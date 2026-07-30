@@ -1,0 +1,65 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# dev tools (not deployed)
+_dev/
+
+# audit & temp
+_audit/
+_screenshots/
+_mobile_audit/
+_PAGES/
+_data/
+test-results/
+
+# infrastructure
+*.ps1
+*.log
+.server.pid
+n8n-*.json
+cloudflared-config.yml
+wrangler.toml
+
+muse_full.cjs
+_full_out.txt
+muse_settings.cjs
+node_modules/
+.vercel/
+_AUDIT_SCREENSHOTS/

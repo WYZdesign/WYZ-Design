@@ -1,0 +1,46 @@
+# Vercel deployment exclusions
+# Build cache
+.next/
+node_modules/
+
+# Audit / screenshots / exports
+_audit/
+_screenshots/
+_mobile_audit/
+_PAGES/
+test-results/
+
+# Environment
+.env*
+*.tsbuildinfo
+
+# Infrastructure (not site code)
+*.ps1
+*.log
+.server.pid
+n8n-*.json
+fd-api/
+scripts/
+
+# Cloudflare
+wrangler.toml
+cloudflared-config.yml
+
+# Temp
+_temp_promos/
+_temp_recaps/
+_data/
+
+# Tools
+check-*.js
+wyz-link-audit.mjs
+link-audit-report.txt
+site-media-manifest.json
+shadow-ssh-setup.ps1
+
+# Vercel
+_events_array.txt
+_install_startup.ps1
+_start_server.ps1
+
+.vercel/

@@ -1,0 +1,59 @@
+import { NextRequest, NextResponse } from "next/server";
+import { createCheckoutSession, createGiftCardCheckout, createServiceCheckout } from "@/lib/stripe";
+
+const VALID_GIFT_AMOUNTS = [10, 25, 50, 100, 200, 500];
+const VALID_SERVICE_PRICES: Record<string, number> = {
+  "consultation": 1500,
+  "photoshoot": 5000,
+  "design": 3000,
+};
+
+/**
+ * Creates a Stripe checkout session for subscriptions, gift cards, or services.
+ * @method POST
+ * @request Body `{ type: "subscription"|"giftcard"|"service", plan?: string, amount?: number, email?: string, serviceName?: string, servicePrice?: number }`
+ * @response JSON with Stripe checkout session URL
+ * @auth None
+ */
+export async function POST(req: NextRequest) {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return NextResponse.json({ error: "Stripe not configured" }, { status: 503 });
+  }
+
+  try {
+    const { type, plan, amount, email, serviceName, servicePrice, userId } = await req.json();
+
+    if (type === "subscription") {
+      if (!plan) return NextResponse.json({ error: "Plan required" }, { status: 400 });
+      const session = await createCheckoutSession(plan, email, userId);
+      return NextResponse.json({ url: session.url });
+    }
+
+    if (type === "giftcard") {
+      if (!amount) return NextResponse.json({ error: "Amount required" }, { status: 400 });
+      if (!VALID_GIFT_AMOUNTS.includes(amount)) {
+        return NextResponse.json({ error: "Invalid gift card amount" }, { status: 400 });
+      }
+      const session = await createGiftCardCheckout(amount, email);
+      return NextResponse.json({ url: session.url });
+    }
+
+    if (type === "service") {
+      if (!serviceName || !servicePrice) return NextResponse.json({ error: "Service name and price required" }, { status: 400 });
+      const normalizedName = serviceName.toLowerCase().replace(/[^a-z]/g, "");
+      const match = Object.entries(VALID_SERVICE_PRICES).find(([k]) => normalizedName.includes(k));
+      if (!match) {
+        return NextResponse.json({ error: "Unknown service" }, { status: 400 });
+      }
+      if (servicePrice !== match[1]) {
+        return NextResponse.json({ error: "Invalid service price" }, { status: 400 });
+      }
+      const session = await createServiceCheckout(serviceName, servicePrice, email);
+      return NextResponse.json({ url: session.url });
+    }
+
+    return NextResponse.json({ error: "Invalid checkout type" }, { status: 400 });
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message }, { status: 500 });
+  }
+}
