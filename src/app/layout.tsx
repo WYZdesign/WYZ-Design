@@ -36,7 +36,13 @@ export const metadata: Metadata = {
     url: "https://wyzdesign.com",
     siteName: "WYZ Design",
     type: "website",
-    images: [{ url: "https://wyzdesign.com/og-image.png", width: 512, height: 512 }],
+    images: [{ url: "/wyz-og-image.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WYZ Design | Creative Direction & Production",
+    description: "Photography, design, web, print, motion. Los Angeles.",
+    images: ["/wyz-og-image.png"],
   },
   robots: { index: true, follow: true },
   icons: {
