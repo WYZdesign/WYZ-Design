@@ -11,6 +11,11 @@ import Stripe from "stripe";
  * @auth None — verified via Stripe signature
  */
 export async function POST(req: NextRequest) {
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!endpointSecret) {
+    console.error("[webhook] STRIPE_WEBHOOK_SECRET not set — refusing to process unverified webhook");
+    return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
+  }
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json({ error: "Stripe not configured" }, { status: 503 });
   }
@@ -18,7 +23,6 @@ export async function POST(req: NextRequest) {
   const stripe = getStripe();
   const body = await req.text();
   const sig = req.headers.get("stripe-signature") || "";
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
 
   try {
     const event = stripe.webhooks.constructEvent(body, sig, endpointSecret);

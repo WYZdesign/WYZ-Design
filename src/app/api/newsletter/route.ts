@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { addNewsletterSubscriber, removeNewsletterSubscriber } from "@/lib/wyzmind";
+import { createHmac, timingSafeEqual } from "crypto";
 
 let resend: Resend;
 function getResend() {
@@ -9,7 +10,25 @@ function getResend() {
 }
 const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://www.wyzdesign.com";
 
-const welcomeHtml = (email: string) => `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">
+function signUnsubscribe(email: string): string {
+  const secret = process.env.NEXTAUTH_SECRET || process.env.STRIPE_SECRET_KEY || "wyz-newsletter-secret";
+  const hmac = createHmac("sha256", secret).update(email.toLowerCase().trim()).digest("hex");
+  return `${encodeURIComponent(email)}.${hmac.slice(0, 16)}`;
+}
+
+function verifyUnsubscribe(token: string): string | null {
+  const parts = token.split(".");
+  if (parts.length !== 2) return null;
+  const email = decodeURIComponent(parts[0]);
+  const expected = signUnsubscribe(email);
+  const expectedHash = expected.split(".")[1];
+  if (expectedHash !== parts[1]) return null;
+  return email;
+}
+
+const welcomeHtml = (email: string) => {
+  const token = signUnsubscribe(email);
+  return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">
   <h1 style="font-size:24px;color:#111;margin-bottom:16px;">Welcome to WYZ Design</h1>
   <p style="font-size:16px;color:#444;line-height:1.6;">
     You're now part of the WYZ Design community. Expect exclusive updates, behind-the-scenes content, promotions, and early access to new services.
@@ -26,9 +45,10 @@ const welcomeHtml = (email: string) => `<div style="font-family:Arial,sans-serif
   </p>
   <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;" />
   <p style="font-size:11px;color:#aaa;">
-    <a href="${BASE_URL}/api/newsletter?unsubscribe=${encodeURIComponent(email)}" style="color:#aaa;">Unsubscribe</a> from these emails at any time.
+    <a href="${BASE_URL}/api/newsletter?unsubscribe=${token}" style="color:#aaa;">Unsubscribe</a> from these emails at any time.
   </p>
 </div>`;
+};
 
 /**
  * Subscribes an email to the newsletter and sends a welcome email.
@@ -69,8 +89,16 @@ export async function POST(req: NextRequest) {
  * @auth None
  */
 export async function GET(req: NextRequest) {
-  const email = req.nextUrl.searchParams.get("unsubscribe");
-  if (!email) return NextResponse.json({ error: "Missing unsubscribe email" }, { status: 400 });
+  const token = req.nextUrl.searchParams.get("unsubscribe");
+  if (!token) return NextResponse.json({ error: "Missing unsubscribe token" }, { status: 400 });
+
+  const email = verifyUnsubscribe(token);
+  if (!email) {
+    return new NextResponse(
+      `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Invalid Link</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="font-family:Arial,sans-serif;text-align:center;padding:80px 20px;background:#FEFEFD;"><h1 style="color:#333;">Invalid or expired unsubscribe link.</h1><p style="color:#666;">Please check your email for the correct link or contact us.</p><p><a href="${BASE_URL}" style="color:#DF3131;">Back to wyzdesign.com</a></p></body></html>`,
+      { status: 400, headers: { "Content-Type": "text/html" } }
+    );
+  }
 
   const escapedEmail = email.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

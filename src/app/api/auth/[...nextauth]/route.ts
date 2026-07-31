@@ -7,6 +7,10 @@ interface ExtendedSession extends Session {
   user: Session["user"] & { provider?: string };
 }
 
+const loginAttempts = new Map<string, { count: number; resetAt: number }>();
+const MAX_ATTEMPTS = 5;
+const LOCKOUT_MS = 300_000;
+
 const providers = [
   Google({
     clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -23,8 +27,23 @@ const providers = [
       const pw = String(credentials?.password || "");
       if (!email || !pw) return null;
 
+      const now = Date.now();
+      const attempt = loginAttempts.get(email);
+      if (attempt && attempt.resetAt > now && attempt.count >= MAX_ATTEMPTS) {
+        return null;
+      }
+      if (!attempt || now > attempt.resetAt) {
+        loginAttempts.set(email, { count: 0, resetAt: now + LOCKOUT_MS });
+      }
+
       const adminPass = process.env.ADMIN_PASSWORD || "";
-      if (!adminPass || pw !== adminPass) return null;
+      if (!adminPass || pw !== adminPass) {
+        const a = loginAttempts.get(email)!;
+        a.count++;
+        return null;
+      }
+
+      loginAttempts.delete(email);
 
       const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase());
       if (!adminEmails.includes(email)) return null;

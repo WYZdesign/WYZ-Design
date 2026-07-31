@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession, createGiftCardCheckout, createServiceCheckout } from "@/lib/stripe";
+import { validateCsrf } from "@/lib/csrf";
 
 const VALID_GIFT_AMOUNTS = [10, 25, 50, 100, 200, 500];
 const VALID_SERVICE_PRICES: Record<string, number> = {
@@ -16,6 +17,9 @@ const VALID_SERVICE_PRICES: Record<string, number> = {
  * @auth None
  */
 export async function POST(req: NextRequest) {
+  if (!validateCsrf(req)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json({ error: "Stripe not configured" }, { status: 503 });
   }

@@ -1,9 +1,13 @@
 const buckets = new Map<string, { count: number; resetAt: number }>();
+const MAX_BUCKETS = 10000;
 
 export function rateLimit(key: string, limit = 10, windowMs = 60_000): { ok: boolean; remaining: number } {
   const now = Date.now();
   const entry = buckets.get(key);
   if (!entry || now > entry.resetAt) {
+    if (buckets.size >= MAX_BUCKETS) {
+      buckets.clear();
+    }
     buckets.set(key, { count: 1, resetAt: now + windowMs });
     return { ok: true, remaining: limit - 1 };
   }
