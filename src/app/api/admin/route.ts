@@ -5,6 +5,7 @@ import { readFileSync, existsSync } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
 import type { Session } from "next-auth";
+import { logger } from "@/lib/logger";
 
 interface FormSubmission {
   id: string;
@@ -32,14 +33,14 @@ function getFormSubmissions(): FormSubmission[] {
   const dir = process.env.VERCEL ? join(tmpdir(), "_data") : join(process.cwd(), "_data");
   const file = join(dir, "form-submissions.json");
   if (!existsSync(file)) return [];
-  try { return JSON.parse(readFileSync(file, "utf-8")); } catch (e) { console.error("[admin:getFormSubmissions]", e); return []; }
+  try { return JSON.parse(readFileSync(file, "utf-8")); } catch (e) { logger.error("admin:getFormSubmissions", e); return []; }
 }
 
 function getChatHistory(): ChatMessage[] {
   const dir = process.env.VERCEL ? join(tmpdir(), "_data") : join(process.cwd(), "_data");
   const file = join(dir, "chat-history.json");
   if (!existsSync(file)) return [];
-  try { return JSON.parse(readFileSync(file, "utf-8")); } catch (e) { console.error("[admin:getChatHistory]", e); return []; }
+  try { return JSON.parse(readFileSync(file, "utf-8")); } catch (e) { logger.error("admin:getChatHistory", e); return []; }
 }
 
 function getAllowedEmails(): string[] {
@@ -94,7 +95,7 @@ export async function GET(req: NextRequest) {
 
       // Neo4j stats (safe fallback)
       let neo4jStats = { totalUsers: 0, adminCount: 0, newsletterSubs: 0 };
-      try { neo4jStats = await getDashboardStats(); } catch (e) { console.error("[admin:neo4jStats]", e); }
+      try { neo4jStats = await getDashboardStats(); } catch (e) { logger.error("admin:neo4jStats", e); }
 
       return NextResponse.json({
         stats: {

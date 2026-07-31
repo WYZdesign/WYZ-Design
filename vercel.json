@@ -1,5 +1,6 @@
 {
   "crons": [
+    { "path": "/api/health", "schedule": "*/5 * * * *" },
     { "path": "/api/backup", "schedule": "0 6 * * *" }
   ],
   "headers": [
@@ -41,6 +42,8 @@
     }
   ],
   "redirects": [
+    { "source": "/muse", "destination": "https://muse.wyzdesign.com/muse", "permanent": true },
+    { "source": "/muse/(.*)", "destination": "https://muse.wyzdesign.com/muse/$1", "permanent": true },
     { "source": "/:path*", "has": [{ "type": "host", "value": "wyzdesign.com" }], "destination": "https://www.wyzdesign.com/:path*", "permanent": true }
   ],
   "functions": {
