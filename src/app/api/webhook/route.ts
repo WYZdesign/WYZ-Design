@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { getServiceClient } from "@/lib/supabase";
 import Stripe from "stripe";
+import { logger } from "@/lib/logger";
 
 /**
  * Handles Stripe webhook events (checkout.session.completed, subscription deleted).
@@ -13,7 +14,7 @@ import Stripe from "stripe";
 export async function POST(req: NextRequest) {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!endpointSecret) {
-    console.error("[webhook] STRIPE_WEBHOOK_SECRET not set — refusing to process unverified webhook");
+    logger.error("webhook", "STRIPE_WEBHOOK_SECRET not set — refusing unverified request");
     return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
   }
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -38,9 +39,9 @@ export async function POST(req: NextRequest) {
           try {
             const sb = getServiceClient();
             const { error } = await sb.from("muse_profiles").update({ tier: plan }).eq("auth_id", userId);
-            if (error) console.error("Muse tier update failed:", error.message);
+            if (error) logger.error("webhook:museTier", error.message);
           } catch (e) {
-            console.error("Muse tier update error:", (e as Error).message);
+            logger.error("webhook:museTier", (e as Error).message);
           }
         }
 
@@ -69,7 +70,7 @@ export async function POST(req: NextRequest) {
           if (email) {
             await sb.from("muse_profiles").update({ tier: "free" }).eq("email", email.toLowerCase());
           }
-        } catch (e) { console.error("[webhook:subscriptionDelete]", (e as Error).message); }
+        } catch (e) { logger.error("webhook:subscriptionDelete", (e as Error).message); }
         const stripeWebhookUrl = process.env.N8N_WEBHOOK_URL;
         if (stripeWebhookUrl) {
           await fetch(stripeWebhookUrl, {
@@ -88,7 +89,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ received: true });
   } catch (e) {
-    console.error("[webhook] Error:", (e as Error).message);
+    logger.error("webhook", (e as Error).message);
     return NextResponse.json({ error: "Webhook processing failed" }, { status: 400 });
   }
 }

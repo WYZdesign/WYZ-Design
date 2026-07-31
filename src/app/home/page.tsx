@@ -6,6 +6,8 @@ import { FiArrowRight, FiChevronLeft, FiChevronRight, FiCamera, FiMonitor, FiVid
 import ScrollReveal from "@/components/ScrollReveal";
 import { MouseGlow } from "@/components/MouseGlow";
 import CardTilt from "@/components/CardTilt";
+import Testimonials from "@/components/Testimonials";
+import LeadMagnet from "@/components/LeadMagnet";
 
 const LOGO_INTROS_RAW = [
  "/videos/intros/Untitled Project.mp4",
@@ -985,10 +987,15 @@ export default function HomePage() {
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase">Clients</h2>
  </div>
  <LogoCarousel items={CLIENT_LOGOS} speed={0.5} />
- </section>
- </ScrollReveal>
+  </section>
+  </ScrollReveal>
 
- {/* ═══ FAQ ═══ */}
+  {/* ═══ TESTIMONIALS ═══ */}
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+    <Testimonials />
+  </ScrollReveal>
+
+  {/* ═══ FAQ ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-12 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
   <div className="max-w-7xl mx-auto px-6">
@@ -1106,8 +1113,10 @@ export default function HomePage() {
  <ScrollReveal animation="fadeIn" duration={1}>
  <section className="py-6">
  <SmoothCarousel items={shuffledDesign.length > 0 ? shuffledDesign : DESIGN_SHOWCASE_RAW} speed={0.5} />
- </section>
- </ScrollReveal>
- </main>
+  </section>
+  </ScrollReveal>
+
+  <LeadMagnet />
+  </main>
  );
 }
