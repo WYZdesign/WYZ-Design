@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logger } from "@/lib/logger";
 
 /**
  * Receives CSP violation reports from browsers.
@@ -15,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     if (process.env.NODE_ENV !== "production") {
-      console.warn("[csp-violation]", JSON.stringify(body).slice(0, 500));
+      logger.warn("csp-violation", JSON.stringify(body).slice(0, 500));
     }
     return NextResponse.json({ ok: true });
   } catch {

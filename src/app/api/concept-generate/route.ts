@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { openrouterChat } from "@/lib/openrouter";
+import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;
 
@@ -33,7 +34,7 @@ export async function POST(req: NextRequest) {
           const data = await resp.json();
           if (data.response) return NextResponse.json({ content: data.response });
         }
-      } catch (e) { console.error("[concept-generate:ollama]", e); }
+      } catch (e) { logger.error("concept-generate:ollama", e); }
     }
 
     return NextResponse.json({ content: "AI is currently unavailable. Contact us directly for creative direction." });

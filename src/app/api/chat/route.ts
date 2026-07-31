@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { openrouterChat } from "@/lib/openrouter";
+import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;
 
@@ -55,7 +56,7 @@ Be helpful, warm, professional, and concise. Always offer to connect visitors to
         });
         const data = await resp.json();
         reply = data.message?.content || "";
-      } catch (e) { console.error("[chat:ollama]", e); }
+      } catch (e) { logger.error("chat:ollama", e); }
     }
 
     if (!reply) {

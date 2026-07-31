@@ -3,7 +3,9 @@ import { getServiceClient } from "@/lib/supabase";
 import { Resend } from "resend";
 import { sendAdminAlert } from "@/lib/novu";
 import { sendDiscordAlert } from "@/lib/discord";
+import { rateLimit, sanitizeHtml } from "@/lib/rate-limit";
 import { validateCsrf } from "@/lib/csrf";
+import { logger } from "@/lib/logger";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 
 const VALID_FORM_TYPES = [
@@ -35,7 +37,7 @@ async function sendAdminNotification(formType: string, data: Record<string, unkn
       subject: `New ${formType} Submission`,
       text: `New form submission received:\n\nType: ${formType}\n\n${details}\n\nView all: https://www.wyzdesign.com/admin`,
     });
-  } catch (e) { console.error("[forms:sendAdminNotification]", e); }
+  } catch (e) { logger.error("forms:sendAdminNotification", e); }
 }
 
 async function sendCustomerConfirmation(formType: string, data: Record<string, unknown>) {
@@ -64,7 +66,7 @@ async function sendCustomerConfirmation(formType: string, data: Record<string, u
       subject,
       html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">${body}<hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"><p style="font-size:14px;color:#888;">- The WYZ Design Team<br/><a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a></p></div>`,
     });
-  } catch (e) { console.error("[forms:sendCustomerConfirmation]", e); }
+  } catch (e) { logger.error("forms:sendCustomerConfirmation", e); }
 }
 
 /**
@@ -110,7 +112,7 @@ export async function POST(req: NextRequest) {
       const { error } = await supabase.from("form_submissions").insert({
         id, form_type: formType, data, submitted_at: submittedAt, ip,
       });
-      if (error) console.error("Supabase insert error:", error.message);
+      if (error) logger.error("Supabase insert error:", error.message);
     } catch { /* best-effort */ }
 
     // Fire notifications in parallel

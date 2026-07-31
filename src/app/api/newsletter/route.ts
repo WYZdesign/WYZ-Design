@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { addNewsletterSubscriber, removeNewsletterSubscriber } from "@/lib/wyzmind";
 import { createHmac } from "crypto";
 import { validateCsrf } from "@/lib/csrf";
+import { logger } from "@/lib/logger";
 
 let resend: Resend;
 function getResend() {
@@ -77,7 +78,7 @@ export async function POST(req: NextRequest) {
         subject: "Welcome to WYZ Design — You're In",
         html: welcomeHtml(email),
       });
-    } catch (e) { console.error("[newsletter:send]", e); }
+    } catch (e) { logger.error("newsletter:send", e); }
 
     return NextResponse.json({ success: true, message: "Subscribed! Check your inbox for a welcome email." });
   } catch (e: unknown) {

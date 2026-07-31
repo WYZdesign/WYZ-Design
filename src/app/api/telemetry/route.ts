@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { logger } from "@/lib/logger";
 import { getServiceClient } from "@/lib/supabase";
 
 /**
@@ -14,7 +15,7 @@ export async function POST(req: NextRequest) {
     try {
       const sb = getServiceClient();
       await sb.from("muse_error_logs").insert({ message, context, ua: req.headers.get("user-agent") || "" });
-    } catch (e) { console.error("[telemetry:insert]", e); }
+    } catch (e) { logger.error("telemetry:insert", e); }
   } catch {
     return NextResponse.json({ ok: true });
   }

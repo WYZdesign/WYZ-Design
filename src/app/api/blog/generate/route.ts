@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { openrouterChat } from "@/lib/openrouter";
+import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;
 
@@ -39,7 +40,7 @@ Write as WYZ Design's blog — a creative agency in Chicago.`;
         });
         const data = await resp.json();
         if (data.response) return NextResponse.json({ content: data.response });
-      } catch (e) { console.error("[blog:ollama]", e); }
+      } catch (e) { logger.error("blog:ollama", e); }
     }
 
     return NextResponse.json({ content: "", error: "AI service unavailable. Please try again later." });

@@ -4,6 +4,7 @@ import { tmpdir } from "os";
 import { join } from "path";
 import { rateLimit } from "@/lib/rate-limit";
 import { validateCsrf } from "@/lib/csrf";
+import { logger } from "@/lib/logger";
 
 const DATA_DIR = process.env.VERCEL ? join(tmpdir(), "_data") : join(process.cwd(), "_data");
 const FILE = join(DATA_DIR, "form-submissions.json");
@@ -14,7 +15,7 @@ function saveLocal(formType: string, data: Record<string, unknown>, ip: string) 
     const subs = existsSync(FILE) ? JSON.parse(readFileSync(FILE, "utf-8")) : [];
     subs.push({ id: Date.now().toString(36), formType, data, submittedAt: new Date().toISOString(), ip });
     writeFileSync(FILE, JSON.stringify(subs, null, 2), "utf-8");
-  } catch (e) { console.error("[contact:saveLocal]", e); }
+  } catch (e) { logger.error("contact:saveLocal", e); }
 }
 
 async function forwardToN8n(name: string, email: string, message: string) {
@@ -22,7 +23,7 @@ async function forwardToN8n(name: string, email: string, message: string) {
   if (!url) return;
   try {
     await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, message, timestamp: new Date().toISOString() }) });
-  } catch (e) { console.error("[contact:forwardToN8n]", e); }
+  } catch (e) { logger.error("contact:forwardToN8n", e); }
 }
 
 /**
