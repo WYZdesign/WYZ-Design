@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { rateLimit } from "@/lib/rate-limit";
+import { validateCsrf } from "@/lib/csrf";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 
 const DATA_DIR = process.env.VERCEL ? "/tmp/_data" : join(process.cwd(), "_data");
@@ -16,6 +17,9 @@ function ensureDir() {
 
 export async function POST(req: NextRequest) {
   try {
+    if (!validateCsrf(req)) {
+      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+    }
     const ip = req.headers.get("x-forwarded-for") || "unknown";
     const { ok, remaining } = rateLimit(`bugs:${ip}`, 5, 60_000);
     if (!ok) {

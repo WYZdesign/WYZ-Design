@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { addNewsletterSubscriber, removeNewsletterSubscriber } from "@/lib/wyzmind";
-import { createHmac, timingSafeEqual } from "crypto";
+import { createHmac } from "crypto";
+import { validateCsrf } from "@/lib/csrf";
 
 let resend: Resend;
 function getResend() {
@@ -59,6 +60,9 @@ const welcomeHtml = (email: string) => {
  */
 export async function POST(req: NextRequest) {
   try {
+    if (!validateCsrf(req)) {
+      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+    }
     const { email } = await req.json();
     if (!email || !email.includes("@")) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });

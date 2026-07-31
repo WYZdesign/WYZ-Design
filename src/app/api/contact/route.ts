@@ -3,6 +3,7 @@ import { writeFileSync, readFileSync, existsSync, mkdirSync } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
 import { rateLimit } from "@/lib/rate-limit";
+import { validateCsrf } from "@/lib/csrf";
 
 const DATA_DIR = process.env.VERCEL ? join(tmpdir(), "_data") : join(process.cwd(), "_data");
 const FILE = join(DATA_DIR, "form-submissions.json");
@@ -33,6 +34,9 @@ async function forwardToN8n(name: string, email: string, message: string) {
  */
 export async function POST(req: NextRequest) {
   try {
+    if (!validateCsrf(req)) {
+      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+    }
     const ip = req.headers.get("x-forwarded-for") || "unknown";
     const { ok } = rateLimit(`contact:${ip}`, 5, 60_000);
     if (!ok) {

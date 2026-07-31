@@ -3,6 +3,7 @@ import { getServiceClient } from "@/lib/supabase";
 import { Resend } from "resend";
 import { sendAdminAlert } from "@/lib/novu";
 import { sendDiscordAlert } from "@/lib/discord";
+import { validateCsrf } from "@/lib/csrf";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 
 const VALID_FORM_TYPES = [
@@ -70,6 +71,9 @@ async function sendCustomerConfirmation(formType: string, data: Record<string, u
  * Submits a form with email notifications. Persists to Supabase.
  */
 export async function POST(req: NextRequest) {
+  if (!validateCsrf(req)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   try {
     const body = await req.json();
     const { formType, data } = body;

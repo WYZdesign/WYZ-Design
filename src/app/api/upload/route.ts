@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { writeFile, mkdir } from "fs/promises";
-import path from "path";
+import { join } from "path";
+import { tmpdir } from "os";
 import { validateUpload, sanitizeFileName } from "@/lib/api-utils";
+import { validateCsrf } from "@/lib/csrf";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 
 /**
- * Uploads an image or video file (max 10MB) to the public uploads directory.
+ * Uploads an image or video file (max 10MB) to a non-public temp directory.
  * @method POST
  * @request Multipart form-data with `file` field
  * @response JSON with url, name, size, and type of the uploaded file
@@ -13,6 +15,9 @@ import { auth } from "@/app/api/auth/[...nextauth]/route";
  */
 export async function POST(req: NextRequest) {
   try {
+    if (!validateCsrf(req)) {
+      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+    }
     const session = await auth();
     if (!session) {
       return NextResponse.json({ error: "Authentication required" }, { status: 401 });
@@ -36,18 +41,18 @@ export async function POST(req: NextRequest) {
 
     const isVideo = file.type.startsWith("video/");
     const subDir = isVideo ? "videos" : "images";
-    const dir = path.join(process.cwd(), "public", "uploads", subDir);
+    const dir = process.env.VERCEL ? join(tmpdir(), "uploads", subDir) : join(process.cwd(), "_uploads", subDir);
     await mkdir(dir, { recursive: true });
 
-    const ext = path.extname(sanitizeFileName(file.name)) || (isVideo ? ".mp4" : ".jpg");
-    const name = `u-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}${ext.toLowerCase()}`;
-    const filePath = path.join(dir, name);
+    const ext = join("", sanitizeFileName(file.name)).split(".").pop() || (isVideo ? "mp4" : "jpg");
+    const name = `u-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}.${ext.toLowerCase()}`;
+    const filePath = join(dir, name);
 
     const bytes = await file.arrayBuffer();
     await writeFile(filePath, Buffer.from(bytes));
 
     return NextResponse.json({
-      url: `/uploads/${subDir}/${name}`,
+      url: `/api/upload/${name}`,
       name: file.name,
       size: file.size,
       type: file.type,

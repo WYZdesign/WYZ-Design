@@ -783,12 +783,18 @@ export default function HomePage() {
      <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
     </h1>
     <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-lg leading-relaxed mb-8 max-w-lg text-center">
-   We help artists, brands, and real people build creative work that actually looks good.
-   </p>
-    <Link href="/about"
-    className="inline-block border-2 border-[#333] text-[#333] px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#333] hover:text-white transition-all mx-auto">
-    SEE THE STORY
-    </Link>
+    We help artists, brands, and real people build creative work that actually looks good.
+    </p>
+    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+     <Link href="/about"
+     className="inline-block border-2 border-[#333] text-[#333] px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#333] hover:text-white transition-all">
+     SEE THE STORY
+     </Link>
+     <Link href="/contact"
+     className="inline-block px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center bg-[#DF3131] text-white hover:bg-[#C41E1E] transition-all">
+     START A PROJECT
+     </Link>
+    </div>
    </div>
    </div>
     <div className="w-full lg:w-1/2 h-[40vh] sm:h-[50vh] lg:h-auto relative overflow-hidden bg-black"
