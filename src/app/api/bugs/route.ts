@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
     }
     const ip = req.headers.get("x-forwarded-for") || "unknown";
-    const { ok, remaining } = rateLimit(`bugs:${ip}`, 5, 60_000);
+    const { ok, remaining } = await rateLimit(`bugs:${ip}`, 5, 60_000);
     if (!ok) {
       return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
     }
