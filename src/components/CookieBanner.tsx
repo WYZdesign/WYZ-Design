@@ -53,8 +53,8 @@ export default function CookieBanner() {
   };
 
   const enableAnalytics = () => {
-    if (typeof window !== "undefined" && window.umami) {
-      window.umami.track("consent_analytics_accepted");
+    if (typeof window !== "undefined" && (window as any).umami) {
+      (window as any).umami.track("consent_analytics_accepted");
     }
   };
 
@@ -69,7 +69,7 @@ export default function CookieBanner() {
       <div className="bg-white dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#444] rounded-xl shadow-xl p-6 max-h-[80vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <FiCookie className="w-6 h-6 text-[#DF3131]" />
+            <FiGlobe className="w-6 h-6 text-[#DF3131]" />
             <div>
               <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg">Cookie Preferences</h3>
               <p className="text-sm text-[#666] dark:text-white/70">We use cookies to enhance your experience.</p>

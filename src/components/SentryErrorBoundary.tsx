@@ -1,7 +1,6 @@
 "use client";
 
 import { Component, ReactNode } from "react";
-import * as Sentry from "@sentry/nextjs";
 
 interface Props {
   children: ReactNode;
@@ -21,10 +20,12 @@ export class SentryErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    Sentry.captureException(error, {
-      extra: errorInfo,
-      tags: { boundary: "client" },
-    });
+    if (typeof window !== "undefined" && (window as any).Sentry) {
+      (window as any).Sentry.captureException(error, {
+        extra: errorInfo,
+        tags: { boundary: "client" },
+      });
+    }
   }
 
   render() {

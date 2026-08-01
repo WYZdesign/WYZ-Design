@@ -1,3 +1,6 @@
+// Sentry client — requires @sentry/nextjs
+// Install: npm install @sentry/nextjs then uncomment below
+/*
 "use client";
 
 import * as Sentry from "@sentry/nextjs";
@@ -50,3 +53,4 @@ export function register() {
     }
   }
 }
+*/
