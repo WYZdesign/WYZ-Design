@@ -143,6 +143,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   };
 
   return (
+  <>
   <div className={`overflow-hidden ${className}`}>
   <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
   {[...items, ...items].map((src, i) => (
@@ -153,6 +154,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   </div>
   </div>
   {lightboxSrc && <Lightbox src={lightboxSrc} alt="Photography portfolio" onClose={() => setLightboxSrc(null)} />}
+  </>
   );
 }
 

@@ -6,7 +6,14 @@ let redisAvailable = false;
 async function initRedis() {
   if (redisAvailable) return redis;
   try {
-    const { Redis } = await import("@upstash/redis");
+    let Redis: any;
+    try {
+      const mod = await import("@upstash/redis");
+      Redis = mod.Redis;
+    } catch {
+      logger.warn("rate-limit", "@upstash/redis not installed — using in-memory fallback");
+      return null;
+    }
     const url = process.env.UPSTASH_REDIS_REST_URL;
     const token = process.env.UPSTASH_REDIS_REST_TOKEN;
     if (url && token) {
