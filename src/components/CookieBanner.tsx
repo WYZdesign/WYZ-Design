@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FiX, FiCookie } from "react-icons/fi";
+import { FiX, FiGlobe } from "react-icons/fi";
 
 interface CookieConsent {
   necessary: boolean;

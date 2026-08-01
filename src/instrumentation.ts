@@ -1,3 +1,7 @@
+// Sentry instrumentation — requires @sentry/nextjs package
+// Install: npm install @sentry/nextjs
+// Then uncomment below:
+/*
 import * as Sentry from "@sentry/nextjs";
 
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;

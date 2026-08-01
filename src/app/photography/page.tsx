@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Link from "next/link";
 import { FiCamera, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
-import Lightbox from "@/components/Lightbox";
 import { useSwipe } from "@/hooks/useSwipe";
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -51,7 +50,7 @@ function useInView(threshold = 0.1) {
  return { ref, vis };
 }
 
-function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
+function PhotoLightbox({ images, index, onClose, onPrev, onNext, album }: {
  images: string[]; index: number; onClose: () => void; onPrev: () => void; onNext: () => void; album?: string;
 }) {
  const swipe = useSwipe(onNext, onPrev);
@@ -106,7 +105,7 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  </div>
  </div>
  </div>
- {lIdx !== null && <Lightbox images={imgs} index={lIdx} album={album} onClose={() => setLIdx(null)} onPrev={() => setLIdx((lIdx - 1 + imgs.length) % imgs.length)} onNext={() => setLIdx((lIdx + 1) % imgs.length)} />}
+ {lIdx !== null && <PhotoLightbox images={imgs} index={lIdx} album={album} onClose={() => setLIdx(null)} onPrev={() => setLIdx((lIdx - 1 + imgs.length) % imgs.length)} onNext={() => setLIdx((lIdx + 1) % imgs.length)} />}
  </>
  );
 }
