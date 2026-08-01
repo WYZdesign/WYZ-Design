@@ -7,6 +7,12 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "res.cloudinary.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "*.googleusercontent.com" },
+    ],
   },
 
   compress: true,
@@ -85,7 +91,7 @@ const nextConfig: NextConfig = {
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://*.googleusercontent.com",
-            "connect-src 'self' https://api.resend.com https://api.stripe.com https://umami.wyzdesign.com https://*.supabase.co",
+            "connect-src 'self' https://api.resend.com https://api.stripe.com https://umami.wyzdesign.com https://*.supabase.co https://o11y.sentry.io",
             "frame-src https://js.stripe.com https://hooks.stripe.com",
             "frame-ancestors 'none'",
             "base-uri 'self'",
@@ -105,8 +111,8 @@ const nextConfig: NextConfig = {
       { source: "/booking-retouching", destination: "/booking-calendar/photo-retouching", permanent: true },
       { source: "/service-consultation", destination: "/service-page/creative-consultation", permanent: true },
       { source: "/service-events", destination: "/service-page/event-photography", permanent: true },
-      { source: "/service-photoshoot", destination: "/service-page/photoshoot", permanent: true },
-      { source: "/service-retouching", destination: "/service-page/photo-retouching", permanent: true },
+      { source: "/service-photoshoot", destination: "/booking-calendar/photoshoot", permanent: true },
+      { source: "/service-retouching", destination: "/booking-calendar/photo-retouching", permanent: true },
       { source: "/plans-pricing", destination: "/plans", permanent: true },
       { source: "/my-profile", destination: "/account/my-account", permanent: true },
     ];
