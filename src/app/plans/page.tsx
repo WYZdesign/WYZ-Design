@@ -344,6 +344,112 @@ export default function PlansPage() {
         </div>
         </ScrollReveal>
 
+        {/* Pricing Comparison Table */}
+        <ScrollReveal animation="fadeUp" delay={0.2}>
+        <section className="mt-16">
+          <div className="max-w-5xl mx-auto px-6 overflow-x-auto">
+            <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] dark:text-white text-center tracking-[0.08em] uppercase mb-8">
+              PLAN <span className="text-[#DF3131]">COMPARISON</span>
+            </h2>
+            <div className="rounded-xl border border-[#E2E2E2] dark:border-[#444] overflow-hidden">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="bg-[#DF3131] text-white">
+                    <th className="p-4 text-[14px] font-bold tracking-[0.05em]">FEATURE</th>
+                    <th className="p-4 text-[14px] font-bold">STARTER</th>
+                    <th className="p-4 text-[14px] font-bold">BUSINESS</th>
+                    <th className="p-4 text-[14px] font-bold">PRO</th>
+                    <th className="p-4 text-[14px] font-bold">ULTIMATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
+                    <td className="p-4 text-[#666] dark:text-white/70 font-semibold">Monthly Price</td>
+                    <td className="p-4 text-[#DF3131] font-bold">$250</td>
+                    <td className="p-4 text-[#DF3131] font-bold">$500</td>
+                    <td className="p-4 text-[#DF3131] font-bold">$750</td>
+                    <td className="p-4 text-[#DF3131] font-bold">$1,000</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
+                    <td className="p-4 text-[#666] dark:text-white/70">Value</td>
+                    <td className="p-4 text-[#666] dark:text-white/70">$725</td>
+                    <td className="p-4 text-[#DF3131] font-bold">$2,025</td>
+                    <td className="p-4 text-[#DF3131] font-bold">$1,425</td>
+                    <td className="p-4 text-[#DF3131] font-bold">$5,000+</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
+                    <td className="p-4 text-[#666] dark:text-white/70">Photoshoots (2hr)</td>
+                    <td className="p-4 text-center">✓ (1)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
+                    <td className="p-4 text-[#666] dark:text-white/70">Graphic Designs</td>
+                    <td className="p-4 text-center">✓ (1)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
+                    <td className="p-4 text-[#666] dark:text-white/70">Promo Videos</td>
+                    <td className="p-4 text-center">✓ (1)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
+                    <td className="p-4 text-[#666] dark:text-white/70">Custom Printing</td>
+                    <td className="p-4 text-center">✓ (≤$100)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
+                    <td className="p-4 text-[#666] dark:text-white/70">Web Design + Maintenance</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
+                    <td className="p-4 text-[#666] dark:text-white/70">Event Planning</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
+                    <td className="p-4 text-[#666] dark:text-white/70">Strategy Consultations</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
+                    <td className="p-4 text-[#666] dark:text-white/70">Loyalty Rewards</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                  </tr>
+                  <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
+                    <td className="p-4 text-[#666] dark:text-white/70">Priority Support</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#888]">—</td>
+                    <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-6 text-center text-[#888] dark:text-white/50 text-sm">
+              All plans auto-renew monthly. Cancel anytime. <Link href="/services" className="text-[#DF3131] hover:underline">View individual services</Link>
+            </p>
+          </div>
+        </section>
+        </ScrollReveal>
+
         {/* Auto-renew disclaimer */}
         <p className="mt-8 text-[16px] text-[#8F8F8F] text-center max-w-3xl mx-auto leading-relaxed text-center">
           All subscription plans auto-renew monthly or quarterly. You can cancel at any time by contacting our
