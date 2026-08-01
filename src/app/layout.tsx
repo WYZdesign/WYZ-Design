@@ -23,13 +23,14 @@ const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", 
 const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.wyzdesign.com"),
+  alternates: { canonical: "https://www.wyzdesign.com" },
   title: {
     default: "WYZ Design | Creative Direction & Production - Los Angeles",
     template: "%s | WYZ Design",
   },
   description: "WYZ Design is the creative problem you hire when your brand is tired of looking like it was designed by a committee. Photography, design, web, print, motion. Los Angeles. No fluff, no pretending exposure pays rent.",
   keywords: ["WYZ Design", "creative agency", "Los Angeles", "photography", "graphic design", "branding", "web design", "printing", "event production"],
-  metadataBase: new URL("https://wyzdesign.com"),
   openGraph: {
     title: "WYZ Design | Creative Direction & Production",
     description: "Photography, design, web, print, motion. Los Angeles. Sharp creative work that does what it's supposed to do.",
@@ -132,6 +133,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "@type": "SearchAction",
                 target: "https://wyzdesign.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "WYZ Design",
+              url: "https://www.wyzdesign.com",
+              logo: "https://www.wyzdesign.com/wyz-crown-square.png",
+              image: "https://www.wyzdesign.com/wyz-og-image.png",
+              description: "Creative direction and production agency. Photography, graphic design, web design, videography, branding, and printing. Los Angeles + Chicago.",
+              priceRange: "$$",
+              telephone: "+1-213-399-9610",
+              email: "info@wyzdesign.com",
+              address: { "@type": "PostalAddress", addressLocality: "Los Angeles", addressRegion: "CA", addressCountry: "US" },
+              areaServed: ["Los Angeles", "Chicago", "United States"],
+              sameAs: [
+                "https://instagram.com/wyzdesign",
+                "https://facebook.com/wyzdesign",
+                "https://tiktok.com/@wyzdesign",
+                "https://youtube.com/channel/UCfd75GcUKsGqWo-sgSQjZBg",
+                "https://linkedin.com/in/torre-harris",
+              ],
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                opens: "09:00",
+                closes: "18:00",
               },
             }),
           }}
