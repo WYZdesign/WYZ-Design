@@ -87,7 +87,7 @@ const nextConfig: NextConfig = {
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
           { key: "Content-Security-Policy", value: [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://umami.wyzdesign.com https://va.vercel-scripts.com https://js.stripe.com",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://umami.wyzdesign.com https://va.vercel-scripts.com https://js.stripe.com 'strict-dynamic'",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://*.googleusercontent.com",
