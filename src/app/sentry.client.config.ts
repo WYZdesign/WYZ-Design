@@ -1,26 +1,19 @@
-// Sentry client — requires @sentry/nextjs
-// Install: npm install @sentry/nextjs then uncomment below
-/*
 "use client";
 
 import * as Sentry from "@sentry/nextjs";
 
-export function register() {
-  if (process.env.NODE_ENV === "production") {
-    const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
+if (process.env.NODE_ENV === "production") {
+  const SENTRY_DSN = process.env.NEXT_PUBLIC_SENTRY_DSN;
 
+  if (SENTRY_DSN) {
     Sentry.init({
-      dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+      dsn: SENTRY_DSN,
       tracesSampleRate: 1.0,
       debug: false,
-      replaysOnErrorSampleRate: 1.0,
-      replaysSessionSampleRate: 0.1,
       integrations: [
-        Sentry.replayIntegration({
-          maskAllText: true,
-          blockAllMedia: true,
-        }),
-        Sentry.browserTracingIntegration(),
+        Sentry.dedupeIntegration(),
+        Sentry.inboundFiltersIntegration(),
+        Sentry.functionToStringIntegration(),
       ],
       beforeSend(event, hint) {
         if (event.exception) {
@@ -53,4 +46,3 @@ export function register() {
     }
   }
 }
-*/
