@@ -10,28 +10,28 @@ import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
 
 const LOGO_INTROS_RAW = [
- "/videos/intros/Untitled Project.mp4",
- "/videos/intros/Untitled Project (1).mp4",
- "/videos/intros/Untitled Project (2).mp4",
- "/videos/intros/Untitled Project (3).mp4",
- "/videos/intros/Untitled Project (4).mp4",
- "/videos/intros/Untitled Project (5).mp4",
- "/videos/intros/Untitled Project (6).mp4",
- "/videos/intros/Untitled Project (7).mp4",
- "/videos/intros/Untitled Project (8).mp4",
- "/videos/intros/Untitled Project (9).mp4",
- "/videos/intros/Untitled Project (10).mp4",
- "/videos/intros/Untitled Project (11).mp4",
- "/videos/intros/Untitled Project (12).mp4",
- "/videos/intros/Untitled Project (13).mp4",
- "/videos/intros/Untitled Project (14).mp4",
- "/videos/intros/Untitled Project (15).mp4",
- "/videos/intros/Untitled Project (16).mp4",
- "/videos/intros/Untitled Project (17).mp4",
- "/videos/intros/Untitled Project (18).mp4",
- "/videos/intros/Untitled Project (19).mp4",
- "/videos/intros/Untitled Project (20).mp4",
- "/videos/intros/Untitled Project (21).mp4",
+ "/videos/Untitled Project.mp4",
+ "/videos/Untitled Project (1).mp4",
+ "/videos/Untitled Project (2).mp4",
+ "/videos/Untitled Project (3).mp4",
+ "/videos/Untitled Project (4).mp4",
+ "/videos/Untitled Project (5).mp4",
+ "/videos/Untitled Project (6).mp4",
+ "/videos/Untitled Project (7).mp4",
+ "/videos/Untitled Project (8).mp4",
+ "/videos/Untitled Project (9).mp4",
+ "/videos/Untitled Project (10).mp4",
+ "/videos/Untitled Project (11).mp4",
+ "/videos/Untitled Project (12).mp4",
+ "/videos/Untitled Project (13).mp4",
+ "/videos/Untitled Project (14).mp4",
+ "/videos/Untitled Project (15).mp4",
+ "/videos/Untitled Project (16).mp4",
+ "/videos/Untitled Project (17).mp4",
+ "/videos/Untitled Project (18).mp4",
+ "/videos/Untitled Project (19).mp4",
+ "/videos/Untitled Project (20).mp4",
+ "/videos/Untitled Project (21).mp4",
 ];
 
 function shuffleArray<T>(arr: T[]): T[] {
@@ -784,7 +784,7 @@ export default function HomePage() {
     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.05em] mb-6 text-center" style={{ lineHeight: 1 }}>
      <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
     </h1>
-    <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-lg leading-relaxed mb-8 max-w-lg text-center">
+    <p className="text-[#666] dark:text-white/70 text-[14px] sm:text-lg leading-relaxed mb-8 max-w-lg text-center">
     We help artists, brands, and real people build creative work that actually looks good.
     </p>
     <div className="flex flex-col sm:flex-row gap-3 justify-center">
