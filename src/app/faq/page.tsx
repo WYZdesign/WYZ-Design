@@ -305,11 +305,11 @@ export default function FAQPage() {
                     }`}>
                       <span className="font-heading font-bold text-[13px]">{String(i + 1).padStart(2, "0")}</span>
                     </div>
-                    <span className={`flex-1 font-heading font-bold text-[16px] pr-4 transition-colors leading-snug ${
-                      isOpen ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131]"
-                    }`}>
-                      {faq.q}
-                    </span>
+                     <span className={`flex-1 min-w-0 font-heading font-bold text-[16px] pr-4 transition-colors leading-snug ${
+                       isOpen ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131]"
+                     }`}>
+                       {faq.q}
+                     </span>
                     <span className={`text-xl font-bold shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 ${
                       isOpen ? "bg-[#DF3131] text-white rotate-45" : "bg-white dark:bg-[#252528] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
                     }`}>
