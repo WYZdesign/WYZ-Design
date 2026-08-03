@@ -437,11 +437,11 @@ return (
   `}</style>
 
 {/* HERO */}
-  <section ref={heroRef} className="relative min-h-[85vh] sm:min-h-screen sm:max-h-[700px] flex items-center justify-center overflow-hidden hero-banner">
+  <section ref={heroRef} className="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen lg:max-h-[700px] flex items-center justify-center overflow-hidden hero-banner">
   {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
   <div className="absolute inset-0 flex items-center justify-center">
-  {/* Background: video fills entire hero */}
-  <div ref={hVis} className={`absolute inset-0 z-0 bg-black ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
+  {/* Background: gradient fallback (always visible) + video on top when available */}
+  <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
    <video
     src="/videos/hero-banners/photography.mp4"
     autoPlay muted loop playsInline

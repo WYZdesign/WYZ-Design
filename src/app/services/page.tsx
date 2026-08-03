@@ -120,7 +120,7 @@ export default function ServicesPage() {
   {/* Text content on top */}
   <div className="relative z-10 text-center max-w-xl mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
 <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
-  CREATIVE <span className="text-[#DF3131]">SERVICES</span>
+  CREATIVE<br /><span className="text-[#DF3131]">SERVICES</span>
   </h1>
   <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto">
    From photography to web design, we deliver end-to-end creative solutions that make your brand stand out.
