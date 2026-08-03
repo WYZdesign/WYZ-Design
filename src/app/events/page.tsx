@@ -707,17 +707,18 @@ export default function EventsPage() {
 
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-  <div className="relative overflow-hidden mx-0 hero-banner">
-  <div className="grid grid-cols-1 lg:grid-cols-2 h-auto lg:h-[60vh] max-h-[600px]">
-  <div className="relative overflow-hidden bg-white dark:bg-[#111]">
-  <img src="/images/events/hero_bg.jpg" alt="Events" className="w-full h-full object-cover opacity-80" style={{ filter: "saturate(1.3) contrast(1.1)" }} />
-  <div className="absolute inset-0 bg-black/30" />
-    </div>
-    <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center py-10 lg:py-0 overflow-hidden">
-    <div className="absolute inset-0 hero-grad-events z-0" />
-    <div className="absolute inset-0 bg-black/20 z-[1]" />
-    <div className="relative z-10">
-     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-2 lg:mb-4" style={{ lineHeight: 1 }}>
+  <div className="relative min-h-[60vh] sm:min-h-[65vh] flex items-center justify-center overflow-hidden hero-banner">
+  {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
+  <div className="absolute inset-0 flex items-center justify-center">
+  {/* Background: image fills entire hero */}
+  <div className="absolute inset-0 z-0">
+  <img src="/images/events/hero_bg.jpg" alt="Events" className="w-full h-full object-cover" style={{ filter: "saturate(1.3) contrast(1.1)" }} />
+  </div>
+  {/* 30% black overlay between image and text */}
+  <div className="absolute inset-0 bg-black/30 z-[1]" />
+  {/* Text content on top */}
+  <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
+     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
    <span className="whitespace-nowrap">SIMPLIFY YOUR</span><br />
    <span className="text-[#DF3131] whitespace-nowrap">EVENT</span><br />
    <span className="whitespace-nowrap">PLANNING</span>
@@ -728,7 +729,6 @@ export default function EventsPage() {
    <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#111] transition-all">
    BOOK NOW
    </Link>
-   </div>
    </div>
    </div>
    </div>

@@ -141,7 +141,7 @@ function ParallaxHero() {
         <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
           Dying Breed Crew
         </p>
-        <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
+        <h1 className="text-left text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
           <span className="block">WORN</span>
           <span className="block text-[#DF3131]">DIFFERENT</span>
         </h1>

@@ -776,20 +776,28 @@ export default function HomePage() {
  .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
  `}</style>
 
-    <section ref={heroRef} className="relative flex flex-col lg:flex-row lg:min-h-screen min-h-[80vh] sm:min-h-[90vh]">
-    <div className="w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-12 py-20 bg-white dark:bg-[#111]">
-    <div className="w-full max-w-2xl flex flex-col items-center justify-center text-center"
-    style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateX(-40px)", transition: "all 0.8s ease-out" }}>
-    <p className="text-[#888] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-3 whitespace-nowrap">Wild Vision. Zealous Execution.</p>
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.05em] mb-6 text-center" style={{ lineHeight: 1 }}>
+    <section ref={heroRef} className="relative min-h-[80vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden hero-banner">
+    {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
+    <div className="absolute inset-0 flex items-center justify-center">
+    {/* Background: video fills entire hero */}
+    <div className="absolute inset-0 z-0 bg-black">
+    <VideoPlaylist videos={LOGO_INTROS} />
+    </div>
+    {/* 30% black overlay between video and text */}
+    <div className="absolute inset-0 bg-black/30 z-[1]" />
+    {/* Text content on top */}
+    <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
+    style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
+    <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-3 whitespace-nowrap">Wild Vision. Zealous Execution.</p>
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6 text-center" style={{ lineHeight: 1 }}>
      <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
     </h1>
-    <p className="text-[#666] dark:text-white/70 text-[14px] sm:text-lg leading-relaxed mb-8 max-w-lg text-center">
+    <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-lg text-center">
     We help artists, brands, and real people build creative work that actually looks good.
     </p>
     <div className="flex flex-col sm:flex-row gap-3 justify-center">
      <Link href="/about"
-     className="inline-block border-2 border-[#333] text-[#333] px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#333] hover:text-white transition-all">
+     className="inline-block border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#333] transition-all">
      SEE THE STORY
      </Link>
      <Link href="/contact"
@@ -798,11 +806,6 @@ export default function HomePage() {
      </Link>
     </div>
    </div>
-   </div>
-    <div className="w-full lg:w-1/2 h-[40vh] sm:h-[50vh] lg:h-auto relative overflow-hidden bg-black"
-   style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateX(40px)", transition: "all 0.8s ease-out 0.2s" }}>
-   <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/20 to-transparent z-[1] pointer-events-none lg:block hidden" />
-   <VideoPlaylist videos={LOGO_INTROS} />
    </div>
    </section>
 

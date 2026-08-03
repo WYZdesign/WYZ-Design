@@ -164,25 +164,24 @@ export default function PrintingPage() {
   <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
 {/* ── Hero: Split with Video ── */}
   <ScrollReveal animation="fadeUp">
-  <section className="relative bg-white dark:bg-black pb-6">
-  <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[50vh] pb-10 lg:pb-16">
-  {/* Left: Video filling full half */}
-   <div className="relative overflow-hidden h-[40vh] lg:h-auto">
-    <ParallaxVideo src="/videos/printing-hero.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} />
-    </div>
-  {/* Right: Text with gradient bg */}
-   <div className="relative overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-12 lg:py-16">
-    <div className="absolute inset-0 hero-grad-print z-0" />
-    <div className="absolute inset-0 bg-black/20 z-[1]" />
-    <div className="relative z-10">
-    <TextReveal text="DIGITAL" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase mb-0.5 lg:mb-1 text-white" tag="h1" />
-    <TextReveal text="PRINTING" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase mb-4 lg:mb-6 text-white" tag="h1" />
-    <p className="text-white/70 text-[16px] sm:text-lg mb-6 sm:mb-8 max-w-md">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
-    <Link href="/designs" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
+  <section className="relative min-h-[60vh] sm:min-h-[65vh] flex items-center justify-center overflow-hidden hero-banner">
+  {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
+  <div className="absolute inset-0 flex items-center justify-center">
+  {/* Background: video fills entire hero */}
+  <div className="absolute inset-0 z-0">
+    <ParallaxVideo src="/videos/printing-hero.mp4" speed={0.3} opacity={1} overlayOpacity={0} playbackRate={0.7} />
+  </div>
+  {/* 30% black overlay between video and text */}
+  <div className="absolute inset-0 bg-black/30 z-[1]" />
+  {/* Text content on top */}
+  <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
+    <TextReveal text="DIGITAL" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.08em] uppercase mb-0.5 lg:mb-1 text-white" tag="h1" />
+    <TextReveal text="PRINTING" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.08em] uppercase mb-4 sm:mb-6 text-white" tag="h1" />
+    <p className="text-white/70 text-[16px] sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
+    <Link href="/designs" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30">
     GRAPHIC DESIGN
     </Link>
-    </div>
-    </div>
+  </div>
   </div>
   </section>
   </ScrollReveal>

@@ -437,21 +437,23 @@ return (
   `}</style>
 
 {/* HERO */}
-  <section ref={heroRef} className="relative bg-white dark:bg-[#111] h-screen max-h-[700px] overflow-hidden hero-banner">
-  <div className="max-w-[130rem] mx-auto grid grid-cols-1 lg:grid-cols-2 h-full">
-  <div ref={hVis} className={`relative overflow-hidden h-full ${heroVisible ? "animate-slideInLeft" : "opacity-0"}`} style={{ background: "#000" }}>
+  <section ref={heroRef} className="relative min-h-[85vh] sm:min-h-screen sm:max-h-[700px] flex items-center justify-center overflow-hidden hero-banner">
+  {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
+  <div className="absolute inset-0 flex items-center justify-center">
+  {/* Background: video fills entire hero */}
+  <div ref={hVis} className={`absolute inset-0 z-0 bg-black ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
    <video
     src="/videos/hero-banners/photography.mp4"
     autoPlay muted loop playsInline
     className="absolute inset-0 w-full h-full object-cover"
-    style={{ opacity: 0.7, filter: "saturate(1.2) contrast(1.1)" }}
+    style={{ filter: "saturate(1.2) contrast(1.1)" }}
     />
    </div>
-<div className={`relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center overflow-hidden ${heroVisible ? "animate-slideInRight" : "opacity-0"}`} style={{ transitionDelay: "0.2s" }}>
-   <div className="absolute inset-0 hero-grad-photo z-0" />
-   <div className="absolute inset-0 bg-black/20 z-[1]" />
-   <div className="relative z-10">
-   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-2 lg:mb-4" style={{ lineHeight: 1 }}>
+  {/* 30% black overlay between video and text */}
+  <div className="absolute inset-0 bg-black/30 z-[1]" />
+  {/* Text content on top */}
+<div className={`relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out 0.2s" }}>
+   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
     <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
     <span className="text-[#DF3131]">CREATING</span><br />
     MEMORIES
@@ -462,7 +464,6 @@ return (
      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#111] transition-all">
       BOOK A SHOOT
       </Link>
-     </div>
      </div>
   </div>
   </section>

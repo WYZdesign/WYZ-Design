@@ -100,8 +100,8 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
 @media (max-width: 767px) {
   body { font-size: 15px; line-height: 1.6; }
 
-  /* Heads — center-aligned on mobile; h2-h4 allow page-level overrides */
-  h1, h2, h3, h4 { text-align: center !important; }
+  /* Heads — center-aligned on mobile by default; .text-left headings (explicit left-align design intent) are exempted */
+  h1:not(.text-left), h2:not(.text-left), h3:not(.text-left), h4:not(.text-left) { text-align: center !important; }
   h1 { font-size: 2.25rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 1 !important; }
   h2 { font-size: 1.35rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; }
   h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; }
@@ -171,15 +171,10 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
   /* FAQ text — prevent overflow on mobile */
   .faq-question { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: calc(100vw - 8rem); }
 
-  /* Hero text readability — stronger gradient overlays */
-  .hero-banner::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.4) 100%);
-    z-index: 1;
-    pointer-events: none;
-  }
+  /* Hero text readability: handled by an explicit 30% black overlay div in each
+     hero section's markup now (consistent across all viewports). The legacy
+     ::after gradient here was removed — it stacked on top of the explicit
+     overlay on mobile only, causing inconsistent extra darkening vs desktop. */
 
   /* Carousel images — increase 15% from previous mobile size */
   [class*="carousel"] .flex-none,
