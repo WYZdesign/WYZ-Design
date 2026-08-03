@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiX, FiGlobe } from "react-icons/fi";
 
 interface CookieConsent {
@@ -18,6 +18,8 @@ export default function CookieBanner() {
     analytics: false,
     marketing: false,
   });
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem(CONSENT_KEY);
@@ -34,6 +36,43 @@ export default function CookieBanner() {
       setShow(false);
     }
   }, []);
+
+  // Focus trap: move focus into dialog on open, trap Tab/Shift+Tab, restore on close
+  useEffect(() => {
+    if (!show) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeBtnRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShow(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [show]);
 
   const acceptAll = () => {
     const full: CookieConsent = { necessary: true, analytics: true, marketing: true };
@@ -66,6 +105,7 @@ export default function CookieBanner() {
 
   return (
     <div
+      ref={dialogRef}
       className="fixed bottom-0 left-0 right-0 sm:bottom-6 sm:left-auto sm:right-6 sm:w-96 z-[60] sm:animate-slideUp"
       role="dialog"
       aria-label="Cookie consent"
@@ -80,7 +120,7 @@ export default function CookieBanner() {
               <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to enhance your experience.</p>
             </div>
           </div>
-          <button onClick={() => setShow(false)} className="text-[#888] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">
+          <button ref={closeBtnRef} onClick={() => setShow(false)} className="text-[#888] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">
             <FiX className="w-5 h-5" />
           </button>
         </div>
@@ -149,7 +189,7 @@ export default function CookieBanner() {
 
         <p className="mt-4 text-center text-xs text-[#888] dark:text-white/50">
           You can change your preferences at any time from the footer.{" "}
-          <a href="/privacy" className="text-[#DF3131] hover:underline">Privacy Policy</a>
+          <a href="/privacy-policy" className="text-[#DF3131] hover:underline">Privacy Policy</a>
         </p>
       </div>
     </div>
