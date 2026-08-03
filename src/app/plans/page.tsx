@@ -112,7 +112,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
           <div className="p-5 text-center border-b border-[#E2E2E2]">
             <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center">{p.name}</h3>
             <div className="mt-2 text-center">
-              <span className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
+              <span className="whitespace-nowrap text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
               <span className="text-[#8F8F8F] text-sm">/month</span>
             </div>
             <span className="inline-block mt-1 text-[14px] text-[#DF3131] font-semibold text-center">{p.value}</span>
@@ -192,7 +192,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
           <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] mt-1 text-center">{w.name}</h3>
           <div className="mt-2 text-center">
             <span className="text-xs text-[#8F8F8F] dark:text-white/40 line-through">{w.original}</span>{" "}
-            <span className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-black text-[#333333] dark:text-white">{w.discounted}</span>
+            <span className="whitespace-nowrap text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-black text-[#333333] dark:text-white">{w.discounted}</span>
           </div>
           <p className="text-[16px] text-[#666666] dark:text-white/60 mt-2 text-center">{w.desc}</p>
         </div>

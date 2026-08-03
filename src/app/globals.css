@@ -192,8 +192,12 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
   .value-card-grid .group { text-align: left !important; }
   .value-card-grid .group svg { margin-right: 1rem !important; margin-bottom: 0 !important; float: left; }
 
-  /* Plans pricing — prevent "mo" from wrapping */
-  .font-heading.font-black { white-space: nowrap; }
+  /* Plans pricing "mo" wrap-prevention moved to explicit whitespace-nowrap
+     classes directly on the price <span> elements in plans/page.tsx.
+     This selector previously matched EVERY heading site-wide (any element
+     with both font-heading + font-black), silently forcing all long hero
+     H1s off-screen on mobile since centered nowrap text overflows both
+     edges invisibly instead of wrapping. */
 
   /* Services cards — reduce height on mobile */
   .service-card { min-height: min(380px, 55vh) !important; }
