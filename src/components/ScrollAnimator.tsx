@@ -19,6 +19,15 @@ export default function ScrollAnimator() {
         if (el.closest("nav, footer, [role='navigation'], .fixed, .sticky, .absolute")) return;
         el.classList.add("wz-reveal");
         io.observe(el);
+        // Defensive fallback: if the IntersectionObserver never fires for this
+        // element (race condition with layout/reflow timing, e.g. flex `order`
+        // reshuffling on mobile), force it visible after 2s so content can
+        // never be permanently stuck at opacity:0.
+        setTimeout(() => {
+          if (!el.classList.contains("wz-revealed")) {
+            el.classList.add("wz-revealed");
+          }
+        }, 2000);
       });
     }
 
