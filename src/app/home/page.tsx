@@ -613,15 +613,15 @@ function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[
  const doubled = [...items, ...items];
 
  return (
- <div ref={sectionRef} className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-  <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
-   {doubled.map((src, i) => (
-   <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] overflow-hidden rounded-sm">
-   <img src={src} alt="WYZ Design portfolio" loading="lazy" width={400} height={300} className="w-full h-auto object-contain" />
-   </div>
-   ))}
- </div>
- </div>
+    <div ref={sectionRef} className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+    <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
+     {doubled.map((src, i) => (
+    <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm">
+    <img src={src} alt="WYZ Design portfolio" loading="lazy" width={400} height={300} className="absolute inset-0 w-full h-full object-contain" />
+    </div>
+    ))}
+  </div>
+  </div>
  );
 }
 
@@ -783,8 +783,8 @@ export default function HomePage() {
     <div className="absolute inset-0 z-0 bg-black">
     <VideoPlaylist videos={LOGO_INTROS} />
     </div>
-    {/* 70% black overlay between video and text */}
-    <div className="absolute inset-0 bg-black/70 z-[1]" />
+    {/* 80% black overlay between video and text */}
+     <div className="absolute inset-0 bg-black/80 z-[1]" />
     {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
@@ -1081,13 +1081,13 @@ export default function HomePage() {
   <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-5 sm:p-7 lg:p-10 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1">
  <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
- <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />
-   <div className="flex items-center gap-4">
-   <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
-  <div>
-  <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] mb-2 group-hover:text-[#DF3131] transition-colors duration-300 text-left">{c.title}</h3>
-  <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-left">{c.body}</p>
-  </div>
+  <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />
+    <div className="flex flex-col items-center text-center gap-3">
+    <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
+    <div>
+   <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] mb-2 group-hover:text-[#DF3131] transition-colors duration-300 text-left">{c.title}</h3>
+   <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-left">{c.body}</p>
+   </div>
   </div>
  </div>
  </CardTilt>

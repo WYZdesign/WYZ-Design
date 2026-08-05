@@ -38,7 +38,7 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="relative py-24 sm:py-32 lg:py-40 bg-[#111] overflow-hidden">
           <div className="absolute inset-0 opacity-20">
-            <img src="/images/home/carousel_top/wix_0094.jpg" alt="" className="w-full h-full object-cover" loading="lazy" />
+            <img src="/images/home/carousel_top/wix_0094.jpg" alt="" className="w-full h-full object-contain" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
           </div>
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">

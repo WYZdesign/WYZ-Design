@@ -148,7 +148,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
   {[...items, ...items].map((src, i) => (
   <div key={i} className="flex-none w-[28vw] sm:w-[200px] md:w-[280px] h-32 sm:h-48 md:h-64 relative overflow-hidden cursor-pointer group" onClick={handleClick}>
-  <img src={src} alt="Photography portfolio" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+  <img src={src} alt="Photography portfolio" loading="lazy" className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
   </div>
   ))}
  </div>

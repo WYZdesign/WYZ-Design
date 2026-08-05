@@ -9,30 +9,35 @@ const TESTIMONIALS = [
     name: "Andrew Vickers",
     role: "Google Review",
     location: "Chicago, IL",
+    link: "https://www.google.com/search?q=Andrew+Vickers+review"
   },
   {
     quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to enhance artistic endeavors and build community.",
     name: "Tim Perez",
     role: "Google Review",
     location: "Chicago, IL",
+    link: "https://www.google.com/search?q=Tim+Perez+review"
   },
   {
     quote: "Consistency in every aspect of service. Made me an established brand and has got me so many opportunities. Don't hesitate to bring your business here.",
     name: "Robert Sykes Jr",
     role: "Google Review",
     location: "Chicago, IL",
+    link: "https://www.google.com/search?q=Robert+Sykes+Jr+review"
   },
   {
     quote: "This is a very solid place, the owner is awesome.",
     name: "900 Montae",
     role: "Google Review",
     location: "Chicago, IL",
+    link: "https://www.google.com/search?q=900+Montae+review"
   },
   {
     quote: "Artistic abilities stand out with unique designs and high-quality photography delivered quickly. Work consistently improves before deadlines, reflecting a fast-paced and efficient environment.",
     name: "Atly",
     role: "Business Review",
     location: "Chicago, IL",
+    link: "https://www.google.com/search?q=Atly+review"
   },
 ];
 
@@ -75,7 +80,11 @@ export default function Testimonials() {
             <blockquote className="text-white/80 text-lg sm:text-xl leading-relaxed mb-6 max-w-2xl mx-auto italic">
               &ldquo;{t.quote}&rdquo;
             </blockquote>
-            <p className="text-white font-bold text-sm tracking-[0.08em] uppercase">{t.name}</p>
+            <p className="text-white font-bold text-sm tracking-[0.08em] uppercase">
+              <a href={t.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#DF3131] transition-colors cursor-pointer">
+                {t.name}
+              </a>
+            </p>
             <p className="text-white/50 text-xs mt-1">{t.role} &mdash; {t.location}</p>
           </div>
 
