@@ -94,7 +94,7 @@ export default function FAQPage() {
       printing: ["print", "flyers", "posters", "stickers", "business cards"],
       video: ["videography", "film", "footage", "recording"],
     };
-    let expandedTerms = [s];
+    const expandedTerms = [s];
     for (const [key, syns] of Object.entries(synonyms)) {
       if (s.includes(key)) expandedTerms.push(...syns);
     }
@@ -130,7 +130,7 @@ export default function FAQPage() {
           <div className="relative overflow-hidden -mx-6 lg:-mx-12 mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 h-[50vh] max-h-[500px]">
               <div className="relative overflow-hidden flex items-center justify-center" style={{background:"linear-gradient(-45deg, rgba(223,49,49,0.8), rgba(26,26,26,0.9), rgba(139,0,0,0.7), rgba(42,42,42,0.85), rgba(223,49,49,0.8))",backgroundSize:"400% 400%",animation:"heroGradFaq 8s ease infinite"}}>
-                <video src="/videos/wyz-nav-bg.mp4" muted loop autoPlay playsInline className="absolute inset-0 w-full h-full object-cover" />
+                <video src="/videos/wyz-nav-bg.mp4" muted loop autoPlay playsInline className="hidden lg:block absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/80 to-[#1a1a1a]/90" />
                 <div className="relative z-10 text-center px-8">
                   <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto">
@@ -305,11 +305,11 @@ export default function FAQPage() {
                     }`}>
                       <span className="font-heading font-bold text-[13px]">{String(i + 1).padStart(2, "0")}</span>
                     </div>
-                    <span className={`flex-1 font-heading font-bold text-[16px] pr-4 transition-colors leading-snug ${
-                      isOpen ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131]"
-                    }`}>
-                      {faq.q}
-                    </span>
+                     <span className={`flex-1 min-w-0 font-heading font-bold text-[16px] pr-4 transition-colors leading-snug ${
+                       isOpen ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131]"
+                     }`}>
+                       {faq.q}
+                     </span>
                     <span className={`text-xl font-bold shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 ${
                       isOpen ? "bg-[#DF3131] text-white rotate-45" : "bg-white dark:bg-[#252528] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
                     }`}>

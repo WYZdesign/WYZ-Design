@@ -133,7 +133,7 @@ async function scrapeSearchPage(): Promise<FdEvent[]> {
     $('[data-testid="event-card"], .eds-event-card__content, article').each((_: any, el: any) => {
       const card = $(el);
       const titleEl = card.find('[data-testid="event-card-title"]');
-      let title = titleEl.text().trim();
+      const title = titleEl.text().trim();
       if (!title) return;
       if (!title.toLowerCase().includes("fd") && !title.toLowerCase().includes("photo")) return;
 

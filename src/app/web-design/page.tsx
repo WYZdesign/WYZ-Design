@@ -178,19 +178,27 @@ export default function WebDesignPage() {
 return (
     <>
       <main className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
-        {/* ═══ HERO — Full screen split ═══ */}
-        <section className="relative h-screen flex flex-col lg:flex-row overflow-hidden hero-banner">
-          {/* Left: text side — unique gradient */}
-          <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 z-10 lg:min-h-screen overflow-hidden text-center">
-          <div className="absolute inset-0 hero-grad-web z-0" />
-          <div className="absolute inset-0 bg-black/20 z-[1]" />
-          <div className="relative z-10 max-w-lg mx-auto">
+        {/* ═══ HERO — Merged video background ═══ */}
+        <section className="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen flex items-center justify-center overflow-hidden hero-banner">
+          {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
+          <div className="absolute inset-0 flex items-center justify-center">
+          {/* Background: gradient fallback (always visible) + video on top when available */}
+          <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#DF3131]/20">
+            <video autoPlay muted loop playsInline preload="metadata"
+              className="w-full h-full object-cover scale-110">
+              <source src="/videos/hero-banners/web design.mp4" type="video/mp4" />
+            </video>
+          </div>
+          {/* 30% black overlay between video and text */}
+          <div className="absolute inset-0 bg-black/30 z-[1]" />
+          {/* Text content on top */}
+          <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 text-center">
           <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3 block">WYZ DESIGN - WEB DEVELOPMENT</span>
-<h1 className="text-[2rem] sm:text-[3rem] md:text-[3.75rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.04em] mb-2 lg:mb-6" style={{ lineHeight: 1 }}>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
   WEBSITES<br />
   THAT <span className="text-[#DF3131]">WORK</span>
   </h1>
-  <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-6 sm:mb-8 max-w-md">
+  <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto">
    From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
    </p>
   <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
@@ -202,19 +210,12 @@ return (
   </a>
   </div>
               {/* Stats strip */}
-<div className="flex gap-6 sm:gap-10 mt-12 pt-8 border-t border-white/10 justify-center">
+<div className="flex gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 justify-center">
   <AnimatedCounter end={11} suffix="+" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Sites Built" />
   <AnimatedCounter end={100} suffix="%" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Responsive" />
   <AnimatedCounter end={7} suffix="-Day" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Turnaround" />
             </div>
           </div>
-          </div>
-          {/* Right: video side - NO overlays, just the video */}
-          <div className="w-full lg:w-1/2 relative overflow-hidden bg-[#0a0a0a]">
-            <video autoPlay muted loop playsInline preload="metadata"
-              className="w-full h-full object-cover opacity-30 scale-110">
-              <source src="/videos/hero-banners/web design.mp4" type="video/mp4" />
-            </video>
           </div>
         </section>
 

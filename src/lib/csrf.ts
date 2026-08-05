@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { createHmac, randomBytes } from "crypto";
+import { createHmac, randomBytes, timingSafeEqual } from "crypto";
 
 const ALLOWED_ORIGINS = [
   "https://wyzdesign.com",
@@ -39,7 +39,7 @@ export function validateCsrfToken(token: string): boolean {
     const a = Buffer.from(expected);
     const b = Buffer.from(sig);
     if (a.length !== b.length) return false;
-    return require("crypto").timingSafeEqual(a, b);
+    return timingSafeEqual(a, b);
   } catch {
     return false;
   }

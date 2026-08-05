@@ -66,7 +66,8 @@ export default function Footer() {
   const footerBg = "relative bg-[#111]";
   const videoBg = (
     <>
-      <video src="/videos/wyz-nav-bg.mp4" className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
+      <div className="absolute inset-0 wyz-red-gradient" />
+      <video src="/videos/wyz-nav-bg.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
       <div className="absolute inset-0 bg-black/15" />
     </>
   );

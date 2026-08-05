@@ -100,12 +100,12 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
 @media (max-width: 767px) {
   body { font-size: 15px; line-height: 1.6; }
 
-  /* Heads — center-aligned on mobile; h2-h4 allow page-level overrides */
-  h1, h2, h3, h4 { text-align: center !important; }
+  /* Heads — center-aligned on mobile by default; .text-left headings (explicit left-align design intent) are exempted */
+  h1:not(.text-left), h2:not(.text-left), h3:not(.text-left), h4:not(.text-left) { text-align: center !important; }
   h1 { font-size: 2.25rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 1 !important; }
-  h2 { font-size: 1.35rem; font-weight: 800; letter-spacing: 0.04em; }
-  h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; }
-  h4 { font-size: 1rem; font-weight: 700; }
+  h2 { font-size: 1.35rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; }
+  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; }
+  h4 { font-size: 1rem !important; font-weight: 700 !important; }
   p { font-size: 14px; }
 
   /* H1 adjacent text — no line spacing with H1 (tags/accents) */
@@ -171,15 +171,10 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
   /* FAQ text — prevent overflow on mobile */
   .faq-question { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: calc(100vw - 8rem); }
 
-  /* Hero text readability — stronger gradient overlays */
-  .hero-banner::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.4) 100%);
-    z-index: 1;
-    pointer-events: none;
-  }
+  /* Hero text readability: handled by an explicit 30% black overlay div in each
+     hero section's markup now (consistent across all viewports). The legacy
+     ::after gradient here was removed — it stacked on top of the explicit
+     overlay on mobile only, causing inconsistent extra darkening vs desktop. */
 
   /* Carousel images — increase 15% from previous mobile size */
   [class*="carousel"] .flex-none,
@@ -197,8 +192,12 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
   .value-card-grid .group { text-align: left !important; }
   .value-card-grid .group svg { margin-right: 1rem !important; margin-bottom: 0 !important; float: left; }
 
-  /* Plans pricing — prevent "mo" from wrapping */
-  .font-heading.font-black { white-space: nowrap; }
+  /* Plans pricing "mo" wrap-prevention moved to explicit whitespace-nowrap
+     classes directly on the price <span> elements in plans/page.tsx.
+     This selector previously matched EVERY heading site-wide (any element
+     with both font-heading + font-black), silently forcing all long hero
+     H1s off-screen on mobile since centered nowrap text overflows both
+     edges invisibly instead of wrapping. */
 
   /* Services cards — reduce height on mobile */
   .service-card { min-height: min(380px, 55vh) !important; }
@@ -271,6 +270,11 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
 @supports (padding: env(safe-area-inset-top)) {
   nav.fixed { padding-top: env(safe-area-inset-top); height: auto; min-height: 5rem; }
   nav { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+}
+
+/* ── Nav/Footer Red Gradient (mobile fallback for heavy bg video) ── */
+.wyz-red-gradient {
+  background: linear-gradient(135deg, #C90000 0%, #E63C3C 38%, #F47474 72%, #FFB3B3 100%);
 }
 
 /* ── Custom Cursor (desktop only) ── */
@@ -383,40 +387,6 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
 .dark button[class*="border-[#DF3131]"][class*="text-[#DF3131]"] {
   color: white !important;
   border-color: white !important;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SCROLL-DRIVEN HEADING ANIMATIONS
-   h1→h4 cascade with different intro effects
-   Only in Chromium 115+; graceful no-op elsewhere
-   ═══════════════════════════════════════════════════════════ */
-@supports (animation-timeline: view()) {
-  h1 {
-    animation: wzSlideRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 75%;
-  }
-  h2 {
-    animation: wzFadeInUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-timeline: view();
-    animation-range: entry 2% entry 82%;
-  }
-  h3 {
-    animation: wzSlideLeft 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-timeline: view();
-    animation-range: entry 2% entry 88%;
-  }
-  h4 {
-    animation: wzFadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-timeline: view();
-    animation-range: entry 4% entry 92%;
-  }
-  section > p,
-  section > div > p {
-    animation: wzFadeInUp 0.5s ease-out both;
-    animation-timeline: view();
-    animation-range: entry 4% entry 95%;
-  }
 }
 
 .dark [class*="border-[#333]"] {

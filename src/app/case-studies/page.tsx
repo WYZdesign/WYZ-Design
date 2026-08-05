@@ -17,6 +17,20 @@ const CASE_STUDIES = [
     desc: "Brand identity, photography, video content, and campaign strategy for an emerging music artist.",
     color: "#DF3131",
   },
+  {
+    slug: "gft-foods",
+    title: "GFT Foods",
+    tag: "Rebrand + Packaging + Digital Launch",
+    desc: "Complete rebrand from local shop to national player: new logo, packaging system, e-commerce site, and social content. 3x inquiry rate in 30 days.",
+    color: "#2E7D32",
+  },
+  {
+    slug: "dawneeahs-glow",
+    title: "Dawneeah's Glow",
+    tag: "Brand Identity + Photography + E-Commerce",
+    desc: "Full brand identity, product photography, Shopify build, and social strategy for skincare founder. $180K revenue in first 90 days.",
+    color: "#7C4DFF",
+  },
 ];
 
 export default function CaseStudiesIndex() {

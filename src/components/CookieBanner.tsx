@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiX, FiGlobe } from "react-icons/fi";
 
 interface CookieConsent {
@@ -18,6 +18,8 @@ export default function CookieBanner() {
     analytics: false,
     marketing: false,
   });
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem(CONSENT_KEY);
@@ -29,7 +31,48 @@ export default function CookieBanner() {
     } else {
       setShow(true);
     }
+    // Don't show on splash page (root) - let user enter the site first
+    if (window.location.pathname === "/") {
+      setShow(false);
+    }
   }, []);
+
+  // Focus trap: move focus into dialog on open, trap Tab/Shift+Tab, restore on close
+  useEffect(() => {
+    if (!show) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeBtnRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShow(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [show]);
 
   const acceptAll = () => {
     const full: CookieConsent = { necessary: true, analytics: true, marketing: true };
@@ -53,8 +96,8 @@ export default function CookieBanner() {
   };
 
   const enableAnalytics = () => {
-    if (typeof window !== "undefined" && window.umami) {
-      window.umami.track("consent_analytics_accepted");
+    if (typeof window !== "undefined" && (window as any).umami) {
+      (window as any).umami.track("consent_analytics_accepted");
     }
   };
 
@@ -62,31 +105,33 @@ export default function CookieBanner() {
 
   return (
     <div
-      className="fixed bottom-4 left-4 right-4 md:bottom-6 md:left-auto md:right-6 md:w-96 z-50 animate-slideUp"
+      ref={dialogRef}
+      className="fixed bottom-0 left-0 right-0 sm:bottom-6 sm:left-auto sm:right-6 sm:w-96 z-[60] sm:animate-slideUp"
       role="dialog"
       aria-label="Cookie consent"
+      aria-modal="true"
     >
-      <div className="bg-white dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#444] rounded-xl shadow-xl p-6 max-h-[80vh] overflow-y-auto">
+      <div className="bg-white dark:bg-[#1C1C1E] border-t-2 border-[#DF3131] sm:border-2 sm:border-[#E2E2E2] dark:border-[#444] sm:rounded-xl shadow-2xl sm:shadow-xl p-5 sm:p-6 max-h-[75vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <FiCookie className="w-6 h-6 text-[#DF3131]" />
+            <FiGlobe className="w-6 h-6 text-[#DF3131] flex-shrink-0" />
             <div>
               <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg">Cookie Preferences</h3>
-              <p className="text-sm text-[#666] dark:text-white/70">We use cookies to enhance your experience.</p>
+              <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to enhance your experience.</p>
             </div>
           </div>
-          <button onClick={() => setShow(false)} className="text-[#888] hover:text-[#DF3131] transition-colors p-1">
+          <button ref={closeBtnRef} onClick={() => setShow(false)} className="text-[#888] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">
             <FiX className="w-5 h-5" />
           </button>
         </div>
 
         <div className="space-y-4 mb-6">
-          <label className="flex items-center gap-3 cursor-pointer">
+          <label className="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
               checked={consent.necessary}
               disabled
-              className="w-4 h-4 rounded border-[#DF3131] text-[#DF3131] focus:ring-[#DF3131]"
+              className="w-4 h-4 rounded border-[#DF3131] text-[#DF3131] focus:ring-[#DF3131] mt-0.5"
             />
             <div>
               <p className="font-medium text-[#333] dark:text-white">Necessary Cookies</p>
@@ -94,12 +139,12 @@ export default function CookieBanner() {
             </div>
           </label>
 
-          <label className="flex items-center gap-3 cursor-pointer">
+          <label className="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
               checked={consent.analytics}
               onChange={() => setConsent({ ...consent, analytics: !consent.analytics })}
-              className="w-4 h-4 rounded border-[#DF3131] text-[#DF3131] focus:ring-[#DF3131]"
+              className="w-4 h-4 rounded border-[#DF3131] text-[#DF3131] focus:ring-[#DF3131] mt-0.5"
             />
             <div>
               <p className="font-medium text-[#333] dark:text-white">Analytics Cookies</p>
@@ -107,12 +152,12 @@ export default function CookieBanner() {
             </div>
           </label>
 
-          <label className="flex items-center gap-3 cursor-pointer">
+          <label className="flex items-start gap-3 cursor-pointer">
             <input
               type="checkbox"
               checked={consent.marketing}
               onChange={() => setConsent({ ...consent, marketing: !consent.marketing })}
-              className="w-4 h-4 rounded border-[#DF3131] text-[#DF3131] focus:ring-[#DF3131]"
+              className="w-4 h-4 rounded border-[#DF3131] text-[#DF3131] focus:ring-[#DF3131] mt-0.5"
             />
             <div>
               <p className="font-medium text-[#333] dark:text-white">Marketing Cookies</p>
@@ -144,7 +189,7 @@ export default function CookieBanner() {
 
         <p className="mt-4 text-center text-xs text-[#888] dark:text-white/50">
           You can change your preferences at any time from the footer.{" "}
-          <a href="/privacy" className="text-[#DF3131] hover:underline">Privacy Policy</a>
+          <a href="/privacy-policy" className="text-[#DF3131] hover:underline">Privacy Policy</a>
         </p>
       </div>
     </div>

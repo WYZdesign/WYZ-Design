@@ -108,21 +108,21 @@ export default function ServicesPage() {
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-   <section className="relative min-h-[60vh] lg:min-h-[70vh] flex flex-col lg:flex-row hero-banner">
-  {/* Left: Image */}
-  <div className="w-full lg:w-1/2 h-[40vh] lg:h-auto relative overflow-hidden">
+   <section className="relative min-h-[60vh] sm:min-h-[65vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden hero-banner">
+  {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
+  <div className="absolute inset-0 flex items-center justify-center">
+  {/* Background: image fills entire hero */}
+  <div className="absolute inset-0 z-0">
   <img src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" className="w-full h-full object-cover" />
-   <div className="absolute inset-0 bg-black/20" />
   </div>
-  {/* Right: Text with gradient */}
- <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 overflow-hidden">
-   <div className="absolute inset-0 hero-grad-services z-0" />
-   <div className="absolute inset-0 bg-black/20 z-[1]" />
-   <div className="relative z-10 text-center max-w-xl mx-auto">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-2 lg:mb-6" style={{ lineHeight: 1 }}>
-  CREATIVE <span className="text-[#DF3131]">SERVICES</span>
+  {/* 30% black overlay between image and text */}
+  <div className="absolute inset-0 bg-black/30 z-[1]" />
+  {/* Text content on top */}
+  <div className="relative z-10 text-center max-w-xl mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
+  CREATIVE<br /><span className="text-[#DF3131]">SERVICES</span>
   </h1>
-  <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto lg:mx-0">
+  <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto">
    From photography to web design, we deliver end-to-end creative solutions that make your brand stand out.
    </p>
    <Link href="/plans"
