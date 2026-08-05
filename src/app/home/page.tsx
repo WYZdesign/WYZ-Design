@@ -614,12 +614,12 @@ function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[
 
  return (
  <div ref={sectionRef} className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
- <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform cursor-pointer">
-  {doubled.map((src, i) => (
-  <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-28 sm:h-48 md:h-64 overflow-hidden rounded-sm">
-  <img src={src} alt="WYZ Design portfolio" loading="lazy" width={400} height={300} className="w-full h-full object-cover" />
-  </div>
-  ))}
+  <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
+   {doubled.map((src, i) => (
+   <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] overflow-hidden rounded-sm">
+   <img src={src} alt="WYZ Design portfolio" loading="lazy" width={400} height={300} className="w-full h-auto object-contain" />
+   </div>
+   ))}
  </div>
  </div>
  );
@@ -783,8 +783,8 @@ export default function HomePage() {
     <div className="absolute inset-0 z-0 bg-black">
     <VideoPlaylist videos={LOGO_INTROS} />
     </div>
-    {/* 30% black overlay between video and text */}
-    <div className="absolute inset-0 bg-black/30 z-[1]" />
+    {/* 70% black overlay between video and text */}
+    <div className="absolute inset-0 bg-black/70 z-[1]" />
     {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
@@ -823,16 +823,19 @@ export default function HomePage() {
  <div className="absolute top-0 right-0 w-96 h-96 bg-[#DF3131]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
  <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#DF3131]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
- <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
- <div className="text-center mb-8">
-   <h2 className="text-[1.725rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-3">
-    WHAT <span className="text-[#DF3131]">WE DO</span>
-   </h2>
-   <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene — making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+  <div className="text-center mb-12 sm:mb-16">
+    <h2 className="text-[1.725rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-3">
+     WHAT <span className="text-[#DF3131]">WE DO</span>
+    </h2>
+    <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene — making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
   </div>
-  <div className="mb-6">
+  </div>
+  {/* Full-width carousel — even padding on top and bottom */}
+  <div className="relative z-10 py-8 sm:py-12">
     <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.5} />
   </div>
+  <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
   {/* Animated tab switcher */}
  <div className="flex justify-center gap-4 mb-10">
  <button onClick={() => setSpTab("services")}
@@ -1079,8 +1082,8 @@ export default function HomePage() {
  <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
  <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />
-  <div className="flex items-start gap-4">
-  <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
+   <div className="flex items-center gap-4">
+   <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
   <div>
   <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] mb-2 group-hover:text-[#DF3131] transition-colors duration-300 text-left">{c.title}</h3>
   <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-left">{c.body}</p>

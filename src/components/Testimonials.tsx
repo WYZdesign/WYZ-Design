@@ -5,34 +5,34 @@ import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
 
 const TESTIMONIALS = [
   {
-    quote: "WYZ Design took our brand from 'local shop' to 'national player.' The logo redesign alone brought in 3x our usual inquiry rate within 30 days.",
-    name: "Marcus J.",
-    role: "Founder, GFT Foods",
+    quote: "I hired him for my wedding. He did remarkable work. If you ever need a photographer I would definitely recommend this person.",
+    name: "Andrew Vickers",
+    role: "Google Review",
     location: "Chicago, IL",
   },
   {
-    quote: "I've worked with agencies that charge 3x more and deliver half the quality. Torree understands brand identity at a level most designers don't.",
-    name: "Diana K.",
-    role: "Creative Director, Dawneeah's Glow",
-    location: "Atlanta, GA",
+    quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to enhance artistic endeavors and build community.",
+    name: "Tim Perez",
+    role: "Google Review",
+    location: "Chicago, IL",
   },
   {
-    quote: "The photography and retouching quality is unmatched. Our model portfolio went from amateur to editorial-grade in one shoot.",
-    name: "James R.",
-    role: "Casting Director, Nomadic Breed",
-    location: "Los Angeles, CA",
+    quote: "Consistency in every aspect of service. Made me an established brand and has got me so many opportunities. Don't hesitate to bring your business here.",
+    name: "Robert Sykes Jr",
+    role: "Google Review",
+    location: "Chicago, IL",
   },
   {
-    quote: "Full-stack creative execution. They did our logo, our website, our merch designs, and our event flyers — and every piece was fire.",
-    name: "Lisa T.",
-    role: "Owner, XXtra Society",
-    location: "Houston, TX",
+    quote: "This is a very solid place, the owner is awesome.",
+    name: "900 Montae",
+    role: "Google Review",
+    location: "Chicago, IL",
   },
   {
-    quote: "The FD Drive system alone is worth it. We get our raw photos delivered within hours of the shoot, organized and ready for review.",
-    name: "Andre W.",
-    role: "Producer, Studio One Ink",
-    location: "Brooklyn, NY",
+    quote: "Artistic abilities stand out with unique designs and high-quality photography delivered quickly. Work consistently improves before deadlines, reflecting a fast-paced and efficient environment.",
+    name: "Atly",
+    role: "Business Review",
+    location: "Chicago, IL",
   },
 ];
 

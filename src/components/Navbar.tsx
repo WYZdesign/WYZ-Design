@@ -143,7 +143,7 @@ export default function Navbar() {
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-4 sm:pl-6 lg:pl-0">
-              <img src="/images/wyz-crown.png" alt="WYZ Design" width={34} height={34} style={{ maxWidth: "34px", maxHeight: "34px", filter: "drop-shadow(0 1px 3px rgba(255,255,255,0.25)) drop-shadow(0 1px 2px rgba(255,255,255,0.15))", animation: "logoGlow 3s ease-in-out infinite alternate" }} className="hover:scale-110 transition-transform" />
+              <img src="/images/wyz-crown.png" alt="WYZ Design" width={54} height={54} style={{ maxWidth: "54px", maxHeight: "54px", filter: "drop-shadow(0 1px 3px rgba(255,255,255,0.25)) drop-shadow(0 1px 2px rgba(255,255,255,0.15))", animation: "logoGlow 3s ease-in-out infinite alternate" }} className="hover:scale-110 transition-transform" />
             </Link>
 
             {/* Nav links */}

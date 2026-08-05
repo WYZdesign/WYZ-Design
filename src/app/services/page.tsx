@@ -57,7 +57,7 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
  </div>
  <div className="p-5">
  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131]">{service.cat}</span>
-  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[16px] md:text-[18px] tracking-[0.03em] mt-1 mb-2 group-hover:text-[#DF3131] transition-colors">{service.name}</h3>
+  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[16px] md:text-[18px] tracking-[0.03em] mt-1 mb-2 group-hover:text-[#DF3131] transition-colors text-left">{service.name}</h3>
   <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] leading-relaxed line-clamp-2">{service.desc}</p>
  </div>
  </div>
@@ -74,7 +74,7 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
  </div>
  <div className="relative z-10">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">{service.cat}</span>
- <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mt-1 mb-3">{service.name}</h3>
+  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mt-1 mb-3 text-left">{service.name}</h3>
  <p className="text-white/80 text-[15px] leading-relaxed mb-4">{service.desc}</p>
  <div className="flex items-center gap-3 mb-4">
  <span className="text-[28px] font-black">{service.price}</span>
