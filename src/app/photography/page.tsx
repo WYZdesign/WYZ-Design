@@ -50,7 +50,7 @@ function useInView(threshold = 0.1) {
  return { ref, vis };
 }
 
-function PhotoLightbox({ images, index, onClose, onPrev, onNext, album }: {
+function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
  images: string[]; index: number; onClose: () => void; onPrev: () => void; onNext: () => void; album?: string;
 }) {
  const swipe = useSwipe(onNext, onPrev);
@@ -105,57 +105,55 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  </div>
  </div>
  </div>
- {lIdx !== null && <PhotoLightbox images={imgs} index={lIdx} album={album} onClose={() => setLIdx(null)} onPrev={() => setLIdx((lIdx - 1 + imgs.length) % imgs.length)} onNext={() => setLIdx((lIdx + 1) % imgs.length)} />}
+ {lIdx !== null && <Lightbox images={imgs} index={lIdx} album={album} onClose={() => setLIdx(null)} onPrev={() => setLIdx((lIdx - 1 + imgs.length) % imgs.length)} onNext={() => setLIdx((lIdx + 1) % imgs.length)} />}
  </>
  );
 }
 
 function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]; speed?: number; className?: string }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const offsetRef = useRef(0);
-  const paused = useRef(false);
-  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+ const trackRef = useRef<HTMLDivElement>(null);
+ const offsetRef = useRef(0);
+ const paused = useRef(false);
+ const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-  const el = trackRef.current;
-  if (!el || items.length === 0) return;
-  let raf: number;
-  const tick = () => {
-  if (!paused.current && el) {
-  offsetRef.current += speed;
-  const half = el.scrollWidth / 2;
-  if (half > 0 && offsetRef.current >= half) offsetRef.current -= half;
-  el.style.transform = `translateX(${-offsetRef.current}px)`;
-  }
-  raf = requestAnimationFrame(tick);
-  };
-  raf = requestAnimationFrame(tick);
-  return () => cancelAnimationFrame(raf);
-  }, [items, speed]);
+ useEffect(() => {
+ const el = trackRef.current;
+ if (!el || items.length === 0) return;
+ let raf: number;
+ const tick = () => {
+ if (!paused.current && el) {
+ offsetRef.current += speed;
+ const half = el.scrollWidth / 2;
+ if (half > 0 && offsetRef.current >= half) offsetRef.current -= half;
+ el.style.transform = `translateX(${-offsetRef.current}px)`;
+ }
+ raf = requestAnimationFrame(tick);
+ };
+ raf = requestAnimationFrame(tick);
+ return () => cancelAnimationFrame(raf);
+ }, [items, speed]);
 
-  useEffect(() => {
-  return () => { if (resumeTimer.current) clearTimeout(resumeTimer.current); };
-  }, []);
+ useEffect(() => {
+ return () => { if (resumeTimer.current) clearTimeout(resumeTimer.current); };
+ }, []);
 
-  const handleClick = (src: string) => {
-    setLightboxSrc(src);
-  };
+ const handleClick = () => {
+      if (typeof window !== 'undefined') {
+        window.location.href = '/photography';
+      }
+    };
 
-  return (
-  <>
-  <div className={`overflow-hidden ${className}`}>
-  <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
+ return (
+ <div className={`overflow-hidden ${className}`}>
+ <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
   {[...items, ...items].map((src, i) => (
-  <div key={i} className="flex-none w-[28vw] sm:w-[200px] md:w-[280px] h-32 sm:h-48 md:h-64 relative overflow-hidden cursor-pointer group" onClick={() => handleClick(src)}>
+  <div key={i} className="flex-none w-[28vw] sm:w-[200px] md:w-[280px] h-32 sm:h-48 md:h-64 relative overflow-hidden cursor-pointer group" onClick={handleClick}>
   <img src={src} alt="Photography portfolio" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
   </div>
   ))}
-  </div>
-  </div>
-  {lightboxSrc && <Lightbox src={lightboxSrc} alt="Photography portfolio" onClose={() => setLightboxSrc(null)} />}
-  </>
-  );
+ </div>
+ </div>
+ );
 }
 
  function PhotoFlipCard({ s }: { s: { name: string; price: string; dur: string; cat: string; desc: string; bookLink: string; img: string } }) {
@@ -274,7 +272,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  .then((r) => r.json())
  .then((d) => ({ cat, images: d.images || [] }))
  .catch(() => ({ cat, images: [] as string[] }))
-import Lightbox from "@/components/Lightbox";
+ )
  ).then((results) => {
  for (const { cat, images } of results) {
  const fresh = images.find((img: string) => !used.has(img));

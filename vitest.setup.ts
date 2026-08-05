@@ -6,6 +6,7 @@ vi.mock("next/server", () => ({
     constructor(public url: string, public init?: RequestInit) {}
     headers = new Headers(this.init?.headers);
     async json() { return JSON.parse(this.init?.body as string || "{}"); }
+    async text() { return this.init?.body as string || ""; }
     get nextUrl() { return new URL(this.url); }
   },
   NextResponse: {
@@ -33,7 +34,7 @@ vi.mock("@/lib/wyzmind", () => ({
 vi.mock("@/lib/stripe", () => ({
   getStripe: () => ({
     checkout: { sessions: { create: vi.fn().mockResolvedValue({ url: "https://checkout.stripe.com/test" }) } },
-    webhooks: { constructEvent: vi.fn().mockReturnValue({ type: "checkout.session.completed" }) },
+    webhooks: { constructEvent: vi.fn().mockImplementation((_body: string, sig: string) => { if (sig === "invalid_sig") throw new Error("Invalid signature"); return { type: "checkout.session.completed", data: { object: { metadata: {}, customer: "cus_test", customer_details: { email: "test@test.com" } } } }; }) },
   }),
   createCheckoutSession: vi.fn().mockResolvedValue({ url: "https://checkout.stripe.com/test" }),
   createServiceCheckout: vi.fn().mockResolvedValue({ url: "https://checkout.stripe.com/test" }),
@@ -65,5 +66,5 @@ vi.mock("@/app/api/auth/[...nextauth]/route", () => ({
 }));
 
 Object.defineProperty(global, "Request", { value: class { constructor(public url: string, public init?: RequestInit) {} } });
-Object.defineProperty(global, "Response", { value: class { constructor(public body?: any, public init?: ResponseInit) {} static json(d: any, i?: ResponseInit) { return new Response(JSON.stringify(d), { ...i, headers: { "Content-Type": "application/json" } }) } } });
+Object.defineProperty(global, "Response", { value: class { body: any; status: number; ok: boolean; headers: Headers; constructor(body?: any, init?: ResponseInit) { this.body = body; this.status = init?.status ?? 200; this.ok = this.status >= 200 && this.status < 300; this.headers = new Headers(init?.headers); } async json() { return JSON.parse(this.body as string || "{}"); } static json(d: any, i?: ResponseInit) { return new Response(JSON.stringify(d), { ...i, headers: { "Content-Type": "application/json", ...(i?.headers as Record<string, string>) } }); } } });
 Object.defineProperty(global, "Headers", { value: class { constructor(init?: Record<string, string>) { this.map = new Map(Object.entries(init || {})); } map: Map<string, string>; get(k: string) { return this.map.get(k.toLowerCase()) || null; } set(k: string, v: string) { this.map.set(k.toLowerCase(), v); } has(k: string) { return this.map.has(k.toLowerCase()); } } });

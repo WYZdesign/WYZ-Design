@@ -6,16 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@calcom/embed-core": "^1.5.3",
     "@calcom/embed-react": "^1.5.3",
     "@novu/node": "^2.6.6",
+    "@sentry/nextjs": "^10.69.0",
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.110.7",
     "@types/dompurify": "^3.0.5",
-    "@upstash/redis": "^2.0.0",
+    "@upstash/redis": "^1.34.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "cheerio": "^1.2.0",
