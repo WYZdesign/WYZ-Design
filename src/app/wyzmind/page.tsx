@@ -72,18 +72,18 @@ export default function WYZMiNDPage() {
    const brainCanvasRef = useRef<HTMLCanvasElement>(null);
 
    useEffect(() => {
-     const canvas = brainCanvasRef.current;
-     if (!canvas) return;
-     const ctx = canvas.getContext("2d");
-     if (!ctx) return;
+     const c = brainCanvasRef.current;
+     if (!c) return;
+     const cx = c.getContext("2d");
+     if (!cx) return;
      let animId: number;
      const nodes: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
      function resize() {
-       const w = canvas.offsetWidth;
-       const h = canvas.offsetHeight;
-       canvas.width = w * 2;
-       canvas.height = h * 2;
-       ctx.setTransform(2, 0, 0, 2, 0, 0);
+       const w = c.offsetWidth;
+       const h = c.offsetHeight;
+       c.width = w * 2;
+       c.height = h * 2;
+       cx.setTransform(2, 0, 0, 2, 0, 0);
        for (let i = 0; i < 40; i++) {
          nodes.push({
            x: Math.random() * w,
@@ -97,21 +97,21 @@ export default function WYZMiNDPage() {
      resize();
      window.addEventListener("resize", resize);
      function draw() {
-       const w = canvas.offsetWidth;
-       const h = canvas.offsetHeight;
-       ctx.clearRect(0, 0, w, h);
+       const w = c.offsetWidth;
+       const h = c.offsetHeight;
+       cx.clearRect(0, 0, w, h);
        for (let i = 0; i < nodes.length; i++) {
          for (let j = i + 1; j < nodes.length; j++) {
            const dx = nodes[i].x - nodes[j].x;
            const dy = nodes[i].y - nodes[j].y;
            const dist = Math.sqrt(dx * dx + dy * dy);
            if (dist < 120) {
-             ctx.beginPath();
-             ctx.strokeStyle = `rgba(223,49,49,${0.4 * (1 - dist / 120)})`;
-             ctx.lineWidth = 0.5;
-             ctx.moveTo(nodes[i].x, nodes[i].y);
-             ctx.lineTo(nodes[j].x, nodes[j].y);
-             ctx.stroke();
+             cx.beginPath();
+             cx.strokeStyle = `rgba(223,49,49,${0.4 * (1 - dist / 120)})`;
+             cx.lineWidth = 0.5;
+             cx.moveTo(nodes[i].x, nodes[i].y);
+             cx.lineTo(nodes[j].x, nodes[j].y);
+             cx.stroke();
            }
          }
        }
@@ -120,10 +120,10 @@ export default function WYZMiNDPage() {
          n.y += n.vy;
          if (n.x < 0 || n.x > w) n.vx *= -1;
          if (n.y < 0 || n.y > h) n.vy *= -1;
-         ctx.beginPath();
-         ctx.fillStyle = "rgba(223,49,49,0.6)";
-         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-         ctx.fill();
+         cx.beginPath();
+         cx.fillStyle = "rgba(223,49,49,0.6)";
+         cx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+         cx.fill();
        });
        animId = requestAnimationFrame(draw);
      }
