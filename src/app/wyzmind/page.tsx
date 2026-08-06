@@ -79,13 +79,15 @@ export default function WYZMiNDPage() {
      let animId: number;
      const nodes: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
      function resize() {
-       canvas.width = canvas.offsetWidth * 2;
-       canvas.height = canvas.offsetHeight * 2;
-       ctx.scale(2, 2);
+       const w = canvas.offsetWidth;
+       const h = canvas.offsetHeight;
+       canvas.width = w * 2;
+       canvas.height = h * 2;
+       ctx.setTransform(2, 0, 0, 2, 0, 0);
        for (let i = 0; i < 40; i++) {
          nodes.push({
-           x: Math.random() * canvas.offsetWidth,
-           y: Math.random() * canvas.offsetHeight,
+           x: Math.random() * w,
+           y: Math.random() * h,
            vx: (Math.random() - 0.5) * 0.3,
            vy: (Math.random() - 0.5) * 0.3,
            r: Math.random() * 2 + 1,
@@ -95,7 +97,9 @@ export default function WYZMiNDPage() {
      resize();
      window.addEventListener("resize", resize);
      function draw() {
-       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+       const w = canvas.offsetWidth;
+       const h = canvas.offsetHeight;
+       ctx.clearRect(0, 0, w, h);
        for (let i = 0; i < nodes.length; i++) {
          for (let j = i + 1; j < nodes.length; j++) {
            const dx = nodes[i].x - nodes[j].x;
@@ -114,8 +118,8 @@ export default function WYZMiNDPage() {
        nodes.forEach((n) => {
          n.x += n.vx;
          n.y += n.vy;
-         if (n.x < 0 || n.x > canvas.offsetWidth) n.vx *= -1;
-         if (n.y < 0 || n.y > canvas.offsetHeight) n.vy *= -1;
+         if (n.x < 0 || n.x > w) n.vx *= -1;
+         if (n.y < 0 || n.y > h) n.vy *= -1;
          ctx.beginPath();
          ctx.fillStyle = "rgba(223,49,49,0.6)";
          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
