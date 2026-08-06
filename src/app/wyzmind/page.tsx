@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect, ReactNode } from "react";
+import { useState, useRef, useEffect, ReactNode, useCallback } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
 import { FiCpu, FiLayers, FiBarChart2, FiZap, FiFolder, FiMaximize } from "react-icons/fi";
@@ -66,9 +66,66 @@ const STACK_ITEMS = [
 const STACK_CATEGORIES = ["All", "AI", "Data", "Infra", "Platform"];
 
 export default function WYZMiNDPage() {
-  const [activeFeature, setActiveFeature] = useState<string | null>(null);
-  const [activeStackCat, setActiveStackCat] = useState("All");
-  const [expandedStack, setExpandedStack] = useState<string | null>(null);
+   const [activeFeature, setActiveFeature] = useState<string | null>(null);
+   const [activeStackCat, setActiveStackCat] = useState("All");
+   const [expandedStack, setExpandedStack] = useState<string | null>(null);
+   const brainCanvasRef = useRef<HTMLCanvasElement>(null);
+
+   useEffect(() => {
+     const canvas = brainCanvasRef.current;
+     if (!canvas) return;
+     const ctx = canvas.getContext("2d");
+     if (!ctx) return;
+     let animId: number;
+     const nodes: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
+     function resize() {
+       canvas.width = canvas.offsetWidth * 2;
+       canvas.height = canvas.offsetHeight * 2;
+       ctx.scale(2, 2);
+       for (let i = 0; i < 40; i++) {
+         nodes.push({
+           x: Math.random() * canvas.offsetWidth,
+           y: Math.random() * canvas.offsetHeight,
+           vx: (Math.random() - 0.5) * 0.3,
+           vy: (Math.random() - 0.5) * 0.3,
+           r: Math.random() * 2 + 1,
+         });
+       }
+     }
+     resize();
+     window.addEventListener("resize", resize);
+     function draw() {
+       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+       for (let i = 0; i < nodes.length; i++) {
+         for (let j = i + 1; j < nodes.length; j++) {
+           const dx = nodes[i].x - nodes[j].x;
+           const dy = nodes[i].y - nodes[j].y;
+           const dist = Math.sqrt(dx * dx + dy * dy);
+           if (dist < 120) {
+             ctx.beginPath();
+             ctx.strokeStyle = `rgba(223,49,49,${0.4 * (1 - dist / 120)})`;
+             ctx.lineWidth = 0.5;
+             ctx.moveTo(nodes[i].x, nodes[i].y);
+             ctx.lineTo(nodes[j].x, nodes[j].y);
+             ctx.stroke();
+           }
+         }
+       }
+       nodes.forEach((n) => {
+         n.x += n.vx;
+         n.y += n.vy;
+         if (n.x < 0 || n.x > canvas.offsetWidth) n.vx *= -1;
+         if (n.y < 0 || n.y > canvas.offsetHeight) n.vy *= -1;
+         ctx.beginPath();
+         ctx.fillStyle = "rgba(223,49,49,0.6)";
+         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+         ctx.fill();
+       });
+       animId = requestAnimationFrame(draw);
+     }
+     draw();
+     return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+   }, []);
 
   const filteredStack = activeStackCat === "All"
     ? STACK_ITEMS
@@ -78,20 +135,22 @@ export default function WYZMiNDPage() {
     <main className="bg-white dark:bg-[#1C1C1E] min-h-screen text-[#333] dark:text-[#e0e0e0] pb-20">
       <ScrollReveal animation="fadeUp">
 {/* Hero */}
-         <section className="relative py-24 px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
-   <div className="absolute inset-0 hero-grad-wyzmind z-0" />
-   <div className="absolute inset-0 bg-black/20 z-[1]" />
-   <div className="relative z-10">
-           <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-4">WYZMiND</p>
-<h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] mb-6 text-white" style={{ lineHeight: 1, overflowWrap: "break-word" }}>
-              creative<br />
-              <span className="text-[#DF3131]">AI Brain</span>
-            </h1>
-           <p className="text-white/70 text-[16px] sm:text-lg max-w-2xl mx-auto leading-relaxed">
-             The behind-the-scenes engine that keeps WYZ Design running smooth. Automation, client systems, creative tools, built for us, eventually for you.
-           </p>
-           </div>
-         </section>
+          <section className="relative py-24 px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
+    <div className="absolute inset-0 hero-grad-wyzmind z-0" />
+    <div className="absolute inset-0 bg-black/20 z-[1]" />
+    {/* Neural network canvas background */}
+    <canvas ref={brainCanvasRef} className="absolute inset-0 z-[2] w-full h-full" style={{ opacity: 0.3 }} />
+    <div className="relative z-10">
+            <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-4">WYZMiND</p>
+ <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] mb-6 text-white" style={{ lineHeight: 1, overflowWrap: "break-word" }}>
+               creative<br />
+               <span className="text-[#DF3131]">AI Brain</span>
+             </h1>
+            <p className="text-white/70 text-[16px] sm:text-lg max-w-2xl mx-auto leading-relaxed">
+              The behind-the-scenes engine that keeps WYZ Design running smooth. Automation, client systems, creative tools, built for us, eventually for you.
+            </p>
+            </div>
+          </section>
 
         {/* Features — dynamic interactive cards */}
         <section className="max-w-6xl mx-auto px-6 py-16">
