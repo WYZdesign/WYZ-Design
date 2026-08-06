@@ -331,7 +331,7 @@ export default function DesignsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
   <section className="py-10 bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
- <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+ <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
  <div className="text-center sm:text-left">
  <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131]">FEATURED ARTIST OF THE MONTH</span>
   <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">F. A. O. T. M.</h2>
@@ -341,7 +341,7 @@ export default function DesignsPage() {
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
  {dbcMerch.slice(0, 4).map((p, i) => (
  <Link key={i} href="/merch" className="group cursor-pointer block">
- <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
+ <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
  <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
  </div>
   <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
