@@ -1085,8 +1085,8 @@ export default function HomePage() {
     <div className="flex flex-col items-center text-center gap-3">
     <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
     <div>
-   <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] mb-2 group-hover:text-[#DF3131] transition-colors duration-300 text-left">{c.title}</h3>
-   <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-left">{c.body}</p>
+   <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] mb-2 group-hover:text-[#DF3131] transition-colors duration-300 text-center">{c.title}</h3>
+   <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-center">{c.body}</p>
    </div>
   </div>
  </div>

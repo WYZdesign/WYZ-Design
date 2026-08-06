@@ -235,7 +235,7 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
               <Link href="/account/my-account" data-kp-light
-                className="px-6 py-2 text-[14px] font-semibold tracking-[0.1em] border-[1.5px] border-white rounded-full transition-all bg-white text-[#DF3131] hover:bg-white hover:text-[#DF3131] hover:border-[#DF3131] dark:bg-[#252528] dark:text-[#DF3131] dark:hover:bg-[#333] dark:hover:text-[#DF3131] dark:hover:border-[#DF3131] dark:border-[#444]">
+                className="px-6 py-2 text-[14px] font-semibold tracking-[0.1em] border-[1.5px] border-white rounded-full transition-all bg-white text-[#DF3131] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:bg-white dark:text-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:border-white">
                 Login
               </Link>
               <ThemeToggle />

@@ -110,13 +110,13 @@ export default function BlogPage() {
  {filtered.map((p, i) => (
  <ScrollReveal key={p.id} animation="fadeUp" delay={0.08 * i}>
  <article className="blog-card group bg-white dark:bg-[#252528] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
- <div className="relative h-56 overflow-hidden">
- <img src={p.img} alt={p.title} className="blog-img w-full h-full object-cover dark:brightness-110 dark:contrast-110" />
- <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded">{p.cat}</span>
- </div>
- <div className="p-5 sm:p-6">
- <div className="flex items-center gap-3 text-[#8F8F8F] dark:text-[#999] text-[12px] mb-3">
- <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>
+  <div className="relative h-56 overflow-hidden">
+  <img src={p.img} alt={p.title} className="blog-img w-full h-full object-cover dark:brightness-110 dark:grayscale" loading="eager" />
+  <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded">{p.cat}</span>
+  </div>
+  <div className="p-5 sm:p-6">
+  <div className="flex items-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
+  <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>
  <span>•</span>
  <span>{p.date}</span>
  </div>

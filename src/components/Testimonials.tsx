@@ -77,15 +77,17 @@ export default function Testimonials() {
                 <FiStar key={i} className="w-5 h-5 fill-[#D49341] text-[#D49341]" />
               ))}
             </div>
-            <blockquote className="text-white/80 text-lg sm:text-xl leading-relaxed mb-6 max-w-2xl mx-auto italic">
-              &ldquo;{t.quote}&rdquo;
+            <blockquote className="text-white text-lg sm:text-xl leading-relaxed mb-6 max-w-2xl mx-auto italic">
+              &ldquo;
+              {t.quote}
+              &rdquo;
             </blockquote>
             <p className="text-white font-bold text-sm tracking-[0.08em] uppercase">
               <a href={t.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#DF3131] transition-colors cursor-pointer">
                 {t.name}
               </a>
             </p>
-            <p className="text-white/50 text-xs mt-1">{t.role} &mdash; {t.location}</p>
+            <p className="text-white/70 text-xs mt-1">{t.role} &mdash; {t.location}</p>
           </div>
 
           <button

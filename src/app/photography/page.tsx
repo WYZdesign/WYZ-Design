@@ -34,7 +34,7 @@ const ALBUM_COVERS_STATIC: Record<string, string> = {
  Bodypaint: "/images/photography-categories/Bodypaint.jpg",
  Urbex: "/images/photography-categories/URBEX.jpg",
  Products: "/images/photography-categories/Products.jpg",
-  Conceptual: "/images/photography-categories/Conceptual.JPG",
+  Conceptual: "/images/photography-categories/Coneceptual.JPG",
 };
 
 function useInView(threshold = 0.1) {
@@ -412,15 +412,15 @@ return (
   .animate-slideInLeft{animation:slideInLeft .8s ease-out forwards}
   .animate-slideInRight{animation:slideInRight .8s ease-out forwards}
   .album-card { perspective: 1000px; }
-  .album-card img {
-  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1),
-  filter 0.6s cubic-bezier(0.2, 0, 0.2, 1);
-  filter: saturate(0.2);
-  }
-  .album-card:hover img {
-  transform: scale(1.05);
-  filter: saturate(1.1);
-  }
+   .album-card img {
+   transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1),
+   filter 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+   filter: saturate(0.15);
+   }
+   .album-card:hover img {
+   transform: scale(1.1);
+   filter: saturate(1.2);
+   }
   .hover-lift{transition:transform .3s ease,box-shadow .3s ease}
   .hover-lift:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(0,0,0,.15)}
   .model-polaroid {
@@ -643,7 +643,6 @@ return (
   style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
   <img src={albumCovers[a]} alt={a}
    className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110"
-   style={{ filter: "saturate(1.2)" }}
    loading="lazy" />
    <div className="absolute inset-0 z-10 bg-black/30" />
    <div className="absolute inset-0 flex items-center justify-center z-20">
@@ -671,8 +670,8 @@ return (
  {b.icon}
  </div>
  <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] mb-4 whitespace-pre-line leading-tight">{b.title}</h3>
- <p className="text-[16px] text-[#666] dark:text-white/70 leading-relaxed mb-4">{b.desc}</p>
- <Link href="/plans" className="inline-block text-[#DF3131] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-[#B82020] transition-colors">READ MORE +</Link>
+   <p className="text-[15px] text-white/70 dark:text-[#aaa] leading-relaxed mb-4 text-center">{b.desc}</p>
+   <Link href="/plans" className="inline-block text-[#DF3131] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-white transition-colors">READ MORE +</Link>
  </div>
  ))}
  </div>
