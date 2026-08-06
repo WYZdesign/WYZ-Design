@@ -97,50 +97,50 @@ export default function WYZMiNDPage() {
         <section className="max-w-6xl mx-auto px-6 py-16">
           <h2 className="text-center font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] mb-3 text-[#333] dark:text-[#e0e0e0]">What It Powers</h2>
           <p className="text-center text-[#8F8F8F] dark:text-[#b0b0b0] text-[16px] mb-12">Click any card to explore what each system actually does</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-auto">
-            {FEATURES.map((f) => {
-              const isActive = activeFeature === f.id;
-              return (
-                <div key={f.id}
-                  role="button"
-                  tabIndex={0}
-                  aria-expanded={isActive}
-                  aria-label={`${f.title} - ${f.layman}`}
-                  onClick={() => setActiveFeature(isActive ? null : f.id)}
-                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveFeature(isActive ? null : f.id); } }}
-                  className={`relative cursor-pointer transition-all duration-500 rounded-lg overflow-hidden ${
-                    isActive ? "sm:col-span-2 lg:col-span-3 shadow-2xl shadow-[#DF3131]/20 border-2 border-[#DF3131] z-10" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:-translate-y-1 hover:shadow-lg"
-                  }`}>
-                  {/* Card header — always visible */}
-                  <div className={`p-6 transition-all duration-300 ${isActive ? "bg-[#333] dark:bg-[#111] text-white" : ""}`}>
-                    <div className={`text-5xl mb-3 text-center transition-transform duration-300 ${isActive ? "scale-110" : ""}`}>
-                      {f.icon}
-                    </div>
-                    <h3 className={`font-heading font-bold text-[16px] mb-1 text-center transition-colors ${isActive ? "text-white" : "text-[#333] dark:text-[#e0e0e0]"}`}>
-                      {f.title}
-                    </h3>
-                    <p className={`text-[16px] leading-relaxed text-center transition-colors ${isActive ? "text-white/50" : "text-[#666] dark:text-[#b0b0b0]"}`}>
-                      {f.layman}
-                    </p>
-                    <p className={`text-[11px] font-bold tracking-[0.1em] uppercase mt-3 text-center transition-colors ${isActive ? "text-[#DF3131]" : "text-[#999]"}`}>
-                      {isActive ? "CLICK TO CLOSE" : "CLICK TO LEARN MORE"}
-                    </p>
-                  </div>
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+             {FEATURES.map((f) => {
+               const isActive = activeFeature === f.id;
+               return (
+                 <div key={f.id}
+                   role="button"
+                   tabIndex={0}
+                   aria-expanded={isActive}
+                   aria-label={`${f.title} - ${f.layman}`}
+                   onClick={() => setActiveFeature(isActive ? null : f.id)}
+                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveFeature(isActive ? null : f.id); } }}
+                   className={`relative cursor-pointer transition-all duration-500 rounded-lg overflow-hidden aspect-square ${
+                     isActive ? "ring-2 ring-[#DF3131] ring-offset-2 dark:ring-offset-[#252528] shadow-2xl shadow-[#DF3131]/20 z-10" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:-translate-y-1 hover:shadow-lg"
+                   }`}>
+                   {/* Card header — always visible, icon centered at top */}
+                   <div className={`flex flex-col items-center text-center p-5 transition-all duration-300 ${isActive ? "bg-[#333] dark:bg-[#111] text-white" : "bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0]"}`}>
+                     <div className={`text-4xl mb-3 transition-transform duration-300 ${isActive ? "scale-110" : ""}`}>
+                       {f.icon}
+                     </div>
+                     <h3 className={`font-heading font-bold text-[16px] mb-1 transition-colors ${isActive ? "text-white" : "text-[#333] dark:text-[#e0e0e0]"}`}>
+                       {f.title}
+                     </h3>
+                     <p className={`text-[13px] leading-relaxed px-2 transition-colors ${isActive ? "text-white/50" : "text-[#666] dark:text-[#b0b0b0]"}`}>
+                       {f.layman}
+                     </p>
+                     <p className={`text-[11px] font-bold tracking-[0.1em] uppercase mt-3 transition-colors ${isActive ? "text-[#DF3131]" : "text-[#999]"}`}>
+                       {isActive ? "CLICK TO CLOSE" : "CLICK TO LEARN MORE"}
+                     </p>
+                   </div>
 
-                  {/* Expanded detail */}
-                  <div className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                    isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-                  }`}>
-                    <div className={`px-6 pb-6 ${isActive ? "bg-white dark:bg-[#252528]" : ""}`}>
-                      <div className={`pt-4 border-t ${isActive ? "border-[#E2E2E2]" : "border-transparent"}`}>
-                        <p className="text-[#333] dark:text-[#e0e0e0] text-[16px] leading-relaxed text-center">{f.details}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                   {/* Expanded detail */}
+                   <div className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                     isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                   }`}>
+                     <div className={`px-5 pb-5 text-center ${isActive ? "bg-white dark:bg-[#252528]" : ""}`}>
+                       <div className={`pt-4 border-t px-4 py-3 ${isActive ? "border-[#E2E2E2] dark:border-[#444]" : "border-transparent"}`}>
+                         <p className="text-[#333] dark:text-[#e0e0e0] text-[15px] leading-relaxed">{f.details}</p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               );
+             })}
+           </div>
         </section>
 
         {/* Stack — interactive tabs */}

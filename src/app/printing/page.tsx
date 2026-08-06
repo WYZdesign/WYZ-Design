@@ -80,37 +80,37 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
  </div>
  </div>
  </div>
- {/* Back */}
- <div
- className={`absolute inset-0 transition-all duration-700 ease-in-out ${flipped ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
- style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}
- >
- <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative">
- <div className="absolute inset-0 opacity-10">
- <img src={sticker.img} alt="" className="w-full h-full object-cover" />
- </div>
- <div className="relative z-10">
- <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">Sticker Type</span>
- <h3 className="font-heading font-black text-white text-[24px] tracking-[0.03em] mt-1 mb-3">{sticker.name}</h3>
- <p className="text-white/80 text-[15px] leading-relaxed mb-4">{sticker.desc}</p>
- <div className="space-y-2">
- {sticker.features.map((f) => (
-  <div key={f} className="flex items-center gap-2 text-[14px] text-white/90">
-  <span className="text-white font-bold">✓</span> {f}
-  </div>
- ))}
- </div>
- </div>
- <div className="relative z-10 flex gap-2">
- <Link href="/booking" className="flex-1 text-center py-3 bg-white text-[#DF3131] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
- GET A QUOTE
- </Link>
- <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
- VIEW PLANS
- </Link>
- </div>
- </div>
- </div>
+   {/* Back */}
+   <div
+   className={`absolute inset-0 transition-all duration-700 ease-in-out ${flipped ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
+   style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}
+   >
+   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col justify-between overflow-hidden relative">
+   <div className="absolute inset-0 opacity-10">
+   <img src={sticker.img} alt="" className="w-full h-full object-cover" />
+   </div>
+   <div className="relative z-10 text-center flex-1 flex flex-col justify-center">
+   <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">Sticker Type</span>
+   <h3 className="font-heading font-black text-white text-[24px] tracking-[0.03em] mt-1 mb-4">{sticker.name}</h3>
+   <p className="text-white/80 text-[15px] leading-relaxed mb-4">{sticker.desc}</p>
+   <div className="space-y-2">
+   {sticker.features.map((f) => (
+   <div key={f} className="flex items-center justify-center gap-2 text-[14px] text-white/90">
+   <span className="text-white font-bold">✓</span> {f}
+   </div>
+   ))}
+   </div>
+   </div>
+   <div className="relative z-10 flex gap-2 justify-center mt-4">
+   <Link href="/booking" className="flex-1 text-center py-3 px-4 bg-white text-[#DF3131] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
+   GET A QUOTE
+   </Link>
+   <Link href="/plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
+   VIEW PLANS
+   </Link>
+   </div>
+   </div>
+   </div>
  </div>
  );
 }
@@ -168,16 +168,18 @@ export default function PrintingPage() {
   {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
   <div className="absolute inset-0 flex items-center justify-center">
   {/* Background: video fills entire hero */}
-  <div className="absolute inset-0 z-0">
-    <ParallaxVideo src="/videos/printing-hero.mp4" speed={0.3} opacity={1} overlayOpacity={0} playbackRate={0.7} />
-  </div>
-  {/* 30% black overlay between video and text */}
-  <div className="absolute inset-0 bg-black/30 z-[1]" />
-  {/* Text content on top */}
-  <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
-    <TextReveal text="DIGITAL" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.08em] uppercase mb-0.5 lg:mb-1 text-white" tag="h1" />
-    <TextReveal text="PRINTING" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.08em] uppercase mb-4 sm:mb-6 text-white" tag="h1" />
-    <p className="text-white/70 text-[16px] sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
+   <div className="absolute inset-0 z-0">
+   <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={1} overlayOpacity={0} playbackRate={0.7} />
+   </div>
+   {/* 30% black overlay between video and text (mobile merged) */}
+   <div className="absolute inset-0 bg-black/30 z-[1]" />
+   {/* Desktop: light gray background behind text side */}
+   <div className="hidden md:block absolute inset-y-0 right-0 w-1/2 z-0" style={{ background: "linear-gradient(135deg, #e8e8e8 0%, #dadada 100%)" }} />
+   {/* Text content (mobile centered / desktop left) */}
+   <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20 md:absolute md:inset-y-0 md:my-auto md:w-1/2 md:items-start md:text-left md:pl-8 lg:pl-12 xl:pl-16">
+     <TextReveal text="DIGITAL" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.08em] uppercase mb-0.5 lg:mb-1 text-black" tag="h1" />
+     <TextReveal text="PRINTING" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.08em] uppercase mb-4 sm:mb-6 text-black" tag="h1" />
+     <p className="text-black/70 text-[16px] sm:text-lg mb-6 sm:mb-8 max-w-md mx-auto md:max-w-sm md:mx-0">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
     <Link href="/designs" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30">
     GRAPHIC DESIGN
     </Link>

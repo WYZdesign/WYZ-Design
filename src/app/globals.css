@@ -851,15 +851,22 @@ video { will-change: auto; }
 .will-change-transform { will-change: transform; transform: translateZ(0); }
 
 @media (max-width: 767px) {
-  .hero-section, .hero-banner {
-    text-align: center;
-  }
-  .hero-section h1, .hero-section h2, .hero-section h3,
-  .hero-banner h1, .hero-banner h2, .hero-banner h3 {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
+   .hero-section, .hero-banner {
+     text-align: center;
+   }
+   .hero-section h1, .hero-section h2, .hero-section h3,
+   .hero-banner h1, .hero-banner h2, .hero-banner h3 {
+     margin-left: auto;
+     margin-right: auto;
+   }
+ }
+
+/* Inner padding for all card content blocks */
+.card-inner-p { padding: 1rem 1.25rem; }
+@media (min-width: 640px) { .card-inner-p { padding: 1.25rem 1.5rem; } }
+@media (min-width: 1024px) { .card-inner-p { padding: 1.5rem 2rem; } }
+.card-text-center { text-align: center; }
+.card-text-center * { text-align: center; }
 
 /* ═══════════════════════════════════════════════════════════
    FLUID TYPOGRAPHY — smooth scaling across all viewports

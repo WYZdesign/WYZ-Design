@@ -436,39 +436,62 @@ return (
   }
   `}</style>
 
-{/* HERO */}
-  <section ref={heroRef} className="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen lg:max-h-[700px] flex items-center justify-center overflow-hidden hero-banner">
-  {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
-  <div className="absolute inset-0 flex items-center justify-center">
-  {/* Background: gradient fallback (always visible) + video on top when available */}
-  <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
-   <video
-    src="/videos/hero-banners/photography.mp4"
-    autoPlay muted loop playsInline
-    className="absolute inset-0 w-full h-full object-cover"
-    style={{ filter: "saturate(1.2) contrast(1.1)" }}
-    />
+ {/* HERO */}
+   <section ref={heroRef} className="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen lg:max-h-[700px] overflow-hidden hero-banner">
+   {/* Desktop split: video left, text right */}
+   <div className="hidden md:grid md:grid-cols-2 md:h-full">
+   <div className="relative h-full">
+   <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
+    <video
+     src="/videos/hero-banners/photography.mp4"
+     autoPlay muted loop playsInline
+     className="absolute inset-0 w-full h-full object-cover"
+     style={{ filter: "saturate(1.2) contrast(1.1)" }}
+     />
+    </div>
+    </div>
+   <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-6 lg:px-12 py-12 min-h-[500px]">
+   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-4" style={{ lineHeight: 1 }}>
+     <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
+     <span className="text-[#DF3131]">CREATING</span><br />
+     MEMORIES
+     </h1>
+     <p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-6">
+      Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
+      </p>
+      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-black text-black text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all">
+       BOOK A SHOOT
+       </Link>
    </div>
-  {/* 30% black overlay between video and text */}
-  <div className="absolute inset-0 bg-black/30 z-[1]" />
-  {/* Text content on top */}
-<div className={`relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out 0.2s" }}>
+   </div>
+   {/* Mobile merged */}
+   <div className="md:hidden absolute inset-0 flex items-center justify-center">
+   <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
+    <video
+     src="/videos/hero-banners/photography.mp4"
+     autoPlay muted loop playsInline
+     className="absolute inset-0 w-full h-full object-cover"
+     style={{ filter: "saturate(1.2) contrast(1.1)" }}
+     />
+    </div>
+   <div className="absolute inset-0 bg-black/30 z-[1]" />
+   <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
-    <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
-    <span className="text-[#DF3131]">CREATING</span><br />
-    MEMORIES
-    </h1>
-    <p className="text-[16px] sm:text-[16px] text-white/70 max-w-md leading-relaxed mb-6 sm:mb-8 mx-auto">
-     Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
-     </p>
-     <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#111] transition-all">
-      BOOK A SHOOT
-      </Link>
-     </div>
-  </div>
-  </section>
+     <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
+     <span className="text-[#DF3131]">CREATING</span><br />
+     MEMORIES
+     </h1>
+     <p className="text-[16px] sm:text-[16px] text-white/70 max-w-md leading-relaxed mb-6 sm:mb-8 mx-auto">
+      Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
+      </p>
+      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#111] transition-all">
+       BOOK A SHOOT
+       </Link>
+</div>
+    </div>
+   </section>
 
- {/* IMAGE CAROUSEL 1 */}
+  {/* IMAGE CAROUSEL 1 */}
  <section className="py-6">
   <AutoScrollRow items={CAROUSEL_IMAGES_1} />
  </section>

@@ -178,45 +178,77 @@ export default function WebDesignPage() {
 return (
     <>
       <main className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
-        {/* ═══ HERO — Merged video background ═══ */}
-        <section className="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen flex items-center justify-center overflow-hidden hero-banner">
-          {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
-          <div className="absolute inset-0 flex items-center justify-center">
-          {/* Background: gradient fallback (always visible) + video on top when available */}
+        {/* ═══ HERO — Split (desktop video/text, mobile merged) ═══ */}
+        <section className="relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen overflow-hidden hero-banner">
+        {/* Desktop split grid */}
+        <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
+          <div className="relative h-full">
+            <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#DF3131]/20">
+              <video autoPlay muted loop playsInline preload="metadata"
+                className="w-full h-full object-cover">
+                <source src="/videos/hero-banners/web design.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+          <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-6 lg:px-12 py-16 min-h-[500px]">
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3 block">WYZ DESIGN - WEB DEVELOPMENT</span>
+            <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#111] tracking-[0.08em] mb-4" style={{ lineHeight: 1 }}>
+              WEBSITES<br />
+              THAT <span className="text-[#DF3131]">WORK</span>
+            </h1>
+            <p className="text-[#333] text-[16px] sm:text-[16px] leading-relaxed mb-6 max-w-md">
+              From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
+            </p>
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
+              <Link href="/booking" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg hover:shadow-[#DF3131]/30">
+                GET A QUOTE <FiArrowRight className="w-4 h-4" />
+              </Link>
+              <a href="#portfolio" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-black text-black font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] hover:bg-black hover:text-white transition-all">
+                VIEW WORK
+              </a>
+            </div>
+            {/* Stats strip */}
+            <div className="flex gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 justify-center">
+              <AnimatedCounter end={11} suffix="+" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Sites Built" />
+              <AnimatedCounter end={100} suffix="%" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Responsive" />
+              <AnimatedCounter end={7} suffix="-Day" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Turnaround" />
+            </div>
+          </div>
+        </div>
+        {/* Mobile merged */}
+        <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
           <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#DF3131]/20">
             <video autoPlay muted loop playsInline preload="metadata"
-              className="w-full h-full object-cover scale-110">
+              className="w-full h-full object-cover">
               <source src="/videos/hero-banners/web design.mp4" type="video/mp4" />
             </video>
           </div>
-          {/* 30% black overlay between video and text */}
           <div className="absolute inset-0 bg-black/30 z-[1]" />
-          {/* Text content on top */}
-          <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 text-center">
-          <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3 block">WYZ DESIGN - WEB DEVELOPMENT</span>
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
-  WEBSITES<br />
-  THAT <span className="text-[#DF3131]">WORK</span>
-  </h1>
-  <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto">
-   From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
-   </p>
-  <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-  <Link href="/booking" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] text-center hover:bg-[#B82020] transition-all hover:shadow-lg hover:shadow-[#DF3131]/30">
-  GET A QUOTE <FiArrowRight className="w-4 h-4" />
-  </Link>
-  <a href="#portfolio" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-white text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] text-center hover:bg-white hover:text-[#111] transition-all">
-  VIEW WORK
-  </a>
-  </div>
-              {/* Stats strip */}
-<div className="flex gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 justify-center">
-  <AnimatedCounter end={11} suffix="+" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Sites Built" />
-  <AnimatedCounter end={100} suffix="%" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Responsive" />
-  <AnimatedCounter end={7} suffix="-Day" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Turnaround" />
+          <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3 block">WYZ DESIGN - WEB DEVELOPMENT</span>
+            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
+              WEBSITES<br />
+              THAT <span className="text-[#DF3131]">WORK</span>
+            </h1>
+            <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto">
+              From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
+            </p>
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
+              <Link href="/booking" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] text-center hover:bg-[#B82020] transition-all">
+                GET A QUOTE <FiArrowRight className="w-4 h-4" />
+              </Link>
+              <a href="#portfolio" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-white text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] text-center hover:bg-white hover:text-[#111] transition-all">
+                VIEW WORK
+              </a>
+            </div>
+            {/* Stats strip */}
+            <div className="flex gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 justify-center">
+              <AnimatedCounter end={11} suffix="+" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Sites Built" />
+              <AnimatedCounter end={100} suffix="%" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Responsive" />
+              <AnimatedCounter end={7} suffix="-Day" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Turnaround" />
             </div>
           </div>
-          </div>
+        </div>
         </section>
 
         {/* ═══ CAPABILITIES — Scroll reveal ═══ */}
