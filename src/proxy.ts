@@ -107,12 +107,12 @@ export async function proxy(req: NextRequest) {
   if (isApi && !pathname.startsWith("/api/auth") && !pathname.startsWith("/api/health")) {
     const cl = parseInt(req.headers.get("content-length") || "0", 10);
     if (cl > 10_000_000) {
-      return NextResponse.json({ error: { code: "PAYLOAD_TOO_LARGE", message: "Request body exceeds 10MB limit" } }, { status: 413 });
+      return NextResponse.json({ error: "Request body exceeds 10MB limit", code: "PAYLOAD_TOO_LARGE", timestamp: new Date().toISOString() }, { status: 413 });
     }
 
     const ct = req.headers.get("content-type") || "";
     if (req.method !== "GET" && req.method !== "HEAD" && !ct.includes("application/json") && !ct.includes("multipart/form-data") && !ct.includes("application/x-www-form-urlencoded")) {
-      return NextResponse.json({ error: { code: "UNSUPPORTED_MEDIA_TYPE", message: "Unsupported Content-Type" } }, { status: 415 });
+      return NextResponse.json({ error: "Unsupported Content-Type", code: "UNSUPPORTED_MEDIA_TYPE", timestamp: new Date().toISOString() }, { status: 415 });
     }
 
     const key = `${req.method}:${pathname}:${ip}`;
@@ -124,11 +124,10 @@ export async function proxy(req: NextRequest) {
         const retryAfter = Math.ceil((result.resetAt - Date.now()) / 1000);
         return NextResponse.json(
           {
-            error: {
-              code: "RATE_LIMITED",
-              message: "Too many requests. Please slow down and try again shortly.",
-              retryAfter,
-            },
+            error: "Too many requests. Please slow down and try again shortly.",
+            code: "RATE_LIMITED",
+            timestamp: new Date().toISOString(),
+            retryAfter,
           },
           {
             status: 429,
@@ -160,7 +159,7 @@ export async function proxy(req: NextRequest) {
     try {
       const result = await rateLimit(`page:${ip}`, 60, 60_000);
       if (!result.ok) {
-        return NextResponse.json({ error: { code: "RATE_LIMITED", message: "Too many requests" } }, {
+        return NextResponse.json({ error: "Too many requests", code: "RATE_LIMITED", timestamp: new Date().toISOString() }, {
           status: 429,
           headers: { "Retry-After": String(Math.ceil((result.resetAt - Date.now()) / 1000)) },
         });

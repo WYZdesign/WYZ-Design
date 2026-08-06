@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession, createGiftCardCheckout, createServiceCheckout } from "@/lib/stripe";
 import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
+import { errorResponse } from "@/lib/http";
 
 const VALID_GIFT_AMOUNTS = [10, 25, 50, 100, 200, 500];
 const VALID_SERVICE_PRICES: Record<string, number> = {
@@ -32,10 +33,7 @@ export async function POST(req: NextRequest) {
   try {
     const { ok } = await rateLimit(`checkout:${getIp(req)}`, 30, 60_000);
     if (!ok) {
-      return NextResponse.json(
-        { error: { code: "RATE_LIMITED", message: "Too many requests. Please try again shortly." } },
-        { status: 429 }
-      );
+      return errorResponse("Too many requests. Please try again shortly.", 429, { code: "RATE_LIMITED" });
     }
     const { type, plan, amount, email, serviceName, servicePrice, userId } = await req.json();
 

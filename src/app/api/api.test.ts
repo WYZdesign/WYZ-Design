@@ -124,3 +124,29 @@ describe("Checkout Route", () => {
     expect(res.status).toBe(400);
   });
 });
+
+describe("errorResponse helper", () => {
+  it("keeps error as a string for backward compat", async () => {
+    const { errorResponse } = await import("@/lib/http");
+    const res = errorResponse("Something went wrong", 400, { code: "BAD_REQUEST" });
+    expect(res.status).toBe(400);
+    const data = await res.json();
+    expect(typeof data.error).toBe("string");
+    expect(data.error).toBe("Something went wrong");
+    expect(data.code).toBe("BAD_REQUEST");
+    expect(data.timestamp).toBeDefined();
+  });
+
+  it("infers code from status when not provided", async () => {
+    const { errorResponse } = await import("@/lib/http");
+    const res = errorResponse("Too many requests", 429);
+    const data = await res.json();
+    expect(data.code).toBe("RATE_LIMITED");
+  });
+
+  it("sets Retry-After header when retryAfter is provided", async () => {
+    const { errorResponse } = await import("@/lib/http");
+    const res = errorResponse("Too many requests", 429, { code: "RATE_LIMITED", retryAfter: 30 });
+    expect(res.headers.get("Retry-After")).toBe("30");
+  });
+});
