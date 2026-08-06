@@ -1,14 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { openrouterChat } from "@/lib/openrouter";
+import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;
+
+function getIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+}
 
 /**
  * Generates creative design concepts using LLM from a user vision description.
  */
 export async function POST(req: NextRequest) {
   try {
+    const { ok } = await rateLimit(`concept:${getIp(req)}`, 10, 60_000);
+    if (!ok) {
+      return NextResponse.json(
+        { error: { code: "RATE_LIMITED", message: "Too many requests. Please wait a moment." } },
+        { status: 429 }
+      );
+    }
     const { text } = await req.json();
     if (!text) return NextResponse.json({ error: "Text required" }, { status: 400 });
 

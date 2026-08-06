@@ -1,14 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { openrouterChat } from "@/lib/openrouter";
+import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;
+
+function getIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+}
 
 /**
  * Sends chat messages to WYZi AI assistant and returns a reply.
  */
 export async function POST(req: NextRequest) {
   try {
+    const { ok } = await rateLimit(`chat:${getIp(req)}`, 15, 60_000);
+    if (!ok) {
+      return NextResponse.json(
+        { error: { code: "RATE_LIMITED", message: "Too many messages. Please wait a moment." } },
+        { status: 429 }
+      );
+    }
     const { messages, sessionId } = await req.json();
     if (!messages?.length) return NextResponse.json({ error: "Messages required" }, { status: 400 });
 

@@ -1,4 +1,6 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+
+const BASE = process.env.NEXT_PUBLIC_URL || "https://www.wyzdesign.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,13 +8,19 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/admin", "/account/", "/_next/"],
-      },
-      {
-        userAgent: "GPTBot",
-        disallow: "/",
+        disallow: [
+          "/api/",
+          "/admin/",
+          "/account/",
+          "/fd",
+          "/match",
+          "/model-archive",
+          "/view",
+          "/splash-gallery",
+          "/splash-showcase",
+        ],
       },
     ],
-    sitemap: "https://wyzdesign.com/sitemap.xml",
+    sitemap: `${BASE}/sitemap.xml`,
   };
 }

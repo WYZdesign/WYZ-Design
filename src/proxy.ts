@@ -1,104 +1,185 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { rateLimit } from "@/lib/rate-limit-redis";
+
+const BLOCKED_USER_AGENTS = [
+  "sqlmap",
+  "nikto",
+  "nmap",
+  "nessus",
+  "masscan",
+  "zgrab",
+  "acunetix",
+  "netsparker",
+  "burpcollaborator",
+  "fuzz",
+  "libwww-perl",
+  "curl/7.35",
+  "python-requests",
+  "go-http-client",
+  "scrapy",
+  "wpscan",
+  "joomscan",
+  "headlesschrome",
+  "petalbot",
+  "dotbot",
+  "mj12bot",
+  "semrushbot",
+  "ahrefsbot",
+  "majestic-seo",
+  "rogerbot",
+  "exabot",
+  "yandexbot",
+  "baiduspider",
+  "archive.org_bot",
+  "sogou",
+  "iaskspider",
+  "bytespider",
+  "ltx71",
+  "blexbot",
+  "uptimerobot",
+  "gptbot",
+  "ccbot",
+  "claudebot",
+  "anthropic-ai",
+  "cohere-ai",
+  "amazonbot",
+  "meta-externalagent",
+  "crawler",
+];
 
 const BLOCKED_IPS = ["156.59.198.135", "156.59.198.136", "216.244.66.227"];
-const BLOCKED_BOTS = ["semrush","ahrefs","mj12bot","dotbot","blexbot","petalbot","yandexbot","bytespider","gptbot","ccbot","claudebot","anthropic-ai","cohere-ai","amazonbot","meta-externalagent","facebookbot"];
 
-const RATE_LIMIT_MAP = new Map<string, { count: number; resetAt: number }>();
-const WINDOW_MS = 60_000;
-const API_MAX = 20;
-const PAGE_MAX = 60;
+const BLOCKED_PATH_PATTERNS = [
+  /\/(\.env|\.git|\.aws|\.ssh)(\/|$)/i,
+  /\/wp-admin(\/|$)/i,
+  /\/wp-login\.php/i,
+  /\/\.htaccess/i,
+  /\/\.DS_Store/i,
+  /\/\.well-known\/acme-challenge\/(?!.*valid)/i,
+  /\/admin\/?$.*\.(php|asp|aspx|jsp)$/i,
+  /\/config\.php/i,
+  /\/phpmyadmin/i,
+  /\/mysql/i,
+  /\/server-status/i,
+  /\/cgi-bin/i,
+  /\/\.git\/config/i,
+  /\/\.env\.local/i,
+  /\/webpack.config/i,
+  /\/package\.json/i,
+  /\/tsconfig\.json/i,
+  /\/sql(\/|$)/i,
+  /\/backup/i,
+  /\/\.vscode/i,
+  /\/\.idea/i,
+  /\/\.tmp/i,
+  /\/\.old/i,
+  /\/\.bak/i,
+  /\/\.log/i,
+];
 
-function log(level: string, msg: string, data?: Record<string, unknown>) {
-  const entry = { t: new Date().toISOString(), l: level, m: msg, ...data };
-  const line = JSON.stringify(entry);
-  if (level === "error") console.error(line);
-  else if (level === "warn") console.warn(line);
-  else console.log(line);
+const USER_AGENT_BLOCKED = "Blocked by WYZ Design edge security";
+
+function getClientIp(req: NextRequest): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0].trim();
+  return req.headers.get("x-real-ip") || "unknown";
 }
 
-function isLimited(key: string, max: number): { limited: boolean; retryAfter: number } {
-  const now = Date.now();
-  const entry = RATE_LIMIT_MAP.get(key);
-  if (!entry || now > entry.resetAt) {
-    RATE_LIMIT_MAP.set(key, { count: 1, resetAt: now + WINDOW_MS });
-    return { limited: false, retryAfter: 0 };
-  }
-  entry.count++;
-  if (entry.count > max) {
-    return { limited: true, retryAfter: Math.ceil((entry.resetAt - now) / 1000) };
-  }
-  return { limited: false, retryAfter: 0 };
-}
-
-setInterval(() => {
-  const now = Date.now();
-  for (const [k, v] of RATE_LIMIT_MAP) {
-    if (now > v.resetAt) RATE_LIMIT_MAP.delete(k);
-  }
-}, 60_000).unref();
-
-export function proxy(req: NextRequest) {
-  const path = req.nextUrl.pathname;
-  const start = Date.now();
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  const ua = req.headers.get("user-agent")?.toLowerCase() || "";
+export async function proxy(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+  const ua = req.headers.get("user-agent") || "";
+  const ip = getClientIp(req);
+  const isApi = pathname.startsWith("/api/");
+  const isAdmin = pathname.startsWith("/api/admin") || pathname.startsWith("/api/telemetry");
 
   if (BLOCKED_IPS.includes(ip)) {
     return new NextResponse("Forbidden", { status: 403 });
   }
-  if (BLOCKED_BOTS.some(bot => ua.includes(bot))) {
-    return new NextResponse("Forbidden", { status: 403 });
+
+  if (BLOCKED_USER_AGENTS.some((b) => ua.toLowerCase().includes(b))) {
+    return new NextResponse(USER_AGENT_BLOCKED, { status: 403 });
   }
 
-  const response = NextResponse.next();
+  if (BLOCKED_PATH_PATTERNS.some((re) => re.test(pathname))) {
+    return new NextResponse(USER_AGENT_BLOCKED, { status: 403 });
+  }
 
-  response.headers.set("X-Content-Type-Options", "nosniff");
-  response.headers.set("X-Frame-Options", "DENY");
-  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  response.headers.set("X-Response-Time", `${Date.now() - start}ms`);
-  response.headers.set("X-XSS-Protection", "1; mode=block");
-  response.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
-
-  if (path.startsWith("/api/") && !path.startsWith("/api/auth") && !path.startsWith("/api/health") && !path.startsWith("/api/media")) {
+  if (isApi && !pathname.startsWith("/api/auth") && !pathname.startsWith("/api/health")) {
     const cl = parseInt(req.headers.get("content-length") || "0", 10);
     if (cl > 10_000_000) {
-      return new NextResponse(JSON.stringify({ error: "Request body exceeds 10MB limit" }), {
-        status: 413, headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json({ error: { code: "PAYLOAD_TOO_LARGE", message: "Request body exceeds 10MB limit" } }, { status: 413 });
     }
+
     const ct = req.headers.get("content-type") || "";
     if (req.method !== "GET" && req.method !== "HEAD" && !ct.includes("application/json") && !ct.includes("multipart/form-data") && !ct.includes("application/x-www-form-urlencoded")) {
-      return new NextResponse(JSON.stringify({ error: "Unsupported Content-Type" }), {
-        status: 415, headers: { "Content-Type": "application/json" },
-      });
+      return NextResponse.json({ error: { code: "UNSUPPORTED_MEDIA_TYPE", message: "Unsupported Content-Type" } }, { status: 415 });
     }
 
-    const { limited, retryAfter } = isLimited(`api:${ip}`, API_MAX);
-    if (limited) {
-      return new NextResponse(JSON.stringify({ error: "Too many requests" }), {
-        status: 429, headers: { "Content-Type": "application/json", "Retry-After": String(retryAfter) },
-      });
+    const key = `${req.method}:${pathname}:${ip}`;
+    const limit = isAdmin ? 30 : req.method === "GET" ? 120 : 20;
+    const windowMs = 60_000;
+    try {
+      const result = await rateLimit(key, limit, windowMs);
+      if (!result.ok) {
+        const retryAfter = Math.ceil((result.resetAt - Date.now()) / 1000);
+        return NextResponse.json(
+          {
+            error: {
+              code: "RATE_LIMITED",
+              message: "Too many requests. Please slow down and try again shortly.",
+              retryAfter,
+            },
+          },
+          {
+            status: 429,
+            headers: {
+              "Retry-After": String(retryAfter),
+              "X-RateLimit-Limit": String(limit),
+              "X-RateLimit-Remaining": String(result.remaining),
+              "X-RateLimit-Reset": String(Math.floor(result.resetAt / 1000)),
+            },
+          }
+        );
+      }
+
+      const res = NextResponse.next();
+      res.headers.set("X-RateLimit-Limit", String(limit));
+      res.headers.set("X-RateLimit-Remaining", String(result.remaining));
+      res.headers.set("X-RateLimit-Reset", String(Math.floor(result.resetAt / 1000)));
+      res.headers.set("X-Request-Id", crypto.randomUUID());
+      return res;
+    } catch {
+      // Rate limiter failure must never block the site — allow through.
+      const res = NextResponse.next();
+      res.headers.set("X-Request-Id", crypto.randomUUID());
+      return res;
     }
-    const finalize = () => {
-      log("info", "api_request", { path, method: req.method, ms: Date.now() - start });
-    };
-    setTimeout(finalize, 0);
   }
 
-  if (!path.startsWith("/api/") && !path.startsWith("/_next/") && !path.includes(".")) {
-    const { limited, retryAfter } = isLimited(`page:${ip}`, PAGE_MAX);
-    if (limited) {
-      return new NextResponse(JSON.stringify({ error: "Too many requests" }), {
-        status: 429,
-        headers: { "Content-Type": "application/json", "Retry-After": String(retryAfter) },
-      });
+  if (!isApi && !pathname.startsWith("/_next/") && !pathname.includes(".")) {
+    try {
+      const result = await rateLimit(`page:${ip}`, 60, 60_000);
+      if (!result.ok) {
+        return NextResponse.json({ error: { code: "RATE_LIMITED", message: "Too many requests" } }, {
+          status: 429,
+          headers: { "Retry-After": String(Math.ceil((result.resetAt - Date.now()) / 1000)) },
+        });
+      }
+    } catch {
+      /* fail open */
     }
   }
 
-  return response;
+  const res = NextResponse.next();
+  res.headers.set("X-Request-Id", crypto.randomUUID());
+  return res;
 }
 
 export const config = {
-  matcher: "/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|mp4|webm|woff2?|css|js)).*)",
+  matcher: [
+    "/api/:path*",
+    "/admin/:path*",
+    "/_next/data/:path*",
+    "/((?!_next/static|_next/image|favicon.ico|images/|videos/|icons/|fonts/|splash/|manifest.json|sw.js|og-image.png|opengraph-image.png|wyz-crown.png|wyz-crown-square.png|wyz-og-image.png).*)",
+  ],
 };
