@@ -103,53 +103,36 @@ export default function ServicesPage() {
 
  const filtered = active === "All Services" ? allServices : allServices.filter(s => s.cat === active);
 
- return (
+return (
   <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
 
-  {/* ── Hero: Split Layout (desktop video/text, mobile merged) ── */}
-    <ScrollReveal animation="fadeIn" duration={1.2}>
-     <section className="relative min-h-[60vh] sm:min-h-[65vh] lg:min-h-[70vh] overflow-hidden hero-banner">
-    {/* Desktop split grid */}
-    <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
-    <div className="relative h-full">
-    <img src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" className="w-full h-full object-cover" loading="lazy" />
-    </div>
-    <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-8 lg:px-12 py-16">
-    <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#111] tracking-[0.08em] mb-4" style={{ lineHeight: 1 }}>
-      <span className="text-[#DF3131]">CREATIVE</span><br />
-      SERVICES
-    </h1>
-    <p className="text-[#333] text-[16px] sm:text-base leading-relaxed mb-6 max-w-md">
-     From photography to web design, we deliver end-to-end creative solutions that make your brand stand out.
-    </p>
-      <Link href="/plans"
-      className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm hover:bg-[#B82020] transition-all">
-      VIEW PLANS
-      </Link>
-    </div>
-    </div>
-    {/* Mobile merged */}
-    <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
-    <div className="absolute inset-0 z-0">
-    <img src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" className="w-full h-full object-cover" loading="lazy" />
-    </div>
-    <div className="absolute inset-0 bg-black/30 z-[1]" />
-    <div className="relative z-10 px-4 sm:px-10 py-16 sm:py-20">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
-      <span className="text-[#DF3131]">CREATIVE</span><br />
-      SERVICES
-    </h1>
-    <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto">
-     From photography to web design, we deliver end-to-end creative solutions that make your brand stand out.
-    </p>
-      <Link href="/plans"
-      className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all">
-      VIEW PLANS
-      </Link>
-    </div>
-    </div>
-    </section>
-    </ScrollReveal>
+{/* ── Hero: Split Layout ── */}
+  <ScrollReveal animation="fadeIn" duration={1.2}>
+   <section className="relative min-h-[60vh] lg:min-h-[70vh] flex flex-col lg:flex-row hero-banner">
+  {/* Left: Image */}
+  <div className="w-full lg:w-1/2 h-[40vh] lg:h-auto relative overflow-hidden">
+  <img src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" className="w-full h-full object-cover" />
+   <div className="absolute inset-0 bg-black/20" />
+  </div>
+  {/* Right: Text with gradient */}
+ <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 overflow-hidden">
+   <div className="absolute inset-0 hero-grad-services z-0" />
+   <div className="absolute inset-0 bg-black/20 z-[1]" />
+   <div className="relative z-10 text-center max-w-xl mx-auto">
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-2 lg:mb-6" style={{ lineHeight: 1 }}>
+  CREATIVE <span className="text-[#DF3131]">SERVICES</span>
+  </h1>
+  <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto lg:mx-0">
+   From photography to web design, we deliver end-to-end creative solutions that make your brand stand out.
+   </p>
+   <Link href="/plans"
+   className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all">
+   VIEW PLANS
+   </Link>
+   </div>
+   </div>
+  </section>
+  </ScrollReveal>
 
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-12">
 
