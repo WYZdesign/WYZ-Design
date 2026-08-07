@@ -91,14 +91,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Rate limit exceeded" }, { status: 429 });
   }
 
-  const { page, html } = await req.json();
-  if (!page || !html) return NextResponse.json({ error: "page and html required" }, { status: 400 });
+  try {
+    const { page, html } = await req.json();
+    if (!page || !html) return NextResponse.json({ error: "page and html required" }, { status: 400 });
 
-  const pageName = page.replace(/[^a-zA-Z0-9_-]/g, "");
-  if (pageName.length > 64) return NextResponse.json({ error: "Invalid page name" }, { status: 400 });
+    const pageName = page.replace(/[^a-zA-Z0-9_-]/g, "");
+    if (pageName.length > 64) return NextResponse.json({ error: "Invalid page name" }, { status: 400 });
+    if (!ALLOWED_PAGES.has(pageName)) return NextResponse.json({ error: "Page not allowed" }, { status: 400 });
 
-  const cleaned = sanitizeHtml(html);
-  if (!existsSync(PAGES_DIR)) mkdirSync(PAGES_DIR, { recursive: true });
-  writeFileSync(join(PAGES_DIR, `${pageName}.html`), cleaned, "utf-8");
-  return NextResponse.json({ success: true, remaining });
+    const cleaned = sanitizeHtml(html);
+    if (!existsSync(PAGES_DIR)) mkdirSync(PAGES_DIR, { recursive: true });
+    writeFileSync(join(PAGES_DIR, `${pageName}.html`), cleaned, "utf-8");
+    return NextResponse.json({ success: true, remaining });
+  } catch {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
 }
