@@ -261,7 +261,7 @@ function AutoScrollCarousel() {
           <Link key={`${p.id}-${i}`} href={FAOTM_URL}
             className="flex-shrink-0 w-[260px] sm:w-[300px] group cursor-pointer">
             <div className="bg-[#f5f5f5] aspect-square overflow-hidden relative mb-3">
-              <Image src="p.image" alt="p.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
+               <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
    <p className="text-white font-heading font-bold text-[6px] tracking-[0.03em] uppercase">{p.name}</p>
@@ -306,7 +306,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
               transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
             }}>
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mb-3 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#DF3131]/20 transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-105">
-              <Image src="product.image" alt="product.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
+               <Image src={product.image} alt={product.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase mb-0.5">{product.category}</p>
@@ -650,7 +650,7 @@ export default function MerchPage() {
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
                       <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
-                        <Image src="cp.image" alt="cp.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority decoding="async" />
+                         <Image src={cp.image} alt={cp.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority decoding="async" />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
                       <p className="text-[12px] text-[#DF3131] font-bold">${cp.price.toFixed(2)}</p>

@@ -226,7 +226,7 @@ export default function ModelArchivePage() {
  {albumImages.map((src, i) => (
  <div key={i} onClick={() => setLightboxIdx(i)}
  className="break-inside-avoid cursor-pointer group">
- <Image src="src" alt="`${selectedModel" width={400} height={533} className="w-full object-cover rounded-sm group-hover:opacity-80 transition-opacity" priority />
+  <Image src={src} alt={`${selectedModel}`} width={400} height={533} className="w-full object-cover rounded-sm group-hover:opacity-80 transition-opacity" priority />
  </div>
  ))}
  </div>

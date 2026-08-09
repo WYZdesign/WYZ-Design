@@ -98,7 +98,7 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
  {imgs.map((img, i) => (
  <button key={i} onClick={() => setLIdx(i)} className="aspect-square relative bg-gray-100 overflow-hidden hover:ring-2 hover:ring-[#DF3131] transition-all cursor-pointer group">
- <Image src="img" alt="`${album" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+  <Image src={img} alt={`${album}`} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
  </button>
  ))}
  </div>
@@ -149,7 +149,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
   {[...items, ...items].map((src, i) => (
   <div key={i} className="flex-none w-[28vw] sm:w-[200px] md:w-[280px] h-32 sm:h-48 md:h-64 relative overflow-hidden cursor-pointer group" onClick={handleClick}>
-  <Image src="src" alt="Photography portfolio" fill className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+  <Image src={src} alt="Photography portfolio" fill className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
   </div>
   ))}
  </div>
@@ -169,7 +169,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
   <div className="aspect-[4/3] overflow-hidden relative">
-  <Image src="s.img" alt="s.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
+  <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
   <div className="absolute top-3 right-3 bg-[#DF3131] text-white px-3 py-1 text-[14px] font-bold tracking-wider">{s.price}</div>
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
@@ -579,7 +579,7 @@ return (
  >
  <div className={`w-full h-full bg-white dark:bg-[#252528] rounded-lg overflow-hidden shadow-2xl ${isActive ? "ring-2 ring-[#DF3131] ring-offset-4 dark:ring-offset-[#252528]" : ""}`}>
  <div className="aspect-[3/4] overflow-hidden relative">
- <Image src="m.cover" alt="m.name" fill className="w-full h-full object-cover" priority />
+  <Image src={m.cover} alt={m.name} fill className="w-full h-full object-cover" priority />
  </div>
  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 pt-12">
  <p className="text-white font-heading font-black text-lg tracking-[0.08em] uppercase">{m.name}</p>

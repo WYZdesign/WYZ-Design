@@ -118,7 +118,7 @@ return (
   >
   {[...images, ...images, ...images].map((src, i) => (
   <button key={i} className={`flex-none w-[30vw] sm:w-[210px] md:w-[230px] h-24 sm:h-36 md:h-52 relative overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#252528]"}`}>
-  <Image src="src" alt="WYZ Design portfolio" fill className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-700" priority />
+  <Image src={src} alt="WYZ Design portfolio" fill className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-700" priority />
   </button>
   ))}
  </div>
@@ -344,11 +344,11 @@ export default function DesignsPage() {
  {dbcMerch.slice(0, 4).map((p, i) => (
  <Link key={i} href="/merch" className="group cursor-pointer block">
  <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
- <Image src="p.img" alt="p.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
- </div>
-  <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
- </Link>
- ))}
+  <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+  </div>
+   <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
+  </Link>
+  ))}
  </div>
  </div>
  </section>
@@ -370,9 +370,9 @@ export default function DesignsPage() {
  {dbcMerch.map((p, i) => (
  <Link key={i} href="/merch" className="flex-none w-[13vw] min-w-[120px] group cursor-pointer block">
  <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
- <Image src="p.img" alt="p.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
- </div>
-  <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
+  <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+  </div>
+   <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
   <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{p.price}</p>
  </Link>
  ))}
