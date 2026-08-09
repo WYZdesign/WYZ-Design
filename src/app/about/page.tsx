@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const BRANDS = [
@@ -38,7 +39,7 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="relative py-24 sm:py-32 lg:py-40 bg-[#111] overflow-hidden">
           <div className="absolute inset-0 opacity-20">
-            <img src="/images/home/carousel_top/wix_0094.jpg" alt="" className="w-full h-full object-contain" loading="lazy" />
+            <Image src="/images/home/carousel_top/wix_0094.jpg" alt="About Hero" fill className="w-full h-full object-cover" priority />
             <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
           </div>
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
@@ -82,7 +83,7 @@ export default function AboutPage() {
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
               <div className="w-full lg:w-5/12">
                 <div className="relative aspect-[3/4] max-w-md mx-auto overflow-hidden">
-                  <img src="/images/torre-marcel.jpg" alt="Torreé Marcel, Founder of WYZ Design" className="w-full h-full object-cover" />
+                  <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel, Founder of WYZ Design" fill className="w-full h-full object-cover" priority />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#DF3131]/10 via-transparent to-transparent" />
                 </div>
               </div>
@@ -102,7 +103,7 @@ export default function AboutPage() {
                     Now based in Los Angeles, Torreé continues to expand WYZ Design's reach while staying rooted in the values that built it: wild vision, zealous execution, and a commitment to doing the work the right way, every single time.
                   </p>
                 </div>
-                <div className="mt-8 flex flex-wrap gap-4">
+                 <div className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
                   <Link href="/services" className="inline-block px-8 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#B82020] transition-all">
                     SEE OUR SERVICES
                   </Link>

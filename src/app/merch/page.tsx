@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -128,7 +129,7 @@ function ParallaxHero() {
         <div className="marquee-strip flex gap-2 h-full w-[200%]">
           {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
             <div key={i} className="flex-shrink-0 w-[30vw] sm:w-[20vw] h-full overflow-hidden">
-              <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" decoding="async" />
+               <Image src={img} alt="Marquee item" fill className="w-full h-full object-cover" priority decoding="async" />
             </div>
           ))}
         </div>
@@ -260,7 +261,7 @@ function AutoScrollCarousel() {
           <Link key={`${p.id}-${i}`} href={FAOTM_URL}
             className="flex-shrink-0 w-[260px] sm:w-[300px] group cursor-pointer">
             <div className="bg-[#f5f5f5] aspect-square overflow-hidden relative mb-3">
-              <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+              <Image src="p.image" alt="p.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
    <p className="text-white font-heading font-bold text-[6px] tracking-[0.03em] uppercase">{p.name}</p>
@@ -305,7 +306,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
               transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
             }}>
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mb-3 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#DF3131]/20 transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-105">
-              <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async" />
+              <Image src="product.image" alt="product.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase mb-0.5">{product.category}</p>
@@ -331,7 +332,7 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
           <div className={`bg-[#f5f5f5] aspect-square overflow-hidden relative mb-3 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
-            <img src={product.image} alt={product.name} className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} loading="lazy" decoding="async" />
+             <Image src={product.image} alt={product.name} fill className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} priority decoding="async" />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all">Quick View</span>
             </div>
@@ -599,7 +600,7 @@ export default function MerchPage() {
           <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+                <Image src="selectedProduct.image" alt="selectedProduct.name" fill className="w-full h-full object-cover" priority decoding="async" />
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
@@ -649,7 +650,7 @@ export default function MerchPage() {
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
                       <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
-                        <img src={cp.image} alt={cp.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+                        <Image src="cp.image" alt="cp.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority decoding="async" />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
                       <p className="text-[12px] text-[#DF3131] font-bold">${cp.price.toFixed(2)}</p>

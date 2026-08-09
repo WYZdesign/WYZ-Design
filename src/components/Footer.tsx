@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FiTwitter, FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiArrowRight, FiMapPin, FiPhone, FiMail } from "react-icons/fi";
 import toast from "react-hot-toast";
@@ -116,7 +117,7 @@ export default function Footer() {
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center shrink-0">
-                  <img src="/images/wyz-crown.png" alt="WYZ Crown" width={24} height={24} style={{ width: "24px", height: "24px", maxWidth: "24px", maxHeight: "24px", objectFit: "contain" }} />
+                  <Image src="/images/wyz-crown.png" alt="WYZ Crown" width={24} height={24} loading="lazy" />
                 </div>
                 <span className={`${textPrimary} font-heading font-bold text-xl`}>WYZ <span className="text-[#DF3131]">Design</span></span>
               </Link>
@@ -154,7 +155,7 @@ export default function Footer() {
             <p className={`text-[13px] ${copyrightColor}`}>&copy; {new Date().getFullYear()} WYZ Design LLC. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <p className={`text-[13px] ${precisionColor}`}>Designed & built with precision.</p>
-              <img src="/images/wix-partner-logo.png" alt="Wix Editor X Partner" width={24} height={24} style={{ width: "24px", height: "24px", maxWidth: "24px", maxHeight: "24px", objectFit: "contain" }} className="opacity-60 hover:opacity-100 transition-opacity" />
+              <Image src="/images/wix-partner-logo.png" alt="Wix Editor X Partner" width={24} height={24} className="opacity-60 hover:opacity-100 transition-opacity" priority />
             </div>
           </div>
         </div>

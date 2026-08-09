@@ -264,7 +264,7 @@ export function Duotone({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const li = useRef<HTMLDivElement>(null);
  useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; p.x += (m.x - p.x) * .1; p.y += (m.y - p.y) * .1; if (li.current) li.current.style.background = `radial-gradient(300px circle at ${p.x}px ${p.y}px, rgba(255,255,255,.22), transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#1a1410")}>
- {/* Swap this gradient for: <img src="/your-photo.jpg" style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",filter:"grayscale(1)"}}/> */}
+ {/* Swap this gradient for: <Image src="/your-photo.jpg" fill loading="lazy" /> */}
  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,#3a2a18,#1a1410 60%)", mixBlendMode: "luminosity", opacity: .5 }} />
  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg,rgba(223,49,49,.35),rgba(212,147,65,.3))", mixBlendMode: "color" }} />
  <div ref={li} style={{ position: "absolute", inset: 0, mixBlendMode: "overlay" }} /><Brand onEnter={onEnter} /></div>;

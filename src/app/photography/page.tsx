@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FiCamera, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -34,7 +35,7 @@ const ALBUM_COVERS_STATIC: Record<string, string> = {
  Bodypaint: "/images/photography-categories/Bodypaint.jpg",
  Urbex: "/images/photography-categories/URBEX.jpg",
  Products: "/images/photography-categories/Products.jpg",
-  Conceptual: "/images/photography-categories/Coneceptual.JPG",
+   Conceptual: "/images/photography-categories/Conceptual.JPG",
 };
 
 function useInView(threshold = 0.1) {
@@ -70,7 +71,7 @@ function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
  <button onClick={onClose} className="absolute top-4 right-4 z-[210] text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"><FiX className="w-8 h-8" /></button>
  <button onClick={(e) => { e.stopPropagation(); onPrev(); }} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-[210] w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors min-w-[44px] min-h-[44px]"><FiChevronLeft className="w-6 h-6" /></button>
  <div className="max-w-[90vw] max-h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
- <img src={images[index]} alt={album ? `${album} photo ${index + 1}` : "Photo"} width={1200} height={800} className="max-w-full max-h-[85vh] object-contain select-none" draggable={false} />
+  <Image src={images[index]} alt={album ? `${album} photo` : "Gallery photo"} width={1200} height={800} className="max-w-full max-h-[85vh] object-contain select-none" loading="lazy" />
  </div>
  <button onClick={(e) => { e.stopPropagation(); onNext(); }} className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[210] w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors min-w-[44px] min-h-[44px]"><FiChevronRight className="w-6 h-6" /></button>
  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">{index + 1} / {images.length}</div>
@@ -97,7 +98,7 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
  {imgs.map((img, i) => (
  <button key={i} onClick={() => setLIdx(i)} className="aspect-square relative bg-gray-100 overflow-hidden hover:ring-2 hover:ring-[#DF3131] transition-all cursor-pointer group">
- <img src={img} alt={`${album} photo ${i + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+ <Image src="img" alt="`${album" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
  </button>
  ))}
  </div>
@@ -148,7 +149,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
   {[...items, ...items].map((src, i) => (
   <div key={i} className="flex-none w-[28vw] sm:w-[200px] md:w-[280px] h-32 sm:h-48 md:h-64 relative overflow-hidden cursor-pointer group" onClick={handleClick}>
-  <img src={src} alt="Photography portfolio" loading="lazy" className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
+  <Image src="src" alt="Photography portfolio" fill className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
   </div>
   ))}
  </div>
@@ -168,7 +169,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
   <div className="aspect-[4/3] overflow-hidden relative">
-  <img src={s.img} alt={s.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+  <Image src="s.img" alt="s.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
   <div className="absolute top-3 right-3 bg-[#DF3131] text-white px-3 py-1 text-[14px] font-bold tracking-wider">{s.price}</div>
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
@@ -187,7 +188,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   >
   <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative">
   <div className="absolute inset-0 opacity-10">
-  <img src={s.img} alt="" className="w-full h-full object-cover" />
+   <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" priority />
   </div>
   <div className="relative z-10">
   <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">{s.cat}</span>
@@ -450,7 +451,7 @@ return (
      />
     </div>
     </div>
-   <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-6 lg:px-12 py-12 min-h-[500px]">
+    <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 py-12 min-h-[500px] h-full">
    <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-4" style={{ lineHeight: 1 }}>
      <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span><br />
@@ -578,7 +579,7 @@ return (
  >
  <div className={`w-full h-full bg-white dark:bg-[#252528] rounded-lg overflow-hidden shadow-2xl ${isActive ? "ring-2 ring-[#DF3131] ring-offset-4 dark:ring-offset-[#252528]" : ""}`}>
  <div className="aspect-[3/4] overflow-hidden relative">
- <img src={m.cover} alt={m.name} className="w-full h-full object-cover" loading="lazy" />
+ <Image src="m.cover" alt="m.name" fill className="w-full h-full object-cover" priority />
  </div>
  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 pt-12">
  <p className="text-white font-heading font-black text-lg tracking-[0.08em] uppercase">{m.name}</p>
@@ -664,9 +665,7 @@ return (
  <Link key={a} href={`/photography/${encodeURIComponent(a)}`}
   className="album-card group relative overflow-hidden aspect-square cursor-pointer"
   style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
-  <img src={albumCovers[a]} alt={a}
-   className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110"
-   loading="lazy" />
+  <Image src="albumCovers[a]" alt="a" fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" priority />
    <div className="absolute inset-0 z-10 bg-black/30" />
    <div className="absolute inset-0 flex items-center justify-center z-20">
    <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>

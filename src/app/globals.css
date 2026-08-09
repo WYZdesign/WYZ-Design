@@ -277,11 +277,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
   background: linear-gradient(135deg, #C90000 0%, #E63C3C 38%, #F47474 72%, #FFB3B3 100%);
 }
 
-/* ── Custom Cursor (desktop only) ── */
-@media (hover: hover) and (pointer: fine) {
-  *, *::before, *::after { cursor: none !important; }
-  a, button, [role=button], input, textarea, select, label, .cursor-pointer { cursor: auto !important; }
-}
+
 
 /* ═══════════════════════════════════════════════════════════
    Z-INDEX SCALE

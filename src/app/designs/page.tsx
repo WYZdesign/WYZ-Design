@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FiArrowRight, FiSearch, FiCpu } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
@@ -52,7 +53,7 @@ function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onCl
  return (
  <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center cursor-pointer" onClick={onClose}>
  <button onClick={onClose} className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[210] text-white/60 hover:text-white transition-colors w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:border-white/40">✕</button>
- <img src={src} alt={alt || "Design preview"} width={1200} height={800} className="max-w-[92vw] max-h-[92vh] object-contain" onClick={(e) => e.stopPropagation()} />
+  <Image src={src} alt={alt || "Design preview"} width={1200} height={800} className="max-w-[92vw] max-h-[92vh] object-contain" onClick={(e) => e.stopPropagation()} loading="lazy" />
  </div>
  );
 }
@@ -117,7 +118,7 @@ return (
   >
   {[...images, ...images, ...images].map((src, i) => (
   <button key={i} className={`flex-none w-[30vw] sm:w-[210px] md:w-[230px] h-24 sm:h-36 md:h-52 relative overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#252528]"}`}>
-  <img src={src} alt="WYZ Design portfolio" loading="lazy" className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-700" />
+  <Image src="src" alt="WYZ Design portfolio" fill className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-700" priority />
   </button>
   ))}
  </div>
@@ -141,9 +142,9 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
  <div className="flex-1">
   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[20px] sm:text-[24px] tracking-[0.04em] leading-snug">{title}</h3>
  </div>
- <div className="hidden sm:block w-[60px] h-[60px] relative rounded-lg overflow-hidden flex-shrink-0">
- <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
- </div>
+  <div className="hidden sm:block w-[60px] h-[60px] relative rounded-lg overflow-hidden flex-shrink-0">
+  <Image src={img} alt={title} fill className="w-full h-full object-cover" priority />
+  </div>
  </button>
  <div
  ref={contentRef}
@@ -151,9 +152,9 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
  style={{ maxHeight: isOpen ? `${contentRef.current?.scrollHeight || 500}px` : "0px" }}
  >
  <div className="flex flex-col sm:flex-row">
- <div className="w-full sm:w-[45%] h-[200px] sm:h-[250px] overflow-hidden relative">
- <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
- </div>
+  <div className="w-full sm:w-[45%] h-[200px] sm:h-[250px] overflow-hidden relative">
+  <Image src={img} alt={title} fill className="w-full h-full object-cover" priority />
+  </div>
  <div className="w-full sm:w-[55%] px-6 lg:px-10 py-6 flex flex-col justify-center">
   <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.7] mb-5">{desc}</p>
   <Link href="/booking" className="inline-flex items-center gap-2 px-6 py-3 text-[12px] sm:text-[15px] font-bold tracking-[0.08em] text-white text-center transition-all hover:scale-105" style={{ background: accent }}>
@@ -343,7 +344,7 @@ export default function DesignsPage() {
  {dbcMerch.slice(0, 4).map((p, i) => (
  <Link key={i} href="/merch" className="group cursor-pointer block">
  <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
- <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+ <Image src="p.img" alt="p.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
  </div>
   <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
  </Link>
@@ -369,7 +370,7 @@ export default function DesignsPage() {
  {dbcMerch.map((p, i) => (
  <Link key={i} href="/merch" className="flex-none w-[13vw] min-w-[120px] group cursor-pointer block">
  <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
- <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+ <Image src="p.img" alt="p.name" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
  </div>
   <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
   <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{p.price}</p>

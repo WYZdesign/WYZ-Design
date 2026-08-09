@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiChevronLeft, FiChevronRight, FiCamera, FiMonitor, FiVideo, FiMessageCircle, FiGlobe, FiSearch, FiZap, FiAward, FiTrendingUp } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -617,7 +618,7 @@ function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[
     <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
      {doubled.map((src, i) => (
     <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm">
-    <img src={src} alt="WYZ Design portfolio" loading="lazy" width={400} height={300} className="absolute inset-0 w-full h-full object-contain" />
+     <Image src={src} alt="WYZ Design portfolio" fill className="absolute inset-0 w-full h-full object-contain" loading="lazy" />
     </div>
     ))}
   </div>
@@ -687,7 +688,7 @@ function LogoCarousel({ items, speed = 0.5 }: { items: { name: string; img: stri
   <div ref={trackRef} className="flex gap-4 sm:gap-6 lg:gap-8 items-center py-3 will-change-transform cursor-pointer">
   {tripled.map((logo, i) => (
   <div key={i} className="flex-none flex items-center justify-center opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110">
-   <img src={logo.img} alt={logo.name} width={64} height={64} className="h-6 sm:h-8 max-w-[60px] sm:max-w-[90px] w-auto object-contain transition-all duration-300" loading="lazy" />
+   <Image src="logo.img" alt="logo.name" width={64} height={64} className="h-6 sm:h-8 max-w-[60px] sm:max-w-[90px] w-auto object-contain transition-all duration-300" priority />
  </div>
  ))}
  </div>
@@ -783,8 +784,8 @@ export default function HomePage() {
     <div className="absolute inset-0 z-0 bg-black">
     <VideoPlaylist videos={LOGO_INTROS} />
     </div>
-    {/* 80% black overlay between video and text */}
-     <div className="absolute inset-0 bg-black/80 z-[1]" />
+     {/* 80% + 30% black overlay (or overall opacity increase) between video and text */}
+     <div className="absolute inset-0 bg-black/95 z-[1]" />
     {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
@@ -810,11 +811,11 @@ export default function HomePage() {
    </section>
 
 {/* ═══ IMAGE GALLERY STRIP ═══ */}
- <ScrollReveal animation="fadeIn" duration={1}>
- <section className="py-6">
- <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.5} />
- </section>
- </ScrollReveal>
+  <ScrollReveal animation="fadeIn" duration={1}>
+  <section className="py-6 w-screen max-w-none left-[50%] right-[50%] -translate-x-[50%] relative overflow-hidden my-8">
+  <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.5} />
+  </section>
+  </ScrollReveal>
 
 {/* ═══ SERVICES + PRICING PLANS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
@@ -831,10 +832,10 @@ export default function HomePage() {
     <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene — making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
   </div>
   </div>
-  {/* Full-width carousel — even padding on top and bottom */}
-  <div className="relative z-10 py-8 sm:py-12">
-    <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.5} />
-  </div>
+   {/* Full-width carousel — extra margin space above and below, full bleed stretching to both sides */}
+   <div className="relative z-10 my-16 sm:my-24 w-screen max-w-none left-[50%] right-[50%] -translate-x-[50%] overflow-hidden">
+     <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.5} />
+   </div>
   <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
   {/* Animated tab switcher */}
  <div className="flex justify-center gap-4 mb-10">
@@ -971,7 +972,7 @@ export default function HomePage() {
   <ScrollReveal animation="scaleIn" delay={0.1}>
   <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-black hero-banner">
   <div className="absolute inset-0">
-  <img src="/images/printing/wix_0164.jpg" alt="" className="w-full h-full object-cover opacity-60" loading="lazy" />
+   <Image src="/images/printing/wix_0164.jpg" alt="Digital Printing" fill className="w-full h-full object-cover opacity-60" priority />
   </div>
   <div className="absolute inset-0 bg-black/20 z-[1]" />
   <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
@@ -1078,7 +1079,7 @@ export default function HomePage() {
  const Icon = c.icon;
  return (
   <CardTilt key={i} intensity={10}>
-  <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-5 sm:p-7 lg:p-10 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1">
+   <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-6 sm:p-8 lg:p-12 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1 min-h-[320px] sm:min-h-[360px] flex flex-col justify-center">
  <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
   <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />

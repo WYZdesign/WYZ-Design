@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import StrategyWizard from "@/components/StrategyWizard";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -49,17 +50,15 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}
   >
    <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
- <div className="aspect-[4/3] overflow-hidden relative">
- <img src={service.img} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
- <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
- <div className="absolute top-3 right-3 bg-[#DF3131] text-white px-3 py-1 text-[14px] font-bold tracking-wider">{service.price}</div>
- <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{service.dur}</div>
- </div>
- <div className="p-5">
- <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131]">{service.cat}</span>
-  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[16px] md:text-[18px] tracking-[0.03em] mt-1 mb-2 group-hover:text-[#DF3131] transition-colors text-left">{service.name}</h3>
-  <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] leading-relaxed line-clamp-2">{service.desc}</p>
- </div>
+  <div className="aspect-[4/3] overflow-hidden relative">
+  <Image src={service.img} alt={service.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+  <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{service.dur}</div>
+  </div>
+  <div className="p-5 text-center">
+  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131]">{service.cat}</span>
+   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[16px] md:text-[18px] tracking-[0.03em] mt-1 group-hover:text-[#DF3131] transition-colors text-center">{service.name}</h3>
+  </div>
  </div>
  </div>
 
@@ -69,9 +68,9 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
  <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative">
- <div className="absolute inset-0 opacity-10">
- <img src={service.img} alt="" className="w-full h-full object-cover" />
- </div>
+  <div className="absolute inset-0 opacity-10">
+  <Image src={service.img} alt={service.name} fill className="w-full h-full object-cover" priority />
+  </div>
  <div className="relative z-10">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">{service.cat}</span>
   <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mt-1 mb-3 text-left">{service.name}</h3>
@@ -111,14 +110,14 @@ return (
    <section className="relative min-h-[60vh] lg:min-h-[70vh] flex flex-col lg:flex-row hero-banner">
   {/* Left: Image */}
   <div className="w-full lg:w-1/2 h-[40vh] lg:h-auto relative overflow-hidden">
-  <img src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" className="w-full h-full object-cover" />
+  <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill className="w-full h-full object-cover" priority />
    <div className="absolute inset-0 bg-black/20" />
   </div>
   {/* Right: Text with gradient */}
  <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 overflow-hidden">
    <div className="absolute inset-0 hero-grad-services z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
-   <div className="relative z-10 text-center max-w-xl mx-auto">
+    <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
 <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-2 lg:mb-6" style={{ lineHeight: 1 }}>
   CREATIVE <span className="text-[#DF3131]">SERVICES</span>
   </h1>

@@ -222,7 +222,7 @@ const PHOTO_COVERS: Record<string, string> = {
   Bodypaint: "wyzdesign/photography/Bodypaint",
   Urbex: "wyzdesign/photography/URBEX",
   Products: "wyzdesign/photography/Products",
-  Conceptual: "wyzdesign/photography/Coneceptual",
+   Conceptual: "wyzdesign/photography/Conceptual",
 };
 
 /**

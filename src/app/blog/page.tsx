@@ -1,6 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FiArrowRight, FiClock, FiTag, FiSearch, FiTrendingUp } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import TextReveal from "@/components/TextReveal";
@@ -61,17 +62,17 @@ export default function BlogPage() {
  <p className="text-white/70 text-base sm:text-lg max-w-md">News, insights, and behind-the-scenes from WYZ Design</p>
  </div>
  </div>
- {featured && (
- <Link href="#articles" className="hidden lg:block relative overflow-hidden group">
- <img src={featured.img} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
- <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
- <div className="absolute bottom-0 left-0 right-0 p-10">
- <span className="inline-block px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-3">Featured</span>
- <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.04em] mb-2">{featured.title}</h2>
-  <p className="text-white/70 text-[16px] max-w-md">{featured.excerpt}</p>
- </div>
- </Link>
- )}
+  {featured && (
+  <Link href="#articles" className="hidden lg:block relative overflow-hidden group">
+  <Image src={featured.img} alt={featured.title} fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" priority />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+  <div className="absolute bottom-0 left-0 right-0 p-10">
+  <span className="inline-block px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-3">Featured</span>
+  <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.04em] mb-2">{featured.title}</h2>
+   <p className="text-white/70 text-[16px] max-w-md">{featured.excerpt}</p>
+  </div>
+  </Link>
+  )}
  </div>
  </div>
  </ScrollReveal>
@@ -110,10 +111,10 @@ export default function BlogPage() {
  {filtered.map((p, i) => (
  <ScrollReveal key={p.id} animation="fadeUp" delay={0.08 * i}>
  <article className="blog-card group bg-white dark:bg-[#252528] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
-  <div className="relative h-56 overflow-hidden">
-  <img src={p.img} alt={p.title} className="blog-img w-full h-full object-cover dark:brightness-110 dark:grayscale" loading="eager" />
-  <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded">{p.cat}</span>
-  </div>
+   <div className="relative h-56 overflow-hidden">
+   <Image src={p.img} alt={p.title} fill className="blog-img w-full h-full object-cover dark:brightness-110" priority />
+   <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded">{p.cat}</span>
+   </div>
   <div className="p-5 sm:p-6">
   <div className="flex items-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
   <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>

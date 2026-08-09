@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
+import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -228,7 +229,7 @@ function AuthenticatedDashboard({ session, update, signOut }: any) {
  <div className="flex items-start gap-5 mb-6">
  <div className="w-16 h-16 rounded-full overflow-hidden bg-[#DF3131] flex-shrink-0 flex items-center justify-center">
  {session.user?.image ? (
- <img src={session.user.image} alt={`${session.user?.name || "Member"} profile photo`} width={64} height={64} className="w-full h-full object-cover" />
+  <Image src={session.user.image} alt={`${session.user?.name || "Member"} profile photo`} width={64} height={64} className="w-full h-full object-cover" priority />
  ) : (
  <span className="text-white text-2xl font-bold">{(session?.user?.name || session?.user?.email || "?")[0]?.toUpperCase()}</span>
  )}

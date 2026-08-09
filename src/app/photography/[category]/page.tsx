@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -240,8 +241,7 @@ function AutoScrollRow({ images, label, speed, onImageClick }: { images: string[
               }}
               onMouseEnter={() => { paused.current = true; if (resumeTimer.current) clearTimeout(resumeTimer.current); }}
               onMouseLeave={() => { paused.current = false; }}>
-              <img src={src} alt={`${label} ${j % images.length + 1}`} loading="lazy" width={400} height={300}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+               <Image src={src} alt={label} width={400} height={300} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
             </div>
           ))}
         </div>

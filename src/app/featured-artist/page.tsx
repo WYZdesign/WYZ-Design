@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FiUser, FiEdit3, FiCalendar, FiMapPin, FiHeart, FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -65,7 +66,7 @@ function ArtistGallery() {
  >
  {!flipping && (
  item.src ? (
- <img src={item.src} alt={item.label} className="w-full h-full object-cover" />
+  <Image src={item.src} alt={item.label} fill className="w-full h-full object-cover" priority />
  ) : (
  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#DF3131]/5 to-[#D49341]/5">
  <span className="text-[#DF3131]/30 text-[13px] font-bold tracking-[0.1em] uppercase">{item.label}</span>
@@ -143,12 +144,7 @@ export default function FeaturedArtistPage() {
  {/* Left: Image */}
  <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen bg-white dark:bg-[#111] flex items-center justify-center overflow-hidden">
  <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/20 via-[#FFFFFF] dark:via-[#111] to-[#DF3131]/10" />
- <img
- src="/images/danny-davis.png"
- alt="Donte 'Danny' Davis"
- width={800} height={1067}
- className="relative z-10 w-full lg:w-[85%] aspect-[3/4] max-w-full lg:max-w-lg object-cover object-top border border-[#E2E2E2] dark:border-white/10 shadow-2xl shadow-black/50"
- />
+ <Image src="/images/danny-davis.png" alt="Donte 'Danny' Davis" width={800} height={1067} className="relative z-10 w-full lg:w-[85%] aspect-[3/4] max-w-full lg:max-w-lg object-cover object-top border border-[#E2E2E2] dark:border-white/10 shadow-2xl shadow-black/50" priority />
  <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] dark:from-[#111]/80 via-transparent to-[#FFFFFF]/30 dark:to-[#111]/30 z-20" />
  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#FFFFFF] dark:to-[#111] hidden lg:block z-20" />
  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#FFFFFF] dark:from-[#111] to-transparent lg:hidden z-20" />
@@ -243,16 +239,16 @@ export default function FeaturedArtistPage() {
  {/* Art preview grid */}
  <div className="grid grid-cols-2 gap-3">
  <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
- <img src="/images/faotm_1.jpg" alt="Featured artwork" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+ <Image src="/images/faotm_1.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
  <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
- <img src="/images/faotm_2.jpg" alt="Featured artwork" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+ <Image src="/images/faotm_2.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
  <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
- <img src="/images/faotm_3.jpg" alt="Featured artwork" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+ <Image src="/images/faotm_3.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
  <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
- <img src="/images/danny-davis.png" alt="Danny Davis portrait" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+ <Image src="/images/danny-davis.png" alt="Danny Davis portrait" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
  </div>
  </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -126,7 +127,7 @@ export default function Navbar() {
     return (
       <nav className="fixed top-3 left-3 z-50">
         <Link href="/" className="flex items-center justify-center w-10 h-10 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:scale-110 active:scale-95 transition-all">
-          <img src="/images/wyz-crown.png" alt="WYZ Design" className="w-5 h-5 object-contain" />
+          <Image src="/images/wyz-crown.png" alt="WYZ Design" fill className="w-5 h-5 object-contain" loading="lazy" />
         </Link>
       </nav>
     );
@@ -143,7 +144,7 @@ export default function Navbar() {
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
               <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-4 sm:pl-6 lg:pl-0">
-                <img src="/images/wyz-crown.png" alt="WYZ Design" width={70} height={70} style={{ maxWidth: "70px", maxHeight: "70px", objectFit: "contain", filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.3))", animation: "logoGlow 3s ease-in-out infinite alternate" }} className="hover:scale-110 transition-transform" />
+                <Image src="/images/wyz-crown.png" alt="WYZ Design" width={70} height={70} className="hover:scale-110 transition-transform" loading="lazy" />
             </Link>
 
             {/* Nav links */}

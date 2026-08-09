@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -254,7 +255,7 @@ export default function FDDriveBrowser() {
                   <>
                     <div className="aspect-video bg-zinc-800 flex items-center justify-center">
                       {f.thumbnailLink
-                        ? <img src={f.thumbnailLink} alt={f.name} className="w-full h-full object-cover" loading="lazy" />
+                        ? <Image src={f.thumbnailLink} alt={f.name} fill className="w-full h-full object-cover" priority />
                         : <span className="text-3xl">🎬</span>
                       }
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
@@ -314,7 +315,7 @@ export default function FDDriveBrowser() {
                   <>
                     <div className="aspect-square bg-zinc-800 overflow-hidden">
                       {f.thumbnailLink
-                        ? <img src={f.thumbnailLink} alt={f.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" loading="lazy" />
+                        ? <Image src={f.thumbnailLink} alt={f.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" priority />
                         : <div className="w-full h-full flex items-center justify-center text-3xl">📸</div>
                       }
                     </div>

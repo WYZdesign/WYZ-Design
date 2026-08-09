@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback, useMemo, createContext, useContext } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { FiChevronLeft, FiChevronRight, FiPlay, FiX } from "react-icons/fi";
 import { useSwipe } from "@/hooks/useSwipe";
@@ -141,7 +142,7 @@ interface VideoMuteCtx {
 const VideoMuteContext = createContext<VideoMuteCtx>({ activeVideoId: null, toggleVideo: () => {}, muteAll: () => {} });
 
 function VideoMuteProvider({ children }: { children: React.ReactNode }) {
- const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+  const [activeVideoId, setActiveVideoId] = useState<string | null>("aura");
  const toggleVideo = useCallback((id: string) => {
   setActiveVideoId((prev) => (prev === id ? null : id));
  }, []);
@@ -710,7 +711,7 @@ export default function EventsPage() {
   <div className="relative overflow-hidden mx-0 hero-banner">
   <div className="grid grid-cols-1 lg:grid-cols-2 h-auto lg:h-[60vh] max-h-[600px]">
   <div className="relative overflow-hidden bg-white dark:bg-[#111]">
-  <img src="/images/events/hero_bg.jpg" alt="Events" className="w-full h-full object-cover opacity-80" style={{ filter: "saturate(1.3) contrast(1.1)" }} />
+  <Image src="/images/events/hero_bg.jpg" alt="Events" fill className="w-full h-full object-cover opacity-80" priority />
   <div className="absolute inset-0 bg-black/30" />
     </div>
     <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center py-10 lg:py-0 overflow-hidden">
@@ -804,8 +805,8 @@ export default function EventsPage() {
  <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
  {visibleEvents.map((e) => (
   <div key={e.title} className="group cursor-pointer relative overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] mb-2 break-inside-avoid">
- <img src={e.img} alt={e.title} className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-500" loading="lazy"
- onError={(ev) => { (ev.target as HTMLImageElement).style.display = 'none'; }} />
+  <Image src={e.img} alt={e.title} width={400} height={300} className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-500" loading="lazy"
+  onError={(ev) => { (ev.target as HTMLImageElement).style.display = 'none'; }} />
  </div>
  ))}
  </div>

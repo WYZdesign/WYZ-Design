@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useSwipe } from "@/hooks/useSwipe";
 
@@ -79,7 +80,7 @@ export default function GalleryPage() {
  {filtered.map((img, i) => (
  <div key={i} className="break-inside-avoid cursor-pointer group" onClick={() => setLightbox(i)}>
  <div className="relative overflow-hidden rounded-lg">
- <img src={img.src} alt={img.cat} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+  <Image src={img.src} alt={img.cat} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-end p-3">
  <span className="text-white text-xs font-semibold bg-[#DF3131] px-2 py-1 rounded-full">{img.cat}</span>
  </div>

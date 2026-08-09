@@ -109,20 +109,20 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
               Most Popular
             </div>
           )}
-          <div className="p-5 text-center border-b border-[#E2E2E2]">
+          <div className="p-6 text-center border-b border-[#E2E2E2] flex flex-col items-center justify-center">
             <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center">{p.name}</h3>
             <div className="mt-2 text-center">
-              <span className="whitespace-nowrap text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
+              <span className="whitespace-nowrap text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
               <span className="text-[#8F8F8F] text-sm">/month</span>
             </div>
             <span className="inline-block mt-1 text-[14px] text-[#DF3131] font-semibold text-center">{p.value}</span>
             <p className="text-[13px] text-[#8F8F8F] text-center">Valid for 3 months</p>
           </div>
-          <div className="p-5">
-            <ul className="space-y-2">
+          <div className="p-6 flex flex-col items-center justify-center text-center">
+            <ul className="space-y-2 text-center w-full">
               {FEATURES[p.name].map((f) => (
-                <li key={f} className="text-[16px] text-[#666666] flex items-start gap-2 text-center justify-center">
-                  <span className="text-[#DF3131] mt-0.5">+</span>
+                <li key={f} className="text-[16px] text-[#666666] flex items-center justify-center gap-2 text-center w-full">
+                  <span className="text-[#DF3131]">+</span>
                   {f}
                 </li>
               ))}
@@ -337,7 +337,7 @@ export default function PlansPage() {
 
         {/* Plan Cards */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
           {PLANS.map((p) => (
             <PlanCard key={p.name} p={p} subscribe={subscribe} loading={loading} />
           ))}
