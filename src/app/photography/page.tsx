@@ -665,7 +665,7 @@ return (
  <Link key={a} href={`/photography/${encodeURIComponent(a)}`}
   className="album-card group relative overflow-hidden aspect-square cursor-pointer"
   style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
-  <Image src="albumCovers[a]" alt="a" fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" priority />
+   <Image src={albumCovers[a]} alt={a} fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" priority />
    <div className="absolute inset-0 z-10 bg-black/30" />
    <div className="absolute inset-0 flex items-center justify-center z-20">
    <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
