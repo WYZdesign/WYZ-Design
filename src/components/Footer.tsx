@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FiTwitter, FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiArrowRight, FiMapPin, FiPhone, FiMail } from "react-icons/fi";
 import toast from "react-hot-toast";
 import { FaTiktok } from "react-icons/fa6";
+import { trackMetaEvent } from "@/components/AnalyticsProvider";
 
 const SITEMAP = {
   Services: [
@@ -59,7 +60,7 @@ export default function Footer() {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
-      if (data.success) { setSubscribed(true); setEmail(""); toast.success("Subscribed! Check your inbox."); }
+      if (data.success) { setSubscribed(true); setEmail(""); toast.success("Subscribed! Check your inbox."); trackMetaEvent("Subscribe"); }
       else { toast.error("Subscription failed. Please try again."); }
     } catch { toast.error("Network error. Please try again."); }
   };

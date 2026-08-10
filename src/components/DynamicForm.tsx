@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackMetaEvent, trackTikTokEvent } from "@/components/AnalyticsProvider";
 
 export type FieldType = "text" | "email" | "tel" | "select" | "textarea" | "date" | "checkbox" | "number";
 
@@ -83,6 +84,8 @@ export default function DynamicForm({
       });
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
+      trackMetaEvent("Lead");
+      trackTikTokEvent("SubmitForm");
       onSuccess?.();
     } catch (err: any) {
       const msg = err.message || "Something went wrong";

@@ -14,6 +14,7 @@ import CookieBanner from "@/components/CookieBanner";
 import AuthProvider from "@/components/AuthProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import CustomCursor from "@/components/CustomCursor";
+import AnalyticsProvider from "@/components/AnalyticsProvider";
 import PageTransition from "@/components/PageTransition";
 import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -191,6 +192,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <SpeedInsights />
         <CookieBanner />
+        <AnalyticsProvider />
         <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" } }} />
         <script dangerouslySetInnerHTML={{ __html: `
           if (window.matchMedia('(display-mode: standalone)').matches) {
@@ -200,6 +202,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             document.body.classList.remove('cursor-none');
           }
         `}} />
+        {/* GTM noscript fallback */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
       </body>
     </html>
   );
