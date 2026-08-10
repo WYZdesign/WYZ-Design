@@ -444,7 +444,7 @@ return (
    <div className="relative h-full">
    <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
     <video
-     src="/videos/hero-banners/photography.mp4"
+     src="/videos/wyz-nav-bg.mp4"
      autoPlay muted loop playsInline
      className="absolute inset-0 w-full h-full object-cover"
      style={{ filter: "saturate(1.2) contrast(1.1)" }}
@@ -469,7 +469,7 @@ return (
    <div className="md:hidden absolute inset-0 flex items-center justify-center">
    <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
     <video
-     src="/videos/hero-banners/photography.mp4"
+     src="/videos/wyz-nav-bg.mp4"
      autoPlay muted loop playsInline
      className="absolute inset-0 w-full h-full object-cover"
      style={{ filter: "saturate(1.2) contrast(1.1)" }}
