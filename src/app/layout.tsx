@@ -13,7 +13,7 @@ import ChatWidget from "@/components/ChatWidget";
 import CookieBanner from "@/components/CookieBanner";
 import AuthProvider from "@/components/AuthProvider";
 import ScrollProgress from "@/components/ScrollProgress";
-
+import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -163,26 +163,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }),
           }}
         />
-      <style dangerouslySetInnerHTML={{ __html: `
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth}
-        body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#333;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
-        .dark body{background:#1C1C1E;color:#e0e0e0}
-        img{max-width:100%;height:auto;display:block}
-        a{color:#DF3131;text-decoration:none}
-        h1,h2,h3,h4,h5,h6{font-family:var(--font-heading,'Montserrat',sans-serif);font-weight:700;letter-spacing:.07em;text-transform:uppercase}
-        .font-heading{font-family:var(--font-heading,'Montserrat',sans-serif)}
-        .font-body{font-family:var(--font-body,'Inter',sans-serif)}
-      `}} />
+
       </head>
-      <body className="min-h-full flex flex-col bg-white dark:bg-[#1C1C1E] text-[#333333] dark:text-[#e0e0e0] antialiased">
+      <body className="min-h-full flex flex-col bg-white dark:bg-[#1C1C1E] text-[#333333] dark:text-[#e0e0e0] antialiased cursor-none lg:cursor-none max-lg:cursor-auto">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
           <AuthProvider>
           <ScrollAnimator />
           <RouteBackground />
           <ScrollProgress />
-
+          <CustomCursor />
           <Navbar />
           <div id="main-content" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#1C1C1E]" tabIndex={-1}>
             <PageTransition>{children}</PageTransition>
