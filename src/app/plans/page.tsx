@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
+import { trackMetaEvent } from "@/components/AnalyticsProvider";
 import type { FormField } from "@/components/DynamicForm";
 
 const FEATURES: Record<string, string[]> = {
@@ -241,6 +242,7 @@ export default function PlansPage() {
       });
       const data = await res.json();
       if (data.url) {
+        trackMetaEvent("InitiateCheckout", { value: planName });
         window.location.href = data.url;
       } else {
         alert(data.error || "Checkout failed. Make sure Stripe is configured.");

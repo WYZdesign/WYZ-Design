@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { trackMetaEvent } from "@/components/AnalyticsProvider";
 
 const CARDS = [
   { amount: 25, label: "Small", desc: "A sticker pack, small merch item, or partial service credit." },
@@ -26,6 +27,7 @@ export default function GiftCardPage() {
       });
       const data = await res.json();
       if (data.url) {
+        trackMetaEvent("InitiateCheckout", { value: amount, content_type: "gift_card" });
         window.location.href = data.url;
       } else {
         alert(data.error || "Checkout failed. Please try again.");
