@@ -38,8 +38,11 @@ export default function AboutPage() {
       {/* HERO */}
       <ScrollReveal animation="fadeUp">
         <section className="relative py-24 sm:py-32 lg:py-40 bg-[#111] overflow-hidden">
-          <div className="absolute inset-0 opacity-20">
-            <Image src="/images/home/carousel_top/wix_0094.jpg" alt="About Hero" fill className="w-full h-full object-cover" priority />
+          <div className="absolute inset-0">
+            <video autoPlay muted loop playsInline preload="metadata"
+              className="w-full h-full object-cover opacity-25">
+              <source src="/videos/hero-banners/about.mp4" type="video/mp4" />
+            </video>
             <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
           </div>
           {/* Crown logo marquee background */}
