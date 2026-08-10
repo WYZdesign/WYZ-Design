@@ -138,11 +138,11 @@ function ParallaxHero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/40 to-[#111]/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#111]/60 via-transparent to-[#111]/60" />
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col items-start justify-center px-6 text-left">
+      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
         <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
           Dying Breed Crew
         </p>
-        <h1 className="text-left text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
+        <h1 className="text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
           <span className="block">WORN</span>
           <span className="block text-[#DF3131]">DIFFERENT</span>
         </h1>
@@ -409,6 +409,15 @@ export default function MerchPage() {
     <>
       <main className="min-h-screen bg-[#FEFEFD]">
         <ParallaxHero />
+
+        {/* Product Name Marquee Strip */}
+        <div className="relative overflow-hidden bg-[#111] py-3 border-y border-white/5">
+          <div className="flex whitespace-nowrap animate-marquee-left">
+            {[...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS].map((p, i) => (
+              <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6">{p.name}</span>
+            ))}
+          </div>
+        </div>
 
         {/* Brand Statement — Animated Square Quote */}
         <section className="py-20 px-6">

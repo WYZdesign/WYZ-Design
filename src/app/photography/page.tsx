@@ -692,7 +692,7 @@ return (
  {b.icon}
  </div>
  <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] mb-4 whitespace-pre-line leading-tight">{b.title}</h3>
-   <p className="text-[15px] text-white/70 dark:text-[#aaa] leading-relaxed mb-4 text-center">{b.desc}</p>
+   <p className="text-[15px] text-[#333] dark:text-[#aaa] leading-relaxed mb-4 text-center">{b.desc}</p>
    <Link href="/plans" className="inline-block text-[#DF3131] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-white transition-colors">READ MORE +</Link>
  </div>
  ))}

@@ -136,7 +136,7 @@ export default function Navbar() {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${visible ? "opacity-100" : "opacity-0 -translate-y-2 pointer-events-none"}`}>
-        <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
+        <div className="absolute inset-0 overflow-hidden wyz-red-gradient opacity-90">
           <video src="/videos/wyz-nav-bg.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
           <div className="absolute inset-0 bg-black/15" />
         </div>
@@ -144,7 +144,7 @@ export default function Navbar() {
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
               <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-4 sm:pl-6 lg:pl-0">
-                <Image src="/images/wyz-crown.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[44px] h-[44px] sm:w-[56px] sm:h-[56px] lg:w-[70px] lg:h-[70px]" loading="lazy" />
+                <Image src="/images/wyz-crown.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] lg:w-[48px] lg:h-[48px]" loading="lazy" />
             </Link>
 
             {/* Nav links */}
@@ -170,7 +170,7 @@ export default function Navbar() {
                   {moreOpen && (
                     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
                       className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 shadow-xl z-50 rounded-lg overflow-hidden"
-                      style={{ background: "rgba(0,0,0,0.85)" }}>
+                      >
                       <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
                         <video src="/videos/wyz-nav-bg.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
                         <div className="absolute inset-0 bg-black/15" />

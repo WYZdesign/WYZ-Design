@@ -42,6 +42,23 @@ export default function AboutPage() {
             <Image src="/images/home/carousel_top/wix_0094.jpg" alt="About Hero" fill className="w-full h-full object-cover" priority />
             <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
           </div>
+          {/* Crown logo marquee background */}
+          <div className="absolute inset-0 z-[1] overflow-hidden opacity-[0.04] pointer-events-none">
+            <div className="flex whitespace-nowrap animate-marquee-left" style={{ gap: '4rem' }}>
+              {Array.from({ length: 24 }).map((_, i) => (
+                <svg key={`cr1-${i}`} className="w-16 h-16 flex-none" fill="#DF3131" viewBox="0 0 24 24">
+                  <path d="M2.5 18.5l1.5-10 5.5 4 2.5-7 2.5 7 5.5-4 1.5 10z M2.5 19.5h19v1.5h-19z" />
+                </svg>
+              ))}
+            </div>
+            <div className="flex whitespace-nowrap animate-marquee-right mt-4" style={{ gap: '4rem' }}>
+              {Array.from({ length: 24 }).map((_, i) => (
+                <svg key={`cr2-${i}`} className="w-12 h-12 flex-none" fill="#DF3131" viewBox="0 0 24 24">
+                  <path d="M2.5 18.5l1.5-10 5.5 4 2.5-7 2.5 7 5.5-4 1.5 10z M2.5 19.5h19v1.5h-19z" />
+                </svg>
+              ))}
+            </div>
+          </div>
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase mb-4 block">About Us</span>
             <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-6" style={{ lineHeight: 1 }}>
@@ -79,20 +96,20 @@ export default function AboutPage() {
       {/* FOUNDER */}
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-[#F5F5F3] dark:bg-[#252528]">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-              <div className="w-full lg:w-5/12">
-                <div className="relative aspect-[3/4] max-w-md mx-auto overflow-hidden">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="flex flex-col items-center gap-12 text-center">
+              <div className="w-full max-w-md">
+                <div className="relative aspect-[3/4] max-w-sm mx-auto overflow-hidden">
                   <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel, Founder of WYZ Design" fill className="w-full h-full object-cover" priority />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#DF3131]/10 via-transparent to-transparent" />
                 </div>
               </div>
-              <div className="w-full lg:w-7/12">
+              <div className="w-full">
                 <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase mb-3 block">The Founder</span>
                 <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-6" style={{ lineHeight: 1 }}>
                   TORREÉ <span className="text-[#DF3131]">MARCEL</span>
                 </h2>
-                <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed">
+                <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">
                   <p>
                     Torreé Marcel is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. What started as making flyers for local artists became a brand that serves over 30 clients and has produced 60+ events.
                   </p>
@@ -103,7 +120,7 @@ export default function AboutPage() {
                     Now based in Los Angeles, Torreé continues to expand WYZ Design's reach while staying rooted in the values that built it: wild vision, zealous execution, and a commitment to doing the work the right way, every single time.
                   </p>
                 </div>
-                 <div className="mt-8 flex flex-wrap gap-4 justify-center lg:justify-start">
+                 <div className="mt-8 flex flex-wrap gap-4 justify-center">
                   <Link href="/services" className="inline-block px-8 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#B82020] transition-all">
                     SEE OUR SERVICES
                   </Link>
@@ -130,8 +147,8 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {BRANDS.map((brand, i) => (
                 <div key={i} className="relative group">
-                  <div className="p-8 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full">
-                    <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full" style={{ background: brand.color }} />
+                  <div className="p-8 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full text-center">
+                    <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full mx-auto" style={{ background: brand.color }} />
                     <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase" style={{ color: brand.color }}>{brand.tagline}</span>
                     <h3 className="font-heading font-black text-[#333] dark:text-white text-[18px] sm:text-[20px] tracking-[0.04em] uppercase mt-2 mb-4">{brand.name}</h3>
                     <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed">{brand.desc}</p>

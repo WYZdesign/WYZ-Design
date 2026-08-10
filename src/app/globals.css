@@ -188,6 +188,29 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
     animation-play-state: paused;
   }
 
+  /* Marquee animations for YouTube logo rows and other scrolling strips */
+  @keyframes marqueeLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes marqueeRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  @keyframes marqueeLeftFast {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee-left {
+    animation: marqueeLeft 30s linear infinite;
+  }
+  .animate-marquee-right {
+    animation: marqueeRight 30s linear infinite;
+  }
+  .animate-marquee-left-fast {
+    animation: marqueeLeftFast 18s linear infinite;
+  }
+
   /* Hero text readability: handled by an explicit 30% black overlay div in each
      hero section's markup now (consistent across all viewports). The legacy
      ::after gradient here was removed — it stacked on top of the explicit
@@ -244,8 +267,8 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
 
   /* ── Navbar logo — smaller on mobile ── */
   nav .flex img[src*="crown"] {
-    width: 44px !important;
-    height: 44px !important;
+    width: 32px !important;
+    height: 32px !important;
   }
 
   /* ── Flip cards — center text, flip on first tap ── */

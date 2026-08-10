@@ -471,172 +471,58 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
 }
 
 function YouTubeSection() {
- const sectionRef = useRef<HTMLDivElement>(null);
- const canvasRef = useRef<HTMLCanvasElement>(null);
- const mouseRef = useRef({ x: 0.5, y: 0.5 });
- const particlesRef = useRef<Array<{ x: number; y: number; vx: number; vy: number; size: number; life: number; color: string; glitter: number; rotation: number }>>([]);
+ const ytLogos = [
+   { color: "#FF0000", label: "YouTube" },
+   { color: "#FFFFFF", label: "YouTube" },
+   { color: "#282828", label: "YouTube" },
+   { color: "#FF0000", label: "YT" },
+   { color: "#CC0000", label: "YouTube" },
+   { color: "#E0E0E0", label: "YT" },
+   { color: "#FF1A1A", label: "YouTube" },
+   { color: "#333333", label: "YouTube" },
+ ];
 
- useEffect(() => {
- const section = sectionRef.current;
- const canvas = canvasRef.current;
- if (!section || !canvas) return;
- const ctx = canvas.getContext("2d");
- if (!ctx) return;
+ const ytPath = "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z";
 
- const resize = () => {
- canvas.width = section.offsetWidth;
- canvas.height = section.offsetHeight;
- };
- resize();
- window.addEventListener("resize", resize);
+ const LogoItem = ({ color, label }: { color: string; label: string }) => (
+   <div className="flex-none flex items-center gap-2 px-6 py-3" style={{ opacity: color === "#282828" || color === "#333333" ? 0.6 : 1 }}>
+     <svg className="w-8 h-8 sm:w-10 sm:h-10" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
+     <span className="font-heading font-bold text-sm sm:text-base tracking-wider" style={{ color }}>{label}</span>
+   </div>
+ );
 
- let visible = true;
- let raf: number;
- const startLoop = () => { raf = requestAnimationFrame(tick); };
- const obs = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) startLoop(); }, { threshold: 0 });
- obs.observe(section);
-
- const handleMouse = (e: MouseEvent) => {
- const rect = section.getBoundingClientRect();
- mouseRef.current = {
- x: (e.clientX - rect.left) / rect.width,
- y: (e.clientY - rect.top) / rect.height,
- };
- };
- const handleTouch = (e: TouchEvent) => {
- const rect = section.getBoundingClientRect();
- const t = e.touches[0];
- mouseRef.current = {
- x: (t.clientX - rect.left) / rect.width,
- y: (t.clientY - rect.top) / rect.height,
- };
- };
- section.addEventListener("mousemove", handleMouse);
- section.addEventListener("touchmove", handleTouch, { passive: true });
-
- // Gyroscope for mobile tilt-driven particle effect
- let gyroCleanup: (() => void) | null = null;
- const startGyro = () => {
- const handler = (e: DeviceOrientationEvent) => {
- if (e.beta === null || e.gamma === null) return;
- mouseRef.current = {
- x: Math.max(0, Math.min(1, ((e.gamma || 0) + 90) / 180)),
- y: Math.max(0, Math.min(1, ((e.beta || 0) + 90) / 180)),
- };
- };
- window.addEventListener("deviceorientation", handler, true);
- gyroCleanup = () => window.removeEventListener("deviceorientation", handler, true);
- };
- const requestPerm = async () => {
- try {
- if (typeof DeviceOrientationEvent !== "undefined" && typeof (DeviceOrientationEvent as any).requestPermission === "function") {
- const perm = await (DeviceOrientationEvent as any).requestPermission();
- if (perm === "granted") startGyro();
- } else { startGyro(); }
- } catch (e) { console.warn("[events-page] Gyro permission failed", e); }
- };
- const onFirst = () => { document.removeEventListener("touchend", onFirst); document.removeEventListener("click", onFirst); requestPerm(); };
- document.addEventListener("touchend", onFirst, { once: true });
- document.addEventListener("click", onFirst, { once: true });
-
- const colors = ["#FF0000", "#DF3131", "#FFFFFF", "#FF3333", "#CC0000", "#FF6666", "#E0E0E0", "#FF1A1A"];
-
- const tick = () => {
- if (!visible) { return; }
- const { x: mx, y: my } = mouseRef.current;
- ctx.clearRect(0, 0, canvas.width, canvas.height);
-
- for (let i = 0; i < 4; i++) {
- if (particlesRef.current.length > 120) break;
- particlesRef.current.push({
- x: mx * canvas.width + (Math.random() - 0.5) * 120,
- y: my * canvas.height + (Math.random() - 0.5) * 120,
- vx: (Math.random() - 0.5) * 2.5,
- vy: (Math.random() - 0.5) * 2.5,
- size: Math.random() * 3 + 1.5,
- life: 1,
- color: colors[Math.floor(Math.random() * colors.length)],
- glitter: Math.random() * Math.PI * 2,
- rotation: Math.random() * Math.PI * 2,
- });
- }
-
- particlesRef.current = particlesRef.current.filter((p) => {
- p.x += p.vx;
- p.y += p.vy;
- p.life -= 0.018;
- p.glitter += 0.12;
- if (p.life <= 0) return false;
-
- const shimmer = 0.5 + 0.5 * Math.sin(p.glitter * 3);
- ctx.globalAlpha = p.life * shimmer * 0.85;
- ctx.fillStyle = p.color;
- ctx.shadowColor = p.color;
- ctx.shadowBlur = p.size * 3;
-
- ctx.save();
- ctx.translate(p.x, p.y);
- ctx.rotate(p.rotation + p.glitter * 0.3);
-
- const sides = 6;
- const r = p.size * 1.8;
- ctx.beginPath();
- for (let j = 0; j <= sides; j++) {
- const a = (j * 2 * Math.PI) / sides - Math.PI / 2;
- const px = Math.cos(a) * r;
- const py = Math.sin(a) * r;
- j === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
- }
- ctx.closePath();
- ctx.fill();
-
- ctx.globalAlpha = p.life * shimmer * 0.35;
- ctx.fillStyle = "#FFFFFF";
- const innerR = r * 0.45;
- ctx.beginPath();
- for (let j = 0; j <= sides; j++) {
- const a = (j * 2 * Math.PI) / sides - Math.PI / 2;
- const px = Math.cos(a) * innerR;
- const py = Math.sin(a) * innerR - innerR * 0.3;
- j === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
- }
- ctx.closePath();
- ctx.fill();
-
- ctx.restore();
- ctx.shadowBlur = 0;
- return true;
- });
-
- ctx.globalAlpha = 1;
- raf = requestAnimationFrame(tick);
- };
- raf = requestAnimationFrame(tick);
-
- return () => {
- cancelAnimationFrame(raf);
- obs.disconnect();
- window.removeEventListener("resize", resize);
- section.removeEventListener("mousemove", handleMouse);
- section.removeEventListener("touchmove", handleTouch);
- gyroCleanup?.();
- document.removeEventListener("touchend", onFirst);
- document.removeEventListener("click", onFirst);
- };
- }, []);
+ const row1 = [...ytLogos, ...ytLogos, ...ytLogos, ...ytLogos];
+ const row2 = [...ytLogos.slice().reverse(), ...ytLogos.slice().reverse(), ...ytLogos.slice().reverse(), ...ytLogos.slice().reverse()];
 
  return (
- <div ref={sectionRef} className="relative overflow-hidden bg-[#0a0a0a]">
- <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-10" />
+ <div className="relative overflow-hidden bg-[#0a0a0a]">
  <div className="absolute inset-0 z-0">
  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0000]/10 via-transparent to-[#DF3131]/8" />
  <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-[100px]" />
  <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-[#DF3131]/5 rounded-full blur-[80px]" />
  </div>
+ <div className="absolute inset-0 bg-black/30 z-[1]" />
+
+ <div className="relative z-10 overflow-hidden py-3 border-b border-white/5">
+   <div className="flex whitespace-nowrap animate-marquee-left">
+     {row1.map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} label={logo.label} />))}
+   </div>
+ </div>
+ <div className="relative z-10 overflow-hidden py-3 border-b border-white/5">
+   <div className="flex whitespace-nowrap animate-marquee-right">
+     {row2.map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} label={logo.label} />))}
+   </div>
+ </div>
+ <div className="relative z-10 overflow-hidden py-3 border-b border-white/5">
+   <div className="flex whitespace-nowrap animate-marquee-left-fast">
+     {row1.map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} label={logo.label} />))}
+   </div>
+ </div>
+
  <div className="relative z-20 flex flex-col items-center justify-center py-20 sm:py-28 px-6 text-center">
  <div className="yt-float mb-8">
  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#FF0000] flex items-center justify-center yt-pulse shadow-lg shadow-[#FF0000]/40">
- <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+ <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d={ytPath}/></svg>
  </div>
  </div>
  <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3.5rem] font-heading font-black text-white tracking-[0.08em] leading-tight mb-4">
@@ -654,7 +540,7 @@ function YouTubeSection() {
   </a>
   <a href="https://www.youtube.com/playlist?list=PLJ_paMo7iTXEkVi_UWaIdeUzF0Ag-oURT" target="_blank" rel="noopener noreferrer"
   className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 border-2 border-white/30 text-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:border-[#FF0000] hover:text-[#FF0000] transition-all hover:scale-105">
-  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d={ytPath}/></svg>
   WATCH RECAPS
   </a>
   <a href="https://www.youtube.com/@wyzdesign" target="_blank" rel="noopener noreferrer"
@@ -680,6 +566,7 @@ function YouTubeSection() {
  </div>
  );
 }
+
 
 export default function EventsPage() {
  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
@@ -738,13 +625,8 @@ export default function EventsPage() {
 {/* ═══ 2. Sign-Up ═══ */}
  <ScrollReveal animation="foldDown" duration={1.0}>
  <div className="relative overflow-hidden bg-black">
-  <video src="/videos/concert-crowd.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.25, animation: 'videoFadeIn 1.56s ease-out forwards' }} />
-  <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/30 via-[#B82020]/20 to-[#1a1a1a]/40 pointer-events-none z-[1]">
-    <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-[#DF3131]/20 rounded-full blur-3xl animate-pulse" />
-    <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-[#B82020]/20 rounded-full blur-3xl animate-pulse" />
-    <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#FF6B6B]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-  </div>
-  <style>{`@keyframes videoFadeIn { from { opacity: 0; } to { opacity: 0.25; } }`}</style>
+   <Image src="/concert-crowd.jpg" alt="Concert Crowd" fill className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.7 }} priority />
+   <div className="absolute inset-0 bg-black/30 z-[1]" />
  <div className="relative z-10 flex flex-col items-center justify-center py-12 sm:py-16 px-4 sm:px-6 text-center">
  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-white tracking-[0.08em] leading-tight mb-4">
  SIGN-UP FOR<br />

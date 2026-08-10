@@ -28,9 +28,6 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
           <h3 className={`font-heading font-bold text-[18px] tracking-[0.1em] uppercase mb-2 ${plan.accent ? "text-white" : "text-[#333]"}`}>{plan.name}</h3>
           <p className={`text-[2.5rem] font-heading font-black mb-4 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.price}</p>
           <p className={`text-[12px] tracking-[0.15em] uppercase ${plan.accent ? "text-white/60" : "text-[#999]"}`}>Tap to see what&apos;s included</p>
-          <Link href="/booking" onClick={(e) => e.stopPropagation()} className={`inline-block w-full max-w-[200px] mt-6 py-3 font-heading font-bold tracking-[0.12em] uppercase text-[13px] text-center transition-all ${plan.accent ? "bg-white text-[#DF3131] hover:bg-[#333] dark:hover:bg-[#111] hover:text-white" : "bg-[#333] text-white hover:bg-[#DF3131]"}`}>
-            Get Started
-          </Link>
         </div>
       </div>
       {/* Back */}

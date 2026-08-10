@@ -23,15 +23,15 @@ function PaperAccordion({ paper, index }: { paper: typeof PAPER_TYPES[0]; index:
  const [isOpen, setIsOpen] = useState(false);
  return (
  <div className="border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131]/40 transition-all duration-300 overflow-hidden">
- <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between p-5 text-left group">
- <div className="flex items-center gap-4">
- <span className="w-10 h-10 bg-[#DF3131]/10 text-[#DF3131] font-bold text-[14px] flex items-center justify-center flex-shrink-0 group-hover:bg-[#DF3131] group-hover:text-white transition-all">
+ <button onClick={() => setIsOpen(!isOpen)} className="w-full p-5 text-center group">
+ <div className="flex items-center justify-center gap-3">
+ <span className="w-8 h-8 bg-[#DF3131]/10 text-[#DF3131] font-bold text-[13px] flex items-center justify-center flex-shrink-0 group-hover:bg-[#DF3131] group-hover:text-white transition-all">
  {String(index + 1).padStart(2, "0")}
  </span>
-  <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[14px] sm:text-[15px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors text-center w-full">{paper.name}</h3>
+  <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[14px] sm:text-[15px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors">{paper.name}</h3>
   </div>
-  <div className={`w-8 h-8 flex items-center justify-center text-[#999] dark:text-[#aaa] group-hover:text-[#DF3131] transition-all duration-300 ${isOpen ? "rotate-45" : ""}`}>
- <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+  <div className={`w-6 h-6 mx-auto mt-2 flex items-center justify-center text-[#999] dark:text-[#aaa] group-hover:text-[#DF3131] transition-all duration-300 ${isOpen ? "rotate-45" : ""}`}>
+ <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
  </div>
  </button>
  <div className="overflow-hidden transition-all duration-500 ease-in-out" style={{ maxHeight: isOpen ? "400px" : "0px" }}>

@@ -93,7 +93,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
-      style={{ perspective: "1200px", minHeight: "min(480px, 70vh)" }}
+      style={{ perspective: "1200px", minHeight: "min(530px, 77vh)" }}
       role="button"
       tabIndex={0}
       aria-label={`${p.name} plan, ${p.price}/month. ${p.value}. Click to flip and subscribe.`}
@@ -112,7 +112,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
               Most Popular
             </div>
           )}
-          <div className="p-6 text-center border-b border-[#E2E2E2] flex flex-col items-center justify-center">
+          <div className="p-7 text-center border-b border-[#E2E2E2] flex flex-col items-center justify-center">
             <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center">{p.name}</h3>
             <div className="mt-2 text-center">
               <span className="whitespace-nowrap text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
@@ -121,7 +121,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
             <span className="inline-block mt-1 text-[14px] text-[#DF3131] font-semibold text-center">{p.value}</span>
             <p className="text-[13px] text-[#8F8F8F] text-center">Valid for 3 months</p>
           </div>
-          <div className="p-6 flex flex-col items-center justify-center text-center">
+          <div className="p-7 flex flex-col items-center justify-center text-center">
             <ul className="space-y-2 text-center w-full">
               {FEATURES[p.name].map((f) => (
                 <li key={f} className="text-[16px] text-[#666666] flex items-center justify-center gap-2 text-center w-full">
@@ -138,7 +138,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
         className="absolute inset-0 transition-all duration-700 ease-in-out"
         style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
       >
-        <div className={`w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative ${
+        <div className={`w-full h-full bg-[#DF3131] text-white p-7 flex flex-col justify-between overflow-hidden relative ${
           p.popular ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">

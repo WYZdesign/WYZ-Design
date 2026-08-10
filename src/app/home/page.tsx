@@ -786,7 +786,7 @@ export default function HomePage() {
     <VideoPlaylist videos={LOGO_INTROS} />
     </div>
      {/* 80% + 30% black overlay (or overall opacity increase) between video and text */}
-     <div className="absolute inset-0 bg-black/95 z-[1]" />
+      <div className="absolute inset-0 bg-black/65 z-[1]" />
     {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
@@ -922,37 +922,29 @@ export default function HomePage() {
   onClick={() => setFlippedPlans(prev => ({ ...prev, [i]: !prev[i] }))}>
  {/* Card container with 3D flip */}
  <div className="relative w-full transition-transform duration-700"
-  style={{ transformStyle: "preserve-3d", minHeight: "420px", transform: flippedPlans[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}>
- {/* Front face */}
- <div className={`absolute inset-0 p-6 text-center backface-hidden transition-all duration-300 ${
- p.badge ? "border-[3px] border-[#DF3131] shadow-lg shadow-[#DF3131]/10" : "border border-[#E2E2E2] hover:border-[#DF3131]"
+  style={{ transformStyle: "preserve-3d", minHeight: "320px", transform: flippedPlans[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}>
+ {/* Front face — just plan name big & bold */}
+ <div className={`absolute inset-0 p-8 text-center backface-hidden flex flex-col items-center justify-center transition-all duration-300 ${
+  p.badge ? "border-[3px] border-[#DF3131] shadow-lg shadow-[#DF3131]/10 bg-white dark:bg-[#252528]" : "border border-[#E2E2E2] hover:border-[#DF3131] bg-white dark:bg-[#252528]"
  }`} style={{ backfaceVisibility: "hidden" }}>
  {p.badge && (
- <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#DF3131] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 whitespace-nowrap">
- {p.badge}
- </div>
+  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#DF3131] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 whitespace-nowrap">
+  {p.badge}
+  </div>
  )}
-   <h3 className="font-heading font-bold text-[#333] dark:text-white text-[9px] tracking-[0.1em] uppercase mt-1">{p.name}</h3>
-   <p className="text-3xl font-black text-[#333] dark:text-white my-3">{p.price}</p>
-   <p className="text-xs text-[#666] dark:text-white/70 mb-1 font-bold italic">Every 3 months</p>
- <p className="text-xs text-[#888] dark:text-white/50 mb-4">{p.desc}</p>
- <p className="text-[10px] text-[#aaa] dark:text-white/40 mb-4">{p.valid}</p>
-   <Link href="/plans" className={`block py-2 font-heading font-bold tracking-[0.1em] uppercase text-[11px] sm:text-xs text-center transition-all ${p.badge ? "bg-[#DF3131] text-white hover:bg-[#B82020]" : "border border-[#333] dark:border-white text-[#333] dark:text-white hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131]"}`}>
-   SUBSCRIBE
-   </Link>
+   <h3 className="font-heading font-black text-[#333] dark:text-white text-[28px] sm:text-[32px] tracking-[0.06em] uppercase leading-tight">{p.name}</h3>
+   <p className="text-4xl sm:text-5xl font-black text-[#DF3131] mt-4">{p.price}</p>
+   <p className="text-xs text-[#888] dark:text-white/50 mt-3">Tap to see details</p>
  </div>
- {/* Back face */}
+ {/* Back face — all info + subscribe */}
  <div className="absolute inset-0 p-6 text-center bg-[#DF3131] text-white flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
- <h3 className="font-heading font-bold text-lg tracking-[0.1em] uppercase mb-3">{p.name}</h3>
- <p className="text-4xl font-black mb-2">{p.price}</p>
- <p className="text-white/80 text-xs mb-4">{p.desc}</p>
- <div className="space-y-2 text-sm text-white/90 mb-6">
- <p>✓ Everything in previous tier</p>
- <p>✓ Priority scheduling</p>
- <p>✓ Dedicated support</p>
- </div>
+ <h3 className="font-heading font-bold text-lg tracking-[0.1em] uppercase mb-2">{p.name}</h3>
+ <p className="text-4xl font-black mb-1">{p.price}</p>
+ <p className="text-white/80 text-xs mb-1 font-bold italic">Every 3 months</p>
+ <p className="text-white/70 text-xs mb-4">{p.desc}</p>
+ <p className="text-white/50 text-[10px] mb-4">{p.valid}</p>
  <Link href="/plans" className="w-full py-3 bg-white text-[#DF3131] font-heading font-bold tracking-[0.1em] uppercase text-sm hover:bg-[#333] dark:hover:bg-[#111] hover:text-white transition-all">
- GET STARTED
+ SUBSCRIBE
  </Link>
  </div>
  </div>

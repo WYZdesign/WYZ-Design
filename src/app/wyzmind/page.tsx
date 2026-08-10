@@ -171,12 +171,12 @@ export default function WYZMiNDPage() {
                     aria-label={`${f.title} - ${f.layman}`}
                     onClick={() => setActiveFeature(isActive ? null : f.id)}
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveFeature(isActive ? null : f.id); } }}
-                    style={{ width: "125%", height: "110%", margin: "-5% -12.5%" }}
+                    style={{ minHeight: "380px" }}
                     className={`relative cursor-pointer transition-all duration-500 rounded-lg overflow-hidden flex flex-col justify-between ${
                       isActive ? "ring-2 ring-[#DF3131] ring-offset-2 dark:ring-offset-[#252528] shadow-2xl shadow-[#DF3131]/20 z-10 bg-white dark:bg-[#252528]" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:-translate-y-1 hover:shadow-lg"
                     }`}>
                     {/* Card content — icon stacked on top of title and description */}
-                    <div className="flex flex-col items-center text-center p-6 flex-1 justify-center">
+                    <div className="flex flex-col items-center text-center p-7 flex-1 justify-center">
                       <div className="text-4xl mb-4 text-[#DF3131]">
                         {f.icon}
                       </div>
@@ -190,7 +190,7 @@ export default function WYZMiNDPage() {
 
                     {/* Expanded detail */}
                     <div className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                      isActive ? "max-h-[500px] opacity-100 border-t border-[#E2E2E2] dark:border-[#444]" : "max-h-0 opacity-0"
+                      isActive ? "max-h-[600px] opacity-100 border-t border-[#E2E2E2] dark:border-[#444]" : "max-h-0 opacity-0"
                     }`}>
                       <div className="p-5 text-center bg-gray-50 dark:bg-[#1a1a1c]">
                         <p className="text-[#333] dark:text-[#e0e0e0] text-[14px] leading-relaxed">{f.details}</p>
