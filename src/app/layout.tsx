@@ -50,10 +50,15 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   icons: {
     icon: [
-      { url: "/images/wyz-crown.png", sizes: "any", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-512x512.png", sizes: "512x512", type: "image/png" },
+      { url: "/wyz-icon-final.png", sizes: "any", type: "image/png" },
     ],
+    shortcut: [{ url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }],
     apple: [
-      { url: "/images/wyz-crown.png", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
   appleWebApp: {
@@ -80,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-title" content="WYZ Design" />
         <meta name="format-detection" content="telephone=no" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192x192.png" />
         <link rel="apple-touch-icon" sizes="512x512" href="/favicon-512x512.png" />
         <script

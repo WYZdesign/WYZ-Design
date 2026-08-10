@@ -230,49 +230,39 @@ function SquareQuote() {
   );
 }
 
-function AutoScrollCarousel() {
-  const rowRef = useRef<HTMLDivElement>(null);
-  const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    const el = rowRef.current;
-    if (!el) return;
-    let raf: number;
-    let pos = 0;
-    const speed = 0.5;
-    const tick = () => {
-      if (!paused) {
-        pos += speed;
-        if (pos >= el.scrollWidth / 2) pos = 0;
-        el.scrollLeft = pos;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [paused]);
-
+function VerticalMerchGrid() {
+  const ITEMS_PER_PAGE = 6;
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const items = [...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS];
+  const visibleItems = items.slice(0, visibleCount);
+  const hasMore = visibleCount < items.length;
 
   return (
-    <div className="relative overflow-hidden py-8 bg-[#FEFEFD]" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <div ref={rowRef} className="flex gap-5 overflow-hidden" style={{ scrollbarWidth: "none" }}>
-        {items.map((p, i) => (
+    <div className="py-8 bg-[#FEFEFD]">
+      <div className="grid grid-cols-2 gap-3 px-4 max-w-2xl mx-auto">
+        {visibleItems.map((p, i) => (
           <Link key={`${p.id}-${i}`} href={FAOTM_URL}
-            className="flex-shrink-0 w-[260px] sm:w-[300px] group cursor-pointer">
-            <div className="bg-[#f5f5f5] aspect-square overflow-hidden relative mb-3">
+            className="group cursor-pointer">
+            <div className="bg-[#f5f5f5] aspect-square overflow-hidden relative mb-2">
                <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-   <p className="text-white font-heading font-bold text-[6px] tracking-[0.03em] uppercase">{p.name}</p>
-                 <p className="text-[#DF3131] font-black text-[11px]">${p.price.toFixed(2)}</p>
-              </div>
+            </div>
+            <div className="text-center px-1">
+              <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase text-[#333] dark:text-white">{p.name}</p>
+              <p className="text-[#DF3131] font-black text-[11px]">${p.price.toFixed(2)}</p>
             </div>
           </Link>
         ))}
       </div>
-      <div className="absolute left-0 top-0 bottom-0 w-20 pointer-events-none z-10 merch-fade-left" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 pointer-events-none z-10 merch-fade-right" />
+      {hasMore && (
+        <div className="text-center mt-6">
+          <button
+            onClick={() => setVisibleCount(prev => prev + ITEMS_PER_PAGE)}
+            className="px-8 py-3 border-2 border-[#333] text-[#333] text-[12px] font-bold tracking-[0.12em] uppercase hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all">
+            Load More ({items.length - visibleCount} remaining)
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -296,7 +286,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
   }, [products.length]);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-10 px-4">
+    <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 md:gap-8 lg:gap-10 px-4">
       {products.map((product, i) => {
         const pos = positions[i] || { rotate: 0, offsetX: 0, offsetY: 0, scale: 1 };
         return (
@@ -310,7 +300,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase mb-0.5">{product.category}</p>
-                <p className="text-white font-heading font-bold text-[6px] tracking-[0.03em] uppercase">{product.name}</p>
+                <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase">{product.name}</p>
                  <p className="text-[#DF3131] font-black text-[11px]">${product.price.toFixed(2)}</p>
               </div>
               {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10">{product.badge}</span>}
@@ -326,27 +316,25 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-8">
       {products.map((product) => (
         <div key={product.id} className="group cursor-pointer"
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
-          <div className={`bg-[#f5f5f5] aspect-square overflow-hidden relative mb-3 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
+          <div className={`bg-[#f5f5f5] aspect-square overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
              <Image src={product.image} alt={product.name} fill className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} priority decoding="async" />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all">Quick View</span>
             </div>
             {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10">{product.badge}</span>}
           </div>
-          <div className="flex items-start justify-between gap-2">
-            <div className="min-w-0">
-              <p className="text-[10px] text-[#999] font-bold tracking-[0.12em] uppercase mb-0.5">{product.category}</p>
-              <h3 className="text-[6px] font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors">{product.name}</h3>
-            </div>
+          <div className="text-center px-1">
+            <p className="text-[10px] text-[#999] font-bold tracking-[0.12em] uppercase mb-0.5">{product.category}</p>
+            <h3 className="text-[9px] sm:text-[10px] font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">${product.price.toFixed(2)}</p>
           </div>
           {product.rating && (
-            <div className="flex items-center gap-1.5 mt-1">
+            <div className="flex items-center justify-center gap-1.5 mt-1">
               <StarRating rating={product.rating} />
               <span className="text-[10px] text-[#999]">({product.reviews})</span>
             </div>
@@ -429,9 +417,9 @@ export default function MerchPage() {
           </ScrollReveal>
         </section>
 
-        {/* Auto-scroll carousel */}
+        {/* Vertical Merch Grid */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
-          <AutoScrollCarousel />
+          <VerticalMerchGrid />
         </ScrollReveal>
 
         {/* Enter Store Toggle */}

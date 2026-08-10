@@ -157,7 +157,7 @@ export async function proxy(req: NextRequest) {
 
   if (!isApi && !pathname.startsWith("/_next/") && !pathname.includes(".")) {
     try {
-      const result = await rateLimit(`page:${ip}`, 120, 60_000);
+      const result = await rateLimit(`page:${ip}`, 600, 60_000);
       if (!result.ok) {
         return NextResponse.json({ error: "Too many requests", code: "RATE_LIMITED", timestamp: new Date().toISOString() }, {
           status: 429,

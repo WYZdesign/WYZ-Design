@@ -144,7 +144,7 @@ export default function Navbar() {
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
               <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-4 sm:pl-6 lg:pl-0">
-                <Image src="/images/wyz-crown.png" alt="WYZ Design" width={70} height={70} className="hover:scale-110 transition-transform" loading="lazy" />
+                <Image src="/images/wyz-crown.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[44px] h-[44px] sm:w-[56px] sm:h-[56px] lg:w-[70px] lg:h-[70px]" loading="lazy" />
             </Link>
 
             {/* Nav links */}

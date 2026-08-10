@@ -9,6 +9,7 @@ import { MouseGlow } from "@/components/MouseGlow";
 import CardTilt from "@/components/CardTilt";
 import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
+import GyroTilt from "@/components/GyroTilt";
 
 const LOGO_INTROS_RAW = [
  "/videos/Untitled Project.mp4",
@@ -789,13 +790,15 @@ export default function HomePage() {
     {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
-    <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-3 whitespace-nowrap">Wild Vision. Zealous Execution.</p>
+    <GyroTilt intensity={8} enableOnDesktop>
+    <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-3 whitespace-nowrap text-center">Wild Vision. Zealous Execution.</p>
     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6 text-center" style={{ lineHeight: 1 }}>
      <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
     </h1>
     <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-lg text-center">
     We help artists, brands, and real people build creative work that actually looks good.
     </p>
+    </GyroTilt>
     <div className="flex flex-col sm:flex-row gap-3 justify-center">
      <Link href="/about"
      className="inline-block border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#333] transition-all">
@@ -1038,9 +1041,14 @@ export default function HomePage() {
   <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold transition-all duration-300 flex-shrink-0 ${
   openFaq === i ? "bg-[#DF3131] text-white rotate-45" : "bg-[#F5F5F3] dark:bg-[#252528] text-[#333] dark:text-white"
   }`}>+</span>
-  <span className={`font-heading font-bold text-[13px] sm:text-sm tracking-[0.02em] transition-colors truncate ${
+  <span className={`font-heading font-bold text-[13px] sm:text-sm tracking-[0.02em] transition-colors ${
   openFaq === i ? "text-[#DF3131]" : "text-[#333] dark:text-white"
-  }`}>{faq.q}</span>
+  }`}>
+    <span className="faq-marquee">
+      <span className="faq-marquee-inner">{faq.q}</span>
+      <span className="faq-marquee-inner" aria-hidden="true">{faq.q}</span>
+    </span>
+  </span>
   </button>
  <div className="px-6 pb-4 pl-14 sm:pl-[4.5rem]">
  <p className="text-[15px] text-[#666] dark:text-white/70 leading-relaxed">{faq.a}</p>
@@ -1078,7 +1086,8 @@ export default function HomePage() {
  ].map((c, i) => {
  const Icon = c.icon;
  return (
-  <CardTilt key={i} intensity={10}>
+  <GyroTilt key={i} intensity={6} enableOnDesktop>
+  <CardTilt intensity={10}>
    <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-6 sm:p-8 lg:p-12 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1 min-h-[320px] sm:min-h-[360px] flex flex-col justify-center">
  <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
@@ -1092,6 +1101,7 @@ export default function HomePage() {
   </div>
  </div>
  </CardTilt>
+ </GyroTilt>
  );
  })}
  </div>

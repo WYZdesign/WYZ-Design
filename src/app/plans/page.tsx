@@ -5,6 +5,7 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
 import { trackMetaEvent } from "@/components/AnalyticsProvider";
+import GyroTilt from "@/components/GyroTilt";
 import type { FormField } from "@/components/DynamicForm";
 
 const FEATURES: Record<string, string[]> = {
@@ -89,6 +90,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
   const [flipped, setFlipped] = useState(false);
 
   return (
+    <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
       style={{ perspective: "1200px", minHeight: "min(480px, 70vh)" }}
@@ -164,6 +166,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
         </div>
       </div>
     </div>
+    </GyroTilt>
   );
 }
 
@@ -171,6 +174,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
+    <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
       style={{ perspective: "1200px", minHeight: "min(440px, 65vh)" }}
@@ -224,6 +228,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
         </div>
       </div>
     </div>
+    </GyroTilt>
   );
 }
 

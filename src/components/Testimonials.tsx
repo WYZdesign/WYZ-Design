@@ -99,12 +99,12 @@ export default function Testimonials() {
           </button>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="testimonial-dots flex justify-center gap-2 mt-8">
           {TESTIMONIALS.map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`w-2 h-2 rounded-full transition-all ${i === active ? "bg-[#DF3131] w-6" : "bg-white/30 hover:bg-white/50"}`}
+              className={`rounded-full transition-all ${i === active ? "bg-[#DF3131] w-4 h-[5px]" : "w-[5px] h-[5px] bg-white/30 hover:bg-white/50"}`}
               aria-label={`Testimonial ${i + 1}`}
             />
           ))}
