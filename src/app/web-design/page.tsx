@@ -24,7 +24,7 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
         className={`absolute inset-0 p-8 text-center flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${flipped ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"}`}
       >
         <div className={`w-full h-full p-8 text-center flex flex-col items-center justify-center ${plan.accent ? "bg-[#DF3131] text-white shadow-xl shadow-[#DF3131]/30 border-4 border-[#DF3131]" : "bg-white border border-[#E2E2E2] hover:border-[#DF3131] hover:shadow-xl hover:shadow-[#DF3131]/10"}`}>
-          {plan.accent && <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#333] dark:bg-[#111] text-white text-[11px] font-bold tracking-[0.1em] px-4 py-1 uppercase">★ Most Popular</span>}
+          {plan.accent && <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#333] dark:bg-[#111] text-white text-[11px] font-bold tracking-[0.1em] px-4 py-1 uppercase mb-2">★ Most Popular</span>}
           <h3 className={`font-heading font-bold text-[18px] tracking-[0.1em] uppercase mb-2 ${plan.accent ? "text-white" : "text-[#333]"}`}>{plan.name}</h3>
           <p className={`text-[2.5rem] font-heading font-black mb-4 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.price}</p>
           <p className={`text-[12px] tracking-[0.15em] uppercase ${plan.accent ? "text-white/60" : "text-[#999]"}`}>Tap to see what&apos;s included</p>
@@ -148,11 +148,11 @@ function SiteCard({ site, index }: { site: typeof CLIENT_SITES[0]; index: number
         style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
-        <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 group-hover:text-white/60 transition-colors">{site.category}</span>
-        <h3 className="font-heading font-black text-white text-[1.1rem] sm:text-[1.3rem] tracking-[0.04em] uppercase mb-1 group-hover:scale-105 transition-transform duration-300">{site.name}</h3>
+        <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 group-hover:text-white/60 transition-colors mb-2">{site.category}</span>
+        <h3 className="font-heading font-black text-white text-[1.1rem] sm:text-[1.3rem] tracking-[0.04em] uppercase group-hover:scale-105 transition-transform duration-300 mb-3">{site.name}</h3>
         {/* Hover reveal */}
         <div className="flex items-center gap-2 mt-3 sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-all duration-300 sm:translate-y-3 sm:group-hover:translate-y-0">
-          <span className="text-[12px] font-bold tracking-[0.1em] uppercase" style={{ color: site.accent }}>Visit Live Site</span>
+          <span className="text-[12px] font-bold tracking-[0.1em] uppercase mb-2" style={{ color: site.accent }}>Visit Live Site</span>
           <FiExternalLink className="w-3.5 h-3.5" style={{ color: site.accent }} />
         </div>
       </div>
@@ -188,8 +188,8 @@ return (
             </div>
           </div>
           <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-6 lg:px-12 py-16 min-h-[500px]">
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3 block">WYZ DESIGN - WEB DEVELOPMENT</span>
-            <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#111] tracking-[0.08em] mb-4" style={{ lineHeight: 1 }}>
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">WYZ DESIGN - WEB DEVELOPMENT</span>
+            <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#111] tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
               WEBSITES<br />
               THAT <span className="text-[#DF3131]">WORK</span>
             </h1>
@@ -222,8 +222,8 @@ return (
           </div>
           <div className="absolute inset-0 bg-black/30 z-[1]" />
           <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 text-center flex flex-col items-center justify-center h-full">
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3 block text-center">WYZ DESIGN - WEB DEVELOPMENT</span>
-            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6 text-center" style={{ lineHeight: 1 }}>
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block text-center mb-2">WYZ DESIGN - WEB DEVELOPMENT</span>
+            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
               WEBSITES<br />
               THAT <span className="text-[#DF3131]">WORK</span>
             </h1>
@@ -253,8 +253,8 @@ return (
           <section className="py-20 bg-white dark:bg-[#1C1C1E]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-14">
-                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">WHAT WE DO</span>
-                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0]">CAPABILITIES</h2>
+                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT WE DO</span>
+                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">CAPABILITIES</h2>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {CAPABILITIES.map((c, i) => (
@@ -263,7 +263,7 @@ return (
                     <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] text-xl mb-5 group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
                       {c.icon}
                     </div>
-                    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] tracking-[0.05em] uppercase mb-2">{c.title}</h3>
+                    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] tracking-[0.05em] uppercase mb-3">{c.title}</h3>
                     <p className="text-[13px] text-[#888] dark:text-white/50 leading-relaxed">{c.desc}</p>
                   </div>
                 ))}
@@ -277,8 +277,8 @@ return (
           <section className="py-20 bg-[#111]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-10">
-                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">HOW IT WORKS</span>
-                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-white">OUR PROCESS</h2>
+                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">HOW IT WORKS</span>
+                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-white mb-4">OUR PROCESS</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                 {PROCESS_STEPS.map((step, i) => (
@@ -305,8 +305,8 @@ return (
           <section id="portfolio" className="py-20 bg-[#F5F5F3] dark:bg-[#252528]">
             <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-12">
-                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">OUR WORK</span>
-                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0]">CLIENT PORTFOLIO</h2>
+                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">OUR WORK</span>
+                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">CLIENT PORTFOLIO</h2>
                 <p className="text-[#888] dark:text-white/50 text-[14px] mt-3 max-w-lg mx-auto">Tap any card to visit the live site. Real clients, real results.</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -321,8 +321,8 @@ return (
           <section className="py-20 bg-white dark:bg-[#1C1C1E]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-14">
-                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">PRICING</span>
-                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0]">MAKE IT AN ADD-ON</h2>
+                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">PRICING</span>
+                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">MAKE IT AN ADD-ON</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
                 {[
@@ -341,7 +341,7 @@ return (
         <ScrollReveal animation="fadeUp">
           <section className="py-16 bg-white dark:bg-[#111] text-center">
             <div className="max-w-3xl mx-auto px-6">
-<h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-white mb-3">READY TO BUILD?</h2>
+<h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-white mb-4">READY TO BUILD?</h2>
  <p className="text-[#666] dark:text-white/50 text-[15px] mb-8 max-w-lg mx-auto">Let&apos;s create a website that works as hard as you do. Book a free consultation to get started.</p>
               <Link href="/booking" className="inline-block px-12 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[15px] hover:bg-[#B82020] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30">
                 BOOK CONSULTATION

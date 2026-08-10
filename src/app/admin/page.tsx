@@ -42,11 +42,11 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="flex items-center justify-between py-6 border-b border-white/10 mb-6">
           <div>
-            <h1 className="text-[20px] font-heading font-bold tracking-[0.15em] uppercase">WYZ Admin</h1>
+            <h1 className="text-[20px] font-heading font-bold tracking-[0.15em] uppercase mb-6 sm:mb-8">WYZ Admin</h1>
             <p className="text-[13px] text-white/40">{session.user?.email}</p>
           </div>
           <div className="flex items-center gap-4">
-            <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[11px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30">ADMIN</span>
+            <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[11px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30 mb-2">ADMIN</span>
             <Link href="/account/my-account" className="text-[13px] text-white/50 hover:text-white transition-colors">My Account</Link>
           </div>
         </div>
@@ -98,7 +98,7 @@ function OverviewTab({ data }: { data: { stats: Stats; recentForms: FormEntry[] 
       {/* Form Type Breakdown */}
       {Object.keys(s.formTypes || {}).length > 0 && (
         <div>
-          <h3 className="font-heading font-bold text-[13px] tracking-[0.1em] uppercase text-white/60 mb-4">Form Submissions by Type</h3>
+          <h3 className="font-heading font-bold text-[13px] tracking-[0.1em] uppercase text-white/60 mb-3">Form Submissions by Type</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {Object.entries(s.formTypes).sort((a,b) => b[1]-a[1]).map(([type, count]) => (
               <div key={type} className="bg-white/5 border border-white/10 p-4 flex items-center justify-between">
@@ -113,7 +113,7 @@ function OverviewTab({ data }: { data: { stats: Stats; recentForms: FormEntry[] 
       {/* Submissions chart */}
       {s.submissionsByDay?.length > 0 && (
         <div>
-          <h3 className="font-heading font-bold text-[13px] tracking-[0.1em] uppercase text-white/60 mb-4">Submissions Over Time</h3>
+          <h3 className="font-heading font-bold text-[13px] tracking-[0.1em] uppercase text-white/60 mb-3">Submissions Over Time</h3>
           <div className="bg-white/5 border border-white/10 p-6">
             <div className="flex items-end gap-1 h-32">
               {s.submissionsByDay.map(([day, count]) => {
@@ -135,7 +135,7 @@ function OverviewTab({ data }: { data: { stats: Stats; recentForms: FormEntry[] 
       {/* Recent Forms */}
       {data?.recentForms?.length > 0 && (
         <div>
-          <h3 className="font-heading font-bold text-[13px] tracking-[0.1em] uppercase text-white/60 mb-4">Recent Submissions</h3>
+          <h3 className="font-heading font-bold text-[13px] tracking-[0.1em] uppercase text-white/60 mb-3">Recent Submissions</h3>
           <div className="bg-white/5 border border-white/10 overflow-x-auto">
             <table className="w-full text-[13px]">
               <thead>
@@ -316,14 +316,14 @@ function StatCard({ label, value, color }: { label: string; value: number; color
   return (
     <div className="bg-white/5 border border-white/10 p-6">
       <p className="text-[28px] font-heading font-bold" style={{ color }}>{value.toLocaleString()}</p>
-      <p className="text-[11px] text-white/40 font-heading font-bold tracking-[0.1em] uppercase mt-2">{label}</p>
+      <p className="text-[11px] text-white/40 font-heading font-bold tracking-[0.1em] uppercase mb-2">{label}</p>
     </div>
   );
 }
 
 function FormTypeBadge({ type }: { type: string }) {
   const colors: Record<string,string> = { "contact":"#5865F2","photoshoot-booking":"#34A853","consultation-booking":"#D49341","custom-plan":"#EA4335","featured-artist-application":"#FFD700","model-application":"#00D4FF" };
-  return <span className="px-2 py-0.5 text-[11px] font-bold uppercase whitespace-nowrap" style={{ background: `${colors[type] || "#DF3131"}20`, color: colors[type] || "#DF3131" }}>{type.replace(/-/g," ")}</span>;
+  return <span className="px-2 py-0.5 text-[11px] font-bold uppercase whitespace-nowrap mb-2" style={{ background: `${colors[type] || "#DF3131"}20`, color: colors[type] || "#DF3131" }}>{type.replace(/-/g," ")}</span>;
 }
 
 function Empty({ children }: { children: string }) {
@@ -343,7 +343,7 @@ function NeedSignIn() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
       <div className="text-center">
-        <h1 className="text-[24px] font-heading font-bold text-white tracking-[0.1em] mb-4">Admin Access Required</h1>
+        <h1 className="text-[24px] font-heading font-bold text-white tracking-[0.1em] mb-6 sm:mb-8">Admin Access Required</h1>
         <p className="text-white/50 mb-6">Sign in with an admin account to continue.</p>
         <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">Sign In</Link>
       </div>
@@ -355,7 +355,7 @@ function NotAuthorized() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
       <div className="text-center">
-        <h1 className="text-[24px] font-heading font-bold text-white tracking-[0.1em] mb-4">Access Denied</h1>
+        <h1 className="text-[24px] font-heading font-bold text-white tracking-[0.1em] mb-6 sm:mb-8">Access Denied</h1>
         <p className="text-white/50 mb-6">Your account is not authorized to view the admin panel.</p>
         <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">My Account</Link>
       </div>

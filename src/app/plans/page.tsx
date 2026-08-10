@@ -113,7 +113,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
             </div>
           )}
           <div className="p-7 text-center border-b border-[#E2E2E2] flex flex-col items-center justify-center">
-            <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center">{p.name}</h3>
+            <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center mb-3">{p.name}</h3>
             <div className="mt-2 text-center">
               <span className="whitespace-nowrap text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
               <span className="text-[#8F8F8F] text-sm">/month</span>
@@ -142,7 +142,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
           p.popular ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">
-            <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-2">{p.name}</h3>
+            <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{p.name}</h3>
             <div className="mb-4">
               <span className="text-[36px] font-black text-white">{p.price}</span>
               <span className="text-white/60 text-sm">/mo</span>
@@ -192,9 +192,9 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
             : "border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131]/50"
         }`}>
           {i === 0 && (
-            <span className="text-[13px] font-bold text-[#DF3131] tracking-[0.08em]">Recommended</span>
+            <span className="text-[13px] font-bold text-[#DF3131] tracking-[0.08em] mb-2">Recommended</span>
           )}
-          <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] mt-1 text-center">{w.name}</h3>
+          <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center mb-3">{w.name}</h3>
           <div className="mt-2 text-center">
             <span className="text-xs text-[#8F8F8F] dark:text-white/40 line-through">{w.original}</span>{" "}
             <span className="whitespace-nowrap text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-black text-[#333333] dark:text-white">{w.discounted}</span>
@@ -211,8 +211,8 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
           i === 0 ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">
-            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/70">Web Design Add-On</span>
-            <h3 className="font-heading font-black text-white text-[20px] tracking-[0.03em] mt-1 mb-2">{w.name}</h3>
+            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">Web Design Add-On</span>
+            <h3 className="font-heading font-black text-white text-[20px] tracking-[0.03em] mb-3">{w.name}</h3>
             <div className="mb-3">
               <span className="text-white/50 text-[12px] line-through mr-2">{w.original}</span>
               <span className="text-[28px] font-black text-white">{w.discounted}</span>
@@ -267,7 +267,7 @@ export default function PlansPage() {
           {/* Left: Text */}
   <div className="w-full lg:w-1/2 bg-white dark:bg-[#111] flex items-center justify-center px-4 sm:px-10 lg:px-16 py-12 lg:py-0 order-2 lg:order-1">
   <div className="text-center max-w-xl">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.12em] mb-2 lg:mb-6" style={{ lineHeight: 1 }}>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.12em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
  CHOOSE YOUR <span className="text-[#DF3131]">PRICING</span> PLAN
  </h1>
  <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto">
@@ -355,7 +355,7 @@ export default function PlansPage() {
          <ScrollReveal animation="fadeUp" delay={0.2}>
          <section className="mt-16">
            <div className="max-w-5xl mx-auto px-6">
-             <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] dark:text-white text-center tracking-[0.08em] uppercase mb-8">
+             <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] dark:text-white text-center tracking-[0.08em] uppercase mb-4">
                PLAN <span className="text-[#DF3131]">COMPARISON</span>
              </h2>
              {/* Mobile: stacked cards */}
@@ -365,7 +365,7 @@ export default function PlansPage() {
                  return (
                    <div key={p.name} className={`border rounded-xl p-4 ${p.popular ? "border-[#DF3131]" : "border-[#E2E2E2] dark:border-[#444]"}`}>
                      <div className="flex justify-between items-center mb-3">
-                       <h3 className="font-heading font-black text-[#333] dark:text-white">{p.name}</h3>
+                       <h3 className="font-heading font-black text-[#333] dark:text-white mb-3">{p.name}</h3>
                        <span className="text-[#DF3131] font-bold">{p.price}</span>
                      </div>
                      <div className="text-sm text-[#666] dark:text-white/70 mb-3">{p.value}</div>
@@ -494,7 +494,7 @@ export default function PlansPage() {
 
         {/* Build Your Own Plan */}
         <div className="mt-10 border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] p-6">
-          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333333] dark:text-[#e0e0e0] tracking-[0.1em] mb-4 text-center">BUILD YOUR OWN PLAN</h2>
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333333] dark:text-[#e0e0e0] tracking-[0.1em] text-center mb-4">BUILD YOUR OWN PLAN</h2>
           <DynamicForm
             fields={CUSTOM_PLAN_FIELDS}
             formType="custom-plan"
@@ -505,7 +505,7 @@ export default function PlansPage() {
 
         {/* Web Design Add-Ons */}
         <div className="mt-10 pb-10">
-          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333333] dark:text-[#e0e0e0] tracking-[0.1em] mb-8 text-center">Web Design</h2>
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333333] dark:text-[#e0e0e0] tracking-[0.1em] text-center mb-4">Web Design</h2>
           <p className="text-[16px] text-[#666666] max-w-2xl mb-6 text-center mx-auto">
             Looking to elevate your online presence? Our Web Design service can help you create a stunning website
             that reflects your brand&apos;s unique identity. Receive a 10% discount by including it as an add-on to

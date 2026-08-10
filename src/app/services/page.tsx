@@ -56,8 +56,8 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{service.dur}</div>
   </div>
   <div className="p-5 text-center">
-  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131]">{service.cat}</span>
-   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[16px] md:text-[18px] tracking-[0.03em] mt-1 group-hover:text-[#DF3131] transition-colors text-center">{service.name}</h3>
+  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{service.cat}</span>
+   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[16px] md:text-[18px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors text-center mb-3">{service.name}</h3>
   </div>
  </div>
  </div>
@@ -72,8 +72,8 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
   <Image src={service.img} alt={service.name} fill className="w-full h-full object-cover" priority />
   </div>
  <div className="relative z-10">
- <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">{service.cat}</span>
-  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mt-1 mb-3 text-left">{service.name}</h3>
+ <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">{service.cat}</span>
+  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] text-left mb-3">{service.name}</h3>
  <p className="text-white/80 text-[15px] leading-relaxed mb-4">{service.desc}</p>
  <div className="flex items-center gap-3 mb-4">
  <span className="text-[28px] font-black">{service.price}</span>
@@ -118,7 +118,7 @@ return (
    <div className="absolute inset-0 hero-grad-services z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-2 lg:mb-6" style={{ lineHeight: 1 }}>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
   CREATIVE <span className="text-[#DF3131]">SERVICES</span>
   </h1>
   <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md mx-auto lg:mx-0">

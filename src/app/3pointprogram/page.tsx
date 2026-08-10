@@ -54,8 +54,8 @@ export default function ThreePointProgramPage() {
       <ScrollReveal animation="fadeUp">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-14 pt-12">
-            <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-4">Framework</p>
-            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-3" style={{ lineHeight: 1 }}>3-POINT PROGRAM</h1>
+            <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-2">Framework</p>
+            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>3-POINT PROGRAM</h1>
             <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto text-[16px] leading-relaxed">A structured framework for building your brand from the ground up. Three pillars, one unified vision. Built for creatives, artists, and small businesses who are tired of guessing.</p>
           </div>
 
@@ -78,7 +78,7 @@ export default function ThreePointProgramPage() {
                 {PILLARS[activePillar].icon}
               </div>
               <div>
-                <h2 className="text-[1.25rem] sm:text-[1.5rem] font-heading font-bold text-[#333] dark:text-[#e0e0e0] tracking-[0.05em]">{PILLARS[activePillar].title}</h2>
+                <h2 className="text-[1.25rem] sm:text-[1.5rem] font-heading font-bold text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-4">{PILLARS[activePillar].title}</h2>
                 <p className="text-[#8F8F8F] text-[13px] flex items-center gap-1.5"><FiCalendar className="w-3.5 h-3.5" /> {PILLARS[activePillar].timeline}</p>
               </div>
             </div>
@@ -92,14 +92,14 @@ export default function ThreePointProgramPage() {
               ))}
             </ul>
             <div className="bg-[#f5f5f5] dark:bg-[#252528] p-4 rounded-lg border-l-4 border-[#DF3131]">
-              <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#8F8F8F] dark:text-white/50 mb-1">OUTCOME</p>
+              <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#8F8F8F] dark:text-white/50 mb-2">OUTCOME</p>
               <p className="text-[16px] text-[#333] dark:text-[#e0e0e0] leading-relaxed">{PILLARS[activePillar].outcome}</p>
             </div>
           </div>
 
           {/* CTA */}
           <div className="bg-white dark:bg-[#111] p-10 text-center">
-<h2 className="text-[1.5rem] sm:text-[1.75rem] font-heading font-bold text-[#333] dark:text-white tracking-[0.1em] mb-3">Ready to Build Your Brand?</h2>
+<h2 className="text-[1.5rem] sm:text-[1.75rem] font-heading font-bold text-[#333] dark:text-white tracking-[0.1em] mb-4">Ready to Build Your Brand?</h2>
  <p className="text-[#666] dark:text-white/50 text-[16px] mb-6 max-w-lg mx-auto">Start with a free consultation. We'll assess where you are and map out your 3-Point journey, no commitment, no pressure.</p>
             <Link href="/booking" className="inline-flex items-center gap-2 px-10 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-colors">
               Book Free Consultation <FiArrowRight className="w-4 h-4" />

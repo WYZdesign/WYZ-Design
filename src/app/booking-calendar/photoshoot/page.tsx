@@ -87,7 +87,7 @@ export default function PhotoshootCalendar() {
             <div className="w-16 h-16 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-6">
               <span className="text-white text-2xl">✓</span>
             </div>
-            <h1 className="text-3xl font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-white mb-4">Booking Confirmed</h1>
+            <h1 className="text-3xl font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-white mb-6 sm:mb-8">Booking Confirmed</h1>
             <p className="text-[#666665] dark:text-white/70 mb-2">Your photoshoot is scheduled for:</p>
             <p className="text-xl font-bold text-[#DF3131] mb-1">
               {selectedDate?.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
@@ -107,8 +107,8 @@ export default function PhotoshootCalendar() {
     <>
 <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
         <div className="max-w-5xl mx-auto px-6">
-          <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm mb-4">Book a Session</p>
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-white mb-2">
+          <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm mb-2">Book a Session</p>
+          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-white mb-6 sm:mb-8">
             Photoshoot Booking
           </h1>
           <p className="text-[#666665] dark:text-white/70 mb-10">$100/hr · 1-hour minimum · Includes 20 edited photos</p>
@@ -119,7 +119,7 @@ export default function PhotoshootCalendar() {
               <div className="border border-gray-200 dark:border-[#444] p-6">
                 <div className="flex items-center justify-between mb-6">
                   <button onClick={prevMonth} className="text-[#666665] dark:text-white/60 hover:text-[#DF3131] text-xl px-2">←</button>
-                  <h2 className="text-lg font-heading font-bold tracking-[0.15em] uppercase">{monthNames[viewMonth]} {viewYear}</h2>
+                  <h2 className="text-lg font-heading font-bold tracking-[0.15em] uppercase mb-4">{monthNames[viewMonth]} {viewYear}</h2>
                   <button onClick={nextMonth} className="text-[#666665] dark:text-white/60 hover:text-[#DF3131] text-xl px-2">→</button>
                 </div>
                 <div className="grid grid-cols-7 gap-1 mb-2">
@@ -179,7 +179,7 @@ export default function PhotoshootCalendar() {
             {/* Booking form */}
             <div className="lg:col-span-2">
               <div className="bg-[#f5f5f5] dark:bg-[#252528] p-6 sticky top-28">
-                <h3 className="text-lg font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">Your Details</h3>
+                <h3 className="text-lg font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-3">Your Details</h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Session Type</label>

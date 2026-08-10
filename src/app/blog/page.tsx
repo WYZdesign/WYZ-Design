@@ -67,8 +67,8 @@ export default function BlogPage() {
   <Image src={featured.img} alt={featured.title} fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" priority />
   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
   <div className="absolute bottom-0 left-0 right-0 p-10">
-  <span className="inline-block px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-3">Featured</span>
-  <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.04em] mb-2">{featured.title}</h2>
+  <span className="inline-block px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-2">Featured</span>
+  <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.04em] mb-4">{featured.title}</h2>
    <p className="text-white/70 text-[16px] max-w-md">{featured.excerpt}</p>
   </div>
   </Link>
@@ -113,7 +113,7 @@ export default function BlogPage() {
  <article className="blog-card group bg-white dark:bg-[#252528] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
    <div className="relative h-56 overflow-hidden">
    <Image src={p.img} alt={p.title} fill className="blog-img w-full h-full object-cover dark:brightness-110" priority />
-   <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded">{p.cat}</span>
+   <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-2">{p.cat}</span>
    </div>
   <div className="p-5 sm:p-6">
   <div className="flex items-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
@@ -121,7 +121,7 @@ export default function BlogPage() {
  <span>•</span>
  <span>{p.date}</span>
  </div>
- <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] mb-2 group-hover:text-[#DF3131] transition-colors leading-snug">{p.title}</h3>
+ <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] group-hover:text-[#DF3131] transition-colors leading-snug mb-3">{p.title}</h3>
   <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
  <div className="mt-4 flex items-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
  READ MORE <FiArrowRight className="w-3.5 h-3.5" />

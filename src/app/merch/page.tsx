@@ -139,10 +139,10 @@ function ParallaxHero() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#111]/60 via-transparent to-[#111]/60" />
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-        <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
+        <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-2" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
           Dying Breed Crew
         </p>
-        <h1 className="text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
+        <h1 className="text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-6 sm:mb-8" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
           <span className="block">WORN</span>
           <span className="block text-[#DF3131]">DIFFERENT</span>
         </h1>
@@ -211,11 +211,11 @@ function SquareQuote() {
 
           {/* Content */}
           <div className="relative z-10">
-            <p className="text-[#DF3131] text-[11px] sm:text-[12px] font-heading font-bold tracking-[0.3em] uppercase mb-6 opacity-0 animate-fadeIn"
+            <p className="text-[#DF3131] text-[11px] sm:text-[12px] font-heading font-bold tracking-[0.3em] uppercase opacity-0 animate-fadeIn mb-2"
               style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}>
               Est. 2019
             </p>
-            <h2 className="text-[1.1rem] sm:text-[1.4rem] md:text-[1.7rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.03em] leading-[1.4] opacity-0 animate-fadeIn"
+            <h2 className="text-[1.1rem] sm:text-[1.4rem] md:text-[1.7rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.03em] leading-[1.4] opacity-0 animate-fadeIn mb-4"
               style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}>
               Every garment<br />tells a story of <span className="text-[#DF3131]">defiance</span>,<br />creativity, and<br />the enduring spirit<br />of doing it yourself.
             </h2>
@@ -248,7 +248,7 @@ function VerticalMerchGrid() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <div className="text-center px-1">
-              <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase text-[#333] dark:text-white">{p.name}</p>
+              <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase text-[#333] dark:text-white mb-2">{p.name}</p>
               <p className="text-[#DF3131] font-black text-[11px]">${p.price.toFixed(2)}</p>
             </div>
           </Link>
@@ -299,11 +299,11 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
                <Image src={product.image} alt={product.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase mb-0.5">{product.category}</p>
-                <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase">{product.name}</p>
+                <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase .5 mb-2">{product.category}</p>
+                <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase mb-2">{product.name}</p>
                  <p className="text-[#DF3131] font-black text-[11px]">${product.price.toFixed(2)}</p>
               </div>
-              {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10">{product.badge}</span>}
+              {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
             </div>
           </div>
         );
@@ -324,13 +324,13 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
           <div className={`bg-[#f5f5f5] aspect-square overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
              <Image src={product.image} alt={product.name} fill className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} priority decoding="async" />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
-              <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all">Quick View</span>
+              <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all mb-2">Quick View</span>
             </div>
-            {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10">{product.badge}</span>}
+            {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
           </div>
           <div className="text-center px-1">
-            <p className="text-[10px] text-[#999] font-bold tracking-[0.12em] uppercase mb-0.5">{product.category}</p>
-            <h3 className="text-[9px] sm:text-[10px] font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors">{product.name}</h3>
+            <p className="text-[10px] text-[#999] font-bold tracking-[0.12em] uppercase .5 mb-2">{product.category}</p>
+            <h3 className="text-[9px] sm:text-[10px] font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">${product.price.toFixed(2)}</p>
           </div>
           {product.rating && (
@@ -414,7 +414,7 @@ export default function MerchPage() {
         <div className="relative overflow-hidden bg-[#111] py-3 border-y border-white/5">
           <div className="flex whitespace-nowrap animate-marquee-left">
             {[...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS].map((p, i) => (
-              <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6">{p.name}</span>
+              <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
             ))}
           </div>
         </div>
@@ -434,7 +434,7 @@ export default function MerchPage() {
         {/* Enter Store Toggle */}
         <section className="py-16 px-6 text-center" id="shop">
           <ScrollReveal animation="fadeUp">
-            <p className="text-[11px] text-[#999] font-bold tracking-[0.2em] uppercase mb-4">Print-on-Demand via Printful</p>
+            <p className="text-[11px] text-[#999] font-bold tracking-[0.2em] uppercase mb-2">Print-on-Demand via Printful</p>
             <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] tracking-[0.05em] mb-4">The Collection</h2>
             <button onClick={handleToggleStore}
               className={`group px-10 py-4 text-[13px] font-bold tracking-[0.15em] uppercase transition-all border-2 ${showStore ? "bg-[#DF3131] text-white border-[#DF3131]" : "bg-transparent text-[#333] border-[#333] hover:bg-[#333] hover:text-white"}`}>
@@ -603,7 +603,7 @@ export default function MerchPage() {
               <div className="p-8">
                 <button onClick={() => setSelectedProduct(null)} className="text-[#999] hover:text-[#333] text-[15px] mb-4 block">&larr; Back to shop</button>
                 <p className="text-[12px] text-[#999] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
-                <h2 className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-2">{selectedProduct.name}</h2>
+                <h2 className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
                 <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">${selectedProduct.price.toFixed(2)}</p>
                 <p className="text-[14px] text-[#666] mb-4">{selectedProduct.description}</p>
                 {selectedProduct.rating && (
@@ -642,7 +642,7 @@ export default function MerchPage() {
             </div>
             {crossSells.length > 0 && (
               <div className="border-t border-[#E2E2E2] p-8">
-                <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#999] mb-4">You might also like</p>
+                <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#999] mb-2">You might also like</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">

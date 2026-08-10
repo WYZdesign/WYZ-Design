@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
     <>
 <main className="min-h-screen bg-white pb-20">
         <div className="max-w-4xl mx-auto px-6">
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] mb-12">
+          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] mb-6 sm:mb-8">
             Privacy Policy
           </h1>
           <div className="space-y-8 text-[#666665] leading-relaxed">

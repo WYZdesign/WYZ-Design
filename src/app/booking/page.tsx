@@ -110,7 +110,7 @@ export default function BookingPage() {
   return (
     <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-4xl mx-auto px-6 lg:px-12">
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center" style={{ lineHeight: 1 }}>Book a Service</h1>
+        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>Book a Service</h1>
         <p className="text-center text-[#666665] dark:text-[#b0b0b0] text-[15px] mt-2">Tell us about your project and we&apos;ll get back to you within 24 hours.</p>
 
         {submitted ? (
@@ -118,7 +118,7 @@ export default function BookingPage() {
             <div className="w-16 h-16 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-6">
               <FiCheck className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333] dark:text-[#e0e0e0] mb-3">Request Submitted!</h2>
+            <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333] dark:text-[#e0e0e0] mb-4">Request Submitted!</h2>
             <p className="text-[15px] text-[#666] dark:text-[#b0b0b0] mb-6">We&apos;ll review your request and get back to you within 24 hours.</p>
             <Link href="/" className="inline-block px-6 py-2.5 bg-[#DF3131] text-white font-bold text-sm tracking-wider hover:bg-[#B82020] transition-all">
               Back to Home
@@ -222,7 +222,7 @@ export default function BookingPage() {
         {/* Cal.com Quick Book */}
         {calLink && (
           <div className="mt-16">
-            <h2 className="text-center font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-6">Quick Book with Calendar Sync</h2>
+            <h2 className="text-center font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">Quick Book with Calendar Sync</h2>
             <div className="border border-[#E2E2E2] dark:border-[#333] rounded-lg overflow-hidden">
               <CalBooking calLink={calLink} />
             </div>

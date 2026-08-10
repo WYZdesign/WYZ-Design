@@ -145,8 +145,8 @@ export default function WYZMiNDPage() {
     {/* Neural network canvas background */}
     <canvas ref={brainCanvasRef} className="absolute inset-0 z-[2] w-full h-full" style={{ opacity: 0.3 }} />
     <div className="relative z-10">
-            <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-4">WYZMiND</p>
- <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] mb-6 text-white" style={{ lineHeight: 1, overflowWrap: "break-word" }}>
+            <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-2">WYZMiND</p>
+ <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] text-white mb-6 sm:mb-8" style={{ lineHeight: 1, overflowWrap: "break-word" }}>
                creative<br />
                <span className="text-[#DF3131]">AI Brain</span>
              </h1>
@@ -158,7 +158,7 @@ export default function WYZMiNDPage() {
 
         {/* Features — dynamic interactive cards */}
         <section className="max-w-6xl mx-auto px-6 py-16">
-          <h2 className="text-center font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] mb-3 text-[#333] dark:text-[#e0e0e0]">What It Powers</h2>
+          <h2 className="text-center font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-4">What It Powers</h2>
           <p className="text-center text-[#8F8F8F] dark:text-[#b0b0b0] text-[16px] mb-12">Click any card to explore what each system actually does</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
               {FEATURES.map((f) => {
@@ -180,7 +180,7 @@ export default function WYZMiNDPage() {
                       <div className="text-4xl mb-4 text-[#DF3131]">
                         {f.icon}
                       </div>
-                      <h3 className="font-heading font-bold text-[17px] mb-2 text-[#333] dark:text-[#e0e0e0] text-center">
+                      <h3 className="font-heading font-bold text-[17px] text-[#333] dark:text-[#e0e0e0] text-center mb-3">
                         {f.title}
                       </h3>
                       <p className="text-[14px] leading-relaxed text-[#666] dark:text-[#b0b0b0] text-center">
@@ -205,7 +205,7 @@ export default function WYZMiNDPage() {
         {/* Stack — interactive tabs */}
         <section className="bg-white dark:bg-[#111] border-y border-[#E2E2E2] dark:border-[#333] py-16 px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] mb-1.5 text-[#333] dark:text-white text-center">The Stack</h2>
+            <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] .5 text-[#333] dark:text-white text-center mb-4">The Stack</h2>
             <p className="text-[#666] dark:text-white/30 text-[13px] text-center mb-8">Everything we use to build and run WYZ Design, explained like you&apos;re not a programmer</p>
 
             {/* Category tabs */}
@@ -237,7 +237,7 @@ export default function WYZMiNDPage() {
                     }`}>
                     <div className="px-5 py-3.5 flex items-center justify-between gap-4">
                       <div className="flex-1 min-w-0">
-                        <p className="text-[#333] dark:text-white text-[14px] font-heading font-bold tracking-[0.03em]">{item.name}</p>
+                        <p className="text-[#333] dark:text-white text-[14px] font-heading font-bold tracking-[0.03em] mb-2">{item.name}</p>
                         <p className="text-[#666] dark:text-white/40 text-[12px] mt-0.5">{item.layman}</p>
                       </div>
                       <span className={`text-[#666] dark:text-white/40 text-[14px] transition-transform duration-300 shrink-0 ${isOpen ? "rotate-180" : ""}`}>▼</span>

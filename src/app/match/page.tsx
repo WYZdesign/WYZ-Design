@@ -20,7 +20,7 @@ export default function MatchPage() {
     <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-14">
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-3">M A T C H</h1>
+          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">M A T C H</h1>
           <p className="text-[#8F8F8F] dark:text-white/50 max-w-xl mx-auto">Not sure where to start? Let us match you with the perfect creative services for your brand.</p>
         </div>
 
@@ -28,14 +28,14 @@ export default function MatchPage() {
           {STEPS.map((s, i) => (
             <div key={i} className="text-center">
               <div className="w-14 h-14 mx-auto mb-4 bg-[#DF3131] text-white rounded-full flex items-center justify-center text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-black">{s.num}</div>
-              <h3 className="font-heading font-bold text-[#333] dark:text-white tracking-[0.08em] mb-2">{s.title}</h3>
+              <h3 className="font-heading font-bold text-[#333] dark:text-white tracking-[0.08em] mb-3">{s.title}</h3>
               <p className="text-[#8F8F8F] dark:text-white/50 text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
 
         <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-10 mb-12">
-          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333] dark:text-white tracking-[0.1em] mb-6">What You Get</h2>
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333] dark:text-white tracking-[0.1em] mb-4">What You Get</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {INCLUDES.map((item, i) => (
               <div key={i} className="flex items-center gap-3">

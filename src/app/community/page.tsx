@@ -656,7 +656,7 @@ export default function ForumPage() {
     <main className="pt-12 pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6">
-          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-4" style={{ lineHeight: 1 }}>COMMUNITY</h1>
+          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>COMMUNITY</h1>
           <p className="text-[#666] dark:text-[#b0b0b0] text-center mb-8 text-[16px]">Connect with creators, share your work, and grow with the WYZ community.</p>
 
           {/* Stats strip */}
@@ -668,14 +668,14 @@ export default function ForumPage() {
             ].map((s) => (
               <div key={s.l} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
                 <p className="font-heading font-black text-[28px] tracking-[0.05em]" style={{ color: s.c }}>{s.v}</p>
-                <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#999] dark:text-[#b0b0b0] mt-1">{s.l}</p>
+                <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#999] dark:text-[#b0b0b0] mb-2">{s.l}</p>
               </div>
             ))}
           </div>
 
           {/* Community Highlights — 3-col grid */}
           <div className="mb-12">
-            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] mb-4 text-center">WHAT HAPPENS HERE</h2>
+            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-4">WHAT HAPPENS HERE</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {COMMUNITY_HIGHLIGHTS.map((h, i) => (
                 <div
@@ -706,7 +706,7 @@ export default function ForumPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
-                        <p className="font-heading font-bold text-[15px] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0]">
+                        <p className="font-heading font-bold text-[15px] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-2">
                           {h.name}
                         </p>
                         <span
@@ -739,7 +739,7 @@ export default function ForumPage() {
 
           {/* News Feed — 3-col grid */}
           <div className="mb-12">
-            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] mb-4 text-center">NEWS FEED</h2>
+            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-4">NEWS FEED</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {feedPosts.map((post) => (
                 <div
@@ -757,11 +757,11 @@ export default function ForumPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <p className="font-heading font-bold text-[14px] tracking-[0.03em] text-[#333] dark:text-[#e0e0e0] truncate">
+                          <p className="font-heading font-bold text-[14px] tracking-[0.03em] text-[#333] dark:text-[#e0e0e0] truncate mb-2">
                             {post.author}
                           </p>
                           {post.type === "announcement" && (
-                            <span className="text-[9px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#DF3131] shrink-0">
+                            <span className="text-[9px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#DF3131] shrink-0 mb-2">
                               Official
                             </span>
                           )}
@@ -873,8 +873,8 @@ export default function ForumPage() {
           {/* Forum — Reddit-style discussions */}
           <div className="mb-12">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0]">DISCUSSIONS</h2>
-              <span className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#DF3131]">{visibleThreads.length} threads</span>
+              <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] mb-4">DISCUSSIONS</h2>
+              <span className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#DF3131] mb-2">{visibleThreads.length} threads</span>
             </div>
 
             {/* Sorting tabs */}
@@ -929,7 +929,7 @@ export default function ForumPage() {
             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 mb-6">
               <div className="flex items-center gap-2 mb-3">
                 <FiPlus className="w-4 h-4 text-[#DF3131]" />
-                <p className="font-heading font-bold text-[14px] tracking-[0.06em] text-[#333] dark:text-[#e0e0e0]">START A THREAD</p>
+                <p className="font-heading font-bold text-[14px] tracking-[0.06em] text-[#333] dark:text-[#e0e0e0] mb-2">START A THREAD</p>
               </div>
               <select
                 value={composer.category}
@@ -1018,7 +1018,7 @@ export default function ForumPage() {
                       <div className="flex items-center gap-2 mb-2 flex-wrap">
                         {flair && (
                           <span
-                            className="text-[10px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 rounded"
+                            className="text-[10px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 rounded mb-2"
                             style={{ backgroundColor: `${flair.color}18`, color: flair.color }}
                           >
                             {flair.label}
@@ -1032,7 +1032,7 @@ export default function ForumPage() {
                         onClick={() => setOpenThread(isOpen ? null : t.id)}
                         className="text-left w-full"
                       >
-                        <p className="font-heading font-bold text-[15px] tracking-[0.03em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors line-clamp-2">
+                        <p className="font-heading font-bold text-[15px] tracking-[0.03em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors line-clamp-2 mb-2">
                           {t.title}
                         </p>
                       </button>
@@ -1117,7 +1117,7 @@ export default function ForumPage() {
 
           {/* Upcoming Events — 3-col grid */}
           <div className="mb-12">
-            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] mb-4 text-center">UPCOMING</h2>
+            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-4">UPCOMING</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {UPCOMING_EVENTS.map((ev) => (
                 <div
@@ -1129,10 +1129,10 @@ export default function ForumPage() {
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-3 mb-1 flex-wrap">
-                      <p className="font-heading font-bold text-[14px] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0]">
+                      <p className="font-heading font-bold text-[14px] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-2">
                         {ev.title}
                       </p>
-                      <span className="text-[11px] font-bold tracking-[0.1em] text-[#DF3131] uppercase">
+                      <span className="text-[11px] font-bold tracking-[0.1em] text-[#DF3131] uppercase mb-2">
                         {ev.date}
                       </span>
                     </div>
@@ -1157,7 +1157,7 @@ export default function ForumPage() {
                 rel="noopener noreferrer"
                 className="block p-6 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all group min-h-[44px]"
               >
-                <p className="font-heading font-bold text-[14px] tracking-[0.08em] mb-1" style={{ color: s.color }}>
+                <p className="font-heading font-bold text-[14px] tracking-[0.08em] mb-2" style={{ color: s.color }}>
                   {s.name}
                 </p>
                 <p className="text-[16px] text-[#666] dark:text-[#b0b0b0]">{s.desc}</p>
@@ -1169,7 +1169,7 @@ export default function ForumPage() {
           <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] mb-10">
             <div className="bg-[#5865F2] p-8 text-center">
               <FiUsers className="w-12 h-12 text-white/80 mx-auto mb-4" />
-              <h2 className="font-heading font-bold text-[24px] tracking-[0.06em] text-white mb-2">Join Our Discord</h2>
+              <h2 className="font-heading font-bold text-[24px] tracking-[0.06em] text-white mb-4">Join Our Discord</h2>
               <p className="text-white/70 text-[16px] max-w-md mx-auto mb-6">
                 Real-time chat, voice channels, event announcements, portfolio reviews, and creative collaborations.
               </p>
@@ -1189,9 +1189,9 @@ export default function ForumPage() {
             <div className="bg-[#5865F2] px-6 py-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <FiHash className="w-5 h-5 text-white/80" />
-                <h3 className="font-heading font-bold text-[16px] tracking-[0.06em] text-white">WYZ DESIGN · CHANNELS</h3>
+                <h3 className="font-heading font-bold text-[16px] tracking-[0.06em] text-white mb-3">WYZ DESIGN · CHANNELS</h3>
               </div>
-              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white/70">0 online</span>
+              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white/70 mb-2">0 online</span>
             </div>
             <div className="bg-[#2B2D31] p-4 grid grid-cols-2 md:grid-cols-4 gap-2">
               {DISCORD_CHANNELS.map((ch) => (

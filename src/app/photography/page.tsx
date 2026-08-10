@@ -88,7 +88,7 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  <div className="fixed inset-0 z-[150] bg-black/60 flex items-center justify-center p-4" onClick={onClose}>
  <div className="bg-white max-w-5xl w-full max-h-[85vh] overflow-y-auto rounded-lg" onClick={e => e.stopPropagation()}>
  <div className="sticky top-0 bg-white border-b border-[#E2E2E2] px-6 py-4 flex items-center justify-between z-10">
- <h3 className="font-heading font-bold text-[#333] text-lg tracking-[0.05em] uppercase">{album}</h3>
+ <h3 className="font-heading font-bold text-[#333] text-lg tracking-[0.05em] uppercase mb-3">{album}</h3>
  <button onClick={onClose} className="text-[#8F8F8F] hover:text-[#333] transition-colors"><FiX className="w-6 h-6" /></button>
  </div>
  <div className="p-6">
@@ -175,8 +175,8 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
   </div>
   <div className="p-5">
-  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131]">{s.cat}</span>
-  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] tracking-[0.03em] mt-1 mb-2 group-hover:text-[#DF3131] transition-colors">{s.name}</h3>
+  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{s.cat}</span>
+  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
   <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed line-clamp-2">{s.desc}</p>
   </div>
   </div>
@@ -191,8 +191,8 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
    <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" priority />
   </div>
   <div className="relative z-10">
-  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">{s.cat}</span>
-  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mt-1 mb-3">{s.name}</h3>
+  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">{s.cat}</span>
+  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{s.name}</h3>
   <p className="text-white/80 text-[15px] leading-relaxed mb-4">{s.desc}</p>
   <div className="flex items-center gap-3 mb-4">
   <span className="text-[28px] font-black">{s.price}</span>
@@ -452,7 +452,7 @@ return (
     </div>
     </div>
     <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 py-12 min-h-[500px] h-full">
-   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-4" style={{ lineHeight: 1 }}>
+   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
      <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span><br />
      MEMORIES
@@ -477,7 +477,7 @@ return (
     </div>
    <div className="absolute inset-0 bg-black/30 z-[1]" />
    <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
-   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
+   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
      <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span><br />
      MEMORIES
@@ -504,7 +504,7 @@ return (
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
   {/* Left: Info + Buttons */}
   <div className={`flex flex-col items-center justify-center text-center h-full ${archiveVis ? "animate-slideInLeft" : "opacity-0"}`}>
-  <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] leading-tight mb-6">
+  <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] leading-tight mb-4">
   MODEL<br />ARCHIVE
   </h2>
   <p className="text-[16px] lg:text-[18px] text-[#666] dark:text-white/60 max-w-lg leading-relaxed mb-8 mx-auto">
@@ -614,7 +614,7 @@ return (
 {/* Become A Model Form */}
   {showModelForm && (
   <div className="bg-white dark:bg-[#252528] p-6 lg:p-8 shadow-xl rounded-lg border border-[#E2E2E2] dark:border-[#444]">
-  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-xl tracking-[0.05em] mb-6">APPLY TO BE A MODEL</h3>
+  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-xl tracking-[0.05em] mb-3">APPLY TO BE A MODEL</h3>
   <form onSubmit={async (e) => { 
   e.preventDefault();
   const fd = new FormData(e.currentTarget as HTMLFormElement);
@@ -691,7 +691,7 @@ return (
  <div className="w-16 h-16 mx-auto flex items-center justify-center text-white text-2xl font-bold mb-4" style={{ backgroundColor: b.bg }}>
  {b.icon}
  </div>
- <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] mb-4 whitespace-pre-line leading-tight">{b.title}</h3>
+ <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] whitespace-pre-line leading-tight mb-3">{b.title}</h3>
    <p className="text-[15px] text-[#333] dark:text-[#aaa] leading-relaxed mb-4 text-center">{b.desc}</p>
    <Link href="/plans" className="inline-block text-[#DF3131] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-white transition-colors">READ MORE +</Link>
  </div>

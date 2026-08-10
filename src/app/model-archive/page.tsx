@@ -158,7 +158,7 @@ export default function ModelArchivePage() {
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
  {/* Header */}
  <div className="mb-8 text-center">
- <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em]" style={{ lineHeight: 1 }}>M O D E L . A R C H I V E</h1>
+ <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>M O D E L . A R C H I V E</h1>
  <p className="text-[#666] dark:text-white/50 text-sm mt-2">Every talent who has graced our lens, {MODELS.length} models and counting</p>
  </div>
 
@@ -198,7 +198,7 @@ export default function ModelArchivePage() {
   <Image src={m.img} alt={m.name} fill className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" priority />
  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity" />
  <div className="absolute bottom-0 left-0 right-0 p-3 sm:translate-y-full sm:group-hover:translate-y-0 translate-y-0 transition-transform">
- <p className="text-white text-xs font-bold tracking-[0.15em]">{m.name}</p>
+ <p className="text-white text-xs font-bold tracking-[0.15em] mb-2">{m.name}</p>
  </div>
  </div>
  ))}
@@ -213,7 +213,7 @@ export default function ModelArchivePage() {
  <button onClick={closeAlbum} className="flex items-center gap-2 text-[#666] dark:text-white/60 hover:text-[#333] dark:hover:text-white text-sm mb-6 transition-colors">
  <FiChevronLeft className="w-4 h-4" /> BACK TO ALL MODELS
  </button>
- <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-2">{selectedModel}</h2>
+ <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">{selectedModel}</h2>
  <p className="text-[#666] dark:text-white/50 text-sm mb-8">{albumImages.length} photos</p>
  {albumLoading ? (
  <div className="flex items-center justify-center py-20">
@@ -239,7 +239,7 @@ export default function ModelArchivePage() {
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
  {/* Left: Info */}
  <div className="text-[#333] dark:text-white">
- <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] mb-6">
+ <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] mb-4">
  JOIN OUR <span className="text-[#DF3131]">ROSTER</span>
  </h2>
  <p className="text-[#666] dark:text-white/70 text-[16px] leading-relaxed mb-8">
@@ -249,21 +249,21 @@ export default function ModelArchivePage() {
  <div className="flex items-start gap-4">
  <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#DF3131] text-white text-xl font-bold">1</div>
  <div>
- <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg tracking-[0.05em] mb-1">SUBMIT YOUR INFO</h3>
+ <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg tracking-[0.05em] mb-3">SUBMIT YOUR INFO</h3>
  <p className="text-[#666] dark:text-white/60 text-sm">Fill out the form with your details and a few photos.</p>
  </div>
  </div>
  <div className="flex items-start gap-4">
  <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#DF3131] text-white text-xl font-bold">2</div>
  <div>
- <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg tracking-[0.05em] mb-1">REVIEW PROCESS</h3>
+ <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg tracking-[0.05em] mb-3">REVIEW PROCESS</h3>
  <p className="text-[#666] dark:text-white/60 text-sm">Our team reviews every submission within 48 hours.</p>
  </div>
  </div>
  <div className="flex items-start gap-4">
  <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-[#DF3131] text-white text-xl font-bold">3</div>
  <div>
- <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg tracking-[0.05em] mb-1">GET BOOKED</h3>
+ <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg tracking-[0.05em] mb-3">GET BOOKED</h3>
  <p className="text-[#666] dark:text-white/60 text-sm">Approved models get added to our roster and start receiving bookings.</p>
  </div>
  </div>
@@ -275,7 +275,7 @@ export default function ModelArchivePage() {
  {submitted ? (
  <div className="text-center py-12">
  <div className="w-16 h-16 mx-auto flex items-center justify-center bg-green-500 text-white text-3xl font-bold mb-4">✓</div>
- <h3 className="font-heading font-bold text-[#333] dark:text-white text-xl tracking-[0.05em] mb-2">APPLICATION SUBMITTED</h3>
+ <h3 className="font-heading font-bold text-[#333] dark:text-white text-xl tracking-[0.05em] mb-3">APPLICATION SUBMITTED</h3>
  <p className="text-[#666] dark:text-white/60 text-sm">We&apos;ll review your submission and get back to you within 48 hours.</p>
  <button onClick={() => { setSubmitted(false); setFormData({ name: "", email: "", phone: "", experience: "", message: "" }); }} className="mt-6 px-6 py-3 border border-[#E2E2E2] dark:border-white/30 text-[#333] dark:text-white text-sm font-bold tracking-[0.1em] hover:bg-[#F5F5F3] dark:hover:bg-white/10 transition-colors">
  SUBMIT ANOTHER

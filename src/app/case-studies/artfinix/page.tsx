@@ -7,8 +7,8 @@ export default function ArtfinixCaseStudy() {
     <main className="bg-white dark:bg-[#111] min-h-screen pb-20">
       <ScrollReveal animation="fadeUp">
         <section className="bg-[#1a1a2e] text-white py-24 px-6 text-center">
-          <p className="text-[#e94560] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-4">Case Study</p>
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] mb-6">
+          <p className="text-[#e94560] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-2">Case Study</p>
+          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] mb-6 sm:mb-8">
             ART<span className="text-[#e94560]">FINIX</span>
           </h1>
           <p className="text-white/60 text-[16px] sm:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -24,7 +24,7 @@ export default function ArtfinixCaseStudy() {
               { label: "Focus", value: "Youth Arts + Community Mentorship" },
             ].map(s => (
               <div key={s.label} className="border border-[#E2E2E2] dark:border-[#444] p-6">
-                <p className="text-[11px] font-heading font-bold tracking-[0.15em] uppercase text-[#888] dark:text-[#666] mb-1">{s.label}</p>
+                <p className="text-[11px] font-heading font-bold tracking-[0.15em] uppercase text-[#888] dark:text-[#666] mb-2">{s.label}</p>
                 <p className="text-[14px] text-[#333] dark:text-[#e0e0e0]">{s.value}</p>
               </div>
             ))}
@@ -35,7 +35,7 @@ export default function ArtfinixCaseStudy() {
             <p>WYZ Design developed the commercial blueprint, planned the shoot structure, captured b-roll of performances and student practice sessions, and designed the visual storytelling arc around emotional connection and mission clarity.</p>
           </div>
 
-          <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-8">Strategy & Deliverables</h2>
+          <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-4">Strategy & Deliverables</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16">
             {[
               { title: "Student Interviews", desc: "On camera testimonials from students and parents vouching for the program's impact." },
@@ -46,7 +46,7 @@ export default function ArtfinixCaseStudy() {
               { title: "Iteration Strategy", desc: "Plan for testing audience response and refining future commercials based on data." },
             ].map(d => (
               <div key={d.title} className="bg-[#F5F5F3] dark:bg-[#252528] p-6">
-                <h3 className="font-heading font-bold text-[15px] text-[#333] dark:text-[#e0e0e0] mb-2">{d.title}</h3>
+                <h3 className="font-heading font-bold text-[15px] text-[#333] dark:text-[#e0e0e0] mb-3">{d.title}</h3>
                 <p className="text-[14px] text-[#666] dark:text-[#888]">{d.desc}</p>
               </div>
             ))}

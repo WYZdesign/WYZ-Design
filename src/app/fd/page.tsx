@@ -249,7 +249,7 @@ export default function FDOraclePage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/70 text-sm mb-4">
                 <span>FD Photo Studio LA  ·  AI Event Intelligence</span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight">
+              <h1 className="text-5xl md:text-7xl font-heading font-bold text-white tracking-tight mb-6 sm:mb-8">
                 FD <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DF3131] to-[#F9AD4D]">ORACLE</span>
               </h1>
               <p className="text-lg md:text-xl text-zinc-400 mt-3 max-w-2xl mx-auto">
@@ -396,7 +396,7 @@ export default function FDOraclePage() {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-bold text-white">{studio.name}</h3>
+                      <h3 className="font-bold text-white mb-3">{studio.name}</h3>
                       <span className="px-2 py-0.5 rounded text-xs font-medium" style={{ background: `${studio.color}20`, color: studio.color }}>{studio.building}</span>
                     </div>
                     <p className="text-zinc-400 text-sm leading-relaxed">{studio.feature}</p>
@@ -447,7 +447,7 @@ export default function FDOraclePage() {
                   </span>
                   <span className="text-xs text-zinc-500">{selectedEvent.dateLabel}</span>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">{selectedEvent.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-3">{selectedEvent.title}</h3>
                 <div className="flex items-center gap-2 text-sm text-zinc-400 mb-1">
                   <span>🕐 {selectedEvent.time}</span>
                 </div>
@@ -523,10 +523,10 @@ export default function FDOraclePage() {
       <section className="py-20 px-4 bg-black border-t border-zinc-900">
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal animation="fadeUp">
-            <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-8">HOW THE <span className="text-[#DF3131]">ORACLE</span> WORKS</h2>
+            <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4">HOW THE <span className="text-[#DF3131]">ORACLE</span> WORKS</h2>
             <div className="grid md:grid-cols-2 gap-6 text-left">
               <div className="p-6 rounded-xl border border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-transparent">
-                <h3 className="text-blue-400 font-bold mb-3 text-lg">THE ANALYST</h3>
+                <h3 className="text-blue-400 font-bold text-lg mb-3">THE ANALYST</h3>
                 <ul className="space-y-2 text-zinc-400 text-sm">
                   <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />Checks 82+ past events for redundancy</li>
                   <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />Validates pricing and profitability</li>
@@ -535,7 +535,7 @@ export default function FDOraclePage() {
                 </ul>
               </div>
               <div className="p-6 rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-transparent">
-                <h3 className="text-purple-400 font-bold mb-3 text-lg">THE MUSE</h3>
+                <h3 className="text-purple-400 font-bold text-lg mb-3">THE MUSE</h3>
                 <ul className="space-y-2 text-zinc-400 text-sm">
                   <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Generates never-done-before concepts</li>
                   <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Leverages unique studio features (jet, underwater, RGB cave)</li>

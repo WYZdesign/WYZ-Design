@@ -197,7 +197,7 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
  >
   {isMuted ? SPEAKER_MUTED_SVG : SPEAKER_ON_SVG}
  </button>
- <p className="text-white text-center mt-3 font-heading font-bold text-sm tracking-wider">{title}</p>
+ <p className="text-white text-center font-heading font-bold text-sm tracking-wider mb-2">{title}</p>
  </div>
  </div>
  );
@@ -320,7 +320,7 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
  {isMuted ? SPEAKER_MUTED_SVG : SPEAKER_ON_SVG}
  </button>
  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
- <h3 className="font-heading font-bold text-white text-lg sm:text-2xl tracking-[0.05em]">
+ <h3 className="font-heading font-bold text-white text-lg sm:text-2xl tracking-[0.05em] mb-3">
  {items[current].title}
  </h3>
  <p className="text-white/60 text-sm mt-1">{current + 1} / {items.length}</p>
@@ -460,7 +460,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  </div>
  </div>
  <div className="px-0.5 py-1.5">
-  <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] carousel-video-title group-hover:text-[#DF3131] transition-colors leading-tight line-clamp-2">{v.title}</h3>
+  <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] carousel-video-title group-hover:text-[#DF3131] transition-colors leading-tight line-clamp-2 mb-3">{v.title}</h3>
  </div>
  </div>
  ))}
@@ -487,7 +487,7 @@ function YouTubeSection() {
  const LogoItem = ({ color, label }: { color: string; label: string }) => (
    <div className="flex-none flex items-center gap-2 px-6 py-3" style={{ opacity: color === "#282828" || color === "#333333" ? 0.6 : 1 }}>
      <svg className="w-8 h-8 sm:w-10 sm:h-10" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
-     <span className="font-heading font-bold text-sm sm:text-base tracking-wider" style={{ color }}>{label}</span>
+     <span className="font-heading font-bold text-sm sm:text-base tracking-wider mb-2" style={{ color }}>{label}</span>
    </div>
  );
 
@@ -605,7 +605,7 @@ export default function EventsPage() {
     <div className="absolute inset-0 hero-grad-events z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10">
-     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-2 lg:mb-4" style={{ lineHeight: 1 }}>
+     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
   <span className="whitespace-nowrap">SIMPLIFY YOUR</span><br />
   <span className="text-[#DF3131] whitespace-nowrap">EVENT</span><br />
   <span className="whitespace-nowrap">PLANNING</span>
@@ -646,7 +646,7 @@ export default function EventsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div className="mt-12 mb-6 max-w-[130rem] mx-auto px-6 lg:px-12">
  <div className="text-center mb-4">
-  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em]">DIY SHOWS</h2>
+  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">DIY SHOWS</h2>
  </div>
  <VideoCarousel items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
  </div>
@@ -663,7 +663,7 @@ export default function EventsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
  <div className="text-center mb-4">
-  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em]">CLIENT EVENTS</h2>
+  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">CLIENT EVENTS</h2>
  </div>
  <VideoCarousel items={shuffledClientEvents} onPlay={(v) => setModalVideo(v)} />
  </div>
@@ -681,7 +681,7 @@ export default function EventsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div>
  <div className="text-center mb-4">
-  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em]">PREVIOUS EVENTS</h2>
+  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">PREVIOUS EVENTS</h2>
   <p className="text-[16px] text-[#8F8F8F] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED/CURATED BY WYZ DESIGN</p>
  </div>
  <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">

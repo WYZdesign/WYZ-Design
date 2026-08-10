@@ -69,13 +69,13 @@ function ArtistGallery() {
   <Image src={item.src} alt={item.label} fill className="w-full h-full object-cover" priority />
  ) : (
  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#DF3131]/5 to-[#D49341]/5">
- <span className="text-[#DF3131]/30 text-[13px] font-bold tracking-[0.1em] uppercase">{item.label}</span>
+ <span className="text-[#DF3131]/30 text-[13px] font-bold tracking-[0.1em] uppercase mb-2">{item.label}</span>
  </div>
  )
  )}
  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
- <span className="text-white text-[12px] font-bold tracking-[0.15em] uppercase drop-shadow-md">{item.label}</span>
+ <span className="text-white text-[12px] font-bold tracking-[0.15em] uppercase drop-shadow-md mb-2">{item.label}</span>
  <span className="text-white/60 text-[11px] font-mono">{current + 1}/{ARTIST_GALLERY.length}</span>
  </div>
  </div>
@@ -153,8 +153,8 @@ export default function FeaturedArtistPage() {
  {/* Right: Biography text on dark bg */}
  <div className="w-full lg:w-1/2 flex items-center bg-white dark:bg-[#111] px-10 lg:px-16 xl:px-24 py-16 lg:py-0 relative z-10">
   <div className="max-w-xl text-center lg:text-center">
-  <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-4 block">FEATURED ARTIST OF THE MONTH</span>
-  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6" style={{ lineHeight: 1 }}>DONTE<br />&quot;DANNY&quot;<br />DAVIS</h1>
+  <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">FEATURED ARTIST OF THE MONTH</span>
+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>DONTE<br />&quot;DANNY&quot;<br />DAVIS</h1>
  <div className="w-16 h-[3px] bg-[#DF3131] mb-6 mx-auto lg:mx-0" />
  <p className="text-[#666] dark:text-white/70 text-[16px] leading-relaxed mb-4">
   From the west side of Chicago, born and raised! A guy known to some as &quot;Danny&quot; is a creative in every sense of the word. From writing to painting, with a palette of many other talents and abilities.
@@ -186,8 +186,8 @@ export default function FeaturedArtistPage() {
  <section className="py-16 bg-white">
  <div className="max-w-[80rem] mx-auto px-6 lg:px-12">
  <div className="text-center mb-12">
- <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">THE BASICS</span>
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333]">GET TO KNOW THE ARTIST</h2>
+ <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">THE BASICS</span>
+ <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] mb-4">GET TO KNOW THE ARTIST</h2>
  </div>
  <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 items-start">
  {/* Flipcard gallery — visible on all screens, sticky on desktop */}
@@ -202,10 +202,10 @@ export default function FeaturedArtistPage() {
  <div className="w-10 h-10 flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 rounded-full">
  {w.icon}
  </div>
- <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131]">{w.label}</span>
+ <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">{w.label}</span>
  </div>
  <div className="flex-1">
- <h3 className="font-heading font-bold text-[#333] text-[16px] tracking-[0.03em] mb-1">{w.value}</h3>
+ <h3 className="font-heading font-bold text-[#333] text-[16px] tracking-[0.03em] mb-3">{w.value}</h3>
  <p className="text-[14px] text-[#666] leading-relaxed">{w.desc}</p>
  </div>
  </div>
@@ -222,8 +222,8 @@ export default function FeaturedArtistPage() {
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
  <div className="text-center lg:text-center">
- <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">SUPPORT THE ARTIST</span>
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-white mb-3">ART STORE</h2>
+ <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">SUPPORT THE ARTIST</span>
+ <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-white mb-4">ART STORE</h2>
  <p className="text-white/60 text-[15px] leading-relaxed mb-6">
  Support this month&apos;s featured artist by browsing and purchasing original artwork, prints, and custom pieces. Every purchase directly supports the artist.
  </p>
@@ -261,22 +261,22 @@ export default function FeaturedArtistPage() {
  <section className="py-16 bg-white dark:bg-[#111]">
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
  <div className="text-center mb-12">
- <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">WHAT IS FAOTM?</span>
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-white">FEATURED ARTIST OF THE MONTH</h2>
+ <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT IS FAOTM?</span>
+ <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-white mb-4">FEATURED ARTIST OF THE MONTH</h2>
  </div>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
   <div className="p-8 bg-white dark:bg-white/5 border border-[#E2E2E2] dark:border-white/10 hover:border-[#DF3131]/50 transition-all duration-300 text-center">
-  <span className="text-[#DF3131] font-heading font-bold text-[13px] tracking-[0.15em] uppercase mb-3 block">What It Does</span>
+  <span className="text-[#DF3131] font-heading font-bold text-[13px] tracking-[0.15em] uppercase block mb-2">What It Does</span>
   <h3 className="font-heading font-bold text-[#333] dark:text-white text-[18px] tracking-[0.04em] mb-3">Spotlight Creators</h3>
    <p className="text-[#666] dark:text-white/50 text-[14px] leading-relaxed">Every month, WYZ Design selects one artist to feature across our platform, giving them visibility, a dedicated page, and access to our audience.</p>
   </div>
   <div className="p-8 bg-white dark:bg-white/5 border border-[#E2E2E2] dark:border-white/10 hover:border-[#DF3131]/50 transition-all duration-300 text-center">
-  <span className="text-[#DF3131] font-heading font-bold text-[13px] tracking-[0.15em] uppercase mb-3 block">Why It Exists</span>
+  <span className="text-[#DF3131] font-heading font-bold text-[13px] tracking-[0.15em] uppercase block mb-2">Why It Exists</span>
   <h3 className="font-heading font-bold text-[#333] dark:text-white text-[18px] tracking-[0.04em] mb-3">Elevate Talent</h3>
   <p className="text-[#666] dark:text-white/50 text-[14px] leading-relaxed">Artists deserve a stage. FAOTM exists to bridge the gap between talented creators and the communities that need to see their work.</p>
   </div>
   <div className="p-8 bg-white dark:bg-white/5 border border-[#E2E2E2] dark:border-white/10 hover:border-[#DF3131]/50 transition-all duration-300 text-center">
-  <span className="text-[#DF3131] font-heading font-bold text-[13px] tracking-[0.15em] uppercase mb-3 block">How To Be Involved</span>
+  <span className="text-[#DF3131] font-heading font-bold text-[13px] tracking-[0.15em] uppercase block mb-2">How To Be Involved</span>
   <h3 className="font-heading font-bold text-[#333] dark:text-white text-[18px] tracking-[0.04em] mb-3">Apply Now</h3>
   <p className="text-[#666] dark:text-white/50 text-[14px] leading-relaxed">Submit your portfolio and bio below. Our team reviews every application and selects one artist each month to feature.</p>
   </div>
@@ -296,8 +296,8 @@ export default function FeaturedArtistPage() {
  <section ref={formRef} className="py-16 bg-white border-t border-[#E2E2E2]">
  <div className="max-w-2xl mx-auto px-6">
  <div className="text-center mb-8">
- <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] mb-3 block">APPLY NOW</span>
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333]">FEATURED ARTIST APPLICATION</h2>
+ <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">APPLY NOW</span>
+ <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] mb-4">FEATURED ARTIST APPLICATION</h2>
  </div>
  {submitted ? (
  <div className="text-center py-12">

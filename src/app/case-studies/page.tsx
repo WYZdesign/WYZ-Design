@@ -38,7 +38,7 @@ export default function CaseStudiesIndex() {
     <main className="bg-white dark:bg-[#111] min-h-screen pb-20">
       <ScrollReveal animation="fadeUp">
         <section className="py-20 px-6 text-center">
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-4">
+          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-6 sm:mb-8">
             CASE <span className="text-[#DF3131]">STUDIES</span>
           </h1>
           <p className="text-[#666] dark:text-[#888] text-[16px] max-w-xl mx-auto leading-relaxed">
@@ -53,8 +53,8 @@ export default function CaseStudiesIndex() {
                 className="block border border-[#E2E2E2] dark:border-[#444] p-8 hover:shadow-lg hover:border-[#DF3131]/30 transition-all group">
                 <div className="flex items-start justify-between gap-6">
                   <div>
-                    <span className="text-[12px] font-heading font-bold tracking-[0.1em] uppercase" style={{ color: cs.color }}>{cs.tag}</span>
-                    <h2 className="text-[20px] sm:text-[24px] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.03em] mt-2 group-hover:text-[#DF3131] transition-colors">{cs.title}</h2>
+                    <span className="text-[12px] font-heading font-bold tracking-[0.1em] uppercase mb-2" style={{ color: cs.color }}>{cs.tag}</span>
+                    <h2 className="text-[20px] sm:text-[24px] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors mb-4">{cs.title}</h2>
                     <p className="text-[14px] text-[#666] dark:text-[#888] mt-3 max-w-2xl">{cs.desc}</p>
                   </div>
                   <span className="text-[#ccc] dark:text-[#666] group-hover:text-[#DF3131] transition-colors text-[24px] hidden sm:block">→</span>

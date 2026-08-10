@@ -14,7 +14,7 @@ export default function ContactPage() {
     <main className="pt-12 pb-10 sm:pb-16 lg:pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <ScrollReveal animation="fadeUp">
         <div className="max-w-2xl mx-auto px-6">
-          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-4" style={{ lineHeight: 1 }}>CONTACT US</h1>
+          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>CONTACT US</h1>
           <p className="text-[#666] dark:text-[#999] text-center mb-10 text-[15px] leading-relaxed">
             Have a question, project idea, or just want to say hello? Drop us a message and we&apos;ll get back to you within 24 hours.
           </p>

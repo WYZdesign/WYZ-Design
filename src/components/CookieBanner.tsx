@@ -74,24 +74,26 @@ export default function CookieBanner() {
     };
   }, [show]);
 
+  const saveConsent = (c: CookieConsent) => {
+    localStorage.setItem(CONSENT_KEY, JSON.stringify(c));
+    setShow(false);
+  };
+
   const acceptAll = () => {
     const full: CookieConsent = { necessary: true, analytics: true, marketing: true };
     setConsent(full);
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(full));
-    setShow(false);
+    saveConsent(full);
     enableAnalytics();
   };
 
   const acceptNecessary = () => {
     const minimal: CookieConsent = { necessary: true, analytics: false, marketing: false };
     setConsent(minimal);
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(minimal));
-    setShow(false);
+    saveConsent(minimal);
   };
 
   const saveCustom = () => {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
-    setShow(false);
+    saveConsent(consent);
     if (consent.analytics) enableAnalytics();
   };
 
@@ -120,7 +122,7 @@ export default function CookieBanner() {
               <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to enhance your experience.</p>
             </div>
           </div>
-          <button ref={closeBtnRef} onClick={() => setShow(false)} className="text-[#888] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">
+          <button ref={closeBtnRef} onClick={() => saveConsent({ necessary: true, analytics: false, marketing: false })} className="text-[#888] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">
             <FiX className="w-5 h-5" />
           </button>
         </div>

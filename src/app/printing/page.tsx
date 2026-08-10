@@ -28,7 +28,7 @@ function PaperAccordion({ paper, index }: { paper: typeof PAPER_TYPES[0]; index:
  <span className="w-8 h-8 bg-[#DF3131]/10 text-[#DF3131] font-bold text-[13px] flex items-center justify-center flex-shrink-0 group-hover:bg-[#DF3131] group-hover:text-white transition-all">
  {String(index + 1).padStart(2, "0")}
  </span>
-  <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[14px] sm:text-[15px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors">{paper.name}</h3>
+  <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[14px] sm:text-[15px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors mb-3">{paper.name}</h3>
   </div>
   <div className={`w-6 h-6 mx-auto mt-2 flex items-center justify-center text-[#999] dark:text-[#aaa] group-hover:text-[#DF3131] transition-all duration-300 ${isOpen ? "rotate-45" : ""}`}>
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
@@ -66,7 +66,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   <Image src={sticker.img} alt={sticker.name} fill className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" priority />
  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
  <div className="absolute bottom-0 left-0 right-0 p-5">
- <h3 className="font-heading font-black text-white text-[22px] tracking-[0.05em] mb-1">{sticker.name}</h3>
+ <h3 className="font-heading font-black text-white text-[22px] tracking-[0.05em] mb-3">{sticker.name}</h3>
  </div>
  </div>
  <div className="p-5">
@@ -91,8 +91,8 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
     <Image src={sticker.img} alt={sticker.name} fill className="w-full h-full object-cover" priority />
    </div>
    <div className="relative z-10 text-center flex-1 flex flex-col justify-center items-center w-full">
-    <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 block text-center">Sticker Type</span>
-    <h3 className="font-heading font-black text-white text-[24px] tracking-[0.03em] mt-1 mb-4 text-center">{sticker.name}</h3>
+    <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 block text-center mb-2">Sticker Type</span>
+    <h3 className="font-heading font-black text-white text-[24px] tracking-[0.03em] text-center mb-3">{sticker.name}</h3>
     <p className="text-white/80 text-[15px] leading-relaxed mb-4 text-center">{sticker.desc}</p>
     <div className="space-y-2 text-center w-full">
     {sticker.features.map((f) => (
@@ -129,7 +129,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out ${flipped ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"}`}>
         <div className="border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] p-8 lg:p-10 text-center hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10 h-full flex flex-col justify-center">
-          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase mb-4 text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors">{title}</h2>
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors mb-4">{title}</h2>
           <p className="text-[#DF3131] text-[16px] tracking-[0.1em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">{subtitle}</p>
           <div className="mt-6 flex items-center justify-center gap-2 text-[13px] text-[#888] dark:text-[#aaa]">
             <span>Hover or tap to see pricing</span>
@@ -144,7 +144,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
       >
         <div className={`w-full h-full ${backBg} text-white p-8 lg:p-12 flex flex-col justify-between overflow-hidden relative`}>
           <div className="relative z-10 text-center">
-            <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.1em] uppercase mb-6">{backTitle}</h2>
+            <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.1em] uppercase mb-4">{backTitle}</h2>
             {backContent}
             <p className="text-white/60 text-[11px] mt-4">{backNote}</p>
           </div>
@@ -176,7 +176,7 @@ export default function PrintingPage() {
     <div className="absolute inset-0 hero-grad-print z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 flex flex-col items-center justify-center h-full">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase mb-0.5 lg:mb-1 text-white text-center">DIGITAL PRINTING</h1>
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase .5 text-white text-center mb-6 sm:mb-8">DIGITAL PRINTING</h1>
     <p className="text-white/70 text-[16px] sm:text-lg mb-6 sm:mb-8 max-w-md text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
     <Link href="/designs" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GRAPHIC DESIGN
@@ -192,7 +192,7 @@ export default function PrintingPage() {
  {/* ── Paper Types — Accordion ── */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div className="py-12">
-  <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center mb-3 text-[#333] dark:text-[#e0e0e0]">PHOTO PAPER TYPES</h2>
+  <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center text-[#333] dark:text-[#e0e0e0] mb-4">PHOTO PAPER TYPES</h2>
   <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] tracking-[0.1em] uppercase mb-8 max-w-3xl mx-auto">Photo Print Options Include: Premium Gloss, Matte Paper, Luster/Pearl, Semi-Gloss, Satin/Semi-Gloss, Select Sizes, Paper Types, And Quantities Available Upon Request.</p>
  <div className="space-y-2 max-w-4xl mx-auto">
  {PAPER_TYPES.map((paper, i) => (
@@ -205,7 +205,7 @@ export default function PrintingPage() {
  {/* ── Sticker Cut Types — Interactive Cards ── */}
  <ScrollReveal animation="fadeUp" delay={0.15}>
   <div className="py-12 border-t border-[#E2E2E2] dark:border-[#444]">
-  <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center mb-8 text-[#333] dark:text-[#e0e0e0]">STICKER CUT TYPES</h2>
+  <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center text-[#333] dark:text-[#e0e0e0] mb-4">STICKER CUT TYPES</h2>
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
  {STICKER_TYPES.map((s) => (
  <StickerCard key={s.name} sticker={s} />
@@ -295,7 +295,7 @@ export default function PrintingPage() {
   {/* ── Get A Quote ── */}
   <ScrollReveal animation="fadeUp" delay={0.15}>
   <div className="py-12 border-t border-[#E2E2E2] dark:border-[#444]">
-  <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center mb-6 text-[#333] dark:text-[#e0e0e0]">GET A QUOTE</h2>
+  <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center text-[#333] dark:text-[#e0e0e0] mb-4">GET A QUOTE</h2>
  <form onSubmit={async (e) => { 
  e.preventDefault();
  const fd = new FormData(e.currentTarget as HTMLFormElement);

@@ -60,8 +60,8 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-            <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase mb-4 block">About Us</span>
-            <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-6" style={{ lineHeight: 1 }}>
+            <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
+            <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
               WE MAKE<br />WHAT <span className="text-[#DF3131]">WORKS</span>
             </h1>
             <p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-2xl mx-auto">
@@ -75,7 +75,7 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase mb-8 text-center">
+            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
               OUR <span className="text-[#DF3131]">MISSION</span>
             </h2>
             <div className="max-w-3xl mx-auto text-center">
@@ -105,8 +105,8 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="w-full">
-                <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase mb-3 block">The Founder</span>
-                <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-6" style={{ lineHeight: 1 }}>
+                <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">The Founder</span>
+                <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-4" style={{ lineHeight: 1 }}>
                   TORREÉ <span className="text-[#DF3131]">MARCEL</span>
                 </h2>
                 <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">
@@ -138,7 +138,7 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase mb-4 text-center">
+            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
               THE <span className="text-[#DF3131]">BRANDS</span>
             </h2>
             <p className="text-[#666] dark:text-white/70 text-[15px] text-center mb-12 max-w-2xl mx-auto">
@@ -149,8 +149,8 @@ export default function AboutPage() {
                 <div key={i} className="relative group">
                   <div className="p-8 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full text-center">
                     <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full mx-auto" style={{ background: brand.color }} />
-                    <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase" style={{ color: brand.color }}>{brand.tagline}</span>
-                    <h3 className="font-heading font-black text-[#333] dark:text-white text-[18px] sm:text-[20px] tracking-[0.04em] uppercase mt-2 mb-4">{brand.name}</h3>
+                    <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: brand.color }}>{brand.tagline}</span>
+                    <h3 className="font-heading font-black text-[#333] dark:text-white text-[18px] sm:text-[20px] tracking-[0.04em] uppercase mb-3">{brand.name}</h3>
                     <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed">{brand.desc}</p>
                   </div>
                 </div>
@@ -164,7 +164,7 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-[#111]">
           <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] uppercase mb-12 text-center">
+            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] uppercase text-center mb-4">
               WHAT WE <span className="text-[#DF3131]">STAND FOR</span>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -186,7 +186,7 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase mb-12 text-center">
+            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
               BY THE <span className="text-[#DF3131]">NUMBERS</span>
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
@@ -198,7 +198,7 @@ export default function AboutPage() {
               ].map((s, i) => (
                 <div key={i}>
                   <p className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1">{s.num}</p>
-                  <p className="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase">{s.label}</p>
+                  <p className="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -210,7 +210,7 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-[#DF3131]">
           <div className="max-w-3xl mx-auto px-6 text-center">
-            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] uppercase mb-6">
+            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] uppercase mb-4">
               READY TO BUILD?
             </h2>
             <p className="text-white/80 text-[16px] leading-relaxed mb-8 max-w-xl mx-auto">

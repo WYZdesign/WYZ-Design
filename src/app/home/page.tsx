@@ -791,8 +791,8 @@ export default function HomePage() {
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
     <GyroTilt intensity={8} enableOnDesktop>
-    <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-3 whitespace-nowrap text-center">Wild Vision. Zealous Execution.</p>
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6 text-center" style={{ lineHeight: 1 }}>
+    <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-2">Wild Vision. Zealous Execution.</p>
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>
      <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
     </h1>
     <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-lg text-center">
@@ -829,7 +829,7 @@ export default function HomePage() {
 
   <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
   <div className="text-center mb-12 sm:mb-16">
-    <h2 className="text-[1.725rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-3">
+    <h2 className="text-[1.725rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
      WHAT <span className="text-[#DF3131]">WE DO</span>
     </h2>
     <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene — making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
@@ -862,7 +862,7 @@ export default function HomePage() {
  {/* ── SERVICES TAB ── */}
  {spTab === "services" && (
  <div className="max-w-3xl mx-auto animate-fadeIn">
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-3 text-center">Services</h2>
+ <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-4">Services</h2>
  <div className="flex flex-wrap gap-2 mb-8 justify-center">
  {SERVICES.map((s) => (
   <button key={s.tab} onClick={() => setActiveTab(s.tab)}
@@ -885,7 +885,7 @@ export default function HomePage() {
  <FiCamera className="w-6 h-6 text-[#DF3131]" />
  </div>
  <div className="flex-1">
-  <h3 className="font-heading font-bold text-[#333] dark:text-white text-[14px] sm:text-[16px] md:text-[17px] tracking-[0.05em] uppercase mb-1 group-hover:text-[#DF3131] transition-colors text-left">{s.name}</h3>
+  <h3 className="font-heading font-bold text-[#333] dark:text-white text-[14px] sm:text-[16px] md:text-[17px] tracking-[0.05em] uppercase group-hover:text-[#DF3131] transition-colors text-left mb-3">{s.name}</h3>
   <p className="text-sm text-[#666] dark:text-white/70 mb-2">{s.desc}</p>
  <div className="flex items-center justify-between">
  <Link href={s.href} className="text-[#DF3131] text-sm font-bold tracking-[0.08em] uppercase hover:underline inline-flex items-center gap-1">
@@ -912,7 +912,7 @@ export default function HomePage() {
  {/* ── PLANS TAB ── */}
   {spTab === "plans" && (
   <div className="max-w-4xl mx-auto animate-fadeIn">
-   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-1.5 text-center">Pricing Plans</h2>
+   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase .5 text-center mb-4">Pricing Plans</h2>
    <p className="text-[#888] dark:text-white/50 text-sm mb-8 text-center">Affordable Plans for Any Budget</p>
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
  {PRICING_PLANS.map((p, i) => (
@@ -932,13 +932,13 @@ export default function HomePage() {
   {p.badge}
   </div>
  )}
-   <h3 className="font-heading font-black text-[#333] dark:text-white text-[28px] sm:text-[32px] tracking-[0.06em] uppercase leading-tight">{p.name}</h3>
+   <h3 className="font-heading font-black text-[#333] dark:text-white text-[28px] sm:text-[32px] tracking-[0.06em] uppercase leading-tight mb-3">{p.name}</h3>
    <p className="text-4xl sm:text-5xl font-black text-[#DF3131] mt-4">{p.price}</p>
    <p className="text-xs text-[#888] dark:text-white/50 mt-3">Tap to see details</p>
  </div>
  {/* Back face — all info + subscribe */}
  <div className="absolute inset-0 p-6 text-center bg-[#DF3131] text-white flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
- <h3 className="font-heading font-bold text-lg tracking-[0.1em] uppercase mb-2">{p.name}</h3>
+ <h3 className="font-heading font-bold text-lg tracking-[0.1em] uppercase mb-3">{p.name}</h3>
  <p className="text-4xl font-black mb-1">{p.price}</p>
  <p className="text-white/80 text-xs mb-1 font-bold italic">Every 3 months</p>
  <p className="text-white/70 text-xs mb-4">{p.desc}</p>
@@ -971,7 +971,7 @@ export default function HomePage() {
   </div>
   <div className="absolute inset-0 bg-black/20 z-[1]" />
   <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-<h2 className="text-[1.05rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase mb-1 sm:mb-2 max-sm:whitespace-normal" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
+<h2 className="text-[1.05rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase max-sm:whitespace-normal mb-4" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
   <p className="text-white/80 tracking-[0.3em] text-[12px] sm:text-sm uppercase mb-4 max-sm:whitespace-normal max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
@@ -986,7 +986,7 @@ export default function HomePage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-12 bg-white dark:bg-[#1C1C1E] overflow-hidden">
   <div className="max-w-6xl mx-auto px-6 text-center mb-4">
-  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase">Clients</h2>
+  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-4">Clients</h2>
  </div>
  <LogoCarousel items={CLIENT_LOGOS} speed={0.5} />
   </section>
@@ -1003,7 +1003,7 @@ export default function HomePage() {
   <div className="max-w-7xl mx-auto px-6">
   <div className="relative flex flex-col lg:flex-row gap-8">
   <div className="lg:w-1/3 lg:sticky lg:top-28 lg:self-start">
-   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase mb-3">FAQ</h2>
+   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase mb-4">FAQ</h2>
    <div className="w-16 h-1 bg-[#DF3131] mx-auto mb-3"></div>
   <p className="text-[#666] dark:text-white/70 text-[15px] leading-relaxed mb-4">Have questions? We have answers. If you can&apos;t find what you&apos;re looking for, reach out to our team.</p>
  <div className="relative mb-4">
@@ -1087,7 +1087,7 @@ export default function HomePage() {
     <div className="flex flex-col items-center text-center gap-3">
     <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
     <div>
-   <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] mb-2 group-hover:text-[#DF3131] transition-colors duration-300 text-center">{c.title}</h3>
+   <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] group-hover:text-[#DF3131] transition-colors duration-300 text-center mb-3">{c.title}</h3>
    <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-center">{c.body}</p>
    </div>
   </div>
@@ -1105,7 +1105,7 @@ export default function HomePage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-12 bg-white dark:bg-[#1C1C1E]">
   <div className="max-w-6xl mx-auto px-6 text-center">
-  <h2 className="text-[1.1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] uppercase mb-3">Quick Links</h2>
+  <h2 className="text-[1.1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] uppercase mb-4">Quick Links</h2>
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 sm:gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8 max-w-5xl mx-auto">
  {QUICK_LINKS.map((link) => (
  <Link key={link.label} href={link.href}

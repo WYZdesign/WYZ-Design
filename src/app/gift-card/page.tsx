@@ -48,8 +48,8 @@ export default function GiftCardPage() {
   return (
     <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
  <div className="max-w-4xl mx-auto px-6 pt-8">
- <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm mb-2 text-center">Give the Gift of Creative</p>
- <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-2 text-center">
+ <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm text-center mb-2">Give the Gift of Creative</p>
+ <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] text-center mb-6 sm:mb-8">
  Gift Cards
  </h1>
  <p className="text-lg text-[#666666] dark:text-[#b0b0b0] mb-6 text-center">The perfect gift for anyone who needs design, photography, or creative services. Redeemable for any WYZ Design service or merch.</p>
@@ -63,7 +63,7 @@ export default function GiftCardPage() {
           {CARDS.map((card) => (
             <div key={card.label} className="border border-gray-200 dark:border-[#333] p-6 text-center hover:border-[#DF3131] transition-colors group bg-white dark:bg-[#252528]">
               <p className="text-3xl font-bold text-[#DF3131] mb-1">${card.amount}</p>
-              <p className="text-sm font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] mb-3">{card.label}</p>
+              <p className="text-sm font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">{card.label}</p>
               <p className="text-sm text-[#666666] dark:text-[#b0b0b0] mb-4">{card.desc}</p>
               <button onClick={() => buyGiftCard(card.amount)} disabled={loading} className="bg-[#333] text-white px-6 py-3 min-h-[44px] font-heading font-bold tracking-[0.15em] uppercase text-sm group-hover:bg-[#DF3131] transition-colors disabled:opacity-50">
                 {loading ? "Loading..." : "Buy Now"}
@@ -72,7 +72,7 @@ export default function GiftCardPage() {
           ))}
           <div className="border border-dashed border-gray-300 dark:border-[#555] p-6 text-center hover:border-[#DF3131] transition-colors bg-white dark:bg-[#252528]">
             <p className="text-3xl font-bold text-[#333] dark:text-[#e0e0e0] mb-1">Custom</p>
-            <p className="text-sm font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] mb-3">Any Amount</p>
+            <p className="text-sm font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Any Amount</p>
             <input type="number" min="5" value={customAmount} onChange={e => setCustomAmount(e.target.value)} placeholder="$ Amount" className="w-full border border-gray-300 dark:border-[#555] px-3 py-3 min-h-[44px] text-center text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:outline-none mb-3" />
             <button onClick={buyCustom} disabled={loading} className="bg-[#DF3131] text-white px-6 py-3 min-h-[44px] font-heading font-bold tracking-[0.15em] uppercase text-sm hover:bg-red-700 transition-colors disabled:opacity-50">
               {loading ? "Loading..." : "Buy Now"}
@@ -81,21 +81,21 @@ export default function GiftCardPage() {
         </div>
 
         <div className="bg-[#f5f5f5] dark:bg-[#252528] p-8 mb-16">
-          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] mb-3 text-center">How It Works</h2>
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] text-center mb-4">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-[#DF3131] mb-2">01</p>
-              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-1">Choose Amount</p>
+              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Choose Amount</p>
               <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Pick a preset or custom value.</p>
             </div>
             <div className="text-center">
               <p className="text-3xl font-bold text-[#DF3131] mb-2">02</p>
-              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-1">Pay via Stripe</p>
+              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Pay via Stripe</p>
                <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Secure checkout, credit card, Apple Pay, Google Pay.</p>
             </div>
             <div className="text-center">
               <p className="text-3xl font-bold text-[#DF3131] mb-2">03</p>
-              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-1">Redeem</p>
+              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Redeem</p>
               <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Apply to any service or merch order. No expiration.</p>
             </div>
           </div>

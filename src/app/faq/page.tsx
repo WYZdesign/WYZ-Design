@@ -181,7 +181,7 @@ export default function FAQPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-[#DF3131] to-[#B82020] rounded-full flex items-center justify-center mx-auto shadow-lg shadow-[#DF3131]/30 mb-5">
                 <FiMessageCircle className="w-8 h-8 text-white" />
               </div>
-              <h2 className="font-heading font-black text-[2rem] sm:text-[2.5rem] md:text-[3rem] tracking-[0.15em] text-[#333] dark:text-[#e0e0e0] uppercase mb-3">
+              <h2 className="font-heading font-black text-[2rem] sm:text-[2.5rem] md:text-[3rem] tracking-[0.15em] text-[#333] dark:text-[#e0e0e0] uppercase mb-4">
                 ASK WYZ AI
               </h2>
               <p className="text-[16px] text-[#8F8F8F] dark:text-[#b0b0b0] max-w-2xl mx-auto">

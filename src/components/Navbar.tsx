@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
 import { IoChevronDown } from "react-icons/io5";
 import { FiSun, FiMoon, FiSearch } from "react-icons/fi";
+import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
 
 const NAV_LINKS = [
@@ -78,9 +79,11 @@ function ThemeToggle({ className = "" }: { className?: string }) {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -121,6 +124,17 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const profileRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const isActive = (href: string) => pathname === href || pathname?.startsWith(href + "/");
 
   if (pathname?.startsWith("/muse")) {
@@ -143,8 +157,8 @@ export default function Navbar() {
         <div className="relative max-w-[115rem] mx-auto pr-8 lg:pr-16">
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
-              <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-4 sm:pl-6 lg:pl-0">
-                <Image src="/images/wyz-crown.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] lg:w-[48px] lg:h-[48px]" loading="lazy" />
+            <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
+              <Image src="/images/wyz-crown.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] lg:w-[48px] lg:h-[48px]" loading="lazy" />
             </Link>
 
             {/* Nav links */}
@@ -235,10 +249,48 @@ export default function Navbar() {
                   )}
                 </AnimatePresence>
               </div>
-              <Link href="/account/my-account" data-kp-light
-                className="px-6 py-2 text-[14px] font-semibold tracking-[0.1em] border-[1.5px] border-white rounded-full transition-all bg-white text-[#DF3131] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:bg-white dark:text-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:border-white">
-                Login
-              </Link>
+              {session?.user ? (
+                <div ref={profileRef} className="relative shrink-0">
+                  <button onClick={() => setProfileOpen(!profileOpen)}
+                    className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/30 hover:border-white transition-all flex items-center justify-center bg-white/10 backdrop-blur">
+                    {session.user.image ? (
+                      <Image src={session.user.image} alt={session.user.name || "Account"} width={40} height={40}
+                        className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="w-8 h-8 rounded-full bg-[#DF3131] text-white flex items-center justify-center font-heading font-bold text-[14px]">
+                        {session.user.name?.[0]?.toUpperCase() || "U"}
+                      </span>
+                    )}
+                  </button>
+                  <AnimatePresence>
+                    {profileOpen && (
+                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
+                        className="absolute top-full right-0 mt-1 w-56 shadow-xl z-50 rounded-lg overflow-hidden">
+                        <div className="absolute inset-0 wyz-red-gradient" />
+                        <div className="relative z-10 py-2">
+                          <div className="px-4 py-3 border-b border-white/10">
+                            <p className="font-medium text-white text-sm">{session.user.name}</p>
+                            <p className="text-xs text-white/60 truncate">{session.user.email}</p>
+                          </div>
+                          <Link href="/account/my-account" onClick={() => setProfileOpen(false)}
+                            className="block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
+                            My Account
+                          </Link>
+                          <button onClick={() => signOut()}
+                            className="w-full text-left px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
+                            Sign Out
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <Link href="/account/my-account" data-kp-light
+                  className="px-6 py-2 text-[14px] font-semibold tracking-[0.1em] border-[1.5px] border-white rounded-full transition-all bg-white text-[#DF3131] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:bg-white dark:text-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:border-white">
+                  Login
+                </Link>
+              )}
               <ThemeToggle />
             </div>
 

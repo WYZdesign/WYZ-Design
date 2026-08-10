@@ -225,7 +225,7 @@ function AutoScrollRow({ images, label, speed, onImageClick }: { images: string[
   return (
     <div className="mb-10">
       <div className="flex items-center gap-3 mb-4 px-2">
-        <span className="text-[13px] text-white/50 font-heading font-bold tracking-[0.15em] uppercase">{label}</span>
+        <span className="text-[13px] text-white/50 font-heading font-bold tracking-[0.15em] uppercase mb-2">{label}</span>
         <div className="flex-1 h-px bg-white/10" />
         <span className="text-[12px] text-white/25 font-mono">{images.length} photos</span>
       </div>
@@ -321,7 +321,7 @@ export default function CategoryPage() {
  <div className="max-w-lg mx-auto mt-12 mb-20 px-6 text-center">
  <div className="border border-white/10 bg-white/5 p-10">
  <FiLock className="w-10 h-10 text-[#DF3131] mx-auto mb-4" />
- <h2 className="text-white font-heading font-bold text-[1.25rem] tracking-[0.05em] mb-2">Sign In Required</h2>
+ <h2 className="text-white font-heading font-bold text-[1.25rem] tracking-[0.05em] mb-4">Sign In Required</h2>
  <p className="text-white/40 text-[14px] mb-6">
  {meta.desc} This content is available to authenticated users only.
  </p>

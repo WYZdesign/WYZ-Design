@@ -51,7 +51,7 @@ function SearchContent() {
   return (
     <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-3xl mx-auto px-6">
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-8">S E A R C H</h1>
+        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">S E A R C H</h1>
         <div className="relative mb-10">
           <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#8F8F8F] w-5 h-5" />
           <input type="text" value={query} onChange={e => setQuery(e.target.value)} autoFocus placeholder="Search pages, services, content..."
@@ -66,7 +66,7 @@ function SearchContent() {
               className="block bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-5 hover:shadow-md hover:border-[#DF3131]/30 transition-all group">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-heading font-bold text-[#333] dark:text-white group-hover:text-[#DF3131] transition-colors">{r.title}</h3>
+                  <h3 className="font-heading font-bold text-[#333] dark:text-white group-hover:text-[#DF3131] transition-colors mb-3">{r.title}</h3>
                   <p className="text-[#8F8F8F] dark:text-white/50 text-sm mt-0.5">{r.desc}</p>
                 </div>
                 <FiArrowRight className="text-[#8F8F8F] group-hover:text-[#DF3131] transition-colors shrink-0 ml-4" />

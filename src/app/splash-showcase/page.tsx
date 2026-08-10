@@ -74,7 +74,7 @@ export default function SplashShowcasePage() {
  <main className="pb-16 bg-white dark:bg-[#111]">
  <div className="max-w-[115rem] mx-auto px-4 lg:px-12">
  <div className="text-center mb-8 md:mb-12">
- <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] mb-3 whitespace-nowrap">
+ <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] whitespace-nowrap mb-6 sm:mb-8">
  <span className="text-[#333] dark:text-white">SPLASH</span> <span className="text-[#DF3131]">SHOWCASE</span>
  </h1>
  <p className="text-[#666] dark:text-white/40 text-sm">{isTouch && hasGyro ? "Tilt your phone to explore" : "Static splash screen showcase"}</p>
@@ -114,7 +114,7 @@ export default function SplashShowcasePage() {
  transition: "opacity 0.3s ease-out",
  } : undefined}
  >
- <p className="text-[#333] dark:text-white font-heading font-bold text-xs md:text-sm tracking-[0.1em]">{s.title}</p>
+ <p className="text-[#333] dark:text-white font-heading font-bold text-xs md:text-sm tracking-[0.1em] mb-2">{s.title}</p>
  </div>
  </div>
  );
@@ -125,7 +125,7 @@ export default function SplashShowcasePage() {
  {selected !== null && (
  <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-8" onClick={() => setSelected(null)}>
   <Image src={SPLASHES[selected].src} alt={SPLASHES[selected].title} width={900} height={506} className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg" priority />
- <p className="absolute bottom-8 text-[#333] dark:text-white font-heading font-bold tracking-[0.1em]">{SPLASHES[selected].title}</p>
+ <p className="absolute bottom-8 text-[#333] dark:text-white font-heading font-bold tracking-[0.1em] mb-2">{SPLASHES[selected].title}</p>
  </div>
  )}
  </main>

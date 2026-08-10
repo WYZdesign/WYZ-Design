@@ -48,7 +48,7 @@ function MyAccount() {
   <div className="w-16 h-16 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-6">
   <span className="text-white text-2xl">&#9993;</span>
   </div>
-  <h1 className="text-2xl font-heading font-bold text-[#333] dark:text-white mb-4">Check Your Email</h1>
+  <h1 className="text-2xl font-heading font-bold text-[#333] dark:text-white mb-6 sm:mb-8">Check Your Email</h1>
   <p className="text-[#666] dark:text-white/70 text-[15px] leading-relaxed">
  We sent a magic link to <strong>{email}</strong>. Click the link in the email to sign in.
  </p>
@@ -86,7 +86,7 @@ function MyAccount() {
  return (
  <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
   <div className="max-w-md mx-auto px-6">
-  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-white mb-8 text-center">
+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-white text-center mb-6 sm:mb-8">
  My Account
  </h1>
 
@@ -220,7 +220,7 @@ function AuthenticatedDashboard({ session, update, signOut }: any) {
  <main className="min-h-screen bg-[#F5F5F3] dark:bg-[#252528] pb-20">
   <div className="max-w-2xl mx-auto px-6">
   <div className="flex items-center justify-between mb-8">
-  <h1 className="text-2xl sm:text-3xl font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-white">My Account</h1>
+  <h1 className="text-2xl sm:text-3xl font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-white mb-6 sm:mb-8">My Account</h1>
  <Link href="/admin" className="text-xs text-[#DF3131] hover:underline uppercase tracking-wider font-bold">Admin →</Link>
  </div>
 
@@ -277,7 +277,7 @@ function AuthenticatedDashboard({ session, update, signOut }: any) {
  {/* Bug Report */}
   <div className="bg-white dark:bg-[#252528] border border-gray-200 dark:border-[#444] p-6 mb-6">
   <button onClick={() => setBugTab(!bugTab)} className="flex items-center justify-between w-full">
-   <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-white">🐞 Report a Bug / Issue</h3>
+   <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-white mb-3">🐞 Report a Bug / Issue</h3>
    <span className="text-[#888] dark:text-white/50 text-lg">{bugTab ? "▲" : "▼"}</span>
  </button>
  {bugTab && (
@@ -328,7 +328,7 @@ function AuthenticatedDashboard({ session, update, signOut }: any) {
  )}
  </div>
  <div className="bg-white dark:bg-[#252528] border border-gray-200 dark:border-[#444] p-6 mb-6">
-  <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-white mb-4">Account Actions</h3>
+  <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-white mb-3">Account Actions</h3>
  <div className="grid grid-cols-2 gap-3">
  <ActionLink href="/plans" label="View Plans" icon={<FiFileText />} />
  <ActionLink href="/booking-calendar/photoshoot" label="Book a Shoot" icon={<FiCamera />} />
@@ -368,7 +368,7 @@ function Field({ label, value, onChange, textarea, placeholder }: { label: strin
 function InfoRow({ label, value, link }: { label: string; value: string; link?: boolean }) {
  return (
  <div className="flex items-start gap-3">
- <span className="text-[12px] font-heading font-bold tracking-[0.08em] uppercase text-[#888] dark:text-white/50 w-20 flex-shrink-0 pt-0.5">{label}</span>
+ <span className="text-[12px] font-heading font-bold tracking-[0.08em] uppercase text-[#888] dark:text-white/50 w-20 flex-shrink-0 pt-0.5 mb-2">{label}</span>
  {link ? (
  <a href={value} target="_blank" rel="noopener noreferrer" className="text-[14px] text-[#DF3131] hover:underline break-all">{value}</a>
  ) : (

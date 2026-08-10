@@ -140,7 +140,7 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
  <span className="text-[18px] font-bold transition-all duration-300" style={{ color: isOpen ? "white" : accent, transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>+</span>
  </div>
  <div className="flex-1">
-  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[20px] sm:text-[24px] tracking-[0.04em] leading-snug">{title}</h3>
+  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[20px] sm:text-[24px] tracking-[0.04em] leading-snug mb-3">{title}</h3>
  </div>
   <div className="hidden sm:block w-[60px] h-[60px] relative rounded-lg overflow-hidden flex-shrink-0">
   <Image src={img} alt={title} fill className="w-full h-full object-cover" priority />
@@ -256,7 +256,7 @@ export default function DesignsPage() {
    <div className="absolute inset-0 hero-grad-design z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
    <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 py-12 md:py-0">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-2 lg:mb-4" style={{ lineHeight: 1 }}>DESIGNING<br />THE <span className="text-[#DF3131]">FUTURE</span></h1>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>DESIGNING<br />THE <span className="text-[#DF3131]">FUTURE</span></h1>
   <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-6 sm:mb-8 mx-auto">Our creative design services blend bold aesthetics with strategic thinking to build brands that dominate.</p>
    <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131">GET A QUOTE</Link>
    </div>
@@ -273,7 +273,7 @@ export default function DesignsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-3 sm:py-4 lg:py-5">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Cover Art</h2>
+  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">Cover Art</h2>
   <Link href="#cover-art" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
  </div>
  <Carousel images={shuffledCovers} direction="left" />
@@ -284,7 +284,7 @@ export default function DesignsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-3 sm:py-4 lg:py-5">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Flyers</h2>
+  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">Flyers</h2>
   <Link href="#flyers" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
  </div>
  <Carousel images={shuffledFlyers} direction="right" />
@@ -295,7 +295,7 @@ export default function DesignsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-3 sm:py-4 lg:py-5">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Logos</h2>
+  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">Logos</h2>
   <Link href="#logos" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
  </div>
  <Carousel images={shuffledLogos} direction="left" whiteBgInDark />
@@ -335,8 +335,8 @@ export default function DesignsPage() {
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
  <div className="text-center">
- <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131]">FEATURED ARTIST OF THE MONTH</span>
-  <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">F. A. O. T. M.</h2>
+ <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">FEATURED ARTIST OF THE MONTH</span>
+  <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">F. A. O. T. M.</h2>
  </div>
   <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all justify-center sm:justify-start">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
  </div>
@@ -346,7 +346,7 @@ export default function DesignsPage() {
  <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
   <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
   </div>
-   <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
+   <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
   </Link>
   ))}
  </div>
@@ -360,7 +360,7 @@ export default function DesignsPage() {
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
  <div className="text-center">
-  <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">MERCH SHOP</h2>
+  <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">MERCH SHOP</h2>
  </div>
   <Link href="/merch" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all justify-center sm:justify-start">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
  </div>
@@ -372,7 +372,7 @@ export default function DesignsPage() {
  <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
   <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
   </div>
-   <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide">{p.name}</p>
+   <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
   <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{p.price}</p>
  </Link>
  ))}
@@ -387,7 +387,7 @@ export default function DesignsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
   <section className="py-6 lg:py-20 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-2 items-start">
- <div className="text-center"><span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131]">UNLEASH YOUR IMAGINATION</span>  <h2 className="text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mt-2 mb-4">DESIGN CONCEPT<br />GENERATOR</h2>  <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">Not sure where to start? Describe your vision and our AI will spark creative ideas tailored to your brand.</p></div>
+ <div className="text-center"><span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">UNLEASH YOUR IMAGINATION</span>  <h2 className="text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">DESIGN CONCEPT<br />GENERATOR</h2>  <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">Not sure where to start? Describe your vision and our AI will spark creative ideas tailored to your brand.</p></div>
   <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] p-4 sm:p-6 lg:p-8 shadow-sm rounded-lg">
  <div className="space-y-4 mb-4 max-h-[320px] overflow-y-auto">
  <div className="flex gap-2 items-start">

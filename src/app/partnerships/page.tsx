@@ -69,8 +69,8 @@ export default function PartnershipsPage() {
       <section className="relative py-20 sm:py-28 lg:py-36 bg-[#111] overflow-hidden hero-banner">
         <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1a1a1a] to-[#DF3131]/20" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-4">Collaborate With Us</p>
-          <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.08em] mb-6" style={{ lineHeight: 1.05 }}>
+          <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-2">Collaborate With Us</p>
+          <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 1.05 }}>
             PARTNERS<span className="text-[#DF3131]">HIPS</span>
           </h1>
           <p className="text-white/60 text-[16px] sm:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -83,7 +83,7 @@ export default function PartnershipsPage() {
       <section className="py-16 sm:py-20 bg-white dark:bg-[#1C1C1E]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-3">
+            <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
               THE <span className="text-[#DF3131]">BRANDS</span>
             </h2>
             <p className="text-[#666] dark:text-white/60 text-[15px] max-w-xl mx-auto">Under the WYZ Design umbrella, three distinct brands serve different parts of the creative ecosystem.</p>
@@ -92,8 +92,8 @@ export default function PartnershipsPage() {
             {PARTNERS.map((p) => (
               <div key={p.name} className="bg-[#F5F5F3] dark:bg-[#252528] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: p.color }} />
-                <p className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-3" style={{ color: p.color }}>{p.tagline}</p>
-                <h3 className="font-heading font-bold text-[20px] tracking-[0.06em] text-[#333] dark:text-white mb-4 uppercase">{p.name}</h3>
+                <p className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: p.color }}>{p.tagline}</p>
+                <h3 className="font-heading font-bold text-[20px] tracking-[0.06em] text-[#333] dark:text-white uppercase mb-3">{p.name}</h3>
                 <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed">{p.desc}</p>
               </div>
             ))}
@@ -105,7 +105,7 @@ export default function PartnershipsPage() {
       <section className="py-16 sm:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-3">
+            <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
               WHY <span className="text-[#DF3131]">PARTNER</span>
             </h2>
           </div>
@@ -114,21 +114,21 @@ export default function PartnershipsPage() {
               <div className="w-14 h-14 mx-auto mb-4 bg-[#DF3131]/10 flex items-center justify-center rounded-xl">
                 <FiUsers className="w-7 h-7 text-[#DF3131]" />
               </div>
-              <h3 className="font-heading font-bold text-[16px] tracking-[0.05em] text-[#333] dark:text-white mb-2 uppercase">Expand Your Reach</h3>
+              <h3 className="font-heading font-bold text-[16px] tracking-[0.05em] text-[#333] dark:text-white uppercase mb-3">Expand Your Reach</h3>
               <p className="text-[15px] text-[#666] dark:text-white/60">Tap into our network of artists, brands, and creative communities across Chicago and Los Angeles.</p>
             </div>
             <div className="text-center">
               <div className="w-14 h-14 mx-auto mb-4 bg-[#DF3131]/10 flex items-center justify-center rounded-xl">
                 <FiTarget className="w-7 h-7 text-[#DF3131]" />
               </div>
-              <h3 className="font-heading font-bold text-[16px] tracking-[0.05em] text-[#333] dark:text-white mb-2 uppercase">Professional Execution</h3>
+              <h3 className="font-heading font-bold text-[16px] tracking-[0.05em] text-[#333] dark:text-white uppercase mb-3">Professional Execution</h3>
               <p className="text-[15px] text-[#666] dark:text-white/60">Every project gets the full WYZ Design treatment—bold creative direction, professional production, zero shortcuts.</p>
             </div>
             <div className="text-center">
               <div className="w-14 h-14 mx-auto mb-4 bg-[#DF3131]/10 flex items-center justify-center rounded-xl">
                 <FiTrendingUp className="w-7 h-7 text-[#DF3131]" />
               </div>
-              <h3 className="font-heading font-bold text-[16px] tracking-[0.05em] text-[#333] dark:text-white mb-2 uppercase">Mutual Growth</h3>
+              <h3 className="font-heading font-bold text-[16px] tracking-[0.05em] text-[#333] dark:text-white uppercase mb-3">Mutual Growth</h3>
               <p className="text-[15px] text-[#666] dark:text-white/60">Partnerships are built on shared success. We invest in relationships that create real value for both sides.</p>
             </div>
           </div>
@@ -139,7 +139,7 @@ export default function PartnershipsPage() {
       <section className="py-16 sm:py-20 bg-white dark:bg-[#1C1C1E]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-3">
+            <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
               PARTNERSHIP <span className="text-[#DF3131]">TIERS</span>
             </h2>
             <p className="text-[#666] dark:text-white/60 text-[15px] max-w-xl mx-auto">Choose the partnership model that fits your goals.</p>
@@ -147,8 +147,8 @@ export default function PartnershipsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {TIERS.map((tier) => (
               <div key={tier.name} className="border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-                <h3 className="font-heading font-bold text-[18px] tracking-[0.06em] text-[#333] dark:text-white mb-1 uppercase">{tier.name}</h3>
-                <p className="text-[#DF3131] font-heading font-bold text-[14px] tracking-[0.1em] mb-3">{tier.price}</p>
+                <h3 className="font-heading font-bold text-[18px] tracking-[0.06em] text-[#333] dark:text-white uppercase mb-3">{tier.name}</h3>
+                <p className="text-[#DF3131] font-heading font-bold text-[14px] tracking-[0.1em] mb-2">{tier.price}</p>
                 <p className="text-[15px] text-[#666] dark:text-white/60 mb-6">{tier.desc}</p>
                 <ul className="space-y-3">
                   {tier.perks.map((perk) => (
