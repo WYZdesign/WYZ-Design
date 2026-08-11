@@ -44,13 +44,11 @@ function PaperAccordion({ paper, index }: { paper: typeof PAPER_TYPES[0]; index:
  {d}
  </div>
  ))}
- </div>
- </div>
    </div>
-   </div>
-   </div>
-   </div>
-  );
+    </div>
+    </div>
+    </div>
+   );
 }
 
 function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
@@ -112,12 +110,12 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
    <Link href="/plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
     VIEW PLANS
    </Link>
-   </div>
-   </div>
-   </div>
-   </div>
-   </div>
-  );
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+ );
 }
 
 function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, backBg, orderLink, orderLabel, orderClass }: {
