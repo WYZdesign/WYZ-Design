@@ -792,10 +792,10 @@ export default function HomePage() {
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
     <GyroTilt intensity={8} enableOnDesktop>
     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-2">Wild Vision. Zealous Execution.</p>
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-4 sm:mb-6" style={{ lineHeight: 1 }}>
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
       <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
     </h1>
-    <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-2 sm:mb-3 max-w-lg text-center">
+    <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-3 sm:mb-3 max-w-lg text-center">
     We help artists, brands, and real people build creative work that actually looks good.
     </p>
     </GyroTilt>
@@ -974,7 +974,7 @@ export default function HomePage() {
 <h2 className="text-[1.05rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase max-sm:whitespace-normal mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
-  <p className="text-white/80 tracking-[0.3em] text-[12px] sm:text-sm uppercase mb-2 max-sm:whitespace-normal max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
+  <p className="text-white/80 tracking-[0.3em] text-[12px] sm:text-sm uppercase mb-3 max-sm:whitespace-normal max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
   <Link href="/printing" className="inline-block px-8 py-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.12em] hover:bg-white hover:text-[#111] transition-all whitespace-nowrap mt-4">
   CUSTOM PRINTING →
   </Link>

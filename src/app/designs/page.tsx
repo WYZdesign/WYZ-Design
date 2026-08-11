@@ -256,8 +256,8 @@ export default function DesignsPage() {
    <div className="absolute inset-0 hero-grad-design z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
    <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 py-12 md:py-0">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-6" style={{ lineHeight: 1 }}>DESIGNING<br />THE <span className="text-[#DF3131]">FUTURE</span></h1>
-  <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-2 sm:mb-3 mx-auto">Our creative design services blend bold aesthetics with strategic thinking to build brands that dominate.</p>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>DESIGNING<br />THE <span className="text-[#DF3131]">FUTURE</span></h1>
+  <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">Our creative design services blend bold aesthetics with strategic thinking to build brands that dominate.</p>
    <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131">GET A QUOTE</Link>
    </div>
    </div>

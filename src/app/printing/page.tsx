@@ -180,8 +180,8 @@ export default function PrintingPage() {
     <div className="absolute inset-0 hero-grad-print z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 flex flex-col items-center justify-center h-full">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase .5 text-white text-center mb-4 sm:mb-6">DIGITAL PRINTING</h1>
-    <p className="text-white/70 text-[16px] sm:text-lg mb-2 sm:mb-3 max-w-md text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase .5 text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
+    <p className="text-white/70 text-[16px] sm:text-lg mb-3 sm:mb-3 max-w-md text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
     <Link href="/designs" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GRAPHIC DESIGN
     </Link>
