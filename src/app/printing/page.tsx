@@ -46,46 +46,49 @@ function PaperAccordion({ paper, index }: { paper: typeof PAPER_TYPES[0]; index:
  ))}
  </div>
  </div>
- </div>
- </div>
- );
+   </div>
+   </div>
+   </div>
+   </div>
+  );
 }
 
 function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
  const [flipped, setFlipped] = useState(false);
 
- return (
- <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(480px, 70vh)" }}
- onMouseEnter={() => setFlipped(true)}
- onMouseLeave={() => setFlipped(false)}
- onClick={() => setFlipped(f => !f)}>
- {/* Front */}
- <div className={`absolute inset-0 transition-all duration-700 ease-in-out ${flipped ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"}`}>
+  return (
+  <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(480px, 70vh)" }}
+  onMouseEnter={() => setFlipped(true)}
+  onMouseLeave={() => setFlipped(false)}
+  onClick={() => setFlipped(f => !f)}>
+  <div
+    className="relative w-full h-full transition-transform duration-700 ease-in-out"
+    style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+  >
+  {/* Front */}
+  <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
   <div className="overflow-hidden bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-500 hover:shadow-2xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
- <div className="aspect-[4/3] overflow-hidden relative">
+  <div className="aspect-[4/3] overflow-hidden relative">
   <Image src={sticker.img} alt={sticker.name} fill className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" priority />
- <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
- <div className="absolute bottom-0 left-0 right-0 p-5">
- <h3 className="font-heading font-black text-white text-[22px] tracking-[0.05em] mb-3">{sticker.name}</h3>
- </div>
- </div>
- <div className="p-5">
- <p className="text-[#666] dark:text-[#b0b0b0] text-[15px] leading-relaxed mb-4">{sticker.desc}</p>
- <div className="grid grid-cols-2 gap-2">
- {sticker.features.map((f) => (
+  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+  <div className="absolute bottom-0 left-0 right-0 p-5">
+  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.05em] mb-3">{sticker.name}</h3>
+  </div>
+  </div>
+  <div className="p-5">
+  <p className="text-[#666] dark:text-[#b0b0b0] text-[15px] leading-relaxed mb-4">{sticker.desc}</p>
+  <div className="grid grid-cols-2 gap-2">
+  {sticker.features.map((f) => (
   <div key={f} className="flex items-center gap-2 text-[13px] text-[#333] dark:text-[#e0e0e0]">
   <span className="text-[#DF3131] font-bold">✓</span> {f}
   </div>
- ))}
- </div>
- </div>
- </div>
- </div>
+  ))}
+  </div>
+  </div>
+  </div>
+  </div>
    {/* Back */}
-   <div
-   className={`absolute inset-0 transition-all duration-700 ease-in-out ${flipped ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
-   style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}
-   >
+   <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col justify-between overflow-hidden relative">
    <div className="absolute inset-0 opacity-10">
     <Image src={sticker.img} alt={sticker.name} fill className="w-full h-full object-cover" priority />
@@ -101,19 +104,20 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
     </div>
     ))}
     </div>
-    </div>
+   </div>
    <div className="relative z-10 flex gap-2 justify-center mt-4">
    <Link href="/booking" className="flex-1 text-center py-3 px-4 bg-white text-[#DF3131] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
-   GET A QUOTE
+    GET A QUOTE
    </Link>
    <Link href="/plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
-   VIEW PLANS
+    VIEW PLANS
    </Link>
    </div>
    </div>
    </div>
- </div>
- );
+   </div>
+   </div>
+  );
 }
 
 function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, backBg, orderLink, orderLabel, orderClass }: {
@@ -126,8 +130,12 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
       onClick={() => setFlipped(f => !f)}>
+      <div
+        className="relative w-full h-full transition-transform duration-700 ease-in-out"
+        style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+      >
       {/* Front */}
-      <div className={`absolute inset-0 transition-all duration-700 ease-in-out ${flipped ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"}`}>
+      <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
         <div className="border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] p-8 lg:p-10 text-center hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10 h-full flex flex-col justify-center">
           <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors mb-4">{title}</h2>
           <p className="text-[#DF3131] text-[16px] tracking-[0.1em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">{subtitle}</p>
@@ -138,10 +146,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
         </div>
       </div>
       {/* Back */}
-      <div
-        className={`absolute inset-0 transition-all duration-700 ease-in-out ${flipped ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
-        style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}
-      >
+      <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
         <div className={`w-full h-full ${backBg} text-white p-8 lg:p-12 flex flex-col justify-between overflow-hidden relative`}>
           <div className="relative z-10 text-center">
             <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.1em] uppercase mb-4">{backTitle}</h2>
@@ -152,6 +157,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
             <Link href={orderLink} className={orderClass} onClick={(e) => e.stopPropagation()}>{orderLabel}</Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -204,7 +204,7 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
 }
 
 function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: string }[]; onPlay?: (item: { title: string; video: string }) => void }) {
- const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(() => Math.floor(Math.random() * items.length));
  const [flipping, setFlipping] = useState(false);
  const [direction, setDirection] = useState(0);
  const [auraColor, setAuraColor] = useState("#DF3131");
@@ -470,54 +470,54 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  );
 }
 
-function YouTubeSection() {
- const ytLogos = [
-   { color: "#FF0000", label: "YouTube" },
-   { color: "#FFFFFF", label: "YouTube" },
-   { color: "#282828", label: "YouTube" },
-   { color: "#FF0000", label: "YT" },
-   { color: "#CC0000", label: "YouTube" },
-   { color: "#E0E0E0", label: "YT" },
-   { color: "#FF1A1A", label: "YouTube" },
-   { color: "#333333", label: "YouTube" },
- ];
+ function YouTubeSection() {
+  const ytPath = "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z";
 
- const ytPath = "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z";
+  const ytRows = [
+    { color: "#FF0000" },
+    { color: "#FFFFFF" },
+    { color: "#FF1A1A" },
+    { color: "#CC0000" },
+    { color: "#FF4D4D" },
+    { color: "#FF8080" },
+  ];
 
- const LogoItem = ({ color, label }: { color: string; label: string }) => (
-   <div className="flex-none flex items-center gap-2 px-6 py-3" style={{ opacity: color === "#282828" || color === "#333333" ? 0.6 : 1 }}>
-     <svg className="w-8 h-8 sm:w-10 sm:h-10" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
-     <span className="font-heading font-bold text-sm sm:text-base tracking-wider mb-2" style={{ color }}>{label}</span>
-   </div>
- );
+  const LogoItem = ({ color }: { color: string }) => (
+    <div className="flex-none flex items-center gap-2 px-6 py-3">
+      <svg className="w-8 h-8 sm:w-10 sm:h-10" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
+    </div>
+  );
 
- const row1 = [...ytLogos, ...ytLogos, ...ytLogos, ...ytLogos];
- const row2 = [...ytLogos.slice().reverse(), ...ytLogos.slice().reverse(), ...ytLogos.slice().reverse(), ...ytLogos.slice().reverse()];
+  const row1 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
+  const row2 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
+  const row3 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
 
- return (
- <div className="relative overflow-hidden bg-[#0a0a0a]">
- <div className="absolute inset-0 z-0">
- <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0000]/10 via-transparent to-[#DF3131]/8" />
- <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-[100px]" />
- <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-[#DF3131]/5 rounded-full blur-[80px]" />
- </div>
- <div className="absolute inset-0 bg-black/30 z-[1]" />
+  return (
+  <div className="relative overflow-hidden bg-[#0a0a0a]">
+  <div className="absolute inset-0 z-0">
+  <div className="absolute top-0 left-0 w-full h-full bg-black/30" />
+  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0000]/10 via-transparent to-[#DF3131]/8" />
+  <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-[100px]" />
+  <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-[#DF3131]/5 rounded-full blur-[80px]" />
+  </div>
 
- <div className="relative z-10 overflow-hidden py-3 border-b border-white/5">
-   <div className="flex whitespace-nowrap animate-marquee-left">
-     {row1.map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} label={logo.label} />))}
-   </div>
- </div>
- <div className="relative z-10 overflow-hidden py-3 border-b border-white/5">
-   <div className="flex whitespace-nowrap animate-marquee-right">
-     {row2.map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} label={logo.label} />))}
-   </div>
- </div>
- <div className="relative z-10 overflow-hidden py-3 border-b border-white/5">
-   <div className="flex whitespace-nowrap animate-marquee-left-fast">
-     {row1.map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} label={logo.label} />))}
-   </div>
- </div>
+  <div className="absolute inset-0 bg-black/70 z-[1]" />
+
+  <div className="relative z-10 overflow-hidden py-3">
+    <div className="flex whitespace-nowrap animate-marquee-left">
+      {row1.map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} />))}
+    </div>
+  </div>
+  <div className="relative z-10 overflow-hidden py-3">
+    <div className="flex whitespace-nowrap animate-marquee-right">
+      {row2.map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} />))}
+    </div>
+  </div>
+  <div className="relative z-10 overflow-hidden py-3">
+    <div className="flex whitespace-nowrap animate-marquee-left-fast">
+      {row3.map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} />))}
+    </div>
+  </div>
 
  <div className="relative z-20 flex flex-col items-center justify-center py-20 sm:py-28 px-6 text-center">
  <div className="yt-float mb-8">

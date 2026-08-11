@@ -230,39 +230,23 @@ function SquareQuote() {
   );
 }
 
-function VerticalMerchGrid() {
-  const ITEMS_PER_PAGE = 6;
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-  const items = [...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS];
-  const visibleItems = items.slice(0, visibleCount);
-  const hasMore = visibleCount < items.length;
-
+function MerchCarousel() {
+  const items = [...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS];
   return (
-    <div className="py-8 bg-[#FEFEFD]">
-      <div className="grid grid-cols-2 gap-3 px-4 max-w-2xl mx-auto">
-        {visibleItems.map((p, i) => (
-          <Link key={`${p.id}-${i}`} href={FAOTM_URL}
-            className="group cursor-pointer">
-            <div className="bg-[#f5f5f5] aspect-square overflow-hidden relative mb-2">
-               <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-            <div className="text-center px-1">
-              <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase text-[#333] dark:text-white mb-2">{p.name}</p>
-              <p className="text-[#DF3131] font-black text-[11px]">${p.price.toFixed(2)}</p>
+    <div className="py-8 bg-[#FEFEFD] overflow-hidden">
+      <div className="flex whitespace-nowrap animate-marquee-left">
+        {items.map((p, i) => (
+          <Link key={`mc-${i}`} href={FAOTM_URL} className="flex-none cursor-pointer">
+            <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
+              <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover" priority decoding="async" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="font-heading font-bold text-[12px] tracking-[0.05em] uppercase text-white">{p.name}</h3>
+              </div>
             </div>
           </Link>
         ))}
       </div>
-      {hasMore && (
-        <div className="text-center mt-6">
-          <button
-            onClick={() => setVisibleCount(prev => prev + ITEMS_PER_PAGE)}
-            className="px-8 py-3 border-2 border-[#333] text-[#333] text-[12px] font-bold tracking-[0.12em] uppercase hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all">
-            Load More ({items.length - visibleCount} remaining)
-          </button>
-        </div>
-      )}
     </div>
   );
 }
@@ -426,9 +410,9 @@ export default function MerchPage() {
           </ScrollReveal>
         </section>
 
-        {/* Vertical Merch Grid */}
+        {/* Merch Carousel */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
-          <VerticalMerchGrid />
+          <MerchCarousel />
         </ScrollReveal>
 
         {/* Enter Store Toggle */}

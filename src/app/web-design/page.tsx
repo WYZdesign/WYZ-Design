@@ -19,10 +19,12 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
       role="button"
       aria-label={`${plan.name} package - click to ${flipped ? "see price" : "see features"}`}
     >
-      {/* Front */}
       <div
-        className={`absolute inset-0 p-8 text-center flex flex-col items-center justify-center transition-all duration-700 ease-in-out ${flipped ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"}`}
+        className="relative w-full h-full transition-transform duration-700 ease-in-out"
+        style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
       >
+      {/* Front */}
+      <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
         <div className={`w-full h-full p-8 text-center flex flex-col items-center justify-center ${plan.accent ? "bg-[#DF3131] text-white shadow-xl shadow-[#DF3131]/30 border-4 border-[#DF3131]" : "bg-white border border-[#E2E2E2] hover:border-[#DF3131] hover:shadow-xl hover:shadow-[#DF3131]/10"}`}>
           {plan.accent && <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#333] dark:bg-[#111] text-white text-[11px] font-bold tracking-[0.1em] px-4 py-1 uppercase mb-2">★ Most Popular</span>}
           <h3 className={`font-heading font-bold text-[18px] tracking-[0.1em] uppercase mb-2 ${plan.accent ? "text-white" : "text-[#333]"}`}>{plan.name}</h3>
@@ -31,10 +33,7 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
         </div>
       </div>
       {/* Back */}
-      <div
-        className={`absolute inset-0 p-8 flex flex-col justify-between overflow-auto transition-all duration-700 ease-in-out ${flipped ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
-        style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-      >
+      <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
         <div className={`w-full h-full p-8 flex flex-col justify-between overflow-auto ${plan.accent ? "bg-[#DF3131] text-white border-4 border-[#DF3131]" : "bg-[#333] dark:bg-[#111] text-white border border-[#444] dark:border-[#333]"}`}>
           <div>
             <h3 className={`font-heading font-bold text-[16px] tracking-[0.1em] uppercase mb-1 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.name}</h3>
@@ -55,6 +54,7 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
