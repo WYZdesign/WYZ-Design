@@ -7,6 +7,7 @@ import { FiChevronLeft, FiChevronRight, FiPlay, FiX } from "react-icons/fi";
 import { useSwipe } from "@/hooks/useSwipe";
 import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
 
 const CLIENT_EVENTS_RAW = [
  { title: "Birthday Video", video: "/videos/client-events/Birthday Video.mp4" },
@@ -621,6 +622,13 @@ export default function EventsPage() {
   </div>
   </div>
   </ScrollReveal>
+
+{/* ═══ EVENTS MARQUEE ═══ */}
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
+      CONCERTS&nbsp;&bull;&nbsp;DIY&nbsp;SHOWS&nbsp;&bull;&nbsp;MIXERS&nbsp;&bull;&nbsp;ART&nbsp;SHOWS&nbsp;&bull;&nbsp;RECAPS&nbsp;&bull;&nbsp;LIVE&nbsp;COVERAGE&nbsp;&bull;&nbsp;
+    </span>
+  </EnhancedMarquee>
 
 {/* ═══ 2. Sign-Up ═══ */}
  <ScrollReveal animation="foldDown" duration={1.0}>

@@ -6,6 +6,7 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import TextReveal from "@/components/TextReveal";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
 
 const PAPER_TYPES = [
  { name: "Premium Gloss", desc: "Premium high gloss paper is the thinnest, glossiest paper you can get. High gloss paper provides vibrant, rich color reproduction, as well as the crispest images possible. Applications include brochures, advertising, flyers, one-sheets, photography, printing and other presentation documents.", details: ["Thinnest gloss available", "Vibrant color reproduction", "Crispest image detail", "Best for brochures & flyers"] },
@@ -190,6 +191,13 @@ export default function PrintingPage() {
   </div>
   </section>
   </ScrollReveal>
+
+{/* ═══ PRINTING MARQUEE ═══ */}
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
+      FLYERS&nbsp;&bull;&nbsp;POSTERS&nbsp;&bull;&nbsp;BUSINESS&nbsp;CARDS&nbsp;&bull;&nbsp;STICKERS&nbsp;&bull;&nbsp;BANNERS&nbsp;&bull;&nbsp;PHOTO&nbsp;PRINTS&nbsp;&bull;&nbsp;
+    </span>
+  </EnhancedMarquee>
 
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
 

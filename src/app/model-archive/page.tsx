@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { FiUser, FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import ImageHoverReveal from "@/components/ImageHoverReveal";
 
 const MODELS = [
  { name: "ADRIENNE", img: "/images/models/ADRIENNE.jpg" },
@@ -192,16 +193,18 @@ export default function ModelArchivePage() {
  <input type="text" placeholder="Search models..." value={search} onChange={e => setSearch(e.target.value)}
  className="w-full max-w-md px-5 py-3 bg-[#F5F5F3] dark:bg-white/10 border border-[#E2E2E2] dark:border-white/20 rounded-full text-[#333] dark:text-white placeholder-[#888] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors mb-8" />
  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
- {filtered.map((m, i) => (
- <div key={i} onClick={() => loadAlbum(m.name)}
- className="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer">
-  <Image src={m.img} alt={m.name} fill className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" priority />
- <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity" />
- <div className="absolute bottom-0 left-0 right-0 p-3 sm:translate-y-full sm:group-hover:translate-y-0 translate-y-0 transition-transform">
- <p className="text-white text-xs font-bold tracking-[0.15em] mb-2">{m.name}</p>
- </div>
- </div>
- ))}
+  {filtered.map((m, i) => (
+  <ImageHoverReveal key={i}>
+  <div onClick={() => loadAlbum(m.name)}
+  className="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer">
+   <Image src={m.img} alt={m.name} fill className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" priority />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity" />
+  <div className="absolute bottom-0 left-0 right-0 p-3 sm:translate-y-full sm:group-hover:translate-y-0 translate-y-0 transition-transform">
+  <p className="text-white text-xs font-bold tracking-[0.15em] mb-2">{m.name}</p>
+  </div>
+  </div>
+  </ImageHoverReveal>
+  ))}
  </div>
  {filtered.length === 0 && <p className="text-center text-[#888] dark:text-white/40 py-20">No models match your search.</p>}
  </>
