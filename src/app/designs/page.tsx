@@ -7,6 +7,8 @@ import { FiArrowRight, FiSearch, FiCpu } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import { LOGOS_IMAGES, COVER_ART_WYZ, FLYERS_IMAGES } from "@/data/designs-data";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
+import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 
 function shuffleArray<T>(arr: T[]): T[] {
  const a = [...arr];
@@ -329,27 +331,36 @@ export default function DesignsPage() {
  </section>
  </ScrollReveal>
 
- {/* ═══ FOATM — FEATURED ARTIST OF THE MONTH ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
-  <section className="py-10 bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
- <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
- <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
- <div className="text-center">
- <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">FEATURED ARTIST OF THE MONTH</span>
-  <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">F. A. O. T. M.</h2>
- </div>
-  <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all justify-center sm:justify-start">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
- </div>
- <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
- {dbcMerch.slice(0, 4).map((p, i) => (
- <Link key={i} href="/merch" className="group cursor-pointer block">
- <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
-  <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+{/* ═══ DESIGNS MARQUEE ═══ */}
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
+      COVER&nbsp;ART&nbsp;&bull;&nbsp;LOGOS&nbsp;&bull;&nbsp;FLYERS&nbsp;&bull;&nbsp;WEB&nbsp;DESIGN&nbsp;&bull;&nbsp;BRANDING&nbsp;&bull;&nbsp;MERCH&nbsp;&bull;&nbsp;
+    </span>
+  </EnhancedMarquee>
+
+  {/* ═══ FOATM — FEATURED ARTIST OF THE MONTH ═══ */}
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+   <section className="py-10 bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
+  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-2">
+  <div className="text-center">
+  <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">FEATURED ARTIST OF THE MONTH</span>
+   <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">F. A. O. T. M.</h2>
   </div>
-   <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
-  </Link>
-  ))}
- </div>
+   <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all justify-center sm:justify-start">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
+  </div>
+  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+  {dbcMerch.slice(0, 4).map((p, i) => (
+  <ScrollParallaxCard key={i} tiltAmount={4} scaleAmount={1.03}>
+  <Link href="/merch" className="group cursor-pointer block">
+  <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
+   <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+   </div>
+    <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
+   </Link>
+  </ScrollParallaxCard>
+   ))}
+  </div>
  </div>
  </section>
  </ScrollReveal>

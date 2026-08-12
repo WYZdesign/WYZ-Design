@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import StrategyWizard from "@/components/StrategyWizard";
 import ScrollReveal from "@/components/ScrollReveal";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
+import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 
 function shuffleArray<T>(arr: T[]): T[] {
  const a = [...arr];
@@ -132,6 +134,13 @@ return (
    </div>
   </section>
   </ScrollReveal>
+
+{/* ═══ SERVICES MARQUEE ═══ */}
+  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
+      PHOTOSHOOTS&nbsp;&bull;&nbsp;RETOUCHING&nbsp;&bull;&nbsp;GRAPHIC&nbsp;DESIGN&nbsp;&bull;&nbsp;LOGOS&nbsp;&bull;&nbsp;VIDEO&nbsp;&bull;&nbsp;WEBSITES&nbsp;&bull;&nbsp;SEO&nbsp;&bull;&nbsp;CONSULTATION&nbsp;&bull;&nbsp;
+    </span>
+  </EnhancedMarquee>
 
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-12">
 

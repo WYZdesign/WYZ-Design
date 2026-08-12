@@ -10,6 +10,10 @@ import CardTilt from "@/components/CardTilt";
 import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
 import GyroTilt from "@/components/GyroTilt";
+import TextMaskReveal from "@/components/TextMaskReveal";
+import MagneticElement from "@/components/MagneticElement";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
+import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 
 const LOGO_INTROS_RAW = [
  "/videos/Untitled Project.mp4",
@@ -792,22 +796,28 @@ export default function HomePage() {
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
     <GyroTilt intensity={8} enableOnDesktop>
     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-3">Wild Vision. Zealous Execution.</p>
+    <TextMaskReveal direction="up">
     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
       <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
     </h1>
+    </TextMaskReveal>
     <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-3 sm:mb-3 max-w-lg text-center">
     We help artists, brands, and real people build creative work that actually looks good.
     </p>
     </GyroTilt>
     <div className="flex flex-col sm:flex-row gap-3 justify-center">
+     <MagneticElement tag="div" strength={0.25}>
      <Link href="/about"
      className="inline-block border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#333] transition-all">
      SEE THE STORY
      </Link>
+     </MagneticElement>
+     <MagneticElement tag="div" strength={0.25}>
      <Link href="/contact"
      className="inline-block px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center bg-[#DF3131] text-white hover:bg-[#C41E1E] transition-all">
      START A PROJECT
      </Link>
+     </MagneticElement>
     </div>
    </div>
    </div>
@@ -819,6 +829,13 @@ export default function HomePage() {
   <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.5} />
   </section>
   </ScrollReveal>
+
+{/* ═══ BRAND MARQUEE ═══ */}
+  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+    <span className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-8">
+      PHOTOGRAPHY&nbsp;&bull;&nbsp;DESIGN&nbsp;&bull;&nbsp;PRINT&nbsp;&bull;&nbsp;WEB&nbsp;&bull;&nbsp;VIDEO&nbsp;&bull;&nbsp;EVENTS&nbsp;&bull;&nbsp;BRANDING&nbsp;&bull;&nbsp;
+    </span>
+  </EnhancedMarquee>
 
 {/* ═══ SERVICES + PRICING PLANS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
@@ -1077,23 +1094,25 @@ export default function HomePage() {
   { title: "Fast, But Never Sloppy", body: "We move quick because we know what we are doing. But nothing leaves the desk looking rushed, generic, or like someone stopped caring halfway through.", color: "#888888", icon: FiTrendingUp },
  ].map((c, i) => {
  const Icon = c.icon;
- return (
-  <GyroTilt key={i} intensity={6} enableOnDesktop>
-  <CardTilt intensity={10}>
-   <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-6 sm:p-8 lg:p-12 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1 min-h-[320px] sm:min-h-[360px] flex flex-col justify-center">
- <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
- <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
-  <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />
-    <div className="flex flex-col items-center text-center gap-3">
-    <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
-    <div>
-   <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] group-hover:text-[#DF3131] transition-colors duration-300 text-center mb-3">{c.title}</h3>
-   <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-center">{c.body}</p>
+  return (
+   <GyroTilt key={i} intensity={6} enableOnDesktop>
+   <CardTilt intensity={10}>
+   <ScrollParallaxCard tiltAmount={4} scaleAmount={1.03}>
+    <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-6 sm:p-8 lg:p-12 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1 min-h-[320px] sm:min-h-[360px] flex flex-col justify-center">
+  <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
+  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
+   <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />
+     <div className="flex flex-col items-center text-center gap-3">
+     <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
+     <div>
+    <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] group-hover:text-[#DF3131] transition-colors duration-300 text-center mb-3">{c.title}</h3>
+    <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-center">{c.body}</p>
+    </div>
    </div>
   </div>
- </div>
- </CardTilt>
- </GyroTilt>
+  </ScrollParallaxCard>
+  </CardTilt>
+  </GyroTilt>
  );
  })}
  </div>

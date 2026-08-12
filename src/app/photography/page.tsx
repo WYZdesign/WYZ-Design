@@ -6,6 +6,8 @@ import Link from "next/link";
 import { FiCamera, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSwipe } from "@/hooks/useSwipe";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
+import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 
 function shuffleArray<T>(arr: T[]): T[] {
  const a = [...arr];
@@ -656,26 +658,35 @@ return (
  </section>
  </ScrollReveal>
 
- {/* ALBUM CATEGORIES */}
- <ScrollReveal animation="fadeUp" delay={0.05}>
- <section className="py-6 sm:py-8 lg:py-12">
- <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
- <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
- {ALBUMS.map((a, i) => (
- <Link key={a} href={`/photography/${encodeURIComponent(a)}`}
-  className="album-card group relative overflow-hidden aspect-square cursor-pointer"
-  style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
-   <Image src={albumCovers[a]} alt={a} fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" priority />
-   <div className="absolute inset-0 z-10 bg-black/30" />
-   <div className="absolute inset-0 flex items-center justify-center z-20">
-   <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
+{/* ALBUM CATEGORIES */}
+  <ScrollReveal animation="fadeUp" delay={0.05}>
+  <section className="py-6 sm:py-8 lg:py-12">
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
+  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+  {ALBUMS.map((a, i) => (
+  <ScrollParallaxCard key={a} tiltAmount={5} scaleAmount={1.02}>
+  <Link href={`/photography/${encodeURIComponent(a)}`}
+   className="album-card group relative overflow-hidden aspect-square cursor-pointer"
+   style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
+    <Image src={albumCovers[a]} alt={a} fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" priority />
+    <div className="absolute inset-0 z-10 bg-black/30" />
+    <div className="absolute inset-0 flex items-center justify-center z-20">
+    <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
+   </div>
+   </Link>
+  </ScrollParallaxCard>
+  ))}
   </div>
-  </Link>
- ))}
- </div>
- </div>
- </section>
- </ScrollReveal>
+  </div>
+  </section>
+  </ScrollReveal>
+
+{/* ═══ BRAND MARQUEE ═══ */}
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E] mb-4">
+    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
+      EVENTS&nbsp;&bull;&nbsp;OUTDOORS&nbsp;&bull;&nbsp;STUDIO&nbsp;&bull;&nbsp;BOUDOIR&nbsp;&bull;&nbsp;BODYPAINT&nbsp;&bull;&nbsp;URBEX&nbsp;&bull;&nbsp;PRODUCTS&nbsp;&bull;&nbsp;CONCEPTUAL&nbsp;&bull;&nbsp;
+    </span>
+  </EnhancedMarquee>
 
  {/* BENEFITS CARDS */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
