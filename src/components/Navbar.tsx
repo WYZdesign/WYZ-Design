@@ -311,8 +311,49 @@ export default function Navbar() {
         {mobileOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-white dark:bg-[#1C1C1E] lg:hidden flex flex-col pt-24">
+            {/* Profile / Account / Login — pinned to top of side menu */}
+            <div className="px-6 pt-2 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
+              {session?.user ? (
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#DF3131] flex items-center justify-center bg-[#DF3131]/10 shrink-0">
+                    {session.user.image ? (
+                      <Image src={session.user.image} alt={session.user.name || "Account"} width={48} height={48} className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="w-full h-full rounded-full bg-[#DF3131] text-white flex items-center justify-center font-heading font-bold text-[18px]">
+                        {session.user.name?.[0]?.toUpperCase() || "U"}
+                      </span>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[15px] font-semibold text-[#333] dark:text-[#e0e0e0] truncate">{session.user.name || "Account"}</p>
+                    <p className="text-[12px] text-[#8F8F8F] truncate">{session.user.email}</p>
+                  </div>
+                </div>
+              ) : (
+                <Link href="/account/my-account" onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-between w-full px-5 py-3 text-[15px] font-semibold tracking-[0.05em] rounded-xl bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3">
+                  <span>Login</span>
+                  <span className="text-[12px] font-normal opacity-80">Profile & Account</span>
+                </Link>
+              )}
+              <div className="flex items-center gap-3">
+                {session?.user && (
+                  <Link href="/account/my-account" onClick={() => setMobileOpen(false)}
+                    className="flex-1 text-center py-3 px-4 text-[14px] font-semibold border-[1.5px] border-[#DF3131] text-[#DF3131] hover:bg-[#DF3131] hover:text-white rounded-full transition-all">
+                    My Account
+                  </Link>
+                )}
+                {session?.user && (
+                  <button onClick={() => { signOut(); setMobileOpen(false); }}
+                    className="flex-1 text-center py-3 px-4 text-[14px] font-semibold border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] dark:hover:bg-[#e0e0e0] hover:text-white dark:hover:text-[#1C1C1E] rounded-full transition-all">
+                    Sign Out
+                  </button>
+                )}
+                <ThemeToggle className="border-[#DF3131] text-[#DF3131] dark:border-[#e0e0e0] dark:text-[#e0e0e0] hover:bg-[#DF3131]/10 dark:hover:bg-[#e0e0e0]/10" />
+              </div>
+            </div>
             {/* Mobile search */}
-            <div className="px-6 pt-2 pb-4">
+            <div className="px-6 pt-3 pb-2">
               <input type="text" placeholder="Search WYZ..."
                 className="w-full px-4 py-3 text-[14px] border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] placeholder:text-[#999] focus:border-[#DF3131] outline-none"
                 onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
@@ -328,13 +369,6 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              <div className="mt-6 pt-4 border-t-[2px] border-[#E2E2E2] dark:border-[#333] flex items-center justify-between">
-                <Link href="/account/my-account" onClick={() => setMobileOpen(false)}
-                  className="text-center py-3 px-6 text-[14px] font-semibold border-[1.5px] border-[#DF3131] text-[#DF3131] hover:bg-[#DF3131] hover:text-white rounded-full transition-all dark:bg-[#252528] dark:text-[#DF3131] dark:hover:bg-[#333] dark:hover:text-[#DF3131] dark:border-[#DF3131]">
-                  Login
-                </Link>
-                <ThemeToggle className="border-[#DF3131] text-[#DF3131] dark:border-[#e0e0e0] dark:text-[#e0e0e0] hover:bg-[#DF3131]/10 dark:hover:bg-[#e0e0e0]/10" />
-              </div>
             </div>
           </motion.div>
         )}

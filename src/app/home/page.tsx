@@ -834,9 +834,16 @@ export default function HomePage() {
 
 {/* ═══ BRAND MARQUEE ═══ */}
   <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
-    <span className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-8">
-      PHOTOGRAPHY&nbsp;&bull;&nbsp;DESIGN&nbsp;&bull;&nbsp;PRINT&nbsp;&bull;&nbsp;WEB&nbsp;&bull;&nbsp;VIDEO&nbsp;&bull;&nbsp;EVENTS&nbsp;&bull;&nbsp;BRANDING&nbsp;&bull;&nbsp;
-    </span>
+    {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => (
+      <span key={i} className="inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4">
+        <span className={[
+          "text-[#DF3131]",
+          "text-[#111] dark:text-white",
+          "text-[#B0B0B0] dark:text-[#6B6B6B]",
+        ][i % 3]}>{word}</span>
+        <span className="text-[#B0B0B0] dark:text-[#6B6B6B] ml-4">&bull;</span>
+      </span>
+    ))}
   </EnhancedMarquee>
 
 {/* ═══ SERVICES + PRICING PLANS ═══ */}
