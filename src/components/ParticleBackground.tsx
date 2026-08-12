@@ -77,6 +77,7 @@ export default function ParticleBackground({
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = blendMode as GlobalCompositeOperation;
 
       particlesRef.current.forEach((p) => {
         p.x += p.vx;
@@ -96,7 +97,6 @@ export default function ParticleBackground({
         ctx.fill();
       });
 
-      ctx.globalCompositeOperation = blendMode as GlobalCompositeOperation;
       animId = requestAnimationFrame(animate);
     };
 

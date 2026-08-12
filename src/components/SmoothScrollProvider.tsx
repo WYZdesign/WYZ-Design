@@ -8,10 +8,9 @@ export const useLenis = () => useContext(LenisContext);
 
 interface SmoothScrollProviderProps {
   children: ReactNode;
-  root?: boolean;
 }
 
-export default function SmoothScrollProvider({ children, root = false }: SmoothScrollProviderProps) {
+export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {

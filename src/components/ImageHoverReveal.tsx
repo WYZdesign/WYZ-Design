@@ -5,13 +5,15 @@ import { useRef, useState, useCallback, ReactNode, cloneElement, isValidElement 
 interface ImageHoverRevealProps {
   children: ReactNode;
   className?: string;
-  intensity?: number;
+  spotlightRadius?: number;
+  glowRadius?: number;
 }
 
 export default function ImageHoverReveal({
   children,
   className = "",
-  intensity = 20,
+  spotlightRadius = 400,
+  glowRadius = 150,
 }: ImageHoverRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
@@ -27,6 +29,8 @@ export default function ImageHoverReveal({
     });
   }, []);
 
+  const child = isValidElement(children) ? children as React.ReactElement<Record<string, unknown>> : null;
+
   return (
     <div
       ref={ref}
@@ -34,21 +38,12 @@ export default function ImageHoverReveal({
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       onMouseMove={onMove}
-      style={
-        {
-          "--hx": `${pos.x}%`,
-          "--hy": `${pos.y}%`,
-          "--intensity": `${intensity}px`,
-        } as React.CSSProperties
-      }
     >
-      {isValidElement(children) &&
-        cloneElement(children as React.ReactElement<any>, {
-          className: `${
-            (children as React.ReactElement<any>).props.className || ""
-          } transition-transform duration-500`,
+      {child &&
+        cloneElement(child, {
+          className: `${child.props.className || ""} transition-transform duration-500`,
           style: {
-            ...((children as React.ReactElement<any>).props.style || {}),
+            ...(child.props.style || {}),
             transform: hovering
               ? `scale(1.08) translate(${(50 - pos.x) * 0.02}px, ${(50 - pos.y) * 0.02}px)`
               : "scale(1)",
@@ -62,13 +57,13 @@ export default function ImageHoverReveal({
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(400px circle at var(--hx) var(--hy), rgba(223,49,49,0.12) 0%, transparent 60%)`,
+            background: `radial-gradient(${spotlightRadius}px circle at ${pos.x}% ${pos.y}%, rgba(223,49,49,0.12) 0%, transparent 60%)`,
           }}
         />
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(150px circle at var(--hx) var(--hy), rgba(255,255,255,0.08) 0%, transparent 50%)`,
+            background: `radial-gradient(${glowRadius}px circle at ${pos.x}% ${pos.y}%, rgba(255,255,255,0.08) 0%, transparent 50%)`,
           }}
         />
       </div>

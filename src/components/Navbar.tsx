@@ -81,7 +81,6 @@ function ThemeToggle({ className = "" }: { className?: string }) {
 export default function Navbar() {
   const pathname = usePathname();
   const { data: session } = useSession();
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -94,7 +93,6 @@ export default function Navbar() {
   const searchContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
-  useEffect(() => { const h = () => setScrolled(window.scrollY > 20); window.addEventListener("scroll", h, { passive: true }); return () => window.removeEventListener("scroll", h); }, []);
   useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [mobileOpen]);
   useEffect(() => { if (!mobileOpen) return; const close = (e: TouchEvent | MouseEvent) => { const target = e.target as HTMLElement; if (!target.closest("[data-more-dropdown]") && !target.closest("[data-more-btn]")) setMoreOpen(false); }; document.addEventListener("touchstart", close); return () => document.removeEventListener("touchstart", close); }, [mobileOpen]);
 

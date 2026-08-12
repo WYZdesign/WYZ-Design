@@ -1,36 +1,30 @@
 "use client";
 
-import { useRef, ReactNode, useCallback } from "react";
+import { useRef, ReactNode, useCallback, ComponentPropsWithRef, ElementType } from "react";
 
-interface MagneticElementProps {
+interface MagneticElementProps<T extends ElementType = "span"> {
   children: ReactNode;
   className?: string;
   strength?: number;
-  tag?: "span" | "div" | "button" | "a";
+  tag?: T;
 }
 
-export default function MagneticElement({
+export default function MagneticElement<T extends ElementType = "span">({
   children,
   className = "",
   strength = 0.3,
-  tag: Tag = "span",
-}: MagneticElementProps) {
+  tag,
+}: MagneticElementProps<T>) {
+  const Tag = (tag || "span") as ElementType;
   const ref = useRef<HTMLElement>(null);
-  const boundsRef = useRef({ cx: 0, cy: 0, w: 0, h: 0 });
 
   const onMove = useCallback(
     (e: React.MouseEvent) => {
       const el = ref.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
-      boundsRef.current = {
-        cx: rect.left + rect.width / 2,
-        cy: rect.top + rect.height / 2,
-        w: rect.width,
-        h: rect.height,
-      };
-      const dx = e.clientX - boundsRef.current.cx;
-      const dy = e.clientY - boundsRef.current.cy;
+      const dx = e.clientX - (rect.left + rect.width / 2);
+      const dy = e.clientY - (rect.top + rect.height / 2);
       el.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
       el.style.transition = "transform 0.15s ease-out";
     },
@@ -45,7 +39,6 @@ export default function MagneticElement({
   }, []);
 
   return (
-    // @ts-expect-error dynamic tag
     <Tag ref={ref} className={className} onMouseMove={onMove} onMouseLeave={onLeave}>
       {children}
     </Tag>
