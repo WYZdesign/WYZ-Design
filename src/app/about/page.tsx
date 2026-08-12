@@ -3,6 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
+import TextMaskReveal from "@/components/TextMaskReveal";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const BRANDS = [
   {
@@ -45,6 +48,7 @@ export default function AboutPage() {
             </video>
             <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
           </div>
+          <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
           {/* Crown logo marquee background */}
           <div className="absolute inset-0 z-[1] overflow-hidden opacity-[0.04] pointer-events-none">
             <div className="flex whitespace-nowrap animate-marquee-left" style={{ gap: '4rem' }}>
@@ -64,15 +68,24 @@ export default function AboutPage() {
           </div>
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
+            <TextMaskReveal direction="up">
             <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
               WE MAKE<br />WHAT <span className="text-[#DF3131]">WORKS</span>
             </h1>
+            </TextMaskReveal>
             <p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-2xl mx-auto mb-3">
               WYZ Design is a creative growth studio for artists, brands, and culture. Built from scratch in Chicago. Scaling in Los Angeles.
             </p>
           </div>
         </section>
       </ScrollReveal>
+
+      {/* ═══ BRAND MARQUEE ═══ */}
+      <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+        <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
+          WILD&nbsp;YET&nbsp;ZEALOUS&nbsp;&bull;&nbsp;DYING&nbsp;BREED&nbsp;CREW&nbsp;&bull;&nbsp;NOMADIC&nbsp;BREED&nbsp;&bull;&nbsp;CHICAGO&nbsp;&bull;&nbsp;LOS&nbsp;ANGELES&nbsp;&bull;&nbsp;
+        </span>
+      </EnhancedMarquee>
 
       {/* MISSION */}
       <ScrollReveal animation="fadeUp">

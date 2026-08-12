@@ -10,6 +10,7 @@ import { IoChevronDown } from "react-icons/io5";
 import { FiSun, FiMoon, FiSearch } from "react-icons/fi";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
+import MagneticElement from "@/components/MagneticElement";
 
 const NAV_LINKS = [
   { href: "/home", label: "H O M E" },
@@ -157,9 +158,11 @@ export default function Navbar() {
         <div className="relative max-w-[115rem] mx-auto pr-8 lg:pr-16">
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
+            <MagneticElement tag="div" strength={0.2}>
             <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
               <Image src="/images/wyz-crown.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] lg:w-[48px] lg:h-[48px]" loading="lazy" />
             </Link>
+            </MagneticElement>
 
             {/* Nav links */}
             <div className="hidden lg:flex flex-1 items-center justify-evenly px-10">

@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { FiExternalLink, FiMonitor, FiSmartphone, FiTrendingUp, FiZap, FiGlobe, FiLock, FiArrowRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import EnhancedMarquee from "@/components/EnhancedMarquee";
 
 function FlipCard({ plan }: { plan: { name: string; price: string; features: string[]; accent: boolean } }) {
   const [flipped, setFlipped] = useState(false);
@@ -247,6 +248,13 @@ return (
           </div>
         </div>
         </section>
+
+        {/* ═══ WEB DESIGN MARQUEE ═══ */}
+        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+          <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
+            RESPONSIVE&nbsp;&bull;&nbsp;SEO&nbsp;&bull;&nbsp;E-COMMERCE&nbsp;&bull;&nbsp;LANDING&nbsp;PAGES&nbsp;&bull;&nbsp;CMS&nbsp;&bull;&nbsp;CUSTOM&nbsp;CODE&nbsp;&bull;&nbsp;
+          </span>
+        </EnhancedMarquee>
 
         {/* ═══ CAPABILITIES — Scroll reveal ═══ */}
         <ScrollReveal animation="fadeUp">
