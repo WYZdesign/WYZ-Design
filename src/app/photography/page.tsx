@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { useSwipe } from "@/hooks/useSwipe";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
+import ImageHoverReveal from "@/components/ImageHoverReveal";
 
 function shuffleArray<T>(arr: T[]): T[] {
  const a = [...arr];
@@ -665,15 +666,17 @@ return (
   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
   {ALBUMS.map((a, i) => (
   <ScrollParallaxCard key={a} tiltAmount={5} scaleAmount={1.02}>
+  <ImageHoverReveal>
   <Link href={`/photography/${encodeURIComponent(a)}`}
-   className="album-card group relative overflow-hidden aspect-square cursor-pointer"
+   className="album-card group relative overflow-hidden aspect-square cursor-pointer block"
    style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
     <Image src={albumCovers[a]} alt={a} fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" priority />
     <div className="absolute inset-0 z-10 bg-black/30" />
-    <div className="absolute inset-0 flex items-center justify-center z-20">
+    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
     <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
    </div>
    </Link>
+  </ImageHoverReveal>
   </ScrollParallaxCard>
   ))}
   </div>

@@ -9,6 +9,7 @@ import ParallaxVideo from "@/components/ParallaxVideo";
 import { LOGOS_IMAGES, COVER_ART_WYZ, FLYERS_IMAGES } from "@/data/designs-data";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
+import ImageHoverReveal from "@/components/ImageHoverReveal";
 
 function shuffleArray<T>(arr: T[]): T[] {
  const a = [...arr];
@@ -351,14 +352,16 @@ export default function DesignsPage() {
   </div>
   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
   {dbcMerch.slice(0, 4).map((p, i) => (
-  <ScrollParallaxCard key={i} tiltAmount={4} scaleAmount={1.03}>
-  <Link href="/merch" className="group cursor-pointer block">
-  <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
-   <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
-   </div>
-    <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
-   </Link>
-  </ScrollParallaxCard>
+   <ScrollParallaxCard key={i} tiltAmount={4} scaleAmount={1.03}>
+   <ImageHoverReveal>
+   <Link href="/merch" className="group cursor-pointer block">
+   <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
+    <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+    </div>
+     <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
+    </Link>
+   </ImageHoverReveal>
+   </ScrollParallaxCard>
    ))}
   </div>
  </div>

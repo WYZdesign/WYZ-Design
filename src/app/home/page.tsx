@@ -14,6 +14,7 @@ import TextMaskReveal from "@/components/TextMaskReveal";
 import MagneticElement from "@/components/MagneticElement";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const LOGO_INTROS_RAW = [
  "/videos/Untitled Project.mp4",
@@ -790,8 +791,9 @@ export default function HomePage() {
     <VideoPlaylist videos={LOGO_INTROS} />
     </div>
      {/* 80% + 30% black overlay (or overall opacity increase) between video and text */}
-      <div className="absolute inset-0 bg-black/65 z-[1]" />
-    {/* Text content on top */}
+       <div className="absolute inset-0 bg-black/65 z-[1]" />
+     <ParticleBackground count={25} color="#DF3131" maxSize={2} speed={0.2} className="z-[2]" />
+     {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
     <GyroTilt intensity={8} enableOnDesktop>
