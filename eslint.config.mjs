@@ -23,6 +23,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "screenshot-audit.js",
+    "wyz_*.mjs",
+    "verify_*.mjs",
   ]),
 ]);
 

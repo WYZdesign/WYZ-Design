@@ -156,7 +156,7 @@ export default function Footer() {
             <p className={`text-[13px] ${copyrightColor}`}>&copy; {new Date().getFullYear()} WYZ Design LLC. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <p className={`text-[13px] ${precisionColor}`}>Designed & built with precision.</p>
-              <Image src="/images/wix-partner-logo.png" alt="Wix Editor X Partner" width={24} height={24} className="opacity-60 hover:opacity-100 transition-opacity" priority />
+              <Image src="/images/wix-extracted/common/logo/common_logo_00_98442d_d7e48f1e01ab4d7b87f7e4f779f4dfd9.png.png" alt="Wix Editor X Partner" width={80} height={80} className="opacity-60 hover:opacity-100 transition-opacity w-8 h-8 object-contain" priority />
             </div>
           </div>
         </div>

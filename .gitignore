@@ -63,3 +63,8 @@ muse_settings.cjs
 node_modules/
 .vercel/
 _AUDIT_SCREENSHOTS/
+
+# temp verify/audit scripts
+screenshot-audit.js
+wyz_*.mjs
+verify_*.mjs
