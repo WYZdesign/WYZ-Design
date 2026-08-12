@@ -20,6 +20,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import A11yAudit from "@/components/A11yAudit";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import NoiseOverlay from "@/components/NoiseOverlay";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap" });
@@ -176,6 +178,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
           <AuthProvider>
+          <SmoothScrollProvider>
           <ScrollAnimator />
           <RouteBackground />
           <ScrollProgress />
@@ -188,6 +191,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <ChatWidget />
           <ScrollToTop />
+          <NoiseOverlay />
+          </SmoothScrollProvider>
         </AuthProvider>
         </ThemeProvider>
         <GlobalImagePicker />
