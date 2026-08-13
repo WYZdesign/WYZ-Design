@@ -394,6 +394,17 @@ export default function MerchPage() {
       <main className="min-h-screen bg-[#FEFEFD]">
         <ParallaxHero />
 
+        {/* Gallery Carousel 1 — under hero */}
+        <div className="py-6 bg-[#111] overflow-hidden">
+          <div className="flex whitespace-nowrap animate-marquee-right">
+            {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
+              <div key={`gc1-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
+                <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Product Name Marquee Strip */}
         <div className="relative overflow-hidden bg-[#111] py-3 border-y border-white/5">
           <div className="flex whitespace-nowrap animate-marquee-left">
@@ -643,6 +654,17 @@ export default function MerchPage() {
           </div>
         </div>
       )}
+
+      {/* Gallery Carousel 2 — under store */}
+      <div className="py-6 bg-[#111] overflow-hidden">
+        <div className="flex whitespace-nowrap animate-marquee-left">
+          {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
+            <div key={`gc2-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
+              <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 }
