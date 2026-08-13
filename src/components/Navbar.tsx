@@ -149,9 +149,8 @@ export default function Navbar() {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${visible ? "opacity-100" : "opacity-0 -translate-y-2 pointer-events-none"}`}>
-        <div className="absolute inset-0 overflow-hidden wyz-red-gradient opacity-90">
+        <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
           <video src="/videos/wyz-nav-bg.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
-          <div className="absolute inset-0 bg-black/15" />
         </div>
         <div className="relative max-w-[115rem] mx-auto pr-8 lg:pr-16">
           <div className="flex items-center h-20 lg:h-24">

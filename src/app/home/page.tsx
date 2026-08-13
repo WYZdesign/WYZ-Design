@@ -796,18 +796,18 @@ export default function HomePage() {
      {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
-    <GyroTilt intensity={8} enableOnDesktop>
-    <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-3">Wild Vision. Zealous Execution.</p>
-    <TextMaskReveal direction="up">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
-      <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
-    </h1>
-    </TextMaskReveal>
-    <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-3 sm:mb-3 max-w-lg text-center">
-    We help artists, brands, and real people build creative work that actually looks good.
-    </p>
-    </GyroTilt>
-    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+     <GyroTilt intensity={8} enableOnDesktop>
+     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-6">Wild Vision. Zealous Execution.</p>
+     <TextMaskReveal direction="up">
+     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-8" style={{ lineHeight: 1 }}>
+       <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
+     </h1>
+     </TextMaskReveal>
+     <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-8 max-w-lg mx-auto text-center">
+     We help artists, brands, and real people build creative work that actually looks good.
+     </p>
+     </GyroTilt>
+     <div className="flex flex-col sm:flex-row gap-4 justify-center">
      <MagneticElement tag="div" strength={0.25}>
      <Link href="/about"
      className="inline-block border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#333] transition-all">
@@ -835,14 +835,22 @@ export default function HomePage() {
 {/* ═══ BRAND MARQUEE ═══ */}
   <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
-      const color = [
+      const colors = [
         "text-[#DF3131]",
         "text-[#111] dark:text-white",
-        "text-[#B0B0B0] dark:text-[#6B6B6B]",
-      ][i % 3];
+        "text-[#DF3131]",
+        "text-white dark:text-white",
+      ];
+      const strokes = [
+        "",
+        "",
+        "",
+        "[-webkit-text-stroke:1px_#DF3131] dark:[-webkit-text-stroke:1px_#DF3131]",
+      ];
+      const ci = i % 4;
       return (
-        <span key={i} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 ${color}`}>
-          {word}<span className="ml-4">&bull;</span>
+        <span key={i} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]} ${strokes[ci]}`}>
+          {word}<span className="ml-4 opacity-60">&bull;</span>
         </span>
       );
     })}
