@@ -807,7 +807,7 @@ export default function HomePage() {
        <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
      </h1>
      </TextMaskReveal>
-     <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-8 max-w-lg mx-auto text-center">
+     <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-10 max-w-lg mx-auto text-center">
      We help artists, brands, and real people build creative work that actually looks good.
      </p>
      </GyroTilt>
@@ -845,17 +845,11 @@ export default function HomePage() {
         "text-[#DF3131]",
         "text-[#111] dark:text-white",
         "text-[#DF3131]",
-        "text-white dark:text-white",
-      ];
-      const strokes = [
-        "",
-        "",
-        "",
-        "[-webkit-text-stroke:1px_#DF3131] dark:[-webkit-text-stroke:1px_#DF3131]",
+        "text-[#111] dark:text-white",
       ];
       const ci = i % 4;
       return (
-        <span key={i} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]} ${strokes[ci]}`}>
+        <span key={i} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]}`}>
           {word}<span className="ml-4 opacity-60">&bull;</span>
         </span>
       );

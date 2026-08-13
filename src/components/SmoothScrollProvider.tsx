@@ -15,11 +15,12 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.8,
+      easing: (t: number) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
-      syncTouchLerp: 0.075,
-      touchMultiplier: 2,
+      syncTouchLerp: 0.1,
+      touchMultiplier: 1.5,
+      wheelMultiplier: 1,
     });
 
     lenisRef.current = lenis;
