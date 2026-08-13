@@ -240,23 +240,23 @@ export default function FeaturedArtistPage() {
  {/* Art preview grid */}
  <div className="grid grid-cols-2 gap-3">
  <ImageReveal direction="left" delay={0}>
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
- <Image src="/images/faotm_1.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
+ <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
+ <Image src="/images/faotm_1.jpg" alt="Featured artwork" fill className="object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
  </ImageReveal>
  <ImageReveal direction="right" delay={0.1}>
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
- <Image src="/images/faotm_2.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
+ <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
+ <Image src="/images/faotm_2.jpg" alt="Featured artwork" fill className="object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
  </ImageReveal>
  <ImageReveal direction="left" delay={0.2}>
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
- <Image src="/images/faotm_3.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
+ <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
+ <Image src="/images/faotm_3.jpg" alt="Featured artwork" fill className="object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
  </ImageReveal>
  <ImageReveal direction="right" delay={0.3}>
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
-  <Image src="/images/danny-davis.png" alt="Danny Davis portrait" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
+ <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
+  <Image src="/images/danny-davis.png" alt="Danny Davis portrait" fill className="object-cover group-hover:scale-105 transition-transform duration-500" priority />
   </Link>
   </ImageReveal>
   </div>
