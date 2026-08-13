@@ -153,14 +153,14 @@ export default function StrategyWizard() {
         .wz-plan-box p{font-size:14px;opacity:.9;margin-top:4px}
       `}</style>
 
-      <div className="mt-12 p-6 border border-[#DF3131] bg-[#DF3131]/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
+      <div className="mt-12 p-6 border border-[#DF3131] bg-[#DF3131]/5 flex flex-col sm:flex-row items-start justify-between gap-4">
+        <div className="text-left">
            <h3 className="text-lg font-heading font-bold text-[#333333] dark:text-white">Strategy Wizard</h3>
-           <p className="text-[13px] text-[#666665] dark:text-white/60 mt-1 max-w-2xl">
+           <p className="text-[13px] text-[#666665] dark:text-white/60 mt-1 max-w-2xl text-left">
             Answer 4 quick questions and get a personalized service recommendation with exact pricing and the best plan for your needs.
           </p>
         </div>
-        <button onClick={() => { reset(); setOpen(true); }} className="shrink-0 px-6 py-3 bg-[#DF3131] text-white text-[15px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-colors">
+        <button onClick={() => { reset(); setOpen(true); }} className="shrink-0 px-6 py-3 bg-[#DF3131] text-white text-[15px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-colors sm:self-center">
           Start Wizard
         </button>
       </div>

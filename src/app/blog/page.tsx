@@ -115,15 +115,15 @@ export default function BlogPage() {
    <Image src={p.img} alt={p.title} fill className="blog-img w-full h-full object-cover dark:brightness-110" priority />
    <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-2">{p.cat}</span>
    </div>
-  <div className="p-5 sm:p-6">
-  <div className="flex items-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
+  <div className="p-5 sm:p-6 text-center">
+  <div className="flex items-center justify-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
   <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>
  <span>•</span>
  <span>{p.date}</span>
  </div>
  <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] group-hover:text-[#DF3131] transition-colors leading-snug mb-3">{p.title}</h3>
   <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
- <div className="mt-4 flex items-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
+ <div className="mt-4 flex items-center justify-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
  READ MORE <FiArrowRight className="w-3.5 h-3.5" />
  </div>
  </div>

@@ -143,7 +143,7 @@ export default function FeaturedArtistPage() {
  <section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden">
  {/* Left: Image */}
  <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen bg-white dark:bg-[#111] flex items-center justify-center overflow-hidden">
- <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/20 via-[#FFFFFF] dark:via-[#111] to-[#DF3131]/10" />
+ <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/20 via-[#FFFFFF] dark:via-[#111] to-[#DF3131]/10 blur-[70%]" />
  <Image src="/images/danny-davis.png" alt="Donte 'Danny' Davis" width={800} height={1067} className="relative z-10 w-full lg:w-[85%] aspect-[3/4] max-w-full lg:max-w-lg object-cover object-top border border-[#E2E2E2] dark:border-white/10 shadow-2xl shadow-black/50" priority />
  <div className="absolute inset-0 bg-gradient-to-t from-[#FFFFFF] dark:from-[#111]/80 via-transparent to-[#FFFFFF]/30 dark:to-[#111]/30 z-20" />
  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#FFFFFF] dark:to-[#111] hidden lg:block z-20" />
@@ -155,7 +155,7 @@ export default function FeaturedArtistPage() {
   <div className="max-w-xl text-center lg:text-center">
   <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">FEATURED ARTIST OF THE MONTH</span>
   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>DONTE<br />&quot;DANNY&quot;<br />DAVIS</h1>
- <div className="w-16 h-[3px] bg-[#DF3131] mb-6 mx-auto lg:mx-0" />
+ <div className="w-16 h-[3px] bg-[#DF3131] mb-6 mx-auto" />
  <p className="text-[#666] dark:text-white/70 text-[16px] leading-relaxed mb-4">
   From the west side of Chicago, born and raised! A guy known to some as &quot;Danny&quot; is a creative in every sense of the word. From writing to painting, with a palette of many other talents and abilities.
  </p>

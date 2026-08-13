@@ -56,7 +56,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
  const [flipped, setFlipped] = useState(false);
 
   return (
-  <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(480px, 70vh)" }}
+  <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(624px, 80vh)" }}
   onMouseEnter={() => setFlipped(true)}
   onMouseLeave={() => setFlipped(false)}
   onClick={() => setFlipped(f => !f)}>
@@ -174,7 +174,7 @@ export default function PrintingPage() {
   <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[50vh] pb-10 lg:pb-16">
   {/* Left: Video filling full half */}
    <div className="relative overflow-hidden h-[40vh] lg:h-auto">
-    <ParallaxVideo src="/videos/printing-hero.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} />
+    <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} />
     </div>
   {/* Right: Text with gradient bg */}
    <div className="relative overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-12 lg:py-16">

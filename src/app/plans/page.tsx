@@ -93,7 +93,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
-      style={{ perspective: "1200px", minHeight: "min(530px, 77vh)" }}
+      style={{ perspective: "1200px", minHeight: "min(663px, 85vh)" }}
       role="button"
       tabIndex={0}
       aria-label={`${p.name} plan, ${p.price}/month. ${p.value}. Click to flip and subscribe.`}
