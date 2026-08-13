@@ -8,6 +8,7 @@ const CONTENT_EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const isRoot = pathname === "/";
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => { setIsFirstRender(false); }, []);
@@ -30,10 +31,10 @@ export default function PageTransition({ children }: { children: ReactNode }) {
           animate={{ scaleX: 0, transition: { duration: 0.6, ease: CURTAIN_EASE, delay: 0.1 } }}
           exit={{ scaleX: 0 }}
         />
-        {/* Content — fades in with blur */}
+        {/* Content — skip initial animation on root page so splash shows immediately */}
         <motion.div
-          initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: CONTENT_EASE, delay: 0.5 } }}
+          initial={isRoot ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 40, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: CONTENT_EASE, delay: isRoot ? 0 : 0.5 } }}
           exit={{ opacity: 0, y: -30, filter: "blur(4px)", transition: { duration: 0.3, ease: CONTENT_EASE } }}
         >
           {children}
