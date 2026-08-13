@@ -6,20 +6,18 @@ import Lenis from "lenis";
 const LenisContext = createContext<Lenis | null>(null);
 export const useLenis = () => useContext(LenisContext);
 
-interface SmoothScrollProviderProps {
-  children: ReactNode;
-}
-
-export default function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
+export default function SmoothScrollProvider({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: isTouch ? 0.5 : 0.8,
       easing: (t: number) => 1 - Math.pow(1 - t, 3),
-      smoothWheel: true,
-      syncTouchLerp: 0.1,
-      touchMultiplier: 1.5,
+      smoothWheel: !isTouch,
+      syncTouchLerp: isTouch ? 0.15 : 0.1,
+      touchMultiplier: isTouch ? 1 : 1.5,
       wheelMultiplier: 1,
     });
 

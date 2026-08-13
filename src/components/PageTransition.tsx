@@ -9,9 +9,28 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isRoot = pathname === "/";
   const [isFirstRender, setIsFirstRender] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768 || ("ontouchstart" in window && navigator.maxTouchPoints > 0));
+  }, []);
 
   useEffect(() => { setIsFirstRender(false); }, []);
   useEffect(() => { if (!isFirstRender) window.scrollTo(0, 0); }, [pathname, isFirstRender]);
+
+  if (isMobile) {
+    return (
+      <AnimatePresence mode="wait">
+        <motion.div key={pathname}
+          initial={isRoot ? { opacity: 1 } : { opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.3, delay: isRoot ? 0 : 0.15 } }}
+          exit={{ opacity: 0, transition: { duration: 0.15 } }}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    );
+  }
 
   return (
     <AnimatePresence mode="wait">

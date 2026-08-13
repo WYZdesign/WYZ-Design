@@ -10,7 +10,6 @@ interface Particle {
   size: number;
   opacity: number;
   opacityDir: number;
-  hue: number;
 }
 
 interface ParticleBackgroundProps {
@@ -37,38 +36,44 @@ export default function ParticleBackground({
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
 
-  const init = useCallback(() => {
+  const init = useCallback((actualCount: number, actualMaxSize: number, actualSpeed: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const w = canvas.offsetWidth;
     const h = canvas.offsetHeight;
     const arr: Particle[] = [];
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < actualCount; i++) {
       arr.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * speed,
-        vy: (Math.random() - 0.5) * speed,
-        size: Math.random() * maxSize + 1,
+        vx: (Math.random() - 0.5) * actualSpeed,
+        vy: (Math.random() - 0.5) * actualSpeed,
+        size: Math.random() * actualMaxSize + 1,
         opacity: Math.random() * 0.7 + 0.1,
         opacityDir: Math.random() > 0.5 ? 1 : -1,
-        hue: Math.random() * 30 - 15,
       });
     }
     particlesRef.current = arr;
-  }, [count, maxSize, speed]);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    const isMobile = window.innerWidth < 768;
+    const actualCount = isMobile ? Math.min(count, 20) : count;
+    const actualMaxSize = isMobile ? Math.min(maxSize, 2.5) : maxSize;
+    const actualSpeed = isMobile ? speed * 0.6 : speed;
+    const useMouse = mouseReactive && !isTouch;
+
     const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = canvas.offsetWidth * dpr;
       canvas.height = canvas.offsetHeight * dpr;
       const ctx = canvas.getContext("2d");
       if (ctx) ctx.scale(dpr, dpr);
-      init();
+      init(actualCount, actualMaxSize, actualSpeed);
     };
 
     resize();
@@ -78,7 +83,7 @@ export default function ParticleBackground({
       const rect = canvas.getBoundingClientRect();
       mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
-    if (mouseReactive) {
+    if (useMouse) {
       canvas.addEventListener("mousemove", onMouse);
       canvas.style.pointerEvents = "auto";
     }
@@ -96,7 +101,7 @@ export default function ParticleBackground({
       const my = mouseRef.current.y;
 
       particlesRef.current.forEach((p) => {
-        if (mouseReactive && mx > 0 && my > 0) {
+        if (useMouse && mx > 0 && my > 0) {
           const dx = mx - p.x;
           const dy = my - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
@@ -125,11 +130,13 @@ export default function ParticleBackground({
         ctx.globalAlpha = p.opacity;
         ctx.fill();
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = color;
-        ctx.globalAlpha = p.opacity * 0.15;
-        ctx.fill();
+        if (!isMobile) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = color;
+          ctx.globalAlpha = p.opacity * 0.15;
+          ctx.fill();
+        }
       });
 
       rafRef.current = requestAnimationFrame(animate);
@@ -140,9 +147,9 @@ export default function ParticleBackground({
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
-      if (mouseReactive) canvas.removeEventListener("mousemove", onMouse);
+      if (useMouse) canvas.removeEventListener("mousemove", onMouse);
     };
-  }, [color, blendMode, init, mouseReactive]);
+  }, [color, blendMode, init, mouseReactive, count, maxSize, speed]);
 
   return (
     <canvas
