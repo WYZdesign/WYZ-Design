@@ -128,7 +128,7 @@ function ParallaxHero() {
       <div className="absolute inset-0 opacity-40 overflow-hidden">
         <div className="marquee-strip flex gap-2 h-full w-[200%]">
           {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
-            <div key={i} className="flex-shrink-0 w-[30vw] sm:w-[20vw] h-full overflow-hidden">
+            <div key={i} className="flex-shrink-0 w-[20vw] sm:w-[15vw] h-full overflow-hidden">
                <Image src={img} alt="Marquee item" fill className="w-full h-full object-cover" priority decoding="async" />
             </div>
           ))}

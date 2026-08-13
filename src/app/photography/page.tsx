@@ -9,6 +9,7 @@ import { useSwipe } from "@/hooks/useSwipe";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
+import TextSplit from "@/components/TextSplit";
 
 function shuffleArray<T>(arr: T[]): T[] {
  const a = [...arr];
@@ -507,8 +508,8 @@ return (
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
   {/* Left: Info + Buttons */}
   <div className={`flex flex-col items-center justify-center text-center h-full ${archiveVis ? "animate-slideInLeft" : "opacity-0"}`}>
-  <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] leading-tight mb-4">
-  MODEL<br />ARCHIVE
+   <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] leading-tight mb-4">
+   <TextSplit stagger={0.03} direction="up">MODEL</TextSplit><br /><TextSplit stagger={0.03} direction="up">ARCHIVE</TextSplit>
   </h2>
    <p className="text-[16px] lg:text-[18px] text-[#666] dark:text-white/60 max-w-md leading-relaxed mb-8 mx-auto">
   Our model archive is a curated collection of 78+ models and client albums. Explore our diverse range of talent, from inexperienced to professional.

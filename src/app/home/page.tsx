@@ -831,9 +831,11 @@ export default function HomePage() {
 
 {/* ═══ IMAGE GALLERY STRIP ═══ */}
   <ScrollReveal animation="fadeIn" duration={1}>
+  <ImageReveal direction="up">
   <section className="py-6 w-screen max-w-none left-[50%] right-[50%] -translate-x-[50%] relative overflow-hidden my-8">
   <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.5} />
   </section>
+  </ImageReveal>
   </ScrollReveal>
 
 {/* ═══ BRAND MARQUEE ═══ */}
@@ -869,8 +871,8 @@ export default function HomePage() {
 
   <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
   <div className="text-center mb-12 sm:mb-16">
-    <h2 className="text-[1.25rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
-     WHAT <span className="text-[#DF3131]">WE DO</span>
+     <h2 className="text-[1.25rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
+     <TextSplit stagger={0.02} direction="up">WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.02} direction="up">WE DO</TextSplit></span>
     </h2>
     <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene — making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
   </div>
