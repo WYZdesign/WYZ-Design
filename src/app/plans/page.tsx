@@ -65,25 +65,24 @@ const PLAN_KEYS: Record<string, string> = {
 };
 
 const CUSTOM_PLAN_FIELDS: FormField[] = [
-  { name: "fullName", label: "Full Name", type: "text", required: true, placeholder: "Your name" },
-  { name: "email", label: "Email", type: "email", required: true, placeholder: "you@email.com" },
-  { name: "phone", label: "Phone", type: "tel", placeholder: "(555) 555-5555" },
-  { name: "socialMedia", label: "Social Media", type: "text", placeholder: "@yourhandle" },
-  { name: "services", label: "Services Needed", type: "checkbox" },
-  { name: "services", label: "Photography", type: "checkbox" },
-  { name: "services", label: "Graphic Design", type: "checkbox" },
-  { name: "services", label: "Videography", type: "checkbox" },
-  { name: "services", label: "Custom Printing", type: "checkbox" },
-  { name: "services", label: "Web Design", type: "checkbox" },
-  { name: "services", label: "Consultation", type: "checkbox" },
+  { name: "fullName", label: "Full Name", type: "text", required: true, placeholder: "Your name", page: 0 },
+  { name: "email", label: "Email", type: "email", required: true, placeholder: "you@email.com", page: 0 },
+  { name: "phone", label: "Phone", type: "tel", placeholder: "(555) 555-5555", page: 0 },
+  { name: "socialMedia", label: "Social Media", type: "text", placeholder: "@yourhandle", page: 0 },
+  { name: "services_photography", label: "Photography", type: "checkbox", page: 1 },
+  { name: "services_graphic", label: "Graphic Design", type: "checkbox", page: 1 },
+  { name: "services_video", label: "Videography", type: "checkbox", page: 1 },
+  { name: "services_printing", label: "Custom Printing", type: "checkbox", page: 1 },
+  { name: "services_web", label: "Web Design", type: "checkbox", page: 1 },
+  { name: "services_consultation", label: "Consultation", type: "checkbox", page: 1 },
   { name: "planType", label: "Plan Type", type: "select", options: [
     { value: "one-time", label: "One-Time Fee" },
     { value: "recurring", label: "Recurring Plan" },
     { value: "contract", label: "Contract" },
-  ]},
-  { name: "startDate", label: "Start Date", type: "date" },
-  { name: "additionalInfo", label: "Additional Info", type: "textarea", placeholder: "Tell us about your needs..." },
-  { name: "newsletterOptIn", label: "I want to subscribe to the newsletter.", type: "checkbox" },
+  ], page: 2 },
+  { name: "startDate", label: "Start Date", type: "date", page: 2 },
+  { name: "additionalInfo", label: "Additional Info", type: "textarea", placeholder: "Tell us about your needs...", page: 2 },
+  { name: "newsletterOptIn", label: "I want to subscribe to the newsletter.", type: "checkbox", page: 2 },
 ];
 
 function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (name: string) => void; loading: string | null }) {
@@ -500,6 +499,7 @@ export default function PlansPage() {
             formType="custom-plan"
             submitLabel="SUBMIT"
             className="max-w-2xl mx-auto"
+            paginated
           />
         </div>
 
