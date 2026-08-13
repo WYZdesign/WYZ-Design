@@ -140,7 +140,7 @@ export default function Footer() {
 
             {/* Sitemap columns */}
             {Object.entries(SITEMAP).map(([title, links]) => (
-              <div key={title}>
+              <div key={title} className="text-center">
                 <h4 className={`font-heading font-bold ${headingColor} text-[13px] tracking-[0.15em] uppercase mb-4`}>{title}</h4>
                 <div className="space-y-2">
                   {links.map(l => (

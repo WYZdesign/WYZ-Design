@@ -266,7 +266,7 @@ export default function DesignsPage() {
    </div>
 {/* Right half: video - no overlay */}
     <div className="w-full md:w-1/2 relative overflow-hidden">
-      <ParallaxVideo src="/videos/disco-heads-dining.mp4" speed={0.25} />
+       <ParallaxVideo src="/videos/hero-banners/designs.mp4" speed={0.25} />
     </div>
   </div>
   </section>

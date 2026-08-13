@@ -921,7 +921,7 @@ export default function HomePage() {
  <FiCamera className="w-6 h-6 text-[#DF3131]" />
  </div>
  <div className="flex-1">
-  <h3 className="font-heading font-bold text-[#333] dark:text-white text-[14px] sm:text-[16px] md:text-[17px] tracking-[0.05em] uppercase group-hover:text-[#DF3131] transition-colors text-left mb-3">{s.name}</h3>
+   <h3 className="font-heading font-bold text-[#333] dark:text-white text-[14px] sm:text-[16px] md:text-[17px] tracking-[0.05em] uppercase group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
   <p className="text-sm text-[#666] dark:text-white/70 mb-2">{s.desc}</p>
  <div className="flex items-center justify-between">
  <Link href={s.href} className="text-[#DF3131] text-sm font-bold tracking-[0.08em] uppercase hover:underline inline-flex items-center gap-1">

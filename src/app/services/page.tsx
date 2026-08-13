@@ -46,25 +46,21 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
  onClick={() => setFlipped(f => !f)}
  >
   <div className="relative w-full" style={{ minHeight: "min(400px, 60vh)" }}>
- {/* Front */}
+ {/* Front — full image + 30% overlay + title */}
  <div
     className="absolute inset-0 transition-all duration-700 ease-in-out"
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}
   >
-   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
-  <div className="aspect-[4/3] overflow-hidden relative">
+   <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
   <Image src={service.img} alt={service.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-  <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{service.dur}</div>
-  </div>
-  <div className="p-5 text-center">
-  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{service.cat}</span>
-   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[16px] md:text-[18px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors text-center mb-3">{service.name}</h3>
+  <div className="absolute inset-0 bg-black/30" />
+  <div className="absolute inset-0 flex items-center justify-center z-10">
+  <h3 className="font-heading font-black text-white text-[22px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
   </div>
  </div>
  </div>
 
- {/* Back */}
+ {/* Back — info, details, price, button */}
  <div
     className="absolute inset-0 transition-all duration-700 ease-in-out"
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
@@ -75,8 +71,8 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
   </div>
  <div className="relative z-10">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">{service.cat}</span>
-  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] text-left mb-3">{service.name}</h3>
- <p className="text-white/80 text-[15px] leading-relaxed mb-4">{service.desc}</p>
+  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] text-center mb-3">{service.name}</h3>
+ <p className="text-white/80 text-[15px] leading-relaxed mb-4 text-center">{service.desc}</p>
  <div className="flex items-center gap-3 mb-4">
  <span className="text-[28px] font-black">{service.price}</span>
  <span className="text-white/60 text-[14px]">· {service.dur}</span>

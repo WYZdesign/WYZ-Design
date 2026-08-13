@@ -496,7 +496,7 @@ return (
    </section>
 
   {/* IMAGE CAROUSEL 1 */}
- <section className="py-6">
+ <section className="py-2">
   <AutoScrollRow items={CAROUSEL_IMAGES_1} />
  </section>
 
@@ -510,7 +510,7 @@ return (
   <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] leading-tight mb-4">
   MODEL<br />ARCHIVE
   </h2>
-  <p className="text-[16px] lg:text-[18px] text-[#666] dark:text-white/60 max-w-lg leading-relaxed mb-8 mx-auto">
+   <p className="text-[16px] lg:text-[18px] text-[#666] dark:text-white/60 max-w-md leading-relaxed mb-8 mx-auto">
   Our model archive is a curated collection of 78+ models and client albums. Explore our diverse range of talent, from inexperienced to professional.
   </p>
  <div className="flex flex-wrap gap-4 justify-center mb-8">
@@ -707,7 +707,7 @@ return (
  </div>
  <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] whitespace-pre-line leading-tight mb-3">{b.title}</h3>
    <p className="text-[15px] text-[#333] dark:text-[#aaa] leading-relaxed mb-4 text-center">{b.desc}</p>
-   <Link href="/plans" className="inline-block text-[#DF3131] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-white transition-colors">READ MORE +</Link>
+   <Link href="/plans" className="inline-block text-[#DF3131] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-[#B82020] transition-colors">READ MORE +</Link>
  </div>
  ))}
  </div>
