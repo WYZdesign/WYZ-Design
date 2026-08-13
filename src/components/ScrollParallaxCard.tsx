@@ -8,13 +8,15 @@ interface ScrollParallaxCardProps {
   className?: string;
   tiltAmount?: number;
   scaleAmount?: number;
+  yAmount?: number;
 }
 
 export default function ScrollParallaxCard({
   children,
   className = "",
-  tiltAmount = 8,
-  scaleAmount = 1.05,
+  tiltAmount = 12,
+  scaleAmount = 1.06,
+  yAmount = 30,
 }: ScrollParallaxCardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -23,9 +25,10 @@ export default function ScrollParallaxCard({
     offset: ["start end", "end start"],
   });
 
-  const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [tiltAmount, 0, -tiltAmount]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, scaleAmount, 0.95]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.6, 1, 1, 0.6]);
+  const rotateX = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [tiltAmount, 0, 0, -tiltAmount]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, scaleAmount, scaleAmount, 0.92]);
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [yAmount, 0, -yAmount]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.5, 1, 1, 0.5]);
 
   return (
     <motion.div
@@ -34,9 +37,10 @@ export default function ScrollParallaxCard({
       style={{
         rotateX,
         scale,
+        y,
         opacity,
         transformStyle: "preserve-3d",
-        perspective: 1200,
+        perspective: 1000,
       }}
     >
       {children}

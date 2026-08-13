@@ -15,6 +15,8 @@ import MagneticElement from "@/components/MagneticElement";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ParticleBackground from "@/components/ParticleBackground";
+import TextSplit from "@/components/TextSplit";
+import ImageReveal from "@/components/ImageReveal";
 
 const LOGO_INTROS_RAW = [
  "/videos/Untitled Project.mp4",
@@ -797,7 +799,9 @@ export default function HomePage() {
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
-     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-6">Wild Vision. Zealous Execution.</p>
+     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-6">
+       <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
+     </p>
      <TextMaskReveal direction="up">
      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-8" style={{ lineHeight: 1 }}>
        <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, ReactNode, useCallback, ComponentPropsWithRef, ElementType } from "react";
+import { useRef, ReactNode, useCallback, ElementType } from "react";
 
 interface MagneticElementProps<T extends ElementType = "span"> {
   children: ReactNode;
@@ -12,7 +12,7 @@ interface MagneticElementProps<T extends ElementType = "span"> {
 export default function MagneticElement<T extends ElementType = "span">({
   children,
   className = "",
-  strength = 0.3,
+  strength = 0.45,
   tag,
 }: MagneticElementProps<T>) {
   const Tag = (tag || "span") as ElementType;
@@ -25,7 +25,7 @@ export default function MagneticElement<T extends ElementType = "span">({
       const rect = el.getBoundingClientRect();
       const dx = e.clientX - (rect.left + rect.width / 2);
       const dy = e.clientY - (rect.top + rect.height / 2);
-      el.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
+      el.style.transform = `translate(${dx * strength}px, ${dy * strength}px) scale(1.05)`;
       el.style.transition = "transform 0.15s ease-out";
     },
     [strength]
@@ -34,8 +34,8 @@ export default function MagneticElement<T extends ElementType = "span">({
   const onLeave = useCallback(() => {
     const el = ref.current;
     if (!el) return;
-    el.style.transform = "translate(0px, 0px)";
-    el.style.transition = "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)";
+    el.style.transform = "translate(0px, 0px) scale(1)";
+    el.style.transition = "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)";
   }, []);
 
   return (

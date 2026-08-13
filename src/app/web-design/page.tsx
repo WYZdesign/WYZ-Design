@@ -206,10 +206,10 @@ return (
               </a>
             </div>
             {/* Stats strip */}
-            <div className="flex gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 justify-center">
-              <AnimatedCounter end={11} suffix="+" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Sites Built" />
-              <AnimatedCounter end={100} suffix="%" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Responsive" />
-              <AnimatedCounter end={7} suffix="-Day" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Turnaround" />
+            <div className="flex gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-black/10 justify-center">
+              <AnimatedCounter end={11} suffix="+" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-[#666] tracking-[0.1em] uppercase" label="Sites Built" />
+              <AnimatedCounter end={100} suffix="%" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-[#666] tracking-[0.1em] uppercase" label="Responsive" />
+              <AnimatedCounter end={7} suffix="-Day" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-[#666] tracking-[0.1em] uppercase" label="Turnaround" />
             </div>
           </div>
         </div>
@@ -250,7 +250,7 @@ return (
         </section>
 
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
-        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
+        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-1 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
           <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
             RESPONSIVE&nbsp;&bull;&nbsp;SEO&nbsp;&bull;&nbsp;E-COMMERCE&nbsp;&bull;&nbsp;LANDING&nbsp;PAGES&nbsp;&bull;&nbsp;CMS&nbsp;&bull;&nbsp;CUSTOM&nbsp;CODE&nbsp;&bull;&nbsp;
           </span>
@@ -332,7 +332,7 @@ return (
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">PRICING</span>
                 <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">MAKE IT AN ADD-ON</h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto" style={{ perspective: "1200px" }}>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto" style={{ perspective: "1200px" }}>
                 {[
                   { name: "Starter", price: "$499", features: ["1-page landing", "Mobile responsive", "Contact form", "Basic SEO", "7-day delivery"], accent: false },
                   { name: "Business", price: "$1,299", features: ["Up to 5 pages", "Custom design", "CMS integration", "Advanced SEO", "Analytics setup", "14-day delivery"], accent: true },

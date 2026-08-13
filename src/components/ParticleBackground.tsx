@@ -10,6 +10,7 @@ interface Particle {
   size: number;
   opacity: number;
   opacityDir: number;
+  hue: number;
 }
 
 interface ParticleBackgroundProps {
@@ -19,25 +20,28 @@ interface ParticleBackgroundProps {
   speed?: number;
   className?: string;
   blendMode?: string;
+  mouseReactive?: boolean;
 }
 
 export default function ParticleBackground({
-  count = 40,
+  count = 60,
   color = "#DF3131",
-  maxSize = 3,
-  speed = 0.3,
+  maxSize = 4,
+  speed = 0.4,
   className = "",
   blendMode = "screen",
+  mouseReactive = true,
 }: ParticleBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
+  const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
 
   const init = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const w = canvas.width;
-    const h = canvas.height;
+    const w = canvas.offsetWidth;
+    const h = canvas.offsetHeight;
     const arr: Particle[] = [];
     for (let i = 0; i < count; i++) {
       arr.push({
@@ -45,9 +49,10 @@ export default function ParticleBackground({
         y: Math.random() * h,
         vx: (Math.random() - 0.5) * speed,
         vy: (Math.random() - 0.5) * speed,
-        size: Math.random() * maxSize + 0.5,
-        opacity: Math.random() * 0.5 + 0.1,
+        size: Math.random() * maxSize + 1,
+        opacity: Math.random() * 0.7 + 0.1,
         opacityDir: Math.random() > 0.5 ? 1 : -1,
+        hue: Math.random() * 30 - 15,
       });
     }
     particlesRef.current = arr;
@@ -69,25 +74,49 @@ export default function ParticleBackground({
     resize();
     window.addEventListener("resize", resize);
 
+    const onMouse = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
+    if (mouseReactive) {
+      canvas.addEventListener("mousemove", onMouse);
+      canvas.style.pointerEvents = "auto";
+    }
+
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animId: number;
     const animate = () => {
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.globalCompositeOperation = blendMode as GlobalCompositeOperation;
 
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
       particlesRef.current.forEach((p) => {
+        if (mouseReactive && mx > 0 && my > 0) {
+          const dx = mx - p.x;
+          const dy = my - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            const force = (150 - dist) / 150 * 0.02;
+            p.vx += dx * force;
+            p.vy += dy * force;
+          }
+        }
+
+        p.vx *= 0.99;
+        p.vy *= 0.99;
         p.x += p.vx;
         p.y += p.vy;
         if (p.x < 0) p.x = w;
         if (p.x > w) p.x = 0;
         if (p.y < 0) p.y = h;
         if (p.y > h) p.y = 0;
-        p.opacity += p.opacityDir * 0.003;
-        if (p.opacity >= 0.6) p.opacityDir = -1;
+        p.opacity += p.opacityDir * 0.005;
+        if (p.opacity >= 0.8) p.opacityDir = -1;
         if (p.opacity <= 0.1) p.opacityDir = 1;
 
         ctx.beginPath();
@@ -95,19 +124,25 @@ export default function ParticleBackground({
         ctx.fillStyle = color;
         ctx.globalAlpha = p.opacity;
         ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.globalAlpha = p.opacity * 0.15;
+        ctx.fill();
       });
 
-      animId = requestAnimationFrame(animate);
+      rafRef.current = requestAnimationFrame(animate);
     };
 
-    animId = requestAnimationFrame(animate);
-    rafRef.current = animId;
+    rafRef.current = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(animId);
+      cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
+      if (mouseReactive) canvas.removeEventListener("mousemove", onMouse);
     };
-  }, [color, blendMode, init]);
+  }, [color, blendMode, init, mouseReactive]);
 
   return (
     <canvas
