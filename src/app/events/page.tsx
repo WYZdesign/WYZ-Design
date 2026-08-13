@@ -8,6 +8,7 @@ import { useSwipe } from "@/hooks/useSwipe";
 import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
+import TextSplit from "@/components/TextSplit";
 
 const CLIENT_EVENTS_RAW = [
  { title: "Birthday Video", video: "/videos/client-events/Birthday Video.mp4" },
@@ -607,9 +608,9 @@ export default function EventsPage() {
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10">
      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
-  <span className="whitespace-nowrap">SIMPLIFY YOUR</span><br />
-  <span className="text-[#DF3131] whitespace-nowrap">EVENT</span><br />
-  <span className="whitespace-nowrap">PLANNING</span>
+  <span className="whitespace-nowrap"><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span><br />
+  <span className="text-[#DF3131] whitespace-nowrap"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span><br />
+  <span className="whitespace-nowrap"><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
   </h1>
   <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
   Transform your event with our expert planning. From concept to execution, we create a seamless, stress-free, and unforgettable experience.

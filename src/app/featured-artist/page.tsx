@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import ImageReveal from "@/components/ImageReveal";
 import { FiUser, FiEdit3, FiCalendar, FiMapPin, FiHeart, FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -238,19 +239,27 @@ export default function FeaturedArtistPage() {
  </div>
  {/* Art preview grid */}
  <div className="grid grid-cols-2 gap-3">
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
+ <ImageReveal direction="left" delay={0}>
+ <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
  <Image src="/images/faotm_1.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
+ </ImageReveal>
+ <ImageReveal direction="right" delay={0.1}>
+ <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
  <Image src="/images/faotm_2.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
+ </ImageReveal>
+ <ImageReveal direction="left" delay={0.2}>
+ <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
  <Image src="/images/faotm_3.jpg" alt="Featured artwork" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
  </Link>
- <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group">
- <Image src="/images/danny-davis.png" alt="Danny Davis portrait" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
- </Link>
- </div>
+ </ImageReveal>
+ <ImageReveal direction="right" delay={0.3}>
+ <Link href="/merch" className="aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
+  <Image src="/images/danny-davis.png" alt="Danny Davis portrait" fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
+  </Link>
+  </ImageReveal>
+  </div>
  </div>
  </div>
  </section>
