@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: "/favicon.ico",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, must-revalidate" },
+        ],
+      },
+      {
         source: "/:path*\\.(jpg|jpeg|png|gif|webp|svg|ico|avif)",
         headers: [
           { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
