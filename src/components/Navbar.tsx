@@ -152,7 +152,7 @@ export default function Navbar() {
         <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
           <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
         </div>
-        <div className="relative max-w-[115rem] mx-auto pr-8 lg:pr-16">
+        <div className="relative z-10 max-w-[115rem] mx-auto pr-8 lg:pr-16">
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
             <MagneticElement tag="div" strength={0.2}>
@@ -295,9 +295,9 @@ export default function Navbar() {
             </div>
 
             <div className="lg:hidden ml-auto flex items-center gap-3">
-              <Link href="/account/my-account" className="text-white font-semibold tracking-[0.15em] text-[12px] px-3 py-2 border border-white/40 rounded-full hover:bg-white/10 transition-all whitespace-nowrap">
+              <a href="/account/my-account" className="text-white font-semibold tracking-[0.15em] text-[12px] px-4 py-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/40 rounded-full hover:bg-white/10 transition-all whitespace-nowrap">
                 LOGIN
-              </Link>
+              </a>
               <ThemeToggle />
               <button aria-label={mobileOpen ? "Close menu" : "Open menu"} className="p-2 text-white" onClick={() => setMobileOpen(!mobileOpen)}>
                 {mobileOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
@@ -330,11 +330,11 @@ export default function Navbar() {
                   </div>
                 </div>
               ) : (
-                <Link href="/account/my-account" onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-between w-full px-5 py-3 text-[15px] font-semibold tracking-[0.15em] rounded-xl bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3">
+                <a href="/account/my-account" onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-between w-full px-5 py-3 text-[15px] font-semibold tracking-[0.15em] rounded-xl bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3 min-h-[44px]">
                   <span className="font-heading font-bold tracking-[0.15em] uppercase">Login</span>
                   <span className="text-[12px] font-normal opacity-80">Profile & Account</span>
-                </Link>
+                </a>
               )}
               <div className="flex items-center gap-3">
                 {session?.user && (
