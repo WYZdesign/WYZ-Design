@@ -601,7 +601,7 @@ return (
  <button
  key={i}
  onClick={() => setModelIdx(i)}
- className={`w-2 h-2 rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-6" : "bg-[#333]/30 hover:bg-[#333]/50"}`}
+  className={`w-[3px] h-[3px] rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-[10px]" : "bg-[#333]/30 hover:bg-[#333]/50"}`}
  />
  ))}
  </div>
@@ -687,12 +687,15 @@ return (
 
 {/* ═══ BRAND MARQUEE ═══ */}
   <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326] mb-4">
-    {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => (
-      <span key={word} className={`inline-flex items-center gap-4 text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
-        {word}
-        <span className="opacity-60 text-[#111] dark:text-white">&bull;</span>
-      </span>
-    ))}
+    {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+      return (
+        <>
+          <span key={`w-${i}`} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 3) % 4]}`}>{word}</span>
+          <span key={`b-${i}`} className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
+        </>
+      );
+    })}
   </EnhancedMarquee>
 
  {/* BENEFITS CARDS */}

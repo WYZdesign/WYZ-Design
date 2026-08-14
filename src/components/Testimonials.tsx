@@ -104,7 +104,7 @@ export default function Testimonials() {
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`rounded-full transition-all ${i === active ? "bg-[#DF3131] w-4 h-[5px]" : "w-[5px] h-[5px] bg-white/30 hover:bg-white/50"}`}
+              className={`rounded-full transition-all ${i === active ? "bg-[#DF3131] w-[6px] h-[2px]" : "w-[2px] h-[2px] bg-white/30 hover:bg-white/50"}`}
               aria-label={`Testimonial ${i + 1}`}
             />
           ))}

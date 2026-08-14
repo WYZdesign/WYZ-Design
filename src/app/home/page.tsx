@@ -928,18 +928,12 @@ export default function HomePage() {
 {/* ═══ BRAND MARQUEE ═══ */}
   <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
-      const colors = [
-        "text-[#DF3131]",
-        "text-[#111] dark:text-white",
-        "text-[#DF3131]",
-        "text-[#111] dark:text-white",
-      ];
-      const ci = i % 4;
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
-        <span key={word} className={`inline-flex items-center gap-4 text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]}`}>
-          {word}
-          <span className="opacity-60 text-[#111] dark:text-white">&bull;</span>
-        </span>
+        <>
+          <span key={`w-${i}`} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[i % 4]}`}>{word}</span>
+          <span key={`b-${i}`} className="inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
+        </>
       );
     })}
   </EnhancedMarquee>

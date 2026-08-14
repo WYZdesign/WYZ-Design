@@ -157,7 +157,7 @@ export default function Navbar() {
             {/* Logo */}
             <MagneticElement tag="div" strength={0.2}>
             <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
-              <Image src="/wyz-crown-square.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] lg:w-[48px] lg:h-[48px] object-contain" loading="lazy" />
+              <Image src="/wyz-crown-square.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[26px] h-[26px] sm:w-[30px] sm:h-[30px] lg:w-[38px] lg:h-[38px] object-contain" loading="lazy" />
             </Link>
             </MagneticElement>
 
@@ -295,6 +295,9 @@ export default function Navbar() {
             </div>
 
             <div className="lg:hidden ml-auto flex items-center gap-3">
+              <Link href="/account/my-account" className="text-white font-semibold tracking-[0.15em] text-[12px] px-3 py-2 border border-white/40 rounded-full hover:bg-white/10 transition-all whitespace-nowrap">
+                LOGIN
+              </Link>
               <ThemeToggle />
               <button aria-label={mobileOpen ? "Close menu" : "Open menu"} className="p-2 text-white" onClick={() => setMobileOpen(!mobileOpen)}>
                 {mobileOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
@@ -328,8 +331,8 @@ export default function Navbar() {
                 </div>
               ) : (
                 <Link href="/account/my-account" onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-between w-full px-5 py-3 text-[15px] font-semibold tracking-[0.05em] rounded-xl bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3">
-                  <span>Login</span>
+                  className="flex items-center justify-between w-full px-5 py-3 text-[15px] font-semibold tracking-[0.15em] rounded-xl bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3">
+                  <span className="font-heading font-bold tracking-[0.15em] uppercase">Login</span>
                   <span className="text-[12px] font-normal opacity-80">Profile & Account</span>
                 </Link>
               )}

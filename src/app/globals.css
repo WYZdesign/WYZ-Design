@@ -987,7 +987,7 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
    even spacing, centered alignment, medium paragraph measure
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
-  h1 { font-size: clamp(2.25rem, 2.25rem + 2vw, 3.25rem) !important; }
+  h1 { font-size: clamp(2.55rem, 2.55rem + 2.3vw, 3.7rem) !important; }
   h2 { font-size: clamp(1.5rem, 1.5rem + 1vw, 1.9rem) !important; }
   h3 { font-size: clamp(1.15rem, 1.15rem + 0.6vw, 1.4rem) !important; }
   h4, h5, h6 { font-size: 1rem !important; }
@@ -1023,6 +1023,30 @@ p[class*="tracking-"][class*="uppercase"] {
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MARQUEE OUTLINE — white fill with black stroke (one of the
+   4 marquee word patterns). Dark mode: outline-only.
+   ═══════════════════════════════════════════════════════════ */
+.marquee-outline {
+  color: #fff;
+  -webkit-text-stroke: 1.5px #111;
+}
+.dark .marquee-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #e0e0e0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO CTA BUTTONS — more space between heading/paragraph
+   and the button row on mobile.
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  [class*="flex"][class*="justify-center"]:has(a[class*="tracking-"]),
+  [class*="flex"][class*="justify-center"]:has(button[class*="tracking-"]) {
+    margin-top: 2.5rem !important;
+  }
 }
 
 /* Responsive grid utilities */

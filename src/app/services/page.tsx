@@ -134,12 +134,15 @@ return (
 
 {/* ═══ SERVICES MARQUEE ═══ */}
   <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
-    {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => (
-      <span key={word} className={`inline-flex items-center gap-4 text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
-        {word}
-        <span className="opacity-60 text-[#111] dark:text-white">&bull;</span>
-      </span>
-    ))}
+    {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => {
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+      return (
+        <>
+          <span key={`w-${i}`} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 2) % 4]}`}>{word}</span>
+          <span key={`b-${i}`} className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
+        </>
+      );
+    })}
   </EnhancedMarquee>
 
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-12">
