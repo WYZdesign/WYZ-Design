@@ -9,7 +9,7 @@ const LINKS = [
   { href: "/photography", label: "photography" },
   { href: "/events", label: "DIY events" },
   { href: "/featured-artist", label: "Get featured" },
-  { href: "/", label: "Partnerships" },
+  { href: "/partnerships", label: "Partnerships" },
   { href: "/plans", label: "SuBSCRIPTIONS" },
   { href: "/gift-card", label: "Gift card" },
   { href: "/model-archive", label: "model archive" },

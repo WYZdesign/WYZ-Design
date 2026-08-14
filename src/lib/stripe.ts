@@ -45,8 +45,8 @@ export async function createCheckoutSession(plan: string, email?: string, userId
     customer_email: email,
     client_reference_id: userId || undefined,
     line_items: [{ price: planConfig.priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/muse?upgraded=${plan}&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/muse`,
+    success_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/account/my-account?upgraded=${plan}&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/account/my-account`,
     allow_promotion_codes: true,
     metadata: { plan, userId: userId || "", priceId: planConfig.priceId },
     subscription_data: {
