@@ -150,7 +150,7 @@ export default function Navbar() {
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${visible ? "opacity-100" : "opacity-0 -translate-y-2 pointer-events-none"}`}>
         <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
-          <video src="/videos/hero-banners/photography.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
+          <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
         </div>
         <div className="relative max-w-[115rem] mx-auto pr-8 lg:pr-16">
           <div className="flex items-center h-20 lg:h-24">
@@ -186,7 +186,7 @@ export default function Navbar() {
                       className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 shadow-xl z-50 rounded-lg overflow-hidden"
                       >
                       <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
-                        <video src="/videos/hero-banners/photography.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="metadata" />
+                        <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
                         <div className="absolute inset-0 bg-black/15" />
                       </div>
                       <div className="relative z-10">

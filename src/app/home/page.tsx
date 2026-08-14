@@ -807,9 +807,9 @@ export default function HomePage() {
        <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
      </h1>
      </TextMaskReveal>
-      <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-10 w-full text-center">
-      We help artists, brands, and real people build creative work that actually looks good.
-      </p>
+       <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-16 w-full text-center">
+       We help artists, brands, and real people build creative work that actually looks good.
+       </p>
      </GyroTilt>
      <div className="flex flex-col sm:flex-row gap-4 justify-center">
      <MagneticElement tag="div" strength={0.25}>
@@ -849,9 +849,12 @@ export default function HomePage() {
       ];
       const ci = i % 4;
       return (
-        <span key={i} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]}`}>
-          {word}<span className="mx-4 opacity-60">&bull;</span>
-        </span>
+        <>
+          <span key={`w-${i}`} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]}`}>
+            {word}
+          </span>
+          <span key={`b-${i}`} className="inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 opacity-60 text-[#111] dark:text-white">&bull;</span>
+        </>
       );
     })}
   </EnhancedMarquee>
