@@ -117,8 +117,8 @@ export default function Footer() {
             {/* Brand */}
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center shrink-0">
-                  <Image src="/images/wyz-crown.png" alt="WYZ Crown" width={24} height={24} loading="lazy" />
+                <div className="w-8 h-8 rounded flex items-center justify-center shrink-0">
+                  <Image src="/wyz-crown-square.png" alt="WYZ Crown" width={24} height={24} className="object-contain" loading="lazy" />
                 </div>
                 <span className={`${textPrimary} font-heading font-bold text-xl`}>WYZ <span className="text-[#DF3131]">Design</span></span>
               </Link>

@@ -157,7 +157,7 @@ export default function Navbar() {
             {/* Logo */}
             <MagneticElement tag="div" strength={0.2}>
             <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
-              <Image src="/images/wyz-crown.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] lg:w-[48px] lg:h-[48px]" loading="lazy" />
+              <Image src="/wyz-crown-square.png" alt="WYZ Design" width={56} height={56} className="hover:scale-110 transition-transform w-[32px] h-[32px] sm:w-[38px] sm:h-[38px] lg:w-[48px] lg:h-[48px] object-contain" loading="lazy" />
             </Link>
             </MagneticElement>
 
@@ -346,7 +346,6 @@ export default function Navbar() {
                     Sign Out
                   </button>
                 )}
-                <ThemeToggle className="border-[#DF3131] text-[#DF3131] dark:border-[#e0e0e0] dark:text-[#e0e0e0] hover:bg-[#DF3131]/10 dark:hover:bg-[#e0e0e0]/10" />
               </div>
             </div>
             {/* Mobile search */}

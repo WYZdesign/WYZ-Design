@@ -802,7 +802,7 @@ function VideoPlaylist({ videos }: { videos: string[] }) {
 }
 
 export default function HomePage() {
- const [activeTab, setActiveTab] = useState("PHOTOGRAPHY");
+  const [activeTab, setActiveTab] = useState("ALL");
  const [spTab, setSpTab] = useState<"services" | "plans">("services");
  const [openFaq, setOpenFaq] = useState<number | null>(null);
  const [faqSearch, setFaqSearch] = useState("");
@@ -936,12 +936,10 @@ export default function HomePage() {
       ];
       const ci = i % 4;
       return (
-        <>
-          <span key={`w-${i}`} className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]}`}>
-            {word}
-          </span>
-          <span key={`b-${i}`} className="inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 opacity-60 text-[#111] dark:text-white">&bull;</span>
-        </>
+        <span key={word} className={`inline-flex items-center gap-4 text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${colors[ci]}`}>
+          {word}
+          <span className="opacity-60 text-[#111] dark:text-white">&bull;</span>
+        </span>
       );
     })}
   </EnhancedMarquee>
@@ -990,6 +988,14 @@ export default function HomePage() {
   <div className="max-w-6xl mx-auto animate-fadeIn">
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-4">Services</h2>
   <div className="flex flex-wrap gap-2 mb-8 justify-center">
+  <button onClick={() => setActiveTab("ALL")}
+   className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
+  activeTab === "ALL"
+  ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
+  : "bg-white dark:bg-[#232326] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+  }`}>
+  <span className="relative z-10">ALL</span>
+  </button>
   {SERVICES.map((s) => (
    <button key={s.tab} onClick={() => setActiveTab(s.tab)}
    className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
@@ -1001,6 +1007,21 @@ export default function HomePage() {
   </button>
   ))}
   </div>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {SERVICES.filter(s => activeTab === "ALL" || s.tab === activeTab).map((s) => (
+    <div key={s.name} className="group relative p-8 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 bg-white dark:bg-[#2b2b2e] text-center">
+      <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] text-2xl mb-5 group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+        {s.icon}
+      </div>
+      <h3 className="font-heading font-bold text-[#333] dark:text-white text-[15px] tracking-[0.05em] uppercase mb-3">{s.name}</h3>
+      <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed mb-5">{s.desc}</p>
+      <Link href={s.href} className="inline-flex items-center gap-1 text-[#DF3131] text-sm font-bold tracking-[0.08em] uppercase hover:underline">
+        Read More <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+      </Link>
+    </div>
+  ))}
+  </div>
+  <h3 className="text-center font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-sm mb-6 mt-12">Popular Services</h3>
   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
   {SERVICE_LIST.map((s) => (
     <HomeServiceFlipCard key={s.name} s={s} />

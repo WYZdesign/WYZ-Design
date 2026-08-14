@@ -336,12 +336,10 @@ export default function DesignsPage() {
 {/* ═══ DESIGNS MARQUEE ═══ */}
   <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
     {(["COVER ART","LOGOS","FLYERS","WEB DESIGN","BRANDING","MERCH"] as const).map((word, i) => (
-      <>
-        <span key={`w-${i}`} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
-          {word}
-        </span>
-        <span key={`b-${i}`} className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 opacity-60 text-[#111] dark:text-white">&bull;</span>
-      </>
+      <span key={word} className={`inline-flex items-center gap-4 text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
+        {word}
+        <span className="opacity-60 text-[#111] dark:text-white">&bull;</span>
+      </span>
     ))}
   </EnhancedMarquee>
 
