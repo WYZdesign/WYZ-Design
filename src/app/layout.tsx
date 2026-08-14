@@ -175,6 +175,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       </head>
       <body className="min-h-full flex flex-col bg-white dark:bg-[#232326] text-[#333333] dark:text-[#e0e0e0] antialiased cursor-none lg:cursor-none max-lg:cursor-auto">
+        {/* Critical CSS: hide content behind splash before JS hydrates */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          div[data-splash-content] { opacity: 0 !important; pointer-events: none !important; }
+          div[data-splash-active] div[data-splash-content] { opacity: 1 !important; pointer-events: auto !important; }
+        `}} />
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
           <AuthProvider>

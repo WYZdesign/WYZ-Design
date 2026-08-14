@@ -402,11 +402,11 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  if (trackRef.current) trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
  }, []);
 
- const doubled = useMemo(() => {
-  const d = [...items, ...items, ...items];
-  for (let i = d.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; }
-  return d;
- }, [items]);
+  const doubled = useMemo(() => {
+   const d = [...items, ...items];
+   for (let i = d.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; }
+   return d;
+  }, [items]);
 
  return (
  <div ref={secRef} className="relative group/carousel"
@@ -486,13 +486,18 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
 
   const LogoItem = ({ color }: { color: string }) => (
     <div className="flex-none flex items-center gap-2 px-6 py-3">
-      <svg className="w-8 h-8 sm:w-10 sm:h-10" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
+      <svg className="w-10 h-10 sm:w-12 sm:h-12" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
     </div>
   );
 
-  const row1 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
-  const row2 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
-  const row3 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
+  const row1 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
+  const row2 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
+  const row3 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
+  const row4 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
+  const row5 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
+  const row6 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
+  const row7 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
+  const row8 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
 
   return (
   <div className="relative overflow-hidden bg-[#0a0a0a]">
@@ -500,24 +505,49 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   <div className="absolute top-0 left-0 w-full h-full bg-black/30" />
   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0000]/10 via-transparent to-[#DF3131]/8" />
   <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-[100px]" />
-  <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-[#DF3131]/5 rounded-full blur-[80px]" />
+  <div className="absolute bottom-1/4 left-1/3 w-80 w-80 bg-[#DF3131]/5 rounded-full blur-[80px]" />
   </div>
 
   <div className="absolute inset-0 bg-black/70 z-[1]" />
 
-  <div className="relative z-10 overflow-hidden py-3">
+  <div className="relative z-10 overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-left">
       {row1.map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-3">
+  <div className="relative z-10 overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-right">
       {row2.map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-3">
+  <div className="relative z-10 overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-left-fast">
       {row3.map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} />))}
+    </div>
+  </div>
+  <div className="relative z-10 overflow-hidden py-2">
+    <div className="flex whitespace-nowrap animate-marquee-right">
+      {row4.map((logo, i) => (<LogoItem key={`r4-${i}`} color={logo.color} />))}
+    </div>
+  </div>
+  <div className="relative z-10 overflow-hidden py-2">
+    <div className="flex whitespace-nowrap animate-marquee-left">
+      {row5.map((logo, i) => (<LogoItem key={`r5-${i}`} color={logo.color} />))}
+    </div>
+  </div>
+  <div className="relative z-10 overflow-hidden py-2">
+    <div className="flex whitespace-nowrap animate-marquee-right-fast">
+      {row6.map((logo, i) => (<LogoItem key={`r6-${i}`} color={logo.color} />))}
+    </div>
+  </div>
+  <div className="relative z-10 overflow-hidden py-2">
+    <div className="flex whitespace-nowrap animate-marquee-left">
+      {row7.map((logo, i) => (<LogoItem key={`r7-${i}`} color={logo.color} />))}
+    </div>
+  </div>
+  <div className="relative z-10 overflow-hidden py-2">
+    <div className="flex whitespace-nowrap animate-marquee-right">
+      {row8.map((logo, i) => (<LogoItem key={`r8-${i}`} color={logo.color} />))}
     </div>
   </div>
 
@@ -627,9 +657,12 @@ export default function EventsPage() {
 {/* ═══ EVENTS MARQUEE ═══ */}
   <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
     {(["CONCERTS","DIY SHOWS","MIXERS","ART SHOWS","RECAPS","LIVE COVERAGE"] as const).map((word, i) => (
-      <span key={i} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
-        {word}<span className="mx-4 opacity-60">&bull;</span>
-      </span>
+      <>
+        <span key={`w-${i}`} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
+          {word}
+        </span>
+        <span key={`b-${i}`} className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 opacity-60 text-[#111] dark:text-white">&bull;</span>
+      </>
     ))}
   </EnhancedMarquee>
 
