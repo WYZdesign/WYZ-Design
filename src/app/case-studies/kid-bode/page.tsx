@@ -45,14 +45,14 @@ export default function KidBodeCaseStudy() {
               { title: "Release Strategy", desc: "Rollout planning for singles with coordinated visual content across platforms." },
               { title: "Artist EPK", desc: "Electronic press kit with bio, photos, music links, and booking contact information." },
             ].map(d => (
-              <div key={d.title} className="bg-[#F5F5F3] dark:bg-[#252528] p-6">
+              <div key={d.title} className="bg-[#F5F5F3] dark:bg-[#2b2b2e] p-6">
                 <h3 className="font-heading font-bold text-[15px] text-[#333] dark:text-[#e0e0e0] mb-3">{d.title}</h3>
                 <p className="text-[14px] text-[#666] dark:text-[#888]">{d.desc}</p>
               </div>
             ))}
           </div>
 
-          <div className="text-center bg-[#F5F5F3] dark:bg-[#252528] p-12">
+          <div className="text-center bg-[#F5F5F3] dark:bg-[#2b2b2e] p-12">
             <p className="text-[#666] dark:text-[#888] text-[15px] italic mb-6 max-w-xl mx-auto leading-relaxed">
               Artists need more than talent. They need visual infrastructure that makes people take them seriously. This is what WYZ Design builds.
             </p>

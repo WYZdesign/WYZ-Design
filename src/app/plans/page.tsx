@@ -101,7 +101,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
-        <div className={`relative bg-white dark:bg-[#252528] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full ${
+        <div className={`relative bg-white dark:bg-[#2b2b2e] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full ${
           p.popular
             ? "border-[4px] border-[#DF3131] shadow-lg shadow-[#DF3131]/20 scale-[1.03]"
             : "border border-[#E2E2E2] hover:border-[#DF3131]/50"
@@ -185,7 +185,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
-        <div className={`border p-5 bg-white dark:bg-[#252528] text-center transition-all hover:-translate-y-1 hover:shadow-lg h-full ${
+        <div className={`border p-5 bg-white dark:bg-[#2b2b2e] text-center transition-all hover:-translate-y-1 hover:shadow-lg h-full ${
           i === 0
             ? "border-[4px] border-[#DF3131] shadow-md shadow-[#DF3131]/20"
             : "border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131]/50"
@@ -259,7 +259,7 @@ export default function PlansPage() {
   }
 
   return (
-    <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+    <main className="pb-12 bg-white dark:bg-[#232326]">
       {/* ── Hero: Split Layout ── */}
       <ScrollReveal animation="fadeIn" duration={1.2}>
         <section className="relative min-h-[50vh] lg:min-h-[70vh] flex flex-col lg:flex-row">
@@ -492,7 +492,7 @@ export default function PlansPage() {
         </p>
 
         {/* Build Your Own Plan */}
-        <div className="mt-10 border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] p-6">
+        <div className="mt-10 border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] p-6">
           <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333333] dark:text-[#e0e0e0] tracking-[0.1em] text-center mb-4">BUILD YOUR OWN PLAN</h2>
           <DynamicForm
             fields={CUSTOM_PLAN_FIELDS}

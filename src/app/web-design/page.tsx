@@ -250,17 +250,19 @@ return (
         </section>
 
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
-        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-1 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
-          <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
-            RESPONSIVE&nbsp;&bull;&nbsp;SEO&nbsp;&bull;&nbsp;E-COMMERCE&nbsp;&bull;&nbsp;LANDING&nbsp;PAGES&nbsp;&bull;&nbsp;CMS&nbsp;&bull;&nbsp;CUSTOM&nbsp;CODE&nbsp;&bull;&nbsp;
-          </span>
+        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-1 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
+          {(["RESPONSIVE","SEO","E-COMMERCE","LANDING PAGES","CMS","CUSTOM CODE"] as const).map((word, i) => (
+            <span key={i} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
+              {word}<span className="mx-4 opacity-60">&bull;</span>
+            </span>
+          ))}
         </EnhancedMarquee>
 
         {/* ═══ CAPABILITIES — Scroll reveal ═══ */}
         <ScrollReveal animation="fadeUp">
-          <section className="py-20 bg-white dark:bg-[#1C1C1E]">
+          <section className="pt-6 pb-20 bg-white dark:bg-[#232326]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
-              <div className="text-center mb-14">
+              <div className="text-center mb-8">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT WE DO</span>
                 <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">CAPABILITIES</h2>
               </div>
@@ -310,7 +312,7 @@ return (
 
         {/* ═══ CLIENT PORTFOLIO — Interactive grid ═══ */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
-          <section id="portfolio" className="py-20 bg-[#F5F5F3] dark:bg-[#252528]">
+          <section id="portfolio" className="py-20 bg-[#F5F5F3] dark:bg-[#2b2b2e]">
             <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-12">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">OUR WORK</span>
@@ -326,7 +328,7 @@ return (
 
         {/* ═══ PRICING ═══ */}
         <ScrollReveal animation="fadeUp">
-          <section className="py-20 bg-white dark:bg-[#1C1C1E]">
+          <section className="py-20 bg-white dark:bg-[#232326]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-14">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">PRICING</span>

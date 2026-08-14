@@ -63,7 +63,7 @@ export default function CaseStudiesIndex() {
             ))}
           </div>
 
-          <div className="text-center mt-16 p-12 bg-[#F5F5F3] dark:bg-[#252528]">
+          <div className="text-center mt-16 p-12 bg-[#F5F5F3] dark:bg-[#2b2b2e]">
             <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-4">Your Project Here</h2>
             <p className="text-[#666] dark:text-[#888] text-[15px] max-w-lg mx-auto mb-6">Want to be the next case study? Let us build something worth documenting.</p>
             <Link href="/contact" className="inline-block bg-[#DF3131] text-white px-10 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#B82020] transition-all">

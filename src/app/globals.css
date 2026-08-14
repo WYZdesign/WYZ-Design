@@ -396,9 +396,9 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
      Deep     (darkest)  — footer, deep inset areas
    ═══════════════════════════════════════════════════════════ */
 :root {
-  --dm-surface: #252528;
-  --dm-page: #1C1C1E;
-  --dm-deep: #141416;
+  --dm-surface: #2b2b2e;
+  --dm-page: #232326;
+  --dm-deep: #161618;
   --dm-text: #e0e0e0;
   --dm-muted: #b0b0b0;
   --dm-border: #444;
@@ -693,6 +693,27 @@ p.wz-reveal.wz-revealed { animation: wzFadeInUp 0.45s ease-out forwards; }
   .touch-hover:active {
     transform: scale(0.97);
     transition: transform 0.15s ease, background 0.15s ease;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL TOUCH FEEDBACK — awwwards-style tap interactions
+   ═══════════════════════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse) {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  a:active,
+  button:active,
+  [role="button"]:active {
+    transform: scale(0.98);
+    transition: transform 0.12s ease;
+  }
+  /* Cards & flip cards press effect */
+  [style*="perspective"]:active,
+  [class*="card"]:active {
+    transform: scale(0.985);
+    transition: transform 0.12s ease;
   }
 }
 
@@ -1025,7 +1046,7 @@ footer img[class*="object-contain"] {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .dark .glass {
-  background: rgba(37, 37, 40, 0.75);
+  background: rgba(43, 43, 46, 0.75);
   border-color: rgba(255, 255, 255, 0.08);
 }
 

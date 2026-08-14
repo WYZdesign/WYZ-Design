@@ -653,7 +653,7 @@ export default function ForumPage() {
     activeCat === "all" ? sortedThreads : sortedThreads.filter((t) => t.category === activeCat);
 
   return (
-    <main className="pt-12 pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
+    <main className="pt-12 pb-20 bg-white dark:bg-[#232326] min-h-screen">
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6">
           <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>COMMUNITY</h1>
@@ -666,7 +666,7 @@ export default function ForumPage() {
               { v: 23, l: "Members", c: "#D49341" },
               { v: CATEGORIES.length, l: "Channels", c: "#5865F2" },
             ].map((s) => (
-              <div key={s.l} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
+              <div key={s.l} className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
                 <p className="font-heading font-black text-[28px] tracking-[0.05em]" style={{ color: s.c }}>{s.v}</p>
                 <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#999] dark:text-[#b0b0b0] mb-2">{s.l}</p>
               </div>
@@ -680,7 +680,7 @@ export default function ForumPage() {
               {COMMUNITY_HIGHLIGHTS.map((h, i) => (
                 <div
                   key={h.name}
-                  className={`bg-white dark:bg-[#252528] border transition-all duration-300 overflow-hidden cursor-pointer min-h-[44px] ${
+                  className={`bg-white dark:bg-[#2b2b2e] border transition-all duration-300 overflow-hidden cursor-pointer min-h-[44px] ${
                     expandedCard === i
                       ? "border-[#DF3131] shadow-lg"
                       : "border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] hover:shadow-sm"
@@ -744,7 +744,7 @@ export default function ForumPage() {
               {feedPosts.map((post) => (
                 <div
                   key={post.id}
-                  className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all flex flex-col"
+                  className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all flex flex-col"
                 >
                   {/* Post header */}
                   <div className="p-5 pb-0">
@@ -780,7 +780,7 @@ export default function ForumPage() {
 
                   {/* Image attachment placeholder */}
                   {post.hasImage && (
-                    <div className="mx-5 mb-4 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-dashed border-[#CCCCCC] dark:border-[#444] rounded-lg p-6 flex flex-col items-center justify-center gap-2">
+                    <div className="mx-5 mb-4 bg-[#F7F7F7] dark:bg-[#232326] border border-dashed border-[#CCCCCC] dark:border-[#444] rounded-lg p-6 flex flex-col items-center justify-center gap-2">
                       <FiImage className="w-8 h-8 text-[#999] dark:text-[#666]" />
                       <p className="text-[13px] text-[#999] dark:text-[#666] font-medium">Photo attached</p>
                     </div>
@@ -811,7 +811,7 @@ export default function ForumPage() {
 
                   {/* Comment section */}
                   {post.showComments && (
-                    <div className="border-t border-[#E2E2E2] dark:border-[#333] bg-[#F7F7F7] dark:bg-[#1C1C1E] p-5">
+                    <div className="border-t border-[#E2E2E2] dark:border-[#333] bg-[#F7F7F7] dark:bg-[#232326] p-5">
                       {post.commentList.length > 0 && (
                         <div className="space-y-3 mb-4">
                           {post.commentList.map((c, i) => (
@@ -854,7 +854,7 @@ export default function ForumPage() {
                             }
                           }}
                           placeholder="Write a comment..."
-                          className="flex-1 px-4 py-2.5 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[14px] outline-none focus:border-[#DF3131] rounded-full"
+                          className="flex-1 px-4 py-2.5 bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[14px] outline-none focus:border-[#DF3131] rounded-full"
                         />
                         <button
                           onClick={() => postFeedComment(post.id)}
@@ -878,7 +878,7 @@ export default function ForumPage() {
             </div>
 
             {/* Sorting tabs */}
-            <div className="flex gap-1 mb-4 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] p-1 w-fit">
+            <div className="flex gap-1 mb-4 bg-[#F7F7F7] dark:bg-[#232326] border border-[#E2E2E2] dark:border-[#333] p-1 w-fit">
               {(["hot", "new", "top"] as const).map((tab) => (
                 <button
                   key={tab}
@@ -904,7 +904,7 @@ export default function ForumPage() {
                 className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] uppercase transition-all ${
                   activeCat === "all"
                     ? "bg-[#333] dark:bg-[#e0e0e0] text-white dark:text-[#1C1C1E]"
-                    : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#666] dark:text-[#b0b0b0]"
+                    : "bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] text-[#666] dark:text-[#b0b0b0]"
                 }`}
               >
                 All
@@ -916,7 +916,7 @@ export default function ForumPage() {
                   className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] uppercase transition-all ${
                     activeCat === c.id
                       ? "text-white"
-                      : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#666] dark:text-[#b0b0b0]"
+                      : "bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] text-[#666] dark:text-[#b0b0b0]"
                   }`}
                   style={activeCat === c.id ? { backgroundColor: c.color } : {}}
                 >
@@ -926,7 +926,7 @@ export default function ForumPage() {
             </div>
 
             {/* New thread composer */}
-            <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 mb-6">
+            <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] p-5 mb-6">
               <div className="flex items-center gap-2 mb-3">
                 <FiPlus className="w-4 h-4 text-[#DF3131]" />
                 <p className="font-heading font-bold text-[14px] tracking-[0.06em] text-[#333] dark:text-[#e0e0e0] mb-2">START A THREAD</p>
@@ -934,7 +934,7 @@ export default function ForumPage() {
               <select
                 value={composer.category}
                 onChange={(e) => setComposer({ ...composer, category: e.target.value })}
-                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
+                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#232326] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -946,14 +946,14 @@ export default function ForumPage() {
                 value={composer.title}
                 onChange={(e) => setComposer({ ...composer, title: e.target.value })}
                 placeholder="Thread title..."
-                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] placeholder:text-[#999]"
+                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#232326] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] placeholder:text-[#999]"
               />
               <textarea
                 value={composer.body}
                 onChange={(e) => setComposer({ ...composer, body: e.target.value })}
                 placeholder="What's on your mind?"
                 rows={3}
-                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] resize-none placeholder:text-[#999]"
+                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#232326] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] resize-none placeholder:text-[#999]"
               />
               <button
                 onClick={postThread}
@@ -972,10 +972,10 @@ export default function ForumPage() {
                 return (
                   <div
                     key={t.id}
-                    className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] overflow-hidden flex flex-col"
+                    className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] overflow-hidden flex flex-col"
                   >
                     {/* Vote bar */}
-                    <div className="flex items-center gap-2 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border-b border-[#E2E2E2] dark:border-[#333]">
+                    <div className="flex items-center gap-2 px-4 py-3 bg-[#F7F7F7] dark:bg-[#232326] border-b border-[#E2E2E2] dark:border-[#333]">
                       <button
                         onClick={() => voteThread(t.id, "up")}
                         className={`p-1 rounded transition-colors ${
@@ -1051,7 +1051,7 @@ export default function ForumPage() {
 
                     {/* Expanded thread with replies */}
                     {isOpen && (
-                      <div className="border-t border-[#E2E2E2] dark:border-[#333] bg-[#F7F7F7] dark:bg-[#1C1C1E] p-5">
+                      <div className="border-t border-[#E2E2E2] dark:border-[#333] bg-[#F7F7F7] dark:bg-[#232326] p-5">
                         <div className="space-y-3 mb-4">
                           {t.replies.length === 0 && (
                             <p className="text-[14px] text-[#999] dark:text-[#b0b0b0] italic">
@@ -1090,7 +1090,7 @@ export default function ForumPage() {
                                 }
                               }}
                               placeholder="Write a reply..."
-                              className="flex-1 px-4 py-3 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
+                              className="flex-1 px-4 py-3 bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
                             />
                             <button
                               onClick={() => postReply(t.id)}
@@ -1122,7 +1122,7 @@ export default function ForumPage() {
               {UPCOMING_EVENTS.map((ev) => (
                 <div
                   key={ev.title}
-                  className="flex items-start gap-4 p-5 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all min-h-[44px]"
+                  className="flex items-start gap-4 p-5 bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all min-h-[44px]"
                 >
                   <div className="w-10 h-10 rounded-full bg-[#DF3131]/10 flex items-center justify-center shrink-0 mt-0.5">
                     <FiCalendar className="w-4 h-4 text-[#DF3131]" />
@@ -1155,7 +1155,7 @@ export default function ForumPage() {
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-6 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all group min-h-[44px]"
+                className="block p-6 bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all group min-h-[44px]"
               >
                 <p className="font-heading font-bold text-[14px] tracking-[0.08em] mb-2" style={{ color: s.color }}>
                   {s.name}

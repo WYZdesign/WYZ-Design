@@ -114,7 +114,7 @@ export default function FAQPage() {
   }
 
   return (
-    <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+    <main className="pb-12 bg-white dark:bg-[#232326]">
       <style>{`
         .faq-item{transition:all .3s ease}
         .faq-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
@@ -140,7 +140,7 @@ export default function FAQPage() {
                   <p className="text-white/70 text-base sm:text-lg max-w-md mx-auto">Simplifying Creative Success, Find answers to everything</p>
                 </div>
               </div>
-              <div className="hidden lg:flex flex-col items-center justify-center h-full px-10 lg:px-16 text-center bg-white dark:bg-[#1C1C1E]">
+              <div className="hidden lg:flex flex-col items-center justify-center h-full px-10 lg:px-16 text-center bg-white dark:bg-[#232326]">
                 <div className="grid grid-cols-3 gap-6 mb-8">
                   <AnimatedCounter end={12} suffix="+" className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#8F8F8F] dark:text-white/50 tracking-[0.1em] uppercase" label="Questions" />
                   <AnimatedCounter end={6} className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#8F8F8F] dark:text-white/50 tracking-[0.1em] uppercase" label="Topics" />
@@ -168,7 +168,7 @@ export default function FAQPage() {
                 placeholder="Search questions..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-14 pr-5 py-4 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-xl shadow-sm hover:shadow-md"
+                className="w-full pl-14 pr-5 py-4 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-xl shadow-sm hover:shadow-md"
               />
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function FAQPage() {
               </p>
             </div>
 
-            <div className="max-w-[52rem] mx-auto border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] overflow-hidden rounded-2xl shadow-2xl">
+            <div className="max-w-[52rem] mx-auto border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] overflow-hidden rounded-2xl shadow-2xl">
               {/* Chat Header */}
               <div className="bg-gradient-to-r from-[#DF3131] to-[#B82020] px-6 py-5 flex items-center justify-between">
                 <div className="flex items-center gap-4">
@@ -221,7 +221,7 @@ export default function FAQPage() {
                         <div className={`max-w-[80%] px-5 py-4 text-[16px] leading-relaxed shadow-md ${
                           msg.role === "user"
                             ? "bg-gradient-to-br from-[#DF3131] to-[#B82020] text-white rounded-2xl rounded-br-sm"
-                            : "bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] rounded-2xl rounded-bl-sm border border-[#E2E2E2] dark:border-[#444]"
+                            : "bg-white dark:bg-[#2b2b2e] text-[#333] dark:text-[#e0e0e0] rounded-2xl rounded-bl-sm border border-[#E2E2E2] dark:border-[#444]"
                         }`}>
                           {msg.text}
                         </div>
@@ -231,14 +231,14 @@ export default function FAQPage() {
                   </div>
 
               {/* Chat Input */}
-              <div className="border-t-2 border-[#E2E2E2] dark:border-[#444] p-5 flex gap-3 bg-white dark:bg-[#252528]">
+              <div className="border-t-2 border-[#E2E2E2] dark:border-[#444] p-5 flex gap-3 bg-white dark:bg-[#2b2b2e]">
                     <input
                       type="text"
                       value={chatInput}
                       onChange={(e) => setChatInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && handleSend()}
                       placeholder="Ask about services, pricing, booking..."
-                      className="flex-1 px-5 py-3 border-2 border-[#E2E2E2] text-[16px] text-[#333] dark:text-[#e0e0e0] dark:bg-[#252528] dark:border-[#444] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-lg"
+                      className="flex-1 px-5 py-3 border-2 border-[#E2E2E2] text-[16px] text-[#333] dark:text-[#e0e0e0] dark:bg-[#2b2b2e] dark:border-[#444] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-lg"
                     />
                     <button
                       onClick={handleSend}
@@ -290,7 +290,7 @@ export default function FAQPage() {
             return (
               <ScrollReveal key={realIndex} animation="fadeUp" delay={0.04 * i}>
                 <div
-                  className={`faq-item border-2 bg-white dark:bg-[#252528] overflow-hidden transition-all duration-300 rounded-xl ${
+                  className={`faq-item border-2 bg-white dark:bg-[#2b2b2e] overflow-hidden transition-all duration-300 rounded-xl ${
                     isOpen ? "border-[#DF3131] shadow-lg shadow-[#DF3131]/10" : "border-[#E2E2E2] hover:border-[#DF3131]/50"
                   }`}
                 >
@@ -301,7 +301,7 @@ export default function FAQPage() {
                     className="w-full flex items-center gap-4 px-6 py-5 text-left group"
                   >
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
-                      isOpen ? "bg-[#DF3131] text-white" : "bg-white dark:bg-[#252528] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
+                      isOpen ? "bg-[#DF3131] text-white" : "bg-white dark:bg-[#2b2b2e] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
                     }`}>
                       <span className="font-heading font-bold text-[13px]">{String(i + 1).padStart(2, "0")}</span>
                     </div>
@@ -314,7 +314,7 @@ export default function FAQPage() {
                        </span>
                      </span>
                     <span className={`text-xl font-bold shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 ${
-                      isOpen ? "bg-[#DF3131] text-white rotate-45" : "bg-white dark:bg-[#252528] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
+                      isOpen ? "bg-[#DF3131] text-white rotate-45" : "bg-white dark:bg-[#2b2b2e] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
                     }`}>
                       +
                     </span>

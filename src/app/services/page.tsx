@@ -102,7 +102,7 @@ export default function ServicesPage() {
  const filtered = active === "All Services" ? allServices : allServices.filter(s => s.cat === active);
 
 return (
-  <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+  <main className="pb-12 bg-white dark:bg-[#232326]">
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
@@ -120,7 +120,7 @@ return (
 <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
   <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
   </h1>
-  <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto lg:mx-0">
+  <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
    From photography to web design, we deliver end-to-end creative solutions that make your brand stand out.
    </p>
    <Link href="/plans"
@@ -133,10 +133,12 @@ return (
   </ScrollReveal>
 
 {/* ═══ SERVICES MARQUEE ═══ */}
-  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
-    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
-      PHOTOSHOOTS&nbsp;&bull;&nbsp;RETOUCHING&nbsp;&bull;&nbsp;GRAPHIC&nbsp;DESIGN&nbsp;&bull;&nbsp;LOGOS&nbsp;&bull;&nbsp;VIDEO&nbsp;&bull;&nbsp;WEBSITES&nbsp;&bull;&nbsp;SEO&nbsp;&bull;&nbsp;CONSULTATION&nbsp;&bull;&nbsp;
-    </span>
+  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
+    {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => (
+      <span key={i} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
+        {word}<span className="mx-4 opacity-60">&bull;</span>
+      </span>
+    ))}
   </EnhancedMarquee>
 
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-12">
@@ -151,7 +153,7 @@ return (
  className={`relative px-4 py-2.5 text-[12px] font-bold tracking-[0.1em] uppercase rounded-full transition-all duration-300 shrink-0 ${
  isActive
  ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30 scale-105"
-  : "bg-white dark:bg-[#252528] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
+  : "bg-white dark:bg-[#2b2b2e] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
  }`}>
  {cat}
  </button>

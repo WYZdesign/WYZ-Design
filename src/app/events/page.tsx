@@ -582,7 +582,7 @@ export default function EventsPage() {
 
  return (
   <VideoMuteProvider>
-  <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+  <main className="pb-12 bg-white dark:bg-[#232326]">
  <style>{`
  .hover-lift{transition:transform .3s ease,box-shadow .3s ease}
  .hover-lift:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,.1)}
@@ -625,10 +625,12 @@ export default function EventsPage() {
   </ScrollReveal>
 
 {/* ═══ EVENTS MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
-    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
-      CONCERTS&nbsp;&bull;&nbsp;DIY&nbsp;SHOWS&nbsp;&bull;&nbsp;MIXERS&nbsp;&bull;&nbsp;ART&nbsp;SHOWS&nbsp;&bull;&nbsp;RECAPS&nbsp;&bull;&nbsp;LIVE&nbsp;COVERAGE&nbsp;&bull;&nbsp;
-    </span>
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
+    {(["CONCERTS","DIY SHOWS","MIXERS","ART SHOWS","RECAPS","LIVE COVERAGE"] as const).map((word, i) => (
+      <span key={i} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
+        {word}<span className="mx-4 opacity-60">&bull;</span>
+      </span>
+    ))}
   </EnhancedMarquee>
 
 {/* ═══ 2. Sign-Up ═══ */}
@@ -695,7 +697,7 @@ export default function EventsPage() {
  </div>
  <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
  {visibleEvents.map((e) => (
-  <div key={e.title} className="group cursor-pointer relative overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] mb-2 break-inside-avoid">
+  <div key={e.title} className="group cursor-pointer relative overflow-hidden bg-[#f5f5f5] dark:bg-[#2b2b2e] mb-2 break-inside-avoid">
   <Image src={e.img} alt={e.title} width={400} height={300} className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-500" loading="lazy"
   onError={(ev) => { (ev.target as HTMLImageElement).style.display = 'none'; }} />
  </div>

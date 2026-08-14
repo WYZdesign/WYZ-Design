@@ -136,7 +136,7 @@ export default function WYZMiNDPage() {
     : STACK_ITEMS.filter((s) => s.category === activeStackCat);
 
   return (
-    <main className="bg-white dark:bg-[#1C1C1E] min-h-screen text-[#333] dark:text-[#e0e0e0] pb-20">
+    <main className="bg-white dark:bg-[#232326] min-h-screen text-[#333] dark:text-[#e0e0e0] pb-20">
       <ScrollReveal animation="fadeUp">
 {/* Hero */}
           <section className="relative py-24 px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
@@ -173,7 +173,7 @@ export default function WYZMiNDPage() {
                     onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveFeature(isActive ? null : f.id); } }}
                     style={{ minHeight: "380px" }}
                     className={`relative cursor-pointer transition-all duration-500 rounded-lg overflow-hidden flex flex-col justify-between ${
-                      isActive ? "ring-2 ring-[#DF3131] ring-offset-2 dark:ring-offset-[#252528] shadow-2xl shadow-[#DF3131]/20 z-10 bg-white dark:bg-[#252528]" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:-translate-y-1 hover:shadow-lg"
+                      isActive ? "ring-2 ring-[#DF3131] ring-offset-2 dark:ring-offset-[#252528] shadow-2xl shadow-[#DF3131]/20 z-10 bg-white dark:bg-[#2b2b2e]" : "bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:-translate-y-1 hover:shadow-lg"
                     }`}>
                     {/* Card content — icon stacked on top of title and description */}
                     <div className="flex flex-col items-center text-center p-7 flex-1 justify-center">

@@ -10,11 +10,11 @@ export default function Page() {
   return (
     <>
       {!entered && (
-        <div className="fixed inset-0 z-[9999] bg-[#111] transition-opacity duration-700">
+        <div className="fixed inset-0 z-[9999]" style={{ backgroundColor: "#111" }}>
           <RandomSplash onEnter={() => setEntered(true)} />
         </div>
       )}
-      <div className={entered ? "block" : "opacity-0 pointer-events-none"}>
+      <div style={entered ? undefined : { opacity: 0, pointerEvents: "none" }}>
         <HomePage />
       </div>
     </>

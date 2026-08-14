@@ -108,13 +108,13 @@ export default function BookingPage() {
   }
 
   return (
-    <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+    <main className="pb-12 bg-white dark:bg-[#232326]">
       <div className="max-w-4xl mx-auto px-6 lg:px-12">
         <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>Book a Service</h1>
         <p className="text-center text-[#666665] dark:text-[#b0b0b0] text-[15px] mt-2">Tell us about your project and we&apos;ll get back to you within 24 hours.</p>
 
         {submitted ? (
-          <div className="mt-16 text-center py-16 border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528]">
+          <div className="mt-16 text-center py-16 border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#2b2b2e]">
             <div className="w-16 h-16 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-6">
               <FiCheck className="w-8 h-8 text-white" />
             </div>
@@ -130,19 +130,19 @@ export default function BookingPage() {
               {/* Name */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Full Name *</label>
-                <input type="text" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
+                <input type="text" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
               </div>
 
               {/* Email */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Email *</label>
-                <input type="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
+                <input type="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
               </div>
 
               {/* Phone */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Phone</label>
-                <input type="tel" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
+                <input type="tel" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
               </div>
 
               {/* Service */}
@@ -152,7 +152,7 @@ export default function BookingPage() {
                   required
                   value={selectedService}
                   onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors"
+                  className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] outline-none focus:border-[#DF3131] transition-colors"
                 >
                   <option value="">Select a service</option>
                   {SERVICES.map((s) => (
@@ -164,7 +164,7 @@ export default function BookingPage() {
               {/* Budget */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Budget Range</label>
-                <select className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
+                <select className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] outline-none focus:border-[#DF3131] transition-colors">
                   <option value="">Select a range</option>
                   <option>Under $250</option>
                   <option>$250 - $500</option>
@@ -177,20 +177,20 @@ export default function BookingPage() {
               {/* Preferred Date */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Preferred Date</label>
-                <input type="date" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors" />
+                <input type="date" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] outline-none focus:border-[#DF3131] transition-colors" />
               </div>
             </div>
 
             {/* Message */}
             <div className="mt-6">
               <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Project Details *</label>
-              <textarea required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
+              <textarea required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
             </div>
 
             {/* How did you hear about us */}
             <div className="mt-6">
               <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">How did you hear about us?</label>
-              <select className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
+              <select className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#2b2b2e] outline-none focus:border-[#DF3131] transition-colors">
                 <option value="">Select one</option>
                 <option>Instagram</option>
                 <option>TikTok</option>
@@ -256,7 +256,7 @@ function CalBooking({ calLink }: { calLink: string }) {
 
   if (!calLink) {
     return (
-      <div className="text-center p-8 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-lg">
+      <div className="text-center p-8 bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#333] rounded-lg">
         <p className="text-[#666] dark:text-[#b0b0b0] text-[14px] mb-4">Calendar booking is being set up.</p>
         <a href="mailto:info@wyzdesign.com" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">
           Email to Book

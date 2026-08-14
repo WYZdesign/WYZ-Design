@@ -38,7 +38,7 @@ export default function BlogPage() {
  }, [cat, search]);
 
  return (
- <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
+ <main className="pb-16 bg-white dark:bg-[#232326]">
  <style>{`
  .blog-card{transition:all .35s ease}
  .blog-card:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(0,0,0,.1)}
@@ -87,18 +87,18 @@ export default function BlogPage() {
  placeholder="Search articles..."
  value={search}
  onChange={(e) => setSearch(e.target.value)}
-  className="w-full pl-11 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-lg"
+  className="w-full pl-11 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-lg"
 />
  </div>
  </div>
  </ScrollReveal>
 
  <ScrollReveal animation="fadeUp" delay={0.15}>
- <div className="sticky top-20 lg:top-24 z-10 bg-white dark:bg-[#1C1C1E] py-3 -mx-6 px-6 lg:-mx-12 lg:px-12">
+ <div className="sticky top-20 lg:top-24 z-10 bg-white dark:bg-[#232326] py-3 -mx-6 px-6 lg:-mx-12 lg:px-12">
  <div className="flex gap-2 flex-wrap">
  {CATS.map(c => (
  <button key={c} onClick={() => setCat(c)}
- className={`px-5 py-2.5 min-h-[44px] text-[13px] font-semibold tracking-[0.08em] rounded-full border-2 transition-all ${cat === c ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20" : "bg-white text-[#666] border-[#E2E2E2] dark:bg-[#252528] dark:text-[#e0e0e0] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"}`}>
+ className={`px-5 py-2.5 min-h-[44px] text-[13px] font-semibold tracking-[0.08em] rounded-full border-2 transition-all ${cat === c ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20" : "bg-white text-[#666] border-[#E2E2E2] dark:bg-[#2b2b2e] dark:text-[#e0e0e0] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"}`}>
  {c}
  </button>
  ))}
@@ -110,7 +110,7 @@ export default function BlogPage() {
  <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
  {filtered.map((p, i) => (
  <ScrollReveal key={p.id} animation="fadeUp" delay={0.08 * i}>
- <article className="blog-card group bg-white dark:bg-[#252528] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
+ <article className="blog-card group bg-white dark:bg-[#2b2b2e] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
    <div className="relative h-56 overflow-hidden">
    <Image src={p.img} alt={p.title} fill className="blog-img w-full h-full object-cover dark:brightness-110" priority />
    <span className="absolute top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-2">{p.cat}</span>

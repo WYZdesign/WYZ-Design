@@ -50,7 +50,7 @@ export default function ThreePointProgramPage() {
   const [activePillar, setActivePillar] = useState(0);
 
   return (
-    <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
+    <main className="pb-20 bg-white dark:bg-[#232326]">
       <ScrollReveal animation="fadeUp">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-14 pt-12">
@@ -64,7 +64,7 @@ export default function ThreePointProgramPage() {
             {PILLARS.map((p, i) => (
               <button key={i} onClick={() => setActivePillar(i)}
                 className={`px-6 py-3 rounded-full text-[12px] font-bold tracking-[0.1em] uppercase transition-all ${
-                  activePillar === i ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/70 hover:border-[#DF3131]"
+                  activePillar === i ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30" : "bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/70 hover:border-[#DF3131]"
                 }`}>
                 {p.title}
               </button>
@@ -72,7 +72,7 @@ export default function ThreePointProgramPage() {
           </div>
 
           {/* Active pillar */}
-          <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] p-8 sm:p-10 mb-16">
+          <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] p-8 sm:p-10 mb-16">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-full bg-[#DF3131]/10 flex items-center justify-center text-[#DF3131] text-2xl shrink-0">
                 {PILLARS[activePillar].icon}
@@ -91,7 +91,7 @@ export default function ThreePointProgramPage() {
                 </li>
               ))}
             </ul>
-            <div className="bg-[#f5f5f5] dark:bg-[#252528] p-4 rounded-lg border-l-4 border-[#DF3131]">
+            <div className="bg-[#f5f5f5] dark:bg-[#2b2b2e] p-4 rounded-lg border-l-4 border-[#DF3131]">
               <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#8F8F8F] dark:text-white/50 mb-2">OUTCOME</p>
               <p className="text-[16px] text-[#333] dark:text-[#e0e0e0] leading-relaxed">{PILLARS[activePillar].outcome}</p>
             </div>

@@ -35,7 +35,7 @@ export default function LoyaltyPage() {
   const pointsNeeded = tierIndex === 0 ? 1000 - (data?.points || 0) : tierIndex === 1 ? 5000 - (data?.points || 0) : 0;
 
   return (
-  <main className="pb-16 bg-white dark:bg-[#1C1C1E] pt-20 lg:pt-24">
+  <main className="pb-16 bg-white dark:bg-[#232326] pt-20 lg:pt-24">
     <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-4">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">L O Y A L T Y</h1>
@@ -43,7 +43,7 @@ export default function LoyaltyPage() {
         </div>
 
         {session && data ? (
-          <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10 text-center">
+          <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10 text-center">
             <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#888] dark:text-white/50 mb-2">Your Points</p>
             <p className="text-[3rem] font-heading font-black" style={{ color: TIERS[tierIndex].color }}>{data.points}</p>
             <p className="text-[14px] uppercase font-bold tracking-[0.1em] mb-2" style={{ color: TIERS[tierIndex].color }}>{TIERS[tierIndex].name} TIER</p>
@@ -63,7 +63,7 @@ export default function LoyaltyPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 mb-16">
           {TIERS.map((t, i) => (
-            <div key={i} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+            <div key={i} className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: t.color }} />
               <h3 className="font-heading font-bold text-[20px] tracking-[0.06em] mb-3" style={{ color: t.color }}>{t.name}</h3>
               <p className="text-[13px] text-[#888] mb-4">{t.points} pts</p>
@@ -79,7 +79,7 @@ export default function LoyaltyPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {WAYS.map((w, i) => (
-            <div key={i} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center hover:shadow-lg transition-all group">
+            <div key={i} className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center hover:shadow-lg transition-all group">
               <div className="w-10 h-10 mx-auto flex items-center justify-center text-[#DF3131] group-hover:scale-110 transition-transform mb-3">{w.icon}</div>
               <h3 className="font-heading font-bold text-[14px] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-3">{w.title}</h3>
               <p className="text-[16px] text-[#666] dark:text-[#b0b0b0]">{w.desc}</p>

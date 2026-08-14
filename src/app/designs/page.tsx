@@ -121,7 +121,7 @@ return (
   style={{ overflowX: "auto" }}
   >
   {[...images, ...images, ...images].map((src, i) => (
-  <button key={i} className={`flex-none w-[30vw] sm:w-[210px] md:w-[230px] h-24 sm:h-36 md:h-52 relative overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#252528]"}`}>
+  <button key={i} className={`flex-none w-[30vw] sm:w-[210px] md:w-[230px] h-24 sm:h-36 md:h-52 relative overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#2b2b2e]"}`}>
   <Image src={src} alt="WYZ Design portfolio" fill className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-700" priority />
   </button>
   ))}
@@ -237,7 +237,7 @@ export default function DesignsPage() {
  };
 
  return (
-  <main className="pb-0 bg-white dark:bg-[#1C1C1E]">
+  <main className="pb-0 bg-white dark:bg-[#232326]">
  <style>{[
  "@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}",
  "@keyframes slideInLeft{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:translateX(0)}}",
@@ -334,20 +334,22 @@ export default function DesignsPage() {
  </ScrollReveal>
 
 {/* ═══ DESIGNS MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E]">
-    <span className="text-[1.25rem] sm:text-[1.75rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase px-6">
-      COVER&nbsp;ART&nbsp;&bull;&nbsp;LOGOS&nbsp;&bull;&nbsp;FLYERS&nbsp;&bull;&nbsp;WEB&nbsp;DESIGN&nbsp;&bull;&nbsp;BRANDING&nbsp;&bull;&nbsp;MERCH&nbsp;&bull;&nbsp;
-    </span>
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
+    {(["COVER ART","LOGOS","FLYERS","WEB DESIGN","BRANDING","MERCH"] as const).map((word, i) => (
+      <span key={i} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-6 ${i % 2 === 0 ? "text-[#DF3131]" : "text-[#111] dark:text-white"}`}>
+        {word}<span className="mx-4 opacity-60">&bull;</span>
+      </span>
+    ))}
   </EnhancedMarquee>
 
   {/* ═══ FOATM — FEATURED ARTIST OF THE MONTH ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
-   <section className="py-10 bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
+   <section className="py-10 bg-white dark:bg-[#2b2b2e] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
-   <div className="flex flex-col items-center mb-6 gap-2">
+   <div className="flex flex-wrap items-center justify-center mb-6 gap-x-6 gap-y-2">
    <div className="text-center">
    <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">FEATURED ARTIST OF THE MONTH</span>
-    <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">F. A. O. T. M.</h2>
+    <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0">F. A. O. T. M.</h2>
    </div>
     <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
    </div>
@@ -356,7 +358,7 @@ export default function DesignsPage() {
    <ScrollParallaxCard key={i} tiltAmount={4} scaleAmount={1.03}>
    <ImageHoverReveal>
    <Link href="/merch" className="group cursor-pointer block">
-   <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
+   <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
     <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
     </div>
      <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
@@ -371,20 +373,20 @@ export default function DesignsPage() {
 
  {/* ═══ MERCH WIDGET (with scroll arrows) ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
-  <section className="py-8 bg-white dark:bg-[#1C1C1E] border-b border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
+  <section className="py-8 bg-white dark:bg-[#232326] border-b border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
- <div className="flex flex-col items-center mb-4 gap-2">
+ <div className="flex flex-wrap items-center justify-center mb-4 gap-x-6 gap-y-2">
  <div className="text-center">
-  <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">MERCH SHOP</h2>
+  <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0">MERCH SHOP</h2>
  </div>
   <Link href="/merch" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
  </div>
  <div className="relative">
-  <button onClick={() => merchScrollRef.current?.scrollBy({ left: -300, behavior: "smooth" })} className="absolute sm:-left-5 left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#252528]" aria-label="Scroll left">←</button>
+  <button onClick={() => merchScrollRef.current?.scrollBy({ left: -300, behavior: "smooth" })} className="absolute sm:-left-5 left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#2b2b2e]" aria-label="Scroll left">←</button>
  <div ref={merchScrollRef} className="flex gap-2 overflow-x-auto pb-2 px-6" style={{ scrollbarWidth: "none" }}>
  {dbcMerch.map((p, i) => (
  <Link key={i} href="/merch" className="flex-none w-[13vw] min-w-[120px] group cursor-pointer block">
- <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
+ <div className="aspect-square relative dark:bg-[#2b2b2e] overflow-hidden mb-2 rounded-md">
   <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
   </div>
    <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
@@ -392,7 +394,7 @@ export default function DesignsPage() {
  </Link>
  ))}
  </div>
-  <button onClick={() => merchScrollRef.current?.scrollBy({ left: 300, behavior: "smooth" })} className="absolute sm:-right-5 right-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#252528]" aria-label="Scroll right">→</button>
+  <button onClick={() => merchScrollRef.current?.scrollBy({ left: 300, behavior: "smooth" })} className="absolute sm:-right-5 right-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#2b2b2e]" aria-label="Scroll right">→</button>
  </div>
  </div>
  </section>
@@ -400,10 +402,10 @@ export default function DesignsPage() {
 
  {/* ═══ CONCEPT GENERATOR (Ollama connected) ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
-  <section className="py-6 lg:py-20 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
+  <section className="py-6 lg:py-20 bg-white dark:bg-[#232326] border-t border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-2 items-start">
  <div className="text-center"><span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">UNLEASH YOUR IMAGINATION</span>  <h2 className="text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">DESIGN CONCEPT<br />GENERATOR</h2>  <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">Not sure where to start? Describe your vision and our AI will spark creative ideas tailored to your brand.</p></div>
-  <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] p-4 sm:p-6 lg:p-8 shadow-sm rounded-lg">
+  <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] p-4 sm:p-6 lg:p-8 shadow-sm rounded-lg">
  <div className="space-y-4 mb-4 max-h-[320px] overflow-y-auto">
  <div className="flex gap-2 items-start">
  <div className="w-8 h-8 rounded-full bg-[#DF3131] flex items-center justify-center flex-shrink-0"><span className="text-white text-[11px] font-bold">AI</span></div>
@@ -428,7 +430,7 @@ export default function DesignsPage() {
  )}
  </div>
  <div className="relative mb-4">
-  <textarea value={conceptText} onChange={(e) => setConceptText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); generateConcept(); } }} rows={2} className="w-full border border-[#E2E2E2] dark:border-[#444] py-3 px-5 pr-12 text-[16px] text-[#333] dark:text-[#e0e0e0] dark:bg-[#252528] focus:outline-none focus:border-[#DF3131] transition-colors rounded-lg resize-none" placeholder="Describe your vision..." />
+  <textarea value={conceptText} onChange={(e) => setConceptText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); generateConcept(); } }} rows={2} className="w-full border border-[#E2E2E2] dark:border-[#444] py-3 px-5 pr-12 text-[16px] text-[#333] dark:text-[#e0e0e0] dark:bg-[#2b2b2e] focus:outline-none focus:border-[#DF3131] transition-colors rounded-lg resize-none" placeholder="Describe your vision..." />
  <FiSearch className="absolute right-4 top-1/2 -translate-y-1/2 text-[#CBCBCA] w-4 h-4" />
  </div>
  <button onClick={generateConcept} disabled={conceptLoading || !conceptText.trim()} className="w-full py-3 bg-[#DF3131] text-white text-[15px] font-bold tracking-[0.12em] hover:bg-[#B82020] transition-all flex items-center justify-center gap-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">{"\u2728"} SPARK CREATIVITY</button>
