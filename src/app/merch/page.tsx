@@ -592,7 +592,7 @@ export default function MerchPage() {
           <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <Image src="selectedProduct.image" alt="selectedProduct.name" fill className="w-full h-full object-cover" priority decoding="async" />
+                <Image src={selectedProduct.image} alt={selectedProduct.name} fill className="w-full h-full object-cover" priority decoding="async" />
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">

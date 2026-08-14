@@ -31,9 +31,11 @@ export default function ScrollReveal({
   threshold = 0.12,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [hydrated, setHydrated] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    setHydrated(true);
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -55,6 +57,7 @@ export default function ScrollReveal({
   }, [threshold]);
 
   const from = animationStyles[animation];
+  const show = !hydrated || visible;
 
   return (
     <div
@@ -62,9 +65,9 @@ export default function ScrollReveal({
       className={className}
       style={{
         transformOrigin: animation === "foldDown" ? "top center" : undefined,
-        opacity: visible ? 1 : 0,
-        transform: visible ? "none" : from,
-        transition: `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s`,
+        opacity: show ? 1 : 0,
+        transform: show ? "none" : from,
+        transition: hydrated ? `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s` : undefined,
       }}
       onTransitionEnd={(e) => {
         if (e.target === ref.current && e.propertyName === "transform") {

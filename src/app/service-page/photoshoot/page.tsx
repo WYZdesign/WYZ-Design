@@ -5,6 +5,45 @@ import Link from "next/link";
 export default function Photoshoot() {
   return (
     <>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Photoshoot",
+      description: "Professional photoshoot sessions including lighting, creative direction, and edited high-resolution images.",
+      provider: {
+        "@type": "LocalBusiness",
+        name: "WYZ Design",
+        url: "https://www.wyzdesign.com",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "United States",
+      },
+      serviceType: "Photography",
+      offers: {
+        "@type": "Offer",
+        price: "100",
+        priceCurrency: "USD",
+      },
+    }),
+  }}
+/>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wyzdesign.com" },
+        { "@type": "ListItem", position: 2, name: "Photoshoot", item: "https://www.wyzdesign.com/service-page/photoshoot" },
+      ],
+    }),
+  }}
+/>
 <main className="min-h-screen bg-white dark:bg-[#111] pb-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm mb-2">Photography Service</p>

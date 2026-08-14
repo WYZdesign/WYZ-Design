@@ -1,12 +1,35 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /account/
+Disallow: /api/
+Disallow: /booking-calendar/
+Disallow: /booking
+Disallow: /search?*q=
 Sitemap: https://www.wyzdesign.com/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /account/
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /account/
 
 User-agent: GPTBot
 Allow: /
 
-User-agent: Googlebot
+User-agent: CCBot
 Allow: /
 
-User-agent: Bingbot
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
 Allow: /

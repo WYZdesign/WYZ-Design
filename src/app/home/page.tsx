@@ -113,10 +113,68 @@ const SERVICES = [
 ];
 
 const SERVICE_LIST = [
- { name: "Photoshoot", desc: "Capture authentic moments with sleek, professional photography.", dur: "1 hr", price: "$100", href: "/booking-calendar/photoshoot" },
- { name: "Photo Retouching", desc: "Basic to Advanced Professional Photo Retouching.", dur: "2 hr", price: "Price Varies", href: "/service-page/photo-retouching" },
- { name: "Event Photography", desc: "Expertly capturing every moment - from public showcases to private events.", dur: "3 hr", price: "$200", href: "/service-page/event-photography" },
+  { cat: "Photography", name: "Photoshoot", desc: "Capture authentic moments with sleek, professional photography.", dur: "1 hr", price: "$100", href: "/booking-calendar/photoshoot", img: "/images/services/Photography.webp" },
+  { cat: "Photography", name: "Photo Retouching", desc: "Basic to Advanced Professional Photo Retouching.", dur: "2 hr", price: "Price Varies", href: "/service-page/photo-retouching", img: "/images/services/Photo Retouching.jpg" },
+  { cat: "Photography", name: "Event Photography", desc: "Expertly capturing every moment - from public showcases to private events.", dur: "3 hr", price: "$200", href: "/service-page/event-photography", img: "/images/services/Event Photography.jpg" },
 ];
+
+function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div
+      className="group relative cursor-pointer w-full"
+      style={{ perspective: "1200px" }}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+      onClick={() => setFlipped((f) => !f)}
+    >
+      <div className="relative w-full" style={{ minHeight: "min(380px, 50vh)" }}>
+        {/* Front */}
+        <div
+          className="absolute inset-0 transition-all duration-700 ease-in-out"
+          style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}
+        >
+          <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
+            <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
+            <div className="absolute inset-0 bg-black/60" />
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <h3 className="font-heading font-black text-white text-[20px] sm:text-[22px] md:text-[24px] tracking-[0.06em] text-center drop-shadow-lg px-4 uppercase">{s.name}</h3>
+            </div>
+          </div>
+        </div>
+
+        {/* Back */}
+        <div
+          className="absolute inset-0 transition-all duration-700 ease-in-out"
+          style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
+        >
+          <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative text-center">
+            <div className="absolute inset-0 opacity-10">
+              <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" priority />
+            </div>
+            <div className="relative z-10">
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{s.cat}</span>
+              <h3 className="font-heading font-black text-white text-[20px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
+              <p className="text-white/80 text-[14px] leading-relaxed mb-4">{s.desc}</p>
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <span className="text-[40px] font-black">{s.price}</span>
+                <span className="text-white/60 text-[14px]">· {s.dur}</span>
+              </div>
+            </div>
+            <div className="relative z-10 flex gap-2">
+              <Link href={s.href} className="flex-1 text-center py-2.5 bg-white text-[#DF3131] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
+                BOOK NOW
+              </Link>
+              <Link href="/plans" className="flex-1 text-center py-2.5 border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
+                VIEW PLANS
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const PRICING_PLANS = [
  { name: "Creator Access", price: "$250", badge: "", desc: "For artists, models, and young brands building their foundation. Design tasks, strategy calls, web updates included.", valid: "Monthly. Cancel anytime." },
@@ -775,8 +833,37 @@ export default function HomePage() {
  f.q.toLowerCase().includes(faqSearch.toLowerCase()) || f.a.toLowerCase().includes(faqSearch.toLowerCase())
  );
 
- return (
+  return (
  <main className="pt-0">
+ <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wyzdesign.com" },
+      ],
+    }),
+  }}
+ />
+ <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.a,
+        },
+      })),
+    }),
+  }}
+ />
  <style>{`
  @keyframes heroSlideIn { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
  @keyframes heroSlideInR { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
@@ -898,55 +985,34 @@ export default function HomePage() {
  </div>
 
  <div className="min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]">
- {/* ── SERVICES TAB ── */}
- {spTab === "services" && (
- <div className="max-w-3xl mx-auto animate-fadeIn">
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-4">Services</h2>
- <div className="flex flex-wrap gap-2 mb-8 justify-center">
- {SERVICES.map((s) => (
-  <button key={s.tab} onClick={() => setActiveTab(s.tab)}
-  className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
- activeTab === s.tab
- ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
- : "bg-white dark:bg-[#232326] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
- }`}>
- <span className="relative z-10">{s.tab}</span>
- </button>
- ))}
- </div>
- <div className="space-y-4">
- {SERVICE_LIST.map((s, i) => (
- <CardTilt key={s.name} intensity={8}>
- <div
- className="flex gap-4 items-start pb-6 border-b border-[#E2E2E2] dark:border-[#444] last:border-0 group hover:bg-gray-50/50 dark:hover:bg-white/5 p-4 -mx-4 rounded-lg transition-all duration-300 hover:shadow-md"
- style={{ animationDelay: `${i * 100}ms` }}>
- <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#f5f5f5] dark:bg-[#2b2b2e] group-hover:bg-[#DF3131]/10 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
- <FiCamera className="w-6 h-6 text-[#DF3131]" />
- </div>
- <div className="flex-1">
-   <h3 className="font-heading font-bold text-[#333] dark:text-white text-[14px] sm:text-[16px] md:text-[17px] tracking-[0.05em] uppercase group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
-  <p className="text-sm text-[#666] dark:text-white/70 mb-2">{s.desc}</p>
- <div className="flex items-center justify-between">
- <Link href={s.href} className="text-[#DF3131] text-sm font-bold tracking-[0.08em] uppercase hover:underline inline-flex items-center gap-1">
- Read More <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
- </Link>
- <div className="flex items-center gap-4 text-sm">
-  <span className="text-[#888] dark:text-white/50">{s.dur}</span>
-  <span className="font-bold text-[#333] dark:text-white">{s.price}</span>
- </div>
- </div>
- </div>
- </div>
- </CardTilt>
- ))}
- </div>
- <div className="text-center mt-8">
- <Link href="/services" className="inline-block px-8 py-3 border-2 border-[#333] text-[#333] font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
- VIEW ALL SERVICES
- </Link>
- </div>
- </div>
- )}
+  {/* ── SERVICES TAB ── */}
+  {spTab === "services" && (
+  <div className="max-w-6xl mx-auto animate-fadeIn">
+  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-4">Services</h2>
+  <div className="flex flex-wrap gap-2 mb-8 justify-center">
+  {SERVICES.map((s) => (
+   <button key={s.tab} onClick={() => setActiveTab(s.tab)}
+   className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
+  activeTab === s.tab
+  ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
+  : "bg-white dark:bg-[#232326] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+  }`}>
+  <span className="relative z-10">{s.tab}</span>
+  </button>
+  ))}
+  </div>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {SERVICE_LIST.map((s) => (
+    <HomeServiceFlipCard key={s.name} s={s} />
+  ))}
+  </div>
+  <div className="text-center mt-8">
+  <Link href="/services" className="inline-block px-8 py-3 border-2 border-[#333] dark:border-white text-[#333] dark:text-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
+  VIEW ALL SERVICES
+  </Link>
+  </div>
+  </div>
+  )}
 
  {/* ── PLANS TAB ── */}
   {spTab === "plans" && (

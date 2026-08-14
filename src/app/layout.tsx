@@ -23,8 +23,8 @@ import A11yAudit from "@/components/A11yAudit";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import NoiseOverlay from "@/components/NoiseOverlay";
 
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap" });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap", preload: true });
+const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap", preload: true });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.wyzdesign.com"),
@@ -80,12 +80,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${montserrat.variable} ${inter.variable} h-full`}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://umami.wyzdesign.com" />
+        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
+        <link rel="dns-prefetch" href="https://js.stripe.com" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="WYZ Design" />
         <meta name="format-detection" content="telephone=no" />
+        <meta name="theme-color" content="#DF3131" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#232326" media="(prefers-color-scheme: dark)" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192x192.png" />

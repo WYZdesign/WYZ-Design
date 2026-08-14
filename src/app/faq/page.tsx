@@ -115,6 +115,36 @@ export default function FAQPage() {
 
   return (
     <main className="pb-12 bg-white dark:bg-[#232326]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.a,
+              },
+            })),
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wyzdesign.com" },
+              { "@type": "ListItem", position: 2, name: "FAQ", item: "https://www.wyzdesign.com/faq" },
+            ],
+          }),
+        }}
+      />
       <style>{`
         .faq-item{transition:all .3s ease}
         .faq-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}

@@ -314,7 +314,7 @@ export default function CategoryPage() {
  return (
   <div className="min-h-screen bg-[#0A0A0A] pb-20">
  <div className="pt-24">
- <MarqueeTitle text={meta.label.toUpperCase()} />
+ <h1><MarqueeTitle text={meta.label.toUpperCase()} /></h1>
  <p className="text-white/50 text-[16px] text-center max-w-xl mx-auto mb-8 px-6">{meta.desc} {allImages.length > 0 && ` - ${allImages.length} images across ${albums.length} albums`}</p>
 
   {isGated && status !== "loading" && status !== "authenticated" && (

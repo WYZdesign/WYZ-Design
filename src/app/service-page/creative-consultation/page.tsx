@@ -5,6 +5,45 @@ import Link from "next/link";
 export default function CreativeConsultation() {
   return (
     <>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Creative Consultation",
+      description: "Free creative consultation to unleash your brand's potential.",
+      provider: {
+        "@type": "LocalBusiness",
+        name: "WYZ Design",
+        url: "https://www.wyzdesign.com",
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "United States",
+      },
+      serviceType: "Consultation",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    }),
+  }}
+/>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wyzdesign.com" },
+        { "@type": "ListItem", position: 2, name: "Creative Consultation", item: "https://www.wyzdesign.com/service-page/creative-consultation" },
+      ],
+    }),
+  }}
+/>
 <main className="min-h-screen bg-white dark:bg-[#111] pb-20">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm mb-2">Free Service</p>
