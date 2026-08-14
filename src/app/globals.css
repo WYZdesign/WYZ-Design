@@ -982,6 +982,36 @@ h2 { font-size: clamp(1.35rem, 1.35rem + 1.5vw, 3.3rem); }
 h3 { font-size: clamp(1.05rem, 1.05rem + 1vw, 2.1rem); }
 h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
 
+/* ═══════════════════════════════════════════════════════════
+   MOBILE UNIFORM TYPE STACK — consistent heading hierarchy,
+   even spacing, centered alignment, medium paragraph measure
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  h1 { font-size: clamp(1.875rem, 1.875rem + 1.5vw, 2.5rem) !important; }
+  h2 { font-size: clamp(1.4rem, 1.4rem + 1vw, 1.7rem) !important; }
+  h3 { font-size: clamp(1.1rem, 1.1rem + 0.6vw, 1.3rem) !important; }
+  h4, h5, h6 { font-size: 1rem !important; }
+
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.15 !important;
+    text-align: center !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.875rem !important;
+  }
+  h1:first-child, h2:first-child, h3:first-child,
+  h4:first-child, h5:first-child, h6:first-child {
+    margin-top: 0 !important;
+  }
+
+  p {
+    font-size: 0.9375rem !important;
+    line-height: 1.65 !important;
+    max-width: 36rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
 /* Responsive grid utilities */
 .grid-auto-fit { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
 .grid-auto-fill { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
