@@ -564,7 +564,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   <p className="text-white/60 text-[16px] sm:text-[17px] max-w-lg leading-relaxed mb-8">
  Watch full event recaps, behind-the-scenes footage, live performances, and exclusive content from every WYZ Design event.
  </p>
- <div className="flex flex-col sm:flex-row gap-4 items-center">
+  <div className="flex flex-row flex-wrap gap-4 items-center justify-center">
   <a href="https://www.youtube.com/channel/UC_wYZDesign?sub_confirmation=1" target="_blank" rel="noopener noreferrer"
   className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-[#FF0000] text-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#CC0000] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#FF0000]/30">
   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49.1 3.59.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>

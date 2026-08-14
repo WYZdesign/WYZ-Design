@@ -173,7 +173,7 @@ export default function PartnershipsPage() {
           <p className="text-white/80 text-[16px] max-w-xl mx-auto mb-8">
             Whether you are an artist, brand, studio, or community—we are ready to partner with you. Let us talk about what we can create together.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-row gap-4 justify-center">
             <Link href="/contact" className="inline-block px-8 py-3 bg-white text-[#DF3131] font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-white/90 transition-all">
               Get In Touch
             </Link>

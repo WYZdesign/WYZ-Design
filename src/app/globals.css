@@ -987,9 +987,9 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
    even spacing, centered alignment, medium paragraph measure
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
-  h1 { font-size: clamp(1.875rem, 1.875rem + 1.5vw, 2.5rem) !important; }
-  h2 { font-size: clamp(1.4rem, 1.4rem + 1vw, 1.7rem) !important; }
-  h3 { font-size: clamp(1.1rem, 1.1rem + 0.6vw, 1.3rem) !important; }
+  h1 { font-size: clamp(2.25rem, 2.25rem + 2vw, 3.25rem) !important; }
+  h2 { font-size: clamp(1.5rem, 1.5rem + 1vw, 1.9rem) !important; }
+  h3 { font-size: clamp(1.15rem, 1.15rem + 0.6vw, 1.4rem) !important; }
   h4, h5, h6 { font-size: 1rem !important; }
 
   h1, h2, h3, h4, h5, h6 {
@@ -1010,6 +1010,19 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
     margin-left: auto !important;
     margin-right: auto !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TAGLINES / KICKERS — small uppercase labels above headings.
+   Match the heading width so title + tagline align as one frame.
+   ═══════════════════════════════════════════════════════════ */
+span[class*="tracking-"][class*="uppercase"],
+p[class*="tracking-"][class*="uppercase"] {
+  display: block !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
 }
 
 /* Responsive grid utilities */

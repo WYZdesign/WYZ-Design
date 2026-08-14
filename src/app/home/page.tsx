@@ -898,7 +898,7 @@ export default function HomePage() {
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
      </GyroTilt>
-     <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <div className="flex flex-row gap-4 justify-center">
      <MagneticElement tag="div" strength={0.25}>
      <Link href="/about"
      className="inline-block border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#333] transition-all">

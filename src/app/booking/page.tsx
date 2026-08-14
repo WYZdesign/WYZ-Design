@@ -202,7 +202,7 @@ export default function BookingPage() {
               </select>
             </div>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <div className="mt-8 flex flex-row gap-3">
               <button type="submit" disabled={loading} aria-label="Submit booking request" className="flex-1 py-3.5 bg-[#DF3131] text-white font-heading font-bold text-sm tracking-[0.1em] uppercase hover:bg-[#B82020] transition-all disabled:opacity-50">
                 {loading ? "Loading..." : "Submit Request"}
               </button>
