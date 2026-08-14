@@ -13,6 +13,8 @@ export default function Photoshoot() {
       "@type": "Service",
       name: "Photoshoot",
       description: "Professional photoshoot sessions including lighting, creative direction, and edited high-resolution images.",
+      url: "https://www.wyzdesign.com/service-page/photoshoot",
+      image: "https://www.wyzdesign.com/wyz-og-image.png",
       provider: {
         "@type": "LocalBusiness",
         name: "WYZ Design",

@@ -13,6 +13,8 @@ export default function PhotoRetouching() {
       "@type": "Service",
       name: "Photo Retouching",
       description: "Professional photo retouching from basic cleanup to advanced editing.",
+      url: "https://www.wyzdesign.com/service-page/photo-retouching",
+      image: "https://www.wyzdesign.com/wyz-og-image.png",
       provider: {
         "@type": "LocalBusiness",
         name: "WYZ Design",

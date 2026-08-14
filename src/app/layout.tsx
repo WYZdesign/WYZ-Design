@@ -103,9 +103,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
+              "@id": "https://www.wyzdesign.com/#organization",
               name: "WYZ Design",
-              url: "https://wyzdesign.com",
-              logo: "https://wyzdesign.com/wyz-crown-square.png",
+              url: "https://www.wyzdesign.com",
+              logo: "https://www.wyzdesign.com/wyz-crown-square.png",
               description: "Creative direction and production agency. Photography, graphic design, web design, videography, branding, and printing. Los Angeles + Chicago.",
               sameAs: [
                 "https://instagram.com/wyzdesign",
@@ -137,11 +138,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
+              "@id": "https://www.wyzdesign.com/#website",
               name: "WYZ Design",
-              url: "https://wyzdesign.com",
+              url: "https://www.wyzdesign.com",
               potentialAction: {
                 "@type": "SearchAction",
-                target: "https://wyzdesign.com/search?q={search_term_string}",
+                target: "https://www.wyzdesign.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             }),
@@ -153,6 +155,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
+              "@id": "https://www.wyzdesign.com/#local-business",
               name: "WYZ Design",
               url: "https://www.wyzdesign.com",
               logo: "https://www.wyzdesign.com/wyz-crown-square.png",

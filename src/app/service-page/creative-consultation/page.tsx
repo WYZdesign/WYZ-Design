@@ -13,6 +13,8 @@ export default function CreativeConsultation() {
       "@type": "Service",
       name: "Creative Consultation",
       description: "Free creative consultation to unleash your brand's potential.",
+      url: "https://www.wyzdesign.com/service-page/creative-consultation",
+      image: "https://www.wyzdesign.com/wyz-og-image.png",
       provider: {
         "@type": "LocalBusiness",
         name: "WYZ Design",

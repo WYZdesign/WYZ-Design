@@ -13,6 +13,8 @@ export default function EventPhotography() {
       "@type": "Service",
       name: "Event Photography",
       description: "Expert event photography for concerts, showcases, and private events.",
+      url: "https://www.wyzdesign.com/service-page/event-photography",
+      image: "https://www.wyzdesign.com/wyz-og-image.png",
       provider: {
         "@type": "LocalBusiness",
         name: "WYZ Design",
