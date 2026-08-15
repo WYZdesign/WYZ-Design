@@ -34,10 +34,14 @@ export default function ClearCachePage() {
     } catch {}
 
     setDone(true);
-    setStatus("Done! Caches, cookies, service workers, and storage cleared.");
+    setStatus("Done! Redirecting you home…");
     setTimeout(() => {
-      window.location.href = "/home";
-    }, 1500);
+      try {
+        window.location.replace("/home?t=" + Date.now());
+      } catch {
+        window.location.href = "/home";
+      }
+    }, 1000);
   };
 
   return (

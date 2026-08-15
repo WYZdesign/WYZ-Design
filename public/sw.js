@@ -40,9 +40,9 @@ self.addEventListener("fetch", (event) => {
       .catch(async () => {
         const cached = await caches.match(event.request);
         if (cached) return cached;
-        // Fallback for navigation requests when offline
+        // Offline: serve the friendly offline page for navigations
         if (event.request.mode === "navigate") {
-          return (await caches.match("/")) || (await caches.match("/home")) || new Response("Offline", { status: 503, headers: { "Content-Type": "text/plain" } });
+          return (await caches.match("/offline")) || Response.redirect("/offline", 302);
         }
         return new Response("", { status: 503 });
       })
