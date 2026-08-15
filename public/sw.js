@@ -40,11 +40,12 @@ self.addEventListener("fetch", (event) => {
       .catch(async () => {
         const cached = await caches.match(event.request);
         if (cached) return cached;
-        // Offline: serve the friendly offline page for navigations
+        // Offline: serve a self-contained offline page for navigations
         if (event.request.mode === "navigate") {
-          return (await caches.match("/offline")) || Response.redirect("/offline", 302);
+          const offlineHtml = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Offline | WYZ Design</title><style>body{margin:0;background:#111;color:#fff;font-family:Inter,-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center}px{-webkit-font-smoothing:antialiased}.c{max-width:400px;padding:2rem}.r{background:#DF3131;color:#fff;border:none;padding:1rem 2.5rem;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:8px;cursor:pointer;margin-top:1.5rem}.r:hover{background:#B82020}</style></head><body><div class="c"><p style="color:#DF3131;font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1rem">You're offline</p><h1 style="font-size:2rem;font-weight:900;letter-spacing:.03em;margin:0 0 1rem">WYZ DESIGN</h1><p style="color:rgba(255,255,255,.6);font-size:15px;line-height:1.6;margin-bottom:2rem">Looks like you lost your connection. Reconnect and we'll get you right back in.</p><button class="r" onclick="location.reload()">Retry Connection</button><p style="margin-top:1.5rem"><a href="/home" style="color:#DF3131;font-size:14px;text-decoration:underline">Try home</a></p></div></body></html>`;
+          return new Response(offlineHtml, { headers: { "Content-Type": "text/html" } });
         }
-        return new Response("", { status: 503 });
+        return new Response("Offline", { status: 503 });
       })
   );
 });

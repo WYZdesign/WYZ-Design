@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-:focus-visible { outline: 2px solid #DF3131; outline-offset: 2px; border-radius: 2px; }
-
 @variant dark (&:where(.dark, .dark *));
 
 @theme inline {
@@ -68,6 +66,7 @@ h3 { max-width: 75%; margin-left: auto; margin-right: auto; }
 }
 
 ::selection { background: rgba(223, 49, 49, 0.2); color: #333333; }
+.dark ::selection { background: rgba(223, 49, 49, 0.3); color: #e0e0e0; }
 
 /* ── NAV ── */
 nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
@@ -286,8 +285,6 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
     cursor: pointer;
   }
 
-  /* ── White font only on red/black backgrounds ── */
-  .text-white { color: white !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════
