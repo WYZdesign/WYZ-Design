@@ -266,7 +266,7 @@ function MarqueeTitle({ text }: { text: string }) {
  </div>
  <style>{`
  @keyframes marqueeInfinite { from { transform: translateX(0); } to { transform: translateX(-50%); } }
- .animate-marquee-infinite { animation: marqueeInfinite 35s linear infinite; }
+ .animate-marquee-infinite { animation: marqueeInfinite 30s linear infinite; }
  .scrollbar-hide::-webkit-scrollbar { display: none; }
  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
  `}</style>

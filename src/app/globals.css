@@ -177,7 +177,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
   }
   .faq-marquee-inner {
     display: inline-block;
-    animation: faqMarquee 12s linear infinite;
+    animation: faqMarquee 10s linear infinite;
     padding-right: 2rem;
   }
   @keyframes faqMarquee {
@@ -201,14 +201,21 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
+  @keyframes marqueeRightFast {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
   .animate-marquee-left {
-    animation: marqueeLeft 30s linear infinite;
+    animation: marqueeLeft 26s linear infinite;
   }
   .animate-marquee-right {
-    animation: marqueeRight 30s linear infinite;
+    animation: marqueeRight 26s linear infinite;
   }
   .animate-marquee-left-fast {
-    animation: marqueeLeftFast 18s linear infinite;
+    animation: marqueeLeftFast 16s linear infinite;
+  }
+  .animate-marquee-right-fast {
+    animation: marqueeRightFast 16s linear infinite;
   }
 
   /* Hero text readability: handled by an explicit 30% black overlay div in each

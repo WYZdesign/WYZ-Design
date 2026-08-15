@@ -118,7 +118,7 @@ function ParallaxHero() {
           100% { transform: translateX(-50%); }
         }
         .marquee-strip {
-          animation: marqueeScroll 40s linear infinite;
+          animation: marqueeScroll 35s linear infinite;
         }
         .marquee-strip:hover {
           animation-play-state: paused;

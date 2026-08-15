@@ -12,9 +12,9 @@ interface EnhancedMarqueeProps {
 }
 
 const speeds = {
-  slow: "40s",
-  normal: "25s",
-  fast: "15s",
+  slow: "35s",
+  normal: "22s",
+  fast: "13s",
 };
 
 export default function EnhancedMarquee({
