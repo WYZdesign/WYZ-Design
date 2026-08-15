@@ -149,7 +149,7 @@ function ParallaxHero() {
         <div className="text-white/50 text-[11px] sm:text-[13px] max-w-lg leading-relaxed min-h-[3em] mb-3" style={{ opacity: Math.max(0, 1 - scrollY / 300) }}>
            <TypewriterText text="More than fashion, a narrative of defiance, creativity, and the enduring spirit of doing it yourself." speed={30} />
         </div>
-        <a href="#shop" className="mt-8 px-8 py-3 border-2 border-white/30 text-white text-[13px] font-bold tracking-[0.15em] uppercase hover:bg-white hover:text-[#111] transition-all" style={{ opacity: Math.max(0, 1 - scrollY / 250) }}>
+        <a href="#shop" className="mt-8 px-8 py-3 bg-white text-[#111] border-2 border-white text-[13px] font-bold tracking-[0.15em] uppercase hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all" style={{ opacity: Math.max(0, 1 - scrollY / 250) }}>
           Shop Now
         </a>
       </div>

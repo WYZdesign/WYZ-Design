@@ -1,50 +1,50 @@
-const SW_VERSION = "v1";
+/* WYZ Design Service Worker — Network-First Self-Healing */
+const SW_VERSION = "v2-2026";
+const CACHE_NAME = `wyzdesign-${SW_VERSION}`;
 
-self.addEventListener("install", (event: any) => {
-  event.waitUntil(
-    caches.open(`wyzdesign-${SW_VERSION}`).then((cache) => {
-      return cache.addAll([
-        "/",
-        "/home",
-        "/photography",
-        "/designs",
-        "/services",
-        "/plans",
-        "/offline",
-      ]);
-    })
-  );
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
 });
 
-self.addEventListener("activate", (event: any) => {
+self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter((k) => k !== `wyzdesign-${SW_VERSION}`).map((k) => caches.delete(k))
+        keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
-self.addEventListener("fetch", (event: any) => {
+self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
-  if (event.request.url.includes("/api/") || event.request.url.includes("/_next/")) {
+  const url = event.request.url;
+  if (url.includes("/api/") || url.includes("/_next/webpack-hmr")) {
     return;
   }
 
+  // Network-first strategy: Always fetch fresh HTML & assets first.
+  // Fall back to cache ONLY if offline / network error.
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const fetched = fetch(event.request).then((response) => {
-        if (response && response.status === 200) {
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200 && response.type === "basic") {
           const clone = response.clone();
-          caches.open(`wyzdesign-${SW_VERSION}`).then((cache) => {
+          caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, clone);
           });
         }
         return response;
-      });
-      return cached || fetched;
-    })
+      })
+      .catch(async () => {
+        const cached = await caches.match(event.request);
+        if (cached) return cached;
+        // Fallback for navigation requests when offline
+        if (event.request.mode === "navigate") {
+          return (await caches.match("/")) || (await caches.match("/home")) || new Response("Offline", { status: 503, headers: { "Content-Type": "text/plain" } });
+        }
+        return new Response("", { status: 503 });
+      })
   );
 });

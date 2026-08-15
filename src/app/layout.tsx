@@ -94,6 +94,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#DF3131" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#232326" media="(prefers-color-scheme: dark)" />
         <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}html.dark,html.dark body{background:#232326;color:#f0eaff}a{color:inherit;text-decoration:none}img{max-width:100%;height:auto}` }} />
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function () {
+            try {
+              var u = new URL(window.location.href);
+              var force = u.searchParams.get("reset") === "1" || u.searchParams.get("clearcache") === "1" || u.searchParams.get("fresh") === "1";
+              if (force) {
+                var clean = function () {
+                  try {
+                    if ("caches" in window) {
+                      caches.keys().then(function (keys) { keys.forEach(function (k) { caches.delete(k); }); });
+                    }
+                  } catch (e) {}
+                  try { localStorage.clear(); } catch (e) {}
+                  try { sessionStorage.clear(); } catch (e) {}
+                  try {
+                    document.cookie.split(";").forEach(function (c) {
+                      var name = c.split("=")[0].trim();
+                      if (name) document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+                    });
+                  } catch (e) {}
+                  if ("serviceWorker" in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(function (regs) { regs.forEach(function (r) { r.unregister(); }); });
+                  }
+                };
+                clean();
+                u.searchParams.delete("reset"); u.searchParams.delete("clearcache"); u.searchParams.delete("fresh");
+                setTimeout(function () { window.location.replace(u.pathname + u.search); }, 60);
+              }
+            } catch (e) {}
+          })();
+        `}} />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"

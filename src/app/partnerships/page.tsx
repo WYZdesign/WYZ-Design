@@ -177,7 +177,7 @@ export default function PartnershipsPage() {
             <Link href="/contact" className="inline-block px-8 py-3 bg-white text-[#DF3131] font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-white/90 transition-all">
               Get In Touch
             </Link>
-            <Link href="/services" className="inline-block px-8 py-3 border-2 border-white text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-white hover:text-[#DF3131] transition-all">
+            <Link href="/services" className="inline-block px-8 py-3 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
               View Services
             </Link>
           </div>

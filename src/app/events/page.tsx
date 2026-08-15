@@ -573,12 +573,12 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   SUBSCRIBE
   </a>
   <a href="https://www.youtube.com/playlist?list=PLJ_paMo7iTXEkVi_UWaIdeUzF0Ag-oURT" target="_blank" rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 border-2 border-white/30 text-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:border-[#FF0000] hover:text-[#FF0000] transition-all hover:scale-105">
+  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all hover:scale-105">
   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d={ytPath}/></svg>
   WATCH RECAPS
   </a>
   <a href="https://www.youtube.com/@wyzdesign" target="_blank" rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 border-2 border-white/30 text-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:border-[#FF0000] hover:text-[#FF0000] transition-all hover:scale-105">
+  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all hover:scale-105">
   VISIT CHANNEL
   </a>
  </div>
@@ -647,7 +647,7 @@ export default function EventsPage() {
   <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
   Transform your event with our expert planning. From concept to execution, we create a seamless, stress-free, and unforgettable experience.
   </p>
-  <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 border-2 border-white text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#111] transition-all">
+  <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
   BOOK NOW
   </Link>
   </div>

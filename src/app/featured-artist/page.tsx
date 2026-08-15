@@ -231,7 +231,7 @@ export default function FeaturedArtistPage() {
  <Link href="/merch" className="inline-flex items-center gap-2 px-8 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg hover:shadow-[#DF3131]/30">
  BROWSE SHOP <FiArrowRight className="w-4 h-4" />
  </Link>
- <Link href="/designs" className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-white hover:text-[#111] transition-all">
+  <Link href="/designs" className="inline-flex items-center gap-2 px-8 py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
  CUSTOM ORDERS
  </Link>
  </div>

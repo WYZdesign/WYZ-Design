@@ -901,7 +901,7 @@ export default function HomePage() {
       <div className="flex flex-row gap-4 justify-center">
      <MagneticElement tag="div" strength={0.25}>
      <Link href="/about"
-     className="inline-block border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#333] transition-all">
+      className="inline-block bg-white text-[#111] border-2 border-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
      SEE THE STORY
      </Link>
      </MagneticElement>
@@ -1095,7 +1095,7 @@ export default function HomePage() {
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
   <p className="text-white/80 tracking-[0.3em] text-[12px] sm:text-sm uppercase mb-3 max-sm:whitespace-normal max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
-  <Link href="/printing" className="inline-block px-8 py-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.12em] hover:bg-white hover:text-[#111] transition-all whitespace-nowrap mt-4">
+  <Link href="/printing" className="inline-block px-8 py-4 bg-white text-[#111] border-2 border-white text-[14px] font-bold tracking-[0.12em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all whitespace-nowrap mt-4">
   CUSTOM PRINTING →
   </Link>
   </div>
