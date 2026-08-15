@@ -122,6 +122,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 u.searchParams.delete("reset"); u.searchParams.delete("clearcache"); u.searchParams.delete("fresh");
                 setTimeout(function () { window.location.replace(u.pathname + u.search); }, 60);
               }
+
+              // Chunk-load error recovery: if a JS/CSS chunk fails to load
+              // (usually after a fresh deploy while this device has the page open),
+              // auto-reload once so the visitor never sees a broken/error page.
+              var recovered = false;
+              var reloadOnce = function () {
+                if (recovered) return;
+                recovered = true;
+                try { sessionStorage.setItem("wyz_recovered", "1"); } catch (e) {}
+                setTimeout(function () { window.location.reload(); }, 300);
+              };
+              window.addEventListener("error", function (e) {
+                var m = (e && e.message) || "";
+                if (m.indexOf("ChunkLoadError") !== -1 || m.indexOf("Loading chunk") !== -1 || m.indexOf("Failed to fetch dynamically imported module") !== -1 || m.indexOf("error loading dynamically imported module") !== -1) {
+                  reloadOnce();
+                }
+              }, true);
+              window.addEventListener("unhandledrejection", function (e) {
+                var r = (e && e.reason) || {};
+                var m = (r && r.message) || (r && r.toString) ? (r.toString()) : "";
+                if (typeof m === "string" && (m.indexOf("ChunkLoadError") !== -1 || m.indexOf("Loading chunk") !== -1 || m.indexOf("Failed to fetch dynamically imported module") !== -1)) {
+                  reloadOnce();
+                }
+              });
             } catch (e) {}
           })();
         `}} />
