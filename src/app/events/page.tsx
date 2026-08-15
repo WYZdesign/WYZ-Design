@@ -743,7 +743,7 @@ export default function EventsPage() {
  <div className="text-center mt-8">
  <button
  onClick={() => setVisibleCount(prev => prev + ITEMS_PER_PAGE)}
-  className="px-6 py-3 border-2 border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[16px] font-bold tracking-[0.12em] hover:bg-[#333] hover:text-white transition-all"
+  className="px-6 py-3 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white text-[16px] font-bold tracking-[0.12em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all"
  >
   LOAD MORE +{shuffled.length - visibleCount}
  </button>

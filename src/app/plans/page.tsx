@@ -273,7 +273,7 @@ export default function PlansPage() {
   Affordable plans for any budget. Find what works best for you and your brand.
   </p>
   <Link href="/services"
-  className="inline-block border-2 border-[#333] dark:border-white text-[#333] dark:text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#333] dark:hover:bg-white hover:text-white dark:hover:text-[#111] transition-all">
+   className="inline-block bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:border-[#DF3131] dark:hover:text-white transition-all">
   SERVICES
   </Link>
   </div>

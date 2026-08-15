@@ -1022,7 +1022,7 @@ export default function HomePage() {
   ))}
   </div>
   <div className="text-center mt-8">
-  <Link href="/services" className="inline-block px-8 py-3 border-2 border-[#333] dark:border-white text-[#333] dark:text-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
+  <Link href="/services" className="inline-block px-8 py-3 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
   VIEW ALL SERVICES
   </Link>
   </div>
@@ -1227,8 +1227,8 @@ export default function HomePage() {
   <h2 className="text-[1.1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] uppercase mb-4">Quick Links</h2>
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 sm:gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8 max-w-5xl mx-auto">
  {QUICK_LINKS.map((link) => (
- <Link key={link.label} href={link.href}
- className="border-2 border-[#333] text-[#333] py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all text-center">
+  <Link key={link.label} href={link.href}
+  className="bg-[#F5F5F5] dark:bg-[#2b2b2e] border-2 border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-white py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:border-[#DF3131] dark:hover:text-white transition-all text-center">
  {link.label}
  </Link>
  ))}

@@ -51,7 +51,7 @@ export default function GftFoodsCaseStudy() {
           </div>
 
           <div className="text-center">
-            <Link href="/case-studies" className="inline-block px-8 py-3 border-2 border-[#333] dark:border-white text-[#333] dark:text-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all">
+            <Link href="/case-studies" className="inline-block px-8 py-3 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">
               Back to Case Studies
             </Link>
           </div>

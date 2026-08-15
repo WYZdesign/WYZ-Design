@@ -144,7 +144,7 @@ export default function AboutPage() {
                   <Link href="/services" className="inline-block px-8 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#B82020] transition-all">
                     SEE OUR SERVICES
                   </Link>
-                  <Link href="/contact" className="inline-block px-8 py-4 border-2 border-[#333] dark:border-white text-[#333] dark:text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#333] hover:text-white transition-all">
+                  <Link href="/contact" className="inline-block px-8 py-4 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">
                     GET IN TOUCH
                   </Link>
                 </div>

@@ -355,7 +355,7 @@ export default function DesignsPage() {
     <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">FEATURED ARTIST OF THE MONTH</span>
       <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap !max-w-none">F. A. O. T. M.</h2>
     </div>
-    <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
+     <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
    </div>
   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
   {dbcMerch.slice(0, 4).map((p, i) => (
@@ -383,7 +383,7 @@ export default function DesignsPage() {
   <div className="text-left">
     <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap !max-w-none">MERCH SHOP</h2>
   </div>
-  <Link href="/merch" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
+   <Link href="/merch" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
  </div>
  <div className="relative">
   <button onClick={() => merchScrollRef.current?.scrollBy({ left: -300, behavior: "smooth" })} className="absolute sm:-left-5 left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#2b2b2e]" aria-label="Scroll left">←</button>

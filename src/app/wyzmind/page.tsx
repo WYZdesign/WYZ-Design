@@ -260,7 +260,7 @@ export default function WYZMiNDPage() {
           <p className="text-[#666] dark:text-[#b0b0b0] text-[16px] max-w-xl mx-auto mb-8 leading-relaxed">
             WYZMiND infrastructure is currently internal. Custom client systems are available for brands and studios needing AI automation, booking intelligence, and creative workflow tools.
           </p>
-          <Link href="/contact" className="inline-block border-2 border-[#DF3131] text-[#DF3131] px-8 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#DF3131] hover:text-white transition-all">
+          <Link href="/contact" className="inline-block bg-[#DF3131] text-white border-2 border-[#DF3131] px-8 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#b82020] hover:border-[#b82020] transition-all">
             Inquire About Systems
           </Link>
         </section>
