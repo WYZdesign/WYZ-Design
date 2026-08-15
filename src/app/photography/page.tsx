@@ -595,16 +595,19 @@ return (
  })}
  </div>
  </div>
- {/* Navigation Dots */}
- <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
- {FEATURED_MODELS.map((_, i) => (
- <button
- key={i}
- onClick={() => setModelIdx(i)}
-  className={`w-[3px] h-[3px] rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-[10px]" : "bg-[#333]/30 hover:bg-[#333]/50"}`}
- />
- ))}
- </div>
+  {/* Navigation Dots */}
+  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
+  {FEATURED_MODELS.map((_, i) => (
+  <button
+  key={i}
+  onClick={() => setModelIdx(i)}
+  className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[20px] min-h-[20px] cursor-pointer"
+  aria-label={`Model ${i + 1}`}
+  >
+    <span className={`rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-4 h-1.5" : "bg-white/50 dark:bg-white/40 w-1.5 h-1.5"}`} />
+  </button>
+  ))}
+  </div>
  {/* Nav Arrows */}
  <button onClick={() => setModelIdx((modelIdx - 1 + FEATURED_MODELS.length) % FEATURED_MODELS.length)} className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
  <FiChevronLeft className="w-5 h-5" />
