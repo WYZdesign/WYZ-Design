@@ -353,7 +353,7 @@ export default function DesignsPage() {
     <div className="flex flex-wrap items-center justify-between mb-6 gap-x-6 gap-y-2">
     <div className="text-left">
     <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">FEATURED ARTIST OF THE MONTH</span>
-     <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap">F. A. O. T. M.</h2>
+      <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap !max-w-none">F. A. O. T. M.</h2>
     </div>
     <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
    </div>
@@ -381,7 +381,7 @@ export default function DesignsPage() {
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
   <div className="flex flex-wrap items-center justify-between mb-4 gap-x-6 gap-y-2">
   <div className="text-left">
-   <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap">MERCH SHOP</h2>
+    <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap !max-w-none">MERCH SHOP</h2>
   </div>
   <Link href="/merch" className="inline-flex items-center gap-2 px-6 py-2.5 border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] text-[14px] font-bold tracking-[0.1em] hover:bg-[#333] hover:text-white transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
  </div>

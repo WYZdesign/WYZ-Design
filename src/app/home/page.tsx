@@ -1153,14 +1153,11 @@ export default function HomePage() {
   <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold transition-all duration-300 flex-shrink-0 ${
   openFaq === i ? "bg-[#DF3131] text-white rotate-45" : "bg-[#F5F5F3] dark:bg-[#2b2b2e] text-[#333] dark:text-white"
   }`}>+</span>
-  <span className={`font-heading font-bold text-[13px] sm:text-sm tracking-[0.02em] transition-colors ${
-  openFaq === i ? "text-[#DF3131]" : "text-[#333] dark:text-white"
-  }`}>
-    <span className="faq-marquee">
-      <span className="faq-marquee-inner">{faq.q}</span>
-      <span className="faq-marquee-inner" aria-hidden="true">{faq.q}</span>
-    </span>
-  </span>
+   <span className={`font-heading font-bold text-[13px] sm:text-sm tracking-[0.02em] transition-colors ${
+   openFaq === i ? "text-[#DF3131]" : "text-[#333] dark:text-white"
+   }`}>
+     {faq.q}
+   </span>
   </button>
  <div className="px-6 pb-4 pl-14 sm:pl-[4.5rem]">
  <p className="text-[15px] text-[#666] dark:text-white/70 leading-relaxed">{faq.a}</p>
