@@ -1031,11 +1031,15 @@ p[class*="tracking-"][class*="uppercase"] {
    ═══════════════════════════════════════════════════════════ */
 .marquee-outline {
   color: #fff;
+  -webkit-text-fill-color: #fff;
   -webkit-text-stroke: 1.5px #111;
+  paint-order: stroke fill;
 }
 .dark .marquee-outline {
   color: transparent;
+  -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1.5px #e0e0e0;
+  paint-order: stroke fill;
 }
 
 /* ═══════════════════════════════════════════════════════════

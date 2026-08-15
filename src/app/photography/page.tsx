@@ -165,7 +165,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   const [flipped, setFlipped] = useState(false);
 
   return (
-  <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "480px" }}
+   <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "624px" }}
   onClick={() => setFlipped(f => !f)}
   onMouseEnter={() => setFlipped(true)}
   onMouseLeave={() => setFlipped(false)}>

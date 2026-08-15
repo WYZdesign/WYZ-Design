@@ -508,48 +508,50 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   <div className="absolute bottom-1/4 left-1/3 w-80 w-80 bg-[#DF3131]/5 rounded-full blur-[80px]" />
   </div>
 
-  <div className="absolute inset-0 bg-black/70 z-[1]" />
-
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="absolute inset-0 z-10 flex flex-col justify-center gap-4 pointer-events-none">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-left">
       {row1.map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-right">
       {row2.map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-left-fast">
       {row3.map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-right">
       {row4.map((logo, i) => (<LogoItem key={`r4-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-left">
       {row5.map((logo, i) => (<LogoItem key={`r5-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-right-fast">
       {row6.map((logo, i) => (<LogoItem key={`r6-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-left">
       {row7.map((logo, i) => (<LogoItem key={`r7-${i}`} color={logo.color} />))}
     </div>
   </div>
-  <div className="relative z-10 overflow-hidden py-2">
+  <div className="overflow-hidden py-2">
     <div className="flex whitespace-nowrap animate-marquee-right">
       {row8.map((logo, i) => (<LogoItem key={`r8-${i}`} color={logo.color} />))}
     </div>
   </div>
+  </div>
+
+  <div className="absolute inset-0 bg-black/60 z-[15] pointer-events-none" />
 
  <div className="relative z-20 flex flex-col items-center justify-center py-20 sm:py-28 px-6 text-center">
  <div className="yt-float mb-8">

@@ -19,8 +19,10 @@ export default function TextSplit({
 }: TextSplitProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [inView, setInView] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    setHydrated(true);
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
@@ -46,6 +48,8 @@ export default function TextSplit({
     }
   };
 
+  const visible = !hydrated || inView;
+
   return (
     <span ref={ref} className={`inline-block ${className}`} aria-label={children}>
       {children.split("").map((char, i) => (
@@ -57,8 +61,8 @@ export default function TextSplit({
           <span
             className="inline-block"
             style={{
-              transform: getTransform(inView),
-              opacity: inView ? 1 : 0,
+              transform: getTransform(visible),
+              opacity: visible ? 1 : 0,
               transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${i * stagger}s, opacity 0.4s ease ${i * stagger}s`,
             }}
           >
