@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Offline | WYZ Design",
+  title: "Offline",
   description: "You're offline. Reconnect to continue.",
   robots: { index: false, follow: false },
 };
