@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
   try {
     const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(long)}&zoom=10`;
     const r = await fetch(url, {
-      headers: { "User-Agent": "MuseApp/1.0 (wyzdesign.com)" },
+      headers: { "User-Agent": "WYZDesign/1.0 (wyzdesign.com)" },
       // Cache for 30 days — city for a coordinate rarely changes.
       cache: "force-cache",
     });
