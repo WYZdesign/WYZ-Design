@@ -1002,8 +1002,8 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.15 !important;
     text-align: center !important;
-    margin-top: 1.5rem !important;
-    margin-bottom: 0.875rem !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
   }
   h1:first-child, h2:first-child, h3:first-child,
   h4:first-child, h5:first-child, h6:first-child {
@@ -1069,7 +1069,7 @@ p[class*="tracking-"][class*="uppercase"] {
 @media (max-width: 767px) {
   [class*="flex"][class*="justify-center"]:has(a[class*="tracking-"]),
   [class*="flex"][class*="justify-center"]:has(button[class*="tracking-"]) {
-    margin-top: 2.5rem !important;
+    margin-top: 1.5rem !important;
   }
 }
 
