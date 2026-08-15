@@ -93,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#DF3131" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#232326" media="(prefers-color-scheme: dark)" />
+        <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}html.dark,html.dark body{background:#232326;color:#f0eaff}a{color:inherit;text-decoration:none}img{max-width:100%;height:auto}` }} />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <script
           type="application/ld+json"

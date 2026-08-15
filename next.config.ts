@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
       {
         source: "/:path*\\.(js|css)",
         headers: [
-          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "Cache-Control", value: "public, max-age=604800, must-revalidate" },
         ],
       },
       {
@@ -117,6 +117,7 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      { source: "/", destination: "/splash", permanent: false },
       { source: "/booking-events", destination: "/booking-calendar/event-photography", permanent: true },
       { source: "/booking-photoshoot", destination: "/booking-calendar/photoshoot", permanent: true },
       { source: "/booking-retouching", destination: "/booking-calendar/photo-retouching", permanent: true },
