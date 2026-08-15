@@ -144,7 +144,7 @@ interface VideoMuteCtx {
 const VideoMuteContext = createContext<VideoMuteCtx>({ activeVideoId: null, toggleVideo: () => {}, muteAll: () => {} });
 
 function VideoMuteProvider({ children }: { children: React.ReactNode }) {
-  const [activeVideoId, setActiveVideoId] = useState<string | null>("aura");
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
  const toggleVideo = useCallback((id: string) => {
   setActiveVideoId((prev) => (prev === id ? null : id));
  }, []);

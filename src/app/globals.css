@@ -1049,6 +1049,19 @@ p[class*="tracking-"][class*="uppercase"] {
   paint-order: stroke fill;
 }
 
+/* Pulsating glow behind the navbar logo — irregular intervals/intensities */
+@keyframes logoGlowPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  18% { opacity: 0.75; transform: scale(1.12); }
+  32% { opacity: 0.25; transform: scale(0.92); }
+  50% { opacity: 0.9; transform: scale(1.18); }
+  66% { opacity: 0.45; transform: scale(1.04); }
+  82% { opacity: 0.7; transform: scale(1.1); }
+}
+.logo-glow-pulse {
+  animation: logoGlowPulse 5.5s ease-in-out infinite;
+}
+
 /* ═══════════════════════════════════════════════════════════
    HERO CTA BUTTONS — more space between heading/paragraph
    and the button row on mobile.

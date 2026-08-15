@@ -50,20 +50,21 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
           </div>
           <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
-          {/* Crown logo marquee background */}
-          <div className="absolute inset-0 z-[1] overflow-hidden opacity-[0.04] pointer-events-none">
-            <div className="flex whitespace-nowrap animate-marquee-left" style={{ gap: '4rem' }}>
-              {Array.from({ length: 24 }).map((_, i) => (
-                <Image key={`cr1-${i}`} src="/images/wyz-crown.png" alt="" width={64} height={64} className="w-16 h-16 flex-none object-contain" />
-              ))}
-            </div>
-            <div className="flex whitespace-nowrap animate-marquee-right mt-4" style={{ gap: '4rem' }}>
-              {Array.from({ length: 24 }).map((_, i) => (
-                <Image key={`cr2-${i}`} src="/images/wyz-crown.png" alt="" width={48} height={48} className="w-12 h-12 flex-none object-contain" />
-              ))}
-            </div>
+          {/* Crown logo marquee background — full-bleed, opposite rows */}
+          <div className="absolute inset-0 z-10 flex flex-col justify-center gap-4 pointer-events-none">
+            {[0,1,2,3,4,5,6,7].map((row) => (
+              <div key={row} className="overflow-hidden py-1">
+                <div className={`flex whitespace-nowrap ${row % 2 === 0 ? "animate-marquee-left" : "animate-marquee-right"}`} style={{ gap: '3rem' }}>
+                  {Array.from({ length: 28 }).map((_, i) => (
+                    <Image key={`cr${row}-${i}`} src="/images/wyz-crown.png" alt="" width={row % 2 === 0 ? 56 : 44} height={row % 2 === 0 ? 56 : 44} className={`${row % 2 === 0 ? "w-14 h-14" : "w-11 h-11"} flex-none object-contain opacity-25`} />
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          {/* 60% black overlay */}
+          <div className="absolute inset-0 bg-black/60 z-[15] pointer-events-none" />
+          <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
             <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
             <TextMaskReveal direction="up">
             <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
