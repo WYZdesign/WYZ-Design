@@ -77,7 +77,7 @@ async function runSeoChecks(): Promise<{ check: string; status: string; detail?:
   try {
     const r = await fetch(`${base}/robots.txt`, { signal: AbortSignal.timeout(5000) });
     const txt = await r.text();
-    if (txt.includes("User-agent")) checks.push({ check: "robots.txt", status: "pass" });
+    if (/User-agent|User-Agent/i.test(txt)) checks.push({ check: "robots.txt", status: "pass" });
     else checks.push({ check: "robots.txt", status: "warn", detail: "Missing User-agent directive" });
   } catch {
     checks.push({ check: "robots.txt", status: "fail", detail: "Could not fetch robots.txt" });

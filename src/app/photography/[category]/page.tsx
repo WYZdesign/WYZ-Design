@@ -8,17 +8,19 @@ import { FiChevronLeft, FiX, FiChevronRight, FiLock } from "react-icons/fi";
 const GATED_CATEGORIES = ["Boudoir", "Bodypaint"];
 
 const CATEGORY_META: Record<string, { label: string; desc: string }> = {
- Events: { label: "Events", desc: "Live shows, mixers, workshops, and community gatherings." },
- Outdoors: { label: "Outdoors", desc: "Natural light, urban landscapes, and open air portraits." },
- Studio: { label: "Studio", desc: "Controlled lighting, headshots, and creative studio work." },
- Boudoir: { label: "Boudoir", desc: "Intimate, editorial, and personal portrait sessions." },
- Bodypaint: { label: "Bodypaint", desc: "Body as canvas. Art, paint, texture, and expression." },
- Urbex: { label: "Urbex", desc: "Abandoned spaces, urban decay, and industrial textures." },
- Products: { label: "Products", desc: "Commercial product photography, mockups, and branding shots." },
- Conceptual: { label: "Conceptual", desc: "Idea driven work. Abstract, surreal, and experimental imagery." },
- Portraits: { label: "Portraits", desc: "Expressive portrait sessions capturing personality and emotion." },
- Concerts: { label: "Concerts", desc: "Live music performances, venue shoots, and artist coverage." },
- Street: { label: "Street", desc: "Urban storytelling through candid street photography." },
+  Events: { label: "Events", desc: "Live shows, mixers, workshops, and community gatherings." },
+  Outdoors: { label: "Outdoors", desc: "Natural light, urban landscapes, and open air portraits." },
+  Studio: { label: "Studio", desc: "Controlled lighting, headshots, and creative studio work." },
+  Boudoir: { label: "Boudoir", desc: "Intimate, editorial, and personal portrait sessions." },
+  Bodypaint: { label: "Bodypaint", desc: "Body as canvas. Art, paint, texture, and expression." },
+  Urbex: { label: "Urbex", desc: "Abandoned spaces, urban decay, and industrial textures." },
+  Products: { label: "Products", desc: "Commercial product photography, mockups, and branding shots." },
+  Conceptual: { label: "Conceptual", desc: "Idea driven work. Abstract, surreal, and experimental imagery." },
+  Portraits: { label: "Portraits", desc: "Expressive portrait sessions capturing personality and emotion." },
+  Concerts: { label: "Concerts", desc: "Live music performances, venue shoots, and artist coverage." },
+  Street: { label: "Street", desc: "Urban storytelling through candid street photography." },
+  Editorial: { label: "Editorial", desc: "Magazine-style shoots, fashion editorials, and styled storytelling." },
+  Commercial: { label: "Commercial", desc: "Brand campaigns, product launches, and commercial advertising work." },
 };
 
 // ── Local album definitions per category ──
@@ -190,11 +192,39 @@ const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: string[] }>>
  "/images/photography/carousel_1/wix_0207.jpg", "/images/photography/carousel_1/wix_0210.jpg",
  "/images/photography/carousel_1/wix_0212.jpg", "/images/photography/carousel_1/wix_0213.jpg",
  ]},
- { name: "Street Stories", images: [
- "/images/photography/carousel_1/wix_0429.jpg", "/images/photography/carousel_1/wix_0431.jpg",
- "/images/photography/carousel_1/wix_0432.jpg", "/images/photography/carousel_1/wix_0434.jpg",
- ]},
- ],
+  { name: "Street Stories", images: [
+  "/images/photography/carousel_1/wix_0429.jpg", "/images/photography/carousel_1/wix_0431.jpg",
+  "/images/photography/carousel_1/wix_0432.jpg", "/images/photography/carousel_1/wix_0434.jpg",
+  ]},
+  ],
+  Editorial: [
+  { name: "Fashion Editorials", images: [
+  "/images/photography/carousel_3/wix_0303.jpg", "/images/photography/carousel_3/wix_0305.jpg",
+  "/images/photography/carousel_3/wix_0308.jpg", "/images/photography/carousel_3/wix_0309.jpg",
+  "/images/photography/carousel_3/wix_0311.jpg", "/images/photography/carousel_3/wix_0319.jpg",
+  "/images/photography/carousel_3/wix_0321.jpg", "/images/photography/carousel_3/wix_0324.jpg",
+  "/images/photography/carousel_3/wix_0326.jpg", "/images/photography/carousel_3/wix_0328.jpg",
+  ]},
+  { name: "Styled Shoots", images: [
+  "/images/photography/carousel_2/wix_0245.jpg", "/images/photography/carousel_2/wix_0257.jpg",
+  "/images/photography/carousel_2/wix_0259.jpg", "/images/photography/carousel_2/wix_0261.jpg",
+  "/images/photography/carousel_2/wix_0264.jpg", "/images/photography/carousel_2/wix_0266.jpg",
+  ]},
+  ],
+  Commercial: [
+  { name: "Brand Campaigns", images: [
+  "/images/photography/carousel_2/wix_0334.jpg", "/images/photography/carousel_2/wix_0338.jpg",
+  "/images/photography/carousel_2/wix_0341.jpg", "/images/photography/carousel_2/wix_0348.jpg",
+  "/images/photography/carousel_2/wix_0350.jpg",
+  "/images/photography/carousel_1/wix_0438.jpg", "/images/photography/carousel_1/wix_0440.jpg",
+  "/images/photography/carousel_1/wix_0444.jpg", "/images/photography/carousel_1/wix_0445.jpg",
+  "/images/photography/carousel_1/wix_0446.jpg",
+  ]},
+  { name: "Product Shots", images: [
+  "/images/photography/carousel_2/wix_0334.jpg", "/images/photography/carousel_2/wix_0338.jpg",
+  "/images/photography/carousel_2/wix_0341.jpg",
+  ]},
+  ],
 };
 
 function AutoScrollRow({ images, label, speed, onImageClick }: { images: string[]; label: string; speed: number; onImageClick: (src: string) => void }) {
