@@ -250,7 +250,7 @@ return (
         </section>
 
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
-        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-1 border-b border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
+        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-1 bg-white dark:bg-[#232326]">
           {(["RESPONSIVE","SEO","E-COMMERCE","LANDING PAGES","CMS","CUSTOM CODE"] as const).map((word, i) => {
             const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
             return (

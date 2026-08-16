@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
+const ADMIN_STYLES = `
+.admin-scrollbar::-webkit-scrollbar { width: 8px; }
+.admin-scrollbar::-webkit-scrollbar-track { background: #1a1a1a; }
+.admin-scrollbar::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 4px; }
+.admin-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
+`;
+
 interface Stats { totalForms: number; totalChats: number; chatSessions: number; totalUsers: number; adminCount: number; newsletterSubs: number; formTypes: Record<string,number>; submissionsByDay: [string,number][] }
 interface FormEntry { id: string; formType: string; data: Record<string,unknown>; submittedAt: string; ip: string }
 interface User { email: string; name: string; role: string; createdAt: string; provider: string }
@@ -79,20 +86,21 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex">
-      <aside className={`fixed inset-y-0 left-0 z-40 bg-[#111] border-r border-white/10 transition-all duration-300 ${sidebarOpen ? "w-60" : "w-16"} flex flex-col`}>
+      <style>{ADMIN_STYLES}</style>
+      <aside className={`fixed inset-y-0 left-0 z-40 bg-[#111] border-r border-white/10 transition-all duration-300 ${sidebarOpen ? "w-72" : "w-16"} flex flex-col`}>
         <div className="h-16 flex items-center px-4 border-b border-white/10">
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="w-8 h-8 flex items-center justify-center text-white/40 hover:text-white transition-colors">
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition-colors">
             {sidebarOpen ? "\u25C1" : "\u25B7"}
           </button>
           {sidebarOpen && <span className="ml-3 text-[13px] font-heading font-bold tracking-[0.15em] uppercase">WYZ Admin</span>}
         </div>
-        <nav className="flex-1 overflow-y-auto py-4">
+         <nav className="flex-1 overflow-y-auto admin-scrollbar py-4">
           {NAV_SECTIONS.map(section => (
             <div key={section.label} className="mb-4">
-              {sidebarOpen && <p className="px-4 text-[9px] text-white/20 font-bold tracking-[0.2em] uppercase mb-2">{section.label}</p>}
+              {sidebarOpen && <p className="px-4 text-[9px] text-white/40 font-bold tracking-[0.2em] uppercase mb-2">{section.label}</p>}
               {section.items.map(item => (
                 <button key={item.id} onClick={() => setTab(item.id as TabId)}
-                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-[13px] transition-all ${tab === item.id ? "text-[#DF3131] bg-[#DF3131]/10 border-r-2 border-[#DF3131]" : "text-white/40 hover:text-white/70 hover:bg-white/5"} ${!sidebarOpen ? "justify-center px-0" : ""}`}>
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-[13px] transition-all ${tab === item.id ? "text-[#DF3131] bg-[#DF3131]/10 border-r-2 border-[#DF3131]" : "text-white/60 hover:text-white/70 hover:bg-white/5"} ${!sidebarOpen ? "justify-center px-0" : ""}`}>
                   <span className="text-[14px] w-5 text-center">{item.icon}</span>
                   {sidebarOpen && <span className="font-heading font-bold tracking-[0.05em] uppercase text-[11px]">{item.label}</span>}
                 </button>
@@ -100,17 +108,17 @@ export default function AdminDashboard() {
             </div>
           ))}
         </nav>
-        {sidebarOpen && <div className="p-4 border-t border-white/10"><p className="text-[10px] text-white/30 truncate">{session.user?.email}</p></div>}
+        {sidebarOpen && <div className="p-4 border-t border-white/10"><p className="text-[10px] text-white/50 truncate">{session.user?.email}</p></div>}
       </aside>
 
-      <main className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ml-60" : "ml-16"}`}>
+      <main className={`flex-1 transition-all duration-300 admin-scrollbar ${sidebarOpen ? "ml-72" : "ml-16"}`}>
         <header className="h-16 flex items-center justify-between px-8 border-b border-white/10 bg-[#0a0a0a] sticky top-0 z-30">
           <h1 className="text-[15px] font-heading font-bold tracking-[0.12em] uppercase text-white/60">
             {NAV_SECTIONS.flatMap(s => s.items).find(i => i.id === tab)?.label || tab}
           </h1>
           <div className="flex items-center gap-4">
             <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30">ADMIN</span>
-            <Link href="/home" className="text-[12px] text-white/30 hover:text-white transition-colors">\u2190 Site</Link>
+            <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors">\u2190 Site</Link>
           </div>
         </header>
         <div className="p-8">
@@ -146,7 +154,7 @@ function KpiCard({ label, value, color, icon, format }: { label: string; value: 
     <div className="bg-white/5 border border-white/10 p-5 hover:border-white/20 transition-colors">
       <div className="flex items-center gap-2 mb-2">
         <span className="text-[14px]" style={{color}}>{icon}</span>
-        <span className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">{label}</span>
+        <span className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">{label}</span>
       </div>
       <p className="text-[22px] font-heading font-bold" style={{color}}>{display}</p>
     </div>
@@ -154,11 +162,11 @@ function KpiCard({ label, value, color, icon, format }: { label: string; value: 
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-[12px] font-heading font-bold tracking-[0.15em] uppercase text-white/40 mb-3 mt-6">{children}</h3>;
+  return <h3 className="text-[12px] font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-3 mt-6">{children}</h3>;
 }
 
 function Empty({ children }: { children: React.ReactNode }) {
-  return <div className="text-center py-16 text-white/20 text-[13px]">{children}</div>;
+  return <div className="text-center py-16 text-white/40 text-[13px]">{children}</div>;
 }
 
 function Loader() {
@@ -170,11 +178,11 @@ function PageLoader() {
 }
 
 function NeedSignIn() {
-  return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-center px-6"><div><h1 className="text-[28px] font-heading font-bold text-white mb-3">Admin Access</h1><p className="text-white/40 text-[14px] mb-6">Sign in with your admin account.</p><Link href="/api/auth/signin" className="inline-block px-8 py-3 bg-[#DF3131] text-white text-[13px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#c12a2a] transition-colors">Sign In</Link></div></div>;
+  return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-center px-6"><div><h1 className="text-[28px] font-heading font-bold text-white mb-3">Admin Access</h1><p className="text-white/60 text-[14px] mb-6">Sign in with your admin account.</p><Link href="/api/auth/signin" className="inline-block px-8 py-3 bg-[#DF3131] text-white text-[13px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#c12a2a] transition-colors">Sign In</Link></div></div>;
 }
 
 function NotAuthorized() {
-  return <div className="text-center py-20"><h2 className="text-[24px] font-heading font-bold text-[#EA4335] mb-2">Access Denied</h2><p className="text-white/40 text-[13px]">Your account does not have admin privileges.</p></div>;
+  return <div className="text-center py-20"><h2 className="text-[24px] font-heading font-bold text-[#EA4335] mb-2">Access Denied</h2><p className="text-white/60 text-[13px]">Your account does not have admin privileges.</p></div>;
 }
 
 // ─── OVERVIEW ───
@@ -198,7 +206,7 @@ function OverviewTab({ data }: { data: any }) {
             {Object.entries(s.formTypes).sort((a,b) => (b[1] as number)-(a[1] as number)).map(([type, count]) => (
               <div key={type} className="bg-white/5 border border-white/10 p-4">
                 <span className="text-[18px] font-heading font-bold text-[#DF3131]">{String(count)}</span>
-                <p className="text-[11px] text-white/40 capitalize mt-1">{type.replace(/-/g," ")}</p>
+                <p className="text-[11px] text-white/60 capitalize mt-1">{type.replace(/-/g," ")}</p>
               </div>
             ))}
           </div>
@@ -248,7 +256,7 @@ function BookkeepingDashboard({ data, onRefresh }: { data: FinancialSummary; onR
               <div key={i} className="flex items-center justify-between px-5 py-3 border-b border-white/5 last:border-0">
                 <div>
                   <span className="text-[13px] text-white/70">{c.category}</span>
-                  {c.schedule_c_line && <span className="text-[10px] text-white/30 ml-2">{c.schedule_c_line}</span>}
+                  {c.schedule_c_line && <span className="text-[10px] text-white/50 ml-2">{c.schedule_c_line}</span>}
                 </div>
                 <span className="text-[14px] font-heading font-bold text-[#EA4335]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
               </div>
@@ -266,9 +274,9 @@ function BookkeepingDashboard({ data, onRefresh }: { data: FinancialSummary; onR
                 const h = max > 0 ? (m.amount / max) * 100 : 10;
                 return (
                   <div key={m.month} className="flex-1 flex flex-col items-center gap-1 group">
-                    <span className="text-[10px] text-white/40 group-hover:text-white/80">${(m.amount/1000).toFixed(1)}k</span>
+                    <span className="text-[10px] text-white/60 group-hover:text-white/80">${(m.amount/1000).toFixed(1)}k</span>
                     <div className="w-full bg-[#34A853]/40 group-hover:bg-[#34A853] transition-colors rounded-t" style={{ height: `${h}%` }} />
-                    <span className="text-[9px] text-white/30">{m.month.slice(5)}</span>
+                    <span className="text-[9px] text-white/50">{m.month.slice(5)}</span>
                   </div>
                 );
               })}
@@ -292,7 +300,7 @@ function IncomeTab({ data, onRefresh }: { data: { transactions: Transaction[] };
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <p className="text-[24px] font-heading font-bold text-[#34A853]">${total.toLocaleString(undefined,{minimumFractionDigits:2})}</p>
-          <p className="text-[11px] text-white/30">{txns.length} transactions</p>
+          <p className="text-[11px] text-white/50">{txns.length} transactions</p>
         </div>
         <div className="flex gap-3">
           <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#34A853]/20 text-[#34A853] border border-[#34A853]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#34A853]/30 transition-all">+ Log Income</button>
@@ -315,7 +323,7 @@ function ExpensesTab({ data, onRefresh }: { data: { transactions: Transaction[] 
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <p className="text-[24px] font-heading font-bold text-[#EA4335]">${total.toLocaleString(undefined,{minimumFractionDigits:2})}</p>
-          <p className="text-[11px] text-white/30">{txns.length} transactions</p>
+          <p className="text-[11px] text-white/50">{txns.length} transactions</p>
         </div>
         <div className="flex gap-3">
           <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#EA4335]/20 text-[#EA4335] border border-[#EA4335]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#EA4335]/30 transition-all">+ Log Expense</button>
@@ -373,9 +381,9 @@ function ReportsTab({ data }: { data: FinancialSummary }) {
           <div className="bg-white/5 border border-white/10 overflow-x-auto">
             <table className="w-full text-left">
               <thead><tr className="border-b border-white/10">
-                <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Month</th>
-                <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase text-right">Income</th>
-                <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase text-right">Expenses</th>
+                <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Month</th>
+                <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase text-right">Income</th>
+                <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase text-right">Expenses</th>
               </tr></thead>
               <tbody>
                 {data.monthly_income.map((m) => {
@@ -427,9 +435,9 @@ function AnalyticsTab({ data }: { data: AnalyticsSummary }) {
                 const h = (d.views / max) * 100;
                 return (
                   <div key={d.date} className="flex-1 flex flex-col items-center gap-0.5 group min-w-0">
-                    <span className="text-[8px] text-white/40 group-hover:text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">{d.views}</span>
+                    <span className="text-[8px] text-white/60 group-hover:text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">{d.views}</span>
                     <div className="w-full bg-[#DF3131]/40 group-hover:bg-[#DF3131] transition-colors rounded-t" style={{ height: `${h}%` }} />
-                    <span className="text-[7px] text-white/20 truncate w-full text-center">{d.date.slice(5)}</span>
+                    <span className="text-[7px] text-white/40 truncate w-full text-center">{d.date.slice(5)}</span>
                   </div>
                 );
               })}
@@ -526,7 +534,7 @@ function SeoTab({ data }: { data: any }) {
         </div>
         <div>
           <p className="text-[13px] text-white/50">{passed}/{total} checks passed</p>
-          <p className="text-[11px] text-white/30 mt-1">Last checked: {data.checkedAt ? new Date(data.checkedAt).toLocaleString() : "unknown"}</p>
+          <p className="text-[11px] text-white/50 mt-1">Last checked: {data.checkedAt ? new Date(data.checkedAt).toLocaleString() : "unknown"}</p>
         </div>
       </div>
       <div className="bg-white/5 border border-white/10 overflow-hidden">
@@ -537,7 +545,7 @@ function SeoTab({ data }: { data: any }) {
             </span>
             <div className="flex-1">
               <p className="text-[13px] text-white/70">{c.check}</p>
-              {c.detail && <p className="text-[11px] text-white/30 mt-0.5">{c.detail}</p>}
+              {c.detail && <p className="text-[11px] text-white/50 mt-0.5">{c.detail}</p>}
             </div>
             <span className={`text-[10px] font-heading font-bold tracking-[0.1em] uppercase ${c.status === "pass" ? "text-[#34A853]" : c.status === "warn" ? "text-[#FBBC05]" : "text-[#EA4335]"}`}>{c.status}</span>
           </div>
@@ -566,10 +574,10 @@ function TrafficTab({ data }: { data: AnalyticsSummary }) {
             <div className="bg-white/5 border border-white/10">
               {data.top_pages.slice(0, 15).map((p, i) => (
                 <div key={i} className="flex items-center gap-4 px-5 py-3 border-b border-white/5 last:border-0">
-                  <span className="text-[11px] text-white/20 font-heading font-bold w-6">{i + 1}</span>
+                  <span className="text-[11px] text-white/40 font-heading font-bold w-6">{i + 1}</span>
                   <span className="text-[12px] text-white/70 flex-1 truncate font-mono">{p.path}</span>
                   <span className="text-[12px] text-[#DF3131] font-heading font-bold">{p.views}</span>
-                  <span className="text-[10px] text-white/30">{Math.round(p.avg_duration / 1000)}s avg</span>
+                  <span className="text-[10px] text-white/50">{Math.round(p.avg_duration / 1000)}s avg</span>
                 </div>
               ))}
             </div>
@@ -581,7 +589,7 @@ function TrafficTab({ data }: { data: AnalyticsSummary }) {
             <div className="bg-white/5 border border-white/10">
               {data.top_referrers.map((r, i) => (
                 <div key={i} className="flex items-center gap-4 px-5 py-3 border-b border-white/5 last:border-0">
-                  <span className="text-[11px] text-white/20 font-heading font-bold w-6">{i + 1}</span>
+                  <span className="text-[11px] text-white/40 font-heading font-bold w-6">{i + 1}</span>
                   <span className="text-[12px] text-white/70 flex-1 truncate">{r.referrer}</span>
                   <span className="text-[12px] text-[#5865F2] font-heading font-bold">{r.count}</span>
                 </div>
@@ -605,24 +613,24 @@ function FormsTab({ data }: { data: FormEntry[] }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 flex-wrap">
-        <button onClick={() => setFilter("all")} className={`px-4 py-2 text-[11px] font-heading font-bold tracking-[0.1em] uppercase border transition-all ${filter === "all" ? "bg-[#DF3131]/20 text-[#DF3131] border-[#DF3131]/30" : "bg-white/5 text-white/30 border-white/10 hover:text-white/60"}`}>All ({data.length})</button>
+        <button onClick={() => setFilter("all")} className={`px-4 py-2 text-[11px] font-heading font-bold tracking-[0.1em] uppercase border transition-all ${filter === "all" ? "bg-[#DF3131]/20 text-[#DF3131] border-[#DF3131]/30" : "bg-white/5 text-white/50 border-white/10 hover:text-white/60"}`}>All ({data.length})</button>
         {types.map(t => (
-          <button key={t} onClick={() => setFilter(t)} className={`px-4 py-2 text-[11px] font-heading font-bold tracking-[0.1em] uppercase border transition-all ${filter === t ? "bg-[#DF3131]/20 text-[#DF3131] border-[#DF3131]/30" : "bg-white/5 text-white/30 border-white/10 hover:text-white/60"}`}>{t.replace(/-/g," ")} ({data.filter(f => f.formType === t).length})</button>
+          <button key={t} onClick={() => setFilter(t)} className={`px-4 py-2 text-[11px] font-heading font-bold tracking-[0.1em] uppercase border transition-all ${filter === t ? "bg-[#DF3131]/20 text-[#DF3131] border-[#DF3131]/30" : "bg-white/5 text-white/50 border-white/10 hover:text-white/60"}`}>{t.replace(/-/g," ")} ({data.filter(f => f.formType === t).length})</button>
         ))}
       </div>
       <div className="bg-white/5 border border-white/10 overflow-x-auto">
         <table className="w-full text-left min-w-[700px]">
           <thead><tr className="border-b border-white/10">
-            <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Type</th>
-            <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Data</th>
-            <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Date</th>
+            <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Type</th>
+            <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Data</th>
+            <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Date</th>
           </tr></thead>
           <tbody>
             {filtered.map((f) => (
               <tr key={f.id} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
                 <td className="px-5 py-3"><span className="px-2 py-1 bg-[#DF3131]/10 text-[#DF3131] text-[10px] font-heading font-bold tracking-[0.05em] uppercase">{f.formType}</span></td>
                 <td className="px-5 py-3 text-[12px] text-white/60 max-w-md truncate">{JSON.stringify(f.data).slice(0, 120)}</td>
-                <td className="px-5 py-3 text-[12px] text-white/40 whitespace-nowrap">{new Date(f.submittedAt).toLocaleDateString()}</td>
+                <td className="px-5 py-3 text-[12px] text-white/60 whitespace-nowrap">{new Date(f.submittedAt).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>
@@ -639,18 +647,18 @@ function UsersTab({ data }: { data: User[] }) {
     <div className="bg-white/5 border border-white/10 overflow-x-auto">
       <table className="w-full text-left min-w-[600px]">
         <thead><tr className="border-b border-white/10">
-          <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Email</th>
-          <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Name</th>
-          <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Role</th>
-          <th className="px-5 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Provider</th>
+          <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Email</th>
+          <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Name</th>
+          <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Role</th>
+          <th className="px-5 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Provider</th>
         </tr></thead>
         <tbody>
           {data.map((u) => (
             <tr key={u.email} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
               <td className="px-5 py-3 text-[13px] text-white/70">{u.email}</td>
               <td className="px-5 py-3 text-[13px] text-white/50">{u.name || "-"}</td>
-              <td className="px-5 py-3"><span className={`px-2 py-1 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${u.role === "admin" ? "bg-[#EA4335]/10 text-[#EA4335]" : "bg-white/5 text-white/30"}`}>{u.role}</span></td>
-              <td className="px-5 py-3 text-[12px] text-white/40">{u.provider}</td>
+              <td className="px-5 py-3"><span className={`px-2 py-1 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${u.role === "admin" ? "bg-[#EA4335]/10 text-[#EA4335]" : "bg-white/5 text-white/50"}`}>{u.role}</span></td>
+              <td className="px-5 py-3 text-[12px] text-white/60">{u.provider}</td>
             </tr>
           ))}
         </tbody>
@@ -672,7 +680,7 @@ function NewsletterTab({ data }: { data: Subscriber[] }) {
         {data.map((s, i) => (
           <div key={i} className="flex items-center justify-between px-5 py-3 border-b border-white/5 last:border-0">
             <span className="text-[13px] text-white/70">{s.email}</span>
-            <span className="text-[12px] text-white/30">{new Date(s.subscribedAt).toLocaleDateString()}</span>
+            <span className="text-[12px] text-white/50">{new Date(s.subscribedAt).toLocaleDateString()}</span>
           </div>
         ))}
       </div>
@@ -690,7 +698,7 @@ function ChatsTab({ data }: { data: any }) {
         <div key={s.sessionId} className="bg-white/5 border border-white/10 p-5">
           <div className="flex items-center justify-between mb-3">
             <span className="text-[12px] text-white/50 font-mono">{s.sessionId.slice(0, 12)}...</span>
-            <span className="text-[11px] text-white/30">{s.messages} messages</span>
+            <span className="text-[11px] text-white/50">{s.messages} messages</span>
           </div>
           <div className="space-y-2 max-h-48 overflow-y-auto">
             {s.preview?.map((m: any, i: number) => (
@@ -723,29 +731,29 @@ function HealthTab() {
             <div className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 ${health?.status === "ok" ? "bg-[#34A853]/20 text-[#34A853]" : "bg-[#EA4335]/20 text-[#EA4335]"}`}>
               {health?.status === "ok" ? "\u2713" : "\u2717"}
             </div>
-            <p className="text-[11px] text-white/40">API Status</p>
+            <p className="text-[11px] text-white/60">API Status</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#34A853]/20 text-[#34A853]">{"\u2713"}</div>
-            <p className="text-[11px] text-white/40">DB Connected</p>
+            <p className="text-[11px] text-white/60">DB Connected</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#34A853]/20 text-[#34A853]">{"\u2713"}</div>
-            <p className="text-[11px] text-white/40">Analytics Active</p>
+            <p className="text-[11px] text-white/60">Analytics Active</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#FBBC05]/20 text-[#FBBC05]">{"\u26A0"}</div>
-            <p className="text-[11px] text-white/40">Vault Locked</p>
+            <p className="text-[11px] text-white/60">Vault Locked</p>
           </div>
         </div>
       </div>
       <div className="bg-white/5 border border-white/10 p-6">
         <SectionTitle>System Info</SectionTitle>
         <div className="grid grid-cols-2 gap-4 mt-4 text-[12px]">
-          <div><span className="text-white/30">Uptime:</span> <span className="text-white/70">{health?.uptime || "unknown"}</span></div>
-          <div><span className="text-white/30">Node:</span> <span className="text-white/70">{health?.node || "unknown"}</span></div>
-          <div><span className="text-white/30">Environment:</span> <span className="text-white/70">{health?.env || "production"}</span></div>
-          <div><span className="text-white/30">Version:</span> <span className="text-white/70">{health?.version || "1.0"}</span></div>
+          <div><span className="text-white/50">Uptime:</span> <span className="text-white/70">{health?.uptime || "unknown"}</span></div>
+          <div><span className="text-white/50">Node:</span> <span className="text-white/70">{health?.node || "unknown"}</span></div>
+          <div><span className="text-white/50">Environment:</span> <span className="text-white/70">{health?.env || "production"}</span></div>
+          <div><span className="text-white/50">Version:</span> <span className="text-white/70">{health?.version || "1.0"}</span></div>
         </div>
       </div>
     </div>
@@ -768,7 +776,7 @@ function ExportTab() {
         ].map((item) => (
           <a key={item.href} href={item.href} className="block bg-white/5 border border-white/10 p-5 hover:border-[#DF3131]/30 transition-all group">
             <p className="text-[13px] text-white/70 group-hover:text-[#DF3131] transition-colors font-heading font-bold">{item.label}</p>
-            <p className="text-[11px] text-white/30 mt-1">{item.desc}</p>
+            <p className="text-[11px] text-white/50 mt-1">{item.desc}</p>
           </a>
         ))}
       </div>
@@ -802,7 +810,7 @@ function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClos
     onClose();
   };
 
-  const inputClass = "w-full bg-white/5 border border-white/10 text-white text-[13px] px-4 py-2.5 focus:outline-none focus:border-[#DF3131]/50 transition-colors placeholder:text-white/20";
+  const inputClass = "w-full bg-white/5 border border-white/10 text-white text-[13px] px-4 py-2.5 focus:outline-none focus:border-[#DF3131]/50 transition-colors placeholder:text-white/40";
   const filteredCategories = categories.filter(c => type === "income" ? c.type === "income" : c.type === "expense");
 
   return (
@@ -810,16 +818,16 @@ function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClos
       <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60">{type === "income" ? "Log Income" : "Log Expense"}</h3>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
-          <label className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Date</label>
+          <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Date</label>
           <input type="date" value={form.date} onChange={e => setForm({...form, date: e.target.value})} className={inputClass} required />
         </div>
         <div>
-          <label className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Amount ($)</label>
+          <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Amount ($)</label>
           <input type="number" step="0.01" min="0.01" placeholder="0.00" value={form.amount} onChange={e => setForm({...form, amount: e.target.value})} className={inputClass} required />
         </div>
         {type === "income" ? (
           <div>
-            <label className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Client</label>
+            <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Client</label>
             <select value={form.client_name} onChange={e => setForm({...form, client_name: e.target.value})} className={inputClass}>
               <option value="">Select client...</option>
               {clients.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
@@ -827,12 +835,12 @@ function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClos
           </div>
         ) : (
           <div>
-            <label className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Vendor</label>
+            <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Vendor</label>
             <input type="text" placeholder="Vendor name" value={form.vendor} onChange={e => setForm({...form, vendor: e.target.value})} className={inputClass} />
           </div>
         )}
         <div>
-          <label className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Category</label>
+          <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Category</label>
           <select value={form.category} onChange={e => setForm({...form, category: e.target.value})} className={inputClass}>
             <option value="">Select category...</option>
             {filteredCategories.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
@@ -841,7 +849,7 @@ function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClos
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Channel</label>
+          <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Channel</label>
           <select value={form.channel} onChange={e => setForm({...form, channel: e.target.value})} className={inputClass}>
             <option value="">Select channel...</option>
             <option value="cashapp">Cash App</option>
@@ -856,13 +864,13 @@ function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClos
           </select>
         </div>
         <div>
-          <label className="text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Description</label>
+          <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Description</label>
           <input type="text" placeholder="Brief description" value={form.description} onChange={e => setForm({...form, description: e.target.value})} className={inputClass} />
         </div>
       </div>
       <div className="flex gap-3 pt-2">
         <button type="submit" disabled={saving} className="px-6 py-2.5 bg-[#DF3131] text-white text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#c12a2a] disabled:opacity-40 transition-all">{saving ? "Saving..." : "Save"}</button>
-        <button type="button" onClick={onClose} className="px-6 py-2.5 bg-white/5 text-white/40 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:text-white/70 transition-all">Cancel</button>
+        <button type="button" onClick={onClose} className="px-6 py-2.5 bg-white/5 text-white/60 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:text-white/70 transition-all">Cancel</button>
       </div>
     </form>
   );
@@ -885,7 +893,7 @@ function TransactionTable({ transactions, onRefresh }: { transactions: Transacti
     <div className="space-y-4">
       <div className="flex items-center gap-3">
         {(["all", "income", "expense"] as const).map(f => (
-          <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 text-[10px] font-heading font-bold tracking-[0.1em] uppercase border transition-all ${filter === f ? "bg-[#DF3131]/20 text-[#DF3131] border-[#DF3131]/30" : "bg-white/5 text-white/30 border-white/10 hover:text-white/60"}`}>
+          <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 text-[10px] font-heading font-bold tracking-[0.1em] uppercase border transition-all ${filter === f ? "bg-[#DF3131]/20 text-[#DF3131] border-[#DF3131]/30" : "bg-white/5 text-white/50 border-white/10 hover:text-white/60"}`}>
             {f} {f !== "all" ? `(${transactions.filter(t => t.type === f).length})` : `(${transactions.length})`}
           </button>
         ))}
@@ -894,14 +902,14 @@ function TransactionTable({ transactions, onRefresh }: { transactions: Transacti
       <div className="bg-white/5 border border-white/10 overflow-x-auto">
         <table className="w-full text-left min-w-[800px]">
           <thead><tr className="border-b border-white/10">
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Date</th>
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Type</th>
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Amount</th>
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Client/Vendor</th>
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Category</th>
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Channel</th>
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">P/B</th>
-            <th className="px-4 py-3 text-[10px] text-white/30 font-heading font-bold tracking-[0.1em] uppercase">Actions</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Date</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Type</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Amount</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Client/Vendor</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Category</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Channel</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">P/B</th>
+            <th className="px-4 py-3 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Actions</th>
           </tr></thead>
           <tbody>
             {filtered.map((t) => (
@@ -910,16 +918,16 @@ function TransactionTable({ transactions, onRefresh }: { transactions: Transacti
                 <td className="px-4 py-3"><span className={`px-2 py-0.5 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${t.type === "income" ? "bg-[#34A853]/10 text-[#34A853]" : "bg-[#EA4335]/10 text-[#EA4335]"}`}>{t.type}</span></td>
                 <td className="px-4 py-3 text-[13px] font-heading font-bold" style={{ color: t.type === "income" ? "#34A853" : "#EA4335" }}>${t.amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                 <td className="px-4 py-3 text-[12px] text-white/60">{t.client_name || t.vendor || "-"}</td>
-                <td className="px-4 py-3 text-[12px] text-white/40">{t.category_name || "-"}</td>
-                <td className="px-4 py-3 text-[12px] text-white/40 capitalize">{t.channel || "-"}</td>
-                <td className="px-4 py-3 text-[12px] text-white/40 capitalize">{t.business_personal || "business"}</td>
+                <td className="px-4 py-3 text-[12px] text-white/60">{t.category_name || "-"}</td>
+                <td className="px-4 py-3 text-[12px] text-white/60 capitalize">{t.channel || "-"}</td>
+                <td className="px-4 py-3 text-[12px] text-white/60 capitalize">{t.business_personal || "business"}</td>
                 <td className="px-4 py-3">
                   <button onClick={() => handleDelete(t.id)} className="text-[11px] text-[#EA4335]/60 hover:text-[#EA4335] transition-colors">Delete</button>
                 </td>
               </tr>
             ))}
             {filtered.length === 0 && (
-              <tr><td colSpan={8} className="px-5 py-8 text-center text-[13px] text-white/20">No transactions yet</td></tr>
+              <tr><td colSpan={8} className="px-5 py-8 text-center text-[13px] text-white/40">No transactions yet</td></tr>
             )}
           </tbody>
         </table>

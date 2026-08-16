@@ -193,7 +193,7 @@ export default function PrintingPage() {
   </ScrollReveal>
 
 {/* ═══ PRINTING MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#232326]">
     {(["FLYERS","POSTERS","BUSINESS CARDS","STICKERS","BANNERS","PHOTO PRINTS"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (

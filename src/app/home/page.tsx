@@ -894,7 +894,7 @@ export default function HomePage() {
        <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
      </h1>
      </TextMaskReveal>
-       <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-16 w-full text-center">
+        <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-24 sm:mb-32 w-full text-center">
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
      </GyroTilt>
@@ -926,7 +926,7 @@ export default function HomePage() {
   </ScrollReveal>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 border-y border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#232326]">
+  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#232326]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (

@@ -22,7 +22,7 @@ export default function QuickLinks() {
         <h2 className="text-2xl font-heading font-bold text-[#333333] tracking-[0.1em] mb-8">QUICK LINKS</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
           {LINKS.map((l) => (
-            <Link key={l.label} href={l.href} className="text-[15px] tracking-[0.08em] text-[#666665] hover:text-[#DF3131] transition-colors py-1.5">
+             <Link key={l.label} href={l.href} className="text-[15px] tracking-[0.08em] font-heading font-bold text-[#DF3131] hover:text-white hover:bg-[#DF3131] border border-[#DF3131] rounded-full px-4 py-2 transition-all">
               {l.label}
             </Link>
           ))}

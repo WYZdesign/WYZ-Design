@@ -159,7 +159,7 @@ export default function Navbar() {
               {NAV_LINKS.map((l) => (
                 <Link key={l.href} href={l.href}
                   className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold whitespace-nowrap transition-all duration-[400ms] ${
-                    isActive(l.href) ? "text-white" : "text-white/70 hover:text-white hover:scale-105 active:text-white/80"
+                    isActive(l.href) ? "text-white dark:text-black" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black hover:scale-105 active:text-white/80"
                   }`}
                   style={isActive(l.href) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
                   {l.label}
@@ -168,7 +168,7 @@ export default function Navbar() {
               <div className="relative" data-more-dropdown onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
                 <button data-more-btn onClick={() => setMoreOpen(!moreOpen)}
                   className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors duration-[400ms] ${
-                    MORE_LINKS.some(l => isActive(l.href)) ? "text-white" : "text-white/70 hover:text-white active:text-white/80"
+                    MORE_LINKS.some(l => isActive(l.href)) ? "text-white dark:text-black" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black active:text-white/80"
                   }`}
                   style={MORE_LINKS.some(l => isActive(l.href)) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
                   M O R E <IoChevronDown className={`w-3 h-3 transition-transform ${moreOpen ? "rotate-180" : ""}`} />
@@ -178,15 +178,14 @@ export default function Navbar() {
                     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
                       className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 shadow-xl z-50 rounded-lg overflow-hidden"
                       >
-                      <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
-                        <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
-                        <div className="absolute inset-0 bg-black/15" />
-                      </div>
+                       <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
+                         <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
+                       </div>
                       <div className="relative z-10">
                         {MORE_LINKS.map((l) => (
                           <Link key={l.href} href={l.href}
                             className={`block px-5 py-3 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
-                              isActive(l.href) ? "text-white bg-white/10 font-bold" : "text-white/70 hover:text-white hover:bg-white/5 active:text-white/80"
+                              isActive(l.href) ? "text-white dark:text-black bg-white/10 dark:bg-black/10 font-bold" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black hover:bg-white/5 dark:hover:bg-black/5 active:text-white/80"
                             }`}>
                             {l.label}
                           </Link>
@@ -203,8 +202,8 @@ export default function Navbar() {
               <div className="relative">
                 <AnimatePresence initial={false}>
                   {searchOpen ? (
-                    <motion.div key="search-input" initial={{ width: 44 }} animate={{ width: 288 }} exit={{ width: 44 }}
-                      transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                    <motion.div key="search-input" initial={{ width: 0, opacity: 0 }} animate={{ width: 288, opacity: 1 }} exit={{ width: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                       className="relative h-11">
                       <input ref={searchInputRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                         onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
@@ -234,7 +233,7 @@ export default function Navbar() {
                       </AnimatePresence>
                     </motion.div>
                   ) : (
-                    <motion.button key="search-btn" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }}
+                    <motion.button key="search-btn" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                       onClick={() => setSearchOpen(true)}
                       className="w-11 h-11 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 transition-all">
                       <FiSearch className="w-4 h-4" />
