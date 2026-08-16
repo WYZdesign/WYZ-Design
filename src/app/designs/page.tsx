@@ -192,20 +192,27 @@ export default function DesignsPage() {
  const [openService, setOpenService] = useState(-1);
  const merchScrollRef = useRef<HTMLDivElement>(null);
  const merchProducts = usePrintfulMerch();
- const dbcMerch = useMemo(() => [
-  "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-b3c114b8dab6450887e3d3aee9c71030~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-bd1e1406036d4ba99d4f8197e1495337~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-c13840a266e44b959886dc63b5826213~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-71e847c4dd9546b0bef2a69d72d2baa6~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-7ef7fb49e39942f687d13018406e72a8~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-3aa0e795baf84e72affb65d9c1cf76a6~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-a35038eae10c4de8a68b7ca3aa5f28f3~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-60d7fe9cb1a14d4696d62ca1b5902cdf~mv2.jpg",
-  "/images/merch/dbc-archive/nsplsh-ea5cee04903c44399fee2f8de391fa51~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-422f5f161e544ce9bf0e06f901881db4~mv2.jpg",
- ].map((img, i) => ({ img, name: "Dying Breed Crew", price: "$" + [35,65,45,55,25,32,30,40,15,28,12,30][i] })), []);
+  const dbcMerch = useMemo(() => [
+  { img: "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg", name: "Dying Breed Crew", price: "$35" },
+  { img: "/images/merch/dbc-archive/98442d-b3c114b8dab6450887e3d3aee9c71030~mv2.jpg", name: "Dying Breed Crew", price: "$65" },
+  { img: "/images/merch/dbc-archive/98442d-bd1e1406036d4ba99d4f8197e1495337~mv2.jpg", name: "Dying Breed Crew", price: "$45" },
+  { img: "/images/merch/dbc-archive/98442d-c13840a266e44b959886dc63b5826213~mv2.jpg", name: "Dying Breed Crew", price: "$55" },
+  { img: "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg", name: "Dying Breed Crew", price: "$25" },
+  { img: "/images/merch/dbc-archive/98442d-71e847c4dd9546b0bef2a69d72d2baa6~mv2.jpg", name: "Dying Breed Crew", price: "$32" },
+  { img: "/images/merch/dbc-archive/98442d-7ef7fb49e39942f687d13018406e72a8~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
+  { img: "/images/merch/dbc-archive/98442d-a35038eae10c4de8a68b7ca3aa5f28f3~mv2.jpg", name: "Dying Breed Crew", price: "$40" },
+  { img: "/images/merch/dbc-archive/98442d-60d7fe9cb1a14d4696d62ca1b5902cdf~mv2.jpg", name: "Dying Breed Crew", price: "$15" },
+  { img: "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg", name: "Dying Breed Crew", price: "$28" },
+  { img: "/images/merch/dbc-archive/nsplsh-ea5cee04903c44399fee2f8de391fa51~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
+  { img: "/images/merch/dbc-archive/98442d-422f5f161e544ce9bf0e06f901881db4~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
+], []);
+
+const faotmImages = [
+  { img: "/images/faotm_1.jpg", name: "F. A. O. T. M. #1", price: "Artist Spotlight" },
+  { img: "/images/faotm_2.jpg", name: "F. A. O. T. M. #2", price: "Artist Spotlight" },
+  { img: "/images/faotm_3.jpg", name: "F. A. O. T. M. #3", price: "Artist Spotlight" },
+  { img: "/images/faotm_1.jpg", name: "F. A. O. T. M. #4", price: "Artist Spotlight" },
+];
 
  const shuffledLogos = useMemo(() => shuffleArray(LOGOS_IMAGES), []);
  const shuffledCovers = useMemo(() => shuffleArray(COVER_ART_WYZ), []);
@@ -358,7 +365,7 @@ export default function DesignsPage() {
      <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
    </div>
   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-  {dbcMerch.slice(0, 4).map((p, i) => (
+  {faotmImages.map((p, i) => (
    <ScrollParallaxCard key={i} tiltAmount={4} scaleAmount={1.03}>
    <ImageHoverReveal>
    <Link href="/merch" className="group cursor-pointer block">

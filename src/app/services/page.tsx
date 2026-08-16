@@ -32,7 +32,10 @@ const ALL_SERVICES_RAW = [
  { cat: "Consultation", name: "Logo Consultation", price: "$50", dur: "2 HR", desc: "Creating captivating logos through in-depth research and collaborative brainstorming.", img: "/images/services/Logo Consultation.jpg", bookLink: "/booking" },
  { cat: "Consultation", name: "Marketing Consultation", price: "$50", dur: "1 HR", desc: "Expert marketing strategy and actionable guidance to elevate your brand's reach.", img: "/images/services/Marketing Consultation.jpg", bookLink: "/booking" },
  { cat: "Web Design", name: "Website Design", price: "$500", dur: "3 HR", desc: "Professional website design and organization to help your business thrive online.", img: "/images/services/Website Design.jpg", bookLink: "/booking" },
- { cat: "Web Design", name: "SEO Audit", price: "$50", dur: "1 HR", desc: "In-depth website audit for a targeted growth strategy and improved search visibility.", img: "/images/services/SEO.jpg", bookLink: "/booking" },
+  { cat: "Web Design", name: "SEO Audit", price: "$50", dur: "1 HR", desc: "In-depth website audit for a targeted growth strategy and improved search visibility.", img: "/images/services/SEO.jpg", bookLink: "/booking" },
+  { cat: "Branding Design", name: "Brand Identity Package", price: "$300", dur: "6 HR", desc: "Complete brand identity system with logo, color palette, typography, and brand guidelines.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
+  { cat: "Videography", name: "Motion Graphics", price: "$150", dur: "2 HR", desc: "Custom animated graphics and motion design for your promotional videos.", img: "/images/services/Video Editing.jpg", bookLink: "/booking" },
+  { cat: "Photography", name: "Product Photography", price: "$120", dur: "2 HR", desc: "Professional product photography with clean backgrounds and multiple angles.", img: "/images/services/Event Photography.jpg", bookLink: "/booking" },
 ];
 
 function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; index: number }) {

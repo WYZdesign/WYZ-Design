@@ -150,7 +150,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
           <div className="relative z-10 text-center">
             <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.1em] uppercase mb-4">{backTitle}</h2>
             {backContent}
-            <p className="text-white/60 text-[11px] mt-4">{backNote}</p>
+            <p className="text-white/60 text-[11px] mt-2">{backNote}</p>
           </div>
           <div className="relative z-10 flex justify-center">
             <Link href={orderLink} className={orderClass} onClick={(e) => e.stopPropagation()}>{orderLabel}</Link>
