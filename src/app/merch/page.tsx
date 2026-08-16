@@ -137,6 +137,8 @@ function ParallaxHero() {
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/40 to-[#111]/90" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#111]/60 via-transparent to-[#111]/60" />
+      {/* 70% black overlay for text readability */}
+      <div className="absolute inset-0 bg-black/70" />
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
         <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-2" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
@@ -154,6 +156,144 @@ function ParallaxHero() {
         </a>
       </div>
     </div>
+  );
+}
+
+function DynamicContentUnderHero() {
+  const features = [
+    { title: "CUSTOM PRINTING", desc: "Every design is printed to order with premium inks on quality garments.", icon: "🎨" },
+    { title: "CREW APPROVED", desc: "All designs are worn and tested by the Dying Breed Crew themselves.", icon: "✅" },
+    { title: "QUALITY GUARANTEED", desc: "Not satisfied? We'll make it right — no questions asked.", icon: "🔒" },
+  ];
+  return (
+    <section className="py-12 sm:py-16 bg-[#FEFEFD]">
+      <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="text-[11px] sm:text-[13px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">WHY DBC MERCH</span>
+          <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Built By The Crew, For The Crew</h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {features.map((f) => (
+            <div key={f.title} className="bg-white dark:bg-[#2b2b2e] p-6 sm:p-8 rounded-xl border border-[#E2E2E2] dark:border-[#444] shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 transition-all text-center">
+              <div className="text-[2.5rem] sm:text-[3rem] mb-4">{f.icon}</div>
+              <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.05em] mb-2">{f.title}</h3>
+              <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const DBC_MODEL_MOCKUPS = [
+  { id: 1, name: "Denim Jacket", category: "Outerwear", price: 89.99, img: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", model: "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg" },
+  { id: 2, name: "Zip-Up Hoodie", category: "Apparel", price: 64.99, img: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", model: "/images/merch/dbc-archive/98442d-b3c114b8dab6450887e3d3aee9c71030~mv2.jpg" },
+  { id: 3, name: "Crown Tee", category: "Apparel", price: 34.99, img: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", model: "/images/merch/dbc-archive/98442d-bd1e1406036d4ba99d4f8197e1495337~mv2.jpg" },
+  { id: 4, name: "Dad Hat", category: "Headwear", price: 32.99, img: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", model: "/images/merch/dbc-archive/98442d-c13840a266e44b959886dc63b5826213~mv2.jpg" },
+  { id: 5, name: "Ribbed Beanie", category: "Headwear", price: 24.99, img: "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg", model: "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg" },
+  { id: 6, name: "Embroidered Socks", category: "Accessories", price: 29.77, img: "/images/merch/dbc-archive/WYZ-Crown-Embroidered-socks.jpg", model: "/images/merch/dbc-archive/98442d-a35038eae10c4de8a68b7ca3aa5f28f3~mv2.jpg" },
+  { id: 7, name: "White Glossy Mug", category: "Accessories", price: 14.99, img: "/images/merch/dbc-archive/WYZ-Crown-White-glossy-mug.jpg", model: "/images/merch/dbc-archive/98442d-71e847c4dd9546b0bef2a69d72d2baa6~mv2.jpg" },
+  { id: 8, name: "Denim Tote Bag", category: "Accessories", price: 39.65, img: "/images/merch/dbc-archive/WYZ-Crown-Organic-denim-tote-bag.jpg", model: "/images/merch/dbc-archive/98442d-7ef7fb49e39942f687d13018406e72a8~mv2.jpg" },
+];
+
+function AccordionGallery() {
+  const [openId, setOpenId] = useState<number | null>(null);
+  useEffect(() => {
+    if (openId === null) {
+      const timer = setTimeout(() => setOpenId(0), 200);
+      return () => clearTimeout(timer);
+    }
+  }, [openId]);
+  useEffect(() => {
+    if (openId === null) return;
+    const timer = setTimeout(() => {
+      const next = (openId + 1) % DBC_MODEL_MOCKUPS.length;
+      setOpenId(next);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [openId]);
+  return (
+    <section className="py-12 bg-[#FEFEFD]">
+      <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
+        <div className="text-center mb-8">
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] block mb-2">DBC CREW MODEL MOCKUPS</span>
+          <h3 className="text-[1.3rem] sm:text-[1.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.05em]">Worn By The Crew</h3>
+        </div>
+        <div className="border border-[#E2E2E2] dark:border-[#444] rounded-xl overflow-hidden">
+          {DBC_MODEL_MOCKUPS.map((item) => (
+            <div key={item.id} className="border-b border-[#E2E2E2] dark:border-[#444] last:border-b-0">
+              <button
+                onClick={() => setOpenId(openId === item.id ? null : item.id)}
+                className="w-full flex items-center gap-4 p-4 sm:p-6 text-left hover:bg-[#f5f5f5] dark:hover:bg-[#2b2b2e] transition-all"
+              >
+                <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
+                  <Image src={item.model} alt={item.name} width={80} height={80} className="w-full h-full object-cover" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[17px] mb-1">{item.name}</h4>
+                  <p className="text-[12px] text-[#999] dark:text-[#aaa]">{item.category}</p>
+                </div>
+                <div className="flex-shrink-0 flex items-center gap-3">
+                  <span className="text-[#DF3131] font-black text-[18px]">${item.price.toFixed(2)}</span>
+                  <svg className={`w-5 h-5 text-[#888] transition-transform ${openId === item.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </button>
+              <div className={`overflow-hidden transition-all duration-500 ${openId === item.id ? "max-h-[300px] py-4" : "max-h-0"}`}>
+                <div className="px-4 sm:px-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                  <div className="w-full sm:w-48 aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
+                    <Image src={item.img} alt={item.name} width={192} height={192} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="flex-1 text-center sm:text-left">
+                    <h5 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] mb-2">{item.name}</h5>
+                    <p className="text-[#666] dark:text-[#999] text-[14px] mb-3">Premium quality garment worn by the Dying Breed Crew. Machine washable, true to size.</p>
+                    <Link href={FAOTM_URL} className="inline-block px-6 py-2.5 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[12px] hover:bg-[#B82020] transition-all">
+                      Shop This Item
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link href={FAOTM_URL} className="inline-block px-8 py-3 bg-white text-[#111] border-2 border-[#111] font-heading font-bold tracking-[0.15em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
+            VIEW FULL COLLECTION
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DynamicContentUnderShop() {
+  return (
+    <section className="py-12 sm:py-16 bg-[#FEFEFD]">
+      <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">MEET THE CREW</span>
+          <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Every Piece Tells A Story</h2>
+          <p className="text-[#666] dark:text-[#999] text-[15px] max-w-2xl mx-auto mt-3">The Dying Breed Crew isn't just a band — it's a family of creators, artists, and rebels who refuse to conform. Every design in our collection is worn and approved by the crew members themselves.</p>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4">
+          {DBC_MODEL_MOCKUPS.slice(0, 8).map((m, i) => (
+            <div key={m.id} className="group cursor-pointer">
+              <div className="aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5]">
+                <Image src={m.model} alt={m.name} width={80} height={80} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <p className="text-[10px] font-bold text-[#333] dark:text-[#e0e0e0] text-center mt-1 truncate">{m.name}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-10 sm:mt-12 text-center">
+          <Link href="/events" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[13px] hover:bg-[#B82020] transition-all">
+            SEE CREW IN ACTION
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -393,6 +533,7 @@ export default function MerchPage() {
     <>
       <main className="min-h-screen bg-[#FEFEFD]">
         <ParallaxHero />
+        <DynamicContentUnderHero />
 
         {/* Gallery Carousel 1 — under hero */}
         <div className="py-6 bg-[#111] overflow-hidden">
@@ -521,66 +662,7 @@ export default function MerchPage() {
             </>
           )}
 
-          {showStore && (
-            <section
-              className={`max-w-7xl mx-auto px-6 pb-20 ${portalAnimating ? "portal-enter" : ""}`}
-              style={!portalAnimating ? { clipPath: "circle(75% at 50% 50%)", opacity: 1 } : undefined}
-            >
-              {/* Gradient portal overlay — fades out after animation */}
-              {portalAnimating && (
-                <div className="absolute inset-0 bg-gradient-radial from-[#DF3131]/5 via-transparent to-transparent pointer-events-none z-10"
-                  style={{ animation: "portalGlow 2s ease-in-out infinite" }} />
-              )}
-
-              {/* Toolbar */}
-              <div className="stagger-1 flex flex-col sm:flex-row gap-3 mb-6 sticky top-20 z-40 bg-[#FEFEFD]/95 backdrop-blur-md py-3 border-b border-[#E2E2E2]">
-                <div className="flex gap-2 overflow-x-auto flex-1" style={{ scrollbarWidth: "none" }}>
-                  {CATEGORIES.map((cat) => (
-                    <button key={cat} onClick={() => setActiveCategory(cat)}
-                      className={`px-4 py-2 rounded-full text-[12px] font-bold tracking-[0.08em] uppercase whitespace-nowrap transition-all ${
-                        activeCategory === cat ? "bg-[#DF3131] text-white shadow-md shadow-[#DF3131]/30" : "bg-[#f5f5f5] text-[#666] hover:bg-[#eee]"
-                      }`}>
-                      {cat}
-                    </button>
-                  ))}
-                </div>
-                <div className="stagger-2 flex gap-3 items-center">
-                  <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}
-                    className="px-3 py-2 border border-[#E2E2E2] text-[12px] text-[#333] focus:border-[#DF3131] outline-none bg-white cursor-pointer">
-                    {SORT_OPTIONS.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
-                  </select>
-                  <div className="flex border border-[#E2E2E2] overflow-hidden">
-                    {(["grid", "explore"] as const).map((mode) => (
-                      <button key={mode} onClick={() => setStoreMode(mode)}
-                        className={`px-3 py-2 text-[11px] font-bold tracking-[0.08em] uppercase transition-all ${storeMode === mode ? "bg-[#DF3131] text-white" : "bg-white text-[#999] hover:text-[#333]"}`}>
-                        {mode === "grid" ? "Grid" : "Scatter"}
-                      </button>
-                    ))}
-                  </div>
-                  <span className="stagger-3 text-[11px] text-[#999] tracking-wider">{filtered.length} ITEMS</span>
-                </div>
-              </div>
-
-              {/* Products */}
-              <div className="stagger-3">
-                {storeMode === "explore" ? (
-                  <ScatteredGrid products={filtered} onSelect={(p) => { setSelectedProduct(p); setQuickColor(0); setQuickSize("M"); }} />
-                ) : (
-                  <ProductGrid products={filtered} onSelect={(p) => { setSelectedProduct(p); setQuickColor(0); setQuickSize("M"); }} />
-                )}
-              </div>
-
-              {/* Bottom CTA — FAOTM Redirect */}
-              <div className="stagger-4 mt-12 bg-[#111] text-white p-10 text-center">
-                <p className="text-[11px] text-[#DF3131] font-bold tracking-[0.2em] uppercase mb-2">Featured Artist of the Month</p>
-                <p className="text-white/40 text-[14px] mb-4">Each month we spotlight an independent creator with their own curated art store.</p>
-                <Link href={FAOTM_URL}
-                  className="stagger-5 inline-block px-8 py-3 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.12em] uppercase hover:bg-[#B82020] transition-colors">
-                  FAOTM Art Store
-                </Link>
-              </div>
-            </section>
-          )}
+  {showStore && <AccordionGallery />}
         </div>
 
 
@@ -655,16 +737,19 @@ export default function MerchPage() {
         </div>
       )}
 
-      {/* Gallery Carousel 2 — under store */}
-      <div className="py-6 bg-[#111] overflow-hidden">
-        <div className="flex whitespace-nowrap animate-marquee-left">
-          {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
-            <div key={`gc2-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
-              <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
-            </div>
-          ))}
-        </div>
+    {/* Dynamic Content — under expandable shop */}
+    {showStore && <DynamicContentUnderShop />}
+
+    {/* Gallery Carousel 2 — under store */}
+    <div className="py-6 bg-[#111] overflow-hidden">
+      <div className="flex whitespace-nowrap animate-marquee-left">
+        {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
+          <div key={`gc2-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
+            <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+          </div>
+        ))}
       </div>
-    </>
+    </div>
+  </>
   );
 }

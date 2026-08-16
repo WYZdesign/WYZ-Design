@@ -205,16 +205,16 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
     100% { transform: translateX(0); }
   }
   .animate-marquee-left {
-    animation: marqueeLeft 26s linear infinite;
+    animation: marqueeLeft 72s linear infinite;
   }
   .animate-marquee-right {
-    animation: marqueeRight 26s linear infinite;
+    animation: marqueeRight 72s linear infinite;
   }
   .animate-marquee-left-fast {
-    animation: marqueeLeftFast 16s linear infinite;
+    animation: marqueeLeftFast 52s linear infinite;
   }
   .animate-marquee-right-fast {
-    animation: marqueeRightFast 16s linear infinite;
+    animation: marqueeRightFast 52s linear infinite;
   }
 
   /* Hero text readability: handled by an explicit 30% black overlay div in each

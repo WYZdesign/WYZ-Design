@@ -162,7 +162,7 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
               </div>
             </div>
             <div className="relative z-10 flex gap-2">
-              <Link href={s.href} className="flex-1 text-center py-2.5 bg-white text-[#DF3131] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
+              <Link href={s.href} className="flex-1 text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
                 BOOK NOW
               </Link>
               <Link href="/plans" className="flex-1 text-center py-2.5 border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
@@ -1063,7 +1063,7 @@ export default function HomePage() {
  <p className="text-white/80 text-xs mb-1 font-bold italic">Every 3 months</p>
  <p className="text-white/70 text-xs mb-4">{p.desc}</p>
  <p className="text-white/50 text-[10px] mb-4">{p.valid}</p>
- <Link href="/plans" className="w-full py-3 bg-white text-[#DF3131] font-heading font-bold tracking-[0.1em] uppercase text-sm hover:bg-[#333] dark:hover:bg-[#111] hover:text-white transition-all">
+  <Link href="/plans" className="w-full py-3 bg-white text-[#111] font-heading font-bold tracking-[0.1em] uppercase text-sm hover:bg-[#333] dark:hover:bg-[#111] hover:text-white transition-all">
  SUBSCRIBE
  </Link>
  </div>

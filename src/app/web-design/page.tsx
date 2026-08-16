@@ -50,7 +50,7 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
           </div>
           <div className="text-center mt-4">
             <p className="text-[11px] tracking-[0.15em] uppercase text-white/50 mb-3">Tap to flip back</p>
-            <Link href="/booking" onClick={(e) => e.stopPropagation()} className="inline-block w-full max-w-[200px] py-3 font-heading font-bold tracking-[0.12em] uppercase text-[13px] text-center bg-white text-[#DF3131] hover:bg-[#333] dark:hover:bg-[#111] hover:text-white transition-all">
+            <Link href="/booking" onClick={(e) => e.stopPropagation()} className="inline-block w-full max-w-[200px] py-3 font-heading font-bold tracking-[0.12em] uppercase text-[13px] text-center bg-[#DF3131] text-white hover:bg-[#B82020] transition-all">
               Get Started
             </Link>
           </div>
@@ -160,6 +160,9 @@ function SiteCard({ site, index }: { site: typeof CLIENT_SITES[0]; index: number
       {/* Border glow on hover */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{ boxShadow: `inset 0 0 0 2px ${site.accent}60, inset 0 0 30px ${site.accent}15` }} />
+      {/* Accent sprite inside card */}
+      <div className="absolute top-4 right-4 w-3 h-3 rounded-full z-[5]"
+        style={{ backgroundColor: site.accent, boxShadow: `0 0 10px ${site.accent}` }} />
     </a>
   );
 }

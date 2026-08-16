@@ -83,7 +83,7 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
  </div>
  </div>
  <div className="relative z-10 flex gap-2">
- <Link href={service.bookLink} className="flex-1 text-center py-3 bg-white text-[#DF3131] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
+  <Link href={service.bookLink} className="flex-1 text-center py-3 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
  BOOK NOW
  </Link>
  <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>

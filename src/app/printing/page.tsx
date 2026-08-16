@@ -105,7 +105,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
     </div>
    </div>
    <div className="relative z-10 flex gap-2 justify-center mt-4">
-   <Link href="/booking" className="flex-1 text-center py-3 px-4 bg-white text-[#DF3131] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
+    <Link href="/booking" className="flex-1 text-center py-3 px-4 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
     GET A QUOTE
    </Link>
    <Link href="/plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
@@ -257,7 +257,7 @@ export default function PrintingPage() {
     backBg="bg-[#DF3131]"
     orderLink="/booking"
     orderLabel="ORDER NOW"
-    orderClass="px-6 py-3 bg-white text-[#DF3131] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all"
+    orderClass="px-6 py-3 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all"
   />
 
   {/* Prints + Posters */}

@@ -178,9 +178,9 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   <div className="absolute top-3 right-3 bg-[#DF3131] text-white px-3 py-1 text-[14px] font-bold tracking-wider">{s.price}</div>
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
   </div>
-  <div className="p-5">
+  <div className="p-5 text-center">
   <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{s.cat}</span>
-  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
+  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
   <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed line-clamp-2">{s.desc}</p>
   </div>
   </div>
@@ -199,16 +199,16 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{s.name}</h3>
   <p className="text-white/80 text-[15px] leading-relaxed mb-4">{s.desc}</p>
   <div className="flex items-center gap-3 mb-4">
-  <span className="text-[28px] font-black">{s.price}</span>
+  <span className="text-[32px] font-black">{s.price}</span>
   <span className="text-white/60 text-[14px]">· {s.dur}</span>
   </div>
   </div>
   <div className="relative z-10 flex gap-2">
-  <Link href={s.bookLink} className="flex-1 text-center py-3 bg-white text-[#DF3131] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
-  BOOK NOW
+  <Link href={s.bookLink} className="flex-1 text-center py-3 bg-[#DF3131] text-white text-[14px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-all" onClick={(e) => e.stopPropagation()}>
+   BOOK NOW
   </Link>
-  <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
-  VIEW PLANS
+  <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#111] transition-all" onClick={(e) => e.stopPropagation()}>
+   VIEW PLANS
   </Link>
   </div>
   </div>

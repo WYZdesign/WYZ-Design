@@ -158,7 +158,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
             </ul>
           </div>
           <div className="relative z-10">
-            <button onClick={(e) => { e.stopPropagation(); subscribe(p.name); }} disabled={loading === p.name} className="block w-full text-center py-3 bg-white text-[#DF3131] text-[12px] sm:text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all disabled:opacity-50">
+            <button onClick={(e) => { e.stopPropagation(); subscribe(p.name); }} disabled={loading === p.name} className="block w-full text-center py-3 bg-white text-[#111] text-[12px] sm:text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all disabled:opacity-50">
               {loading === p.name ? "Loading..." : "SUBSCRIBE"}
             </button>
           </div>
@@ -220,7 +220,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
             <p className="text-white/60 text-[11px]">10% discount when added to any subscription plan</p>
           </div>
           <div className="relative z-10">
-            <Link href="/web-design" className="block text-center py-2.5 bg-white text-[#DF3131] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
+            <Link href="/web-design" className="block text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
               GET STARTED
             </Link>
           </div>

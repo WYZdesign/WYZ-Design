@@ -237,10 +237,10 @@ export default function AboutPage() {
                Whether you're an artist launching your brand, a business building your identity, or a studio scaling your presence, we're ready when you are.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/booking" className="inline-block px-10 py-4 bg-white text-[#DF3131] font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#333] hover:text-white transition-all">
+              <Link href="/booking" className="inline-block px-10 py-4 bg-white text-[#111] font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white transition-all">
                 BOOK A FREE CONSULTATION
               </Link>
-              <Link href="/plans" className="inline-block px-10 py-4 bg-white text-[#DF3131] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#111] hover:text-white hover:border-[#111] transition-all">
+              <Link href="/plans" className="inline-block px-10 py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
                 VIEW PLANS
               </Link>
             </div>

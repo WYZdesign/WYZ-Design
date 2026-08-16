@@ -551,7 +551,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   </div>
   </div>
 
-  <div className="absolute inset-0 bg-black/60 z-[15] pointer-events-none" />
+  <div className="absolute inset-0 bg-black/20 z-[15] pointer-events-none" />
 
  <div className="relative z-20 flex flex-col items-center justify-center py-20 sm:py-28 px-6 text-center">
  <div className="yt-float mb-8">
@@ -699,29 +699,36 @@ export default function EventsPage() {
  </div>
  </ScrollReveal>
 
- {/* ═══ 4. Autoplay Video Playlist (DIY Shows only, color aura) ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
- <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
- <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
- </div>
- </ScrollReveal>
+  {/* ═══ 4. Autoplay Video Playlist (DIY Shows only, color aura) ═══ */}
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+  <div className="mb-12 hidden md:block max-w-[130rem] mx-auto px-6 lg:px-12">
+  <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
+  </div>
+  </ScrollReveal>
 
- {/* ═══ 5. Client Events Carousel ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
- <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
- <div className="text-center mb-4">
-  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">CLIENT EVENTS</h2>
- </div>
- <VideoCarousel items={shuffledClientEvents} onPlay={(v) => setModalVideo(v)} />
- </div>
- </ScrollReveal>
+  {/* ═══ 5. Client Events Carousel ═══ */}
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+  <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
+  <div className="text-center mb-4">
+   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">CLIENT EVENTS</h2>
+  </div>
+  <VideoCarousel items={shuffledClientEvents} onPlay={(v) => setModalVideo(v)} />
+  </div>
+  </ScrollReveal>
 
- {/* ═══ 6. YouTube Section ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
- <div className="mb-12">
- <YouTubeSection />
- </div>
- </ScrollReveal>
+  {/* ═══ 5b. Autoplay DIY Recap Video (between client events and YouTube) ═══ */}
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+  <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
+  <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
+  </div>
+  </ScrollReveal>
+
+  {/* ═══ 6. YouTube Section ═══ */}
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+  <div className="mb-12">
+  <YouTubeSection />
+  </div>
+  </ScrollReveal>
 
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  {/* ═══ 7. Previous Events ═══ */}
