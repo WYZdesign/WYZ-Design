@@ -15,6 +15,7 @@ import AuthProvider from "@/components/AuthProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import CustomCursor from "@/components/CustomCursor";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 import PageTransition from "@/components/PageTransition";
 import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -252,6 +253,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollProgress />
           <CustomCursor />
         <A11yAudit />
+        <AnalyticsTracker />
           <Navbar />
           <div id="main-content" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#232326]" tabIndex={-1}>
             <PageTransition>{children}</PageTransition>
