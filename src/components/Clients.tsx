@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
-export default function Clients() {
+function ClientsCarousel() {
   return (
     <section className="py-16 bg-white overflow-hidden">
       <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
@@ -21,5 +22,19 @@ export default function Clients() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function Clients() {
+  return (
+    <ErrorBoundary fallback={
+      <section className="py-16 bg-white overflow-hidden">
+        <div className="max-w-[115rem] mx-auto px-6 lg:px-12 text-center">
+          <p className="text-[#8F8F8F] text-sm">Clients section temporarily unavailable</p>
+        </div>
+      </section>
+    }>
+      <ClientsCarousel />
+    </ErrorBoundary>
   );
 }

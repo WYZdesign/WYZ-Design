@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const TESTIMONIALS = [
   {
@@ -42,6 +43,18 @@ const TESTIMONIALS = [
 ];
 
 export default function Testimonials() {
+  return (
+    <ErrorBoundary fallback={
+      <section className="py-16 bg-gradient-to-b from-zinc-950 to-black text-center">
+        <p className="text-white/50 text-sm">Testimonials temporarily unavailable</p>
+      </section>
+    }>
+      <TestimonialsSliderInner />
+    </ErrorBoundary>
+  );
+}
+
+function TestimonialsSliderInner() {
   const [active, setActive] = useState(0);
 
   const next = useCallback(() => setActive((a) => (a + 1) % TESTIMONIALS.length), []);

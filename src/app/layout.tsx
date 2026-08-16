@@ -20,6 +20,7 @@ import PageTransition from "@/components/PageTransition";
 import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
 import ScrollAnimator from "@/components/ScrollAnimator";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import A11yAudit from "@/components/A11yAudit";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import NoiseOverlay from "@/components/NoiseOverlay";
@@ -255,6 +256,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <A11yAudit />
         <AnalyticsTracker />
           <Navbar />
+          <ErrorBoundary>
           <div id="main-content" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#232326]" tabIndex={-1}>
             <PageTransition>{children}</PageTransition>
           </div>
@@ -262,6 +264,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ChatWidget />
           <ScrollToTop />
           <NoiseOverlay />
+          </ErrorBoundary>
           </SmoothScrollProvider>
         </AuthProvider>
         </ThemeProvider>

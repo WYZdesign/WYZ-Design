@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FiArrowRight, FiClock, FiTag, FiSearch, FiTrendingUp } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import TextReveal from "@/components/TextReveal";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const POSTS = [
  { id: 1, title: "Behind the Scenes: FD Mixer Vol. 6", excerpt: "An inside look at our latest event photography session, from setup to the final shots.", date: "May 15, 2026", cat: "Events", img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop", featured: true, readTime: "5 min" },
@@ -106,31 +107,38 @@ export default function BlogPage() {
  </div>
  </ScrollReveal>
 
- {/* Post Grid */}
- <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
- {filtered.map((p, i) => (
- <ScrollReveal key={p.id} animation="fadeUp" delay={0.08 * i}>
- <article className="blog-card group bg-white dark:bg-[#2b2b2e] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
-    <div className="relative h-56 overflow-hidden">
-    <Image src={p.img} alt={p.title} fill className="blog-img w-full h-full object-cover dark:brightness-110" priority />
+  {/* Post Grid */}
+  <ErrorBoundary fallback={
+    <div className="text-center py-20">
+      <p className="text-[#8F8F8F] text-lg">Failed to load articles</p>
+      <p className="text-[#8F8F8F] text-sm mt-1">Please try again later</p>
     </div>
-    <span className="absolute -top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded z-10">{p.cat}</span>
-  <div className="p-5 sm:p-6 text-center">
-  <div className="flex items-center justify-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
-  <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>
- <span>•</span>
- <span>{p.date}</span>
- </div>
- <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] group-hover:text-[#DF3131] transition-colors leading-snug mb-3">{p.title}</h3>
-  <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
- <div className="mt-4 flex items-center justify-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
- READ MORE <FiArrowRight className="w-3.5 h-3.5" />
- </div>
- </div>
- </article>
- </ScrollReveal>
- ))}
- </div>
+  }>
+  <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {filtered.map((p, i) => (
+    <ScrollReveal key={p.id} animation="fadeUp" delay={0.08 * i}>
+    <article className="blog-card group bg-white dark:bg-[#2b2b2e] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
+      <div className="relative h-56 overflow-hidden">
+      <Image src={p.img} alt={p.title} fill className="blog-img w-full h-full object-cover dark:brightness-110" priority />
+      </div>
+      <span className="absolute -top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded z-10">{p.cat}</span>
+    <div className="p-5 sm:p-6 text-center">
+    <div className="flex items-center justify-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
+    <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>
+   <span>•</span>
+   <span>{p.date}</span>
+   </div>
+   <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] group-hover:text-[#DF3131] transition-colors leading-snug mb-3">{p.title}</h3>
+   <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
+   <div className="mt-4 flex items-center justify-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
+   READ MORE <FiArrowRight className="w-3.5 h-3.5" />
+   </div>
+   </div>
+   </article>
+   </ScrollReveal>
+  ))}
+  </div>
+  </ErrorBoundary>
 
  {filtered.length === 0 && (
  <div className="text-center py-20">

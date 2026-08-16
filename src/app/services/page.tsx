@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import TextSplit from "@/components/TextSplit";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 function shuffleArray<T>(arr: T[]): T[] {
  const a = [...arr];
@@ -174,14 +175,20 @@ return (
   <span className="text-[16px] text-[#999] dark:text-[#b0b0b0] tracking-wider">{filtered.length} SERVICE{filtered.length !== 1 ? "S" : ""} AVAILABLE</span>
  </div>
 
- {/* ── Service Grid — flip cards ── */}
- <ScrollReveal animation="fadeUp" delay={0.15}>
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
- {filtered.map((s, i) => (
- <ServiceCard key={s.name} service={s} index={i} />
- ))}
- </div>
- </ScrollReveal>
+  {/* ── Service Grid — flip cards ── */}
+  <ScrollReveal animation="fadeUp" delay={0.15}>
+  <ErrorBoundary fallback={
+    <div className="text-center py-16 col-span-full">
+      <p className="text-[#8F8F8F]">Services temporarily unavailable. Please try again later.</p>
+    </div>
+  }>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+  {filtered.map((s, i) => (
+  <ServiceCard key={s.name} service={s} index={i} />
+  ))}
+  </div>
+  </ErrorBoundary>
+  </ScrollReveal>
 
  {/* ── Strategy Wizard ── */}
  <ScrollReveal animation="fadeUp" delay={0.1}>

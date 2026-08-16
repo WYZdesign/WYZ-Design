@@ -4,6 +4,7 @@ import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 interface Product {
   id: number;
@@ -214,6 +215,13 @@ function AccordionGallery() {
     return () => clearTimeout(timer);
   }, [openId]);
   return (
+    <ErrorBoundary fallback={
+      <section className="py-12 bg-[#FEFEFD]">
+        <div className="max-w-[130rem] mx-auto px-6 lg:px-12 text-center">
+          <p className="text-[#8F8F8F]">Crew gallery temporarily unavailable</p>
+        </div>
+      </section>
+    }>
     <section className="py-12 bg-[#FEFEFD]">
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8">
@@ -265,11 +273,19 @@ function AccordionGallery() {
         </div>
       </div>
     </section>
+    </ErrorBoundary>
   );
 }
 
 function DynamicContentUnderShop() {
   return (
+    <ErrorBoundary fallback={
+      <section className="py-12 sm:py-16 bg-[#FEFEFD]">
+        <div className="max-w-[130rem] mx-auto px-6 lg:px-12 text-center">
+          <p className="text-[#8F8F8F]">Crew content temporarily unavailable</p>
+        </div>
+      </section>
+    }>
     <section className="py-12 sm:py-16 bg-[#FEFEFD]">
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8 sm:mb-12">
@@ -294,6 +310,7 @@ function DynamicContentUnderShop() {
         </div>
       </div>
     </section>
+    </ErrorBoundary>
   );
 }
 
@@ -749,7 +766,7 @@ export default function MerchPage() {
           </div>
         ))}
       </div>
-    </div>
-  </>
+      </div>
+    </>
   );
 }
