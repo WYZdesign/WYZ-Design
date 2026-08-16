@@ -288,9 +288,6 @@ export default function Navbar() {
             </div>
 
             <div className="lg:hidden ml-auto flex items-center gap-3">
-              <a href="/account/my-account" className="text-white font-semibold tracking-[0.15em] text-[12px] px-4 py-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center border border-white/40 rounded-full hover:bg-white/10 transition-all whitespace-nowrap">
-                LOGIN
-              </a>
               <ThemeToggle />
               <button aria-label={mobileOpen ? "Close menu" : "Open menu"} className="p-2 text-white" onClick={() => setMobileOpen(!mobileOpen)}>
                 {mobileOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
@@ -324,9 +321,8 @@ export default function Navbar() {
                 </div>
               ) : (
                 <a href="/account/my-account" onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-between w-full px-5 py-3 text-[15px] font-semibold tracking-[0.15em] rounded-xl bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3 min-h-[44px]">
-                  <span className="font-heading font-bold tracking-[0.15em] uppercase">Login</span>
-                  <span className="text-[12px] font-normal opacity-80">Profile & Account</span>
+                  className="flex items-center justify-center w-full px-4 py-2.5 text-[13px] font-semibold tracking-[0.12em] rounded-lg bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3 min-h-[40px]">
+                  <span className="font-heading font-bold tracking-[0.12em] uppercase">Login</span>
                 </a>
               )}
               <div className="flex items-center gap-3">
