@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
+import SafeImage from "@/components/SafeImage";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -130,7 +131,7 @@ function ParallaxHero() {
         <div className="marquee-strip flex gap-2 h-full w-[200%]">
           {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
             <div key={i} className="flex-shrink-0 w-[20vw] sm:w-[15vw] h-full overflow-hidden">
-               <Image src={img} alt="Marquee item" fill className="w-full h-full object-cover" priority decoding="async" />
+                <SafeImage src={img} alt="Marquee item" className="w-full h-full object-cover" loading="lazy" />
             </div>
           ))}
         </div>
@@ -236,7 +237,7 @@ function AccordionGallery() {
                 className="w-full flex items-center gap-4 p-4 sm:p-6 text-left hover:bg-[#f5f5f5] dark:hover:bg-[#2b2b2e] transition-all"
               >
                 <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
-                  <Image src={item.model} alt={item.name} width={80} height={80} className="w-full h-full object-cover" />
+                  <SafeImage src={item.model} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
                 </div>
                 <div className="flex-1">
                   <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[17px] mb-1">{item.name}</h4>
@@ -252,7 +253,7 @@ function AccordionGallery() {
               <div className={`overflow-hidden transition-all duration-500 ${openId === item.id ? "max-h-[300px] py-4" : "max-h-0"}`}>
                 <div className="px-4 sm:px-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
                   <div className="w-full sm:w-48 aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
-                    <Image src={item.img} alt={item.name} width={192} height={192} className="w-full h-full object-cover" />
+                    <SafeImage src={item.img} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                   <div className="flex-1 text-center sm:text-left">
                     <h5 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] mb-2">{item.name}</h5>
@@ -297,7 +298,7 @@ function DynamicContentUnderShop() {
           {DBC_MODEL_MOCKUPS.slice(0, 8).map((m, i) => (
             <div key={m.id} className="group cursor-pointer">
               <div className="aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5]">
-                <Image src={m.model} alt={m.name} width={80} height={80} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <SafeImage src={m.model} alt={m.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
               </div>
               <p className="text-[10px] font-bold text-[#333] dark:text-[#e0e0e0] text-center mt-1 truncate">{m.name}</p>
             </div>
@@ -395,7 +396,7 @@ function MerchCarousel() {
         {items.map((p, i) => (
           <Link key={`mc-${i}`} href={FAOTM_URL} className="flex-none cursor-pointer">
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
-              <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover" priority decoding="async" />
+               <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h3 className="font-heading font-bold text-[12px] tracking-[0.05em] uppercase text-white">{p.name}</h3>
@@ -437,7 +438,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
               transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
             }}>
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mb-3 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#DF3131]/20 transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-105">
-               <Image src={product.image} alt={product.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" />
+                <Image src={product.image} alt={product.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase .5 mb-2">{product.category}</p>
@@ -463,7 +464,7 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
           <div className={`bg-[#f5f5f5] aspect-square overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
-             <Image src={product.image} alt={product.name} fill className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} priority decoding="async" />
+               <Image src={product.image} alt={product.name} fill className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all mb-2">Quick View</span>
             </div>
@@ -557,7 +558,7 @@ export default function MerchPage() {
           <div className="flex whitespace-nowrap animate-marquee-right">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
               <div key={`gc1-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
-                <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+                <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               </div>
             ))}
           </div>
@@ -691,7 +692,7 @@ export default function MerchPage() {
           <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <Image src={selectedProduct.image} alt={selectedProduct.name} fill className="w-full h-full object-cover" priority decoding="async" />
+                <Image src={selectedProduct.image} alt={selectedProduct.name} fill className="w-full h-full object-cover" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
@@ -741,7 +742,7 @@ export default function MerchPage() {
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
                       <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
-                         <Image src={cp.image} alt={cp.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority decoding="async" />
+                         <Image src={cp.image} alt={cp.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
                       <p className="text-[12px] text-[#DF3131] font-bold">${cp.price.toFixed(2)}</p>
@@ -762,7 +763,7 @@ export default function MerchPage() {
       <div className="flex whitespace-nowrap animate-marquee-left">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
           <div key={`gc2-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
-            <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+            <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
           </div>
         ))}
       </div>
