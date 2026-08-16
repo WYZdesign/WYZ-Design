@@ -280,9 +280,12 @@ export default function CategoryPage() {
  const [slideshowIndex, setSlideshowIndex] = useState<number | null>(null);
  const [allImages, setAllImages] = useState<string[]>([]);
 
- const meta = CATEGORY_META[category] || { label: category, desc: "" };
- const albums = CATEGORY_ALBUMS[category] || [];
- const isGated = GATED_CATEGORIES.includes(category);
+  // Case-insensitive lookup: URL slugs are lowercase, keys are capitalized
+  const metaKey = Object.keys(CATEGORY_META).find(k => k.toLowerCase() === category.toLowerCase()) || category;
+  const meta = CATEGORY_META[metaKey] || { label: category, desc: "" };
+  const categoryKey = Object.keys(CATEGORY_ALBUMS).find(k => k.toLowerCase() === category.toLowerCase()) || category;
+  const albums = CATEGORY_ALBUMS[categoryKey] || [];
+  const isGated = GATED_CATEGORIES.some(g => g.toLowerCase() === category.toLowerCase());
  const { data: session, status } = useSession();
 
  useEffect(() => {
