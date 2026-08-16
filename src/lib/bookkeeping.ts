@@ -1,22 +1,30 @@
 import Database from "better-sqlite3";
 import { join } from "path";
 
-let _db: Database.Database | null = null;
+let _db: any = null;
+let _dbAvailable: boolean | null = null;
 
-function getDb(): Database.Database {
+function getDb(): any {
+  if (_dbAvailable === false) return null;
   if (_db) return _db;
-  const dbPath = join(process.cwd(), "data", "bookkeeping.db");
-  // Ensure data directory exists
-  const { mkdirSync, existsSync } = require("fs");
-  const dir = join(process.cwd(), "data");
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-  _db = new Database(dbPath);
-  _db.pragma("journal_mode = WAL");
-  initSchema(_db);
-  return _db;
+  try {
+    const Database = require("better-sqlite3");
+    const dbPath = join(process.cwd(), "data", "bookkeeping.db");
+    const { mkdirSync, existsSync } = require("fs");
+    const dir = join(process.cwd(), "data");
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    _db = new Database(dbPath);
+    _db.pragma("journal_mode = WAL");
+    initSchema(_db);
+    _dbAvailable = true;
+    return _db;
+  } catch {
+    _dbAvailable = false;
+    return null;
+  }
 }
 
-function initSchema(db: Database.Database) {
+function initSchema(db: any) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS clients (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -158,6 +166,7 @@ export function getTransactions(filters?: {
   offset?: number;
 }): Transaction[] {
   const db = getDb();
+  if (!db) return [];
   let where = "WHERE 1=1";
   const params: any[] = [];
 
@@ -186,6 +195,7 @@ export function getTransactions(filters?: {
 
 export function getTransactionById(id: number): Transaction | null {
   const db = getDb();
+  if (!db) return null;
   const row = db.prepare(`
     SELECT t.*, c.name as client_name, cat.name as category_name
     FROM transactions t
@@ -198,6 +208,7 @@ export function getTransactionById(id: number): Transaction | null {
 
 export function createTransaction(input: TransactionInput): Transaction {
   const db = getDb();
+  if (!db) throw new Error("Database unavailable");
   const result = db.prepare(`
     INSERT INTO transactions (date, type, amount, client_id, vendor, category_id, channel, description, business_personal, receipt_url)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -213,6 +224,7 @@ export function createTransaction(input: TransactionInput): Transaction {
 
 export function updateTransaction(id: number, input: Partial<TransactionInput>): Transaction | null {
   const db = getDb();
+  if (!db) return null;
   const existing = getTransactionById(id);
   if (!existing) return null;
 
@@ -241,6 +253,7 @@ export function updateTransaction(id: number, input: Partial<TransactionInput>):
 
 export function deleteTransaction(id: number): boolean {
   const db = getDb();
+  if (!db) return false;
   const result = db.prepare("DELETE FROM transactions WHERE id = ?").run(id);
   return result.changes > 0;
 }
@@ -256,11 +269,14 @@ export interface Client {
 }
 
 export function getClients(): Client[] {
-  return getDb().prepare("SELECT * FROM clients ORDER BY name").all() as Client[];
+  const db = getDb();
+  if (!db) return [];
+  return db.prepare("SELECT * FROM clients ORDER BY name").all() as Client[];
 }
 
 export function createClient(name: string, email = "", notes = ""): Client {
   const db = getDb();
+  if (!db) throw new Error("Database unavailable");
   const result = db.prepare("INSERT INTO clients (name, email, notes) VALUES (?, ?, ?)").run(name, email, notes);
   return db.prepare("SELECT * FROM clients WHERE id = ?").get(result.lastInsertRowid) as Client;
 }
@@ -276,6 +292,7 @@ export interface Category {
 
 export function getCategories(type?: string): Category[] {
   const db = getDb();
+  if (!db) return [];
   if (type) return db.prepare("SELECT * FROM categories WHERE type = ? ORDER BY name").all(type) as Category[];
   return db.prepare("SELECT * FROM categories ORDER BY type, name").all() as Category[];
 }
@@ -297,6 +314,7 @@ export interface FinancialSummary {
 
 export function getFinancialSummary(year: number): FinancialSummary {
   const db = getDb();
+  if (!db) return { year, total_income: 0, total_expenses: 0, net_profit: 0, income_by_client: [], expenses_by_category: [], income_by_channel: [], monthly_income: [], monthly_expenses: [], transaction_count: 0 };
   const from = `${year}-01-01`;
   const to = `${year}-12-31`;
 

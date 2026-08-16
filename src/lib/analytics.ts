@@ -1,20 +1,28 @@
-import Database from "better-sqlite3";
 import { join } from "path";
 import { mkdirSync, existsSync } from "fs";
 
-let _db: Database.Database | null = null;
+let _db: any = null;
+let _dbAvailable: boolean | null = null;
 
-export function getAnalyticsDb(): Database.Database {
+export function getAnalyticsDb(): any {
+  if (_dbAvailable === false) return null;
   if (_db) return _db;
-  const dir = join(process.cwd(), "data");
-  if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-  _db = new Database(join(dir, "analytics.db"));
-  _db.pragma("journal_mode = WAL");
-  initAnalyticsSchema(_db);
-  return _db;
+  try {
+    const Database = require("better-sqlite3");
+    const dir = join(process.cwd(), "data");
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    _db = new Database(join(dir, "analytics.db"));
+    _db.pragma("journal_mode = WAL");
+    initAnalyticsSchema(_db);
+    _dbAvailable = true;
+    return _db;
+  } catch {
+    _dbAvailable = false;
+    return null;
+  }
 }
 
-function initAnalyticsSchema(db: Database.Database) {
+function initAnalyticsSchema(db: any) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS pageviews (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -115,6 +123,7 @@ export interface PageviewInput {
 
 export function logPageview(input: PageviewInput): void {
   const db = getAnalyticsDb();
+  if (!db) return;
   db.prepare(`
     INSERT INTO pageviews (path, referrer, user_agent, ip_hash, country, city, device, browser, os, screen_width, utm_source, utm_medium, utm_campaign, session_id, duration_ms)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -136,6 +145,7 @@ export function getPageviews(filters?: {
   offset?: number;
 }): Pageview[] {
   const db = getAnalyticsDb();
+  if (!db) return [];
   let where = "WHERE 1=1";
   const params: any[] = [];
   if (filters?.path) { where += " AND path = ?"; params.push(filters.path); }
@@ -161,6 +171,7 @@ export interface AnalyticsEvent {
 
 export function logEvent(event_type: string, path: string, label = "", value = 0, metadata = "{}", session_id = ""): void {
   const db = getAnalyticsDb();
+  if (!db) return;
   db.prepare("INSERT INTO events (event_type, path, label, value, metadata, session_id) VALUES (?, ?, ?, ?, ?, ?)").run(event_type, path, label, value, metadata, session_id);
 }
 
@@ -185,6 +196,7 @@ export interface AnalyticsSummary {
 
 export function getAnalyticsSummary(days = 30): AnalyticsSummary {
   const db = getAnalyticsDb();
+  if (!db) return { period: `${days}d`, total_pageviews: 0, unique_visitors: 0, unique_pages: 0, avg_duration_ms: 0, top_pages: [], top_referrers: [], top_utm_sources: [], device_breakdown: [], browser_breakdown: [], os_breakdown: [], daily_views: [], bounce_rate: 0, pages_per_session: 0 };
   const from = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
 
   const totals = db.prepare(`
@@ -283,6 +295,7 @@ export interface SeoCheck {
 
 export function logSeoCheck(check: Omit<SeoCheck, "id" | "created_at">): void {
   const db = getAnalyticsDb();
+  if (!db) return;
   db.prepare(`
     INSERT INTO seo_checks (url, score, title_length, description_length, has_h1, has_canonical, has_og, has_schema, issues)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -291,6 +304,7 @@ export function logSeoCheck(check: Omit<SeoCheck, "id" | "created_at">): void {
 
 export function getSeoHistory(url?: string, limit = 50): SeoCheck[] {
   const db = getAnalyticsDb();
+  if (!db) return [];
   if (url) {
     return db.prepare("SELECT * FROM seo_checks WHERE url = ? ORDER BY created_at DESC LIMIT ?").all(url, limit) as SeoCheck[];
   }
@@ -299,6 +313,7 @@ export function getSeoHistory(url?: string, limit = 50): SeoCheck[] {
 
 export function getLatestSeoScores(): { url: string; score: number; last_check: string }[] {
   const db = getAnalyticsDb();
+  if (!db) return [];
   return db.prepare(`
     SELECT url, score, MAX(created_at) as last_check
     FROM seo_checks GROUP BY url ORDER BY last_check DESC
