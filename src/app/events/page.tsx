@@ -502,7 +502,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   return (
   <div className="relative overflow-hidden bg-[#0a0a0a]">
   <div className="absolute inset-0 z-0">
-  <div className="absolute top-0 left-0 w-full h-full bg-black/30" />
+  <div className="absolute top-0 left-0 w-full h-full bg-black/80" />
   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0000]/10 via-transparent to-[#DF3131]/8" />
   <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF0000]/5 rounded-full blur-[100px]" />
   <div className="absolute bottom-1/4 left-1/3 w-80 w-80 bg-[#DF3131]/5 rounded-full blur-[80px]" />
@@ -699,9 +699,9 @@ export default function EventsPage() {
  </div>
  </ScrollReveal>
 
-  {/* ═══ 4. Autoplay Video Playlist (DIY Shows only, color aura) ═══ */}
+  {/* ═══ 4. Autoplay Video Playlist (between recaps & clients) ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
-  <div className="mb-12 hidden md:block max-w-[130rem] mx-auto px-6 lg:px-12">
+  <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
   <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
   </div>
   </ScrollReveal>
@@ -713,13 +713,6 @@ export default function EventsPage() {
    <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">CLIENT EVENTS</h2>
   </div>
   <VideoCarousel items={shuffledClientEvents} onPlay={(v) => setModalVideo(v)} />
-  </div>
-  </ScrollReveal>
-
-  {/* ═══ 5b. Autoplay DIY Recap Video (between client events and YouTube) ═══ */}
-  <ScrollReveal animation="fadeUp" delay={0.1}>
-  <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
-  <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
   </div>
   </ScrollReveal>
 

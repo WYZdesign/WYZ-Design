@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
+import { FiUser, FiFileText, FiCamera, FiGift, FiCreditCard, FiStar, FiMessageCircle, FiMenu, FiLogOut, FiMail, FiCheck, FiChevronDown, FiChevronUp, FiAlertCircle } from "react-icons/fi";
 
 const ADMIN_STYLES = `
-.admin-scrollbar::-webkit-scrollbar { width: 8px; }
+.admin-scrollbar { scrollbar-width: thin; scrollbar-color: #3a3a3a #1a1a1a; }
+.admin-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
 .admin-scrollbar::-webkit-scrollbar-track { background: #1a1a1a; }
 .admin-scrollbar::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 4px; }
 .admin-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
+.admin-scrollbar::-webkit-scrollbar-corner { background: #1a1a1a; }
 `;
 
 interface Stats { totalForms: number; totalChats: number; chatSessions: number; totalUsers: number; adminCount: number; newsletterSubs: number; formTypes: Record<string,number>; submissionsByDay: [string,number][] }
@@ -45,20 +49,34 @@ const NAV_SECTIONS: { label: string; items: { id: string; icon: string; label: s
     { id: "health", icon: "\u25D2", label: "Health" },
     { id: "export", icon: "\u25D3", label: "Export" },
   ]},
+  { label: "PROFILE", items: [
+    { id: "profile", icon: "\u25CB", label: "Profile" },
+    { id: "bugs", icon: "\u25A0", label: "Bug Report" },
+  ]},
 ];
 
-type TabId = "overview" | "bookkeeping" | "income" | "expenses" | "reports" | "analytics" | "seo" | "traffic" | "forms" | "users" | "newsletter" | "chats" | "health" | "export";
+type TabId = "overview" | "bookkeeping" | "income" | "expenses" | "reports" | "analytics" | "seo" | "traffic" | "forms" | "users" | "newsletter" | "chats" | "health" | "export" | "profile" | "bugs";
 
 export default function AdminDashboard() {
   const sessionResult = useSession();
   const session = sessionResult?.data ?? null;
   const status = sessionResult?.status ?? "loading";
+  const update = sessionResult?.update;
   const [tab, setTab] = useState<TabId>("overview");
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const handler = () => setSidebarOpen(!mq.matches);
+    handler();
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const fetchTab = async () => {
+    if (tab === "profile" || tab === "bugs") { setLoading(false); return; }
     setLoading(true);
     try {
       const email = session?.user?.email ? `&email=${encodeURIComponent(session.user.email)}` : "";
@@ -82,14 +100,15 @@ export default function AdminDashboard() {
   useEffect(() => { if (status === "authenticated") fetchTab(); }, [status, tab]);
 
   if (status === "loading") return <PageLoader />;
-  if (!session) return <NeedSignIn />;
+  if (!session) return <AccountAuth />;
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex">
       <style>{ADMIN_STYLES}</style>
-      <aside className={`fixed inset-y-0 left-0 z-40 bg-[#111] border-r border-white/10 transition-all duration-300 ${sidebarOpen ? "w-72" : "w-16"} flex flex-col`}>
+      {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={() => setSidebarOpen(false)} />}
+      <aside className={`fixed inset-y-0 left-0 z-40 bg-[#111] border-r border-white/10 transition-all duration-300 flex flex-col w-72 -translate-x-full lg:translate-x-0 lg:w-16 ${sidebarOpen ? "translate-x-0 lg:w-72" : ""}`}>
         <div className="h-16 flex items-center px-4 border-b border-white/10">
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition-colors">
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition-colors" aria-label="Toggle sidebar">
             {sidebarOpen ? "\u25C1" : "\u25B7"}
           </button>
           {sidebarOpen && <span className="ml-3 text-[13px] font-heading font-bold tracking-[0.15em] uppercase">WYZ Admin</span>}
@@ -99,7 +118,7 @@ export default function AdminDashboard() {
             <div key={section.label} className="mb-4">
               {sidebarOpen && <p className="px-4 text-[9px] text-white/40 font-bold tracking-[0.2em] uppercase mb-2">{section.label}</p>}
               {section.items.map(item => (
-                <button key={item.id} onClick={() => setTab(item.id as TabId)}
+                <button key={item.id} onClick={() => { setTab(item.id as TabId); if (window.matchMedia("(max-width: 1023px)").matches) setSidebarOpen(false); }}
                   className={`w-full flex items-center gap-3 px-4 py-2.5 text-[13px] transition-all ${tab === item.id ? "text-[#DF3131] bg-[#DF3131]/10 border-r-2 border-[#DF3131]" : "text-white/60 hover:text-white/70 hover:bg-white/5"} ${!sidebarOpen ? "justify-center px-0" : ""}`}>
                   <span className="text-[14px] w-5 text-center">{item.icon}</span>
                   {sidebarOpen && <span className="font-heading font-bold tracking-[0.05em] uppercase text-[11px]">{item.label}</span>}
@@ -108,21 +127,35 @@ export default function AdminDashboard() {
             </div>
           ))}
         </nav>
-        {sidebarOpen && <div className="p-4 border-t border-white/10"><p className="text-[10px] text-white/50 truncate">{session.user?.email}</p></div>}
+        {sidebarOpen && (
+          <div className="p-4 border-t border-white/10 space-y-3">
+            <p className="text-[10px] text-white/50 truncate">{session.user?.email}</p>
+            <button onClick={() => signOut({ callbackUrl: "/" })} className="flex items-center gap-2 text-[11px] text-white/50 hover:text-white transition-colors font-heading font-bold tracking-[0.05em] uppercase">
+              <FiLogOut className="w-3.5 h-3.5" /> Sign Out
+            </button>
+          </div>
+        )}
       </aside>
 
-      <main className={`flex-1 transition-all duration-300 admin-scrollbar ${sidebarOpen ? "ml-72" : "ml-16"}`}>
-        <header className="h-16 flex items-center justify-between px-8 border-b border-white/10 bg-[#0a0a0a] sticky top-0 z-30">
-          <h1 className="text-[15px] font-heading font-bold tracking-[0.12em] uppercase text-white/60">
-            {NAV_SECTIONS.flatMap(s => s.items).find(i => i.id === tab)?.label || tab}
-          </h1>
+      <main className={`flex-1 transition-all duration-300 admin-scrollbar lg:ml-16 ${sidebarOpen ? "lg:ml-72" : ""}`}>
+        <header className="h-16 flex items-center justify-between px-4 sm:px-8 border-b border-white/10 bg-[#0a0a0a] sticky top-0 z-30">
+          <div className="flex items-center gap-3">
+            <button className="lg:hidden w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
+              <FiMenu className="w-5 h-5" />
+            </button>
+            <h1 className="text-[15px] font-heading font-bold tracking-[0.12em] uppercase text-white/60">
+              {NAV_SECTIONS.flatMap(s => s.items).find(i => i.id === tab)?.label || tab}
+            </h1>
+          </div>
           <div className="flex items-center gap-4">
             <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30">ADMIN</span>
             <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors">\u2190 Site</Link>
           </div>
         </header>
-        <div className="p-8">
-          {loading ? <Loader /> : data?.forbidden ? <NotAuthorized /> : (
+        <div className="p-4 sm:p-8">
+          {tab === "profile" ? <ProfileTab session={session} update={update} signOut={signOut} /> :
+           tab === "bugs" ? <BugReportTab session={session} /> :
+           loading ? <Loader /> : data?.forbidden ? <NotAuthorized /> : (
             <>
               {tab === "overview" && <OverviewTab data={data} />}
               {tab === "bookkeeping" && <BookkeepingDashboard data={data} onRefresh={fetchTab} />}
@@ -177,8 +210,287 @@ function PageLoader() {
   return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center"><div className="w-8 h-8 border-2 border-white/20 border-t-[#DF3131] rounded-full animate-spin" /></div>;
 }
 
-function NeedSignIn() {
-  return <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-center px-6"><div><h1 className="text-[28px] font-heading font-bold text-white mb-3">Admin Access</h1><p className="text-white/60 text-[14px] mb-6">Sign in with your admin account.</p><Link href="/api/auth/signin" className="inline-block px-8 py-3 bg-[#DF3131] text-white text-[13px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#c12a2a] transition-colors">Sign In</Link></div></div>;
+function AccountAuth() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSignIn(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || !password) { setError("Enter your email and admin key."); return; }
+    setLoading(true);
+    setError("");
+    try {
+      const result = await signIn("credentials", { email, password, redirect: false });
+      if (result?.error) setError("Invalid email or admin key.");
+    } catch { setError("Network error. Try again."); }
+    setLoading(false);
+  }
+
+  return (
+    <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 py-12">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-[28px] font-heading font-bold text-white">Admin Access</h1>
+          <p className="text-white/60 text-[14px] mt-2">Sign in to manage your WYZ Design account.</p>
+        </div>
+
+        <button onClick={() => signIn("google", { callbackUrl: "/admin" })}
+          className="w-full flex items-center justify-center gap-3 bg-white text-[#333] py-3 font-bold text-sm hover:bg-gray-200 transition-colors">
+          <svg className="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          Continue with Google
+        </button>
+
+        <div className="flex items-center gap-4 my-6">
+          <div className="flex-1 h-px bg-white/10" />
+          <span className="text-[12px] text-white/40 uppercase tracking-wider">or admin sign in</span>
+          <div className="flex-1 h-px bg-white/10" />
+        </div>
+
+        <form onSubmit={handleSignIn} className="space-y-4">
+          <div>
+            <label className="block text-[11px] font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-1">Email</label>
+            <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@wyzdesign.com"
+              className="w-full bg-white/5 border border-white/10 text-white text-[14px] px-4 py-3 focus:outline-none focus:border-[#DF3131]/50 transition-colors placeholder:text-white/30" />
+          </div>
+          <div>
+            <label className="block text-[11px] font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-1">Admin Key</label>
+            <input type="password" required value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••"
+              className="w-full bg-white/5 border border-white/10 text-white text-[14px] px-4 py-3 focus:outline-none focus:border-[#DF3131]/50 transition-colors placeholder:text-white/30" />
+          </div>
+          {error && <p className="flex items-center gap-2 text-[#DF3131] text-sm justify-center"><FiAlertCircle className="w-4 h-4 shrink-0" />{error}</p>}
+          <button type="submit" disabled={loading} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#c12a2a] transition-colors disabled:opacity-50">
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
+
+        <p className="text-center text-[12px] text-white/40 mt-8">
+          <Link href="/home" className="hover:text-white transition-colors">&larr; Back to site</Link>
+        </p>
+      </div>
+    </main>
+  );
+}
+
+function ProfileTab({ session, update, signOut }: { session: any; update: any; signOut: any }) {
+  const [editMode, setEditMode] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [profile, setProfile] = useState({
+    name: session?.user?.name || "",
+    bio: "", phone: "", website: "", instagram: "", facebook: "", avatarUrl: session?.user?.image || "",
+  });
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/profile").then(r => r.json()).then(data => {
+      if (data.user) setProfile(prev => ({
+        ...prev,
+        name: data.user.name || prev.name,
+        bio: data.user.bio || "", phone: data.user.phone || "",
+        website: data.user.website || "", instagram: data.user.instagram || "",
+        facebook: data.user.facebook || "", avatarUrl: data.user.avatarUrl || prev.avatarUrl,
+      }));
+    }).catch(() => {});
+  }, []);
+
+  async function saveProfile() {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/profile", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(profile) });
+      if (res.ok) { setSaved(true); setEditMode(false); await update(); setTimeout(() => setSaved(false), 3000); }
+    } catch (e) { console.warn("[admin-profile] Save profile failed", e); }
+    setSaving(false);
+  }
+
+  const inputClass = "w-full bg-white/5 border border-white/10 text-white text-[13px] px-4 py-2.5 focus:outline-none focus:border-[#DF3131]/50 transition-colors placeholder:text-white/40";
+
+  return (
+    <div className="max-w-2xl">
+      <div className="bg-white/5 border border-white/10 p-6 mb-6">
+        <div className="flex items-start gap-5 mb-6">
+          <div className="w-16 h-16 rounded-full overflow-hidden bg-[#DF3131] flex-shrink-0 flex items-center justify-center">
+            {session?.user?.image ? (
+              <Image src={session.user.image} alt={`${session?.user?.name || "Member"} profile photo`} width={64} height={64} className="w-full h-full object-cover" priority />
+            ) : (
+              <FiUser className="w-7 h-7 text-white" />
+            )}
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-heading font-bold text-white text-lg truncate">{session?.user?.name || "Member"}</p>
+            <p className="text-white/50 text-sm truncate flex items-center gap-1.5"><FiMail className="w-3.5 h-3.5 shrink-0" />{session?.user?.email}</p>
+            <p className="text-[12px] text-white/40 mt-1">Signed in via {session?.user?.provider || "email"}</p>
+          </div>
+          <button onClick={() => setEditMode(!editMode)} className="text-sm text-[#DF3131] hover:underline font-bold uppercase tracking-wider whitespace-nowrap">
+            {editMode ? "Cancel" : "Edit"}
+          </button>
+        </div>
+
+        {saved && <p className="text-[#34A853] text-sm mb-4 text-center font-bold">Profile saved!</p>}
+
+        {editMode ? (
+          <div className="space-y-4">
+            <ProfileField label="Display Name" value={profile.name} onChange={v => setProfile(p => ({ ...p, name: v }))} inputClass={inputClass} />
+            <ProfileField label="Bio" value={profile.bio} onChange={v => setProfile(p => ({ ...p, bio: v }))} textarea inputClass={inputClass} />
+            <ProfileField label="Phone" value={profile.phone} onChange={v => setProfile(p => ({ ...p, phone: v }))} inputClass={inputClass} />
+            <ProfileField label="Website" value={profile.website} onChange={v => setProfile(p => ({ ...p, website: v }))} placeholder="https://" inputClass={inputClass} />
+            <ProfileField label="Instagram" value={profile.instagram} onChange={v => setProfile(p => ({ ...p, instagram: v }))} placeholder="@username" inputClass={inputClass} />
+            <ProfileField label="Facebook" value={profile.facebook} onChange={v => setProfile(p => ({ ...p, facebook: v }))} placeholder="Profile URL" inputClass={inputClass} />
+            <ProfileField label="Avatar URL" value={profile.avatarUrl} onChange={v => setProfile(p => ({ ...p, avatarUrl: v }))} placeholder="https://..." inputClass={inputClass} />
+            <button onClick={saveProfile} disabled={saving} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#c12a2a] transition-colors disabled:opacity-50">
+              {saving ? "Saving..." : "Save Profile"}
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {profile.bio && <ProfileInfoRow label="Bio" value={profile.bio} />}
+            {profile.phone && <ProfileInfoRow label="Phone" value={profile.phone} />}
+            {profile.website && <ProfileInfoRow label="Website" value={profile.website} link />}
+            {profile.instagram && <ProfileInfoRow label="Instagram" value={profile.instagram} />}
+            {profile.facebook && <ProfileInfoRow label="Facebook" value={profile.facebook} link />}
+            {!profile.bio && !profile.phone && !profile.website && !profile.instagram && !profile.facebook && (
+              <p className="text-white/40 text-sm text-center py-4">No profile info yet. Click Edit to get started.</p>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div className="bg-white/5 border border-white/10 p-6 mb-6">
+        <h3 className="text-[12px] font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-4">Account Actions</h3>
+        <div className="grid grid-cols-2 gap-3">
+          <ProfileActionLink href="/plans" label="View Plans" icon={<FiFileText className="w-4 h-4" />} />
+          <ProfileActionLink href="/booking-calendar/photoshoot" label="Book a Shoot" icon={<FiCamera className="w-4 h-4" />} />
+          <ProfileActionLink href="/gift-card" label="Gift Cards" icon={<FiGift className="w-4 h-4" />} />
+          <ProfileActionLink href={process.env.NEXT_PUBLIC_STRIPE_PORTAL_URL || "/plans"} label="Billing Portal" icon={<FiCreditCard className="w-4 h-4" />} external />
+          <ProfileActionLink href="/loyalty" label="Loyalty Rewards" icon={<FiStar className="w-4 h-4" />} />
+          <ProfileActionLink href="/community" label="Community" icon={<FiMessageCircle className="w-4 h-4" />} />
+          <ProfileActionLink href="/model-archive" label="Model Archive" icon={<FiUser className="w-4 h-4" />} />
+        </div>
+      </div>
+
+      <button onClick={() => signOut({ callbackUrl: "/" })} className="w-full py-3 border border-white/20 text-white/70 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-white hover:text-[#111] transition-all flex items-center justify-center gap-2">
+        <FiLogOut className="w-4 h-4" /> Sign Out
+      </button>
+    </div>
+  );
+}
+
+function ProfileField({ label, value, onChange, textarea, placeholder, inputClass }: { label: string; value: string; onChange: (v: string) => void; textarea?: boolean; placeholder?: string; inputClass: string }) {
+  return (
+    <div>
+      <label className="block text-[11px] font-heading font-bold tracking-[0.08em] uppercase text-white/60 mb-1">{label}</label>
+      {textarea ? (
+        <textarea value={value} onChange={e => onChange(e.target.value)} rows={3} placeholder={placeholder} className={`${inputClass} resize-none`} />
+      ) : (
+        <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} className={inputClass} />
+      )}
+    </div>
+  );
+}
+
+function ProfileInfoRow({ label, value, link }: { label: string; value: string; link?: boolean }) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="text-[11px] font-heading font-bold tracking-[0.08em] uppercase text-white/40 w-20 flex-shrink-0 pt-0.5">{label}</span>
+      {link ? (
+        <a href={value} target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#DF3131] hover:underline break-all">{value}</a>
+      ) : (
+        <span className="text-[13px] text-white/80 break-all">{value}</span>
+      )}
+    </div>
+  );
+}
+
+function ProfileActionLink({ href, label, icon, external }: { href: string; label: string; icon: React.ReactNode; external?: boolean }) {
+  const Comp = external ? "a" : Link;
+  return (
+    <Comp href={href} target={external ? "_blank" : undefined} rel={external ? "noopener noreferrer" : undefined}
+      className="flex items-center gap-2 px-3 py-2.5 border border-white/10 text-[13px] font-bold tracking-[0.05em] text-white/70 hover:border-[#DF3131]/50 hover:text-[#DF3131] transition-all">
+      <span>{icon}</span> {label}
+    </Comp>
+  );
+}
+
+function BugReportTab({ session }: { session: any }) {
+  const [open, setOpen] = useState(true);
+  const [bugCat, setBugCat] = useState("");
+  const [bugChecks, setBugChecks] = useState<string[]>([]);
+  const [bugDesc, setBugDesc] = useState("");
+  const [bugSent, setBugSent] = useState(false);
+
+  const bugCategories = ["Visual / Styling", "Performance / Loading", "Broken Link / 404", "Form / Input Issue", "Mobile / Responsive", "Dark Mode", "Feature Request", "Other"];
+  const bugCheckboxes: Record<string, string[]> = {
+    "Visual / Styling": ["Text color", "Background", "Image", "Spacing / Layout", "Animation", "Typography"],
+    "Performance / Loading": ["Slow page load", "Image not loading", "Video issue", "Hangs / freezes"],
+    "Broken Link / 404": ["Nav link", "Footer link", "Button link", "Image link"],
+    "Form / Input Issue": ["Not submitting", "Validation wrong", "Missing field"],
+    "Mobile / Responsive": ["Too small", "Overflow / scroll", "Touch target", "Menu broken"],
+    "Dark Mode": ["Colors wrong", "Toggle broken", "Text invisible"],
+    "Feature Request": ["New feature", "Improvement", "Integration"],
+    "Other": [],
+  };
+
+  const submit = async () => {
+    if (!bugCat && !bugDesc) return;
+    try { await fetch("/api/bugs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category: bugCat, issues: bugChecks, description: bugDesc, email: session?.user?.email, page: typeof window !== "undefined" ? window.location.href : "" }) }); } catch (e) { console.warn("[admin-bugs] Submit failed", e); }
+    setBugSent(true);
+  };
+
+  const selectClass = "w-full bg-white/5 border border-white/10 text-white text-[13px] px-4 py-2.5 focus:outline-none focus:border-[#DF3131]/50 transition-colors";
+  const inputClass = "w-full bg-white/5 border border-white/10 text-white text-[13px] px-4 py-2.5 focus:outline-none focus:border-[#DF3131]/50 transition-colors placeholder:text-white/40";
+
+  return (
+    <div className="max-w-2xl">
+      <div className="bg-white/5 border border-white/10 p-6">
+        <button onClick={() => setOpen(!open)} className="flex items-center justify-between w-full">
+          <h3 className="flex items-center gap-2 text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/80"><FiAlertCircle className="w-4 h-4 text-[#DF3131]" /> Report a Bug / Issue</h3>
+          {open ? <FiChevronUp className="w-5 h-5 text-white/50" /> : <FiChevronDown className="w-5 h-5 text-white/50" />}
+        </button>
+        {open && (
+          <div className="mt-5 space-y-4">
+            {bugSent ? (
+              <div className="text-center py-6">
+                <div className="w-12 h-12 rounded-full bg-[#34A853]/20 text-[#34A853] flex items-center justify-center mx-auto mb-3"><FiCheck className="w-6 h-6" /></div>
+                <p className="text-white font-heading font-bold text-lg mb-1">Submitted!</p>
+                <p className="text-white/50 text-sm">Thanks, we&apos;ll review it and fix the issue.</p>
+                <button onClick={() => { setBugSent(false); setBugCat(""); setBugChecks([]); setBugDesc(""); }} className="mt-4 text-[13px] text-[#DF3131] font-bold underline">Report another</button>
+              </div>
+            ) : (
+              <>
+                <div>
+                  <label className="block text-[11px] font-heading font-bold tracking-[0.08em] uppercase text-white/60 mb-2">Category</label>
+                  <select value={bugCat} onChange={e => { setBugCat(e.target.value); setBugChecks([]); }} className={selectClass}>
+                    <option value="">- Select category -</option>
+                    {bugCategories.map(c => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
+                {bugCat && (bugCheckboxes[bugCat]?.length || 0) > 0 && (
+                  <div>
+                    <label className="block text-[11px] font-heading font-bold tracking-[0.08em] uppercase text-white/60 mb-2">Specific Issue</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {(bugCheckboxes[bugCat] || []).map(opt => (
+                        <label key={opt} className="flex items-center gap-2 text-[13px] text-white/80 cursor-pointer">
+                          <input type="checkbox" checked={bugChecks.includes(opt)} onChange={() => setBugChecks(prev => prev.includes(opt) ? prev.filter(x => x !== opt) : [...prev, opt])} className="accent-[#DF3131]" />
+                          {opt}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                <div>
+                  <label className="block text-[11px] font-heading font-bold tracking-[0.08em] uppercase text-white/60 mb-2">Describe the issue <span className="text-white/40 font-normal">({bugDesc.length}/1250)</span></label>
+                  <textarea value={bugDesc} onChange={e => { if (e.target.value.length <= 1250) setBugDesc(e.target.value); }} rows={5} placeholder="What happened? What did you expect to happen? Which page were you on?" className={`${inputClass} resize-none`} />
+                </div>
+                <button onClick={submit} disabled={!bugDesc.trim()} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#c12a2a] transition-colors disabled:opacity-40">
+                  Submit Report
+                </button>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 function NotAuthorized() {

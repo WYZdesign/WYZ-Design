@@ -113,7 +113,7 @@ export default function Footer() {
       <div className={footerBg}>
         {videoBg}
         <div className="relative max-w-[115rem] mx-auto px-6 lg:px-12 py-14">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 lg:gap-10">
             {/* Brand */}
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-2 mb-4">
@@ -139,6 +139,7 @@ export default function Footer() {
             </div>
 
             {/* Sitemap columns */}
+            <div className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-6">
             {Object.entries(SITEMAP).map(([title, links]) => (
               <div key={title} className="text-center">
                 <h4 className={`font-heading font-bold ${headingColor} text-[13px] tracking-[0.15em] uppercase mb-4`}>{title}</h4>
@@ -149,7 +150,7 @@ export default function Footer() {
                 </div>
               </div>
             ))}
-
+            </div>
           </div>
 
           <div className={`mt-12 pt-6 ${borderColor} flex flex-col sm:flex-row items-center justify-between gap-3`}>
@@ -158,6 +159,9 @@ export default function Footer() {
               <p className={`text-[13px] ${precisionColor}`}>Designed & built with precision.</p>
               <Image src="/images/wix-extracted/common/logo/common_logo_00_98442d_d7e48f1e01ab4d7b87f7e4f779f4dfd9.png.png" alt="Wix Editor X Partner" width={80} height={80} className="opacity-60 hover:opacity-100 transition-opacity w-8 h-8 object-contain" priority />
             </div>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <Image src="/wyz-crown-square.png" alt="WYZ Design" width={16} height={16} className="w-4 h-4 object-contain opacity-50" loading="lazy" />
           </div>
         </div>
       </div>
