@@ -204,7 +204,7 @@ return (
               <Link href="/booking" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg hover:shadow-[#DF3131]/30">
                 GET A QUOTE <FiArrowRight className="w-4 h-4" />
               </Link>
-              <a href="#portfolio" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-black text-black font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] hover:bg-black hover:text-white transition-all">
+              <a href="#portfolio" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-black text-white bg-black font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] hover:bg-[#DF3131] hover:text-white transition-all">
                 VIEW WORK
               </a>
             </div>

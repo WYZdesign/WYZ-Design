@@ -464,7 +464,7 @@ return (
      <p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-2">
       Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
       </p>
-      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-black text-black text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all">
+      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-black text-white bg-black text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all">
        BOOK A SHOOT
        </Link>
    </div>
