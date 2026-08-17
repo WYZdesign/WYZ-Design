@@ -201,6 +201,7 @@ const DBC_MODEL_MOCKUPS = [
 
 function AccordionGallery() {
   const [openId, setOpenId] = useState<number | null>(null);
+  const [showContent, setShowContent] = useState(false);
   useEffect(() => {
     if (openId === null) {
       const timer = setTimeout(() => setOpenId(0), 200);
@@ -213,6 +214,11 @@ function AccordionGallery() {
       const next = (openId + 1) % DBC_MODEL_MOCKUPS.length;
       setOpenId(next);
     }, 5000);
+    return () => clearTimeout(timer);
+  }, [openId]);
+  useEffect(() => {
+    if (openId === null) return;
+    const timer = setTimeout(() => setShowContent(true), 200);
     return () => clearTimeout(timer);
   }, [openId]);
   return (
@@ -229,6 +235,19 @@ function AccordionGallery() {
           <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] block mb-2">DBC CREW MODEL MOCKUPS</span>
           <h3 className="text-[1.3rem] sm:text-[1.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.05em]">Worn By The Crew</h3>
         </div>
+        {!showContent ? (
+          <div className="animate-pulse space-y-2">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center gap-4 p-4 sm:p-6 bg-[#f5f5f5] border-b border-[#E2E2E2]">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-[#ddd]" />
+                <div className="flex-1 space-y-2">
+                  <div className="h-4 w-3/4 bg-[#ddd] rounded" />
+                  <div className="h-3 w-1/4 bg-[#ddd] rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
         <div className="border border-[#E2E2E2] dark:border-[#444] rounded-xl overflow-hidden">
           {DBC_MODEL_MOCKUPS.map((item) => (
             <div key={item.id} className="border-b border-[#E2E2E2] dark:border-[#444] last:border-b-0">
@@ -267,6 +286,7 @@ function AccordionGallery() {
             </div>
           ))}
         </div>
+        )}
         <div className="mt-8 text-center">
           <Link href={FAOTM_URL} className="inline-block px-8 py-3 bg-white text-[#111] border-2 border-[#111] font-heading font-bold tracking-[0.15em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
             VIEW FULL COLLECTION
@@ -498,26 +518,49 @@ export default function MerchPage() {
   const [showStore, setShowStore] = useState(false);
   const [portalAnimating, setPortalAnimating] = useState(false);
 
+  const [catalogStatus, setCatalogStatus] = useState<"idle" | "loading" | "loaded" | "error">("idle");
+
   useEffect(() => {
-    fetch("/api/printful-catalog")
-      .then((r) => r.json())
-      .then((data) => {
-        if (!data.products?.length) return;
-        const printfulProducts: Product[] = data.products.map((p: Record<string, unknown>) => ({
-          id: p.id as number,
-          name: p.title as string,
-          category: (p.category as string) || "Apparel",
-          price: (p.price as number) || 0,
-          description: `Custom ${p.title}, Dying Breed Crew x WYZ Design`,
-          colors: ["#333333", "#DF3131", "#FFFFFF"],
-          image: (p.image as string) || "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg",
-          rating: 4.7,
-          reviews: Math.floor(Math.random() * 150) + 20,
-          trending: Math.floor(Math.random() * 40) + 60,
-        }));
-        setProducts(printfulProducts);
-      })
-      .catch(() => {});
+    setCatalogStatus("loading");
+    let attempts = 0;
+    const maxAttempts = 3;
+    const delay = 1000;
+    const controller = new AbortController();
+
+    const fetchCatalog = () => {
+      fetch("/api/printful-catalog", { signal: controller.signal })
+        .then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
+        .then((data) => {
+          if (!data.products?.length) return;
+          const printfulProducts: Product[] = data.products.map((p: Record<string, unknown>) => ({
+            id: p.id as number,
+            name: p.title as string,
+            category: (p.category as string) || "Apparel",
+            price: (p.price as number) || 0,
+            description: `Custom ${p.title}, Dying Breed Crew x WYZ Design`,
+            colors: ["#333333", "#DF3131", "#FFFFFF"],
+            image: (p.image as string) || "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg",
+            rating: 4.7,
+            reviews: Math.floor(Math.random() * 150) + 20,
+            trending: Math.floor(Math.random() * 40) + 60,
+          }));
+          setProducts(printfulProducts);
+          setCatalogStatus("loaded");
+        })
+        .catch(() => {
+          attempts++;
+          if (attempts < maxAttempts && !controller.signal.aborted) {
+            setTimeout(fetchCatalog, delay * attempts);
+          } else {
+            setCatalogStatus("error");
+          }
+        });
+    };
+    fetchCatalog();
+    return () => controller.abort();
   }, []);
 
   const filtered = useMemo(() => {
