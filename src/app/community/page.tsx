@@ -653,7 +653,7 @@ export default function ForumPage() {
     activeCat === "all" ? sortedThreads : sortedThreads.filter((t) => t.category === activeCat);
 
   return (
-    <main className="pt-12 pb-20 bg-white dark:bg-[#232326] min-h-screen">
+    <main className="pb-20 bg-white dark:bg-[#232326] min-h-screen">
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6">
           <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>COMMUNITY</h1>

@@ -13,7 +13,7 @@ const CONTACT_FIELDS = [
 
 export default function ContactPage() {
   return (
-    <main className="pt-12 pb-10 sm:pb-16 lg:pb-20 bg-white dark:bg-[#232326] min-h-screen">
+    <main className="pb-10 sm:pb-16 lg:pb-20 bg-white dark:bg-[#232326] min-h-screen">
       <ScrollReveal animation="fadeUp">
         <div className="relative max-w-2xl mx-auto px-6">
           <ParticleBackground count={15} color="#DF3131" maxSize={2} speed={0.2} className="z-0 opacity-40" />

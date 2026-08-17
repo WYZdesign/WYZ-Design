@@ -349,7 +349,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; color: #333333; }
 
 /* ── Nav/Footer Red Gradient (mobile fallback for heavy bg video) ── */
 .wyz-red-gradient {
-  background: linear-gradient(135deg, #C90000 0%, #E63C3C 38%, #F47474 72%, #FFB3B3 100%);
+  background: linear-gradient(135deg, #C90000 0%, #E63C3C 38%, #DF3131 100%);
 }
 
 /* ── Custom Cursor (desktop only) ── */

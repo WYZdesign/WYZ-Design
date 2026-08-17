@@ -35,7 +35,7 @@ export default function LoyaltyPage() {
   const pointsNeeded = tierIndex === 0 ? 1000 - (data?.points || 0) : tierIndex === 1 ? 5000 - (data?.points || 0) : 0;
 
   return (
-  <main className="pb-16 bg-white dark:bg-[#232326] pt-20 lg:pt-24">
+  <main className="pb-16 bg-white dark:bg-[#232326]">
     <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-4">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">L O Y A L T Y</h1>
