@@ -1068,8 +1068,8 @@ p[class*="tracking-"][class*="uppercase"] {
    and the button row on mobile.
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
-  [class*="flex"][class*="justify-center"]:has(a[class*="tracking-"]),
-  [class*="flex"][class*="justify-center"]:has(button[class*="tracking-"]) {
+  [class*="flex"][class*="justify-center"]:not(.hero-banner):has(a[class*="tracking-"]),
+  [class*="flex"][class*="justify-center"]:not(.hero-banner):has(button[class*="tracking-"]) {
     margin-top: 1.5rem !important;
   }
 }
