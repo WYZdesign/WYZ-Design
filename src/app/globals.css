@@ -772,10 +772,14 @@ a[href*="register"] {
   max-width: 100vw !important;
   margin-left: calc(-50vw + 50%) !important;
   margin-right: calc(-50vw + 50%) !important;
+  margin-top: -5rem !important;
   position: relative;
   left: 50%;
   right: 50%;
   transform: translateX(-50%);
+}
+@media (min-width: 1024px) {
+  .hero-banner { margin-top: -6rem !important; }
 }
 
 @media (max-width: 768px) {

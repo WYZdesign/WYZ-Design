@@ -41,7 +41,7 @@ export default function AboutPage() {
     <main className="pt-0">
       {/* HERO */}
       <ScrollReveal animation="fadeUp">
-        <section className="relative py-24 sm:py-32 lg:py-40 bg-[#111] overflow-hidden">
+        <section className="relative min-h-[75vh] py-24 sm:py-32 lg:py-40 bg-[#111] overflow-hidden hero-banner">
           <div className="absolute inset-0">
             <video autoPlay muted loop playsInline preload="metadata"
               className="w-full h-full object-cover opacity-25">

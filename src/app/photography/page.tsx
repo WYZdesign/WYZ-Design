@@ -442,7 +442,7 @@ return (
   `}</style>
 
  {/* HERO */}
-   <section ref={heroRef} className="relative min-h-[50vh] sm:min-h-[55vh] lg:min-h-[60vh] lg:max-h-[500px] overflow-hidden hero-banner">
+    <section ref={heroRef} className="relative min-h-[75vh] overflow-hidden hero-banner">
    {/* Desktop split: video left, text right */}
    <div className="hidden md:grid md:grid-cols-2 md:h-full">
    <div className="relative h-full">

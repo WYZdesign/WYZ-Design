@@ -137,22 +137,22 @@ export default function AdminDashboard() {
         )}
       </aside>
 
-      <main className={`flex-1 transition-all duration-300 admin-scrollbar lg:ml-16 ${sidebarOpen ? "lg:ml-72" : ""}`}>
-        <header className="h-16 flex items-center justify-between px-4 sm:px-8 border-b border-white/10 bg-[#0a0a0a] sticky top-0 z-30">
-          <div className="flex items-center gap-3">
-            <button className="lg:hidden w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
+      <main className={`flex-1 min-w-0 max-w-full overflow-x-hidden transition-all duration-300 admin-scrollbar lg:ml-16 ${sidebarOpen ? "lg:ml-72" : ""}`}>
+        <header className="h-16 flex items-center justify-between gap-3 px-4 sm:px-8 border-b border-white/10 bg-[#0a0a0a] sticky top-0 z-30">
+          <div className="flex items-center gap-3 min-w-0 flex-1">
+            <button className="lg:hidden w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors shrink-0" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
               <FiMenu className="w-5 h-5" />
             </button>
-            <h1 className="text-[15px] font-heading font-bold tracking-[0.12em] uppercase text-white/60">
+            <h1 className="text-[15px] font-heading font-bold tracking-[0.12em] uppercase text-white/60 truncate">
               {NAV_SECTIONS.flatMap(s => s.items).find(i => i.id === tab)?.label || tab}
             </h1>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30">ADMIN</span>
-            <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors">\u2190 Site</Link>
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30 whitespace-nowrap">ADMIN</span>
+            <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors whitespace-nowrap">\u2190 Site</Link>
           </div>
         </header>
-        <div className="p-4 sm:p-8">
+        <div className="p-4 sm:p-8 max-w-full">
           {tab === "profile" ? <ProfileTab session={session} update={update} signOut={signOut} /> :
            tab === "bugs" ? <BugReportTab session={session} /> :
            loading ? <Loader /> : data?.forbidden ? <NotAuthorized /> : (

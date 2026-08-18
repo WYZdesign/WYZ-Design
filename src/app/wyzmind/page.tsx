@@ -139,7 +139,7 @@ export default function WYZMiNDPage() {
     <main className="bg-white dark:bg-[#232326] min-h-screen text-[#333] dark:text-[#e0e0e0] pb-20">
       <ScrollReveal animation="fadeUp">
 {/* Hero */}
-          <section className="relative py-24 px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
+          <section className="relative min-h-[75vh] py-24 px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
     <div className="absolute inset-0 hero-grad-wyzmind z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     {/* Neural network canvas background */}

@@ -630,7 +630,7 @@ export default function EventsPage() {
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
   <div className="relative overflow-hidden mx-0 hero-banner">
-  <div className="grid grid-cols-1 lg:grid-cols-2 h-auto lg:h-[60vh] max-h-[600px]">
+  <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[75vh]">
   <div className="relative overflow-hidden bg-white dark:bg-[#111]">
   <Image src="/images/events/hero_bg.jpg" alt="Events" fill className="w-full h-full object-cover opacity-80" priority />
   <div className="absolute inset-0 bg-black/30" />
