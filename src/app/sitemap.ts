@@ -27,6 +27,8 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/case-studies", priority: 0.6, changeFrequency: "monthly" },
   { path: "/case-studies/artfinix", priority: 0.5, changeFrequency: "yearly" },
   { path: "/case-studies/kid-bode", priority: 0.5, changeFrequency: "yearly" },
+  { path: "/case-studies/dawneeahs-glow", priority: 0.5, changeFrequency: "yearly" },
+  { path: "/case-studies/gft-foods", priority: 0.5, changeFrequency: "yearly" },
   { path: "/featured-artist", priority: 0.7, changeFrequency: "weekly" },
   { path: "/gallery", priority: 0.6, changeFrequency: "weekly" },
   { path: "/community", priority: 0.5, changeFrequency: "weekly" },

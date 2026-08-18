@@ -165,10 +165,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description: "Creative direction and production agency. Photography, graphic design, web design, videography, branding, and printing. Los Angeles + Chicago.",
               sameAs: [
                 "https://instagram.com/wyzdesign",
+                "https://twitter.com/WYZdesign",
                 "https://facebook.com/wyzdesign",
                 "https://tiktok.com/@wyzdesign",
                 "https://youtube.com/channel/UCfd75GcUKsGqWo-sgSQjZBg",
-                "https://linkedin.com/in/torre-harris",
+                "https://www.linkedin.com/in/torre%C3%A9-harris-11180b89",
               ],
               address: {
                 "@type": "PostalAddress",
@@ -184,6 +185,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               },
               areaServed: ["Los Angeles", "Chicago", "United States"],
               knowsAbout: ["Photography", "Graphic Design", "Web Design", "Videography", "Branding", "Printing", "Event Production"],
+              founder: { "@id": "https://www.wyzdesign.com/#torree-marcel" },
+              alternateName: ["WYZ", "WYZ Design LLC", "Wild Yet Zealous"],
+              naics: "541430",
+              slogan: "Wild vision. Zealous execution.",
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "@id": "https://www.wyzdesign.com/#torree-marcel",
+              name: "Torreé Marcel",
+              alternateName: ["Torre Harris", "Torree Marcel", "Torree Harris", "Torreé Harris", "Torre Marcel"],
+              url: "https://www.wyzdesign.com/about",
+              image: "https://www.wyzdesign.com/images/torre-marcel.jpg",
+              jobTitle: "Founder & Creative Director",
+              description: "Chicago-born creative director, photographer, designer, and entrepreneur. Founder of WYZ Design, a full-service creative studio.",
+              worksFor: { "@id": "https://www.wyzdesign.com/#organization" },
+              knowsAbout: ["Photography", "Graphic Design", "Web Design", "Branding", "Event Production", "Creative Direction"],
+              homeLocation: { "@type": "Place", name: "Los Angeles, CA" },
+              sameAs: [
+                "https://www.linkedin.com/in/torre%C3%A9-harris-11180b89",
+                "https://instagram.com/wyzdesign",
+                "https://twitter.com/WYZdesign",
+              ],
             }),
           }}
         />
@@ -223,10 +252,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               areaServed: ["Los Angeles", "Chicago", "United States"],
               sameAs: [
                 "https://instagram.com/wyzdesign",
+                "https://twitter.com/WYZdesign",
                 "https://facebook.com/wyzdesign",
                 "https://tiktok.com/@wyzdesign",
                 "https://youtube.com/channel/UCfd75GcUKsGqWo-sgSQjZBg",
-                "https://linkedin.com/in/torre-harris",
+                "https://www.linkedin.com/in/torre%C3%A9-harris-11180b89",
               ],
               openingHoursSpecification: {
                 "@type": "OpeningHoursSpecification",

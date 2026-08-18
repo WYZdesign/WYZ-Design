@@ -3,23 +3,23 @@ import { NextResponse } from "next/server";
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const FREE_MODEL = "google/gemini-2.0-flash-exp:free";
 
-const FD_KNOWLEDGE_BASE = `# FD PHOTO STUDIO — COMPLETE KNOWLEDGE BASE
+const FD_KNOWLEDGE_BASE = `# FD PHOTO STUDIO: COMPLETE KNOWLEDGE BASE
 
 ## ABOUT FD
 FD Photo Studio is LA's premier studio rental company with 60+ stages across LA and NY. Founded ~2017, they've hosted 200+ events. Website: fdphotostudio.com
 
-## LA STUDIO BUILDINGS — COMPLETE INVENTORY
+## LA STUDIO BUILDINGS: COMPLETE INVENTORY
 
-### OLYMPIC BUILDING — 3316 E Olympic Blvd, Los Angeles, CA 90023
+### OLYMPIC BUILDING: 3316 E Olympic Blvd, Los Angeles, CA 90023
 | Studio | Feature | SqFt | Best For |
 |--------|---------|------|----------|
 | Olympic 1 (Underwater) | Large underwater tank, submerged shooting windows | 800 | Mermaid, aquatic editorial, ethereal beauty |
 | Olympic 2 (Black Cyc-wall) | Black infinity cyclorama | 1,850 | Dark editorial, dramatic single-light portraits |
 | Olympic 3 (Car Turntable) | Motorized rotating platform, RGB tunnel, TV wall | 2,100 | Automotive, motion, product hero shots, music videos |
-| Olympic 4 (Private Jet) | Full private jet interior — cockpit + passenger cabin | 810 | Luxury fashion, travel editorial, lifestyle campaigns |
+| Olympic 4 (Private Jet) | Full private jet interior: cockpit + passenger cabin | 810 | Luxury fashion, travel editorial, lifestyle campaigns |
 | Olympic 5 (Metal Garage) | Industrial metal, roll-up door, boxing ring | 3,500 | Urban edge, automotive, grunge fashion, streetwear |
 
-### HILL BUILDING — 1808 S Hill St, Los Angeles, CA 90015
+### HILL BUILDING: 1808 S Hill St, Los Angeles, CA 90015
 | Studio | Feature | SqFt | Best For |
 |--------|---------|------|----------|
 | Hill 1 (White Floor) | Clean white floor, modern minimal | 860 | Product, fashion, clean beauty |
@@ -31,7 +31,7 @@ FD Photo Studio is LA's premier studio rental company with 60+ stages across LA 
 | Hill 7 (Rain Room) | Controlled rain effects, waterproof lighting | 760 | Moody water portraits, dramatic wet fashion |
 | Hill 8 (Concrete Wall) | Brutalist concrete | 780 | Avant-garde, industrial, hard shadows |
 
-### YUKON BUILDING — 12828 Yukon Ave, Hawthorne, CA 90250
+### YUKON BUILDING: 12828 Yukon Ave, Hawthorne, CA 90250
 | Studio | Feature | SqFt | Best For |
 |--------|---------|------|----------|
 | Yukon 1 (Corner Cyc) | White corner cyc wall | 1,860 | Clean product, commercial fashion |
@@ -40,15 +40,15 @@ FD Photo Studio is LA's premier studio rental company with 60+ stages across LA 
 | Yukon 4 (Light Cube) | RGB light cube, reflective mylar | 1,860 | Neon, futuristic, color-saturated concepts |
 | Yukon 5 (RGB Cave) | Fully programmable ceiling LEDs | 1,500 | Immersive color wash, music, avant-garde |
 
-### ART BUILDING — 1048 Santee St, Los Angeles, CA 90015
+### ART BUILDING: 1048 Santee St, Los Angeles, CA 90015
 | Studio | Feature | SqFt | Best For |
 |--------|---------|------|----------|
 | Art 1 (White Steps) | Tiered white platforms | 1,390 | Clean editorial, fashion, group |
 | Art 2 (Wood Floor) | Warm wood floors, chandelier | 1,220 | Classic portraits, warm lifestyle |
-| Art 3 (Flower Wall) | Massive flower wall | — | Romantic, botanical, feminine beauty |
+| Art 3 (Flower Wall) | Massive flower wall | - | Romantic, botanical, feminine beauty |
 | Art 4 (Wood Corner) | Corner windows, natural wood | 1,800 | Golden hour, natural light, intimate |
 
-### LOFT BUILDING — DTLA
+### LOFT BUILDING: DTLA
 | Studio | Feature | Best For |
 |--------|---------|----------|
 | Loft 1 (French Loft) | Herringbone floors, ornate moldings | Classic French aesthetic, lifestyle |
@@ -58,7 +58,7 @@ FD Photo Studio is LA's premier studio rental company with 60+ stages across LA 
 | Loft 5 (Sunny Loft) | Flooded natural light | Airy editorial, daytime lifestyle |
 | Loft 6 (Sunset Cycwall) | Sunset gradient cyc wall | Golden hour at any time |
 
-### MAIN BUILDING — 530 E 8th St, Los Angeles, CA 90014
+### MAIN BUILDING: 530 E 8th St, Los Angeles, CA 90014
 | Studio | Feature | Best For |
 |--------|---------|----------|
 | Main A (Classic) | Versatile open, track lighting | Everything |
@@ -68,7 +68,7 @@ FD Photo Studio is LA's premier studio rental company with 60+ stages across LA 
 | Main E (Soft Light) | North-facing window | Diffused natural, airy |
 | Main F (DT View) | DTLA skyline windows | City lights at night |
 
-## EVENT HISTORY — EVERY EVENT FD HAS DONE
+## EVENT HISTORY: EVERY EVENT FD HAS DONE
 
 ### LA MIXERS ($15-$55, typically Sat 3-6PM)
 2026: Jun 27 (Main, $20-30), May 30 Candlelight (Art, $15-20), May 16 Racing (Olympic, $30-55), Apr 25 (Hill, $15), Mar 7 (Art, $15), Feb 14 Valentine's (Main, $15), Jan 17 Vintage RV (Yukon, $20)
@@ -119,7 +119,7 @@ FD Photo Studio is LA's premier studio rental company with 60+ stages across LA 
 - Mila: scheduling coordination
 
 ## PATTERNS & INSIGHTS
-1. Best-selling: themed mixers (cosplay, candlelight, racing) — 20-50 tickets each
+1. Best-selling: themed mixers (cosplay, candlelight, racing): 20-50 tickets each
 2. Masterclasses with known photographers = highest revenue per event
 3. Recurring weekly series: never tested (potential gap)
 4. Cross-building events: never done (combining Olympic+Loft+Art = untapped gold)
@@ -129,22 +129,22 @@ FD Photo Studio is LA's premier studio rental company with 60+ stages across LA 
 8. Standard crew per mixer: 1 host, 1-2 models per studio, 1 photographer
 `;
 
-const SYSTEM_PROMPT = `You are the FD ORACLE — the world's leading expert on FD Photo Studio, especially their LA locations. You have complete knowledge of every studio, every past event, every price point, and every operational detail.
+const SYSTEM_PROMPT = `You are the FD ORACLE: the world's leading expert on FD Photo Studio, especially their LA locations. You have complete knowledge of every studio, every past event, every price point, and every operational detail.
 
 Always respond with TWO sections:
 
-[ANALYST] — Expert analysis: Checks against the complete event history. Flags redundancy. Validates pricing against historical data. Notes what worked/didn't work for similar concepts. Uses specific past event data as evidence.
+[ANALYST]: Expert analysis: Checks against the complete event history. Flags redundancy. Validates pricing against historical data. Notes what worked/didn't work for similar concepts. Uses specific past event data as evidence.
 
-[MUSE] — Creative generation: Generates never-done-before concepts. Specific studio features. Fresh angles. ALWAYS references exact studio names (e.g., "Hill 7 Rain Room", "Olympic 4 Private Jet", "Yukon 5 RGB Cave"). Explains WHY it would sell.
+[MUSE]: Creative generation: Generates never-done-before concepts. Specific studio features. Fresh angles. ALWAYS references exact studio names (e.g., "Hill 7 Rain Room", "Olympic 4 Private Jet", "Yukon 5 RGB Cave"). Explains WHY it would sell.
 
 RULES:
-1. Know every LA studio intimately — features, size, best use, vibe
-2. Check against ALL past events — never suggest something already done
+1. Know every LA studio intimately: features, size, best use, vibe
+2. Check against ALL past events: never suggest something already done
 3. Pricing must match historical patterns: mixers $15-55, workshops $75-250, special $25-95
 4. LA-only unless user specifically asks for NY
 5. Cross-building concepts = gold (nobody has combined multiple buildings yet)
 6. Keep concepts low-setup, high-creative-impact
-7. Be specific — studio names, stage numbers, exact features
+7. Be specific: studio names, stage numbers, exact features
 8. Reference real past events as evidence for your recommendations`;
 
 export async function POST(req: Request) {
