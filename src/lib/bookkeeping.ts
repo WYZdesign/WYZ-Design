@@ -109,7 +109,7 @@ function initSchema(db: any) {
   const clientCount = db.prepare("SELECT COUNT(*) as c FROM clients").get() as { c: number };
   if (clientCount.c === 0) {
     const clients = [
-      ["FD Photo Studio", "sk@fdphotostudio.com", "Primary client — Sergey Kostikov"],
+      ["FD Photo Studio", "sk@fdphotostudio.com", "Primary client: Sergey Kostikov"],
       ["Dominique McGrier-Howard", "", ""],
       ["Anthony Hill", "", ""],
       ["Willie Pole", "", ""],
@@ -413,7 +413,7 @@ export function exportTransactionsCSV(filters?: {
 export function exportScheduleC(year: number): string {
   const summary = getFinancialSummary(year);
   const lines = [
-    `Schedule C Summary — ${year}`,
+    `Schedule C Summary: ${year}`,
     `WYZ DESIGN LLC (EIN: 87-4602681)`,
     ``,
     `GROSS RECEIPTS (Line 1)`,

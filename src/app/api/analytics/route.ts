@@ -43,22 +43,22 @@ async function runSeoChecks(): Promise<{ check: string; status: string; detail?:
       const hasOg = /<meta\s+property=["']og:image["']/i.test(html);
       const hasViewport = /<meta\s+name=["']viewport["']/i.test(html);
 
-      if (hasMeta) checks.push({ check: `Meta description — ${p}`, status: "pass" });
-      else checks.push({ check: `Meta description — ${p}`, status: "fail", detail: "Missing <meta name=\"description\">" });
+      if (hasMeta) checks.push({ check: `Meta description: ${p}`, status: "pass" });
+      else checks.push({ check: `Meta description: ${p}`, status: "fail", detail: "Missing <meta name=\"description\">" });
 
-      if (hasTitle) checks.push({ check: `Title tag — ${p}`, status: "pass" });
-      else checks.push({ check: `Title tag — ${p}`, status: "fail", detail: "Missing <title>" });
+      if (hasTitle) checks.push({ check: `Title tag: ${p}`, status: "pass" });
+      else checks.push({ check: `Title tag: ${p}`, status: "fail", detail: "Missing <title>" });
 
-      if (hasH1) checks.push({ check: `H1 tag — ${p}`, status: "pass" });
-      else checks.push({ check: `H1 tag — ${p}`, status: "warn", detail: "No <h1> found" });
+      if (hasH1) checks.push({ check: `H1 tag: ${p}`, status: "pass" });
+      else checks.push({ check: `H1 tag: ${p}`, status: "warn", detail: "No <h1> found" });
 
-      if (hasOg) checks.push({ check: `OG image — ${p}`, status: "pass" });
-      else checks.push({ check: `OG image — ${p}`, status: "warn", detail: "Missing og:image meta" });
+      if (hasOg) checks.push({ check: `OG image: ${p}`, status: "pass" });
+      else checks.push({ check: `OG image: ${p}`, status: "warn", detail: "Missing og:image meta" });
 
-      if (hasViewport) checks.push({ check: `Viewport — ${p}`, status: "pass" });
-      else checks.push({ check: `Viewport — ${p}`, status: "fail", detail: "Missing viewport meta — not mobile-friendly" });
+      if (hasViewport) checks.push({ check: `Viewport: ${p}`, status: "pass" });
+      else checks.push({ check: `Viewport: ${p}`, status: "fail", detail: "Missing viewport meta, not mobile-friendly" });
     } catch {
-      checks.push({ check: `Page fetch — ${p}`, status: "fail", detail: "Could not fetch page" });
+      checks.push({ check: `Page fetch: ${p}`, status: "fail", detail: "Could not fetch page" });
     }
   }
 
