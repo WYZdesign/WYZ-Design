@@ -135,15 +135,15 @@ const CLIENT_LOGOS = shuffleArray([
 const SERVICES = [
  { icon: <FiCamera />, name: "Artist Launch Kit", desc: "Creative direction, photoshoot, cover art, social graphics, landing page. For musicians, models, performers ready to level up.", href: "/plans", tab: "FOR ARTISTS" },
  { icon: <FiMonitor />, name: "Brand Identity System", desc: "Logo refresh, visual identity, web design, photo content, social kit. For businesses tired of looking forgettable.", href: "/plans", tab: "FOR BRANDS" },
- { icon: <FiVideo />, name: "Studio Growth System", desc: "Event programming, promotional assets, recap content, booking funnel strategy. For studios and production spaces.", href: "/plans", tab: "FOR STUDIOS" },
+ { icon: <FiVideo />, name: "Studio Growth System", desc: "Event programming, promotional assets, recap content, booking strategy. For studios and production spaces.", href: "/plans", tab: "FOR STUDIOS" },
  { icon: <FiMessageCircle />, name: "Event Production", desc: "Flyers, social rollout, Eventbrite setup, photo/video recap, artist coordination. From concept to curtains.", href: "/events", tab: "EVENTS" },
- { icon: <FiGlobe />, name: "WYZMiND Systems", desc: "AI intake bots, client portals, booking automation, workflow intelligence. Creative infrastructure that scales.", href: "/services", tab: "SYSTEMS" },
+ { icon: <FiGlobe />, name: "WYZMiND Systems", desc: "AI intake bots, client portals, booking tools, and automated workflows. Systems that keep up as you grow.", href: "/services", tab: "SYSTEMS" },
 ];
 
 const SERVICE_LIST = [
   { cat: "Photography", name: "Photoshoot", desc: "Capture authentic moments with sleek, professional photography.", dur: "1 hr", price: "$100", href: "/booking-calendar/photoshoot", img: "/images/services/Photography.webp" },
   { cat: "Photography", name: "Photo Retouching", desc: "Basic to Advanced Professional Photo Retouching.", dur: "2 hr", price: "Price Varies", href: "/service-page/photo-retouching", img: "/images/services/Photo Retouching.jpg" },
-  { cat: "Photography", name: "Event Photography", desc: "Expertly capturing every moment - from public showcases to private events.", dur: "3 hr", price: "$200", href: "/service-page/event-photography", img: "/images/services/Event Photography.jpg" },
+  { cat: "Photography", name: "Event Photography", desc: "Capturing every moment, from public showcases to private events.", dur: "3 hr", price: "$200", href: "/service-page/event-photography", img: "/images/services/Event Photography.jpg" },
 ];
 
 function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
@@ -206,7 +206,7 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
 
 const PRICING_PLANS = [
  { name: "Creator Access", price: "$250", badge: "", desc: "For artists, models, and young brands building their foundation. Design tasks, strategy calls, web updates included.", valid: "Monthly. Cancel anytime." },
- { name: "Growth Retainer", price: "$500", badge: "Most Popular", desc: "For brands, studios, and businesses scaling their presence. Content, design, event support, and campaign planning.", valid: "Monthly. Cancel anytime." },
+ { name: "Growth Retainer", price: "$500", badge: "Most Popular", desc: "For brands, studios, and businesses ready to grow. Content, design, event support, and campaign planning.", valid: "Monthly. Cancel anytime." },
  { name: "Brand System", price: "$750", badge: "", desc: "For established businesses needing consistent creative direction. Full visual identity, web, photo, video, and strategy.", valid: "Monthly. Cancel anytime." },
   { name: "Business Suite", price: "$1,000", desc: "For serious brands and studios. Unlimited design, content production, event programming, AI systems, and support.", valid: "Monthly. Cancel anytime." },
 ];
@@ -619,15 +619,15 @@ const FAQ_ITEMS = [
  { q: "How much does a photoshoot session cost?", a: "Our photoshoot sessions start at $100 per hour, including free basic retouching and a 24-hour turnaround." },
  { q: "Can WYZ Design help with website design?", a: "Yes, we offer professional website design services starting at a flat rate of $500 for a website of up to 5 pages." },
  { q: "Does WYZ Design provide printing services?", a: "Absolutely! We offer digital printing for various materials such as stickers, flyers, prints, and posters on different paper types." },
- { q: "Do you offer marketing and branding consultations?", a: "Yes, we offer marketing and branding strategy consultations at $50 per hour, providing expert advice and actionable steps." },
+ { q: "Do you offer marketing and branding consultations?", a: "Yes, we offer marketing and branding strategy consultations at $50 per hour, providing expert advice and clear next steps." },
  { q: "What is the turnaround time for projects?", a: "Most projects are completed within 3-7 business days depending on scope. Rush delivery is available for an additional fee." },
- { q: "Do you work with clients outside the local area?", a: "Yes! While based locally, we serve clients nationwide and can accommodate remote projects seamlessly." },
+ { q: "Do you work with clients outside the local area?", a: "Yes! While based locally, we serve clients nationwide and handle remote projects without missing a beat." },
  { q: "What is included in a photoshoot session?", a: "Each photoshoot includes professional lighting, a creative concept discussion, outfit guidance, and a minimum of 20 edited high-resolution images delivered within 24 hours." },
  { q: "Do you offer event photography for weddings?", a: "Yes! We offer full-day event photography packages for weddings, parties, and private functions. Custom packages are available upon request." },
  { q: "What graphic design services do you provide?", a: "We design logos, brand identities, flyers, posters, album covers, social media content, banners, business cards, and any custom print materials." },
  { q: "How many revisions are included with design work?", a: "Logo design includes 5 revisions. Graphic design packages include 3 revisions. Additional revisions are available at $50 per set of 3." },
  { q: "Can you create a full brand identity for my business?", a: "Absolutely. Our brand identity packages include logo design, color palette, typography selection, brand guidelines, and social media templates." },
- { q: "What video production services do you offer?", a: "We produce music videos, promotional videos, event coverage, drone footage, and social media reels - from concept to final edit." },
+ { q: "What video production services do you offer?", a: "We produce music videos, promotional videos, event coverage, drone footage, and social media reels, from concept to final edit." },
  { q: "How much does a music video cost?", a: "Music video production starts at $200 for a basic shoot and edit. Premium packages with special effects, multiple locations, and advanced editing are available at custom rates." },
  { q: "Do you offer SEO services?", a: "Yes! We provide SEO audits starting at $50, covering keyword analysis, on-page optimization recommendations, and a competitor breakdown report." },
  { q: "What does a website design package include?", a: "Our $500 website package includes up to 5 custom pages, mobile-responsive design, contact form integration, basic SEO setup, and one round of revisions." },
@@ -635,18 +635,18 @@ const FAQ_ITEMS = [
  { q: "Do you offer retouching for personal photos?", a: "Yes! Photo retouching starts at $50 and covers skin smoothing, color correction, background removal, and blemish cleanup." },
  { q: "What is a Creative Consultation?", a: "A free 30-minute strategy session where we discuss your vision, goals, and recommend the best services and packages for your project." },
  { q: "Can I book a consultation for logo design specifically?", a: "Yes! Our dedicated Logo Consultation is a 2-hour deep-dive session for $50, covering competitor research, mood boards, and initial concept direction." },
- { q: "Do you offer package deals or bundles?", a: "Yes - our subscription plans (Starter Pack, Business Boost, Pro Plus, Ultimate Suite) bundle multiple services at a significant discount." },
+ { q: "Do you offer package deals or bundles?", a: "Yes! Our subscription plans (Starter Pack, Business Boost, Pro Plus, Ultimate Suite) bundle multiple services at a significant discount." },
  { q: "What payment methods do you accept?", a: "We accept all major credit cards, PayPal, Venmo, Zelle, and cash. A 50% deposit is required to book most services." },
  { q: "Can I reschedule or cancel a booking?", a: "Yes. Reschedules are free if made 48 hours in advance. Cancellations within 48 hours of the appointment forfeit the deposit." },
  { q: "Do you work with influencers or content creators?", a: "Absolutely. We offer creator-specific packages including headshot sessions, brand content shoots, and social media asset creation at discounted rates." },
- { q: "How do I get started?", a: "Book a free Creative Consultation through our booking page. We will discuss your needs, recommend services, and put together a custom plan." },
- { q: "Do you offer same-day or rush delivery?", a: "Yes - rush delivery is available for most services at a 25-50% premium. Contact us to discuss your timeline." },
- { q: "What is the difference between graphic design and branding?", a: "Graphic design covers individual assets (flyers, logos). Branding is a comprehensive strategy that defines your visual identity, voice, and market positioning." },
+ { q: "How do I get started?", a: "Book a free Creative Consultation through our booking page. We'll discuss your needs, recommend services, and put together a custom plan." },
+ { q: "Do you offer same-day or rush delivery?", a: "Yes! Rush delivery is available for most services at a 25-50% premium. Contact us to discuss your timeline." },
+ { q: "What is the difference between graphic design and branding?", a: "Graphic design covers individual assets (flyers, logos). Branding covers the whole picture: your visual identity, voice, and market positioning." },
  { q: "Can you design merchandise for my brand?", a: "Yes! We design custom merch including t-shirts, hats, stickers, and apparel. We also handle printing through our in-house digital printing service." },
  { q: "Do you provide mockups for design projects?", a: "Yes. All logo and branding projects include realistic mockup presentations so you can see your design in real-world applications before finalizing." },
  { q: "What file formats do I receive for my designs?", a: "You receive PNG, JPG, PDF, and SVG for logos. Print-ready files include CMYK versions and bleed marks. Source files are available upon request." },
  { q: "Is there a loyalty or rewards program?", a: "Yes! Our Members Loyalty Program earns you points on every purchase that can be redeemed for discounts, free upgrades, and exclusive perks." },
- { q: "How can I become a WYZ Design model?", a: "Visit our Model Archive page and click 'Become a Model.' Fill out the form with your portfolio details and we will reach out for an audition session." },
+ { q: "How can I become a WYZ Design model?", a: "Visit our Model Archive page and click 'Become a Model.' Fill out the form with your portfolio details and we'll reach out for an audition session." },
  { q: "What DIY events does WYZ Design host?", a: "We host music showcases, art shows, open mic nights, and creative meetups. Check our Events page or subscribe to our newsletter for upcoming dates." },
 ];
 
@@ -978,7 +978,7 @@ export default function HomePage() {
      <h2 className="text-[1.25rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
      <TextSplit stagger={0.02} direction="up">WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.02} direction="up">WE DO</TextSplit></span>
     </h2>
-    <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene — making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
+    <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
   </div>
   </div>
    {/* Full-width carousel — full bleed stretching to both sides */}
@@ -1217,9 +1217,9 @@ export default function HomePage() {
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
  {[
- { title: "We Actually Do the Work", body: "We show up, we shoot, we design, we build. No outsourcing to strangers. No passing you around to three different people who do not talk to each other.", color: "#DF3131", icon: FiZap },
- { title: "Good Work Costs What It Costs", body: "We do not work for exposure, good vibes, or vague promises of future referrals. Creativity is real work. Real work earns real money. We also have accessible options for artists just getting started.", color: "#D49341", icon: FiAward },
-  { title: "Fast, But Never Sloppy", body: "We move quick because we know what we are doing. But nothing leaves the desk looking rushed, generic, or like someone stopped caring halfway through.", color: "#888888", icon: FiTrendingUp },
+ { title: "We Actually Do the Work", body: "We show up, we shoot, we design, we build. No outsourcing to strangers. No passing you around to three different people who don't talk to each other.", color: "#DF3131", icon: FiZap },
+ { title: "Good Work Costs What It Costs", body: "We don't work for exposure, good vibes, or vague promises of future referrals. Creativity is real work. Real work earns real money. We also have accessible options for artists just getting started.", color: "#D49341", icon: FiAward },
+  { title: "Fast, But Never Sloppy", body: "We move quick because we know what we're doing. But nothing leaves the desk looking rushed, generic, or like someone stopped caring halfway through.", color: "#888888", icon: FiTrendingUp },
  ].map((c, i) => {
  const Icon = c.icon;
   return (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "3-Point Program",
-  description: "The WYZ Design 3-Point Program — a structured framework for creative growth and brand development.",
+  description: "The WYZ Design 3-Point Program, a structured framework for creative growth and brand development.",
   keywords: ["creative growth", "brand development", "3-point program"],
   alternates: { canonical: "https://www.wyzdesign.com/3pointprogram" },
   openGraph: {

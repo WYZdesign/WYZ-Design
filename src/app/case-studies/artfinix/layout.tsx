@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Case Study: Artfinix",
-  description: "How WYZ Design helped Artfinix build a complete brand identity — logo to web to social.",
+  description: "How WYZ Design helped Artfinix build a complete brand identity, from logo to web to social.",
   alternates: { canonical: "https://www.wyzdesign.com/case-studies/artfinix" },
   openGraph: {
     title: "Case Study: Artfinix | WYZ Design",

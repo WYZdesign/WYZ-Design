@@ -13,7 +13,7 @@ const TESTIMONIALS = [
     link: "https://www.google.com/search?q=Andrew+Vickers+review"
   },
   {
-    quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to enhance artistic endeavors and build community.",
+    quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to help artists level up and build community.",
     name: "Tim Perez",
     role: "Google Review",
     location: "Chicago, IL",

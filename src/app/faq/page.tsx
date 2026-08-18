@@ -9,16 +9,16 @@ import TextReveal from "@/components/TextReveal";
 
 const FAQS = [
   { q: "What exactly is a creative design agency?", a: "A creative design agency offers web design, graphic design, marketing, branding, and event curation to help individuals and companies build and promote their brands effectively.", icon: FiZap },
-  { q: "What kind of clients does WYZ Design work with?", a: "We work with startup businesses, individual artists, and established companies looking to enhance their brand identity and marketing strategies.", icon: FiSend },
+  { q: "What kind of clients does WYZ Design work with?", a: "We work with startup businesses, individual artists, and established companies looking to strengthen their brand and sharpen their marketing.", icon: FiSend },
   { q: "How can WYZ Design help me grow my brand?", a: "From web design and marketing strategies to custom printing and 3D sculpting, our team has the expertise to support your brand's success across every channel.", icon: FiZap },
   { q: "Can WYZ Design help me with branding and marketing?", a: "Yes. We develop strong brand identities, create marketing plans, and execute campaigns to help you reach your target audience effectively.", icon: FiLayout },
   { q: "How can WYZ Design assist independent artists?", a: "We offer graphic design, photography, and event curation to help you showcase your work and promote your brand to a wider audience.", icon: FiCamera },
-  { q: "What sets WYZ Design apart from other agencies?", a: "We deliver high-quality, personalized services at competitive pricing. Our team has a wide range of skills, allowing us to provide comprehensive support for all your creative and business needs.", icon: FiZap },
+  { q: "What sets WYZ Design apart from other agencies?", a: "We deliver high-quality, custom services at competitive pricing. Our team has a wide range of skills, allowing us to provide full support for all your creative and business needs.", icon: FiZap },
   { q: "How does WYZ Design approach web design?", a: "We take a strategic approach, creating sites that are visually appealing and user-friendly, designed around your goals and target audience. Pricing starts at $500 for up to 5 pages.", icon: FiLayout },
   { q: "What custom printing services do you offer?", a: "Business cards, flyers, brochures, stickers, posters, and promotional materials, all custom-designed to reflect your brand's identity. Contact us for pricing details.", icon: FiPrinter },
   { q: "Can WYZ Design help with event planning?", a: "Yes. We create unique, memorable events that promote your brand and engage your audience from concept to execution. Event photography starts at $200.", icon: FiCalendar },
-  { q: "How do I get started?", a: "Contact us with your needs and goals. We'll develop a personalized plan of action that meets your unique requirements. Book a free consultation at info@wyzdesign.com.", icon: FiSend },
-  { q: "How do you ensure quality and satisfaction?", a: "We work closely with every client, understanding goals and requirements, then deliver personalized solutions that exceed expectations.", icon: FiHelpCircle },
+  { q: "How do I get started?", a: "Contact us with your needs and goals. We'll put together a clear plan of action that fits your situation. Book a free consultation at info@wyzdesign.com.", icon: FiSend },
+  { q: "How do you ensure quality and satisfaction?", a: "We work closely with every client, understanding goals and requirements, then deliver custom strategies built around your specific needs.", icon: FiHelpCircle },
   { q: "Can WYZ Design work with clients remotely?", a: "Absolutely. We have extensive experience working with clients remotely and can serve you anywhere in the world.", icon: FiZap },
 ];
 
@@ -35,9 +35,9 @@ const CATEGORY_MAP: Record<string, number[]> = {
 const BOT_RESPONSES: Record<string, string> = {
   "services": "We offer photography ($100/hr), graphic design ($75+), videography ($200), web design ($500+), printing, branding, marketing consultations ($50), and full event planning. What interests you most?",
   "photography": "WYZ Design offers professional photography services starting at $100/hr. This includes headshots, event coverage, product photography, and more. Would you like to book a session?",
-  "web design": "We build custom websites starting at $500 for up to 5 pages. Our sites are modern, responsive, and optimized for conversions. Want a free consultation?",
+  "web design": "We build custom websites starting at $500 for up to 5 pages. Our sites are modern, responsive, and built to turn visitors into customers. Want a free consultation?",
   "printing": "We offer custom printing for flyers, stickers, posters, business cards, and more. Upload your design or let us create one for you. Visit our printing page for details!",
-  "branding": "Our branding packages include logo design, brand guidelines, color palettes, typography, and marketing collateral. We tailor everything to your vision.",
+  "branding": "Our branding packages include logo design, brand guidelines, color palettes, typography, and marketing materials. We build everything around your vision.",
   "event": "WYZ Design handles event photography, videography, and full event recaps. We've covered concerts, corporate events, and private parties. Want to book us for your next event?",
   "pricing": "Our pricing starts at $100/hr for photography, $500 for web design, and $50 for marketing consultations. We also have monthly subscription plans starting at $250.",
   "price": "Our pricing starts at $100/hr for photography, $500 for web design, and $50 for marketing consultations. We also have monthly subscription plans starting at $250.",

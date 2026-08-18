@@ -50,7 +50,7 @@ function getIcon(file: DriveFile): string {
 }
 
 function formatSize(bytes: number | null): string {
-  if (!bytes) return "—";
+  if (!bytes) return "";
   const units = ["B", "KB", "MB", "GB"];
   let i = 0;
   let size = bytes;

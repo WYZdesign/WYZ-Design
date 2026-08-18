@@ -645,7 +645,7 @@ export default function EventsPage() {
   <span className="whitespace-nowrap"><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
   </h1>
   <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
-  Transform your event with our expert planning. From concept to execution, we create a seamless, stress-free, and unforgettable experience.
+  Let our team handle the planning, from the first idea to the final encore. You&apos;ll get an event that&apos;s easy, stress-free, and unforgettable.
   </p>
   <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
   BOOK NOW
@@ -729,7 +729,7 @@ export default function EventsPage() {
  <div>
  <div className="text-center mb-4">
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">PREVIOUS EVENTS</h2>
-  <p className="text-[16px] text-[#8F8F8F] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED/CURATED BY WYZ DESIGN</p>
+  <p className="text-[16px] text-[#8F8F8F] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED BY WYZ DESIGN</p>
  </div>
  <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
  {visibleEvents.map((e) => (

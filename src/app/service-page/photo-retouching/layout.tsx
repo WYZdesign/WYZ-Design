@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Photo Retouching Service",
-  description: "Professional photo retouching — basic cleanup to advanced editing. Fast turnaround. Starting at $50.",
+  description: "Professional photo retouching, from basic cleanup to advanced editing. Fast turnaround. Starting at $50.",
   keywords: ["photo retouching", "image editing", "professional retouching"],
   alternates: { canonical: "https://www.wyzdesign.com/service-page/photo-retouching" },
   openGraph: {

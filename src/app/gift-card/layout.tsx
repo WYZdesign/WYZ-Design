@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Gift Cards",
-  description: "Give the gift of creative work. WYZ Design gift cards — photography, design, branding. Digital delivery.",
+  description: "Give the gift of creative work. WYZ Design gift cards for photography, design, and branding. Digital delivery.",
   keywords: ["creative gift card", "photography gift card", "design gift card"],
   alternates: { canonical: "https://www.wyzdesign.com/gift-card" },
   openGraph: {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Featured Artist of the Month",
-  description: "WYZ Design spotlights emerging artists, musicians, and creatives. Get featured — submit your work.",
+  description: "WYZ Design spotlights emerging artists, musicians, and creatives. Get featured, submit your work.",
   keywords: ["featured artist", "emerging artist", "artist spotlight", "creative showcase"],
   alternates: { canonical: "https://www.wyzdesign.com/featured-artist" },
   openGraph: {

@@ -12,13 +12,13 @@ const PARTNERS = [
   {
     name: "Dying Breed Crew",
     tagline: "The Community",
-    desc: "Dying Breed Crew is the community arm of WYZ Design. Built for independent artists, creatives, and culture-makers who refuse to blend in, DBC represents the doers—the ones who show up, put in the work, and build from the ground up. Through merch, events, and creative collaborations, DBC keeps the spirit of authentic culture alive.",
+    desc: "Dying Breed Crew is the community arm of WYZ Design. Built for independent artists, creatives, and culture-makers who refuse to blend in, DBC represents the doers, the ones who show up, put in the work, and build from the ground up. Through merch, events, and creative collaborations, DBC keeps the spirit of authentic culture alive.",
     color: "#D49341",
   },
   {
     name: "Nomadic Breed",
     tagline: "The Movement",
-    desc: "Nomadic Breed is the mobile arm of WYZ Design. We travel to wherever the culture is alive—pop-up shoots, touring event coverage. Nomadic Breed brings the WYZ Design standard wherever the work takes us. No studio walls. No limits. Every location is a set. Every city is an opportunity.",
+    desc: "Nomadic Breed is the mobile arm of WYZ Design. We travel to wherever the culture is alive, pop-up shoots, touring event coverage. Nomadic Breed brings the WYZ Design standard wherever the work takes us. No studio walls. No limits. Every location is a set. Every city is an opportunity.",
     color: "#00B4D8",
   },
 ];
@@ -122,7 +122,7 @@ export default function PartnershipsPage() {
                 <FiTarget className="w-7 h-7 text-[#DF3131]" />
               </div>
               <h3 className="font-heading font-bold text-[16px] tracking-[0.05em] text-[#333] dark:text-white uppercase mb-3">Professional Execution</h3>
-              <p className="text-[15px] text-[#666] dark:text-white/60">Every project gets the full WYZ Design treatment—bold creative direction, professional production, zero shortcuts.</p>
+              <p className="text-[15px] text-[#666] dark:text-white/60">Every project gets the full WYZ Design treatment, bold creative direction, professional production, zero shortcuts.</p>
             </div>
             <div className="text-center">
               <div className="w-14 h-14 mx-auto mb-4 bg-[#DF3131]/10 flex items-center justify-center rounded-xl">
@@ -171,7 +171,7 @@ export default function PartnershipsPage() {
             READY TO BUILD?
           </h2>
           <p className="text-white/80 text-[16px] max-w-xl mx-auto mb-8">
-            Whether you are an artist, brand, studio, or community—we are ready to partner with you. Let us talk about what we can create together.
+            Whether you are an artist, brand, studio, or community, we are ready to partner with you. Let us talk about what we can create together.
           </p>
           <div className="flex flex-row gap-4 justify-center">
             <Link href="/contact" className="inline-block px-8 py-3 bg-white text-[#111] font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#DF3131] hover:text-white transition-all">

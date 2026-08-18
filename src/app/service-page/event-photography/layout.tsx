@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Event Photography Service",
-  description: "Expert event photography — concerts, showcases, private events. Starting at $200 for 3 hours.",
+  description: "Expert event photography for concerts, showcases, and private events. Starting at $200 for 3 hours.",
   keywords: ["event photography", "concert photography", "event documentation"],
   alternates: { canonical: "https://www.wyzdesign.com/service-page/event-photography" },
   openGraph: {

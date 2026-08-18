@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Browse the WYZ Design gallery — photography, design work, events, and creative projects.",
+  description: "Browse the WYZ Design gallery, featuring photography, design work, events, and creative projects.",
   keywords: ["creative gallery", "photography gallery", "design portfolio", "visual portfolio"],
   alternates: { canonical: "https://www.wyzdesign.com/gallery" },
   openGraph: {

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Case Study: Dawneeah's Glow",
-  description: "How WYZ Design built the full brand identity, photography, and Shopify store for Dawneeah's Glow — $180K revenue in 90 days.",
+  description: "How WYZ Design built the full brand identity, photography, and Shopify store for Dawneeah's Glow, generating $180K revenue in 90 days.",
   alternates: { canonical: "https://www.wyzdesign.com/case-studies/dawneeahs-glow" },
   openGraph: {
     title: "Case Study: Dawneeah's Glow | WYZ Design",

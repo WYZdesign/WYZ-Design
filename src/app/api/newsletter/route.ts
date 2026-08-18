@@ -38,11 +38,11 @@ const welcomeHtml = (email: string) => {
   <div style="margin:32px 0;padding:24px;background:#F5F5F3;border-left:4px solid #DF3131;">
     <p style="font-size:14px;color:#333;margin:0;">
       <strong>What's next?</strong><br/>
-      We'll send you occasional updates — no spam, no fluff. Just the good stuff.
+      We'll send you occasional updates, no spam, no fluff. Just the good stuff.
     </p>
   </div>
   <p style="font-size:14px;color:#888;margin-top:32px;">
-    — The WYZ Design Team<br/>
+    - The WYZ Design Team<br/>
     <a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a>
   </p>
   <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;" />
@@ -75,7 +75,7 @@ export async function POST(req: NextRequest) {
       await getResend().emails.send({
         from: "WYZ Design <newsletter@wyzdesign.com>",
         to: email,
-        subject: "Welcome to WYZ Design — You're In",
+        subject: "Welcome to WYZ Design, You're In",
         html: welcomeHtml(email),
       });
     } catch (e) { logger.error("newsletter:send", e); }

@@ -37,7 +37,7 @@ export default function LeadMagnet() {
       <div className="max-w-2xl mx-auto px-6 text-center text-white">
         <h3 className="text-xl sm:text-2xl font-heading font-bold mb-2">Free Brand Audit Guide</h3>
         <p className="text-white/80 text-sm mb-6 max-w-md mx-auto">
-          7 questions to diagnose what your brand is missing — plus what to do about it.
+          7 questions to diagnose what your brand is missing, plus what to do about it.
         </p>
         <form onSubmit={handleSubmit} className="flex gap-2 max-w-sm mx-auto">
           <input

@@ -21,15 +21,15 @@ export default function PrivacyPolicy() {
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] mb-4">Information Sharing</h2>
-              <p>We do not sell your personal information. We may share data with trusted third parties who assist in operating our website and providing services, including payment processors, email service providers, and analytics tools. These parties are contractually obligated to keep your information confidential.</p>
+              <p>We don&apos;t sell your personal information. We may share data with trusted third parties who assist in operating our website and providing services, including payment processors, email service providers, and analytics tools. These parties are contractually obligated to keep your information confidential.</p>
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] mb-4">Cookies</h2>
-              <p>We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. You can control cookies through your browser settings. Disabling cookies may affect site functionality.</p>
+              <p>We use cookies to make the site work better for you, understand how people use it, and show you content that fits your interests. You can control cookies through your browser settings. Disabling cookies may affect how the site works.</p>
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] mb-4">Data Security</h2>
-              <p>We implement industry-standard security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure, and we cannot guarantee absolute security.</p>
+              <p>We implement industry-standard security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure, and we can&apos;t guarantee absolute security.</p>
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] mb-4">Your Rights</h2>

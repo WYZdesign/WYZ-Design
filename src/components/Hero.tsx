@@ -31,13 +31,13 @@ export default function Hero() {
 
           <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-5 text-lg text-[#666665] max-w-lg leading-relaxed">
-             WYZ Design™ (pronounced "wise") helps startups and established brands stand out with tailored creative services, including photography, videography, graphic and web design, custom printing, event planning, marketing consulting, and SEO audits.
+             WYZ Design™ (pronounced "wise") helps startups and established brands stand out with creative services, including photography, videography, graphic and web design, custom printing, event planning, marketing consulting, and SEO audits.
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-8 flex gap-3">
             <Link href="/3pointprogram" className="btn-primary inline-flex items-center gap-2">
-              Unlock Potential <FiArrowRight className="w-5 h-5" />
+              Get Started <FiArrowRight className="w-5 h-5" />
             </Link>
           </motion.div>
         </div>

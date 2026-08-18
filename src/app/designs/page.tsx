@@ -268,7 +268,7 @@ const faotmImages = [
    <div className="absolute inset-0 bg-black/20 z-[1]" />
    <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 py-12 md:py-0">
 <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}><TextSplit stagger={0.03} direction="up">DESIGNING</TextSplit><br /><TextSplit stagger={0.03} direction="up">THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
-  <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">Our creative design services blend bold aesthetics with strategic thinking to build brands that dominate.</p>
+  <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
    <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131">GET A QUOTE</Link>
    </div>
    </div>
@@ -333,7 +333,7 @@ const faotmImages = [
  <AccordionServiceCard
  img="/images/web-design/site_3.jpg"
  title="LOGO DESIGN"
- desc="Professional logos that embody your brand personality."
+ desc="Professional logos that capture the personality of your brand."
  isOpen={openService === 2}
  onToggle={() => setOpenService(openService === 2 ? -1 : 2)}
  />
@@ -415,7 +415,7 @@ const faotmImages = [
  <ScrollReveal animation="fadeUp" delay={0.1}>
   <section className="py-6 lg:py-20 bg-white dark:bg-[#232326] border-t border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-2 items-start">
- <div className="text-center"><span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">UNLEASH YOUR IMAGINATION</span>  <h2 className="text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">DESIGN CONCEPT<br />GENERATOR</h2>  <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">Not sure where to start? Describe your vision and our AI will spark creative ideas tailored to your brand.</p></div>
+ <div className="text-center"><span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">LET&apos;S GET CREATIVE</span>  <h2 className="text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">DESIGN CONCEPT<br />GENERATOR</h2>  <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">Not sure where to start? Tell us your vision and our AI will toss out creative ideas built for your brand.</p></div>
   <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] p-4 sm:p-6 lg:p-8 shadow-sm rounded-lg">
  <div className="space-y-4 mb-4 max-h-[320px] overflow-y-auto">
  <div className="flex gap-2 items-start">
@@ -444,7 +444,7 @@ const faotmImages = [
   <textarea value={conceptText} onChange={(e) => setConceptText(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); generateConcept(); } }} rows={2} className="w-full border border-[#E2E2E2] dark:border-[#444] py-3 px-5 pr-12 text-[16px] text-[#333] dark:text-[#e0e0e0] dark:bg-[#2b2b2e] focus:outline-none focus:border-[#DF3131] transition-colors rounded-lg resize-none" placeholder="Describe your vision..." />
  <FiSearch className="absolute right-4 top-1/2 -translate-y-1/2 text-[#CBCBCA] w-4 h-4" />
  </div>
- <button onClick={generateConcept} disabled={conceptLoading || !conceptText.trim()} className="w-full py-3 bg-[#DF3131] text-white text-[15px] font-bold tracking-[0.12em] hover:bg-[#B82020] transition-all flex items-center justify-center gap-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">{"\u2728"} SPARK CREATIVITY</button>
+ <button onClick={generateConcept} disabled={conceptLoading || !conceptText.trim()} className="w-full py-3 bg-[#DF3131] text-white text-[15px] font-bold tracking-[0.12em] hover:bg-[#B82020] transition-all flex items-center justify-center gap-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed">{"\u2728"} GENERATE IDEAS</button>
  </div>
  </div>
  </section>

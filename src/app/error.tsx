@@ -22,7 +22,7 @@ export default function Error({
           LET&apos;S GET YOU BACK ON TRACK
         </h1>
         <p className="text-[#666] dark:text-[#999] text-[15px] leading-relaxed mb-8">
-          Refreshing automatically — if nothing happens, tap a button below.
+          Refreshing automatically, and if nothing happens, tap a button below.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button

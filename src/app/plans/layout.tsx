@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Pricing Plans",
-  description: "Flexible monthly plans for brands, studios, and businesses. From $250/mo — design, strategy, content, event support. Cancel anytime.",
+  description: "Flexible monthly plans for brands, studios, and businesses. From $250/mo for design, strategy, content, and event support. Cancel anytime.",
   keywords: ["creative agency pricing", "monthly retainer", "branding plan", "design subscription"],
   alternates: { canonical: "https://www.wyzdesign.com/plans" },
   openGraph: {

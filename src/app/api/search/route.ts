@@ -9,17 +9,17 @@ interface StaticResult {
 }
 
 const STATIC_PAGES: StaticResult[] = [
-  { title: "Home", href: "/", desc: "WYZ Design — Bold creative studio in LA" },
+  { title: "Home", href: "/", desc: "WYZ Design, bold creative studio in LA" },
   { title: "Photography", href: "/photography", desc: "Model portfolios, events, headshots, editorial photography" },
   { title: "Events", href: "/events", desc: "Event photography, recaps, and coverage" },
   { title: "Designs", href: "/designs", desc: "Graphic design, branding, visual identity" },
   { title: "Web Design", href: "/web-design", desc: "Web development, landing pages, e-commerce" },
-  { title: "Services", href: "/services", desc: "Full creative services — photo, video, web, design" },
+  { title: "Services", href: "/services", desc: "Full creative services for photo, video, web, and design" },
   { title: "Blog", href: "/blog", desc: "Articles, insights, and creative industry news" },
   { title: "Merch", href: "/merch", desc: "Print-on-demand apparel, accessories, and art" },
   { title: "Plans & Pricing", href: "/plans", desc: "Starter, Business, Pro, and Ultimate plans" },
   { title: "Community", href: "/community", desc: "Forums, discussions, and creator community" },
-  { title: "Contact", href: "/contact", desc: "Get in touch — book a call or send a message" },
+  { title: "Contact", href: "/contact", desc: "Get in touch to book a call or send a message" },
   { title: "Portfolio", href: "/case-studies", desc: "Our creative work and case studies" },
   { title: "About", href: "/about", desc: "Who we are, what we do, and why" },
   { title: "Case Studies", href: "/case-studies", desc: "Deep dives into past projects and results" },

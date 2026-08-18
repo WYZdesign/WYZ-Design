@@ -332,7 +332,7 @@ const SEED_THREADS = [
     author: "maya.k",
     avatar: "#DF3131",
     time: "1d",
-    body: "Spent months figuring out why my RGB-to-CMYK conversions kept looking muddy. Here's what finally worked: soft-proof before exporting, use Fogra39 profile, and bump saturation on reds/yellows by 5-8%. Game changer for merchandise printing.",
+    body: "Spent months figuring out why my RGB-to-CMYK conversions kept looking muddy. Here's what finally worked: soft-proof before exporting, use Fogra39 profile, and bump saturation on reds/yellows by 5-8%. This changed everything for my merchandise printing.",
     likes: 38,
     views: 512,
     replies: [

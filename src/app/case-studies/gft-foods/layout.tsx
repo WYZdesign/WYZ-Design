@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Case Study: GFT Foods",
-  description: "How WYZ Design rebranded GFT Foods from local shop to national player — new logo, packaging, e-commerce, and social content.",
+  description: "How WYZ Design rebranded GFT Foods from local shop to national player, with a new logo, packaging, e-commerce, and social content.",
   alternates: { canonical: "https://www.wyzdesign.com/case-studies/gft-foods" },
   openGraph: {
     title: "Case Study: GFT Foods | WYZ Design",

@@ -25,13 +25,13 @@ const ALL_SERVICES_RAW = [
  { cat: "Photography", name: "Photoshoot", price: "$100", dur: "1 HR", desc: "Capture authentic moments with sleek, professional photography.", img: "/images/services/Photography.webp", bookLink: "/booking-calendar/photoshoot" },
  { cat: "Photography", name: "Photo Retouching", price: "$50", dur: "2 HR", desc: "Basic to advanced professional photo retouching.", img: "/images/services/Photo Retouching.jpg", bookLink: "/booking" },
  { cat: "Photography", name: "Event Photography", price: "$200", dur: "3 HR", desc: "Expertly capturing every moment, from public showcases to private events.", img: "/images/services/Event Photography.jpg", bookLink: "/booking-calendar/event-photography" },
- { cat: "Branding Design", name: "Graphic Design", price: "$150", dur: "3 HR", desc: "Transform your vision into stunning reality with customized graphic design.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
- { cat: "Branding Design", name: "Logo Design", price: "$100", dur: "3 HR", desc: "Tailored logos crafted to embody your brand identity.", img: "/images/services/Logo Design.jpg", bookLink: "/booking" },
+ { cat: "Branding Design", name: "Graphic Design", price: "$150", dur: "3 HR", desc: "Bring your vision to life with graphic design that hits.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
+ { cat: "Branding Design", name: "Logo Design", price: "$100", dur: "3 HR", desc: "Custom logos designed to represent who you are.", img: "/images/services/Logo Design.jpg", bookLink: "/booking" },
  { cat: "Videography", name: "Video Shoot", price: "$200", dur: "3 HR", desc: "Make an unforgettable impression with our visual storytelling and professional video production.", img: "/images/services/Video Shoot.jpg", bookLink: "/booking" },
  { cat: "Videography", name: "Video Editing", price: "$200", dur: "4 HR", desc: "Premium video editing with the latest software to bring your footage to life.", img: "/images/services/Video Editing.jpg", bookLink: "/booking" },
- { cat: "Consultation", name: "Creative Consultation", price: "Free", dur: "30 MIN", desc: "Unleash your brand's potential with our expert strategy session.", img: "/images/services/Creative Consultation.avif", bookLink: "/booking" },
+ { cat: "Consultation", name: "Creative Consultation", price: "Free", dur: "30 MIN", desc: "Get a clear game plan for your brand in a free, no-pressure session.", img: "/images/services/Creative Consultation.avif", bookLink: "/booking" },
  { cat: "Consultation", name: "Logo Consultation", price: "$50", dur: "2 HR", desc: "Creating captivating logos through in-depth research and collaborative brainstorming.", img: "/images/services/Logo Consultation.jpg", bookLink: "/booking" },
- { cat: "Consultation", name: "Marketing Consultation", price: "$50", dur: "1 HR", desc: "Expert marketing strategy and actionable guidance to elevate your brand's reach.", img: "/images/services/Marketing Consultation.jpg", bookLink: "/booking" },
+ { cat: "Consultation", name: "Marketing Consultation", price: "$50", dur: "1 HR", desc: "Straightforward marketing advice to help more people find your brand.", img: "/images/services/Marketing Consultation.jpg", bookLink: "/booking" },
  { cat: "Web Design", name: "Website Design", price: "$500", dur: "3 HR", desc: "Professional website design and organization to help your business thrive online.", img: "/images/services/Website Design.jpg", bookLink: "/booking" },
   { cat: "Web Design", name: "SEO Audit", price: "$50", dur: "1 HR", desc: "In-depth website audit for a targeted growth strategy and improved search visibility.", img: "/images/services/SEO.jpg", bookLink: "/booking" },
   { cat: "Branding Design", name: "Brand Identity Package", price: "$300", dur: "6 HR", desc: "Complete brand identity system with logo, color palette, typography, and brand guidelines.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
@@ -125,7 +125,7 @@ return (
   <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
   </h1>
   <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
-   From photography to web design, we deliver end-to-end creative solutions that make your brand stand out.
+   From photography to web design, we handle the full creative process to make your brand stand out.
    </p>
    <Link href="/plans"
    className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all">

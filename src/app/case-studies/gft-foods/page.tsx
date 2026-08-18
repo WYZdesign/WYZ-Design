@@ -31,7 +31,7 @@ export default function GftFoodsCaseStudy() {
           </div>
 
           <div className="space-y-6 text-[15px] text-[#666] dark:text-[#888] leading-relaxed mb-12">
-            <p>GFT Foods came to WYZ Design as a local shop with a loyal following but a look that didn&apos;t match its ambition. They needed a complete rebrand to compete on a national stage — starting with identity and packaging, then extending into e-commerce and social content.</p>
+            <p>GFT Foods came to WYZ Design as a local shop with a loyal following but a look that didn&apos;t match its ambition. They needed a complete rebrand to compete on a national stage, starting with identity and packaging, then extending into e-commerce and social content.</p>
             <p>WYZ Design delivered a new logo system, a packaging refresh across the full product line, a Shopify storefront, and a social content rollout. Within 30 days of launch, inquiry volume tripled.</p>
           </div>
 

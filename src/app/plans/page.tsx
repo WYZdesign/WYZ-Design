@@ -53,8 +53,8 @@ const PLANS = [
 
 const WEB_ADDONS = [
   { name: "Startup", original: "$650/mo", discounted: "$500/mo", desc: "Launch your dream business with confidence. Our startup plan offers the essential tools and support you need to succeed." },
-  { name: "Artist", original: "$400/mo", discounted: "$250/mo", desc: "Simplify your creative journey. Our subscription plan provides everything you need to succeed as an independent artist or brand." },
-  { name: "Enterprise", original: "$900/mo", discounted: "$750/mo", desc: "Power up your business with our comprehensive plan. Designed to help you streamline operations, optimize resources, and drive growth." },
+  { name: "Artist", original: "$400/mo", discounted: "$250/mo", desc: "Keep it simple. Our subscription plan gives independent artists and brands everything they need to succeed." },
+  { name: "Enterprise", original: "$900/mo", discounted: "$750/mo", desc: "Power up your business with a plan that does it all. Built to help you cut costs, work smarter, and grow." },
 ];
 
 const PLAN_KEYS: Record<string, string> = {
@@ -289,42 +289,42 @@ export default function PlansPage() {
             `}</style>
             {/* Massive scattered dollar signs */}
             <div className="absolute inset-0 pointer-events-none">
-              {/* Row 1 — top scattered */}
+              {/* Row 1 × top scattered */}
               <span className="absolute text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-black text-white/10" style={{top:"5%",left:"5%",animation:"pD1 5s ease-in-out infinite"}}>$</span>
               <span className="absolute text-[3.5rem] sm:text-[4rem] lg:text-[5rem] font-black text-white/20" style={{top:"3%",left:"28%",animation:"pD2 7s ease-in-out 0.3s infinite"}}>$</span>
               <span className="absolute text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-black text-white/8" style={{top:"8%",left:"52%",animation:"pD3 6s ease-in-out 1s infinite"}}>$</span>
               <span className="absolute text-[4rem] sm:text-[5rem] lg:text-[6rem] font-black text-white/15" style={{top:"2%",right:"22%",animation:"pD1 8s ease-in-out 0.5s infinite"}}>$</span>
               <span className="absolute text-[1.8rem] sm:text-[2.2rem] lg:text-[2.8rem] font-black text-white/10" style={{top:"6%",right:"5%",animation:"pD4 5.5s ease-in-out 2s infinite"}}>$</span>
 
-              {/* Row 2 — upper mid */}
+              {/* Row 2 × upper mid */}
               <span className="absolute text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] font-black text-[#FFD700]/15" style={{top:"18%",left:"8%",animation:"pD3 6.5s ease-in-out 1.5s infinite"}}>$</span>
               <span className="absolute text-[5rem] sm:text-[6rem] lg:text-[7rem] font-black text-white/12" style={{top:"15%",left:"35%",animation:"pD5 9s ease-in-out 0.8s infinite"}}>$</span>
               <span className="absolute text-[1.5rem] sm:text-[1.8rem] lg:text-[2.2rem] font-black text-white/8" style={{top:"22%",left:"60%",animation:"pD2 5s ease-in-out 2.5s infinite"}}>$</span>
               <span className="absolute text-[3rem] sm:text-[3.5rem] lg:text-[4.5rem] font-black text-[#FFD700]/10" style={{top:"16%",right:"10%",animation:"pD1 7.5s ease-in-out 1.2s infinite"}}>$</span>
               <span className="absolute text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-black text-white/10" style={{top:"20%",right:"30%",animation:"pD4 6s ease-in-out 3s infinite"}}>$</span>
 
-              {/* Row 3 — center scatter */}
+              {/* Row 3 × center scatter */}
               <span className="absolute text-[6rem] sm:text-[7rem] lg:text-[8rem] font-black text-white/8" style={{top:"32%",left:"3%",animation:"pD2 8.5s ease-in-out 0.2s infinite"}}>$</span>
               <span className="absolute text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-black text-white/15" style={{top:"38%",left:"22%",animation:"pD3 5.5s ease-in-out 1.8s infinite"}}>$</span>
               <span className="absolute text-[4.5rem] sm:text-[5rem] lg:text-[5.5rem] font-black text-[#FFD700]/12" style={{top:"34%",left:"48%",animation:"pD1 7s ease-in-out 0.7s infinite"}}>$</span>
               <span className="absolute text-[1.2rem] sm:text-[1.5rem] lg:text-[1.8rem] font-black text-white/10" style={{top:"40%",right:"18%",animation:"pD5 6s ease-in-out 2.2s infinite"}}>$</span>
               <span className="absolute text-[3.5rem] sm:text-[4rem] lg:text-[5rem] font-black text-white/10" style={{top:"36%",right:"3%",animation:"pD4 8s ease-in-out 1.4s infinite"}}>$</span>
 
-              {/* Row 4 — lower mid */}
+              {/* Row 4 × lower mid */}
               <span className="absolute text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] font-black text-white/12" style={{top:"52%",left:"6%",animation:"pD1 6s ease-in-out 2.8s infinite"}}>$</span>
               <span className="absolute text-[5.5rem] sm:text-[6rem] lg:text-[6.5rem] font-black text-[#FFD700]/10" style={{top:"50%",left:"30%",animation:"pD3 9s ease-in-out 0.4s infinite"}}>$</span>
               <span className="absolute text-[1.8rem] sm:text-[2rem] lg:text-[2.5rem] font-black text-white/8" style={{top:"55%",left:"55%",animation:"pD2 5s ease-in-out 3.5s infinite"}}>$</span>
               <span className="absolute text-[3rem] sm:text-[3.5rem] lg:text-[4rem] font-black text-white/15" style={{top:"48%",right:"8%",animation:"pD5 7s ease-in-out 1.1s infinite"}}>$</span>
               <span className="absolute text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-black text-white/10" style={{top:"54%",right:"28%",animation:"pD4 6.5s ease-in-out 2.4s infinite"}}>$</span>
 
-              {/* Row 5 — bottom scatter */}
+              {/* Row 5 × bottom scatter */}
               <span className="absolute text-[4rem] sm:text-[4.5rem] lg:text-[5.5rem] font-black text-white/10" style={{top:"68%",left:"4%",animation:"pD3 7.5s ease-in-out 0.6s infinite"}}>$</span>
               <span className="absolute text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-black text-[#FFD700]/12" style={{top:"72%",left:"25%",animation:"pD1 5.5s ease-in-out 1.9s infinite"}}>$</span>
               <span className="absolute text-[6rem] sm:text-[7rem] lg:text-[8rem] font-black text-white/8" style={{top:"66%",left:"45%",animation:"pD2 10s ease-in-out 0.1s infinite"}}>$</span>
               <span className="absolute text-[2.5rem] sm:text-[3rem] lg:text-[3.5rem] font-black text-white/12" style={{top:"74%",right:"15%",animation:"pD4 6s ease-in-out 3.2s infinite"}}>$</span>
               <span className="absolute text-[1.2rem] sm:text-[1.5rem] lg:text-[2rem] font-black text-white/8" style={{top:"70%",right:"35%",animation:"pD5 5s ease-in-out 2.6s infinite"}}>$</span>
 
-              {/* Row 6 — very bottom */}
+              {/* Row 6 × very bottom */}
               <span className="absolute text-[3rem] sm:text-[3.5rem] lg:text-[4rem] font-black text-white/10" style={{top:"82%",left:"10%",animation:"pD1 6.5s ease-in-out 1.3s infinite"}}>$</span>
               <span className="absolute text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-black text-[#FFD700]/15" style={{top:"85%",left:"38%",animation:"pD3 7s ease-in-out 2.7s infinite"}}>$</span>
               <span className="absolute text-[4.5rem] sm:text-[5rem] lg:text-[6rem] font-black text-white/12" style={{top:"80%",right:"12%",animation:"pD2 8s ease-in-out 0.9s infinite"}}>$</span>
@@ -373,11 +373,11 @@ export default function PlansPage() {
                        <li className="flex justify-between"><span>Graphic Designs</span><span>{["✓ (1)", "✓ (2)", "✓ (3)", "Unlimited"][pi]}</span></li>
                        <li className="flex justify-between"><span>Promo Videos</span><span>{["✓ (1)", "✓ (2)", "✓ (3)", "Unlimited"][pi]}</span></li>
                        <li className="flex justify-between"><span>Custom Printing</span><span>{["$100", "$250", "$250", "Unlimited"][pi]}</span></li>
-                       <li className="flex justify-between"><span>Web Design + Maintenance</span><span>{pi === 3 ? "✓" : "—"}</span></li>
-                       <li className="flex justify-between"><span>Event Planning</span><span>{pi === 3 ? "✓" : "—"}</span></li>
+                       <li className="flex justify-between"><span>Web Design + Maintenance</span><span>{pi === 3 ? "✓" : "×"}</span></li>
+                       <li className="flex justify-between"><span>Event Planning</span><span>{pi === 3 ? "✓" : "×"}</span></li>
                        <li className="flex justify-between"><span>Strategy Consultations</span><span>✓</span></li>
                        <li className="flex justify-between"><span>Loyalty Rewards</span><span>✓</span></li>
-                       <li className="flex justify-between"><span>Priority Support</span><span>{pi === 3 ? "✓" : "—"}</span></li>
+                       <li className="flex justify-between"><span>Priority Support</span><span>{pi === 3 ? "✓" : "×"}</span></li>
                      </ul>
                    </div>
                  );
@@ -440,16 +440,16 @@ export default function PlansPage() {
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
                      <td className="p-4 text-[#666] dark:text-white/70">Web Design + Maintenance</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
                      <td className="p-4 text-[#666] dark:text-white/70">Event Planning</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
@@ -468,9 +468,9 @@ export default function PlansPage() {
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
                      <td className="p-4 text-[#666] dark:text-white/70">Priority Support</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
-                     <td className="p-4 text-center text-[#888]">—</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#888]">×</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                    </tr>
                  </tbody>
@@ -488,7 +488,7 @@ export default function PlansPage() {
           All subscription plans auto-renew monthly or quarterly. You can cancel at any time by contacting our
           customer support team or through your online account. If you cancel before the end of your current
           subscription period, your subscription will still be active until the end of the current period, and
-          you will not receive a refund for any unused portion.
+          you won&apos;t receive a refund for any unused portion.
         </p>
 
         {/* Build Your Own Plan */}
@@ -507,9 +507,9 @@ export default function PlansPage() {
         <div className="mt-10 pb-10">
           <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333333] dark:text-[#e0e0e0] tracking-[0.1em] text-center mb-4">Web Design</h2>
           <p className="text-[16px] text-[#666666] max-w-2xl mb-6 text-center mx-auto">
-            Looking to elevate your online presence? Our Web Design service can help you create a stunning website
-            that reflects your brand&apos;s unique identity. Receive a 10% discount by including it as an add-on to
-            any subscription plan.
+            Want to look your best online? Our Web Design service can help you build a website
+            that reflects your brand&apos;s unique identity. Add it to any subscription plan and
+            you&apos;ll save 10%.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {WEB_ADDONS.map((w, i) => (

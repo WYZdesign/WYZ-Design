@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Events & Event Production",
-  description: "Event production, concert photography, promotional content. From concept to curtains — flyers, social rollout, photo/video recap. Book your event.",
+  description: "Event production, concert photography, promotional content. From concept to curtains, flyers, social rollout, photo/video recap. Book your event.",
   keywords: ["event production", "concert photography", "event flyers", "Los Angeles events"],
   alternates: { canonical: "https://www.wyzdesign.com/events" },
   openGraph: {

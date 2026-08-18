@@ -39,7 +39,7 @@ export default function LoyaltyPage() {
     <div className="max-w-5xl mx-auto px-6">
         <div className="text-center mb-4">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">L O Y A L T Y</h1>
-          <p className="text-[#8F8F8F] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">Join the WYZ Design loyalty program. Earn points with every interaction, unlock exclusive perks, and level up your creative partnership.</p>
+          <p className="text-[#8F8F8F] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">Join the WYZ Design loyalty program. Earn points with every interaction, score exclusive perks, and level up your creative partnership.</p>
         </div>
 
         {session && data ? (
@@ -47,7 +47,7 @@ export default function LoyaltyPage() {
             <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#888] dark:text-white/50 mb-2">Your Points</p>
             <p className="text-[3rem] font-heading font-black" style={{ color: TIERS[tierIndex].color }}>{data.points}</p>
             <p className="text-[14px] uppercase font-bold tracking-[0.1em] mb-2" style={{ color: TIERS[tierIndex].color }}>{TIERS[tierIndex].name} TIER</p>
-            {nextTier && <p className="text-[13px] text-[#888] dark:text-white/50 mt-2">{pointsNeeded} more points to unlock {nextTier.name}</p>}
+            {nextTier && <p className="text-[13px] text-[#888] dark:text-white/50 mt-2">{pointsNeeded} more points to reach {nextTier.name}</p>}
             {!nextTier && <p className="text-[13px] text-[#888] dark:text-white/50 mt-2">Maximum tier reached, enjoy all perks!</p>}
             <div className="mt-6 h-3 bg-gray-100 dark:bg-[#444] rounded-full overflow-hidden">
               <div className="h-full rounded-full transition-all duration-700" style={{ width: `${Math.min(100, ((data.points / (nextTier ? (tierIndex === 0 ? 1000 : 5000) : 5000)) * 100))}%`, background: TIERS[tierIndex].color }} />

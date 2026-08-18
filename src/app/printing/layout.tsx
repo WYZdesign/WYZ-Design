@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Digital Printing",
-  description: "Professional digital printing — stickers, flyers, prints, posters. Premium paper stocks, vibrant colors, fast turnaround. Order online.",
+  description: "Professional digital printing for stickers, flyers, prints, and posters. Premium paper stocks, vibrant colors, fast turnaround. Order online.",
   keywords: ["digital printing", "sticker printing", "flyer printing", "poster printing", "print shop Los Angeles"],
   alternates: { canonical: "https://www.wyzdesign.com/printing" },
   openGraph: {

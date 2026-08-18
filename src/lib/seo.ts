@@ -63,7 +63,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   photography: {
     title: "Photography",
-    description: "Professional photography services — portraits, events, editorial, and commercial. High-resolution images with 24-hour turnaround. Book your session now.",
+    description: "Professional photography services for portraits, events, editorial, and commercial work. High-resolution images with 24-hour turnaround. Book your session now.",
     path: "/photography",
     keywords: ["professional photography", "portrait photography", "event photography", "Los Angeles photographer", "editorial photography"],
     priority: 0.9,
@@ -71,7 +71,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   events: {
     title: "Events & Event Production",
-    description: "Event production, concert photography, and promotional content creation. From concept to curtains — flyers, social rollout, photo/video recap. Book your event.",
+    description: "Event production, concert photography, and promotional content creation. From concept to curtains, we handle flyers, social rollout, and the photo/video recap. Book your event.",
     path: "/events",
     keywords: ["event production", "concert photography", "event flyers", "Los Angeles events", "event planning"],
     priority: 0.8,
@@ -103,7 +103,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   plans: {
     title: "Pricing Plans",
-    description: "Flexible monthly plans for brands, studios, and businesses. From $250/mo — design tasks, strategy calls, content, event support. Cancel anytime.",
+    description: "Flexible monthly plans for brands, studios, and businesses. From $250/mo for design tasks, strategy calls, content, and event support. Cancel anytime.",
     path: "/plans",
     keywords: ["creative agency pricing", "monthly retainer", "branding plan", "design subscription", "creative services pricing"],
     priority: 0.7,
@@ -135,7 +135,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   merch: {
     title: "Merch Store",
-    description: "Official WYZ Design merchandise — hoodies, tees, accessories. Premium quality streetwear inspired by the creative community.",
+    description: "Official WYZ Design merchandise, from hoodies and tees to accessories. Premium streetwear inspired by the creative community.",
     path: "/merch",
     keywords: ["WYZ Design merch", "streetwear", "creative agency merchandise", "designer clothing"],
     priority: 0.6,
@@ -151,7 +151,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   "featured-artist": {
     title: "Featured Artist of the Month",
-    description: "WYZ Design spotlights emerging artists, musicians, and creatives. Get featured — submit your work for a chance to be highlighted on our platform.",
+    description: "WYZ Design spotlights emerging artists, musicians, and creatives. Want to get featured? Submit your work for a shot at the spotlight.",
     path: "/featured-artist",
     keywords: ["featured artist", "emerging artist", "artist spotlight", "creative showcase"],
     priority: 0.7,
@@ -167,7 +167,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   gallery: {
     title: "Gallery",
-    description: "Browse the WYZ Design gallery — photography, design work, events, and creative projects. Visual storytelling at its finest.",
+    description: "Browse the WYZ Design gallery for photography, design work, events, and creative projects. Visual storytelling at its finest.",
     path: "/gallery",
     keywords: ["creative gallery", "photography gallery", "design portfolio", "visual portfolio"],
     priority: 0.6,
@@ -191,7 +191,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   wyzmind: {
     title: "WYZMiND Systems",
-    description: "AI-powered creative infrastructure — intake bots, client portals, booking automation, workflow intelligence. Technology that scales your creative business.",
+    description: "Custom AI tools for creatives, from intake bots and client portals to booking automation. Technology that scales your creative business.",
     path: "/wyzmind",
     keywords: ["AI creative tools", "client portal", "booking automation", "workflow intelligence"],
     priority: 0.7,
@@ -199,7 +199,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   search: {
     title: "Search",
-    description: "Search WYZ Design — find services, portfolio work, articles, and resources across our entire platform.",
+    description: "Search WYZ Design to find services, portfolio work, articles, and resources across our whole platform.",
     path: "/search",
     noindex: true,
     priority: 0.3,
@@ -215,7 +215,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   "case-studies-artfinix": {
     title: "Case Study: Artfinix",
-    description: "How WYZ Design helped Artfinix build a complete brand identity — from logo to web to social presence.",
+    description: "How WYZ Design helped Artfinix build a complete brand identity, from logo and web to social presence.",
     path: "/case-studies/artfinix",
     keywords: ["Artfinix", "brand identity", "case study"],
     priority: 0.5,
@@ -247,7 +247,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   "service-event-photo": {
     title: "Event Photography Service",
-    description: "Expert event photography — concerts, showcases, private events, corporate functions. Starting at $200 for 3 hours. Book today.",
+    description: "Expert event photography for concerts, showcases, private events, and corporate functions. Starting at $200 for 3 hours. Book today.",
     path: "/service-page/event-photography",
     keywords: ["event photography", "concert photography", "event documentation"],
     priority: 0.6,
@@ -255,7 +255,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   "service-consultation": {
     title: "Creative Consultation",
-    description: "Free creative consultation to unleash your brand's potential. Expert strategy sessions with actionable steps. Book your free call.",
+    description: "Free creative consultation to get a clear game plan for your brand. A no-pressure strategy session with practical next steps. Book your free call.",
     path: "/service-page/creative-consultation",
     keywords: ["creative consultation", "brand strategy", "free consultation"],
     priority: 0.6,

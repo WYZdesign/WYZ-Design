@@ -119,7 +119,7 @@ export default function CookieBanner() {
             <FiGlobe className="w-6 h-6 text-[#DF3131] flex-shrink-0" />
             <div>
               <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg">Cookie Preferences</h3>
-              <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to enhance your experience.</p>
+              <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to make the site work better for you.</p>
             </div>
           </div>
           <button ref={closeBtnRef} onClick={() => saveConsent({ necessary: true, analytics: false, marketing: false })} className="text-[#888] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">

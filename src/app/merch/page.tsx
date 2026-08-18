@@ -165,7 +165,7 @@ function DynamicContentUnderHero() {
   const features = [
     { title: "CUSTOM PRINTING", desc: "Every design is printed to order with premium inks on quality garments.", icon: "✦" },
     { title: "CREW APPROVED", desc: "All designs are worn and tested by the Dying Breed Crew themselves.", icon: "✦" },
-    { title: "QUALITY GUARANTEED", desc: "Not satisfied? We'll make it right — no questions asked.", icon: "✦" },
+    { title: "QUALITY GUARANTEED", desc: "Not satisfied? We'll make it right, no questions asked.", icon: "✦" },
   ];
   return (
     <section className="py-12 sm:py-16 bg-[#FEFEFD]">
@@ -312,7 +312,7 @@ function DynamicContentUnderShop() {
         <div className="text-center mb-8 sm:mb-12">
           <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">MEET THE CREW</span>
           <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Every Piece Tells A Story</h2>
-          <p className="text-[#666] dark:text-[#999] text-[15px] max-w-2xl mx-auto mt-3">The Dying Breed Crew isn't just a band — it's a family of creators, artists, and rebels who refuse to conform. Every design in our collection is worn and approved by the crew members themselves.</p>
+          <p className="text-[#666] dark:text-[#999] text-[15px] max-w-2xl mx-auto mt-3">The Dying Breed Crew isn't just a band, it's a family of creators, artists, and rebels who refuse to conform. Every design in our collection is worn and approved by the crew members themselves.</p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4">
           {DBC_MODEL_MOCKUPS.slice(0, 8).map((m, i) => (
