@@ -163,9 +163,9 @@ function ParallaxHero() {
 
 function DynamicContentUnderHero() {
   const features = [
-    { title: "CUSTOM PRINTING", desc: "Every design is printed to order with premium inks on quality garments.", icon: "🎨" },
-    { title: "CREW APPROVED", desc: "All designs are worn and tested by the Dying Breed Crew themselves.", icon: "✅" },
-    { title: "QUALITY GUARANTEED", desc: "Not satisfied? We'll make it right — no questions asked.", icon: "🔒" },
+    { title: "CUSTOM PRINTING", desc: "Every design is printed to order with premium inks on quality garments.", icon: "✦" },
+    { title: "CREW APPROVED", desc: "All designs are worn and tested by the Dying Breed Crew themselves.", icon: "✦" },
+    { title: "QUALITY GUARANTEED", desc: "Not satisfied? We'll make it right — no questions asked.", icon: "✦" },
   ];
   return (
     <section className="py-12 sm:py-16 bg-[#FEFEFD]">
