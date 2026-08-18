@@ -5,9 +5,9 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
 const CARDS = [
-  { title: "GRAPHIC DESIGNS", desc: "Elevate your brand with expert graphic design that captivates and sets you apart. Visit the graphic design page to browse our portfolio.", href: "/designs", cta: "View Gallery" },
-  { title: "PHOTOGRAPHY", desc: "Engage and inspire with stunning photography that captures your brand\u2019s essence \u2014 from product shots to lifestyle imagery. Visit our photography page to view albums.", href: "/photography", cta: "View Albums" },
-  { title: "EVENT RECAPS", desc: "Relive the magic with our captivating event recaps. We capture every moment to tell your story with power and authenticity. Visit our event recaps page to see the magic for yourself.", href: "/events", cta: "View Recaps" },
+  { title: "GRAPHIC DESIGNS", desc: "Stand out with graphic design that actually gets attention. Visit the graphic design page to browse our portfolio.", href: "/designs", cta: "View Gallery" },
+  { title: "PHOTOGRAPHY", desc: "Photography that catches your brand at its best, from product shots to lifestyle imagery. Visit our photography page to view albums.", href: "/photography", cta: "View Albums" },
+  { title: "EVENT RECAPS", desc: "Relive the night with our event recaps. We catch every moment so you can tell your story your way. Visit our event recaps page to see it for yourself.", href: "/events", cta: "View Recaps" },
 ];
 
 export default function CTA() {

@@ -272,7 +272,7 @@ export default function FeaturedArtistPage() {
   </div>
   <div className="p-8 bg-white dark:bg-white/5 border border-[#E2E2E2] dark:border-white/10 hover:border-[#DF3131]/50 transition-all duration-300 text-center">
   <span className="text-[#DF3131] font-heading font-bold text-[13px] tracking-[0.15em] uppercase block mb-2">Why It Exists</span>
-  <h3 className="font-heading font-bold text-[#333] dark:text-white text-[18px] tracking-[0.04em] mb-3">Elevate Talent</h3>
+  <h3 className="font-heading font-bold text-[#333] dark:text-white text-[18px] tracking-[0.04em] mb-3">Lift Up Talent</h3>
   <p className="text-[#666] dark:text-white/50 text-[14px] leading-relaxed">Artists deserve a stage. FAOTM exists to bridge the gap between talented creators and the communities that need to see their work.</p>
   </div>
   <div className="p-8 bg-white dark:bg-white/5 border border-[#E2E2E2] dark:border-white/10 hover:border-[#DF3131]/50 transition-all duration-300 text-center">

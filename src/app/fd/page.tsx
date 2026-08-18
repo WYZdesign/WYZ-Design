@@ -538,9 +538,9 @@ export default function FDOraclePage() {
                 <h3 className="text-purple-400 font-bold text-lg mb-3">THE MUSE</h3>
                 <ul className="space-y-2 text-zinc-400 text-sm">
                   <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Generates never-done-before concepts</li>
-                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Leverages unique studio features (jet, underwater, RGB cave)</li>
+                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Uses unique studio features (jet, underwater, RGB cave)</li>
                   <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Low-setup, high-creative-impact events</li>
-                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Cross-building synergies for visual variety</li>
+                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />Mixes studio features across buildings for visual variety</li>
                 </ul>
               </div>
             </div>
