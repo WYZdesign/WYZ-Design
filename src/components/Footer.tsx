@@ -86,7 +86,7 @@ export default function Footer() {
   const inputBg = "bg-white text-[14px] text-[#333] placeholder:text-[#999] border-[#333]";
 
   return (
-    <footer className="relative overflow-hidden">
+    <footer className="relative overflow-hidden bg-[#111] dark:bg-[#f0f0f0]">
       {/* Newsletter banner */}
       <div className="bg-[#111] dark:bg-[#f0f0f0]">
         <div className="max-w-[115rem] mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-6">

@@ -107,7 +107,6 @@ const CLIENT_LOGOS = shuffleArray([
   { name: "KTM", img: "/images/client-logos/ktm.jpg" },
   { name: "Ynot", img: "/images/client-logos/ynot.jpg" },
   { name: "XXXtra Society", img: "/images/client-logos/xxxtra-society.jpg" },
-  { name: "Abstract Hawk", img: "/images/client-logos/abstract-hawk.jpg" },
   { name: "GNP", img: "/images/client-logos/gnp.jpg" },
   { name: "Greater Emmanuel", img: "/images/client-logos/greater-emmanuel.jpg" },
   { name: "Enticing Cafe", img: "/images/client-logos/33_Enticing_Cafe_Final_Logo_2.jpg" },
@@ -131,11 +130,6 @@ const CLIENT_LOGOS = shuffleArray([
   { name: "Redeaux", img: "/images/client-logos/Redeaux Logo.png" },
   { name: "Sheba", img: "/images/client-logos/Sheba logo draft 3.png" },
   { name: "Win E", img: "/images/client-logos/Win E Logo (no background).png" },
-  { name: "Cocktails", img: "/images/client-logos/logo cocktails.jpg" },
-  { name: "Hairpin", img: "/images/client-logos/Copy+of+Hairpin_Pins.jpg" },
-  { name: "BDSM", img: "/images/client-logos/BDSM Logo Draft copy.jpg" },
-  { name: "Justy Font", img: "/images/client-logos/41_JUSTY_font.jpg" },
-  { name: "Creator", img: "/images/client-logos/Creator.png" },
 ]);
 
 const SERVICES = [

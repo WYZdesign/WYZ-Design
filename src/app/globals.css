@@ -944,7 +944,7 @@ section:first-of-type {
 }
 
 /* Performance optimizations */
-.hero-banner { contain: layout style; }
+.hero-banner { contain: layout; }
 video { will-change: auto; }
 
 /* GPU acceleration for animated elements */
