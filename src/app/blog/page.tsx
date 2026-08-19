@@ -6,21 +6,7 @@ import { FiArrowRight, FiClock, FiTag, FiSearch, FiTrendingUp } from "react-icon
 import ScrollReveal from "@/components/ScrollReveal";
 import TextReveal from "@/components/TextReveal";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-
-const POSTS = [
- { id: 1, title: "Behind the Scenes: FD Mixer Vol. 6", excerpt: "An inside look at our latest event photography session, from setup to the final shots.", date: "May 15, 2026", cat: "Events", img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop", featured: true, readTime: "5 min" },
- { id: 2, title: "Logo Design Trends for 2026", excerpt: "The top logo styles dominating this year and how WYZ Design stays ahead of the curve.", date: "Apr 28, 2026", cat: "Design", img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=600&fit=crop", featured: false, readTime: "4 min" },
- { id: 3, title: "How to Prepare for Your Photoshoot", excerpt: "A complete guide to getting camera-ready, wardrobe, lighting preferences, and posing tips.", date: "Apr 10, 2026", cat: "Photography", img: "https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=800&h=600&fit=crop", featured: false, readTime: "6 min" },
- { id: 4, title: "Why Your Brand Needs a Style Guide", excerpt: "Consistency is king. Here is why every business needs a cohesive visual identity.", date: "Mar 22, 2026", cat: "Branding", img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop", featured: false, readTime: "3 min" },
- { id: 5, title: "Event Photography: Capturing the Moment", excerpt: "Techniques we use to freeze authentic moments at live events and concerts.", date: "Mar 5, 2026", cat: "Events", img: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop", featured: false, readTime: "5 min" },
-  { id: 6, title: "The Power of Retouching", excerpt: "Why professional retouching matters and how it makes your portfolio better.", date: "Feb 18, 2026", cat: "Photography", img: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop", featured: false, readTime: "4 min" },
- { id: 7, title: "Top 10 Branding Trends for 2026", excerpt: "From kinetic logos to AI-generated palettes, these emerging brand design trends are reshaping how businesses present themselves. Stay ahead of the curve with what is defining visual identity this year.", date: "July 10, 2026", cat: "Branding", img: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop", featured: false, readTime: "7 min" },
- { id: 8, title: "Why Your Business Needs a Professional Website", excerpt: "Your website is your digital storefront and first impressions happen in milliseconds. A professional web presence builds trust, drives conversions, and keeps you competitive in an online-first world.", date: "July 8, 2026", cat: "Web Design", img: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop", featured: false, readTime: "5 min" },
- { id: 9, title: "The Art of Event Photography: Capturing Moments", excerpt: "Great event photography goes beyond pointing and shooting, it is about reading the room, anticipating emotion, and telling a story through frames. Here are the techniques that separate snapshots from art.", date: "July 5, 2026", cat: "Photography", img: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&h=600&fit=crop", featured: false, readTime: "6 min" },
- { id: 10, title: "Custom Printing: From Concept to Creation", excerpt: "Taking a design from screen to physical product involves color profiles, material selection, and finishing techniques. This walkthrough covers the full custom printing pipeline.", date: "July 2, 2026", cat: "Printing", img: "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=800&h=600&fit=crop", featured: false, readTime: "5 min" },
- { id: 11, title: "How to Build a Strong Social Media Presence", excerpt: "Consistency, authenticity, and strategy are the pillars of a social media presence that actually converts. Learn the frameworks that turn followers into loyal customers.", date: "June 28, 2026", cat: "Marketing", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop", featured: false, readTime: "4 min" },
- { id: 12, title: "Freelance Designer's Guide to Client Management", excerpt: "Managing expectations, scope, and communication is what separates thriving freelancers from burning out. These battle-tested strategies will keep your clients happy and your boundaries intact.", date: "June 25, 2026", cat: "Business", img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop", featured: false, readTime: "6 min" },
-];
+import { POSTS } from "@/lib/blog";
 
 const CATS = ["All", "Events", "Design", "Photography", "Branding", "Web Design", "Printing", "Marketing", "Business"];
 
@@ -64,7 +50,7 @@ export default function BlogPage() {
  </div>
  </div>
   {featured && (
-  <Link href="#articles" className="hidden lg:block relative overflow-hidden group">
+  <Link href={`/blog/${featured.slug}`} className="hidden lg:block relative overflow-hidden group">
   <SafeImage src={featured.img} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" priority />
   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
   <div className="absolute bottom-0 left-0 right-0 p-10">
@@ -117,7 +103,7 @@ export default function BlogPage() {
   <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
   {filtered.map((p, i) => (
     <ScrollReveal key={p.id} animation="fadeUp" delay={0.08 * i}>
-    <article className="blog-card group bg-white dark:bg-[#2b2b2e] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333] cursor-pointer min-h-[44px]">
+    <Link href={`/blog/${p.slug}`} className="blog-card group block bg-white dark:bg-[#2b2b2e] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333]">
       <div className="relative h-56 overflow-hidden">
       <SafeImage src={p.img} alt={p.title} className="blog-img w-full h-full object-cover dark:brightness-110" loading="lazy" priority={false} />
       </div>
@@ -127,15 +113,15 @@ export default function BlogPage() {
     <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>
    <span>•</span>
    <span>{p.date}</span>
-   </div>
+    </div>
    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] group-hover:text-[#DF3131] transition-colors leading-snug mb-3">{p.title}</h3>
    <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
    <div className="mt-4 flex items-center justify-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
    READ MORE <FiArrowRight className="w-3.5 h-3.5" />
    </div>
-   </div>
-   </article>
-   </ScrollReveal>
+    </div>
+    </Link>
+    </ScrollReveal>
   ))}
   </div>
   </ErrorBoundary>

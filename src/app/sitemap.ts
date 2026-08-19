@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/blog";
 
 const BASE = (process.env.NEXT_PUBLIC_URL || "https://www.wyzdesign.com").replace(/^\uFEFF/, "").trim();
 
@@ -52,10 +53,17 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  return PUBLIC_ROUTES.map((r) => ({
+  const routes = PUBLIC_ROUTES.map((r) => ({
     url: `${BASE}${r.path}`,
     lastModified: now,
     changeFrequency: r.changeFrequency || "monthly",
     priority: r.priority || 0.5,
   }));
+  const posts = getAllPosts().map((p) => ({
+    url: `${BASE}/blog/${p.slug}`,
+    lastModified: new Date(p.dateISO),
+    changeFrequency: "yearly" as const,
+    priority: 0.5,
+  }));
+  return [...routes, ...posts];
 }
