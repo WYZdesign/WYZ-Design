@@ -20,6 +20,7 @@ const SITEMAP = {
   Company: [
     { href: "/home", label: "Home" },
     { href: "/about", label: "About" },
+    { href: "/brands", label: "Our Brands" },
     { href: "/plans", label: "Pricing" },
     { href: "/merch", label: "Merch Store" },
     { href: "/gift-card", label: "Gift Cards" },

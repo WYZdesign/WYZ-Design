@@ -189,6 +189,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               alternateName: ["WYZ", "WYZ Design LLC", "Wild Yet Zealous"],
               naics: "541430",
               slogan: "Wild vision. Zealous execution.",
+              brand: [
+                { "@id": "https://www.wyzdesign.com/#wild-yet-zealous" },
+                { "@id": "https://www.wyzdesign.com/#dying-breed-crew" },
+                { "@id": "https://www.wyzdesign.com/#nomadic-breed" },
+              ],
             }),
           }}
         />
@@ -213,6 +218,53 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 "https://instagram.com/wyzdesign",
                 "https://twitter.com/WYZdesign",
               ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Brand",
+              "@id": "https://www.wyzdesign.com/#wild-yet-zealous",
+              name: "Wild Yet Zealous",
+              slogan: "Wild vision. Zealous execution.",
+              description: "The creative philosophy and parent brand behind WYZ Design. Born in Chicago's DIY art and music scene.",
+              url: "https://www.wyzdesign.com/about",
+              parentOrganization: { "@id": "https://www.wyzdesign.com/#organization" },
+              founder: { "@id": "https://www.wyzdesign.com/#torree-marcel" },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Brand",
+              "@id": "https://www.wyzdesign.com/#dying-breed-crew",
+              name: "Dying Breed Crew",
+              alternateName: ["DBC", "Dying Breed"],
+              description: "The community and clothing arm of WYZ Design. A collective of artists, musicians, models, and culture-makers.",
+              url: "https://www.wyzdesign.com/merch",
+              parentOrganization: { "@id": "https://www.wyzdesign.com/#organization" },
+              founder: { "@id": "https://www.wyzdesign.com/#torree-marcel" },
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Brand",
+              "@id": "https://www.wyzdesign.com/#nomadic-breed",
+              name: "Nomadic Breed",
+              description: "The mobile arm of WYZ Design, built for pop-up shoots and touring event coverage.",
+              url: "https://www.wyzdesign.com/events",
+              parentOrganization: { "@id": "https://www.wyzdesign.com/#organization" },
+              founder: { "@id": "https://www.wyzdesign.com/#torree-marcel" },
             }),
           }}
         />
