@@ -103,7 +103,7 @@ export default function AboutPage() {
                  We believe every artist, brand, and creative deserves access to professional-grade design, photography, and creative strategy, without the gatekeeping, without the pretension, and without paying for work that looks like it came from a template.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
-                 WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel</span> built this from the ground up: over 60 events produced, over 30 clients supported, and a creative standard that doesn't drop based on who's paying.
+                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel Harris</span> built this from the ground up: over 60 events produced, over 30 clients supported, and a creative standard that doesn't drop based on who's paying.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed">
                  Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them. We don't outsource. We don't pass you around. We do the work ourselves, from first conversation to final delivery.
@@ -120,18 +120,18 @@ export default function AboutPage() {
             <div className="flex flex-col items-center gap-12 text-center">
               <div className="w-full max-w-md">
                 <div className="relative aspect-[3/4] max-w-sm mx-auto overflow-hidden">
-                  <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel, Founder of WYZ Design" fill className="w-full h-full object-cover" priority />
+                   <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel Harris, Founder of WYZ Design" fill className="w-full h-full object-cover" priority />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#DF3131]/10 via-transparent to-transparent" />
                 </div>
               </div>
               <div className="w-full">
                 <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">The Founder</span>
                 <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-4" style={{ lineHeight: 1 }}>
-                  TORREÉ <span className="text-[#DF3131]">MARCEL</span>
+                  TORREÉ <span className="text-[#DF3131]">MARCEL</span> HARRIS
                 </h2>
                 <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">
                   <p>
-                    Torreé Marcel (also known as Torre Harris) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. What started as making flyers for local artists became a brand that serves over 30 clients and has produced 60+ events.
+                    Torreé Marcel Harris (Torreé Marcel, or Torre Harris) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. What started as making flyers for local artists became a brand that serves over 30 clients and has produced 60+ events.
                   </p>
                   <p>
                     With a background in graphic design, event production, and brand strategy, Torreé saw a gap in the market: artists and small brands were being underserved by agencies that didn't understand their vision, or overcharged for work that didn't reflect their identity. WYZ Design was the answer.

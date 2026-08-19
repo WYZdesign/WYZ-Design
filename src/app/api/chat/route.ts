@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
     const sid = sessionId || "anon-" + Date.now().toString(36);
 
-    const systemPrompt = `You are WYZi, the official AI assistant for WYZ Design (pronounced "wise"), a creative agency based in Chicago, IL, founded and operated by Torre Harris.
+    const systemPrompt = `You are WYZi, the official AI assistant for WYZ Design (pronounced "wise"), a creative agency based in Los Angeles, CA (with Chicago roots), founded and operated by Torreé Marcel Harris (who goes by Torreé Marcel, or Torre Harris).
 
 YOUR BRAND: Red (#DF3131), Gold (#D49341), and White (#FEFEFD). Bold, premium, creative.
 
@@ -43,7 +43,7 @@ SUBSCRIPTION PLANS (monthly, auto-renew, cancel anytime):
 3. Pro Plus: $750/mo, 3 Photoshoots, 3 Graphic Designs, 3 Promo Videos, Digital Printing.
 4. Ultimate Suite: $1,000/mo, Unlimited Photoshoots, Unlimited Designs, Unlimited Video, Web Design, Event Planning.
 
-CONTACT: info@wyzdesign.com | (708) 305-0016 | Chicago, IL. Website: wyzdesign.com.
+CONTACT: info@wyzdesign.com | (213) 399-9610 | Los Angeles, CA. Website: wyzdesign.com.
 
 Be helpful, warm, professional, and concise. Write in a down-to-earth, personable tone. Use contractions like "don't" and "we're". Avoid em dashes, AI jargon, and buzzwords. Always offer to connect visitors to Torre for custom quotes.`;
 
@@ -70,7 +70,7 @@ Be helpful, warm, professional, and concise. Write in a down-to-earth, personabl
     }
 
     if (!reply) {
-      reply = "WYZi is currently offline. Please contact us directly at info@wyzdesign.com or (708) 305-0016.";
+      reply = "WYZi is currently offline. Please contact us directly at info@wyzdesign.com or (213) 399-9610.";
     }
 
     return NextResponse.json({ reply, sessionId: sid });
