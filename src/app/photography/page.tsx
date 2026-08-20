@@ -243,21 +243,33 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  const [carousel2, setCarousel2] = useState<string[]>([]);
  const [carousel3, setCarousel3] = useState<string[]>([]);
 
- const FEATURED_MODELS = useMemo(() => shuffleArray([
- { name: "ADRIENNE", cover: "/images/photography/carousel_3/wix_0283.jpg", title: "Signed Model" },
- { name: "CAMILLE", cover: "/images/photography/carousel_3/wix_0285.jpg", title: "Professional" },
- { name: "CRISTINA", cover: "/images/photography/carousel_3/wix_0287.jpg", title: "Experienced" },
- { name: "DANIELLE", cover: "/images/photography/carousel_3/wix_0289.jpg", title: "Rising Star" },
- { name: "STAR", cover: "/images/photography/carousel_3/wix_0291.jpg", title: "Featured" },
- { name: "SYDNEY", cover: "/images/photography/carousel_3/wix_0296.jpg", title: "New Face" },
- { name: "WOLF", cover: "/images/photography/carousel_3/wix_0298.jpg", title: "Editorial" },
- ]), []);
+ const [featuredModels, setFeaturedModels] = useState([
+  { name: "ADRIENNE", cover: "/images/photography/carousel_3/wix_0283.jpg", title: "Signed Model" },
+  { name: "CAMILLE", cover: "/images/photography/carousel_3/wix_0285.jpg", title: "Professional" },
+  { name: "CRISTINA", cover: "/images/photography/carousel_3/wix_0287.jpg", title: "Experienced" },
+  { name: "DANIELLE", cover: "/images/photography/carousel_3/wix_0289.jpg", title: "Rising Star" },
+  { name: "STAR", cover: "/images/photography/carousel_3/wix_0291.jpg", title: "Featured" },
+  { name: "SYDNEY", cover: "/images/photography/carousel_3/wix_0296.jpg", title: "New Face" },
+  { name: "WOLF", cover: "/images/photography/carousel_3/wix_0298.jpg", title: "Editorial" },
+ ]);
+
+ useEffect(() => {
+  setFeaturedModels(shuffleArray([
+  { name: "ADRIENNE", cover: "/images/photography/carousel_3/wix_0283.jpg", title: "Signed Model" },
+  { name: "CAMILLE", cover: "/images/photography/carousel_3/wix_0285.jpg", title: "Professional" },
+  { name: "CRISTINA", cover: "/images/photography/carousel_3/wix_0287.jpg", title: "Experienced" },
+  { name: "DANIELLE", cover: "/images/photography/carousel_3/wix_0289.jpg", title: "Rising Star" },
+  { name: "STAR", cover: "/images/photography/carousel_3/wix_0291.jpg", title: "Featured" },
+  { name: "SYDNEY", cover: "/images/photography/carousel_3/wix_0296.jpg", title: "New Face" },
+  { name: "WOLF", cover: "/images/photography/carousel_3/wix_0298.jpg", title: "Editorial" },
+  ]));
+ }, []);
  const [modelIdx, setModelIdx] = useState(0);
  const [modelAutoPlay, setModelAutoPlay] = useState(true);
  const [applicationSubmitted, setApplicationSubmitted] = useState(false);
 
  useEffect(() => {
- // Fetch model best-per-model photos for FEATURED_MODELS carousel
+ // Fetch model best-per-model photos for featuredModels carousel
  fetch("/api/model-photos?mode=best-per-model")
  .then((r) => r.json())
  .then((d) => setModelPhotos(d.photos || []))
@@ -309,7 +321,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
 
  useEffect(() => {
  if (!modelAutoPlay) return;
- const t = setInterval(() => setModelIdx(i => (i + 1) % FEATURED_MODELS.length), 2500);
+ const t = setInterval(() => setModelIdx(i => (i + 1) % featuredModels.length), 2500);
  return () => clearInterval(t);
  }, [modelAutoPlay]);
 
@@ -377,37 +389,71 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  "/images/photography/carousel_2/wix_0350.jpg",
  ];
 
- const CAROUSEL_IMAGES_3 = useMemo(() => shuffleArray([
- "/images/photography/carousel_3/wix_0329.jpg",
- "/images/photography/carousel_3/wix_0283.jpg",
- "/images/photography/carousel_3/wix_0285.jpg",
- "/images/photography/carousel_3/wix_0287.jpg",
- "/images/photography/carousel_3/wix_0289.jpg",
- "/images/photography/carousel_3/wix_0291.jpg",
- "/images/photography/carousel_3/wix_0294.jpg",
- "/images/photography/carousel_3/wix_0296.jpg",
- "/images/photography/carousel_3/wix_0298.jpg",
- "/images/photography/carousel_3/wix_0299.jpg",
- "/images/photography/carousel_3/wix_0303.jpg",
- "/images/photography/carousel_3/wix_0305.jpg",
- "/images/photography/carousel_3/wix_0308.jpg",
- "/images/photography/carousel_3/wix_0309.jpg",
- "/images/photography/carousel_3/wix_0311.jpg",
- "/images/photography/carousel_3/wix_0319.jpg",
- "/images/photography/carousel_3/wix_0321.jpg",
- "/images/photography/carousel_3/wix_0324.jpg",
- "/images/photography/carousel_3/wix_0326.jpg",
- "/images/photography/carousel_3/wix_0328.jpg",
- "/images/photography/carousel_3/wix_0352.jpg",
- "/images/photography/carousel_3/wix_0353.jpg",
- "/images/photography/carousel_3/wix_0355.jpg",
- "/images/photography/carousel_3/wix_0356.jpg",
- "/images/photography/carousel_3/wix_0360.jpg",
- "/images/photography/carousel_3/wix_0361.jpg",
- "/images/photography/carousel_3/wix_0366.jpg",
- "/images/photography/carousel_3/wix_0369.jpg",
- "/images/photography/carousel_3/wix_0371.jpg",
- ]), []);
+ const [carouselImages3, setCarouselImages3] = useState<string[]>([
+  "/images/photography/carousel_3/wix_0329.jpg",
+  "/images/photography/carousel_3/wix_0283.jpg",
+  "/images/photography/carousel_3/wix_0285.jpg",
+  "/images/photography/carousel_3/wix_0287.jpg",
+  "/images/photography/carousel_3/wix_0289.jpg",
+  "/images/photography/carousel_3/wix_0291.jpg",
+  "/images/photography/carousel_3/wix_0294.jpg",
+  "/images/photography/carousel_3/wix_0296.jpg",
+  "/images/photography/carousel_3/wix_0298.jpg",
+  "/images/photography/carousel_3/wix_0299.jpg",
+  "/images/photography/carousel_3/wix_0303.jpg",
+  "/images/photography/carousel_3/wix_0305.jpg",
+  "/images/photography/carousel_3/wix_0308.jpg",
+  "/images/photography/carousel_3/wix_0309.jpg",
+  "/images/photography/carousel_3/wix_0311.jpg",
+  "/images/photography/carousel_3/wix_0319.jpg",
+  "/images/photography/carousel_3/wix_0321.jpg",
+  "/images/photography/carousel_3/wix_0324.jpg",
+  "/images/photography/carousel_3/wix_0326.jpg",
+  "/images/photography/carousel_3/wix_0328.jpg",
+  "/images/photography/carousel_3/wix_0352.jpg",
+  "/images/photography/carousel_3/wix_0353.jpg",
+  "/images/photography/carousel_3/wix_0355.jpg",
+  "/images/photography/carousel_3/wix_0356.jpg",
+  "/images/photography/carousel_3/wix_0360.jpg",
+  "/images/photography/carousel_3/wix_0361.jpg",
+  "/images/photography/carousel_3/wix_0366.jpg",
+  "/images/photography/carousel_3/wix_0369.jpg",
+  "/images/photography/carousel_3/wix_0371.jpg",
+ ]);
+
+ useEffect(() => {
+  setCarouselImages3(shuffleArray([
+  "/images/photography/carousel_3/wix_0329.jpg",
+  "/images/photography/carousel_3/wix_0283.jpg",
+  "/images/photography/carousel_3/wix_0285.jpg",
+  "/images/photography/carousel_3/wix_0287.jpg",
+  "/images/photography/carousel_3/wix_0289.jpg",
+  "/images/photography/carousel_3/wix_0291.jpg",
+  "/images/photography/carousel_3/wix_0294.jpg",
+  "/images/photography/carousel_3/wix_0296.jpg",
+  "/images/photography/carousel_3/wix_0298.jpg",
+  "/images/photography/carousel_3/wix_0299.jpg",
+  "/images/photography/carousel_3/wix_0303.jpg",
+  "/images/photography/carousel_3/wix_0305.jpg",
+  "/images/photography/carousel_3/wix_0308.jpg",
+  "/images/photography/carousel_3/wix_0309.jpg",
+  "/images/photography/carousel_3/wix_0311.jpg",
+  "/images/photography/carousel_3/wix_0319.jpg",
+  "/images/photography/carousel_3/wix_0321.jpg",
+  "/images/photography/carousel_3/wix_0324.jpg",
+  "/images/photography/carousel_3/wix_0326.jpg",
+  "/images/photography/carousel_3/wix_0328.jpg",
+  "/images/photography/carousel_3/wix_0352.jpg",
+  "/images/photography/carousel_3/wix_0353.jpg",
+  "/images/photography/carousel_3/wix_0355.jpg",
+  "/images/photography/carousel_3/wix_0356.jpg",
+  "/images/photography/carousel_3/wix_0360.jpg",
+  "/images/photography/carousel_3/wix_0361.jpg",
+  "/images/photography/carousel_3/wix_0366.jpg",
+  "/images/photography/carousel_3/wix_0369.jpg",
+  "/images/photography/carousel_3/wix_0371.jpg",
+  ]));
+ }, []);
 
 return (
   <main className="pb-0 bg-white dark:bg-[#111]">
@@ -457,14 +503,13 @@ return (
     </div>
     <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 py-12 min-h-[500px] h-full">
    <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
-     <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
-     <span className="text-[#DF3131]">CREATING</span><br />
-     MEMORIES
+     <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
+     <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
      <p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-2">
       Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
       </p>
-      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-black text-white bg-black text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all">
+      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#DF3131] text-white bg-[#DF3131] text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#DF3131] hover:border-white transition-all">
        BOOK A SHOOT
        </Link>
    </div>
@@ -482,9 +527,8 @@ return (
    <div className="absolute inset-0 bg-black/30 z-[1]" />
    <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
-     <span className="text-[#DF3131]">CAPTURING</span><br />MOMENTS<br />
-     <span className="text-[#DF3131]">CREATING</span><br />
-     MEMORIES
+     <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
+     <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
      <p className="text-[16px] sm:text-[16px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
       Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
@@ -560,12 +604,12 @@ return (
  {/* Main Featured Card */}
  <div className="absolute inset-0 flex items-center justify-center">
  <div className="relative w-64 h-80 lg:w-72 lg:h-96">
- {FEATURED_MODELS.map((m, i) => {
- const offset = (i - modelIdx + FEATURED_MODELS.length) % FEATURED_MODELS.length;
+ {featuredModels.map((m, i) => {
+ const offset = (i - modelIdx + featuredModels.length) % featuredModels.length;
  const isActive = offset === 0;
- const isPrev = offset === FEATURED_MODELS.length - 1;
+ const isPrev = offset === featuredModels.length - 1;
  const isNext = offset === 1;
- const isHidden = offset > 1 && offset < FEATURED_MODELS.length - 1;
+ const isHidden = offset > 1 && offset < featuredModels.length - 1;
  
  if (isHidden) return null;
  
@@ -579,7 +623,7 @@ return (
  zIndex: isActive ? 10 : isPrev ? 5 : 3,
  filter: isActive ? "none" : "blur(2px)",
  }}
- onClick={() => { if (isNext) setModelIdx((modelIdx + 1) % FEATURED_MODELS.length); if (isPrev) setModelIdx((modelIdx - 1 + FEATURED_MODELS.length) % FEATURED_MODELS.length); }}
+ onClick={() => { if (isNext) setModelIdx((modelIdx + 1) % featuredModels.length); if (isPrev) setModelIdx((modelIdx - 1 + featuredModels.length) % featuredModels.length); }}
  >
  <div className={`w-full h-full bg-white dark:bg-[#2b2b2e] rounded-lg overflow-hidden shadow-2xl ${isActive ? "ring-2 ring-[#DF3131] ring-offset-4 dark:ring-offset-[#252528]" : ""}`}>
  <div className="aspect-[3/4] overflow-hidden relative">
@@ -597,7 +641,7 @@ return (
  </div>
   {/* Navigation Dots */}
   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
-  {FEATURED_MODELS.map((_, i) => (
+  {featuredModels.map((_, i) => (
   <button
   key={i}
   onClick={() => setModelIdx(i)}
@@ -609,10 +653,10 @@ return (
   ))}
   </div>
  {/* Nav Arrows */}
- <button onClick={() => setModelIdx((modelIdx - 1 + FEATURED_MODELS.length) % FEATURED_MODELS.length)} className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
+ <button onClick={() => setModelIdx((modelIdx - 1 + featuredModels.length) % featuredModels.length)} className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
  <FiChevronLeft className="w-5 h-5" />
  </button>
- <button onClick={() => setModelIdx((modelIdx + 1) % FEATURED_MODELS.length)} className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
+ <button onClick={() => setModelIdx((modelIdx + 1) % featuredModels.length)} className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
  <FiChevronRight className="w-5 h-5" />
  </button>
  </div>
@@ -750,7 +794,7 @@ return (
 
  {/* IMAGE CAROUSEL 3 — bottom above footer */}
  <section className="py-6">
-  <AutoScrollRow items={CAROUSEL_IMAGES_3} />
+   <AutoScrollRow items={carouselImages3} />
  </section>
 
   {activeAlbum && <AlbumModal album={activeAlbum} onClose={() => setActiveAlbum(null)} />}

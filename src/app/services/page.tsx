@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StrategyWizard from "@/components/StrategyWizard";
@@ -101,7 +101,11 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
 export default function ServicesPage() {
  const [active, setActive] = useState("All Services");
  const [hoveredTab, setHoveredTab] = useState<string | null>(null);
- const allServices = useMemo(() => shuffleArray(ALL_SERVICES_RAW), []);
+ const [allServices, setAllServices] = useState(ALL_SERVICES_RAW);
+
+ useEffect(() => {
+  setAllServices(shuffleArray(ALL_SERVICES_RAW));
+ }, []);
 
  const filtered = active === "All Services" ? allServices : allServices.filter(s => s.cat === active);
 

@@ -52,8 +52,6 @@ function shuffleArray<T>(arr: T[]): T[] {
  return a;
 }
 
-const LOGO_INTROS = shuffleArray(LOGO_INTROS_RAW);
-
 const HERO_IMAGES_RAW = [
  "/images/home/carousel_top/wix_0094.jpg",
  "/images/home/carousel_top/wix_0033.jpg",
@@ -87,7 +85,7 @@ const HERO_IMAGES_RAW = [
  "/images/home/carousel_top/wix_0401.jpg",
 ];
 
-const CLIENT_LOGOS = shuffleArray([
+const CLIENT_LOGOS_RAW = [
   { name: "YCA", img: "/images/client-logos/yca.jpg" },
   { name: "Ent-Icing Edibles", img: "/images/client-logos/ent-icing-edibles.jpg" },
   { name: "Ent-Icing 2", img: "/images/client-logos/30_Ent-Icing_edibles_logo_2.jpg" },
@@ -130,7 +128,7 @@ const CLIENT_LOGOS = shuffleArray([
   { name: "Redeaux", img: "/images/client-logos/Redeaux Logo.png" },
   { name: "Sheba", img: "/images/client-logos/Sheba logo draft 3.png" },
   { name: "Win E", img: "/images/client-logos/Win E Logo (no background).png" },
-]);
+];
 
 const SERVICES = [
  { icon: <FiCamera />, name: "Artist Launch Kit", desc: "Creative direction, photoshoot, cover art, social graphics, landing page. For musicians, models, performers ready to level up.", href: "/plans", tab: "FOR ARTISTS" },
@@ -841,11 +839,15 @@ export default function HomePage() {
   const [shuffledHero, setShuffledHero] = useState<string[]>([]);
   const [shuffledDesign, setShuffledDesign] = useState<string[]>([]);
   const [shuffledModels, setShuffledModels] = useState<string[]>([]);
+  const [logoIntros, setLogoIntros] = useState(LOGO_INTROS_RAW);
+  const [clientLogos, setClientLogos] = useState(CLIENT_LOGOS_RAW);
 
   useEffect(() => {
   setShuffledHero(shuffleArray(HERO_IMAGES_RAW));
   setShuffledDesign(shuffleArray(DESIGN_SHOWCASE_RAW));
   setShuffledModels(shuffleArray(MODELS_RAW_RECORDS));
+  setLogoIntros(shuffleArray(LOGO_INTROS_RAW));
+  setClientLogos(shuffleArray(CLIENT_LOGOS_RAW));
   }, []);
 
  useEffect(() => {
@@ -905,7 +907,7 @@ export default function HomePage() {
     <div className="absolute inset-0 flex items-center justify-center">
     {/* Background: video fills entire hero */}
     <div className="absolute inset-0 z-0 bg-black">
-    <VideoPlaylist videos={LOGO_INTROS} />
+    <VideoPlaylist videos={logoIntros} />
     </div>
      {/* 80% + 30% black overlay (or overall opacity increase) between video and text */}
        <div className="absolute inset-0 bg-black/65 z-[1]" />
@@ -1136,7 +1138,7 @@ export default function HomePage() {
   <div className="max-w-6xl mx-auto px-6 text-center mb-4">
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-4">Clients</h2>
  </div>
- <LogoCarousel items={CLIENT_LOGOS} speed={0.5} />
+ <LogoCarousel items={clientLogos} speed={0.5} />
   </section>
   </ScrollReveal>
 

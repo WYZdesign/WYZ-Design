@@ -214,9 +214,15 @@ const faotmImages = [
   { img: "/images/faotm_1.jpg", name: "F. A. O. T. M. #4", price: "Artist Spotlight" },
 ];
 
- const shuffledLogos = useMemo(() => shuffleArray(LOGOS_IMAGES), []);
- const shuffledCovers = useMemo(() => shuffleArray(COVER_ART_WYZ), []);
- const shuffledFlyers = useMemo(() => shuffleArray(FLYERS_IMAGES), []);
+ const [shuffledLogos, setShuffledLogos] = useState(LOGOS_IMAGES);
+ const [shuffledCovers, setShuffledCovers] = useState(COVER_ART_WYZ);
+ const [shuffledFlyers, setShuffledFlyers] = useState(FLYERS_IMAGES);
+
+ useEffect(() => {
+  setShuffledLogos(shuffleArray(LOGOS_IMAGES));
+  setShuffledCovers(shuffleArray(COVER_ART_WYZ));
+  setShuffledFlyers(shuffleArray(FLYERS_IMAGES));
+ }, []);
 
  useEffect(() => {
  const hk = (e: Event) => setLbSrc((e as CustomEvent).detail);

@@ -78,22 +78,23 @@ export default function WYZMiNDPage() {
      if (!cx) return;
      let animId: number;
      const nodes: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
-     function resize() {
-       const w = c!.offsetWidth;
-       const h = c!.offsetHeight;
-       c!.width = w * 2;
-       c!.height = h * 2;
-       cx!.setTransform(2, 0, 0, 2, 0, 0);
-       for (let i = 0; i < 40; i++) {
-         nodes.push({
-           x: Math.random() * w,
-           y: Math.random() * h,
-           vx: (Math.random() - 0.5) * 0.3,
-           vy: (Math.random() - 0.5) * 0.3,
-           r: Math.random() * 2 + 1,
-         });
-       }
-     }
+      function resize() {
+        const w = c!.offsetWidth;
+        const h = c!.offsetHeight;
+        c!.width = w * 2;
+        c!.height = h * 2;
+        cx!.setTransform(2, 0, 0, 2, 0, 0);
+        nodes.length = 0;
+        for (let i = 0; i < 40; i++) {
+          nodes.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            r: Math.random() * 2 + 1,
+          });
+        }
+      }
      resize();
      window.addEventListener("resize", resize);
      function draw() {

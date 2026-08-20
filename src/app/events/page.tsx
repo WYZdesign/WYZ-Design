@@ -402,10 +402,12 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  if (trackRef.current) trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
  }, []);
 
-  const doubled = useMemo(() => {
-   const d = [...items, ...items];
-   for (let i = d.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; }
-   return d;
+  const [doubled, setDoubled] = useState(() => [...items, ...items]);
+
+  useEffect(() => {
+    const d = [...items, ...items];
+    for (let i = d.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; }
+    setDoubled(d);
   }, [items]);
 
  return (
