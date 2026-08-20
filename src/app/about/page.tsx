@@ -7,27 +7,7 @@ import TextMaskReveal from "@/components/TextMaskReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ParticleBackground from "@/components/ParticleBackground";
 import TextSplit from "@/components/TextSplit";
-
-const BRANDS = [
-  {
-    name: "Wild Yet Zealous",
-    tagline: "The Root of Everything",
-     desc: "Born in Chicago's DIY art and music scene, Wild Yet Zealous is the creative philosophy behind WYZ Design. It's the belief that wild ideas deserve zealous execution, that creativity without discipline is chaos, and discipline without creativity is empty. Every project we touch carries this ethos: bold vision, relentless standards, zero shortcuts.",
-    color: "#DF3131",
-  },
-  {
-    name: "Dying Breed Crew",
-    tagline: "The Community",
-     desc: "Dying Breed Crew is the community arm of WYZ Design, a collective of artists, musicians, models, and culture-makers who refuse to blend in. DBC represents the doers, the ones who show up, the ones who create when nobody's watching. Through merch, events, and creative collaborations, DBC keeps the spirit of authentic culture alive.",
-    color: "#D49341",
-  },
-  {
-    name: "Nomadic Breed",
-    tagline: "The Movement",
-     desc: "Nomadic Breed is the mobile arm of WYZ Design, built for creators who don't stay in one place. From pop-up shoots to touring event coverage, Nomadic Breed brings the WYZ standard wherever the work takes us. No studio? No problem. Every location is a set. Every city is an opportunity.",
-    color: "#00E5FF",
-  },
-];
+import { SUB_BRANDS } from "@/lib/brands";
 
 const VALUES = [
    { title: "Show Up and Do the Work", body: "No outsourcing. No passing you around. We shoot, design, build, and deliver, every time." },
@@ -165,13 +145,13 @@ export default function AboutPage() {
               Under the WYZ Design umbrella, three distinct brands serve different parts of the creative ecosystem.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {BRANDS.map((brand, i) => (
+              {SUB_BRANDS.map((brand, i) => (
                 <div key={i} className="relative group">
                   <div className="p-8 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full text-center">
                     <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full mx-auto" style={{ background: brand.color }} />
                     <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: brand.color }}>{brand.tagline}</span>
                     <h3 className="font-heading font-black text-[#333] dark:text-white text-[18px] sm:text-[20px] tracking-[0.04em] uppercase mb-3">{brand.name}</h3>
-                    <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed">{brand.desc}</p>
+                    <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed">{brand.longDesc}</p>
                   </div>
                 </div>
               ))}

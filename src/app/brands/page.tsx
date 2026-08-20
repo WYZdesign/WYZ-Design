@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
+import { BRANDS } from "@/lib/brands";
 
 const SITE = "https://www.wyzdesign.com";
 
@@ -18,41 +19,6 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", title: "Our Brands | WYZ Design", description: "One creative ecosystem, four brands.", images: [`${SITE}/wyz-og-image.png`] },
 };
-
-const BRANDS = [
-  {
-    name: "WYZ Design",
-    tagline: "The Company",
-    desc: "Full-service creative direction and production. Photography, graphic design, web design, videography, branding, and printing. The umbrella every other brand operates under.",
-    color: "#DF3131",
-    href: "/",
-    cta: "Visit the main site",
-  },
-  {
-    name: "Wild Yet Zealous",
-    tagline: "The Root of Everything",
-    desc: "The creative philosophy behind it all, born in Chicago's DIY art and music scene. Wild ideas deserve zealous execution. That's the standard every project carries.",
-    color: "#DF3131",
-    href: "/about",
-    cta: "Read the philosophy",
-  },
-  {
-    name: "Dying Breed Crew",
-    tagline: "The Community",
-    desc: "The community and clothing arm. A collective of artists, musicians, models, and culture-makers who refuse to blend in. Merch, events, and collaborations that keep authentic culture alive.",
-    color: "#D49341",
-    href: "/merch",
-    cta: "Shop the merch",
-  },
-  {
-    name: "Nomadic Breed",
-    tagline: "The Movement",
-    desc: "The mobile arm, built for creators who don't stay in one place. Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
-    color: "#00E5FF",
-    href: "/events",
-    cta: "See the events",
-  },
-];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -101,7 +67,7 @@ export default function BrandsPage() {
                 {b.tagline}
               </span>
               <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.5rem] tracking-[0.03em] mb-3">{b.name}</h2>
-              <p className="text-[#666] dark:text-[#999] text-[15px] leading-relaxed mb-5">{b.desc}</p>
+              <p className="text-[#666] dark:text-[#999] text-[15px] leading-relaxed mb-5">{b.shortDesc}</p>
               <span className="inline-flex items-center gap-1.5 text-[#DF3131] text-[13px] font-bold tracking-[0.08em] uppercase group-hover:gap-3 transition-all">
                 {b.cta} <FiArrowRight className="w-4 h-4" />
               </span>

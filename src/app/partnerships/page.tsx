@@ -1,27 +1,7 @@
 "use client";
 import Link from "next/link";
 import { FiArrowRight, FiUsers, FiTarget, FiTrendingUp } from "react-icons/fi";
-
-const PARTNERS = [
-  {
-    name: "Wild Yet Zealous",
-    tagline: "The Root of Everything",
-    desc: "Born in Chicago's DIY art and music scene, Wild Yet Zealous is the parent creative studio behind WYZ Design. It's the belief that wild ideas deserve zealous execution, that creativity without discipline is chaos, and that real artistry comes from doing the work. Every project we touch carries this ethos: bold vision, relentless standards, zero shortcuts.",
-    color: "#DF3131",
-  },
-  {
-    name: "Dying Breed Crew",
-    tagline: "The Community",
-    desc: "Dying Breed Crew is the community arm of WYZ Design. Built for independent artists, creatives, and culture-makers who refuse to blend in, DBC represents the doers, the ones who show up, put in the work, and build from the ground up. Through merch, events, and creative collaborations, DBC keeps the spirit of authentic culture alive.",
-    color: "#D49341",
-  },
-  {
-    name: "Nomadic Breed",
-    tagline: "The Movement",
-    desc: "Nomadic Breed is the mobile arm of WYZ Design. We travel to wherever the culture is alive, pop-up shoots, touring event coverage. Nomadic Breed brings the WYZ Design standard wherever the work takes us. No studio walls. No limits. Every location is a set. Every city is an opportunity.",
-    color: "#00B4D8",
-  },
-];
+import { SUB_BRANDS } from "@/lib/brands";
 
 const TIERS = [
   {
@@ -89,12 +69,12 @@ export default function PartnershipsPage() {
             <p className="text-[#666] dark:text-white/60 text-[15px] max-w-xl mx-auto">Under the WYZ Design umbrella, three distinct brands serve different parts of the creative ecosystem.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {PARTNERS.map((p) => (
+            {SUB_BRANDS.map((p) => (
               <div key={p.name} className="bg-[#F5F5F3] dark:bg-[#2b2b2e] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: p.color }} />
                 <p className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: p.color }}>{p.tagline}</p>
                 <h3 className="font-heading font-bold text-[20px] tracking-[0.06em] text-[#333] dark:text-white uppercase mb-3">{p.name}</h3>
-                <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed">{p.desc}</p>
+                <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed">{p.longDesc}</p>
               </div>
             ))}
           </div>
