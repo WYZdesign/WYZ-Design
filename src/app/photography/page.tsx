@@ -501,7 +501,7 @@ return (
      />
     </div>
     </div>
-    <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 py-12 min-h-[500px] h-full">
+    <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 pt-24 pb-12 min-h-[500px] h-full">
    <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span> MEMORIES
