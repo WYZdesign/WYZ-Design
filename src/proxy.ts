@@ -104,7 +104,7 @@ export async function proxy(req: NextRequest) {
     return new NextResponse(USER_AGENT_BLOCKED, { status: 403 });
   }
 
-  if (isApi && !pathname.startsWith("/api/auth") && !pathname.startsWith("/api/health")) {
+  if (isApi && !pathname.startsWith("/api/auth") && !pathname.startsWith("/api/health") && !pathname.startsWith("/api/csp-report")) {
     const cl = parseInt(req.headers.get("content-length") || "0", 10);
     if (cl > 10_000_000) {
       return NextResponse.json({ error: "Request body exceeds 10MB limit", code: "PAYLOAD_TOO_LARGE", timestamp: new Date().toISOString() }, { status: 413 });

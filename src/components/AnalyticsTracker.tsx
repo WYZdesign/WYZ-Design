@@ -62,11 +62,12 @@ export default function AnalyticsTracker() {
     const handler = () => {
       if (typeof navigator === "undefined" || !navigator.sendBeacon) return;
       const duration = Date.now() - startRef.current;
-      navigator.sendBeacon("/api/analytics", JSON.stringify({
+      const blob = new Blob([JSON.stringify({
         path: pathname,
         session_id: getSid(),
         duration_ms: duration,
-      }));
+      })], { type: "application/json" });
+      navigator.sendBeacon("/api/analytics", blob);
     };
     window.addEventListener("beforeunload", handler);
     return () => window.removeEventListener("beforeunload", handler);

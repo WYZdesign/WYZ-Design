@@ -30,14 +30,16 @@ export default function AnimatedCounter({ end, suffix = "", prefix = "", duratio
   useEffect(() => {
     if (!started) return;
     const startTime = performance.now();
+    let rafId: number;
     const step = (now: number) => {
       const elapsed = (now - startTime) / 1000;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * end));
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) rafId = requestAnimationFrame(step);
     };
-    requestAnimationFrame(step);
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
   }, [started, end, duration]);
 
   return (
