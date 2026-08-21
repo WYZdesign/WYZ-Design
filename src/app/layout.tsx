@@ -30,6 +30,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.wyzdesign.com"),
+  verification: {
+    google: "E11m1f4AC2Ms1nkaE55AmyJXbf0LkdnZE32Z5ImXQJY",
+  },
   alternates: { canonical: "https://www.wyzdesign.com" },
   title: {
     default: "WYZ Design | Creative Direction & Production - Los Angeles",
