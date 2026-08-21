@@ -42,8 +42,6 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/service-page/event-photography", priority: 0.6, changeFrequency: "monthly" },
   { path: "/service-page/creative-consultation", priority: 0.6, changeFrequency: "monthly" },
   { path: "/booking-calendar/photoshoot", priority: 0.5, changeFrequency: "monthly" },
-  { path: "/booking-calendar/event-photography", priority: 0.5, changeFrequency: "monthly" },
-  { path: "/booking-calendar/photo-retouching", priority: 0.5, changeFrequency: "monthly" },
   { path: "/booking-calendar/consultation", priority: 0.5, changeFrequency: "monthly" },
   { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
   { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },
