@@ -40,7 +40,7 @@ function usePrintfulMerch() {
  setProducts(data.products.map((p: any) => ({
  name: p.title,
  price: `$${p.price.toFixed(2)}`,
- img: p.image || "/images/wix-extracted/designs/merch/designs_merch_00.jpg.jpg",
+  img: p.image || "/images/wix-extracted/designs/merch/designs_merch_00_98442d_9a9d17df21e54a95832a6eefa209cf53.jpg.jpg",
  })));
  })
  .catch(() => {});
