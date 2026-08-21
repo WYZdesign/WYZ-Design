@@ -17,5 +17,25 @@ export const metadata: Metadata = {
 };
 
 export default function PhotographyLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "Photography",
+            serviceType: "Professional Photography",
+            description: "Professional photography for portraits, events, editorial, and commercial. High-resolution images with 24-hour turnaround.",
+            provider: { "@id": "https://www.wyzdesign.com/#organization" },
+            areaServed: ["Los Angeles", "Chicago", "United States"],
+            url: "https://www.wyzdesign.com/photography",
+            offers: { "@type": "Offer", "price": "100", "priceCurrency": "USD" },
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
 }

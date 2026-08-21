@@ -17,5 +17,24 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "Creative Services",
+            serviceType: "Photography, Graphic Design, Web Design, Videography, Branding, Printing, Event Production",
+            description: "Professional photography, graphic design, videography, web design, branding, and consultation services by WYZ Design.",
+            provider: { "@id": "https://www.wyzdesign.com/#organization" },
+            areaServed: ["Los Angeles", "Chicago", "United States"],
+            url: "https://www.wyzdesign.com/services",
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
 }

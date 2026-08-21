@@ -17,5 +17,25 @@ export const metadata: Metadata = {
 };
 
 export default function WebDesignLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "Web Design",
+            serviceType: "Custom Website Design and Development",
+            description: "Custom website design and development. Fast, responsive, SEO-optimized websites that convert. Starting at $500.",
+            provider: { "@id": "https://www.wyzdesign.com/#organization" },
+            areaServed: ["Los Angeles", "Chicago", "United States"],
+            url: "https://www.wyzdesign.com/web-design",
+            offers: { "@type": "Offer", "price": "500", "priceCurrency": "USD" },
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
 }
