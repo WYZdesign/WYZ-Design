@@ -93,11 +93,11 @@ const nextConfig: NextConfig = {
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
           { key: "Content-Security-Policy", value: [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://umami.wyzdesign.com https://va.vercel-scripts.com https://js.stripe.com",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://js.stripe.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com",
             "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://*.googleusercontent.com",
-            "connect-src 'self' https://api.resend.com https://api.stripe.com https://umami.wyzdesign.com https://*.supabase.co wss://*.supabase.co https://o11y.sentry.io",
+            "connect-src 'self' https://api.resend.com https://api.stripe.com https://*.supabase.co wss://*.supabase.co https://o11y.sentry.io",
             "frame-src https://js.stripe.com https://hooks.stripe.com",
             "frame-ancestors 'none'",
             "base-uri 'self'",

@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Inter } from "next/font/google";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "react-hot-toast";
@@ -87,7 +86,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://umami.wyzdesign.com" />
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
         <link rel="dns-prefetch" href="https://js.stripe.com" />
         <link rel="manifest" href="/manifest.json" />
@@ -354,11 +352,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </AuthProvider>
         </ThemeProvider>
         <GlobalImagePicker />
-        <Script
-          src={process.env.NEXT_PUBLIC_UMAMI_URL || "https://umami.wyzdesign.com/script.js"}
-          strategy="afterInteractive"
-          data-website-id={process.env.NEXT_PUBLIC_UMAMI_ID || "wyzdesign"}
-        />
         <Analytics />
         <SpeedInsights />
         <CookieBanner />
