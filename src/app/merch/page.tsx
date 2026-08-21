@@ -587,8 +587,8 @@ export default function MerchPage() {
         <div className="py-6 bg-[#111] overflow-hidden">
           <div className="flex whitespace-nowrap animate-marquee-right">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
-              <div key={`gc1-${i}`} className="relative flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
-                <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+              <div key={`gc1-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
+                <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" loading="lazy" />
               </div>
             ))}
           </div>
@@ -792,8 +792,8 @@ export default function MerchPage() {
     <div className="py-6 bg-[#111] overflow-hidden">
       <div className="flex whitespace-nowrap animate-marquee-left">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
-          <div key={`gc2-${i}`} className="relative flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
-            <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+          <div key={`gc2-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
+            <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" loading="lazy" />
           </div>
         ))}
       </div>

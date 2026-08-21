@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FiArrowRight, FiSearch, FiCpu } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
+import SafeImage from "@/components/SafeImage";
 import { LOGOS_IMAGES, COVER_ART_WYZ, FLYERS_IMAGES } from "@/data/designs-data";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
@@ -121,8 +122,8 @@ return (
   style={{ overflowX: "auto" }}
   >
   {[...images, ...images, ...images].map((src, i) => (
-  <button key={i} className={`flex-none w-[30vw] sm:w-[210px] md:w-[230px] h-24 sm:h-36 md:h-52 relative overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#2b2b2e]"}`}>
-  <Image src={src} alt="WYZ Design portfolio" fill className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-700" priority />
+  <button key={i} className={`flex-none h-24 sm:h-36 md:h-52 overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#2b2b2e]"}`}>
+  <SafeImage src={src} alt="WYZ Design portfolio" className="h-full w-auto object-contain group-hover:scale-95 transition-transform duration-700" loading="lazy" />
   </button>
   ))}
  </div>
@@ -272,7 +273,7 @@ const faotmImages = [
    <div className="relative w-full md:w-1/2 flex items-center justify-center z-10 overflow-hidden">
    <div className="absolute inset-0 hero-grad-design z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
-   <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 py-12 md:py-0">
+    <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-24 pb-12 md:py-0">
 <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
   <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
    <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131">GET A QUOTE</Link>

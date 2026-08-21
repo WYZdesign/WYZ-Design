@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import Image from "next/image";
+import SafeImage from "@/components/SafeImage";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -262,7 +263,7 @@ function AutoScrollRow({ images, label, speed, onImageClick }: { images: string[
       <div className="overflow-hidden cursor-grab px-2">
         <div ref={trackRef} className="flex gap-3 will-change-transform">
           {pausedTripled.map((src, j) => (
-            <div key={j} className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[360px] aspect-[4/3] overflow-hidden group rounded-sm"
+            <div key={j} className="flex-shrink-0 h-56 sm:h-64 md:h-72 overflow-hidden group rounded-sm"
               onClick={() => {
                 paused.current = true;
                 if (resumeTimer.current) clearTimeout(resumeTimer.current);
@@ -271,7 +272,7 @@ function AutoScrollRow({ images, label, speed, onImageClick }: { images: string[
               }}
               onMouseEnter={() => { paused.current = true; if (resumeTimer.current) clearTimeout(resumeTimer.current); }}
               onMouseLeave={() => { paused.current = false; }}>
-               <Image src={src} alt={label} width={400} height={300} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" priority />
+               <SafeImage src={src} alt={label} className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             </div>
           ))}
         </div>
