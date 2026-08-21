@@ -117,7 +117,6 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
-      { source: "/", destination: "/splash", permanent: false },
       { source: "/booking-events", destination: "/booking-calendar/event-photography", permanent: true },
       { source: "/booking-photoshoot", destination: "/booking-calendar/photoshoot", permanent: true },
       { source: "/booking-retouching", destination: "/booking-calendar/photo-retouching", permanent: true },
