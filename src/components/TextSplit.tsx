@@ -50,26 +50,37 @@ export default function TextSplit({
 
   const visible = !hydrated || inView;
 
+  const words = children.split(" ");
+  let running = 0;
+
   return (
     <span ref={ref} className={`inline-block ${className}`} aria-label={children}>
-      {children.split("").map((char, i) => (
-        <span
-          key={i}
-          className={`inline-block overflow-hidden ${charClassName}`}
-          style={{ minWidth: char === " " ? "0.3em" : undefined }}
-        >
-          <span
-            className="inline-block"
-            style={{
-              transform: getTransform(visible),
-              opacity: visible ? 1 : 0,
-              transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${i * stagger}s, opacity 0.4s ease ${i * stagger}s`,
-            }}
-          >
-            {char === " " ? "\u00A0" : char}
+      {words.map((word, wi) => {
+        const chars = word.split("");
+        const base = running;
+        running += chars.length;
+        return (
+          <span key={wi}>
+            {wi > 0 ? " " : null}
+            <span className="inline-block whitespace-nowrap">
+              {chars.map((char, ci) => (
+                <span key={ci} className={`inline-block overflow-hidden ${charClassName}`}>
+                  <span
+                    className="inline-block"
+                    style={{
+                      transform: getTransform(visible),
+                      opacity: visible ? 1 : 0,
+                      transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${(base + ci) * stagger}s, opacity 0.4s ease ${(base + ci) * stagger}s`,
+                    }}
+                  >
+                    {char}
+                  </span>
+                </span>
+              ))}
+            </span>
           </span>
-        </span>
-      ))}
+        );
+      })}
     </span>
   );
 }

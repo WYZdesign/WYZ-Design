@@ -175,9 +175,10 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
 
  useEffect(() => { muteAll(); return () => muteAll(); }, [muteAll]);
 
- useEffect(() => {
-  videoRef.current?.play().catch(() => {});
-  const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+  useEffect(() => {
+   const vid = videoRef.current;
+   if (vid) { vid.muted = true; vid.play().catch(() => {}); }
+   const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
   document.addEventListener("keydown", handleKey);
   document.body.style.overflow = "hidden";
   return () => { document.removeEventListener("keydown", handleKey); document.body.style.overflow = ""; };
@@ -191,7 +192,7 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
  <FiX className="w-5 h-5 text-white" />
  </button>
  <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
- <video ref={videoRef} src={video} controls autoPlay className="w-full h-auto max-h-[85vh] object-contain rounded-lg" />
+  <video ref={videoRef} src={video} controls autoPlay muted playsInline className="w-full h-auto max-h-[85vh] object-contain rounded-lg" />
  <button
   onClick={(e) => { e.stopPropagation(); e.preventDefault(); toggleVideo("modal"); }}
   className="absolute bottom-6 right-4 z-30 w-10 h-10 rounded-full bg-black/70 hover:bg-[#DF3131]/80 flex items-center justify-center transition-all duration-200"
@@ -247,24 +248,21 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
  }
  }, [current, flipping]);
 
- useEffect(() => {
- const vid = videoRef.current;
- if (!vid) return;
- vid.muted = isMuted;
- if (isMuted) {
-  vid.pause();
- } else if (vid.paused) {
-  vid.volume = 0;
-  vid.play().then(() => {
+  useEffect(() => {
+  const vid = videoRef.current;
+  if (!vid) return;
+  vid.muted = isMuted;
+  if (!isMuted) {
    let v = 0;
+   vid.volume = 0;
+   if (vid.paused) vid.play().catch(() => {});
    const ramp = setInterval(() => {
     v = Math.min(v + 0.1, 0.3);
     if (videoRef.current) videoRef.current.volume = v;
-    if (v >= 1) clearInterval(ramp);
+    if (v >= 0.3) clearInterval(ramp);
    }, 75);
-  }).catch(() => {});
- }
- }, [isMuted]);
+  }
+  }, [isMuted]);
 
  useEffect(() => {
  const vid = videoRef.current;
@@ -642,9 +640,7 @@ export default function EventsPage() {
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10">
      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
-  <span className="whitespace-nowrap"><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span><br />
-  <span className="text-[#DF3131] whitespace-nowrap"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span><br />
-  <span className="whitespace-nowrap"><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
+   <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
   </h1>
   <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
   Let our team handle the planning, from the first idea to the final encore. You&apos;ll get an event that&apos;s easy, stress-free, and unforgettable.

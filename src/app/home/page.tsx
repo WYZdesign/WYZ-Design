@@ -921,7 +921,7 @@ export default function HomePage() {
      </p>
      <TextMaskReveal direction="up">
      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-8" style={{ lineHeight: 1 }}>
-       <span>WE <span className="text-[#DF3131]">MAKE</span></span><br /><span className="whitespace-nowrap">WHAT <span className="text-[#DF3131]">WORKS</span></span>
+        <span>WE <span className="text-[#DF3131]">MAKE</span></span> <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
      </h1>
      </TextMaskReveal>
         <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-24 sm:mb-32 w-full text-center">

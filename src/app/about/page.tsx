@@ -48,7 +48,7 @@ export default function AboutPage() {
             <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
             <TextMaskReveal direction="up">
             <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
-              <TextSplit stagger={0.03} direction="up">WE MAKE</TextSplit><br /><TextSplit stagger={0.03} direction="up">WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">WORKS</TextSplit></span>
+              <TextSplit stagger={0.03} direction="up">WE MAKE WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">WORKS</TextSplit></span>
             </h1>
             </TextMaskReveal>
             <p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-2xl mx-auto mb-3">
