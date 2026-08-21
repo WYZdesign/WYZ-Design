@@ -32,11 +32,22 @@ export default function AboutPage() {
           <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
           {/* Crown logo marquee background — full-bleed, opposite rows */}
           <div className="absolute inset-0 z-10 flex flex-col justify-center gap-4 pointer-events-none">
-            {[0,1,2,3,4,5,6,7].map((row) => (
-              <div key={row} className="overflow-hidden py-1">
-                <div className={`flex whitespace-nowrap ${row % 2 === 0 ? "animate-marquee-left" : "animate-marquee-right"}`} style={{ gap: '3rem' }}>
-                  {Array.from({ length: 28 }).map((_, i) => (
-                    <Image key={`cr${row}-${i}`} src="/images/wyz-crown.png" alt="" width={row % 2 === 0 ? 56 : 44} height={row % 2 === 0 ? 56 : 44} className={`${row % 2 === 0 ? "w-14 h-14" : "w-11 h-11"} flex-none object-contain opacity-25`} />
+            {[
+              "animate-marquee-left",
+              "animate-marquee-right",
+              "animate-marquee-left-fast",
+              "animate-marquee-right",
+              "animate-marquee-left",
+              "animate-marquee-right-fast",
+              "animate-marquee-left",
+              "animate-marquee-right",
+            ].map((dir, row) => (
+              <div key={row} className="overflow-hidden py-2">
+                <div className={`flex whitespace-nowrap ${dir}`}>
+                  {Array.from({ length: 24 }).map((_, i) => (
+                    <div key={i} className="flex-none flex items-center px-6">
+                      <Image src="/images/wyz-crown.png" alt="" width={48} height={48} className="w-12 h-12 flex-none object-contain opacity-25" />
+                    </div>
                   ))}
                 </div>
               </div>

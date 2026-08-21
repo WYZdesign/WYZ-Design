@@ -114,33 +114,20 @@ function ParallaxHero() {
 
   return (
     <div className="relative h-[85vh] sm:h-[90vh] overflow-hidden bg-[#111]">
-      <style>{`
-        @keyframes marqueeScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .marquee-strip {
-          animation: marqueeScroll 35s linear infinite;
-        }
-        .marquee-strip:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-      {/* Auto-scrolling image strip */}
-      <div className="absolute inset-0 opacity-40 overflow-hidden">
-        <div className="marquee-strip flex gap-2 h-full w-[200%]">
-          {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
-            <div key={i} className="flex-shrink-0 w-[20vw] sm:w-[15vw] h-full overflow-hidden">
-                <SafeImage src={img} alt="Marquee item" className="w-full h-full object-cover" loading="lazy" />
-            </div>
-          ))}
-        </div>
+      {/* Accordion gallery of crew wearing merch — panels expand on hover */}
+      <div className="absolute inset-0 flex">
+        {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
+          <div key={i} className="relative flex-1 group overflow-hidden transition-all duration-700 ease-out hover:flex-[3.5]">
+            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
+          </div>
+        ))}
       </div>
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/40 to-[#111]/90" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#111]/60 via-transparent to-[#111]/60" />
-      {/* 70% black overlay for text readability */}
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/40 to-[#111]/90 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#111]/60 via-transparent to-[#111]/60 pointer-events-none" />
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
         <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-2" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
@@ -600,7 +587,7 @@ export default function MerchPage() {
         <div className="py-6 bg-[#111] overflow-hidden">
           <div className="flex whitespace-nowrap animate-marquee-right">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
-              <div key={`gc1-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
+              <div key={`gc1-${i}`} className="relative flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
                 <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               </div>
             ))}
@@ -805,7 +792,7 @@ export default function MerchPage() {
     <div className="py-6 bg-[#111] overflow-hidden">
       <div className="flex whitespace-nowrap animate-marquee-left">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
-          <div key={`gc2-${i}`} className="flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
+          <div key={`gc2-${i}`} className="relative flex-shrink-0 w-[22vw] sm:w-[16vw] aspect-[3/4] overflow-hidden mx-2">
             <Image src={img} alt="DBC mockup" fill className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
           </div>
         ))}
