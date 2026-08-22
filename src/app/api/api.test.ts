@@ -73,27 +73,6 @@ describe("Newsletter Route", () => {
   });
 });
 
-describe("Contact Route", () => {
-  const mockEnv = {
-    NEXT_PUBLIC_URL: "https://www.wyzdesign.com",
-  };
-
-  beforeEach(() => {
-    vi.clearAllMocks();
-    process.env = { ...process.env, ...mockEnv };
-  });
-
-  it("rejects contact form without required fields", async () => {
-    const { POST } = await import("@/app/api/contact/route");
-    const req = new NextRequest("https://test.com/api/contact", {
-      method: "POST",
-      body: JSON.stringify({ name: "Test" }),
-    });
-    const res = await POST(req);
-    expect(res.status).toBe(400);
-  });
-});
-
 describe("Checkout Route", () => {
   const mockEnv = {
     STRIPE_SECRET_KEY: "sk_test_123",

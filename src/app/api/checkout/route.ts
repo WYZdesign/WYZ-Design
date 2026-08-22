@@ -4,11 +4,14 @@ import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
 import { errorResponse } from "@/lib/http";
 
-const VALID_GIFT_AMOUNTS = [10, 25, 50, 100, 200, 500];
-const VALID_SERVICE_PRICES: Record<string, number> = {
-  "consultation": 1500,
-  "photoshoot": 5000,
-  "design": 3000,
+const VALID_GIFT_AMOUNTS = [25, 50, 100, 150, 250];
+
+const SERVICE_PRICES: Record<string, number> = {
+  "Photoshoot": 100,
+  "Event Photography": 200,
+  "Logo Consultation": 50,
+  "Marketing Consultation": 50,
+  "SEO Audit": 50,
 };
 
 function getIp(req: NextRequest): string {
@@ -45,7 +48,7 @@ export async function POST(req: NextRequest) {
 
     if (type === "giftcard") {
       if (!amount) return NextResponse.json({ error: "Amount required" }, { status: 400 });
-      if (!VALID_GIFT_AMOUNTS.includes(amount)) {
+      if (!VALID_GIFT_AMOUNTS.includes(amount) && amount < 5) {
         return NextResponse.json({ error: "Invalid gift card amount" }, { status: 400 });
       }
       const session = await createGiftCardCheckout(amount, email);
@@ -54,12 +57,11 @@ export async function POST(req: NextRequest) {
 
     if (type === "service") {
       if (!serviceName || !servicePrice) return NextResponse.json({ error: "Service name and price required" }, { status: 400 });
-      const normalizedName = serviceName.toLowerCase().replace(/[^a-z]/g, "");
-      const match = Object.entries(VALID_SERVICE_PRICES).find(([k]) => normalizedName.includes(k));
-      if (!match) {
+      const expectedPrice = SERVICE_PRICES[serviceName];
+      if (expectedPrice === undefined) {
         return NextResponse.json({ error: "Unknown service" }, { status: 400 });
       }
-      if (servicePrice !== match[1]) {
+      if (servicePrice !== expectedPrice) {
         return NextResponse.json({ error: "Invalid service price" }, { status: 400 });
       }
       const session = await createServiceCheckout(serviceName, servicePrice, email);
