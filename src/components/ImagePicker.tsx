@@ -30,9 +30,10 @@ export function GlobalImagePicker() {
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]; if (!f) return;
     const fd = new FormData(); fd.append("file", f);
-    const res = await fetch("/api/upload", { method: "POST", body: fd });
-    const data = await res.json();
-    if (_callback && data.url) _callback(data.url);
+   const res = await fetch("/api/upload", { method: "POST", body: fd });
+   if (!res.ok) return;
+   const data = await res.json();
+   if (_callback && data.url) _callback(data.url);
     _open = false; setOpen(false);
   };
 

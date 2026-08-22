@@ -202,7 +202,8 @@ export async function getCache<T>(key: string): Promise<T | null> {
 
 export async function qdrantSearch(query: string, limit = 5): Promise<{ text: string; score: number; source: string }[]> {
   try {
-    const embedResp = await fetch("http://localhost:11434/api/embed", {
+    const ollamaUrl = process.env.OLLAMA_URL || "http://localhost:11434";
+    const embedResp = await fetch(`${ollamaUrl}/api/embed`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ model: "nomic-embed-text", input: query }),
@@ -211,7 +212,8 @@ export async function qdrantSearch(query: string, limit = 5): Promise<{ text: st
     const vector = embedData.embeddings?.[0];
     if (!vector) return [];
 
-    const searchResp = await fetch("http://localhost:6333/collections/wyzmind_v3/points/search", {
+    const qdrantUrl = process.env.QDRANT_URL || "http://localhost:6333";
+    const searchResp = await fetch(`${qdrantUrl}/collections/wyzmind_v3/points/search`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

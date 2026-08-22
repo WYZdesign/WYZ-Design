@@ -6,7 +6,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import FDDriveBrowser from "@/components/FDDriveBrowser";
 import FDCalendar from "@/components/FDCalendar";
 
-const LOCAL_API = "http://localhost:8080";
+const LOCAL_API = process.env.NEXT_PUBLIC_FD_API || "http://localhost:8080";
 const POLL_INTERVAL = 3000;
 const MAX_POLLS = 160;
 
@@ -163,7 +163,7 @@ export default function FDOraclePage() {
   const checkHealth = useCallback(async () => {
     // Try local bridge API
     try {
-      const r = await fetch(`http://localhost:8080/fd/health`, { signal: AbortSignal.timeout(2000) });
+      const r = await fetch(`${LOCAL_API}/fd/health`, { signal: AbortSignal.timeout(2000) });
       const d = await r.json();
       if (d.status === "online") { setOnline(true); return; }
     } catch (e) { console.warn("[fd-page] Local health check failed", e); }

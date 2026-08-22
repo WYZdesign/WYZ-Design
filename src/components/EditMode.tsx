@@ -82,8 +82,10 @@ export function useEditableImage(slotId: string, defaultSrc?: string) {
 
  const assignedPath = assignments[slotId];
  const src = assignedPath
- ? `/api/media/${assignedPath.replace("G:\\My Drive\\", "").replace(/\\/g, "/")}`
- : defaultSrc;
+   ? (assignedPath.startsWith("http://") || assignedPath.startsWith("https://") || assignedPath.startsWith("/"))
+     ? assignedPath
+     : `/api/media/${assignedPath.replace("G:\\My Drive\\", "").replace(/\\/g, "/")}`
+   : defaultSrc;
 
  // Determine section filter from slot ID
  const sectionKey = Object.entries(SECTION_FILTERS).find(([key]) =>

@@ -18,10 +18,12 @@ export default function EditableImage({ slotId, defaultSrc, className, style, al
 
  const assignedPath = assignments[slotId];
  const src = assignedPath
- ? assignedPath.startsWith("__upload__")
- ? assignedPath.replace("__upload__", "")
- : `/api/media/${assignedPath.replace("G:\\My Drive\\", "").replace(/\\/g, "/")}`
- : defaultSrc;
+   ? (assignedPath.startsWith("http://") || assignedPath.startsWith("https://") || assignedPath.startsWith("/"))
+     ? assignedPath
+     : assignedPath.startsWith("__upload__")
+       ? assignedPath.replace("__upload__", "")
+       : `/api/media/${assignedPath.replace("G:\\My Drive\\", "").replace(/\\/g, "/")}`
+   : defaultSrc;
 
  return (
  <>
