@@ -26,6 +26,15 @@ CREATE INDEX IF NOT EXISTS idx_bk_tx_cat ON bk_transactions(category_id);
 ```
 Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload route auto-creates it on first use).
 
+### Code Smell Fixes (Session 4b)
+
+| Fix | File(s) | Status |
+|-----|---------|--------|
+| `src` computation garbles full URLs with `/api/media/` prefix | `EditMode.tsx`, `EditableImage.tsx` | ✅ Fixed — detects http/https/root-relative URLs, passes through directly |
+| Image upload no error handling on failed response | `ImagePicker.tsx` | ✅ Fixed — added `res.ok` check |
+| Hardcoded `localhost:11434` (Ollama) and `localhost:6333` (Qdrant) | `wyzmind.ts` | ✅ Fixed — uses `OLLAMA_URL` and `QDRANT_URL` env vars |
+| Hardcoded `localhost:8080` (FD bridge) | `fd/page.tsx` | ✅ Fixed — uses `NEXT_PUBLIC_FD_API` env var |
+
 ---
 
 ### Session 3 — Data Plumbing Audit (Handover #7)
