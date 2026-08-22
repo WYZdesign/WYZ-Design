@@ -710,7 +710,7 @@ function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[
     <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
      {doubled.map((src, i) => (
     <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm">
-     <Image src={src} alt="WYZ Design portfolio" fill className="absolute inset-0 w-full h-full object-contain" loading="lazy" />
+      <Image src={src} alt="WYZ Design portfolio" fill className="absolute inset-0 w-full h-full object-contain" />
     </div>
     ))}
   </div>
@@ -928,7 +928,7 @@ export default function HomePage() {
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
      </GyroTilt>
-      <div className="flex flex-row gap-4 justify-center">
+       <div className="flex flex-row gap-4 justify-center flex-wrap">
      <MagneticElement tag="div" strength={0.25}>
      <Link href="/about"
       className="inline-block bg-white text-[#111] border-2 border-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">

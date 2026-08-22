@@ -217,7 +217,7 @@ return (
           </div>
         </div>
         {/* Mobile merged */}
-        <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
+        <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center pt-20">
           <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#DF3131]/20">
             <video autoPlay muted loop playsInline preload="metadata"
               className="w-full h-full object-cover">

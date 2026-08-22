@@ -118,7 +118,7 @@ function ParallaxHero() {
       <div className="absolute inset-0 flex">
         {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
           <div key={i} className="relative flex-1 group overflow-hidden transition-all duration-700 ease-out hover:flex-[3.5]">
-            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
           </div>
         ))}
@@ -243,7 +243,7 @@ function AccordionGallery() {
                 className="w-full flex items-center gap-4 p-4 sm:p-6 text-left hover:bg-[#f5f5f5] dark:hover:bg-[#2b2b2e] transition-all"
               >
                 <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
-                  <SafeImage src={item.model} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
+                  <SafeImage src={item.model} alt={item.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1">
                   <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[17px] mb-1">{item.name}</h4>
@@ -259,7 +259,7 @@ function AccordionGallery() {
               <div className={`overflow-hidden transition-all duration-500 ${openId === item.id ? "max-h-[300px] py-4" : "max-h-0"}`}>
                 <div className="px-4 sm:px-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
                   <div className="w-full sm:w-48 aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
-                    <SafeImage src={item.img} alt={item.name} className="w-full h-full object-cover" loading="lazy" />
+                    <SafeImage src={item.img} alt={item.name} className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 text-center sm:text-left">
                     <h5 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] mb-2">{item.name}</h5>
@@ -305,7 +305,7 @@ function DynamicContentUnderShop() {
           {DBC_MODEL_MOCKUPS.slice(0, 8).map((m, i) => (
             <div key={m.id} className="group cursor-pointer">
               <div className="aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5]">
-                <SafeImage src={m.model} alt={m.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                <SafeImage src={m.model} alt={m.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
               </div>
               <p className="text-[10px] font-bold text-[#333] dark:text-[#e0e0e0] text-center mt-1 truncate">{m.name}</p>
             </div>
@@ -588,7 +588,7 @@ export default function MerchPage() {
           <div className="flex whitespace-nowrap animate-marquee-right">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
               <div key={`gc1-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
-                <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" loading="lazy" />
+                <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
               </div>
             ))}
           </div>
@@ -793,7 +793,7 @@ export default function MerchPage() {
       <div className="flex whitespace-nowrap animate-marquee-left">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
           <div key={`gc2-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
-            <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" loading="lazy" />
+            <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
           </div>
         ))}
       </div>

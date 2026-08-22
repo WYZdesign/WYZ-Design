@@ -24,7 +24,7 @@ export default function FAQ() {
         <div className="space-y-2">
           {FAQS.map((f, i) => (
             <div key={i} className="border border-[#E2E2E2] bg-white">
-              <button onClick={() => setOpen(open === i ? null : i)} className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors">
+              <button onClick={() => setOpen(open === i ? null : i)} className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-gray-50 transition-colors whitespace-normal">
                 <span className="text-[14px] font-semibold text-[#333333] pr-4">{f.q}</span>
                 {open === i ? <FiMinus className="w-4 h-4 text-[#DF3131] shrink-0" /> : <FiPlus className="w-4 h-4 text-[#8F8F8F] shrink-0" />}
               </button>
