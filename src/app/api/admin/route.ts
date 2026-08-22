@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { isAdmin, getAllUsers, getDashboardStats, getNewsletterSubscribers } from "@/lib/wyzmind";
-import { readFileSync, existsSync } from "fs";
-import { tmpdir } from "os";
-import { join } from "path";
+import { getServiceClient } from "@/lib/supabase";
 import type { Session } from "next-auth";
 import { logger } from "@/lib/logger";
 
@@ -21,26 +19,24 @@ interface FormSubmission {
   };
 }
 
-interface ChatMessage {
-  sessionId?: string;
-  role?: string;
-  content?: string;
-  timestamp?: string;
-  [key: string]: unknown;
-}
-
-function getFormSubmissions(): FormSubmission[] {
-  const dir = process.env.VERCEL ? join(tmpdir(), "_data") : join(process.cwd(), "_data");
-  const file = join(dir, "form-submissions.json");
-  if (!existsSync(file)) return [];
-  try { return JSON.parse(readFileSync(file, "utf-8")); } catch (e) { logger.error("admin:getFormSubmissions", e); return []; }
-}
-
-function getChatHistory(): ChatMessage[] {
-  const dir = process.env.VERCEL ? join(tmpdir(), "_data") : join(process.cwd(), "_data");
-  const file = join(dir, "chat-history.json");
-  if (!existsSync(file)) return [];
-  try { return JSON.parse(readFileSync(file, "utf-8")); } catch (e) { logger.error("admin:getChatHistory", e); return []; }
+async function getFormSubmissions(): Promise<FormSubmission[]> {
+  try {
+    const supabase = getServiceClient();
+    const { data, error } = await supabase
+      .from("form_submissions")
+      .select("*")
+      .order("submitted_at", { ascending: false })
+      .limit(500);
+    if (error) { logger.error("admin:getFormSubmissions", error.message); return []; }
+    // Map snake_case Supabase columns to camelCase for the admin UI
+    return (data || []).map((r: any) => ({
+      id: r.id,
+      formType: r.form_type,
+      submittedAt: r.submitted_at,
+      ip: r.ip,
+      data: r.data,
+    }));
+  } catch (e) { logger.error("admin:getFormSubmissions", e); return []; }
 }
 
 function getAllowedEmails(): string[] {
@@ -78,8 +74,7 @@ export async function GET(req: NextRequest) {
 
     // Overview analytics
     if (tab === "overview" || tab === "analytics") {
-      const forms = getFormSubmissions();
-      const chats = getChatHistory();
+      const forms = await getFormSubmissions();
 
       // Form analytics
       const formCounts: Record<string, number> = {};
@@ -90,9 +85,6 @@ export async function GET(req: NextRequest) {
         if (day) last7Days[day] = (last7Days[day] || 0) + 1;
       });
 
-      // Chat analytics
-      const chatSessions = new Set(chats.map((c: ChatMessage) => c.sessionId)).size;
-
       // Neo4j stats (safe fallback)
       let neo4jStats = { totalUsers: 0, adminCount: 0, newsletterSubs: 0 };
       try { neo4jStats = await getDashboardStats(); } catch (e) { logger.error("admin:neo4jStats", e); }
@@ -100,13 +92,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({
         stats: {
           totalForms: forms.length,
-          totalChats: chats.length,
-          chatSessions,
+          totalChats: 0,
+          chatSessions: 0,
           formTypes: formCounts,
           submissionsByDay: Object.entries(last7Days).sort().slice(-14),
           ...neo4jStats,
         },
-        recentForms: forms.slice(-10).reverse(),
+        recentForms: forms.slice(-10),
       });
     }
 
@@ -124,33 +116,22 @@ export async function GET(req: NextRequest) {
 
     // Forms tab
     if (tab === "forms") {
-      return NextResponse.json({ submissions: getFormSubmissions().reverse() });
+      return NextResponse.json({ submissions: await getFormSubmissions() });
     }
 
-    // Chat tab
+    // Chat tab — chats are not currently persisted (stateless /api/chat)
     if (tab === "chats") {
-      const chats = getChatHistory();
-      const sessions = new Map<string, ChatMessage[]>();
-      chats.forEach((c: ChatMessage) => {
-        const sid = c.sessionId || "unknown";
-        if (!sessions.has(sid)) sessions.set(sid, []);
-        sessions.get(sid)!.push(c);
-      });
-      return NextResponse.json({ 
-        totalMessages: chats.length,
-        totalSessions: sessions.size,
-        sessions: Array.from(sessions.entries()).map(([id, msgs]) => ({
-          sessionId: id,
-          messages: msgs.length,
-          lastMessage: msgs[msgs.length - 1]?.timestamp,
-          preview: msgs.slice(-3),
-        }))
+      return NextResponse.json({
+        totalMessages: 0,
+        totalSessions: 0,
+        sessions: [],
+        note: "Chat history is not currently persisted",
       });
     }
 
     // Export CSV
     if (tab === "export") {
-      const forms = getFormSubmissions();
+      const forms = await getFormSubmissions();
       const headers = ["id", "formType", "submittedAt", "ip", "name", "email", "phone", "message"];
       const rows = [headers.join(",")];
       forms.forEach((f: FormSubmission) => {

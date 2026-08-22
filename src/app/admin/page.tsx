@@ -232,8 +232,8 @@ function AccountAuth() {
     <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-[28px] font-heading font-bold text-white">Admin Access</h1>
-          <p className="text-white/60 text-[14px] mt-2">Sign in to manage your WYZ Design account.</p>
+          <h1 className="text-[28px] font-heading font-bold text-white">Sign In</h1>
+          <p className="text-white/60 text-[14px] mt-2">Sign in to access your WYZ Design account and rewards.</p>
         </div>
 
         <button onClick={() => signIn("google", { callbackUrl: "/admin" })}
@@ -244,7 +244,7 @@ function AccountAuth() {
 
         <div className="flex items-center gap-4 my-6">
           <div className="flex-1 h-px bg-white/10" />
-          <span className="text-[12px] text-white/40 uppercase tracking-wider">or admin sign in</span>
+          <span className="text-[12px] text-white/40 uppercase tracking-wider">or sign in with email</span>
           <div className="flex-1 h-px bg-white/10" />
         </div>
 
