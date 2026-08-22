@@ -1,17 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
-import { tmpdir } from "os";
 import { validateUpload, sanitizeFileName } from "@/lib/api-utils";
 import { validateCsrf } from "@/lib/csrf";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { getServiceClient } from "@/lib/supabase";
+
+const BUCKET = "wyzdesign-uploads";
+
+async function ensureBucket(sb: ReturnType<typeof getServiceClient>) {
+  const { data: buckets } = await sb.storage.listBuckets();
+  if (!buckets?.find(b => b.name === BUCKET)) {
+    await sb.storage.createBucket(BUCKET, { public: true });
+  }
+}
 
 /**
- * Uploads an image or video file (max 10MB) to a non-public temp directory.
- * @method POST
- * @request Multipart form-data with `file` field
- * @response JSON with url, name, size, and type of the uploaded file
- * @auth Required
+ * Uploads an image or video file (max 10MB) to Supabase Storage.
  */
 export async function POST(req: NextRequest) {
   try {
@@ -39,20 +42,26 @@ export async function POST(req: NextRequest) {
     const validation = validateUpload(file);
     if (!validation.valid) return NextResponse.json({ error: validation.error }, { status: 400 });
 
+    const sb = getServiceClient();
+    await ensureBucket(sb);
+
     const isVideo = file.type.startsWith("video/");
     const subDir = isVideo ? "videos" : "images";
-    const dir = process.env.VERCEL ? join(tmpdir(), "uploads", subDir) : join(process.cwd(), "_uploads", subDir);
-    await mkdir(dir, { recursive: true });
-
-    const ext = join("", sanitizeFileName(file.name)).split(".").pop() || (isVideo ? "mp4" : "jpg");
-    const name = `u-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}.${ext.toLowerCase()}`;
-    const filePath = join(dir, name);
+    const ext = file.name.split(".").pop() || (isVideo ? "mp4" : "jpg");
+    const safeBase = sanitizeFileName(file.name.replace(/\.[^.]+$/, ""));
+    const path = `${subDir}/${safeBase}-${Date.now().toString(36)}.${ext.toLowerCase()}`;
 
     const bytes = await file.arrayBuffer();
-    await writeFile(filePath, Buffer.from(bytes));
+    const { error } = await sb.storage.from(BUCKET).upload(path, Buffer.from(bytes), {
+      contentType: file.type,
+      upsert: false,
+    });
+    if (error) throw error;
+
+    const { data: urlData } = sb.storage.from(BUCKET).getPublicUrl(path);
 
     return NextResponse.json({
-      url: `/api/upload/${name}`,
+      url: urlData.publicUrl,
       name: file.name,
       size: file.size,
       type: file.type,

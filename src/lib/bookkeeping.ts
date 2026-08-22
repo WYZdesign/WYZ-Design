@@ -1,125 +1,85 @@
-import Database from "better-sqlite3";
-import { join } from "path";
+import { getServiceClient } from "@/lib/supabase";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
-let _db: any = null;
-let _dbAvailable: boolean | null = null;
-
-function getDb(): any {
-  if (_dbAvailable === false) return null;
-  if (_db) return _db;
-  try {
-    const Database = require("better-sqlite3");
-    const dbPath = join(process.cwd(), "data", "bookkeeping.db");
-    const { mkdirSync, existsSync } = require("fs");
-    const dir = join(process.cwd(), "data");
-    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-    _db = new Database(dbPath);
-    _db.pragma("journal_mode = WAL");
-    initSchema(_db);
-    _dbAvailable = true;
-    return _db;
-  } catch {
-    _dbAvailable = false;
-    return null;
-  }
+let _sb: SupabaseClient | null = null;
+function getSb(): SupabaseClient {
+  if (_sb) return _sb;
+  _sb = getServiceClient();
+  return _sb;
 }
 
-function initSchema(db: any) {
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS clients (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL UNIQUE,
-      email TEXT DEFAULT '',
-      notes TEXT DEFAULT '',
-      created_at TEXT DEFAULT (datetime('now'))
-    );
+// ─── SCHEMA (run once via Supabase SQL editor or migration) ───
+// The following DDL must be applied to your Supabase project before
+// the bookkeeping feature works. Paste into Supabase SQL Editor:
+/*
+CREATE TABLE IF NOT EXISTS bk_clients (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  email TEXT DEFAULT '',
+  notes TEXT DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT now()
+);
 
-    CREATE TABLE IF NOT EXISTS categories (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL UNIQUE,
-      schedule_c_line TEXT DEFAULT '',
-      type TEXT DEFAULT 'expense'
-    );
+CREATE TABLE IF NOT EXISTS bk_categories (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  schedule_c_line TEXT DEFAULT '',
+  type TEXT DEFAULT 'expense'
+);
 
-    CREATE TABLE IF NOT EXISTS transactions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      date TEXT NOT NULL,
-      type TEXT NOT NULL CHECK(type IN ('income','expense')),
-      amount REAL NOT NULL,
-      client_id INTEGER REFERENCES clients(id),
-      vendor TEXT DEFAULT '',
-      category_id INTEGER REFERENCES categories(id),
-      channel TEXT DEFAULT '',
-      description TEXT DEFAULT '',
-      business_personal TEXT DEFAULT 'business' CHECK(business_personal IN ('business','personal')),
-      receipt_url TEXT DEFAULT '',
-      created_at TEXT DEFAULT (datetime('now')),
-      updated_at TEXT DEFAULT (datetime('now'))
-    );
+CREATE TABLE IF NOT EXISTS bk_transactions (
+  id BIGSERIAL PRIMARY KEY,
+  date TEXT NOT NULL,
+  type TEXT NOT NULL CHECK(type IN ('income','expense')),
+  amount NUMERIC NOT NULL,
+  client_id BIGINT REFERENCES bk_clients(id),
+  vendor TEXT DEFAULT '',
+  category_id BIGINT REFERENCES bk_categories(id),
+  channel TEXT DEFAULT '',
+  description TEXT DEFAULT '',
+  business_personal TEXT DEFAULT 'business' CHECK(business_personal IN ('business','personal')),
+  receipt_url TEXT DEFAULT '',
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
 
-    CREATE INDEX IF NOT EXISTS idx_transactions_date ON transactions(date);
-    CREATE INDEX IF NOT EXISTS idx_transactions_type ON transactions(type);
-    CREATE INDEX IF NOT EXISTS idx_transactions_category ON transactions(category_id);
-  `);
+CREATE INDEX IF NOT EXISTS idx_bk_tx_date ON bk_transactions(date);
+CREATE INDEX IF NOT EXISTS idx_bk_tx_type ON bk_transactions(type);
+CREATE INDEX IF NOT EXISTS idx_bk_tx_cat ON bk_transactions(category_id);
+*/
 
-  // Seed default categories if empty
-  const count = db.prepare("SELECT COUNT(*) as c FROM categories").get() as { c: number };
-  if (count.c === 0) {
-    const cats = [
-      ["Advertising", "Line 8", "expense"],
-      ["Car and Truck Expenses", "Line 9", "expense"],
-      ["Commissions and Fees", "Line 10", "expense"],
-      ["Contract Labor", "Line 11", "expense"],
-      ["Depletion", "Line 12", "expense"],
-      ["Depreciation", "Line 13", "expense"],
-      ["Employee Benefits", "Line 14", "expense"],
-      ["Insurance", "Line 15", "expense"],
-      ["Interest (Mortgage)", "Line 16a", "expense"],
-      ["Interest (Other)", "Line 16b", "expense"],
-      ["Legal and Professional Services", "Line 17", "expense"],
-      ["Office Expense", "Line 18", "expense"],
-      ["Pension and Profit-Sharing", "Line 19", "expense"],
-      ["Rent or Lease (Vehicles/Equipment)", "Line 20a", "expense"],
-      ["Rent or Lease (Other)", "Line 20b", "expense"],
-      ["Repairs and Maintenance", "Line 21", "expense"],
-      ["Supplies", "Line 22", "expense"],
-      ["Taxes and Licenses", "Line 23", "expense"],
-      ["Travel", "Line 24a", "expense"],
-      ["Meals", "Line 24b", "expense"],
-      ["Utilities", "Line 25", "expense"],
-      ["Wages", "Line 26", "expense"],
-      ["Other Expenses", "Line 27", "expense"],
-      ["Cost of Goods Sold", "Line 38", "expense"],
-      ["Software / Subscriptions", "Line 27 (Other)", "expense"],
-      ["AI Tools", "Line 27 (Other)", "expense"],
-      ["Phone / Communications", "Line 25 (Utilities)", "expense"],
-      ["Storage", "Line 20b (Rent)", "expense"],
-      ["Equipment", "Line 13 (Depreciation)", "expense"],
-      ["Client Income", "", "income"],
-      ["Wix Payments", "", "income"],
-      ["Stripe Payments", "", "income"],
-      ["Consultation Fees", "", "income"],
-      ["Other Income", "", "income"],
-    ];
-    const insert = db.prepare("INSERT INTO categories (name, schedule_c_line, type) VALUES (?, ?, ?)");
-    for (const c of cats) insert.run(...c);
-  }
+async function seedDefaults(sb: SupabaseClient) {
+  const { count } = await sb.from("bk_categories").select("id", { count: "exact", head: true }).single();
+  if ((count || 0) > 0) return;
 
-  // Seed default clients if empty
-  const clientCount = db.prepare("SELECT COUNT(*) as c FROM clients").get() as { c: number };
-  if (clientCount.c === 0) {
-    const clients = [
-      ["FD Photo Studio", "sk@fdphotostudio.com", "Primary client: Sergey Kostikov"],
-      ["Dominique McGrier-Howard", "", ""],
-      ["Anthony Hill", "", ""],
-      ["Willie Pole", "", ""],
-      ["Artfinix Studios", "", "Paid via Zelle"],
-      ["Wix Payment Clients", "", "One-off clients via wyzdesign.com"],
-      ["Stripe Payment Clients", "", "One-off clients via Stripe"],
-    ];
-    const insert = db.prepare("INSERT INTO clients (name, email, notes) VALUES (?, ?, ?)");
-    for (const c of clients) insert.run(...c);
-  }
+  const categories = [
+    ["Advertising", "Line 8", "expense"], ["Car and Truck Expenses", "Line 9", "expense"],
+    ["Commissions and Fees", "Line 10", "expense"], ["Contract Labor", "Line 11", "expense"],
+    ["Depreciation", "Line 13", "expense"], ["Insurance", "Line 15", "expense"],
+    ["Interest (Other)", "Line 16b", "expense"], ["Legal and Professional Services", "Line 17", "expense"],
+    ["Office Expense", "Line 18", "expense"], ["Rent or Lease (Other)", "Line 20b", "expense"],
+    ["Repairs and Maintenance", "Line 21", "expense"], ["Supplies", "Line 22", "expense"],
+    ["Taxes and Licenses", "Line 23", "expense"], ["Travel", "Line 24a", "expense"],
+    ["Meals", "Line 24b", "expense"], ["Utilities", "Line 25", "expense"],
+    ["Wages", "Line 26", "expense"], ["Other Expenses", "Line 27", "expense"],
+    ["Software / Subscriptions", "Line 27 (Other)", "expense"],
+    ["AI Tools", "Line 27 (Other)", "expense"],
+    ["Phone / Communications", "Line 25 (Utilities)", "expense"],
+    ["Equipment", "Line 13 (Depreciation)", "expense"],
+    ["Client Income", "", "income"], ["Wix Payments", "", "income"],
+    ["Stripe Payments", "", "income"], ["Consultation Fees", "", "income"],
+    ["Other Income", "", "income"],
+  ];
+  await sb.from("bk_categories").insert(categories.map(([name, line, type]) => ({ name, schedule_c_line: line, type })));
+
+  const clients = [
+    ["FD Photo Studio", "sk@fdphotostudio.com", "Primary client"],
+    ["Dominique McGrier-Howard", "", ""], ["Anthony Hill", "", ""],
+    ["Artfinix Studios", "", "Paid via Zelle"],
+    ["Wix Payment Clients", "", "One-off via wyzdesign.com"],
+    ["Stripe Payment Clients", "", "One-off via Stripe"],
+  ];
+  await sb.from("bk_clients").insert(clients.map(([name, email, notes]) => ({ name, email, notes })));
 }
 
 // ─── TRANSACTIONS ───
@@ -155,155 +115,121 @@ export interface TransactionInput {
   receipt_url?: string;
 }
 
-export function getTransactions(filters?: {
-  type?: string;
-  client_id?: number;
-  category_id?: number;
-  from?: string;
-  to?: string;
-  business_personal?: string;
-  limit?: number;
-  offset?: number;
-}): Transaction[] {
-  const db = getDb();
-  if (!db) return [];
-  let where = "WHERE 1=1";
-  const params: any[] = [];
-
-  if (filters?.type) { where += " AND t.type = ?"; params.push(filters.type); }
-  if (filters?.client_id) { where += " AND t.client_id = ?"; params.push(filters.client_id); }
-  if (filters?.category_id) { where += " AND t.category_id = ?"; params.push(filters.category_id); }
-  if (filters?.from) { where += " AND t.date >= ?"; params.push(filters.from); }
-  if (filters?.to) { where += " AND t.date <= ?"; params.push(filters.to); }
-  if (filters?.business_personal) { where += " AND t.business_personal = ?"; params.push(filters.business_personal); }
-
-  const limit = filters?.limit || 100;
-  const offset = filters?.offset || 0;
-
-  const rows = db.prepare(`
-    SELECT t.*, c.name as client_name, cat.name as category_name
-    FROM transactions t
-    LEFT JOIN clients c ON t.client_id = c.id
-    LEFT JOIN categories cat ON t.category_id = cat.id
-    ${where}
-    ORDER BY t.date DESC, t.id DESC
-    LIMIT ? OFFSET ?
-  `).all(...params, limit, offset) as Transaction[];
-
-  return rows;
+export async function getTransactions(filters?: {
+  type?: string; client_id?: number; category_id?: number;
+  from?: string; to?: string; business_personal?: string;
+  limit?: number; offset?: number;
+}): Promise<Transaction[]> {
+  try {
+    const sb = getSb();
+    await seedDefaults(sb);
+    let q = sb.from("bk_transactions").select("*, bk_clients(name), bk_categories(name)").order("date", { ascending: false });
+    if (filters?.type) q = q.eq("type", filters.type);
+    if (filters?.client_id) q = q.eq("client_id", filters.client_id);
+    if (filters?.category_id) q = q.eq("category_id", filters.category_id);
+    if (filters?.from) q = q.gte("date", filters.from);
+    if (filters?.to) q = q.lte("date", filters.to);
+    if (filters?.business_personal) q = q.eq("business_personal", filters.business_personal);
+    q = q.range(filters?.offset || 0, (filters?.offset || 0) + (filters?.limit || 100) - 1);
+    const { data, error } = await q;
+    if (error) throw error;
+    return (data || []).map((r: any) => ({
+      ...r,
+      client_name: r.bk_clients?.name || null,
+      category_name: r.bk_categories?.name || null,
+      bk_clients: undefined, bk_categories: undefined,
+    }));
+  } catch { return []; }
 }
 
-export function getTransactionById(id: number): Transaction | null {
-  const db = getDb();
-  if (!db) return null;
-  const row = db.prepare(`
-    SELECT t.*, c.name as client_name, cat.name as category_name
-    FROM transactions t
-    LEFT JOIN clients c ON t.client_id = c.id
-    LEFT JOIN categories cat ON t.category_id = cat.id
-    WHERE t.id = ?
-  `).get(id) as Transaction | undefined;
-  return row || null;
+export async function getTransactionById(id: number): Promise<Transaction | null> {
+  try {
+    const sb = getSb();
+    const { data, error } = await sb.from("bk_transactions").select("*, bk_clients(name), bk_categories(name)").eq("id", id).single();
+    if (error || !data) return null;
+    return {
+      ...data,
+      client_name: (data as any).bk_clients?.name || null,
+      category_name: (data as any).bk_categories?.name || null,
+      bk_clients: undefined, bk_categories: undefined,
+    };
+  } catch { return null; }
 }
 
-export function createTransaction(input: TransactionInput): Transaction {
-  const db = getDb();
-  if (!db) throw new Error("Database unavailable");
-  const result = db.prepare(`
-    INSERT INTO transactions (date, type, amount, client_id, vendor, category_id, channel, description, business_personal, receipt_url)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `).run(
-    input.date, input.type, input.amount,
-    input.client_id ?? null, input.vendor || "",
-    input.category_id ?? null, input.channel || "",
-    input.description || "", input.business_personal || "business",
-    input.receipt_url || ""
-  );
-  return getTransactionById(Number(result.lastInsertRowid))!;
+export async function createTransaction(input: TransactionInput): Promise<Transaction> {
+  const sb = getSb();
+  await seedDefaults(sb);
+  const { data, error } = await sb.from("bk_transactions").insert({
+    date: input.date, type: input.type, amount: input.amount,
+    client_id: input.client_id ?? null, vendor: input.vendor || "",
+    category_id: input.category_id ?? null, channel: input.channel || "",
+    description: input.description || "", business_personal: input.business_personal || "business",
+    receipt_url: input.receipt_url || "",
+  }).select().single();
+  if (error) throw error;
+  const tx = await getTransactionById(data.id);
+  if (!tx) throw new Error("Created transaction not found");
+  return tx;
 }
 
-export function updateTransaction(id: number, input: Partial<TransactionInput>): Transaction | null {
-  const db = getDb();
-  if (!db) return null;
-  const existing = getTransactionById(id);
+export async function updateTransaction(id: number, input: Partial<TransactionInput>): Promise<Transaction | null> {
+  const sb = getSb();
+  const existing = await getTransactionById(id);
   if (!existing) return null;
-
-  const fields: string[] = [];
-  const params: any[] = [];
-
-  if (input.date !== undefined) { fields.push("date = ?"); params.push(input.date); }
-  if (input.type !== undefined) { fields.push("type = ?"); params.push(input.type); }
-  if (input.amount !== undefined) { fields.push("amount = ?"); params.push(input.amount); }
-  if (input.client_id !== undefined) { fields.push("client_id = ?"); params.push(input.client_id ?? null); }
-  if (input.vendor !== undefined) { fields.push("vendor = ?"); params.push(input.vendor); }
-  if (input.category_id !== undefined) { fields.push("category_id = ?"); params.push(input.category_id ?? null); }
-  if (input.channel !== undefined) { fields.push("channel = ?"); params.push(input.channel); }
-  if (input.description !== undefined) { fields.push("description = ?"); params.push(input.description); }
-  if (input.business_personal !== undefined) { fields.push("business_personal = ?"); params.push(input.business_personal); }
-  if (input.receipt_url !== undefined) { fields.push("receipt_url = ?"); params.push(input.receipt_url); }
-
-  if (fields.length === 0) return existing;
-
-  fields.push("updated_at = datetime('now')");
-  params.push(id);
-
-  db.prepare(`UPDATE transactions SET ${fields.join(", ")} WHERE id = ?`).run(...params);
+  const updates: Record<string, any> = { updated_at: new Date().toISOString() };
+  for (const [k, v] of Object.entries(input)) {
+    if (v !== undefined) updates[k] = v;
+  }
+  const { error } = await sb.from("bk_transactions").update(updates).eq("id", id);
+  if (error) return null;
   return getTransactionById(id);
 }
 
-export function deleteTransaction(id: number): boolean {
-  const db = getDb();
-  if (!db) return false;
-  const result = db.prepare("DELETE FROM transactions WHERE id = ?").run(id);
-  return result.changes > 0;
+export async function deleteTransaction(id: number): Promise<boolean> {
+  const sb = getSb();
+  const { error } = await sb.from("bk_transactions").delete().eq("id", id);
+  return !error;
 }
 
 // ─── CLIENTS ───
 
-export interface Client {
-  id: number;
-  name: string;
-  email: string;
-  notes: string;
-  created_at: string;
+export interface Client { id: number; name: string; email: string; notes: string; created_at: string; }
+
+export async function getClients(): Promise<Client[]> {
+  try {
+    const sb = getSb();
+    await seedDefaults(sb);
+    const { data } = await sb.from("bk_clients").select("*").order("name");
+    return data || [];
+  } catch { return []; }
 }
 
-export function getClients(): Client[] {
-  const db = getDb();
-  if (!db) return [];
-  return db.prepare("SELECT * FROM clients ORDER BY name").all() as Client[];
-}
-
-export function createClient(name: string, email = "", notes = ""): Client {
-  const db = getDb();
-  if (!db) throw new Error("Database unavailable");
-  const result = db.prepare("INSERT INTO clients (name, email, notes) VALUES (?, ?, ?)").run(name, email, notes);
-  return db.prepare("SELECT * FROM clients WHERE id = ?").get(result.lastInsertRowid) as Client;
+export async function createClient(name: string, email = "", notes = ""): Promise<Client> {
+  const sb = getSb();
+  const { data, error } = await sb.from("bk_clients").insert({ name, email, notes }).select().single();
+  if (error) throw error;
+  return data;
 }
 
 // ─── CATEGORIES ───
 
-export interface Category {
-  id: number;
-  name: string;
-  schedule_c_line: string;
-  type: string;
-}
+export interface Category { id: number; name: string; schedule_c_line: string; type: string; }
 
-export function getCategories(type?: string): Category[] {
-  const db = getDb();
-  if (!db) return [];
-  if (type) return db.prepare("SELECT * FROM categories WHERE type = ? ORDER BY name").all(type) as Category[];
-  return db.prepare("SELECT * FROM categories ORDER BY type, name").all() as Category[];
+export async function getCategories(type?: string): Promise<Category[]> {
+  try {
+    const sb = getSb();
+    await seedDefaults(sb);
+    let q = sb.from("bk_categories").select("*").order("name");
+    if (type) q = q.eq("type", type);
+    const { data } = await q;
+    return data || [];
+  } catch { return []; }
 }
 
 // ─── SUMMARY / SCHEDULE C ───
 
 export interface FinancialSummary {
-  year: number;
-  total_income: number;
-  total_expenses: number;
-  net_profit: number;
+  year: number; total_income: number; total_expenses: number; net_profit: number;
   income_by_client: { client: string; amount: number }[];
   expenses_by_category: { category: string; schedule_c_line: string; amount: number }[];
   income_by_channel: { channel: string; amount: number }[];
@@ -312,130 +238,94 @@ export interface FinancialSummary {
   transaction_count: number;
 }
 
-export function getFinancialSummary(year: number): FinancialSummary {
-  const db = getDb();
-  if (!db) return { year, total_income: 0, total_expenses: 0, net_profit: 0, income_by_client: [], expenses_by_category: [], income_by_channel: [], monthly_income: [], monthly_expenses: [], transaction_count: 0 };
-  const from = `${year}-01-01`;
-  const to = `${year}-12-31`;
+const EMPTY_SUMMARY = (year: number): FinancialSummary => ({
+  year, total_income: 0, total_expenses: 0, net_profit: 0,
+  income_by_client: [], expenses_by_category: [], income_by_channel: [],
+  monthly_income: [], monthly_expenses: [], transaction_count: 0,
+});
 
-  const totals = db.prepare(`
-    SELECT type, SUM(amount) as total
-    FROM transactions
-    WHERE date >= ? AND date <= ? AND business_personal = 'business'
-    GROUP BY type
-  `).all(from, to) as { type: string; total: number }[];
+export async function getFinancialSummary(year: number): Promise<FinancialSummary> {
+  try {
+    const sb = getSb();
+    await seedDefaults(sb);
+    const from = `${year}-01-01`;
+    const to = `${year}-12-31`;
 
-  const income = totals.find(t => t.type === "income")?.total || 0;
-  const expenses = totals.find(t => t.type === "expense")?.total || 0;
+    // Get all business transactions for the year
+    const { data: txns } = await sb.from("bk_transactions")
+      .select("type, amount, date, channel, client_id, category_id, bk_clients(name), bk_categories(name, schedule_c_line)")
+      .gte("date", from).lte("date", to).eq("business_personal", "business");
 
-  const income_by_client = db.prepare(`
-    SELECT COALESCE(c.name, 'Unknown') as client, SUM(t.amount) as amount
-    FROM transactions t
-    LEFT JOIN clients c ON t.client_id = c.id
-    WHERE t.type = 'income' AND t.date >= ? AND t.date <= ? AND t.business_personal = 'business'
-    GROUP BY c.name
-    ORDER BY amount DESC
-  `).all(from, to) as { client: string; amount: number }[];
+    if (!txns?.length) return EMPTY_SUMMARY(year);
 
-  const expenses_by_category = db.prepare(`
-    SELECT COALESCE(cat.name, 'Uncategorized') as category, COALESCE(cat.schedule_c_line, '') as schedule_c_line, SUM(t.amount) as amount
-    FROM transactions t
-    LEFT JOIN categories cat ON t.category_id = cat.id
-    WHERE t.type = 'expense' AND t.date >= ? AND t.date <= ? AND t.business_personal = 'business'
-    GROUP BY cat.name
-    ORDER BY amount DESC
-  `).all(from, to) as { category: string; schedule_c_line: string; amount: number }[];
+    let total_income = 0, total_expenses = 0;
+    const byClient: Record<string, number> = {};
+    const byCategory: Record<string, { amount: number; line: string }> = {};
+    const byChannel: Record<string, number> = {};
+    const monthlyInc: Record<string, number> = {};
+    const monthlyExp: Record<string, number> = {};
 
-  const income_by_channel = db.prepare(`
-    SELECT COALESCE(channel, 'Unknown') as channel, SUM(amount) as amount
-    FROM transactions
-    WHERE type = 'income' AND date >= ? AND date <= ? AND business_personal = 'business'
-    GROUP BY channel
-    ORDER BY amount DESC
-  `).all(from, to) as { channel: string; amount: number }[];
+    for (const t of txns as any[]) {
+      const amt = Number(t.amount);
+      const month = t.date?.slice(0, 7) || "";
+      if (t.type === "income") {
+        total_income += amt;
+        const client = t.bk_clients?.name || "Unknown";
+        byClient[client] = (byClient[client] || 0) + amt;
+        const ch = t.channel || "Unknown";
+        byChannel[ch] = (byChannel[ch] || 0) + amt;
+        monthlyInc[month] = (monthlyInc[month] || 0) + amt;
+      } else {
+        total_expenses += amt;
+        const cat = t.bk_categories?.name || "Uncategorized";
+        const line = t.bk_categories?.schedule_c_line || "";
+        byCategory[cat] = { amount: (byCategory[cat]?.amount || 0) + amt, line };
+        monthlyExp[month] = (monthlyExp[month] || 0) + amt;
+      }
+    }
 
-  const monthly_income = db.prepare(`
-    SELECT substr(date, 1, 7) as month, SUM(amount) as amount
-    FROM transactions
-    WHERE type = 'income' AND date >= ? AND date <= ? AND business_personal = 'business'
-    GROUP BY month ORDER BY month
-  `).all(from, to) as { month: string; amount: number }[];
-
-  const monthly_expenses = db.prepare(`
-    SELECT substr(date, 1, 7) as month, SUM(amount) as amount
-    FROM transactions
-    WHERE type = 'expense' AND date >= ? AND date <= ? AND business_personal = 'business'
-    GROUP BY month ORDER BY month
-  `).all(from, to) as { month: string; amount: number }[];
-
-  const txCount = db.prepare(`
-    SELECT COUNT(*) as c FROM transactions
-    WHERE date >= ? AND date <= ? AND business_personal = 'business'
-  `).get(from, to) as { c: number };
-
-  return {
-    year,
-    total_income: income,
-    total_expenses: expenses,
-    net_profit: income - expenses,
-    income_by_client,
-    expenses_by_category,
-    income_by_channel,
-    monthly_income,
-    monthly_expenses,
-    transaction_count: txCount.c,
-  };
+    return {
+      year, total_income, total_expenses, net_profit: total_income - total_expenses,
+      income_by_client: Object.entries(byClient).map(([client, amount]) => ({ client, amount })).sort((a, b) => b.amount - a.amount),
+      expenses_by_category: Object.entries(byCategory).map(([category, v]) => ({ category, schedule_c_line: v.line, amount: v.amount })).sort((a, b) => b.amount - a.amount),
+      income_by_channel: Object.entries(byChannel).map(([channel, amount]) => ({ channel, amount })).sort((a, b) => b.amount - a.amount),
+      monthly_income: Object.entries(monthlyInc).sort().map(([month, amount]) => ({ month, amount })),
+      monthly_expenses: Object.entries(monthlyExp).sort().map(([month, amount]) => ({ month, amount })),
+      transaction_count: txns.length,
+    };
+  } catch { return EMPTY_SUMMARY(year); }
 }
 
 // ─── CSV EXPORT ───
 
-export function exportTransactionsCSV(filters?: {
-  type?: string;
-  from?: string;
-  to?: string;
-  business_personal?: string;
-}): string {
-  const txns = getTransactions({ ...filters, limit: 10000 });
+export async function exportTransactionsCSV(filters?: {
+  type?: string; from?: string; to?: string; business_personal?: string;
+}): Promise<string> {
+  const txns = await getTransactions({ ...filters, limit: 10000 });
   const headers = ["Date", "Type", "Amount", "Client", "Vendor", "Category", "Schedule C Line", "Channel", "Description", "Business/Personal"];
   const rows = [headers.join(",")];
   for (const t of txns) {
     rows.push([
       t.date, t.type, t.amount.toFixed(2),
-      t.client_name || "", t.vendor || "",
-      t.category_name || "", "",
-      t.channel || "", t.description || "",
-      t.business_personal,
+      t.client_name || "", t.vendor || "", t.category_name || "", "",
+      t.channel || "", t.description || "", t.business_personal,
     ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(","));
   }
   return rows.join("\n");
 }
 
-export function exportScheduleC(year: number): string {
-  const summary = getFinancialSummary(year);
+export async function exportScheduleC(year: number): Promise<string> {
+  const summary = await getFinancialSummary(year);
   const lines = [
-    `Schedule C Summary: ${year}`,
-    `WYZ DESIGN LLC (EIN: 87-4602681)`,
-    ``,
-    `GROSS RECEIPTS (Line 1)`,
-    `  Total Income: $${summary.total_income.toFixed(2)}`,
-    ``,
-    `EXPENSES`,
+    `Schedule C Summary: ${year}`, `WYZ DESIGN LLC (EIN: 87-4602681)`, ``,
+    `GROSS RECEIPTS (Line 1)`, `  Total Income: $${summary.total_income.toFixed(2)}`, ``, `EXPENSES`,
   ];
   for (const e of summary.expenses_by_category) {
     lines.push(`  ${e.schedule_c_line ? e.schedule_c_line + " " : ""}${e.category}: $${e.amount.toFixed(2)}`);
   }
-  lines.push(`  TOTAL EXPENSES: $${summary.total_expenses.toFixed(2)}`);
-  lines.push(``);
-  lines.push(`NET PROFIT (Line 31): $${summary.net_profit.toFixed(2)}`);
-  lines.push(``);
-  lines.push(`INCOME BY CLIENT`);
-  for (const i of summary.income_by_client) {
-    lines.push(`  ${i.client}: $${i.amount.toFixed(2)}`);
-  }
-  lines.push(``);
-  lines.push(`INCOME BY CHANNEL`);
-  for (const i of summary.income_by_channel) {
-    lines.push(`  ${i.channel}: $${i.amount.toFixed(2)}`);
-  }
+  lines.push(`  TOTAL EXPENSES: $${summary.total_expenses.toFixed(2)}`, ``, `NET PROFIT (Line 31): $${summary.net_profit.toFixed(2)}`, ``, `INCOME BY CLIENT`);
+  for (const i of summary.income_by_client) lines.push(`  ${i.client}: $${i.amount.toFixed(2)}`);
+  lines.push(``, `INCOME BY CHANNEL`);
+  for (const i of summary.income_by_channel) lines.push(`  ${i.channel}: $${i.amount.toFixed(2)}`);
   return lines.join("\n");
 }

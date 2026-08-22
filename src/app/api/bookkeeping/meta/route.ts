@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getCategories, getClients } from "@/lib/bookkeeping";
 
 /**
@@ -6,8 +6,8 @@ import { getCategories, getClients } from "@/lib/bookkeeping";
  */
 export async function GET() {
   try {
-    const categories = getCategories();
-    const clients = getClients();
+    const categories = await getCategories();
+    const clients = await getClients();
     return NextResponse.json({ categories, clients });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });

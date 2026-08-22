@@ -14,12 +14,6 @@ function isAdmin(session: any): boolean {
 
 /**
  * GET /api/bookkeeping — list transactions, summary, or export CSV/Schedule C
- * @query tab — transactions | summary | csv | schedule-c
- * @query type — income | expense (filter for transactions)
- * @query from, to — date range
- * @query client_id, category_id — filters
- * @query year — for summary/schedule-c (default current year)
- * @query business_personal — business | personal
  */
 export async function GET(req: NextRequest) {
   try {
@@ -31,11 +25,11 @@ export async function GET(req: NextRequest) {
 
     if (tab === "summary") {
       const year = parseInt(sp.get("year") || String(new Date().getFullYear()));
-      return NextResponse.json(getFinancialSummary(year));
+      return NextResponse.json(await getFinancialSummary(year));
     }
 
     if (tab === "csv") {
-      const csv = exportTransactionsCSV({
+      const csv = await exportTransactionsCSV({
         type: sp.get("type") || undefined,
         from: sp.get("from") || undefined,
         to: sp.get("to") || undefined,
@@ -51,7 +45,7 @@ export async function GET(req: NextRequest) {
 
     if (tab === "schedule-c") {
       const year = parseInt(sp.get("year") || String(new Date().getFullYear()));
-      const csv = exportScheduleC(year);
+      const csv = await exportScheduleC(year);
       return new NextResponse(csv, {
         headers: {
           "Content-Type": "text/plain",
@@ -60,8 +54,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // Default: transactions list
-    const transactions = getTransactions({
+    const transactions = await getTransactions({
       type: sp.get("type") || undefined,
       client_id: sp.get("client_id") ? parseInt(sp.get("client_id")!) : undefined,
       category_id: sp.get("category_id") ? parseInt(sp.get("category_id")!) : undefined,
@@ -79,7 +72,6 @@ export async function GET(req: NextRequest) {
 
 /**
  * POST /api/bookkeeping — create a transaction
- * Body: { date, type, amount, client_id?, vendor?, category_id?, channel?, description?, business_personal? }
  */
 export async function POST(req: NextRequest) {
   try {
@@ -91,23 +83,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "date, type, and amount are required" }, { status: 400 });
     }
 
-    // Resolve client_name → client_id
     let client_id = body.client_id || null;
     if (!client_id && body.client_name) {
-      const clients = getClients();
+      const clients = await getClients();
       const match = clients.find(c => c.name.toLowerCase() === body.client_name.toLowerCase());
       if (match) client_id = match.id;
     }
 
-    // Resolve category name → category_id
     let category_id = body.category_id || null;
     if (!category_id && body.category) {
-      const categories = getCategories();
+      const categories = await getCategories();
       const match = categories.find(c => c.name.toLowerCase() === body.category.toLowerCase());
       if (match) category_id = match.id;
     }
 
-    const tx = createTransaction({
+    const tx = await createTransaction({
       date: body.date,
       type: body.type,
       amount: parseFloat(body.amount),
@@ -138,7 +128,7 @@ export async function PUT(req: NextRequest) {
     if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
 
     const body = await req.json();
-    const tx = updateTransaction(id, body);
+    const tx = await updateTransaction(id, body);
     if (!tx) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(tx);
   } catch (e: any) {
@@ -157,7 +147,7 @@ export async function DELETE(req: NextRequest) {
     const id = parseInt(req.nextUrl.searchParams.get("id") || "0");
     if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
 
-    const deleted = deleteTransaction(id);
+    const deleted = await deleteTransaction(id);
     if (!deleted) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch (e: any) {
