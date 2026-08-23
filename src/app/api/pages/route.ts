@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
-import { rateLimit, sanitizeHtml } from "@/lib/rate-limit";
+import { rateLimit } from "@/lib/rate-limit";
+import { sanitizeHtml } from "@/lib/dompurify";
 
 const PAGES_DIR = join(process.cwd(), "_PAGES");
 const ALLOWED_PAGES = new Set(["home", "about", "photography", "designs", "events", "services", "plans", "merch", "faq", "blog", "booking", "community", "contact", "web-design", "printing", "gift-card", "3pointprogram", "model-archive"]);
