@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logPageview, logEvent, getAnalyticsSummary, getPageviews } from "@/lib/analytics";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { createHash } from "crypto";
 
 function parseUA(ua: string) {
   let device = "desktop";
@@ -23,8 +25,13 @@ function parseUA(ua: string) {
 }
 
 function hashIp(ip: string): string {
-  const crypto = require("crypto");
-  return crypto.createHash("sha256").update(ip + "wyz-salt-2026").digest("hex").slice(0, 16);
+  return createHash("sha256").update(ip + "wyz-salt-2026").digest("hex").slice(0, 16);
+}
+
+function isAdmin(session: any): boolean {
+  const email = (session?.user?.email || "").toLowerCase();
+  const admins = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
+  return admins.includes(email);
 }
 
 async function runSeoChecks(): Promise<{ check: string; status: string; detail?: string }[]> {
@@ -149,7 +156,7 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (e) {
     return NextResponse.json({ ok: true }); // silent fail — tracking shouldn't break UX
   }
 }
@@ -162,6 +169,9 @@ export async function POST(req: NextRequest) {
  */
 export async function GET(req: NextRequest) {
   try {
+    const session = await auth();
+    if (!isAdmin(session)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
     const tab = req.nextUrl.searchParams.get("tab") || "summary";
     const days = parseInt(req.nextUrl.searchParams.get("days") || "30");
 

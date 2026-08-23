@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import * as cheerio from "cheerio";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { logger } from "@/lib/logger";
 
 const ORGANIZER_URL = "https://www.eventbrite.com/o/fd-photo-studio-14334915883";
 const SEARCH_URL = "https://www.eventbrite.com/d/ca--los-angeles/fd-photo-studio/";
@@ -102,12 +104,12 @@ async function scrapeOrganizerPage(): Promise<FdEvent[]> {
                 source: "eventbrite_ssr",
               });
             });
-          } catch (e) { console.error("[fd:parseSsr]", e); }
+          } catch (e) { logger.error("fd:parseSsr", e); }
         }
       });
     }
   } catch (err) {
-    console.error("Organizer scrape failed:", err);
+    logger.error("fd:organizer-scrape", err);
   }
 
   return events;
@@ -165,7 +167,7 @@ async function scrapeSearchPage(): Promise<FdEvent[]> {
       });
     });
   } catch (err) {
-    console.error("Search scrape failed:", err);
+    logger.error("fd:search-scrape", err);
   }
 
   return events;
@@ -192,6 +194,11 @@ export async function GET() {
 }
 
 export async function POST() {
+  const session = await auth();
+  const email = (session?.user?.email || "").toLowerCase();
+  const admins = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
+  if (!admins.includes(email)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+
   cachedEvents = null;
   cachedAt = null;
   const orgEvents = await scrapeOrganizerPage();

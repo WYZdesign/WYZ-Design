@@ -19,4 +19,5 @@ export async function POST(req: NextRequest) {
   } catch {
     return NextResponse.json({ ok: true });
   }
+  return NextResponse.json({ ok: true });
 }
