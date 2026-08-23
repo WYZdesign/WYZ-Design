@@ -71,6 +71,24 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 
 **Pages fixed (non-hero group):** gallery, match, booking, community, model-archive, loyalty, case-studies, 3pointprogram
 
+### Session 11 — Toast Notifications + Security Regression Fix
+**Auditor:** opencode + Claude (Cowork)
+**Date:** 2026-08-23
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Toast notifications across all user-facing forms (11 files) | DynamicForm, LeadMagnet, booking-calendar, model-archive, featured-artist, photography, printing, plans, gift-card, community | MEDIUM | ✅ Fixed — toast.success on submit, toast.error on failure, replaced alert() |
+| Stale Twitter URL (twitter.com → x.com) | `Footer.tsx` | LOW | ✅ Fixed |
+| Broken YouTube channel placeholder ID | `events/page.tsx` | MEDIUM | ✅ Fixed — now uses @wyzdesign vanity URL |
+| Unused useState import | `contact/page.tsx` | LOW | ✅ Fixed |
+| 21 form inputs missing aria-label | Footer, model-archive, featured-artist, photography, printing | MEDIUM | ✅ Fixed |
+| **SECURITY: DOMPurify sanitizer accidentally replaced with regex blocklist** | `PageRenderer.tsx`, `view/[page]/page.tsx`, `api/pages/route.ts`, `api/forms/route.ts` | **CRITICAL** | ✅ Fixed — restored `dompurify.ts` (isomorphic-dompurify allowlist), removed weak regex `sanitizeHtml` from `rate-limit.ts` |
+| Dead `dompurify.ts` removed incorrectly | `lib/dompurify.ts` | HIGH | ✅ Fixed — file restored from git, imports redirected |
+
+**Claude caught the sanitizer regression** — the "consolidate imports" commit accidentally swapped the DOMPurify allowlist sanitizer for a regex blocklist in `rate-limit.ts`. The output goes into `dangerouslySetInnerHTML` in PageRenderer and view/[page], making this the only thing between stored HTML and XSS. Fixed by restoring the DOMPurify version and removing the regex duplicate.
+
+**Commits:** `9a742a6` (toast), `1fd62a0` (dead code — had regression), `5cc83cd` (security fix)
+
 ### Session 10 — Security Hardening + Performance + Logger Migration
 **Auditor:** opencode (automated audit)
 **Date:** 2026-08-22
