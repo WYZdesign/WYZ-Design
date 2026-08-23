@@ -4,9 +4,9 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `90febfd0` — confirmed via `.git/refs/heads/master` and `.git/refs/remotes/origin/master` (identical SHA), so this and everything before it is genuinely on GitHub, not just local. The "production looks stale" issue was never an unpushed-code problem.
+- **Last commit:** `cd158cf` (Session 15 — chat timeout fix + admin auth dedup)
 - **Build status:** `tsc --noEmit` clean
-- **Vercel:** Auto-deploys from `master` branch — builds were failing for 10+ commits due to `ssr:false` in Server Component. Fixed with `ClientComponents.tsx` wrapper (verified below — cleanly wired, `<ClientComponents />` renders in `layout.tsx` at line 344, no more direct `dynamic(..., {ssr:false})` calls in the Server Component). **This has not yet been confirmed live** — worth checking the Vercel dashboard to make sure the deploy off `90febfd0` (or whichever commit included this fix) actually succeeded, since it's the unlock for testimonials, `/merch/[id]`, `/merch/concepts`, and the pricing calculator all showing up at once.
+- **Vercel:** Auto-deploys from `master` branch — builds were failing for 10+ commits due to `ssr:false` in Server Component. Fixed with `ClientComponents.tsx` wrapper.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
 
 ## Key Architecture Notes
@@ -18,6 +18,13 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **Admin auth:** `ADMIN_EMAILS` env var (comma-separated), checked via NextAuth session
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
+
+## Session 15 addendum — quick sync check + one live catch
+While drafting the above, I saw `.git/refs/heads/master` move to a new commit (`cd158cfe4...`, on top of `90febfd0`) with fresh edits in `analytics/route.ts`, `bugs/route.ts`, `bookkeeping/route.ts`, `bookkeeping/meta/route.ts` — looks like the `isAdmin` dedup into `@/lib/admin-auth` (`getAdminEmails`/`requireAdmin`) that the earlier audit flagged as duplicated 6x. Good to see that landing. I didn't touch any of those files since they had very fresh mtimes (actively being edited) — flagging what I saw instead of risking a collision.
+
+One thing worth a look while you're in `analytics/route.ts`: line 29 reads `process.env.IP_HASH_salt` (lowercase "salt"). Env var names are case-sensitive — if `IP_HASH_SALT` (standard casing) is what's actually set in Vercel, this will never match and silently keeps using the hardcoded `"wyz-salt-2026"` fallback every time, which quietly defeats the fix from Session 14. Small one-character-casing fix, but worth catching since it'd otherwise look fixed in the diff while doing nothing in production.
+
+Also closed the loop on the Google Drive API-key-exposure item from earlier audits: `models/route.ts`, `gdrive-photos/route.ts`, and `model-photos/route.ts` are all fixed — confirmed they route through the new `/api/gdrive-image?id=` proxy (`src/app/api/gdrive-image/route.ts`), which keeps `GOOGLE_DRIVE_API_KEY` server-side and never puts it in a client-facing URL. Nice, correct fix — server-side fetch, proper `Cache-Control`. Turns out `gdrive-index/route.ts` never actually had this issue (it only ever returned file metadata, no download URL with the key embedded) — that one item in the original audit table was a touch overstated. `fd/drive/route.ts` is the one still open, but it's a different, lesser issue than the others: no auth check and it exposes Google's own `webViewLink`/`thumbnailLink`/`downloadLink` (not our API key) to any caller. Worth an auth check on that route when there's time, but it's not a credential leak — safe to deprioritize below the other open items.
 
 ## Session 15 — Claude (Cowork) Live Browser Audit + Chat Widget Timeout Fix
 **Auditor:** Claude (Cowork), live browser session via Chrome automation + direct file access to `V:\wyzdesign` via the device bridge
