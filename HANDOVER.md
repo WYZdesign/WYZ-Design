@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** TBD (Session 13)
+- **Last commit:** `ad6c1b1` (Session 13)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` branch
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -22,7 +22,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 ## Session 13 — Claude Audit #2 + AI Chat + Merch Product Pages + Concept Archive + Pricing Calculator
 **Auditor:** Claude (read-only browser walkthrough of old Wix + DBC sites) + wyzmind (opencode)
 **Date:** 2026-08-23
-**Commits:** TBD
+**Commits:** `ad6c1b1`
 
 ### Claude Audit #2 Cross-Reference
 | Finding | Status |
@@ -222,10 +222,23 @@ Claude audited the old `wyzdesign.wixstudio.com/wyzdesign` against the current s
 
 | Item | Status |
 |------|--------|
-| Stripe subscription Price IDs — need Dashboard creation (Starter $250, Business $500, Pro $750, Ultimate $1000) | Blocked on user |
+| Stripe subscription Price IDs — **NOT in vault**. Need to create 4 Price objects in Stripe Dashboard (Starter $250/mo, Business $500/mo, Pro $750/mo, Ultimate $1,000/mo) and add to vault | Blocked on user |
 | End-to-end purchase test — no real purchase completed to verify webhook | Blocked on Price IDs |
-| Printful API key not configured (degrades gracefully) | Low priority |
+| Printful API key — **NOT in vault**. Needed for live merch product sync | Blocked on user |
 | Neo4j URI may not be set in Vercel | Low priority |
+
+### Vault Check (Session 13)
+| Credential | Status |
+|------------|--------|
+| `STRIPE_SECRET_KEY` | Present (107 chars) |
+| `STRIPE_WEBHOOK_SECRET` | Present (38 chars) |
+| `STRIPE_RESTRICTED_KEY` | Present (107 chars) |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Present (27 chars) |
+| `STRIPE_STARTER_PRICE_ID` | **NOT FOUND** |
+| `STRIPE_BUSINESS_PRICE_ID` | **NOT FOUND** |
+| `STRIPE_PRO_PRICE_ID` | **NOT FOUND** |
+| `STRIPE_ULTIMATE_PRICE_ID` | **NOT FOUND** |
+| `PRINTFUL_API_KEY` | **NOT FOUND** |
 
 ## Claude Code Collaboration Protocol
 
