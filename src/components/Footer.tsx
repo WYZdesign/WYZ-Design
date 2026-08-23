@@ -41,7 +41,7 @@ const SITEMAP = {
 
 const SOCIALS = [
   { icon: FiInstagram, href: "https://www.instagram.com/wyzdesign/", label: "Instagram" },
-  { icon: FiTwitter, href: "https://twitter.com/WYZdesign", label: "Twitter" },
+  { icon: FiTwitter, href: "https://x.com/WYZdesign", label: "X" },
   { icon: FaTiktok, href: "https://www.tiktok.com/@wyzdesign", label: "TikTok" },
   { icon: FiYoutube, href: "https://www.youtube.com/channel/UCfd75GcUKsGqWo-sgSQjZBg", label: "YouTube" },
   { icon: FiFacebook, href: "https://www.facebook.com/wyzdesign", label: "Facebook" },
@@ -98,6 +98,7 @@ export default function Footer() {
           <form onSubmit={h} className="flex flex-col sm:flex-row w-full max-w-full mx-auto md:mx-0 md:w-auto md:max-w-md gap-2">
             <input
               placeholder="Enter your email"
+              aria-label="Email address for newsletter"
               value={email}
               onChange={e => setEmail(e.target.value)}
               data-kp-light

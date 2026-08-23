@@ -328,16 +328,16 @@ export default function PrintingPage() {
  setQuoteSubmitted(true);
  }} className="max-w-4xl mx-auto space-y-4">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <input name="firstName" placeholder="First name" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-  <input name="lastName" placeholder="Last name" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-  </div>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <input name="email" placeholder="Email *" type="email" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-  <input name="phone" placeholder="Phone" type="tel" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-  </div>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <input name="sizing" placeholder="Explain Sizing + Quantity" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-  <select name="product" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#888] dark:text-[#ccc] focus:border-[#DF3131] outline-none">
+   <input name="firstName" placeholder="First name" aria-label="First name" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <input name="lastName" placeholder="Last name" aria-label="Last name" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   </div>
+   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+   <input name="email" placeholder="Email *" type="email" aria-label="Email address" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   </div>
+   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+   <input name="sizing" placeholder="Explain Sizing + Quantity" aria-label="Sizing and quantity details" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <select name="product" aria-label="Product type" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#888] dark:text-[#ccc] focus:border-[#DF3131] outline-none">
  <option>Select a Product</option>
  <option>Business Cards</option>
  <option>Flyers & Posters</option>
@@ -348,7 +348,7 @@ export default function PrintingPage() {
  </select>
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <input name="deadline" placeholder="Project Deadline" type="date" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#888] dark:text-[#ccc] focus:border-[#DF3131] outline-none" />
+   <input name="deadline" placeholder="Project Deadline" type="date" aria-label="Project deadline" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#888] dark:text-[#ccc] focus:border-[#DF3131] outline-none" />
   <label className="flex items-center gap-2 text-[14px] text-[#666] dark:text-[#b0b0b0]">
   <input name="newsletter" type="checkbox" className="accent-[#DF3131]" /> I want to subscribe to the newsletter.
  </label>
