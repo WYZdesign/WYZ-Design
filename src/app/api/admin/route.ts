@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
-import { isAdmin, getAllUsers, getDashboardStats, getNewsletterSubscribers } from "@/lib/wyzmind";
+import { getAllUsers, getDashboardStats, getNewsletterSubscribers } from "@/lib/wyzmind";
 import { getServiceClient } from "@/lib/supabase";
 import type { Session } from "next-auth";
 import { logger } from "@/lib/logger";

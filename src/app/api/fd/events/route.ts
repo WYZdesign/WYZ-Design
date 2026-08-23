@@ -174,23 +174,28 @@ async function scrapeSearchPage(): Promise<FdEvent[]> {
 }
 
 export async function GET() {
-  if (cachedEvents && cachedAt && Date.now() - cachedAt < CACHE_TTL) {
-    return NextResponse.json({ events: cachedEvents, cached: true, cachedAt });
-  }
+  try {
+    if (cachedEvents && cachedAt && Date.now() - cachedAt < CACHE_TTL) {
+      return NextResponse.json({ events: cachedEvents, cached: true, cachedAt });
+    }
 
-  const orgEvents = await scrapeOrganizerPage();
-  let searchEvents: FdEvent[] = [];
-  if (orgEvents.length === 0) {
-    searchEvents = await scrapeSearchPage();
-  }
+    const orgEvents = await scrapeOrganizerPage();
+    let searchEvents: FdEvent[] = [];
+    if (orgEvents.length === 0) {
+      searchEvents = await scrapeSearchPage();
+    }
 
-  const all = orgEvents.length > 0 ? orgEvents : searchEvents;
-  const unique = Array.from(new Map(all.map(e => [e.title + e.dateLabel, e])).values());
+    const all = orgEvents.length > 0 ? orgEvents : searchEvents;
+    const unique = Array.from(new Map(all.map(e => [e.title + e.dateLabel, e])).values());
 
   cachedEvents = unique;
   cachedAt = Date.now();
 
   return NextResponse.json({ events: unique, cached: false, count: unique.length });
+  } catch (err) {
+    logger.error("fd:events-get", err);
+    return NextResponse.json({ events: [], error: "Failed to fetch events" }, { status: 500 });
+  }
 }
 
 export async function POST() {

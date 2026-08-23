@@ -41,7 +41,7 @@ async function listRecursive(
         id: f.id,
         name: f.name,
         mimeType: f.mimeType,
-        path: `G:\\My Drive\\${folderPath.substring(1)}/${f.name}`,
+        path: `${folderPath}/${f.name}`,
         folder: folderPath,
       });
     }

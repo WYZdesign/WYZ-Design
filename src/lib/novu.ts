@@ -23,6 +23,6 @@ export async function triggerNotification(templateId: string, email: string, pay
 }
 
 export async function sendAdminAlert(title: string, body: string) {
-  const adminEmail = process.env.ADMIN_EMAIL || "torree.marcel@gmail.com";
+  const adminEmail = process.env.ADMIN_EMAIL || "";
   await triggerNotification("admin-alert", adminEmail, { title, body });
 }

@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ event: "checkout.session.completed", customer: session.customer, email: session.customer_details?.email, plan }),
-          }).catch(() => {});
+          }).catch((e) => logger.error("webhook:n8n-notify", (e as Error).message));
         }
         break;
       }
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ event: "customer.subscription.deleted", customer: sub.customer, subscription_id: sub.id }),
-          }).catch(() => {});
+          }).catch((e) => logger.error("webhook:n8n-notify", (e as Error).message));
         }
         break;
       }

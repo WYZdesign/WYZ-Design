@@ -7,7 +7,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET || "",
 });
 
-const MINIO_PUBLIC = process.env.MINIO_URL || "https://media.wyzmind.tech/wyz-site-media";
+const MINIO_PUBLIC = process.env.MINIO_URL || "";
 
 function cloudinaryUrl(publicId: string, w?: number, h?: number): string {
   return cloudinary.url(publicId, {
