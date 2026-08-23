@@ -52,6 +52,18 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 **Still Open:**
 - Stripe 500 — keys rotated and redeployed, pending verification
 
+### Session 8 — API Security Hardening (deep audit follow-up)
+**Auditor:** wyzmind (opencode)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Analytics GET endpoint had no auth — any visitor could read pageview data | `analytics/route.ts` | HIGH | ✅ Fixed — requires admin auth |
+| Analytics hashIp() used inline require("crypto") | `analytics/route.ts` | LOW | ✅ Fixed — moved to top-level import |
+| fd/events POST had no auth — anyone could trigger cache invalidation + re-scrape | `fd/events/route.ts` | HIGH | ✅ Fixed — requires admin auth |
+| fd/events used console.error instead of logger | `fd/events/route.ts` | LOW | ✅ Fixed — replaced with logger |
+| telemetry POST missing return statement after successful insert | `telemetry/route.ts` | LOW | ✅ Fixed — added return |
+
 ### Session 7 — Cal.com CSP Fix + Deep API Audit (Handover #14)
 **Auditor:** Claude (Cowork) + wyzmind (opencode)
 **Date:** 2026-08-22
@@ -156,7 +168,7 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 
 ## Deployment State
 
-- **Last commit:** `6488369` — Cal.com CSP fix
+- **Last commit:** `ccab6fa` — API security hardening (analytics auth, fd/events auth, telemetry return)
 - **Build status:** tsc clean, `next build` clean
 - **Vercel:** Auto-deploys from `master` branch
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
