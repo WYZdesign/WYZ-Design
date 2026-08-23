@@ -26,14 +26,31 @@ CREATE INDEX IF NOT EXISTS idx_bk_tx_cat ON bk_transactions(category_id);
 ```
 Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload route auto-creates it on first use).
 
-### Code Smell Fixes (Session 4b)
+### Session 5 — SafeImage Priority, FAQ, Gallery, CSP, Analytics Pixels (Handover #9 + #10)
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
+**Date:** 2026-08-22
+
+**Fixes Applied:**
 
 | Fix | File(s) | Status |
 |-----|---------|--------|
-| `src` computation garbles full URLs with `/api/media/` prefix | `EditMode.tsx`, `EditableImage.tsx` | ✅ Fixed — detects http/https/root-relative URLs, passes through directly |
-| Image upload no error handling on failed response | `ImagePicker.tsx` | ✅ Fixed — added `res.ok` check |
-| Hardcoded `localhost:11434` (Ollama) and `localhost:6333` (Qdrant) | `wyzmind.ts` | ✅ Fixed — uses `OLLAMA_URL` and `QDRANT_URL` env vars |
-| Hardcoded `localhost:8080` (FD bridge) | `fd/page.tsx` | ✅ Fixed — uses `NEXT_PUBLIC_FD_API` env var |
+| SafeImage `priority` prop was silent no-op (spread onto `<img>` where it does nothing) | `SafeImage.tsx`, `utils.tsx` | ✅ Fixed — `priority` now maps to `loading="eager"` |
+| Carousel/marquee images still lazy despite removing `loading="lazy"` from call sites (component default overrode) | `designs/page.tsx`, `merch/page.tsx` | ✅ Fixed — added `priority` prop to carousel/marquee SafeImage calls |
+| FAQ questions render as duplicated text on desktop (marquee CSS is mobile-only, both spans visible above 768px) | `faq/page.tsx` | ✅ Fixed — second span hidden on desktop via `max-md:inline-block hidden` |
+| `/gallery` shows zero photos (fill Image parent has no height/aspect-ratio, columns collapse to 0px) | `gallery/page.tsx` | ✅ Fixed — added `aspect-[3/4]` to wrapper div |
+| Blog images blocked by CSP (`images.unsplash.com` not in `img-src`) | `next.config.ts` | ✅ Fixed — added to `img-src` |
+| Analytics pixels (GTM/Meta/Clarity/TikTok) will silently fail when env vars are set (hosts missing from CSP) | `next.config.ts` | ✅ Fixed — added to `script-src`, `connect-src`, `frame-src` |
+| FDDriveBrowser fill-Image parents missing `position: relative` | `FDDriveBrowser.tsx` | ✅ Fixed — added `relative` to both wrapper divs |
+| Brands page says "three brands" but headline says "Four Brands" | `brands/page.tsx` | ✅ Fixed — copy now says "four" |
+
+**Supabase Schema Created:**
+- `bk_clients` — 0 rows (empty, seeded on first API call)
+- `bk_categories` — 0 rows (empty, seeded on first API call with 27 default categories + 6 clients)
+- `bk_transactions` — 0 rows (empty)
+- `wyzdesign-uploads` storage bucket — auto-created on first upload
+
+**Still Open:**
+- Stripe 500 — needs env var verification in Vercel
 
 ---
 
