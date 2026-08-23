@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { sanitizeHtml } from "@/lib/dompurify";
+import { sanitizeHtml } from "@/lib/rate-limit";
 
 interface GdriveFile {
   name: string;

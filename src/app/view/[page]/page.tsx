@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { sanitizeHtml } from "@/lib/dompurify";
+import { sanitizeHtml } from "@/lib/rate-limit";
 
 export default function ViewPage() {
   const params = useParams();
