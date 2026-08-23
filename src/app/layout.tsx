@@ -18,13 +18,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import dynamic from "next/dynamic";
-
-const ChatWidget = dynamic(() => import("@/components/ChatWidget"), { ssr: false });
-const CookieBanner = dynamic(() => import("@/components/CookieBanner"), { ssr: false });
-const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
-const NoiseOverlay = dynamic(() => import("@/components/NoiseOverlay"), { ssr: false });
-const A11yAudit = dynamic(() => import("@/components/A11yAudit"), { ssr: false });
+import ClientComponents from "@/components/ClientComponents";
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap", preload: true });
 const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap", preload: true });
@@ -332,8 +326,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollAnimator />
           <RouteBackground />
           <ScrollProgress />
-          <CustomCursor />
-        <A11yAudit />
         <AnalyticsTracker />
           <Navbar />
           <ErrorBoundary>
@@ -341,9 +333,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <PageTransition>{children}</PageTransition>
           </div>
           <Footer />
-          <ChatWidget />
           <ScrollToTop />
-          <NoiseOverlay />
           </ErrorBoundary>
           </SmoothScrollProvider>
         </AuthProvider>
@@ -351,7 +341,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GlobalImagePicker />
         <Analytics />
         <SpeedInsights />
-        <CookieBanner />
+        <ClientComponents />
         <AnalyticsProvider />
         <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" } }} />
         <script dangerouslySetInnerHTML={{ __html: `
