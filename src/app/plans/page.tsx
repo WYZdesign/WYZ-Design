@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
 import { trackMetaEvent } from "@/components/AnalyticsProvider";
 import GyroTilt from "@/components/GyroTilt";
+import PricingCalculator from "@/components/PricingCalculator";
 import type { FormField } from "@/components/DynamicForm";
 
 const FEATURES: Record<string, string[]> = {
@@ -491,6 +492,20 @@ export default function PlansPage() {
           subscription period, your subscription will still be active until the end of the current period, and
           you won&apos;t receive a refund for any unused portion.
         </p>
+
+        {/* Interactive Pricing Calculator */}
+        <ScrollReveal animation="fadeUp" delay={0.1}>
+          <section className="py-12 border-t border-[#E2E2E2] dark:border-[#444]">
+            <div className="max-w-4xl mx-auto px-6">
+              <div className="text-center mb-8">
+                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">ESTIMATE YOUR COST</span>
+                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">PRICING CALCULATOR</h2>
+                <p className="text-[#888] dark:text-[#aaa] text-[14px]">Pick what you need. See what it costs. No surprises.</p>
+              </div>
+              <PricingCalculator />
+            </div>
+          </section>
+        </ScrollReveal>
 
         {/* Build Your Own Plan */}
         <div className="mt-10 border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] p-6">

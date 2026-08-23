@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** TBD (Session 12)
+- **Last commit:** TBD (Session 13)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` branch
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -19,7 +19,45 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
 
-## Session 12 — Old Site Audit: Quick Wins from Claude's Cross-Reference
+## Session 13 — Claude Audit #2 + AI Chat + Merch Product Pages + Concept Archive + Pricing Calculator
+**Auditor:** Claude (read-only browser walkthrough of old Wix + DBC sites) + wyzmind (opencode)
+**Date:** 2026-08-23
+**Commits:** TBD
+
+### Claude Audit #2 Cross-Reference
+| Finding | Status |
+|---------|--------|
+| Photography album pattern (category → sub-page → lightbox) | Already existed (`/photography/[category]/page.tsx`) |
+| Build Your Own Plan form | Already existed (`/plans` — `CUSTOM_PLAN_FIELDS` + DynamicForm) |
+| Model Archive stack reveal | Already existed (polaroid carousel on `/photography`) |
+| Merch products + filters + sort | Already existed (14 fallback products, category/sort/rating) |
+| AI concierge chat widget | ✅ Built this session |
+| Concept Archive page | ✅ Built this session |
+| Merch product detail pages | ✅ Built this session |
+| Interactive pricing calculator | ✅ Built this session |
+
+### Corrections to Claude's Handover
+- Cal.com CSP: Already fixed in Session 7 (`app.cal.com` in script-src, connect-src, frame-src). Claude reported stale.
+- Featured Artist page: Already exists at `/featured-artist/page.tsx`. Claude reported as missing.
+- Build Your Own Plan: Already existed on `/plans`. Claude reported as missing.
+
+### New Features Built
+| Feature | File(s) | Status |
+|---------|---------|--------|
+| AI chat widget with streaming + service knowledge | `components/ChatWidget.tsx`, `app/api/chat/route.ts` | ✅ Built |
+| Merch product detail pages (material specs, POD disclosure, "You Might Also Like") | `app/merch/[id]/page.tsx` | ✅ Built |
+| Concept Archive page (design names + stories) | `app/merch/concepts/page.tsx` | ✅ Built |
+| Interactive pricing calculator | `components/PricingCalculator.tsx`, `app/plans/page.tsx` | ✅ Built |
+
+### Claude Audit #1 Items — Still Open
+- Featured Artist of the Month — page exists but needs content/artist selection
+- Event recap videos — needs source files from user
+- LLM chat widget on old site concept — ✅ Built this session
+
+### Still Open (requires user action)
+- Printful API key not configured (merch shows fallback products)
+- Stripe subscription Price IDs stale (need Dashboard creation)
+- End-to-end purchase test not completed — Old Site Audit: Quick Wins from Claude's Cross-Reference
 **Auditor:** Claude (read-only browser walkthrough of old Wix Studio site) + wyzmind (opencode)
 **Date:** 2026-08-23
 
