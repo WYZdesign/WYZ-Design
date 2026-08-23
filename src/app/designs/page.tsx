@@ -123,7 +123,7 @@ return (
   >
   {[...images, ...images, ...images].map((src, i) => (
   <button key={i} className={`flex-none h-24 sm:h-36 md:h-52 overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#2b2b2e]"}`}>
-  <SafeImage src={src} alt="WYZ Design portfolio" className="h-full w-auto object-contain group-hover:scale-95 transition-transform duration-700" />
+  <SafeImage src={src} alt="WYZ Design portfolio" className="h-full w-auto object-contain group-hover:scale-95 transition-transform duration-700" priority />
   </button>
   ))}
  </div>

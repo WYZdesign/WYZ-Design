@@ -253,7 +253,7 @@ export default function FDDriveBrowser() {
                 }>
                 {viewMode === "grid" ? (
                   <>
-                    <div className="aspect-video bg-zinc-800 flex items-center justify-center">
+                    <div className="relative aspect-video bg-zinc-800 flex items-center justify-center">
                       {f.thumbnailLink
                         ? <Image src={f.thumbnailLink} alt={f.name} fill className="w-full h-full object-cover" priority />
                         : <span className="text-3xl">🎬</span>
@@ -313,7 +313,7 @@ export default function FDDriveBrowser() {
                 }>
                 {viewMode === "grid" ? (
                   <>
-                    <div className="aspect-square bg-zinc-800 overflow-hidden">
+                    <div className="relative aspect-square bg-zinc-800 overflow-hidden">
                       {f.thumbnailLink
                         ? <Image src={f.thumbnailLink} alt={f.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" priority />
                         : <div className="w-full h-full flex items-center justify-center text-3xl">📸</div>

@@ -118,7 +118,7 @@ function ParallaxHero() {
       <div className="absolute inset-0 flex">
         {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
           <div key={i} className="relative flex-1 group overflow-hidden transition-all duration-700 ease-out hover:flex-[3.5]">
-            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" />
+            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" priority />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
           </div>
         ))}
@@ -588,7 +588,7 @@ export default function MerchPage() {
           <div className="flex whitespace-nowrap animate-marquee-right">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
               <div key={`gc1-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
-                <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
+                <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" priority />
               </div>
             ))}
           </div>
@@ -793,7 +793,7 @@ export default function MerchPage() {
       <div className="flex whitespace-nowrap animate-marquee-left">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
           <div key={`gc2-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
-            <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
+            <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" priority />
           </div>
         ))}
       </div>

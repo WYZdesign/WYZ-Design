@@ -51,7 +51,7 @@ export default function BrandsPage() {
             One Vision. <span className="text-[#DF3131]">Four Brands.</span>
           </h1>
           <p className="text-[#666] dark:text-[#999] text-[16px] lg:text-[18px] max-w-2xl mx-auto leading-relaxed">
-            Everything we make lives under one roof. WYZ Design is the company, and these three brands are how that vision shows up in the world.
+            Everything we make lives under one roof. WYZ Design is the company, and these four brands are how that vision shows up in the world.
           </p>
         </div>
 

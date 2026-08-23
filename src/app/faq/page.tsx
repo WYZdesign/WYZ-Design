@@ -340,7 +340,7 @@ export default function FAQPage() {
                      }`}>
                        <span className="faq-marquee">
                          <span className="faq-marquee-inner">{faq.q}</span>
-                         <span className="faq-marquee-inner" aria-hidden="true">{faq.q}</span>
+                         <span className="faq-marquee-inner max-md:inline-block hidden" aria-hidden="true">{faq.q}</span>
                        </span>
                      </span>
                     <span className={`text-xl font-bold shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 ${

@@ -14,9 +14,11 @@ interface SafeImageProps {
   priority?: boolean;
 }
 
-export default function SafeImage({ src, alt, className = "", loading = "lazy", decoding = "async", onLoad, ...imgProps }: SafeImageProps & React.ImgHTMLAttributes<HTMLImageElement>) {
+export default function SafeImage({ src, alt, className = "", loading, decoding = "async", onLoad, priority, ...imgProps }: SafeImageProps & React.ImgHTMLAttributes<HTMLImageElement>) {
   const [broken, setBroken] = useState(false);
   const [loaded, setLoaded] = useState(false);
+
+  const resolvedLoading = priority ? "eager" : (loading || "lazy");
 
   if (broken) {
     return (
@@ -31,7 +33,7 @@ export default function SafeImage({ src, alt, className = "", loading = "lazy", 
       src={src}
       alt={alt}
       className={`${className} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
-      loading={loading}
+      loading={resolvedLoading}
       decoding={decoding}
       onLoad={() => { setLoaded(true); onLoad?.(); }}
       onError={() => setBroken(true)}
