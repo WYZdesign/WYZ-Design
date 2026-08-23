@@ -1,4 +1,5 @@
 import { Novu } from "@novu/node";
+import { logger } from "@/lib/logger";
 
 let _novu: Novu | null = null;
 
@@ -18,7 +19,7 @@ export async function triggerNotification(templateId: string, email: string, pay
       to: { subscriberId: email.replace(/[^a-zA-Z0-9]/g, "_"), email },
       payload,
     });
-  } catch (e) { console.error("[novu:trigger]", e); }
+  } catch (e) { logger.error("[novu:trigger]", e); }
 }
 
 export async function sendAdminAlert(title: string, body: string) {

@@ -1,5 +1,6 @@
 import neo4j, { Driver } from "neo4j-driver";
 import Redis from "ioredis";
+import { logger } from "@/lib/logger";
 
 let neo4jDriver: Driver | null = null;
 let redisClient: Redis | null = null;
@@ -126,7 +127,7 @@ export async function addNewsletterSubscriber(email: string) {
     } finally {
       await session.close();
     }
-  } catch (e) { console.error("[wyzmind:addNewsletterSubscriber]", e); }
+  } catch (e) { logger.error("[wyzmind:addNewsletterSubscriber]", e); }
 }
 
 export async function removeNewsletterSubscriber(email: string) {
@@ -141,7 +142,7 @@ export async function removeNewsletterSubscriber(email: string) {
     } finally {
       await session.close();
     }
-  } catch (e) { console.error("[wyzmind:removeNewsletterSubscriber]", e); }
+  } catch (e) { logger.error("[wyzmind:removeNewsletterSubscriber]", e); }
 }
 
 export async function getNewsletterSubscribers() {

@@ -88,12 +88,25 @@ export async function POST(req: NextRequest) {
   try {
     const { messages } = await req.json();
 
+    if (!Array.isArray(messages) || messages.length === 0 || messages.length > 50) {
+      return new Response("Invalid messages", { status: 400 });
+    }
+
+    const lastMsg = messages[messages.length - 1];
+    if (!lastMsg?.content || typeof lastMsg.content !== "string" || lastMsg.content.length > 2000) {
+      return new Response("Message too long or empty", { status: 400 });
+    }
+
+    // Keep only last 10 messages for context window
+    const recentMessages = messages.slice(-10);
+
     const systemMessage = { role: "system", content: KNOWLEDGE };
-    const allMessages = [systemMessage, ...messages];
+    const allMessages = [systemMessage, ...recentMessages];
 
     // Try Ollama first (Shadow PC GPU tunnel)
     try {
-      const ollamaRes = await fetch("http://localhost:11435/api/chat", {
+      const ollamaUrl = process.env.OLLAMA_URL || "http://localhost:11435";
+      const ollamaRes = await fetch(`${ollamaUrl}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -166,11 +166,17 @@ export async function POST(req: NextRequest) {
     }
     if (body.action === "add-points") {
       const { addLoyaltyPoints } = await import("@/lib/wyzmind");
-      await addLoyaltyPoints(body.email, body.amount, body.reason);
+      const email = typeof body.email === "string" && body.email.includes("@") ? body.email : null;
+      const amount = typeof body.amount === "number" && body.amount > 0 && body.amount <= 10000 ? body.amount : null;
+      const reason = typeof body.reason === "string" && body.reason.length > 0 ? body.reason.slice(0, 200) : null;
+      if (!email || !amount || !reason) {
+        return NextResponse.json({ error: "Invalid input: valid email, positive amount (max 10000), and reason required" }, { status: 400 });
+      }
+      await addLoyaltyPoints(email, amount, reason);
       return NextResponse.json({ success: true });
     }
     return NextResponse.json({ error: "Unknown action" }, { status: 400 });
-  } catch (e: unknown) {
-    return NextResponse.json({ error: (e as Error).message }, { status: 500 });
+  } catch {
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

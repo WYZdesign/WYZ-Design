@@ -1,3 +1,5 @@
+import { logger } from "@/lib/logger";
+
 const DISCORD_WEBHOOK = process.env.DISCORD_WEBHOOK_URL || "";
 
 export async function sendDiscordAlert(title: string, fields: Record<string, string>) {
@@ -21,5 +23,5 @@ export async function sendDiscordAlert(title: string, fields: Record<string, str
         }],
       }),
     });
-  } catch (e) { console.error("[discord:sendAlert]", e); }
+  } catch (e) { logger.error("[discord:sendAlert]", e); }
 }

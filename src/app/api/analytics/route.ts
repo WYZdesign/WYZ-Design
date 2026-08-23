@@ -25,7 +25,8 @@ function parseUA(ua: string) {
 }
 
 function hashIp(ip: string): string {
-  return createHash("sha256").update(ip + "wyz-salt-2026").digest("hex").slice(0, 16);
+  const salt = process.env.IP_HASH_salt || "wyz-salt-2026";
+  return createHash("sha256").update(ip + salt).digest("hex").slice(0, 16);
 }
 
 function isAdmin(session: any): boolean {

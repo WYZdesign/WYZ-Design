@@ -16,7 +16,7 @@ export function validateCsrf(req: NextRequest): boolean {
   if (origin === "null") return false;
 
   if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (host === "localhost:3000" && origin.startsWith("http://localhost")) return true;
+  if (process.env.NODE_ENV !== "production" && origin.startsWith("http://localhost")) return true;
 
   return false;
 }

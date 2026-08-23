@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `ad6c1b1` (Session 13)
+- **Last commit:** TBD (Session 14)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` branch
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -18,6 +18,31 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **Admin auth:** `ADMIN_EMAILS` env var (comma-separated), checked via NextAuth session
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
+
+## Session 14 — Deep Security Audit + Bug Fixes
+**Auditor:** opencode (automated audit) + Claude (browser walkthrough)
+**Date:** 2026-08-23
+
+### Fixes Applied
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Chat route hardcoded Ollama URL — no env var | `api/chat/route.ts` | CRITICAL | ✅ Fixed — uses `OLLAMA_URL` env var |
+| CSRF localhost bypass — any localhost passes | `lib/csrf.ts` | HIGH | ✅ Fixed — uses `NODE_ENV !== "production"` |
+| Admin add-points no input validation | `api/admin/route.ts` | HIGH | ✅ Fixed — validates email, amount (1-10000), reason (max 200 chars) |
+| Admin error message leak | `api/admin/route.ts` | MEDIUM | ✅ Fixed — returns generic "Internal server error" |
+| IP hash salt hardcoded | `api/analytics/route.ts` | HIGH | ✅ Fixed — uses `IP_HASH_SALT` env var |
+| Forms hardcoded fallback email | `api/forms/route.ts` | MEDIUM | ✅ Fixed — empty string fallback instead of personal email |
+| Chat route no input size limits | `api/chat/route.ts` | MEDIUM | ✅ Fixed — max 50 messages, 2000 chars per message, keeps last 10 |
+| 4 console.error → logger | `discord.ts`, `novu.ts`, `wyzmind.ts` (x2) | MEDIUM | ✅ Fixed — added logger import + migration |
+
+### Claude Browser Audit (In Progress)
+Claude is doing a full end-to-end walkthrough of every page and interaction. Results will be in next handover.
+
+### Still Open (requires user action)
+- Printful API key — NOT in vault
+- Stripe Price IDs — NOT in vault (need 4 Price objects in Dashboard)
+- End-to-end purchase test
+- Event recap videos — needs source files from user
 
 ## Session 13 — Claude Audit #2 + AI Chat + Merch Product Pages + Concept Archive + Pricing Calculator
 **Auditor:** Claude (read-only browser walkthrough of old Wix + DBC sites) + wyzmind (opencode)

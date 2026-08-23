@@ -34,7 +34,7 @@ async function sendAdminNotification(formType: string, data: Record<string, unkn
     const details = formatEntry(data);
     await resend.emails.send({
       from: "WYZ Design <notifications@wyzdesign.com>",
-      to: process.env.ADMIN_EMAIL || "torree.marcel@gmail.com",
+      to: process.env.ADMIN_EMAIL || "",
       subject: `New ${formType} Submission`,
       text: `New form submission received:\n\nType: ${formType}\n\n${details}\n\nView all: https://www.wyzdesign.com/admin`,
     });
