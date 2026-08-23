@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `cd158cf` (Session 15 — chat timeout fix + admin auth dedup)
+- **Last commit:** `e55cd4e` (Session 15 — Printful V2 API + IP_HASH_SALT casing fix)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` branch — builds were failing for 10+ commits due to `ssr:false` in Server Component. Fixed with `ClientComponents.tsx` wrapper.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -89,7 +89,7 @@ Partway through testing (right after the merch 404 checks), the site's edge secu
 2. **🔴 Cal.com widget "Cal is not defined"** — Manual script injection skipped Cal.com's required stub function. ✅ Fixed with proper stub sequence.
 
 ### Still Open (requires user action)
-- Printful API key — NOT in vault
+- Printful API key — ✅ SAVED TO VAULT. V2 API integration complete (`e55cd4e`). Products now fetched live from Printful catalog.
 - Stripe Price IDs — NOT in vault (need 4 Price objects in Dashboard)
 - End-to-end purchase test
 - Event recap videos — needs source files from user
