@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** TBD (Session 14)
+- **Last commit:** `547e448` (Session 14)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` branch
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -34,9 +34,18 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 | Forms hardcoded fallback email | `api/forms/route.ts` | MEDIUM | ✅ Fixed — empty string fallback instead of personal email |
 | Chat route no input size limits | `api/chat/route.ts` | MEDIUM | ✅ Fixed — max 50 messages, 2000 chars per message, keeps last 10 |
 | 4 console.error → logger | `discord.ts`, `novu.ts`, `wyzmind.ts` (x2) | MEDIUM | ✅ Fixed — added logger import + migration |
+| Cal.com widget "Cal is not defined" | `booking/page.tsx` | HIGH | ✅ Fixed — uses proper stub sequence instead of manual script injection |
+| Blog topic no length limit | `api/blog/generate/route.ts` | MEDIUM | ✅ Fixed — max 500 chars |
+| Novu subscriberId collision | `lib/novu.ts` | MEDIUM | ✅ Fixed — appends timestamp |
+| Unused `isAdmin` import | `api/admin/route.ts` | LOW | ✅ Fixed — removed dead import |
+| Hardcoded MinIO fallback URL | `api/album-images/route.ts` | MEDIUM | ✅ Fixed — empty string fallback |
+| Windows path `G:\My Drive\` exposed | `api/gdrive-index/route.ts` | MEDIUM | ✅ Fixed — uses generic path |
+| fd/events GET no error handling | `api/fd/events/route.ts` | MEDIUM | ✅ Fixed — added try/catch |
+| n8n webhook silent error swallowing | `api/webhook/route.ts` | LOW | ✅ Fixed — added logger |
 
-### Claude Browser Audit (In Progress)
-Claude is doing a full end-to-end walkthrough of every page and interaction. Results will be in next handover.
+### Claude Browser Audit Findings
+1. **🔴 Production serving old build** — Code exists for testimonials, merch/[id], merch/concepts, but production returns 404 or doesn't show them. Need to check Vercel dashboard for failed/stuck builds.
+2. **🔴 Cal.com widget "Cal is not defined"** — Manual script injection skipped Cal.com's required stub function. ✅ Fixed with proper stub sequence.
 
 ### Still Open (requires user action)
 - Printful API key — NOT in vault
