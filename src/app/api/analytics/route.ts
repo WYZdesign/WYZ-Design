@@ -26,7 +26,7 @@ function parseUA(ua: string) {
 }
 
 function hashIp(ip: string): string {
-  const salt = process.env.IP_HASH_salt || "wyz-salt-2026";
+  const salt = process.env.IP_HASH_SALT || "wyz-salt-2026";
   return createHash("sha256").update(ip + salt).digest("hex").slice(0, 16);
 }
 

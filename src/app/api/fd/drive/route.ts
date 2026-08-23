@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { requireAdmin } from "@/lib/admin-auth";
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const FOLDER_ID = "1x4Ya8VMdtt8wfG8jil-V_TxRuaEWht0T";
@@ -22,6 +23,9 @@ async function listFiles(folderId: string, apiKey: string, pageToken?: string) {
 }
 
 export async function GET(req: Request) {
+  const admin = await requireAdmin();
+  if (!admin.ok) return admin.response;
+
   const apiKey = process.env.GOOGLE_DRIVE_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
