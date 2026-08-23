@@ -8,11 +8,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { GlobalImagePicker } from "@/components/ImagePicker";
-import ChatWidget from "@/components/ChatWidget";
-import CookieBanner from "@/components/CookieBanner";
 import AuthProvider from "@/components/AuthProvider";
 import ScrollProgress from "@/components/ScrollProgress";
-import CustomCursor from "@/components/CustomCursor";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import PageTransition from "@/components/PageTransition";
@@ -20,9 +17,14 @@ import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import A11yAudit from "@/components/A11yAudit";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import NoiseOverlay from "@/components/NoiseOverlay";
+import dynamic from "next/dynamic";
+
+const ChatWidget = dynamic(() => import("@/components/ChatWidget"), { ssr: false });
+const CookieBanner = dynamic(() => import("@/components/CookieBanner"), { ssr: false });
+const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
+const NoiseOverlay = dynamic(() => import("@/components/NoiseOverlay"), { ssr: false });
+const A11yAudit = dynamic(() => import("@/components/A11yAudit"), { ssr: false });
 
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap", preload: true });
 const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap", preload: true });
