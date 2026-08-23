@@ -52,6 +52,25 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 **Still Open:**
 - Stripe 500 — keys rotated and redeployed, pending verification
 
+### Session 9 — Sitewide Navbar Overlap Fix + Interactive Hero Effects + Merch/Photography
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Headings hidden behind navbar on 18 pages — `.hero-banner` negative margin + missing padding | 18 page files | HIGH | ✅ Fixed — `pt-32 lg:pt-40` added to all hero inner wrappers + non-hero first children |
+| Events YouTubeSection static — logos had no interaction | `events/page.tsx` | MEDIUM | ✅ Fixed — mouse-interactive reveal: logos near cursor glow/scale, far logos stay dim |
+| Events YouTubeSection overlay too light (60%) | `events/page.tsx` | MEDIUM | ✅ Fixed — changed to 90% black |
+| About hero static crown logos — no interaction | `about/page.tsx` | MEDIUM | ✅ Fixed — mouse-interactive reveal effect added |
+| About hero overlay too light (60%) | `about/page.tsx` | MEDIUM | ✅ Fixed — changed to 90% black |
+| Printing page marquee above hero instead of below | `printing/page.tsx` | LOW | ✅ Fixed — marquee moved under hero section |
+| Photography carousel items too narrow | `photography/page.tsx` | MEDIUM | ✅ Fixed — items widened to `w-[40vw] sm:w-[280px] md:w-[380px] lg:w-[440px]`, changed to `object-cover` |
+| Merch page duplicate images in product grid + mockup gallery | `merch/page.tsx` | MEDIUM | ✅ Fixed — deduplicated FALLBACK_PRODUCTS and DBC_MODEL_MOCKUPS images |
+
+**Pages fixed (hero-banner group):** about, designs, events, partnerships, photography, services, web-design, wyzmind (home untouched — intentional)
+
+**Pages fixed (non-hero group):** gallery, match, booking, community, model-archive, loyalty, case-studies, 3pointprogram
+
 ### Session 8 — API Security Hardening (deep audit follow-up)
 **Auditor:** wyzmind (opencode)
 **Date:** 2026-08-22
