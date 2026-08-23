@@ -26,6 +26,9 @@ interface AnalyticsSummary { period: string; total_pageviews: number; unique_vis
 interface Category { id: number; name: string; schedule_c_line: string; type: string }
 interface Client { id: number; name: string; email: string; notes: string }
 interface ChatSession { sessionId: string; messages: number; lastMessage: string; preview: {role:string;content:string;timestamp:string}[] }
+interface OverviewData { stats: { totalForms: number; totalChats: number; totalUsers: number; newsletterSubs: number; adminCount: number; chatSessions: number; formTypes: Record<string, number>; recentForms: { form_type: string; created_at: string; data: Record<string, unknown> }[] } }
+interface SeoData { checks: { name: string; status: "pass" | "warn" | "fail"; message: string; check: string; detail?: string }[]; checkedAt: string }
+interface ChatsData { sessions: ChatSession[] }
 
 const NAV_SECTIONS: { label: string; items: { id: string; icon: string; label: string }[] }[] = [
   { label: "DASHBOARD", items: [{ id: "overview", icon: "\u25C8", label: "Overview" }] },
@@ -274,7 +277,7 @@ function AccountAuth() {
   );
 }
 
-function ProfileTab({ session, update, signOut }: { session: any; update: any; signOut: any }) {
+function ProfileTab({ session, update, signOut }: { session: import("next-auth").Session; update: () => Promise<import("next-auth").Session | null>; signOut: (options?: { callbackUrl?: string }) => Promise<void> }) {
   const [editMode, setEditMode] = useState(false);
   const [saving, setSaving] = useState(false);
   const [profile, setProfile] = useState({
@@ -412,7 +415,7 @@ function ProfileActionLink({ href, label, icon, external }: { href: string; labe
   );
 }
 
-function BugReportTab({ session }: { session: any }) {
+function BugReportTab({ session }: { session: import("next-auth").Session | null }) {
   const [open, setOpen] = useState(true);
   const [bugCat, setBugCat] = useState("");
   const [bugChecks, setBugChecks] = useState<string[]>([]);
@@ -499,7 +502,7 @@ function NotAuthorized() {
 }
 
 // ─── OVERVIEW ───
-function OverviewTab({ data }: { data: any }) {
+function OverviewTab({ data }: { data: OverviewData }) {
   const s = data?.stats;
   if (!s) return <Empty>No data yet</Empty>;
   return (
@@ -834,9 +837,9 @@ function AnalyticsTab({ data }: { data: AnalyticsSummary }) {
 }
 
 // ─── SEO TAB ───
-function SeoTab({ data }: { data: any }) {
+function SeoTab({ data }: { data: SeoData }) {
   if (!data?.checks) return <Empty>No SEO data yet. Run an SEO check first.</Empty>;
-  const passed = data.checks.filter((c: any) => c.status === "pass").length;
+  const passed = data.checks.filter((c) => c.status === "pass").length;
   const total = data.checks.length;
   const score = total > 0 ? Math.round((passed / total) * 100) : 0;
   return (
@@ -851,7 +854,7 @@ function SeoTab({ data }: { data: any }) {
         </div>
       </div>
       <div className="bg-white/5 border border-white/10 overflow-hidden">
-        {data.checks.map((c: any, i: number) => (
+        {data.checks.map((c, i: number) => (
           <div key={i} className="flex items-center gap-4 px-5 py-3 border-b border-white/5 last:border-0">
             <span className={`text-[14px] ${c.status === "pass" ? "text-[#34A853]" : c.status === "warn" ? "text-[#FBBC05]" : "text-[#EA4335]"}`}>
               {c.status === "pass" ? "\u2713" : c.status === "warn" ? "\u26A0" : "\u2717"}
@@ -1002,7 +1005,7 @@ function NewsletterTab({ data }: { data: Subscriber[] }) {
 }
 
 // ─── CHATS TAB ───
-function ChatsTab({ data }: { data: any }) {
+function ChatsTab({ data }: { data: ChatsData }) {
   const sessions: ChatSession[] = data?.sessions || [];
   if (!sessions.length) return <Empty>No chat sessions</Empty>;
   return (
@@ -1014,7 +1017,7 @@ function ChatsTab({ data }: { data: any }) {
             <span className="text-[11px] text-white/50">{s.messages} messages</span>
           </div>
           <div className="space-y-2 max-h-48 overflow-y-auto">
-            {s.preview?.map((m: any, i: number) => (
+            {s.preview?.map((m, i: number) => (
               <div key={i} className={`text-[12px] px-3 py-2 ${m.role === "user" ? "bg-white/5 text-white/60 ml-8" : "bg-[#DF3131]/10 text-white/80 mr-8"}`}>
                 <span className="text-[10px] font-heading font-bold uppercase mr-2 opacity-50">{m.role}</span>
                 {m.content?.slice(0, 200)}

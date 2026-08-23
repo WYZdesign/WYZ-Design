@@ -1,19 +1,21 @@
 import { join } from "path";
 import { mkdirSync, existsSync } from "fs";
+import type Database from "better-sqlite3";
 
-let _db: any = null;
+let _db: Database.Database | null = null;
 let _dbAvailable: boolean | null = null;
 
-export function getAnalyticsDb(): any {
+export function getAnalyticsDb(): Database.Database | null {
   if (_dbAvailable === false) return null;
   if (_db) return _db;
   try {
-    const Database = require("better-sqlite3");
+    const DatabaseConstructor = require("better-sqlite3");
     const dir = join(process.cwd(), "data");
     if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-    _db = new Database(join(dir, "analytics.db"));
-    _db.pragma("journal_mode = WAL");
-    initAnalyticsSchema(_db);
+    const db = new DatabaseConstructor(join(dir, "analytics.db"));
+    db.pragma("journal_mode = WAL");
+    initAnalyticsSchema(db);
+    _db = db;
     _dbAvailable = true;
     return _db;
   } catch {
@@ -22,7 +24,7 @@ export function getAnalyticsDb(): any {
   }
 }
 
-function initAnalyticsSchema(db: any) {
+function initAnalyticsSchema(db: Database.Database) {
   db.exec(`
     CREATE TABLE IF NOT EXISTS pageviews (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -147,7 +149,7 @@ export function getPageviews(filters?: {
   const db = getAnalyticsDb();
   if (!db) return [];
   let where = "WHERE 1=1";
-  const params: any[] = [];
+  const params: (string | number)[] = [];
   if (filters?.path) { where += " AND path = ?"; params.push(filters.path); }
   if (filters?.from) { where += " AND created_at >= ?"; params.push(filters.from); }
   if (filters?.to) { where += " AND created_at <= ?"; params.push(filters.to); }
@@ -199,64 +201,71 @@ export function getAnalyticsSummary(days = 30): AnalyticsSummary {
   if (!db) return { period: `${days}d`, total_pageviews: 0, unique_visitors: 0, unique_pages: 0, avg_duration_ms: 0, top_pages: [], top_referrers: [], top_utm_sources: [], device_breakdown: [], browser_breakdown: [], os_breakdown: [], daily_views: [], bounce_rate: 0, pages_per_session: 0 };
   const from = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
 
+  interface TotalsRow { total: number; unique_visitors: number; unique_pages: number; avg_duration: number }
+  interface PathRow { path: string; views: number; avg_duration: number }
+  interface CountRow { count: number }
+  interface UtmRow { source: string; count: number }
+  interface DailyRow { date: string; views: number; unique: number }
+  interface SessionRow { session_id: string; views: number }
+
   const totals = db.prepare(`
     SELECT COUNT(*) as total, COUNT(DISTINCT ip_hash) as unique_visitors, COUNT(DISTINCT path) as unique_pages, AVG(duration_ms) as avg_duration
     FROM pageviews WHERE created_at >= ?
-  `).get(from) as any;
+  `).get(from) as TotalsRow | undefined;
 
   const top_pages = db.prepare(`
     SELECT path, COUNT(*) as views, AVG(duration_ms) as avg_duration
     FROM pageviews WHERE created_at >= ?
     GROUP BY path ORDER BY views DESC LIMIT 10
-  `).all(from) as any[];
+  `).all(from) as PathRow[];
 
   const top_referrers = db.prepare(`
     SELECT referrer, COUNT(*) as count FROM pageviews
     WHERE created_at >= ? AND referrer != '' AND referrer IS NOT NULL
     GROUP BY referrer ORDER BY count DESC LIMIT 10
-  `).all(from) as any[];
+  `).all(from) as { referrer: string; count: number }[];
 
   const top_utm_sources = db.prepare(`
     SELECT utm_source as source, COUNT(*) as count FROM pageviews
     WHERE created_at >= ? AND utm_source != '' AND utm_source IS NOT NULL
     GROUP BY utm_source ORDER BY count DESC LIMIT 10
-  `).all(from) as any[];
+  `).all(from) as UtmRow[];
 
   const device_breakdown = db.prepare(`
     SELECT device, COUNT(*) as count FROM pageviews
     WHERE created_at >= ? AND device != ''
     GROUP BY device ORDER BY count DESC
-  `).all(from) as any[];
+  `).all(from) as { device: string; count: number }[];
 
   const browser_breakdown = db.prepare(`
     SELECT browser, COUNT(*) as count FROM pageviews
     WHERE created_at >= ? AND browser != ''
     GROUP BY browser ORDER BY count DESC LIMIT 8
-  `).all(from) as any[];
+  `).all(from) as { browser: string; count: number }[];
 
   const os_breakdown = db.prepare(`
     SELECT os, COUNT(*) as count FROM pageviews
     WHERE created_at >= ? AND os != ''
     GROUP BY os ORDER BY count DESC LIMIT 8
-  `).all(from) as any[];
+  `).all(from) as { os: string; count: number }[];
 
   const daily_views = db.prepare(`
     SELECT substr(created_at, 1, 10) as date, COUNT(*) as views, COUNT(DISTINCT ip_hash) as unique
     FROM pageviews WHERE created_at >= ?
     GROUP BY date ORDER BY date
-  `).all(from) as any[];
+  `).all(from) as DailyRow[];
 
   // Bounce rate: sessions with only 1 pageview / total sessions
   const sessions = db.prepare(`
     SELECT session_id, COUNT(*) as views FROM pageviews
     WHERE created_at >= ? AND session_id != ''
     GROUP BY session_id
-  `).all(from) as any[];
-  const singlePage = sessions.filter((s: any) => s.views === 1).length;
+  `).all(from) as SessionRow[];
+  const singlePage = sessions.filter((s) => s.views === 1).length;
   const bounceRate = sessions.length > 0 ? singlePage / sessions.length : 0;
 
   // Pages per session
-  const totalViews = sessions.reduce((a: number, s: any) => a + s.views, 0);
+  const totalViews = sessions.reduce((a, s) => a + s.views, 0);
   const pps = sessions.length > 0 ? totalViews / sessions.length : 0;
 
   return {
@@ -317,5 +326,5 @@ export function getLatestSeoScores(): { url: string; score: number; last_check: 
   return db.prepare(`
     SELECT url, score, MAX(created_at) as last_check
     FROM seo_checks GROUP BY url ORDER BY last_check DESC
-  `).all() as any[];
+  `).all() as { url: string; score: number; last_check: string }[];
 }
