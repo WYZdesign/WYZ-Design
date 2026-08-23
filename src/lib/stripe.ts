@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { createHmac } from "crypto";
+import { getSiteUrl } from "@/lib/site-url";
 
 let _stripe: Stripe | null = null;
 
@@ -45,8 +46,8 @@ export async function createCheckoutSession(plan: string, email?: string, userId
     customer_email: email,
     client_reference_id: userId || undefined,
     line_items: [{ price: planConfig.priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/account/my-account?upgraded=${plan}&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/account/my-account`,
+    success_url: `${getSiteUrl()}/account/my-account?upgraded=${plan}&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${getSiteUrl()}/account/my-account`,
     allow_promotion_codes: true,
     metadata: { plan, userId: userId || "", priceId: planConfig.priceId },
     subscription_data: {
@@ -72,8 +73,8 @@ export async function createGiftCardCheckout(amount: number, email?: string) {
       },
       quantity: 1,
     }],
-    success_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/gift-card?success=true`,
-    cancel_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/gift-card`,
+    success_url: `${getSiteUrl()}/gift-card?success=true`,
+    cancel_url: `${getSiteUrl()}/gift-card`,
     metadata: { type: "giftcard", amount: String(amount) },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
@@ -94,8 +95,8 @@ export async function createServiceCheckout(serviceName: string, servicePrice: n
       },
       quantity: 1,
     }],
-    success_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/booking?success=true&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_URL || "https://wyzdesign.com"}/booking`,
+    success_url: `${getSiteUrl()}/booking?success=true&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${getSiteUrl()}/booking`,
     allow_promotion_codes: true,
     metadata: { type: "service", name: serviceName, price: String(servicePrice) },
     client_reference_id: email || undefined,

@@ -4,13 +4,14 @@ import { addNewsletterSubscriber, removeNewsletterSubscriber } from "@/lib/wyzmi
 import { createHmac } from "crypto";
 import { validateCsrf } from "@/lib/csrf";
 import { logger } from "@/lib/logger";
+import { getSiteUrl } from "@/lib/site-url";
 
 let resend: Resend;
 function getResend() {
   if (!resend) resend = new Resend(process.env.RESEND_API_KEY);
   return resend;
 }
-const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://www.wyzdesign.com";
+const BASE_URL = getSiteUrl();
 
 function signUnsubscribe(email: string): string {
   const secret = process.env.NEXTAUTH_SECRET;

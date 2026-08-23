@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { getSiteUrl } from "@/lib/site-url";
 
-const BASE = (process.env.NEXT_PUBLIC_URL || "https://www.wyzdesign.com").replace(/^\uFEFF/, "").trim();
+const BASE = getSiteUrl();
 
 const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: "weekly" | "monthly" | "yearly" | "daily" }> = [
   { path: "", priority: 1, changeFrequency: "weekly" },

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site-url";
 
-const BASE = (process.env.NEXT_PUBLIC_URL || "https://www.wyzdesign.com").replace(/^\uFEFF/, "").trim();
+const BASE = getSiteUrl();
 
 export default function robots(): MetadataRoute.Robots {
   return {
