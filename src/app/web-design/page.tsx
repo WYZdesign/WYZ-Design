@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { logger } from "@/lib/logger";
-import { FiExternalLink, FiMonitor, FiSmartphone, FiTrendingUp, FiZap, FiGlobe, FiLock, FiArrowRight } from "react-icons/fi";
+import { FiExternalLink, FiMonitor, FiSmartphone, FiTrendingUp, FiZap, FiGlobe, FiLock, FiArrowRight, FiStar } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
@@ -329,6 +329,36 @@ return (
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {CLIENT_SITES.map((site, i) => <SiteCard key={site.name} site={site} index={i} />)}
+              </div>
+            </div>
+          </section>
+        </ScrollReveal>
+
+        {/* ═══ TESTIMONIALS ═══ */}
+        <ScrollReveal animation="fadeUp" delay={0.05}>
+          <section className="py-20 bg-white dark:bg-[#111]">
+            <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
+              <div className="text-center mb-12">
+                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT CLIENTS SAY</span>
+                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">TESTIMONIALS</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { quote: "Hired him for my wedding. He did remarkable work. If you ever need a photographer I would definitely recommend this person.", name: "Andrew Vickers", role: "Google Review" },
+                  { quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to help artists level up.", name: "Tim Perez", role: "Google Review" },
+                  { quote: "Consistency in every aspect of service. Made me an established brand and has got me so many opportunities. Don't hesitate to bring your business here.", name: "Robert Sykes Jr", role: "Google Review" },
+                ].map((t) => (
+                  <div key={t.name} className="bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 hover:shadow-xl hover:shadow-[#DF3131]/5 transition-all">
+                    <div className="flex gap-1 mb-4 text-[#D49341]">
+                      {[...Array(5)].map((_, i) => <FiStar key={i} className="w-4 h-4 fill-current" />)}
+                    </div>
+                    <p className="text-[#333] dark:text-[#e0e0e0] text-[15px] leading-relaxed mb-6 italic">&quot;{t.quote}&quot;</p>
+                    <div>
+                      <p className="font-heading font-bold text-[14px] text-[#333] dark:text-[#e0e0e0]">{t.name}</p>
+                      <p className="text-[12px] text-[#888] dark:text-[#aaa]">{t.role}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>

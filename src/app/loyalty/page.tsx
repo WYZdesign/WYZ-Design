@@ -55,11 +55,14 @@ export default function LoyaltyPage() {
           </div>
         ) : session && loading ? (
           <div className="text-center py-8 text-[#888]">Loading your rewards...</div>
-        ) : !session ? (
-          <div className="text-center py-8">
-            <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">Sign in to view your rewards</Link>
-          </div>
         ) : null}
+
+        {!session && (
+          <div className="text-center mb-10">
+            <p className="text-[#888] dark:text-[#b0b0b0] mb-4">Sign in to track your points and tier status. Here's how the program works:</p>
+            <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">Sign in to join</Link>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 mb-16">
           {TIERS.map((t, i) => (

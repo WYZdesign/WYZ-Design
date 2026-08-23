@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `5fb5d30` (HANDOVER update)
+- **Last commit:** TBD (Session 12)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` branch
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -18,6 +18,27 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **Admin auth:** `ADMIN_EMAILS` env var (comma-separated), checked via NextAuth session
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
+
+## Session 12 — Old Site Audit: Quick Wins from Claude's Cross-Reference
+**Auditor:** Claude (read-only browser walkthrough of old Wix Studio site) + wyzmind (opencode)
+**Date:** 2026-08-23
+
+Claude audited the old `wyzdesign.wixstudio.com/wyzdesign` against the current site. 9 ideas proposed. 5 already existed. 2 applied.
+
+| Fix | File(s) | Status |
+|-----|---------|--------|
+| Loyalty page gated everything behind sign-in — show tiers + earn ways publicly | `loyalty/page.tsx` | ✅ Fixed |
+| Web-design missing testimonials | `web-design/page.tsx` | ✅ Fixed — added 3 Google review testimonials |
+| Services category filter tabs | `services/page.tsx` | Already existed |
+| Printing paper-type education | `printing/page.tsx` | Already existed |
+| Photography auto-scrolling filmstrip | `photography/page.tsx` | Already existed (3 AutoScrollRow sections) |
+| Web-design client portfolio + process steps | `web-design/page.tsx` | Already existed |
+
+**Remaining (need user input):**
+- Build Your Own Plan form on `/plans` — needs design decision
+- Featured Artist of the Month page — needs content/artist selection
+- Event recap videos on `/events` — needs source files from user
+- LLM chat widget — exploratory, low priority
 
 ## Session 11 — Toast Notifications + Security Regression Fix
 **Auditor:** opencode + Claude (Cowork)
