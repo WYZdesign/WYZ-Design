@@ -156,7 +156,7 @@ export default function ModelArchivePage() {
 
  return (
  <main className="pb-16 bg-white dark:bg-[#111]">
- <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
+ <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
  {/* Header */}
  <div className="mb-8 text-center">
  <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>M O D E L . A R C H I V E</h1>

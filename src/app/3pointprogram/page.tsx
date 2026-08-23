@@ -53,7 +53,7 @@ export default function ThreePointProgramPage() {
     <main className="pb-20 bg-white dark:bg-[#232326]">
       <ScrollReveal animation="fadeUp">
         <div className="max-w-5xl mx-auto px-6">
-          <div className="text-center mb-14 pt-12">
+          <div className="text-center mb-14 pt-32 lg:pt-40">
             <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-2">Framework</p>
             <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>3-POINT PROGRAM</h1>
             <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto text-[16px] leading-relaxed">A structured framework for building your brand from the ground up. Three pillars, one unified vision. Built for creatives, artists, and small businesses who are tired of guessing.</p>

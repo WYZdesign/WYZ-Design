@@ -67,7 +67,7 @@ export default function GalleryPage() {
 
  return (
   <main className="pb-16 bg-white dark:bg-[#232326]">
- <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
+ <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
  <div className="mb-8 text-center">
   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">G A L L E R Y</h1>
   <p className="text-[#8F8F8F] dark:text-[#b0b0b0] text-sm mt-2">Our complete portfolio of work</p>

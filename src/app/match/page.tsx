@@ -18,7 +18,7 @@ const INCLUDES = [
 export default function MatchPage() {
   return (
     <main className="pb-16 bg-white dark:bg-[#232326]">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
         <div className="text-center mb-14">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">M A T C H</h1>
           <p className="text-[#8F8F8F] dark:text-white/50 max-w-xl mx-auto">Not sure where to start? Let us match you with the perfect creative services for your brand.</p>

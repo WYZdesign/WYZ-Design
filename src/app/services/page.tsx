@@ -121,7 +121,7 @@ return (
    <div className="absolute inset-0 bg-black/20" />
   </div>
   {/* Right: Text with gradient */}
- <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 overflow-hidden">
+ <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 pt-32 lg:pt-40 overflow-hidden">
    <div className="absolute inset-0 hero-grad-services z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">

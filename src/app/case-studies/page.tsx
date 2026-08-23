@@ -37,7 +37,7 @@ export default function CaseStudiesIndex() {
   return (
     <main className="bg-white dark:bg-[#111] min-h-screen pb-20">
       <ScrollReveal animation="fadeUp">
-        <section className="py-20 px-6 text-center">
+        <section className="py-20 px-6 text-center pt-32 lg:pt-40">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-6 sm:mb-8">
             CASE <span className="text-[#DF3131]">STUDIES</span>
           </h1>

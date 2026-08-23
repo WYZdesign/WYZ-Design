@@ -473,6 +473,10 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
 }
 
  function YouTubeSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const [isHovering, setIsHovering] = useState(false);
+
   const ytPath = "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z";
 
   const ytRows = [
@@ -484,69 +488,91 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
     { color: "#FF8080" },
   ];
 
-  const LogoItem = ({ color }: { color: string }) => (
-    <div className="flex-none flex items-center gap-2 px-6 py-3">
-      <svg className="w-10 h-10 sm:w-12 sm:h-12" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
-    </div>
-  );
+  const LogoItem = ({ color, idx }: { color: string; idx: number }) => {
+    const dist = Math.sqrt(
+      Math.pow((idx % 8) / 7 - mousePos.x, 2) +
+      Math.pow(Math.floor(idx / 8) / 5 - mousePos.y, 2)
+    );
+    const proximity = isHovering ? Math.max(0, 1 - dist * 1.5) : 0;
+    const glow = proximity * 0.6;
 
-  const row1 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
-  const row2 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
-  const row3 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
-  const row4 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
-  const row5 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
-  const row6 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
-  const row7 = [...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows, ...ytRows];
-  const row8 = [...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse(), ...ytRows.slice().reverse()];
+    return (
+      <div
+        className="flex-none flex items-center gap-2 px-6 py-3 transition-all duration-300"
+        style={{
+          opacity: isHovering ? 0.2 + proximity * 0.8 : undefined,
+          filter: glow > 0 ? `drop-shadow(0 0 ${8 * glow}px ${color}) brightness(${1 + glow * 0.5})` : undefined,
+          transform: isHovering && proximity > 0.3 ? `scale(${1 + proximity * 0.15})` : undefined,
+        }}
+      >
+        <svg className="w-10 h-10 sm:w-12 sm:h-12" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
+      </div>
+    );
+  };
+
+  const buildRow = (arr: typeof ytRows, times: number) => Array.from({ length: times }, () => arr).flat();
 
   return (
-  <div className="relative overflow-hidden bg-[#0a0a0a]">
+  <div
+    ref={sectionRef}
+    className="relative overflow-hidden bg-[#0a0a0a]"
+    onMouseMove={(e) => {
+      const rect = sectionRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      setMousePos({
+        x: (e.clientX - rect.left) / rect.width,
+        y: (e.clientY - rect.top) / rect.height,
+      });
+    }}
+    onMouseEnter={() => setIsHovering(true)}
+    onMouseLeave={() => setIsHovering(false)}
+  >
   <div className="absolute inset-0 z-0">
-  <div className="absolute top-0 left-0 w-full h-full bg-black/60" />
+  <div className="absolute top-0 left-0 w-full h-full bg-black/90" />
   <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0000]/15 via-transparent to-[#DF3131]/10" />
   <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF0000]/8 rounded-full blur-[100px]" />
   <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-[#DF3131]/8 rounded-full blur-[80px]" />
   </div>
 
-  <div className="absolute inset-0 z-10 flex flex-col justify-center gap-6 pointer-events-none opacity-40">
+  <div className="absolute inset-0 z-10 flex flex-col justify-center gap-6 opacity-40">
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left">
-      {row1.map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} idx={i} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right">
-      {row2.map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} idx={i + 48} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left-fast">
-      {row3.map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} idx={i + 96} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right">
-      {row4.map((logo, i) => (<LogoItem key={`r4-${i}`} color={logo.color} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r4-${i}`} color={logo.color} idx={i + 144} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left">
-      {row5.map((logo, i) => (<LogoItem key={`r5-${i}`} color={logo.color} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r5-${i}`} color={logo.color} idx={i + 192} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right-fast">
-      {row6.map((logo, i) => (<LogoItem key={`r6-${i}`} color={logo.color} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r6-${i}`} color={logo.color} idx={i + 240} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left">
-      {row7.map((logo, i) => (<LogoItem key={`r7-${i}`} color={logo.color} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r7-${i}`} color={logo.color} idx={i + 288} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right">
-      {row8.map((logo, i) => (<LogoItem key={`r8-${i}`} color={logo.color} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r8-${i}`} color={logo.color} idx={i + 336} />))}
     </div>
   </div>
   </div>
@@ -635,7 +661,7 @@ export default function EventsPage() {
   <Image src="/images/events/hero_bg.jpg" alt="Events" fill className="w-full h-full object-cover opacity-80" priority />
   <div className="absolute inset-0 bg-black/30" />
     </div>
-    <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center py-10 lg:pt-24 lg:pb-0 overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center py-10 lg:pt-32 lg:pb-0 overflow-hidden">
     <div className="absolute inset-0 hero-grad-events z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10">

@@ -177,7 +177,7 @@ export default function PrintingPage() {
     <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} />
     </div>
   {/* Right: Text with gradient bg */}
-   <div className="relative overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-12 lg:py-16">
+   <div className="relative overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-12 lg:pt-32 lg:pb-16">
     <div className="absolute inset-0 hero-grad-print z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 flex flex-col items-center justify-center h-full">

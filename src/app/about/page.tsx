@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -17,6 +18,10 @@ const VALUES = [
 ];
 
 export default function AboutPage() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
     <main className="pt-0">
       {/* HERO */}
@@ -30,8 +35,21 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
           </div>
           <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
-          {/* Crown logo marquee background — full-bleed, opposite rows */}
-          <div className="absolute inset-0 z-10 flex flex-col justify-center gap-4 pointer-events-none">
+          {/* Crown logo marquee — interactive mouse reveal */}
+          <div
+            ref={heroRef}
+            className="absolute inset-0 z-10 flex flex-col justify-center gap-4"
+            onMouseMove={(e) => {
+              const rect = heroRef.current?.getBoundingClientRect();
+              if (!rect) return;
+              setMousePos({
+                x: (e.clientX - rect.left) / rect.width,
+                y: (e.clientY - rect.top) / rect.height,
+              });
+            }}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
             {[
               "animate-marquee-left",
               "animate-marquee-right",
@@ -44,17 +62,35 @@ export default function AboutPage() {
             ].map((dir, row) => (
               <div key={row} className="overflow-hidden py-2">
                 <div className={`flex whitespace-nowrap ${dir}`}>
-                  {Array.from({ length: 24 }).map((_, i) => (
-                    <div key={i} className="flex-none flex items-center px-6">
-                      <Image src="/images/wyz-crown.png" alt="" width={48} height={48} className="w-12 h-12 flex-none object-contain opacity-25" />
-                    </div>
-                  ))}
+                  {Array.from({ length: 24 }).map((_, i) => {
+                    const logoX = i / 23;
+                    const logoY = row / 7;
+                    const dist = Math.sqrt(
+                      Math.pow(logoX - mousePos.x, 2) +
+                      Math.pow(logoY - mousePos.y, 2)
+                    );
+                    const proximity = isHovering ? Math.max(0, 1 - dist * 1.8) : 0;
+                    const glow = proximity * 0.6;
+                    return (
+                      <div
+                        key={i}
+                        className="flex-none flex items-center px-6 transition-all duration-300"
+                        style={{
+                          opacity: isHovering ? 0.08 + proximity * 0.92 : 0.25,
+                          filter: glow > 0 ? `drop-shadow(0 0 ${10 * glow}px #DF3131) brightness(${1 + glow * 0.5})` : undefined,
+                          transform: isHovering && proximity > 0.3 ? `scale(${1 + proximity * 0.2})` : undefined,
+                        }}
+                      >
+                        <Image src="/images/wyz-crown.png" alt="" width={48} height={48} className="w-12 h-12 flex-none object-contain" />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}
           </div>
-          {/* 60% black overlay */}
-          <div className="absolute inset-0 bg-black/60 z-[15] pointer-events-none" />
+          {/* 90% black overlay */}
+          <div className="absolute inset-0 bg-black/90 z-[15] pointer-events-none" />
           <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
             <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
             <TextMaskReveal direction="up">

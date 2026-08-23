@@ -191,7 +191,7 @@ return (
               </video>
             </div>
           </div>
-          <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-6 lg:px-12 pt-24 pb-16 min-h-[500px]">
+          <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-6 lg:px-12 pt-32 lg:pt-40 pb-16 min-h-[500px]">
             <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">WYZ DESIGN - WEB DEVELOPMENT</span>
             <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#111] tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
               WEBSITES<br />
@@ -225,7 +225,7 @@ return (
             </video>
           </div>
           <div className="absolute inset-0 bg-black/30 z-[1]" />
-          <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 text-center flex flex-col items-center justify-center h-full">
+          <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 pt-32 lg:pt-40 text-center flex flex-col items-center justify-center h-full">
             <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block text-center mb-2">WYZ DESIGN - WEB DEVELOPMENT</span>
             <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
               WEBSITES<br />

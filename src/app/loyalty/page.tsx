@@ -36,7 +36,7 @@ export default function LoyaltyPage() {
 
   return (
   <main className="pb-16 bg-white dark:bg-[#232326]">
-    <div className="max-w-5xl mx-auto px-6">
+    <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
         <div className="text-center mb-4">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">L O Y A L T Y</h1>
           <p className="text-[#8F8F8F] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">Join the WYZ Design loyalty program. Earn points with every interaction, score exclusive perks, and level up your creative partnership.</p>
