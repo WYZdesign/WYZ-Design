@@ -10,7 +10,9 @@ const IS_VERCEL = !!process.env.VERCEL;
 export async function POST(req: NextRequest) {
   try {
     const { topic, style = "professional", length = "medium" } = await req.json();
-    if (!topic) return NextResponse.json({ error: "Topic required" }, { status: 400 });
+    if (!topic || typeof topic !== "string" || topic.length > 500) {
+      return NextResponse.json({ error: "Valid topic required (max 500 chars)" }, { status: 400 });
+    }
 
     const prompts: Record<string, string> = {
       medium: "Write a 300-500 word blog post",
