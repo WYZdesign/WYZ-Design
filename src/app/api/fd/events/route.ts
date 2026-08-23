@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import * as cheerio from "cheerio";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { requireAdmin } from "@/lib/admin-auth";
 import { logger } from "@/lib/logger";
 
 const ORGANIZER_URL = "https://www.eventbrite.com/o/fd-photo-studio-14334915883";
@@ -199,16 +199,19 @@ export async function GET() {
 }
 
 export async function POST() {
-  const session = await auth();
-  const email = (session?.user?.email || "").toLowerCase();
-  const admins = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
-  if (!admins.includes(email)) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  try {
+    const admin = await requireAdmin();
+    if (!admin.ok) return admin.response;
 
-  cachedEvents = null;
-  cachedAt = null;
-  const orgEvents = await scrapeOrganizerPage();
-  const unique = Array.from(new Map(orgEvents.map(e => [e.title + e.dateLabel, e])).values());
-  cachedEvents = unique;
-  cachedAt = Date.now();
-  return NextResponse.json({ events: unique, cached: false, count: unique.length, rescanned: true });
+    cachedEvents = null;
+    cachedAt = null;
+    const orgEvents = await scrapeOrganizerPage();
+    const unique = Array.from(new Map(orgEvents.map(e => [e.title + e.dateLabel, e])).values());
+    cachedEvents = unique;
+    cachedAt = Date.now();
+    return NextResponse.json({ events: unique, cached: false, count: unique.length, rescanned: true });
+  } catch (err) {
+    logger.error("fd:events-post", err);
+    return NextResponse.json({ error: "Failed to rescan events" }, { status: 500 });
+  }
 }

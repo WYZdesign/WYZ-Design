@@ -7,7 +7,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeHtml } from "@/lib/dompurify";
 import { validateCsrf } from "@/lib/csrf";
 import { logger } from "@/lib/logger";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { requireAdmin } from "@/lib/admin-auth";
 
 const VALID_FORM_TYPES = [
   "contact", "booking", "printing-quote", "custom-plan",
@@ -140,14 +140,8 @@ export async function POST(req: NextRequest) {
  */
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
-    if (adminEmails.length === 0 || !adminEmails.includes(session.user.email.toLowerCase())) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const admin = await requireAdmin();
+    if (!admin.ok) return admin.response;
 
     const formType = req.nextUrl.searchParams.get("formType");
     const supabase = getServiceClient();

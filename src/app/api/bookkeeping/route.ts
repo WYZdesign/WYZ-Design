@@ -3,11 +3,12 @@ import { auth } from "@/app/api/auth/[...nextauth]/route";
 import {
   getTransactions, createTransaction, updateTransaction, deleteTransaction,
   getFinancialSummary, exportTransactionsCSV, exportScheduleC,
-  getTransactionById, getCategories, getClients,
+  getCategories, getClients,
 } from "@/lib/bookkeeping";
 import { getAdminEmails } from "@/lib/admin-auth";
+import type { Session } from "next-auth";
 
-function isAdmin(session: any): boolean {
+function isAdmin(session: Session | null): boolean {
   const email = (session?.user?.email || "").toLowerCase();
   return getAdminEmails().includes(email);
 }

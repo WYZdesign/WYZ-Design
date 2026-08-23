@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { logPageview, logEvent, getAnalyticsSummary, getPageviews } from "@/lib/analytics";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { createHash } from "crypto";
-import { getAdminEmails, requireAdmin } from "@/lib/admin-auth";
+import { requireAdmin } from "@/lib/admin-auth";
 
 function parseUA(ua: string) {
   let device = "desktop";
