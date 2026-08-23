@@ -1,226 +1,11 @@
 # WYZ Design — Handover Log
 
-## Session Summary
-
-### Session 4 — Bookkeeping DB + Upload Fix (Handover #8)
-**Auditor:** Claude (Cowork), code review + live testing
-**Date:** 2026-08-22
-
-**Findings & Fixes Applied (by opencode):**
-
-| Fix | File(s) | Status |
-|-----|---------|--------|
-| Bookkeeping DB uses local SQLite (`better-sqlite3`) — won't persist on Vercel serverless | `src/lib/bookkeeping.ts` | ✅ Fixed — migrated to Supabase (bk_transactions, bk_clients, bk_categories tables) |
-| Bookkeeping API routes call now-async functions without `await` | `api/bookkeeping/route.ts`, `api/bookkeeping/meta/route.ts` | ✅ Fixed — all calls properly awaited |
-| Inline image upload writes to `tmpdir()` — ephemeral on Vercel, no serve route | `api/upload/route.ts` | ✅ Fixed — migrated to Supabase Storage (`wyzdesign-uploads` bucket, auto-created) |
-
-**Supabase Schema (run once in SQL Editor):**
-```sql
--- Bookkeeping tables
-CREATE TABLE IF NOT EXISTS bk_clients (id BIGSERIAL PRIMARY KEY, name TEXT NOT NULL UNIQUE, email TEXT DEFAULT '', notes TEXT DEFAULT '', created_at TIMESTAMPTZ DEFAULT now());
-CREATE TABLE IF NOT EXISTS bk_categories (id BIGSERIAL PRIMARY KEY, name TEXT NOT NULL UNIQUE, schedule_c_line TEXT DEFAULT '', type TEXT DEFAULT 'expense');
-CREATE TABLE IF NOT EXISTS bk_transactions (id BIGSERIAL PRIMARY KEY, date TEXT NOT NULL, type TEXT NOT NULL CHECK(type IN ('income','expense')), amount NUMERIC NOT NULL, client_id BIGINT REFERENCES bk_clients(id), vendor TEXT DEFAULT '', category_id BIGINT REFERENCES bk_categories(id), channel TEXT DEFAULT '', description TEXT DEFAULT '', business_personal TEXT DEFAULT 'business' CHECK(business_personal IN ('business','personal')), receipt_url TEXT DEFAULT '', created_at TIMESTAMPTZ DEFAULT now(), updated_at TIMESTAMPTZ DEFAULT now());
-CREATE INDEX IF NOT EXISTS idx_bk_tx_date ON bk_transactions(date);
-CREATE INDEX IF NOT EXISTS idx_bk_tx_type ON bk_transactions(type);
-CREATE INDEX IF NOT EXISTS idx_bk_tx_cat ON bk_transactions(category_id);
-```
-Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload route auto-creates it on first use).
-
-### Session 5 — SafeImage Priority, FAQ, Gallery, CSP, Analytics Pixels (Handover #9 + #10)
-**Auditor:** Claude (Cowork) + wyzmind (opencode)
-**Date:** 2026-08-22
-
-**Fixes Applied:**
-
-| Fix | File(s) | Status |
-|-----|---------|--------|
-| SafeImage `priority` prop was silent no-op (spread onto `<img>` where it does nothing) | `SafeImage.tsx`, `utils.tsx` | ✅ Fixed — `priority` now maps to `loading="eager"` |
-| Carousel/marquee images still lazy despite removing `loading="lazy"` from call sites (component default overrode) | `designs/page.tsx`, `merch/page.tsx` | ✅ Fixed — added `priority` prop to carousel/marquee SafeImage calls |
-| FAQ questions render as duplicated text on desktop (marquee CSS is mobile-only, both spans visible above 768px) | `faq/page.tsx` | ✅ Fixed — second span hidden on desktop via `max-md:inline-block hidden` |
-| `/gallery` shows zero photos (fill Image parent has no height/aspect-ratio, columns collapse to 0px) | `gallery/page.tsx` | ✅ Fixed — added `aspect-[3/4]` to wrapper div |
-| Blog images blocked by CSP (`images.unsplash.com` not in `img-src`) | `next.config.ts` | ✅ Fixed — added to `img-src` |
-| Analytics pixels (GTM/Meta/Clarity/TikTok) will silently fail when env vars are set (hosts missing from CSP) | `next.config.ts` | ✅ Fixed — added to `script-src`, `connect-src`, `frame-src` |
-| FDDriveBrowser fill-Image parents missing `position: relative` | `FDDriveBrowser.tsx` | ✅ Fixed — added `relative` to both wrapper divs |
-| Brands page says "three brands" but headline says "Four Brands" | `brands/page.tsx` | ✅ Fixed — copy now says "four" |
-
-**Supabase Schema Created:**
-- `bk_clients` — 0 rows (empty, seeded on first API call)
-- `bk_categories` — 0 rows (empty, seeded on first API call with 27 default categories + 6 clients)
-- `bk_transactions` — 0 rows (empty)
-- `wyzdesign-uploads` storage bucket — auto-created on first upload
-
-**Still Open:**
-- Stripe 500 — keys rotated and redeployed, pending verification
-
-### Session 9 — Sitewide Navbar Overlap Fix + Interactive Hero Effects + Merch/Photography
-**Auditor:** Claude (Cowork) + wyzmind (opencode)
-**Date:** 2026-08-22
-
-| Fix | File(s) | Severity | Status |
-|-----|---------|----------|--------|
-| Headings hidden behind navbar on 18 pages — `.hero-banner` negative margin + missing padding | 18 page files | HIGH | ✅ Fixed — `pt-32 lg:pt-40` added to all hero inner wrappers + non-hero first children |
-| Events YouTubeSection static — logos had no interaction | `events/page.tsx` | MEDIUM | ✅ Fixed — mouse-interactive reveal: logos near cursor glow/scale, far logos stay dim |
-| Events YouTubeSection overlay too light (60%) | `events/page.tsx` | MEDIUM | ✅ Fixed — changed to 90% black |
-| About hero static crown logos — no interaction | `about/page.tsx` | MEDIUM | ✅ Fixed — mouse-interactive reveal effect added |
-| About hero overlay too light (60%) | `about/page.tsx` | MEDIUM | ✅ Fixed — changed to 90% black |
-| Printing page marquee above hero instead of below | `printing/page.tsx` | LOW | ✅ Fixed — marquee moved under hero section |
-| Photography carousel items too narrow | `photography/page.tsx` | MEDIUM | ✅ Fixed — items widened to `w-[40vw] sm:w-[280px] md:w-[380px] lg:w-[440px]`, changed to `object-cover` |
-| Merch page duplicate images in product grid + mockup gallery | `merch/page.tsx` | MEDIUM | ✅ Fixed — deduplicated FALLBACK_PRODUCTS and DBC_MODEL_MOCKUPS images |
-
-**Pages fixed (hero-banner group):** about, designs, events, partnerships, photography, services, web-design, wyzmind (home untouched — intentional)
-
-**Pages fixed (non-hero group):** gallery, match, booking, community, model-archive, loyalty, case-studies, 3pointprogram
-
-### Session 11 — Toast Notifications + Security Regression Fix
-**Auditor:** opencode + Claude (Cowork)
-**Date:** 2026-08-23
-
-| Fix | File(s) | Severity | Status |
-|-----|---------|----------|--------|
-| Toast notifications across all user-facing forms (11 files) | DynamicForm, LeadMagnet, booking-calendar, model-archive, featured-artist, photography, printing, plans, gift-card, community | MEDIUM | ✅ Fixed — toast.success on submit, toast.error on failure, replaced alert() |
-| Stale Twitter URL (twitter.com → x.com) | `Footer.tsx` | LOW | ✅ Fixed |
-| Broken YouTube channel placeholder ID | `events/page.tsx` | MEDIUM | ✅ Fixed — now uses @wyzdesign vanity URL |
-| Unused useState import | `contact/page.tsx` | LOW | ✅ Fixed |
-| 21 form inputs missing aria-label | Footer, model-archive, featured-artist, photography, printing | MEDIUM | ✅ Fixed |
-| **SECURITY: DOMPurify sanitizer accidentally replaced with regex blocklist** | `PageRenderer.tsx`, `view/[page]/page.tsx`, `api/pages/route.ts`, `api/forms/route.ts` | **CRITICAL** | ✅ Fixed — restored `dompurify.ts` (isomorphic-dompurify allowlist), removed weak regex `sanitizeHtml` from `rate-limit.ts` |
-| Dead `dompurify.ts` removed incorrectly | `lib/dompurify.ts` | HIGH | ✅ Fixed — file restored from git, imports redirected |
-
-**Claude caught the sanitizer regression** — the "consolidate imports" commit accidentally swapped the DOMPurify allowlist sanitizer for a regex blocklist in `rate-limit.ts`. The output goes into `dangerouslySetInnerHTML` in PageRenderer and view/[page], making this the only thing between stored HTML and XSS. Fixed by restoring the DOMPurify version and removing the regex duplicate.
-
-**Commits:** `9a742a6` (toast), `1fd62a0` (dead code — had regression), `5cc83cd` (security fix)
-
-### Session 10 — Security Hardening + Performance + Logger Migration
-**Auditor:** opencode (automated audit)
-**Date:** 2026-08-22
-
-| Fix | File(s) | Severity | Status |
-|-----|---------|----------|--------|
-| CSRF hardcoded fallback `"wyz-csrf-fallback"` when env vars missing | `lib/csrf.ts` | CRITICAL | ✅ Fixed — throws error if `CSRF_SECRET`/`NEXTAUTH_SECRET` unset |
-| Admin password empty string fallback | `api/auth/[...nextauth]/route.ts`, `api/pages/route.ts` | HIGH | ✅ Fixed — removed `\|\| ""`, fails closed |
-| 14 `console.warn/error` calls in production code | 9 page files | MEDIUM | ✅ Fixed — migrated to `logger.warn/error` (dev-only gating) |
-| 5 static policy pages marked `"use client"` unnecessarily | terms, privacy, refund, shipping, copyright | MEDIUM | ✅ Fixed — removed directive, now Server Components |
-| 5 heavy client components loaded statically in layout | `layout.tsx` | MEDIUM | ✅ Fixed — ChatWidget, CookieBanner, CustomCursor, NoiseOverlay, A11yAudit now `next/dynamic` with `ssr: false` |
-
-**Commits:** `f871d30` (security + logger), `96d9032` (perf)
-
-### Session 8 — API Security Hardening (deep audit follow-up)
-**Auditor:** wyzmind (opencode)
-**Date:** 2026-08-22
-
-| Fix | File(s) | Severity | Status |
-|-----|---------|----------|--------|
-| Analytics GET endpoint had no auth — any visitor could read pageview data | `analytics/route.ts` | HIGH | ✅ Fixed — requires admin auth |
-| Analytics hashIp() used inline require("crypto") | `analytics/route.ts` | LOW | ✅ Fixed — moved to top-level import |
-| fd/events POST had no auth — anyone could trigger cache invalidation + re-scrape | `fd/events/route.ts` | HIGH | ✅ Fixed — requires admin auth |
-| fd/events used console.error instead of logger | `fd/events/route.ts` | LOW | ✅ Fixed — replaced with logger |
-| telemetry POST missing return statement after successful insert | `telemetry/route.ts` | LOW | ✅ Fixed — added return |
-
-### Session 7 — Cal.com CSP Fix + Deep API Audit (Handover #14)
-**Auditor:** Claude (Cowork) + wyzmind (opencode)
-**Date:** 2026-08-22
-
-**Findings & Fixes Applied:**
-
-| Fix | File(s) | Severity | Status |
-|-----|---------|----------|--------|
-| Cal.com booking widget silently broken — `app.cal.com` missing from CSP | `next.config.ts` | HIGH | ✅ Fixed — added to `script-src`, `connect-src`, `frame-src` |
-
-**Deep API Audit Findings (from explore agent):**
-
-| Issue | File | Severity | Status |
-|-------|------|----------|--------|
-| No auth on analytics GET endpoint | `analytics/route.ts` | HIGH | Open — needs auth |
-| Hardcoded salt in hashIp() | `analytics/route.ts` | LOW | Open — cosmetic |
-| Silent catch in POST returns success | `analytics/route.ts` | MEDIUM | Open — masks errors |
-| No auth on fd/events POST (cache invalidation) | `fd/events/route.ts` | HIGH | Open — needs auth |
-| console.error instead of logger | `fd/events/route.ts` | LOW | Open — cosmetic |
-| Missing return after successful insert | `telemetry/route.ts` | LOW | Open |
-| Health endpoint exposes env/version | `health/route.ts` | LOW | Open — info disclosure |
-| No input sanitization on search query | `search/route.ts` | LOW | Open |
-
-**Still Open (from previous sessions):**
-- Subscription checkout Price IDs — stale, need Dashboard recreation (Handover #13)
-- Printful API key not configured (degrades gracefully)
-- Neo4j URI may not be set in Vercel (Users/Newsletter tabs empty)
-
-### Session 6 — Critical Security Fixes + Stripe BOM Root Cause (Handover #11, #12)
-**Auditor:** Claude (Cowork) + wyzmind (opencode)
-**Date:** 2026-08-22
-
-| Fix | File(s) | Severity | Status |
-|-----|---------|----------|--------|
-| Path traversal in GET /api/pages — `page` param joined into filesystem path without validation | `api/pages/route.ts` | HIGH | ✅ Fixed — validates against ALLOWED_PAGES set |
-| Hardcoded `"wyz-newsletter-secret"` fallback for HMAC signing | `api/newsletter/route.ts` | HIGH | ✅ Fixed — fails closed if NEXTAUTH_SECRET unset |
-| No auth on /api/bookkeeping/meta — financial data exposed to anyone | `api/bookkeeping/meta/route.ts` | HIGH | ✅ Fixed — added auth + admin check |
-| Rate limit imported but never called in POST /api/forms | `api/forms/route.ts` | HIGH | ✅ Fixed — added rateLimit() call (20/min) |
-| Gift card validation bug — `&& amount < 5` let any amount >=5 through | `api/checkout/route.ts` | HIGH | ✅ Fixed — removed broken condition |
-| BOM in NEXT_PUBLIC_URL broke Stripe checkout URLs | `stripe.ts`, `robots.ts`, `sitemap.ts`, `newsletter/route.ts` | HIGH | ✅ Fixed — shared `getSiteUrl()` helper strips BOM |
-
-**Still Open (from deep audit, lower priority):**
-- `api/analytics/route.ts` GET — no auth on analytics data
-- `api/fd/events/route.ts` — no auth on POST, missing try/catch on GET/POST
-- `api/telemetry/route.ts` POST — missing return statement
-- Multiple routes leak `e.message` to client
-- Several `console.warn/error` calls should use logger
-
----
-
-### Session 3 — Data Plumbing Audit (Handover #7)
-**Auditor:** Claude (Cowork), code review + live testing
-**Date:** 2026-08-22
-
-**Findings & Fixes Applied (by opencode):**
-
-| Fix | File(s) | Status |
-|-----|---------|--------|
-| Admin dashboard reads forms from dead tmpdir file instead of Supabase | `api/admin/route.ts` | ✅ Fixed — now queries `form_submissions` table |
-| Admin Chats tab reads from dead tmpdir file (no persistence exists) | `api/admin/route.ts` | ✅ Fixed — returns empty with note |
-| `/loyalty` sign-in says "Admin Access" | `admin/page.tsx` | ✅ Fixed — heading now "Sign In", subtitle updated |
-
----
-
-### Session 2 — Visual Audit Fixes (Handover #5)
-**Auditor:** Claude (Cowork), browser visual sweep
-**Date:** 2026-08-22
-
-**Findings & Fixes Applied:**
-
-| Fix | File(s) | Status |
-|-----|---------|--------|
-| `loading="lazy"` breaks images in JS-transform carousels | `home/page.tsx`, `designs/page.tsx`, `merch/page.tsx`, `photography/page.tsx` | ✅ Removed lazy from carousel tracks |
-| Mobile hero "WEBSITES" hidden behind fixed header | `web-design/page.tsx` | ✅ Added pt-20 to mobile wrapper |
-| Home hero CTA buttons crop on mobile | `home/page.tsx` | ✅ Added flex-wrap |
-| FAQ question text clips on mobile | `components/FAQ.tsx` | ✅ Added whitespace-normal |
-| TED___SYLVIA.jpg broken | `public/images/models/` | ✅ False alarm — file is valid JPEG |
-
----
-
-### Session 1 — Full Site Wiring Audit (Handover #6)
-**Auditor:** Claude (Cowork), read-only browser + repo clone
-**Date:** 2026-08-22
-
-**Findings & Fixes Applied (by opencode):**
-
-| Fix | File(s) | Status |
-|-----|---------|--------|
-| Gift card amount mismatch (frontend $25/50/100/150/250 vs backend $10/25/50/100/200/500) | `api/checkout/route.ts` | ✅ Fixed — backend now matches frontend |
-| Booking service price/name mismatch (substring + cents vs dollars) | `api/checkout/route.ts` | ✅ Fixed — exact key match, dollar values |
-| Dead `/api/contact` route (writes to ephemeral tmpdir, nothing calls it) | `api/contact/route.ts` | ✅ Deleted |
-| Featured artist dead links (empty href, # placeholders) | `featured-artist/page.tsx` | ✅ Removed dead buttons/icons |
-| Dead test for removed contact route | `api/api.test.ts` | ✅ Removed test block |
-
-**Still Open (requires user action):**
-- Stripe 500 error — API key validity, account restrictions, or Vercel function logs need checking
-- `STRIPE_WEBHOOK_SECRET` — verify it's set in Vercel env vars
-- Printful API key not configured in Vercel (degrades gracefully to static fallback)
-- Neo4j URI env var may not be set in Vercel (Users/Newsletter tabs silently empty)
-
----
+One running file, overwritten each round. Torreé relays it into the repo (Claude has read-only repo access).
 
 ## Deployment State
 
-- **Last commit:** `ccab6fa` — API security hardening (analytics auth, fd/events auth, telemetry return)
-- **Build status:** tsc clean, `next build` clean
+- **Last commit:** `5fb5d30` (HANDOVER update)
+- **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` branch
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
 
@@ -231,7 +16,157 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 - **Bookkeeping:** All tables in Supabase (bk_transactions, bk_clients, bk_categories). Seed defaults on first load.
 - **Image upload:** Supabase Storage `wyzdesign-uploads` bucket (public, auto-created)
 - **Admin auth:** `ADMIN_EMAILS` env var (comma-separated), checked via NextAuth session
-- **Chat persistence:** None — `/api/chat` is stateless (OpenRouter proxy, no save step)
+- **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
+- **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
+
+## Session 11 — Toast Notifications + Security Regression Fix
+**Auditor:** opencode + Claude (Cowork)
+**Date:** 2026-08-23
+**Commits:** `9a742a6`, `1fd62a0` (had regression), `5cc83cd` (security fix), `5fb5d30` (HANDOVER)
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Toast notifications across all user-facing forms (11 files) | DynamicForm, LeadMagnet, booking-calendar, model-archive, featured-artist, photography, printing, plans, gift-card, community | MEDIUM | ✅ Fixed |
+| Stale Twitter URL (twitter.com → x.com) | `Footer.tsx` | LOW | ✅ Fixed |
+| Broken YouTube channel placeholder ID | `events/page.tsx` | MEDIUM | ✅ Fixed |
+| Unused useState import | `contact/page.tsx` | LOW | ✅ Fixed |
+| 21 form inputs missing aria-label | Footer, model-archive, featured-artist, photography, printing | MEDIUM | ✅ Fixed |
+| **SECURITY: DOMPurify sanitizer accidentally replaced with regex blocklist** | PageRenderer, view/[page], api/pages, api/forms | **CRITICAL** | ✅ Fixed — restored `dompurify.ts`, removed weak regex |
+| Dead `dompurify.ts` removed incorrectly | `lib/dompurify.ts` | HIGH | ✅ Fixed — restored from git |
+
+**Claude caught the sanitizer regression** — "consolidate imports" commit accidentally swapped DOMPurify for a regex blocklist in `rate-limit.ts`. Output goes into `dangerouslySetInnerHTML`. Fixed by restoring DOMPurify and removing the regex duplicate.
+
+## Session 10 — Security Hardening + Performance + Logger Migration
+**Auditor:** opencode (automated audit)
+**Date:** 2026-08-22
+**Commits:** `f871d30`, `96d9032`
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| CSRF hardcoded fallback `"wyz-csrf-fallback"` | `lib/csrf.ts` | CRITICAL | ✅ Fixed — throws if env vars missing |
+| Admin password empty string fallback | `api/auth/[...nextauth]/route.ts`, `api/pages/route.ts` | HIGH | ✅ Fixed — fails closed |
+| 14 `console.warn/error` in production code | 9 page files | MEDIUM | ✅ Fixed — migrated to logger |
+| 5 static policy pages `"use client"` unnecessarily | terms, privacy, refund, shipping, copyright | MEDIUM | ✅ Fixed — now Server Components |
+| 5 heavy layout components loaded statically | `layout.tsx` | MEDIUM | ✅ Fixed — dynamic import with ssr:false |
+| 24 `any` types eliminated | `analytics.ts`, `admin/page.tsx` | MEDIUM | ✅ Fixed — proper interfaces |
+| shuffleArray duplicated across 5 files | home, services, designs, photography, SafeImage | LOW | ✅ Fixed — single import from utils |
+| Alt text missing on brand logos | `about/page.tsx`, `PageRenderer.tsx` | MEDIUM | ✅ Fixed |
+
+## Session 9 — Sitewide Navbar Overlap Fix + Interactive Hero Effects
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Headings hidden behind navbar on 18 pages | 18 page files | HIGH | ✅ Fixed — pt-32 lg:pt-40 |
+| Events YouTubeSection static | `events/page.tsx` | MEDIUM | ✅ Fixed — mouse-interactive reveal |
+| Events YouTubeSection overlay too light | `events/page.tsx` | MEDIUM | ✅ Fixed — 90% black |
+| About hero static crown logos | `about/page.tsx` | MEDIUM | ✅ Fixed — mouse-interactive reveal |
+| About hero overlay too light | `about/page.tsx` | MEDIUM | ✅ Fixed — 90% black |
+| Printing marquee above hero | `printing/page.tsx` | LOW | ✅ Fixed — moved under hero |
+| Photography carousel too narrow | `photography/page.tsx` | MEDIUM | ✅ Fixed — widened items |
+| Merch duplicate images | `merch/page.tsx` | MEDIUM | ✅ Fixed — deduplicated |
+
+## Session 8 — API Security Hardening
+**Auditor:** wyzmind (opencode)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Analytics GET no auth | `analytics/route.ts` | HIGH | ✅ Fixed |
+| Analytics hashIp inline require | `analytics/route.ts` | LOW | ✅ Fixed |
+| fd/events POST no auth | `fd/events/route.ts` | HIGH | ✅ Fixed |
+| fd/events console.error | `fd/events/route.ts` | LOW | ✅ Fixed |
+| telemetry POST missing return | `telemetry/route.ts` | LOW | ✅ Fixed |
+
+## Session 7 — Cal.com CSP Fix
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Cal.com widget blocked by CSP | `next.config.ts` | HIGH | ✅ Fixed — added app.cal.com to script-src, connect-src, frame-src |
+
+## Session 6 — Critical Security Fixes + Stripe BOM
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Path traversal in GET /api/pages | `api/pages/route.ts` | HIGH | ✅ Fixed |
+| Hardcoded newsletter HMAC fallback | `api/newsletter/route.ts` | HIGH | ✅ Fixed |
+| No auth on /api/bookkeeping/meta | `api/bookkeeping/meta/route.ts` | HIGH | ✅ Fixed |
+| Rate limit not called in POST /api/forms | `api/forms/route.ts` | HIGH | ✅ Fixed |
+| Gift card validation bug | `api/checkout/route.ts` | HIGH | ✅ Fixed |
+| BOM in NEXT_PUBLIC_URL broke Stripe | `stripe.ts`, `robots.ts`, `sitemap.ts`, `newsletter/route.ts` | HIGH | ✅ Fixed — shared getSiteUrl() helper |
+
+## Session 5 — SafeImage Priority, FAQ, Gallery, CSP
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Status |
+|-----|---------|--------|
+| SafeImage priority prop no-op | `SafeImage.tsx`, `utils.tsx` | ✅ Fixed — maps to loading="eager" |
+| Carousel images still lazy | `designs/page.tsx`, `merch/page.tsx` | ✅ Fixed |
+| FAQ duplicated text on desktop | `faq/page.tsx` | ✅ Fixed |
+| Gallery zero photos | `gallery/page.tsx` | ✅ Fixed — added aspect-[3/4] |
+| Blog images blocked by CSP | `next.config.ts` | ✅ Fixed |
+| Analytics pixels blocked by CSP | `next.config.ts` | ✅ Fixed |
+| FDDriveBrowser missing relative | `FDDriveBrowser.tsx` | ✅ Fixed |
+| Brands says "three" not "four" | `brands/page.tsx` | ✅ Fixed |
+
+## Session 4 — Bookkeeping DB + Upload Fix
+**Auditor:** Claude (Cowork)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Status |
+|-----|---------|--------|
+| Bookkeeping DB uses local SQLite | `src/lib/bookkeeping.ts` | ✅ Fixed — migrated to Supabase |
+| Bookkeeping API missing await | `api/bookkeeping/route.ts`, `api/bookkeeping/meta/route.ts` | ✅ Fixed |
+| Image upload writes to tmpdir | `api/upload/route.ts` | ✅ Fixed — migrated to Supabase Storage |
+
+## Session 3 — Data Plumbing Audit
+**Auditor:** Claude (Cowork)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Status |
+|-----|---------|--------|
+| Admin dashboard reads dead tmpdir | `api/admin/route.ts` | ✅ Fixed — now Supabase |
+| Admin Chats tab reads dead tmpdir | `api/admin/route.ts` | ✅ Fixed — returns empty |
+| Loyalty sign-in says "Admin Access" | `admin/page.tsx` | ✅ Fixed |
+
+## Session 2 — Visual Audit Fixes
+**Auditor:** Claude (Cowork)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Status |
+|-----|---------|--------|
+| loading="lazy" breaks carousel images | home, designs, merch, photography | ✅ Removed lazy |
+| Mobile hero hidden behind header | `web-design/page.tsx` | ✅ Added pt-20 |
+| Home hero CTA buttons crop on mobile | `home/page.tsx` | ✅ Added flex-wrap |
+| FAQ text clips on mobile | `components/FAQ.tsx` | ✅ Added whitespace-normal |
+
+## Session 1 — Full Site Wiring Audit
+**Auditor:** Claude (Cowork)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Status |
+|-----|---------|--------|
+| Gift card amount mismatch | `api/checkout/route.ts` | ✅ Fixed |
+| Booking service price mismatch | `api/checkout/route.ts` | ✅ Fixed |
+| Dead /api/contact route | `api/contact/route.ts` | ✅ Deleted |
+| Featured artist dead links | `featured-artist/page.tsx` | ✅ Removed |
+
+---
+
+## Still Open (requires user action)
+
+| Item | Status |
+|------|--------|
+| Stripe subscription Price IDs — need Dashboard creation (Starter $250, Business $500, Pro $750, Ultimate $1000) | Blocked on user |
+| End-to-end purchase test — no real purchase completed to verify webhook | Blocked on Price IDs |
+| Printful API key not configured (degrades gracefully) | Low priority |
+| Neo4j URI may not be set in Vercel | Low priority |
 
 ## Claude Code Collaboration Protocol
 
