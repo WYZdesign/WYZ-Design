@@ -237,22 +237,29 @@ export default function BookingPage() {
 function CalBooking({ calLink }: { calLink: string }) {
   useEffect(() => {
     if (!calLink || typeof window === "undefined") return;
-    const script = document.createElement("script");
-    script.src = "https://app.cal.com/embed/embed.js";
-    script.async = true;
-    let cleaned = false;
-    script.onload = () => {
-      if (cleaned) return;
-      try {
-        const Cal = (window as Record<string, any>).Cal;
-        if (Cal) {
-          Cal("init", "booking", { origin: "https://app.cal.com" });
-          Cal.ns.booking("inline", { elementOrSelector: "#cal-embed", calLink });
+
+    const w = window as Record<string, any>;
+    if (!w.Cal) {
+      // eslint-disable-next-line prefer-const
+      let _queue: unknown[][] = [];
+      w.Cal = function (...args: unknown[]) {
+        const cal = w.Cal as any;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = _queue;
+          document.head.appendChild(document.createElement("script")).src =
+            "https://app.cal.com/embed/embed.js";
+          cal.loaded = true;
         }
-      } catch (e) { logger.warn("booking-page", `Cal.com init failed: ${e}`); }
-    };
-    document.body.appendChild(script);
-    return () => { cleaned = true; try { script.remove(); } catch {} };
+        _queue.push(args);
+      };
+      w.Cal.q = _queue;
+      w.Cal.ns = {};
+      w.Cal.loaded = false;
+    }
+
+    w.Cal("init", "booking", { origin: "https://app.cal.com" });
+    w.Cal.ns.booking("inline", { elementOrSelector: "#cal-embed", calLink });
   }, [calLink]);
 
   if (!calLink) {
