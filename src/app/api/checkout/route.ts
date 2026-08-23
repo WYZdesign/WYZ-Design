@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
 
     if (type === "giftcard") {
       if (!amount) return NextResponse.json({ error: "Amount required" }, { status: 400 });
-      if (!VALID_GIFT_AMOUNTS.includes(amount) && amount < 5) {
+      if (!VALID_GIFT_AMOUNTS.includes(amount)) {
         return NextResponse.json({ error: "Invalid gift card amount" }, { status: 400 });
       }
       const session = await createGiftCardCheckout(amount, email);

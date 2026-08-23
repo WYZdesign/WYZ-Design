@@ -76,6 +76,11 @@ export async function POST(req: NextRequest) {
   if (!validateCsrf(req)) {
     return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
   }
+  const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown";
+  const { ok } = await rateLimit(`forms:${ip}`, 20, 60_000);
+  if (!ok) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
   try {
     const body = await req.json();
     const { formType, data } = body;

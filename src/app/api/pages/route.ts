@@ -57,6 +57,10 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const page = url.searchParams.get("page") || "home";
   
+  if (!ALLOWED_PAGES.has(page)) {
+    return NextResponse.json({ error: "Invalid page" }, { status: 400 });
+  }
+
   if (process.env.VERCEL) {
     return NextResponse.json({ html: WIX_TEMPLATE, exists: false });
   }

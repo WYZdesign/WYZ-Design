@@ -13,7 +13,8 @@ function getResend() {
 const BASE_URL = process.env.NEXT_PUBLIC_URL || "https://www.wyzdesign.com";
 
 function signUnsubscribe(email: string): string {
-  const secret = process.env.NEXTAUTH_SECRET || process.env.STRIPE_SECRET_KEY || "wyz-newsletter-secret";
+  const secret = process.env.NEXTAUTH_SECRET;
+  if (!secret) throw new Error("NEXTAUTH_SECRET not configured");
   const hmac = createHmac("sha256", secret).update(email.toLowerCase().trim()).digest("hex");
   return `${encodeURIComponent(email)}.${hmac.slice(0, 16)}`;
 }
