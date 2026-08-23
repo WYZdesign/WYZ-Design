@@ -29,6 +29,23 @@ const CATEGORY_MAP: Record<string, number[]> = {
   Art: [2, 3],
 };
 
+interface PrintfulVariant {
+  id: number;
+  name: string;
+  price: string;
+  in_stock: boolean;
+}
+
+interface PrintfulProductResponse {
+  id: number;
+  type: string;
+  name: string;
+  brand: string;
+  model: string;
+  image: string;
+  variants: PrintfulVariant[];
+}
+
 interface PrintfulProduct {
   id: number;
   title: string;
@@ -42,18 +59,31 @@ interface PrintfulProduct {
 
 async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
   try {
-    const res = await fetch(`${PRINTFUL_API}/products/${id}`, {
+    // V2 API: /v2/catalog-products/{id}
+    const res = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}`, {
       headers: { Authorization: `Bearer ${API_KEY}` },
       next: { revalidate: 3600 },
     });
     if (!res.ok) return null;
     const data = await res.json();
-    const p = data.result?.product;
-    const variants = data.result?.variants || [];
-    if (!p || !variants.length) return null;
+    const p: PrintfulProductResponse | undefined = data.data;
+    if (!p) return null;
 
-    // Find cheapest variant for display price
-    const cheapest = variants.reduce((a: any, b: any) => (a.price < b.price ? a : b));
+    // V2 returns variants separately — fetch them
+    const varRes = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}/catalog-variants`, {
+      headers: { Authorization: `Bearer ${API_KEY}` },
+      next: { revalidate: 3600 },
+    });
+    if (!varRes.ok) return null;
+    const varData = await varRes.json();
+    const variants: PrintfulVariant[] = varData.data || [];
+    if (!variants.length) return null;
+
+    // Find cheapest in-stock variant for display price
+    const inStock = variants.filter((v) => v.in_stock);
+    const cheapest = (inStock.length ? inStock : variants).reduce((a, b) =>
+      parseFloat(a.price) < parseFloat(b.price) ? a : b
+    );
 
     // Determine category
     let category = "Apparel";
@@ -63,7 +93,7 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
 
     return {
       id: p.id,
-      title: p.title.split("|")[0].trim(), // clean up "Brand | Model" format
+      title: p.name.split("|")[0].trim(),
       type: p.type,
       image: p.image || "",
       price: parseFloat(cheapest.price),
@@ -78,9 +108,10 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
 
 /**
  * Returns curated Printful product catalog, optionally filtered by category.
+ * Uses Printful V2 API.
  * @method GET
  * @request Query param `category` (optional) — Apparel, Headwear, Accessories, Art, or All
- * @response JSON with products array (id, title, type, image, price, category) and total count
+ * @response JSON with products array and total count
  * @auth None
  */
 export async function GET(req: NextRequest) {
