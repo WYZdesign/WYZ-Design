@@ -19,6 +19,32 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
 
+## Session 17 — Sitewide vertical-spacing audit (Claude/Cowork)
+**Auditor:** Claude (Cowork), live in Chrome with `V:\wyzdesign` open in the desktop app + direct file access via device bridge
+**Date:** 2026-08-23
+**Trigger:** Torreé flagged that the home page hero looked badly spaced on the Galaxy Z Fold 5 — tagline, H1, subtext, and buttons not tightly/evenly stacked, and asked for a full vertical-spacing audit across the site, especially mobile.
+
+### Confirmed and fixed: home hero was a real, isolated outlier
+I diffed the home hero's text-stack spacing against every other hero on the site (about, web-design, services, designs, photography, partnerships all use the same `.hero-banner` pattern). Every one of those uses the same tight rhythm: eyebrow/tagline `mb-2`–`mb-3`, `<h1>` `mb-3 sm:mb-6`, subtext paragraph `mb-2`–`mb-3` (or none) right before the CTA. Home's hero (`src/app/home/page.tsx`) broke that rhythm badly:
+- Tagline ("Wild Vision. Zealous Execution.") had `mb-6` (24px) — 2–3x every other page's eyebrow spacing.
+- `<h1>` had `mb-8` (32px) instead of the sitewide `mb-3 sm:mb-6`.
+- The subtext paragraph had `mb-24 sm:mb-32` — **96px/128px** of margin before the buttons. That's the actual bug: nothing else on the site comes close to that value in a hero stack; I grepped every hero + every page.tsx for `mb-`/`mt-`/`my-` in the 16–39 range sitewide and this was the only hit inside a text stack (the other few hits — `mb-16`, `mt-16`, `my-16 sm:my-24` — are all normal section-to-section spacing between whole page sections, not inside one stacked block, so those are fine and untouched).
+
+**Fixed** (`src/app/home/page.tsx`, hero section ~line 908-921): tagline → `mb-2 sm:mb-3`, `<h1>` → `mb-3 sm:mb-6`, subtext → `mb-6 sm:mb-8`. This brings the home hero in line with the tight, consistent stack rhythm every other hero on the site already uses — tagline, H1, subtext, and buttons now sit close together as one visual group instead of the subtext floating ~100-128px away from the CTAs.
+
+**Also fixed while in there:** the tagline had `whitespace-nowrap` on a fairly long line ("WILD VISION. ZEALOUS EXECUTION.") at `tracking-[0.2em]` uppercase. At very narrow widths (a Fold's ~344px cover-screen-class viewport, or any phone under ~360px) that letter-spacing pushes the rendered line wider than the available `px-4`-padded column, and with `whitespace-nowrap` + the section's `overflow-hidden`, the tail of that line ("EXECUTION.") could get silently clipped off-screen rather than wrapping — exactly the "text touching/going past the edge" symptom Torreé described. Removed `whitespace-nowrap` so it wraps to two lines gracefully on the narrowest screens instead of clipping; it still renders on one line at every breakpoint where it actually fits (sm and up), so nothing changes visually on normal phones or desktop.
+
+File written directly to `V:\wyzdesign\src\app\home\page.tsx` via the device bridge, **not yet committed to git** — please `tsc --noEmit` / build-check and commit/push.
+
+### Sitewide sweep — everything else checked came back clean
+Grepped every top-level page (`home`, `about`, `web-design`, `services`, `designs`, `photography`, `events`, `printing`, `plans`, `partnerships`, `contact`, `gallery`, `brands`, `merch`, `case-studies`, `community`, `faq`, `gift-card`) for `mb-`/`mt-`/`my-` values of 16 and above, then hand-checked every hit in context. Outside the one home-hero bug above, every hit was ordinary section-level spacing (gaps between whole page sections like "Model Archive" or "Our Brands"), not inside a heading/tagline/button stack — so no other page currently has this specific "orphaned huge margin inside a hero stack" bug. The six `.hero-banner` pages other than home (about, web-design, services, designs, photography, partnerships) all already use the consistent tight rhythm described above and needed no changes.
+
+### Tooling limitation — still can't get a true mobile viewport
+Same limitation as Session 16: `resize_window` doesn't change the real render viewport in this session, and the iframe workaround is blocked by `X-Frame-Options: DENY`. Everything above is source-level CSS/Tailwind analysis (comparing actual compiled class values against each other across pages), not a live pixel-for-pixel mobile screenshot. It's a solid way to catch outliers like the home hero bug, but it can't catch things that only show up from real rendering quirks (font metrics, text-wrap behavior in a real WebKit/Chrome mobile engine, etc.). Once this fix is live, a real device or working DevTools emulation should confirm the home hero now reads as one tight stack on a Fold-width screen.
+
+### Suggested next step for either of us
+Once this and the Session 16 `/events` fix are committed and deployed, a real mobile check of `/`, `/events`, and `/plans` together would close out both open mobile-spacing items in one pass. I'd also flag: if either of us gets real device-emulation working, it's worth a second pass specifically on the sub-hero sections (Model Archive, Services/Plans tab switcher, pricing cards) at Fold width — I didn't find bugs there source-side, but those are exactly the kind of dense, multi-element stacks where a live check tends to catch things static analysis misses.
+
 ## Session 16 — Galaxy Z Fold 5 mobile audit (Claude/Cowork)
 **Auditor:** Claude (Cowork)
 **Date:** 2026-08-23

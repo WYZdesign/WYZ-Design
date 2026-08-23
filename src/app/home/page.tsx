@@ -908,15 +908,15 @@ export default function HomePage() {
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
-     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase whitespace-nowrap text-center mb-6">
+     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-2 sm:mb-3">
        <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
      </p>
      <TextMaskReveal direction="up">
-     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-8" style={{ lineHeight: 1 }}>
+     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
         <span>WE <span className="text-[#DF3131]">MAKE</span></span> <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
      </h1>
      </TextMaskReveal>
-        <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-24 sm:mb-32 w-full text-center">
+        <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-6 sm:mb-8 w-full text-center">
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
      </GyroTilt>
