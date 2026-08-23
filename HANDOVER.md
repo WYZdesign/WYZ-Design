@@ -52,8 +52,36 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 **Still Open:**
 - Stripe 500 — keys rotated and redeployed, pending verification
 
-### Session 6 — Critical Security Fixes (Handover #11 deep audit)
-**Auditor:** wyzmind (opencode) — independent deep code audit
+### Session 7 — Cal.com CSP Fix + Deep API Audit (Handover #14)
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
+**Date:** 2026-08-22
+
+**Findings & Fixes Applied:**
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Cal.com booking widget silently broken — `app.cal.com` missing from CSP | `next.config.ts` | HIGH | ✅ Fixed — added to `script-src`, `connect-src`, `frame-src` |
+
+**Deep API Audit Findings (from explore agent):**
+
+| Issue | File | Severity | Status |
+|-------|------|----------|--------|
+| No auth on analytics GET endpoint | `analytics/route.ts` | HIGH | Open — needs auth |
+| Hardcoded salt in hashIp() | `analytics/route.ts` | LOW | Open — cosmetic |
+| Silent catch in POST returns success | `analytics/route.ts` | MEDIUM | Open — masks errors |
+| No auth on fd/events POST (cache invalidation) | `fd/events/route.ts` | HIGH | Open — needs auth |
+| console.error instead of logger | `fd/events/route.ts` | LOW | Open — cosmetic |
+| Missing return after successful insert | `telemetry/route.ts` | LOW | Open |
+| Health endpoint exposes env/version | `health/route.ts` | LOW | Open — info disclosure |
+| No input sanitization on search query | `search/route.ts` | LOW | Open |
+
+**Still Open (from previous sessions):**
+- Subscription checkout Price IDs — stale, need Dashboard recreation (Handover #13)
+- Printful API key not configured (degrades gracefully)
+- Neo4j URI may not be set in Vercel (Users/Newsletter tabs empty)
+
+### Session 6 — Critical Security Fixes + Stripe BOM Root Cause (Handover #11, #12)
+**Auditor:** Claude (Cowork) + wyzmind (opencode)
 **Date:** 2026-08-22
 
 | Fix | File(s) | Severity | Status |
@@ -63,10 +91,11 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 | No auth on /api/bookkeeping/meta — financial data exposed to anyone | `api/bookkeeping/meta/route.ts` | HIGH | ✅ Fixed — added auth + admin check |
 | Rate limit imported but never called in POST /api/forms | `api/forms/route.ts` | HIGH | ✅ Fixed — added rateLimit() call (20/min) |
 | Gift card validation bug — `&& amount < 5` let any amount >=5 through | `api/checkout/route.ts` | HIGH | ✅ Fixed — removed broken condition |
+| BOM in NEXT_PUBLIC_URL broke Stripe checkout URLs | `stripe.ts`, `robots.ts`, `sitemap.ts`, `newsletter/route.ts` | HIGH | ✅ Fixed — shared `getSiteUrl()` helper strips BOM |
 
 **Still Open (from deep audit, lower priority):**
 - `api/analytics/route.ts` GET — no auth on analytics data
-- `api/fd/events/route.ts` — missing try/catch on GET/POST
+- `api/fd/events/route.ts` — no auth on POST, missing try/catch on GET/POST
 - `api/telemetry/route.ts` POST — missing return statement
 - Multiple routes leak `e.message` to client
 - Several `console.warn/error` calls should use logger
@@ -127,10 +156,10 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 
 ## Deployment State
 
-- **Last commit:** Session 4 bookkeeping + upload fixes (pending)
+- **Last commit:** `6488369` — Cal.com CSP fix
 - **Build status:** tsc clean, `next build` clean
 - **Vercel:** Auto-deploys from `master` branch
-- **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket
+- **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
 
 ## Key Architecture Notes
 
