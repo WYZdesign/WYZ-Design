@@ -1,4 +1,5 @@
 "use client";
+import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import { useState } from "react";
 import {
@@ -546,7 +547,7 @@ export default function ForumPage() {
       });
       setSubscribed(true);
       setEmail("");
-    } catch (e) { logger.warn("community-page", `Newsletter subscribe failed: ${e}`); }
+    } catch (e) { logger.warn("community-page", `Newsletter subscribe failed: ${e}`); toast.error("Subscription failed. Please try again."); }
   };
 
   const catLabel = (id: string) => CATEGORIES.find((c) => c.id === id)?.label ?? id;

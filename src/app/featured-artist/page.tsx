@@ -1,4 +1,5 @@
 "use client";
+import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 
 import { useState, useRef, useCallback, useEffect } from "react";
@@ -134,7 +135,7 @@ export default function FeaturedArtistPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "featured-artist-application", data: { ...data, submittedAt: new Date().toISOString() } }),
  });
- } catch (e) { logger.warn("featured-artist-page", `Application submit failed: ${e}`); }
+ } catch (e) { logger.warn("featured-artist-page", `Application submit failed: ${e}`); toast.error("Submission failed. Please try again."); }
  setSubmitted(true);
  };
 

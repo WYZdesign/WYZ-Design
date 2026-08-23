@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Link from "next/link";
 
@@ -75,7 +76,7 @@ export default function PhotoshootCalendar() {
             },
           }),
         });
-      } catch (e) { logger.warn("photoshoot-page", `Form submit failed: ${e}`); }
+      } catch (e) { logger.warn("photoshoot-page", `Form submit failed: ${e}`); toast.error("Booking failed. Please try again."); }
       setSubmitted(true);
     }
   };

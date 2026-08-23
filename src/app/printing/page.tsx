@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -324,7 +325,7 @@ export default function PrintingPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "printing-quote", data }),
  });
- } catch { /* continue */ }
+ } catch { toast.error("Submission failed. Please try again."); }
  setQuoteSubmitted(true);
  }} className="max-w-4xl mx-auto space-y-4">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

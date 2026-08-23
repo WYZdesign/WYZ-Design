@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Link from "next/link";
 
@@ -72,7 +73,7 @@ export default function ConsultationCalendar() {
             },
           }),
         });
-      } catch (e) { logger.warn("consultation-page", `Form submit failed: ${e}`); }
+      } catch (e) { logger.warn("consultation-page", `Form submit failed: ${e}`); toast.error("Scheduling failed. Please try again."); }
       setSubmitted(true);
     }
   };

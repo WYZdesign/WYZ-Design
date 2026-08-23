@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
 import { FiCamera, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -666,7 +667,7 @@ return (
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ formType: "model-application", data }),
   });
-  } catch { /* continue */ }
+   } catch { toast.error("Submission failed. Please try again."); }
   setApplicationSubmitted(true);
   }} className="space-y-4">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

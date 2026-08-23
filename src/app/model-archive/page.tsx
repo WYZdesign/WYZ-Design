@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
+import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Image from "next/image";
 import { FiUser, FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -118,7 +119,7 @@ export default function ModelArchivePage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "model-application", data: { ...data, submittedAt: new Date().toISOString() } }),
  });
- } catch (e) { logger.warn("model-archive-page", `Application submit failed: ${e}`); }
+ } catch (e) { logger.warn("model-archive-page", `Application submit failed: ${e}`); toast.error("Submission failed. Please try again."); }
  setSubmitted(true);
  };
 

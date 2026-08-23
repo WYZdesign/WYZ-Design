@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
@@ -249,10 +250,10 @@ export default function PlansPage() {
         trackMetaEvent("InitiateCheckout", { value: planName });
         window.location.href = data.url;
       } else {
-        alert(data.error || "Checkout failed. Make sure Stripe is configured.");
+        toast.error(data.error || "Checkout failed. Make sure Stripe is configured.");
       }
     } catch {
-      alert("Network error. Please try again.");
+      toast.error("Network error. Please try again.");
     } finally {
       setLoading(null);
     }

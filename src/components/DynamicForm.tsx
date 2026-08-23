@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { trackMetaEvent, trackTikTokEvent } from "@/components/AnalyticsProvider";
 
 export type FieldType = "text" | "email" | "tel" | "select" | "textarea" | "date" | "checkbox" | "number";
@@ -112,12 +113,14 @@ export default function DynamicForm({
         body: JSON.stringify({ formType, data: form }),
       });
       if (!res.ok) throw new Error("Submission failed");
+      toast.success("Submitted successfully!");
       setSubmitted(true);
       trackMetaEvent("Lead");
       trackTikTokEvent("SubmitForm");
       onSuccess?.();
     } catch (err: any) {
       const msg = err.message || "Something went wrong";
+      toast.error(msg);
       setErrorMsg(msg);
       onError?.(msg);
     } finally {

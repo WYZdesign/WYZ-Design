@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import Link from "next/link";
 import { trackMetaEvent } from "@/components/AnalyticsProvider";
 
@@ -30,10 +31,10 @@ export default function GiftCardPage() {
         trackMetaEvent("InitiateCheckout", { value: amount, content_type: "gift_card" });
         window.location.href = data.url;
       } else {
-        alert(data.error || "Checkout failed. Please try again.");
+        toast.error(data.error || "Checkout failed. Please try again.");
       }
     } catch {
-      alert("Network error. Please try again.");
+      toast.error("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -41,7 +42,7 @@ export default function GiftCardPage() {
 
   async function buyCustom() {
     const amt = parseInt(customAmount);
-    if (!amt || amt < 5) { alert("Enter an amount of $5 or more."); return; }
+    if (!amt || amt < 5) { toast.error("Enter an amount of $5 or more."); return; }
     await buyGiftCard(amt);
   }
 

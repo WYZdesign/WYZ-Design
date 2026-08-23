@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 
 export default function LeadMagnet() {
@@ -11,12 +12,16 @@ export default function LeadMagnet() {
     e.preventDefault();
     if (!email.includes("@")) return;
     try {
-      await fetch("/api/newsletter", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-    } catch {}
+      if (!res.ok) throw new Error("Subscription failed");
+      toast.success("You're on the list!");
+    } catch {
+      toast.error("Something went wrong. Try again.");
+    }
     setDone(true);
   };
 
