@@ -661,7 +661,7 @@ export default function EventsPage() {
   <Image src="/images/events/hero_bg.jpg" alt="Events" fill className="w-full h-full object-cover opacity-80" priority />
   <div className="absolute inset-0 bg-black/30" />
     </div>
-    <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center py-10 lg:pt-32 lg:pb-0 overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center pt-24 pb-10 lg:pt-32 lg:pb-0 overflow-hidden">
     <div className="absolute inset-0 hero-grad-events z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10">

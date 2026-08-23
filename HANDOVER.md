@@ -19,6 +19,27 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
 
+## Session 16 — Galaxy Z Fold 5 mobile audit (Claude/Cowork)
+**Auditor:** Claude (Cowork)
+**Date:** 2026-08-23
+**Trigger:** Torreé asked for a full mobile audit at the Galaxy Z Fold 5 viewport, visual + backend/frontend fixes, and attention to console errors/warnings.
+
+### Tooling limitation, disclosed upfront
+I could not get a genuine narrow-viewport render in this session. `resize_window` reports success but doesn't actually change the page's real viewport (`window.innerWidth` stayed `1920` after a `344x882` resize call, confirmed via direct JS execution) — this browser session's window isn't actually resizable the way Chrome DevTools' device toolbar does it. I also tried framing the live site in a same-size iframe as a workaround; that's blocked by the site's own `X-Frame-Options: DENY` header (correct security posture, just closes off that workaround too). So I did **not** get live screenshots or live console output at true Fold width this round — flagging this clearly rather than presenting source-code analysis as a visual confirmation. If either of us gets real device-emulation working (a real phone, BrowserStack, or DevTools on Torreé's own machine), that's the way to actually confirm this and check for console warnings/errors at that viewport, which I could not capture this way.
+
+### What I did instead: root-caused and fixed the mobile nav-clearance bug via source
+This item has been sitting on the open list for several sessions ("`/events` and `/printing` mobile-only navbar-clearance fix — still worth a manual mobile check") without ever being root-caused. I traced it precisely by reading the actual CSS cascade instead of eyeballing a screenshot:
+
+- `#main-content` in `layout.tsx` gives every page `pt-20 lg:pt-24` (80px/96px) as baseline clearance under the fixed navbar (`h-20 lg:h-24`, confirmed in `Navbar.tsx`).
+- `events/page.tsx`'s hero wrapper uses the `.hero-banner` class, whose mobile rule in `globals.css` (line ~777) sets `margin-top: -5rem !important` (-80px) — this exactly cancels that global clearance.
+- The hero's inner text column only added back `py-10` (40px) on mobile, vs. `py-24`+ that every other `.hero-banner` page (about, web-design, etc.) uses as its base. Net result: the heading sits roughly 40px short of clearing the fixed navbar on mobile — worse the narrower the screen, which is exactly why a Fold's 344px cover-screen width would make this more visible than it'd be on a standard 390px phone.
+- **Fixed:** `events/page.tsx` — changed `py-10 lg:pt-32 lg:pb-0` to `pt-24 pb-10 lg:pt-32 lg:pb-0` on the hero text column, bringing mobile clearance in line with the rest of the site's `.hero-banner` pages (96px top padding vs. 80px navbar pull-back = positive clearance again). Desktop (`lg:`) was untouched since that math already worked (`lg:pt-32`/128px vs. `-6rem`/96px pull-back). File written to `V:\wyzdesign\src\app\events\page.tsx`, **not yet committed** — please build-check and commit.
+- **`printing/page.tsx` checked and found clean** — its hero section never had the `.hero-banner` class in the first place, so it just inherits the normal 80px global clearance with nothing canceling it. No live bug there currently; the version of this issue that used to affect printing (the marquee sitting above the hero) was already fixed back in Session 9. Safe to drop from the open-items list.
+- Also checked the `/plans` comparison table for classic narrow-viewport overflow risk (a wide `<table>` with no scroll wrapper is one of the most common Fold-width bugs) — it's already `hidden lg:block`, replaced by a stacked-card layout below `lg:`, so no overflow risk there. Confirmed clean, no fix needed.
+
+### Suggested next step
+Whoever has a real device or working DevTools emulation handy: load `/events` and `/plans` at ~344–390px width and just eyeball that the events heading now clears the navbar and the plans page shows cards not a squeezed table. That's the confirmation I couldn't get myself this round.
+
 ## Session 15 addendum — quick sync check + one live catch
 While drafting the above, I saw `.git/refs/heads/master` move to a new commit (`cd158cfe4...`, on top of `90febfd0`) with fresh edits in `analytics/route.ts`, `bugs/route.ts`, `bookkeeping/route.ts`, `bookkeeping/meta/route.ts` — looks like the `isAdmin` dedup into `@/lib/admin-auth` (`getAdminEmails`/`requireAdmin`) that the earlier audit flagged as duplicated 6x. Good to see that landing. I didn't touch any of those files since they had very fresh mtimes (actively being edited) — flagging what I saw instead of risking a collision.
 

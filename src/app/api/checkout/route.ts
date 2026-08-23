@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createCheckoutSession, createGiftCardCheckout, createServiceCheckout } from "@/lib/stripe";
+import { createCheckoutSession, createGiftCardCheckout, createServiceCheckout, isValidPlan, getMissingPriceIds } from "@/lib/stripe";
 import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
 import { errorResponse } from "@/lib/http";
+import { logger } from "@/lib/logger";
 
 const VALID_GIFT_AMOUNTS = [25, 50, 100, 150, 250];
 
@@ -42,6 +43,15 @@ export async function POST(req: NextRequest) {
 
     if (type === "subscription") {
       if (!plan) return NextResponse.json({ error: "Plan required" }, { status: 400 });
+      if (!isValidPlan(plan)) {
+        const missing = getMissingPriceIds();
+        logger.warn("Checkout: invalid or unconfigured plan", { plan, missingPriceIds: missing });
+        return NextResponse.json({
+          error: missing.length > 0
+            ? `Payment processing is not configured yet. Missing Price IDs for: ${missing.join(", ")}. Please contact support.`
+            : `Unknown plan: "${plan}".`,
+        }, { status: 400 });
+      }
       const session = await createCheckoutSession(plan, email, userId);
       return NextResponse.json({ url: session.url });
     }
@@ -70,6 +80,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ error: "Invalid checkout type" }, { status: 400 });
   } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+    logger.error("Checkout session creation failed", { error: e.message, stack: e.stack });
+    if (e.message?.includes("Price ID not configured")) {
+      return NextResponse.json({ error: "Payment processing is not configured yet. Please contact support." }, { status: 503 });
+    }
+    return NextResponse.json({ error: "Unable to create checkout session. Please try again." }, { status: 500 });
   }
 }

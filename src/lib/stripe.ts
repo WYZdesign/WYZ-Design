@@ -34,10 +34,26 @@ function generateIdempotencyKey(prefix: string, id: string): string {
     .slice(0, 32);
 }
 
+export function getMissingPriceIds(): string[] {
+  const missing: string[] = [];
+  for (const [key, cfg] of Object.entries(SUBSCRIPTION_PRICES)) {
+    if (!cfg.priceId) missing.push(key);
+  }
+  return [...new Set(missing)];
+}
+
 export async function createCheckoutSession(plan: string, email?: string, userId?: string) {
   const stripe = getStripe();
   const planConfig = SUBSCRIPTION_PRICES[plan];
-  if (!planConfig || !planConfig.priceId) throw new Error(`Unknown plan: ${plan}`);
+  if (!planConfig) throw new Error(`Unknown plan: "${plan}". Valid plans: ${Object.keys(SUBSCRIPTION_PRICES).join(", ")}`);
+  if (!planConfig.priceId) {
+    const envKey = `STRIPE_${plan.toUpperCase()}_PRICE_ID`;
+    throw new Error(
+      `Price ID not configured for "${plan}" (${planConfig.name}). ` +
+      `Set ${envKey} in Vercel environment variables. ` +
+      `Create the Price in Stripe Dashboard → Products → Prices (must be a recurring monthly price, not one-time).`
+    );
+  }
 
   const idKey = generateIdempotencyKey("sub", userId || email || "guest");
 
