@@ -4,9 +4,9 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `547e448` (Session 14)
+- **Last commit:** `87f3f25` (Session 14 — build fix)
 - **Build status:** `tsc --noEmit` clean
-- **Vercel:** Auto-deploys from `master` branch
+- **Vercel:** Auto-deploys from `master` branch — 10+ builds failed due to `ssr:false` in Server Component. Fixed with `ClientComponents.tsx` wrapper.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
 
 ## Key Architecture Notes

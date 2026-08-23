@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
     const imgData = await imgRes.json();
 
     const images = (imgData.files || []).map(
-      (f: { id: string }) => `${DRIVE_API}/files/${f.id}?alt=media&key=${apiKey}`
+      (f: { id: string }) => `/api/gdrive-image?id=${f.id}`
     );
     return NextResponse.json({ images });
   } catch {

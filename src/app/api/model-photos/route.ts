@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const ROOT_FOLDER = "1x4Ya8VMdtt8wfG8jil-V_TxRuaEWht0T";
 
-function driveImageUrl(fileId: string, apiKey: string): string {
-  return `${DRIVE_API}/files/${fileId}?alt=media&key=${apiKey}`;
+function driveImageUrl(fileId: string): string {
+  return `/api/gdrive-image?id=${fileId}`;
 }
 
 async function findImages(folderId: string, apiKey: string, limit: number, depth: number = 0): Promise<Array<{ id: string; name: string; folder: string }>> {
@@ -53,14 +53,14 @@ export async function GET(req: NextRequest) {
           seenFolders.add(img.folder);
           results.push({
             model: img.name.split(/[._-]/)[0].toUpperCase() || "MODEL",
-            imageUrl: driveImageUrl(img.id, apiKey),
+            imageUrl: driveImageUrl(img.id),
           });
         }
       }
       return NextResponse.json({ photos: results });
     }
 
-    return NextResponse.json({ photos: images.map((img) => driveImageUrl(img.id, apiKey)) });
+    return NextResponse.json({ photos: images.map((img) => driveImageUrl(img.id)) });
   } catch {
     return NextResponse.json({ photos: [] });
   }

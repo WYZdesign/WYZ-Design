@@ -21,7 +21,7 @@ async function findCoverImage(folderId: string, apiKey: string): Promise<string>
   if (!res.ok) return "";
   const data = await res.json();
   const file = data.files?.[0];
-  return file ? `${DRIVE_API}/files/${file.id}?alt=media&key=${apiKey}` : "";
+  return file ? `/api/gdrive-image?id=${file.id}` : "";
 }
 
 export async function GET() {
