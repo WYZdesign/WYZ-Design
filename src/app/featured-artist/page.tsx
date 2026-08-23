@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
@@ -133,7 +134,7 @@ export default function FeaturedArtistPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "featured-artist-application", data: { ...data, submittedAt: new Date().toISOString() } }),
  });
- } catch (e) { console.warn("[featured-artist-page] Application submit failed", e); }
+ } catch (e) { logger.warn("featured-artist-page", `Application submit failed: ${e}`); }
  setSubmitted(true);
  };
 

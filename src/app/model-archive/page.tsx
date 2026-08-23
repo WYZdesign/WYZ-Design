@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
+import { logger } from "@/lib/logger";
 import Image from "next/image";
 import { FiUser, FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
@@ -117,7 +118,7 @@ export default function ModelArchivePage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "model-application", data: { ...data, submittedAt: new Date().toISOString() } }),
  });
- } catch (e) { console.warn("[model-archive-page] Application submit failed", e); }
+ } catch (e) { logger.warn("model-archive-page", `Application submit failed: ${e}`); }
  setSubmitted(true);
  };
 

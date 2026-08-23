@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { logger } from "@/lib/logger";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import FDDriveBrowser from "@/components/FDDriveBrowser";
@@ -166,7 +167,7 @@ export default function FDOraclePage() {
       const r = await fetch(`${LOCAL_API}/fd/health`, { signal: AbortSignal.timeout(2000) });
       const d = await r.json();
       if (d.status === "online") { setOnline(true); return; }
-    } catch (e) { console.warn("[fd-page] Local health check failed", e); }
+    } catch (e) { logger.warn("fd-page", `Local health check failed: ${e}`); }
 
     // Fall back to cloud Oracle
     try {
@@ -212,7 +213,7 @@ export default function FDOraclePage() {
         }, POLL_INTERVAL);
         return;
       }
-    } catch (e) { console.warn("[fd-page] Local chat API failed, falling back to cloud", e); }
+    } catch (e) { logger.warn("fd-page", `Local chat API failed, falling back to cloud: ${e}`); }
 
     // Cloud fallback
     setJobStatus("Oracle (cloud)...");

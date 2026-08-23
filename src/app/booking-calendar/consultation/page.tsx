@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { logger } from "@/lib/logger";
 import Link from "next/link";
 
 const HOURS = Array.from({ length: 10 }, (_, i) => i + 10);
@@ -71,7 +72,7 @@ export default function ConsultationCalendar() {
             },
           }),
         });
-      } catch (e) { console.warn("[consultation-page] Form submit failed", e); }
+      } catch (e) { logger.warn("consultation-page", `Form submit failed: ${e}`); }
       setSubmitted(true);
     }
   };

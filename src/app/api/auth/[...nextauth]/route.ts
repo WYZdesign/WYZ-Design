@@ -36,7 +36,7 @@ const providers = [
         loginAttempts.set(email, { count: 0, resetAt: now + LOCKOUT_MS });
       }
 
-      const adminPass = process.env.ADMIN_PASSWORD || "";
+      const adminPass = process.env.ADMIN_PASSWORD;
       if (!adminPass || pw !== adminPass) {
         const a = loginAttempts.get(email)!;
         a.count++;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { logger } from "@/lib/logger";
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
@@ -93,7 +94,7 @@ export default function AdminDashboard() {
       const r = await fetch(url);
       if (r.status === 403) { setData({ forbidden: true }); return; }
       setData(await r.json());
-    } catch (e) { console.warn("[admin] fetch failed", e); }
+    } catch (e) { logger.warn("admin", `Fetch failed: ${e}`); }
     setLoading(false);
   };
 
@@ -299,7 +300,7 @@ function ProfileTab({ session, update, signOut }: { session: any; update: any; s
     try {
       const res = await fetch("/api/profile", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(profile) });
       if (res.ok) { setSaved(true); setEditMode(false); await update(); setTimeout(() => setSaved(false), 3000); }
-    } catch (e) { console.warn("[admin-profile] Save profile failed", e); }
+    } catch (e) { logger.warn("admin-profile", `Save profile failed: ${e}`); }
     setSaving(false);
   }
 
@@ -432,7 +433,7 @@ function BugReportTab({ session }: { session: any }) {
 
   const submit = async () => {
     if (!bugCat && !bugDesc) return;
-    try { await fetch("/api/bugs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category: bugCat, issues: bugChecks, description: bugDesc, email: session?.user?.email, page: typeof window !== "undefined" ? window.location.href : "" }) }); } catch (e) { console.warn("[admin-bugs] Submit failed", e); }
+    try { await fetch("/api/bugs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ category: bugCat, issues: bugChecks, description: bugDesc, email: session?.user?.email, page: typeof window !== "undefined" ? window.location.href : "" }) }); } catch (e) { logger.warn("admin-bugs", `Submit failed: ${e}`); }
     setBugSent(true);
   };
 

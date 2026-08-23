@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { logger } from "@/lib/logger";
 import Link from "next/link";
 
 const HOURS = Array.from({ length: 10 }, (_, i) => i + 10); // 10AM-7PM
@@ -74,7 +75,7 @@ export default function PhotoshootCalendar() {
             },
           }),
         });
-      } catch (e) { console.warn("[photoshoot-page] Form submit failed", e); }
+      } catch (e) { logger.warn("photoshoot-page", `Form submit failed: ${e}`); }
       setSubmitted(true);
     }
   };

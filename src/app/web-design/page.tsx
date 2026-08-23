@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { logger } from "@/lib/logger";
 import { FiExternalLink, FiMonitor, FiSmartphone, FiTrendingUp, FiZap, FiGlobe, FiLock, FiArrowRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -116,7 +117,7 @@ function SiteCard({ site, index }: { site: typeof CLIENT_SITES[0]; index: number
           const perm = await (DeviceOrientationEvent as any).requestPermission();
           if (perm === "granted") startGyro();
         } else { startGyro(); }
-      } catch (e) { console.warn("[web-design-page] Gyro permission failed", e); }
+      } catch (e) { logger.warn("web-design-page", `Gyro permission failed: ${e}`); }
     };
     const onFirst = () => { document.removeEventListener("touchend", onFirst); document.removeEventListener("click", onFirst); requestPerm(); };
     document.addEventListener("touchend", onFirst, { once: true });

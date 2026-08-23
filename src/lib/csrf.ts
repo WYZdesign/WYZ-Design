@@ -21,7 +21,10 @@ export function validateCsrf(req: NextRequest): boolean {
   return false;
 }
 
-const CSRF_SECRET = process.env.CSRF_SECRET || process.env.NEXTAUTH_SECRET || "wyz-csrf-fallback";
+const CSRF_SECRET: string = process.env.CSRF_SECRET || process.env.NEXTAUTH_SECRET || "";
+if (!CSRF_SECRET) {
+  throw new Error("CSRF_SECRET or NEXTAUTH_SECRET must be set");
+}
 
 export function generateCsrfToken(): string {
   const nonce = randomBytes(32).toString("hex");

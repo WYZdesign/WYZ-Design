@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { logger } from "@/lib/logger";
 import Link from "next/link";
 import { FiCheck } from "react-icons/fi";
 import toast from "react-hot-toast";
@@ -77,7 +78,7 @@ export default function BookingPage() {
       }
       setSubmitted(true);
     } catch (err) {
-      console.error("Booking submission failed:", err);
+      logger.error("booking-page", `Booking submission failed: ${err}`);
       toast.error("Submission failed. Please try again.");
     } finally {
       setLoading(false);
@@ -248,7 +249,7 @@ function CalBooking({ calLink }: { calLink: string }) {
           Cal("init", "booking", { origin: "https://app.cal.com" });
           Cal.ns.booking("inline", { elementOrSelector: "#cal-embed", calLink });
         }
-      } catch (e) { console.warn("[booking-page] Cal.com init failed", e); }
+      } catch (e) { logger.warn("booking-page", `Cal.com init failed: ${e}`); }
     };
     document.body.appendChild(script);
     return () => { cleaned = true; try { script.remove(); } catch {} };

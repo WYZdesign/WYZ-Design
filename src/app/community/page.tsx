@@ -1,4 +1,5 @@
 "use client";
+import { logger } from "@/lib/logger";
 import { useState } from "react";
 import {
   FiUsers, FiInstagram, FiMail, FiExternalLink, FiCalendar, FiAward,
@@ -545,7 +546,7 @@ export default function ForumPage() {
       });
       setSubscribed(true);
       setEmail("");
-    } catch (e) { console.warn("[community-page] Newsletter subscribe failed", e); }
+    } catch (e) { logger.warn("community-page", `Newsletter subscribe failed: ${e}`); }
   };
 
   const catLabel = (id: string) => CATEGORIES.find((c) => c.id === id)?.label ?? id;
