@@ -5,11 +5,11 @@ import {
   getFinancialSummary, exportTransactionsCSV, exportScheduleC,
   getTransactionById, getCategories, getClients,
 } from "@/lib/bookkeeping";
+import { getAdminEmails } from "@/lib/admin-auth";
 
 function isAdmin(session: any): boolean {
   const email = (session?.user?.email || "").toLowerCase();
-  const admins = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
-  return admins.includes(email);
+  return getAdminEmails().includes(email);
 }
 
 /**

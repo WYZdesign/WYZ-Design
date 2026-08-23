@@ -103,18 +103,29 @@ export async function POST(req: NextRequest) {
     const systemMessage = { role: "system", content: KNOWLEDGE };
     const allMessages = [systemMessage, ...recentMessages];
 
-    // Try Ollama first (Shadow PC GPU tunnel)
+    // Try Ollama first (Shadow PC GPU tunnel). Bounded with a hard timeout so an
+    // unreachable/slow tunnel can't stall the whole request up to Vercel's
+    // maxDuration (30s per vercel.json) before the reliable fallback ever runs —
+    // that stall is what was showing as a permanent "..." in the widget in prod.
     try {
       const ollamaUrl = process.env.OLLAMA_URL || "http://localhost:11435";
-      const ollamaRes = await fetch(`${ollamaUrl}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "deepseek-coder:6.7b",
-          messages: allMessages,
-          stream: true,
-        }),
-      });
+      const ollamaController = new AbortController();
+      const ollamaTimeout = setTimeout(() => ollamaController.abort(), 3500);
+      let ollamaRes: Response;
+      try {
+        ollamaRes = await fetch(`${ollamaUrl}/api/chat`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            model: "deepseek-coder:6.7b",
+            messages: allMessages,
+            stream: true,
+          }),
+          signal: ollamaController.signal,
+        });
+      } finally {
+        clearTimeout(ollamaTimeout);
+      }
 
       if (ollamaRes.ok && ollamaRes.body) {
         const encoder = new TextEncoder();

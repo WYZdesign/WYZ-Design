@@ -43,6 +43,12 @@ export default function ChatWidget() {
     // Add empty assistant message
     setMessages(prev => [...prev, { role: "assistant", content: "" }]);
 
+    // Client-side safety net: the server route now bounds its own Ollama call,
+    // but if anything upstream still stalls (slow network, proxy buffering),
+    // never leave the widget stuck on "..." with the input disabled forever.
+    const controller = new AbortController();
+    const watchdog = setTimeout(() => controller.abort(), 20000);
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -50,6 +56,7 @@ export default function ChatWidget() {
         body: JSON.stringify({
           messages: [...messages, userMessage].map(m => ({ role: m.role, content: m.content })),
         }),
+        signal: controller.signal,
       });
 
       if (!res.ok || !res.body) {
@@ -81,9 +88,17 @@ export default function ChatWidget() {
     } catch {
       setMessages(prev => {
         const updated = [...prev];
-        updated[updated.length - 1] = { role: "assistant", content: "Sorry, I'm having trouble connecting. Please try again." };
+        const timedOut = updated[updated.length - 1]?.content === "";
+        updated[updated.length - 1] = {
+          role: "assistant",
+          content: timedOut
+            ? "That's taking longer than it should. Please try again, or reach us directly at info@wyzdesign.com."
+            : "Sorry, I'm having trouble connecting. Please try again.",
+        };
         return updated;
       });
+    } finally {
+      clearTimeout(watchdog);
     }
 
     setIsStreaming(false);

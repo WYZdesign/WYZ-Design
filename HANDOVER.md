@@ -4,9 +4,9 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `dbe26b6` (Session 14 — Google Drive proxy)
+- **Last commit:** `90febfd0` — confirmed via `.git/refs/heads/master` and `.git/refs/remotes/origin/master` (identical SHA), so this and everything before it is genuinely on GitHub, not just local. The "production looks stale" issue was never an unpushed-code problem.
 - **Build status:** `tsc --noEmit` clean
-- **Vercel:** Auto-deploys from `master` branch — builds were failing for 10+ commits due to `ssr:false` in Server Component. Fixed with `ClientComponents.tsx` wrapper.
+- **Vercel:** Auto-deploys from `master` branch — builds were failing for 10+ commits due to `ssr:false` in Server Component. Fixed with `ClientComponents.tsx` wrapper (verified below — cleanly wired, `<ClientComponents />` renders in `layout.tsx` at line 344, no more direct `dynamic(..., {ssr:false})` calls in the Server Component). **This has not yet been confirmed live** — worth checking the Vercel dashboard to make sure the deploy off `90febfd0` (or whichever commit included this fix) actually succeeded, since it's the unlock for testimonials, `/merch/[id]`, `/merch/concepts`, and the pricing calculator all showing up at once.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
 
 ## Key Architecture Notes
@@ -18,6 +18,40 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **Admin auth:** `ADMIN_EMAILS` env var (comma-separated), checked via NextAuth session
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
+
+## Session 15 — Claude (Cowork) Live Browser Audit + Chat Widget Timeout Fix
+**Auditor:** Claude (Cowork), live browser session via Chrome automation + direct file access to `V:\wyzdesign` via the device bridge
+**Date:** 2026-08-23
+
+Good news first: I read the fix wyzmind already shipped for the stale-build root cause — `dynamic(..., {ssr:false})` calls were sitting directly in `layout.tsx`, which the App Router treats as a Server Component, and Next.js hard-errors on `ssr:false` there. Moving them into `ClientComponents.tsx` (a proper `"use client"` wrapper) is exactly the right fix, and I confirmed it's wired correctly — `<ClientComponents />` renders at `layout.tsx:344`, no leftover direct `dynamic()` calls in the server file. That one line was probably breaking 10+ deploys in a row, and explains everything below in Finding 1 in one shot. Nice catch.
+
+### What I independently verified live on production (before the site's edge security started blocking further automated navigation from this session — see note at bottom)
+| Finding | Verified how | Result |
+|---------|--------------|--------|
+| `/web-design` testimonials missing | `get_page_text` on live page | Confirmed — page jumps straight from "CLIENT PORTFOLIO" to "PRICING," no testimonials section rendered |
+| `/merch/1` 404s | Direct navigation + page text | Confirmed — real custom 404 page, not a stale cache artifact |
+| `/merch/concepts` 404s | Direct navigation + page text | Confirmed — same 404 |
+| `/plans` pricing calculator missing | `get_page_text` + `find` on live page | Confirmed — no "PRICING CALCULATOR" section anywhere between the comparison table and Build Your Own Plan |
+| Local `master` vs `origin/master` | Read `.git/refs/heads/master` and `.git/refs/remotes/origin/master` directly | **Identical SHA** (`90febfd0...`) — the push genuinely succeeded. The stale-production issue was 100% a Vercel build/deploy problem, never an unpushed-commits problem. This should save time chasing the wrong cause. |
+
+### New finding: AI chat widget hangs indefinitely, root-caused and fixed
+I opened the live widget, asked "What services do you offer?", and it sat on a "..." typing indicator with no response for 15+ seconds, after which the input field itself stopped accepting new messages. Read `api/chat/route.ts` and found the cause: the Ollama fetch (`fetch(`${ollamaUrl}/api/chat`, ...)`) has **no timeout or AbortController**. `vercel.json` sets `maxDuration: 30` on API routes, so if `OLLAMA_URL` points anywhere slow/unreachable (the Shadow PC GPU tunnel, per the code comment, isn't a guaranteed-up endpoint), the whole request can legitimately hang for up to 30 seconds before Vercel kills the function — meanwhile the widget shows nothing and blocks further input. The reliable pattern-matching fallback in the same file works fine and returns instantly; it just never gets a chance to run.
+
+**Fix applied (files written directly to `V:\wyzdesign` via the device bridge, NOT yet committed to git — please review and commit/push):**
+- `src/app/api/chat/route.ts` — wrapped the Ollama fetch in an `AbortController` with a 3.5s timeout. On timeout or any Ollama failure, it now falls through to the pattern-matching fallback almost immediately instead of riding out the full 30s function budget.
+- `src/components/ChatWidget.tsx` — added a 20s client-side watchdog (`AbortController` on the `/api/chat` fetch) as defense-in-depth, so even an unexpected server-side stall can't leave the widget permanently stuck with the input disabled. Shows a friendlier "that's taking longer than it should" message if it actually times out, vs. the generic connection-error message for other failures.
+
+Both files build clean as far as I can tell from reading them, but **please run `tsc --noEmit` and your normal build check before committing** — I don't have shell access to your machine from this session, only file read/write through the device bridge, so I couldn't verify the build myself.
+
+### One more thing worth flagging: browser automation got blocked mid-audit
+Partway through testing (right after the merch 404 checks), the site's edge security started hard-blocking every further navigation from my Chrome session — every URL just bounced back to a blank tab. This matches the "Blocked by WYZ Design edge security" WAF behavior noted earlier against Puppeteer; it may be triggering here too against rapid automated navigation, even from a real Chrome extension session. I couldn't verify the Cal.com booking widget fix live for that reason — the `booking/page.tsx` stub-sequence fix reads correct in source, but someone should confirm it renders in a normal browser session (not automated) to be sure. If this WAF sensitivity is going to keep happening to both of our audit tools, might be worth an allowlist rule for legitimate QA traffic, or at least know to pace out live checks.
+
+### Suggested next moves (either of us, whichever gets there first)
+- Confirm on the Vercel dashboard that the `ClientComponents.tsx` fix actually deployed successfully, then re-check `/web-design`, `/merch/1`, `/merch/concepts`, and `/plans` live — if the build was the only blocker, all four should just appear.
+- Review + commit + push the two chat widget files above.
+- Once chat is redeployed, send it a real message live and confirm it responds within a couple seconds instead of hanging.
+- Manually verify Cal.com on `/booking` in a normal (non-automated) browser.
+- Still worth a look whenever there's time: the Google Drive API key exposure in `models/route.ts`, `gdrive-photos/route.ts`, `gdrive-index/route.ts`, `model-photos/route.ts`, `fd/drive/route.ts` (flagged in earlier audits, not sure if the "Google Drive proxy" commit already addressed this — worth a quick check either way), the six orphaned backend routes, and the `/events` + `/printing` mobile navbar-clearance check that's been on the list a few sessions now.
 
 ## Session 14 — Deep Security Audit + Bug Fixes
 **Auditor:** opencode (automated audit) + Claude (browser walkthrough)

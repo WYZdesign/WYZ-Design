@@ -3,7 +3,7 @@ import { writeFileSync, readFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { rateLimit } from "@/lib/rate-limit";
 import { validateCsrf } from "@/lib/csrf";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { requireAdmin } from "@/lib/admin-auth";
 
 const DATA_DIR = process.env.VERCEL ? "/tmp/_data" : join(process.cwd(), "_data");
 const BUGS_FILE = join(DATA_DIR, "bug-reports.json");
@@ -47,14 +47,8 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const session = await auth();
-    if (!session?.user?.email) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
-    if (adminEmails.length === 0 || !adminEmails.includes(session.user.email.toLowerCase())) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const admin = await requireAdmin();
+    if (!admin.ok) return admin.response;
 
     ensureDir();
     const bugs = JSON.parse(readFileSync(BUGS_FILE, "utf-8"));
