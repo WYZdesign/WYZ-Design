@@ -125,7 +125,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(832px, 100vh)" }}
+    <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(500px, 80vh)" }}
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
       onClick={() => setFlipped(f => !f)}>

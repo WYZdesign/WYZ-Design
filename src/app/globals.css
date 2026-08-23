@@ -21,7 +21,7 @@
 :root { --background: #FFFFFF; --foreground: #333333; }
 
 /* ── BASE ── */
-html { overflow-x: hidden; }
+html { overflow-x: clip; }
 body {
   background: #FFFFFF;
   color: #333333;
