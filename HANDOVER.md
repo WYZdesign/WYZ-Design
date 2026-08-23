@@ -50,7 +50,26 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 - `wyzdesign-uploads` storage bucket — auto-created on first upload
 
 **Still Open:**
-- Stripe 500 — needs env var verification in Vercel
+- Stripe 500 — keys rotated and redeployed, pending verification
+
+### Session 6 — Critical Security Fixes (Handover #11 deep audit)
+**Auditor:** wyzmind (opencode) — independent deep code audit
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| Path traversal in GET /api/pages — `page` param joined into filesystem path without validation | `api/pages/route.ts` | HIGH | ✅ Fixed — validates against ALLOWED_PAGES set |
+| Hardcoded `"wyz-newsletter-secret"` fallback for HMAC signing | `api/newsletter/route.ts` | HIGH | ✅ Fixed — fails closed if NEXTAUTH_SECRET unset |
+| No auth on /api/bookkeeping/meta — financial data exposed to anyone | `api/bookkeeping/meta/route.ts` | HIGH | ✅ Fixed — added auth + admin check |
+| Rate limit imported but never called in POST /api/forms | `api/forms/route.ts` | HIGH | ✅ Fixed — added rateLimit() call (20/min) |
+| Gift card validation bug — `&& amount < 5` let any amount >=5 through | `api/checkout/route.ts` | HIGH | ✅ Fixed — removed broken condition |
+
+**Still Open (from deep audit, lower priority):**
+- `api/analytics/route.ts` GET — no auth on analytics data
+- `api/fd/events/route.ts` — missing try/catch on GET/POST
+- `api/telemetry/route.ts` POST — missing return statement
+- Multiple routes leak `e.message` to client
+- Several `console.warn/error` calls should use logger
 
 ---
 
