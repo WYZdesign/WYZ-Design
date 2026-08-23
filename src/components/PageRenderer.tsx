@@ -161,7 +161,7 @@ export default function PageRenderer() {
  return (
  <button key={i} onClick={() => replaceImage(f.path)}
  className="aspect-square rounded-lg overflow-hidden border-2 border-gray-200 hover:border-[#DF3131] hover:shadow-md transition-all">
- <img src={`/api/media/${rel}`} alt="" width={400} height={300} className="w-full h-full object-cover" loading="lazy"
+ <img src={`/api/media/${rel}`} alt="Page content image" width={400} height={300} className="w-full h-full object-cover" loading="lazy"
  onError={e => { (e.target as HTMLImageElement).style.display = "none"; }} />
  </button>
  );

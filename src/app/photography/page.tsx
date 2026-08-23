@@ -10,15 +10,7 @@ import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
-
-function shuffleArray<T>(arr: T[]): T[] {
- const a = [...arr];
- for (let i = a.length - 1; i > 0; i--) {
- const j = Math.floor(Math.random() * (i + 1));
- [a[i], a[j]] = [a[j], a[i]];
- }
- return a;
-}
+import { shuffleArray } from "@/lib/utils";
 
 const ALBUMS = ["Events", "Outdoors", "Studio", "Boudoir", "Bodypaint", "Urbex", "Products", "Conceptual"];
 const ALBUM_DESC: Record<string, string> = {

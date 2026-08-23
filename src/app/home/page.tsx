@@ -17,6 +17,7 @@ import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ParticleBackground from "@/components/ParticleBackground";
 import TextSplit from "@/components/TextSplit";
 import ImageReveal from "@/components/ImageReveal";
+import { shuffleArray } from "@/lib/utils";
 
 const LOGO_INTROS_RAW = [
  "/videos/logo-intro-00.mp4",
@@ -42,15 +43,6 @@ const LOGO_INTROS_RAW = [
  "/videos/logo-intro-20.mp4",
  "/videos/logo-intro-21.mp4",
 ];
-
-function shuffleArray<T>(arr: T[]): T[] {
- const a = [...arr];
- for (let i = a.length - 1; i > 0; i--) {
- const j = Math.floor(Math.random() * (i + 1));
- [a[i], a[j]] = [a[j], a[i]];
- }
- return a;
-}
 
 const HERO_IMAGES_RAW = [
  "/images/home/carousel_top/wix_0094.jpg",

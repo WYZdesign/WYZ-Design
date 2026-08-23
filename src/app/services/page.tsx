@@ -9,15 +9,7 @@ import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import TextSplit from "@/components/TextSplit";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-
-function shuffleArray<T>(arr: T[]): T[] {
- const a = [...arr];
- for (let i = a.length - 1; i > 0; i--) {
- const j = Math.floor(Math.random() * (i + 1));
- [a[i], a[j]] = [a[j], a[i]];
- }
- return a;
-}
+import { shuffleArray } from "@/lib/utils";
 
 const CATEGORIES = ["All Services", "Branding Design", "Photography", "Videography", "Consultation", "Web Design"];
 

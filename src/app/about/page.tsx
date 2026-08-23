@@ -81,7 +81,7 @@ export default function AboutPage() {
                           transform: isHovering && proximity > 0.3 ? `scale(${1 + proximity * 0.2})` : undefined,
                         }}
                       >
-                        <Image src="/images/wyz-crown.png" alt="" width={48} height={48} className="w-12 h-12 flex-none object-contain" />
+                        <Image src="/images/wyz-crown.png" alt="WYZ Design crown logo" width={48} height={48} className="w-12 h-12 flex-none object-contain" />
                       </div>
                     );
                   })}

@@ -71,6 +71,20 @@ Also: ensure `wyzdesign-uploads` bucket exists in Supabase Storage (the upload r
 
 **Pages fixed (non-hero group):** gallery, match, booking, community, model-archive, loyalty, case-studies, 3pointprogram
 
+### Session 10 — Security Hardening + Performance + Logger Migration
+**Auditor:** opencode (automated audit)
+**Date:** 2026-08-22
+
+| Fix | File(s) | Severity | Status |
+|-----|---------|----------|--------|
+| CSRF hardcoded fallback `"wyz-csrf-fallback"` when env vars missing | `lib/csrf.ts` | CRITICAL | ✅ Fixed — throws error if `CSRF_SECRET`/`NEXTAUTH_SECRET` unset |
+| Admin password empty string fallback | `api/auth/[...nextauth]/route.ts`, `api/pages/route.ts` | HIGH | ✅ Fixed — removed `\|\| ""`, fails closed |
+| 14 `console.warn/error` calls in production code | 9 page files | MEDIUM | ✅ Fixed — migrated to `logger.warn/error` (dev-only gating) |
+| 5 static policy pages marked `"use client"` unnecessarily | terms, privacy, refund, shipping, copyright | MEDIUM | ✅ Fixed — removed directive, now Server Components |
+| 5 heavy client components loaded statically in layout | `layout.tsx` | MEDIUM | ✅ Fixed — ChatWidget, CookieBanner, CustomCursor, NoiseOverlay, A11yAudit now `next/dynamic` with `ssr: false` |
+
+**Commits:** `f871d30` (security + logger), `96d9032` (perf)
+
 ### Session 8 — API Security Hardening (deep audit follow-up)
 **Auditor:** wyzmind (opencode)
 **Date:** 2026-08-22

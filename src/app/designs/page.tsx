@@ -12,12 +12,7 @@ import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
-
-function shuffleArray<T>(arr: T[]): T[] {
- const a = [...arr];
- for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
- return a;
-}
+import { shuffleArray } from "@/lib/utils";
 
 const FALLBACK_MERCH = [
  { name: "Cute Ghost Hat", price: "$35.00", img: "/images/wix-extracted/designs/merch/designs_merch_00_98442d_9a9d17df21e54a95832a6eefa209cf53.jpg.jpg" },
