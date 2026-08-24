@@ -3,11 +3,11 @@ const ALLOWED_MIME: Record<string, string[]> = {
   videos: ["video/mp4", "video/webm", "video/quicktime"],
 };
 
-const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export function validateUpload(file: File): { valid: boolean; error?: string } {
   if (!file) return { valid: false, error: "No file provided" };
-  if (file.size > MAX_FILE_SIZE) return { valid: false, error: "File exceeds 50MB limit" };
+  if (file.size > MAX_FILE_SIZE) return { valid: false, error: "File exceeds 10MB limit" };
   const category = file.type.startsWith("video/") ? "videos" : "images";
   const allowed = ALLOWED_MIME[category];
   if (!allowed?.includes(file.type)) {

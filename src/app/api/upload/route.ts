@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateUpload, sanitizeFileName } from "@/lib/api-utils";
 import { validateCsrf } from "@/lib/csrf";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { requireAdmin } from "@/lib/admin-auth";
+import { rateLimit } from "@/lib/rate-limit";
 import { getServiceClient } from "@/lib/supabase";
 
 const BUCKET = "wyzdesign-uploads";
+
+function getIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+}
 
 async function ensureBucket(sb: ReturnType<typeof getServiceClient>) {
   const { data: buckets } = await sb.storage.listBuckets();
@@ -21,10 +26,11 @@ export async function POST(req: NextRequest) {
     if (!validateCsrf(req)) {
       return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
     }
-    const session = await auth();
-    if (!session) {
-      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
-    }
+    const admin = await requireAdmin();
+    if (!admin.ok) return admin.response;
+
+    const rl = await rateLimit(`upload:${getIp(req)}`, 10, 60_000);
+    if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
 
     const cl = parseInt(req.headers.get("content-length") || "0", 10);
     if (cl === 0) return NextResponse.json({ error: "Empty request" }, { status: 400 });
