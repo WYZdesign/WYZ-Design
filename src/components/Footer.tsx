@@ -25,6 +25,7 @@ const SITEMAP = {
     { href: "/merch", label: "Merch Store" },
     { href: "/gift-card", label: "Gift Cards" },
     { href: "/loyalty", label: "Loyalty Program" },
+    { href: "/referral", label: "Referral Program" },
     { href: "/featured-artist", label: "Featured Artist" },
     { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },

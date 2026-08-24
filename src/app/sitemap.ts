@@ -43,6 +43,7 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/community", priority: 0.5, changeFrequency: "weekly" },
   { path: "/3pointprogram", priority: 0.6, changeFrequency: "monthly" },
   { path: "/partnerships", priority: 0.5, changeFrequency: "monthly" },
+  { path: "/referral", priority: 0.5, changeFrequency: "monthly" },
   { path: "/loyalty", priority: 0.5, changeFrequency: "monthly" },
   { path: "/model-archive", priority: 0.6, changeFrequency: "monthly" },
   { path: "/service-page/photoshoot", priority: 0.6, changeFrequency: "monthly" },
