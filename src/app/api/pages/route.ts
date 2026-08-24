@@ -3,6 +3,8 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeHtml } from "@/lib/dompurify";
+import { getServiceClient } from "@/lib/supabase";
+import { logger } from "@/lib/logger";
 
 const PAGES_DIR = join(process.cwd(), "_PAGES");
 const ALLOWED_PAGES = new Set(["home", "about", "photography", "designs", "events", "services", "plans", "merch", "faq", "blog", "booking", "community", "contact", "web-design", "printing", "gift-card", "3pointprogram", "model-archive"]);
@@ -105,10 +107,18 @@ export async function POST(req: Request) {
     if (!ALLOWED_PAGES.has(pageName)) return NextResponse.json({ error: "Page not allowed" }, { status: 400 });
 
     const cleaned = sanitizeHtml(html);
-    if (!existsSync(PAGES_DIR)) mkdirSync(PAGES_DIR, { recursive: true });
-    writeFileSync(join(PAGES_DIR, `${pageName}.html`), cleaned, "utf-8");
+
+    if (process.env.VERCEL) {
+      const sb = getServiceClient();
+      await sb.from("page_content").upsert({ page: pageName, html: cleaned }, { onConflict: "page" });
+    } else {
+      if (!existsSync(PAGES_DIR)) mkdirSync(PAGES_DIR, { recursive: true });
+      writeFileSync(join(PAGES_DIR, `${pageName}.html`), cleaned, "utf-8");
+    }
+
     return NextResponse.json({ success: true, remaining });
-  } catch {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  } catch (e: unknown) {
+    logger.error("pages:POST", e);
+    return NextResponse.json({ error: "Failed to save page" }, { status: 500 });
   }
 }

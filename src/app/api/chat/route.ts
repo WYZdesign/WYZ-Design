@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 
 const KNOWLEDGE = `You are the WYZ Design AI assistant. You help visitors learn about services, pricing, booking, and the brand. Be concise, personable, and helpful. Use contractions. No em dashes. No AI jargon.
 
@@ -86,6 +87,10 @@ Phone: (213) 399-9610
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const rl = await rateLimit(`chat:${ip}`, 20, 60_000);
+    if (!rl.ok) return new Response("Too many requests", { status: 429 });
+
     const { messages } = await req.json();
 
     if (!Array.isArray(messages) || messages.length === 0 || messages.length > 50) {

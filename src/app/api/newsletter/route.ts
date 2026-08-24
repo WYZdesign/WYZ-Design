@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { addNewsletterSubscriber, removeNewsletterSubscriber } from "@/lib/wyzmind";
 import { createHmac } from "crypto";
 import { validateCsrf } from "@/lib/csrf";
+import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -66,8 +67,12 @@ export async function POST(req: NextRequest) {
     if (!validateCsrf(req)) {
       return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
     }
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const rl = await rateLimit(`newsletter:${ip}`, 5, 60_000);
+    if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
     const { email } = await req.json();
-    if (!email || !email.includes("@")) {
+    if (!email || typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
@@ -84,7 +89,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true, message: "Subscribed! Check your inbox for a welcome email." });
   } catch (e: unknown) {
-    return NextResponse.json({ error: (e as Error).message || "Failed to subscribe" }, { status: 500 });
+    logger.error("newsletter:subscribe", e);
+    return NextResponse.json({ error: "Failed to subscribe" }, { status: 500 });
   }
 }
 

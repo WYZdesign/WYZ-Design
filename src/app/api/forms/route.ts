@@ -131,7 +131,7 @@ export async function POST(req: NextRequest) {
       headers: { "Cache-Control": "no-store, max-age=0" },
     });
   } catch (e: unknown) {
-    return NextResponse.json({ error: (e as Error).message }, { status: 500, headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json({ error: "Failed to submit form" }, { status: 500, headers: { "Cache-Control": "no-store" } });
   }
 }
 
@@ -149,10 +149,10 @@ export async function GET(req: NextRequest) {
     if (formType) query = query.eq("form_type", formType);
     const { data, error } = await query;
     if (error) {
-      return NextResponse.json({ submissions: [], error: error.message }, { status: 200 });
+      return NextResponse.json({ submissions: [], error: "Failed to load submissions" }, { status: 500 });
     }
     return NextResponse.json(data || []);
   } catch (e: unknown) {
-    return NextResponse.json({ error: (e as Error).message, submissions: [] }, { status: 200 });
+    return NextResponse.json({ error: "Failed to load submissions", submissions: [] }, { status: 500 });
   }
 }

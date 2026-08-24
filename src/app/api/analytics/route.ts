@@ -121,7 +121,6 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const ua = body.user_agent || req.headers.get("user-agent") || "";
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || req.headers.get("x-real-ip") || "unknown";
     const parsed = parseUA(ua);
 
     // Extract UTM params from referrer or body

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { getLoyaltyPoints, getLoyaltyHistory } from "@/lib/wyzmind";
+import { logger } from "@/lib/logger";
 
 /**
  * Returns loyalty points balance and history for the authenticated user.
@@ -19,6 +20,7 @@ export async function GET(req: NextRequest) {
     const history = await getLoyaltyHistory(session.user.email);
     return NextResponse.json({ ...points, history });
   } catch (e: unknown) {
-    return NextResponse.json({ error: (e as Error).message }, { status: 500 });
+    logger.error("loyalty:GET", e);
+    return NextResponse.json({ error: "Failed to load loyalty data" }, { status: 500 });
   }
 }

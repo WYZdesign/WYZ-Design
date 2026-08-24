@@ -4,7 +4,10 @@ import { join } from "path";
 import { rateLimit } from "@/lib/rate-limit";
 import { validateCsrf } from "@/lib/csrf";
 import { requireAdmin } from "@/lib/admin-auth";
+import { getServiceClient } from "@/lib/supabase";
+import { logger } from "@/lib/logger";
 
+const IS_VERCEL = !!process.env.VERCEL;
 const DATA_DIR = process.env.VERCEL ? "/tmp/_data" : join(process.cwd(), "_data");
 const BUGS_FILE = join(DATA_DIR, "bug-reports.json");
 const MAX_TITLE = 200;
@@ -35,12 +38,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "title and description required" }, { status: 400 });
     }
 
-    ensureDir();
-    const bugs = JSON.parse(readFileSync(BUGS_FILE, "utf-8"));
-    bugs.push({ title, description, severity, id: Date.now(), createdAt: new Date().toISOString(), ip });
-    writeFileSync(BUGS_FILE, JSON.stringify(bugs, null, 2), "utf-8");
+    const report = { title, description, severity, id: Date.now(), createdAt: new Date().toISOString(), ip };
+
+    if (IS_VERCEL) {
+      const sb = getServiceClient();
+      await sb.from("bug_reports").insert(report);
+    } else {
+      ensureDir();
+      const bugs = JSON.parse(readFileSync(BUGS_FILE, "utf-8"));
+      bugs.push(report);
+      writeFileSync(BUGS_FILE, JSON.stringify(bugs, null, 2), "utf-8");
+    }
+
     return NextResponse.json({ success: true, remaining });
-  } catch {
+  } catch (e: unknown) {
+    logger.error("bugs:POST", e);
     return NextResponse.json({ error: "Failed to submit bug report" }, { status: 500 });
   }
 }
@@ -50,10 +62,17 @@ export async function GET() {
     const admin = await requireAdmin();
     if (!admin.ok) return admin.response;
 
+    if (IS_VERCEL) {
+      const sb = getServiceClient();
+      const { data } = await sb.from("bug_reports").select("*").order("createdAt", { ascending: false }).limit(100);
+      return NextResponse.json({ bugs: data || [] });
+    }
+
     ensureDir();
     const bugs = JSON.parse(readFileSync(BUGS_FILE, "utf-8"));
     return NextResponse.json({ bugs });
-  } catch {
+  } catch (e: unknown) {
+    logger.error("bugs:GET", e);
     return NextResponse.json({ bugs: [] });
   }
 }

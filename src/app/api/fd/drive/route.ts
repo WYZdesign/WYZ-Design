@@ -16,8 +16,7 @@ async function listFiles(folderId: string, apiKey: string, pageToken?: string) {
 
   const r = await fetch(`${DRIVE_API}/files?${params}`, { next: { revalidate: 300 } });
   if (!r.ok) {
-    const err = await r.text();
-    throw new Error(`Drive API ${r.status}: ${err}`);
+    throw new Error("Drive API request failed");
   }
   return r.json();
 }

@@ -6,6 +6,7 @@ import {
   getCategories, getClients,
 } from "@/lib/bookkeeping";
 import { getAdminEmails } from "@/lib/admin-auth";
+import { logger } from "@/lib/logger";
 import type { Session } from "next-auth";
 
 function isAdmin(session: Session | null): boolean {
@@ -66,8 +67,9 @@ export async function GET(req: NextRequest) {
       offset: parseInt(sp.get("offset") || "0"),
     });
     return NextResponse.json({ transactions });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    logger.error("bookkeeping:GET", e);
+    return NextResponse.json({ error: "Failed to load transactions" }, { status: 500 });
   }
 }
 
@@ -112,8 +114,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(tx, { status: 201 });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    logger.error("bookkeeping:POST", e);
+    return NextResponse.json({ error: "Failed to create transaction" }, { status: 500 });
   }
 }
 
@@ -129,11 +132,16 @@ export async function PUT(req: NextRequest) {
     if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
 
     const body = await req.json();
-    const tx = await updateTransaction(id, body);
+    const allowed: Record<string, unknown> = {};
+    for (const key of ["date", "type", "amount", "client_id", "vendor", "category_id", "channel", "description", "business_personal", "receipt_url"]) {
+      if (body[key] !== undefined) allowed[key] = body[key];
+    }
+    const tx = await updateTransaction(id, allowed);
     if (!tx) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(tx);
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    logger.error("bookkeeping:PUT", e);
+    return NextResponse.json({ error: "Failed to update transaction" }, { status: 500 });
   }
 }
 
@@ -151,7 +159,8 @@ export async function DELETE(req: NextRequest) {
     const deleted = await deleteTransaction(id);
     if (!deleted) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ success: true });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    logger.error("bookkeeping:DELETE", e);
+    return NextResponse.json({ error: "Failed to delete transaction" }, { status: 500 });
   }
 }

@@ -146,7 +146,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({ error: "Unknown tab" }, { status: 400 });
   } catch (e: unknown) {
-    return NextResponse.json({ error: (e as Error).message }, { status: 500 });
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
