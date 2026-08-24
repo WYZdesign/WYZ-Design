@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `addc4ae` (Session 16 — Stripe key fix + Price ID validation + chat timeout + dead imports + home hero spacing)
+- **Last commit:** `19135c3` (Session 16 — duplicate video cleanup + Stripe key fix)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` — all builds passing. Stripe checkout confirmed working on production.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -347,15 +347,32 @@ Claude audited the old `wyzdesign.wixstudio.com/wyzdesign` against the current s
 
 ---
 
-## Still Open (requires user action)
+## Tasks — What Needs Doing
 
-| Item | Status |
-|------|--------|
-| Stripe subscription Price IDs — ✅ ALL 4 IN VAULT + VERCEL. Checkout verified working on production. | **DONE** |
-| Stripe webhook secret — ✅ IN VAULT + VERCEL. WYZ Design account webhook configured. | **DONE** |
-| End-to-end purchase test — checkout creates sessions. Need real card test to verify webhook flow. | Ready to test |
-| Printful API key — ✅ IN VAULT. V2 API integration live. | **DONE** |
-| Neo4j URI may not be set in Vercel | Low priority |
+### User Action Required
+| Task | Why | How |
+|------|-----|-----|
+| End-to-end Stripe purchase test | Verify webhook fires + user tier upgrades | Open /plans → Subscribe → use test card 4242... in Stripe test mode, or check Supabase `stripe_events` table after a real purchase |
+| Verify Cal.com booking widget renders | Claude couldn't test due to WAF blocking automated browsers | Open /booking in a normal browser → confirm the Cal.com embed loads |
+| Mobile check of /, /events, /plans at ~344px | Claude's spacing fixes are live but need real device confirmation | Chrome DevTools device toolbar → Galaxy Z Fold 5 → check hero spacing, navbar clearance, no overflow |
+
+### Content Organization (Staging Area)
+| Task | Location |
+|------|----------|
+| 103 raw camera photos staged | `W:\WYZ_Command_Center\_INGEST\photos\raw\` |
+| 12 raw camera videos staged | `W:\WYZ_Command_Center\_INGEST\videos\raw\` |
+| 16 screenshots staged | `W:\WYZ_Command_Center\_INGEST\screenshots\` |
+| Social images + stock files staged | `W:\WYZ_Command_Center\_INGEST\social\` + `stock\` |
+| Sort raw photos into model/event subdirs | User decides categorization |
+| 2 duplicate videos cleaned | `logo-intro-01.mp4` deleted, `about.mp4` restored for about page |
+
+### Low Priority / Future
+| Task | Notes |
+|------|-------|
+| Neo4j URI in Vercel | May not be needed if not using graph queries from Vercel |
+| 3 Stripe accounts confusion | Muse #1 (W avatar), Muse #2, WYZ Design — keep vault organized |
+| Featured Artist monthly rotation | Page exists, needs artist selection workflow |
+| Event recap videos wiring | All 20 videos already wired into /events, no action needed |
 
 ### Vault Check (Session 16)
 | Credential | Status |
