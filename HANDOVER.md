@@ -4,10 +4,11 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `19135c3` (Session 16 — duplicate video cleanup + Stripe key fix)
+- **Last commit:** `e258e04` (Session 16 — orphaned route cleanup + full health check)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` — all builds passing. Stripe checkout confirmed working on production.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
+- **Full health check:** 23/24 pages return 200 (`/book` = 404 expected, route is `/booking`). All API endpoints responding correctly.
 
 ## Key Architecture Notes
 
