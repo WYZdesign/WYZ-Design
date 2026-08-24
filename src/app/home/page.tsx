@@ -21,7 +21,6 @@ import { shuffleArray } from "@/lib/utils";
 
 const LOGO_INTROS_RAW = [
  "/videos/logo-intro-00.mp4",
- "/videos/logo-intro-01.mp4",
  "/videos/logo-intro-02.mp4",
  "/videos/logo-intro-03.mp4",
  "/videos/logo-intro-04.mp4",
