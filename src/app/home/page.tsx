@@ -201,7 +201,7 @@ const PRICING_PLANS = [
 ];
 
 const QUICK_LINKS = [
- { label: "PARTNERSHIPS", href: "/services" }, { label: "SUBSCRIPTIONS", href: "/plans" },
+ { label: "PARTNERSHIPS", href: "/partnerships" }, { label: "SUBSCRIPTIONS", href: "/plans" },
  { label: "GIFT CARD", href: "/gift-card" }, { label: "MODEL ARCHIVE", href: "/model-archive" },
  { label: "DESIGNS", href: "/designs" }, { label: "PHOTOGRAPHY", href: "/photography" },
  { label: "DIY EVENTS", href: "/events" }, { label: "GET FEATURED", href: "/featured-artist" },
