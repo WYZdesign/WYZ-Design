@@ -113,16 +113,16 @@ export async function getAllUsers() {
   }
 }
 
-export async function addNewsletterSubscriber(email: string) {
+export async function addNewsletterSubscriber(email: string, active = true) {
   try {
     const driver = getNeo4j();
     const session = driver.session();
     try {
       await session.run(
         `MERGE (s:NewsletterSubscriber {email: $email})
-         ON CREATE SET s.subscribedAt = datetime(), s.active = true
-         ON MATCH SET s.active = true, s.resubscribedAt = datetime()`,
-        { email }
+         ON CREATE SET s.subscribedAt = datetime(), s.active = $active
+         ON MATCH SET s.active = $active, s.resubscribedAt = datetime()`,
+        { email, active }
       );
     } finally {
       await session.close();
@@ -240,7 +240,7 @@ export async function getLoyaltyPoints(email: string) {
   const session = driver.session();
   try {
     const result = await session.run(
-      `MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'bronze'
+      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'silver'
        RETURN u.points AS points, u.tier AS tier, u.createdAt AS joined`,
       { email }
     );
@@ -254,13 +254,13 @@ export async function addLoyaltyPoints(email: string, amount: number, reason: st
   const session = driver.session();
   try {
     await session.run(
-      `MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'bronze'
+      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'silver'
        SET u.points = COALESCE(u.points, 0) + $amount
        CREATE (u)-[:EARNED_POINTS]->(:LoyaltyTransaction {amount: $amount, reason: $reason, timestamp: datetime()})
        WITH u,
-         CASE WHEN u.points + $amount >= 1000 THEN 'gold'
-              WHEN u.points + $amount >= 500 THEN 'silver'
-              ELSE 'bronze' END AS newTier
+         CASE WHEN u.points + $amount >= 5000 THEN 'diamond'
+              WHEN u.points + $amount >= 1000 THEN 'gold'
+              ELSE 'silver' END AS newTier
        SET u.tier = newTier`,
       { email, amount, reason }
     );

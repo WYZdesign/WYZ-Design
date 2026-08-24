@@ -3,6 +3,17 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
+const CONSENT_KEY = "wyz_cookie_consent";
+
+function hasAnalyticsConsent(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const raw = localStorage.getItem(CONSENT_KEY);
+    if (raw) return JSON.parse(raw).analytics === true;
+  } catch {}
+  return false;
+}
+
 let _sid = "";
 function getSid() {
   if (_sid) return _sid;
@@ -13,7 +24,7 @@ function getSid() {
 }
 
 export function trackEvent(event_type: string, path?: string, label?: string, value?: number, metadata?: Record<string, unknown>) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || !hasAnalyticsConsent()) return;
   fetch("/api/analytics", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -33,8 +44,8 @@ export default function AnalyticsTracker() {
   const startRef = useRef<number>(Date.now());
   const sentRef = useRef(false);
 
-  // Track pageview on route change
   useEffect(() => {
+    if (!hasAnalyticsConsent()) return;
     sentRef.current = false;
     startRef.current = Date.now();
 
@@ -57,8 +68,8 @@ export default function AnalyticsTracker() {
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  // Track duration on unload
   useEffect(() => {
+    if (!hasAnalyticsConsent()) return;
     const handler = () => {
       if (typeof navigator === "undefined" || !navigator.sendBeacon) return;
       const duration = Date.now() - startRef.current;

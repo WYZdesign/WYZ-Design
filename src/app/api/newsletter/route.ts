@@ -14,25 +14,33 @@ function getResend() {
 }
 const BASE_URL = getSiteUrl();
 
-function signUnsubscribe(email: string): string {
+function signToken(email: string, purpose: string): string {
   const secret = process.env.NEXTAUTH_SECRET;
   if (!secret) throw new Error("NEXTAUTH_SECRET not configured");
-  const hmac = createHmac("sha256", secret).update(email.toLowerCase().trim()).digest("hex");
-  return `${encodeURIComponent(email)}.${hmac.slice(0, 16)}`;
+  const timestamp = Date.now();
+  const data = `${email.toLowerCase().trim()}.${purpose}.${timestamp}`;
+  const hmac = createHmac("sha256", secret).update(data).digest("hex");
+  return `${encodeURIComponent(email)}.${timestamp}.${purpose}.${hmac.slice(0, 32)}`;
 }
 
-function verifyUnsubscribe(token: string): string | null {
+function verifyToken(token: string, purpose: string): string | null {
   const parts = token.split(".");
-  if (parts.length !== 2) return null;
+  if (parts.length !== 4) return null;
   const email = decodeURIComponent(parts[0]);
-  const expected = signUnsubscribe(email);
-  const expectedHash = expected.split(".")[1];
-  if (expectedHash !== parts[1]) return null;
+  const timestamp = parseInt(parts[1], 10);
+  const tokenPurpose = parts[2];
+  const hash = parts[3];
+  if (tokenPurpose !== purpose) return null;
+  if (Date.now() - timestamp > 30 * 24 * 60 * 60 * 1000) return null; // 30 day expiry
+  const secret = process.env.NEXTAUTH_SECRET;
+  if (!secret) return null;
+  const expected = createHmac("sha256", secret).update(`${email.toLowerCase().trim()}.${purpose}.${timestamp}`).digest("hex").slice(0, 32);
+  if (expected !== hash) return null;
   return email;
 }
 
 const welcomeHtml = (email: string) => {
-  const token = signUnsubscribe(email);
+  const token = signToken(email, "unsubscribe");
   return `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">
   <h1 style="font-size:24px;color:#111;margin-bottom:16px;">Welcome to WYZ Design</h1>
   <p style="font-size:16px;color:#444;line-height:1.6;">
@@ -78,11 +86,11 @@ export async function POST(req: NextRequest) {
 
     // Store as pending (not yet confirmed)
     try {
-      await addNewsletterSubscriber(email);
+      await addNewsletterSubscriber(email, false);
     } catch (e) { logger.error("newsletter:store", e); }
 
     // Send double opt-in confirmation email
-    const token = signUnsubscribe(email);
+    const token = signToken(email, "confirm");
     const confirmUrl = `${BASE_URL}/api/newsletter?confirm=${token}`;
     try {
       await getResend().emails.send({
@@ -127,7 +135,7 @@ export async function GET(req: NextRequest) {
   // Double opt-in confirmation
   const confirmToken = req.nextUrl.searchParams.get("confirm");
   if (confirmToken) {
-    const email = verifyUnsubscribe(confirmToken);
+    const email = verifyToken(confirmToken, "confirm");
     if (!email) {
       return new NextResponse(
         `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Invalid Link</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="font-family:Arial,sans-serif;text-align:center;padding:80px 20px;background:#FEFEFD;"><h1 style="color:#333;">Invalid or expired confirmation link.</h1><p style="color:#666;">Please try subscribing again.</p><p><a href="${BASE_URL}" style="color:#DF3131;">Back to wyzdesign.com</a></p></body></html>`,
@@ -162,7 +170,7 @@ export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("unsubscribe");
   if (!token) return NextResponse.json({ error: "Missing unsubscribe token" }, { status: 400 });
 
-  const email = verifyUnsubscribe(token);
+  const email = verifyToken(token, "unsubscribe");
   if (!email) {
     return new NextResponse(
       `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Invalid Link</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="font-family:Arial,sans-serif;text-align:center;padding:80px 20px;background:#FEFEFD;"><h1 style="color:#333;">Invalid or expired unsubscribe link.</h1><p style="color:#666;">Please check your email for the correct link or contact us.</p><p><a href="${BASE_URL}" style="color:#DF3131;">Back to wyzdesign.com</a></p></body></html>`,

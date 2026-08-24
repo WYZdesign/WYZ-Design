@@ -161,7 +161,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description: "Creative direction and production agency. Photography, graphic design, web design, videography, branding, and printing. Los Angeles + Chicago.",
               sameAs: [
                 "https://instagram.com/wyzdesign",
-                "https://twitter.com/WYZdesign",
+                "https://x.com/WYZdesign",
                 "https://facebook.com/wyzdesign",
                 "https://tiktok.com/@wyzdesign",
                 "https://youtube.com/channel/UCfd75GcUKsGqWo-sgSQjZBg",
@@ -212,7 +212,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               sameAs: [
                 "https://www.linkedin.com/in/torre%C3%A9-harris-11180b89",
                 "https://instagram.com/wyzdesign",
-                "https://twitter.com/WYZdesign",
+                "https://x.com/WYZdesign",
               ],
             }),
           }}
@@ -222,7 +222,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Brand",
+              "@type": "Organization",
               "@id": "https://www.wyzdesign.com/#wild-yet-zealous",
               name: "Wild Yet Zealous",
               slogan: "Wild vision. Zealous execution.",
@@ -238,7 +238,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Brand",
+              "@type": "Organization",
               "@id": "https://www.wyzdesign.com/#dying-breed-crew",
               name: "Dying Breed Crew",
               alternateName: ["DBC", "Dying Breed"],
@@ -254,7 +254,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Brand",
+              "@type": "Organization",
               "@id": "https://www.wyzdesign.com/#nomadic-breed",
               name: "Nomadic Breed",
               description: "The mobile arm of WYZ Design, built for pop-up shoots and touring event coverage.",
@@ -300,7 +300,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               areaServed: ["Los Angeles", "Chicago", "United States"],
               sameAs: [
                 "https://instagram.com/wyzdesign",
-                "https://twitter.com/WYZdesign",
+                "https://x.com/WYZdesign",
                 "https://facebook.com/wyzdesign",
                 "https://tiktok.com/@wyzdesign",
                 "https://youtube.com/channel/UCfd75GcUKsGqWo-sgSQjZBg",

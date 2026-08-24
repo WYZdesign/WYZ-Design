@@ -66,6 +66,15 @@ export default function BookingPage() {
     const data = Object.fromEntries(fd.entries());
     data.service = selectedService;
 
+    // Capture UTM parameters for attribution
+    const params = new URLSearchParams(window.location.search);
+    const utmSource = params.get("utm_source");
+    const utmMedium = params.get("utm_medium");
+    const utmCampaign = params.get("utm_campaign");
+    if (utmSource) data.utm_source = utmSource;
+    if (utmMedium) data.utm_medium = utmMedium;
+    if (utmCampaign) data.utm_campaign = utmCampaign;
+
     setLoading(true);
     try {
       const res = await fetch("/api/forms", {
