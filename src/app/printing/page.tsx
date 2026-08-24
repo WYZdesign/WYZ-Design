@@ -350,9 +350,9 @@ export default function PrintingPage() {
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
    <input name="deadline" placeholder="Project Deadline" type="date" aria-label="Project deadline" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#888] dark:text-[#ccc] focus:border-[#DF3131] outline-none" />
-  <label className="flex items-center gap-2 text-[14px] text-[#666] dark:text-[#b0b0b0]">
-  <input name="newsletter" type="checkbox" className="accent-[#DF3131]" /> I want to subscribe to the newsletter.
- </label>
+   <label className="flex items-center gap-2 text-[14px] text-[#666] dark:text-[#b0b0b0]">
+   <input name="newsletter" type="checkbox" className="accent-[#DF3131]" /> Keep me updated on new printing options and promotions.
+  </label>
   </div>
   <button type="submit" className="w-full py-4 bg-[#333] text-white font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#DF3131] transition-all hover:scale-[1.01] hover:shadow-lg">
   {quoteSubmitted ? "QUOTE REQUESTED" : "SUBMIT"}

@@ -76,18 +76,40 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Valid email required" }, { status: 400 });
     }
 
-    await addNewsletterSubscriber(email).catch(() => {});
+    // Store as pending (not yet confirmed)
+    try {
+      await addNewsletterSubscriber(email);
+    } catch (e) { logger.error("newsletter:store", e); }
 
+    // Send double opt-in confirmation email
+    const token = signUnsubscribe(email);
+    const confirmUrl = `${BASE_URL}/api/newsletter?confirm=${token}`;
     try {
       await getResend().emails.send({
         from: "WYZ Design <newsletter@wyzdesign.com>",
         to: email,
-        subject: "Welcome to WYZ Design, You're In",
-        html: welcomeHtml(email),
+        subject: "Confirm your subscription to WYZ Design",
+        html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">
+  <h1 style="font-size:24px;color:#111;margin-bottom:16px;">Confirm Your Subscription</h1>
+  <p style="font-size:16px;color:#444;line-height:1.6;">
+    Click the button below to confirm your email and start receiving updates from WYZ Design.
+  </p>
+  <div style="margin:32px 0;text-align:center;">
+    <a href="${confirmUrl}" style="display:inline-block;padding:14px 32px;background:#DF3131;color:#fff;font-weight:bold;text-decoration:none;font-size:14px;letter-spacing:0.05em;">CONFIRM MY EMAIL</a>
+  </div>
+  <p style="font-size:14px;color:#888;margin-top:32px;">
+    - The WYZ Design Team<br/>
+    <a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a>
+  </p>
+  <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;" />
+  <p style="font-size:11px;color:#aaa;">
+    If you did not request this, you can safely ignore this email.
+  </p>
+</div>`,
       });
     } catch (e) { logger.error("newsletter:send", e); }
 
-    return NextResponse.json({ success: true, message: "Subscribed! Check your inbox for a welcome email." });
+    return NextResponse.json({ success: true, message: "Check your inbox to confirm your subscription." });
   } catch (e: unknown) {
     logger.error("newsletter:subscribe", e);
     return NextResponse.json({ error: "Failed to subscribe" }, { status: 500 });
@@ -102,6 +124,41 @@ export async function POST(req: NextRequest) {
  * @auth None
  */
 export async function GET(req: NextRequest) {
+  // Double opt-in confirmation
+  const confirmToken = req.nextUrl.searchParams.get("confirm");
+  if (confirmToken) {
+    const email = verifyUnsubscribe(confirmToken);
+    if (!email) {
+      return new NextResponse(
+        `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Invalid Link</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="font-family:Arial,sans-serif;text-align:center;padding:80px 20px;background:#FEFEFD;"><h1 style="color:#333;">Invalid or expired confirmation link.</h1><p style="color:#666;">Please try subscribing again.</p><p><a href="${BASE_URL}" style="color:#DF3131;">Back to wyzdesign.com</a></p></body></html>`,
+        { status: 400, headers: { "Content-Type": "text/html" } }
+      );
+    }
+    try {
+      await addNewsletterSubscriber(email);
+      const escapedEmail = email.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      // Send welcome email after confirmation
+      try {
+        await getResend().emails.send({
+          from: "WYZ Design <newsletter@wyzdesign.com>",
+          to: email,
+          subject: "Welcome to WYZ Design, You're In",
+          html: welcomeHtml(email),
+        });
+      } catch (e) { logger.error("newsletter:welcome", e); }
+      return new NextResponse(
+        `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Confirmed</title><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="font-family:Arial,sans-serif;text-align:center;padding:80px 20px;background:#FEFEFD;"><h1 style="color:#333;">You're confirmed!</h1><p style="color:#666;font-size:16px;">${escapedEmail} is now subscribed to the WYZ Design newsletter.</p><p><a href="${BASE_URL}" style="color:#DF3131;">Back to wyzdesign.com</a></p></body></html>`,
+        { headers: { "Content-Type": "text/html" } }
+      );
+    } catch {
+      return new NextResponse(
+        `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Error</title></head><body style="font-family:Arial,sans-serif;text-align:center;padding:80px 20px;"><h1>Something went wrong.</h1><p><a href="${BASE_URL}" style="color:#DF3131;">Back to wyzdesign.com</a></p></body></html>`,
+        { headers: { "Content-Type": "text/html" } }
+      );
+    }
+  }
+
+  // Unsubscribe
   const token = req.nextUrl.searchParams.get("unsubscribe");
   if (!token) return NextResponse.json({ error: "Missing unsubscribe token" }, { status: 400 });
 

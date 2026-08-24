@@ -17,6 +17,7 @@ export const BRAND = {
   socials: {
     instagram: "https://instagram.com/wyzdesign",
     facebook: "https://facebook.com/wyzdesign",
+    twitter: "https://x.com/WYZdesign",
     tiktok: "https://tiktok.com/@wyzdesign",
     youtube: "https://youtube.com/channel/UCfd75GcUKsGqWo-sgSQjZBg",
     linkedin: "https://www.linkedin.com/in/torre%C3%A9-harris-11180b89",

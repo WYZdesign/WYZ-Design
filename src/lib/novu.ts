@@ -16,7 +16,7 @@ export async function triggerNotification(templateId: string, email: string, pay
   if (!novu) return;
   try {
     await novu.trigger(templateId, {
-      to: { subscriberId: `sub_${email.replace(/[^a-zA-Z0-9]/g, "_")}_${Date.now()}`, email },
+      to: { subscriberId: `sub_${email.replace(/[^a-zA-Z0-9]/g, "_")}`, email },
       payload,
     });
   } catch (e) { logger.error("[novu:trigger]", e); }

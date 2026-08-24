@@ -98,9 +98,7 @@ export default function CookieBanner() {
   };
 
   const enableAnalytics = () => {
-    if (typeof window !== "undefined" && (window as any).umami) {
-      (window as any).umami.track("consent_analytics_accepted");
-    }
+    // Analytics scripts are loaded by AnalyticsProvider based on consent state
   };
 
   if (!show) return null;
@@ -150,7 +148,7 @@ export default function CookieBanner() {
             />
             <div>
               <p className="font-medium text-[#333] dark:text-white">Analytics Cookies</p>
-              <p className="text-sm text-[#666] dark:text-white/70">Help us understand how visitors interact with our site (Umami).</p>
+              <p className="text-sm text-[#666] dark:text-white/70">Help us understand how visitors interact with our site (GTM, Clarity).</p>
             </div>
           </label>
 

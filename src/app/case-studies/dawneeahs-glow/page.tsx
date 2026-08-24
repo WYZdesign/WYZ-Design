@@ -1,6 +1,7 @@
 "use client";
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
+import SocialShare from "@/components/SocialShare";
 
 export default function DawneeahsGlowCaseStudy() {
   return (
@@ -28,6 +29,10 @@ export default function DawneeahsGlowCaseStudy() {
                 <p className="text-[14px] text-[#333] dark:text-[#e0e0e0]">{s.value}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mb-8">
+            <SocialShare title="Dawneeah's Glow Case Study" url="https://www.wyzdesign.com/case-studies/dawneeahs-glow" description="Brand identity, photography, e-commerce, and social strategy. $180K revenue in 90 days." />
           </div>
 
           <div className="space-y-6 text-[15px] text-[#666] dark:text-[#888] leading-relaxed mb-12">

@@ -540,10 +540,10 @@ export default function ForumPage() {
     e.preventDefault();
     if (!email) return;
     try {
-      await fetch("/api/forms", {
+      await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ formType: "newsletter", data: { email } }),
+        body: JSON.stringify({ email }),
       });
       setSubscribed(true);
       setEmail("");

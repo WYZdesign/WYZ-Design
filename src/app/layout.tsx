@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import ConsentGatedAnalytics from "@/components/ConsentGatedAnalytics";
 import { Toaster } from "react-hot-toast";
 import { RouteBackground } from "@/components/RouteBackground";
 import "./globals.css";
@@ -339,8 +338,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </AuthProvider>
         </ThemeProvider>
         <GlobalImagePicker />
-        <Analytics />
-        <SpeedInsights />
+        <ConsentGatedAnalytics />
         <ClientComponents />
         <AnalyticsProvider />
         <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" } }} />

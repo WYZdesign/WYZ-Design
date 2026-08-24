@@ -84,7 +84,7 @@ const CUSTOM_PLAN_FIELDS: FormField[] = [
   ], page: 2 },
   { name: "startDate", label: "Start Date", type: "date", page: 2 },
   { name: "additionalInfo", label: "Additional Info", type: "textarea", placeholder: "Tell us about your needs...", page: 2 },
-  { name: "newsletterOptIn", label: "I want to subscribe to the newsletter.", type: "checkbox", page: 2 },
+  { name: "keepUpdated", label: "Keep me updated on new services and promotions.", type: "checkbox", page: 2 },
 ];
 
 function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (name: string) => void; loading: string | null }) {

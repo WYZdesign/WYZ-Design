@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { getServiceClient } from "@/lib/supabase";
+import { addLoyaltyPoints } from "@/lib/wyzmind";
 import Stripe from "stripe";
 import { logger } from "@/lib/logger";
 
@@ -67,6 +68,16 @@ export async function POST(req: NextRequest) {
             logger.error("webhook:museTier", (e as Error).message);
           }
         }
+
+        // Auto-earn loyalty points on purchase (1 point per dollar spent)
+        try {
+          const email = session.customer_details?.email?.toLowerCase();
+          const amountTotal = session.amount_total || 0;
+          const pointsEarned = Math.floor(amountTotal / 100); // 1 point per dollar
+          if (email && pointsEarned > 0) {
+            await addLoyaltyPoints(email, pointsEarned, `Purchase: ${plan || "subscription"}`);
+          }
+        } catch (e) { logger.error("webhook:loyalty-earn", (e as Error).message); }
 
         const n8nUrl = process.env.N8N_WEBHOOK_URL;
         if (n8nUrl) {

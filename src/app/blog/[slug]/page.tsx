@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug, BLOG_AUTHOR } from "@/lib/blog";
 import { FiArrowLeft, FiClock, FiTag, FiCalendar } from "react-icons/fi";
+import SocialShare from "@/components/SocialShare";
 
 const SITE = "https://www.wyzdesign.com";
 
@@ -92,6 +93,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <span className="flex items-center gap-1.5"><FiCalendar className="w-3.5 h-3.5" /> {post.date}</span>
           <span className="flex items-center gap-1.5"><FiClock className="w-3.5 h-3.5" /> {post.readTime}</span>
           <span className="flex items-center gap-1.5"><FiTag className="w-3.5 h-3.5" /> {post.cat}</span>
+          <SocialShare title={post.title} url={`${SITE}/blog/${post.slug}`} description={post.excerpt} />
         </div>
 
         <div className="relative w-full h-[16rem] sm:h-[22rem] lg:h-[26rem] rounded-xl overflow-hidden mb-10">

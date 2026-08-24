@@ -19,10 +19,10 @@ export default function LeadMagnet() {
       });
       if (!res.ok) throw new Error("Subscription failed");
       toast.success("You're on the list!");
+      setDone(true);
     } catch {
       toast.error("Something went wrong. Try again.");
     }
-    setDone(true);
   };
 
   if (done) {

@@ -1,6 +1,7 @@
 "use client";
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
+import SocialShare from "@/components/SocialShare";
 
 export default function KidBodeCaseStudy() {
   return (
@@ -28,6 +29,10 @@ export default function KidBodeCaseStudy() {
                 <p className="text-[14px] text-[#333] dark:text-[#e0e0e0]">{s.value}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mb-8">
+            <SocialShare title="Kid Bode Case Study" url="https://www.wyzdesign.com/case-studies/kid-bode" description="Artist branding, content production, and visual identity for an emerging music artist." />
           </div>
 
           <div className="space-y-6 text-[15px] text-[#666] dark:text-[#888] leading-relaxed mb-12">
