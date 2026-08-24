@@ -4,9 +4,9 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `e55cd4e` (Session 15 — Printful V2 API + IP_HASH_SALT casing fix)
+- **Last commit:** `addc4ae` (Session 16 — Stripe key fix + Price ID validation + chat timeout + dead imports + home hero spacing)
 - **Build status:** `tsc --noEmit` clean
-- **Vercel:** Auto-deploys from `master` branch — builds were failing for 10+ commits due to `ssr:false` in Server Component. Fixed with `ClientComponents.tsx` wrapper.
+- **Vercel:** Auto-deploys from `master` — all builds passing. Stripe checkout confirmed working on production.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
 
 ## Key Architecture Notes
@@ -18,6 +18,13 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **Admin auth:** `ADMIN_EMAILS` env var (comma-separated), checked via NextAuth session
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
+
+## Session 17 addendum — live confirmation at a REAL mobile viewport + a coordination note
+**Date:** 2026-08-23 (same day, later)
+
+Good news on tooling: Torreé got Chrome's device toolbar actually driving the automated tab this round — `window.innerWidth` read a genuine `344` (true Fold width), not the stuck `1920` from the last two sessions. First real mobile render I've had. I loaded the live site at that width and the home hero looks exactly right: tagline, "WE MAKE WHAT WORKS," subtext, and both buttons sit as one tight stack, and the tagline wraps cleanly to two lines instead of running off the edge. No JS errors or warnings came from wyzdesign.com's own code — the only console entries were a generic Chrome-extension messaging error unrelated to the site.
+
+Here's the part worth flagging: my hero fix (below) was still sitting **uncommitted** on disk when I checked this, yet production already had it live. Cross-referencing `.git/logs/HEAD`, the fix's file-write timestamp lands right between two of your commits — `fix: Stripe Price ID validation...` (`9926147`) and `redeploy: trigger fresh build with Stripe Price IDs` (`c4e0175`). My best read is the redeploy commit picked up my in-progress `home/page.tsx` edit as a side effect (a broad `git add -A`/`git commit -am` sweeping up whatever was sitting on disk at the time) rather than it being reviewed on its own. It happens to be correct and verified live now, so no harm this time — but flagging it since the standing rule between us is to never ship the other's in-progress edits unreviewed. Worth a quick `git diff` before a broad commit/redeploy in case something uncommitted (mine or yours) is sitting in the tree. Since it's live and confirmed working, I'm marking the home hero fix done rather than asking for a separate commit — just wanted the mechanism on record.
 
 ## Session 17 — Sitewide vertical-spacing audit (Claude/Cowork)
 **Auditor:** Claude (Cowork), live in Chrome with `V:\wyzdesign` open in the desktop app + direct file access via device bridge
@@ -344,23 +351,25 @@ Claude audited the old `wyzdesign.wixstudio.com/wyzdesign` against the current s
 
 | Item | Status |
 |------|--------|
-| Stripe subscription Price IDs — **NOT in vault**. Need to create 4 Price objects in Stripe Dashboard (Starter $250/mo, Business $500/mo, Pro $750/mo, Ultimate $1,000/mo) and add to vault | Blocked on user |
-| End-to-end purchase test — no real purchase completed to verify webhook | Blocked on Price IDs |
-| Printful API key — **NOT in vault**. Needed for live merch product sync | Blocked on user |
+| Stripe subscription Price IDs — ✅ ALL 4 IN VAULT + VERCEL. Checkout verified working on production. | **DONE** |
+| Stripe webhook secret — ✅ IN VAULT + VERCEL. WYZ Design account webhook configured. | **DONE** |
+| End-to-end purchase test — checkout creates sessions. Need real card test to verify webhook flow. | Ready to test |
+| Printful API key — ✅ IN VAULT. V2 API integration live. | **DONE** |
 | Neo4j URI may not be set in Vercel | Low priority |
 
-### Vault Check (Session 13)
+### Vault Check (Session 16)
 | Credential | Status |
 |------------|--------|
-| `STRIPE_SECRET_KEY` | Present (107 chars) |
-| `STRIPE_WEBHOOK_SECRET` | Present (38 chars) |
-| `STRIPE_RESTRICTED_KEY` | Present (107 chars) |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Present (27 chars) |
-| `STRIPE_STARTER_PRICE_ID` | **NOT FOUND** |
-| `STRIPE_BUSINESS_PRICE_ID` | **NOT FOUND** |
-| `STRIPE_PRO_PRICE_ID` | **NOT FOUND** |
-| `STRIPE_ULTIMATE_PRICE_ID` | **NOT FOUND** |
-| `PRINTFUL_API_KEY` | **NOT FOUND** |
+| `STRIPE_SECRET_KEY` | ✅ Present (107 chars) — WYZ Design restricted key |
+| `STRIPE_WEBHOOK_SECRET` | ✅ Present (38 chars) — WYZ Design account |
+| `STRIPE_RESTRICTED_KEY` | ✅ Present (107 chars) — WYZ Design |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | ✅ Present (27 chars) — WYZ Design |
+| `STRIPE_STARTER_PRICE_ID` | ✅ Present |
+| `STRIPE_BUSINESS_PRICE_ID` | ✅ Present |
+| `STRIPE_PRO_PRICE_ID` | ✅ Present |
+| `STRIPE_ULTIMATE_PRICE_ID` | ✅ Present |
+| `PRINTFUL_API_KEY` | ✅ Present |
+| `STRIPE_MUSE_SECRET_KEY` | ✅ Present (old Muse key preserved) |
 
 ## Claude Code Collaboration Protocol
 
