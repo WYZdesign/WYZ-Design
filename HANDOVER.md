@@ -374,6 +374,16 @@ Claude audited the old `wyzdesign.wixstudio.com/wyzdesign` against the current s
 | 3 Stripe accounts confusion | Muse #1 (W avatar), Muse #2, WYZ Design — keep vault organized |
 | Featured Artist monthly rotation | Page exists, needs artist selection workflow |
 | Event recap videos wiring | All 20 videos already wired into /events, no action needed |
+| 11 `any` types in API routes | All in catch blocks or Supabase/Drive mapping — acceptable |
+
+### Code Quality Status
+- `tsc --noEmit`: Clean ✅
+- `console.error/warn`: Only in logger + errorTracker (correct) ✅
+- Orphaned routes: Removed `/api/geocode`, `/api/fd/events` ✅
+- Admin auth: `requireAdmin()` wired into analytics, bookkeeping/meta, bugs, fd/drive, fd/events (deleted), forms ✅
+- Dead imports: Cleaned ✅
+- All 23 pages return 200 ✅
+- All API endpoints responding correctly ✅
 
 ### Vault Check (Session 16)
 | Credential | Status |
