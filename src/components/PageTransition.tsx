@@ -18,6 +18,19 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   useEffect(() => { setIsFirstRender(false); }, []);
   useEffect(() => { if (!isFirstRender) window.scrollTo(0, 0); }, [pathname, isFirstRender]);
 
+  useEffect(() => {
+    if (isFirstRender) return;
+    const timer = setTimeout(() => {
+      document.querySelectorAll<HTMLElement>(".fixed.inset-0.z-\\[9998\\]").forEach((el) => {
+        const t = el.style.transform || getComputedStyle(el).transform;
+        if (t && t !== "none" && t !== "matrix(0, 0, 0, 1, 0, 0)") {
+          el.style.setProperty("display", "none", "important");
+        }
+      });
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [pathname, isFirstRender]);
+
   if (isMobile) {
     return (
       <AnimatePresence mode="wait">
