@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
   } catch (e) {
     logger.error("webhook:handler", (e as Error).message);
     try {
-      await sb.from("stripe_events").update({ error: (e as Error).message }).eq("stripe_event_id", event.id);
+      await sb.from("stripe_events").update({ error: "Webhook processing failed" }).eq("stripe_event_id", event.id);
     } catch { /* best-effort */ }
     return NextResponse.json({ error: "Processing failed" }, { status: 500 });
   }

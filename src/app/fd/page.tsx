@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { logger } from "@/lib/logger";
+import { sanitizeHtml } from "@/lib/dompurify";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import FDDriveBrowser from "@/components/FDDriveBrowser";
@@ -230,12 +231,12 @@ export default function FDOraclePage() {
   };
 
   const formatContent = (text: string) => {
-    return text
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    const formatted = text
       .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
       .replace(/\[ANALYST\]/gi, '<div class="flex items-center gap-2 mt-4 mb-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span><span class="text-blue-400 font-bold text-xs tracking-wider">ANALYST</span></div>')
       .replace(/\[MUSE\]/gi, '<div class="flex items-center gap-2 mt-4 mb-2"><span class="w-2 h-2 rounded-full bg-purple-500"></span><span class="text-purple-400 font-bold text-xs tracking-wider">MUSE</span></div>')
       .replace(/\n/g, "<br>");
+    return sanitizeHtml(formatted);
   };
 
   return (
