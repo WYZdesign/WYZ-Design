@@ -274,9 +274,9 @@ export default function FeaturedArtistPage() {
   </div>
  </div>
   <div className="text-center mt-10">
-  <Link href="" className="inline-flex items-center gap-2 px-10 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[15px] hover:bg-[#B82020] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30">
-  TUNE IN <FiArrowRight className="w-5 h-5" />
-  </Link>
+  <button onClick={() => { setShowForm(true); setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth" }), 100); }} className="inline-flex items-center gap-2 px-10 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[15px] hover:bg-[#B82020] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 cursor-pointer">
+   TUNE IN <FiArrowRight className="w-5 h-5" />
+   </button>
   </div>
  </div>
  </section>
