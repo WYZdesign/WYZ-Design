@@ -65,6 +65,11 @@ export async function GET(req: Request) {
   }
 
   if (process.env.VERCEL) {
+    try {
+      const sb = getServiceClient();
+      const { data } = await sb.from("page_content").select("html").eq("page", page).single();
+      if (data?.html) return NextResponse.json({ html: data.html, exists: true });
+    } catch { /* fall through to template */ }
     return NextResponse.json({ html: WIX_TEMPLATE, exists: false });
   }
   
