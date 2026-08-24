@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const ROOT_FOLDER = "1x4Ya8VMdtt8wfG8jil-V_TxRuaEWht0T";
+
+function getIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+}
 
 interface DriveFile {
   id: string;
@@ -52,6 +57,9 @@ async function listRecursive(
 export async function GET(req: NextRequest) {
   const apiKey = process.env.GOOGLE_DRIVE_API_KEY;
   if (!apiKey) return NextResponse.json({ files: [] });
+
+  const rl = await rateLimit(`gdrive-idx:${getIp(req)}`, 10, 60_000);
+  if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
 
   const folder = req.nextUrl.searchParams.get("folder") || ROOT_FOLDER;
   const limit = Math.min(parseInt(req.nextUrl.searchParams.get("limit") || "200"), 500);

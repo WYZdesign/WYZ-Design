@@ -3,6 +3,7 @@ import { logPageview, logEvent, getAnalyticsSummary, getPageviews } from "@/lib/
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { createHash } from "crypto";
 import { requireAdmin } from "@/lib/admin-auth";
+import { rateLimit } from "@/lib/rate-limit";
 
 function parseUA(ua: string) {
   let device = "desktop";
@@ -114,6 +115,10 @@ async function runSeoChecks(): Promise<{ check: string; status: string; detail?:
  */
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const rl = await rateLimit(`analytics:${ip}`, 60, 60_000);
+    if (!rl.ok) return NextResponse.json({ ok: true });
+
     const body = await req.json();
     const ua = body.user_agent || req.headers.get("user-agent") || "";
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || req.headers.get("x-real-ip") || "unknown";

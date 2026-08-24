@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const ROOT_FOLDER = "1x4Ya8VMdtt8wfG8jil-V_TxRuaEWht0T";
 
+function getIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+}
+
 async function findSubfolder(parentId: string, name: string, apiKey: string): Promise<string | null> {
+  const sanitizedName = name.replace(/[^a-zA-Z0-9 _-]/g, "").slice(0, 100);
   const params = new URLSearchParams({
-    q: `'${parentId}' in parents and name = '${name}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
+    q: `'${parentId}' in parents and name = '${sanitizedName}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
     fields: "files(id,name)",
     pageSize: "1",
     key: apiKey,
@@ -19,6 +25,9 @@ async function findSubfolder(parentId: string, name: string, apiKey: string): Pr
 export async function GET(req: NextRequest) {
   const apiKey = process.env.GOOGLE_DRIVE_API_KEY;
   if (!apiKey) return NextResponse.json({ images: [] });
+
+  const rl = await rateLimit(`gdrive-photos:${getIp(req)}`, 20, 60_000);
+  if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
 
   const category = req.nextUrl.searchParams.get("category") || "";
   const perPage = Math.min(parseInt(req.nextUrl.searchParams.get("per_page") || "20"), 50);

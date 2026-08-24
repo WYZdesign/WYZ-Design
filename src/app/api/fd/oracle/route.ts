@@ -1,7 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { rateLimit } from "@/lib/rate-limit";
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const FREE_MODEL = "google/gemini-2.0-flash-exp:free";
+
+function getIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+}
 
 const FD_KNOWLEDGE_BASE = `# FD PHOTO STUDIO: COMPLETE KNOWLEDGE BASE
 
@@ -147,19 +152,22 @@ RULES:
 7. Be specific: studio names, stage numbers, exact features
 8. Reference real past events as evidence for your recommendations`;
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
-      { error: "OPENROUTER_API_KEY not set", hint: "Add to Vercel env vars." },
+      { error: "AI service temporarily unavailable" },
       { status: 503 }
     );
   }
 
+  const rl = await rateLimit(`oracle:${getIp(req)}`, 10, 60_000);
+  if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
   try {
     const { message, session_id } = await req.json();
-    if (!message) {
-      return NextResponse.json({ error: "Message is required" }, { status: 400 });
+    if (!message || typeof message !== "string" || message.length > 5000) {
+      return NextResponse.json({ error: "Message required (max 5000 chars)" }, { status: 400 });
     }
 
     const r = await fetch(OPENROUTER_URL, {
@@ -183,8 +191,7 @@ export async function POST(req: Request) {
     });
 
     if (!r.ok) {
-      const err = await r.text();
-      return NextResponse.json({ error: `OpenRouter ${r.status}: ${err.slice(0, 200)}` }, { status: 502 });
+      return NextResponse.json({ error: "Oracle is temporarily unavailable" }, { status: 502 });
     }
 
     const data = await r.json();
@@ -196,11 +203,12 @@ export async function POST(req: Request) {
       model: data.model || FREE_MODEL,
     });
 
-  } catch (err: any) {
-    if (err.name === "TimeoutError" || err.name === "AbortError") {
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.name : "unknown";
+    if (msg === "TimeoutError" || msg === "AbortError") {
       return NextResponse.json({ error: "Oracle timed out. Try a simpler query." }, { status: 504 });
     }
-    return NextResponse.json({ error: err.message || "Internal error" }, { status: 500 });
+    return NextResponse.json({ error: "Oracle encountered an error" }, { status: 500 });
   }
 }
 

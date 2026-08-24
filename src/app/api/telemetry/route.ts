@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logger } from "@/lib/logger";
 import { getServiceClient } from "@/lib/supabase";
+import { rateLimit } from "@/lib/rate-limit";
 
 /**
  * Best-effort telemetry sink for client-side trackError() beacons.
@@ -9,6 +10,10 @@ import { getServiceClient } from "@/lib/supabase";
  */
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const rl = await rateLimit(`telemetry:${ip}`, 30, 60_000);
+    if (!rl.ok) return NextResponse.json({ ok: true });
+
     const body = await req.json().catch(() => ({}));
     const message = typeof body?.message === "string" ? body.message.slice(0, 4000) : "unknown";
     const context = typeof body?.context === "string" ? body.context.slice(0, 200) : "client";

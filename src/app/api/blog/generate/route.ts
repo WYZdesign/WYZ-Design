@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { openrouterChat } from "@/lib/openrouter";
+import { requireAdmin } from "@/lib/admin-auth";
 import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;
@@ -8,6 +9,9 @@ const IS_VERCEL = !!process.env.VERCEL;
  * Generates a blog post using LLM based on a topic, style, and length.
  */
 export async function POST(req: NextRequest) {
+  const admin = await requireAdmin();
+  if (!admin.ok) return admin.response;
+
   try {
     const { topic, style = "professional", length = "medium" } = await req.json();
     if (!topic || typeof topic !== "string" || topic.length > 500) {
@@ -46,7 +50,8 @@ Write as the WYZ Design blog, a creative agency in Chicago. Keep it down-to-eart
     }
 
     return NextResponse.json({ content: "", error: "AI service unavailable. Please try again later." });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e) {
+    logger.error("blog:generate", e);
+    return NextResponse.json({ error: "Failed to generate blog post" }, { status: 500 });
   }
 }
