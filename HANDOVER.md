@@ -11,6 +11,21 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - Added dark mode to PageRenderer editor UI: modal bg, borders, text, filter buttons, pagination, search input
 - `tsc --noEmit` clean
 
+## Session 27 — site audit fixes + UI tweaks
+**Date:** 2026-08-25
+**Audit fixes shipped:**
+- Neo4j `disableLosslessIntegers: true` — points were serializing as {low,high} objects, crashing /loyalty page
+- Zeal race conditions: per-user Redis lock + atomic once-keys for one-time actions; service paths normalized to top-level segment (subpath farming fixed); per-post blog cooldown keys; quest bonuses only marked when payout succeeds; earn identity stabilized via ref (daily-login no longer refires per navigation); session marks only after success
+- False-success forms fixed in 8 files (photoshoot, consultation, featured-artist, model-archive, printing, photography, community newsletter, footer subscribe): res.ok + data.success checks, toast.error on failure, submitting/disabled button states
+- React bugs: events immortal volume interval (cleared at real cap), events flyer-grid + useShuffle hydration mismatches (client-only shuffle), random initial slide → 0, fd page poll cleanup, ImagePicker render-time listener moved to effect, GyroTilt/splash disposed-flag guards, web-design hover interval churn
+- lineHeight 0 → 0.9 across 18 files + globals.css (heading overlap fix)
+**UI tweaks:**
+- Home "Popular Services" title text-sm → text-2xl/3xl/4xl; services section bottom padding +~40%
+- Client carousel removals: Dying Breed x2, Nomadic Breed, Monkey Mug, Re(Belle), JR3Y, Photo-Bombed
+- Home Quick Links buttons: red borders + red text
+- Full-height heroes: designs, services, photography, web-design (min-h-screen)
+- Loyalty Ways-to-Earn rows + category labels centered
+
 ## Session 26 — Zeal points system (full build)
 **Date:** 2026-08-25
 **Changes:**
