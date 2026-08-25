@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `40c0318` (Session 21 — h1 line-height fix, photography dark mode + form bug)
+- **Last commit:** `8a58c02` (Session 22 — dark mode legal pages, fragment keys, layout dedup, contractions)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` — all builds passing. Stripe checkout confirmed working on production.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -26,6 +26,14 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - Fixed React fragment key warnings in 5 page files: `about/page.tsx`, `designs/page.tsx`, `printing/page.tsx`, `photography/page.tsx`, `web-design/page.tsx`
 - Each had `.map()` returning `<>` fragments with `<span key={...}>` inside — replaced with a single `<span key={i}>` wrapper to eliminate the warning
 - Removed redundant `key` props from inner spans since the parent now carries the key
+
+## Session 22 — dark mode legal pages, fragment keys, layout dedup, contractions (Claude)
+**Date:** 2026-08-24
+**Changes:**
+- Added dark mode to privacy-policy, terms-and-conditions, refund-return-policy pages (`dark:bg-[#111]`, `dark:text-[#e0e0e0]`, `dark:text-[#b0b0b0]`)
+- Fixed fragment key warnings in marquee loops across 8 pages (home, services, events, about, designs, printing, photography, web-design) — replaced `<>` fragments with keyed `<span>` wrappers
+- Removed duplicate dark mode background from layout.tsx inline `<style>` tag
+- Softened printing page copy ("all numbers shown reflect" → "every price you see reflects")
 
 ## Session 21 — h1 line-height, photography dark mode, form bug (Claude)
 **Date:** 2026-08-24
