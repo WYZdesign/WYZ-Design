@@ -4,7 +4,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `e258e04` (Session 16 — orphaned route cleanup + full health check)
+- **Last commit:** `40c0318` (Session 21 — h1 line-height fix, photography dark mode + form bug)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` — all builds passing. Stripe checkout confirmed working on production.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
@@ -19,6 +19,16 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **Admin auth:** `ADMIN_EMAILS` env var (comma-separated), checked via NextAuth session
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
+
+## Session 21 — h1 line-height, photography dark mode, form bug (Claude)
+**Date:** 2026-08-24
+**Changes:**
+- Fixed h1 `line-height` from `1` to `0` across globals.css and 17 page files (22 inline replacements)
+- Fixed photography page: added `dark:bg-[#111]` to Book Today section
+- Fixed photography model application form: `setApplicationSubmitted(true)` now only runs on success (was running on error too)
+- Verified all 22+ pages live and functional
+- Verified privacy-policy, terms-and-conditions, refund-return-policy pages all load correctly (earlier 404s were from testing wrong URLs)
+- AnimatedCounter on web-design page works correctly (0 is initial state before intersection observer triggers)
 
 ## Session 20 — two features silently don't persist on Vercel (local filesystem writes) (Claude/Cowork)
 **Date:** 2026-08-24
