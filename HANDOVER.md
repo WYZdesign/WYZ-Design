@@ -2,6 +2,12 @@
 
 One running file, overwritten each round. Torreé relays it into the repo (Claude has read-only repo access).
 
+## Session 24 — Footer dark mode, about page copy tightening
+**Date:** 2026-08-25
+**Changes:**
+- Fixed footer dark mode: `dark:bg-[#f0f0f0]` (white) → `dark:bg-[#111]` (deep dark). Updated all text color vars from `dark:text-black` to `dark:text-white`.
+- Tightened about page copy: removed filler words ("without the", "over", "a commitment to"), added contractions, shortened sentences for punchier tone.
+
 ## Session 23 — Dark mode palette corrections across entire codebase
 **Date:** 2026-08-25
 **Changes:**
@@ -13,7 +19,7 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 
 ## Deployment State
 
-- **Last commit:** `pending` (Session 23 — dark mode palette corrections)
+- **Last commit:** `6110771` (Session 24 — footer dark mode, about copy)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` — all builds passing. Stripe checkout confirmed working on production.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table
