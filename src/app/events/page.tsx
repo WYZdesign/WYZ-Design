@@ -9,6 +9,7 @@ import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import TextSplit from "@/components/TextSplit";
+import { getSiteUrl } from "@/lib/site-url";
 
 const CLIENT_EVENTS_RAW = [
  { title: "Birthday Video", video: "/videos/client-events/Birthday Video.mp4" },
@@ -641,7 +642,44 @@ export default function EventsPage() {
  return (
   <VideoMuteProvider>
   <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
- <style>{`
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "WYZ Design Events",
+        description: "DIY music shows, art shows, live event coverage, and creative meetups hosted by WYZ Design.",
+        itemListElement: [
+          ...DIY_SHOWS_RAW.slice(0, 5).map((event, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Event",
+              name: event.title,
+              organizer: { "@type": "Organization", name: "WYZ Design", url: getSiteUrl() },
+              location: { "@type": "Place", name: "Chicago, IL" },
+              eventStatus: "https://schema.org/EventCompleted",
+              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            },
+          })),
+          ...CLIENT_EVENTS_RAW.slice(0, 3).map((event, i) => ({
+            "@type": "ListItem",
+            position: DIY_SHOWS_RAW.length + i + 1,
+            item: {
+              "@type": "Event",
+              name: event.title,
+              organizer: { "@type": "Organization", name: "WYZ Design", url: getSiteUrl() },
+              location: { "@type": "Place", name: "Chicago, IL" },
+              eventStatus: "https://schema.org/EventCompleted",
+              eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            },
+          })),
+        ],
+      }),
+    }}
+  />
+  <style>{`
  .hover-lift{transition:transform .3s ease,box-shadow .3s ease}
  .hover-lift:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,.1)}
  @keyframes ytPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,0,0,.4)}50%{box-shadow:0 0 0 20px rgba(255,0,0,0)}}

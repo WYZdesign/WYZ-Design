@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import TextReveal from "@/components/TextReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
+import { useZeal } from "@/components/ZealProvider";
 
 const PAPER_TYPES = [
  { name: "Premium Gloss", desc: "Premium high gloss paper is the thinnest, glossiest paper you can get. High gloss paper provides vibrant, rich color reproduction, as well as the crispest images possible. Applications include brochures, advertising, flyers, one-sheets, photography, printing and other presentation documents.", details: ["Thinnest gloss available", "Vibrant color reproduction", "Crispest image detail", "Best for brochures & flyers"] },
@@ -164,6 +165,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
 }
 
 export default function PrintingPage() {
+ const { earn } = useZeal();
  const [quoteSubmitted, setQuoteSubmitted] = useState(false);
 
  return (
@@ -325,6 +327,7 @@ export default function PrintingPage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "printing-quote", data }),
  });
+ void earn("submit-design-brief");
  } catch { toast.error("Submission failed. Please try again."); }
  setQuoteSubmitted(true);
  }} className="max-w-4xl mx-auto space-y-4">

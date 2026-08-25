@@ -4,6 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { trackMetaEvent } from "@/components/AnalyticsProvider";
+import { useZeal } from "@/components/ZealProvider";
 
 const CARDS = [
   { amount: 25, label: "Small", desc: "A sticker pack, small merch item, or partial service credit." },
@@ -14,6 +15,7 @@ const CARDS = [
 ];
 
 export default function GiftCardPage() {
+  const { earn } = useZeal();
   const [customAmount, setCustomAmount] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,6 +31,7 @@ export default function GiftCardPage() {
       const data = await res.json();
       if (data.url) {
         trackMetaEvent("InitiateCheckout", { value: amount, content_type: "gift_card" });
+        void earn("buy-gift-card");
         window.location.href = data.url;
       } else {
         toast.error(data.error || "Checkout failed. Please try again.");

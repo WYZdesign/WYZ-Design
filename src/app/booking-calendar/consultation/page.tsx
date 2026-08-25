@@ -4,10 +4,12 @@ import { useState, useMemo } from "react";
 import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Link from "next/link";
+import { useZeal } from "@/components/ZealProvider";
 
 const HOURS = Array.from({ length: 10 }, (_, i) => i + 10);
 
 export default function ConsultationCalendar() {
+  const { earn } = useZeal();
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [name, setName] = useState("");
@@ -71,9 +73,10 @@ export default function ConsultationCalendar() {
               notes,
               submittedAt: new Date().toISOString(),
             },
-          }),
-        });
-      } catch (e) { logger.warn("consultation-page", `Form submit failed: ${e}`); toast.error("Scheduling failed. Please try again."); }
+            }),
+          });
+          void earn("book-consultation");
+        } catch (e) { logger.warn("consultation-page", `Form submit failed: ${e}`); toast.error("Scheduling failed. Please try again."); }
       setSubmitted(true);
     }
   };

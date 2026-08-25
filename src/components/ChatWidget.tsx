@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useZeal } from "@/components/ZealProvider";
 
 interface Message {
   role: "user" | "assistant";
@@ -15,6 +16,7 @@ const QUICK_REPLIES = [
 ];
 
 export default function ChatWidget() {
+  const { earn } = useZeal();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hey! I'm the WYZ Design assistant. I can help you learn about our services, check pricing, or get you booked. How can I help today?" },
@@ -108,7 +110,7 @@ export default function ChatWidget() {
     <>
       {/* Chat Bubble */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => { if (!isOpen) void earn("open-chat"); setIsOpen(!isOpen); }}
         className={`fixed bottom-6 right-6 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 ${
           isOpen ? "bg-[#333] rotate-90" : "bg-[#DF3131] animate-pulse"
         }`}

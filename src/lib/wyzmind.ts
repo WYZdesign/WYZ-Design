@@ -240,30 +240,34 @@ export async function getLoyaltyPoints(email: string) {
   const session = driver.session();
   try {
     const result = await session.run(
-      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'silver'
+      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'recruit'
        RETURN u.points AS points, u.tier AS tier, u.createdAt AS joined`,
       { email }
     );
     const r = result.records[0];
-    return { points: r.get("points") || 0, tier: r.get("tier") || "bronze", joined: r.get("joined") };
+    return { points: r.get("points") || 0, tier: r.get("tier") || "recruit", joined: r.get("joined") };
   } finally { await session.close(); }
 }
 
-export async function addLoyaltyPoints(email: string, amount: number, reason: string) {
+export async function addLoyaltyPoints(email: string, amount: number, reason: string): Promise<{ points: number; tier: string }> {
   const driver = getNeo4j();
   const session = driver.session();
   try {
-    await session.run(
-      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'silver'
+    const result = await session.run(
+      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'recruit'
        SET u.points = COALESCE(u.points, 0) + $amount
        CREATE (u)-[:EARNED_POINTS]->(:LoyaltyTransaction {amount: $amount, reason: $reason, timestamp: datetime()})
        WITH u,
-         CASE WHEN u.points + $amount >= 5000 THEN 'diamond'
-              WHEN u.points + $amount >= 1000 THEN 'gold'
-              ELSE 'silver' END AS newTier
-       SET u.tier = newTier`,
+         CASE WHEN u.points >= 5000 THEN 'legend'
+              WHEN u.points >= 2000 THEN 'champion'
+              WHEN u.points >= 500 THEN 'zealot'
+              ELSE 'recruit' END AS newTier
+       SET u.tier = newTier
+       RETURN u.points AS points, u.tier AS tier`,
       { email, amount, reason }
     );
+    const r = result.records[0];
+    return { points: r.get("points") || 0, tier: r.get("tier") || "recruit" };
   } finally { await session.close(); }
 }
 

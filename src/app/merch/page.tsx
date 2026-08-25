@@ -6,6 +6,7 @@ import SafeImage from "@/components/SafeImage";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { getSiteUrl } from "@/lib/site-url";
 
 interface Product {
   id: number;
@@ -580,6 +581,35 @@ export default function MerchPage() {
   return (
     <>
       <main className="min-h-screen bg-[#FEFEFD]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              name: "WYZ Design Merch Store",
+              description: "Premium apparel, headwear, and accessories from the Dying Breed Crew collection.",
+              itemListElement: FALLBACK_PRODUCTS.slice(0, 10).map((product, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                item: {
+                  "@type": "Product",
+                  name: product.name,
+                  description: product.description,
+                  image: `${getSiteUrl()}${product.image}`,
+                  offers: {
+                    "@type": "Offer",
+                    price: product.price.toFixed(2),
+                    priceCurrency: "USD",
+                    availability: "https://schema.org/InStock",
+                    url: `${getSiteUrl()}/merch`,
+                  },
+                  brand: { "@type": "Organization", name: "WYZ Design" },
+                },
+              })),
+            }),
+          }}
+        />
         <ParallaxHero />
         <DynamicContentUnderHero />
 

@@ -11,6 +11,22 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - Added dark mode to PageRenderer editor UI: modal bg, borders, text, filter buttons, pagination, search input
 - `tsc --noEmit` clean
 
+## Session 26 — Zeal points system (full build)
+**Date:** 2026-08-25
+**Changes:**
+- **Core engine** `src/lib/zeal.ts`: 33-action catalog (daily/weekly/milestone/easter), 12 achievements, 4 quest chains, Redis NX cooldowns (persistent), Neo4j user state (zealActions, zealCounters, streaks, achievements, questsCompleted), server-side achievement/quest evaluation, rate limit 60/hr
+- **New tiers everywhere**: recruit (0) / zealot (500) / champion (2000) / legend (5000). Updated `addLoyaltyPoints` in wyzmind.ts (now returns {points, tier}); Stripe webhook + admin API inherit new tiers automatically
+- **APIs**: POST `/api/zeal/earn` (validated action whitelist, returns tierUp/achievement/quest flags), GET `/api/zeal/status` (balance, streaks, history, full catalog)
+- **ZealProvider** mounted in root layout inside AuthProvider: useZeal() hook, route-change discovery earns, scroll tracking (+trio bonus via sessionStorage), Konami code listener, daily-login on sign-in, toast feedback for every earn/tier-up/achievement/quest completion
+- **Wired triggers (29 call sites / 17 files)**: Footer newsletter, Navbar logo 5-click egg + search, ChatWidget open, SocialShare all buttons, StrategyWizard completion, community comments/replies, blog ReadTracker (read + thorough 3min + speed-reader <5s), gallery 10-views + double-tap, consultation booking, gift card checkout, model archive submit, featured artist submit, printing brief, /secret hidden page
+- **Auto awards (server-side)**: first-login, night-owl (00:00-05:00 local), streak-3/7/14/30, service-explorer + view-all-services (distinct services tracked via Redis SADD using metaPath), read-5-blog-posts, blog-reader (10 posts), gallery-regular (5 visits)
+- **Profile achievements**: PUT /api/profile now calls evaluateProfileAchievements (profile-complete, social-connected, avatar-uploaded)
+- **Loyalty page rebuilt as Zeal HQ**: balance card with streak + refresh, quests with per-step checkmarks from actionsEarned, achievements grid locked/unlocked, recent activity feed, categorized ways-to-earn catalog, 4 tier cards. Layout metadata updated to Zeal branding
+- **Easter eggs live**: /secret page (noindex via layout, not in sitemap, +100), Konami code (+200), logo 5-click (+50), night owl (+25), speed/thorough reader (+15/+20)
+- **Not wired (documented)**: refer-friend (+500; referral system has no account creation hook yet), leave-review (+30; no review form exists yet)
+- **Bugs caught during self-review**: read-5-blog-posts could re-award infinitely (fixed by pushing action id to state.actions); view-all-services/service-explorer were unreachable without distinct-service tracking (fixed with metaPath + Redis sets); react-hot-toast icon prop misuse removed; FiFlame not exported by react-icons/fi (swapped for FiZap)
+- `tsc --noEmit` clean
+
 ## Session 25 — WCAG AA color contrast fixes
 **Date:** 2026-08-25
 **Changes:**

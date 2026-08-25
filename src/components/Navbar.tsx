@@ -11,6 +11,7 @@ import { FiSun, FiMoon, FiSearch } from "react-icons/fi";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
 import MagneticElement from "@/components/MagneticElement";
+import { useZeal } from "@/components/ZealProvider";
 
 const NAV_LINKS = [
   { href: "/home", label: "H O M E" },
@@ -81,6 +82,7 @@ function ThemeToggle({ className = "" }: { className?: string }) {
 export default function Navbar() {
   const pathname = usePathname();
   const { data: session } = useSession();
+  const { earn } = useZeal();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -91,6 +93,7 @@ export default function Navbar() {
   const [searchFocused, setSearchFocused] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
+  const logoClicksRef = useRef<number[]>([]);
 
   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
   useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [mobileOpen]);
@@ -136,6 +139,17 @@ export default function Navbar() {
 
   const isActive = (href: string) => pathname === href || pathname?.startsWith(href + "/");
 
+  const handleLogoClick = () => {
+    const now = Date.now();
+    const recent = logoClicksRef.current.filter(t => now - t < 3000);
+    recent.push(now);
+    logoClicksRef.current = recent;
+    if (recent.length >= 5) {
+      logoClicksRef.current = [];
+      void earn("logo-easter-egg");
+    }
+  };
+
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${visible ? "opacity-100" : "opacity-0 -translate-y-2 pointer-events-none"}`}>
@@ -146,7 +160,7 @@ export default function Navbar() {
           <div className="flex items-center h-20 lg:h-24">
             {/* Logo */}
             <MagneticElement tag="div" strength={0.2}>
-            <Link href="/" className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
+            <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
               <span className="relative inline-flex">
                 <span className="absolute inset-[-10px] rounded-full bg-[#DF3131]/35 blur-lg logo-glow-pulse pointer-events-none" />
                 <Image src="/wyz-crown-square.png" alt="WYZ Design" width={56} height={56} className="relative hover:scale-110 transition-transform w-[26px] h-[26px] sm:w-[30px] sm:h-[30px] lg:w-[38px] lg:h-[38px] object-contain" loading="lazy" />
@@ -207,10 +221,10 @@ export default function Navbar() {
                       className="relative h-11">
                       <input ref={searchInputRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                         onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
-                        onKeyDown={e => { if (e.key === "Enter") { const q = searchQuery.trim(); if (q) window.location.href = `/search?q=${encodeURIComponent(q)}`; } if (e.key === "Escape") { setSearchOpen(false); setSearchQuery(""); setSearchResults([]); } }}
+                        onKeyDown={e => { if (e.key === "Enter") { const q = searchQuery.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; } } if (e.key === "Escape") { setSearchOpen(false); setSearchQuery(""); setSearchResults([]); } }}
                         placeholder="Search..."
                         className="absolute inset-0 w-full pl-4 pr-11 text-[13px] border-[1.5px] border-[#DF3131] rounded-full bg-white text-[#333] placeholder:text-[#999] outline-none transition-colors" />
-                      <button onClick={() => { const q = searchQuery.trim(); if (q) window.location.href = `/search?q=${encodeURIComponent(q)}`; }}
+                      <button onClick={() => { const q = searchQuery.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; } }}
                         className="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full text-[#DF3131] hover:bg-[#DF3131]/10 transition-colors">
                         <FiSearch className="w-4 h-4" />
                       </button>
@@ -343,7 +357,7 @@ export default function Navbar() {
             <div className="px-6 pt-3 pb-2">
               <input type="text" placeholder="Search WYZ..."
                 className="w-full px-4 py-3 text-[14px] border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] placeholder:text-[#999] focus:border-[#DF3131] outline-none"
-                onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
+                onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-4 space-y-1">
               {ALL_LINKS.map((l, i) => (

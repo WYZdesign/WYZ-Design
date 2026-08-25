@@ -12,6 +12,7 @@ import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
 import { shuffleArray } from "@/lib/utils";
+import { getSiteUrl } from "@/lib/site-url";
 
 const ALBUMS = ["Events", "Outdoors", "Studio", "Boudoir", "Bodypaint", "Urbex", "Products", "Conceptual"];
 const ALBUM_DESC: Record<string, string> = {
@@ -166,7 +167,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
   <div className="aspect-[4/3] overflow-hidden relative">
-  <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
+  <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
   <div className="absolute top-3 right-3 bg-[#DF3131] text-white px-3 py-1 text-[14px] font-bold tracking-wider">{s.price}</div>
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
@@ -185,9 +186,9 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   >
   <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative">
   <div className="absolute inset-0 opacity-10">
-   <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" priority />
-  </div>
-  <div className="relative z-10">
+    <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" />
+   </div>
+   <div className="relative z-10">
   <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">{s.cat}</span>
   <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{s.name}</h3>
   <p className="text-white/80 text-[15px] leading-relaxed mb-4">{s.desc}</p>
@@ -450,6 +451,32 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
 
 return (
   <main className="pb-0 bg-white dark:bg-[#111]">
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "WYZ Design Photography",
+        description: "Professional photography services including photoshoots, event photography, retouching, and creative portrait sessions in Chicago and Los Angeles.",
+        provider: {
+          "@type": "Organization",
+          name: "WYZ Design",
+          url: getSiteUrl(),
+        },
+        areaServed: "US",
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Photography Services",
+          itemListElement: [
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photoshoot", description: "Professional photoshoot sessions", price: "$100", priceCurrency: "USD" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Event Photography", description: "Live event coverage and documentation", price: "$200", priceCurrency: "USD" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photo Retouching", description: "Professional photo retouching services" } },
+          ],
+        },
+      }),
+    }}
+  />
   <style>{`
   @keyframes slideInLeft{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:translateX(0)}}
   @keyframes slideInRight{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:translateX(0)}}
@@ -618,8 +645,8 @@ return (
  >
  <div className={`w-full h-full bg-white dark:bg-[#252528] rounded-lg overflow-hidden shadow-2xl ${isActive ? "ring-2 ring-[#DF3131] ring-offset-4 dark:ring-offset-[#252528]" : ""}`}>
  <div className="aspect-[3/4] overflow-hidden relative">
-  <Image src={m.cover} alt={m.name} fill className="w-full h-full object-cover" priority />
- </div>
+   <Image src={m.cover} alt={m.name} fill className="w-full h-full object-cover" />
+  </div>
  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 pt-12">
  <p className="text-white font-heading font-black text-lg tracking-[0.08em] uppercase">{m.name}</p>
  <p className="text-[#DF3131] text-[12px] tracking-[0.1em] uppercase mt-1">{m.title}</p>
@@ -709,7 +736,7 @@ return (
   <Link href={`/photography/${encodeURIComponent(a)}`}
    className="album-card group relative overflow-hidden aspect-square cursor-pointer block"
    style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
-    <Image src={albumCovers[a]} alt={a} fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" priority />
+    <Image src={albumCovers[a]} alt={a} fill className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" />
     <div className="absolute inset-0 z-10 bg-black/30" />
     <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
     <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>

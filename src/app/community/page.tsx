@@ -9,6 +9,7 @@ import {
   FiChevronUp, FiChevronDown, FiEye, FiSend, FiMessageSquare,
 } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useZeal } from "@/components/ZealProvider";
 
 const DISCORD_INVITE = "https://discord.gg/RqQngbtXrs";
 
@@ -515,6 +516,7 @@ type FeedPost = NewsPost & {
 type Thread = (typeof SEED_THREADS)[number] & { voted: "up" | "down" | null };
 
 export default function ForumPage() {
+  const { earn } = useZeal();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
@@ -569,6 +571,8 @@ export default function ForumPage() {
   };
 
   const postFeedComment = (id: number) => {
+    const target = feedPosts.find((p) => p.id === id);
+    if (!target || !target.commentText.trim()) return;
     setFeedPosts((prev) =>
       prev.map((p) => {
         if (p.id !== id || !p.commentText.trim()) return p;
@@ -583,6 +587,7 @@ export default function ForumPage() {
         };
       })
     );
+    void earn("community-comment");
   };
 
   const postThread = () => {
@@ -620,6 +625,7 @@ export default function ForumPage() {
       )
     );
     setReplyBox(null);
+    void earn("community-comment");
   };
 
   const voteThread = (id: number, dir: "up" | "down") => {

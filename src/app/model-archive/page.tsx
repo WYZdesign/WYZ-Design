@@ -5,6 +5,7 @@ import { logger } from "@/lib/logger";
 import Image from "next/image";
 import { FiUser, FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
+import { useZeal } from "@/components/ZealProvider";
 
 const MODELS = [
  { name: "ADRIENNE", img: "/images/models/ADRIENNE.jpg" },
@@ -97,6 +98,7 @@ const MODELS = [
 ];
 
 export default function ModelArchivePage() {
+ const { earn } = useZeal();
  const [search, setSearch] = useState("");
  const [showApply, setShowApply] = useState(false);
  const [formData, setFormData] = useState({ name: "", email: "", phone: "", experience: "", message: "" });
@@ -119,6 +121,7 @@ export default function ModelArchivePage() {
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "model-application", data: { ...data, submittedAt: new Date().toISOString() } }),
  });
+ void earn("upload-model-photo");
  } catch (e) { logger.warn("model-archive-page", `Application submit failed: ${e}`); toast.error("Submission failed. Please try again."); }
  setSubmitted(true);
  };
@@ -199,7 +202,7 @@ export default function ModelArchivePage() {
   <ImageHoverReveal key={i}>
   <div onClick={() => loadAlbum(m.name)}
   className="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer">
-   <Image src={m.img} alt={m.name} fill className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" priority />
+    <Image src={m.img} alt={m.name} fill className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" />
   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity" />
   <div className="absolute bottom-0 left-0 right-0 p-3 sm:translate-y-full sm:group-hover:translate-y-0 translate-y-0 transition-transform">
   <p className="text-white text-xs font-bold tracking-[0.15em] mb-2">{m.name}</p>
@@ -231,7 +234,7 @@ export default function ModelArchivePage() {
  {albumImages.map((src, i) => (
  <div key={i} onClick={() => setLightboxIdx(i)}
  className="break-inside-avoid cursor-pointer group">
-  <Image src={src} alt={`${selectedModel}`} width={400} height={533} className="w-full object-cover rounded-sm group-hover:opacity-80 transition-opacity" priority />
+   <Image src={src} alt={`${selectedModel}`} width={400} height={533} className="w-full object-cover rounded-sm group-hover:opacity-80 transition-opacity" />
  </div>
  ))}
  </div>

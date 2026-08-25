@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronRight, FiCheck, FiRotateCcw } from "react-icons/fi";
+import { useZeal } from "@/components/ZealProvider";
 
 interface Step { q: string; options: { label: string; value: string }[]; }
 
@@ -116,10 +117,12 @@ function getRecommendation(answers: string[]): Recommendation {
 }
 
 export default function StrategyWizard() {
+  const { earn } = useZeal();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [result, setResult] = useState<Recommendation | null>(null);
+  const earnedCompleteRef = useRef(false);
 
   function pick(val: string) {
     const next = [...answers, val];
@@ -127,6 +130,10 @@ export default function StrategyWizard() {
     if (next.length === STEPS.length) {
       setResult(getRecommendation(next));
       setStep(STEPS.length);
+      if (!earnedCompleteRef.current) {
+        earnedCompleteRef.current = true;
+        void earn("complete-wizard");
+      }
     } else {
       setStep(step + 1);
     }
@@ -136,8 +143,6 @@ export default function StrategyWizard() {
 
   return (
     <>
-
-
       <div className="mt-12 p-6 border border-[#DF3131] bg-[#DF3131]/5 flex flex-col sm:flex-row items-start justify-between gap-4">
         <div className="text-left">
            <h3 className="text-lg font-heading font-bold text-[#333333] dark:text-white">Strategy Wizard</h3>

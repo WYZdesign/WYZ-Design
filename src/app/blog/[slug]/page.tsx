@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug, BLOG_AUTHOR } from "@/lib/blog";
 import { FiArrowLeft, FiClock, FiTag, FiCalendar } from "react-icons/fi";
 import SocialShare from "@/components/SocialShare";
+import ReadTracker from "./ReadTracker";
 
 const SITE = "https://www.wyzdesign.com";
 
@@ -78,6 +79,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
+      <ReadTracker />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 

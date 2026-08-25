@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { GlobalImagePicker } from "@/components/ImagePicker";
 import AuthProvider from "@/components/AuthProvider";
+import ZealProvider from "@/components/ZealProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
@@ -321,6 +322,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
           <AuthProvider>
+          <ZealProvider>
           <SmoothScrollProvider>
           <ScrollAnimator />
           <RouteBackground />
@@ -335,6 +337,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollToTop />
           </ErrorBoundary>
           </SmoothScrollProvider>
+          </ZealProvider>
         </AuthProvider>
         </ThemeProvider>
         <GlobalImagePicker />

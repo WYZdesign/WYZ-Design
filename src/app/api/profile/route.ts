@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { updateUserProfile } from "@/lib/wyzmind";
+import { evaluateProfileAchievements } from "@/lib/zeal";
 import { logger } from "@/lib/logger";
 
 const FIELD_MAX_LEN: Record<string, number> = {
@@ -30,7 +31,19 @@ export async function PUT(req: NextRequest) {
     }
 
     const updated = await updateUserProfile(session.user.email, raw);
-    return NextResponse.json({ user: updated });
+    let unlockedAchievements: string[] = [];
+    if (updated && typeof updated === "object") {
+      const u = updated as Record<string, unknown>;
+      unlockedAchievements = await evaluateProfileAchievements(session.user.email, {
+        avatarUrl: typeof u.avatarUrl === "string" ? u.avatarUrl : null,
+        instagram: typeof u.instagram === "string" ? u.instagram : null,
+        facebook: typeof u.facebook === "string" ? u.facebook : null,
+        website: typeof u.website === "string" ? u.website : null,
+        bio: typeof u.bio === "string" ? u.bio : null,
+        phone: typeof u.phone === "string" ? u.phone : null,
+      }).catch(() => []);
+    }
+    return NextResponse.json({ user: updated, unlockedAchievements });
   } catch (e: unknown) {
     logger.error("profile:update", e);
     return NextResponse.json({ error: "Failed to update profile" }, { status: 500 });

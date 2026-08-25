@@ -7,6 +7,7 @@ import { FiTwitter, FiFacebook, FiInstagram, FiLinkedin, FiYoutube, FiArrowRight
 import toast from "react-hot-toast";
 import { FaTiktok } from "react-icons/fa6";
 import { trackMetaEvent } from "@/components/AnalyticsProvider";
+import { useZeal } from "@/components/ZealProvider";
 
 const SITEMAP = {
   Services: [
@@ -52,6 +53,7 @@ const SOCIALS = [
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const { earn } = useZeal();
   const h = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
@@ -62,7 +64,7 @@ export default function Footer() {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
-      if (data.success) { setSubscribed(true); setEmail(""); toast.success("Subscribed! Check your inbox."); trackMetaEvent("Subscribe"); }
+      if (data.success) { setSubscribed(true); setEmail(""); toast.success("Subscribed! Check your inbox."); trackMetaEvent("Subscribe"); void earn("subscribe-newsletter"); }
       else { toast.error("Subscription failed. Please try again."); }
     } catch { toast.error("Network error. Please try again."); }
   };
@@ -160,7 +162,7 @@ export default function Footer() {
             <p className={`text-[13px] ${copyrightColor}`}>&copy; {new Date().getFullYear()} WYZ Design LLC. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <p className={`text-[13px] ${precisionColor}`}>Designed & built with precision.</p>
-              <Image src="/images/wix-extracted/common/logo/common_logo_00_98442d_d7e48f1e01ab4d7b87f7e4f779f4dfd9.png.png" alt="Wix Editor X Partner" width={80} height={80} className="opacity-60 hover:opacity-100 transition-opacity w-8 h-8 object-contain" priority />
+               <Image src="/images/wix-extracted/common/logo/common_logo_00_98442d_d7e48f1e01ab4d7b87f7e4f779f4dfd9.png.png" alt="Wix Editor X Partner" width={80} height={80} className="opacity-60 hover:opacity-100 transition-opacity w-8 h-8 object-contain" />
             </div>
           </div>
           <div className="mt-10 flex justify-center">
