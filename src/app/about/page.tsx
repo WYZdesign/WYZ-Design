@@ -94,7 +94,7 @@ export default function AboutPage() {
           <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
             <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
             <TextMaskReveal direction="up">
-            <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-3 sm:mb-6" style={{ lineHeight: 0 }}>
+            <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
               <TextSplit stagger={0.03} direction="up">WE MAKE WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">WORKS</TextSplit></span>
             </h1>
             </TextMaskReveal>
@@ -153,7 +153,7 @@ export default function AboutPage() {
               </div>
               <div className="w-full">
                 <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">The Founder</span>
-                <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-4" style={{ lineHeight: 0 }}>
+                <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-4" style={{ lineHeight: 0.9 }}>
                   TORREÉ <span className="text-[#DF3131]">MARCEL</span> HARRIS
                 </h2>
                 <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">

@@ -164,7 +164,7 @@ export default function ModelArchivePage() {
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
  {/* Header */}
  <div className="mb-8 text-center">
- <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 0 }}>M O D E L . A R C H I V E</h1>
+ <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>M O D E L . A R C H I V E</h1>
  <p className="text-[#666] dark:text-white/50 text-sm mt-2">Every talent who has graced our lens, {MODELS.length} models and counting</p>
  </div>
 

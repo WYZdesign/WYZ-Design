@@ -120,7 +120,7 @@ export default function BookingPage() {
   return (
     <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-4xl mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0 }}>Book a Service</h1>
+        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>Book a Service</h1>
         <p className="text-center text-[#666665] dark:text-[#b0b0b0] text-[15px] mt-2">Tell us about your project and we&apos;ll get back to you within 24 hours.</p>
 
         {submitted ? (

@@ -522,7 +522,7 @@ return (
     </div>
     </div>
     <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 pt-24 pb-12 min-h-[500px] h-full">
-   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0 }}>
+   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
      <p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-2">
@@ -545,7 +545,7 @@ return (
     </div>
    <div className="absolute inset-0 bg-black/30 z-[1]" />
    <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
-   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0 }}>
+   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
      <p className="text-[16px] sm:text-[16px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">

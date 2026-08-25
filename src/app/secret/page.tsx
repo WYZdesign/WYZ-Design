@@ -15,7 +15,7 @@ export default function SecretPage() {
     <main className="min-h-screen bg-[#111] text-white flex items-center justify-center px-6">
       <div className="max-w-xl text-center">
         <p className="text-[#DF3131] font-heading font-bold tracking-[0.3em] uppercase text-[12px] mb-4">You found it</p>
-        <h1 className="text-[2.5rem] sm:text-[3.5rem] font-heading font-black tracking-[0.05em] uppercase mb-6" style={{ lineHeight: 0 }}>
+        <h1 className="text-[2.5rem] sm:text-[3.5rem] font-heading font-black tracking-[0.05em] uppercase mb-6" style={{ lineHeight: 0.9 }}>
           THE <span className="text-[#DF3131]">HIDDEN</span> PAGE
         </h1>
         <p className="text-white/70 leading-relaxed mb-8">

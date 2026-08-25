@@ -147,7 +147,7 @@ export default function WYZMiNDPage() {
     <canvas ref={brainCanvasRef} className="absolute inset-0 z-[2] w-full h-full" style={{ opacity: 0.3 }} />
     <div className="relative z-10 pt-32 lg:pt-40">
             <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-2">WYZMiND</p>
- <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] text-white mb-6 sm:mb-8" style={{ lineHeight: 0, overflowWrap: "break-word" }}>
+ <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] text-white mb-6 sm:mb-8" style={{ lineHeight: 0.9, overflowWrap: "break-word" }}>
                creative<br />
                <span className="text-[#DF3131]">AI Brain</span>
              </h1>
