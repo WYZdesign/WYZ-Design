@@ -164,7 +164,7 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   onMouseLeave={() => setFlipped(false)}>
   {/* Front */}
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
-  <div className="bg-white dark:bg-[#2b2b2e] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
+  <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
   <div className="aspect-[4/3] overflow-hidden relative">
   <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
@@ -538,7 +538,7 @@ return (
 
 {/* MODEL ARCHIVE */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
-  <section className="py-12 lg:py-20 bg-[#F5F5F3] dark:bg-[#2b2b2e]">
+  <section className="py-12 lg:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
   {/* Left: Info + Buttons */}
@@ -616,7 +616,7 @@ return (
  }}
  onClick={() => { if (isNext) setModelIdx((modelIdx + 1) % featuredModels.length); if (isPrev) setModelIdx((modelIdx - 1 + featuredModels.length) % featuredModels.length); }}
  >
- <div className={`w-full h-full bg-white dark:bg-[#2b2b2e] rounded-lg overflow-hidden shadow-2xl ${isActive ? "ring-2 ring-[#DF3131] ring-offset-4 dark:ring-offset-[#252528]" : ""}`}>
+ <div className={`w-full h-full bg-white dark:bg-[#252528] rounded-lg overflow-hidden shadow-2xl ${isActive ? "ring-2 ring-[#DF3131] ring-offset-4 dark:ring-offset-[#252528]" : ""}`}>
  <div className="aspect-[3/4] overflow-hidden relative">
   <Image src={m.cover} alt={m.name} fill className="w-full h-full object-cover" priority />
  </div>
@@ -655,7 +655,7 @@ return (
 
 {/* Become A Model Form */}
   {showModelForm && (
-  <div className="bg-white dark:bg-[#2b2b2e] p-6 lg:p-8 shadow-xl rounded-lg border border-[#E2E2E2] dark:border-[#444]">
+  <div className="bg-white dark:bg-[#252528] p-6 lg:p-8 shadow-xl rounded-lg border border-[#E2E2E2] dark:border-[#444]">
   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-xl tracking-[0.05em] mb-3">APPLY TO BE A MODEL</h3>
   <form onSubmit={async (e) => { 
   e.preventDefault();
@@ -671,12 +671,12 @@ return (
    setApplicationSubmitted(true);
   }} className="space-y-4">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-   <input name="fullName" placeholder="Full Name *" aria-label="Full name" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
-   <input name="email" placeholder="Email *" type="email" aria-label="Email address" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
+   <input name="fullName" placeholder="Full Name *" aria-label="Full name" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
+   <input name="email" placeholder="Email *" type="email" aria-label="Email address" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
    </div>
    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-   <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
-   <select name="experience" aria-label="Experience level" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] text-[14px] text-[#888] dark:text-white/60 focus:border-[#DF3131] outline-none transition-colors">
+   <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
+   <select name="experience" aria-label="Experience level" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] text-[#888] dark:text-white/60 focus:border-[#DF3131] outline-none transition-colors">
   <option>Experience Level</option>
   <option>No Experience</option>
   <option>Beginner (1-2 shoots)</option>
@@ -685,7 +685,7 @@ return (
   <option>Professional</option>
   </select>
   </div>
-   <textarea name="about" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={3} className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none resize-none transition-colors" />
+   <textarea name="about" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={3} className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none resize-none transition-colors" />
    <button type="submit" className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg text-center">
   {applicationSubmitted ? "SUBMITTED ✓" : "SUBMIT"}
   </button>
@@ -724,7 +724,7 @@ return (
   </ScrollReveal>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#232326] mb-4">
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E] mb-4">
     {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
@@ -746,7 +746,7 @@ return (
  { title: "PROFESSIONAL\nEQUIPMENT", desc: "All equipment used has been tested and approved for top-tier performance every time.", icon: "\u25C6", bg: "#333" },
  { title: "TOP-QUALITY\nGUARANTEED", desc: "Satisfaction is 100% guaranteed no matter how big or small your project may be.", icon: "\u2605", bg: "#DF3131" },
  ].map((b, i) => (
- <div key={b.title} className={`p-10 text-center group ${i === 1 ? "bg-white dark:bg-[#2b2b2e]" : "bg-[#F5F5F3] dark:bg-[#DF3131]"}`}>
+ <div key={b.title} className={`p-10 text-center group ${i === 1 ? "bg-white dark:bg-[#252528]" : "bg-[#F5F5F3] dark:bg-[#DF3131]"}`}>
  <div className="w-16 h-16 mx-auto flex items-center justify-center text-white text-2xl font-bold mb-4" style={{ backgroundColor: b.bg }}>
  {b.icon}
  </div>

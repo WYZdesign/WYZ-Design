@@ -101,7 +101,7 @@ export default function EventPhotography() {
             </div>
           </div>
 
-          <div className="bg-[#f5f5f5] dark:bg-[#2b2b2e] p-8 mb-16">
+          <div className="bg-[#f5f5f5] dark:bg-[#252528] p-8 mb-16">
             <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">What You Get</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">

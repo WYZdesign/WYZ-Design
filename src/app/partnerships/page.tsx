@@ -44,7 +44,7 @@ const TIERS = [
 
 export default function PartnershipsPage() {
   return (
-    <main className="pb-16 bg-white dark:bg-[#232326]">
+    <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       {/* Hero */}
       <section className="relative min-h-[75vh] py-20 sm:py-28 lg:py-36 bg-[#111] overflow-hidden hero-banner">
         <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1a1a1a] to-[#DF3131]/20" />
@@ -60,7 +60,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Our Brands */}
-      <section className="py-16 sm:py-20 bg-white dark:bg-[#232326]">
+      <section className="py-16 sm:py-20 bg-white dark:bg-[#1C1C1E]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
@@ -70,7 +70,7 @@ export default function PartnershipsPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {SUB_BRANDS.map((p) => (
-              <div key={p.name} className="bg-[#F5F5F3] dark:bg-[#2b2b2e] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+              <div key={p.name} className="bg-[#F5F5F3] dark:bg-[#252528] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: p.color }} />
                 <p className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: p.color }}>{p.tagline}</p>
                 <h3 className="font-heading font-bold text-[20px] tracking-[0.06em] text-[#333] dark:text-white uppercase mb-3">{p.name}</h3>
@@ -82,7 +82,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Why Partner */}
-      <section className="py-16 sm:py-20 bg-[#F5F5F3] dark:bg-[#2b2b2e]">
+      <section className="py-16 sm:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
@@ -116,7 +116,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Partnership Tiers */}
-      <section className="py-16 sm:py-20 bg-white dark:bg-[#232326]">
+      <section className="py-16 sm:py-20 bg-white dark:bg-[#1C1C1E]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">

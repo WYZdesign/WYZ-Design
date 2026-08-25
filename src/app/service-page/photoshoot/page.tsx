@@ -66,7 +66,7 @@ export default function Photoshoot() {
                 <li className="flex items-start gap-3"><span className="text-[#DF3131] mt-1">→</span> Online gallery for viewing and downloads</li>
               </ul>
             </div>
-            <div className="bg-[#333333] dark:bg-[#2b2b2e] text-white p-8">
+            <div className="bg-[#333333] dark:bg-[#252528] text-white p-8">
               <h3 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-bold tracking-[0.15em] uppercase mb-3">Pricing</h3>
               <div className="space-y-4">
                 <div className="border-b border-gray-600 pb-4">

@@ -947,7 +947,7 @@ export default function HomePage() {
   </ScrollReveal>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#232326]">
+  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
@@ -983,14 +983,14 @@ export default function HomePage() {
  <div className="flex justify-center gap-4 mb-10">
  <button onClick={() => setSpTab("services")}
  className={`px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase text-sm border-2 transition-all duration-500 relative overflow-hidden group ${
- spTab === "services" ? "bg-[#333] text-white border-[#333] shadow-lg shadow-[#333]/20" : "bg-white dark:bg-[#232326] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+ spTab === "services" ? "bg-[#333] text-white border-[#333] shadow-lg shadow-[#333]/20" : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
  }`}>
  <span className="relative z-10">Services</span>
  {spTab !== "services" && <div className="absolute inset-0 bg-[#DF3131]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />}
  </button>
  <button onClick={() => setSpTab("plans")}
  className={`px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase text-sm border-2 transition-all duration-500 relative overflow-hidden group ${
- spTab === "plans" ? "bg-[#333] text-white border-[#333] shadow-lg shadow-[#333]/20" : "bg-white dark:bg-[#232326] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+ spTab === "plans" ? "bg-[#333] text-white border-[#333] shadow-lg shadow-[#333]/20" : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
  }`}>
  <span className="relative z-10">Pricing Plans</span>
  {spTab !== "plans" && <div className="absolute inset-0 bg-[#DF3131]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />}
@@ -1007,7 +1007,7 @@ export default function HomePage() {
    className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
   activeTab === "ALL"
   ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
-  : "bg-white dark:bg-[#232326] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+  : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
   }`}>
   <span className="relative z-10">ALL</span>
   </button>
@@ -1016,7 +1016,7 @@ export default function HomePage() {
    className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
   activeTab === s.tab
   ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
-  : "bg-white dark:bg-[#232326] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+  : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
   }`}>
   <span className="relative z-10">{s.tab}</span>
   </button>
@@ -1024,7 +1024,7 @@ export default function HomePage() {
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {SERVICES.filter(s => activeTab === "ALL" || s.tab === activeTab).map((s) => (
-    <div key={s.name} className="group relative p-8 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 bg-white dark:bg-[#2b2b2e] text-center">
+    <div key={s.name} className="group relative p-8 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 bg-white dark:bg-[#252528] text-center">
       <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] text-2xl mb-5 group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
         {s.icon}
       </div>
@@ -1066,7 +1066,7 @@ export default function HomePage() {
   style={{ transformStyle: "preserve-3d", minHeight: "320px", transform: flippedPlans[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}>
  {/* Front face — just plan name big & bold */}
  <div className={`absolute inset-0 p-8 text-center backface-hidden flex flex-col items-center justify-center transition-all duration-300 ${
-  p.badge ? "border-[3px] border-[#DF3131] shadow-lg shadow-[#DF3131]/10 bg-white dark:bg-[#2b2b2e]" : "border border-[#E2E2E2] hover:border-[#DF3131] bg-white dark:bg-[#2b2b2e]"
+  p.badge ? "border-[3px] border-[#DF3131] shadow-lg shadow-[#DF3131]/10 bg-white dark:bg-[#252528]" : "border border-[#E2E2E2] hover:border-[#DF3131] bg-white dark:bg-[#252528]"
  }`} style={{ backfaceVisibility: "hidden" }}>
  {p.badge && (
   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#DF3131] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 whitespace-nowrap">
@@ -1125,7 +1125,7 @@ export default function HomePage() {
 
  {/* ═══ CLIENTS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 bg-white dark:bg-[#232326] overflow-hidden">
+ <section className="py-12 bg-white dark:bg-[#1C1C1E] overflow-hidden">
   <div className="max-w-6xl mx-auto px-6 text-center mb-4">
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-4">Clients</h2>
  </div>
@@ -1140,7 +1140,7 @@ export default function HomePage() {
 
   {/* ═══ FAQ ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 bg-white dark:bg-[#232326] border-t border-[#E2E2E2] dark:border-[#444]">
+ <section className="py-12 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
   <div className="max-w-7xl mx-auto px-6">
   <div className="relative flex flex-col lg:flex-row gap-8">
   <div className="lg:w-1/3 lg:sticky lg:top-28 lg:self-start">
@@ -1154,7 +1154,7 @@ export default function HomePage() {
   placeholder="Search questions..."
   value={faqSearch}
   onChange={(e) => setFaqSearch(e.target.value)}
-  className="w-full pl-10 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] text-sm text-[#333] dark:text-white outline-none focus:border-[#DF3131] transition-colors rounded-lg"
+  className="w-full pl-10 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-sm text-[#333] dark:text-white outline-none focus:border-[#DF3131] transition-colors rounded-lg"
   />
  </div>
  <p className="text-[13px] text-[#888] dark:text-white/50">{filteredFaq.length} question{filteredFaq.length !== 1 ? "s" : ""} found</p>
@@ -1172,7 +1172,7 @@ export default function HomePage() {
   onClick={() => setOpenFaq(openFaq === i ? null : i)}
   className="w-full text-left px-4 sm:px-6 py-4 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
   <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold transition-all duration-300 flex-shrink-0 ${
-  openFaq === i ? "bg-[#DF3131] text-white rotate-45" : "bg-[#F5F5F3] dark:bg-[#2b2b2e] text-[#333] dark:text-white"
+  openFaq === i ? "bg-[#DF3131] text-white rotate-45" : "bg-[#F5F5F3] dark:bg-[#252528] text-[#333] dark:text-white"
   }`}>+</span>
    <span className={`font-heading font-bold text-[13px] sm:text-sm tracking-[0.02em] transition-colors ${
    openFaq === i ? "text-[#DF3131]" : "text-[#333] dark:text-white"
@@ -1206,7 +1206,7 @@ export default function HomePage() {
 
  {/* ═══ VALUE CARDS ═══ */}
  <ScrollReveal animation="fadeUp">
- <section className="py-8 sm:py-10 lg:py-14 bg-white dark:bg-[#232326] border-t border-[#E2E2E2] dark:border-[#444]">
+ <section className="py-8 sm:py-10 lg:py-14 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
  {[
@@ -1243,13 +1243,13 @@ export default function HomePage() {
 
  {/* ═══ QUICK LINKS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 bg-white dark:bg-[#232326]">
+ <section className="py-12 bg-white dark:bg-[#1C1C1E]">
   <div className="max-w-6xl mx-auto px-6 text-center">
   <h2 className="text-[1.1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] uppercase mb-4">Quick Links</h2>
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 sm:gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8 max-w-5xl mx-auto">
  {QUICK_LINKS.map((link) => (
   <Link key={link.label} href={link.href}
-  className="bg-[#F5F5F5] dark:bg-[#2b2b2e] border-2 border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-white py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:border-[#DF3131] dark:hover:text-white transition-all text-center">
+  className="bg-[#F5F5F5] dark:bg-[#252528] border-2 border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-white py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:border-[#DF3131] dark:hover:text-white transition-all text-center">
  {link.label}
  </Link>
  ))}

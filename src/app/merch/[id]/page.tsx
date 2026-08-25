@@ -34,7 +34,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   if (!product) {
     return (
-      <main className="min-h-screen bg-white dark:bg-[#232326] flex items-center justify-center pt-32 lg:pt-40">
+      <main className="min-h-screen bg-white dark:bg-[#1C1C1E] flex items-center justify-center pt-32 lg:pt-40">
         <div className="text-center">
           <h1 className="font-heading font-black text-[2rem] text-[#333] dark:text-[#e0e0e0] mb-4">Product Not Found</h1>
           <Link href="/merch" className="text-[#DF3131] font-bold hover:underline">Back to Shop</Link>
@@ -56,7 +56,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#232326] pb-20">
+    <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
       {/* Breadcrumb */}
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40 pb-6">
         <nav className="flex items-center gap-2 text-[13px] text-[#888] dark:text-[#aaa]">
@@ -71,7 +71,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Image */}
           <ScrollReveal animation="fadeUp">
-            <div className="relative aspect-square overflow-hidden bg-[#f5f5f5] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] group">
+            <div className="relative aspect-square overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] group">
               <Image src={product.image} alt={product.name} fill className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" priority />
               {product.badge && (
                 <div className="absolute top-4 left-4 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] px-3 py-1 uppercase z-10">
@@ -120,7 +120,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <div className="flex flex-wrap gap-2">
                   {product.sizes.map((s, i) => (
                     <button key={i} onClick={() => setSelectedSize(i)}
-                      className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] border transition-all ${i === selectedSize ? "bg-[#DF3131] text-white border-[#DF3131]" : "bg-white dark:bg-[#2b2b2e] text-[#333] dark:text-[#e0e0e0] border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131]"}`}>
+                      className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] border transition-all ${i === selectedSize ? "bg-[#DF3131] text-white border-[#DF3131]" : "bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131]"}`}>
                       {s}
                     </button>
                   ))}
@@ -179,7 +179,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {related.map(p => (
                   <Link key={p.id} href={`/merch/${p.id}`} className="group">
-                    <div className="relative aspect-square overflow-hidden bg-[#f5f5f5] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all mb-3">
+                    <div className="relative aspect-square overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all mb-3">
                       <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <p className="font-heading font-bold text-[14px] text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors">{p.name}</p>

@@ -163,7 +163,7 @@ function DynamicContentUnderHero() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {features.map((f) => (
-            <div key={f.title} className="bg-white dark:bg-[#2b2b2e] p-6 sm:p-8 rounded-xl border border-[#E2E2E2] dark:border-[#444] shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 transition-all text-center">
+            <div key={f.title} className="bg-white dark:bg-[#252528] p-6 sm:p-8 rounded-xl border border-[#E2E2E2] dark:border-[#444] shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 transition-all text-center">
               <div className="text-[2.5rem] sm:text-[3rem] mb-4">{f.icon}</div>
               <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.05em] mb-2">{f.title}</h3>
               <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">{f.desc}</p>
@@ -240,7 +240,7 @@ function AccordionGallery() {
             <div key={item.id} className="border-b border-[#E2E2E2] dark:border-[#444] last:border-b-0">
               <button
                 onClick={() => setOpenId(openId === item.id ? null : item.id)}
-                className="w-full flex items-center gap-4 p-4 sm:p-6 text-left hover:bg-[#f5f5f5] dark:hover:bg-[#2b2b2e] transition-all"
+                className="w-full flex items-center gap-4 p-4 sm:p-6 text-left hover:bg-[#f5f5f5] dark:hover:bg-[#252528] transition-all"
               >
                 <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
                   <SafeImage src={item.model} alt={item.name} className="w-full h-full object-cover" />

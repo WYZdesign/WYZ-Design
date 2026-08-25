@@ -102,7 +102,7 @@ export default function ServicesPage() {
  const filtered = active === "All Services" ? allServices : allServices.filter(s => s.cat === active);
 
 return (
-  <main className="pb-12 bg-white dark:bg-[#232326]">
+  <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
@@ -133,7 +133,7 @@ return (
   </ScrollReveal>
 
 {/* ═══ SERVICES MARQUEE ═══ */}
-  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#232326]">
+  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
@@ -157,7 +157,7 @@ return (
  className={`relative px-4 py-2.5 text-[12px] font-bold tracking-[0.1em] uppercase rounded-full transition-all duration-300 shrink-0 ${
  isActive
  ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30 scale-105"
-  : "bg-white dark:bg-[#2b2b2e] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
+  : "bg-white dark:bg-[#252528] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
  }`}>
  {cat}
  </button>

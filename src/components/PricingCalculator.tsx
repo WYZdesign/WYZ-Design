@@ -58,7 +58,7 @@ export default function PricingCalculator() {
   const activeCount = Object.values(selected).filter(q => q > 0).length;
 
   return (
-    <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-2xl overflow-hidden">
+    <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl overflow-hidden">
       {/* Service Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-[#E2E2E2] dark:bg-[#444]">
         {SERVICES.map(service => {
@@ -66,7 +66,7 @@ export default function PricingCalculator() {
           const isActive = qty > 0;
           return (
             <div key={service.name}
-              className={`p-4 bg-white dark:bg-[#2b2b2e] transition-all ${isActive ? "ring-2 ring-[#DF3131] ring-inset" : ""}`}>
+              className={`p-4 bg-white dark:bg-[#252528] transition-all ${isActive ? "ring-2 ring-[#DF3131] ring-inset" : ""}`}>
               <button onClick={() => toggle(service.name)}
                 className={`w-full text-left mb-2 transition-colors ${isActive ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131]"}`}>
                 <p className="font-heading font-bold text-[13px] tracking-[0.02em]">{service.name}</p>

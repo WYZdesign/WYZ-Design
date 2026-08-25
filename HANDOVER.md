@@ -2,9 +2,18 @@
 
 One running file, overwritten each round. Torreé relays it into the repo (Claude has read-only repo access).
 
+## Session 23 — Dark mode palette corrections across entire codebase
+**Date:** 2026-08-25
+**Changes:**
+- Replaced `#232326` → `#1C1C1E` (page background) in 38 files
+- Replaced `#2b2b2e` → `#252528` (surface/card) in 34 files
+- Replaced `#161618` → `#111` (deep color) in 1 file (globals.css)
+- Total: 48 unique files touched, all dark mode hex values now match design convention
+- `tsc --noEmit` clean
+
 ## Deployment State
 
-- **Last commit:** `8a58c02` (Session 22 — dark mode legal pages, fragment keys, layout dedup, contractions)
+- **Last commit:** `pending` (Session 23 — dark mode palette corrections)
 - **Build status:** `tsc --noEmit` clean
 - **Vercel:** Auto-deploys from `master` — all builds passing. Stripe checkout confirmed working on production.
 - **Supabase:** `form_submissions`, `bk_transactions`, `bk_clients`, `bk_categories` tables + `wyzdesign-uploads` storage bucket + `stripe_events` table

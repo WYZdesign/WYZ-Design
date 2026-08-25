@@ -77,7 +77,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <main className="pb-20 bg-white dark:bg-[#232326]">
+    <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
@@ -115,7 +115,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           ))}
         </div>
 
-        <div className="mt-14 p-8 bg-[#F5F5F3] dark:bg-[#2b2b2e] rounded-xl text-center">
+        <div className="mt-14 p-8 bg-[#F5F5F3] dark:bg-[#252528] rounded-xl text-center">
           <p className="text-[#333] dark:text-[#e0e0e0] font-heading font-bold text-[1.1rem] mb-2">Written by {BLOG_AUTHOR.name}</p>
           <p className="text-[#666] dark:text-[#999] text-[14px] mb-5">Founder of WYZ Design. Photography, design, and the business of making things that look good.</p>
           <Link href="/contact" className="inline-block px-8 py-3 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.1em] uppercase rounded-full hover:bg-[#B82020] transition-colors">

@@ -57,7 +57,7 @@ export default function ReferralPage() {
   const shareText = "Check out WYZ Design for photography, design, and branding!";
 
   return (
-    <main className="pb-16 bg-white dark:bg-[#232326]">
+    <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
         <div className="text-center mb-12">
           <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-2">Earn Together</p>
@@ -84,7 +84,7 @@ export default function ReferralPage() {
 
         {data && (
           <>
-            <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10">
+            <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10">
               <div className="text-center mb-6">
                 <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#888] dark:text-white/50 mb-2">Your Referral Code</p>
                 <p className="text-[2.5rem] font-heading font-black text-[#DF3131] tracking-[0.1em]">{data.code}</p>
@@ -114,24 +114,24 @@ export default function ReferralPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-              <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
+              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
                 <FiUsers className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
                 <p className="text-[2rem] font-heading font-black text-[#333] dark:text-white">{data.signups}</p>
                 <p className="text-[13px] text-[#888] dark:text-white/50 uppercase tracking-wider">Signups</p>
               </div>
-              <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
+              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
                 <FiDollarSign className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
                 <p className="text-[2rem] font-heading font-black text-[#333] dark:text-white">{data.purchases}</p>
                 <p className="text-[13px] text-[#888] dark:text-white/50 uppercase tracking-wider">Purchases</p>
               </div>
-              <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
+              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
                 <FiDollarSign className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
                 <p className="text-[2rem] font-heading font-black text-[#DF3131]">${data.pendingCommission.toFixed(2)}</p>
                 <p className="text-[13px] text-[#888] dark:text-white/50 uppercase tracking-wider">Pending Commission</p>
               </div>
             </div>
 
-            <div className="bg-[#F5F5F3] dark:bg-[#2b2b2e] rounded-2xl p-8">
+            <div className="bg-[#F5F5F3] dark:bg-[#252528] rounded-2xl p-8">
               <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] uppercase text-[#333] dark:text-white mb-6 text-center">How It Works</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div className="text-center">

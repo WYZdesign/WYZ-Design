@@ -50,14 +50,14 @@ export default function ArtfinixCaseStudy() {
               { title: "Photography Suite", desc: "Event photos, student portraits, and environmental shots for web and social use." },
               { title: "Iteration Strategy", desc: "Plan for testing audience response and refining future commercials based on data." },
             ].map(d => (
-              <div key={d.title} className="bg-[#F5F5F3] dark:bg-[#2b2b2e] p-6">
+              <div key={d.title} className="bg-[#F5F5F3] dark:bg-[#252528] p-6">
                 <h3 className="font-heading font-bold text-[15px] text-[#333] dark:text-[#e0e0e0] mb-3">{d.title}</h3>
                 <p className="text-[14px] text-[#666] dark:text-[#888]">{d.desc}</p>
               </div>
             ))}
           </div>
 
-          <div className="text-center bg-[#F5F5F3] dark:bg-[#2b2b2e] p-12">
+          <div className="text-center bg-[#F5F5F3] dark:bg-[#252528] p-12">
             <p className="text-[#666] dark:text-[#888] text-[15px] italic mb-6 max-w-xl mx-auto leading-relaxed">
               This project shows WYZ Design is not just a content production shop. It is a strategic creative partner that translates mission into visual narrative.
             </p>

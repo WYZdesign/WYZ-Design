@@ -106,7 +106,7 @@ export default function AboutPage() {
       </ScrollReveal>
 
       {/* ═══ BRAND MARQUEE ═══ */}
-      <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#232326]">
+      <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
         {(["WILD YET ZEALOUS","DYING BREED CREW","NOMADIC BREED","CHICAGO","LOS ANGELES"] as const).map((word, i) => {
           const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
           return (
@@ -120,7 +120,7 @@ export default function AboutPage() {
 
       {/* MISSION */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#232326]">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-5xl mx-auto px-6">
             <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
               OUR <span className="text-[#DF3131]">MISSION</span>
@@ -142,7 +142,7 @@ export default function AboutPage() {
 
       {/* FOUNDER */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-[#F5F5F3] dark:bg-[#2b2b2e]">
+        <section className="py-16 sm:py-20 lg:py-24 bg-[#F5F5F3] dark:bg-[#252528]">
           <div className="max-w-4xl mx-auto px-6">
             <div className="flex flex-col items-center gap-12 text-center">
               <div className="w-full max-w-md">
@@ -183,7 +183,7 @@ export default function AboutPage() {
 
       {/* BRANDS UNDER WYZ */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#232326]">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
               THE <span className="text-[#DF3131]">BRANDS</span>
@@ -194,7 +194,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {SUB_BRANDS.map((brand, i) => (
                 <div key={i} className="relative group">
-                  <div className="p-8 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full text-center">
+                  <div className="p-8 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full text-center">
                     <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full mx-auto" style={{ background: brand.color }} />
                     <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: brand.color }}>{brand.tagline}</span>
                     <h3 className="font-heading font-black text-[#333] dark:text-white text-[18px] sm:text-[20px] tracking-[0.04em] uppercase mb-3">{brand.name}</h3>
@@ -231,7 +231,7 @@ export default function AboutPage() {
 
       {/* BY THE NUMBERS */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#232326]">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-5xl mx-auto px-6">
             <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
               BY THE <span className="text-[#DF3131]">NUMBERS</span>

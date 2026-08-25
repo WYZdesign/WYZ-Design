@@ -67,7 +67,7 @@ export default function PhotoRetouching() {
                 <li className="flex items-start gap-3"><span className="text-[#DF3131] mt-1">→</span> Composite &amp; manipulation work</li>
               </ul>
             </div>
-            <div className="bg-[#f5f5f5] dark:bg-[#2b2b2e] p-8">
+            <div className="bg-[#f5f5f5] dark:bg-[#252528] p-8">
               <h3 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-3">Pricing</h3>
               <div className="space-y-4">
                 <div className="border-b border-gray-200 dark:border-[#444] pb-4">

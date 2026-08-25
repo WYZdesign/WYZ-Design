@@ -17,7 +17,7 @@ const INCLUDES = [
 
 export default function MatchPage() {
   return (
-    <main className="pb-16 bg-white dark:bg-[#232326]">
+    <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
         <div className="text-center mb-14">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">M A T C H</h1>
@@ -34,7 +34,7 @@ export default function MatchPage() {
           ))}
         </div>
 
-        <div className="bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-10 mb-12">
+        <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-10 mb-12">
           <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333] dark:text-white tracking-[0.1em] mb-4">What You Get</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {INCLUDES.map((item, i) => (

@@ -9,7 +9,7 @@ export default function MyAccountPage() {
     router.replace("/admin");
   }, [router]);
   return (
-    <div className="min-h-screen bg-white dark:bg-[#232326] flex items-center justify-center">
+    <div className="min-h-screen bg-white dark:bg-[#1C1C1E] flex items-center justify-center">
       <p className="text-[#888] dark:text-white/50">Redirecting...</p>
     </div>
   );

@@ -49,13 +49,13 @@ function SearchContent() {
   }, [query]);
 
   return (
-    <main className="pb-16 bg-white dark:bg-[#232326]">
+    <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-3xl mx-auto px-6">
         <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">S E A R C H</h1>
         <div className="relative mb-10">
           <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#8F8F8F] w-5 h-5" />
           <input type="text" value={query} onChange={e => setQuery(e.target.value)} autoFocus placeholder="Search pages, services, content..."
-            className="w-full pl-14 pr-6 py-4 bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-xl text-[#333] dark:text-white text-lg outline-none focus:border-[#DF3131] transition-colors" />
+            className="w-full pl-14 pr-6 py-4 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl text-[#333] dark:text-white text-lg outline-none focus:border-[#DF3131] transition-colors" />
         </div>
         {query.trim() && (
           <p className="text-[#8F8F8F] text-sm mb-6">{results.length} result{results.length !== 1 ? "s" : ""} for &ldquo;{query}&rdquo;</p>
@@ -63,7 +63,7 @@ function SearchContent() {
         <div className="space-y-3">
           {results.map((r, i) => (
             <Link key={i} href={r.href}
-              className="block bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-5 hover:shadow-md hover:border-[#DF3131]/30 transition-all group">
+              className="block bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-5 hover:shadow-md hover:border-[#DF3131]/30 transition-all group">
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-heading font-bold text-[#333] dark:text-white group-hover:text-[#DF3131] transition-colors mb-3">{r.title}</h3>

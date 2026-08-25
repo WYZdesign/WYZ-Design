@@ -111,7 +111,7 @@ export default function CookieBanner() {
       aria-label="Cookie consent"
       aria-modal="true"
     >
-      <div className="bg-white dark:bg-[#232326] border-t-2 border-[#DF3131] sm:border-2 sm:border-[#E2E2E2] dark:border-[#444] sm:rounded-xl shadow-2xl sm:shadow-xl p-5 sm:p-6 max-h-[75vh] overflow-y-auto">
+      <div className="bg-white dark:bg-[#1C1C1E] border-t-2 border-[#DF3131] sm:border-2 sm:border-[#E2E2E2] dark:border-[#444] sm:rounded-xl shadow-2xl sm:shadow-xl p-5 sm:p-6 max-h-[75vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <FiGlobe className="w-6 h-6 text-[#DF3131] flex-shrink-0" />

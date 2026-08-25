@@ -27,7 +27,7 @@ export default function ConceptArchivePage() {
   const filtered = activeCollection === "All" ? CONCEPTS : CONCEPTS.filter(c => c.category === activeCollection);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#232326] pb-20">
+    <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
       {/* Hero */}
       <section className="relative min-h-[50vh] flex items-center justify-center bg-[#111] overflow-hidden hero-banner">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20" />
@@ -51,7 +51,7 @@ export default function ConceptArchivePage() {
                 className={`px-5 py-2.5 text-[12px] font-bold tracking-[0.1em] uppercase rounded-full transition-all duration-300 ${
                   activeCollection === col
                     ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30 scale-105"
-                    : "bg-white dark:bg-[#2b2b2e] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
+                    : "bg-white dark:bg-[#252528] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
                 }`}>
                 {col}
               </button>
@@ -67,7 +67,7 @@ export default function ConceptArchivePage() {
                 className="group cursor-pointer"
                 onClick={() => setExpandedConcept(expandedConcept === i ? null : i)}
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f5] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-500 hover:shadow-2xl hover:shadow-[#DF3131]/10">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-500 hover:shadow-2xl hover:shadow-[#DF3131]/10">
                   <Image src={concept.img} alt={concept.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">

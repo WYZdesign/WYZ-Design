@@ -67,7 +67,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   >
   {/* Front */}
   <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
-  <div className="overflow-hidden bg-white dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-500 hover:shadow-2xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
+  <div className="overflow-hidden bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-500 hover:shadow-2xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
   <div className="aspect-[4/3] overflow-hidden relative">
   <Image src={sticker.img} alt={sticker.name} fill className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" priority />
   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -136,7 +136,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
       >
       {/* Front */}
       <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
-        <div className="border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#2b2b2e] p-8 lg:p-10 text-center hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10 h-full flex flex-col justify-center">
+        <div className="border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] p-8 lg:p-10 text-center hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10 h-full flex flex-col justify-center">
           <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors mb-4">{title}</h2>
           <p className="text-[#DF3131] text-[16px] tracking-[0.1em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">{subtitle}</p>
           <div className="mt-6 flex items-center justify-center gap-2 text-[13px] text-[#888] dark:text-[#aaa]">
@@ -168,7 +168,7 @@ export default function PrintingPage() {
 
  return (
  <>
-  <main className="min-h-screen bg-white dark:bg-[#232326] pb-20">
+  <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
 {/* ── Hero: Split with Video ── */}
   <ScrollReveal animation="fadeUp">
   <section className="relative bg-white dark:bg-black pb-6">
@@ -194,7 +194,7 @@ export default function PrintingPage() {
   </ScrollReveal>
 
 {/* ═══ PRINTING MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#232326]">
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["FLYERS","POSTERS","BUSINESS CARDS","STICKERS","BANNERS","PHOTO PRINTS"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (

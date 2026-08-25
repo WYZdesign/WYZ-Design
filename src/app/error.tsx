@@ -15,7 +15,7 @@ export default function Error({
   }, [reset]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-white dark:bg-[#232326] px-6">
+    <main className="min-h-screen flex items-center justify-center bg-white dark:bg-[#1C1C1E] px-6">
       <div className="text-center max-w-md">
         <p className="text-[#DF3131] text-[11px] font-heading font-bold tracking-[0.3em] uppercase mb-4">WYZ Design</p>
         <h1 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.03em] leading-none mb-4">

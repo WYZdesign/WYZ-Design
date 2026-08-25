@@ -81,7 +81,7 @@ export default function ConsultationCalendar() {
   if (submitted) {
     return (
       <>
-<main className="min-h-screen bg-white dark:bg-[#232326] pb-20">
+<main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
           <div className="max-w-lg mx-auto px-6 text-center">
             <div className="w-16 h-16 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-6">
               <span className="text-white text-2xl">✓</span>
@@ -102,7 +102,7 @@ export default function ConsultationCalendar() {
 
   return (
     <>
-<main className="min-h-screen bg-white dark:bg-[#232326] pb-20">
+<main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
         <div className="max-w-5xl mx-auto px-6">
           <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm mb-2">Free Session</p>
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-white mb-6 sm:mb-8">
@@ -170,12 +170,12 @@ export default function ConsultationCalendar() {
             </div>
 
             <div className="lg:col-span-2">
-              <div className="bg-[#f5f5f5] dark:bg-[#2b2b2e] p-6 sticky top-28">
+              <div className="bg-[#f5f5f5] dark:bg-[#252528] p-6 sticky top-28">
                 <h3 className="text-lg font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-3">Your Details</h3>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Topic</label>
-                    <select value={topic} onChange={(e) => setTopic(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#2b2b2e] dark:text-[#e0e0e0]">
+                    <select value={topic} onChange={(e) => setTopic(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]">
                       <option value="branding">Branding &amp; Identity</option>
                       <option value="photography">Photography</option>
                       <option value="web">Web Design</option>
@@ -186,19 +186,19 @@ export default function ConsultationCalendar() {
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Full Name *</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#2b2b2e] dark:text-[#e0e0e0]" />
+                    <input value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Email *</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#2b2b2e] dark:text-[#e0e0e0]" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Phone</label>
-                    <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#2b2b2e] dark:text-[#e0e0e0]" />
+                    <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">What do you want to discuss?</label>
-                    <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm resize-none bg-white dark:bg-[#2b2b2e] dark:text-[#e0e0e0]" placeholder="Tell us about your project..." />
+                    <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm resize-none bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" placeholder="Tell us about your project..." />
                   </div>
                   <button
                     onClick={handleSubmit}

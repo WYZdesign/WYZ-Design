@@ -40,7 +40,7 @@ const breadcrumbJsonLd = {
 
 export default function BrandsPage() {
   return (
-    <main className="pb-20 bg-white dark:bg-[#232326]">
+    <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
 
@@ -60,7 +60,7 @@ export default function BrandsPage() {
             <Link
               key={b.name}
               href={b.href}
-              className="group relative overflow-hidden rounded-2xl border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#2b2b2e] p-8 transition-all hover:-translate-y-1 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-2xl border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] p-8 transition-all hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="absolute top-0 left-0 w-full h-1.5" style={{ background: b.color }} />
               <span className="inline-block text-[12px] font-bold tracking-[0.15em] uppercase mb-3" style={{ color: b.color }}>
@@ -75,7 +75,7 @@ export default function BrandsPage() {
           ))}
         </div>
 
-        <div className="text-center p-8 bg-[#F5F5F3] dark:bg-[#2b2b2e] rounded-2xl">
+        <div className="text-center p-8 bg-[#F5F5F3] dark:bg-[#252528] rounded-2xl">
           <p className="text-[#333] dark:text-[#e0e0e0] font-heading font-bold text-[1.15rem] mb-1">Built by Torreé Marcel Harris</p>
           <p className="text-[#666] dark:text-[#999] text-[14px]">
             Founder and Creative Director of WYZ Design and its family of brands.{" "}

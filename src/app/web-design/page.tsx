@@ -254,7 +254,7 @@ return (
         </section>
 
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
-        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-6 bg-white dark:bg-[#232326]">
+        <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-6 bg-white dark:bg-[#1C1C1E]">
           {(["RESPONSIVE","SEO","E-COMMERCE","LANDING PAGES","CMS","CUSTOM CODE"] as const).map((word, i) => {
             const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
             return (
@@ -268,7 +268,7 @@ return (
 
         {/* ═══ CAPABILITIES — Scroll reveal ═══ */}
         <ScrollReveal animation="fadeUp">
-          <section className="pt-6 pb-20 bg-white dark:bg-[#232326]">
+          <section className="pt-6 pb-20 bg-white dark:bg-[#1C1C1E]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-8">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT WE DO</span>
@@ -320,7 +320,7 @@ return (
 
         {/* ═══ CLIENT PORTFOLIO — Interactive grid ═══ */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
-          <section id="portfolio" className="py-20 bg-[#F5F5F3] dark:bg-[#2b2b2e]">
+          <section id="portfolio" className="py-20 bg-[#F5F5F3] dark:bg-[#252528]">
             <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-12">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">OUR WORK</span>
@@ -348,7 +348,7 @@ return (
                   { quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to help artists level up.", name: "Tim Perez", role: "Google Review" },
                   { quote: "Consistency in every aspect of service. Made me an established brand and has got me so many opportunities. Don't hesitate to bring your business here.", name: "Robert Sykes Jr", role: "Google Review" },
                 ].map((t) => (
-                  <div key={t.name} className="bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 hover:shadow-xl hover:shadow-[#DF3131]/5 transition-all">
+                  <div key={t.name} className="bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 hover:shadow-xl hover:shadow-[#DF3131]/5 transition-all">
                     <div className="flex gap-1 mb-4 text-[#D49341]">
                       {[...Array(5)].map((_, i) => <FiStar key={i} className="w-4 h-4 fill-current" />)}
                     </div>
@@ -366,7 +366,7 @@ return (
 
         {/* ═══ PRICING ═══ */}
         <ScrollReveal animation="fadeUp">
-          <section className="py-20 bg-white dark:bg-[#232326]">
+          <section className="py-20 bg-white dark:bg-[#1C1C1E]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-14">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">PRICING</span>

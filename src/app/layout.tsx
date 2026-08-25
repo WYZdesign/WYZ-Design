@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-title" content="WYZ Design" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#DF3131" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#232326" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)" />
         <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}a{text-decoration:none}img{max-width:100%;height:auto}` }} />
         <script dangerouslySetInnerHTML={{ __html: `
           (function () {
@@ -317,7 +317,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
 
       </head>
-      <body className="min-h-full flex flex-col bg-white dark:bg-[#232326] text-[#333333] dark:text-[#e0e0e0] antialiased cursor-none lg:cursor-none max-lg:cursor-auto">
+      <body className="min-h-full flex flex-col bg-white dark:bg-[#1C1C1E] text-[#333333] dark:text-[#e0e0e0] antialiased cursor-none lg:cursor-none max-lg:cursor-auto">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
           <AuthProvider>
@@ -328,7 +328,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AnalyticsTracker />
           <Navbar />
           <ErrorBoundary>
-          <div id="main-content" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#232326]" tabIndex={-1}>
+          <div id="main-content" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#1C1C1E]" tabIndex={-1}>
             <PageTransition>{children}</PageTransition>
           </div>
           <Footer />
