@@ -117,10 +117,10 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
             <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center mb-3">{p.name}</h3>
             <div className="mt-2 text-center">
               <span className="whitespace-nowrap text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
-              <span className="text-[#8F8F8F] text-sm">/month</span>
+              <span className="text-[#666] text-sm">/month</span>
             </div>
             <span className="inline-block mt-1 text-[14px] text-[#DF3131] font-semibold text-center">{p.value}</span>
-            <p className="text-[13px] text-[#8F8F8F] text-center">Valid for 3 months</p>
+            <p className="text-[13px] text-[#666] text-center">Valid for 3 months</p>
           </div>
           <div className="p-7 flex flex-col items-center justify-center text-center">
             <ul className="space-y-2 text-center w-full">
@@ -197,7 +197,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
           )}
           <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center mb-3">{w.name}</h3>
           <div className="mt-2 text-center">
-            <span className="text-xs text-[#8F8F8F] dark:text-white/40 line-through">{w.original}</span>{" "}
+            <span className="text-xs text-[#666] dark:text-white/40 line-through">{w.original}</span>{" "}
             <span className="whitespace-nowrap text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-black text-[#333333] dark:text-white">{w.discounted}</span>
           </div>
           <p className="text-[16px] text-[#666666] dark:text-white/60 mt-2 text-center">{w.desc}</p>
@@ -442,16 +442,16 @@ export default function PlansPage() {
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
                      <td className="p-4 text-[#666] dark:text-white/70">Web Design + Maintenance</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
                      <td className="p-4 text-[#666] dark:text-white/70">Event Planning</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
@@ -470,15 +470,15 @@ export default function PlansPage() {
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
                      <td className="p-4 text-[#666] dark:text-white/70">Priority Support</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
-                     <td className="p-4 text-center text-[#888]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
+                     <td className="p-4 text-center text-[#666]">×</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                    </tr>
                  </tbody>
                </table>
              </div>
-              <p className="mt-6 text-center text-[#8F8F8F] text-[14px]">
+              <p className="mt-6 text-center text-[#666] text-[14px]">
                 All plans auto-renew monthly. Cancel anytime. <Link href="/services" className="text-[#DF3131] hover:underline">View individual services</Link>
               </p>
           </div>
@@ -486,7 +486,7 @@ export default function PlansPage() {
         </ScrollReveal>
 
         {/* Auto-renew disclaimer */}
-        <p className="mt-8 text-[16px] text-[#8F8F8F] text-center max-w-3xl mx-auto leading-relaxed text-center">
+        <p className="mt-8 text-[16px] text-[#666] text-center max-w-3xl mx-auto leading-relaxed text-center">
           All subscription plans auto-renew monthly or quarterly. You can cancel at any time by contacting our
           customer support team or through your online account. If you cancel before the end of your current
           subscription period, your subscription will still be active until the end of the current period, and
@@ -500,7 +500,7 @@ export default function PlansPage() {
               <div className="text-center mb-8">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">ESTIMATE YOUR COST</span>
                 <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">PRICING CALCULATOR</h2>
-                <p className="text-[#888] dark:text-[#aaa] text-[14px]">Pick what you need. See what it costs. No surprises.</p>
+                <p className="text-[#666] dark:text-[#aaa] text-[14px]">Pick what you need. See what it costs. No surprises.</p>
               </div>
               <PricingCalculator />
             </div>

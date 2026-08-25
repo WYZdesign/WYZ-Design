@@ -64,14 +64,14 @@ export default function ReferralPage() {
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">
             REFER <span className="text-[#DF3131]">&</span> EARN
           </h1>
-          <p className="text-[#8F8F8F] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">
+          <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">
             Share your unique referral link. When someone signs up or purchases, you earn 10% commission. No limits, no caps.
           </p>
         </div>
 
         {!session && (
           <div className="text-center mb-10">
-            <p className="text-[#888] dark:text-[#b0b0b0] mb-4">Sign in to get your referral code and track earnings.</p>
+            <p className="text-[#666] dark:text-[#b0b0b0] mb-4">Sign in to get your referral code and track earnings.</p>
             <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">
               Sign in
             </Link>
@@ -79,14 +79,14 @@ export default function ReferralPage() {
         )}
 
         {session && loading && (
-          <div className="text-center py-8 text-[#888]">Setting up your referral code...</div>
+          <div className="text-center py-8 text-[#666]">Setting up your referral code...</div>
         )}
 
         {data && (
           <>
             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10">
               <div className="text-center mb-6">
-                <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#888] dark:text-white/50 mb-2">Your Referral Code</p>
+                <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#666] dark:text-white/50 mb-2">Your Referral Code</p>
                 <p className="text-[2.5rem] font-heading font-black text-[#DF3131] tracking-[0.1em]">{data.code}</p>
               </div>
 
@@ -108,7 +108,7 @@ export default function ReferralPage() {
                 </a>
               </div>
 
-              <p className="text-center text-[13px] text-[#888] dark:text-white/50">
+              <p className="text-center text-[13px] text-[#666] dark:text-white/50">
                 Share this link anywhere. When someone clicks it and makes a purchase, you earn 10% commission.
               </p>
             </div>
@@ -117,17 +117,17 @@ export default function ReferralPage() {
               <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
                 <FiUsers className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
                 <p className="text-[2rem] font-heading font-black text-[#333] dark:text-white">{data.signups}</p>
-                <p className="text-[13px] text-[#888] dark:text-white/50 uppercase tracking-wider">Signups</p>
+                <p className="text-[13px] text-[#666] dark:text-white/50 uppercase tracking-wider">Signups</p>
               </div>
               <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
                 <FiDollarSign className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
                 <p className="text-[2rem] font-heading font-black text-[#333] dark:text-white">{data.purchases}</p>
-                <p className="text-[13px] text-[#888] dark:text-white/50 uppercase tracking-wider">Purchases</p>
+                <p className="text-[13px] text-[#666] dark:text-white/50 uppercase tracking-wider">Purchases</p>
               </div>
               <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
                 <FiDollarSign className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
                 <p className="text-[2rem] font-heading font-black text-[#DF3131]">${data.pendingCommission.toFixed(2)}</p>
-                <p className="text-[13px] text-[#888] dark:text-white/50 uppercase tracking-wider">Pending Commission</p>
+                <p className="text-[13px] text-[#666] dark:text-white/50 uppercase tracking-wider">Pending Commission</p>
               </div>
             </div>
 

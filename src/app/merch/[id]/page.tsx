@@ -59,7 +59,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
       {/* Breadcrumb */}
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40 pb-6">
-        <nav className="flex items-center gap-2 text-[13px] text-[#888] dark:text-[#aaa]">
+        <nav className="flex items-center gap-2 text-[13px] text-[#666] dark:text-[#aaa]">
           <Link href="/merch" className="hover:text-[#DF3131] transition-colors">Shop</Link>
           <span>/</span>
           <span className="text-[#333] dark:text-[#e0e0e0]">{product.name}</span>
@@ -96,7 +96,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </svg>
                   ))}
                 </div>
-                <span className="text-[14px] text-[#888] dark:text-[#aaa]">{product.rating} ({product.reviews} reviews)</span>
+                <span className="text-[14px] text-[#666] dark:text-[#aaa]">{product.rating} ({product.reviews} reviews)</span>
               </div>
 
               <p className="text-[2rem] font-heading font-black text-[#DF3131] mb-2">${product.price.toFixed(2)}</p>

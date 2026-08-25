@@ -25,7 +25,7 @@ export default function DawneeahsGlowCaseStudy() {
               { label: "Focus", value: "Skincare + Beauty" },
             ].map(s => (
               <div key={s.label} className="border border-[#E2E2E2] dark:border-[#444] p-6">
-                <p className="text-[11px] font-heading font-bold tracking-[0.15em] uppercase text-[#888] dark:text-[#666] mb-2">{s.label}</p>
+                <p className="text-[11px] font-heading font-bold tracking-[0.15em] uppercase text-[#666] dark:text-[#666] mb-2">{s.label}</p>
                 <p className="text-[14px] text-[#333] dark:text-[#e0e0e0]">{s.value}</p>
               </div>
             ))}

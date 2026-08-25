@@ -141,7 +141,7 @@ export default function DynamicForm({
   }
 
   const renderField = (field: FormField) => {
-    const inputClasses = "w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[14px] placeholder:text-[#8F8F8F] text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:ring-1 focus:ring-[#DF3131]/20 outline-none transition-all";
+    const inputClasses = "w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[14px] placeholder:text-[#666] text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:ring-1 focus:ring-[#DF3131]/20 outline-none transition-all";
     const wrapperClass = field.halfWidth ? "" : "sm:col-span-2";
 
     return (

@@ -74,28 +74,28 @@ export default function Photoshoot() {
                     <span className="font-semibold">Standard Session</span>
                     <span className="text-[#DF3131] font-bold">$100/hr</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">1-hour minimum. Includes 20 edited photos.</p>
+                  <p className="text-sm text-[#666] mt-1">1-hour minimum. Includes 20 edited photos.</p>
                 </div>
                 <div className="border-b border-gray-600 pb-4">
                   <div className="flex justify-between">
                     <span className="font-semibold">Half Day (4hrs)</span>
                     <span className="text-[#DF3131] font-bold">$350</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">Includes 60 edited photos.</p>
+                  <p className="text-sm text-[#666] mt-1">Includes 60 edited photos.</p>
                 </div>
                 <div className="border-b border-gray-600 pb-4">
                   <div className="flex justify-between">
                     <span className="font-semibold">Full Day (8hrs)</span>
                     <span className="text-[#DF3131] font-bold">$600</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">Includes 120+ edited photos.</p>
+                  <p className="text-sm text-[#666] mt-1">Includes 120+ edited photos.</p>
                 </div>
                 <div>
                   <div className="flex justify-between">
                     <span className="font-semibold">Add-On: Rush Delivery</span>
                     <span className="text-[#DF3131] font-bold">+$75</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">Delivery within 24 hours.</p>
+                  <p className="text-sm text-[#666] mt-1">Delivery within 24 hours.</p>
                 </div>
               </div>
             </div>

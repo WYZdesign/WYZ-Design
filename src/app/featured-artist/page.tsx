@@ -297,7 +297,7 @@ export default function FeaturedArtistPage() {
  <span className="text-white text-2xl">✓</span>
  </div>
  <p className="font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] mb-2">Application Submitted</p>
- <p className="text-[14px] text-[#888]">We&apos;ll review your submission and reach out within 48 hours.</p>
+ <p className="text-[14px] text-[#666]">We&apos;ll review your submission and reach out within 48 hours.</p>
  </div>
  ) : (
  <form onSubmit={handleSubmit} className="space-y-4">

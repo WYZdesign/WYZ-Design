@@ -1054,7 +1054,7 @@ export default function HomePage() {
   {spTab === "plans" && (
   <div className="max-w-4xl mx-auto animate-fadeIn">
    <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase .5 text-center mb-4">Pricing Plans</h2>
-   <p className="text-[#888] dark:text-white/50 text-sm mb-8 text-center">Affordable Plans for Any Budget</p>
+   <p className="text-[#666] dark:text-white/50 text-sm mb-8 text-center">Affordable Plans for Any Budget</p>
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
  {PRICING_PLANS.map((p, i) => (
  <div key={p.name}
@@ -1154,6 +1154,7 @@ export default function HomePage() {
   placeholder="Search questions..."
   value={faqSearch}
   onChange={(e) => setFaqSearch(e.target.value)}
+  aria-label="Search frequently asked questions"
   className="w-full pl-10 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-sm text-[#333] dark:text-white outline-none focus:border-[#DF3131] transition-colors rounded-lg"
   />
  </div>

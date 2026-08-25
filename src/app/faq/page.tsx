@@ -172,11 +172,11 @@ export default function FAQPage() {
               </div>
               <div className="hidden lg:flex flex-col items-center justify-center h-full px-10 lg:px-16 text-center bg-white dark:bg-[#1C1C1E]">
                 <div className="grid grid-cols-3 gap-6 mb-8">
-                  <AnimatedCounter end={12} suffix="+" className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#8F8F8F] dark:text-white/50 tracking-[0.1em] uppercase" label="Questions" />
-                  <AnimatedCounter end={6} className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#8F8F8F] dark:text-white/50 tracking-[0.1em] uppercase" label="Topics" />
+                  <AnimatedCounter end={12} suffix="+" className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Questions" />
+                  <AnimatedCounter end={6} className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Topics" />
                   <div className="text-center">
                     <p className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white">24/7</p>
-                    <p className="text-[11px] text-[#8F8F8F] dark:text-white/50 tracking-[0.1em] uppercase">AI Answers</p>
+                    <p className="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase">AI Answers</p>
                   </div>
                 </div>
                 <p className="text-[#666] dark:text-[#b0b0b0] text-[16px] max-w-sm mb-6 leading-relaxed">Can't find what you're looking for? Our AI assistant is always here to help with instant answers.</p>
@@ -192,7 +192,7 @@ export default function FAQPage() {
         <ScrollReveal animation="fadeUp" delay={0.1}>
           <div className="max-w-3xl mx-auto">
             <div className="relative">
-              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#8F8F8F] w-5 h-5" />
+              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#666] w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search questions..."
@@ -214,7 +214,7 @@ export default function FAQPage() {
               <h2 className="font-heading font-black text-[2rem] sm:text-[2.5rem] md:text-[3rem] tracking-[0.15em] text-[#333] dark:text-[#e0e0e0] uppercase mb-4">
                 ASK WYZ AI
               </h2>
-              <p className="text-[16px] text-[#8F8F8F] dark:text-[#b0b0b0] max-w-2xl mx-auto">
+              <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] max-w-2xl mx-auto">
                 Got a question? Our AI assistant knows everything about WYZ Design.
               </p>
             </div>
@@ -309,8 +309,8 @@ export default function FAQPage() {
           {filteredFaqs.length === 0 && (
             <div className="text-center py-16">
               <FiSearch className="w-12 h-12 text-[#E2E2E2] mx-auto mb-4" />
-              <p className="text-[#8F8F8F] text-lg">No questions match your search.</p>
-              <p className="text-[#8F8F8F] text-sm mt-1">Try different keywords or browse all categories.</p>
+              <p className="text-[#666] text-lg">No questions match your search.</p>
+              <p className="text-[#666] text-sm mt-1">Try different keywords or browse all categories.</p>
             </div>
           )}
           {filteredFaqs.map((faq, i) => {

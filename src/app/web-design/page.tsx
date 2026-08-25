@@ -31,7 +31,7 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
           {plan.accent && <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#333] dark:bg-[#111] text-white text-[11px] font-bold tracking-[0.1em] px-4 py-1 uppercase mb-2">★ Most Popular</span>}
           <h3 className={`font-heading font-bold text-[18px] tracking-[0.1em] uppercase mb-2 ${plan.accent ? "text-white" : "text-[#333]"}`}>{plan.name}</h3>
           <p className={`text-[2.5rem] font-heading font-black mb-4 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.price}</p>
-          <p className={`text-[12px] tracking-[0.15em] uppercase ${plan.accent ? "text-white/60" : "text-[#999]"}`}>Tap to see what&apos;s included</p>
+          <p className={`text-[12px] tracking-[0.15em] uppercase ${plan.accent ? "text-white/60" : "text-[#666]"}`}>Tap to see what&apos;s included</p>
         </div>
       </div>
       {/* Back */}
@@ -256,7 +256,7 @@ return (
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
         <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 -mt-6 bg-white dark:bg-[#1C1C1E]">
           {(["RESPONSIVE","SEO","E-COMMERCE","LANDING PAGES","CMS","CUSTOM CODE"] as const).map((word, i) => {
-            const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+            const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
             return (
               <span key={i} className="inline-flex items-center">
                 <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[i % 4]}`}>{word}</span>
@@ -282,7 +282,7 @@ return (
                       {c.icon}
                     </div>
                     <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] tracking-[0.05em] uppercase mb-3">{c.title}</h3>
-                    <p className="text-[13px] text-[#888] dark:text-white/50 leading-relaxed">{c.desc}</p>
+                    <p className="text-[13px] text-[#666] dark:text-white/50 leading-relaxed">{c.desc}</p>
                   </div>
                 ))}
               </div>
@@ -325,7 +325,7 @@ return (
               <div className="text-center mb-12">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">OUR WORK</span>
                 <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">CLIENT PORTFOLIO</h2>
-                <p className="text-[#888] dark:text-white/50 text-[14px] mt-3 max-w-lg mx-auto">Tap any card to visit the live site. Real clients, real results.</p>
+                <p className="text-[#666] dark:text-white/50 text-[14px] mt-3 max-w-lg mx-auto">Tap any card to visit the live site. Real clients, real results.</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {CLIENT_SITES.map((site, i) => <SiteCard key={site.name} site={site} index={i} />)}
@@ -355,7 +355,7 @@ return (
                     <p className="text-[#333] dark:text-[#e0e0e0] text-[15px] leading-relaxed mb-6 italic">&quot;{t.quote}&quot;</p>
                     <div>
                       <p className="font-heading font-bold text-[14px] text-[#333] dark:text-[#e0e0e0]">{t.name}</p>
-                      <p className="text-[12px] text-[#888] dark:text-[#aaa]">{t.role}</p>
+                      <p className="text-[12px] text-[#666] dark:text-[#aaa]">{t.role}</p>
                     </div>
                   </div>
                 ))}

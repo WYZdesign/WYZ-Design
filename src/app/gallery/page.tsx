@@ -32,7 +32,7 @@ function GalleryLightbox({ images, index, onClose, onPrev, onNext }: {
  useEffect(() => { document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = ""; }; }, []);
  return (
  <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={onClose} {...swipe}>
- <button className="absolute top-6 right-6 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={onClose}><FiX className="w-8 h-8" /></button>
+ <button className="absolute top-6 right-6 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={onClose} aria-label="Close"><FiX className="w-8 h-8" /></button>
  <button className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onPrev(); }}><FiChevronLeft className="w-10 h-10" /></button>
  <img src={images[index].src} alt={images[index].cat} width={900} height={600} className="max-h-[85vh] max-w-[90vw] object-contain select-none" draggable={false} onClick={(e) => e.stopPropagation()} />
  <button className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onNext(); }}><FiChevronRight className="w-10 h-10" /></button>
@@ -70,7 +70,7 @@ export default function GalleryPage() {
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
  <div className="mb-8 text-center">
   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">G A L L E R Y</h1>
-  <p className="text-[#8F8F8F] dark:text-[#b0b0b0] text-sm mt-2">Our complete portfolio of work</p>
+  <p className="text-[#666] dark:text-[#b0b0b0] text-sm mt-2">Our complete portfolio of work</p>
  </div>
  <div className="flex gap-3 mb-8 flex-wrap justify-center">
  {CATS.map(c => (
@@ -91,7 +91,7 @@ export default function GalleryPage() {
   </div>
   ))}
  </div>
- {filtered.length === 0 && <p className="text-center text-[#8F8F8F] py-20">No images in this category.</p>}
+ {filtered.length === 0 && <p className="text-center text-[#666] py-20">No images in this category.</p>}
  </div>
 
  {lightbox !== null && (

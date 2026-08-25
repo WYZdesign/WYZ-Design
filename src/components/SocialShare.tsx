@@ -25,7 +25,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
 
   return (
     <div className="flex items-center gap-3">
-      <span className="flex items-center gap-1.5 text-[13px] text-[#888] dark:text-[#666]">
+      <span className="flex items-center gap-1.5 text-[13px] text-[#666] dark:text-[#888]">
         <FiShare2 className="w-3.5 h-3.5" /> Share
       </span>
       <a

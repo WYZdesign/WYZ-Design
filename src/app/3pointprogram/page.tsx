@@ -79,7 +79,7 @@ export default function ThreePointProgramPage() {
               </div>
               <div>
                 <h2 className="text-[1.25rem] sm:text-[1.5rem] font-heading font-bold text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-4">{PILLARS[activePillar].title}</h2>
-                <p className="text-[#8F8F8F] text-[13px] flex items-center gap-1.5"><FiCalendar className="w-3.5 h-3.5" /> {PILLARS[activePillar].timeline}</p>
+                <p className="text-[#666] text-[13px] flex items-center gap-1.5"><FiCalendar className="w-3.5 h-3.5" /> {PILLARS[activePillar].timeline}</p>
               </div>
             </div>
             <p className="text-[#666] dark:text-[#b0b0b0] text-[16px] mb-6">{PILLARS[activePillar].intro}</p>
@@ -92,7 +92,7 @@ export default function ThreePointProgramPage() {
               ))}
             </ul>
             <div className="bg-[#f5f5f5] dark:bg-[#252528] p-4 rounded-lg border-l-4 border-[#DF3131]">
-              <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#8F8F8F] dark:text-white/50 mb-2">OUTCOME</p>
+              <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/50 mb-2">OUTCOME</p>
               <p className="text-[16px] text-[#333] dark:text-[#e0e0e0] leading-relaxed">{PILLARS[activePillar].outcome}</p>
             </div>
           </div>

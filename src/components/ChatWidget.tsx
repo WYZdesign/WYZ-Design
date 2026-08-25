@@ -191,6 +191,7 @@ export default function ChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about services, pricing..."
+                aria-label="Type a message"
                 disabled={isStreaming}
                 className="flex-1 px-4 py-2.5 bg-[#f5f5f5] dark:bg-[#2a2a2a] border border-[#E2E2E2] dark:border-[#444] rounded-full text-[13px] text-[#333] dark:text-[#e0e0e0] placeholder:text-[#999] focus:border-[#DF3131] outline-none transition-colors disabled:opacity-50"
               />

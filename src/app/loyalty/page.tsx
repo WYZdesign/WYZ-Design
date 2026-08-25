@@ -39,27 +39,27 @@ export default function LoyaltyPage() {
     <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
         <div className="text-center mb-4">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">L O Y A L T Y</h1>
-          <p className="text-[#8F8F8F] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">Join the WYZ Design loyalty program. Earn points with every interaction, score exclusive perks, and level up your creative partnership.</p>
+          <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">Join the WYZ Design loyalty program. Earn points with every interaction, score exclusive perks, and level up your creative partnership.</p>
         </div>
 
         {session && data ? (
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10 text-center">
-            <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#888] dark:text-white/50 mb-2">Your Points</p>
+            <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#666] dark:text-white/50 mb-2">Your Points</p>
             <p className="text-[3rem] font-heading font-black" style={{ color: TIERS[tierIndex].color }}>{data.points}</p>
             <p className="text-[14px] uppercase font-bold tracking-[0.1em] mb-2" style={{ color: TIERS[tierIndex].color }}>{TIERS[tierIndex].name} TIER</p>
-            {nextTier && <p className="text-[13px] text-[#888] dark:text-white/50 mt-2">{pointsNeeded} more points to reach {nextTier.name}</p>}
-            {!nextTier && <p className="text-[13px] text-[#888] dark:text-white/50 mt-2">Maximum tier reached, enjoy all perks!</p>}
+            {nextTier && <p className="text-[13px] text-[#666] dark:text-white/50 mt-2">{pointsNeeded} more points to reach {nextTier.name}</p>}
+            {!nextTier && <p className="text-[13px] text-[#666] dark:text-white/50 mt-2">Maximum tier reached, enjoy all perks!</p>}
             <div className="mt-6 h-3 bg-gray-100 dark:bg-[#444] rounded-full overflow-hidden">
               <div className="h-full rounded-full transition-all duration-700" style={{ width: `${Math.min(100, ((data.points / (nextTier ? (tierIndex === 0 ? 1000 : 5000) : 5000)) * 100))}%`, background: TIERS[tierIndex].color }} />
             </div>
           </div>
         ) : session && loading ? (
-          <div className="text-center py-8 text-[#888]">Loading your rewards...</div>
+          <div className="text-center py-8 text-[#666]">Loading your rewards...</div>
         ) : null}
 
         {!session && (
           <div className="text-center mb-10">
-            <p className="text-[#888] dark:text-[#b0b0b0] mb-4">Sign in to track your points and tier status. Here's how the program works:</p>
+            <p className="text-[#666] dark:text-[#b0b0b0] mb-4">Sign in to track your points and tier status. Here's how the program works:</p>
             <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">Sign in to join</Link>
           </div>
         )}
@@ -69,7 +69,7 @@ export default function LoyaltyPage() {
             <div key={i} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: t.color }} />
               <h3 className="font-heading font-bold text-[20px] tracking-[0.06em] mb-3" style={{ color: t.color }}>{t.name}</h3>
-              <p className="text-[13px] text-[#888] mb-4">{t.points} pts</p>
+              <p className="text-[13px] text-[#666] mb-4">{t.points} pts</p>
               <ul className="space-y-2 text-left">
                 {t.perks.map((p, j) => <li key={j} className="text-[16px] text-[#666] dark:text-[#b0b0b0] flex items-start gap-2"><span className="text-[#DF3131] mt-0.5">✓</span> {p}</li>)}
               </ul>

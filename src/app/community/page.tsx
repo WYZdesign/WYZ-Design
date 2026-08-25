@@ -670,7 +670,7 @@ export default function ForumPage() {
             ].map((s) => (
               <div key={s.l} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
                 <p className="font-heading font-black text-[28px] tracking-[0.05em]" style={{ color: s.c }}>{s.v}</p>
-                <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#999] dark:text-[#b0b0b0] mb-2">{s.l}</p>
+                <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2">{s.l}</p>
               </div>
             ))}
           </div>
@@ -712,7 +712,7 @@ export default function ForumPage() {
                           {h.name}
                         </p>
                         <span
-                          className={`text-[#999] dark:text-[#b0b0b0] transition-transform duration-300 text-[18px] ${
+                          className={`text-[#666] dark:text-[#b0b0b0] transition-transform duration-300 text-[18px] ${
                             expandedCard === i ? "rotate-180" : ""
                           }`}
                         >
@@ -768,7 +768,7 @@ export default function ForumPage() {
                             </span>
                           )}
                         </div>
-                        <p className="text-[12px] text-[#999] dark:text-[#b0b0b0]">
+                        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0]">
                           {post.handle} · {post.time}
                         </p>
                       </div>
@@ -783,8 +783,8 @@ export default function ForumPage() {
                   {/* Image attachment placeholder */}
                   {post.hasImage && (
                     <div className="mx-5 mb-4 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-dashed border-[#CCCCCC] dark:border-[#444] rounded-lg p-6 flex flex-col items-center justify-center gap-2">
-                      <FiImage className="w-8 h-8 text-[#999] dark:text-[#666]" />
-                      <p className="text-[13px] text-[#999] dark:text-[#666] font-medium">Photo attached</p>
+                      <FiImage className="w-8 h-8 text-[#666] dark:text-[#666]" />
+                      <p className="text-[13px] text-[#666] dark:text-[#666] font-medium">Photo attached</p>
                     </div>
                   )}
 
@@ -825,7 +825,7 @@ export default function ForumPage() {
                                 {c.author.slice(0, 1).toUpperCase()}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-[13px] text-[#999] dark:text-[#b0b0b0]">
+                                <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">
                                   @{c.author} · {c.time}
                                 </p>
                                 <p className="text-[15px] text-[#333] dark:text-[#e0e0e0] leading-relaxed">
@@ -856,6 +856,7 @@ export default function ForumPage() {
                             }
                           }}
                           placeholder="Write a comment..."
+                          aria-label="Write a comment"
                           className="flex-1 px-4 py-2.5 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[14px] outline-none focus:border-[#DF3131] rounded-full"
                         />
                         <button
@@ -948,12 +949,14 @@ export default function ForumPage() {
                 value={composer.title}
                 onChange={(e) => setComposer({ ...composer, title: e.target.value })}
                 placeholder="Thread title..."
+                aria-label="Post title"
                 className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] placeholder:text-[#999]"
               />
               <textarea
                 value={composer.body}
                 onChange={(e) => setComposer({ ...composer, body: e.target.value })}
                 placeholder="What's on your mind?"
+                aria-label="Post content"
                 rows={3}
                 className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] resize-none placeholder:text-[#999]"
               />
@@ -983,7 +986,7 @@ export default function ForumPage() {
                         className={`p-1 rounded transition-colors ${
                           t.voted === "up"
                             ? "text-[#DF3131] bg-[#DF3131]/10"
-                            : "text-[#999] hover:text-[#DF3131]"
+                            : "text-[#666] hover:text-[#DF3131]"
                         }`}
                       >
                         <FiChevronUp className="w-5 h-5" />
@@ -1004,13 +1007,13 @@ export default function ForumPage() {
                         className={`p-1 rounded transition-colors ${
                           t.voted === "down"
                             ? "text-[#5865F2] bg-[#5865F2]/10"
-                            : "text-[#999] hover:text-[#5865F2]"
+                            : "text-[#666] hover:text-[#5865F2]"
                         }`}
                       >
                         <FiChevronDown className="w-5 h-5" />
                       </button>
                       <div className="flex-1" />
-                      <span className="flex items-center gap-1.5 text-[12px] text-[#999] dark:text-[#b0b0b0]">
+                      <span className="flex items-center gap-1.5 text-[12px] text-[#666] dark:text-[#b0b0b0]">
                         <FiEye className="w-3.5 h-3.5" /> {t.views}
                       </span>
                     </div>
@@ -1026,7 +1029,7 @@ export default function ForumPage() {
                             {flair.label}
                           </span>
                         )}
-                        <span className="text-[12px] text-[#999] dark:text-[#b0b0b0]">
+                        <span className="text-[12px] text-[#666] dark:text-[#b0b0b0]">
                           @{t.author} · {t.time}
                         </span>
                       </div>
@@ -1056,7 +1059,7 @@ export default function ForumPage() {
                       <div className="border-t border-[#E2E2E2] dark:border-[#333] bg-[#F7F7F7] dark:bg-[#1C1C1E] p-5">
                         <div className="space-y-3 mb-4">
                           {t.replies.length === 0 && (
-                            <p className="text-[14px] text-[#999] dark:text-[#b0b0b0] italic">
+                            <p className="text-[14px] text-[#666] dark:text-[#b0b0b0] italic">
                               No replies yet, be the first.
                             </p>
                           )}
@@ -1069,7 +1072,7 @@ export default function ForumPage() {
                                 {r.author.slice(0, 1).toUpperCase()}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-[13px] text-[#999] dark:text-[#b0b0b0]">
+                                <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">
                                   @{r.author} · {r.time}
                                 </p>
                                 <p className="text-[15px] text-[#333] dark:text-[#e0e0e0] leading-relaxed">
@@ -1092,6 +1095,7 @@ export default function ForumPage() {
                                 }
                               }}
                               placeholder="Write a reply..."
+                              aria-label="Write a reply"
                               className="flex-1 px-4 py-3 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
                             />
                             <button

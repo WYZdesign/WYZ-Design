@@ -223,7 +223,7 @@ export default function BookingPage() {
               )}
             </div>
 
-            <p className="text-center text-[13px] text-[#8F8F8F] dark:text-[#b0b0b0] mt-4">
+            <p className="text-center text-[13px] text-[#666] dark:text-[#b0b0b0] mt-4">
               Or contact us directly at <a href="mailto:info@wyzdesign.com" className="text-[#DF3131] hover:underline">info@wyzdesign.com</a> or <a href="tel:2133999610" className="text-[#DF3131] hover:underline">(213) 399-9610</a>
             </p>
           </form>

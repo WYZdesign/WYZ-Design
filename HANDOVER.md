@@ -2,6 +2,19 @@
 
 One running file, overwritten each round. Torreé relays it into the repo (Claude has read-only repo access).
 
+## Session 25 — WCAG AA color contrast fixes
+**Date:** 2026-08-25
+**Changes:**
+- Replaced light gray text colors with `#666` across ~50 files for WCAG AA contrast compliance on white backgrounds
+- Pattern 1: `text-[#8F8F8F]` → `text-[#666]` (28 files)
+- Pattern 2: `text-[#888]` → `text-[#666]` foreground text only, skipping `dark:text-[#888]` and `placeholder:text-[#888]` (20+ files)
+- Pattern 3: `text-[#999]` → `text-[#666]` foreground text only, skipping `dark:text-[#999]` and `placeholder:text-[#999]` (20+ files)
+- Pattern 4: `text-gray-400` → `text-[#666]` (2 files: ImagePicker.tsx, PageRenderer.tsx)
+- Pattern 5: `text-gray-500` → `text-[#666]` (3 files: PageRenderer.tsx, ImagePicker.tsx, view/[page]/page.tsx)
+- Updated theme variable in globals.css: `--color-wyz-muted: #8F8F8F` → `#666666`
+- Skipped `dark:` mode overrides and `placeholder:` utility classes per user instructions
+- `tsc --noEmit` clean
+
 ## Session 24 — Footer dark mode, about page copy tightening
 **Date:** 2026-08-25
 **Changes:**

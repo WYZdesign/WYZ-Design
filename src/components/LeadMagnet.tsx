@@ -50,6 +50,7 @@ export default function LeadMagnet() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your email"
+            aria-label="Email address"
             required
             className="flex-1 px-4 py-3 text-sm text-zinc-900 bg-white rounded-lg outline-none"
           />

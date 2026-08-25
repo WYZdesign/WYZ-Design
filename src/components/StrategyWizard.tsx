@@ -172,11 +172,11 @@ export default function StrategyWizard() {
             <div className="px-6 py-4 border-b border-[#E2E2E2] flex items-center justify-between">
               <div>
                 <p className="text-[11px] font-bold tracking-[0.15em] text-[#DF3131] uppercase">Strategy Wizard</p>
-                <p className="text-[13px] text-[#8F8F8F] mt-0.5">
+                <p className="text-[13px] text-[#666] mt-0.5">
                   {step < STEPS.length ? `Question ${step + 1} of ${STEPS.length}` : "Your Recommendation"}
                 </p>
               </div>
-              <button onClick={() => setOpen(false)} className="text-[#8F8F8F] dark:text-white/60 hover:text-[#333] dark:hover:text-white text-xl leading-none">&times;</button>
+              <button onClick={() => setOpen(false)} className="text-[#666] dark:text-white/60 hover:text-[#333] dark:hover:text-white text-xl leading-none">&times;</button>
             </div>
 
             {/* Progress bar */}
@@ -210,7 +210,7 @@ export default function StrategyWizard() {
                         <FiCheck className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-xl font-heading font-bold text-[#333]">Here's Your Plan</h3>
-                      <p className="text-[13px] text-[#8F8F8F] mt-1">Based on your answers, here's what we recommend</p>
+                      <p className="text-[13px] text-[#666] mt-1">Based on your answers, here's what we recommend</p>
                     </div>
 
                     {/* Recommended services */}

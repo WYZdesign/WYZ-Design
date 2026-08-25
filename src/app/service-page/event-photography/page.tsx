@@ -74,28 +74,28 @@ export default function EventPhotography() {
                     <span className="font-semibold">Standard Event</span>
                     <span className="text-[#DF3131] font-bold">$200/event</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">Up to 4 hours. Includes 50+ edited photos.</p>
+                  <p className="text-sm text-[#666] mt-1">Up to 4 hours. Includes 50+ edited photos.</p>
                 </div>
                 <div className="border-b border-gray-600 pb-4">
                   <div className="flex justify-between">
                     <span className="font-semibold">Extended Event</span>
                     <span className="text-[#DF3131] font-bold">$350/event</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">4–8 hours. Includes 100+ edited photos.</p>
+                  <p className="text-sm text-[#666] mt-1">4–8 hours. Includes 100+ edited photos.</p>
                 </div>
                 <div className="border-b border-gray-600 pb-4">
                   <div className="flex justify-between">
                     <span className="font-semibold">Multi-Day Event</span>
                     <span className="text-[#DF3131] font-bold">Custom Quote</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">Pricing based on scope and days.</p>
+                  <p className="text-sm text-[#666] mt-1">Pricing based on scope and days.</p>
                 </div>
                 <div>
                   <div className="flex justify-between">
                     <span className="font-semibold">Add-On: Second Shooter</span>
                     <span className="text-[#DF3131] font-bold">+$150</span>
                   </div>
-                  <p className="text-sm text-[#999] mt-1">Additional photographer for full coverage.</p>
+                  <p className="text-sm text-[#666] mt-1">Additional photographer for full coverage.</p>
                 </div>
               </div>
             </div>

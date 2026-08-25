@@ -53,12 +53,12 @@ function SearchContent() {
       <div className="max-w-3xl mx-auto px-6">
         <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">S E A R C H</h1>
         <div className="relative mb-10">
-          <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#8F8F8F] w-5 h-5" />
-          <input type="text" value={query} onChange={e => setQuery(e.target.value)} autoFocus placeholder="Search pages, services, content..."
+          <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#666] w-5 h-5" />
+          <input type="text" value={query} onChange={e => setQuery(e.target.value)} autoFocus placeholder="Search pages, services, content..." aria-label="Search"
             className="w-full pl-14 pr-6 py-4 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl text-[#333] dark:text-white text-lg outline-none focus:border-[#DF3131] transition-colors" />
         </div>
         {query.trim() && (
-          <p className="text-[#8F8F8F] text-sm mb-6">{results.length} result{results.length !== 1 ? "s" : ""} for &ldquo;{query}&rdquo;</p>
+          <p className="text-[#666] text-sm mb-6">{results.length} result{results.length !== 1 ? "s" : ""} for &ldquo;{query}&rdquo;</p>
         )}
         <div className="space-y-3">
           {results.map((r, i) => (
@@ -67,17 +67,17 @@ function SearchContent() {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="font-heading font-bold text-[#333] dark:text-white group-hover:text-[#DF3131] transition-colors mb-3">{r.title}</h3>
-                  <p className="text-[#8F8F8F] dark:text-white/50 text-sm mt-0.5">{r.desc}</p>
+                  <p className="text-[#666] dark:text-white/50 text-sm mt-0.5">{r.desc}</p>
                 </div>
-                <FiArrowRight className="text-[#8F8F8F] group-hover:text-[#DF3131] transition-colors shrink-0 ml-4" />
+                <FiArrowRight className="text-[#666] group-hover:text-[#DF3131] transition-colors shrink-0 ml-4" />
               </div>
             </Link>
           ))}
         </div>
         {query.trim() && results.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-[#8F8F8F] text-lg mb-2">No results found</p>
-            <p className="text-[#8F8F8F] text-sm">Try different keywords or browse our <Link href="/services" className="text-[#DF3131] underline">services</Link></p>
+            <p className="text-[#666] text-lg mb-2">No results found</p>
+            <p className="text-[#666] text-sm">Try different keywords or browse our <Link href="/services" className="text-[#DF3131] underline">services</Link></p>
           </div>
         )}
       </div>
@@ -87,7 +87,7 @@ function SearchContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<main className="pb-16 bg-white"><div className="max-w-3xl mx-auto px-6 text-center py-20 text-[#8F8F8F]">Loading search...</div></main>}>
+    <Suspense fallback={<main className="pb-16 bg-white"><div className="max-w-3xl mx-auto px-6 text-center py-20 text-[#666]">Loading search...</div></main>}>
       <SearchContent />
     </Suspense>
   );

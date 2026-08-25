@@ -70,7 +70,7 @@ export default function PricingCalculator() {
               <button onClick={() => toggle(service.name)}
                 className={`w-full text-left mb-2 transition-colors ${isActive ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131]"}`}>
                 <p className="font-heading font-bold text-[13px] tracking-[0.02em]">{service.name}</p>
-                <p className="text-[12px] text-[#888] dark:text-[#aaa]">${service.price}/{service.unit}</p>
+                <p className="text-[12px] text-[#666] dark:text-[#aaa]">${service.price}/{service.unit}</p>
               </button>
               {isActive && (
                 <div className="flex items-center gap-2 mt-2">
@@ -83,7 +83,7 @@ export default function PricingCalculator() {
                     className="w-7 h-7 border border-[#E2E2E2] dark:border-[#444] rounded flex items-center justify-center text-[#333] dark:text-[#e0e0e0] hover:border-[#DF3131] transition-colors text-sm">
                     +
                   </button>
-                  <span className="text-[11px] text-[#888] dark:text-[#aaa] ml-auto">${(service.price * qty).toLocaleString()}</span>
+                  <span className="text-[11px] text-[#666] dark:text-[#aaa] ml-auto">${(service.price * qty).toLocaleString()}</span>
                 </div>
               )}
             </div>
@@ -95,11 +95,11 @@ export default function PricingCalculator() {
       <div className="p-6 bg-[#f9f9f9] dark:bg-[#1a1a1a] border-t border-[#E2E2E2] dark:border-[#444]">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#888] dark:text-[#aaa]">Estimated Total</p>
+            <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-[#aaa]">Estimated Total</p>
             <p className="text-[2rem] font-heading font-black text-[#DF3131]">${total.toLocaleString()}</p>
           </div>
           <div className="text-right">
-            <p className="text-[12px] text-[#888] dark:text-[#aaa]">{activeCount} service{activeCount !== 1 ? "s" : ""} selected</p>
+            <p className="text-[12px] text-[#666] dark:text-[#aaa]">{activeCount} service{activeCount !== 1 ? "s" : ""} selected</p>
           </div>
         </div>
 
@@ -112,7 +112,7 @@ export default function PricingCalculator() {
         )}
 
         {total === 0 && (
-          <p className="text-[13px] text-[#888] dark:text-[#aaa] text-center">Tap services above to estimate your cost</p>
+          <p className="text-[13px] text-[#666] dark:text-[#aaa] text-center">Tap services above to estimate your cost</p>
         )}
       </div>
     </div>

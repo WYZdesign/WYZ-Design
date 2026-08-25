@@ -120,7 +120,7 @@ export default function CookieBanner() {
               <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to make the site work better for you.</p>
             </div>
           </div>
-          <button ref={closeBtnRef} onClick={() => saveConsent({ necessary: true, analytics: false, marketing: false })} className="text-[#888] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">
+          <button ref={closeBtnRef} onClick={() => saveConsent({ necessary: true, analytics: false, marketing: false })} className="text-[#666] hover:text-[#DF3131] transition-colors p-1" aria-label="Close">
             <FiX className="w-5 h-5" />
           </button>
         </div>

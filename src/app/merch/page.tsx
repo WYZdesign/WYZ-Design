@@ -212,7 +212,7 @@ function AccordionGallery() {
     <ErrorBoundary fallback={
       <section className="py-12 bg-[#FEFEFD]">
         <div className="max-w-[130rem] mx-auto px-6 lg:px-12 text-center">
-          <p className="text-[#8F8F8F]">Crew gallery temporarily unavailable</p>
+          <p className="text-[#666]">Crew gallery temporarily unavailable</p>
         </div>
       </section>
     }>
@@ -247,11 +247,11 @@ function AccordionGallery() {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[17px] mb-1">{item.name}</h4>
-                  <p className="text-[12px] text-[#999] dark:text-[#aaa]">{item.category}</p>
+                  <p className="text-[12px] text-[#666] dark:text-[#aaa]">{item.category}</p>
                 </div>
                 <div className="flex-shrink-0 flex items-center gap-3">
                   <span className="text-[#DF3131] font-black text-[18px]">${item.price.toFixed(2)}</span>
-                  <svg className={`w-5 h-5 text-[#888] transition-transform ${openId === item.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <svg className={`w-5 h-5 text-[#666] transition-transform ${openId === item.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </div>
@@ -290,7 +290,7 @@ function DynamicContentUnderShop() {
     <ErrorBoundary fallback={
       <section className="py-12 sm:py-16 bg-[#FEFEFD]">
         <div className="max-w-[130rem] mx-auto px-6 lg:px-12 text-center">
-          <p className="text-[#8F8F8F]">Crew content temporarily unavailable</p>
+          <p className="text-[#666]">Crew content temporarily unavailable</p>
         </div>
       </section>
     }>
@@ -478,14 +478,14 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
             {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
           </div>
           <div className="text-center px-1">
-            <p className="text-[10px] text-[#999] font-bold tracking-[0.12em] uppercase .5 mb-2">{product.category}</p>
+            <p className="text-[10px] text-[#666] font-bold tracking-[0.12em] uppercase .5 mb-2">{product.category}</p>
             <h3 className="text-[9px] sm:text-[10px] font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">${product.price.toFixed(2)}</p>
           </div>
           {product.rating && (
             <div className="flex items-center justify-center gap-1.5 mt-1">
               <StarRating rating={product.rating} />
-              <span className="text-[10px] text-[#999]">({product.reviews})</span>
+              <span className="text-[10px] text-[#666]">({product.reviews})</span>
             </div>
           )}
         </div>
@@ -618,7 +618,7 @@ export default function MerchPage() {
         {/* Enter Store Toggle */}
         <section className="py-16 px-6 text-center" id="shop">
           <ScrollReveal animation="fadeUp">
-            <p className="text-[11px] text-[#999] font-bold tracking-[0.2em] uppercase mb-2">Print-on-Demand via Printful</p>
+            <p className="text-[11px] text-[#666] font-bold tracking-[0.2em] uppercase mb-2">Print-on-Demand via Printful</p>
             <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] tracking-[0.05em] mb-4">The Collection</h2>
             <button onClick={handleToggleStore}
               className={`group px-10 py-4 text-[13px] font-bold tracking-[0.15em] uppercase transition-all border-2 ${showStore ? "bg-[#DF3131] text-white border-[#DF3131]" : "bg-transparent text-[#333] border-[#333] hover:bg-[#333] hover:text-white"}`}>
@@ -629,7 +629,7 @@ export default function MerchPage() {
                 </span>
               )}
             </button>
-            {!showStore && <p className="text-[11px] text-[#999] mt-3 tracking-wider animate-pulse">Click to expand the store</p>}
+            {!showStore && <p className="text-[11px] text-[#666] mt-3 tracking-wider animate-pulse">Click to expand the store</p>}
           </ScrollReveal>
         </section>
 
@@ -726,15 +726,15 @@ export default function MerchPage() {
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
-                <button onClick={() => setSelectedProduct(null)} className="text-[#999] hover:text-[#333] text-[15px] mb-4 block">&larr; Back to shop</button>
-                <p className="text-[12px] text-[#999] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
+                <button onClick={() => setSelectedProduct(null)} className="text-[#666] hover:text-[#333] text-[15px] mb-4 block">&larr; Back to shop</button>
+                <p className="text-[12px] text-[#666] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
                 <h2 className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
                 <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">${selectedProduct.price.toFixed(2)}</p>
                 <p className="text-[14px] text-[#666] mb-4">{selectedProduct.description}</p>
                 {selectedProduct.rating && (
                   <div className="flex items-center gap-2 mb-4">
                     <StarRating rating={selectedProduct.rating} />
-                    <span className="text-[12px] text-[#999]">{selectedProduct.rating} ({selectedProduct.reviews} reviews)</span>
+                    <span className="text-[12px] text-[#666]">{selectedProduct.rating} ({selectedProduct.reviews} reviews)</span>
                   </div>
                 )}
                 <div className="mb-4">
@@ -762,7 +762,7 @@ export default function MerchPage() {
                   className="block w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-center transition-all text-[14px] hover:bg-[#B82020]">
                   Shop the FAOTM Art Store
                 </Link>
-                <p className="text-center text-[12px] text-[#999] mt-3">Each month features a new independent artist</p>
+                <p className="text-center text-[12px] text-[#666] mt-3">Each month features a new independent artist</p>
               </div>
             </div>
             {crossSells.length > 0 && (

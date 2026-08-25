@@ -65,7 +65,7 @@ function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
  if (!images.length) return null;
  return (
  <div className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center" onClick={onClose} {...swipe}>
- <button onClick={onClose} className="absolute top-4 right-4 z-[210] text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"><FiX className="w-8 h-8" /></button>
+ <button onClick={onClose} className="absolute top-4 right-4 z-[210] text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close"><FiX className="w-8 h-8" /></button>
  <button onClick={(e) => { e.stopPropagation(); onPrev(); }} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-[210] w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors min-w-[44px] min-h-[44px]"><FiChevronLeft className="w-6 h-6" /></button>
  <div className="max-w-[90vw] max-h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
   <Image src={images[index]} alt={album ? `${album} photo` : "Gallery photo"} width={1200} height={800} className="max-w-full max-h-[85vh] object-contain select-none" loading="lazy" />
@@ -86,11 +86,11 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  <div className="bg-white max-w-5xl w-full max-h-[85vh] overflow-y-auto rounded-lg" onClick={e => e.stopPropagation()}>
  <div className="sticky top-0 bg-white border-b border-[#E2E2E2] px-6 py-4 flex items-center justify-between z-10">
  <h3 className="font-heading font-bold text-[#333] text-lg tracking-[0.05em] uppercase mb-3">{album}</h3>
- <button onClick={onClose} className="text-[#8F8F8F] hover:text-[#333] transition-colors"><FiX className="w-6 h-6" /></button>
+ <button onClick={onClose} className="text-[#666] hover:text-[#333] transition-colors" aria-label="Close"><FiX className="w-6 h-6" /></button>
  </div>
  <div className="p-6">
  {imgs.length === 0 ? (
- <div className="text-center py-12"><FiCamera className="w-12 h-12 text-[#CBCBCA] mx-auto mb-4" /><p className="text-[#8F8F8F]">No images in this album yet.</p></div>
+ <div className="text-center py-12"><FiCamera className="w-12 h-12 text-[#CBCBCA] mx-auto mb-4" /><p className="text-[#666]">No images in this album yet.</p></div>
  ) : (
  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
  {imgs.map((img, i) => (
@@ -568,15 +568,15 @@ return (
  <div className="flex gap-8 justify-center">
  <div className="text-center">
  <p className="text-[2rem] font-heading font-black text-[#DF3131]">78+</p>
- <p className="text-[12px] text-[#888] tracking-[0.1em] uppercase">Models</p>
+ <p className="text-[12px] text-[#666] tracking-[0.1em] uppercase">Models</p>
  </div>
  <div className="text-center">
  <p className="text-[2rem] font-heading font-black text-[#DF3131]">8</p>
- <p className="text-[12px] text-[#888] tracking-[0.1em] uppercase">Albums</p>
+ <p className="text-[12px] text-[#666] tracking-[0.1em] uppercase">Albums</p>
  </div>
  <div className="text-center">
  <p className="text-[2rem] font-heading font-black text-[#DF3131]">500+</p>
- <p className="text-[12px] text-[#888] tracking-[0.1em] uppercase">Photos</p>
+ <p className="text-[12px] text-[#666] tracking-[0.1em] uppercase">Photos</p>
  </div>
  </div>
  </div>
@@ -726,7 +726,7 @@ return (
 {/* ═══ BRAND MARQUEE ═══ */}
   <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E] mb-4">
     {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
-      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
           <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 3) % 4]}`}>{word}</span>

@@ -21,7 +21,7 @@ export default function ViewPage() {
       .catch(() => setLoading(false));
   }, [pageName]);
 
-  if (loading) return <div className="text-center py-20 text-gray-500">Loading...</div>;
+  if (loading) return <div className="text-center py-20 text-[#666]">Loading...</div>;
 
   return (
     <div>

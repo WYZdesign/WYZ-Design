@@ -208,7 +208,7 @@ export default function ModelArchivePage() {
   </ImageHoverReveal>
   ))}
  </div>
- {filtered.length === 0 && <p className="text-center text-[#888] dark:text-white/40 py-20">No models match your search.</p>}
+ {filtered.length === 0 && <p className="text-center text-[#666] dark:text-white/40 py-20">No models match your search.</p>}
  </>
  )}
 
@@ -225,7 +225,7 @@ export default function ModelArchivePage() {
  <div className="w-8 h-8 border-2 border-[#E2E2E2] dark:border-white/20 border-t-[#DF3131] rounded-full animate-spin" />
  </div>
  ) : albumImages.length === 0 ? (
- <p className="text-center text-[#888] dark:text-white/40 py-20">No images found in this model&apos;s album.</p>
+ <p className="text-center text-[#666] dark:text-white/40 py-20">No images found in this model&apos;s album.</p>
  ) : (
  <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-3 space-y-3">
  {albumImages.map((src, i) => (

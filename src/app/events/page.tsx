@@ -683,7 +683,7 @@ export default function EventsPage() {
 {/* ═══ EVENTS MARQUEE ═══ */}
   <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["CONCERTS","DIY SHOWS","MIXERS","ART SHOWS","RECAPS","LIVE COVERAGE"] as const).map((word, i) => {
-      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
           <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 1) % 4]}`}>{word}</span>
@@ -753,7 +753,7 @@ export default function EventsPage() {
  <div>
  <div className="text-center mb-4">
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">PREVIOUS EVENTS</h2>
-  <p className="text-[16px] text-[#8F8F8F] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED BY WYZ DESIGN</p>
+  <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED BY WYZ DESIGN</p>
  </div>
  <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
  {visibleEvents.map((e) => (

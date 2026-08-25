@@ -32,7 +32,7 @@ function PaperAccordion({ paper, index }: { paper: typeof PAPER_TYPES[0]; index:
  </span>
   <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[14px] sm:text-[15px] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors mb-3">{paper.name}</h3>
   </div>
-  <div className={`w-6 h-6 mx-auto mt-2 flex items-center justify-center text-[#999] dark:text-[#aaa] group-hover:text-[#DF3131] transition-all duration-300 ${isOpen ? "rotate-45" : ""}`}>
+  <div className={`w-6 h-6 mx-auto mt-2 flex items-center justify-center text-[#666] dark:text-[#aaa] group-hover:text-[#DF3131] transition-all duration-300 ${isOpen ? "rotate-45" : ""}`}>
  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
  </div>
  </button>
@@ -139,7 +139,7 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
         <div className="border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] p-8 lg:p-10 text-center hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10 h-full flex flex-col justify-center">
           <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors mb-4">{title}</h2>
           <p className="text-[#DF3131] text-[16px] tracking-[0.1em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">{subtitle}</p>
-          <div className="mt-6 flex items-center justify-center gap-2 text-[13px] text-[#888] dark:text-[#aaa]">
+          <div className="mt-6 flex items-center justify-center gap-2 text-[13px] text-[#666] dark:text-[#aaa]">
             <span>Hover or tap to see pricing</span>
             <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
@@ -338,7 +338,7 @@ export default function PrintingPage() {
    </div>
    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
    <input name="sizing" placeholder="Explain Sizing + Quantity" aria-label="Sizing and quantity details" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-   <select name="product" aria-label="Product type" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#888] dark:text-[#ccc] focus:border-[#DF3131] outline-none">
+   <select name="product" aria-label="Product type" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#666] dark:text-[#ccc] focus:border-[#DF3131] outline-none">
  <option>Select a Product</option>
  <option>Business Cards</option>
  <option>Flyers & Posters</option>
@@ -349,7 +349,7 @@ export default function PrintingPage() {
  </select>
   </div>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-   <input name="deadline" placeholder="Project Deadline" type="date" aria-label="Project deadline" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#888] dark:text-[#ccc] focus:border-[#DF3131] outline-none" />
+   <input name="deadline" placeholder="Project Deadline" type="date" aria-label="Project deadline" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#666] dark:text-[#ccc] focus:border-[#DF3131] outline-none" />
    <label className="flex items-center gap-2 text-[14px] text-[#666] dark:text-[#b0b0b0]">
    <input name="newsletter" type="checkbox" className="accent-[#DF3131]" /> Keep me updated on new printing options and promotions.
   </label>

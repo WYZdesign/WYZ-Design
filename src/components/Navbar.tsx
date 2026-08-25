@@ -223,9 +223,9 @@ export default function Navbar() {
                                 className="flex items-center justify-between px-4 py-3 hover:bg-[#DF3131]/5 transition-colors group border-b border-[#E2E2E2] last:border-b-0">
                                 <div>
                                   <p className="text-[13px] font-semibold text-[#333] group-hover:text-[#DF3131] transition-colors">{r.title}</p>
-                                  <p className="text-[11px] text-[#8F8F8F] mt-0.5">{r.desc}</p>
+                                  <p className="text-[11px] text-[#666] mt-0.5">{r.desc}</p>
                                 </div>
-                                <FiSearch className="w-3 h-3 text-[#8F8F8F] group-hover:text-[#DF3131] transition-colors shrink-0 ml-3" />
+                                <FiSearch className="w-3 h-3 text-[#666] group-hover:text-[#DF3131] transition-colors shrink-0 ml-3" />
                               </Link>
                             ))}
                           </motion.div>
@@ -315,7 +315,7 @@ export default function Navbar() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-[15px] font-semibold text-[#333] dark:text-[#e0e0e0] truncate">{session.user.name || "Account"}</p>
-                    <p className="text-[12px] text-[#8F8F8F] truncate">{session.user.email}</p>
+                    <p className="text-[12px] text-[#666] truncate">{session.user.email}</p>
                   </div>
                 </div>
               ) : (

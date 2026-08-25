@@ -160,7 +160,7 @@ export default function WYZMiNDPage() {
         {/* Features — dynamic interactive cards */}
         <section className="max-w-[90rem] mx-auto px-6 lg:px-12 py-16">
           <h2 className="text-center font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-4">What It Powers</h2>
-          <p className="text-center text-[#8F8F8F] dark:text-[#b0b0b0] text-[16px] mb-12">Click any card to explore what each system actually does</p>
+          <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] mb-12">Click any card to explore what each system actually does</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
               {FEATURES.map((f) => {
                 const isActive = activeFeature === f.id;

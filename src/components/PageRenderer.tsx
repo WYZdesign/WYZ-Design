@@ -97,7 +97,7 @@ export default function PageRenderer() {
  setShowUpload(false);
  };
 
- if (loading) return <div className="text-center py-20 text-gray-500 text-lg">Loading...</div>;
+ if (loading) return <div className="text-center py-20 text-[#666] text-lg">Loading...</div>;
 
  return (
  <div>
@@ -134,7 +134,7 @@ export default function PageRenderer() {
  </div>
  <div className="flex gap-2">
  <button onClick={() => setShowUpload(!showUpload)} className="px-3 py-1.5 border rounded-lg text-xs hover:bg-gray-50">Upload</button>
- <button onClick={() => { setPickerOpen(false); setShowUpload(false); }} className="text-gray-400 hover:text-gray-600">✕</button>
+ <button onClick={() => { setPickerOpen(false); setShowUpload(false); }} className="hover:text-gray-600" aria-label="Close">✕</button>
  </div>
  </div>
 
@@ -143,16 +143,16 @@ export default function PageRenderer() {
  <div onClick={() => fileRef.current?.click()} className="border-2 border-dashed border-[#DF3131] rounded-xl p-12 cursor-pointer hover:bg-red-50">
  <span className="text-4xl block mb-3">📁</span>
  <p className="font-semibold text-[#DF3131]">Click to Upload</p>
- <p className="text-xs text-gray-500 mt-1">JPG, PNG, WebP, GIF</p>
+ <p className="text-xs text-[#666] mt-1">JPG, PNG, WebP, GIF</p>
  </div>
- <button onClick={() => setShowUpload(false)} className="mt-4 text-sm text-gray-500">← Back to GDrive</button>
+ <button onClick={() => setShowUpload(false)} className="mt-4 text-sm text-[#666]">← Back to GDrive</button>
  <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
  </div>
  ) : (
  <>
  <div className="px-4 py-2 border-b">
  <input value={gdriveSearch} onChange={e => { setGdriveSearch(e.target.value); setGdrivePage(0); }}
- placeholder="Search your GDrive..." className="w-full px-3 py-2 border rounded-lg text-sm focus:border-[#DF3131] outline-none" />
+  placeholder="Search your GDrive..." aria-label="Search" className="w-full px-3 py-2 border rounded-lg text-sm focus:border-[#DF3131] outline-none" />
  </div>
  <div className="flex-1 overflow-y-auto p-4">
  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
@@ -169,10 +169,10 @@ export default function PageRenderer() {
  </div>
  </div>
  <div className="flex items-center justify-between px-4 py-2 border-t text-xs">
- <span className="text-gray-500">{filtered.length} files</span>
+ <span className="text-[#666]">{filtered.length} files</span>
  <div className="flex gap-1">
  <button onClick={() => setGdrivePage(p => Math.max(0, p-1))} disabled={gdrivePage===0} className="px-2 py-0.5 border rounded disabled:opacity-30">←</button>
- <span className="px-1 text-gray-500">{gdrivePage+1}/{Math.max(1,Math.ceil(filtered.length/PER))}</span>
+ <span className="px-1 text-[#666]">{gdrivePage+1}/{Math.max(1,Math.ceil(filtered.length/PER))}</span>
  <button onClick={() => setGdrivePage(p => p+1)} disabled={(gdrivePage+1)*PER>=filtered.length} className="px-2 py-0.5 border rounded disabled:opacity-30">→</button>
  </div>
  </div>

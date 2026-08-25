@@ -135,7 +135,7 @@ return (
 {/* ═══ SERVICES MARQUEE ═══ */}
   <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => {
-      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
           <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 2) % 4]}`}>{word}</span>
@@ -168,14 +168,14 @@ return (
 
  {/* ── Service Count ── */}
  <div className="mb-4 text-center">
-  <span className="text-[16px] text-[#999] dark:text-[#b0b0b0] tracking-wider">{filtered.length} SERVICE{filtered.length !== 1 ? "S" : ""} AVAILABLE</span>
+  <span className="text-[16px] text-[#666] dark:text-[#b0b0b0] tracking-wider">{filtered.length} SERVICE{filtered.length !== 1 ? "S" : ""} AVAILABLE</span>
  </div>
 
   {/* ── Service Grid — flip cards ── */}
   <ScrollReveal animation="fadeUp" delay={0.15}>
   <ErrorBoundary fallback={
     <div className="text-center py-16 col-span-full">
-      <p className="text-[#8F8F8F]">Services temporarily unavailable. Please try again later.</p>
+      <p className="text-[#666]">Services temporarily unavailable. Please try again later.</p>
     </div>
   }>
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">

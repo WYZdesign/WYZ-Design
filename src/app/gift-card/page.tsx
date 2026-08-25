@@ -74,7 +74,7 @@ export default function GiftCardPage() {
           <div className="border border-dashed border-gray-300 dark:border-[#555] p-6 text-center hover:border-[#DF3131] transition-colors bg-white dark:bg-[#252528]">
             <p className="text-3xl font-bold text-[#333] dark:text-[#e0e0e0] mb-1">Custom</p>
             <p className="text-sm font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Any Amount</p>
-            <input type="number" min="5" value={customAmount} onChange={e => setCustomAmount(e.target.value)} placeholder="$ Amount" className="w-full border border-gray-300 dark:border-[#555] px-3 py-3 min-h-[44px] text-center text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:outline-none mb-3" />
+            <input type="number" min="5" value={customAmount} onChange={e => setCustomAmount(e.target.value)} placeholder="$ Amount" aria-label="Custom gift card amount" className="w-full border border-gray-300 dark:border-[#555] px-3 py-3 min-h-[44px] text-center text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:outline-none mb-3" />
             <button onClick={buyCustom} disabled={loading} className="bg-[#DF3131] text-white px-6 py-3 min-h-[44px] font-heading font-bold tracking-[0.15em] uppercase text-sm hover:bg-red-700 transition-colors disabled:opacity-50">
               {loading ? "Loading..." : "Buy Now"}
             </button>

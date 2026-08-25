@@ -68,12 +68,13 @@ export default function BlogPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
  <div className="relative flex-1 w-full">
- <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8F8F8F] w-4 h-4" />
+ <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-[#666] w-4 h-4" />
  <input
  type="text"
  placeholder="Search articles..."
  value={search}
  onChange={(e) => setSearch(e.target.value)}
+  aria-label="Search blog posts"
   className="w-full pl-11 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-lg"
 />
  </div>
@@ -96,8 +97,8 @@ export default function BlogPage() {
   {/* Post Grid */}
   <ErrorBoundary fallback={
     <div className="text-center py-20">
-      <p className="text-[#8F8F8F] text-lg">Failed to load articles</p>
-      <p className="text-[#8F8F8F] text-sm mt-1">Please try again later</p>
+      <p className="text-[#666] text-lg">Failed to load articles</p>
+      <p className="text-[#666] text-sm mt-1">Please try again later</p>
     </div>
   }>
   <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -109,7 +110,7 @@ export default function BlogPage() {
       </div>
       <span className="absolute -top-4 left-4 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded z-10">{p.cat}</span>
     <div className="p-5 sm:p-6 text-center">
-    <div className="flex items-center justify-center gap-3 text-[#8F8F8F] dark:text-[#aaa] text-[12px] mb-3">
+    <div className="flex items-center justify-center gap-3 text-[#666] dark:text-[#aaa] text-[12px] mb-3">
     <span className="flex items-center gap-1"><FiClock className="w-3 h-3" /> {p.readTime}</span>
    <span>•</span>
    <span>{p.date}</span>
@@ -129,8 +130,8 @@ export default function BlogPage() {
  {filtered.length === 0 && (
  <div className="text-center py-20">
  <FiSearch className="w-12 h-12 text-[#E2E2E2] mx-auto mb-4" />
- <p className="text-[#8F8F8F] text-lg">No articles found</p>
- <p className="text-[#8F8F8F] text-sm mt-1">Try a different search or category</p>
+ <p className="text-[#666] text-lg">No articles found</p>
+ <p className="text-[#666] text-sm mt-1">Try a different search or category</p>
  </div>
  )}
 

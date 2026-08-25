@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         <span className="inline-block px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-4">{post.cat}</span>
         <h1 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.75rem] sm:text-[2.25rem] lg:text-[2.75rem] leading-tight tracking-[0.02em] mb-4">{post.title}</h1>
 
-        <div className="flex flex-wrap items-center gap-4 text-[#8F8F8F] dark:text-[#aaa] text-[13px] mb-8">
+        <div className="flex flex-wrap items-center gap-4 text-[#666] dark:text-[#aaa] text-[13px] mb-8">
           <span className="flex items-center gap-1.5"><FiCalendar className="w-3.5 h-3.5" /> {post.date}</span>
           <span className="flex items-center gap-1.5"><FiClock className="w-3.5 h-3.5" /> {post.readTime}</span>
           <span className="flex items-center gap-1.5"><FiTag className="w-3.5 h-3.5" /> {post.cat}</span>
