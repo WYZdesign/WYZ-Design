@@ -136,22 +136,7 @@ export default function StrategyWizard() {
 
   return (
     <>
-      <style>{`
-        .wizard-overlay{position:fixed;inset:0;z-50;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
-        .wizard-box{background:#FFFFFF;max-width:560px;width:calc(100% - 2rem);max-height:85vh;overflow-y:auto;border:1px solid #E2E2E2;box-shadow:0 25px 60px rgba(0,0,0,.25)}
-        .wizard-option{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid #E2E2E2;background:white;cursor:pointer;transition:all .2s ease;text-align:left;width:100%}
-        .wizard-option:hover{border-color:#DF3131;background:#DF3131;color:white}
-        .wizard-option:hover .wz-label{color:white}
-        .wizard-option:hover .wz-icon{border-color:white;color:white}
-        .wz-icon{width:28px;height:28px;border:2px solid #DF3131;color:#DF3131;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s ease}
-        .wz-label{font-size:14px;font-weight:600;color:#333}
-        .wz-rec-card{padding:16px;border:1px solid #E2E2E2;background:#FAFAF9}
-        .wz-rec-card h4{font-family:'Montserrat',sans-serif;font-weight:800;color:#333;font-size:14px;margin-bottom:8px}
-        .wz-rec-card p{color:#666;font-size:13px}
-        .wz-plan-box{padding:20px;background:#DF3131;color:white;text-align:center}
-        .wz-plan-box h3{font-family:'Montserrat',sans-serif;font-weight:900;font-size:20px}
-        .wz-plan-box p{font-size:14px;opacity:.9;margin-top:4px}
-      `}</style>
+
 
       <div className="mt-12 p-6 border border-[#DF3131] bg-[#DF3131]/5 flex flex-col sm:flex-row items-start justify-between gap-4">
         <div className="text-left">
@@ -166,13 +151,13 @@ export default function StrategyWizard() {
       </div>
 
       {open && (
-        <div className="wizard-overlay" onClick={() => setOpen(false)}>
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} onClick={e => e.stopPropagation()} className="wizard-box">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)}>
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} onClick={e => e.stopPropagation()} className="bg-white dark:bg-[#252528] max-w-[560px] w-[calc(100%-2rem)] max-h-[85vh] overflow-y-auto border border-[#E2E2E2] dark:border-[#444] shadow-[0_25px_60px_rgba(0,0,0,.25)]">
             {/* Header */}
-            <div className="px-6 py-4 border-b border-[#E2E2E2] flex items-center justify-between">
+            <div className="px-6 py-4 border-b border-[#E2E2E2] dark:border-[#444] flex items-center justify-between">
               <div>
                 <p className="text-[11px] font-bold tracking-[0.15em] text-[#DF3131] uppercase">Strategy Wizard</p>
-                <p className="text-[13px] text-[#666] mt-0.5">
+                <p className="text-[13px] text-[#666] dark:text-white/60 mt-0.5">
                   {step < STEPS.length ? `Question ${step + 1} of ${STEPS.length}` : "Your Recommendation"}
                 </p>
               </div>
@@ -181,7 +166,7 @@ export default function StrategyWizard() {
 
             {/* Progress bar */}
             {step < STEPS.length && (
-              <div className="h-[3px] bg-[#E2E2E2]">
+              <div className="h-[3px] bg-[#E2E2E2] dark:bg-[#444]">
                 <motion.div animate={{ width: `${((step) / STEPS.length) * 100}%` }} transition={{ duration: 0.3 }} className="h-full bg-[#DF3131]" />
               </div>
             )}
@@ -191,12 +176,12 @@ export default function StrategyWizard() {
               <AnimatePresence mode="wait">
                 {step < STEPS.length && (
                   <motion.div key={step} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}>
-                    <h3 className="text-lg font-heading font-bold text-[#333] mb-4">{STEPS[step].q}</h3>
+                    <h3 className="text-lg font-heading font-bold text-[#333] dark:text-white mb-4">{STEPS[step].q}</h3>
                     <div className="space-y-2">
                       {STEPS[step].options.map(opt => (
-                        <button key={opt.value} onClick={() => pick(opt.value)} className="wizard-option">
-                          <span className="wz-icon"><FiChevronRight className="w-4 h-4" /></span>
-                          <span className="wz-label">{opt.label}</span>
+                        <button key={opt.value} onClick={() => pick(opt.value)} className="flex items-center gap-3 px-[18px] py-[14px] border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] cursor-pointer transition-all duration-200 text-left w-full group hover:border-[#DF3131] hover:bg-[#DF3131] hover:text-white">
+                          <span className="w-[28px] h-[28px] border-2 border-[#DF3131] text-[#DF3131] flex items-center justify-center shrink-0 transition-all duration-200 group-hover:border-white group-hover:text-white"><FiChevronRight className="w-4 h-4" /></span>
+                          <span className="text-sm font-semibold text-[#333] dark:text-white group-hover:text-white">{opt.label}</span>
                         </button>
                       ))}
                     </div>
@@ -209,17 +194,17 @@ export default function StrategyWizard() {
                       <div className="w-12 h-12 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-3">
                         <FiCheck className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-heading font-bold text-[#333]">Here's Your Plan</h3>
-                      <p className="text-[13px] text-[#666] mt-1">Based on your answers, here's what we recommend</p>
+                      <h3 className="text-xl font-heading font-bold text-[#333] dark:text-white">Here's Your Plan</h3>
+                      <p className="text-[13px] text-[#666] dark:text-white/60 mt-1">Based on your answers, here's what we recommend</p>
                     </div>
 
                     {/* Recommended services */}
                     {result.services.map((s, i) => (
-                      <div key={i} className="wz-rec-card">
+                      <div key={i} className="p-4 border border-[#E2E2E2] dark:border-[#444] bg-[#FAFAF9] dark:bg-[#1C1C1E]">
                         <div className="flex items-start justify-between">
                           <div>
-                            <h4>{s.name}</h4>
-                            <p>{s.note}</p>
+                            <h4 className="font-heading font-extrabold text-[#333] dark:text-white text-sm mb-2">{s.name}</h4>
+                            <p className="text-[13px] text-[#666] dark:text-white/60">{s.note}</p>
                           </div>
                           <span className="text-[15px] font-bold text-[#DF3131] shrink-0 ml-3">{s.price}</span>
                         </div>
@@ -227,24 +212,24 @@ export default function StrategyWizard() {
                     ))}
 
                     {/* Total */}
-                    <div className="wz-rec-card flex items-center justify-between">
-                      <h4 className="!mb-0">À La Carte Total</h4>
+                    <div className="p-4 border border-[#E2E2E2] dark:border-[#444] bg-[#FAFAF9] dark:bg-[#1C1C1E] flex items-center justify-between">
+                      <h4 className="font-heading font-extrabold text-[#333] dark:text-white text-sm !mb-0">À La Carte Total</h4>
                       <span className="text-[18px] font-bold text-[#DF3131]">{result.total}</span>
                     </div>
 
                     {/* Plan recommendation */}
                     {result.plan && (
-                      <div className="wz-plan-box">
+                      <div className="p-5 bg-[#DF3131] text-white text-center">
                         <p className="text-[11px] font-bold tracking-[0.15em] uppercase opacity-80">Recommended Plan</p>
-                        <h3 className="mt-1">{result.plan}</h3>
+                        <h3 className="font-heading font-black text-xl mt-1">{result.plan}</h3>
                         <p className="text-[18px] font-bold mt-1">{result.planPrice}</p>
-                        <p className="text-[13px] opacity-80 mt-1">{result.planNote}</p>
+                        <p className="text-[14px] opacity-90 mt-1">{result.planNote}</p>
                       </div>
                     )}
 
                     {/* Actions */}
                     <div className="flex gap-3 pt-2">
-                      <button onClick={reset} className="flex items-center gap-2 px-4 py-2.5 border border-[#E2E2E2] text-[13px] font-bold text-[#333] hover:border-[#DF3131] hover:text-[#DF3131] transition-all">
+                      <button onClick={reset} className="flex items-center gap-2 px-4 py-2.5 border border-[#E2E2E2] dark:border-[#444] text-[13px] font-bold text-[#333] dark:text-white/70 hover:border-[#DF3131] hover:text-[#DF3131] transition-all">
                         <FiRotateCcw className="w-3.5 h-3.5" /> Start Over
                       </button>
                       <button onClick={() => setOpen(false)} className="flex-1 px-4 py-2.5 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-colors">

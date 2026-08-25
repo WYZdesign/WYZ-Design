@@ -118,7 +118,7 @@ return (
   >
   {[...images, ...images, ...images].map((src, i) => (
   <button key={i} className={`flex-none h-24 sm:h-36 md:h-52 overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#252528]"}`}>
-  <SafeImage src={src} alt="WYZ Design portfolio" className="h-full w-auto object-contain group-hover:scale-95 transition-transform duration-700" priority />
+  <SafeImage src={src} alt="WYZ Design portfolio" className="h-full w-auto object-contain group-hover:scale-95 transition-transform duration-700" />
   </button>
   ))}
  </div>
@@ -143,19 +143,19 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[20px] sm:text-[24px] tracking-[0.04em] leading-snug mb-3">{title}</h3>
  </div>
   <div className="hidden sm:block w-[60px] h-[60px] relative rounded-lg overflow-hidden flex-shrink-0">
-  <Image src={img} alt={title} fill className="w-full h-full object-cover" priority />
-  </div>
- </button>
- <div
- ref={contentRef}
+  <Image src={img} alt={title} fill className="w-full h-full object-cover" />
+   </div>
+  </button>
+  <div
+   ref={contentRef}
  className="overflow-hidden transition-all duration-500 ease-in-out"
  style={{ maxHeight: isOpen ? `${contentRef.current?.scrollHeight || 500}px` : "0px" }}
  >
  <div className="flex flex-col sm:flex-row">
   <div className="w-full sm:w-[45%] h-[200px] sm:h-[250px] overflow-hidden relative">
-  <Image src={img} alt={title} fill className="w-full h-full object-cover" priority />
-  </div>
- <div className="w-full sm:w-[55%] px-6 lg:px-10 py-6 flex flex-col justify-center">
+  <Image src={img} alt={title} fill className="w-full h-full object-cover" />
+   </div>
+  <div className="w-full sm:w-[55%] px-6 lg:px-10 py-6 flex flex-col justify-center">
   <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.7] mb-5">{desc}</p>
   <Link href="/booking" className="inline-flex items-center gap-2 px-6 py-3 text-[12px] sm:text-[15px] font-bold tracking-[0.08em] text-white text-center transition-all hover:scale-105" style={{ background: accent }}>
   GET A QUOTE <FiArrowRight className="w-4 h-4" />
@@ -372,7 +372,7 @@ const faotmImages = [
    <ImageHoverReveal>
    <Link href="/merch" className="group cursor-pointer block">
    <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
-    <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+    <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
     </div>
      <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
     </Link>
@@ -400,8 +400,8 @@ const faotmImages = [
  {dbcMerch.map((p, i) => (
  <Link key={i} href="/merch" className="flex-none w-[13vw] min-w-[120px] group cursor-pointer block">
  <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
-  <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
-  </div>
+   <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+   </div>
    <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
   <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{p.price}</p>
  </Link>

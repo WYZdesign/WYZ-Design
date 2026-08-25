@@ -2,6 +2,15 @@
 
 One running file, overwritten each round. Torreé relays it into the repo (Claude has read-only repo access).
 
+## Session 26 — Dark mode for loading skeletons, admin error, ImagePicker, PageRenderer
+**Date:** 2026-08-25
+**Changes:**
+- Added `dark:bg-[#1C1C1E]` (page bg) and `dark:bg-[#252528]` (surface) to all loading skeletons: admin, designs, events, merch
+- Added `dark:bg-[#1C1C1E]`, `dark:text-white`, `dark:text-white/70` to admin error page
+- Added dark mode to ImagePicker modal: `dark:bg-[#252528]`, `dark:text-white/70`, `dark:border-[#444]`
+- Added dark mode to PageRenderer editor UI: modal bg, borders, text, filter buttons, pagination, search input
+- `tsc --noEmit` clean
+
 ## Session 25 — WCAG AA color contrast fixes
 **Date:** 2026-08-25
 **Changes:**

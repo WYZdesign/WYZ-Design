@@ -95,8 +95,8 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
  {imgs.map((img, i) => (
  <button key={i} onClick={() => setLIdx(i)} className="aspect-square relative bg-gray-100 overflow-hidden hover:ring-2 hover:ring-[#DF3131] transition-all cursor-pointer group">
-  <Image src={img} alt={`${album}`} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
- </button>
+   <Image src={img} alt={`${album}`} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+  </button>
  ))}
  </div>
  )}

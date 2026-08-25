@@ -403,7 +403,7 @@ function MerchCarousel() {
         {items.map((p, i) => (
           <Link key={`mc-${i}`} href={FAOTM_URL} className="flex-none cursor-pointer">
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
-               <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+               <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h3 className="font-heading font-bold text-[12px] tracking-[0.05em] uppercase text-white">{p.name}</h3>
@@ -445,7 +445,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
               transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
             }}>
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mb-3 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#DF3131]/20 transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-105">
-                <Image src={product.image} alt={product.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                <Image src={product.image} alt={product.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase .5 mb-2">{product.category}</p>
@@ -471,7 +471,7 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
           <div className={`bg-[#f5f5f5] aspect-square overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
-               <Image src={product.image} alt={product.name} fill className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+               <Image src={product.image} alt={product.name} fill className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all mb-2">Quick View</span>
             </div>
@@ -722,7 +722,7 @@ export default function MerchPage() {
           <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <Image src={selectedProduct.image} alt={selectedProduct.name} fill className="w-full h-full object-cover" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                <Image src={selectedProduct.image} alt={selectedProduct.name} fill className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
@@ -772,7 +772,7 @@ export default function MerchPage() {
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
                       <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
-                         <Image src={cp.image} alt={cp.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                          <Image src={cp.image} alt={cp.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
                       <p className="text-[12px] text-[#DF3131] font-bold">${cp.price.toFixed(2)}</p>

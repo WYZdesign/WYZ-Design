@@ -103,7 +103,7 @@ export default function PageRenderer() {
  <div>
  {/* Edit toggle */}
  <div className="fixed top-20 right-4 z-40 flex gap-2">
- <button onClick={() => setEditMode(!editMode)} className={`px-4 py-2 rounded-full text-sm font-semibold shadow-lg transition-colors ${editMode ? "bg-[#DF3131] text-white" : "bg-white border border-[#E2E2E2] text-gray-600 hover:border-[#DF3131]"}`}>
+ <button onClick={() => setEditMode(!editMode)} className={`px-4 py-2 rounded-full text-sm font-semibold shadow-lg transition-colors ${editMode ? "bg-[#DF3131] text-white" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-gray-600 dark:text-white/70 hover:border-[#DF3131]"}`}>
  {editMode ? "Done Editing" : "✏️ Edit Images"}
  </button>
  </div>
@@ -121,20 +121,20 @@ export default function PageRenderer() {
  {/* Image picker overlay */}
  {pickerOpen && (
  <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={() => { setPickerOpen(false); setShowUpload(false); }}>
- <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
- <div className="flex items-center justify-between px-4 py-3 border-b">
+ <div className="bg-white dark:bg-[#252528] rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
+ <div className="flex items-center justify-between px-4 py-3 border-b dark:border-[#444]">
  <div>
  <h3 className="font-heading font-bold text-sm">Replace Image</h3>
  <div className="flex gap-1 mt-1">
  {["Pictures", "Graphics", "Video"].map(f => (
  <button key={f} onClick={() => { setGdriveFilter(f); setGdrivePage(0); setGdrive([]); loadGdrive(); }}
- className={`text-[13px] px-2 py-0.5 rounded ${gdriveFilter===f?"bg-[#DF3131] text-white":"bg-gray-100"}`}>{f}</button>
+  className={`text-[13px] px-2 py-0.5 rounded ${gdriveFilter===f?"bg-[#DF3131] text-white":"bg-gray-100 dark:bg-[#1C1C1E]"}`}>{f}</button>
  ))}
  </div>
  </div>
  <div className="flex gap-2">
- <button onClick={() => setShowUpload(!showUpload)} className="px-3 py-1.5 border rounded-lg text-xs hover:bg-gray-50">Upload</button>
- <button onClick={() => { setPickerOpen(false); setShowUpload(false); }} className="hover:text-gray-600" aria-label="Close">✕</button>
+ <button onClick={() => setShowUpload(!showUpload)} className="px-3 py-1.5 border dark:border-[#444] rounded-lg text-xs hover:bg-gray-50 dark:hover:bg-[#1C1C1E]">Upload</button>
+ <button onClick={() => { setPickerOpen(false); setShowUpload(false); }} className="hover:text-gray-600 dark:hover:text-white/70" aria-label="Close">✕</button>
  </div>
  </div>
 
@@ -143,16 +143,16 @@ export default function PageRenderer() {
  <div onClick={() => fileRef.current?.click()} className="border-2 border-dashed border-[#DF3131] rounded-xl p-12 cursor-pointer hover:bg-red-50">
  <span className="text-4xl block mb-3">📁</span>
  <p className="font-semibold text-[#DF3131]">Click to Upload</p>
- <p className="text-xs text-[#666] mt-1">JPG, PNG, WebP, GIF</p>
+ <p className="text-xs text-[#666] dark:text-white/70 mt-1">JPG, PNG, WebP, GIF</p>
  </div>
- <button onClick={() => setShowUpload(false)} className="mt-4 text-sm text-[#666]">← Back to GDrive</button>
+ <button onClick={() => setShowUpload(false)} className="mt-4 text-sm text-[#666] dark:text-white/70">← Back to GDrive</button>
  <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
  </div>
  ) : (
  <>
- <div className="px-4 py-2 border-b">
+ <div className="px-4 py-2 border-b dark:border-[#444]">
  <input value={gdriveSearch} onChange={e => { setGdriveSearch(e.target.value); setGdrivePage(0); }}
-  placeholder="Search your GDrive..." aria-label="Search" className="w-full px-3 py-2 border rounded-lg text-sm focus:border-[#DF3131] outline-none" />
+   placeholder="Search your GDrive..." aria-label="Search" className="w-full px-3 py-2 border dark:border-[#444] rounded-lg text-sm focus:border-[#DF3131] outline-none" />
  </div>
  <div className="flex-1 overflow-y-auto p-4">
  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
@@ -160,7 +160,7 @@ export default function PageRenderer() {
  const rel = f.path.replace("G:\\My Drive\\", "").replace(/\\/g, "/");
  return (
  <button key={i} onClick={() => replaceImage(f.path)}
- className="aspect-square rounded-lg overflow-hidden border-2 border-gray-200 hover:border-[#DF3131] hover:shadow-md transition-all">
+  className="aspect-square rounded-lg overflow-hidden border-2 border-gray-200 dark:border-[#444] hover:border-[#DF3131] hover:shadow-md transition-all">
  <img src={`/api/media/${rel}`} alt="Page content image" width={400} height={300} className="w-full h-full object-cover" loading="lazy"
  onError={e => { (e.target as HTMLImageElement).style.display = "none"; }} />
  </button>
@@ -168,12 +168,12 @@ export default function PageRenderer() {
  })}
  </div>
  </div>
- <div className="flex items-center justify-between px-4 py-2 border-t text-xs">
- <span className="text-[#666]">{filtered.length} files</span>
+ <div className="flex items-center justify-between px-4 py-2 border-t dark:border-[#444] text-xs">
+ <span className="text-[#666] dark:text-white/70">{filtered.length} files</span>
  <div className="flex gap-1">
- <button onClick={() => setGdrivePage(p => Math.max(0, p-1))} disabled={gdrivePage===0} className="px-2 py-0.5 border rounded disabled:opacity-30">←</button>
- <span className="px-1 text-[#666]">{gdrivePage+1}/{Math.max(1,Math.ceil(filtered.length/PER))}</span>
- <button onClick={() => setGdrivePage(p => p+1)} disabled={(gdrivePage+1)*PER>=filtered.length} className="px-2 py-0.5 border rounded disabled:opacity-30">→</button>
+ <button onClick={() => setGdrivePage(p => Math.max(0, p-1))} disabled={gdrivePage===0} className="px-2 py-0.5 border dark:border-[#444] rounded disabled:opacity-30">←</button>
+ <span className="px-1 text-[#666] dark:text-white/70">{gdrivePage+1}/{Math.max(1,Math.ceil(filtered.length/PER))}</span>
+ <button onClick={() => setGdrivePage(p => p+1)} disabled={(gdrivePage+1)*PER>=filtered.length} className="px-2 py-0.5 border dark:border-[#444] rounded disabled:opacity-30">→</button>
  </div>
  </div>
  </>
