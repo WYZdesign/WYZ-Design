@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback, useMemo, createContext, useContext } from "react";
+import { useRef, useState, useEffect, useCallback, createContext, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiChevronLeft, FiChevronRight, FiPlay, FiX } from "react-icons/fi";
@@ -208,7 +208,7 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
 }
 
 function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: string }[]; onPlay?: (item: { title: string; video: string }) => void }) {
-  const [current, setCurrent] = useState(() => Math.floor(Math.random() * items.length));
+  const [current, setCurrent] = useState(0);
  const [flipping, setFlipping] = useState(false);
  const [direction, setDirection] = useState(0);
  const [auraColor, setAuraColor] = useState("#DF3131");
@@ -232,21 +232,24 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
 
  useEffect(() => {
  const vid = videoRef.current;
+ let ramp: ReturnType<typeof setInterval> | null = null;
+ let disposed = false;
  if (vid && !flipping) {
  vid.load();
  vid.muted = isMuted;
  vid.volume = 0;
  vid.play().then(() => {
- if (!isMuted) {
+ if (!isMuted && !disposed) {
  let v = 0;
- const ramp = setInterval(() => {
+ ramp = setInterval(() => {
  v = Math.min(v + 0.1, 0.3);
  if (videoRef.current) videoRef.current.volume = v;
- if (v >= 1) clearInterval(ramp);
+ if (v >= 0.3 && ramp) clearInterval(ramp);
  }, 75);
  }
  }).catch(() => {});
  }
+ return () => { disposed = true; if (ramp) clearInterval(ramp); };
  }, [current, flipping]);
 
   useEffect(() => {
@@ -632,7 +635,11 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
 export default function EventsPage() {
  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
  const [modalVideo, setModalVideo] = useState<{ video: string; title: string } | null>(null);
- const shuffled = useMemo(() => [...ALL_EVENT_IMAGES].sort(() => Math.random() - 0.5), []);
+ const [shuffled, setShuffled] = useState(ALL_EVENT_IMAGES);
+
+ useEffect(() => {
+ setShuffled([...ALL_EVENT_IMAGES].sort(() => Math.random() - 0.5));
+ }, []);
  const visibleEvents = shuffled.slice(0, visibleCount);
  const hasMore = visibleCount < shuffled.length;
 

@@ -103,6 +103,7 @@ export default function ModelArchivePage() {
  const [showApply, setShowApply] = useState(false);
  const [formData, setFormData] = useState({ name: "", email: "", phone: "", experience: "", message: "" });
  const [submitted, setSubmitted] = useState(false);
+ const [submitting, setSubmitting] = useState(false);
  const [selectedModel, setSelectedModel] = useState<string | null>(null);
  const [albumImages, setAlbumImages] = useState<string[]>([]);
  const [albumLoading, setAlbumLoading] = useState(false);
@@ -111,19 +112,28 @@ export default function ModelArchivePage() {
 
  const handleSubmit = async (e: React.FormEvent) => {
  e.preventDefault();
+ if (submitting) return;
  const form = e.target as HTMLFormElement;
  const fd = new FormData(form);
  const data: Record<string, string> = {};
  fd.forEach((v, k) => { data[k] = v as string; });
+ setSubmitting(true);
  try {
- await fetch("/api/forms", {
+ const res = await fetch("/api/forms", {
  method: "POST",
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "model-application", data: { ...data, submittedAt: new Date().toISOString() } }),
  });
+ const result = await res.json();
+ if (!res.ok || !result.success) {
+ logger.warn("model-archive-page", `Application submit failed: ${result.error || res.status}`);
+ toast.error(result.error || "Submission failed. Please try again.");
+ return;
+ }
  void earn("upload-model-photo");
- } catch (e) { logger.warn("model-archive-page", `Application submit failed: ${e}`); toast.error("Submission failed. Please try again."); }
  setSubmitted(true);
+ } catch (e) { logger.warn("model-archive-page", `Application submit failed: ${e}`); toast.error("Submission failed. Please try again."); }
+ finally { setSubmitting(false); }
  };
 
  const loadAlbum = useCallback(async (modelName: string) => {
@@ -312,8 +322,8 @@ export default function ModelArchivePage() {
  </div>
  <textarea name="message" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={4} value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}
  className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#888] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors resize-none" />
- <button type="submit" className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase hover:bg-[#B82020] transition-colors flex items-center justify-center gap-2">
- <FiSend className="w-4 h-4" /> BE A MODEL
+ <button type="submit" disabled={submitting} className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase hover:bg-[#B82020] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+ <FiSend className="w-4 h-4" /> {submitting ? "SUBMITTING..." : "BE A MODEL"}
  </button>
  </form>
  )}

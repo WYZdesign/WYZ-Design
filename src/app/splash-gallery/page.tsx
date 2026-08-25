@@ -27,18 +27,23 @@ function useGyro() {
  setGyro({ x: Number(x.toFixed(3)), y: Number(y.toFixed(3)), z: Number(z.toFixed(3)) });
  };
 
+ let disposed = false;
+
  if (typeof DeviceOrientationEvent !== "undefined") {
  // iOS requires permission
  if ((DeviceOrientationEvent as any).requestPermission) {
  (DeviceOrientationEvent as any).requestPermission()
- .then(() => window.addEventListener("deviceorientation", handler))
+ .then(() => { if (!disposed) window.addEventListener("deviceorientation", handler); })
  .catch(() => {});
  } else {
  window.addEventListener("deviceorientation", handler);
  }
  }
 
- return () => window.removeEventListener("deviceorientation", handler);
+ return () => {
+ disposed = true;
+ window.removeEventListener("deviceorientation", handler);
+ };
  }, []);
 
  return { gyro, hasGyro: hasGyro.current };

@@ -119,6 +119,7 @@ export default function FeaturedArtistPage() {
   const [showForm, setShowForm] = useState(false);
  const [formData, setFormData] = useState({ fullName: "", artistName: "", email: "", socialMedia: "", bio: "" });
  const [submitted, setSubmitted] = useState(false);
+ const [submitting, setSubmitting] = useState(false);
  const formRef = useRef<HTMLDivElement>(null);
 
  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -127,19 +128,28 @@ export default function FeaturedArtistPage() {
 
  const handleSubmit = async (e: React.FormEvent) => {
  e.preventDefault();
+ if (submitting) return;
  const form = e.target as HTMLFormElement;
  const fd = new FormData(form);
  const data: Record<string, string> = {};
  fd.forEach((v, k) => { data[k] = v as string; });
+ setSubmitting(true);
  try {
- await fetch("/api/forms", {
+ const res = await fetch("/api/forms", {
  method: "POST",
  headers: { "Content-Type": "application/json" },
  body: JSON.stringify({ formType: "featured-artist-application", data: { ...data, submittedAt: new Date().toISOString() } }),
  });
+ const result = await res.json();
+ if (!res.ok || !result.success) {
+ logger.warn("featured-artist-page", `Application submit failed: ${result.error || res.status}`);
+ toast.error(result.error || "Submission failed. Please try again.");
+ return;
+ }
  void earn("submit-featured-artist");
- } catch (e) { logger.warn("featured-artist-page", `Application submit failed: ${e}`); toast.error("Submission failed. Please try again."); }
  setSubmitted(true);
+ } catch (e) { logger.warn("featured-artist-page", `Application submit failed: ${e}`); toast.error("Submission failed. Please try again."); }
+ finally { setSubmitting(false); }
  };
 
  return (
@@ -319,8 +329,8 @@ export default function FeaturedArtistPage() {
  <textarea name="bio" placeholder="Tell us about yourself and your art *" aria-label="About your art" required value={formData.bio} onChange={handleChange}
  className="w-full px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all h-32 resize-none" />
  <div className="flex flex-wrap gap-4">
- <button type="submit" className="px-8 py-4 bg-[#DF3131] text-white text-[14px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-all">
- SUBMIT APPLICATION
+ <button type="submit" disabled={submitting} className="px-8 py-4 bg-[#DF3131] text-white text-[14px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+ {submitting ? "SUBMITTING..." : "SUBMIT APPLICATION"}
  </button>
  <button type="button" onClick={() => setShowForm(false)} className="px-8 py-4 border-2 border-[#333] text-[#333] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all">
  CANCEL

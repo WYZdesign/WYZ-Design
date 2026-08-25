@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useState, useEffect } from "react";
 
 function FisherYatesShuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -10,5 +10,11 @@ function FisherYatesShuffle<T>(arr: T[]): T[] {
 }
 
 export function useShuffle<T>(items: T[]): T[] {
-  return useMemo(() => FisherYatesShuffle(items), []);
+  const [shuffled, setShuffled] = useState(items);
+
+  useEffect(() => {
+    setShuffled(FisherYatesShuffle(items));
+  }, [items]);
+
+  return shuffled;
 }

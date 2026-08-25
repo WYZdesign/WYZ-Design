@@ -53,10 +53,16 @@ const SOCIALS = [
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [subscribing, setSubscribing] = useState(false);
   const { earn } = useZeal();
   const h = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    setSubscribing(true);
     try {
       const res = await fetch("/api/newsletter", {
         method: "POST",
@@ -64,9 +70,10 @@ export default function Footer() {
         body: JSON.stringify({ email }),
       });
       const data = await res.json();
-      if (data.success) { setSubscribed(true); setEmail(""); toast.success("Subscribed! Check your inbox."); trackMetaEvent("Subscribe"); void earn("subscribe-newsletter"); }
-      else { toast.error("Subscription failed. Please try again."); }
+      if (res.ok && data.success) { setSubscribed(true); setEmail(""); toast.success("Subscribed! Check your inbox."); trackMetaEvent("Subscribe"); void earn("subscribe-newsletter"); }
+      else { toast.error(data.error || "Subscription failed. Please try again."); }
     } catch { toast.error("Network error. Please try again."); }
+    finally { setSubscribing(false); }
   };
 
   const footerBg = "relative bg-[#111] dark:bg-[#111]";
@@ -107,8 +114,8 @@ export default function Footer() {
               data-kp-light
               className="flex-1 w-full px-4 py-3 bg-white text-[14px] text-[#333] placeholder:text-[#999] focus:outline-none focus:border-white border-2 border-white text-center md:text-left"
             />
-            <button type="submit" data-kp-light className="px-6 py-3 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.1em] hover:bg-white hover:text-[#111] transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0 border-2 border-[#DF3131]">
-              {subscribed ? "THANKS!" : "SUBSCRIBE"} <FiArrowRight className="w-4 h-4" />
+            <button type="submit" disabled={subscribing} data-kp-light className="px-6 py-3 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.1em] hover:bg-white hover:text-[#111] transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0 border-2 border-[#DF3131] disabled:opacity-50 disabled:cursor-not-allowed">
+              {subscribed ? "THANKS!" : subscribing ? "SUBSCRIBING..." : "SUBSCRIBE"} <FiArrowRight className="w-4 h-4" />
             </button>
           </form>
         </div>

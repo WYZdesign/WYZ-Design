@@ -31,11 +31,12 @@ export default function GyroTilt({ children, intensity = 15, className = "", ena
       requestPermission?: () => Promise<string>;
     };
     const DOE = DeviceOrientationEvent as unknown as DeviceOrientationEventWithPermission;
+    let disposed = false;
 
     if (typeof DOE !== "undefined" && typeof DOE.requestPermission === "function") {
       DOE.requestPermission()!
         .then((state) => {
-          if (state === "granted") {
+          if (!disposed && state === "granted") {
             window.addEventListener("deviceorientation", handleOrientation, { passive: true });
           }
         })
@@ -44,7 +45,10 @@ export default function GyroTilt({ children, intensity = 15, className = "", ena
       window.addEventListener("deviceorientation", handleOrientation, { passive: true });
     }
 
-    return () => window.removeEventListener("deviceorientation", handleOrientation);
+    return () => {
+      disposed = true;
+      window.removeEventListener("deviceorientation", handleOrientation);
+    };
   }, [intensity, enableOnDesktop]);
 
   useEffect(() => {

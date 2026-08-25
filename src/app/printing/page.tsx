@@ -166,7 +166,8 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
 
 export default function PrintingPage() {
  const { earn } = useZeal();
- const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+  const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+  const [quoteSubmitting, setQuoteSubmitting] = useState(false);
 
  return (
  <>
@@ -317,20 +318,25 @@ export default function PrintingPage() {
   <ScrollReveal animation="fadeUp" delay={0.15}>
   <div className="py-12 border-t border-[#E2E2E2] dark:border-[#444]">
   <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center text-[#333] dark:text-[#e0e0e0] mb-4">GET A QUOTE</h2>
- <form onSubmit={async (e) => { 
- e.preventDefault();
- const fd = new FormData(e.currentTarget as HTMLFormElement);
- const data = Object.fromEntries(fd.entries());
- try {
- await fetch("/api/forms", {
- method: "POST",
- headers: { "Content-Type": "application/json" },
- body: JSON.stringify({ formType: "printing-quote", data }),
- });
- void earn("submit-design-brief");
- } catch { toast.error("Submission failed. Please try again."); }
- setQuoteSubmitted(true);
- }} className="max-w-4xl mx-auto space-y-4">
+  <form onSubmit={async (e) => {
+  e.preventDefault();
+  if (quoteSubmitting) return;
+  const fd = new FormData(e.currentTarget as HTMLFormElement);
+  const data = Object.fromEntries(fd.entries());
+  setQuoteSubmitting(true);
+  try {
+  const res = await fetch("/api/forms", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ formType: "printing-quote", data }),
+  });
+  const result = await res.json();
+  if (!res.ok || !result.success) { toast.error(result.error || "Submission failed. Please try again."); return; }
+  void earn("submit-design-brief");
+  setQuoteSubmitted(true);
+  } catch { toast.error("Submission failed. Please try again."); }
+  finally { setQuoteSubmitting(false); }
+  }} className="max-w-4xl mx-auto space-y-4">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
    <input name="firstName" placeholder="First name" aria-label="First name" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
    <input name="lastName" placeholder="Last name" aria-label="Last name" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
@@ -357,8 +363,8 @@ export default function PrintingPage() {
    <input name="newsletter" type="checkbox" className="accent-[#DF3131]" /> Keep me updated on new printing options and promotions.
   </label>
   </div>
-  <button type="submit" className="w-full py-4 bg-[#333] text-white font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#DF3131] transition-all hover:scale-[1.01] hover:shadow-lg">
-  {quoteSubmitted ? "QUOTE REQUESTED" : "SUBMIT"}
+  <button type="submit" disabled={quoteSubmitting} className="w-full py-4 bg-[#333] text-white font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#DF3131] transition-all hover:scale-[1.01] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+  {quoteSubmitted ? "QUOTE REQUESTED" : quoteSubmitting ? "SUBMITTING..." : "SUBMIT"}
   </button>
  </form>
  </div>

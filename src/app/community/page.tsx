@@ -541,12 +541,21 @@ export default function ForumPage() {
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
     try {
-      await fetch("/api/newsletter", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        toast.error(data.error || "Subscription failed. Please try again.");
+        return;
+      }
       setSubscribed(true);
       setEmail("");
     } catch (e) { logger.warn("community-page", `Newsletter subscribe failed: ${e}`); toast.error("Subscription failed. Please try again."); }

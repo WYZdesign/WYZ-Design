@@ -85,11 +85,8 @@ const CLIENT_LOGOS_RAW = [
   { name: "Nuvonic", img: "/images/client-logos/nuvonic.jpg" },
   { name: "Nuvonic Title", img: "/images/client-logos/34_Nuvonic_Title.jpg" },
   { name: "LSG Production", img: "/images/client-logos/lsg-production.jpg" },
-  { name: "Dying Breed", img: "/images/client-logos/dying-breed.jpg" },
-  { name: "Dying Breed Clothing", img: "/images/client-logos/43_Dying_Breed_Clothing.jpg" },
   { name: "YALL", img: "/images/client-logos/yall.png" },
   { name: "YALL Red", img: "/images/client-logos/35_YALL_Logo__red_bevel_.jpg" },
-  { name: "Nomadic Breed", img: "/images/client-logos/nomadic-breed.jpg" },
   { name: "New Summit", img: "/images/client-logos/new-summit.jpg" },
   { name: "Premo", img: "/images/client-logos/premo.jpg" },
   { name: "The Promontory", img: "/images/client-logos/promontory.jpg" },
@@ -104,16 +101,12 @@ const CLIENT_LOGOS_RAW = [
   { name: "Diamond Kiss", img: "/images/client-logos/diamond-kiss.jpg" },
   { name: "Diamond Kiss 2", img: "/images/client-logos/36_Diamond_Kiss_Logo.jpg" },
   { name: "AP", img: "/images/client-logos/37_AP_Logo.jpg" },
-  { name: "Photo-Bombed", img: "/images/client-logos/photo-bombed.jpg" },
   { name: "Justy", img: "/images/client-logos/38_JUSTY_Logo__crown_.jpg" },
-  { name: "JR3Y", img: "/images/client-logos/jr3y.jpg" },
   { name: "Vanity J", img: "/images/client-logos/vanity-j.jpg" },
   { name: "Live Life Fearless", img: "/images/client-logos/39_Live.Life.Fearless.jpg" },
   { name: "LaBelleza", img: "/images/client-logos/40_LaBelleza.jpg" },
   { name: "K&G", img: "/images/client-logos/k-and-g.jpg" },
-  { name: "Monkey Mug", img: "/images/client-logos/monkey-mug.jpg" },
   { name: "PornEstrella", img: "/images/client-logos/pornestrella.jpg" },
-  { name: "Re(Belle)", img: "/images/client-logos/re-belle.jpg" },
   { name: "Baderbrau", img: "/images/client-logos/Baderbrau-Logo-570x558.jpg" },
   { name: "Fun Timez", img: "/images/client-logos/Fun Timez Logo.jpg" },
   { name: "Redeaux", img: "/images/client-logos/Redeaux Logo.png" },
@@ -961,7 +954,7 @@ export default function HomePage() {
 
 {/* ═══ SERVICES + PRICING PLANS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-8 sm:py-12 lg:py-16 relative overflow-hidden wyz-gradient-flow">
+ <section className="pt-8 sm:pt-12 lg:pt-16 pb-14 sm:pb-20 lg:pb-28 relative overflow-hidden wyz-gradient-flow">
  {/* Decorative background elements */}
  <div className="absolute top-0 right-0 w-96 h-96 bg-[#DF3131]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
  <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#DF3131]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
@@ -1036,7 +1029,7 @@ export default function HomePage() {
     </div>
   ))}
   </div>
-  <h3 className="text-center font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-sm mb-6 mt-12">Popular Services</h3>
+  <h3 className="text-center font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-2xl sm:text-3xl md:text-4xl mb-6 mt-12">Popular Services</h3>
   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
   {SERVICE_LIST.map((s) => (
     <HomeServiceFlipCard key={s.name} s={s} />
@@ -1250,7 +1243,7 @@ export default function HomePage() {
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 sm:gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8 max-w-5xl mx-auto">
  {QUICK_LINKS.map((link) => (
   <Link key={link.label} href={link.href}
-  className="bg-[#F5F5F5] dark:bg-[#252528] border-2 border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-white py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:border-[#DF3131] dark:hover:text-white transition-all text-center">
+   className="bg-[#F5F5F5] dark:bg-[#252528] border-2 border-[#DF3131] text-[#DF3131] py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:text-white transition-all text-center">
  {link.label}
  </Link>
  ))}

@@ -152,6 +152,8 @@ export default function LoyaltyPage() {
           </>
         ) : session && loading ? (
           <div className="text-center py-8 text-[#666] dark:text-white/50">Loading your Zeal...</div>
+        ) : session && !data ? (
+          <div className="text-center py-8 text-[#666] dark:text-white/50 mb-10">Couldn't load your Zeal right now. Refresh the page in a moment.</div>
         ) : null}
 
         {!session && (
@@ -169,17 +171,17 @@ export default function LoyaltyPage() {
           {(["daily", "weekly", "milestone", "easter"] as const).map(cat => {
             const items = (data?.catalog.actions ?? []).filter(a => a.category === cat);
             if (items.length === 0 && !data) return (
-              <div key={cat}>
+              <div key={cat} className="text-center">
                 <h3 className="font-heading font-bold text-[13px] tracking-[0.15em] uppercase text-[#DF3131] mb-3">{CATEGORY_LABELS[cat]}</h3>
                 <p className="text-[13px] text-[#666] dark:text-white/50">Sign in to see every way to earn in this category.</p>
               </div>
             );
             return (
               <div key={cat}>
-                <h3 className="font-heading font-bold text-[13px] tracking-[0.15em] uppercase text-[#DF3131] mb-3">{CATEGORY_LABELS[cat]}</h3>
+                <h3 className="font-heading font-bold text-[13px] tracking-[0.15em] uppercase text-[#DF3131] mb-3 text-center">{CATEGORY_LABELS[cat]}</h3>
                 <ul className="space-y-2">
                   {items.map(a => (
-                    <li key={a.id} className="flex items-center justify-between gap-3 border border-[#E2E2E2] dark:border-[#444] rounded-lg px-4 py-2.5 bg-white dark:bg-[#252528]">
+                    <li key={a.id} className="flex items-center justify-center gap-3 border border-[#E2E2E2] dark:border-[#444] rounded-lg px-4 py-2.5 bg-white dark:bg-[#252528] text-center">
                       <span className="text-[13px] text-[#333] dark:text-white/80">{a.reason}</span>
                       <span className="text-[13px] font-heading font-bold text-[#DF3131] whitespace-nowrap">+{a.zeal}{a.repeatable ? "" : " once"}</span>
                     </li>

@@ -171,9 +171,12 @@ function SiteCard({ site, index }: { site: typeof CLIENT_SITES[0]; index: number
 export default function WebDesignPage() {
   const [activeStep, setActiveStep] = useState(0);
   const stepTimer = useRef<NodeJS.Timeout | null>(null);
+  const stepPaused = useRef(false);
 
   useEffect(() => {
-    stepTimer.current = setInterval(() => setActiveStep(p => (p + 1) % PROCESS_STEPS.length), 3000);
+    stepTimer.current = setInterval(() => {
+      if (!stepPaused.current) setActiveStep(p => (p + 1) % PROCESS_STEPS.length);
+    }, 3000);
     return () => { if (stepTimer.current) clearInterval(stepTimer.current); };
   }, []);
 
@@ -181,7 +184,7 @@ return (
     <>
       <main className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
         {/* ═══ HERO — Split (desktop video/text, mobile merged) ═══ */}
-        <section className="relative min-h-[75vh] lg:min-h-screen overflow-hidden hero-banner">
+        <section className="relative min-h-screen overflow-hidden hero-banner">
         {/* Desktop split grid */}
         <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
           <div className="relative h-full">
@@ -303,8 +306,8 @@ return (
                   <div key={step.num}
                     className={`relative p-6 text-center cursor-pointer transition-all duration-500 border ${i === activeStep ? "bg-[#DF3131] scale-105 shadow-xl shadow-[#DF3131]/30 border-[#DF3131]" : "bg-[#1a1a1a] border-white/20 hover:border-[#DF3131]"}`}
                     onClick={() => setActiveStep(i)}
-                    onMouseEnter={() => { if (stepTimer.current) clearInterval(stepTimer.current); }}
-                    onMouseLeave={() => { stepTimer.current = setInterval(() => setActiveStep(p => (p + 1) % PROCESS_STEPS.length), 3000); }}>
+                    onMouseEnter={() => { stepPaused.current = true; }}
+                    onMouseLeave={() => { stepPaused.current = false; }}>
                     <span className={`text-[2rem] font-heading font-black block mb-2 transition-colors ${i === activeStep ? "text-white" : "text-[#DF3131]"}`}>{step.num}</span>
 <h3 className={`font-heading font-bold text-[14px] tracking-[0.08em] uppercase mb-2 transition-colors ${i === activeStep ? "text-white" : "text-white"}`}>{step.title}</h3>
  <p className={`text-[12px] leading-relaxed transition-colors ${i === activeStep ? "text-white/80" : "text-white/60"}`}>{step.desc}</p>

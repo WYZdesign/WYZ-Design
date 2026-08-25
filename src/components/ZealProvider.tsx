@@ -46,7 +46,6 @@ const ROUTE_ACTIONS: [RegExp, string][] = [
   [/^\/services/, "visit-service-page"],
   [/^\/plans/, "visit-pricing"],
   [/^\/gallery/, "visit-gallery"],
-  [/^\/secret/, "hidden-page"],
 ];
 
 const KONAMI = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"];
@@ -64,6 +63,8 @@ export default function ZealProvider({ children }: { children: React.ReactNode }
   const [points, setPoints] = useState<number | null>(null);
   const [tier, setTier] = useState<string | null>(null);
   const konamiIdx = useRef(0);
+  const pathnameRef = useRef<string | undefined>(undefined);
+  pathnameRef.current = pathname ?? undefined;
 
   const refresh = useCallback(async () => {
     try {
@@ -82,7 +83,7 @@ export default function ZealProvider({ children }: { children: React.ReactNode }
       const res = await fetch("/api/zeal/earn", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action, localHour: new Date().getHours(), metaPath: pathname ?? undefined }),
+        body: JSON.stringify({ action, localHour: new Date().getHours(), metaPath: pathnameRef.current }),
       });
       if (res.status === 401) return null;
       if (res.status === 429) return null;
@@ -107,7 +108,7 @@ export default function ZealProvider({ children }: { children: React.ReactNode }
     }
     toast.success(`+${payload.zeal} Zeal! ${payload.reason ?? ""}`);
     return payload;
-  }, [status, pathname]);
+  }, [status]);
 
   // Route-based discovery actions, once per route per session
   useEffect(() => {
@@ -116,8 +117,9 @@ export default function ZealProvider({ children }: { children: React.ReactNode }
     if (!match) return;
     const key = `zeal:route:${pathname}`;
     if (sessionHas(key)) return;
-    sessionMark(key);
-    void earn(match[1]);
+    void earn(match[1]).then(payload => {
+      if (payload?.success) sessionMark(key);
+    });
   }, [pathname, status, earn]);
 
   // Daily login on sign-in (server evaluates night-owl from localHour)
@@ -136,22 +138,22 @@ export default function ZealProvider({ children }: { children: React.ReactNode }
   useEffect(() => {
     if (status !== "authenticated") return;
     const key = `zeal:scrolled:${pathname}`;
-    let pendingTrio = false;
     const onScroll = () => {
       const bottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60;
       if (!bottom || sessionHas(key)) return;
-      sessionMark(key);
-      void earn("scroll-full-page");
-      try {
-        const raw = sessionStorage.getItem("zeal:scrolled-count");
-        const count = (raw ? parseInt(raw, 10) : 0) + 1;
-        sessionStorage.setItem("zeal:scrolled-count", String(count));
-        if (count >= 3 && !sessionHas("zeal:trio")) {
-          sessionMark("zeal:trio");
-          pendingTrio = true;
-        }
-      } catch {}
-      if (pendingTrio) void earn("scroll-trio");
+      void earn("scroll-full-page").then(payload => {
+        if (!payload?.success) return;
+        sessionMark(key);
+        try {
+          const raw = sessionStorage.getItem("zeal:scrolled-count");
+          const count = (raw ? parseInt(raw, 10) : 0) + 1;
+          sessionStorage.setItem("zeal:scrolled-count", String(count));
+          if (count >= 3 && !sessionHas("zeal:trio")) {
+            sessionMark("zeal:trio");
+            void earn("scroll-trio");
+          }
+        } catch {}
+      });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

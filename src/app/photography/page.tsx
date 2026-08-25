@@ -260,7 +260,8 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  }, []);
  const [modelIdx, setModelIdx] = useState(0);
  const [modelAutoPlay, setModelAutoPlay] = useState(true);
- const [applicationSubmitted, setApplicationSubmitted] = useState(false);
+  const [applicationSubmitted, setApplicationSubmitted] = useState(false);
+  const [applicationSubmitting, setApplicationSubmitting] = useState(false);
 
  useEffect(() => {
  // Fetch model best-per-model photos for featuredModels carousel
@@ -508,7 +509,7 @@ return (
   `}</style>
 
  {/* HERO */}
-    <section ref={heroRef} className="relative min-h-[75vh] overflow-hidden hero-banner">
+    <section ref={heroRef} className="relative min-h-screen overflow-hidden hero-banner">
    {/* Desktop split: video left, text right */}
    <div className="hidden md:grid md:grid-cols-2 md:h-full">
    <div className="relative h-full">
@@ -684,18 +685,23 @@ return (
   {showModelForm && (
   <div className="bg-white dark:bg-[#252528] p-6 lg:p-8 shadow-xl rounded-lg border border-[#E2E2E2] dark:border-[#444]">
   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-xl tracking-[0.05em] mb-3">APPLY TO BE A MODEL</h3>
-  <form onSubmit={async (e) => { 
+  <form onSubmit={async (e) => {
   e.preventDefault();
+  if (applicationSubmitting) return;
   const fd = new FormData(e.currentTarget as HTMLFormElement);
   const data = Object.fromEntries(fd.entries());
+  setApplicationSubmitting(true);
   try {
-  await fetch("/api/forms", {
+  const res = await fetch("/api/forms", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ formType: "model-application", data }),
   });
-   } catch { toast.error("Submission failed. Please try again."); return; }
-   setApplicationSubmitted(true);
+  const result = await res.json();
+  if (!res.ok || !result.success) { toast.error(result.error || "Submission failed. Please try again."); return; }
+  setApplicationSubmitted(true);
+  } catch { toast.error("Submission failed. Please try again."); }
+  finally { setApplicationSubmitting(false); }
   }} className="space-y-4">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
    <input name="fullName" placeholder="Full Name *" aria-label="Full name" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
@@ -713,8 +719,8 @@ return (
   </select>
   </div>
    <textarea name="about" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={3} className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none resize-none transition-colors" />
-   <button type="submit" className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg text-center">
-  {applicationSubmitted ? "SUBMITTED ✓" : "SUBMIT"}
+  <button type="submit" disabled={applicationSubmitting} className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg text-center disabled:opacity-50 disabled:cursor-not-allowed">
+  {applicationSubmitted ? "SUBMITTED ✓" : applicationSubmitting ? "SUBMITTING..." : "SUBMIT"}
   </button>
   </form>
   </div>

@@ -16,6 +16,7 @@ export default function PhotoshootCalendar() {
   const [duration, setDuration] = useState("1hr");
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const today = new Date();
   const [viewMonth, setViewMonth] = useState(today.getMonth());
@@ -57,28 +58,35 @@ export default function PhotoshootCalendar() {
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   const handleSubmit = async () => {
-    if (selectedDate && selectedTime && name && email) {
-      try {
-        await fetch("/api/forms", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            formType: "photoshoot-booking",
-            data: {
-              date: selectedDate.toISOString(),
-              time: selectedTime,
-              name,
-              email,
-              phone,
-              duration,
-              notes,
-              submittedAt: new Date().toISOString(),
-            },
-          }),
-        });
-      } catch (e) { logger.warn("photoshoot-page", `Form submit failed: ${e}`); toast.error("Booking failed. Please try again."); }
+    if (!selectedDate || !selectedTime || !name || !email || submitting) return;
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formType: "photoshoot-booking",
+          data: {
+            date: selectedDate.toISOString(),
+            time: selectedTime,
+            name,
+            email,
+            phone,
+            duration,
+            notes,
+            submittedAt: new Date().toISOString(),
+          },
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        logger.warn("photoshoot-page", `Form submit failed: ${data.error || res.status}`);
+        toast.error(data.error || "Booking failed. Please try again.");
+        return;
+      }
       setSubmitted(true);
-    }
+    } catch (e) { logger.warn("photoshoot-page", `Form submit failed: ${e}`); toast.error("Booking failed. Please try again."); }
+    finally { setSubmitting(false); }
   };
 
   if (submitted) {
@@ -210,7 +218,7 @@ export default function PhotoshootCalendar() {
                   </div>
                   <button
                     onClick={handleSubmit}
-                    disabled={!selectedDate || !selectedTime || !name || !email}
+                    disabled={!selectedDate || !selectedTime || !name || !email || submitting}
                     className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Confirm Booking

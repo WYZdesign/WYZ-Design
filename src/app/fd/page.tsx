@@ -180,6 +180,8 @@ export default function FDOraclePage() {
 
   useEffect(() => { checkHealth(); }, [checkHealth]);
 
+  useEffect(() => () => { if (pollRef.current) clearInterval(pollRef.current); }, []);
+
   const addMsg = (role: Message["role"], content: string) => { setMessages(prev => [...prev, { role, content }]); scrollDown(); };
 
   const sendMessage = async (msg?: string) => {

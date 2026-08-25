@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiUpload, FiFolder, FiX } from "react-icons/fi";
 
 let _open = false; let _slotId = ""; let _albumMode = false;
@@ -21,11 +21,13 @@ export function GlobalImagePicker() {
   const [albumPath, setAlbumPath] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
-  if (typeof window !== "undefined") {
-    window.addEventListener("wyz-picker-open", () => {
+  useEffect(() => {
+    const handleOpen = () => {
       setOpen(true); setAlbumMode(_albumMode); setAlbumPath("");
-    });
-  }
+    };
+    window.addEventListener("wyz-picker-open", handleOpen);
+    return () => window.removeEventListener("wyz-picker-open", handleOpen);
+  }, []);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]; if (!f) return;

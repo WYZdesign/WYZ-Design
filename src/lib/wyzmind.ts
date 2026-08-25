@@ -12,7 +12,8 @@ export function getNeo4j(): Driver {
       neo4j.auth.basic(
         process.env.NEO4J_USER || "neo4j",
         process.env.NEO4J_PASSWORD || "password"
-      )
+      ),
+      { disableLosslessIntegers: true }
     );
   }
   return neo4jDriver;

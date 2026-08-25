@@ -219,10 +219,10 @@ async function saveUserState(email: string, state: UserZealState): Promise<void>
 }
 
 /** Atomic Redis cooldown. Returns false when already earned inside the window. */
-async function claimCooldown(email: string, action: string, cooldownMs: number): Promise<boolean> {
+async function claimCooldown(email: string, action: string, cooldownMs: number, subKey?: string): Promise<boolean> {
   if (cooldownMs === 0) return true;
   const redis = getRedis();
-  const key = `zeal:cd:${email}:${action}`;
+  const key = `zeal:cd:${email}:${action}${subKey ? `:${subKey}` : ""}`;
   try {
     const res = await redis.set(key, "1", "EX", Math.ceil(cooldownMs / 1000), "NX");
     return res === "OK";
@@ -230,6 +230,36 @@ async function claimCooldown(email: string, action: string, cooldownMs: number):
     logger.warn("zeal:cooldown", e instanceof Error ? e.message : String(e));
     return true;
   }
+}
+
+/** Atomic permanent claim for one-time actions. Returns false when already claimed. */
+async function claimOnce(email: string, action: string): Promise<boolean> {
+  const redis = getRedis();
+  try {
+    const res = await redis.set(`zeal:once:${email}:${action}`, "1", "NX");
+    return res === "OK";
+  } catch (e) {
+    logger.warn("zeal:once", e instanceof Error ? e.message : String(e));
+    return true;
+  }
+}
+
+/** Serializes earns per user so concurrent requests can't double-award or clobber state. */
+async function acquireUserLock(email: string): Promise<boolean> {
+  const redis = getRedis();
+  try {
+    const res = await redis.set(`zeal:lock:${email}`, "1", "EX", 10, "NX");
+    return res === "OK";
+  } catch (e) {
+    logger.warn("zeal:lock", e instanceof Error ? e.message : String(e));
+    return true;
+  }
+}
+
+async function releaseUserLock(email: string): Promise<void> {
+  try {
+    await getRedis().del(`zeal:lock:${email}`);
+  } catch {}
 }
 
 export interface EarnResult {
@@ -243,6 +273,7 @@ export interface EarnResult {
   quest?: { id: string; title: string; bonusZeal: number };
   error?: string;
   cooldown?: boolean;
+  busy?: boolean;
 }
 
 /**
@@ -256,14 +287,45 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
   const def = ZEAL_ACTIONS[actionId];
   if (!def) return { success: false, error: "Unknown action" };
 
-  const state = await loadUserState(email);
-
-  if (def.cooldownMs === 0 && state.actions.includes(actionId)) {
-    return { success: true, zeal: 0, total: state.points, tier: state.tier, reason: def.reason };
+  // Normalize to top-level path segment so /photography/events can't farm distinct-service tracking
+  let normalizedPath: string | undefined;
+  if (opts?.metaPath && /^\/[a-z0-9-]*$/i.test(opts.metaPath.split("?")[0])) {
+    normalizedPath = opts.metaPath.split("/")[1]?.toLowerCase();
   }
 
-  const claimed = await claimCooldown(email, actionId, def.cooldownMs);
-  if (!claimed) return { success: false, cooldown: true, error: "Cooldown active" };
+  // Serialize all earns for this user: prevents double-awards and state clobbering
+  const locked = await acquireUserLock(email);
+  if (!locked) return { success: false, error: "Busy, try again", busy: true };
+  try {
+    return await earnZealLocked(email, actionId, def, { localHour: opts?.localHour, normalizedPath });
+  } finally {
+    await releaseUserLock(email);
+  }
+}
+
+async function earnZealLocked(
+  email: string,
+  actionId: string,
+  def: ZealActionDef,
+  ctx: { localHour?: number; normalizedPath?: string }
+): Promise<EarnResult> {
+  const state = await loadUserState(email);
+
+  if (def.cooldownMs === 0) {
+    const fastPath = state.actions.includes(actionId);
+    if (fastPath) return { success: true, zeal: 0, total: state.points, tier: state.tier, reason: def.reason };
+    const once = await claimOnce(email, actionId);
+    if (!once) {
+      state.actions.push(actionId);
+      await saveUserState(email, state);
+      return { success: true, zeal: 0, total: state.points, tier: state.tier, reason: def.reason };
+    }
+  } else {
+    // Per-post cooldown keys stop re-reads of one post from farming blog rewards
+    const subKey = actionId === "read-blog-post" && ctx.normalizedPath ? `post:${ctx.normalizedPath}` : undefined;
+    const claimed = await claimCooldown(email, actionId, def.cooldownMs, subKey);
+    if (!claimed) return { success: false, cooldown: true, error: "Cooldown active" };
+  }
 
   const beforeTier = tierForPoints(state.points);
 
@@ -291,10 +353,10 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
 
   // Distinct service page tracking for view-all-services + service-explorer
   let distinctServices = -1;
-  if (actionId === "visit-service-page" && opts?.metaPath) {
+  if (actionId === "visit-service-page" && ctx.normalizedPath) {
     try {
       const redis = getRedis();
-      await redis.sadd(`zeal:svcs:${email}`, opts.metaPath);
+      await redis.sadd(`zeal:svcs:${email}`, ctx.normalizedPath);
       distinctServices = await redis.scard(`zeal:svcs:${email}`);
       state.counters.services_distinct = distinctServices;
     } catch (e) {
@@ -307,20 +369,21 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
   const pendingAchievements: string[] = [];
 
   if (!state.achievements.includes("first-login")) pendingAchievements.push("first-login");
-  if (opts?.localHour !== undefined && opts.localHour >= 0 && opts.localHour < 5 && !state.achievements.includes("night-owl")) {
+  if (ctx.localHour !== undefined && ctx.localHour >= 0 && ctx.localHour < 5 && !state.achievements.includes("night-owl")) {
     pendingAchievements.push("night-owl");
   }
   for (const [achId, threshold] of [["streak-3", 3], ["streak-7", 7], ["streak-14", 14], ["streak-30", 30]] as const) {
     if (state.visitStreak >= threshold && !state.achievements.includes(achId)) pendingAchievements.push(achId);
   }
+  let bonusDescriptions: string[] = [];
   if ((state.counters.blogs_read || 0) >= 5 && !state.actions.includes("read-5-blog-posts")) {
-    await awardDirect(email, ZEAL_ACTIONS["read-5-blog-posts"].zeal, ZEAL_ACTIONS["read-5-blog-posts"].reason);
-    state.actions.push("read-5-blog-posts");
+    const ok = await awardDirect(email, ZEAL_ACTIONS["read-5-blog-posts"].zeal, ZEAL_ACTIONS["read-5-blog-posts"].reason);
+    if (ok) { state.actions.push("read-5-blog-posts"); bonusDescriptions.push(ZEAL_ACTIONS["read-5-blog-posts"].reason); }
   }
   if (distinctServices >= 6 && !state.actions.includes("view-all-services")) {
     const svcDef = ZEAL_ACTIONS["view-all-services"];
-    await awardDirect(email, svcDef.zeal, svcDef.reason);
-    state.actions.push("view-all-services");
+    const ok = await awardDirect(email, svcDef.zeal, svcDef.reason);
+    if (ok) { state.actions.push("view-all-services"); bonusDescriptions.push(svcDef.reason); }
   }
   if ((state.counters.services_distinct || distinctServices) >= 6 && !state.achievements.includes("service-explorer")) {
     pendingAchievements.push("service-explorer");
@@ -337,9 +400,12 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
     if (!achievementReward) achievementReward = { id: achId, title: ach.title, zeal: ach.zeal };
   }
 
-  await addLoyaltyPoints(email, def.zeal + achievementZeal, achievementZeal > 0
-    ? `${def.reason} + Achievement: ${achievementReward?.title}`
-    : def.reason);
+  await addLoyaltyPoints(email, def.zeal + achievementZeal,
+    bonusDescriptions.length > 0
+      ? `${def.reason} + ${bonusDescriptions.join(", ")}`
+      : achievementZeal > 0
+        ? `${def.reason} + Achievement: ${achievementReward?.title}`
+        : def.reason);
 
   // Quest completion check
   let questReward: EarnResult["quest"];
@@ -347,9 +413,11 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
     if (state.questsCompleted.includes(questId)) continue;
     const allDone = quest.steps.every(s => state.actions.includes(s));
     if (allDone) {
-      state.questsCompleted.push(questId);
-      await awardDirect(email, quest.bonusZeal, `Quest Complete: ${quest.title}`);
-      questReward = { id: questId, title: quest.title, bonusZeal: quest.bonusZeal };
+      const ok = await awardDirect(email, quest.bonusZeal, `Quest Complete: ${quest.title}`);
+      if (ok) {
+        state.questsCompleted.push(questId);
+        questReward = { id: questId, title: quest.title, bonusZeal: quest.bonusZeal };
+      }
     }
   }
 
@@ -370,12 +438,14 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
   };
 }
 
-/** Direct point award without cooldown/action bookkeeping (used for bonuses). */
-async function awardDirect(email: string, amount: number, reason: string): Promise<void> {
+/** Direct point award without cooldown/action bookkeeping (used for bonuses). Returns false on failure. */
+async function awardDirect(email: string, amount: number, reason: string): Promise<boolean> {
   try {
     await addLoyaltyPoints(email, amount, reason);
+    return true;
   } catch (e) {
     logger.error("zeal:awardDirect", e);
+    return false;
   }
 }
 
