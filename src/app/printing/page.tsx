@@ -183,7 +183,7 @@ export default function PrintingPage() {
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 flex flex-col items-center justify-center h-full">
     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase .5 text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
-    <p className="text-white/70 text-[16px] sm:text-lg mb-3 sm:mb-3 max-w-md text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and all numbers shown reflect industry prices at a 10% discount.</p>
+    <p className="text-white/70 text-[16px] sm:text-lg mb-3 sm:mb-3 max-w-md text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and every price you see reflects industry pricing at a 10% discount.</p>
     <Link href="/designs" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GRAPHIC DESIGN
     </Link>
@@ -198,10 +198,10 @@ export default function PrintingPage() {
     {(["FLYERS","POSTERS","BUSINESS CARDS","STICKERS","BANNERS","PHOTO PRINTS"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
-        <>
-          <span key={`w-${i}`} className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 2) % 4]}`}>{word}</span>
-          <span key={`b-${i}`} className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
-        </>
+        <span key={i} className="inline-flex items-center">
+          <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 2) % 4]}`}>{word}</span>
+          <span className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
+        </span>
       );
     })}
   </EnhancedMarquee>

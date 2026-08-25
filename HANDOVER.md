@@ -20,6 +20,13 @@ One running file, overwritten each round. Torreé relays it into the repo (Claud
 - **HTML sanitization:** `src/lib/dompurify.ts` (isomorphic-dompurify, allowlist-based). Do NOT use regex-based alternatives.
 - **Toast notifications:** `react-hot-toast` — all user-facing forms now have toast.success/toast.error
 
+## Session 22 — Fragment key warnings fix across 5 marquee sections
+**Date:** 2026-08-24
+**Changes:**
+- Fixed React fragment key warnings in 5 page files: `about/page.tsx`, `designs/page.tsx`, `printing/page.tsx`, `photography/page.tsx`, `web-design/page.tsx`
+- Each had `.map()` returning `<>` fragments with `<span key={...}>` inside — replaced with a single `<span key={i}>` wrapper to eliminate the warning
+- Removed redundant `key` props from inner spans since the parent now carries the key
+
 ## Session 21 — h1 line-height, photography dark mode, form bug (Claude)
 **Date:** 2026-08-24
 **Changes:**

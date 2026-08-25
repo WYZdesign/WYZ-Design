@@ -91,7 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#DF3131" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#232326" media="(prefers-color-scheme: dark)" />
-        <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}html.dark,html.dark body{background:#232326;color:#f0eaff}a{text-decoration:none}img{max-width:100%;height:auto}` }} />
+        <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}a{text-decoration:none}img{max-width:100%;height:auto}` }} />
         <script dangerouslySetInnerHTML={{ __html: `
           (function () {
             try {
