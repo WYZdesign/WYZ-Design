@@ -117,7 +117,7 @@ return (
    <div className="absolute inset-0 hero-grad-services z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 0 }}>
   <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
   </h1>
   <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">

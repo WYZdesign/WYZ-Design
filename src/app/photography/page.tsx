@@ -495,7 +495,7 @@ return (
     </div>
     </div>
     <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 pt-24 pb-12 min-h-[500px] h-full">
-   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
+   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
      <p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-2">
@@ -518,7 +518,7 @@ return (
     </div>
    <div className="absolute inset-0 bg-black/30 z-[1]" />
    <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
-   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
+   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
      <p className="text-[16px] sm:text-[16px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
@@ -667,8 +667,8 @@ return (
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ formType: "model-application", data }),
   });
-   } catch { toast.error("Submission failed. Please try again."); }
-  setApplicationSubmitted(true);
+   } catch { toast.error("Submission failed. Please try again."); return; }
+   setApplicationSubmitted(true);
   }} className="space-y-4">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
    <input name="fullName" placeholder="Full Name *" aria-label="Full name" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#2b2b2e] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
@@ -767,7 +767,7 @@ return (
 
  {/* BOOK TODAY */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 lg:py-20 bg-white">
+ <section className="py-12 lg:py-20 bg-white dark:bg-[#111]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] tracking-[0.1em] text-center mb-4">BOOK TODAY</h2>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

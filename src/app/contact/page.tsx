@@ -18,7 +18,7 @@ export default function ContactPage() {
           <ParticleBackground count={15} color="#DF3131" maxSize={2} speed={0.2} className="z-0 opacity-40" />
           <div className="relative z-10">
           <TextMaskReveal direction="up">
-          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>CONTACT US</h1>
+          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0 }}>CONTACT US</h1>
           </TextMaskReveal>
           </div>
           <p className="text-[#666] dark:text-[#999] text-center mb-10 text-[15px] leading-relaxed">

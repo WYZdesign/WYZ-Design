@@ -156,7 +156,7 @@ export default function FeaturedArtistPage() {
  <div className="w-full lg:w-1/2 flex items-center bg-white dark:bg-[#111] px-10 lg:px-16 xl:px-24 py-16 lg:py-0 relative z-10">
   <div className="max-w-xl text-center lg:text-center">
   <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">FEATURED ARTIST OF THE MONTH</span>
-  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6 sm:mb-8" style={{ lineHeight: 1 }}>DONTE<br />&quot;DANNY&quot;<br />DAVIS</h1>
+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6 sm:mb-8" style={{ lineHeight: 0 }}>DONTE<br />&quot;DANNY&quot;<br />DAVIS</h1>
  <div className="w-16 h-[3px] bg-[#DF3131] mb-6 mx-auto" />
  <p className="text-[#666] dark:text-white/70 text-[16px] leading-relaxed mb-4">
   From the west side of Chicago, born and raised! A guy known to some as &quot;Danny&quot; is a creative in every sense of the word. From writing to painting, with a palette of many other talents and abilities.

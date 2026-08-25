@@ -33,7 +33,7 @@ export default function ConceptArchivePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20" />
         <div className="relative z-10 text-center px-6 pt-24">
           <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-3">THE ART BEHIND THE WEAR</span>
-          <h1 className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-heading font-black text-white tracking-[0.08em] mb-4" style={{ lineHeight: 0.9 }}>
+          <h1 className="text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-heading font-black text-white tracking-[0.08em] mb-4" style={{ lineHeight: 0 }}>
             CONCEPT<br />ARCHIVE
           </h1>
           <p className="text-white/50 text-[15px] max-w-lg mx-auto leading-relaxed">

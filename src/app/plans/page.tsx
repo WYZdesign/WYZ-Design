@@ -268,7 +268,7 @@ export default function PlansPage() {
           {/* Left: Text */}
   <div className="w-full lg:w-1/2 bg-white dark:bg-[#111] flex items-center justify-center px-4 sm:px-10 lg:px-16 py-12 lg:py-0 order-2 lg:order-1">
   <div className="text-center max-w-xl">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 1 }}>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 0 }}>
  CHOOSE YOUR <span className="text-[#DF3131]">PRICING</span> PLAN
  </h1>
  <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">

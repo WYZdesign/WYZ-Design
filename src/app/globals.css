@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-h1 { max-width: 100%; line-height: 1; }
+h1 { max-width: 100%; line-height: 0; }
 h2 { max-width: 85%; margin-left: auto; margin-right: auto; }
 h3 { max-width: 75%; margin-left: auto; margin-right: auto; }
 
@@ -101,7 +101,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 
   /* Heads — center-aligned on mobile by default; .text-left headings (explicit left-align design intent) are exempted */
   h1:not(.text-left), h2:not(.text-left), h3:not(.text-left), h4:not(.text-left) { text-align: center !important; }
-  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 1 !important; max-width: 95% !important; }
+  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0 !important; max-width: 95% !important; }
   h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: 90% !important; }
   h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: 85% !important; }
   h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: 80% !important; }
@@ -151,7 +151,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   [class*="carousel"] .flex-none { height: 10rem !important; }
 
   /* Hero titles */
-  .hero-title { font-size: 3rem !important; line-height: 1 !important; }
+  .hero-title { font-size: 3rem !important; line-height: 0 !important; }
   .hero-subtitle { font-size: 1.1rem !important; }
 
   /* Hero overlay — dark overlay for hero text over video */
@@ -1010,7 +1010,7 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
   h4, h5, h6 { font-size: 1rem !important; }
 
   h1, h2, h3, h4, h5, h6 {
-    line-height: 1.15 !important;
+    line-height: 0 !important;
     text-align: center !important;
     margin-top: 0.75rem !important;
     margin-bottom: 0.5rem !important;

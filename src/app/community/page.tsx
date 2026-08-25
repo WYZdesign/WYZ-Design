@@ -658,7 +658,7 @@ export default function ForumPage() {
     <main className="pb-20 bg-white dark:bg-[#232326] min-h-screen">
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6 pt-32 lg:pt-40">
-          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 1 }}>COMMUNITY</h1>
+          <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0 }}>COMMUNITY</h1>
           <p className="text-[#666] dark:text-[#b0b0b0] text-center mb-8 text-[16px]">Connect with creators, share your work, and grow with the WYZ community.</p>
 
           {/* Stats strip */}
