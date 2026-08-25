@@ -67,7 +67,7 @@ export default function Footer() {
     } catch { toast.error("Network error. Please try again."); }
   };
 
-  const footerBg = "relative bg-[#111] dark:bg-[#f0f0f0]";
+  const footerBg = "relative bg-[#111] dark:bg-[#111]";
   const videoBg = (
     <>
       <div className="absolute inset-0 wyz-red-gradient dark:wyz-red-gradient-light" />
@@ -75,26 +75,26 @@ export default function Footer() {
       <div className="absolute inset-0 bg-black/15 dark:bg-black/15" />
     </>
   );
-  const textPrimary = "text-white dark:text-black";
-  const textSecondary = "text-white/70 dark:text-black/70";
-  const textMuted = "text-white/50 dark:text-black/50";
-  const textLink = "text-white/60 dark:text-black/60 hover:text-white dark:hover:text-black";
-  const headingColor = "text-white dark:text-black";
-  const borderColor = "border-white/10 dark:border-black/10";
-  const socialBorder = "border-white/15 dark:border-black/15";
-  const socialText = "text-white/60 dark:text-black/60";
-  const copyrightColor = "text-white/40 dark:text-black/40";
-  const precisionColor = "text-white/30 dark:text-black/30";
+  const textPrimary = "text-white dark:text-white";
+  const textSecondary = "text-white/70 dark:text-white/70";
+  const textMuted = "text-white/50 dark:text-white/50";
+  const textLink = "text-white/60 dark:text-white/60 hover:text-white dark:hover:text-white";
+  const headingColor = "text-white dark:text-white";
+  const borderColor = "border-white/10 dark:border-white/10";
+  const socialBorder = "border-white/15 dark:border-white/15";
+  const socialText = "text-white/60 dark:text-white/60";
+  const copyrightColor = "text-white/40 dark:text-white/40";
+  const precisionColor = "text-white/30 dark:text-white/30";
   const inputBg = "bg-white text-[14px] text-[#333] placeholder:text-[#999] border-[#333]";
 
   return (
-    <footer className="relative overflow-hidden bg-[#111] dark:bg-[#f0f0f0]">
+    <footer className="relative overflow-hidden bg-[#111] dark:bg-[#111]">
       {/* Newsletter banner */}
-      <div className="bg-[#111] dark:bg-[#f0f0f0]">
+      <div className="bg-[#111] dark:bg-[#111]">
         <div className="max-w-[115rem] mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <h3 className="text-white dark:text-black font-heading font-bold text-xl sm:text-2xl tracking-[0.08em] whitespace-nowrap">STAY IN THE LOOP</h3>
-            <p className="text-white/80 dark:text-black/80 text-[14px] mt-1">Get exclusive updates, promotions, and behind-the-scenes content.</p>
+            <h3 className="text-white dark:text-white font-heading font-bold text-xl sm:text-2xl tracking-[0.08em] whitespace-nowrap">STAY IN THE LOOP</h3>
+            <p className="text-white/80 dark:text-white/80 text-[14px] mt-1">Get exclusive updates, promotions, and behind-the-scenes content.</p>
           </div>
           <form onSubmit={h} className="flex flex-col sm:flex-row w-full max-w-full mx-auto md:mx-0 md:w-auto md:max-w-md gap-2">
             <input

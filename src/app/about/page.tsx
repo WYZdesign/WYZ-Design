@@ -126,14 +126,14 @@ export default function AboutPage() {
               OUR <span className="text-[#DF3131]">MISSION</span>
             </h2>
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
-                 We believe every artist, brand, and creative deserves access to professional-grade design, photography, and creative strategy, without the gatekeeping, without the pretension, and without paying for work that looks like it came from a template.
+               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
+                  We believe every artist, brand, and creative deserves access to professional-grade design, photography, and creative strategy, no gatekeeping, no pretension, and no paying for work that looks like it came from a template.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
-                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel Harris</span> built this from the ground up: over 60 events produced, over 30 clients supported, and a creative standard that doesn't drop based on who's paying.
+                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel Harris</span> built this from the ground up: 60+ events, 30+ clients, and a creative standard that doesn't drop based on who's paying.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed">
-                 Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them. We don't outsource. We don't pass you around. We do the work ourselves, from first conversation to final delivery.
+                  Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them. We don't outsource or pass you around. We do the work ourselves, start to finish.
               </p>
             </div>
           </div>
@@ -158,13 +158,13 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">
                   <p>
-                    Torreé Marcel Harris (Torreé Marcel, or Torre Harris) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. What started as making flyers for local artists became a brand that serves over 30 clients and has produced 60+ events.
+                    Torreé Marcel Harris (Torreé Marcel, or Torre Harris) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. It started as flyers for local artists and grew into a brand serving 30+ clients with 60+ events produced.
                   </p>
                   <p>
-                    With a background in graphic design, event production, and brand strategy, Torreé saw a gap in the market: artists and small brands were being underserved by agencies that didn't understand their vision, or overcharged for work that didn't reflect their identity. WYZ Design was the answer.
+                    With a background in graphic design, event production, and brand strategy, Torreé saw artists and small brands getting underserved by agencies that didn't get their vision or overcharged for work that didn't reflect who they were. WYZ Design was the answer.
                   </p>
                   <p>
-                    Now based in Los Angeles, Torreé continues to expand WYZ Design's reach while staying rooted in the values that built it: wild vision, zealous execution, and a commitment to doing the work the right way, every single time.
+                    Now in Los Angeles, Torreé continues to grow WYZ Design's reach while staying true to the values that built it: wild vision, zealous execution, and doing the work the right way, every time.
                   </p>
                 </div>
                  <div className="mt-8 flex flex-wrap gap-4 justify-center">
