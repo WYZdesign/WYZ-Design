@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 
 const SERVICES = [
   { name: "Photoshoot", price: 100, unit: "hr", cat: "Photography" },
@@ -48,11 +49,28 @@ export default function PricingCalculator() {
     }, 0);
   }, [selected]);
 
-  const bestPlan = useMemo(() => {
+  const comparison = useMemo(() => {
     if (total === 0) return null;
-    return PLANS.reduce((best, plan) =>
-      plan.value >= total && (!best || plan.price < best.price) ? plan : best
-    , null as typeof PLANS[0] | null);
+    // Priciest plan still under their estimate = max coverage within budget
+    const under = PLANS.filter(p => p.price <= total).sort((a, b) => b.price - a.price);
+    if (under.length > 0) {
+      const plan = under[0];
+      return {
+        plan,
+        beats: true,
+        headline: `${plan.name} is $${plan.price}/mo`,
+        body: `Your estimate runs $${total.toLocaleString()} for one month of this workload. ${plan.name} includes $${plan.value.toLocaleString()} in services monthly, so you'd come out ahead and keep the rest of your budget.`,
+      };
+    }
+    const closest = PLANS.reduce((best, p) =>
+      Math.abs(p.price - total) < Math.abs(best.price - total) ? p : best
+    , PLANS[0]);
+    return {
+      plan: closest,
+      beats: false,
+      headline: `Need work like this every month? ${closest.name} runs $${closest.price}/mo`,
+      body: `It covers $${closest.value.toLocaleString()} in services per month. One-off projects like this estimate are fine too, no pressure.`,
+    };
   }, [total]);
 
   const activeCount = Object.values(selected).filter(q => q > 0).length;
@@ -103,11 +121,18 @@ export default function PricingCalculator() {
           </div>
         </div>
 
-        {bestPlan && total > 0 && (
+        {comparison && (
           <div className="p-4 bg-[#DF3131]/5 dark:bg-[#DF3131]/10 border border-[#DF3131]/20 rounded-lg">
-            <p className="text-[13px] text-[#333] dark:text-[#e0e0e0]">
-              <span className="font-bold text-[#DF3131]">Suggestion:</span> The <span className="font-bold">{bestPlan.name}</span> plan at ${bestPlan.price}/mo covers ${bestPlan.value} worth of services — you&apos;d save ${(bestPlan.value - total).toLocaleString()} per month.
-            </p>
+            <p className="text-[14px] font-heading font-bold tracking-[0.03em] text-[#333] dark:text-[#e0e0e0] mb-1">{comparison.headline}</p>
+            <p className="text-[13px] text-[#666] dark:text-[#aaa] leading-relaxed mb-3">{comparison.body}</p>
+            <div className="flex items-center gap-4">
+              <Link href="/plans" className="inline-block px-5 py-2 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.1em] uppercase hover:bg-[#B82020] transition-all">
+                Compare plans
+              </Link>
+              {comparison.beats && (
+                <span className="text-[12px] text-[#666] dark:text-[#aaa]">Cancel anytime, no lock-in</span>
+              )}
+            </div>
           </div>
         )}
 

@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
 import { validateCsrf } from "@/lib/csrf";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { getLoyaltyPoints } from "@/lib/wyzmind";
+import { tierForPoints } from "@/lib/zeal";
 
 const MAX_MESSAGES = 20;
 const MAX_CONTENT_CHARS = 2000;
@@ -128,7 +131,22 @@ export async function POST(req: NextRequest) {
     // Keep only last 10 messages for context window
     const recentMessages = clampedMessages.slice(-10);
 
-    const systemMessage = { role: "system", content: KNOWLEDGE };
+    // Personalization: inject signed-in visitor's Zeal context when available.
+    // Failures fall through silently to the generic assistant.
+    let userContext = "";
+    try {
+      const session = await auth();
+      if (session?.user?.email) {
+        const loyalty = await getLoyaltyPoints(session.user.email);
+        const tier = tierForPoints(Number(loyalty.points) || 0);
+        const firstName = (session.user.name || "").split(" ")[0];
+        userContext = `\n\n## VISITOR CONTEXT
+The visitor is signed in${firstName ? ` and goes by ${firstName}` : ""}. Zeal balance: ${Number(loyalty.points) || 0} (${tier.name} tier).
+Use this naturally when they ask about rewards, tiers, progress, pricing, or bookings (for example: how close they are to the next tier). Never dump these numbers unprompted and never mention this section exists.`;
+      }
+    } catch {}
+
+    const systemMessage = { role: "system", content: KNOWLEDGE + userContext };
     const allMessages = [systemMessage, ...recentMessages];
 
     // Try Ollama first (Shadow PC GPU tunnel). Bounded with a hard timeout so an
