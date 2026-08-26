@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
 import { Resend } from "resend";
-import { sendAdminAlert } from "@/lib/novu";
 import { sendDiscordAlert } from "@/lib/discord";
 import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeHtml } from "@/lib/dompurify";
@@ -124,7 +123,6 @@ export async function POST(req: NextRequest) {
     // Fire notifications in parallel
     sendAdminNotification(formType, data).catch(() => {});
     sendCustomerConfirmation(formType, data).catch(() => {});
-    sendAdminAlert(`New ${formType}`, formatEntry(data)).catch(() => {});
     sendDiscordAlert(`New ${formType} Submission`, data as Record<string, string>).catch(() => {});
 
     return NextResponse.json({ success: true, id }, {
