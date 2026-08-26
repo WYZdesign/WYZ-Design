@@ -157,22 +157,24 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
 
  function PhotoFlipCard({ s }: { s: { name: string; price: string; dur: string; cat: string; desc: string; bookLink: string; img: string } }) {
   const [flipped, setFlipped] = useState(false);
+  const canHover = useRef(false);
+  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
-   <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "624px" }}
+    <div className="group relative cursor-pointer min-h-[320px] sm:min-h-[500px] lg:min-h-[624px]" style={{ perspective: "1200px" }}
   onClick={() => setFlipped(f => !f)}
-  onMouseEnter={() => setFlipped(true)}
-  onMouseLeave={() => setFlipped(false)}>
+  onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+  onMouseLeave={() => { if (canHover.current) setFlipped(false); }}>
   {/* Front */}
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
-  <div className="aspect-[4/3] overflow-hidden relative">
+   <div className="aspect-[16/10] sm:aspect-[4/3] overflow-hidden relative">
   <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
   <div className="absolute top-3 right-3 bg-[#DF3131] text-white px-3 py-1 text-[14px] font-bold tracking-wider">{s.price}</div>
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
   </div>
-  <div className="p-5 text-center">
+   <div className="p-4 sm:p-5 text-center">
   <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{s.cat}</span>
   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
   <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed line-clamp-2">{s.desc}</p>

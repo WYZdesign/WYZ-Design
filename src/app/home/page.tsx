@@ -130,12 +130,14 @@ const SERVICE_LIST = [
 
 function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
   const [flipped, setFlipped] = useState(false);
+  const canHover = useRef(false);
+  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
   return (
     <div
       className="group relative cursor-pointer w-full"
       style={{ perspective: "1200px" }}
-      onMouseEnter={() => setFlipped(true)}
-      onMouseLeave={() => setFlipped(false)}
+      onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+      onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
       onClick={() => setFlipped((f) => !f)}
     >
       <div className="relative w-full" style={{ minHeight: "min(380px, 50vh)" }}>

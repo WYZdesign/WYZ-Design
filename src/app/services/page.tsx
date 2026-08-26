@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useRef, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StrategyWizard from "@/components/StrategyWizard";
@@ -34,13 +34,15 @@ const ALL_SERVICES_RAW = [
 
 function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; index: number }) {
  const [flipped, setFlipped] = useState(false);
+ const canHover = useRef(false);
+ useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
  return (
  <div
  className="group relative cursor-pointer"
  style={{ perspective: "1200px" }}
- onMouseEnter={() => setFlipped(true)}
- onMouseLeave={() => setFlipped(false)}
+ onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+ onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
  onClick={() => setFlipped(f => !f)}
  >
   <div className="relative w-full" style={{ minHeight: "min(400px, 60vh)" }}>

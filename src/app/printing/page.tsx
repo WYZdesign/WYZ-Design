@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
@@ -56,11 +56,13 @@ function PaperAccordion({ paper, index }: { paper: typeof PAPER_TYPES[0]; index:
 
 function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
  const [flipped, setFlipped] = useState(false);
+ const canHover = useRef(false);
+ useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
   <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(811px, 90vh)" }}
-  onMouseEnter={() => setFlipped(true)}
-  onMouseLeave={() => setFlipped(false)}
+  onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+  onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
   onClick={() => setFlipped(f => !f)}>
   <div
     className="relative w-full h-full transition-transform duration-700 ease-in-out"
@@ -125,11 +127,13 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
   title: string; subtitle: string; backTitle: string; backContent: React.ReactNode; backNote: string; backBg: string; orderLink: string; orderLabel: string; orderClass: string;
 }) {
   const [flipped, setFlipped] = useState(false);
+  const canHover = useRef(false);
+  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
     <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(500px, 80vh)" }}
-      onMouseEnter={() => setFlipped(true)}
-      onMouseLeave={() => setFlipped(false)}
+      onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+      onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
       onClick={() => setFlipped(f => !f)}>
       <div
         className="relative w-full h-full transition-transform duration-700 ease-in-out"

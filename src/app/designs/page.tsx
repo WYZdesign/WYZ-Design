@@ -104,13 +104,13 @@ function Carousel({ images, direction = "left", whiteBgInDark }: { images: strin
  }, [direction]);
 
  const handleClick = () => {
- paused.current = true;
- if (clickTimer.current) clearTimeout(clickTimer.current);
- clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
+  paused.current = true;
+  if (clickTimer.current) clearTimeout(clickTimer.current);
+  clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
  };
 
-return (
-  <div className="overflow-hidden" onClick={handleClick}>
+ return (
+  <div className="overflow-hidden" onClick={handleClick} onTouchStart={handleClick} onTouchEnd={handleClick}>
   <div
   ref={scrollRef}
   className="flex flex-nowrap gap-2 cursor-pointer no-scrollbar"
@@ -284,9 +284,9 @@ const faotmImages = [
 
  {/* ═══ COVER ART CAROUSEL ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-3 sm:py-4 lg:py-5">
+ <section className="-mt-2 pt-1 pb-1 sm:py-4 lg:py-5">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">Cover Art</h2>
+  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Cover Art</h2>
   <Link href="#cover-art" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
  </div>
  <Carousel images={shuffledCovers} direction="left" />
@@ -295,9 +295,9 @@ const faotmImages = [
 
  {/* ═══ FLYERS CAROUSEL ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-3 sm:py-4 lg:py-5">
+ <section className="pt-1 pb-1 sm:py-4 lg:py-5">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">Flyers</h2>
+  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Flyers</h2>
   <Link href="#flyers" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
  </div>
  <Carousel images={shuffledFlyers} direction="right" />
@@ -306,9 +306,9 @@ const faotmImages = [
 
  {/* ═══ LOGOS CAROUSEL ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-3 sm:py-4 lg:py-5">
+ <section className="pt-1 pb-2 sm:py-4 lg:py-5">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">Logos</h2>
+  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Logos</h2>
   <Link href="#logos" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
  </div>
  <Carousel images={shuffledLogos} direction="left" whiteBgInDark />
@@ -398,7 +398,7 @@ const faotmImages = [
   <button onClick={() => merchScrollRef.current?.scrollBy({ left: -300, behavior: "smooth" })} className="absolute sm:-left-5 left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#252528]" aria-label="Scroll left">←</button>
  <div ref={merchScrollRef} className="flex gap-2 overflow-x-auto pb-2 px-6" style={{ scrollbarWidth: "none" }}>
  {dbcMerch.map((p, i) => (
- <Link key={i} href="/merch" className="flex-none w-[13vw] min-w-[120px] group cursor-pointer block">
+ <Link key={i} href="/merch" className="flex-none w-[21vw] min-w-[190px] sm:w-[13vw] sm:min-w-[120px] group cursor-pointer block">
  <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
    <Image src={p.img} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
    </div>
