@@ -646,12 +646,46 @@ Claude audited the old `wyzdesign.wixstudio.com/wyzdesign` against the current s
 
 ### Code Quality Status
 - `tsc --noEmit`: Clean ✅
-- `console.error/warn`: Only in logger + errorTracker (correct) ✅
+- `console.error/warn`: Only in A11yAudit.tsx (dev-only, acceptable) ✅
+- All error boundaries use trackError for telemetry ✅
 - Orphaned routes: Removed `/api/geocode`, `/api/fd/events` ✅
 - Admin auth: `requireAdmin()` wired into analytics, bookkeeping/meta, bugs, fd/drive, fd/events (deleted), forms ✅
 - Dead imports: Cleaned ✅
 - All 23 pages return 200 ✅
 - All API endpoints responding correctly ✅
+
+### H-Stack Audit (Session 36 — Complete)
+All 17 high-priority findings resolved:
+
+| Finding | Status | Details |
+|---------|--------|---------|
+| A-H1 Root canonical | ✅ | Removed from layout.tsx, per-page canonicals only |
+| A-H2 Error loop + tracker | ✅ | autoResetUsed ref guards, trackError wired in all 5 error boundaries |
+| C-H1 Flip card keyboards | ✅ | role=button, tabIndex, aria-expanded, onKeyDown on 5 components |
+| C-H2 Modal Esc/focus/scroll | ✅ | useModalA11y hook in 10 components (counter-based scroll lock) |
+| C-H3 Autocomplete/labels | ✅ | DynamicForm id=field.name, autoComplete on booking + gift-card |
+| C-H4 aria-current | ✅ | Navbar desktop links get aria-current="page" |
+| C-H5 Reduced motion | ✅ | prefersReducedMotion() in 7 JS animation components + CSS fallback |
+| E-H1 Plan names/billing | ✅ | Starter Pack/Business Boost/Pro Plus/Ultimate Suite, "Every 3 months" |
+| E-H2 Retouching price | ✅ | $75 in services |
+| E-H3 Concept cap | ✅ | concept-generate input length capped |
+| F-8 Toast error duration | ✅ | error: { duration: 8000 } in Toaster config |
+| G-H1 Neo4j constraint | ✅ | neo4j-setup.ts + cypher reference, wired into status + admin routes |
+| G-H2 Svix webhook | ✅ | Full HMAC-SHA256 verification in webhook/resend |
+| G-H3 Server userId | ✅ | checkout derives from auth(), client userId ignored |
+| G-H4 Dead cron | ✅ | Backup cron removed |
+| I-H1 Image priority/sizes | ✅ | Priority removed from 3 non-hero images, sizes added to 23+ fill images |
+| J-H1/J-H2 Sitemap + canonicals | ✅ | Merch products, booking routes, splash routes in sitemap |
+
+### I-Tier Findings (Session 36)
+| Finding | Status | Details |
+|---------|--------|---------|
+| I92 Blog schema | ✅ | BlogPosting + BreadcrumbList JSON-LD already implemented |
+| I98 Cash App button | N/A | Only in admin dropdown, no public CTA planned |
+| I95 18+ age gate | MISSING | No age gate component — needs feature decision |
+| I85 Hero alt text | ✅ | Events hero improved to descriptive string |
+| console violations | ✅ | 3 error boundaries now use trackError instead of console.error |
+| Secret layout desc | N/A | Intentional noindex page, no description needed |
 
 ### Vault Check (Session 16)
 | Credential | Status |
