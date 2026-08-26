@@ -328,11 +328,52 @@ Findings appended per-domain during execution with severity: [C] critical, [H] h
 **Status:** PENDING
 
 ### Findings Ledger
-| ID | Domain | Severity | Finding | Status |
-|----|--------|----------|---------|--------|
+
+**Wave status:** Clusters A-J audited by 5 parallel agents. Consolidated priorities below (full per-checkpoint tables in session transcripts). Live-bug fixes from Claude's browser audit folded in first.
+
+#### FIXED ALREADY (this wave)
+| Sev | Finding | Fix |
+|-----|---------|-----|
+| C | Cal.com embed crash on /booking: stub never created ns.booking synchronously -> TypeError, widget never mounted (revenue path) | Faithful official embed pattern: init creates namespace API stubs sync; guard against double-init |
+| H | Merch carousel tiles linked every product to /featured-artist | Links to /merch/{id} |
+| H | /account/my-account redirected ALL users incl. customers to /admin login | Real account page: sign-in prompt when logged out; Zeal balance/tier card + CTAs when signed in |
+| C | novu.ts deleted as "dead" broke forms route build (grep regex missed import; Discord alert already covered same payload) | Import+call removed; lesson: verify imports via compiler, not grep alone |
+
+#### CRITICAL
+| ID | Domain | Finding | Fix approach |
+|----|--------|---------|--------------|
+| G-C1 | H73/74 | Zeal Redis split-brain: ioredis targets REDIS_HOST (localhost default) unreachable on Vercel -> cooldowns/locks/redemption records fail-open or vanish after deduction | Migrate wyzmind getRedis to @upstash/redis REST client; persist redemption record BEFORE deducting points |
+
+#### HIGH
+| ID | Domain | Finding |
+|----|--------|---------|
+| A-H1 | A4 | Root layout canonical inherited by ~9 public routes -> mass canonical-to-homepage deindexation signal; remove root canonical or add per-page |
+| A-H2 | A6 | error.tsx auto-reset loop every 1.2s unconditionally; neither error file reports to tracker |
+| C-H1 | D33 | Flip cards keyboard-dead on home/services/printing/photography (no tabIndex/role/onKeyDown) |
+| C-H2 | D34-adjacent | 5 modals lack Esc close (AlbumModal, ImagePicker, StrategyWizard, FDDriveBrowser preview, fd lightbox); zero focus-return-to-trigger site-wide |
+| C-H3 | C22 | Zero autocomplete attrs on identity inputs; DynamicForm htmlFor has no matching input id |
+| C-H4 | D35 | aria-current never used site-wide; nav/tab active state invisible to SRs |
+| C-H5 | D38 | JS-driven motion (marquee/particles/gyro/cursor/glow) ignores prefers-reduced-motion |
+| E-H1 | E44 | Plan identity split-brain: home sells Creator Access/Growth Retainer/etc while plans/calculator/chat sell Starter Pack/Business Boost/etc |
+| E-H2 | E44 | Billing contradiction on home plan card ("Every 3 months" + "Monthly") vs plans page "Valid for 3 months" |
+| E-H3 | E44 | Photo retouching "Price Varies" on home flip vs $50 everywhere else |
+| G-H1 | H71 | No Neo4j uniqueness constraint on User.email anywhere; concurrent MERGE can duplicate users/split balances |
+| G-H2 | G62 | /api/webhook/resend verifies no Svix signature -> forgeable unsubscribes |
+| G-H3 | G62 | Checkout trusts client userId; webhook writes muse tier by it -> derive server-side from session/email |
+| G-H4 | G61 | concept-generate forwards uncapped unvalidated text to paid OpenRouter |
+| I-H1 | I81/I85 | Grid-wide image priority stragglers + ~40 fill images without sizes -> preload flood + 100vw overserving |
+| J-H1 | J99 | vercel.json cron hits /api/backup which does not exist -> guaranteed daily 404 |
+| J-H2 | J92 | Sitemap missing public pages: /booking, both booking-calendars, /merch/concepts, /match, splash pages, /merch/[id] products |
+
+#### MEDIUM (top of stack)
+ZealProvider/ThemeProvider/VideoMute context values unmemoized (site-wide re-render churn); banned grays resurfaced (#888/#999 spots listed); FAQ accordion maxHeight clips long answers; ScrollProgress animates width per frame; z-ladder doc-only; duplicate themeColor metas; 6 routes missing title/desc; no generateStaticParams on finite dynamic routes; ImagePicker silent upload failures; Esc missing on Navbar menu/ChatWidget/ImagePicker; toast errors dismiss at 4s like successes; SocialShare copy silent-catch + no insecure fallback; scroll-margin missing under fixed nav anchors (global fix one line); multiple h1s on 6 routes; sub-44px touch targets (5 spots); unlabeled icon buttons (7 spots); nested-lightbox scroll-lock bug (photography); no aria-live for async counts; storage access unwrapped in ThemeProvider/CookieBanner/AnalyticsTracker/events; ~13 fetch sites skip res.ok; em dashes user-facing (concepts meanings, brands longDesc, chat KNOWLEDGE x25); pictographic emojis in FDDriveBrowser/fd/PageRenderer/api-pages HTML; price drift ($75+/design in FAQ, $100+/video-edit in booking); Loyalty Program remnants in Navbar/home-FAQ/plan features; ratelimit INCR-EXPIRE TTL race; CSRF missing on zeal/redeem/profile/admin/bookkeeping mutations; Drive N+1 endpoints unrate-limited + folder param injection surface; bugs POST ignores insert errors (success:true with data lost); raw IPs stored unhashed (events/forms); referral code minting public + leaderboard name fragments attacker-influenceable; analytics SQLite dead-on-Vercel; float money math (bookkeeping parseFloat, commission *0.10, fractional admin points); admin lockout memory-only email-keyed; CSP unsafe-inline/eval enforced without report-only phase; @novu/node still in package.json; no .env.example (54 vars undocumented); GTM noscript bypasses consent; Referrer-Policy conflict between configs.
+
+#### LOW
+CrownDraw Math.random render seed; stray `.5` class token; admin header literal arrow char; body suppressHydrationWarning; /match absent from sitemap; zeal:svcs sets unbounded; checkRedisHealth unwired; updateUserProfile field-name interpolation; pages POST header-token auth model; response-shape drift (plain text/bare array/500-on-bad-json); Printful parseFloat display prices; timing-unsafe compares (admin password, pages token); fd/drive err.message echo; health endpoint version leak; uncapped search/blog-style/event-props/analytics-limit inputs; font preload over-weighting (11 files); FAQ video no poster/preload.
+
+---
 
 ### Fix Log
-Appended as fixes land, referencing Finding IDs.
 
 
 
