@@ -145,7 +145,7 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[20px] sm:text-[24px] tracking-[0.04em] leading-snug mb-3">{title}</h3>
  </div>
   <div className="hidden sm:block w-[60px] h-[60px] relative rounded-lg overflow-hidden flex-shrink-0">
-  <Image src={img} alt={title} fill className="w-full h-full object-cover" />
+  <Image src={img} alt={title} fill sizes="60px" className="w-full h-full object-cover" />
    </div>
   </button>
   <div
@@ -155,7 +155,7 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
  >
  <div className="flex flex-col sm:flex-row">
   <div className="w-full sm:w-[45%] h-[200px] sm:h-[250px] overflow-hidden relative">
-  <Image src={img} alt={title} fill className="w-full h-full object-cover" />
+  <Image src={img} alt={title} fill sizes="(max-width:640px) 100vw, 45vw" className="w-full h-full object-cover" />
    </div>
   <div className="w-full sm:w-[55%] px-6 lg:px-10 py-6 flex flex-col justify-center">
   <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.7] mb-5">{desc}</p>

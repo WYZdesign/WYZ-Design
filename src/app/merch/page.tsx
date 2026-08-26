@@ -119,7 +119,7 @@ function ParallaxHero() {
       <div className="absolute inset-0 flex">
         {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
           <div key={i} className="relative flex-1 group overflow-hidden transition-all duration-700 ease-out hover:flex-[3.5]">
-            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" priority />
+            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
           </div>
         ))}
@@ -404,7 +404,7 @@ function MerchCarousel() {
         {items.map((p, i) => (
           <Link key={`mc-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer">
               <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
-               <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+               <Image src={p.image} alt={p.name} fill sizes="100vw" className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h3 className="font-heading font-bold text-[12px] tracking-[0.05em] uppercase text-white">{p.name}</h3>
@@ -752,7 +752,7 @@ export default function MerchPage() {
           <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <Image src={selectedProduct.image} alt={selectedProduct.name} fill className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                <Image src={selectedProduct.image} alt={selectedProduct.name} fill sizes="(max-width:768px) 100vw, 50vw" className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
@@ -802,7 +802,7 @@ export default function MerchPage() {
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
                       <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
-                          <Image src={cp.image} alt={cp.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                          <Image src={cp.image} alt={cp.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 25vw, 20vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
                       <p className="text-[12px] text-[#DF3131] font-bold">${cp.price.toFixed(2)}</p>
