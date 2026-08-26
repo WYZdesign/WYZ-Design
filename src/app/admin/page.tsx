@@ -1303,7 +1303,13 @@ function TransactionTable({ transactions, onRefresh }: { transactions: Transacti
   );
 }
 
-function NsfwContentTab({ data, onRefresh }: { data: any; onRefresh: () => void }) {
+interface NsfwAdminData {
+  gatedCategories: string[];
+  cachedEntries: { path: string; label: string; confidence: number; ts: number }[];
+  verifiedUsers: { email: string; ts: number }[];
+}
+
+function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRefresh: () => void }) {
   const [clearing, setClearing] = useState(false);
 
   const handleClearCache = async (path: string) => {

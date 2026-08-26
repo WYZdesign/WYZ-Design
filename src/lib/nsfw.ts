@@ -112,7 +112,7 @@ export async function clearScanResult(imagePath: string): Promise<void> {
 export async function listAllScanResults(): Promise<{ path: string; label: string; confidence: number; ts: number }[]> {
   try {
     const r = getRedis();
-    // Use sadd/scard — track indexed paths in a SET
+    // Use sadd/scard to track indexed paths in a SET
     // Since RedisLike doesn't expose smembers, fall through to the raw client
     const rawClient = r as unknown as Record<string, unknown>;
     const smembers = rawClient.smembers as ((key: string) => Promise<string[]>) | undefined;

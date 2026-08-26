@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import SafeImage from "@/components/SafeImage";
 import NsfwImage from "@/components/NsfwImage";
@@ -9,7 +9,8 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { FiChevronLeft, FiX, FiChevronRight, FiLock } from "react-icons/fi";
-const GATED_CATEGORIES = ["Boudoir", "Bodypaint"];
+import { NSFW_CATEGORIES } from "@/lib/nsfw";
+const GATED_CATEGORIES = NSFW_CATEGORIES;
 
 const CATEGORY_META: Record<string, { label: string; desc: string }> = {
   Events: { label: "Events", desc: "Live shows, mixers, workshops, and community gatherings." },

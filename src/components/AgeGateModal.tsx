@@ -34,7 +34,7 @@ export default function AgeGateModal({ open, onClose, onVerified, categoryLabel 
           return;
         }
       }
-      // Not authenticated yet — go to login step
+      // Not authenticated yet, go to login step
       setStep("login");
     } catch {
       setStep("login");
@@ -126,7 +126,7 @@ export default function AgeGateModal({ open, onClose, onVerified, categoryLabel 
               disabled={loading}
               className="w-full py-3.5 bg-[#DF3131] text-white font-heading font-bold text-[13px] tracking-[0.1em] uppercase hover:bg-[#B82020] transition-all disabled:opacity-50"
             >
-              {loading ? "VERIFYING..." : "YES, I AM 18+ — CONTINUE"}
+              {loading ? "VERIFYING..." : "YES, I AM 18+ - CONTINUE"}
             </button>
             <button
               onClick={onClose}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { logger } from "@/lib/logger";
 
 interface NsfwImageProps {
   src: string;
@@ -99,7 +100,7 @@ export default function NsfwImage({
         );
       }
     } catch (e) {
-      console.warn("nsfw scan failed:", e);
+      logger.warn("nsfw-image", `Scan failed for ${src}: ${(e as Error).message}`);
     } finally {
       setScanning(false);
       try {

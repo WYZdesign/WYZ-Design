@@ -5,8 +5,8 @@ import { logger } from "@/lib/logger";
 
 /**
  * NSFW scan result caching endpoint.
- * GET — returns cached scan result for an image path.
- * POST — stores a scan result (admin or authenticated user only).
+ * GET - returns cached scan result for an image path.
+ * POST - stores a scan result (admin or authenticated user only).
  *
  * @method GET, POST
  * @request POST body: `{ imagePath: string, label: string, confidence: number }`

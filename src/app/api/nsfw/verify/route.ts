@@ -5,8 +5,8 @@ import { logger } from "@/lib/logger";
 
 /**
  * NSFW age verification endpoint.
- * GET — returns whether the current user is age-verified.
- * POST — marks the current user as age-verified (requires authentication).
+ * GET - returns whether the current user is age-verified.
+ * POST - marks the current user as age-verified (requires authentication).
  *
  * @method GET, POST
  * @response `{ verified: boolean }` or 401

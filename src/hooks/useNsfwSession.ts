@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useSession } from "next-auth/react";
-import AgeGateModal from "@/components/AgeGateModal";
 
 interface NsfwSessionState {
   /** Whether the user is authenticated. */
