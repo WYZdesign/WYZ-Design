@@ -340,9 +340,9 @@ Findings appended per-domain during execution with severity: [C] critical, [H] h
 | C | novu.ts deleted as "dead" broke forms route build (grep regex missed import; Discord alert already covered same payload) | Import+call removed; lesson: verify imports via compiler, not grep alone |
 
 #### CRITICAL
-| ID | Domain | Finding | Fix approach |
-|----|--------|---------|--------------|
-| G-C1 | H73/74 | Zeal Redis split-brain: ioredis targets REDIS_HOST (localhost default) unreachable on Vercel -> cooldowns/locks/redemption records fail-open or vanish after deduction | Migrate wyzmind getRedis to @upstash/redis REST client; persist redemption record BEFORE deducting points |
+| ID | Domain | Finding | Status |
+|----|--------|---------|--------|
+| G-C1 | H73/74 | Zeal Redis split-brain: ioredis targeted REDIS_HOST (localhost) unreachable on Vercel -> cooldowns/locks fail-open AND redemption records could vanish after deduction. Confirmed live by Vercel 5xx alert: 100% failures on /api/zeal/earn across deployments, sub-200ms sync throws from client construction called outside try blocks, zero server logs (logger dev-gated). | **FIXED** `6a031cd`: getRedis() now returns an ioredis-compatible adapter backed by @upstash/redis REST when UPSTASH_REDIS_REST_* present (same store as rate limiting), ioredis only as local-dev fallback; getRedis() calls moved inside try/catch everywhere; redemption record persists BEFORE point deduction with orphan-record compensation on deduct failure; earn route 500s now carry a short error signature so future incidents are diagnosable; ioredis fallback attaches a no-op error handler (prevents bare-error-event crashes); /status Redis check works against both backends. **Requires UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN in Vercel prod env (already used by rate limiter).** |
 
 #### HIGH
 | ID | Domain | Finding |
