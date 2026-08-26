@@ -61,6 +61,11 @@ Run these checks yourself:
 
 ### Session log (chronological, newest first)
 
+## Session 30 — chat personalization + calculator upsell
+**Date:** 2026-08-26
+- **Chat knows who it's talking to**: POST /api/chat injects signed-in visitor's Zeal balance + tier into the system prompt via auth() + getLoyaltyPoints; prompt instructs natural references only when relevant (progress-to-tier questions), never unprompted stat dumps; auth/DB failures fall through silently to generic assistant
+- **Calculator → plan comparison rebuilt** (PricingCalculator.tsx): old logic compared plan VALUE against one-time total and claimed fake savings. New logic: if any plan price < monthly estimate → recommends priciest plan under budget with real coverage math; else frames closest plan as "need this monthly?" without false claims; added Compare Plans CTA button and cancel-anytime reassurance line
+
 ## Session 29 — mobile UX sweep + backend hardening + interconnections wave 1
 **Date:** 2026-08-26
 **Mobile UX:**
