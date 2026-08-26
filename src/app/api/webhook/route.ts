@@ -74,15 +74,26 @@ export async function POST(req: NextRequest) {
           }
         } catch (e) { logger.error("webhook:loyalty-earn", (e as Error).message); }
 
-        // Gift cards are fulfilled manually — alert staff so they can deliver
+        // Gift cards: insert DB record + alert staff
         if (session.metadata?.type === "giftcard") {
           try {
-            await sendDiscordAlert("Gift Card Purchase - Needs Fulfillment", {
+            const gcAmount = Number(session.metadata.amount) || Math.round(amountTotal / 100);
+            const gcCode = `WYZ-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+            const { error: gcErr } = await sb.from("gift_cards").insert({
+              stripe_session_id: session.id,
+              buyer_email: email || "unknown",
+              amount: gcAmount,
+              code: gcCode,
+            });
+            if (gcErr) logger.error("webhook:giftcard-insert", gcErr.message);
+
+            await sendDiscordAlert("Gift Card Purchase", {
               "Buyer Email": email || "Unknown",
-              Amount: `$${session.metadata.amount || Math.round(amountTotal / 100)}`,
+              Amount: `$${gcAmount}`,
+              Code: gcCode,
               "Session ID": session.id,
             });
-          } catch (e) { logger.error("webhook:giftcard-notify", (e as Error).message); }
+          } catch (e) { logger.error("webhook:giftcard", (e as Error).message); }
         }
 
         // Record referral conversion server-to-server (no client round trip)
@@ -94,6 +105,7 @@ export async function POST(req: NextRequest) {
               email,
               eventType: "purchase",
               amount: Math.floor(amountTotal / 100),
+              stripeEventId: event.id,
             });
             if (!result.ok) {
               logger.warn("webhook:referral", `${result.error} (code: ${referralCode}, session: ${session.id})`);

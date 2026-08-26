@@ -6,6 +6,7 @@ export interface ReferralConversionParams {
   email: string;
   eventType: "signup" | "purchase";
   amount?: number;
+  stripeEventId?: string;
 }
 
 export interface ReferralConversionResult {
@@ -45,12 +46,20 @@ export async function recordReferralConversion(
     const purchaseAmount = typeof amount === "number" ? amount : 0;
     const commission = eventType === "purchase" ? Math.floor(purchaseAmount * 0.10) : 0;
 
+    // Dedup: skip if this event already created a conversion
+    if (params.stripeEventId) {
+      const { data: existing } = await sb.from("referral_conversions")
+        .select("id").eq("stripe_event_id", params.stripeEventId).maybeSingle();
+      if (existing) return { ok: true, status: 200 };
+    }
+
     const { error } = await sb.from("referral_conversions").insert({
       referral_code: code.toUpperCase(),
       referred_email: email.toLowerCase(),
       event_type: eventType,
       amount: purchaseAmount,
       commission,
+      stripe_event_id: params.stripeEventId || null,
     });
     if (error) {
       logger.error("referral:convert", error.message);
