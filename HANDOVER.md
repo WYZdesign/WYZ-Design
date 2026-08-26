@@ -52,15 +52,25 @@ Run these checks yourself:
 7. Confirm `/secret` absent from sitemap output and robots meta noindex present.
 
 ### Open threads (candidates for next session)
-- **Cal.com booking links (HIGH):** `/booking` shows "No links set up" to all visitors. Zero event types published. Needs Torreé to log into Cal.com and publish at least one bookable event type. This is the highest-priority item — the booking page is completely non-functional.
-- **Hero banner redesign (site-wide):** 18+ hero sections inventoried. Wrap all hero text in containers. Half-panel heroes get square containers for header + tagline; full-width heroes get 2:4 rectangle containers. Text centered, tight wrap. Buttons stay side-by-side. Equal spacing across all stacks.
-- **Splash screen decision:** Session-scoped (sessionStorage), requires "Enter Site" click. Needs Torreé decision: keep as-is, auto-dismiss, or remove.
-- Torreé will send MORE client logos to remove from the home carousel (list in progress).
-- Gift card fulfillment has no database persistence — only Discord notification. Needs a `gift_cards` Supabase table + webhook insert + recipient email in checkout metadata.
-- Webhook side effects (loyalty, referrals, Discord alerts) are not idempotent — Stripe retries can cause duplicates. Low priority but worth noting.
+- **Cal.com booking links (HIGH):** `/booking` shows "No links set up" to all visitors. Zero event types published. Needs Torreé to log into Cal.com and publish at least one bookable event type. Highest-priority item — booking page is non-functional.
+- **Hero banner redesign (site-wide):** 18+ hero sections inventoried. Wrap all hero text in containers. Half-panel heroes get square containers; full-width heroes get 2:4 rectangle containers. Text centered, tight wrap. Buttons stay side-by-side.
+- **Gift card tables:** SQL schema written (`sql/gift-cards.sql`) but needs to be run in Supabase SQL Editor. Webhook insert code ready.
+- **Referral dedup:** `stripe_event_id` column + unique index SQL written (`sql/referral-conversions-dedup.sql`). Needs to be run in Supabase SQL Editor. Code ready.
 - Fragment `key={i}` index keys exist on some filterable lists — low priority.
 
 ### Session log (chronological, newest first)
+
+## Session 27 — First real mobile-viewport sweep, marquee stroke bug found
+**Date:** 2026-08-26
+**Context:** Torreé manually tested at 375x667 (iPhone SE) in Chrome DevTools. Device bridge still down.
+**Findings:**
+- **Mobile nav/layout:** Clean at 375x667. Hamburger nav, hero, body copy, buttons all reflow correctly.
+- **Splash tagline:** False alarm. Scrollbar gutter in emulation mode caused apparent off-center. Real phones use overlay scrollbars.
+- **Carousel click-to-pause:** Confirmed NOT working on live site (pre-Session 40 fix). Fixed in Session 40.
+- **Dark-mode marquee stroke-text bleeding:** Outline-only text (`-webkit-text-stroke: 1.5px`) overlaps at font-black weight. Fixed by reducing to 1px.
+**Fixes this session:**
+- `globals.css`: Reduced `.marquee-outline` stroke from `1.5px` to `1px` (light and dark).
+- Client logo cleanup: Removed 11 duplicate/excluded logos (Ent-Icing x3, Nuvonic Title, YALL Red, Promontory, Ynot, GNP, Enticing Cafe Alt, Diamond Kiss 2, Live Life Fearless). Kept 24 unique logos.
 
 ## Session 40 — Carousel click-to-pause fix, full audit sweep
 **Date:** 2026-08-26
