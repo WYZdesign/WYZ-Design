@@ -61,6 +61,23 @@ Run these checks yourself:
 
 ### Session log (chronological, newest first)
 
+## Session 37 — NSFW/18+ content gating system for photography
+**Date:** 2026-08-26
+**Commit:** `84ec2b5`
+**NSFW gating system (full build):**
+- `src/lib/nsfw.ts`: NSFW_CATEGORIES = ["Boudoir", "Bodypaint"], NSFW_CONFIDENCE_THRESHOLD = 0.65, Redis-backed scan cache (90d TTL, SCAN_PREFIX), age verification (30d TTL, AGE_VERIFY_PREFIX), tracking SETs (SCAN_INDEX_KEY, AGE_INDEX_KEY) for admin listing, bulk scan fetch, cache clear, list all scan results, list age-verified users
+- `src/components/AgeGateModal.tsx`: Two-step 18+ verification modal (confirm age -> optional login if not authenticated), Google OAuth sign-in, Redis-backed via /api/nsfw/verify, custom hook `useAgeVerification` for state management
+- `src/hooks/useNsfwSession.ts`: Client-side age verification hook, checks Redis via API, manages modal visibility, onVerified/onClose/requestVerification interface
+- `src/components/NsfwImage.tsx`: Image wrapper with client-side nsfwjs classification on load, blur for NSFW images (blur-xl + scale-110), tap-to-reveal for age-verified users, localStorage caching (7d), scanning indicator, two overlay variants (reveal button vs "18+ CONTENT" badge)
+- `src/app/api/nsfw/verify/route.ts`: GET returns age verification status, POST records verification in Redis via markAgeVerified()
+- `src/app/api/nsfw/scan/route.ts`: GET returns cached scan result for path, POST stores scan result via cacheScanResult()
+- `src/app/api/nsfw/admin/route.ts`: GET returns gated categories + all scan results + verified users, DELETE clears a cached scan result
+- Photography album grid: NSFW category covers (Boudoir/Bodypaint) get blur-xl when not age-verified, 18+ lock badge, clicking shows age gate modal
+- Photography category page: auto-shows age gate for NSFW categories, AutoScrollRow uses NsfwImage for gated categories, passes isNsfw/canReveal props
+- Admin panel Content tab: overview stats (gated categories, scanned images, NSFW detected, verified users), gated category badges, scrollable scan results table with label/confidence/date/clear actions, verified users table
+- Packages installed: nsfwjs + @tensorflow/tfjs
+**Type errors fixed:** nsfwjs default import -> named load(), SafeImage ref incompatibility (switched to raw img), RedisLike missing keys/pipeline (tracking SET + smembers cast), implicit any on filter/reduce callbacks, SafeImage onLoad type mismatch
+
 ## Session 31 — Zeal redemption, leaderboard, quiz handoff, recap rewards, admin chart
 **Date:** 2026-08-26
 **Zeal redemption (rates set by ox-alpha, ~5-6% real-value back):**
