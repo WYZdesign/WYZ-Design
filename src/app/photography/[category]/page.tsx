@@ -2,6 +2,9 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import Image from "next/image";
 import SafeImage from "@/components/SafeImage";
+import NsfwImage from "@/components/NsfwImage";
+import AgeGateModal from "@/components/AgeGateModal";
+import { useNsfwSession } from "@/hooks/useNsfwSession";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -228,7 +231,7 @@ const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: string[] }>>
   ],
 };
 
-function AutoScrollRow({ images, label, speed, onImageClick }: { images: string[]; label: string; speed: number; onImageClick: (src: string) => void }) {
+function AutoScrollRow({ images, label, speed, onImageClick, isNsfw, canReveal }: { images: string[]; label: string; speed: number; onImageClick: (src: string) => void; isNsfw?: boolean; canReveal?: boolean }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const paused = useRef(false);
@@ -272,7 +275,11 @@ function AutoScrollRow({ images, label, speed, onImageClick }: { images: string[
               }}
               onMouseEnter={() => { paused.current = true; if (resumeTimer.current) clearTimeout(resumeTimer.current); }}
               onMouseLeave={() => { paused.current = false; }}>
-               <SafeImage src={src} alt={label} className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+               {isNsfw ? (
+                 <NsfwImage src={src} alt={label} className="h-full w-auto" canReveal={canReveal} loading="lazy" />
+               ) : (
+                 <SafeImage src={src} alt={label} className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+               )}
             </div>
           ))}
         </div>
@@ -310,6 +317,7 @@ export default function CategoryPage() {
  const category = decodeURIComponent(params.category as string);
  const [slideshowIndex, setSlideshowIndex] = useState<number | null>(null);
  const [allImages, setAllImages] = useState<string[]>([]);
+ const nsfwSession = useNsfwSession();
 
   // Case-insensitive lookup: URL slugs are lowercase, keys are capitalized
   const metaKey = Object.keys(CATEGORY_META).find(k => k.toLowerCase() === category.toLowerCase()) || category;
@@ -318,6 +326,13 @@ export default function CategoryPage() {
   const albums = CATEGORY_ALBUMS[categoryKey] || [];
   const isGated = GATED_CATEGORIES.some(g => g.toLowerCase() === category.toLowerCase());
  const { data: session, status } = useSession();
+
+  // Auto-show age gate for NSFW categories when not verified
+  useEffect(() => {
+    if (isGated && !nsfwSession.loading && !nsfwSession.ageVerified && status !== "loading") {
+      nsfwSession.requestVerification();
+    }
+  }, [isGated, nsfwSession.loading, nsfwSession.ageVerified, status]);
 
  useEffect(() => {
  const imgs: string[] = [];
@@ -351,66 +366,52 @@ export default function CategoryPage() {
  <h1><MarqueeTitle text={meta.label.toUpperCase()} /></h1>
  <p className="text-white/50 text-[16px] text-center max-w-xl mx-auto mb-8 px-6">{meta.desc} {allImages.length > 0 && ` - ${allImages.length} images across ${albums.length} albums`}</p>
 
-  {isGated && status !== "loading" && status !== "authenticated" && (
- <div className="max-w-lg mx-auto mt-12 mb-20 px-6 text-center">
- <div className="border border-white/10 bg-white/5 p-10">
- <FiLock className="w-10 h-10 text-[#DF3131] mx-auto mb-4" />
- <h2 className="text-white font-heading font-bold text-[1.25rem] tracking-[0.05em] mb-4">Sign In Required</h2>
- <p className="text-white/40 text-[14px] mb-6">
- {meta.desc} This content is available to authenticated users only.
- </p>
- <Link
- href="/api/auth/signin"
- className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold text-[13px] tracking-[0.1em] uppercase hover:bg-[#B82020] transition-all"
- >
- Sign In to View
- </Link>
- <p className="text-white/25 text-[12px] mt-4">
- <Link href="/photography" className="hover:text-white/50 transition-colors">← Back to Photography</Link>
- </p>
- </div>
- </div>
- )}
+  <div className="max-w-[140rem] mx-auto">
+  <div className="px-6">
+  <Link href="/photography" className="inline-flex items-center gap-2 text-white/40 hover:text-[#DF3131] text-[13px] mb-4 transition-colors">
+  <FiChevronLeft /> Back to Photography
+  </Link>
+  </div>
 
- <div className="max-w-[140rem] mx-auto">
- <div className="px-6">
- <Link href="/photography" className="inline-flex items-center gap-2 text-white/40 hover:text-[#DF3131] text-[13px] mb-4 transition-colors">
- <FiChevronLeft /> Back to Photography
- </Link>
- </div>
+  {albums.length === 0 ? (
+  <div className="text-center py-20">
+  <p className="text-white/30">No images found for this category.</p>
+  <Link href="/photography" className="text-[#DF3131] text-[14px] mt-4 inline-block hover:underline">Browse all categories</Link>
+  </div>
+  ) : (
+  <div>
+  {albums.map((album, i) => (
+  <AutoScrollRow
+  key={i}
+  images={album.images}
+  label={album.name}
+  speed={0.3 + (i % 3) * 0.15}
+  onImageClick={openSlideshow}
+  isNsfw={isGated}
+  canReveal={nsfwSession.ageVerified}
+  />
+   ))}
+   </div>
+   )}
+   </div>
+   </div>
 
- {!isGated || status === "authenticated" ? (
- albums.length === 0 ? (
- <div className="text-center py-20">
- <p className="text-white/30">No images found for this category.</p>
- <Link href="/photography" className="text-[#DF3131] text-[14px] mt-4 inline-block hover:underline">Browse all categories</Link>
- </div>
- ) : (
- <div>
- {albums.map((album, i) => (
- <AutoScrollRow
- key={i}
- images={album.images}
- label={album.name}
- speed={0.3 + (i % 3) * 0.15}
- onImageClick={openSlideshow}
- />
- ))}
- </div>
- )
- ) : null}
- </div>
- </div>
+  {slideshowIndex !== null && (
+  <div className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center" onClick={closeSlideshow}>
+  <button aria-label="Close slideshow" className="absolute top-4 right-4 text-white/60 hover:text-white z-10" onClick={closeSlideshow}><FiX className="w-8 h-8" /></button>
+  <button aria-label="Previous image" className="absolute left-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); prevSlide(); }}><FiChevronLeft className="w-10 h-10" /></button>
+  <img src={allImages[slideshowIndex]} alt={`Slide ${slideshowIndex + 1} of ${allImages.length}`} width={1200} height={800} className="max-w-full max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
+  <button aria-label="Next image" className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); nextSlide(); }}><FiChevronRight className="w-10 h-10" /></button>
+  <div className="absolute bottom-6 text-white/40 text-sm">{slideshowIndex + 1} / {allImages.length}</div>
+  </div>
+  )}
 
- {slideshowIndex !== null && (
- <div className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center" onClick={closeSlideshow}>
- <button aria-label="Close slideshow" className="absolute top-4 right-4 text-white/60 hover:text-white z-10" onClick={closeSlideshow}><FiX className="w-8 h-8" /></button>
- <button aria-label="Previous image" className="absolute left-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); prevSlide(); }}><FiChevronLeft className="w-10 h-10" /></button>
- <img src={allImages[slideshowIndex]} alt={`Slide ${slideshowIndex + 1} of ${allImages.length}`} width={1200} height={800} className="max-w-full max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
- <button aria-label="Next image" className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); nextSlide(); }}><FiChevronRight className="w-10 h-10" /></button>
- <div className="absolute bottom-6 text-white/40 text-sm">{slideshowIndex + 1} / {allImages.length}</div>
- </div>
- )}
+  <AgeGateModal
+    open={nsfwSession.showModal}
+    onClose={nsfwSession.closeModal}
+    onVerified={nsfwSession.onVerified}
+    categoryLabel={isGated ? meta.label : undefined}
+  />
   </div>
   );
 }

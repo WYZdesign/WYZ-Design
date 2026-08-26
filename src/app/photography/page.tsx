@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
-import { FiCamera, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiCamera, FiX, FiChevronLeft, FiChevronRight, FiLock } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSwipe } from "@/hooks/useSwipe";
 import { useModalA11y } from "@/hooks/useModalA11y";
@@ -14,6 +14,9 @@ import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
 import { shuffleArray } from "@/lib/utils";
 import { getSiteUrl } from "@/lib/site-url";
+import { NSFW_CATEGORIES } from "@/lib/nsfw";
+import { useNsfwSession } from "@/hooks/useNsfwSession";
+import AgeGateModal from "@/components/AgeGateModal";
 
 const ALBUMS = ["Events", "Outdoors", "Studio", "Boudoir", "Bodypaint", "Urbex", "Products", "Conceptual"];
 const ALBUM_DESC: Record<string, string> = {
@@ -226,6 +229,8 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  const [activeAlbum, setActiveAlbum] = useState<string | null>(null);
   const [showModelForm, setShowModelForm] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+  const nsfwSession = useNsfwSession();
+  const [nsfwTarget, setNsfwTarget] = useState<string | null>(null);
 
 
  const { ref: hVis, vis: heroVisibleRaw } = useInView(0.1);
@@ -747,25 +752,54 @@ return (
   <section className="py-6 sm:py-8 lg:py-12">
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-  {ALBUMS.map((a, i) => (
-  <ScrollParallaxCard key={a} tiltAmount={5} scaleAmount={1.02}>
-  <ImageHoverReveal>
-  <Link href={`/photography/${encodeURIComponent(a)}`}
-   className="album-card group relative overflow-hidden aspect-square cursor-pointer block"
-   style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
-    <Image src={albumCovers[a]} alt={a} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110" />
-    <div className="absolute inset-0 z-10 bg-black/30" />
-    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-    <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
-   </div>
-   </Link>
-  </ImageHoverReveal>
-  </ScrollParallaxCard>
-  ))}
+  {ALBUMS.map((a, i) => {
+    const isNsfw = NSFW_CATEGORIES.some(c => c.toLowerCase() === a.toLowerCase());
+    const handleClick = (e: React.MouseEvent) => {
+      if (isNsfw && !nsfwSession.ageVerified) {
+        e.preventDefault();
+        setNsfwTarget(a);
+        nsfwSession.requestVerification();
+        return;
+      }
+    };
+    return (
+    <ScrollParallaxCard key={a} tiltAmount={5} scaleAmount={1.02}>
+    <ImageHoverReveal>
+    <Link href={`/photography/${encodeURIComponent(a)}`}
+     onClick={handleClick}
+     className="album-card group relative overflow-hidden aspect-square cursor-pointer block"
+     style={{ opacity: archiveVis ? 1 : 0, transform: archiveVis ? "translateY(0)" : "translateY(20px)", transition: `all .5s ease ${i * 0.06}s` }}>
+      <Image src={albumCovers[a]} alt={a} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw"
+        className={`w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-110 ${
+          isNsfw && !nsfwSession.ageVerified ? "blur-xl scale-110" : ""
+        }`} />
+      <div className="absolute inset-0 z-10 bg-black/30" />
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+      <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
+      </div>
+      {isNsfw && !nsfwSession.ageVerified && (
+        <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/20 pointer-events-none">
+          <div className="bg-[#DF3131]/80 text-white px-3 py-1.5 text-[11px] font-heading font-bold tracking-[0.1em] uppercase flex items-center gap-1.5">
+            <FiLock className="w-3 h-3" /> 18+
+          </div>
+        </div>
+      )}
+      </Link>
+    </ImageHoverReveal>
+    </ScrollParallaxCard>
+    );
+  })}
   </div>
   </div>
   </section>
   </ScrollReveal>
+
+  <AgeGateModal
+    open={nsfwSession.showModal}
+    onClose={nsfwSession.closeModal}
+    onVerified={nsfwSession.onVerified}
+    categoryLabel={nsfwTarget || undefined}
+  />
 
 {/* ═══ BRAND MARQUEE ═══ */}
   <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E] mb-4">

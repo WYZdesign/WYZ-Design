@@ -48,6 +48,7 @@ const NAV_SECTIONS: { label: string; items: { id: string; icon: string; label: s
     { id: "users", icon: "\u25C6", label: "Users" },
     { id: "newsletter", icon: "\u25CF", label: "Newsletter" },
     { id: "chats", icon: "\u25D1", label: "Chats" },
+    { id: "nsfw", icon: "!", label: "Content" },
   ]},
   { label: "SYSTEM", items: [
     { id: "health", icon: "\u25D2", label: "Health" },
@@ -59,7 +60,7 @@ const NAV_SECTIONS: { label: string; items: { id: string; icon: string; label: s
   ]},
 ];
 
-type TabId = "overview" | "bookkeeping" | "income" | "expenses" | "reports" | "analytics" | "seo" | "traffic" | "forms" | "users" | "newsletter" | "chats" | "health" | "export" | "profile" | "bugs";
+type TabId = "overview" | "bookkeeping" | "income" | "expenses" | "reports" | "analytics" | "seo" | "traffic" | "forms" | "users" | "newsletter" | "chats" | "nsfw" | "health" | "export" | "profile" | "bugs";
 
 export default function AdminDashboard() {
   const sessionResult = useSession();
@@ -91,6 +92,8 @@ export default function AdminDashboard() {
         url = `/api/analytics?tab=${tab === "traffic" ? "summary" : tab}${tab === "analytics" ? "&days=30" : ""}`;
       } else if (bookkeepingTabs.includes(tab)) {
         url = `/api/bookkeeping?tab=${tab === "reports" ? "summary" : tab === "income" ? "transactions&type=income" : tab === "expenses" ? "transactions&type=expense" : "summary"}&year=2026`;
+      } else if (tab === "nsfw") {
+        url = `/api/nsfw/admin`;
       } else {
         url = `/api/admin?tab=${tab === "export" ? "overview" : tab}${email}`;
       }
@@ -173,6 +176,7 @@ export default function AdminDashboard() {
               {tab === "users" && <UsersTab data={data?.users || []} />}
               {tab === "newsletter" && <NewsletterTab data={data?.subscribers || []} />}
               {tab === "chats" && <ChatsTab data={data} />}
+              {tab === "nsfw" && <NsfwContentTab data={data} onRefresh={fetchTab} />}
               {tab === "health" && <HealthTab />}
               {tab === "export" && <ExportTab />}
             </>
@@ -1294,6 +1298,140 @@ function TransactionTable({ transactions, onRefresh }: { transactions: Transacti
             )}
           </tbody>
         </table>
+      </div>
+    </div>
+  );
+}
+
+function NsfwContentTab({ data, onRefresh }: { data: any; onRefresh: () => void }) {
+  const [clearing, setClearing] = useState(false);
+
+  const handleClearCache = async (path: string) => {
+    if (!confirm(`Clear scan cache for ${path}?`)) return;
+    setClearing(true);
+    try {
+      await fetch(`/api/nsfw/admin`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ imagePath: path }),
+      });
+      onRefresh();
+    } catch (e) {
+      logger.warn("nsfw-admin", `Clear failed: ${e}`);
+    }
+    setClearing(false);
+  };
+
+  const cachedEntries: { path: string; label: string; confidence: number; ts: number }[] = data?.cachedEntries || [];
+  const verifiedUsers: { email: string; ts: number }[] = data?.verifiedUsers || [];
+  const gatedCategories: string[] = data?.gatedCategories || [];
+
+  return (
+    <div className="space-y-8">
+      {/* Overview */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {[
+          { label: "Gated Categories", value: gatedCategories.length },
+          { label: "Scanned Images", value: cachedEntries.length },
+          { label: "NSFW Detected", value: cachedEntries.filter(e => e.label !== "Neutral").length },
+          { label: "Verified Users", value: verifiedUsers.length },
+        ].map(s => (
+          <div key={s.label} className="bg-white/5 border border-white/10 p-4">
+            <p className="text-[10px] text-white/40 font-heading font-bold tracking-[0.1em] uppercase">{s.label}</p>
+            <p className="text-[24px] font-heading font-bold text-white mt-1">{s.value}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Gated Categories */}
+      <div className="bg-white/5 border border-white/10 p-6">
+        <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Gated Categories</h3>
+        <div className="flex flex-wrap gap-2">
+          {gatedCategories.map(cat => (
+            <span key={cat} className="px-3 py-1.5 bg-[#DF3131]/10 border border-[#DF3131]/30 text-[#DF3131] text-[11px] font-heading font-bold tracking-[0.05em] uppercase">
+              {cat}
+            </span>
+          ))}
+          {gatedCategories.length === 0 && (
+            <p className="text-[12px] text-white/30">No gated categories configured.</p>
+          )}
+        </div>
+        <p className="text-[11px] text-white/30 mt-3">NSFW categories are defined in <code className="text-white/50">src/lib/nsfw.ts</code> (NSFW_CATEGORIES).</p>
+      </div>
+
+      {/* Scan Results */}
+      <div className="bg-white/5 border border-white/10 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60">Scan Results</h3>
+          <button onClick={onRefresh} className="text-[11px] text-white/40 hover:text-white/60 transition-colors font-heading font-bold tracking-[0.05em] uppercase">
+            Refresh
+          </button>
+        </div>
+        {cachedEntries.length === 0 ? (
+          <p className="text-[12px] text-white/30">No scan results cached yet. Images are scanned client-side when users view them.</p>
+        ) : (
+          <div className="bg-[#111] border border-white/10 overflow-x-auto max-h-96 overflow-y-auto admin-scrollbar">
+            <table className="w-full text-left min-w-[600px]">
+              <thead className="sticky top-0 bg-[#111]">
+                <tr className="border-b border-white/10">
+                  <th className="px-4 py-2.5 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Image</th>
+                  <th className="px-4 py-2.5 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Label</th>
+                  <th className="px-4 py-2.5 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Confidence</th>
+                  <th className="px-4 py-2.5 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Scanned</th>
+                  <th className="px-4 py-2.5 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cachedEntries.map((entry) => (
+                  <tr key={entry.path} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
+                    <td className="px-4 py-2.5 text-[11px] text-white/50 max-w-[250px] truncate font-mono">{entry.path}</td>
+                    <td className="px-4 py-2.5">
+                      <span className={`px-2 py-0.5 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${
+                        entry.label === "Neutral" ? "bg-[#34A853]/10 text-[#34A853]" : "bg-[#EA4335]/10 text-[#EA4335]"
+                      }`}>
+                        {entry.label}
+                      </span>
+                    </td>
+                    <td className="px-4 py-2.5 text-[12px] text-white/50">{(entry.confidence * 100).toFixed(1)}%</td>
+                    <td className="px-4 py-2.5 text-[11px] text-white/40">{new Date(entry.ts).toLocaleDateString()}</td>
+                    <td className="px-4 py-2.5">
+                      <button onClick={() => handleClearCache(entry.path)} disabled={clearing} className="text-[11px] text-[#EA4335]/60 hover:text-[#EA4335] transition-colors disabled:opacity-30">
+                        Clear
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* Verified Users */}
+      <div className="bg-white/5 border border-white/10 p-6">
+        <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Age-Verified Users</h3>
+        {verifiedUsers.length === 0 ? (
+          <p className="text-[12px] text-white/30">No users have verified age yet.</p>
+        ) : (
+          <div className="bg-[#111] border border-white/10 overflow-x-auto">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="px-4 py-2.5 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Email</th>
+                  <th className="px-4 py-2.5 text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">Verified</th>
+                </tr>
+              </thead>
+              <tbody>
+                {verifiedUsers.map(u => (
+                  <tr key={u.email} className="border-b border-white/5 last:border-0">
+                    <td className="px-4 py-2.5 text-[12px] text-white/60">{u.email}</td>
+                    <td className="px-4 py-2.5 text-[11px] text-white/40">{new Date(u.ts).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
