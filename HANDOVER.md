@@ -61,6 +61,37 @@ Run these checks yourself:
 
 ### Session log (chronological, newest first)
 
+## Session 28 — Feature ideas, interconnections, and where the system is heading (Claude/Cowork, relayed by Torreé)
+**Date:** 2026-08-26
+*Relayed verbatim from Claude's Session 23 analysis. Status annotations from ox-alpha in brackets [ ] where the Zeal build changed the picture.*
+
+### The system as it stands today
+Worth naming what actually exists, because it's more than the sum of any one session's commits: a full creative-services marketplace (photography, design, video, web, printing, events) sold three ways — hourly/flat-rate à la carte, four subscription tiers (Starter/Business Boost/Pro Plus/Ultimate), and three web-design add-on plans — wrapped in a loyalty program (Silver/Gold/Diamond) [now **Zeal**: Recruit/Zealot/Champion/Legend, 33 earn actions, 12 achievements, 4 quests], a referral program (built, not yet wired live), a merch line with a POD backend (Printful) and a Concept Archive, an events/community layer (DIY Shows, Client Events, YouTube recaps), an AI concierge chat widget, a `/match` quiz, an interactive pricing calculator, a bookkeeping module, an admin dashboard, and — running alongside all of it — a second, separate internal tool for FD Photo Studio (Drive proxy + an AI "Oracle" over studio knowledge).
+
+### Interconnections — wiring together things that already exist
+- **Loyalty ↔ Referral ↔ Bookkeeping should be one ledger, not three.** A booking that completes should be the single event that awards loyalty points, checks referral code attribution + credits commission, and logs the bookkeeping transaction — all from the Stripe webhook completion handler. Today nothing calls the referral conversion endpoint; trigger it server-side alongside the loyalty award, not from a client-callable route.
+- **Chat widget doesn't know about loyalty/referral/match quiz.** Passing signed-in user context (Zeal balance, tier, streaks, referral code) into `api/chat` turns the FAQ bot personalized: "you're 340 points from Zealot." Same for /match output feeding the pricing calculator or chat.
+- **Pricing calculator ↔ subscription plans don't talk.** A visitor estimating $600 à la carte never sees "Business Boost saves you $X/mo." Highest-leverage upsell on the site, currently requires mental math.
+- **Concept Archive ↔ AI concept generator unconnected.** Generated concepts could flow toward the Archive ("submit your favorite for possible production") = merch pipeline + UGC source.
+- **FD tools are an island.** Decide deliberately whether FD stays internal-only or becomes a client-facing brand under WYZ. Business conversation, not a coding task.
+- **Bookkeeping lacks plan-tier profitability view.** Admin chart cross-referencing bk_transactions category × Stripe price ID answers "is Ultimate Suite worth it or is Business Boost carrying us."
+
+### Feature ideas building on existing systems
+- Referral leaderboard / social proof on /partnerships (after wiring above).
+- **Zeal redemption, not just accrual** — still true post-Zeal-build: there's no spend path. Points currently gate perks passively by tier.
+- Event-to-content pipeline: recap video knowledge for chat, event-themed merch drops, attend-event zeal actions.
+- Public /status page: last deploy SHA, last webhook, last form submission — one glance instead of grepping logs each session.
+- Cloudinary/media pipeline audit — lib/cloudinary.ts hasn't been audited yet.
+- Unify chat backends: api/chat + api/fd/oracle duplicate Ollama-with-timeout-fallback logic; extract lib/ai-chat.ts.
+
+### Where to push back gently
+Ledger unification and Zeal redemption touch money + point balances — discuss priority with Torreé before schema changes. Interconnections section = higher-confidence lower-risk work. New features = gut-check priority first. [ox-alpha agrees with this split.]
+
+**ox-alpha status notes (2026-08-26):**
+- DONE since Claude's snapshot: Zeal rebrand + full earn engine, tier rename everywhere except chat route copy + nav/search labels (flagged as open threads in START HERE).
+- STILL OPEN, high value: referral conversion wiring from webhook, chat user-context injection, calculator→plan comparison, Zeal redemption, /status page.
+- Chat route still answers with old Silver/Gold/Diamond copy — fix before doing chat-context work so the bot isn't personalized with wrong data.
+
 ## Session 27 — audit fixes + UI tweaks
 **Date:** 2026-08-25
 **Audit fixes shipped:**
