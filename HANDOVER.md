@@ -53,13 +53,29 @@ Run these checks yourself:
 
 ### Open threads (candidates for next session)
 - Torreé will send MORE client logos to remove from the home carousel (list in progress).
-- Booking form (`src/app/booking/page.tsx`) fields may lack `name` attributes → empty submissions stored. VERIFY and fix.
-- Webhook processes-after-record ordering, referral convert endpoint auth, gift-card fulfillment recording — flagged in audit, not yet fixed. Triage these.
-- Chat route (`src/app/api/chat/route.ts`) still answers with old Silver/Gold/Diamond loyalty copy — update to Zeal tiers/values.
-- Nav/search labels say "Loyalty Program" — consider renaming to "Zeal Rewards".
+- Gift card fulfillment has no database persistence — only Discord notification. Needs a `gift_cards` Supabase table + webhook insert + recipient email in checkout metadata.
+- Webhook side effects (loyalty, referrals, Discord alerts) are not idempotent — Stripe retries can cause duplicates. Low priority but worth noting.
 - Fragment `key={i}` index keys exist on some filterable lists — low priority.
 
 ### Session log (chronological, newest first)
+
+## Session 38 — Zeal Rewards rename, triage, audit fixes
+**Date:** 2026-08-26
+**Commits:** `799d865`, `a802623`, `a2e24b6`
+**Zeal Rewards rename (10 user-facing references across 8 files):**
+- Navbar search: "Loyalty Program" -> "Zeal Rewards" (tags updated)
+- Home FAQ: rewrote loyalty question/answer to reference Zeal Rewards
+- Admin profile: "Loyalty Rewards" -> "Zeal Rewards"
+- Pricing.tsx: "Loyalty Rewards/Perks" -> "Zeal Rewards/Perks" (4 plans)
+- Plans page: same rename in features array + comparison card + comparison table
+- Chat route system prompt: "Our loyalty program" -> "Our rewards program"
+- Loyalty API error message: "loyalty data" -> "rewards data"
+- Pages API HTML: "Loyalty Rewards" -> "Zeal Rewards"
+**Booking form audit:** WYZ-Design form is clean (all 8 fields have name attributes). Broadway Cutz form is missing names but uses React state, not FormData.
+**Webhook/referral/gift card triage:**
+- Webhook process-before-record: intentional design for idempotency (comment explains rationale). Side effects not idempotent = low-risk duplicate concern.
+- Referral convert auth: already fixed (secret-gated + rate-limited).
+- Gift card fulfillment: real problem — Discord-only, no DB persistence. Needs Supabase table creation.
 
 ## Session 37 — NSFW/18+ content gating system for photography
 **Date:** 2026-08-26
