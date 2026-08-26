@@ -151,10 +151,10 @@ export async function GET(req: NextRequest) {
 }
 
 /**
- * Performs admin actions such as adding loyalty points to a user.
+ * Performs admin actions such as adding loyalty points or validating redemption codes.
  * @method POST
- * @request Body `{ action: "add-points", email: string, amount: number, reason: string }`
- * @response `{ success: true }` on success
+ * @request Body `{ action: "add-points", email, amount, reason }` or `{ action: "validate-redemption", code }`
+ * @response `{ success: true }` on success; redemption lookup returns the stored record
  * @auth Required — admin email must be in ADMIN_EMAILS env var
  */
 export async function POST(req: NextRequest) {
@@ -174,6 +174,19 @@ export async function POST(req: NextRequest) {
       }
       await addLoyaltyPoints(email, amount, reason);
       return NextResponse.json({ success: true });
+    }
+    if (body.action === "validate-redemption") {
+      const code = typeof body.code === "string" ? body.code.trim().toUpperCase().slice(0, 20) : "";
+      if (!/^WYZ-[A-Z0-9]{6}$/.test(code)) {
+        return NextResponse.json({ error: "Invalid code format. Expected WYZ-XXXXXX" }, { status: 400 });
+      }
+      const { getRedis } = await import("@/lib/wyzmind");
+      const raw = await getRedis().get(`zeal:redemption:${code}`);
+      if (!raw) {
+        return NextResponse.json({ valid: false, code });
+      }
+      const record = JSON.parse(raw) as { email: string; rewardId: string; title: string; code: string; timestamp: number };
+      return NextResponse.json({ valid: true, ...record });
     }
     return NextResponse.json({ error: "Unknown action" }, { status: 400 });
   } catch {

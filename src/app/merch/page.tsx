@@ -402,7 +402,7 @@ function MerchCarousel() {
     <div className="py-8 bg-[#FEFEFD] overflow-hidden">
       <div className="flex whitespace-nowrap animate-marquee-left">
         {items.map((p, i) => (
-          <Link key={`mc-${i}`} href={FAOTM_URL} className="flex-none cursor-pointer">
+          <Link key={`mc-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer">
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
                <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />

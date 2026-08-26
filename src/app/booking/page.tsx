@@ -250,25 +250,37 @@ function CalBooking({ calLink }: { calLink: string }) {
 
     const w = window as Record<string, any>;
     if (!w.Cal) {
-      // eslint-disable-next-line prefer-const
-      let _queue: unknown[][] = [];
+      // Official Cal.com embed stub. Namespace APIs must be created
+      // SYNCHRONOUSLY during init, before embed.js loads, or callers
+      // that invoke Cal.ns.<name> right after init will crash.
       w.Cal = function (...args: unknown[]) {
         const cal = w.Cal as any;
         if (!cal.loaded) {
           cal.ns = {};
-          cal.q = _queue;
+          cal.q = cal.q || [];
           document.head.appendChild(document.createElement("script")).src =
             "https://app.cal.com/embed/embed.js";
           cal.loaded = true;
         }
-        _queue.push(args);
+        if (args[0] === "init") {
+          const namespace = String(args[1] || "");
+          if (!namespace) return;
+          const api: any = (...inner: unknown[]) => {
+            api.q.push(inner);
+          };
+          api.q = [];
+          cal.ns[namespace] = api;
+          return;
+        }
+        cal.q.push(args);
       };
-      w.Cal.q = _queue;
-      w.Cal.ns = {};
+      w.Cal.q = [];
       w.Cal.loaded = false;
     }
 
-    w.Cal("init", "booking", { origin: "https://app.cal.com" });
+    if (!w.Cal.ns?.booking) {
+      w.Cal("init", "booking", { origin: "https://app.cal.com" });
+    }
     w.Cal.ns.booking("inline", { elementOrSelector: "#cal-embed", calLink });
   }, [calLink]);
 
