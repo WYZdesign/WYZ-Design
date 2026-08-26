@@ -56,6 +56,7 @@ export const ZEAL_ACTIONS: Record<string, ZealActionDef> = {
   "double-tap":       { zeal: 10,  category: "easter", cooldownMs: 0, reason: "Double-tapped a gallery photo" },
   "speed-reader":     { zeal: 15,  category: "easter", cooldownMs: 0, reason: "Speed reader (skimmed in under 5s)" },
   "thorough-reader":  { zeal: 20,  category: "easter", cooldownMs: 0, reason: "Thorough reader (3+ minutes on a post)" },
+  "watch-recap":      { zeal: 10,  category: "easter", cooldownMs: 7 * 24 * 3600000, reason: "Watched an event recap" },
 };
 
 export interface AchievementDef {
@@ -119,6 +120,20 @@ export const ZEAL_TIERS = [
   { name: "Champion", min: 2000, color: "#FFD700" },
   { name: "Legend",   min: 5000, color: "#00D4FF" },
 ];
+
+/**
+ * Redemption catalog. Priced at roughly 5-6% real-value back
+ * (1 Zeal is earned per $1 spent, so 500 Zeal ~= $25 of value).
+ */
+export const ZEAL_REWARDS = [
+  { id: "discount-25",       title: "$25 off any service",              cost: 500,  note: "Discount code honored on any booking" },
+  { id: "free-retouch",      title: "Free photo retouching session",    cost: 750,  note: "$50 value, one session" },
+  { id: "merch-item",        title: "Any merch item under $40",         cost: 1000, note: "Applied at fulfillment" },
+  { id: "shoot-extra-hour",  title: "Extra hour on any photoshoot",     cost: 1200, note: "$100 value, mention when booking" },
+  { id: "discount-100",      title: "$100 off any booking",             cost: 1750, note: "Best value per Zeal" },
+] as const;
+
+export type ZealRewardId = (typeof ZEAL_REWARDS)[number]["id"];
 
 export function tierForPoints(points: number): { name: string; color: string; index: number } {
   let index = 0;
@@ -480,6 +495,57 @@ export async function evaluateProfileAchievements(email: string, profile: {
   }
   if (unlocked.length > 0) await saveUserState(email, state);
   return unlocked;
+}
+
+export interface RedeemResult {
+  success: boolean;
+  code?: string;
+  title?: string;
+  remaining?: number;
+  error?: string;
+}
+
+function generateRedemptionCode(): string {
+  const alphabet = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  let suffix = "";
+  for (let i = 0; i < 6; i++) {
+    suffix += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+  return `WYZ-${suffix}`;
+}
+
+/**
+ * Spends Zeal on a reward. Deducts points atomically under the user lock,
+ * stores the redemption code in Redis for validation, and returns the code.
+ */
+export async function redeemZeal(email: string, rewardId: string): Promise<RedeemResult> {
+  const reward = ZEAL_REWARDS.find(r => r.id === rewardId);
+  if (!reward) return { success: false, error: "Unknown reward" };
+
+  const locked = await acquireUserLock(email);
+  if (!locked) return { success: false, error: "Busy, try again" };
+  try {
+    const state = await loadUserState(email);
+    if (state.points < reward.cost) {
+      return { success: false, error: `Not enough Zeal. You need ${reward.cost - state.points} more.` };
+    }
+
+    const code = generateRedemptionCode();
+    await addLoyaltyPoints(email, -reward.cost, `Redeemed: ${reward.title} (${code})`);
+
+    try {
+      const redis = getRedis();
+      const record = JSON.stringify({ email, rewardId, title: reward.title, code, timestamp: Date.now() });
+      await redis.set(`zeal:redemption:${code}`, record, "EX", 180 * 24 * 3600);
+    } catch (e) {
+      logger.warn("zeal:redeem-store", e instanceof Error ? e.message : String(e));
+    }
+
+    const updated = await loadUserState(email);
+    return { success: true, code, title: reward.title, remaining: updated.points };
+  } finally {
+    await releaseUserLock(email);
+  }
 }
 
 /** Full status payload for the Zeal HQ page. */

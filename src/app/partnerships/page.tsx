@@ -1,7 +1,19 @@
 "use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FiArrowRight, FiUsers, FiTarget, FiTrendingUp } from "react-icons/fi";
 import { SUB_BRANDS } from "@/lib/brands";
+
+interface LeaderEntry {
+  name: string;
+  conversions: number;
+  earned: number;
+}
+
+interface LeaderboardData {
+  leaders: LeaderEntry[];
+  totals: { conversions: number; paid: number };
+}
 
 const TIERS = [
   {
@@ -43,6 +55,19 @@ const TIERS = [
 ];
 
 export default function PartnershipsPage() {
+  const [board, setBoard] = useState<LeaderboardData | null>(null);
+
+  useEffect(() => {
+    fetch("/api/referral/leaderboard")
+      .then((r) => r.json())
+      .then((d) => {
+        if (d && Array.isArray(d.leaders)) setBoard(d as LeaderboardData);
+      })
+      .catch(() => {});
+  }, []);
+
+  const hasLeaders = (board?.leaders.length ?? 0) > 0;
+
   return (
     <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       {/* Hero */}
@@ -141,6 +166,53 @@ export default function PartnershipsPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Referral Leaderboard */}
+      <section className="py-16 sm:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
+              REFERRAL <span className="text-[#DF3131]">LEADERBOARD</span>
+            </h2>
+            <p className="text-[#666] dark:text-white/60 text-[15px] max-w-xl mx-auto">Our referral partners earn 10% on every client they send our way. Here is who is leading right now.</p>
+          </div>
+
+          {hasLeaders ? (
+            <>
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-6 text-center bg-white dark:bg-[#1C1C1E]">
+                  <p className="font-heading font-black text-[2rem] text-[#DF3131] mb-1">{board?.totals.conversions.toLocaleString()}</p>
+                  <p className="text-[12px] font-heading font-bold tracking-[0.15em] uppercase text-[#666] dark:text-white/60">Referrals Converted</p>
+                </div>
+                <div className="border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-6 text-center bg-white dark:bg-[#1C1C1E]">
+                  <p className="font-heading font-black text-[2rem] text-[#DF3131] mb-1">${board?.totals.paid.toLocaleString()}</p>
+                  <p className="text-[12px] font-heading font-bold tracking-[0.15em] uppercase text-[#666] dark:text-white/60">Paid Out to Partners</p>
+                </div>
+              </div>
+
+              <div className="border border-[#E2E2E2] dark:border-[#444] rounded-2xl overflow-hidden bg-white dark:bg-[#1C1C1E]">
+                {board?.leaders.map((leader, i) => (
+                  <div key={leader.name} className={`flex items-center gap-4 px-6 py-5 ${i > 0 ? "border-t border-[#E2E2E2] dark:border-[#444]" : ""}`}>
+                    <span className={`w-8 h-8 shrink-0 flex items-center justify-center rounded-full font-heading font-bold text-[14px] ${i === 0 ? "bg-[#DF3131] text-white" : "bg-[#DF3131]/10 text-[#DF3131]"}`}>
+                      {i + 1}
+                    </span>
+                    <span className="flex-1 min-w-0 truncate font-heading font-bold text-[15px] tracking-[0.04em] text-[#333] dark:text-white">{leader.name}</span>
+                    <span className="text-[14px] text-[#666] dark:text-white/60 whitespace-nowrap hidden sm:block">{leader.conversions} {leader.conversions === 1 ? "referral" : "referrals"}</span>
+                    <span className="font-heading font-bold text-[15px] text-[#DF3131] whitespace-nowrap">${leader.earned.toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-10 text-center bg-white dark:bg-[#1C1C1E]">
+              <p className="text-[15px] text-[#666] dark:text-white/60 mb-6">The board resets every quarter. Be the first name on it.</p>
+              <Link href="/referral" className="inline-block px-6 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:opacity-90 transition-all">
+                Join the Program
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

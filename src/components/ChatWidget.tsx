@@ -8,6 +8,10 @@ interface Message {
   content: string;
 }
 
+interface WyzChatOpenDetail {
+  prefill?: string;
+}
+
 const QUICK_REPLIES = [
   "What services do you offer?",
   "Show me pricing plans",
@@ -33,6 +37,17 @@ export default function ChatWidget() {
   useEffect(() => {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
+
+  useEffect(() => {
+    const onWyzChatOpen = (e: Event) => {
+      const detail = (e as CustomEvent<WyzChatOpenDetail>).detail;
+      if (detail?.prefill) setInput(detail.prefill);
+      if (!isOpen) void earn("open-chat");
+      setIsOpen(true);
+    };
+    window.addEventListener("wyz-chat-open", onWyzChatOpen);
+    return () => window.removeEventListener("wyz-chat-open", onWyzChatOpen);
+  }, [earn, isOpen]);
 
   const sendMessage = async (text: string) => {
     if (!text.trim() || isStreaming) return;

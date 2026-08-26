@@ -61,6 +61,21 @@ Run these checks yourself:
 
 ### Session log (chronological, newest first)
 
+## Session 31 — Zeal redemption, leaderboard, quiz handoff, recap rewards, admin chart
+**Date:** 2026-08-26
+**Zeal redemption (rates set by ox-alpha, ~5-6% real-value back):**
+- ZEAL_REWARDS catalog in zeal.ts: $25 off any service (500), free retouching session (750), merch item under $40 (1,000), extra photoshoot hour (1,200), $100 off any booking (1,750)
+- POST /api/zeal/redeem: auth + 10/hr rate limit, user-lock serialized deduction via addLoyaltyPoints(-cost), generates WYZ-XXXXXX code stored in Redis (180d TTL) for validation, GET returns public catalog
+- Loyalty page "Redeem Zeal" grid between balance and Quests: affordability-gated buttons with remaining-Zeal labels, success toast surfaces the code
+**Interconnections wave 2 (all of Claude's approved list):**
+- Referral leaderboard: GET /api/referral/leaderboard (anonymized top 5 by conversions/commission + all-time totals, rate limited, never 500s); partnerships page section with stat strip, ranked rows, quarterly-reset empty state
+- Quiz handoff: StrategyWizard results now offer "Price It Yourself" (/web-design calculator) and "Ask the Assistant" (wyz-chat-open CustomEvent with result summary prefilled). Note: /match is a static marketing page, no quiz lives there; wizard on /services is the real quiz. ChatWidget listens for the event, prefills input without auto-send, earns open-chat same as manual
+- Event recaps: new watch-recap action (+10, weekly cooldown) fires once/session from VideoModal opens, ColorAuraVideo native play, and YouTube playlist clicks; chat KNOWLEDGE updated with redemption catalog line
+- Admin bookkeeping: Revenue-by-Category horizontal bar card in Bookkeeping tab (aggregates existing /api/bookkeeping transactions client-side, year-scoped)
+- Chat backend unification: Ollama+timeout+streaming+fallback extracted to lib/ai-chat.ts streamChatWithFallback(); api/chat refactored byte-identical. Deviation: fd/oracle uses OpenRouter JSON not the duplicated pattern, left untouched per behavior-preservation constraint
+**Cloudinary audit:** lib/cloudinary.ts exports are all dead code — zero importers; /api/upload uses Supabase Storage; album-images imports the SDK directly. Safe to delete lib later.
+**Env note:** REFERRAL_CONVERT_SECRET optional (external convert calls only; webhook uses the shared function directly).
+
 ## Session 30 — chat personalization + calculator upsell
 **Date:** 2026-08-26
 - **Chat knows who it's talking to**: POST /api/chat injects signed-in visitor's Zeal balance + tier into the system prompt via auth() + getLoyaltyPoints; prompt instructs natural references only when relevant (progress-to-tier questions), never unprompted stat dumps; auth/DB failures fall through silently to generic assistant

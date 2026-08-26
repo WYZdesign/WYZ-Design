@@ -8,6 +8,7 @@ import { FiStar, FiGift, FiZap, FiShield, FiTarget, FiAward, FiRefreshCw } from 
 interface CatalogAction { id: string; zeal: number; category: string; reason: string; repeatable: boolean }
 interface AchievementDef { id: string; zeal: number; title: string; description: string }
 interface QuestDef { id: string; title: string; description: string; steps: string[]; bonusZeal: number }
+interface ZealReward { id: string; title: string; cost: number; note: string }
 
 interface ZealStatus {
   points: number;
@@ -41,6 +42,38 @@ export default function LoyaltyPage() {
   const session = sessionResult?.data ?? null;
   const [data, setData] = useState<ZealStatus | null>(null);
   const [loading, setLoading] = useState(true);
+  const [claimingId, setClaimingId] = useState<string | null>(null);
+
+  const REWARDS: ZealReward[] = [
+    { id: "discount-25",      title: "$25 off any service",           cost: 500,  note: "Discount code honored on any booking" },
+    { id: "free-retouch",     title: "Free photo retouching session", cost: 750,  note: "$50 value, one session" },
+    { id: "merch-item",       title: "Any merch item under $40",      cost: 1000, note: "Applied at fulfillment" },
+    { id: "shoot-extra-hour", title: "Extra hour on any photoshoot",  cost: 1200, note: "$100 value, mention when booking" },
+    { id: "discount-100",     title: "$100 off any booking",          cost: 1750, note: "Best value per Zeal" },
+  ];
+
+  const redeem = async (rewardId: string) => {
+    if (claimingId) return;
+    setClaimingId(rewardId);
+    try {
+      const res = await fetch("/api/zeal/redeem", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rewardId }),
+      });
+      const result = await res.json();
+      if (res.ok && result.success) {
+        toast.success(`Code ${result.code} is yours. ${result.title}`, { duration: 8000 });
+        load();
+      } else {
+        toast.error(result.error || "Redemption failed. Try again.");
+      }
+    } catch {
+      toast.error("Redemption failed. Check your connection.");
+    } finally {
+      setClaimingId(null);
+    }
+  };
 
   const load = () => {
     fetch("/api/zeal/status")
@@ -92,6 +125,28 @@ export default function LoyaltyPage() {
                   background: data.tierColor,
                 }} />
               </div>
+            </div>
+
+            <h2 className="font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4 flex items-center gap-2"><FiGift className="text-[#DF3131]" /> Redeem Zeal</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+              {REWARDS.map(r => {
+                const affordable = data.points >= r.cost;
+                const claiming = claimingId === r.id;
+                return (
+                  <div key={r.id} className={`rounded-xl p-5 border transition-all flex flex-col ${affordable ? "border-[#DF3131]/50 bg-white dark:bg-[#252528]" : "border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] opacity-70"}`}>
+                    <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-1">{r.cost} Zeal</p>
+                    <h3 className="font-heading font-bold text-[14px] text-[#333] dark:text-[#e0e0e0] mb-1">{r.title}</h3>
+                    <p className="text-[12px] text-[#666] dark:text-white/50 leading-snug mb-4 flex-1">{r.note}</p>
+                    <button
+                      onClick={() => redeem(r.id)}
+                      disabled={!affordable || claiming}
+                      className={`w-full py-2.5 text-[12px] font-heading font-bold tracking-[0.1em] uppercase transition-all ${affordable && !claiming ? "bg-[#DF3131] text-white hover:bg-[#B82020]" : "bg-gray-100 dark:bg-[#444] text-[#666] dark:text-white/40 cursor-not-allowed"}`}
+                    >
+                      {claiming ? "Redeeming..." : affordable ? "Redeem" : `Need ${r.cost - data.points} more`}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
 
             <h2 className="font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4 flex items-center gap-2"><FiTarget className="text-[#DF3131]" /> Quests</h2>

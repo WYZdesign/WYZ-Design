@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronRight, FiCheck, FiRotateCcw } from "react-icons/fi";
 import { useZeal } from "@/components/ZealProvider";
@@ -141,6 +142,12 @@ export default function StrategyWizard() {
 
   function reset() { setStep(0); setAnswers([]); setResult(null); }
 
+  const resultSummary = result
+    ? result.plan
+      ? `${result.plan} plan (${result.planPrice})`
+      : result.services[0]?.name || "your recommendation"
+    : "";
+
   return (
     <>
       <div className="mt-12 p-6 border border-[#DF3131] bg-[#DF3131]/5 flex flex-col sm:flex-row items-start justify-between gap-4">
@@ -239,6 +246,17 @@ export default function StrategyWizard() {
                       </button>
                       <button onClick={() => setOpen(false)} className="flex-1 px-4 py-2.5 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-colors">
                         Get Started
+                      </button>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                      <Link href="/web-design" className="flex-1 inline-flex items-center justify-center px-4 py-2.5 border border-[#E2E2E2] dark:border-[#444] text-[13px] font-bold text-[#333] dark:text-white/70 hover:border-[#DF3131] hover:text-[#DF3131] transition-all">
+                        Price It Yourself
+                      </Link>
+                      <button
+                        onClick={() => window.dispatchEvent(new CustomEvent("wyz-chat-open", { detail: { prefill: `Hi! I just took your match quiz and got: ${resultSummary}. Can you tell me more?` } }))}
+                        className="flex-1 px-4 py-2.5 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-colors"
+                      >
+                        Ask the Assistant
                       </button>
                     </div>
                   </motion.div>

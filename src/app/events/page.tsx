@@ -9,6 +9,7 @@ import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import TextSplit from "@/components/TextSplit";
+import { useZeal } from "@/components/ZealProvider";
 import { getSiteUrl } from "@/lib/site-url";
 
 const CLIENT_EVENTS_RAW = [
@@ -110,6 +111,12 @@ const ALL_EVENT_IMAGES = [
 
 const FLIP_SPEED = 450;
 
+function markRecapPlayed(earn: (action: string) => Promise<unknown>) {
+  if (sessionStorage.getItem("zeal:recap")) return;
+  sessionStorage.setItem("zeal:recap", "1");
+  void earn("watch-recap");
+}
+
 function videoThumb(videoPath: string): string {
  const name = videoPath.split("/").pop()?.replace(/\.mp4$/, "") || "";
  const safe = name.replace(/[^a-zA-Z0-9]/g, "_");
@@ -171,6 +178,7 @@ const SPEAKER_ON_SVG = (
 
 function VideoModal({ video, title, onClose }: { video: string; title: string; onClose: () => void }) {
  const videoRef = useRef<HTMLVideoElement>(null);
+ const { earn } = useZeal();
  const { activeVideoId, toggleVideo, muteAll } = useContext(VideoMuteContext);
  const isMuted = activeVideoId !== "modal";
 
@@ -179,11 +187,12 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
   useEffect(() => {
    const vid = videoRef.current;
    if (vid) { vid.muted = true; vid.play().catch(() => {}); }
+   markRecapPlayed(earn);
    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
   document.addEventListener("keydown", handleKey);
   document.body.style.overflow = "hidden";
   return () => { document.removeEventListener("keydown", handleKey); document.body.style.overflow = ""; };
- }, [onClose]);
+ }, [onClose, earn]);
 
  useEffect(() => { const vid = videoRef.current; if (vid) vid.muted = isMuted; }, [isMuted]);
 
@@ -215,6 +224,7 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
  const videoRef = useRef<HTMLVideoElement>(null);
  const canvasRef = useRef<HTMLCanvasElement>(null);
  const colorSampleRef = useRef<NodeJS.Timeout | null>(null);
+ const { earn } = useZeal();
  const { activeVideoId, toggleVideo } = useContext(VideoMuteContext);
  const isMuted = activeVideoId !== "aura";
 
@@ -312,6 +322,7 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
  playsInline
  preload="metadata"
  className="w-full h-full object-cover"
+ onPlay={() => markRecapPlayed(earn)}
  onEnded={() => { if (!flipping) flip(1); }}
  />
  )}
@@ -477,6 +488,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
 }
 
  function YouTubeSection() {
+  const { earn } = useZeal();
   const sectionRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [isHovering, setIsHovering] = useState(false);
@@ -602,7 +614,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49.1 3.59.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
   SUBSCRIBE
   </a>
-  <a href="https://www.youtube.com/playlist?list=PLJ_paMo7iTXEkVi_UWaIdeUzF0Ag-oURT" target="_blank" rel="noopener noreferrer"
+  <a href="https://www.youtube.com/playlist?list=PLJ_paMo7iTXEkVi_UWaIdeUzF0Ag-oURT" target="_blank" rel="noopener noreferrer" onClick={() => markRecapPlayed(earn)}
   className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all hover:scale-105">
   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d={ytPath}/></svg>
   WATCH RECAPS

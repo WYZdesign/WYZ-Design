@@ -551,6 +551,7 @@ function BookkeepingDashboard({ data, onRefresh }: { data: FinancialSummary; onR
         <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Schedule C</a>
       </div>
       {showForm && <TransactionForm type={showForm} onClose={() => { setShowForm(null); onRefresh(); }} />}
+      <RevenueByCategoryCard year={data.year} />
       {data.income_by_client?.length > 0 && (
         <div>
           <SectionTitle>Income by Client</SectionTitle>
@@ -605,6 +606,52 @@ function BookkeepingDashboard({ data, onRefresh }: { data: FinancialSummary; onR
 }
 
 
+
+function RevenueByCategoryCard({ year }: { year: number }) {
+  const [rows, setRows] = useState<{ category: string; amount: number }[] | null>(null);
+
+  useEffect(() => {
+    fetch("/api/bookkeeping?tab=transactions&type=income&limit=10000")
+      .then(r => r.json())
+      .then((d: { transactions?: Pick<Transaction, "date" | "amount" | "category_name">[] }) => {
+        const byCategory: Record<string, number> = {};
+        for (const t of d.transactions || []) {
+          if (String(t.date || "").slice(0, 4) !== String(year)) continue;
+          const cat = t.category_name || "Uncategorized";
+          byCategory[cat] = (byCategory[cat] || 0) + Number(t.amount);
+        }
+        setRows(Object.entries(byCategory).map(([category, amount]) => ({ category, amount })).sort((a, b) => b.amount - a.amount));
+      })
+      .catch(e => { logger.warn("admin-bookkeeping", `Revenue fetch failed: ${e}`); setRows([]); });
+  }, [year]);
+
+  if (!rows) return null;
+  return (
+    <div>
+      <SectionTitle>Revenue by Category</SectionTitle>
+      {rows.length === 0 ? (
+        <Empty>No transactions yet</Empty>
+      ) : (
+        <div className="bg-white/5 border border-white/10 p-6 space-y-4">
+          {(() => {
+            const max = Math.max(...rows.map(r => r.amount));
+            return rows.map(r => (
+              <div key={r.category}>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[13px] text-white/70">{r.category}</span>
+                  <span className="text-[14px] font-heading font-bold text-[#34A853]">${r.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
+                </div>
+                <div className="h-2 w-full rounded overflow-hidden bg-gray-100 dark:bg-[#444]">
+                  <div className="h-full rounded" style={{ width: `${max > 0 ? Math.max((r.amount / max) * 100, 2) : 100}%`, backgroundColor: "#DF3131" }} />
+                </div>
+              </div>
+            ));
+          })()}
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ─── INCOME TAB ───
 function IncomeTab({ data, onRefresh }: { data: { transactions: Transaction[] }; onRefresh: () => void }) {
