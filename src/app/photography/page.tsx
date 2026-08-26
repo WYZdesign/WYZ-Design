@@ -141,17 +141,17 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
  }, []);
 
  const handleClick = () => {
-      if (typeof window !== 'undefined') {
-        window.location.href = '/photography';
-      }
-    };
+  paused.current = true;
+  if (resumeTimer.current) clearTimeout(resumeTimer.current);
+  resumeTimer.current = setTimeout(() => { paused.current = false; }, 3000);
+ };
 
  return (
- <div className={`overflow-hidden ${className}`}>
+ <div className={`overflow-hidden ${className}`} onClick={handleClick}>
   <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
    {[...items, ...items].map((src, i) => (
-   <div key={i} className="flex-none w-[40vw] sm:w-[280px] md:w-[380px] lg:w-[440px] h-40 sm:h-56 md:h-72 relative overflow-hidden cursor-pointer group" onClick={handleClick}>
-    <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 40vw, 440px" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+   <div key={i} className="flex-none w-[40vw] sm:w-[280px] md:w-[380px] lg:w-[440px] h-40 sm:h-56 md:h-72 relative overflow-hidden cursor-pointer group">
+     <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 40vw, 440px" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
    </div>
    ))}
   </div>

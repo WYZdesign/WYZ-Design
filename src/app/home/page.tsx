@@ -675,7 +675,7 @@ function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[
  const handleClick = () => {
  paused.current = true;
  if (clickTimer.current) clearTimeout(clickTimer.current);
- clickTimer.current = setTimeout(() => { paused.current = false; }, 2000);
+ clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
  };
 
  const handleTouchStart = (e: React.TouchEvent) => {
@@ -691,13 +691,13 @@ function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[
  }
  touchStartX.current = null;
  if (clickTimer.current) clearTimeout(clickTimer.current);
- clickTimer.current = setTimeout(() => { paused.current = false; }, 2000);
+ clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
  };
 
  const doubled = [...items, ...items];
 
  return (
-    <div ref={sectionRef} className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+   <div ref={sectionRef} className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
     <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
      {doubled.map((src, i) => (
     <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm">
@@ -745,7 +745,7 @@ function LogoCarousel({ items, speed = 0.5 }: { items: { name: string; img: stri
  const handleClick = () => {
  paused.current = true;
  if (clickTimer.current) clearTimeout(clickTimer.current);
- clickTimer.current = setTimeout(() => { paused.current = false; }, 2000);
+ clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
  };
 
  const handleTouchStart = (e: React.TouchEvent) => {
@@ -761,7 +761,7 @@ function LogoCarousel({ items, speed = 0.5 }: { items: { name: string; img: stri
  }
  touchStartX.current = null;
  if (clickTimer.current) clearTimeout(clickTimer.current);
- clickTimer.current = setTimeout(() => { paused.current = false; }, 2000);
+ clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
  };
 
  const tripled = [...items, ...items, ...items];

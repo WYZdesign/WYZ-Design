@@ -52,13 +52,41 @@ Run these checks yourself:
 7. Confirm `/secret` absent from sitemap output and robots meta noindex present.
 
 ### Open threads (candidates for next session)
-- **Splash screen decision:** Session-scoped (sessionStorage), requires "Enter Site" click, blocks content at z-index 9999. 24 random animated variants. Intentional gate, not a bug. Needs Torreé decision: keep as-is, auto-dismiss after delay, or remove entirely.
+- **Cal.com booking links (HIGH):** `/booking` shows "No links set up" to all visitors. Zero event types published. Needs Torreé to log into Cal.com and publish at least one bookable event type. This is the highest-priority item — the booking page is completely non-functional.
+- **Hero banner redesign (site-wide):** 18+ hero sections inventoried. Wrap all hero text in containers. Half-panel heroes get square containers for header + tagline; full-width heroes get 2:4 rectangle containers. Text centered, tight wrap. Buttons stay side-by-side. Equal spacing across all stacks.
+- **Splash screen decision:** Session-scoped (sessionStorage), requires "Enter Site" click. Needs Torreé decision: keep as-is, auto-dismiss, or remove.
 - Torreé will send MORE client logos to remove from the home carousel (list in progress).
 - Gift card fulfillment has no database persistence — only Discord notification. Needs a `gift_cards` Supabase table + webhook insert + recipient email in checkout metadata.
 - Webhook side effects (loyalty, referrals, Discord alerts) are not idempotent — Stripe retries can cause duplicates. Low priority but worth noting.
 - Fragment `key={i}` index keys exist on some filterable lists — low priority.
 
 ### Session log (chronological, newest first)
+
+## Session 40 — Carousel click-to-pause fix, full audit sweep
+**Date:** 2026-08-26
+**Fixes:**
+- **Photography AutoScrollRow click-to-pause:** Was navigating to `/photography` on click (dead code: `paused`/`resumeTimer` refs existed but were unused). Replaced with pause/resume handler. Pauses for 3000ms on click.
+- **Homepage SmoothCarousel + LogoCarousel:** Changed pause duration from 2000ms to 3000ms across both click and touch handlers.
+- **Designs Carousel:** Already at 3000ms, no change needed.
+**Audit:**
+- Merch carousel: Already fixed in Session 39 (products link to `/merch/${id}`).
+- Merch product-name marquee: Text-only decorative strip, no links needed.
+- Hero banner inventory: 18+ heroes cataloged. Inconsistent containers. Ready for redesign.
+- Cal.com: Confirmed zero booking links. Needs Torreé action, not code.
+
+## Live-site Session 26 — Cal.com dead, merch carousel inert, dark mode verified, hero redesign requested
+**Date:** 2026-08-26
+**Source:** Claude/Cowork live-site sweep (device bridge down all session)
+**Findings:**
+- `/booking` Cal.com: **ZERO booking links published.** Widget renders "No links set up — Torreé Harris hasn't set up any booking links yet." Persistent across multiple checks. Cal.com account configuration issue, not a code bug. Highest priority — booking page is completely non-functional.
+- `/merch` carousel: Product images are inert — no `<a>` tag, no navigation on click. Different from Session 24's description (was thought to misroute to `/featured-artist`). Carousel items need wiring to `/merch/${product.id}`.
+- Dark mode: Visually confirmed correct with real screenshots. Nav, hero buttons, services section all restyle properly. No issues.
+- `/wyzmind`: Clean, zero console errors. Stack disclosure is intentional per Torreé.
+- Mobile viewport: `resize_window` tool confirmed fully broken. No mobile screenshots possible via automation.
+**New work items from Torreé:**
+- Hero banner redesign (all heroes site-wide): wrap text in containers (square for half-panel, 2:4 rectangle for full-width). Text centered, tight wrap. Buttons side-by-side. Equal spacing across all stacks.
+- Carousel click behavior on `/`, `/photography`, `/designs`: should pause autoscroll ~3s on click. Needs verification + fix.
+**Bridge status:** Down entire session. No source reads or code fixes possible.
 
 ## Session 39 — Merch routing bug fix, /wyzmind simplification
 **Date:** 2026-08-26
