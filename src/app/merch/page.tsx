@@ -396,8 +396,8 @@ function SquareQuote() {
   );
 }
 
-function MerchCarousel() {
-  const items = [...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS];
+function MerchCarousel({ products }: { products: Product[] }) {
+  const items = [...products, ...products, ...products];
   return (
     <div className="py-8 bg-[#FEFEFD] overflow-hidden">
       <div className="flex whitespace-nowrap animate-marquee-left">
@@ -589,7 +589,7 @@ export default function MerchPage() {
               "@type": "ItemList",
               name: "WYZ Design Merch Store",
               description: "Premium apparel, headwear, and accessories from the Dying Breed Crew collection.",
-              itemListElement: FALLBACK_PRODUCTS.slice(0, 10).map((product, i) => ({
+              itemListElement: products.slice(0, 10).map((product, i) => ({
                 "@type": "ListItem",
                 position: i + 1,
                 item: {
@@ -627,7 +627,7 @@ export default function MerchPage() {
         {/* Product Name Marquee Strip */}
         <div className="relative overflow-hidden bg-[#111] py-3 border-y border-white/5">
           <div className="flex whitespace-nowrap animate-marquee-left">
-            {[...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS, ...FALLBACK_PRODUCTS].map((p, i) => (
+            {[...products, ...products, ...products].map((p, i) => (
               <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
             ))}
           </div>
@@ -642,7 +642,7 @@ export default function MerchPage() {
 
         {/* Merch Carousel */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
-          <MerchCarousel />
+          <MerchCarousel products={products} />
         </ScrollReveal>
 
         {/* Enter Store Toggle */}

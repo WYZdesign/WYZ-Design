@@ -52,8 +52,6 @@ Run these checks yourself:
 7. Confirm `/secret` absent from sitemap output and robots meta noindex present.
 
 ### Open threads (candidates for next session)
-- `/merch` product-routing bug (Session 24 #2) — highest priority code fix outstanding.
-- `/wyzmind` page discloses full backend stack to anonymous visitors — gut-check with Torreé on whether that tradeoff is intentional (Session 25).
 - Splash-screen persistence flag decision (Session 24 #3).
 - `/account/my-account` -> `/admin` redirect check (Session 24 #4).
 - Torreé will send MORE client logos to remove from the home carousel (list in progress).
@@ -62,6 +60,12 @@ Run these checks yourself:
 - Fragment `key={i}` index keys exist on some filterable lists — low priority.
 
 ### Session log (chronological, newest first)
+
+## Session 39 — Merch routing bug fix, /wyzmind simplification
+**Date:** 2026-08-26
+**Fixes:**
+- **Merch product-routing bug (critical):** Detail page `[id]/page.tsx` had hardcoded IDs 1-14 but the listing page replaced them with Printful catalog IDs (71, 12, 831, etc.) when the API succeeded. Most product links led to "Product Not Found." Fixed by making the detail page fetch from `/api/printful-catalog` on mount and look up by URL param, with hardcoded fallback (matching Printful IDs) when the API is down. Also fixed `MerchCarousel` and JSON-LD structured data to use fetched products instead of fallback-only data.
+- **/wyzmind simplification:** Rewrote all 11 stack items with plain-English names and descriptions. Removed technical jargon (Qdrant, Neo4j, MongoDB Atlas, n8n, etc.). Updated section headers and CTA copy. The page still shows the same systems, just explained for non-technical visitors.
 
 ## Live-site Session 25 — /wyzmind audited, Cal.com re-tested clean, dark mode confirmed
 **Date:** 2026-08-26

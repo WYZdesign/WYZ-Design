@@ -50,17 +50,17 @@ const FEATURES = [
 ];
 
 const STACK_ITEMS = [
-  { name: "Ollama + Local LLMs", category: "AI", layman: "Runs AI models on your own computer, no subscriptions, no data leaks", detail: "deepseek-coder, llama3.2, llava - all running locally or tunneled through our Shadow PC GPU node." },
-  { name: "Qdrant Vector DB", category: "Data", layman: "The brain's memory, stores knowledge so AI can find the right answer instantly", detail: "1.17M+ vectors across 3 collections. Semantic search that actually understands what you mean." },
-  { name: "Neo4j Graph DB", category: "Data", layman: "Maps how everything connects, people, projects, skills, relationships", detail: "Knowledge graph that links clients to projects to tools to past work. Not just search - discovery." },
-  { name: "Redis Queue", category: "Infra", layman: "The to-do list that makes sure nothing gets dropped or forgotten", detail: "Append-only Omega queue handling task scheduling, message passing, and request buffering." },
-  { name: "MongoDB Atlas", category: "Data", layman: "Cloud database that stores all the structured stuff, forms, users, projects", detail: "Schema-flexible document store. Handles everything from contact forms to client project data." },
-  { name: "Heroku", category: "Infra", layman: "Runs the backend services that keep everything online 24/7", detail: "Hosts Python bridge API, n8n workflows, and background processing jobs." },
-  { name: "Python + PowerShell", category: "Infra", layman: "The glue code and automation scripts that tie everything together", detail: "570+ Python modules in _ENGINE/, 800+ PowerShell functions in wyz_os.ps1." },
-  { name: "Next.js + Vercel", category: "Platform", layman: "The website framework, what you're looking at right now", detail: "This entire site runs on Next.js 16 with Turbopack, deployed globally on Vercel's edge network." },
-  { name: "Stripe Payments", category: "Platform", layman: "Handles all the money stuff, subscriptions, invoices, checkout", detail: "Integrated into booking flows, plans, and merch. Automated billing, receipts, and payment tracking." },
-  { name: "Resend Email", category: "Platform", layman: "Sends all the emails, confirmations, newsletters, client updates", detail: "Transactional and marketing email delivery. Branded templates for every notification type." },
-  { name: "n8n Automation", category: "Infra", layman: "Visual workflow builder, connect apps and automate repetitive tasks", detail: "18 active workflows handling contact intake, data processing, and cross-service orchestration." },
+  { name: "AI Assistant", category: "AI", layman: "A smart assistant that reads messages, answers questions, and handles busywork around the clock", detail: "Built on open-source AI models that run privately. No data is sent to third parties. It learns your style and gets better over time." },
+  { name: "Smart Memory", category: "Data", layman: "Remembers everything about your projects, clients, and past work so nothing gets lost", detail: "A knowledge system that connects the dots between people, projects, and ideas. Ask it a question and it finds the right answer instantly." },
+  { name: "Relationship Map", category: "Data", layman: "Visualizes how everything connects: who worked on what, who knows who, what goes where", detail: "A map of your business relationships. See how a client connects to a project, a skill, and a past deliverable all at once." },
+  { name: "Task Queue", category: "Infra", layman: "A smart to-do list that makes sure nothing slips through the cracks", detail: "Handles scheduling, reminders, and background tasks. If something needs doing, it's in the queue." },
+  { name: "Cloud Storage", category: "Data", layman: "Where all your files, forms, and project data live, organized and searchable", detail: "Every document, every form submission, every project file. Stored safely in the cloud, always accessible." },
+  { name: "Always-On Servers", category: "Infra", layman: "The engines that keep everything running 24/7, even while you sleep", detail: "Cloud servers that host the backend systems. They never go down, never take breaks." },
+  { name: "Custom Code", category: "Infra", layman: "The custom-built scripts and automations that tie every piece together", detail: "Hand-written automation that connects all the tools. If two systems need to talk, custom code makes it happen." },
+  { name: "This Website", category: "Platform", layman: "What you're looking at right now, the front door to everything WYZ Design", detail: "Built with modern web technology and deployed worldwide. Fast, responsive, and always up." },
+  { name: "Payments", category: "Platform", layman: "Handles all the money: bookings, subscriptions, invoices, and merch checkout", detail: "Secure payment processing integrated into every touchpoint. Automated receipts, billing, and tracking." },
+  { name: "Email System", category: "Platform", layman: "Sends every email: confirmations, updates, newsletters, and client messages", detail: "Reliable email delivery with branded templates for every type of notification." },
+  { name: "Workflow Automator", category: "Infra", layman: "Connects your apps and automates repetitive tasks so you don't have to", detail: "Visual workflows that handle data intake, processing, and cross-service tasks. Set it and forget it." },
 ];
 
 const STACK_CATEGORIES = ["All", "AI", "Data", "Infra", "Platform"];
@@ -152,7 +152,7 @@ export default function WYZMiNDPage() {
                <span className="text-[#DF3131]">AI Brain</span>
              </h1>
             <p className="text-white/70 text-[16px] sm:text-lg max-w-2xl mx-auto leading-relaxed">
-              The behind-the-scenes engine that keeps WYZ Design running smooth. Automation, client systems, creative tools, built for us, eventually for you.
+              The behind-the-scenes engine that keeps WYZ Design running smooth. Smart automation, organized systems, and creative tools, all built in-house.
             </p>
             </div>
           </section>
@@ -206,8 +206,8 @@ export default function WYZMiNDPage() {
         {/* Stack — interactive tabs */}
         <section className="bg-white dark:bg-[#111] border-y border-[#E2E2E2] dark:border-[#333] py-16 px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] .5 text-[#333] dark:text-white text-center mb-4">The Stack</h2>
-            <p className="text-[#666] dark:text-white/30 text-[13px] text-center mb-8">Everything we use to build and run WYZ Design, explained like you&apos;re not a programmer</p>
+            <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] .5 text-[#333] dark:text-white text-center mb-4">How It All Works</h2>
+            <p className="text-[#666] dark:text-white/30 text-[13px] text-center mb-8">The tools and systems behind WYZ Design, explained in plain English</p>
 
             {/* Category tabs */}
             <div className="flex flex-wrap justify-center gap-2 mb-8">
@@ -257,9 +257,9 @@ export default function WYZMiNDPage() {
 
         {/* CTA */}
         <section className="max-w-4xl mx-auto px-6 py-16 text-center">
-          <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] mb-4">Want Systems Built for Your Business?</h2>
+          <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] mb-4">Want Something Like This for Your Business?</h2>
           <p className="text-[#666] dark:text-[#b0b0b0] text-[16px] max-w-xl mx-auto mb-8 leading-relaxed">
-            WYZMiND infrastructure is currently internal. Custom client systems are available for brands and studios needing AI automation, booking intelligence, and creative workflow tools.
+            WYZMiND is our internal system, but we build custom versions for brands and studios who need smart automation, better workflows, and creative tools that actually work.
           </p>
           <Link href="/contact" className="inline-block bg-[#DF3131] text-white border-2 border-[#DF3131] px-8 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#b82020] hover:border-[#b82020] transition-all">
             Inquire About Systems

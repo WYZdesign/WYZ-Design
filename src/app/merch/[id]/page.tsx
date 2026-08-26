@@ -1,36 +1,94 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, use, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import ScrollReveal from "@/components/ScrollReveal";
-import SafeImage from "@/components/SafeImage";
 
-const PRODUCTS = [
-  { id: 1, name: "Denim Tee", category: "Apparel", price: 34.99, description: "Unisex premium denim tee. Heavyweight cotton with a lived-in feel.", colors: ["#282828", "#1B3A5C"], image: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", rating: 4.8, reviews: 124, badge: "Best Seller", materials: ["100% heavyweight cotton", "Pre-shrunk denim weave", "Reinforced stitching", "Machine washable"], sizes: ["S", "M", "L", "XL", "2XL"] },
-  { id: 2, name: "Zip-Up Hoodie", category: "Apparel", price: 64.99, description: "Unisex fleece zip-up hoodie. Brushed interior, metal hardware.", colors: ["#282828", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", rating: 4.9, reviews: 87, badge: "Premium", materials: ["80% cotton, 20% polyester fleece", "Brushed interior lining", "YKK metal zipper", "Ribbed cuffs and hem"], sizes: ["S", "M", "L", "XL", "2XL"] },
-  { id: 3, name: "Hooded Long Sleeve", category: "Apparel", price: 44.99, description: "Unisex hooded long sleeve tee. Lightweight layering piece.", colors: ["#282828", "#7A8B99"], image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie-1.jpg", rating: 4.7, reviews: 65, materials: ["100% ring-spun cotton", "Lightweight 4.2 oz fabric", "Attached hood with drawstring", "Tagless neck label"], sizes: ["S", "M", "L", "XL"] },
-  { id: 4, name: "Cropped Hoodie", category: "Apparel", price: 54.99, description: "Women's cropped hoodie. Relaxed fit, raw hem, ribbed cuffs.", colors: ["#282828", "#FFFFFF"], image: "/images/merch/dbc-archive/98442d-bd1e1406036d4ba99d4f8197e1495333~mv2.jpg", rating: 4.8, reviews: 52, badge: "New", materials: ["50% cotton, 50% polyester", "Cropped raw hem finish", "Ribbed cuffs and waistband", "Front pouch pocket"], sizes: ["XS", "S", "M", "L"] },
-  { id: 5, name: "Ribbed Beanie", category: "Headwear", price: 24.99, description: "Organic ribbed beanie. One-size-fits-all, folded cuff.", colors: ["#282828", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/98442d-60d7fe9cb1a14d4696d62ca1b5902cdf~mv2.jpg", rating: 4.7, reviews: 203, badge: "Popular", materials: ["100% organic acrylic rib knit", "One-size-fits-all", "Folded cuff design", "Warm winter weight"], sizes: ["One Size"] },
-  { id: 6, name: "Snapback Cap", category: "Headwear", price: 32.99, description: "Adjustable snapback cap. Structured crown, flat visor.", colors: ["#282828", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", rating: 4.7, reviews: 89, materials: ["100% chino cotton twill", "6-panel construction", "Embroidered eyelets", "Adjustable snap closure"], sizes: ["One Size"] },
-  { id: 7, name: "Crop Top", category: "Apparel", price: 29.99, description: "Classic crop top. Premium ring-spun cotton, retail fit.", colors: ["#282828", "#FFFFFF"], image: "/images/merch/dbc-archive/98442d-c13840a266e44b959886dc63b5826213~mv2.jpg", rating: 4.6, reviews: 156, materials: ["100% ring-spun cotton", "4.3 oz lightweight fabric", "Retail fit, cropped length", "Tear-away label"], sizes: ["XS", "S", "M", "L"] },
-  { id: 8, name: "Denim Tote Bag", category: "Accessories", price: 39.65, description: "Organic denim tote bag. Spacious, functional, everyday use.", colors: ["#282828"], image: "/images/merch/dbc-archive/WYZ-Crown-Organic-denim-tote-bag.jpg", rating: 4.5, reviews: 45, materials: ["100% organic cotton denim", "Interior pocket", "Reinforced handles", "Machine washable"], sizes: ["One Size"] },
-  { id: 9, name: "Ceramic Mug", category: "Accessories", price: 14.99, description: "Black glossy ceramic mug. 11oz, dishwasher safe.", colors: ["#282828", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-White-glossy-mug.jpg", rating: 4.6, reviews: 189, materials: ["Ceramic, 11oz capacity", "Glossy finish", "Dishwasher & microwave safe", "C-handle design"], sizes: ["11oz"] },
-  { id: 10, name: "Stainless Tumbler", category: "Accessories", price: 27.78, description: "Stainless steel tumbler. Protects against peeling and fading.", colors: ["#282828", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Stainless-steel-tumbler.jpg", rating: 4.8, reviews: 76, materials: ["18/8 stainless steel", "Double-wall vacuum insulated", "Keeps drinks cold 24hrs / hot 12hrs", "Powder-coated finish"], sizes: ["20oz"] },
-  { id: 11, name: "Embroidered Patches", category: "Accessories", price: 11.87, description: "Embroidered patches. Durable twill fabric, adds color to any outfit.", colors: ["#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Embroidered-patches.jpg", rating: 4.9, reviews: 54, badge: "Value", materials: ["Twill fabric base", "Iron-on backing", "Merrowed border", "3.5\" diameter"], sizes: ["One Size"] },
-  { id: 12, name: "Embroidered Socks", category: "Accessories", price: 29.77, description: "Embroidered socks. Bold minimalist look, US-made.", colors: ["#282828", "#999999", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Embroidered-socks.jpg", rating: 4.7, reviews: 67, materials: ["75% combed cotton", "22% nylon, 3% spandex", "Reinforced heel & toe", "Made in USA"], sizes: ["S/M", "L/XL"] },
-  { id: 13, name: "Water Bottle", category: "Accessories", price: 22.00, description: "Flip straw water bottle. BPA-free, on-the-go hydration.", colors: ["#282828", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Flip-straw-water-bottle.jpg", rating: 4.5, reviews: 41, materials: ["BPA-free Tritan plastic", "Flip-up straw lid", "Locking mechanism", "26oz capacity"], sizes: ["26oz"] },
-  { id: 14, name: "Organic Apron", category: "Accessories", price: 32.18, description: "Organic cotton apron. 100% organic, sturdy cotton.", colors: ["#282828"], image: "/images/merch/dbc-archive/WYZ-Crown-Organic-cotton-apron.jpg", rating: 4.6, reviews: 33, materials: ["100% organic cotton", "Adjustable neck strap", "Front pocket", "Machine washable"], sizes: ["One Size"] },
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  description: string;
+  colors: string[];
+  image: string;
+  rating?: number;
+  reviews?: number;
+  badge?: string;
+  materials?: string[];
+  sizes?: string[];
+}
+
+const FALLBACK_PRODUCTS: Product[] = [
+  { id: 71, name: "Unisex Staple T-Shirt", category: "Apparel", price: 29.99, description: "Custom Bella+Canvas 3001, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", rating: 4.7, reviews: 89, materials: ["100% combed ringspun cotton", "Side-seamed construction", "Retail fit"], sizes: ["S", "M", "L", "XL", "2XL"] },
+  { id: 12, name: "Unisex Basic Softstyle T-Shirt", category: "Apparel", price: 24.99, description: "Custom Gildan 64000, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", rating: 4.7, reviews: 112, materials: ["100% ring-spun cotton", "4.5 oz lightweight", "Tear-away label"], sizes: ["S", "M", "L", "XL", "2XL"] },
+  { id: 831, name: "Unisex Organic Hoodie", category: "Apparel", price: 64.99, description: "Custom Stanley/Stella, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", rating: 4.8, reviews: 67, materials: ["80% organic cotton, 20% recycled polyester", "Brushed interior", "Fleece lined"], sizes: ["S", "M", "L", "XL", "2XL"] },
+  { id: 77, name: "Snapback Cap", category: "Headwear", price: 32.99, description: "Custom snapback cap, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", rating: 4.7, reviews: 89, materials: ["100% chino cotton twill", "6-panel construction", "Adjustable snap closure"], sizes: ["One Size"] },
+  { id: 100, name: "5 Panel Trucker Cap", category: "Headwear", price: 29.99, description: "Custom 5-panel trucker, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", rating: 4.6, reviews: 54, materials: ["Front foam panel", "Mesh back", "Snapback closure"], sizes: ["One Size"] },
+  { id: 140, name: "Closed-Back Structured Cap", category: "Headwear", price: 34.99, description: "Custom structured cap, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", rating: 4.7, reviews: 41, materials: ["Structured crown", "Closed back", "Embroidered front"], sizes: ["One Size"] },
+  { id: 300, name: "Black Glossy Mug", category: "Accessories", price: 14.99, description: "Custom 11oz ceramic mug, Dying Breed Crew x WYZ Design", colors: ["#333333", "#FFFFFF"], image: "/images/merch/dbc-archive/WYZ-Crown-White-glossy-mug.jpg", rating: 4.8, reviews: 189, materials: ["Ceramic, 11oz capacity", "Glossy finish", "Dishwasher & microwave safe"], sizes: ["11oz"] },
+  { id: 2, name: "Framed Poster", category: "Art", price: 39.99, description: "Custom framed poster, Dying Breed Crew x WYZ Design", colors: ["#333333"], image: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", rating: 4.6, reviews: 34, materials: ["Museum-quality paper", "Hardwood frame", "Acrylic front"], sizes: ["12x18", "18x24", "24x36"] },
+  { id: 3, name: "Canvas", category: "Art", price: 49.99, description: "Custom canvas print, Dying Breed Crew x WYZ Design", colors: ["#333333"], image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie-1.jpg", rating: 4.7, reviews: 28, materials: ["Poly-cotton canvas", "1.5\" stretcher bars", "Wire hanger"], sizes: ["12x12", "16x20", "24x36"] },
+  { id: 350, name: "All-Over Print Fanny Pack", category: "Accessories", price: 29.99, description: "Custom all-over print fanny pack, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131"], image: "/images/merch/dbc-archive/WYZ-Crown-Organic-denim-tote-bag.jpg", rating: 4.5, reviews: 45, materials: ["100% polyester", "All-over sublimation print", "Adjustable waist strap"], sizes: ["One Size"] },
+  { id: 465, name: "All-Over Print Duffle Bag", category: "Accessories", price: 79.99, description: "Custom all-over print duffle bag, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131"], image: "/images/merch/dbc-archive/WYZ-Crown-Organic-denim-tote-bag.jpg", rating: 4.6, reviews: 22, materials: ["100% polyester", "All-over sublimation print", "Inner pocket"], sizes: ["One Size"] },
+  { id: 400, name: "All-Over Print Joggers", category: "Apparel", price: 59.99, description: "Custom all-over print joggers, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131"], image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", rating: 4.7, reviews: 38, materials: ["100% polyester", "All-over sublimation print", "Elastic waistband"], sizes: ["S", "M", "L", "XL"] },
+  { id: 200, name: "All-Over Print Crop Top", category: "Apparel", price: 34.99, description: "Custom all-over print crop top, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131"], image: "/images/merch/dbc-archive/98442d-c13840a266e44b959886dc63b5826213~mv2.jpg", rating: 4.6, reviews: 52, materials: ["100% polyester", "All-over sublimation print", "Cropped fit"], sizes: ["XS", "S", "M", "L"] },
+  { id: 619, name: "Cropped Windbreaker", category: "Apparel", price: 69.99, description: "Custom cropped windbreaker, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131"], image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", rating: 4.8, reviews: 19, materials: ["100% nylon", "Water-resistant", "Cropped hem"], sizes: ["S", "M", "L", "XL"] },
+  { id: 301, name: "Rash Guard", category: "Apparel", price: 44.99, description: "Custom rash guard, Dying Breed Crew x WYZ Design", colors: ["#333333", "#DF3131"], image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie-1.jpg", rating: 4.5, reviews: 31, materials: ["82% polyester, 18% spandex", "UPF 50+", "Flatlock seams"], sizes: ["S", "M", "L", "XL"] },
 ];
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const product = PRODUCTS.find(p => p.id === Number(id));
+  const [allProducts, setAllProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
+  const [loading, setLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedSize, setSelectedSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/printful-catalog")
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        if (cancelled || !data.products?.length) return;
+        const printfulProducts: Product[] = data.products.map((p: Record<string, unknown>) => ({
+          id: p.id as number,
+          name: (p.title as string) || "Product",
+          category: (p.category as string) || "Apparel",
+          price: (p.price as number) || 0,
+          description: `Custom ${p.title}, Dying Breed Crew x WYZ Design`,
+          colors: ["#333333", "#DF3131", "#FFFFFF"],
+          image: (p.image as string) || "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg",
+          rating: 4.7,
+          reviews: Math.floor(Math.random() * 150) + 20,
+        }));
+        setAllProducts(printfulProducts);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
+
+  const product = allProducts.find((p) => p.id === Number(id));
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white dark:bg-[#1C1C1E] flex items-center justify-center pt-32 lg:pt-40">
+        <div className="text-center">
+          <div className="w-8 h-8 border-2 border-[#DF3131] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[14px] text-[#666] dark:text-[#aaa]">Loading product...</p>
+        </div>
+      </main>
+    );
+  }
 
   if (!product) {
     return (
@@ -43,9 +101,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     );
   }
 
-  const related = PRODUCTS.filter(p => p.id !== product.id && p.category === product.category).slice(0, 4);
+  const related = allProducts.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4);
   if (related.length < 4) {
-    const extra = PRODUCTS.filter(p => p.id !== product.id && p.category !== product.category).slice(0, 4 - related.length);
+    const extra = allProducts.filter((p) => p.id !== product.id && p.category !== product.category).slice(0, 4 - related.length);
     related.push(...extra);
   }
 
@@ -54,6 +112,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     toast.success(`${product.name} added to cart`);
     setTimeout(() => setAdded(false), 2000);
   };
+
+  const materials = product.materials || ["Premium materials", "Ethically sourced", "Machine washable"];
+  const sizes = product.sizes || ["S", "M", "L", "XL"];
 
   return (
     <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
@@ -91,7 +152,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex gap-0.5">
                   {[1, 2, 3, 4, 5].map(i => (
-                    <svg key={i} className={`w-4 h-4 ${i <= Math.round(product.rating) ? "text-[#D49341]" : "text-[#ddd]"}`} fill="currentColor" viewBox="0 0 20 20">
+                    <svg key={i} className={`w-4 h-4 ${i <= Math.round(product.rating || 0) ? "text-[#D49341]" : "text-[#ddd]"}`} fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
@@ -118,7 +179,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <div className="mb-6">
                 <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-3">Size</p>
                 <div className="flex flex-wrap gap-2">
-                  {product.sizes.map((s, i) => (
+                  {sizes.map((s, i) => (
                     <button key={i} onClick={() => setSelectedSize(i)}
                       className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] border transition-all ${i === selectedSize ? "bg-[#DF3131] text-white border-[#DF3131]" : "bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131]"}`}>
                       {s}
@@ -151,7 +212,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               <div className="border-t border-[#E2E2E2] dark:border-[#444] pt-6">
                 <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-3">Material Specs</p>
                 <ul className="space-y-2">
-                  {product.materials.map((m, i) => (
+                  {materials.map((m, i) => (
                     <li key={i} className="flex items-start gap-2 text-[14px] text-[#666] dark:text-[#b0b0b0]">
                       <span className="text-[#DF3131] mt-0.5">+</span> {m}
                     </li>
