@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
+import { requireAdmin } from "@/lib/admin-auth";
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const FREE_MODEL = "google/gemini-2.0-flash-exp:free";
@@ -153,6 +154,9 @@ RULES:
 8. Reference real past events as evidence for your recommendations`;
 
 export async function POST(req: NextRequest) {
+  const admin = await requireAdmin();
+  if (!admin.ok) return admin.response;
+
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
