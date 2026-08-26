@@ -172,6 +172,7 @@ export default function Navbar() {
             <div className="hidden lg:flex flex-1 items-center justify-evenly px-10">
               {NAV_LINKS.map((l) => (
                 <Link key={l.href} href={l.href}
+                  aria-current={isActive(l.href) ? "page" : undefined}
                   className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold whitespace-nowrap transition-all duration-[400ms] ${
                     isActive(l.href) ? "text-white dark:text-black" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black hover:scale-105 active:text-white/80"
                   }`}

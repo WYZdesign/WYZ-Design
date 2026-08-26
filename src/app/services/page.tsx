@@ -38,13 +38,18 @@ function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; 
  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
  return (
- <div
- className="group relative cursor-pointer"
- style={{ perspective: "1200px" }}
- onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
- onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
- onClick={() => setFlipped(f => !f)}
- >
+<div
+className="group relative cursor-pointer"
+style={{ perspective: "1200px" }}
+role="button"
+tabIndex={0}
+aria-expanded={flipped}
+aria-label={`${s.name ? s.name + " details" : "Service details"}`}
+onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
+onClick={() => setFlipped(f => !f)}
+onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}
+>
   <div className="relative w-full" style={{ minHeight: "min(400px, 60vh)" }}>
  {/* Front — full image + 60% overlay + title */}
  <div

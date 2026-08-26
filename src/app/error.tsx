@@ -1,15 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { trackError } from "@/lib/errorTracker";
 
 export default function Error({
+  error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  // Auto-reset exactly once. An unconditional timer here turned a persistent
+  // render error into an infinite error->reset loop (spinner flash every
+  // 1.2s, analytics spam) - after one failed recovery the user gets the
+  // manual buttons instead.
+  const autoResetUsed = useRef(false);
+
   useEffect(() => {
+    trackError(error, "app/error-boundary");
+  }, [error]);
+
+  useEffect(() => {
+    if (autoResetUsed.current) return;
+    autoResetUsed.current = true;
     const t = setTimeout(() => reset(), 1200);
     return () => clearTimeout(t);
   }, [reset]);

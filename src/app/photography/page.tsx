@@ -161,10 +161,18 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
-    <div className="group relative cursor-pointer min-h-[320px] sm:min-h-[500px] lg:min-h-[624px]" style={{ perspective: "1200px" }}
-  onClick={() => setFlipped(f => !f)}
-  onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
-  onMouseLeave={() => { if (canHover.current) setFlipped(false); }}>
+    <div
+      className="group relative cursor-pointer min-h-[320px] sm:min-h-[500px] lg:min-h-[624px]"
+      style={{ perspective: "1200px" }}
+      role="button"
+      tabIndex={0}
+      aria-expanded={flipped}
+      aria-label={`${s.name} booking details`}
+      onClick={() => setFlipped(f => !f)}
+      onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+      onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}
+    >
   {/* Front */}
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">

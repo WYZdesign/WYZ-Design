@@ -136,9 +136,14 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
     <div
       className="group relative cursor-pointer w-full"
       style={{ perspective: "1200px" }}
+      role="button"
+      tabIndex={0}
+      aria-expanded={flipped}
+      aria-label={`${s.name} details`}
       onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
       onClick={() => setFlipped((f) => !f)}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped((f) => !f); } }}
     >
       <div className="relative w-full" style={{ minHeight: "min(380px, 50vh)" }}>
         {/* Front */}

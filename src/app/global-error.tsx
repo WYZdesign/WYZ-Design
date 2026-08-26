@@ -1,11 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
+import { trackError } from "@/lib/errorTracker";
+
 export default function GlobalError({
+  error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    trackError(error, "app/global-error-boundary");
+  }, [error]);
+
   return (
     <html lang="en">
       <body style={{ margin: 0, background: "#111", color: "#fff", fontFamily: "'Inter', system-ui, sans-serif" }}>
