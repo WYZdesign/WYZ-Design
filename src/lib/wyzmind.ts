@@ -1,9 +1,11 @@
 import neo4j, { Driver } from "neo4j-driver";
 import Redis from "ioredis";
+import { Redis as UpstashRedis } from "@upstash/redis";
 import { logger } from "@/lib/logger";
 
 let neo4jDriver: Driver | null = null;
 let redisClient: Redis | null = null;
+let upstashClient: UpstashRedis | null = null;
 
 export function getNeo4j(): Driver {
   if (!neo4jDriver) {
@@ -19,7 +21,89 @@ export function getNeo4j(): Driver {
   return neo4jDriver;
 }
 
-export function getRedis(): Redis {
+/**
+ * Minimal Redis surface used across the app, so the backing client can be
+ * swapped without touching call sites.
+ */
+export interface RedisLike {
+  /** Supports the arg styles used here: ("key","val","EX",secs,"NX"), ("key","val","NX"), ("key","val"). */
+  set(key: string, value: string, ...args: (string | number)[]): Promise<string | null>;
+  get(key: string): Promise<string | null>;
+  del(key: string): Promise<number>;
+  sadd(key: string, member: string): Promise<number>;
+  scard(key: string): Promise<number>;
+  setex(key: string, seconds: number, value: string): Promise<"OK" | null>;
+  ping(): Promise<string>;
+}
+
+/**
+ * Prefers Upstash REST (the only reachable Redis on Vercel serverless —
+ * ioredis needs raw TCP, which Vercel functions don't allow). Falls back to
+ * ioredis for local dev where REDIS_HOST is a real endpoint. This fixes the
+ * split-brain where rate limiting used Upstash while zeal cooldowns/locks/
+ * redemption records silently failed open against localhost in production.
+ */
+export function getRedis(): RedisLike {
+  const upstashUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const upstashToken = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (upstashUrl && upstashToken) {
+    if (!upstashClient) {
+      upstashClient = new UpstashRedis({ url: upstashUrl, token: upstashToken });
+    }
+    const r = upstashClient;
+    return {
+      async set(key, value, ...args) {
+        let ex: number | undefined;
+        let nx = false;
+        for (let i = 0; i < args.length; i++) {
+          const token = String(args[i]).toUpperCase();
+          if (token === "EX") {
+            ex = parseInt(String(args[i + 1]), 10);
+            i++;
+          } else if (token === "NX") {
+            nx = true;
+          }
+        }
+        // Upstash's options are a discriminated union - build the exact
+        // variant instead of spreading optionals.
+        let res: string | null;
+        if (nx && ex !== undefined) res = await r.set(key, value, { ex, nx: true });
+        else if (nx) res = await r.set(key, value, { nx: true });
+        else if (ex !== undefined) res = await r.set(key, value, { ex });
+        else res = await r.set(key, value);
+        return res === "OK" ? "OK" : null;
+      },
+      async get(key) {
+        const res = await r.get<string>(key);
+        return typeof res === "string" ? res : null;
+      },
+      async del(key) {
+        const res = await r.del(key);
+        return typeof res === "number" ? res : 0;
+      },
+      async sadd(key, member) {
+        const res = await r.sadd(key, member);
+        return typeof res === "number" ? res : 0;
+      },
+      async scard(key) {
+        const res = await r.scard(key);
+        return typeof res === "number" ? res : 0;
+      },
+      async setex(key, seconds, value) {
+        const res = await r.set(key, value, { ex: seconds });
+        return res === "OK" ? "OK" : null;
+      },
+      async ping() {
+        return r.ping();
+      },
+    };
+  }
+
+  if (!upstashUrl || !upstashToken) {
+    logger.warn("wyzmind", "UPSTASH_REDIS_REST_* not set - falling back to ioredis (local dev only)");
+  }
+
   if (!redisClient) {
     redisClient = new Redis({
       host: process.env.REDIS_HOST || "localhost",
@@ -30,8 +114,11 @@ export function getRedis(): Redis {
         return Math.min(times * 200, 2000);
       },
     });
+    // ioredis emits bare "error" events on connection failures; without a
+    // handler Node treats them as fatal. Swallow here - callers handle rejections.
+    redisClient.on("error", () => {});
   }
-  return redisClient;
+  return redisClient as unknown as RedisLike;
 }
 
 export async function findOrCreateUser(email: string, name?: string) {

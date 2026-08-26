@@ -46,6 +46,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(result);
   } catch (e: unknown) {
     logger.error("zeal-earn:POST", e);
-    return NextResponse.json({ error: "Failed to award zeal" }, { status: 500 });
+    // Surface a short signature on the response too: prod logging is
+    // dev-gated, so without this a 500 here is completely undiagnosable
+    // from server logs alone (exactly what the Vercel 5xx alert showed).
+    const detail = e instanceof Error ? e.message.slice(0, 140) : "unknown";
+    return NextResponse.json({ error: "Failed to award zeal", detail }, { status: 500 });
   }
 }

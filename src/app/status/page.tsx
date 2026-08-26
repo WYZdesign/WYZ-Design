@@ -43,12 +43,10 @@ async function checkNeo4j(): Promise<ServiceStatus> {
 }
 
 async function checkRedis(): Promise<ServiceStatus> {
-  const redis = getRedis();
-  if (redis.listenerCount("error") === 0) {
-    redis.on("error", () => undefined);
-  }
   try {
-    await withTimeout(redis.ping(), 4000);
+    // Connection-error events are handled inside getRedis(); here we only
+    // care whether a PING round-trips.
+    await withTimeout(getRedis().ping(), 4000);
     return { name: "Redis", detail: "PING returned PONG", healthy: true };
   } catch (err) {
     return {

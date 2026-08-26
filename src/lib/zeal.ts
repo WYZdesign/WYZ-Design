@@ -236,9 +236,11 @@ async function saveUserState(email: string, state: UserZealState): Promise<void>
 /** Atomic Redis cooldown. Returns false when already earned inside the window. */
 async function claimCooldown(email: string, action: string, cooldownMs: number, subKey?: string): Promise<boolean> {
   if (cooldownMs === 0) return true;
-  const redis = getRedis();
   const key = `zeal:cd:${email}:${action}${subKey ? `:${subKey}` : ""}`;
   try {
+    // getRedis() inside the try: client construction itself must never escape
+    // (a sync throw here was producing instant unhandled 500s in production).
+    const redis = getRedis();
     const res = await redis.set(key, "1", "EX", Math.ceil(cooldownMs / 1000), "NX");
     return res === "OK";
   } catch (e) {
@@ -249,8 +251,8 @@ async function claimCooldown(email: string, action: string, cooldownMs: number, 
 
 /** Atomic permanent claim for one-time actions. Returns false when already claimed. */
 async function claimOnce(email: string, action: string): Promise<boolean> {
-  const redis = getRedis();
   try {
+    const redis = getRedis();
     const res = await redis.set(`zeal:once:${email}:${action}`, "1", "NX");
     return res === "OK";
   } catch (e) {
@@ -261,8 +263,8 @@ async function claimOnce(email: string, action: string): Promise<boolean> {
 
 /** Serializes earns per user so concurrent requests can't double-award or clobber state. */
 async function acquireUserLock(email: string): Promise<boolean> {
-  const redis = getRedis();
   try {
+    const redis = getRedis();
     const res = await redis.set(`zeal:lock:${email}`, "1", "EX", 10, "NX");
     return res === "OK";
   } catch (e) {
@@ -531,14 +533,31 @@ export async function redeemZeal(email: string, rewardId: string): Promise<Redee
     }
 
     const code = generateRedemptionCode();
-    await addLoyaltyPoints(email, -reward.cost, `Redeemed: ${reward.title} (${code})`);
 
+    // Persist the redemption record BEFORE deducting points. If this write
+    // fails we fail closed with no points spent; if the deduction fails after
+    // a successful write, we delete the orphan record to compensate.
+    let recordStored = false;
     try {
       const redis = getRedis();
       const record = JSON.stringify({ email, rewardId, title: reward.title, code, timestamp: Date.now() });
       await redis.set(`zeal:redemption:${code}`, record, "EX", 180 * 24 * 3600);
+      recordStored = true;
     } catch (e) {
       logger.warn("zeal:redeem-store", e instanceof Error ? e.message : String(e));
+    }
+    if (!recordStored) {
+      return { success: false, error: "Redemption failed. Try again." };
+    }
+
+    try {
+      await addLoyaltyPoints(email, -reward.cost, `Redeemed: ${reward.title} (${code})`);
+    } catch (e) {
+      logger.error("zeal:redeem-deduct", e);
+      try {
+        await getRedis().del(`zeal:redemption:${code}`);
+      } catch {}
+      return { success: false, error: "Redemption failed. Try again." };
     }
 
     const updated = await loadUserState(email);
