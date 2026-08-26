@@ -77,6 +77,7 @@ Run these checks yourself:
 - Admin panel Content tab: overview stats (gated categories, scanned images, NSFW detected, verified users), gated category badges, scrollable scan results table with label/confidence/date/clear actions, verified users table
 - Packages installed: nsfwjs + @tensorflow/tfjs
 **Type errors fixed:** nsfwjs default import -> named load(), SafeImage ref incompatibility (switched to raw img), RedisLike missing keys/pipeline (tracking SET + smembers cast), implicit any on filter/reduce callbacks, SafeImage onLoad type mismatch
+**Audit fixes (`a2e24b6`):** Security: /api/nsfw/admin now checks ADMIN_EMAILS allowlist (was auth-only). Removed unused AgeGateModal import from useNsfwSession. Replaced console.warn with logger.warn in NsfwImage. Imported NSFW_CATEGORIES from nsfw.ts in category page (was hardcoded duplicate). Added NsfwAdminData interface replacing data: any in NsfwContentTab. Removed unused useMemo import from category page. Fixed em dashes in user-facing text and comments across NSFW files.
 
 ## Session 31 — Zeal redemption, leaderboard, quiz handoff, recap rewards, admin chart
 **Date:** 2026-08-26
