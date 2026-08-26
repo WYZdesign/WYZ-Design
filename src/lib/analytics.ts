@@ -1,3 +1,4 @@
+import Database from "better-sqlite3";
 import { join } from "path";
 import { mkdirSync, existsSync } from "fs";
 
@@ -8,7 +9,6 @@ export function getAnalyticsDb(): any {
   if (_dbAvailable === false) return null;
   if (_db) return _db;
   try {
-    const Database = require("better-sqlite3");
     const dir = join(process.cwd(), "data");
     if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
     _db = new Database(join(dir, "analytics.db"));
