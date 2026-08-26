@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
+import { trackError } from "@/lib/errorTracker";
+
 export default function ViewPageError({ error, reset }: { error: Error; reset: () => void }) {
-  console.error("[view/[page]].error:", error.message);
+  useEffect(() => { trackError(error, "view/[page]"); }, [error]);
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center text-center px-6">
       <div>

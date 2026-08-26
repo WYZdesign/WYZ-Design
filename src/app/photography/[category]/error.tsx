@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
+import { trackError } from "@/lib/errorTracker";
+
 export default function PhotographyCategoryError({ error, reset }: { error: Error; reset: () => void }) {
-  console.error("[photography/[category]].error:", error.message);
+  useEffect(() => { trackError(error, "photography/[category]"); }, [error]);
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center text-center px-6">
       <div>

@@ -718,7 +718,7 @@ export default function EventsPage() {
    <div className="relative overflow-hidden mx-0 -mt-20 lg:-mt-24 hero-banner">
    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[75vh]">
   <div className="relative overflow-hidden bg-white dark:bg-[#111]">
-  <Image src="/images/events/hero_bg.jpg" alt="Events" fill className="w-full h-full object-cover opacity-80" priority />
+  <Image src="/images/events/hero_bg.jpg" alt="WYZ Design event production — live concert venue with professional lighting" fill className="w-full h-full object-cover opacity-80" priority />
   <div className="absolute inset-0 bg-black/30" />
     </div>
     <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center pt-24 pb-10 lg:pt-32 lg:pb-0 overflow-hidden">
