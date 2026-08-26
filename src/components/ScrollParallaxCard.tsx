@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, ReactNode } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState, ReactNode } from "react";
+import { motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { prefersReducedMotion } from "@/lib/utils";
 
 interface ScrollParallaxCardProps {
   children: ReactNode;
@@ -25,10 +26,19 @@ export default function ScrollParallaxCard({
     offset: ["start end", "end start"],
   });
 
-  const rotateX = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [tiltAmount, 0, 0, -tiltAmount]);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, scaleAmount, scaleAmount, 0.92]);
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [yAmount, 0, -yAmount]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.5, 1, 1, 0.5]);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) setReducedMotion(true);
+  }, []);
+
+  const frozenProgress = useMotionValue(0.5);
+  const scrollSource = reducedMotion ? frozenProgress : scrollYProgress;
+
+  const rotateX = useTransform(scrollSource, [0, 0.3, 0.7, 1], [tiltAmount, 0, 0, -tiltAmount]);
+  const scale = useTransform(scrollSource, [0, 0.3, 0.7, 1], [0.92, scaleAmount, scaleAmount, 0.92]);
+  const y = useTransform(scrollSource, [0, 0.5, 1], [yAmount, 0, -yAmount]);
+  const opacity = useTransform(scrollSource, [0, 0.2, 0.8, 1], [0.5, 1, 1, 0.5]);
 
   return (
     <motion.div

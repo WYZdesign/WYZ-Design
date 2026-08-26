@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiChevronRight, FiCheck, FiRotateCcw } from "react-icons/fi";
 import { useZeal } from "@/components/ZealProvider";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 interface Step { q: string; options: { label: string; value: string }[]; }
 
@@ -124,6 +125,8 @@ export default function StrategyWizard() {
   const [answers, setAnswers] = useState<string[]>([]);
   const [result, setResult] = useState<Recommendation | null>(null);
   const earnedCompleteRef = useRef(false);
+
+  useModalA11y(() => setOpen(false), { lockScroll: true, active: open });
 
   function pick(val: string) {
     const next = [...answers, val];

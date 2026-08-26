@@ -771,7 +771,7 @@ function LogoCarousel({ items, speed = 0.5 }: { items: { name: string; img: stri
   <div ref={trackRef} className="flex gap-4 sm:gap-6 lg:gap-8 items-center py-3 will-change-transform cursor-pointer">
   {tripled.map((logo, i) => (
   <div key={i} className="flex-none flex items-center justify-center opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110">
-    <Image src={logo.img} alt={logo.name} width={64} height={64} className="h-6 sm:h-8 max-w-[60px] sm:max-w-[90px] w-auto object-contain transition-all duration-300" priority />
+    <Image src={logo.img} alt={logo.name} width={64} height={64} className="h-6 sm:h-8 max-w-[60px] sm:max-w-[90px] w-auto object-contain transition-all duration-300" />
  </div>
  ))}
  </div>

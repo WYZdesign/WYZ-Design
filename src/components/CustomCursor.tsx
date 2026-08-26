@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 const INTERACTIVE_SEL = "a, button, [role=button], input, textarea, select, label, .cursor-pointer";
 
@@ -35,6 +36,14 @@ export default function CustomCursor() {
   useEffect(() => {
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (isTouch) return;
+
+    if (prefersReducedMotion()) {
+      document.body.classList.remove("cursor-none");
+      [cursorRef, trailRef, rippleRef].forEach((r) => {
+        if (r.current) r.current.style.display = "none";
+      });
+      return;
+    }
 
     const classifyTarget = (target: HTMLElement | null) => {
       if (!target || target === lastTarget.current) return;

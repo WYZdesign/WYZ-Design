@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FiUser, FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import { useZeal } from "@/components/ZealProvider";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 const MODELS = [
  { name: "ADRIENNE", img: "/images/models/ADRIENNE.jpg" },
@@ -109,6 +110,8 @@ export default function ModelArchivePage() {
  const [albumLoading, setAlbumLoading] = useState(false);
  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
  const filtered = MODELS.filter(m => m.name.toLowerCase().includes(search.toLowerCase()));
+
+ useModalA11y(() => setLightboxIdx(null), { active: lightboxIdx !== null });
 
  const handleSubmit = async (e: React.FormEvent) => {
  e.preventDefault();

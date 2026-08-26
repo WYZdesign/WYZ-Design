@@ -110,7 +110,7 @@ export default function SplashShowcasePage() {
  transition: "transform 0.3s ease-out",
  }}
  >
-  <Image src={s.src} alt={s.title} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" priority />
+   <Image src={s.src} alt={s.title} fill sizes="(max-width:768px) 50vw, 33vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
  </div>
  <div
  className="absolute inset-0 bg-black/0 sm:group-hover:bg-black/50 bg-black/30 sm:bg-black/0 transition-colors flex items-end p-3 md:p-4 sm:opacity-0 sm:group-hover:opacity-100 opacity-100"
@@ -129,7 +129,7 @@ export default function SplashShowcasePage() {
 
  {selected !== null && (
  <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-8" onClick={() => setSelected(null)}>
-  <Image src={SPLASHES[selected].src} alt={SPLASHES[selected].title} width={900} height={506} className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg" priority />
+   <Image src={SPLASHES[selected].src} alt={SPLASHES[selected].title} width={900} height={506} className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg" />
  <p className="absolute bottom-8 text-[#333] dark:text-white font-heading font-bold tracking-[0.1em] mb-2">{SPLASHES[selected].title}</p>
  </div>
  )}

@@ -349,7 +349,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ConsentGatedAnalytics />
         <ClientComponents />
         <AnalyticsProvider />
-        <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" } }} />
+        <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" }, error: { duration: 8000 } }} />
         <script dangerouslySetInnerHTML={{ __html: `
           if (window.matchMedia('(display-mode: standalone)').matches) {
             document.documentElement.classList.add('is-standalone');

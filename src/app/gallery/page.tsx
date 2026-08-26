@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useSwipe } from "@/hooks/useSwipe";
+import { useModalA11y } from "@/hooks/useModalA11y";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import { useZeal } from "@/components/ZealProvider";
 
@@ -30,6 +31,7 @@ function GalleryLightbox({ images, index, onClose, onPrev, onNext, onImageTap }:
  images: { src: string; cat: string }[]; index: number; onClose: () => void; onPrev: () => void; onNext: () => void; onImageTap: () => void;
 }) {
  const swipe = useSwipe(onNext, onPrev);
+ useModalA11y(onClose);
  useEffect(() => { document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = ""; }; }, []);
  return (
  <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={onClose} {...swipe}>
@@ -124,7 +126,7 @@ export default function GalleryPage() {
   <div key={i} className="break-inside-avoid cursor-pointer group" onClick={() => handleImageOpen(i)}>
   <ImageHoverReveal>
    <div className="relative overflow-hidden rounded-lg aspect-[3/4]">
-   <Image src={img.src} alt={img.cat} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" priority />
+    <Image src={img.src} alt={img.cat} fill sizes="(max-width:768px) 50vw, 33vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-end p-3">
   <span className="text-white text-xs font-semibold bg-[#DF3131] px-2 py-1 rounded-full">{img.cat}</span>
   </div>

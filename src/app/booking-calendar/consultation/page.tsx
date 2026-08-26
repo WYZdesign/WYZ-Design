@@ -197,15 +197,15 @@ export default function ConsultationCalendar() {
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Full Name *</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
+                    <input value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Email *</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Phone</label>
-                    <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
+                    <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
                     <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">What do you want to discuss?</label>

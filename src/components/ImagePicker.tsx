@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { FiUpload, FiFolder, FiX } from "react-icons/fi";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 let _open = false; let _slotId = ""; let _albumMode = false;
 let _callback: ((v: string) => void) | null = null;
@@ -48,6 +49,8 @@ export function GlobalImagePicker() {
 
   const close = () => { setOpen(false); _open = false; };
 
+  useModalA11y(close, { lockScroll: true, active: open });
+
   if (!open) return null;
 
   return (
@@ -73,7 +76,11 @@ export function GlobalImagePicker() {
         ) : (
           <div>
             <div onClick={() => fileRef.current?.click()}
-              className="border-2 border-dashed border-[#DF3131] rounded-xl p-16 text-center cursor-pointer hover:bg-red-50 transition-colors">
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileRef.current?.click(); } }}
+              role="button"
+              tabIndex={0}
+              aria-label="Upload image file"
+              className="border-2 border-dashed border-[#DF3131] rounded-xl p-16 text-center cursor-pointer hover:bg-red-50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DF3131]">
               <FiUpload className="w-12 h-12 text-[#DF3131] mx-auto mb-3" />
               <p className="font-semibold text-[#DF3131] text-lg">Click to Upload</p>
               <p className="text-sm text-[#666] dark:text-white/70 mt-1">JPG, PNG, WebP, GIF</p>

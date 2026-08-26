@@ -13,6 +13,7 @@ import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
 import { shuffleArray } from "@/lib/utils";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 const FALLBACK_MERCH = [
  { name: "Cute Ghost Hat", price: "$35.00", img: "/images/wix-extracted/designs/merch/designs_merch_00_98442d_9a9d17df21e54a95832a6eefa209cf53.jpg.jpg" },
@@ -44,6 +45,7 @@ function usePrintfulMerch() {
 }
 
 function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onClose: () => void }) {
+ useModalA11y(onClose);
  const hk = useCallback((e: KeyboardEvent) => { if (e.key === "Escape") onClose(); }, [onClose]);
  useEffect(() => {
  document.addEventListener("keydown", hk);

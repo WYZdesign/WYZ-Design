@@ -315,7 +315,7 @@ function ProfileTab({ session, update, signOut }: { session: import("next-auth")
         <div className="flex items-start gap-5 mb-6">
           <div className="w-16 h-16 rounded-full overflow-hidden bg-[#DF3131] flex-shrink-0 flex items-center justify-center">
             {session?.user?.image ? (
-              <Image src={session.user.image} alt={`${session?.user?.name || "Member"} profile photo`} width={64} height={64} className="w-full h-full object-cover" priority />
+              <Image src={session.user.image} alt={`${session?.user?.name || "Member"} profile photo`} width={64} height={64} className="w-full h-full object-cover" />
             ) : (
               <FiUser className="w-7 h-7 text-white" />
             )}

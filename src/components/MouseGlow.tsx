@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useRef, useCallback } from "react";
 import { useGyroPermission } from "@/hooks/useGyroPermission";
+import { prefersReducedMotion } from "@/lib/utils";
 
 export function MouseGlow({ color = "#DF3131", children }: { color?: string; children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const gyroGate = useRef(false);
 
   const startGyro = useCallback((setCleanup: (fn: () => void) => void) => {
+    if (prefersReducedMotion()) return;
     const handler = (e: DeviceOrientationEvent) => {
       if (e.beta === null || e.gamma === null) return;
       const el = ref.current;
@@ -25,7 +27,7 @@ export function MouseGlow({ color = "#DF3131", children }: { color?: string; chi
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || prefersReducedMotion()) return;
 
     const mouseHandler = (e: MouseEvent) => {
       if (gyroGate.current) return;

@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useEffect, ReactNode, useCallback } from "react";
 import { useGyroPermission } from "@/hooks/useGyroPermission";
+import { prefersReducedMotion } from "@/lib/utils";
 
 interface CardTiltProps {
   children: ReactNode;
@@ -20,6 +21,7 @@ export default function CardTilt({ children, className = "", intensity = 15 }: C
   intensityRef.current = intensity;
 
   const startGyro = useCallback((setCleanup: (fn: () => void) => void) => {
+    if (prefersReducedMotion()) return;
     let visible = true;
     const animate = () => {
       if (visible && ref.current) {
@@ -62,7 +64,7 @@ export default function CardTilt({ children, className = "", intensity = 15 }: C
 
   const onMove = useCallback(
     (e: React.MouseEvent) => {
-      if (gyroRef.current) return;
+      if (prefersReducedMotion() || gyroRef.current) return;
       const el = ref.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
@@ -76,7 +78,7 @@ export default function CardTilt({ children, className = "", intensity = 15 }: C
   );
 
   const onLeave = useCallback(() => {
-    if (gyroRef.current) return;
+    if (prefersReducedMotion() || gyroRef.current) return;
     const el = ref.current;
     if (!el) return;
     el.style.transform = "perspective(800px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useCallback } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 interface Particle {
   x: number;
@@ -60,6 +61,7 @@ export default function ParticleBackground({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const reduced = prefersReducedMotion();
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     const isMobile = window.innerWidth < 768;
     const actualCount = isMobile ? Math.min(count, 20) : count;
@@ -76,14 +78,18 @@ export default function ParticleBackground({
       init(actualCount, actualMaxSize, actualSpeed);
     };
 
+    const onResize = () => {
+      resize();
+      if (reduced) drawParticles();
+    };
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", onResize);
 
     const onMouse = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     };
-    if (useMouse) {
+    if (useMouse && !reduced) {
       canvas.addEventListener("mousemove", onMouse);
       canvas.style.pointerEvents = "auto";
     }
@@ -91,7 +97,7 @@ export default function ParticleBackground({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const animate = () => {
+    const drawParticles = () => {
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -139,14 +145,22 @@ export default function ParticleBackground({
         }
       });
 
+    };
+
+    const animate = () => {
+      drawParticles();
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    if (reduced) {
+      drawParticles();
+    } else {
+      rafRef.current = requestAnimationFrame(animate);
+    }
 
     return () => {
       cancelAnimationFrame(rafRef.current);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
       if (useMouse) canvas.removeEventListener("mousemove", onMouse);
     };
   }, [color, blendMode, init, mouseReactive, count, maxSize, speed]);

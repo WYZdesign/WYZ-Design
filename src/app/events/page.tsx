@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiChevronLeft, FiChevronRight, FiPlay, FiX } from "react-icons/fi";
 import { useSwipe } from "@/hooks/useSwipe";
+import { useModalA11y } from "@/hooks/useModalA11y";
 import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
@@ -183,6 +184,8 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
  const isMuted = activeVideoId !== "modal";
 
  useEffect(() => { muteAll(); return () => muteAll(); }, [muteAll]);
+
+ useModalA11y(onClose);
 
   useEffect(() => {
    const vid = videoRef.current;

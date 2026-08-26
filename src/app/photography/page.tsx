@@ -7,6 +7,7 @@ import Link from "next/link";
 import { FiCamera, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useSwipe } from "@/hooks/useSwipe";
+import { useModalA11y } from "@/hooks/useModalA11y";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
@@ -53,15 +54,14 @@ function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
  images: string[]; index: number; onClose: () => void; onPrev: () => void; onNext: () => void; album?: string;
 }) {
  const swipe = useSwipe(onNext, onPrev);
+ useModalA11y(onClose, { lockScroll: true });
  const hk = useCallback((e: KeyboardEvent) => {
- if (e.key === "Escape") onClose();
  if (e.key === "ArrowLeft") onPrev();
  if (e.key === "ArrowRight") onNext();
- }, [onClose, onPrev, onNext]);
+ }, [onPrev, onNext]);
  useEffect(() => {
  document.addEventListener("keydown", hk);
- document.body.style.overflow = "hidden";
- return () => { document.removeEventListener("keydown", hk); document.body.style.overflow = ""; };
+ return () => document.removeEventListener("keydown", hk);
  }, [hk]);
  if (!images.length) return null;
  return (
@@ -80,6 +80,7 @@ function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
 function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) {
  const [imgs, setImgs] = useState<string[]>([]);
  const [lIdx, setLIdx] = useState<number | null>(null);
+ useModalA11y(onClose, { lockScroll: true });
  useEffect(() => { fetch(`/api/album-images?album=${encodeURIComponent(album)}`).then(r => r.json()).then(d => setImgs(d.images || [])).catch(() => {}); }, [album]);
  return (
  <>

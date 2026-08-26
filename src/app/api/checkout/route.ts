@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createCheckoutSession, createGiftCardCheckout, createServiceCheckout, isValidPlan, getMissingPriceIds } from "@/lib/stripe";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
 import { errorResponse } from "@/lib/http";
@@ -22,7 +23,7 @@ function getIp(req: NextRequest): string {
  * @method POST
  * @request Body `{ type: "subscription"|"giftcard"|"service", plan?: string, amount?: number, email?: string, serviceName?: string, servicePrice?: number, ref?: string }`
  * @response JSON with Stripe checkout session URL
- * @auth None
+ * @auth Optional — NextAuth session supplies the userId; client-sent values ignored
  */
 export async function POST(req: NextRequest) {
   if (!validateCsrf(req)) {
@@ -37,7 +38,13 @@ export async function POST(req: NextRequest) {
     if (!ok) {
       return errorResponse("Too many requests. Please try again shortly.", 429, { code: "RATE_LIMITED" });
     }
-    const { type, plan, amount, email, serviceName, servicePrice, userId, ref } = await req.json();
+    const { type, plan, amount, email, serviceName, servicePrice, ref } = await req.json();
+
+    // Server-derived identity only. Client-sent userId is ignored so a
+    // forged body cannot write a muse tier to someone else's account.
+    // Email is the app-wide identity key (loyalty, zeal, profiles).
+    const authSession = await auth();
+    const serverUserId = authSession?.user?.email?.toLowerCase() || undefined;
 
     // Referral attribution: optional code captured from ?ref= share links
     let referralCode: string | undefined;
@@ -56,8 +63,8 @@ export async function POST(req: NextRequest) {
             : `Unknown plan: "${plan}".`,
         }, { status: 400 });
       }
-      const session = await createCheckoutSession(plan, email, userId, referralCode);
-      return NextResponse.json({ url: session.url });
+      const checkoutSession = await createCheckoutSession(plan, email, serverUserId, referralCode);
+      return NextResponse.json({ url: checkoutSession.url });
     }
 
     if (type === "giftcard") {

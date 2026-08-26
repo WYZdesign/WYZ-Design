@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 interface GyroTiltProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ export default function GyroTilt({ children, intensity = 15, className = "", ena
   const [hasGyro, setHasGyro] = useState(false);
 
   useEffect(() => {
+    if (prefersReducedMotion()) return;
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (!isTouch && !enableOnDesktop) return;
 

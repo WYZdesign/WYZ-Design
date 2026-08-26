@@ -144,6 +144,13 @@ export default function DynamicForm({
     );
   }
 
+  const autoCompleteFor = (field: FormField): string | undefined => {
+    if (field.type === "email") return "email";
+    if (field.type === "tel") return "tel";
+    if (/name/i.test(field.name)) return "name";
+    return undefined;
+  };
+
   const renderField = (field: FormField) => {
     const inputClasses = "w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[14px] placeholder:text-[#666] text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:ring-1 focus:ring-[#DF3131]/20 outline-none transition-all";
     const wrapperClass = field.halfWidth ? "" : "sm:col-span-2";
@@ -155,6 +162,7 @@ export default function DynamicForm({
         </label>
         {field.type === "textarea" ? (
           <textarea
+            id={field.name}
             value={form[field.name] || ""}
             onChange={(e) => update(field.name, e.target.value)}
             required={field.required}
@@ -164,6 +172,7 @@ export default function DynamicForm({
           />
         ) : field.type === "select" ? (
           <select
+            id={field.name}
             value={form[field.name] || ""}
             onChange={(e) => update(field.name, e.target.value)}
             required={field.required}
@@ -186,11 +195,13 @@ export default function DynamicForm({
           </label>
         ) : (
           <input
+            id={field.name}
             type={field.type}
             value={form[field.name] || ""}
             onChange={(e) => update(field.name, e.target.value)}
             required={field.required}
             placeholder={field.placeholder}
+            autoComplete={autoCompleteFor(field)}
             className={inputClasses}
           />
         )}

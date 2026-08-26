@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import FDDriveBrowser from "@/components/FDDriveBrowser";
 import FDCalendar from "@/components/FDCalendar";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 const LOCAL_API = process.env.NEXT_PUBLIC_FD_API || "http://localhost:8080";
 const POLL_INTERVAL = 3000;
@@ -157,6 +158,8 @@ export default function FDOraclePage() {
   const [selectedEvent, setSelectedEvent] = useState<typeof FD_EVENTS[0] | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showApiSettings, setShowApiSettings] = useState(false);
+
+  useModalA11y(() => setSelectedEvent(null), { lockScroll: true, active: selectedEvent !== null });
   const chatRef = useRef<HTMLDivElement>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 

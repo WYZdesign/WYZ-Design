@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { getAllUsers, getDashboardStats, getNewsletterSubscribers } from "@/lib/wyzmind";
 import { getServiceClient } from "@/lib/supabase";
+import { ensureNeo4jConstraints } from "@/lib/neo4j-setup";
 import type { Session } from "next-auth";
 import { logger } from "@/lib/logger";
 
@@ -65,6 +66,7 @@ function checkAdmin(session: Session | null): boolean {
  */
 export async function GET(req: NextRequest) {
   try {
+    void ensureNeo4jConstraints();
     const session = await auth();
     if (!checkAdmin(session)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });

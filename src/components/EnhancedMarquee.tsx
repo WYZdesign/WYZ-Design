@@ -37,7 +37,7 @@ export default function EnhancedMarquee({
         </>
       )}
       <div
-        className={`flex whitespace-nowrap ${pauseOnHover ? "hover:[animation-play-state:paused]" : ""}`}
+        className={`wyz-marquee-track flex whitespace-nowrap ${pauseOnHover ? "hover:[animation-play-state:paused]" : ""}`}
         style={{
           animation: `${animName} ${speeds[speed]} linear infinite`,
           width: "max-content",
@@ -57,6 +57,9 @@ export default function EnhancedMarquee({
         @keyframes wyzMarqueeRight {
           0% { transform: translateX(-50%); }
           100% { transform: translateX(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .wyz-marquee-track { animation: none !important; }
         }
       `}</style>
     </div>

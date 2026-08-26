@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 interface DriveFile {
   id: string;
@@ -86,6 +87,8 @@ export default function FDDriveBrowser() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFile, setSelectedFile] = useState<DriveFile | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  useModalA11y(() => setImagePreview(null), { lockScroll: true, active: imagePreview !== null });
 
   const fetchFolder = useCallback(async (folderId: string) => {
     setLoading(true);
@@ -255,7 +258,7 @@ export default function FDDriveBrowser() {
                   <>
                     <div className="relative aspect-video bg-zinc-800 flex items-center justify-center">
                       {f.thumbnailLink
-                        ? <Image src={f.thumbnailLink} alt={f.name} fill className="w-full h-full object-cover" priority />
+                        ? <Image src={f.thumbnailLink} alt={f.name} fill sizes="(max-width:640px) 100vw, (max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw" className="w-full h-full object-cover" />
                         : <span className="text-3xl">🎬</span>
                       }
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
@@ -315,7 +318,7 @@ export default function FDDriveBrowser() {
                   <>
                     <div className="relative aspect-square bg-zinc-800 overflow-hidden">
                       {f.thumbnailLink
-                        ? <Image src={f.thumbnailLink} alt={f.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" priority />
+                        ? <Image src={f.thumbnailLink} alt={f.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, (max-width:1024px) 25vw, 20vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                         : <div className="w-full h-full flex items-center justify-center text-3xl">📸</div>
                       }
                     </div>
