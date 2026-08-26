@@ -52,8 +52,7 @@ Run these checks yourself:
 7. Confirm `/secret` absent from sitemap output and robots meta noindex present.
 
 ### Open threads (candidates for next session)
-- Splash-screen persistence flag decision (Session 24 #3).
-- `/account/my-account` -> `/admin` redirect check (Session 24 #4).
+- **Splash screen decision:** Session-scoped (sessionStorage), requires "Enter Site" click, blocks content at z-index 9999. 24 random animated variants. Intentional gate, not a bug. Needs Torreé decision: keep as-is, auto-dismiss after delay, or remove entirely.
 - Torreé will send MORE client logos to remove from the home carousel (list in progress).
 - Gift card fulfillment has no database persistence — only Discord notification. Needs a `gift_cards` Supabase table + webhook insert + recipient email in checkout metadata.
 - Webhook side effects (loyalty, referrals, Discord alerts) are not idempotent — Stripe retries can cause duplicates. Low priority but worth noting.
