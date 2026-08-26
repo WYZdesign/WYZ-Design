@@ -44,7 +44,7 @@ style={{ perspective: "1200px" }}
 role="button"
 tabIndex={0}
 aria-expanded={flipped}
-aria-label={`${s.name ? s.name + " details" : "Service details"}`}
+aria-label={`${service.name ? service.name + " details" : "Service details"}`}
 onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
 onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
 onClick={() => setFlipped(f => !f)}
