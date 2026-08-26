@@ -16,7 +16,7 @@ const FEATURES: Record<string, string[]> = {
     "(1) Video Promo + Editing",
     "(1) Free Graphic Design",
     "Marketing/Branding Strategy Consultations",
-    "Loyalty Rewards/Perks + Referral Discounts",
+    "Zeal Rewards/Perks + Referral Discounts",
   ],
   "Business Boost": [
     "(3) Graphic Designs",
@@ -24,7 +24,7 @@ const FEATURES: Record<string, string[]> = {
     "(2) Promo Video Shoots",
     "Digital Printing Service (<$100)",
     "Marketing/Branding Strategy Consultations",
-    "Loyalty Rewards/Perks + Referral Discounts",
+    "Zeal Rewards/Perks + Referral Discounts",
   ],
   "Pro Plus": [
     "(3) Two-Hour Photoshoots",
@@ -32,7 +32,7 @@ const FEATURES: Record<string, string[]> = {
     "(3) Promo Video Shoots",
     "Digital Printing Service (<$250)",
     "Marketing/Branding Strategy Consultations",
-    "Loyalty Rewards/Perks + Referral Discounts",
+    "Zeal Rewards/Perks + Referral Discounts",
   ],
   "Ultimate Suite": [
     "Professional Photoshoots (Unlimited)",
@@ -42,7 +42,7 @@ const FEATURES: Record<string, string[]> = {
     "Web Design + Maintenance",
     "Marketing/Branding Strategy Consultations",
     "Event Planning Service",
-    "Loyalty Rewards/Perks + Referral Discounts",
+    "Zeal Rewards/Perks + Referral Discounts",
   ],
 };
 
@@ -380,7 +380,7 @@ export default function PlansPage() {
                        <li className="flex justify-between"><span>Web Design + Maintenance</span><span>{pi === 3 ? "✓" : "×"}</span></li>
                        <li className="flex justify-between"><span>Event Planning</span><span>{pi === 3 ? "✓" : "×"}</span></li>
                        <li className="flex justify-between"><span>Strategy Consultations</span><span>✓</span></li>
-                       <li className="flex justify-between"><span>Loyalty Rewards</span><span>✓</span></li>
+                        <li className="flex justify-between"><span>Zeal Rewards</span><span>✓</span></li>
                        <li className="flex justify-between"><span>Priority Support</span><span>{pi === 3 ? "✓" : "×"}</span></li>
                      </ul>
                    </div>
@@ -464,7 +464,7 @@ export default function PlansPage() {
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                    </tr>
                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
-                     <td className="p-4 text-[#666] dark:text-white/70">Loyalty Rewards</td>
+                      <td className="p-4 text-[#666] dark:text-white/70">Zeal Rewards</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>

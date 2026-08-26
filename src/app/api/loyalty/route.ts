@@ -21,6 +21,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ...points, history });
   } catch (e: unknown) {
     logger.error("loyalty:GET", e);
-    return NextResponse.json({ error: "Failed to load loyalty data" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to load rewards data" }, { status: 500 });
   }
 }

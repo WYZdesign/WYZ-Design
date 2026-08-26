@@ -634,7 +634,7 @@ const FAQ_ITEMS = [
  { q: "Can you design merchandise for my brand?", a: "Yes! We design custom merch including t-shirts, hats, stickers, and apparel. We also handle printing through our in-house digital printing service." },
  { q: "Do you provide mockups for design projects?", a: "Yes. All logo and branding projects include realistic mockup presentations so you can see your design in real-world applications before finalizing." },
  { q: "What file formats do I receive for my designs?", a: "You receive PNG, JPG, PDF, and SVG for logos. Print-ready files include CMYK versions and bleed marks. Source files are available upon request." },
- { q: "Is there a loyalty or rewards program?", a: "Yes! Our Members Loyalty Program earns you points on every purchase that can be redeemed for discounts, free upgrades, and exclusive perks." },
+  { q: "Is there a rewards program?", a: "Yes! Zeal Rewards earns you Zeal points on every purchase that can be redeemed for discounts, free upgrades, and exclusive perks." },
  { q: "How can I become a WYZ Design model?", a: "Visit our Model Archive page and click 'Become a Model.' Fill out the form with your portfolio details and we'll reach out for an audition session." },
  { q: "What DIY events does WYZ Design host?", a: "We host music showcases, art shows, open mic nights, and creative meetups. Check our Events page or subscribe to our newsletter for upcoming dates." },
 ];

@@ -68,7 +68,7 @@ Products: vinyl stickers, prints/posters, buttons, business cards, flyers, banne
 Get a quote at /printing.
 
 ## ZEAL REWARDS
-Our loyalty program is Zeal Rewards and points are called Zeal. Four tiers:
+Our rewards program is Zeal Rewards and points are called Zeal. Four tiers:
 - Recruit (0 Zeal): where everyone starts
 - Zealot (500 Zeal): early perks and bonus quest access
 - Champion (2,000 Zeal): bigger perks and priority drops
