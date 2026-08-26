@@ -20,9 +20,14 @@ export async function POST(req: NextRequest) {
       return errorResponse("Too many requests. Please wait a moment.", 429, { code: "RATE_LIMITED" });
     }
     const { text } = await req.json();
-    if (!text) return NextResponse.json({ error: "Text required" }, { status: 400 });
+    // Type + length gate: this feeds a paid LLM, so anything non-string or
+    // oversized gets rejected before it can cost money.
+    if (typeof text !== "string" || text.trim().length === 0) {
+      return NextResponse.json({ error: "Text required" }, { status: 400 });
+    }
+    const vision = text.slice(0, 2000);
 
-    const prompt = `You are a creative design concept generator for WYZ Design, a bold creative studio in LA. The user describes a vision, mood, or theme. Respond with 3-4 creative direction ideas including: color palette suggestions, typography style, visual elements, and overall mood. Keep it concise and inspiring. Format with bullet points.\n\nUser vision: "${text}"`;
+    const prompt = `You are a creative design concept generator for WYZ Design, a bold creative studio in LA. The user describes a vision, mood, or theme. Respond with 3-4 creative direction ideas including: color palette suggestions, typography style, visual elements, and overall mood. Keep it concise and inspiring. Format with bullet points.\n\nUser vision: "${vision}"`;
 
     const result = await openrouterChat({
       messages: [{ role: "user", content: prompt }],

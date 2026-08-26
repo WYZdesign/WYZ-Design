@@ -29,7 +29,10 @@ export const metadata: Metadata = {
   verification: {
     google: "E11m1f4AC2Ms1nkaE55AmyJXbf0LkdnZE32Z5ImXQJY",
   },
-  alternates: { canonical: "https://www.wyzdesign.com" },
+  // No root canonical here on purpose: a layout-level canonical is inherited
+  // by every child without its own alternates, which was emitting
+  // rel=canonical -> homepage on ~9 public routes (mass deindexation signal).
+  // Pages declare their own canonicals; orphans correctly emit none.
   title: {
     default: "WYZ Design | Creative Direction & Production - Los Angeles",
     template: "%s | WYZ Design",

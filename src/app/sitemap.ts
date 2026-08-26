@@ -50,8 +50,15 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/service-page/photo-retouching", priority: 0.6, changeFrequency: "monthly" },
   { path: "/service-page/event-photography", priority: 0.6, changeFrequency: "monthly" },
   { path: "/service-page/creative-consultation", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/booking-calendar/photoshoot", priority: 0.5, changeFrequency: "monthly" },
-  { path: "/booking-calendar/consultation", priority: 0.5, changeFrequency: "monthly" },
+ { path: "/booking-calendar/photoshoot", priority: 0.5, changeFrequency: "monthly" },
+ { path: "/booking-calendar/consultation", priority: 0.5, changeFrequency: "monthly" },
+ { path: "/booking-calendar/event-photography", priority: 0.5, changeFrequency: "monthly" },
+ { path: "/booking-calendar/photo-retouching", priority: 0.5, changeFrequency: "monthly" },
+ { path: "/booking", priority: 0.8, changeFrequency: "monthly" },
+ { path: "/merch/concepts", priority: 0.6, changeFrequency: "monthly" },
+ { path: "/match", priority: 0.5, changeFrequency: "monthly" },
+ { path: "/splash-gallery", priority: 0.4, changeFrequency: "monthly" },
+ { path: "/splash-showcase", priority: 0.4, changeFrequency: "monthly" },
   { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
   { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },
   { path: "/refund-return-policy", priority: 0.2, changeFrequency: "yearly" },
@@ -73,5 +80,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "yearly" as const,
     priority: 0.5,
   }));
-  return [...routes, ...posts];
+  // Merch product detail pages are keyed by numeric id (1-14 in both the
+  // listing fallback and the [id] page catalog).
+  const merchProducts = Array.from({ length: 14 }, (_, i) => ({
+    url: `${BASE}/merch/${i + 1}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
+  return [...routes, ...posts, ...merchProducts];
 }

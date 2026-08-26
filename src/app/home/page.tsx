@@ -124,7 +124,7 @@ const SERVICES = [
 
 const SERVICE_LIST = [
   { cat: "Photography", name: "Photoshoot", desc: "Capture authentic moments with sleek, professional photography.", dur: "1 hr", price: "$100", href: "/booking-calendar/photoshoot", img: "/images/services/Photography.webp" },
-  { cat: "Photography", name: "Photo Retouching", desc: "Basic to Advanced Professional Photo Retouching.", dur: "2 hr", price: "Price Varies", href: "/service-page/photo-retouching", img: "/images/services/Photo Retouching.jpg" },
+  { cat: "Photography", name: "Photo Retouching", desc: "Basic to Advanced Professional Photo Retouching.", dur: "2 hr", price: "$50", href: "/service-page/photo-retouching", img: "/images/services/Photo Retouching.jpg" },
   { cat: "Photography", name: "Event Photography", desc: "Capturing every moment, from public showcases to private events.", dur: "3 hr", price: "$200", href: "/service-page/event-photography", img: "/images/services/Event Photography.jpg" },
 ];
 
@@ -189,10 +189,10 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
 }
 
 const PRICING_PLANS = [
- { name: "Creator Access", price: "$250", badge: "", desc: "For artists, models, and young brands building their foundation. Design tasks, strategy calls, web updates included.", valid: "Monthly. Cancel anytime." },
- { name: "Growth Retainer", price: "$500", badge: "Most Popular", desc: "For brands, studios, and businesses ready to grow. Content, design, event support, and campaign planning.", valid: "Monthly. Cancel anytime." },
- { name: "Brand System", price: "$750", badge: "", desc: "For established businesses needing consistent creative direction. Full visual identity, web, photo, video, and strategy.", valid: "Monthly. Cancel anytime." },
-  { name: "Business Suite", price: "$1,000", desc: "For serious brands and studios. Unlimited design, content production, event programming, AI systems, and support.", valid: "Monthly. Cancel anytime." },
+ { name: "Starter Pack", price: "$250", badge: "", desc: "For artists, models, and young brands building their foundation. Design tasks, strategy calls, web updates included.", valid: "Every 3 months. Cancel anytime." },
+  { name: "Business Boost", price: "$500", badge: "Most Popular", desc: "For brands, studios, and businesses ready to grow. Content, design, event support, and campaign planning.", valid: "Every 3 months. Cancel anytime." },
+  { name: "Pro Plus", price: "$750", badge: "", desc: "For established businesses needing consistent creative direction. Full visual identity, web, photo, video, and strategy.", valid: "Every 3 months. Cancel anytime." },
+  { name: "Ultimate Suite", price: "$1,000", desc: "For serious brands and studios. Unlimited design, content production, event programming, AI systems, and support.", valid: "Every 3 months. Cancel anytime." },
 ];
 
 const QUICK_LINKS = [
