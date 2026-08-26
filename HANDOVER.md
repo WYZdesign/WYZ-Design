@@ -52,12 +52,26 @@ Run these checks yourself:
 7. Confirm `/secret` absent from sitemap output and robots meta noindex present.
 
 ### Open threads (candidates for next session)
+- `/merch` product-routing bug (Session 24 #2) — highest priority code fix outstanding.
+- `/wyzmind` page discloses full backend stack to anonymous visitors — gut-check with Torreé on whether that tradeoff is intentional (Session 25).
+- Splash-screen persistence flag decision (Session 24 #3).
+- `/account/my-account` -> `/admin` redirect check (Session 24 #4).
 - Torreé will send MORE client logos to remove from the home carousel (list in progress).
 - Gift card fulfillment has no database persistence — only Discord notification. Needs a `gift_cards` Supabase table + webhook insert + recipient email in checkout metadata.
 - Webhook side effects (loyalty, referrals, Discord alerts) are not idempotent — Stripe retries can cause duplicates. Low priority but worth noting.
 - Fragment `key={i}` index keys exist on some filterable lists — low priority.
 
 ### Session log (chronological, newest first)
+
+## Live-site Session 25 — /wyzmind audited, Cal.com re-tested clean, dark mode confirmed
+**Date:** 2026-08-26
+**Source:** Claude/Cowork live-site sweep (device bridge was down all session, DOM/console-level verification only)
+**Findings:**
+- `/wyzmind`: New page, zero console errors. Publicly discloses full stack (Ollama, Qdrant, Neo4j, Redis, MongoDB Atlas, Heroku, n8n, etc.). Functionally clean. Deliberate stack-fingerprint marketing choice — worth gut-check with Torreé.
+- `/booking` Cal.com: Second independent clean load. Zero site-caused console errors. The intermittent `Cal.ns.booking is not a function` error (Session 24) did not reproduce. Confirmed low-priority, not deterministic.
+- `/contact` form: Validation confirmed working. Name optional, email + message required. Browser-native validation messages fire correctly.
+- Dark mode toggle: Fully functional. Initial "no change" from automated click tool was a false alarm — direct DOM `.click()` works. The bug is in the testing tool's hit-testing, not the site.
+**Bridge status:** Down entire session. No source reads or code fixes possible.
 
 ## Session 38 — Zeal Rewards rename, triage, audit fixes
 **Date:** 2026-08-26
