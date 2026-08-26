@@ -1,17 +1,67 @@
 # WYZ Design — Handover Log
 
-One running file, overwritten each round. Torreé relays it into the repo (Claude has read-only repo access).
+## CLAUDE: START HERE
 
-## Session 26 — Dark mode for loading skeletons, admin error, ImagePicker, PageRenderer
-**Date:** 2026-08-25
-**Changes:**
-- Added `dark:bg-[#1C1C1E]` (page bg) and `dark:bg-[#252528]` (surface) to all loading skeletons: admin, designs, events, merch
-- Added `dark:bg-[#1C1C1E]`, `dark:text-white`, `dark:text-white/70` to admin error page
-- Added dark mode to ImagePicker modal: `dark:bg-[#252528]`, `dark:text-white/70`, `dark:border-[#444]`
-- Added dark mode to PageRenderer editor UI: modal bg, borders, text, filter buttons, pagination, search input
-- `tsc --noEmit` clean
+You're taking over the WYZ Design site (www.wyzdesign.com). Everything below tells you what exists, what changed recently, and how to audit it yourself with vision + agentic tooling before making new changes.
 
-## Session 27 — site audit fixes + UI tweaks
+### Environment
+- **Repo:** https://github.com/WYZdesign/WYZ-Design, branch `master`, local clone `C:\Users\torre\WYZ-Design` (sparse checkout: `src/` only — no config files, cannot build locally; `npx tsc --noEmit` IS your build check)
+- **Deploy:** push to master = Vercel auto-deploys. Wait ~2 min after pushing before live-auditing.
+- **Stack:** Next.js App Router + React 19, Tailwind, TypeScript. Data: Neo4j (users/loyalty), Supabase (forms/referrals/logs), Redis ioredis (cooldowns/locks), Upstash REST (rate limits), Stripe (checkout), SQLite (analytics).
+- **Auth:** NextAuth v5. Google OAuth + admin credentials. Email is the universal user key.
+
+### Non-negotiable rules
+1. Every change: edit → `npx tsc --noEmit` → update HANDOVER.md → commit → push. Never skip.
+2. No em dashes in user-facing copy. Contractions encouraged. Personable tone.
+3. NO emojis in code files.
+4. Toasts via react-hot-toast for all user feedback. No alert(). No silent catches.
+5. No `any` types. Dark mode palette: page `#1C1C1E`, surface `#252528`, deep `#111`, borders `#444`, accent `#DF3131`.
+6. h1/h2 display headings use `style={{ lineHeight: 0.9 }}` — never 0 (caused overlapping wrapped lines; fixed everywhere, keep it fixed).
+
+### What was recently built: Zeal points system
+The loyalty program is now "Zeal". Read `src/lib/zeal.ts` first — single source of truth: 33 actions, 12 achievements, 4 quests, tiers Recruit/Zealot(500)/Champion(2000)/Legend(5000).
+- **Engine flow:** client calls `earn(action)` from `useZeal()` (ZealProvider) → POST `/api/zeal/earn` → per-user Redis lock → cooldown/once-key check (Redis NX) → Neo4j award (`addLoyaltyPoints`) → achievement/quest evaluation → response includes tierUp/achievement/quest flags → provider toasts.
+- **Purchases** award 1/dollar via Stripe webhook (separate path, same Neo4j function).
+- **Known gaps (do not "fix" blindly):** refer-friend (+500) unwired — referral system has no account-creation hook; leave-review (+30) unwired — no review form exists. Both need product decisions from Torreé first.
+- **Redis fail-open note:** if Redis is down, cooldowns/locks fail open (awards still process, dedupe weakens). Accepted tradeoff for availability. Rate limiter uses Upstash separately with in-memory fallback.
+
+### VISION AUDIT — do these with screenshots after deploy
+Screenshot each page desktop (1440px) AND mobile (390px), light AND dark mode. Verify:
+
+| Page | What to check |
+|------|---------------|
+| `/home` | Hero h1 "WE MAKE WHAT WORKS" wraps cleanly, no overlapping lines. "Popular Services" title is large (~2xl-4xl). VIEW ALL SERVICES button not clipped by next section. Quick Links buttons have RED borders + RED text. Client logo carousel does NOT contain: Dying Breed, Nomadic Breed, Monkey Mug, Re(Belle), JR3Y, Photo-Bombed |
+| `/home` dark mode | Toggle dark: hero readable, sections use #1C1C1E/#252528, footer stays black w/ white text |
+| `/designs` | Split hero fills full viewport height (min-h-screen) |
+| `/services` | Same full-height hero check |
+| `/photography` | Same full-height hero check + model form submit button disables while submitting |
+| `/web-design` | Full-height hero |
+| `/loyalty` | Signed out: "Z E A L" heading, tier cards (Recruit/Zealot/Champion/Legend), ways-to-earn categories show sign-in prompts centered. Signed in: balance card, quest checkmarks, achievement grid, activity feed — numbers render as plain integers NOT [object Object] (Neo4j integer fix) |
+| `/secret` | Hidden page loads, dark bg, "THE HIDDEN PAGE" h1 wraps without overlap, noindex |
+| Any page w/ forms | Submit buttons show disabled/"SUBMITTING..." while in flight; failed submits show red toast, never fake success |
+| `/events` | Flyer grid renders identically on load and after refresh (hydration fix); flipping carousel videos doesn't degrade CPU over time |
+
+### AGENTIC AUDIT — code/API verification
+Run these checks yourself:
+1. `rg "lineHeight:\s*0(?![\d.])" src --pcre2` → must return nothing. Same for CSS `line-height:\s*0[;\s]`.
+2. `rg "text-\[#8F8F8F\]|text-gray-400" src/app src/components` → should be near-zero on light-bg elements.
+3. Grep client logos array in `src/app/home/page.tsx` → confirm removed entries gone.
+4. `npx tsc --noEmit` → always clean before any commit.
+5. API smoke tests (need auth cookie from signing in): POST `/api/zeal/earn` `{action:"daily-login"}` twice → second returns success zeal 0 (cooldown). Unknown action → 400. Unauthenticated → 401. GET `/api/zeal/status` → verify points/tier/catalog shapes.
+6. Check `/api/zeal/earn` never awards negative or unlisted actions; metaPath validation strips query strings.
+7. Confirm `/secret` absent from sitemap output and robots meta noindex present.
+
+### Open threads (candidates for next session)
+- Torreé will send MORE client logos to remove from the home carousel (list in progress).
+- Booking form (`src/app/booking/page.tsx`) fields may lack `name` attributes → empty submissions stored. VERIFY and fix.
+- Webhook processes-after-record ordering, referral convert endpoint auth, gift-card fulfillment recording — flagged in audit, not yet fixed. Triage these.
+- Chat route (`src/app/api/chat/route.ts`) still answers with old Silver/Gold/Diamond loyalty copy — update to Zeal tiers/values.
+- Nav/search labels say "Loyalty Program" — consider renaming to "Zeal Rewards".
+- Fragment `key={i}` index keys exist on some filterable lists — low priority.
+
+### Session log (chronological, newest first)
+
+## Session 27 — audit fixes + UI tweaks
 **Date:** 2026-08-25
 **Audit fixes shipped:**
 - Neo4j `disableLosslessIntegers: true` — points were serializing as {low,high} objects, crashing /loyalty page
