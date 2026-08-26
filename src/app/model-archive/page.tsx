@@ -215,7 +215,7 @@ export default function ModelArchivePage() {
   <ImageHoverReveal key={i}>
   <div onClick={() => loadAlbum(m.name)}
   className="group relative aspect-[3/4] overflow-hidden rounded-lg cursor-pointer">
-    <Image src={m.img} alt={m.name} fill className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" />
+     <Image src={m.img} alt={m.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, (max-width:1024px) 12.5vw, 12.5vw" className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500" />
   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity" />
   <div className="absolute bottom-0 left-0 right-0 p-3 sm:translate-y-full sm:group-hover:translate-y-0 translate-y-0 transition-transform">
   <p className="text-white text-xs font-bold tracking-[0.15em] mb-2">{m.name}</p>

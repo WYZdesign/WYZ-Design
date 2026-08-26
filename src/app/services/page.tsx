@@ -57,7 +57,7 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}
   >
    <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
-  <Image src={service.img} alt={service.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+   <Image src={service.img} alt={service.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
   <div className="absolute inset-0 bg-black/60" />
   <div className="absolute inset-0 flex items-center justify-center z-10">
   <h3 className="font-heading font-black text-white text-[22px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
@@ -72,7 +72,7 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
   >
  <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative">
   <div className="absolute inset-0 opacity-10">
-  <Image src={service.img} alt={service.name} fill className="w-full h-full object-cover" />
+   <Image src={service.img} alt={service.name} fill sizes="100vw" className="w-full h-full object-cover" />
    </div>
   <div className="relative z-10 text-center">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{service.cat}</span>

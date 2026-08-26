@@ -69,7 +69,7 @@ function ArtistGallery() {
  >
  {!flipping && (
  item.src ? (
-   <Image src={item.src} alt={item.label} fill className="w-full h-full object-cover" />
+    <Image src={item.src} alt={item.label} fill sizes="(max-width:640px) 50vw, 33vw" className="w-full h-full object-cover" />
  ) : (
  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#DF3131]/5 to-[#D49341]/5">
  <span className="text-[#DF3131]/30 text-[13px] font-bold tracking-[0.1em] uppercase mb-2">{item.label}</span>
@@ -244,16 +244,16 @@ export default function FeaturedArtistPage() {
   {/* Art preview grid */}
   <div className="grid grid-cols-2 gap-3">
   <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
-  <Image src="/images/faotm_1.jpg" alt="Featured artwork" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+   <Image src="/images/faotm_1.jpg" alt="Featured artwork" fill sizes="50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
    </Link>
    <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
-   <Image src="/images/faotm_2.jpg" alt="Featured artwork" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+    <Image src="/images/faotm_2.jpg" alt="Featured artwork" fill sizes="50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
    </Link>
    <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
-   <Image src="/images/faotm_3.jpg" alt="Featured artwork" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+   <Image src="/images/faotm_3.jpg" alt="Featured artwork" fill sizes="50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
    </Link>
    <Link href="/merch" className="relative aspect-square bg-[#1a1a1a] border border-white/10 hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden cursor-pointer group block">
-    <Image src="/images/danny-davis.png" alt="Danny Davis portrait" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+     <Image src="/images/danny-davis.png" alt="Danny Davis portrait" fill sizes="50vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
    </Link>
    </div>
  </div>

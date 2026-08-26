@@ -68,7 +68,7 @@ export default function ConceptArchivePage() {
                 onClick={() => setExpandedConcept(expandedConcept === i ? null : i)}
               >
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-500 hover:shadow-2xl hover:shadow-[#DF3131]/10">
-                  <Image src={concept.img} alt={concept.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                   <Image src={concept.img} alt={concept.name} fill sizes="(max-width:640px) 100vw, 50vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">{concept.category}</span>

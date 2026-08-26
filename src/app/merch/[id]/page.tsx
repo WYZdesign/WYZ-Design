@@ -180,7 +180,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 {related.map(p => (
                   <Link key={p.id} href={`/merch/${p.id}`} className="group">
                     <div className="relative aspect-square overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all mb-3">
-                      <Image src={p.image} alt={p.name} fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                       <Image src={p.image} alt={p.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 25vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     </div>
                     <p className="font-heading font-bold text-[14px] text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors">{p.name}</p>
                     <p className="text-[13px] text-[#DF3131] font-bold">${p.price.toFixed(2)}</p>
