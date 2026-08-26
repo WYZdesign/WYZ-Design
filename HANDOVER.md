@@ -61,6 +61,30 @@ Run these checks yourself:
 
 ### Session log (chronological, newest first)
 
+## Session 29 — mobile UX sweep + backend hardening + interconnections wave 1
+**Date:** 2026-08-26
+**Mobile UX:**
+- One-tap flip cards site-wide (home/photography/services/printing x2): mouse handlers gated behind `(hover: hover)` matchMedia; simulated mouseenter+click double-fire was eating the first tap
+- PhotoFlipCard mobile height 624px fixed → responsive min-h 320/500/624 + aspect-[16/10] image on mobile; back-face buttons lifted off bottom edge (pb-8/10), price responsive, desc clamped
+- HomeServiceFlipCard back face same button treatment
+- Popular Services section bottom padding +~50% more; VIEW ALL SERVICES/PLANS buttons z-10 + mt-10 (clip fix)
+- Designs page: carousels pause on touchstart/end (rAF no longer fights native scroll = glitch gone); carousel sections pulled up tight under hero on mobile; merch widget images +60% on mobile (21vw/190px)
+- Events: +mt-10/14 between DIY Shows carousel and ColorAuraVideo autoplay block
+- NEW ScrollToTopOnNavigate component in layout: history.scrollRestoration=manual + scrollTo(0,0) per pathname — every page loads at top, back/forward no longer restores mid-page positions
+- All 7 split/full heroes pulled flush to viewport top: -mt-20 lg:-mt-24 (bleeds under fixed navbar) with pt compensation inside — home, events, designs, services, web-design, photography, featured-artist (+right col pt-28 mobile)
+**Backend hardening (audit fixes):**
+- Webhook: process-first-then-record ordering (failed events now retry instead of being dropped); giftcard sessions alert Discord for manual fulfillment; referral conversions recorded server-side via new shared src/lib/referral.ts recordReferralConversion(); checkout threads optional `ref` metadata end-to-end (checkout route → stripe.ts → plans page reads ?ref=)
+- Referral API: convert action secret-gated (x-convert-secret / REFERRAL_CONVERT_SECRET env) + amount integer validation + rate limits (GET 30/min, convert 10/hr)
+- Checkout: gift card amount strictly type/range validated before Stripe
+- Chat API: CSRF gate (origin check), messages clamped to 20 x 2000 chars
+- DynamicForm surfaces server error strings via toast instead of generic message
+- Booking form: name attributes added to all fields (submissions were storing empty payloads)
+**Zeal branding completion:**
+- Chat knowledge base rewritten to Zeal tiers/values (Recruit/Zealot/Champion/Legend, real earn amounts)
+- Nav "Z E A L . R E W A R D S", Footer/search/API labels updated from Loyalty Program
+**New:**
+- /status page (noindex, force-dynamic): commit SHA, timestamp, Neo4j/Redis ping + Supabase/Stripe config checks, each 4s-timeout guarded, green/red indicators
+
 ## Session 28 — Feature ideas, interconnections, and where the system is heading (Claude/Cowork, relayed by Torreé)
 **Date:** 2026-08-26
 *Relayed verbatim from Claude's Session 23 analysis. Status annotations from ox-alpha in brackets [ ] where the Zeal build changed the picture.*

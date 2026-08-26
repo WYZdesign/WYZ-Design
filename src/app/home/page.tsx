@@ -160,7 +160,7 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
           className="absolute inset-0 transition-all duration-700 ease-in-out"
           style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
         >
-          <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative text-center">
+          <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col justify-between overflow-hidden relative text-center">
             <div className="absolute inset-0 opacity-10">
               <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" priority />
             </div>
@@ -173,7 +173,7 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
                 <span className="text-white/60 text-[14px]">· {s.dur}</span>
               </div>
             </div>
-            <div className="relative z-10 flex gap-2">
+            <div className="relative z-10 flex gap-2 shrink-0">
               <Link href={s.href} className="flex-1 text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
                 BOOK NOW
               </Link>
@@ -888,7 +888,7 @@ export default function HomePage() {
  .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
  `}</style>
 
-    <section ref={heroRef} className="relative min-h-[80vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden hero-banner">
+    <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[80vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden hero-banner">
     {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
     <div className="absolute inset-0 flex items-center justify-center">
     {/* Background: video fills entire hero */}
@@ -956,7 +956,7 @@ export default function HomePage() {
 
 {/* ═══ SERVICES + PRICING PLANS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="pt-8 sm:pt-12 lg:pt-16 pb-14 sm:pb-20 lg:pb-28 relative overflow-hidden wyz-gradient-flow">
+ <section className="pt-8 sm:pt-12 lg:pt-16 pb-20 sm:pb-28 lg:pb-36 relative overflow-hidden wyz-gradient-flow">
  {/* Decorative background elements */}
  <div className="absolute top-0 right-0 w-96 h-96 bg-[#DF3131]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
  <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#DF3131]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
@@ -1037,11 +1037,11 @@ export default function HomePage() {
     <HomeServiceFlipCard key={s.name} s={s} />
   ))}
   </div>
-  <div className="text-center mt-8">
-  <Link href="/services" className="inline-block px-8 py-3 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
-  VIEW ALL SERVICES
-  </Link>
-  </div>
+   <div className="text-center mt-10 relative z-10">
+   <Link href="/services" className="inline-block px-8 py-3 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
+   VIEW ALL SERVICES
+   </Link>
+   </div>
   </div>
   )}
 

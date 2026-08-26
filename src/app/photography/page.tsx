@@ -186,27 +186,27 @@ function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]
   className="absolute inset-0 transition-all duration-700 ease-in-out"
   style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
-  <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative">
-  <div className="absolute inset-0 opacity-10">
-    <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" />
+   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col justify-between overflow-hidden relative">
+   <div className="absolute inset-0 opacity-10">
+     <Image src={s.img} alt={s.name} fill className="w-full h-full object-cover" />
+    </div>
+    <div className="relative z-10">
+   <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{s.cat}</span>
+   <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
+   <p className="text-white/80 text-[15px] leading-relaxed mb-4 line-clamp-3">{s.desc}</p>
+   <div className="flex items-center gap-3 mb-4">
+   <span className="text-[26px] sm:text-[32px] font-black">{s.price}</span>
+   <span className="text-white/60 text-[14px]">· {s.dur}</span>
    </div>
-   <div className="relative z-10">
-  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">{s.cat}</span>
-  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{s.name}</h3>
-  <p className="text-white/80 text-[15px] leading-relaxed mb-4">{s.desc}</p>
-  <div className="flex items-center gap-3 mb-4">
-  <span className="text-[32px] font-black">{s.price}</span>
-  <span className="text-white/60 text-[14px]">· {s.dur}</span>
-  </div>
-  </div>
-  <div className="relative z-10 flex gap-2">
-  <Link href={s.bookLink} className="flex-1 text-center py-3 bg-[#DF3131] text-white text-[14px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-all" onClick={(e) => e.stopPropagation()}>
-   BOOK NOW
-  </Link>
-  <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#111] transition-all" onClick={(e) => e.stopPropagation()}>
-   VIEW PLANS
-  </Link>
-  </div>
+   </div>
+   <div className="relative z-10 flex gap-2 shrink-0">
+   <Link href={s.bookLink} className="flex-1 text-center py-2.5 sm:py-3 bg-[#DF3131] text-white text-[14px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-all" onClick={(e) => e.stopPropagation()}>
+    BOOK NOW
+   </Link>
+   <Link href="/plans" className="flex-1 text-center py-2.5 sm:py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#111] transition-all" onClick={(e) => e.stopPropagation()}>
+    VIEW PLANS
+   </Link>
+   </div>
   </div>
   </div>
   </div>
@@ -511,7 +511,7 @@ return (
   `}</style>
 
  {/* HERO */}
-    <section ref={heroRef} className="relative min-h-screen overflow-hidden hero-banner">
+    <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
    {/* Desktop split: video left, text right */}
    <div className="hidden md:grid md:grid-cols-2 md:h-full">
    <div className="relative h-full">

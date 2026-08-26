@@ -262,7 +262,7 @@ const faotmImages = [
 
 {/* ═══ HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-    <section className="relative min-h-screen overflow-hidden bg-white dark:bg-black flex items-center hero-banner">
+    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden bg-white dark:bg-black flex items-center hero-banner">
   <div className="absolute inset-0 flex flex-col md:flex-row">
   {/* Left half: text with gradient */}
    <div className="relative w-full md:w-1/2 flex items-center justify-center z-10 overflow-hidden">

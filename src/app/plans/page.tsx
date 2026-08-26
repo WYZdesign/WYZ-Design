@@ -241,10 +241,12 @@ export default function PlansPage() {
     if (!key) return;
     setLoading(planName);
     try {
+      // Referral attribution from share links (/plans?ref=CODE)
+      const ref = new URLSearchParams(window.location.search).get("ref") || undefined;
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "subscription", plan: key }),
+        body: JSON.stringify({ type: "subscription", plan: key, ref }),
       });
       const data = await res.json();
       if (data.url) {

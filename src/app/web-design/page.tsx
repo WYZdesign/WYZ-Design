@@ -184,7 +184,7 @@ return (
     <>
       <main className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
         {/* ═══ HERO — Split (desktop video/text, mobile merged) ═══ */}
-        <section className="relative min-h-screen overflow-hidden hero-banner">
+        <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
         {/* Desktop split grid */}
         <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
           <div className="relative h-full">

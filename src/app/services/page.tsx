@@ -136,7 +136,7 @@ return (
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-    <section className="relative min-h-screen flex flex-col lg:flex-row hero-banner">
+    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen flex flex-col lg:flex-row hero-banner">
   {/* Left: Image */}
   <div className="w-full lg:w-1/2 h-[40vh] lg:h-auto relative overflow-hidden">
   <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill className="w-full h-full object-cover" priority />

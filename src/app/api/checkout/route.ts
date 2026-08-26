@@ -5,8 +5,6 @@ import { rateLimit } from "@/lib/rate-limit";
 import { errorResponse } from "@/lib/http";
 import { logger } from "@/lib/logger";
 
-const VALID_GIFT_AMOUNTS = [25, 50, 100, 150, 250];
-
 const SERVICE_PRICES: Record<string, number> = {
   "Photoshoot": 100,
   "Event Photography": 200,
@@ -22,7 +20,7 @@ function getIp(req: NextRequest): string {
 /**
  * Creates a Stripe checkout session for subscriptions, gift cards, or services.
  * @method POST
- * @request Body `{ type: "subscription"|"giftcard"|"service", plan?: string, amount?: number, email?: string, serviceName?: string, servicePrice?: number }`
+ * @request Body `{ type: "subscription"|"giftcard"|"service", plan?: string, amount?: number, email?: string, serviceName?: string, servicePrice?: number, ref?: string }`
  * @response JSON with Stripe checkout session URL
  * @auth None
  */
@@ -39,7 +37,13 @@ export async function POST(req: NextRequest) {
     if (!ok) {
       return errorResponse("Too many requests. Please try again shortly.", 429, { code: "RATE_LIMITED" });
     }
-    const { type, plan, amount, email, serviceName, servicePrice, userId } = await req.json();
+    const { type, plan, amount, email, serviceName, servicePrice, userId, ref } = await req.json();
+
+    // Referral attribution: optional code captured from ?ref= share links
+    let referralCode: string | undefined;
+    if (typeof ref === "string" && ref.trim()) {
+      referralCode = ref.trim().toUpperCase().slice(0, 40);
+    }
 
     if (type === "subscription") {
       if (!plan) return NextResponse.json({ error: "Plan required" }, { status: 400 });
@@ -52,16 +56,18 @@ export async function POST(req: NextRequest) {
             : `Unknown plan: "${plan}".`,
         }, { status: 400 });
       }
-      const session = await createCheckoutSession(plan, email, userId);
+      const session = await createCheckoutSession(plan, email, userId, referralCode);
       return NextResponse.json({ url: session.url });
     }
 
     if (type === "giftcard") {
-      if (!amount) return NextResponse.json({ error: "Amount required" }, { status: 400 });
-      if (!VALID_GIFT_AMOUNTS.includes(amount) && (amount < 5 || amount > 500)) {
+      if (typeof amount !== "number" || !Number.isInteger(amount)) {
         return NextResponse.json({ error: "Gift card amount must be $5-$500" }, { status: 400 });
       }
-      const session = await createGiftCardCheckout(amount, email);
+      if (amount < 5 || amount > 500) {
+        return NextResponse.json({ error: "Gift card amount must be $5-$500" }, { status: 400 });
+      }
+      const session = await createGiftCardCheckout(amount, email, referralCode);
       return NextResponse.json({ url: session.url });
     }
 
@@ -74,7 +80,7 @@ export async function POST(req: NextRequest) {
       if (servicePrice !== expectedPrice) {
         return NextResponse.json({ error: "Invalid service price" }, { status: 400 });
       }
-      const session = await createServiceCheckout(serviceName, servicePrice, email);
+      const session = await createServiceCheckout(serviceName, servicePrice, email, referralCode);
       return NextResponse.json({ url: session.url });
     }
 

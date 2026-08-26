@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { getServiceClient } from "@/lib/supabase";
 import { addLoyaltyPoints } from "@/lib/wyzmind";
+import { sendDiscordAlert } from "@/lib/discord";
+import { recordReferralConversion } from "@/lib/referral";
 import Stripe from "stripe";
 import { logger } from "@/lib/logger";
 
@@ -33,7 +35,7 @@ export async function POST(req: NextRequest) {
 
   const sb = getServiceClient();
 
-  // IDEMPOTENCY: Check if event already processed
+  // IDEMPOTENCY: skip events we've already processed successfully
   try {
     const { data: existing } = await sb.from("stripe_events")
       .select("id")
@@ -44,21 +46,16 @@ export async function POST(req: NextRequest) {
     }
   } catch { /* table may not exist yet — continue */ }
 
-  // Record event first to prevent race conditions
-  try {
-    await sb.from("stripe_events").insert({
-      stripe_event_id: event.id,
-      type: event.type,
-      processed_at: new Date().toISOString(),
-    });
-  } catch { /* best-effort */ }
-
+  // Process first, record after. Recording before processing made Stripe
+  // retries see a recorded ID and skip, permanently dropping failed events.
   try {
     switch (event.type) {
       case "checkout.session.completed": {
         const session = event.data.object as Stripe.Checkout.Session;
         const plan = session.metadata?.plan;
         const userId = session.metadata?.userId || session.client_reference_id;
+        const email = session.customer_details?.email?.toLowerCase();
+        const amountTotal = session.amount_total || 0;
 
         if (plan && userId) {
           try {
@@ -71,13 +68,38 @@ export async function POST(req: NextRequest) {
 
         // Auto-earn loyalty points on purchase (1 point per dollar spent)
         try {
-          const email = session.customer_details?.email?.toLowerCase();
-          const amountTotal = session.amount_total || 0;
           const pointsEarned = Math.floor(amountTotal / 100); // 1 point per dollar
           if (email && pointsEarned > 0) {
             await addLoyaltyPoints(email, pointsEarned, `Purchase: ${plan || "subscription"}`);
           }
         } catch (e) { logger.error("webhook:loyalty-earn", (e as Error).message); }
+
+        // Gift cards are fulfilled manually — alert staff so they can deliver
+        if (session.metadata?.type === "giftcard") {
+          try {
+            await sendDiscordAlert("Gift Card Purchase - Needs Fulfillment", {
+              "Buyer Email": email || "Unknown",
+              Amount: `$${session.metadata.amount || Math.round(amountTotal / 100)}`,
+              "Session ID": session.id,
+            });
+          } catch (e) { logger.error("webhook:giftcard-notify", (e as Error).message); }
+        }
+
+        // Record referral conversion server-to-server (no client round trip)
+        const referralCode = session.metadata?.referralCode;
+        if (referralCode && email) {
+          try {
+            const result = await recordReferralConversion({
+              code: referralCode,
+              email,
+              eventType: "purchase",
+              amount: Math.floor(amountTotal / 100),
+            });
+            if (!result.ok) {
+              logger.warn("webhook:referral", `${result.error} (code: ${referralCode}, session: ${session.id})`);
+            }
+          } catch (e) { logger.error("webhook:referral", (e as Error).message); }
+        }
 
         const n8nUrl = process.env.N8N_WEBHOOK_URL;
         if (n8nUrl) {
@@ -112,12 +134,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Record the event only after successful processing so failures retry
+    try {
+      await sb.from("stripe_events").insert({
+        stripe_event_id: event.id,
+        type: event.type,
+        processed_at: new Date().toISOString(),
+      });
+    } catch { /* best-effort */ }
+
     return NextResponse.json({ received: true });
   } catch (e) {
     logger.error("webhook:handler", (e as Error).message);
-    try {
-      await sb.from("stripe_events").update({ error: "Webhook processing failed" }).eq("stripe_event_id", event.id);
-    } catch { /* best-effort */ }
+    // No idempotency row was written, so the next Stripe delivery retries cleanly
     return NextResponse.json({ error: "Processing failed" }, { status: 500 });
   }
 }

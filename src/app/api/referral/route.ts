@@ -2,12 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
 import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
+import { recordReferralConversion } from "@/lib/referral";
 import { logger } from "@/lib/logger";
 
 function generateCode(email: string): string {
   const base = email.replace(/[^a-zA-Z0-9]/g, "").slice(0, 6).toUpperCase();
   const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
   return `${base}-${rand}`;
+}
+
+function getIp(req: NextRequest): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 }
 
 /**
@@ -17,6 +22,9 @@ function generateCode(email: string): string {
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
   if (!code) return NextResponse.json({ error: "Missing code" }, { status: 400 });
+
+  const rl = await rateLimit(`referral-get:${getIp(req)}`, 30, 60_000);
+  if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
 
   const sb = getServiceClient();
   try {
@@ -61,19 +69,58 @@ export async function GET(req: NextRequest) {
  * POST /api/referral — Create a new referral code or record a conversion
  *
  * Create code: { action: "create", email: string }
- * Record conversion: { action: "convert", code: string, email: string, eventType: "signup"|"purchase", amount?: number }
+ * Record conversion (server-to-server only): { action: "convert", code: string, email: string, eventType: "signup"|"purchase", amount?: number }
+ *   Requires an x-convert-secret header matching REFERRAL_CONVERT_SECRET.
  */
 export async function POST(req: NextRequest) {
   try {
-    if (!validateCsrf(req)) {
-      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
-    }
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const ip = getIp(req);
     const rl = await rateLimit(`referral:${ip}`, 10, 60_000);
     if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
 
     const body = await req.json();
     const sb = getServiceClient();
+
+    if (body.action === "convert") {
+      // Server-only path: secret-gated instead of browser CSRF
+      const expectedSecret = process.env.REFERRAL_CONVERT_SECRET;
+      if (!expectedSecret) {
+        return NextResponse.json({ error: "Not configured" }, { status: 503 });
+      }
+      if (req.headers.get("x-convert-secret") !== expectedSecret) {
+        logger.warn("referral:convert", "Rejected request with invalid convert secret");
+        return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+      }
+
+      // Stricter budget for conversion writes
+      const rlConvert = await rateLimit(`referral-convert:${ip}`, 10, 3_600_000);
+      if (!rlConvert.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
+      const { code, email, eventType, amount } = body;
+      if (!code || !email || !eventType) {
+        return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      }
+      if (eventType !== "signup" && eventType !== "purchase") {
+        return NextResponse.json({ error: "Invalid event type" }, { status: 400 });
+      }
+      const amountProvided = amount !== undefined && amount !== null;
+      if (amountProvided && (typeof amount !== "number" || !Number.isInteger(amount) || amount <= 0 || amount > 100000)) {
+        return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
+      }
+      if (eventType === "purchase" && !amountProvided) {
+        return NextResponse.json({ error: "Amount required for purchase conversions" }, { status: 400 });
+      }
+
+      const result = await recordReferralConversion({ code, email, eventType, amount });
+      if (!result.ok) {
+        return NextResponse.json({ error: result.error }, { status: result.status });
+      }
+      return NextResponse.json({ success: true, commission: result.commission });
+    }
+
+    if (!validateCsrf(req)) {
+      return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+    }
 
     if (body.action === "create") {
       const { email } = body;
@@ -104,45 +151,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Failed to create code" }, { status: 500 });
       }
       return NextResponse.json({ code });
-    }
-
-    if (body.action === "convert") {
-      const { code, email, eventType, amount } = body;
-      if (!code || !email || !eventType) {
-        return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-      }
-
-      // Verify code exists
-      const { data: codeRow } = await sb.from("referral_codes")
-        .select("code")
-        .eq("code", code.toUpperCase())
-        .maybeSingle();
-      if (!codeRow) return NextResponse.json({ error: "Invalid referral code" }, { status: 404 });
-
-      // Prevent self-referral
-      const { data: referrer } = await sb.from("referral_codes")
-        .select("referrer_email")
-        .eq("code", code.toUpperCase())
-        .maybeSingle();
-      if (referrer?.referrer_email === email.toLowerCase()) {
-        return NextResponse.json({ error: "Cannot refer yourself" }, { status: 400 });
-      }
-
-      // Calculate commission (10% for purchases)
-      const commission = eventType === "purchase" ? Math.floor((amount || 0) * 0.10) : 0;
-
-      const { error } = await sb.from("referral_conversions").insert({
-        referral_code: code.toUpperCase(),
-        referred_email: email.toLowerCase(),
-        event_type: eventType,
-        amount: amount || 0,
-        commission,
-      });
-      if (error) {
-        logger.error("referral:convert", error.message);
-        return NextResponse.json({ error: "Failed to record conversion" }, { status: 500 });
-      }
-      return NextResponse.json({ success: true, commission });
     }
 
     return NextResponse.json({ error: "Invalid action" }, { status: 400 });

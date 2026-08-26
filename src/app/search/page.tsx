@@ -18,7 +18,7 @@ const ALL_PAGES = [
   { title: "FAQ", href: "/faq", desc: "Frequently asked questions", tags: ["faq", "question", "help", "answer", "support"] },
   { title: "Blog", href: "/blog", desc: "News, tips, and behind-the-scenes", tags: ["blog", "news", "post", "article", "update"] },
   { title: "Gallery", href: "/gallery", desc: "Complete portfolio of our work", tags: ["gallery", "portfolio", "collection", "showcase"] },
-  { title: "Loyalty Program", href: "/loyalty", desc: "Earn points and redeem rewards", tags: ["loyalty", "rewards", "points", "perks", "vip"] },
+  { title: "Zeal Rewards", href: "/loyalty", desc: "Earn Zeal points and redeem rewards", tags: ["zeal", "rewards", "points", "perks", "vip"] },
   { title: "Featured Artist", href: "/featured-artist", desc: "Artist of the Month spotlight", tags: ["artist", "featured", "spotlight", "monthly"] },
   { title: "Creative Consultation", href: "/service-page/creative-consultation", desc: "Free 30-minute strategy session", tags: ["consultation", "strategy", "free", "session"] },
   { title: "Photoshoot", href: "/service-page/photoshoot", desc: "Professional photoshoot services", tags: ["photoshoot", "photo", "session", "studio"] },

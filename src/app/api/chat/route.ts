@@ -1,5 +1,14 @@
 import { NextRequest } from "next/server";
 import { rateLimit } from "@/lib/rate-limit";
+import { validateCsrf } from "@/lib/csrf";
+
+const MAX_MESSAGES = 20;
+const MAX_CONTENT_CHARS = 2000;
+
+interface ChatMessage {
+  role: string;
+  content: string;
+}
 
 const KNOWLEDGE = `You are the WYZ Design AI assistant. You help visitors learn about services, pricing, booking, and the brand. Be concise, personable, and helpful. Use contractions. No em dashes. No AI jargon.
 
@@ -27,7 +36,7 @@ We work with clients remotely anywhere in the world. Contact: info@wyzdesign.com
 - Marketing Consultation: $50/1hr — straightforward marketing advice
 
 ## SUBSCRIPTION PLANS
-- Starter Pack: $250/mo ($725 value) — 1 photoshoot, 1 video promo, 1 graphic design, marketing consultations, loyalty perks
+- Starter Pack: $250/mo ($725 value) — 1 photoshoot, 1 video promo, 1 graphic design, marketing consultations, Zeal Rewards perks
 - Business Boost: $500/mo ($2,025 value) — 3 graphic designs, 2 photoshoots, 2 video shoots, $100 printing, consultations (MOST POPULAR)
 - Pro Plus: $750/mo ($1,425 value) — 3 photoshoots, 3 designs, 3 video shoots, $250 printing, consultations
 - Ultimate Suite: $1,000/mo ($5,000+ value) — unlimited everything plus web design, event planning, dedicated support
@@ -54,12 +63,13 @@ Sticker cuts: Kiss Cut (vinyl only, peel-off backing) and Die Cut (custom shape)
 Products: vinyl stickers, prints/posters, buttons, business cards, flyers, banners.
 Get a quote at /printing.
 
-## LOYALTY PROGRAM
-Three tiers:
-- Silver (0-999 pts): 5% off all services, free social media graphics, birthday discount
-- Gold (1,000-4,999 pts): 10% off, priority booking, free retouching, exclusive event invites
-- Diamond (5,000+ pts): 15% off, dedicated account manager, free monthly shoot, VIP access, custom merch
-Earn: book services (1 pt/$1), refer friends (500 pts), social shares (50 pts), reviews (100 pts).
+## ZEAL REWARDS
+Our loyalty program is Zeal Rewards and points are called Zeal. Four tiers:
+- Recruit (0 Zeal): where everyone starts
+- Zealot (500 Zeal): early perks and bonus quest access
+- Champion (2,000 Zeal): bigger perks and priority drops
+- Legend (5,000 Zeal): top-tier perks and VIP treatment
+Earn Zeal: daily login (+2), newsletter signup (+50), consultation booking (+100), purchases (1 Zeal per $1), referrals (+500). Quests, achievements, and hidden easter eggs award bonus Zeal too.
 
 ## EVENTS
 We curate and cover events: concerts, showcases, private functions. Past events include live performances, art shows, and community gatherings. Event photography starts at $200. See /events.
@@ -87,23 +97,36 @@ Phone: (213) 399-9610
 
 export async function POST(req: NextRequest) {
   try {
+    if (!validateCsrf(req)) {
+      return new Response("Invalid origin", { status: 403 });
+    }
+
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
     const rl = await rateLimit(`chat:${ip}`, 20, 60_000);
     if (!rl.ok) return new Response("Too many requests", { status: 429 });
 
     const { messages } = await req.json();
 
-    if (!Array.isArray(messages) || messages.length === 0 || messages.length > 50) {
+    if (!Array.isArray(messages) || messages.length === 0 || messages.length > MAX_MESSAGES) {
       return new Response("Invalid messages", { status: 400 });
     }
 
-    const lastMsg = messages[messages.length - 1];
-    if (!lastMsg?.content || typeof lastMsg.content !== "string" || lastMsg.content.length > 2000) {
-      return new Response("Message too long or empty", { status: 400 });
+    // Clamp before forwarding: cap history size and truncate oversized content
+    const clampedMessages: ChatMessage[] = messages
+      .map((m): ChatMessage => ({
+        role: m?.role === "assistant" ? "assistant" : "user",
+        content: typeof m?.content === "string" ? m.content.slice(0, MAX_CONTENT_CHARS) : "",
+      }))
+      .filter((m) => m.content.trim().length > 0);
+
+    if (clampedMessages.length === 0) {
+      return new Response("Invalid messages", { status: 400 });
     }
 
+    const lastMsg = clampedMessages[clampedMessages.length - 1];
+
     // Keep only last 10 messages for context window
-    const recentMessages = messages.slice(-10);
+    const recentMessages = clampedMessages.slice(-10);
 
     const systemMessage = { role: "system", content: KNOWLEDGE };
     const allMessages = [systemMessage, ...recentMessages];
@@ -169,7 +192,7 @@ export async function POST(req: NextRequest) {
     } catch {}
 
     // Fallback: smart pattern matching
-    const lastUser = messages[messages.length - 1]?.content?.toLowerCase() || "";
+    const lastUser = lastMsg?.content?.toLowerCase() || "";
     let response = "";
 
     if (lastUser.includes("price") || lastUser.includes("cost") || lastUser.includes("how much")) {
@@ -177,13 +200,13 @@ export async function POST(req: NextRequest) {
     } else if (lastUser.includes("book") || lastUser.includes("schedule")) {
       response = "You can book a free 30-minute creative consultation right now at /booking. For quick booking, we have /booking-calendar/photoshoot and /booking-calendar/event-photography. No pressure, just a game plan for your brand.";
     } else if (lastUser.includes("service") || lastUser.includes("what do you") || lastUser.includes("offer")) {
-      response = "We handle the full creative process: photography ($100/hr), graphic design ($150/3hr), video production ($200/3hr), web design ($500+), printing, and events. We also have a merch line and a loyalty program. Everything is flat-rate pricing. Want details on any specific service?";
+      response = "We handle the full creative process: photography ($100/hr), graphic design ($150/3hr), video production ($200/3hr), web design ($500+), printing, and events. We also have a merch line and Zeal Rewards. Everything is flat-rate pricing. Want details on any specific service?";
     } else if (lastUser.includes("plan") || lastUser.includes("subscription")) {
-      response = "We have 4 subscription plans: Starter ($250/mo) for basics, Business Boost ($500/mo) for growing brands (most popular), Pro Plus ($750/mo) for serious creators, and Ultimate Suite ($1,000/mo) for full-service everything. All include loyalty perks and consultations.";
+      response = "We have 4 subscription plans: Starter ($250/mo) for basics, Business Boost ($500/mo) for growing brands (most popular), Pro Plus ($750/mo) for serious creators, and Ultimate Suite ($1,000/mo) for full-service everything. All include Zeal Rewards perks and consultations.";
     } else if (lastUser.includes("merch") || lastUser.includes("shop") || lastUser.includes("clothing")) {
       response = "Check out our WYZ Crown merch at /merch: denim tees, hoodies, beanies, caps, mugs, tumblers, patches, socks. We also have a Concept Archive at /merch/concepts where each design has a name and story. Every purchase supports the crew.";
     } else if (lastUser.includes("loyalty") || lastUser.includes("reward") || lastUser.includes("point")) {
-      response = "Three tiers: Silver (0-999 pts, 5% off), Gold (1,000-4,999 pts, 10% off + priority booking), Diamond (5,000+ pts, 15% off + dedicated manager + free monthly shoot). Earn points by booking (1 pt/$1), referring friends (500 pts), social shares (50 pts), and reviews (100 pts).";
+      response = "It's called Zeal Rewards and points are called Zeal. Four tiers: Recruit (0), Zealot (500), Champion (2,000), Legend (5,000). Earn Zeal with daily logins (+2), newsletter signups (+50), consultation bookings (+100), purchases (1 Zeal per $1), and referrals (+500). Quests, achievements, and easter eggs award bonus Zeal too.";
     } else if (lastUser.includes("photo") || lastUser.includes("camera") || lastUser.includes("shoot")) {
       response = "Photography starts at $100/hr. We cover Events, Outdoors, Studio, Boudoir, Bodypaint, Urbex, Products, and Conceptual. 78+ models in our archive. Book at /booking-calendar/photoshoot or /booking-calendar/event-photography.";
     } else if (lastUser.includes("web") || lastUser.includes("website") || lastUser.includes("site")) {
@@ -201,7 +224,7 @@ export async function POST(req: NextRequest) {
     } else if (lastUser.includes("thank")) {
       response = "You're welcome! If you need anything else, I'm here. Have a great day!";
     } else {
-      response = "I can help with that! Here's what I know best: our services (photography, design, video, web, printing), pricing (starting free for consultations), subscription plans ($250-$1,000/mo), merch, loyalty rewards, and booking. What would you like to know more about?";
+      response = "I can help with that! Here's what I know best: our services (photography, design, video, web, printing), pricing (starting free for consultations), subscription plans ($250-$1,000/mo), merch, Zeal Rewards, and booking. What would you like to know more about?";
     }
 
     // Simulate streaming

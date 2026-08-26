@@ -112,7 +112,11 @@ export default function DynamicForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ formType, data: form }),
       });
-      if (!res.ok) throw new Error("Submission failed");
+      if (!res.ok) {
+        let data: { error?: string } = {};
+        try { data = await res.json(); } catch { /* empty or non-JSON body */ }
+        throw new Error(data.error || "Submission failed. Please try again.");
+      }
       toast.success("Submitted successfully!");
       setSubmitted(true);
       trackMetaEvent("Lead");

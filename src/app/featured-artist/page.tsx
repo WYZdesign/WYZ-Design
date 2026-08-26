@@ -155,7 +155,7 @@ export default function FeaturedArtistPage() {
  return (
  <main className="pt-0 pb-0 bg-white">
  {/* ═══ HERO — Full biography split ═══ */}
- <section className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden">
+ <section className="relative -mt-20 lg:-mt-24 min-h-screen flex flex-col lg:flex-row overflow-hidden">
  {/* Left: Image */}
  <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen bg-white dark:bg-[#111] flex items-center justify-center overflow-hidden">
  <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/20 via-[#FFFFFF] dark:via-[#111] to-[#DF3131]/10 blur-[70%]" />
@@ -166,7 +166,7 @@ export default function FeaturedArtistPage() {
  </div>
 
  {/* Right: Biography text on dark bg */}
- <div className="w-full lg:w-1/2 flex items-center bg-white dark:bg-[#111] px-10 lg:px-16 xl:px-24 py-16 lg:py-0 relative z-10">
+ <div className="w-full lg:w-1/2 flex items-center bg-white dark:bg-[#111] px-10 lg:px-16 xl:px-24 pt-28 pb-16 lg:py-0 relative z-10">
   <div className="max-w-xl text-center lg:text-center">
   <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">FEATURED ARTIST OF THE MONTH</span>
   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>DONTE<br />&quot;DANNY&quot;<br />DAVIS</h1>

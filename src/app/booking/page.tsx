@@ -140,25 +140,26 @@ export default function BookingPage() {
               {/* Name */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Full Name *</label>
-                <input type="text" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
+                <input type="text" name="name" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
               </div>
 
               {/* Email */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Email *</label>
-                <input type="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
+                <input type="email" name="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
               </div>
 
               {/* Phone */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Phone</label>
-                <input type="tel" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
+                <input type="tel" name="phone" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
               </div>
 
               {/* Service */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Service *</label>
                 <select
+                  name="service"
                   required
                   value={selectedService}
                   onChange={(e) => setSelectedService(e.target.value)}
@@ -174,7 +175,7 @@ export default function BookingPage() {
               {/* Budget */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Budget Range</label>
-                <select className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
+                <select name="budget" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
                   <option value="">Select a range</option>
                   <option>Under $250</option>
                   <option>$250 - $500</option>
@@ -187,20 +188,20 @@ export default function BookingPage() {
               {/* Preferred Date */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Preferred Date</label>
-                <input type="date" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors" />
+                <input type="date" name="date" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors" />
               </div>
             </div>
 
             {/* Message */}
             <div className="mt-6">
               <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Project Details *</label>
-              <textarea required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
+              <textarea name="message" required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
             </div>
 
             {/* How did you hear about us */}
             <div className="mt-6">
               <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">How did you hear about us?</label>
-              <select className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
+              <select name="source" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
                 <option value="">Select one</option>
                 <option>Instagram</option>
                 <option>TikTok</option>

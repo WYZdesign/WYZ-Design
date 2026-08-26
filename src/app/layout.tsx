@@ -12,6 +12,7 @@ import ZealProvider from "@/components/ZealProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
+import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
 import PageTransition from "@/components/PageTransition";
 import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
@@ -328,6 +329,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <RouteBackground />
           <ScrollProgress />
         <AnalyticsTracker />
+        <ScrollToTopOnNavigate />
           <Navbar />
           <ErrorBoundary>
           <div id="main-content" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#1C1C1E]" tabIndex={-1}>

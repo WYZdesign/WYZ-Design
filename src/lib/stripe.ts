@@ -42,7 +42,7 @@ export function getMissingPriceIds(): string[] {
   return [...new Set(missing)];
 }
 
-export async function createCheckoutSession(plan: string, email?: string, userId?: string) {
+export async function createCheckoutSession(plan: string, email?: string, userId?: string, referralCode?: string) {
   const stripe = getStripe();
   const planConfig = SUBSCRIPTION_PRICES[plan];
   if (!planConfig) throw new Error(`Unknown plan: "${plan}". Valid plans: ${Object.keys(SUBSCRIPTION_PRICES).join(", ")}`);
@@ -65,7 +65,7 @@ export async function createCheckoutSession(plan: string, email?: string, userId
     success_url: `${getSiteUrl()}/account/my-account?upgraded=${plan}&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${getSiteUrl()}/account/my-account`,
     allow_promotion_codes: true,
-    metadata: { plan, userId: userId || "", priceId: planConfig.priceId },
+    metadata: { plan, userId: userId || "", priceId: planConfig.priceId, ...(referralCode ? { referralCode } : {}) },
     subscription_data: {
       metadata: { plan, userId: userId || "" },
       trial_period_days: 14,
@@ -75,7 +75,7 @@ export async function createCheckoutSession(plan: string, email?: string, userId
   return session;
 }
 
-export async function createGiftCardCheckout(amount: number, email?: string) {
+export async function createGiftCardCheckout(amount: number, email?: string, referralCode?: string) {
   const stripe = getStripe();
   const idKey = generateIdempotencyKey("gift", email || "guest");
   const session = await stripe.checkout.sessions.create({
@@ -91,13 +91,13 @@ export async function createGiftCardCheckout(amount: number, email?: string) {
     }],
     success_url: `${getSiteUrl()}/gift-card?success=true`,
     cancel_url: `${getSiteUrl()}/gift-card`,
-    metadata: { type: "giftcard", amount: String(amount) },
+    metadata: { type: "giftcard", amount: String(amount), ...(referralCode ? { referralCode } : {}) },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
   return session;
 }
 
-export async function createServiceCheckout(serviceName: string, servicePrice: number, email?: string) {
+export async function createServiceCheckout(serviceName: string, servicePrice: number, email?: string, referralCode?: string) {
   const stripe = getStripe();
   const idKey = generateIdempotencyKey("svc", email || "guest");
   const session = await stripe.checkout.sessions.create({
@@ -114,7 +114,7 @@ export async function createServiceCheckout(serviceName: string, servicePrice: n
     success_url: `${getSiteUrl()}/booking?success=true&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${getSiteUrl()}/booking`,
     allow_promotion_codes: true,
-    metadata: { type: "service", name: serviceName, price: String(servicePrice) },
+    metadata: { type: "service", name: serviceName, price: String(servicePrice), ...(referralCode ? { referralCode } : {}) },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
   return session;

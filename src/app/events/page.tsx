@@ -700,8 +700,8 @@ export default function EventsPage() {
 
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-  <div className="relative overflow-hidden mx-0 hero-banner">
-  <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[75vh]">
+   <div className="relative overflow-hidden mx-0 -mt-20 lg:-mt-24 hero-banner">
+   <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[75vh]">
   <div className="relative overflow-hidden bg-white dark:bg-[#111]">
   <Image src="/images/events/hero_bg.jpg" alt="Events" fill className="w-full h-full object-cover opacity-80" priority />
   <div className="absolute inset-0 bg-black/30" />
@@ -768,12 +768,12 @@ export default function EventsPage() {
  <VideoCarousel items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
  </ScrollReveal>
 
-  {/* ═══ 4. Autoplay Video Playlist (between recaps & clients) ═══ */}
-  <ScrollReveal animation="fadeUp" delay={0.1}>
-  <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
-  <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
-  </div>
-  </ScrollReveal>
+   {/* ═══ 4. Autoplay Video Playlist (between recaps & clients) ═══ */}
+   <ScrollReveal animation="fadeUp" delay={0.1}>
+   <div className="mb-12 mt-10 sm:mt-14 max-w-[130rem] mx-auto px-6 lg:px-12">
+   <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
+   </div>
+   </ScrollReveal>
 
   {/* ═══ 5. Client Events Carousel ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>

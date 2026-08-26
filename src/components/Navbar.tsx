@@ -32,7 +32,7 @@ const MORE_LINKS = [
 
   { href: "/featured-artist", label: "F. A. O. T. M." },
   { href: "/blog", label: "B L O G" },
-  { href: "/loyalty", label: "L O Y A L T Y" },
+  { href: "/loyalty", label: "Z E A L . R E W A R D S" },
   { href: "/gift-card", label: "G I F T . C A R D" },
   { href: "/contact", label: "C O N T A C T" },
   { href: "/community", label: "C O M M U N I T Y" },

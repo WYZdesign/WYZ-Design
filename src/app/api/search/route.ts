@@ -26,7 +26,7 @@ const STATIC_PAGES: StaticResult[] = [
   { title: "FAQ", href: "/faq", desc: "Frequently asked questions" },
   { title: "Featured Artist", href: "/featured-artist", desc: "FAOTM art store and featured creators" },
   { title: "Match", href: "/match", desc: "Get matched with the perfect service package for your brand" },
-  { title: "Account", href: "/account/my-account", desc: "Manage your profile, bookings, and loyalty points" },
+  { title: "Account", href: "/account/my-account", desc: "Manage your profile, bookings, and Zeal points" },
   { title: "3-Point Program", href: "/3pointprogram", desc: "Boost your brand in 3 focused sessions" },
   { title: "Booking", href: "/booking-calendar/photoshoot", desc: "Book a photoshoot or consultation" },
   { title: "Search", href: "/search", desc: "Search the entire WYZ Design site" },
