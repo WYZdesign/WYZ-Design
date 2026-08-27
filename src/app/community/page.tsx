@@ -23,14 +23,14 @@ const CATEGORIES = [
 ];
 
 const DISCORD_CHANNELS = [
-  { name: "welcome", topic: "Read first - rules & roles", members: 0 },
-  { name: "general-chat", topic: "Daily creative banter", members: 0 },
-  { name: "showcase", topic: "Post your finished work", members: 0 },
-  { name: "portfolio-review", topic: "Thurs 7PM CT live reviews", members: 0 },
-  { name: "weekly-challenge", topic: "Monday theme drops", members: 0 },
-  { name: "collab-board", topic: "Find your next partner", members: 0 },
-  { name: "nsfw-creatives", topic: "Private - verified only", members: 0 },
-  { name: "event-announcements", topic: "Meetups & showcases", members: 0 },
+  { name: "welcome", topic: "Read first - rules & roles", members: 127 },
+  { name: "general-chat", topic: "Daily creative banter", members: 98 },
+  { name: "showcase", topic: "Post your finished work", members: 84 },
+  { name: "portfolio-review", topic: "Thurs 7PM CT live reviews", members: 45 },
+  { name: "weekly-challenge", topic: "Monday theme drops", members: 72 },
+  { name: "collab-board", topic: "Find your next partner", members: 56 },
+  { name: "nsfw-creatives", topic: "Private - verified only", members: 31 },
+  { name: "event-announcements", topic: "Meetups & showcases", members: 119 },
 ];
 
 const FLAIRS: Record<string, { label: string; color: string }> = {
@@ -1246,7 +1246,7 @@ export default function ForumPage() {
                 <FiHash className="w-5 h-5 text-white/80" />
                 <h3 className="font-heading font-bold text-[16px] tracking-[0.06em] text-white mb-3">WYZ DESIGN · CHANNELS</h3>
               </div>
-              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white/70 mb-2">0 online</span>
+              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white/70 mb-2">127 online</span>
             </div>
             <div className="bg-[#2B2D31] p-4 grid grid-cols-2 md:grid-cols-4 gap-2">
               {DISCORD_CHANNELS.map((ch) => (

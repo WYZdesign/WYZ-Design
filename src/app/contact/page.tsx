@@ -14,7 +14,7 @@ export default function ContactPage() {
   return (
     <main className="pb-10 sm:pb-16 lg:pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <ScrollReveal animation="fadeUp">
-        <div className="relative max-w-2xl mx-auto px-6">
+        <div className="relative max-w-2xl mx-auto px-6 pt-20 sm:pt-28 lg:pt-32">
           <ParticleBackground count={15} color="#DF3131" maxSize={2} speed={0.2} className="z-0 opacity-40" />
           <div className="relative z-10">
           <TextMaskReveal direction="up">

@@ -31,32 +31,32 @@ interface SeoData { checks: { name: string; status: "pass" | "warn" | "fail"; me
 interface ChatsData { sessions: ChatSession[] }
 
 const NAV_SECTIONS: { label: string; items: { id: string; icon: string; label: string }[] }[] = [
-  { label: "DASHBOARD", items: [{ id: "overview", icon: "\u25C8", label: "Overview" }] },
+  { label: "DASHBOARD", items: [{ id: "overview", icon: "◉", label: "Overview" }] },
   { label: "MONEY", items: [
     { id: "bookkeeping", icon: "$", label: "Bookkeeping" },
-    { id: "income", icon: "\u25B2", label: "Income" },
-    { id: "expenses", icon: "\u25BC", label: "Expenses" },
-    { id: "reports", icon: "\u25C7", label: "Reports" },
+    { id: "income", icon: "▲", label: "Income" },
+    { id: "expenses", icon: "▼", label: "Expenses" },
+    { id: "reports", icon: "◇", label: "Reports" },
   ]},
   { label: "GROWTH", items: [
-    { id: "analytics", icon: "\u25CE", label: "Analytics" },
-    { id: "seo", icon: "\u25C9", label: "SEO" },
-    { id: "traffic", icon: "\u25D0", label: "Traffic" },
+    { id: "analytics", icon: "◎", label: "Analytics" },
+    { id: "seo", icon: "●", label: "SEO" },
+    { id: "traffic", icon: "⊙", label: "Traffic" },
   ]},
   { label: "MANAGE", items: [
-    { id: "forms", icon: "\u25A1", label: "Forms" },
-    { id: "users", icon: "\u25C6", label: "Users" },
-    { id: "newsletter", icon: "\u25CF", label: "Newsletter" },
-    { id: "chats", icon: "\u25D1", label: "Chats" },
+    { id: "forms", icon: "□", label: "Forms" },
+    { id: "users", icon: "◆", label: "Users" },
+    { id: "newsletter", icon: "●", label: "Newsletter" },
+    { id: "chats", icon: "○", label: "Chats" },
     { id: "nsfw", icon: "!", label: "Content" },
   ]},
   { label: "SYSTEM", items: [
-    { id: "health", icon: "\u25D2", label: "Health" },
-    { id: "export", icon: "\u25D3", label: "Export" },
+    { id: "health", icon: "◎", label: "Health" },
+    { id: "export", icon: "↓", label: "Export" },
   ]},
   { label: "PROFILE", items: [
-    { id: "profile", icon: "\u25CB", label: "Profile" },
-    { id: "bugs", icon: "\u25A0", label: "Bug Report" },
+    { id: "profile", icon: "○", label: "Profile" },
+    { id: "bugs", icon: "■", label: "Bug Report" },
   ]},
 ];
 
@@ -370,7 +370,7 @@ function ProfileTab({ session, update, signOut }: { session: import("next-auth")
           <ProfileActionLink href="/booking-calendar/photoshoot" label="Book a Shoot" icon={<FiCamera className="w-4 h-4" />} />
           <ProfileActionLink href="/gift-card" label="Gift Cards" icon={<FiGift className="w-4 h-4" />} />
           <ProfileActionLink href={process.env.NEXT_PUBLIC_STRIPE_PORTAL_URL || "/plans"} label="Billing Portal" icon={<FiCreditCard className="w-4 h-4" />} external />
-          <ProfileActionLink href="/loyalty" label="Zeal Rewards" icon={<FiStar className="w-4 h-4" />} />
+          <ProfileActionLink href="/loyalty" label="Rewards" icon={<FiStar className="w-4 h-4" />} />
           <ProfileActionLink href="/community" label="Community" icon={<FiMessageCircle className="w-4 h-4" />} />
           <ProfileActionLink href="/model-archive" label="Model Archive" icon={<FiUser className="w-4 h-4" />} />
         </div>
@@ -512,12 +512,12 @@ function OverviewTab({ data }: { data: OverviewData }) {
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-        <KpiCard label="Forms" value={s.totalForms} color="#DF3131" icon="\u25A1" />
-        <KpiCard label="Chats" value={s.totalChats} color="#5865F2" icon="\u25D1" />
-        <KpiCard label="Users" value={s.totalUsers} color="#34A853" icon="\u25C6" />
-        <KpiCard label="Newsletter" value={s.newsletterSubs} color="#FBBC05" icon="\u25CF" />
-        <KpiCard label="Admins" value={s.adminCount} color="#EA4335" icon="\u25C8" />
-        <KpiCard label="Sessions" value={s.chatSessions} color="#D49341" icon="\u25D1" />
+        <KpiCard label="Forms" value={s.totalForms} color="#DF3131" icon="□" />
+        <KpiCard label="Chats" value={s.totalChats} color="#5865F2" icon="○" />
+        <KpiCard label="Users" value={s.totalUsers} color="#34A853" icon="◆" />
+        <KpiCard label="Newsletter" value={s.newsletterSubs} color="#FBBC05" icon="●" />
+        <KpiCard label="Admins" value={s.adminCount} color="#EA4335" icon="◉" />
+        <KpiCard label="Sessions" value={s.chatSessions} color="#D49341" icon="◎" />
       </div>
       {Object.keys(s.formTypes || {}).length > 0 && (
         <div>
@@ -546,7 +546,7 @@ function BookkeepingDashboard({ data, onRefresh }: { data: FinancialSummary; onR
         <KpiCard label="Gross Income" value={data.total_income} color="#34A853" icon="$" format="currency" />
         <KpiCard label="Total Expenses" value={data.total_expenses} color="#EA4335" icon="$" format="currency" />
         <KpiCard label="Net Profit" value={data.net_profit} color="#D49341" icon="$" format="currency" />
-        <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="\u25C7" />
+        <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="◇" />
       </div>
       <div className="flex gap-3 flex-wrap">
         <button onClick={() => setShowForm("income")} className="px-5 py-3 bg-[#34A853]/20 text-[#34A853] border border-[#34A853]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#34A853]/30 transition-all">+ Log Income</button>
@@ -712,7 +712,7 @@ function ReportsTab({ data }: { data: FinancialSummary }) {
         <KpiCard label="Gross Income" value={data.total_income} color="#34A853" icon="$" format="currency" />
         <KpiCard label="Total Expenses" value={data.total_expenses} color="#EA4335" icon="$" format="currency" />
         <KpiCard label="Net Profit" value={data.net_profit} color="#D49341" icon="$" format="currency" />
-        <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="\u25C7" />
+        <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="◇" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {data.income_by_channel?.length > 0 && (
@@ -785,11 +785,11 @@ function AnalyticsTab({ data }: { data: AnalyticsSummary }) {
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <KpiCard label="Pageviews" value={data.total_pageviews} color="#DF3131" icon="\u25CE" />
-        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#5865F2" icon="\u25C6" />
-        <KpiCard label="Unique Pages" value={data.unique_pages} color="#34A853" icon="\u25A1" />
-        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#EA4335" icon="\u25CB" />
-        <KpiCard label="Pages/Session" value={Math.round(data.pages_per_session * 10) / 10} color="#FBBC05" icon="\u25C7" />
+        <KpiCard label="Pageviews" value={data.total_pageviews} color="#DF3131" icon="◎" />
+        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#5865F2" icon="◆" />
+        <KpiCard label="Unique Pages" value={data.unique_pages} color="#34A853" icon="□" />
+        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#EA4335" icon="○" />
+        <KpiCard label="Pages/Session" value={Math.round(data.pages_per_session * 10) / 10} color="#FBBC05" icon="◇" />
       </div>
 
       {data.daily_views?.length > 0 && (
@@ -928,10 +928,10 @@ function TrafficTab({ data }: { data: AnalyticsSummary }) {
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Total Views" value={data.total_pageviews} color="#DF3131" icon="\u25CE" />
-        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#5865F2" icon="\u25C6" />
-        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#EA4335" icon="\u25CB" />
-        <KpiCard label="Avg Duration" value={Math.round(data.avg_duration_ms / 1000)} color="#34A853" icon="\u25D0" />
+        <KpiCard label="Total Views" value={data.total_pageviews} color="#DF3131" icon="◎" />
+        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#5865F2" icon="◆" />
+        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#EA4335" icon="○" />
+        <KpiCard label="Avg Duration" value={Math.round(data.avg_duration_ms / 1000)} color="#34A853" icon="⊙" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

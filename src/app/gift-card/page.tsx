@@ -58,7 +58,28 @@ export default function GiftCardPage() {
  </h1>
  <p className="text-lg text-[#666666] dark:text-[#b0b0b0] mb-6 text-center">The perfect gift for anyone who needs design, photography, or creative services. Redeemable for any WYZ Design service or merch.</p>
 
-        <div className="max-w-md mx-auto mb-12 text-center">
+               <div className="bg-[#f5f5f5] dark:bg-[#252528] p-8 mb-12">
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] text-center mb-4">How It Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <p className="text-3xl font-bold text-[#DF3131] mb-2">01</p>
+              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Choose Amount</p>
+              <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Pick a preset or custom value.</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-[#DF3131] mb-2">02</p>
+              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Pay via Stripe</p>
+               <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Secure checkout, credit card, Apple Pay, Google Pay.</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-[#DF3131] mb-2">03</p>
+              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Redeem</p>
+              <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Apply to any service or merch order. No expiration.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-md mx-auto mb-16 text-center">
           <label className="block text-sm font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-1 text-center">Your Email (for receipt)</label>
           <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" autoComplete="email" className="w-full border border-gray-300 dark:border-[#555] px-4 py-3 min-h-[44px] text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:outline-none" />
         </div>
@@ -81,27 +102,6 @@ export default function GiftCardPage() {
             <button onClick={buyCustom} disabled={loading} className="bg-[#DF3131] text-white px-6 py-3 min-h-[44px] font-heading font-bold tracking-[0.15em] uppercase text-sm hover:bg-red-700 transition-colors disabled:opacity-50">
               {loading ? "Loading..." : "Buy Now"}
             </button>
-          </div>
-        </div>
-
-        <div className="bg-[#f5f5f5] dark:bg-[#252528] p-8 mb-16">
-          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] text-center mb-4">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <p className="text-3xl font-bold text-[#DF3131] mb-2">01</p>
-              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Choose Amount</p>
-              <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Pick a preset or custom value.</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold text-[#DF3131] mb-2">02</p>
-              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Pay via Stripe</p>
-               <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Secure checkout, credit card, Apple Pay, Google Pay.</p>
-            </div>
-            <div className="text-center">
-              <p className="text-3xl font-bold text-[#DF3131] mb-2">03</p>
-              <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Redeem</p>
-              <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Apply to any service or merch order. No expiration.</p>
-            </div>
           </div>
         </div>
 

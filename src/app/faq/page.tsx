@@ -172,17 +172,13 @@ export default function FAQPage() {
               </div>
               <div className="hidden lg:flex flex-col items-center justify-center h-full px-10 lg:px-16 text-center bg-white dark:bg-[#1C1C1E]">
                 <div className="grid grid-cols-3 gap-6 mb-8">
-                  <AnimatedCounter end={12} suffix="+" className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Questions" />
-                  <AnimatedCounter end={6} className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Topics" />
+                  <AnimatedCounter end={12} suffix="+" className="font-heading font-black text-[2.25rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Questions" />
+                  <AnimatedCounter end={6} className="font-heading font-black text-[2.25rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Topics" />
                   <div className="text-center">
-                    <p className="font-heading font-black text-[1.5rem] text-[#333] dark:text-white">24/7</p>
+                    <p className="font-heading font-black text-[2.25rem] text-[#333] dark:text-white">24/7</p>
                     <p className="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase">AI Answers</p>
                   </div>
                 </div>
-                <p className="text-[#666] dark:text-[#b0b0b0] text-[16px] max-w-sm mb-6 leading-relaxed">Can't find what you're looking for? Our AI assistant is always here to help with instant answers.</p>
-                <button onClick={() => setChatOpen(true)} className="px-8 py-3 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.1em] hover:bg-[#B82020] transition-all hover:scale-105 inline-flex items-center gap-2">
-                  ASK WYZ AI <FiArrowRight />
-                </button>
               </div>
             </div>
           </div>
