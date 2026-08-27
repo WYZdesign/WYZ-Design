@@ -11,7 +11,7 @@ import TextSplit from "@/components/TextSplit";
 import { SUB_BRANDS } from "@/lib/brands";
 
 const VALUES = [
-   { title: "Show Up and Do the Work", body: "No outsourcing. No passing you around. We shoot, design, build, and deliver, every time." },
+   { title: "We Do The Work Ourselves", body: "No outsourcing. No passing you around. We shoot, design, build, and deliver, every time." },
   { title: "Creativity Earns Real Money", body: "We don't work for exposure or vague promises. Real work gets real compensation. Period." },
   { title: "Fast, Never Sloppy", body: "Speed comes from knowing what we're doing, not from cutting corners. Nothing leaves our desk looking rushed." },
   { title: "Built by Artists, for Artists", body: "We've been in the basement shows, the DIY spaces, the early mornings. We build what we wish existed." },
