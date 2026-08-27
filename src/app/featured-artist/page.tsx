@@ -167,9 +167,9 @@ export default function FeaturedArtistPage() {
 
  {/* Right: Biography text on dark bg */}
  <div className="w-full lg:w-1/2 flex items-center bg-white dark:bg-[#111] px-10 lg:px-16 xl:px-24 pt-28 pb-16 lg:py-0 relative z-10">
-  <div className="max-w-xl text-center lg:text-center">
+  <div className="max-w-2xl text-center lg:text-center">
   <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">FEATURED ARTIST OF THE MONTH</span>
-  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>DONTE<br />&quot;DANNY&quot;<br />DAVIS</h1>
+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] max-sm:text-[2.8rem] font-heading font-black text-[#333] dark:text-white tracking-[0.04em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>DONTE <span className="hidden lg:inline">&quot;DANNY&quot; </span>DAVIS<span className="lg:hidden"><br />&quot;DANNY&quot;</span></h1>
  <div className="w-16 h-[3px] bg-[#DF3131] mb-6 mx-auto" />
  <p className="text-[#666] dark:text-white/70 text-[16px] leading-relaxed mb-4">
   From the west side of Chicago, born and raised! A guy known to some as &quot;Danny&quot; is a creative in every sense of the word. From writing to painting, with a palette of many other talents and abilities.
@@ -228,7 +228,7 @@ export default function FeaturedArtistPage() {
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
  <div className="text-center lg:text-center">
  <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">SUPPORT THE ARTIST</span>
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-white mb-4">ART STORE</h2>
+ <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.04em] uppercase text-white mb-4">ART STORE</h2>
  <p className="text-white/60 text-[15px] leading-relaxed mb-6">
  Support this month&apos;s featured artist by browsing and purchasing original artwork, prints, and custom pieces. Every purchase directly supports the artist.
  </p>
@@ -267,7 +267,7 @@ export default function FeaturedArtistPage() {
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
  <div className="text-center mb-12">
  <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT IS FAOTM?</span>
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-white mb-4">FEATURED ARTIST OF THE MONTH</h2>
+ <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.04em] uppercase text-[#333] dark:text-white mb-4">FEATURED ARTIST OF THE MONTH</h2>
  </div>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
   <div className="p-8 bg-white dark:bg-white/5 border border-[#E2E2E2] dark:border-white/10 hover:border-[#DF3131]/50 transition-all duration-300 text-center">

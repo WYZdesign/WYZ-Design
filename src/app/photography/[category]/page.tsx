@@ -386,7 +386,7 @@ export default function CategoryPage() {
   key={i}
   images={album.images}
   label={album.name}
-  speed={0.3 + (i % 3) * 0.15}
+  speed={0.33 + (i % 3) * 0.165}
   onImageClick={openSlideshow}
   isNsfw={isGated}
   canReveal={nsfwSession.ageVerified}

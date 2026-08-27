@@ -113,7 +113,7 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  );
 }
 
-function AutoScrollRow({ items, speed = 0.8, className = "" }: { items: string[]; speed?: number; className?: string }) {
+function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[]; speed?: number; className?: string }) {
  const trackRef = useRef<HTMLDivElement>(null);
  const offsetRef = useRef(0);
  const paused = useRef(false);

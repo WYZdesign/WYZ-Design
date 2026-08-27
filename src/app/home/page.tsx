@@ -628,13 +628,16 @@ const FAQ_ITEMS = [
  { q: "What DIY events does WYZ Design host?", a: "We host music showcases, art shows, open mic nights, and creative meetups. Check our Events page or subscribe to our newsletter for upcoming dates." },
 ];
 
-function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[]; className?: string; speed?: number }) {
+function SmoothCarousel({ items, className = "", speed = 0.5, direction = "left" }: { items: string[]; className?: string; speed?: number; direction?: "left" | "right" }) {
  const trackRef = useRef<HTMLDivElement>(null);
  const offsetRef = useRef(0);
  const paused = useRef(false);
  const sectionRef = useRef<HTMLDivElement>(null);
  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
  const touchStartX = useRef<number | null>(null);
+ const dirRef = useRef(direction === "right" ? -1 : 1);
+
+ useEffect(() => { dirRef.current = direction === "right" ? -1 : 1; }, [direction]);
 
  useEffect(() => {
  const sec = sectionRef.current;
@@ -650,7 +653,7 @@ function SmoothCarousel({ items, className = "", speed = 0.5 }: { items: string[
  let raf: number;
  const tick = () => {
  if (!paused.current && el) {
- offsetRef.current -= speed;
+ offsetRef.current -= speed * dirRef.current;
  const half = el.scrollWidth / 2;
  if (Math.abs(offsetRef.current) >= half) offsetRef.current += half;
  el.style.transform = `translateX(${offsetRef.current}px)`;
@@ -931,7 +934,7 @@ export default function HomePage() {
   <ScrollReveal animation="fadeIn" duration={1}>
   <ImageReveal direction="up">
   <section className="py-6 w-full relative overflow-hidden my-8">
-  <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.5} />
+  <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.55} direction="right" />
   </section>
   </ImageReveal>
   </ScrollReveal>
@@ -966,7 +969,7 @@ export default function HomePage() {
   </div>
    {/* Full-width carousel — full bleed stretching to both sides */}
    <div className="relative z-10 my-16 sm:my-24 w-full overflow-hidden">
-     <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.5} />
+      <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.55} />
    </div>
   <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
   {/* Animated tab switcher */}
@@ -1252,7 +1255,7 @@ export default function HomePage() {
  {/* ═══ DESIGN SHOWCASE CAROUSEL ═══ */}
  <ScrollReveal animation="fadeIn" duration={1}>
  <section className="py-6">
- <SmoothCarousel items={shuffledDesign.length > 0 ? shuffledDesign : DESIGN_SHOWCASE_RAW} speed={0.5} />
+ <SmoothCarousel items={shuffledDesign.length > 0 ? shuffledDesign : DESIGN_SHOWCASE_RAW} speed={0.55} />
   </section>
   </ScrollReveal>
 

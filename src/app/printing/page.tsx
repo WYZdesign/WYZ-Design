@@ -60,7 +60,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
-  <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(811px, 90vh)" }}
+  <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(608px, 67vh)" }}
   role="button"
   tabIndex={0}
   aria-expanded={flipped}
