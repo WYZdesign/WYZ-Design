@@ -357,7 +357,6 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 /* ── Custom Cursor (desktop only) ── */
 @media (hover: hover) and (pointer: fine) {
   *, *::before, *::after { cursor: none !important; }
-  a, button, [role=button], input, textarea, select, label, .cursor-pointer { cursor: auto !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════
