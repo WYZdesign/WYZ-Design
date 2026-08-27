@@ -75,7 +75,7 @@ export default function PartnershipsPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1a1a1a] to-[#DF3131]/20" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-32 lg:pt-40">
           <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-2">Collaborate With Us</p>
-          <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>
+          <h1 className="text-[2rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.04em] sm:tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>
             PARTNERS<span className="text-[#DF3131]">HIPS</span>
           </h1>
           <p className="text-white/60 text-[16px] sm:text-lg max-w-2xl mx-auto leading-relaxed">

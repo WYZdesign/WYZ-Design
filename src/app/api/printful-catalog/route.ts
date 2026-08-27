@@ -62,6 +62,7 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
     // V2 API: /v2/catalog-products/{id}
     const res = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}`, {
       headers: { Authorization: `Bearer ${API_KEY}` },
+      signal: AbortSignal.timeout(10_000),
       next: { revalidate: 3600 },
     });
     if (!res.ok) return null;
@@ -72,6 +73,7 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
     // V2 returns variants separately — fetch them
     const varRes = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}/catalog-variants`, {
       headers: { Authorization: `Bearer ${API_KEY}` },
+      signal: AbortSignal.timeout(10_000),
       next: { revalidate: 3600 },
     });
     if (!varRes.ok) return null;

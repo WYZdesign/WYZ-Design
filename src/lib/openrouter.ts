@@ -34,6 +34,7 @@ export async function openrouterChat(opts: OpenRouterOpts): Promise<string> {
           "HTTP-Referer": "https://wyzdesign.com",
           "X-Title": opts.title || "WYZ Design",
         },
+        signal: AbortSignal.timeout(30_000),
         body: JSON.stringify({
           model,
           messages: opts.messages,

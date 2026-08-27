@@ -13,6 +13,7 @@ export async function sendDiscordAlert(title: string, fields: Record<string, str
     await fetch(DISCORD_WEBHOOK, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      signal: AbortSignal.timeout(10_000),
       body: JSON.stringify({
         embeds: [{
           title,

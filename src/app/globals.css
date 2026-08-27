@@ -171,7 +171,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   .faq-marquee {
     overflow: hidden;
     white-space: nowrap;
-    max-width: calc(100vw - 8rem);
+    max-width: calc(100vw - 12rem);
     position: relative;
   }
   .faq-marquee-inner {

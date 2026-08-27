@@ -96,6 +96,7 @@ export default function Navbar() {
   const logoClicksRef = useRef<number[]>([]);
 
   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
   useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [mobileOpen]);
   useEffect(() => { if (!mobileOpen) return; const close = (e: TouchEvent | MouseEvent) => { const target = e.target as HTMLElement; if (!target.closest("[data-more-dropdown]") && !target.closest("[data-more-btn]")) setMoreOpen(false); }; document.addEventListener("touchstart", close); return () => document.removeEventListener("touchstart", close); }, [mobileOpen]);
 
