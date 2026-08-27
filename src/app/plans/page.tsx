@@ -378,54 +378,54 @@ export default function PlansPage() {
                })}
              </div>
               <div className="hidden lg:block rounded-xl border border-[#E2E2E2] dark:border-[#444] overflow-hidden">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-[#DF3131] text-white">
-                      <th className="p-4 text-[14px] font-bold tracking-[0.05em] border-b border-white/20">FEATURE</th>
-                      <th className="p-4 text-[14px] font-bold border-b border-white/20">STARTER</th>
-                      <th className="p-4 text-[14px] font-bold border-b border-white/20">BUSINESS</th>
-                      <th className="p-4 text-[14px] font-bold border-b border-white/20">PRO</th>
-                      <th className="p-4 text-[14px] font-bold border-b border-white/20">ULTIMATE</th>
-                    </tr>
-                  </thead>
+                <table className="w-full text-left border-collapse table-fixed">
+<thead>
+                     <tr className="bg-[#DF3131] text-white">
+                       <th className="w-[30%] p-4 text-[14px] font-bold tracking-[0.05em] border-b border-white/20 text-center">FEATURE</th>
+                       <th className="w-[17%] p-4 text-[14px] font-bold border-b border-white/20 text-center">STARTER</th>
+                       <th className="w-[17%] p-4 text-[14px] font-bold border-b border-white/20 text-center">BUSINESS</th>
+                       <th className="w-[17%] p-4 text-[14px] font-bold border-b border-white/20 text-center">PRO</th>
+                       <th className="w-[17%] p-4 text-[14px] font-bold border-b border-white/20 text-center">ULTIMATE</th>
+                     </tr>
+                   </thead>
                   <tbody>
                     <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
-                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Monthly Price</td>
-                      <td className="p-4 text-[#DF3131] font-bold">$250</td>
-                      <td className="p-4 text-[#DF3131] font-bold">$500</td>
-                      <td className="p-4 text-[#DF3131] font-bold">$750</td>
-                      <td className="p-4 text-[#DF3131] font-bold">$1,000</td>
+                      <td className="p-4 text-center text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Monthly Price</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">$250</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">$500</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">$750</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">$1,000</td>
                     </tr>
                     <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
-                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Value</td>
-                      <td className="p-4 text-[#666] dark:text-white/70">$725</td>
-                      <td className="p-4 text-[#DF3131] font-bold">$2,025</td>
-                      <td className="p-4 text-[#DF3131] font-bold">$1,425</td>
-                      <td className="p-4 text-[#DF3131] font-bold">$5,000</td>
+                      <td className="p-4 text-center text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Value</td>
+                      <td className="p-4 text-center text-[#666] dark:text-white/70">$725</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">$2,025</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">$1,425</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">$5,000</td>
                     </tr>
                     <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
-                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Photoshoots (2hr)</td>
+                      <td className="p-4 text-center text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Photoshoots (2hr)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (1)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
                     </tr>
                     <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
-                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Graphic Designs</td>
+                      <td className="p-4 text-center text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Graphic Designs</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (1)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
                     </tr>
                     <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
-                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Promo Videos</td>
+                      <td className="p-4 text-center text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Promo Videos</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (1)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
                     </tr>
                     <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
-                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Custom Printing</td>
+                      <td className="p-4 text-center text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Custom Printing</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$100)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>
                       <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>

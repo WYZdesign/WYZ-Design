@@ -401,6 +401,30 @@ function MerchCarousel({ products }: { products: Product[] }) {
   );
 }
 
+function ProductMarquee({ products }: { products: Product[] }) {
+  const items = [...products, ...products, ...products];
+  return (
+    <div className="relative overflow-hidden bg-gradient-to-r from-[#0a0a0a] via-[#1a0a0a] to-[#0a0a0a] py-10 border-y border-white/10">
+      <div className="flex whitespace-nowrap animate-marquee-left">
+        {items.map((p, i) => (
+          <Link key={`pm-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer group">
+            <div className="w-[200px] sm:w-[240px] px-4 aspect-square flex flex-col items-center">
+              <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden relative flex-1 w-full mb-2 group-hover:border-[#DF3131]/50 group-hover:shadow-xl group-hover:shadow-[#DF3131]/20 transition-all duration-500">
+                <Image src={p.image} alt={p.name} fill sizes="100vw" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" decoding="async" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              </div>
+              <div className="w-full text-center">
+                <h4 className="font-heading font-bold text-white text-[11px] tracking-[0.05em] uppercase truncate">{p.name}</h4>
+                <span className="text-[#DF3131] font-bold text-[13px]">${p.price.toFixed(2)}</span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: (p: Product) => void }) {
   const [scrollY, setScrollY] = useState(0);
 
@@ -488,6 +512,7 @@ export default function MerchPage() {
   const [quickSize, setQuickSize] = useState("M");
   const [products, setProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
   const [showStore, setShowStore] = useState(false);
+  const [storeVisible, setStoreVisible] = useState(false);
   const [portalAnimating, setPortalAnimating] = useState(false);
 
   const [catalogStatus, setCatalogStatus] = useState<"idle" | "loading" | "loaded" | "error">("idle");
@@ -535,7 +560,7 @@ export default function MerchPage() {
     return () => controller.abort();
   }, []);
 
-  const filtered = useMemo(() => {
+  const filteredProducts = useMemo(() => {
     const result = activeCategory === "All" ? [...products] : products.filter((p) => p.category === activeCategory);
     switch (sortBy) {
       case "trending": result.sort((a, b) => (b.trending ?? 0) - (a.trending ?? 0)); break;
@@ -555,10 +580,15 @@ export default function MerchPage() {
     if (!showStore) {
       setPortalAnimating(true);
       setShowStore(true);
+      setTimeout(() => setStoreVisible(true), 200);
       setTimeout(() => setPortalAnimating(false), 1200);
     } else {
-      setShowStore(false);
-      setPortalAnimating(false);
+      setStoreVisible(false);
+      setPortalAnimating(true);
+      setTimeout(() => {
+        setShowStore(false);
+        setPortalAnimating(false);
+      }, 800);
     }
   };
 
@@ -606,6 +636,17 @@ export default function MerchPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Auto-Scroll Merch Gallery — Black-to-Red Gradient Background */}
+        <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-16 border-y border-white/5">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
+          <div className="text-center mb-10">
+            <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">DBC CREW COLLECTION</span>
+            <h3 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-white tracking-[0.05em]">Worn By The Crew</h3>
+          </div>
+          <ProductMarquee products={products} />
+          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
         </div>
 
         {/* Product Name Marquee Strip */}
@@ -724,7 +765,11 @@ export default function MerchPage() {
             </>
           )}
 
-  {showStore && <AccordionGallery />}
+          {showStore && storeVisible && (
+            <div className="portal-enter stagger-1">
+              <AccordionGallery />
+            </div>
+          )}
         </div>
 
 
