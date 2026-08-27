@@ -3,6 +3,7 @@ import { logPageview, logEvent, getAnalyticsSummary, getPageviews } from "@/lib/
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { createHash } from "crypto";
 import { requireAdmin } from "@/lib/admin-auth";
+import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
 
 function parseUA(ua: string) {
@@ -27,7 +28,8 @@ function parseUA(ua: string) {
 }
 
 function hashIp(ip: string): string {
-  const salt = process.env.IP_HASH_SALT || "wyz-salt-2026";
+  const salt = process.env.IP_HASH_SALT;
+  if (!salt) return "no-salt-configured";
   return createHash("sha256").update(ip + salt).digest("hex").slice(0, 16);
 }
 
@@ -114,6 +116,9 @@ async function runSeoChecks(): Promise<{ check: string; status: string; detail?:
  * Body: { path, referrer?, user_agent?, session_id?, event_type?, label?, value?, metadata? }
  */
 export async function POST(req: NextRequest) {
+  if (!validateCsrf(req)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   try {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
     const rl = await rateLimit(`analytics:${ip}`, 60, 60_000);

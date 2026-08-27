@@ -44,8 +44,10 @@ Write as the WYZ Design blog, a creative agency in Chicago. Keep it down-to-eart
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ model: "deepseek-coder", prompt, stream: false, options: { temperature: 0.8, num_predict: 1000 } }),
         });
-        const data = await resp.json();
-        if (data.response) return NextResponse.json({ content: data.response });
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data.response) return NextResponse.json({ content: data.response });
+        }
       } catch (e) { logger.error("blog:ollama", e); }
     }
 

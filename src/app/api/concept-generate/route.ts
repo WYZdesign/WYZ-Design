@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { openrouterChat } from "@/lib/openrouter";
 import { rateLimit } from "@/lib/rate-limit";
+import { validateCsrf } from "@/lib/csrf";
 import { errorResponse } from "@/lib/http";
 import { logger } from "@/lib/logger";
 
@@ -14,6 +15,9 @@ function getIp(req: NextRequest): string {
  * Generates creative design concepts using LLM from a user vision description.
  */
 export async function POST(req: NextRequest) {
+  if (!validateCsrf(req)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   try {
     const { ok } = await rateLimit(`concept:${getIp(req)}`, 10, 60_000);
     if (!ok) {
