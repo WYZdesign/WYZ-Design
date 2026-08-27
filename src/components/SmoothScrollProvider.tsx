@@ -18,7 +18,7 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
       smoothWheel: !isTouch,
       syncTouchLerp: isTouch ? 0.15 : 0.1,
       touchMultiplier: isTouch ? 1 : 1.5,
-      wheelMultiplier: 1,
+      wheelMultiplier: 1.3,
     });
 
     lenisRef.current = lenis;
