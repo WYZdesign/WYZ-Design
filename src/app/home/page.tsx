@@ -899,16 +899,17 @@ export default function HomePage() {
      <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-2 sm:mb-3">
        <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
      </p>
-     <TextMaskReveal direction="up">
-     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
-        <span>WE <span className="text-[#DF3131]">MAKE</span></span> <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
-     </h1>
-     </TextMaskReveal>
+      <TextMaskReveal direction="up">
+      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
+         <span>WE <span className="text-[#DF3131]">MAKE</span></span><br />
+         <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
+      </h1>
+      </TextMaskReveal>
         <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-6 sm:mb-8 w-full text-center">
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
-     </GyroTilt>
-       <div className="flex flex-row gap-4 justify-center flex-wrap">
+       </GyroTilt>
+         <div className="flex flex-row gap-4 justify-center flex-wrap mt-4 sm:mt-6">
      <MagneticElement tag="div" strength={0.25}>
      <Link href="/about"
       className="inline-block bg-white text-[#111] border-2 border-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
