@@ -793,3 +793,35 @@ All 17 high-priority findings resolved:
 ## Claude Code Collaboration Protocol
 
 Claude operates with a **read-only repo clone**. It audits via browser (console + network + vision) and produces handover docs. Opencode applies fixes, commits, pushes, and updates this file. The cycle repeats indefinitely.
+
+---
+
+## Session 30 (2026-08-25) — Code Quality, UX, and Security Fixes
+
+### Commits (8 total)
+| Commit | Fixes |
+|--------|-------|
+| `6efe6c1` | Testimonials slider pause-on-click (resumes after 5s), dark-mode marquee stroke width 1px → 1.5px |
+| `8c4e5cc` | Replaced `<img>` with `next/image` in 4 lightbox components (gallery, featured-artist, photography/[category], model-archive) |
+| `ab5e396` | Removed `cursor: auto !important` on interactive elements that defeated custom cursor |
+| `774c394` | Empty commit to trigger redeploy (PRINTFUL_API_KEY added to Vercel) |
+| `7c886fb` | Added `images.printful.com` to Next.js remotePatterns and CSP img-src |
+| `73b7267` | NSFW age gate modal on /community (18+ confirmation, localStorage persisted) |
+| `a92f857` | NSFW login requirement — age gate checks both auth session and 18+ confirmation |
+
+### Environment Config
+- **PRINTFUL_API_KEY** — Set in Vercel production via REST API (sensitive, encrypted)
+- **images.printful.com** — Added to `next.config.ts` remotePatterns and CSP `img-src` for merch product images
+
+### NSFW Age Gate + Login (/community)
+- `useSession` from `next-auth/react` imported into community page
+- Clicking NSFW category triggers modal:
+  - If not logged in: shows "SIGN IN REQUIRED" → `signIn()` redirect
+  - If logged in but not age-verified: shows "AGE VERIFICATION" → `localStorage.setItem("nsfwAgeVerified", "1")`
+  - If both verified: directly sets `activeCat("nsfw")`
+- Thread composer dropdown disables NSFW option until age-verified
+- Modal persisted in localStorage — one-time verification per browser
+
+### Remaining
+- Hero banner container/spacing redesign (Torreé's spec from Session 27)
+- Screenshot-verify all fixes on live site
