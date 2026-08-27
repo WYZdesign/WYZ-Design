@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
@@ -56,14 +56,22 @@ export default function Testimonials() {
 
 function TestimonialsSliderInner() {
   const [active, setActive] = useState(0);
+  const pausedRef = useRef(false);
+  const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const next = useCallback(() => setActive((a) => (a + 1) % TESTIMONIALS.length), []);
   const prev = useCallback(() => setActive((a) => (a - 1 + TESTIMONIALS.length) % TESTIMONIALS.length), []);
 
   useEffect(() => {
-    const t = setInterval(next, 6000);
+    const t = setInterval(() => { if (!pausedRef.current) next(); }, 6000);
     return () => clearInterval(t);
   }, [next]);
+
+  const pauseAndResume = () => {
+    pausedRef.current = true;
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = setTimeout(() => { pausedRef.current = false; }, 5000);
+  };
 
   const t = TESTIMONIALS[active];
 
@@ -77,7 +85,7 @@ function TestimonialsSliderInner() {
 
         <div className="relative min-h-[240px] flex items-center justify-center">
           <button
-            onClick={prev}
+            onClick={() => { prev(); pauseAndResume(); }}
             className="absolute left-0 z-10 p-2 text-white/60 hover:text-white transition-colors"
             aria-label="Previous testimonial"
           >
@@ -104,7 +112,7 @@ function TestimonialsSliderInner() {
           </div>
 
           <button
-            onClick={next}
+            onClick={() => { next(); pauseAndResume(); }}
             className="absolute right-0 z-10 p-2 text-white/60 hover:text-white transition-colors"
             aria-label="Next testimonial"
           >
