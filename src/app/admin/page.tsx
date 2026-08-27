@@ -519,19 +519,27 @@ function OverviewTab({ data }: { data: OverviewData }) {
         <KpiCard label="Admins" value={s.adminCount} color="#EA4335" icon="◉" />
         <KpiCard label="Sessions" value={s.chatSessions} color="#D49341" icon="◎" />
       </div>
-      {Object.keys(s.formTypes || {}).length > 0 && (
-        <div>
-          <SectionTitle>Forms by Type</SectionTitle>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-            {Object.entries(s.formTypes).sort((a,b) => (b[1] as number)-(a[1] as number)).map(([type, count]) => (
-              <div key={type} className="bg-white/5 border border-white/10 p-4">
-                <span className="text-[18px] font-heading font-bold text-[#DF3131]">{String(count)}</span>
-                <p className="text-[11px] text-white/60 capitalize mt-1">{type.replace(/-/g," ")}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+       <div className="bg-white/5 border border-white/10 p-5">
+         {Object.entries(s.formTypes).length > 0 ? (
+           <div className="space-y-3">
+             {Object.entries(s.formTypes).sort((a,b) => b[1]-a[1]).map(([type, count], i) => {
+               const colors = ["#DF3131","#34A853","#FBBC05","#5865F2","#D49341","#EA4335","#00E5FF","#8E24AA"];
+               const maxCount = Math.max(...Object.values(s.formTypes));
+               const pct = maxCount > 0 ? (count / maxCount) * 100 : 0;
+               return (
+                 <div key={type} className="flex items-center gap-3">
+                   <span className="text-[11px] text-white/70 w-28 truncate text-right">{type}</span>
+                   <div className="flex-1 h-6 bg-white/5 overflow-hidden relative">
+                     <div className="h-full transition-all duration-1000 ease-out flex items-center pl-3"
+                       style={{ width: `${pct}%`, background: colors[i % colors.length] }} />
+                   </div>
+                   <span className="text-[13px] font-heading font-bold w-8 text-right" style={{ color: colors[i % colors.length] }}>{count}</span>
+                 </div>
+               );
+             })}
+           </div>
+         ) : <Empty>No form submissions yet</Empty>}
+       </div>
     </div>
   );
 }
@@ -540,15 +548,39 @@ function OverviewTab({ data }: { data: OverviewData }) {
 function BookkeepingDashboard({ data, onRefresh }: { data: FinancialSummary; onRefresh: () => void }) {
   const [showForm, setShowForm] = useState<"income" | "expense" | null>(null);
   if (!data?.year) return <Empty>Loading bookkeeping...</Empty>;
-  return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Gross Income" value={data.total_income} color="#34A853" icon="$" format="currency" />
-        <KpiCard label="Total Expenses" value={data.total_expenses} color="#EA4335" icon="$" format="currency" />
-        <KpiCard label="Net Profit" value={data.net_profit} color="#D49341" icon="$" format="currency" />
-        <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="◇" />
-      </div>
-      <div className="flex gap-3 flex-wrap">
+return (
+     <div className="space-y-8">
+       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+         <KpiCard label="Gross Income" value={data.total_income} color="#34A853" icon="$" format="currency" />
+         <KpiCard label="Total Expenses" value={data.total_expenses} color="#EA4335" icon="$" format="currency" />
+         <KpiCard label="Net Profit" value={data.net_profit} color="#D49341" icon="$" format="currency" />
+         <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="◇" />
+       </div>
+
+       {/* Monthly Income vs Expenses Bar Chart */}
+       {data.monthly_income?.length > 0 && (
+         <div className="bg-white/5 border border-white/10 p-6">
+           <SectionTitle>Monthly Income vs Expenses</SectionTitle>
+           <div className="flex items-end gap-2 h-48 mt-4">
+             {data.monthly_income.map((m) => {
+               const exp = data.monthly_expenses?.find(e => e.month === m.month)?.amount || 0;
+               const maxVal = Math.max(...data.monthly_income.map(x => x.amount), ...data.monthly_expenses.map(x => x.amount), 1);
+               const incH = (m.amount / maxVal) * 100;
+               const expH = (exp / maxVal) * 100;
+               return (
+                 <div key={m.month} className="flex flex-col items-center gap-1 flex-1 group">
+                   <div className="flex gap-0.5 h-full">
+                     <div className="w-4 bg-[#34A853] rounded-t transition-all duration-500 group-hover:bg-[#34A853]/70" style={{ height: `${incH}%` }} />
+                     <div className="w-4 bg-[#EA4335] rounded-t transition-all duration-500 group-hover:bg-[#EA4335]/70" style={{ height: `${expH}%` }} />
+                   </div>
+                   <span className="text-[8px] text-white/60 text-center">{m.month.slice(5)}</span>
+                 </div>
+               );
+             })}
+           </div>
+         </div>
+       )}
+       <div className="flex gap-3 flex-wrap">
         <button onClick={() => setShowForm("income")} className="px-5 py-3 bg-[#34A853]/20 text-[#34A853] border border-[#34A853]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#34A853]/30 transition-all">+ Log Income</button>
         <button onClick={() => setShowForm("expense")} className="px-5 py-3 bg-[#EA4335]/20 text-[#EA4335] border border-[#EA4335]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#EA4335]/30 transition-all">+ Log Expense</button>
         <a href="/api/bookkeeping?tab=csv&type=business" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV</a>
