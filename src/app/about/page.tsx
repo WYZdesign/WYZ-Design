@@ -89,13 +89,13 @@ export default function AboutPage() {
               </div>
             ))}
           </div>
-          {/* 90% black overlay */}
-          <div className="absolute inset-0 bg-black/90 z-[15] pointer-events-none" />
+          {/* 75% black overlay */}
+          <div className="absolute inset-0 bg-black/75 z-[15] pointer-events-none" />
           <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
             <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
             <TextMaskReveal direction="up">
             <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
-              <TextSplit stagger={0.03} direction="up">WE MAKE WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">WORKS</TextSplit></span>
+              <TextSplit stagger={0.03} direction="up">BUILT DIFFERENT</TextSplit>
             </h1>
             </TextMaskReveal>
             <p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-2xl mx-auto mb-3">
@@ -174,6 +174,17 @@ export default function AboutPage() {
                   <Link href="/contact" className="inline-block px-8 py-4 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">
                     GET IN TOUCH
                   </Link>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-4 justify-center">
+                  <a href="https://instagram.com/torreMarcel" target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#666] dark:text-white/50 hover:text-[#DF3131] transition-colors underline underline-offset-4">
+                    @torreMarcel
+                  </a>
+                  <a href="https://instagram.com/wyzdesign" target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#666] dark:text-white/50 hover:text-[#DF3131] transition-colors underline underline-offset-4">
+                    @wyzdesign
+                  </a>
+                  <a href="mailto:info@wyzdesign.com" className="text-[13px] text-[#666] dark:text-white/50 hover:text-[#DF3131] transition-colors underline underline-offset-4">
+                    info@wyzdesign.com
+                  </a>
                 </div>
               </div>
             </div>

@@ -351,47 +351,32 @@ function SquareQuote() {
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto" ref={ref}>
-      <div className="relative w-full" style={{ paddingBottom: "100%" }}>
-        <div
-          className="absolute inset-0 flex flex-col items-center justify-center text-center p-10 sm:p-16 transition-all duration-100 ease-linear"
-          style={{
-            transform: inView
-              ? `perspective(1200px) rotateY(${scrollOffset * 0.3}deg) rotateX(${-scrollOffset * 0.2}deg) scale(${1 - Math.abs(scrollOffset) * 0.002})`
-              : "none",
-            opacity: inView ? 1 : 0,
-            transition: inView ? "transform 0.1s ease-linear, opacity 0.8s ease" : "opacity 0.8s ease",
-          }}>
-          {/* Animated border ring */}
-          <div className="absolute inset-4 border-2 border-[#E2E2E2] dark:border-[#333] transition-colors" />
-          <div className="absolute -inset-2 sm:-inset-4 opacity-20 pointer-events-none" style={{
-            border: "1px solid #DF3131",
-            transform: `rotate(${scrollOffset * 0.5}deg)`,
-            transition: "transform 0.1s ease-linear",
-          }} />
-          <div className="absolute -inset-4 sm:-inset-8 opacity-10 pointer-events-none" style={{
-            border: "1px solid #D49341",
-            transform: `rotate(${-scrollOffset * 0.3}deg)`,
-            transition: "transform 0.1s ease-linear",
-          }} />
-
-          {/* Content */}
-          <div className="relative z-10">
-            <p className="text-[#DF3131] text-[11px] sm:text-[12px] font-heading font-bold tracking-[0.3em] uppercase opacity-0 animate-fadeIn mb-2"
-              style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}>
-              Est. 2019
-            </p>
-            <h2 className="text-[1.1rem] sm:text-[1.4rem] md:text-[1.7rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.03em] leading-[1.4] opacity-0 animate-fadeIn mb-4"
-              style={{ animationDelay: "0.6s", animationFillMode: "forwards" }}>
-              Every garment<br />tells a story of <span className="text-[#DF3131]">defiance</span>,<br />creativity, and<br />the enduring spirit<br />of doing it yourself.
+    <div className="max-w-4xl mx-auto px-6" ref={ref}>
+      <div className="relative w-full overflow-hidden bg-[#111] border border-[#333]">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="relative h-64 md:h-auto">
+            <Image src="/images/faotm_1.jpg" alt="Featured Artist of the Month" fill className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111]/80 hidden md:block" />
+          </div>
+          <div className="flex flex-col items-center justify-center text-center p-8 sm:p-12">
+            <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3">Featured Artist of the Month</span>
+            <h2 className="text-[1.4rem] sm:text-[1.7rem] md:text-[2rem] font-heading font-black text-white tracking-[0.04em] leading-[1.1] mb-4">
+              This month&apos;s merch is built from the art of Donte &quot;Danny&quot; Davis.
             </h2>
+            <p className="text-white/60 text-[14px] leading-relaxed mb-6 max-w-md">
+              Every piece in this collection comes from a real artist with a real story. No generic graphics. No mass-produced templates. Just art that means something.
+            </p>
+            <div className="flex flex-wrap gap-3 justify-center">
+              <Link href="/featured-artist" className="inline-block px-6 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] hover:bg-[#B82020] transition-all">
+                SEE THE ARTIST
+              </Link>
+              <Link href="/merch" className="inline-block px-6 py-3 border-2 border-white text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] hover:bg-white hover:text-[#111] transition-all">
+                SHOP FAOTM
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-      <style>{`
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
-      `}</style>
     </div>
   );
 }

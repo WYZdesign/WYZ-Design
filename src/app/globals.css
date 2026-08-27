@@ -1052,8 +1052,8 @@ p[class*="tracking-"][class*="uppercase"] {
   paint-order: stroke fill;
 }
 .dark .marquee-outline {
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  color: #111;
+  -webkit-text-fill-color: #111;
   -webkit-text-stroke: 1.5px #e0e0e0;
   paint-order: stroke fill;
 }
