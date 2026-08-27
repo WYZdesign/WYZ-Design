@@ -82,26 +82,26 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
     className="absolute inset-0 transition-all duration-700 ease-in-out"
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
- <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col justify-between overflow-hidden relative">
+<div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col items-center justify-center overflow-hidden relative">
   <div className="absolute inset-0 opacity-10">
    <Image src={service.img} alt={service.name} fill sizes="100vw" className="w-full h-full object-cover" />
    </div>
-  <div className="relative z-10 text-center">
+  <div className="relative z-10 text-center flex flex-col items-center justify-center">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{service.cat}</span>
-  <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{service.name}</h3>
- <p className="text-white/80 text-[15px] leading-relaxed mb-4">{service.desc}</p>
- <div className="flex items-center justify-center gap-3 mb-4">
- <span className="text-[45px] font-black">{service.price}</span>
- <span className="text-white/60 text-[14px]">· {service.dur}</span>
+  <h3 className="font-heading font-black text-white text-[24px] sm:text-[26px] tracking-[0.03em] mb-3">{service.name}</h3>
+ <p className="text-white/80 text-[15px] leading-relaxed mb-5 max-w-xs">{service.desc}</p>
+ <div className="flex flex-col items-center justify-center gap-0 mb-5">
+ <span className="text-[50px] sm:text-[56px] font-black leading-none">{service.price}</span>
+ <span className="text-white/60 text-[15px] mt-1">· {service.dur}</span>
  </div>
  </div>
- <div className="relative z-10 flex gap-2">
+ <div className="relative z-10 flex gap-2 w-full max-w-xs">
   <Link href={service.bookLink} className="flex-1 text-center py-3 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
  BOOK NOW
- </Link>
- <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
+  </Link>
+  <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
  VIEW PLANS
- </Link>
+  </Link>
  </div>
  </div>
  </div>

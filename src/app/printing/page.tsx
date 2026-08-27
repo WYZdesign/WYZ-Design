@@ -96,33 +96,33 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   </div>
   </div>
    {/* Back */}
-   <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
-   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col justify-between overflow-hidden relative">
-   <div className="absolute inset-0 opacity-10">
-     <Image src={sticker.img} alt={sticker.name} fill sizes="100vw" className="w-full h-full object-cover" />
-   </div>
-   <div className="relative z-10 text-center flex-1 flex flex-col justify-center items-center w-full">
-    <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 block text-center mb-2">Sticker Type</span>
-    <h3 className="font-heading font-black text-white text-[24px] tracking-[0.03em] text-center mb-3">{sticker.name}</h3>
-    <p className="text-white/80 text-[15px] leading-relaxed mb-4 text-center">{sticker.desc}</p>
-    <div className="space-y-2 text-center w-full">
-    {sticker.features.map((f) => (
-    <div key={f} className="flex items-center justify-center gap-2 text-[14px] text-white/95 font-medium text-center">
-    <span>✓</span> {f}
+<div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
+    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center overflow-hidden relative">
+    <div className="absolute inset-0 opacity-10">
+      <Image src={sticker.img} alt={sticker.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
-    ))}
+    <div className="relative z-10 text-center flex flex-col items-center justify-center">
+     <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 block text-center mb-2">Sticker Type</span>
+     <h3 className="font-heading font-black text-white text-[24px] tracking-[0.03em] text-center mb-3">{sticker.name}</h3>
+     <p className="text-white/80 text-[15px] leading-relaxed mb-4 text-center">{sticker.desc}</p>
+     <div className="space-y-2 text-center w-full">
+     {sticker.features.map((f) => (
+     <div key={f} className="flex items-center justify-center gap-2 text-[14px] text-white/95 font-medium text-center">
+     <span>✓</span> {f}
+     </div>
+     ))}
+     </div>
+    </div>
+    <div className="relative z-10 flex gap-2 justify-center mt-5 w-full max-w-xs">
+     <Link href="/booking" className="flex-1 text-center py-3 px-4 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
+     GET A QUOTE
+    </Link>
+    <Link href="/plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
+     VIEW PLANS
+    </Link>
     </div>
    </div>
-   <div className="relative z-10 flex gap-2 justify-center mt-4">
-    <Link href="/booking" className="flex-1 text-center py-3 px-4 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
-    GET A QUOTE
-   </Link>
-   <Link href="/plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
-    VIEW PLANS
-   </Link>
-  </div>
-  </div>
-  </div>
+   </div>
   </div>
   </div>
  );

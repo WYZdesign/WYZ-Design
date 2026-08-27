@@ -198,24 +198,24 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   className="absolute inset-0 transition-all duration-700 ease-in-out"
   style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
-   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col justify-between overflow-hidden relative">
+   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col items-center justify-center overflow-hidden relative">
    <div className="absolute inset-0 opacity-10">
      <Image src={s.img} alt={s.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
-    <div className="relative z-10">
+    <div className="relative z-10 text-center flex flex-col items-center justify-center">
    <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{s.cat}</span>
-   <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
-   <p className="text-white/80 text-[15px] leading-relaxed mb-4 line-clamp-3">{s.desc}</p>
-   <div className="flex items-center gap-3 mb-4">
-   <span className="text-[26px] sm:text-[32px] font-black">{s.price}</span>
-   <span className="text-white/60 text-[14px]">· {s.dur}</span>
+   <h3 className="font-heading font-black text-white text-[22px] sm:text-[24px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
+   <p className="text-white/80 text-[14px] sm:text-[15px] leading-relaxed mb-5 line-clamp-3 max-w-xs">{s.desc}</p>
+   <div className="flex flex-col items-center justify-center gap-0 mb-5">
+   <span className="text-[42px] sm:text-[48px] font-black leading-none">{s.price}</span>
+   <span className="text-white/60 text-[14px] mt-1">{s.dur}</span>
    </div>
    </div>
-   <div className="relative z-10 flex gap-2 shrink-0">
-   <Link href={s.bookLink} className="flex-1 text-center py-2.5 sm:py-3 bg-[#DF3131] text-white text-[14px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-all" onClick={(e) => e.stopPropagation()}>
+   <div className="relative z-10 flex gap-2 shrink-0 w-full max-w-xs">
+   <Link href={s.bookLink} className="flex-1 text-center py-2.5 sm:py-3 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
     BOOK NOW
    </Link>
-   <Link href="/plans" className="flex-1 text-center py-2.5 sm:py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#111] transition-all" onClick={(e) => e.stopPropagation()}>
+   <Link href="/plans" className="flex-1 text-center py-2.5 sm:py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
     VIEW PLANS
    </Link>
    </div>
