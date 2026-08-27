@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "res.cloudinary.com" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
       { protocol: "https", hostname: "*.googleusercontent.com" },
+      { protocol: "https", hostname: "images.printful.com" },
     ],
   },
 
@@ -96,7 +97,7 @@ const nextConfig: NextConfig = {
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://js.stripe.com https://www.googletagmanager.com https://connect.facebook.net https://www.clarity.ms https://analytics.tiktok.com https://app.cal.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com",
-            "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://*.googleusercontent.com https://images.unsplash.com",
+            "img-src 'self' data: blob: https://res.cloudinary.com https://lh3.googleusercontent.com https://*.googleusercontent.com https://images.unsplash.com https://images.printful.com",
             "connect-src 'self' https://api.resend.com https://api.stripe.com https://*.supabase.co wss://*.supabase.co https://o11y.sentry.io https://www.facebook.com https://analytics.tiktok.com https://www.clarity.ms https://app.cal.com",
             "frame-src https://js.stripe.com https://hooks.stripe.com https://www.googletagmanager.com https://app.cal.com",
             "frame-ancestors 'none'",
