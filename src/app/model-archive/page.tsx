@@ -353,8 +353,8 @@ export default function ModelArchivePage() {
  <FiChevronRight className="w-10 h-10" />
  </button>
  )}
- <img src={albumImages[lightboxIdx]} alt={`${selectedModel} ${lightboxIdx + 1}`}
- width={900} height={1200}
+ <Image src={albumImages[lightboxIdx]} alt={`${selectedModel} ${lightboxIdx + 1}`}
+ width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
  <div className="absolute bottom-4 text-white/50 text-sm">{lightboxIdx + 1} / {albumImages.length}</div>
  </div>

@@ -401,7 +401,7 @@ export default function CategoryPage() {
   <div className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center" onClick={closeSlideshow}>
   <button aria-label="Close slideshow" className="absolute top-4 right-4 text-white/60 hover:text-white z-10" onClick={closeSlideshow}><FiX className="w-8 h-8" /></button>
   <button aria-label="Previous image" className="absolute left-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); prevSlide(); }}><FiChevronLeft className="w-10 h-10" /></button>
-  <img src={allImages[slideshowIndex]} alt={`Slide ${slideshowIndex + 1} of ${allImages.length}`} width={1200} height={800} className="max-w-full max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
+   <Image src={allImages[slideshowIndex]} alt={`Slide ${slideshowIndex + 1} of ${allImages.length}`} width={1200} height={800} unoptimized className="max-w-full max-h-full object-contain" onClick={(e) => e.stopPropagation()} />
   <button aria-label="Next image" className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white z-10" onClick={(e) => { e.stopPropagation(); nextSlide(); }}><FiChevronRight className="w-10 h-10" /></button>
   <div className="absolute bottom-6 text-white/40 text-sm">{slideshowIndex + 1} / {allImages.length}</div>
   </div>

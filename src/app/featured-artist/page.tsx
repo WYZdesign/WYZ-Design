@@ -104,8 +104,8 @@ function ArtistGallery() {
  <FiChevronRight className="w-10 h-10" />
  </button>
  )}
- <img src={ARTIST_GALLERY[lbIdx].src} alt={ARTIST_GALLERY[lbIdx].label}
- width={900} height={1200}
+ <Image src={ARTIST_GALLERY[lbIdx].src} alt={ARTIST_GALLERY[lbIdx].label}
+ width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
  <div className="absolute bottom-4 text-white/50 text-sm">{lbIdx + 1} / {ARTIST_GALLERY.length}</div>
  </div>
