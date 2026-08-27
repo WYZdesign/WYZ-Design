@@ -150,8 +150,8 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
  <div className={`overflow-hidden ${className}`} onClick={handleClick}>
   <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
    {[...items, ...items].map((src, i) => (
-   <div key={i} className="flex-none w-[40vw] sm:w-[280px] md:w-[380px] lg:w-[440px] h-40 sm:h-56 md:h-72 relative overflow-hidden cursor-pointer group">
-     <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 40vw, 440px" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+    <div key={i} className="flex-none w-[40vw] sm:w-[280px] md:w-[380px] lg:w-[440px] h-44 sm:h-60 md:h-80 relative overflow-hidden cursor-pointer group">
+      <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 40vw, 440px" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
    </div>
    ))}
   </div>
