@@ -2,6 +2,7 @@
 import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import { useState, useEffect } from "react";
+import { useSession, signIn } from "next-auth/react";
 import {
   FiUsers, FiInstagram, FiMail, FiExternalLink, FiCalendar, FiAward,
   FiZap, FiMessageCircle, FiPlus, FiTrendingUp, FiHash, FiThumbsUp,
@@ -517,6 +518,7 @@ type Thread = (typeof SEED_THREADS)[number] & { voted: "up" | "down" | null };
 
 export default function ForumPage() {
   const { earn } = useZeal();
+  const { data: session } = useSession();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
@@ -573,6 +575,10 @@ export default function ForumPage() {
   const catLabel = (id: string) => CATEGORIES.find((c) => c.id === id)?.label ?? id;
 
   const handleNsfwClick = () => {
+    if (!session) {
+      setShowAgeGate(true);
+      return;
+    }
     if (nsfwVerified) {
       setActiveCat("nsfw");
     } else {
@@ -581,6 +587,10 @@ export default function ForumPage() {
   };
 
   const confirmAge = () => {
+    if (!session) {
+      signIn(undefined, { callbackUrl: "/community" });
+      return;
+    }
     try { localStorage.setItem("nsfwAgeVerified", "1"); } catch {}
     setNsfwVerified(true);
     setShowAgeGate(false);
@@ -1268,16 +1278,20 @@ export default function ForumPage() {
             <div className="w-16 h-16 rounded-full bg-[#9B59B6]/10 flex items-center justify-center mx-auto mb-6">
               <FiEye className="w-8 h-8 text-[#9B59B6]" />
             </div>
-            <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-3">AGE VERIFICATION</h2>
+            <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-3">
+              {session ? "AGE VERIFICATION" : "SIGN IN REQUIRED"}
+            </h2>
             <p className="text-[15px] text-[#666] dark:text-[#b0b0b0] leading-relaxed mb-8">
-              The NSFW category contains adult-industry creative content. You must be 18 years or older to access this section.
+              {session
+                ? "The NSFW category contains adult-industry creative content. You must be 18 years or older to access this section."
+                : "You need to sign in to access the NSFW category. Sign in with your account, then confirm you are 18 or older."}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <button
                 onClick={confirmAge}
                 className="flex-1 px-6 py-3 bg-[#9B59B6] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#8E44AD] transition-colors"
               >
-                I am 18 or older
+                {session ? "I am 18 or older" : "Sign in to continue"}
               </button>
               <button
                 onClick={() => setShowAgeGate(false)}
