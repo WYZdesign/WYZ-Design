@@ -716,7 +716,7 @@ export default function EventsPage() {
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
    <div className="relative overflow-hidden mx-0 -mt-20 lg:-mt-24 hero-banner">
-   <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[75vh]">
+   <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
   <div className="relative overflow-hidden bg-white dark:bg-[#111]">
   <Image src="/images/events/hero_bg.jpg" alt="WYZ Design event production — live concert venue with professional lighting" fill className="w-full h-full object-cover opacity-80" priority />
   <div className="absolute inset-0 bg-black/30" />

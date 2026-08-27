@@ -113,7 +113,7 @@ function ParallaxHero() {
   }, []);
 
   return (
-    <div className="relative h-[85vh] sm:h-[90vh] overflow-hidden bg-[#111]">
+    <div className="relative h-screen overflow-hidden bg-[#111]">
       {/* Accordion gallery of crew wearing merch — panels expand on hover */}
       <div className="absolute inset-0 flex">
         {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
@@ -138,7 +138,7 @@ function ParallaxHero() {
           <span className="block text-[#DF3131]">DIFFERENT</span>
         </h1>
         <div className="text-white/50 text-[11px] sm:text-[13px] max-w-lg leading-relaxed min-h-[3em] mb-3" style={{ opacity: Math.max(0, 1 - scrollY / 300) }}>
-           <TypewriterText text="More than fashion, a narrative of defiance, creativity, and the enduring spirit of doing it yourself." speed={30} />
+           <TypewriterText text="Crew-made designs. Quality you can feel. Every piece carries the story." speed={30} />
         </div>
         <a href="#shop" className="mt-8 px-8 py-3 bg-white text-[#111] border-2 border-white text-[13px] font-bold tracking-[0.15em] uppercase hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all" style={{ opacity: Math.max(0, 1 - scrollY / 250) }}>
           Shop Now
@@ -149,10 +149,10 @@ function ParallaxHero() {
 }
 
 function DynamicContentUnderHero() {
-  const features = [
-    { title: "CUSTOM PRINTING", desc: "Every design is printed to order with premium inks on quality garments.", icon: "✦" },
-    { title: "CREW APPROVED", desc: "All designs are worn and tested by the Dying Breed Crew themselves.", icon: "✦" },
-    { title: "QUALITY GUARANTEED", desc: "Not satisfied? We'll make it right, no questions asked.", icon: "✦" },
+   const features = [
+    { title: "PRINTED TO ORDER", desc: "Every design is printed fresh with premium inks. No warehouse full of old stock.", icon: "◆" },
+    { title: "CREW TESTED", desc: "Every design gets worn by the Dying Breed Crew first. If we wouldn't wear it, we don't sell it.", icon: "◆" },
+    { title: "NO HASSLE", desc: "Not feeling it? We'll sort it out. No runaround.", icon: "◆" },
   ];
   return (
     <section className="py-12 sm:py-16 bg-[#FEFEFD]">

@@ -189,7 +189,7 @@ export default function PrintingPage() {
 {/* ── Hero: Split with Video ── */}
   <ScrollReveal animation="fadeUp">
   <section className="relative bg-white dark:bg-black pb-6">
-  <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[75vh] pb-10 lg:pb-16">
+  <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen pb-10 lg:pb-16">
   {/* Left: Video filling full half */}
    <div className="relative overflow-hidden h-[40vh] lg:h-auto">
     <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} />

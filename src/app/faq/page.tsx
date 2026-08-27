@@ -158,7 +158,7 @@ export default function FAQPage() {
         {/* Hero */}
         <ScrollReveal animation="fadeUp" duration={1}>
           <div className="relative overflow-hidden -mx-6 lg:-mx-12 mb-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 h-[50vh] max-h-[500px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] max-h-[800px]">
               <div className="relative overflow-hidden flex items-center justify-center" style={{background:"linear-gradient(-45deg, rgba(223,49,49,0.8), rgba(26,26,26,0.9), rgba(139,0,0,0.7), rgba(42,42,42,0.85), rgba(223,49,49,0.8))",backgroundSize:"400% 400%",animation:"heroGradFaq 8s ease infinite"}}>
                 <video src="/videos/wyz-nav-bg.mp4" muted loop autoPlay playsInline className="hidden lg:block absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/80 to-[#1a1a1a]/90" />
