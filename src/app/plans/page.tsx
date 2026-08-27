@@ -94,7 +94,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
-      style={{ perspective: "1200px", minHeight: "min(663px, 85vh)" }}
+      style={{ perspective: "1200px", minHeight: "min(550px, 85vh)" }}
       role="button"
       tabIndex={0}
       aria-label={`${p.name} plan, ${p.price}/month. ${p.value}. Click to flip and subscribe.`}
@@ -103,7 +103,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
-        <div className={`relative bg-white dark:bg-[#252528] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full ${
+        <div className={`relative bg-white dark:bg-[#252528] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col items-center justify-center ${
           p.popular
             ? "border-[4px] border-[#DF3131] shadow-lg shadow-[#DF3131]/20 scale-[1.03]"
             : "border border-[#E2E2E2] hover:border-[#DF3131]/50"
@@ -113,24 +113,14 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
               Most Popular
             </div>
           )}
-          <div className="p-7 text-center border-b border-[#E2E2E2] flex flex-col items-center justify-center">
+          <div className="p-7 text-center flex flex-col items-center justify-center h-full">
             <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center mb-3">{p.name}</h3>
             <div className="mt-2 text-center">
-              <span className="whitespace-nowrap text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
-              <span className="text-[#666] text-sm">/month</span>
+              <span className="whitespace-nowrap text-[2rem] sm:text-[2.5rem] md:text-[3rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
+              <span className="text-[#666] text-sm ml-2">/month</span>
             </div>
             <span className="inline-block mt-1 text-[14px] text-[#DF3131] font-semibold text-center">{p.value}</span>
-            <p className="text-[13px] text-[#666] text-center">Valid for 3 months</p>
-          </div>
-          <div className="p-7 flex flex-col items-center justify-center text-center">
-            <ul className="space-y-2 text-center w-full">
-              {FEATURES[p.name].map((f) => (
-                <li key={f} className="text-[16px] text-[#666666] flex items-center justify-center gap-2 text-center w-full">
-                  <span className="text-[#DF3131]">+</span>
-                  {f}
-                </li>
-              ))}
-            </ul>
+            <p className="text-[14px] text-[#666] text-center mt-4">Click to flip for full details</p>
           </div>
         </div>
       </div>
@@ -145,14 +135,14 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
           <div className="relative z-10 text-center">
             <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{p.name}</h3>
             <div className="mb-4">
-              <span className="text-[36px] font-black text-white">{p.price}</span>
+              <span className="text-[40px] font-black text-white">{p.price}</span>
               <span className="text-white/60 text-sm">/mo</span>
             </div>
             <p className="text-white/80 text-[14px] mb-2">{p.value}</p>
             <p className="text-white/60 text-[12px] mb-4">Valid for 3 months</p>
-            <ul className="space-y-1.5 text-left max-w-xs mx-auto">
+            <ul className="space-y-2 text-left max-w-xs mx-auto">
               {FEATURES[p.name].map((f) => (
-                <li key={f} className="text-[13px] text-white/90 flex items-start gap-2">
+                <li key={f} className="text-[17px] text-white/90 flex items-start gap-2">
                   <span className="text-white mt-0.5">✓</span>
                   {f}
                 </li>
@@ -387,102 +377,101 @@ export default function PlansPage() {
                  );
                })}
              </div>
-             {/* Desktop: table (hidden on mobile) */}
-             <div className="hidden lg:block rounded-xl border border-[#E2E2E2] dark:border-[#444] overflow-hidden">
-               <table className="w-full text-left">
-                 <thead>
-                   <tr className="bg-[#DF3131] text-white">
-                     <th className="p-4 text-[14px] font-bold tracking-[0.05em]">FEATURE</th>
-                     <th className="p-4 text-[14px] font-bold">STARTER</th>
-                     <th className="p-4 text-[14px] font-bold">BUSINESS</th>
-                     <th className="p-4 text-[14px] font-bold">PRO</th>
-                     <th className="p-4 text-[14px] font-bold">ULTIMATE</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
-                     <td className="p-4 text-[#666] dark:text-white/70 font-semibold">Monthly Price</td>
-                     <td className="p-4 text-[#DF3131] font-bold">$250</td>
-                     <td className="p-4 text-[#DF3131] font-bold">$500</td>
-                     <td className="p-4 text-[#DF3131] font-bold">$750</td>
-                     <td className="p-4 text-[#DF3131] font-bold">$1,000</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
-                     <td className="p-4 text-[#666] dark:text-white/70">Value</td>
-                     <td className="p-4 text-[#666] dark:text-white/70">$725</td>
-                     <td className="p-4 text-[#DF3131] font-bold">$2,025</td>
-                     <td className="p-4 text-[#DF3131] font-bold">$1,425</td>
-                     <td className="p-4 text-[#DF3131] font-bold">$5,000+</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
-                     <td className="p-4 text-[#666] dark:text-white/70">Photoshoots (2hr)</td>
-                     <td className="p-4 text-center">✓ (1)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
-                     <td className="p-4 text-[#666] dark:text-white/70">Graphic Designs</td>
-                     <td className="p-4 text-center">✓ (1)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
-                     <td className="p-4 text-[#666] dark:text-white/70">Promo Videos</td>
-                     <td className="p-4 text-center">✓ (1)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
-                     <td className="p-4 text-[#666] dark:text-white/70">Custom Printing</td>
-                     <td className="p-4 text-center">✓ (≤$100)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
-                     <td className="p-4 text-[#666] dark:text-white/70">Web Design + Maintenance</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
-                     <td className="p-4 text-[#666] dark:text-white/70">Event Planning</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
-                     <td className="p-4 text-[#666] dark:text-white/70">Strategy Consultations</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5">
-                      <td className="p-4 text-[#666] dark:text-white/70">Zeal Rewards</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                   </tr>
-                   <tr className="border-t border-[#E2E2E2] dark:border-[#444]">
-                     <td className="p-4 text-[#666] dark:text-white/70">Priority Support</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#666]">×</td>
-                     <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
-                   </tr>
-                 </tbody>
-               </table>
-             </div>
-              <p className="mt-6 text-center text-[#666] text-[14px]">
-                All plans auto-renew monthly. Cancel anytime. <Link href="/services" className="text-[#DF3131] hover:underline">View individual services</Link>
-              </p>
+              <div className="hidden lg:block rounded-xl border border-[#E2E2E2] dark:border-[#444] overflow-hidden">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-[#DF3131] text-white">
+                      <th className="p-4 text-[14px] font-bold tracking-[0.05em] border-b border-white/20">FEATURE</th>
+                      <th className="p-4 text-[14px] font-bold border-b border-white/20">STARTER</th>
+                      <th className="p-4 text-[14px] font-bold border-b border-white/20">BUSINESS</th>
+                      <th className="p-4 text-[14px] font-bold border-b border-white/20">PRO</th>
+                      <th className="p-4 text-[14px] font-bold border-b border-white/20">ULTIMATE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Monthly Price</td>
+                      <td className="p-4 text-[#DF3131] font-bold">$250</td>
+                      <td className="p-4 text-[#DF3131] font-bold">$500</td>
+                      <td className="p-4 text-[#DF3131] font-bold">$750</td>
+                      <td className="p-4 text-[#DF3131] font-bold">$1,000</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Value</td>
+                      <td className="p-4 text-[#666] dark:text-white/70">$725</td>
+                      <td className="p-4 text-[#DF3131] font-bold">$2,025</td>
+                      <td className="p-4 text-[#DF3131] font-bold">$1,425</td>
+                      <td className="p-4 text-[#DF3131] font-bold">$5,000</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Photoshoots (2hr)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (1)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/5 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Graphic Designs</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (1)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Promo Videos</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (1)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (2)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (3)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Custom Printing</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$100)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓ (≤$250)</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">Unlimited</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Web Design + Maintenance</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Event Planning</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Strategy Consultations</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] bg-white/50 dark:bg-white/10 hover:bg-white/70 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Zeal Rewards</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    </tr>
+                    <tr className="border-t border-[#E2E2E2] dark:border-[#444] hover:bg-white/50 dark:hover:bg-white/10 transition-colors">
+                      <td className="p-4 text-[#666] dark:text-white/70 font-semibold border-r border-[#E2E2E2] dark:border-[#444]">Priority Support</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#666]">×</td>
+                      <td className="p-4 text-center text-[#DF3131] font-bold">✓</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+               <p className="mt-6 text-center text-[#666] text-[14px]">
+                 All plans auto-renew monthly. Cancel anytime. <Link href="/services" className="text-[#DF3131] hover:underline">View individual services</Link>
+               </p>
           </div>
         </section>
         </ScrollReveal>

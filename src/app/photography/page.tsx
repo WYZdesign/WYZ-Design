@@ -14,7 +14,7 @@ import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
 import { shuffleArray } from "@/lib/utils";
 import { getSiteUrl } from "@/lib/site-url";
-import { NSFW_CATEGORIES } from "@/lib/nsfw";
+import { NSFW_CATEGORIES } from "@/lib/nsfw-constants";
 import { useNsfwSession } from "@/hooks/useNsfwSession";
 import AgeGateModal from "@/components/AgeGateModal";
 

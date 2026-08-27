@@ -9,7 +9,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { FiChevronLeft, FiX, FiChevronRight, FiLock } from "react-icons/fi";
-import { NSFW_CATEGORIES } from "@/lib/nsfw";
+import { NSFW_CATEGORIES } from "@/lib/nsfw-constants";
 const GATED_CATEGORIES = NSFW_CATEGORIES;
 
 const CATEGORY_META: Record<string, { label: string; desc: string }> = {
