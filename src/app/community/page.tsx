@@ -1,7 +1,7 @@
 "use client";
 import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   FiUsers, FiInstagram, FiMail, FiExternalLink, FiCalendar, FiAward,
   FiZap, FiMessageCircle, FiPlus, FiTrendingUp, FiHash, FiThumbsUp,
@@ -538,6 +538,15 @@ export default function ForumPage() {
     }))
   );
 
+  const [nsfwVerified, setNsfwVerified] = useState(false);
+  const [showAgeGate, setShowAgeGate] = useState(false);
+
+  useEffect(() => {
+    try {
+      setNsfwVerified(localStorage.getItem("nsfwAgeVerified") === "1");
+    } catch {}
+  }, []);
+
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
@@ -562,6 +571,21 @@ export default function ForumPage() {
   };
 
   const catLabel = (id: string) => CATEGORIES.find((c) => c.id === id)?.label ?? id;
+
+  const handleNsfwClick = () => {
+    if (nsfwVerified) {
+      setActiveCat("nsfw");
+    } else {
+      setShowAgeGate(true);
+    }
+  };
+
+  const confirmAge = () => {
+    try { localStorage.setItem("nsfwAgeVerified", "1"); } catch {}
+    setNsfwVerified(true);
+    setShowAgeGate(false);
+    setActiveCat("nsfw");
+  };
 
   const toggleFeedLike = (id: number) => {
     setFeedPosts((prev) =>
@@ -930,7 +954,7 @@ export default function ForumPage() {
               {CATEGORIES.map((c) => (
                 <button
                   key={c.id}
-                  onClick={() => setActiveCat(c.id)}
+                  onClick={() => c.id === "nsfw" ? handleNsfwClick() : setActiveCat(c.id)}
                   className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] uppercase transition-all ${
                     activeCat === c.id
                       ? "text-white"
@@ -955,8 +979,8 @@ export default function ForumPage() {
                 className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
               >
                 {CATEGORIES.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.label}
+                  <option key={c.id} value={c.id} disabled={c.id === "nsfw" && !nsfwVerified}>
+                    {c.label}{c.id === "nsfw" && !nsfwVerified ? " (verify age first)" : ""}
                   </option>
                 ))}
               </select>
@@ -1236,6 +1260,35 @@ export default function ForumPage() {
           </div>
         </div>
       </ScrollReveal>
+
+      {/* NSFW Age Gate Modal */}
+      {showAgeGate && (
+        <div className="fixed inset-0 z-[300] bg-black/80 flex items-center justify-center p-6" role="dialog" aria-modal="true" aria-label="Age verification">
+          <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] max-w-md w-full p-8 text-center">
+            <div className="w-16 h-16 rounded-full bg-[#9B59B6]/10 flex items-center justify-center mx-auto mb-6">
+              <FiEye className="w-8 h-8 text-[#9B59B6]" />
+            </div>
+            <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-3">AGE VERIFICATION</h2>
+            <p className="text-[15px] text-[#666] dark:text-[#b0b0b0] leading-relaxed mb-8">
+              The NSFW category contains adult-industry creative content. You must be 18 years or older to access this section.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={confirmAge}
+                className="flex-1 px-6 py-3 bg-[#9B59B6] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#8E44AD] transition-colors"
+              >
+                I am 18 or older
+              </button>
+              <button
+                onClick={() => setShowAgeGate(false)}
+                className="flex-1 px-6 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#666] dark:text-[#b0b0b0] font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:border-[#DF3131] transition-colors"
+              >
+                Go back
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
