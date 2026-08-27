@@ -153,7 +153,7 @@ return (
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen flex flex-col lg:flex-row hero-banner">
+   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen flex flex-col lg:flex-row hero-banner">
   {/* Left: Image */}
   <div className="w-full lg:w-1/2 h-[40vh] lg:h-auto relative overflow-hidden">
   <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill className="w-full h-full object-cover" priority />
@@ -161,32 +161,32 @@ return (
   </div>
   {/* Right: Text with gradient */}
  <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 pt-32 lg:pt-40 overflow-hidden">
-   <div className="absolute inset-0 hero-grad-services z-0" />
-   <div className="absolute inset-0 bg-black/20 z-[1]" />
-    <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
-  <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
-  <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
-  </h1>
-  <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
-   From photography to web design, we handle the full creative process to make your brand stand out.
-   </p>
-   <Link href="/plans"
-   className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all mt-4 sm:mt-6">
-   VIEW PLANS
-   </Link>
-   </div>
-   </div>
+    <div className="absolute inset-0 hero-grad-services z-0" />
+    <div className="absolute inset-0 bg-black/20 z-[1]" />
+     <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
+ <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
+   <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
+   <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
+   </h1>
+   <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
+    From photography to web design, we handle the full creative process to make your brand stand out.
+    </p>
+    <Link href="/plans"
+    className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all mt-4 sm:mt-6">
+    VIEW PLANS
+    </Link>
+    </div>
+    </div>
   </section>
   </ScrollReveal>
 
-{/* ═══ SERVICES MARQUEE ═══ */}
+{/* SERVICES MARQUEE */}
   <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
-          <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 2) % 4]}`}>{word}</span>
+          <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 3) % 4]}`}>{word}</span>
           <span className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
         </span>
       );
