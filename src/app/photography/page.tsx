@@ -577,6 +577,19 @@ return (
     </div>
    </section>
 
+{/* ═══ BRAND MARQUEE ═══ */}
+  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
+    {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
+      return (
+        <span key={i} className="inline-flex items-center">
+          <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 3) % 4]}`}>{word}</span>
+          <span className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
+        </span>
+      );
+    })}
+  </EnhancedMarquee>
+
   {/* IMAGE CAROUSEL 1 */}
  <section className="py-2">
   <AutoScrollRow items={CAROUSEL_IMAGES_1} />
@@ -802,19 +815,6 @@ return (
     onVerified={nsfwSession.onVerified}
     categoryLabel={nsfwTarget || undefined}
   />
-
-{/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E] mb-4">
-    {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
-      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
-      return (
-        <span key={i} className="inline-flex items-center">
-          <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 3) % 4]}`}>{word}</span>
-          <span className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
-        </span>
-      );
-    })}
-  </EnhancedMarquee>
 
  {/* BENEFITS CARDS */}
  <ScrollReveal animation="fadeUp" delay={0.1}>

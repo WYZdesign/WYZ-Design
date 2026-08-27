@@ -815,11 +815,12 @@ export default function EventsPage() {
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">PREVIOUS EVENTS</h2>
   <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED BY WYZ DESIGN</p>
  </div>
- <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
- {visibleEvents.map((e) => (
+  <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
+  {visibleEvents.map((e) => (
   <div key={e.title} className="group cursor-pointer relative overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] mb-2 break-inside-avoid">
   <Image src={e.img} alt={e.title} width={400} height={300} className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-500" loading="lazy"
   onError={(ev) => { (ev.target as HTMLImageElement).style.display = 'none'; }} />
+  <div className="absolute inset-0 bg-black/50 group-hover:bg-gradient-to-br group-hover:from-[#DF3131]/30 group-hover:via-black/60 group-hover:to-white/10 transition-all duration-500 pointer-events-none" />
  </div>
  ))}
  </div>
