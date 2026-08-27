@@ -22,6 +22,7 @@ const QUICK_REPLIES = [
 export default function ChatWidget() {
   const { earn } = useZeal();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrollHidden, setScrollHidden] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hey! I'm the WYZ Design assistant. I can help you learn about our services, check pricing, or get you booked. How can I help today?" },
   ]);
@@ -29,6 +30,7 @@ export default function ChatWidget() {
   const [isStreaming, setIsStreaming] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -37,6 +39,19 @@ export default function ChatWidget() {
   useEffect(() => {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
+
+  useEffect(() => {
+    const handler = () => {
+      setScrollHidden(true);
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+      scrollTimerRef.current = setTimeout(() => setScrollHidden(false), 600);
+    };
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handler);
+      if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const onWyzChatOpen = (e: Event) => {
@@ -128,7 +143,7 @@ export default function ChatWidget() {
         onClick={() => { if (!isOpen) void earn("open-chat"); setIsOpen(!isOpen); }}
         className={`fixed bottom-6 right-6 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 ${
           isOpen ? "bg-[#333] rotate-90" : "bg-[#DF3131] animate-pulse"
-        }`}
+        } ${!isOpen && scrollHidden ? "opacity-0 pointer-events-none translate-y-2" : ""}`}
         aria-label={isOpen ? "Close chat" : "Open chat assistant"}
       >
         {isOpen ? (
