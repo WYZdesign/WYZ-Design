@@ -4,11 +4,13 @@ import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import { useState, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FiUsers, FiInstagram, FiMail, FiExternalLink, FiCalendar, FiAward,
   FiZap, FiMessageCircle, FiPlus, FiTrendingUp, FiHash, FiThumbsUp,
   FiCornerDownRight, FiStar, FiImage, FiFilm, FiSmile, FiShare2,
   FiChevronUp, FiChevronDown, FiEye, FiSend, FiMessageSquare,
+  FiX,
 } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useZeal } from "@/components/ZealProvider";
@@ -543,6 +545,7 @@ export default function ForumPage() {
 
   const [nsfwVerified, setNsfwVerified] = useState(false);
   const [showAgeGate, setShowAgeGate] = useState(false);
+  const [showComposer, setShowComposer] = useState(false);
 
   useEffect(() => {
     try {
@@ -930,93 +933,140 @@ export default function ForumPage() {
               <span className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#DF3131] mb-2">{visibleThreads.length} threads</span>
             </div>
 
-            {/* Sorting tabs */}
-            <div className="flex gap-1 mb-4 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] p-1 w-fit">
-              {(["hot", "new", "top"] as const).map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setSortTab(tab)}
-                  className={`px-5 py-2 text-[13px] font-bold tracking-[0.08em] uppercase transition-all ${
-                    sortTab === tab
-                      ? "bg-[#333] dark:bg-[#e0e0e0] text-white dark:text-[#1C1C1E]"
-                      : "text-[#666] dark:text-[#b0b0b0] hover:text-[#333] dark:hover:text-[#e0e0e0]"
-                  }`}
-                >
-                  {tab === "hot" && <FiTrendingUp className="w-3.5 h-3.5 inline mr-1.5" />}
-                  {tab === "new" && <FiZap className="w-3.5 h-3.5 inline mr-1.5" />}
-                  {tab === "top" && <FiAward className="w-3.5 h-3.5 inline mr-1.5" />}
-                  {tab}
-                </button>
-              ))}
-            </div>
+            {/* Unified Dynamic Filter Bar */}
+            <div className="mb-6">
+              <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                {/* Sort Dropdown */}
+                <div className="relative flex-1 sm:flex-[0_0_160px]">
+                  <select
+                    value={sortTab}
+                    onChange={(e) => setSortTab(e.target.value as "hot" | "new" | "top")}
+                    className="w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[13px] font-bold tracking-[0.05em] uppercase outline-none focus:border-[#DF3131] focus:ring-1 focus:ring-[#DF3131] rounded-lg cursor-pointer"
+                  >
+                    <option value="hot">🔥 Hot</option>
+                    <option value="new">⚡ New</option>
+                    <option value="top">🏆 Top</option>
+                  </select>
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#999]">
+                    <FiChevronDown className="w-4 h-4" />
+                  </div>
+                </div>
 
-            {/* Category filter */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              <button
-                onClick={() => setActiveCat("all")}
-                className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] uppercase transition-all ${
-                  activeCat === "all"
-                    ? "bg-[#333] dark:bg-[#e0e0e0] text-white dark:text-[#1C1C1E]"
-                    : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#666] dark:text-[#b0b0b0]"
-                }`}
-              >
-                All
-              </button>
-              {CATEGORIES.map((c) => (
-                <button
-                  key={c.id}
-                  onClick={() => c.id === "nsfw" ? handleNsfwClick() : setActiveCat(c.id)}
-                  className={`px-4 py-2 text-[13px] font-bold tracking-[0.05em] uppercase transition-all ${
-                    activeCat === c.id
-                      ? "text-white"
-                      : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#666] dark:text-[#b0b0b0]"
-                  }`}
-                  style={activeCat === c.id ? { backgroundColor: c.color } : {}}
-                >
-                  {c.label}
-                </button>
-              ))}
-            </div>
+                {/* Category Filter — Single Dynamic Dropdown */}
+                <div className="relative flex-1">
+                  <select
+                    value={activeCat}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (val === "nsfw" && !nsfwVerified) {
+                        handleNsfwClick();
+                      } else {
+                        setActiveCat(val);
+                      }
+                    }}
+                    className="w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[13px] font-bold tracking-[0.05em] uppercase outline-none focus:border-[#DF3131] focus:ring-1 focus:ring-[#DF3131] rounded-lg cursor-pointer"
+                  >
+                    <option value="all">All Categories</option>
+                    {CATEGORIES.map((c) => (
+                      <option key={c.id} value={c.id} disabled={c.id === "nsfw" && !nsfwVerified}>
+                        {c.label}{c.id === "nsfw" && !nsfwVerified ? " 🔞" : ""}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#999]">
+                    <FiChevronDown className="w-4 h-4" />
+                  </div>
+                </div>
 
-            {/* New thread composer */}
-            <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 mb-6">
-              <div className="flex items-center gap-2 mb-3">
-                <FiPlus className="w-4 h-4 text-[#DF3131]" />
-                <p className="font-heading font-bold text-[14px] tracking-[0.06em] text-[#333] dark:text-[#e0e0e0] mb-2">START A THREAD</p>
+                {/* Quick Actions — Mobile Stack */}
+                <div className="flex gap-2 sm:hidden">
+                  <button
+                    onClick={() => setShowComposer(!showComposer)}
+                    className="flex-1 px-4 py-3 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.08em] uppercase rounded-lg hover:bg-[#B82020] transition-all"
+                  >
+                    + Thread
+                  </button>
+                </div>
               </div>
-              <select
-                value={composer.category}
-                onChange={(e) => setComposer({ ...composer, category: e.target.value })}
-                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
-              >
-                {CATEGORIES.map((c) => (
-                  <option key={c.id} value={c.id} disabled={c.id === "nsfw" && !nsfwVerified}>
-                    {c.label}{c.id === "nsfw" && !nsfwVerified ? " (verify age first)" : ""}
-                  </option>
-                ))}
-              </select>
-              <input
-                value={composer.title}
-                onChange={(e) => setComposer({ ...composer, title: e.target.value })}
-                placeholder="Thread title..."
-                aria-label="Post title"
-                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] placeholder:text-[#999]"
-              />
-              <textarea
-                value={composer.body}
-                onChange={(e) => setComposer({ ...composer, body: e.target.value })}
-                placeholder="What's on your mind?"
-                aria-label="Post content"
-                rows={3}
-                className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] resize-none placeholder:text-[#999]"
-              />
-              <button
-                onClick={postThread}
-                className="px-8 py-4 bg-[#333] dark:bg-[#e0e0e0] text-white dark:text-[#1C1C1E] font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white transition-colors"
-              >
-                Post Thread
-              </button>
-            </div>
+
+              {/* Desktop: Inline Composer Toggle + Quick Stats */}
+              <div className="hidden sm:flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4 text-[12px] text-[#666] dark:text-[#b0b0b0]">
+                  <span>{visibleThreads.length} threads</span>
+                  <span className="px-2 py-1 bg-[#DF3131]/10 text-[#DF3131] rounded-full font-bold tracking-[0.05em] uppercase">
+                    {activeCat === "all" ? "All" : CATEGORIES.find(c => c.id === activeCat)?.label}
+                  </span>
+                  <span className="px-2 py-1 bg-[#333]/10 text-[#333] dark:bg-white/10 dark:text-white rounded-full font-bold tracking-[0.05em] uppercase">
+                    {sortTab}
+                  </span>
+                </div>
+                <button
+                  onClick={() => setShowComposer(!showComposer)}
+                  className="px-6 py-2.5 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.08em] uppercase rounded-lg hover:bg-[#B82020] transition-all flex items-center gap-2"
+                >
+                  <FiPlus className="w-4 h-4" /> Start Thread
+                </button>
+              </div>
+</div>
+
+            {/* Dynamic Composer — Slide Down */}
+            <AnimatePresence>
+              {showComposer && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, y: -10 }}
+                  animate={{ opacity: 1, height: "auto", y: 0 }}
+                  exit={{ opacity: 0, height: 0, y: -10 }}
+                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 mb-6"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2">
+                      <FiPlus className="w-4 h-4 text-[#DF3131]" />
+                      <p className="font-heading font-bold text-[14px] tracking-[0.06em] text-[#333] dark:text-[#e0e0e0] mb-2">START A THREAD</p>
+                    </div>
+                    <button
+                      onClick={() => setShowComposer(false)}
+                      className="ml-auto p-1 text-[#666] dark:text-[#b0b0b0] hover:text-[#DF3131] transition-colors"
+                      aria-label="Close composer"
+                    >
+                      <FiX className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <select
+                    value={composer.category}
+                    onChange={(e) => setComposer({ ...composer, category: e.target.value })}
+                    className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
+                  >
+                    {CATEGORIES.map((c) => (
+                      <option key={c.id} value={c.id} disabled={c.id === "nsfw" && !nsfwVerified}>
+                        {c.label}{c.id === "nsfw" && !nsfwVerified ? " (verify age first)" : ""}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    value={composer.title}
+                    onChange={(e) => setComposer({ ...composer, title: e.target.value })}
+                    placeholder="Thread title..."
+                    aria-label="Post title"
+                    className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] placeholder:text-[#999]"
+                  />
+                  <textarea
+                    value={composer.body}
+                    onChange={(e) => setComposer({ ...composer, body: e.target.value })}
+                    placeholder="What's on your mind?"
+                    aria-label="Post content"
+                    rows={3}
+                    className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] resize-none placeholder:text-[#999]"
+                  />
+                  <button
+                    onClick={postThread}
+                    className="w-full px-8 py-4 bg-[#333] dark:bg-[#e0e0e0] text-white dark:text-[#1C1C1E] font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white transition-colors"
+                  >
+                    Post Thread
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Thread list — 3-col grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
