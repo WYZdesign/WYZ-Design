@@ -915,20 +915,20 @@ export default function HomePage() {
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
        </GyroTilt>
-         <div className="flex flex-row gap-4 justify-center flex-wrap mt-4 sm:mt-6">
-     <MagneticElement tag="div" strength={0.25}>
-     <Link href="/about"
-      className="inline-block bg-white text-[#111] border-2 border-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
-     SEE THE STORY
-     </Link>
-     </MagneticElement>
-     <MagneticElement tag="div" strength={0.25}>
-     <Link href="/contact"
-     className="inline-block px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center bg-[#DF3131] text-white hover:bg-[#B82020] transition-all">
-     START A PROJECT
-     </Link>
-     </MagneticElement>
-    </div>
+<div className="flex flex-row gap-4 justify-center flex-wrap mt-4 sm:mt-6">
+      <MagneticElement tag="div" strength={0.25}>
+      <Link href="/about"
+       className="inline-block bg-white text-[#111] border-2 border-white px-8 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[13px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] hover:shadow-white/20 transition-all">
+      SEE THE STORY
+      </Link>
+      </MagneticElement>
+      <MagneticElement tag="div" strength={0.25}>
+      <Link href="/contact"
+       className="inline-block bg-[#DF3131] text-white border-2 border-[#DF3131] px-8 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[13px] sm:text-[15px] text-center hover:bg-[#B82020] hover:border-[#B82020] transition-all">
+      START A PROJECT
+      </Link>
+      </MagneticElement>
+     </div>
    </div>
    </div>
    </section>

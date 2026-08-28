@@ -1,4 +1,5 @@
 "use client";
+
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
 import TextMaskReveal from "@/components/TextMaskReveal";
