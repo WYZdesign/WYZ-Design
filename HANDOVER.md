@@ -1,6 +1,6 @@
-# WYZ Design — Session 34 Complete
+# WYZ Design — Session 35 Complete
 
-## All Sessions Summary (30-34)
+## All Sessions Summary (30-35)
 
 ### Session 30-31 (Prior)
 - Splash scroll lock, hero H1 formatting, button positioning
@@ -46,12 +46,22 @@
 - Merch store expand/collapse animation (portal effect)
 - Merch auto-scroll gallery with black-to-red gradient
 - Pricing calculator FAQ/chatbot widget (6 FAQ items)
+- Home hero buttons: same size px-8 py-4, white button glows white on hover
+- Splash proper scroll lock
+
+### Session 35
+- Community page: unified dynamic filter bar (sort + category in 2 compact dropdowns)
+- Community page: collapsible composer with Framer Motion animation
+- Full SEO metadata for ALL 40 pages with metadata.ts files
+- Pages with metadata: home, about, services, photography, events, blog, designs, gallery, case-studies (4 case studies), web-design, printing, plans, merch (2 sub-pages), featured-artist, model-archive, community, loyalty, FAQ, gift-card, contact, brands, booking, 3-pointprogram, partnerships, referral, match, wyzmind, FD studios, search, secret, splash (2 sub-pages), clear-cache, admin, offline, policy pages
+- Dynamic routes: photography/[category], merch/[id], view/[page] (blog/[slug] has generateMetadata)
 
 ## Current State
-- `HEAD` = dd7aee0
-- 15 commits pushed to origin/master
-- TypeScript clean
+- `HEAD` = b643e78
+- 20 commits pushed to origin/master
+- TypeScript strict: clean
 - Build passes (112 pages)
+- All 40 pages have SEO metadata (title, description, keywords, OpenGraph, Twitter cards, canonical URLs)
 
 ## Remaining (Optional Enhancements)
 - End-to-end Stripe purchase test (needs real browser)
@@ -59,8 +69,15 @@
 - Mobile visual verification (no browser access)
 - NEXT_PUBLIC_FD_API env var for production
 
-## Key Files Modified (Session 34)
-- `src/components/SmoothScrollProvider.tsx` - wheelMultiplier
-- `src/app/merch/page.tsx` - expand/collapse + auto-scroll gallery
-- `src/components/PricingCalculator.tsx` - FAQ/chatbot widget
-- `src/app/plans/page.tsx` - comparison table alignment fix
+## Key Files Modified (Session 35)
+- `src/app/community/page.tsx` - unified filter bar + collapsible composer
+- `src/app/home/page.tsx` - hero buttons same size
+- `src/app/*/metadata.ts` - 40 metadata files for SEO
+
+## Metadata Coverage
+| Type | Count |
+|------|-------|
+| Static pages | 35 |
+| Dynamic routes | 4 |
+| Blog [slug] (generateMetadata) | 1 |
+| **Total** | **40** |
