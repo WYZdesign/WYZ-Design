@@ -4,6 +4,14 @@
 
 
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy — WYZ Design",
+  description: "WYZ Design privacy policy. Information we collect, how we use it, sharing practices, cookies, your rights, and contact information.",
+  robots: { index: true, follow: true },
+};
+
 export default function PrivacyPolicy() {
   return (
     <>

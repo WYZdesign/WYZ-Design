@@ -4,6 +4,14 @@
 
 
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Shipping Policy — WYZ Design",
+  description: "WYZ Design shipping policy. Processing times, shipping methods, rates, international shipping, tracking, and delivery estimates.",
+  robots: { index: true, follow: true },
+};
+
 export default function ShippingPolicy() {
   return (
     <>

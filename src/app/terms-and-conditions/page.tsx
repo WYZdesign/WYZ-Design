@@ -4,6 +4,14 @@
 
 
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions — WYZ Design",
+  description: "WYZ Design terms and conditions. Acceptance, services, payments, cancellations, intellectual property, liability, governing law.",
+  robots: { index: true, follow: true },
+};
+
 export default function TermsAndConditions() {
   return (
     <>

@@ -4,6 +4,14 @@
 
 
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Copyright Notice — WYZ Design",
+  description: "WYZ Design copyright notice. All content, designs, photographs, and materials are protected intellectual property. DMCA policy and contact information.",
+  robots: { index: true, follow: true },
+};
+
 export default function CopyrightNotice() {
   return (
     <>

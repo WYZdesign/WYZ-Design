@@ -10,9 +10,19 @@ interface ZealSummary {
   tierColor?: string;
 }
 
+interface ReferralSummary {
+  code: string;
+  signups: number;
+  purchases: number;
+  totalCommission: number;
+  paidCommission: number;
+  pendingCommission: number;
+}
+
 export default function MyAccountPage() {
   const { status, data: session } = useSession();
   const [zeal, setZeal] = useState<ZealSummary | null>(null);
+  const [referral, setReferral] = useState<ReferralSummary | null>(null);
 
   useEffect(() => {
     if (status !== "authenticated") return;
@@ -20,7 +30,23 @@ export default function MyAccountPage() {
       .then(r => (r.ok ? r.json() : null))
       .then(d => { if (d && typeof d.points === "number") setZeal(d); })
       .catch(() => {});
-  }, [status]);
+    // Fetch referral data by creating/looking up code
+    if (session?.user?.email) {
+      fetch("/api/referral", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "create", email: session.user.email })
+      })
+        .then(r => (r.ok ? r.json() : null))
+        .then(d => { if (d?.code) {
+            fetch("/api/referral?code=" + encodeURIComponent(d.code))
+              .then(r => r.ok ? r.json() : null)
+              .then(rd => { if (rd) setReferral(rd); })
+              .catch(() => {});
+          } })
+        .catch(() => {});
+    }
+  }, [status, session?.user?.email]);
 
   if (status === "loading") {
     return (

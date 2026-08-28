@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
 import { IoChevronDown } from "react-icons/io5";
-import { FiSun, FiMoon, FiSearch } from "react-icons/fi";
+import { FiSun, FiMoon, FiSearch, FiZap, FiShare2 } from "react-icons/fi";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
 import MagneticElement from "@/components/MagneticElement";
@@ -273,13 +273,34 @@ export default function Navbar() {
                   <AnimatePresence>
                     {profileOpen && (
                       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
-                        className="absolute top-full right-0 mt-1 w-56 shadow-xl z-50 rounded-lg overflow-hidden">
+                        className="absolute top-full right-0 mt-1 w-80 shadow-xl z-50 rounded-lg overflow-hidden">
                         <div className="absolute inset-0 wyz-red-gradient" />
                         <div className="relative z-10 py-2">
                           <div className="px-4 py-3 border-b border-white/10">
                             <p className="font-medium text-white text-sm">{session.user.name}</p>
                             <p className="text-xs text-white/60 truncate">{session.user.email}</p>
                           </div>
+
+                          {/* Your Activity Widget */}
+                          <div className="px-4 py-3 border-b border-white/10">
+                            <p className="text-xs font-bold tracking-[0.15em] uppercase text-white/50 mb-2">Your Activity</p>
+                            <Link href="/loyalty" onClick={() => setProfileOpen(false)}
+                              className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                              <FiZap className="w-3 h-3 text-[#DF3131]" />
+                              View Loyalty Dashboard
+                            </Link>
+                          </div>
+
+                          {/* Referral/Commissions */}
+                          <div className="px-4 py-3 border-b border-white/10">
+                            <p className="text-xs font-bold tracking-[0.15em] uppercase text-white/50 mb-2">Referral Program</p>
+                            <Link href="/referral" onClick={() => setProfileOpen(false)}
+                              className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                              <FiShare2 className="w-3 h-3 text-[#DF3131]" />
+                              My Referral Code & Earnings
+                            </Link>
+                          </div>
+
                           <Link href="/account/my-account" onClick={() => setProfileOpen(false)}
                             className="block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
                             My Account
