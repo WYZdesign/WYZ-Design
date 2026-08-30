@@ -189,7 +189,7 @@ return (
     <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
     <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
     </h1>
-    <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
+    <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 sm:mb-3 max-w-sm mx-auto">
     From photography to web design, we handle the full creative process to make your brand stand out.
     </p>
     <Link href="/plans"

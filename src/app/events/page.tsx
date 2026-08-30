@@ -727,7 +727,7 @@ export default function EventsPage() {
      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
     <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
    </h1>
-   <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
+   <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-sm leading-relaxed mb-6 sm:mb-6 mx-auto">
    Let our team handle the planning, from the first idea to the final encore. You&apos;ll get an event that&apos;s easy, stress-free, and unforgettable.
    </p>
    <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">

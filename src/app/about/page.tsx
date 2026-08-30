@@ -93,13 +93,13 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-black/65 z-[15] pointer-events-none" />
             <div className="relative z-20 max-w-4xl mx-auto px-6 text-center flex items-center justify-center min-h-screen">
               <div className="w-full">
-              <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-3">About Us</span>
+              <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-4">About Us</span>
               <TextMaskReveal direction="up">
-              <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white uppercase mb-3 sm:mb-8" style={{ lineHeight: 0.9 }}>
+              <h1 className="text-[2rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white uppercase mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
                 <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">BUILT </TextSplit></span><TextSplit stagger={0.03} direction="up">DIFFERENT</TextSplit>
               </h1>
               </TextMaskReveal>
-<p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-2xl mx-auto mb-3">
+<p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-sm mx-auto mb-6">
                WYZ Design is a creative growth studio for artists, brands, and culture. Built from scratch in Chicago. Scaling in Los Angeles.
              </p>
             </div>
