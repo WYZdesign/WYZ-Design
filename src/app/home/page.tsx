@@ -902,7 +902,7 @@ export default function HomePage() {
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
-     <p className="text-white/70 text-[6px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-2 sm:mb-3">
+     <p className="text-white/70 text-[5px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-2 sm:mb-3">
        <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
      </p>
        <TextMaskReveal direction="up">
@@ -1113,7 +1113,7 @@ export default function HomePage() {
 <h2 className="text-[0.84rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase whitespace-nowrap mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
-  <p className="text-white/80 tracking-[0.3em] text-[12px] sm:text-sm uppercase mb-3 max-sm:whitespace-normal max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
+  <p className="text-white/80 tracking-[0.3em] text-[10px] sm:text-sm uppercase mb-3 max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
   <Link href="/printing" className="inline-block px-8 py-4 bg-white text-[#111] border-2 border-white text-[14px] font-bold tracking-[0.12em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all whitespace-nowrap mt-4">
   CUSTOM PRINTING →
   </Link>
