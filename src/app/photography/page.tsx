@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiCamera, FiX, FiChevronLeft, FiChevronRight, FiLock } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
+import SuccessBurst from "@/components/SuccessBurst";
 import { useSwipe } from "@/hooks/useSwipe";
 import { useModalA11y } from "@/hooks/useModalA11y";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
@@ -749,9 +750,12 @@ return (
   </select>
   </div>
    <textarea name="about" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={3} className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none resize-none transition-colors" />
-  <button type="submit" disabled={applicationSubmitting} className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg text-center disabled:opacity-50 disabled:cursor-not-allowed">
-  {applicationSubmitted ? "SUBMITTED ✓" : applicationSubmitting ? "SUBMITTING..." : "SUBMIT"}
-  </button>
+   <div className="relative">
+   <button type="submit" disabled={applicationSubmitting} className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg text-center disabled:opacity-50 disabled:cursor-not-allowed">
+   {applicationSubmitted ? "SUBMITTED ✓" : applicationSubmitting ? "SUBMITTING..." : "SUBMIT"}
+   </button>
+   <SuccessBurst show={applicationSubmitted} />
+   </div>
   </form>
   </div>
   )}

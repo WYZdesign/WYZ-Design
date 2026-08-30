@@ -5,6 +5,7 @@ import { logger } from "@/lib/logger";
 import { useState, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import {
   FiUsers, FiInstagram, FiMail, FiExternalLink, FiCalendar, FiAward,
   FiZap, FiMessageCircle, FiPlus, FiTrendingUp, FiHash, FiThumbsUp,
@@ -719,16 +720,15 @@ export default function ForumPage() {
 
           {/* Stats strip */}
 <div className="grid grid-cols-3 gap-3 mb-14">
-             {[
-               { v: threads.length, l: "Threads", c: "#DF3131" },
-               { v: 23, l: "Members", c: "#D49341" },
-               { v: CATEGORIES.length, l: "Channels", c: "#5865F2" },
-             ].map((s) => (
-               <div key={s.l} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-                 <p className="font-heading font-black text-[30px] tracking-[0.05em]" style={{ color: s.c }}>{s.v}</p>
-                 <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2">{s.l}</p>
-               </div>
-             ))}
+             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
+               <AnimatedCounter end={threads.length} label="Threads" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#DF3131]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+             </div>
+             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
+               <AnimatedCounter end={23} label="Members" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#D49341]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+             </div>
+             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
+               <AnimatedCounter end={CATEGORIES.length} label="Channels" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#5865F2]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+             </div>
            </div>
 
           {/* Community Highlights — 3-col grid */}

@@ -10,6 +10,7 @@ import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import TextSplit from "@/components/TextSplit";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import { useZeal } from "@/components/ZealProvider";
 import { getSiteUrl } from "@/lib/site-url";
 
@@ -623,18 +624,9 @@ VISIT CHANNEL
 </a>
  </div>
  <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-12 mt-10 pt-8 border-t border-white/10">
- <div className="text-center">
-<p className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]">90+</p>
-  <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">Client Events</p>
-  </div>
-  <div className="text-center">
-  <p className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]">12+</p>
-  <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">DIY Shows</p>
-  </div>
-  <div className="text-center">
-  <p className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]">600+</p>
- <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">Live Shows</p>
- </div>
+ <AnimatedCounter end={90} suffix="+" label="Client Events" className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]" labelClassName="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase" />
+ <AnimatedCounter end={12} suffix="+" label="DIY Shows" className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]" labelClassName="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase" />
+ <AnimatedCounter end={600} suffix="+" label="Live Shows" className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]" labelClassName="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase" />
  </div>
  </div>
  </div>

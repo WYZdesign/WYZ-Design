@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import TextReveal from "@/components/TextReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
+import SuccessBurst from "@/components/SuccessBurst";
 import { useZeal } from "@/components/ZealProvider";
 
 const PAPER_TYPES = [
@@ -390,9 +391,12 @@ export default function PrintingPage() {
    <input name="newsletter" type="checkbox" className="accent-[#DF3131]" /> Keep me updated on new printing options and promotions.
   </label>
   </div>
-  <button type="submit" disabled={quoteSubmitting} className="w-full py-4 bg-[#333] text-white font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#DF3131] transition-all hover:scale-[1.01] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
-  {quoteSubmitted ? "QUOTE REQUESTED" : quoteSubmitting ? "SUBMITTING..." : "SUBMIT"}
-  </button>
+   <div className="relative">
+   <button type="submit" disabled={quoteSubmitting} className="w-full py-4 bg-[#333] text-white font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#DF3131] transition-all hover:scale-[1.01] hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+   {quoteSubmitted ? "QUOTE REQUESTED" : quoteSubmitting ? "SUBMITTING..." : "SUBMIT"}
+   </button>
+   <SuccessBurst show={quoteSubmitted} />
+   </div>
  </form>
  </div>
  </ScrollReveal>

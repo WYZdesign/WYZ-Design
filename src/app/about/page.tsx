@@ -8,6 +8,7 @@ import TextMaskReveal from "@/components/TextMaskReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ParticleBackground from "@/components/ParticleBackground";
 import TextSplit from "@/components/TextSplit";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import { SUB_BRANDS } from "@/lib/brands";
 
 const VALUES = [
@@ -240,17 +241,10 @@ export default function AboutPage() {
               BY THE <span className="text-[#DF3131]">NUMBERS</span>
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-              {[
-                { num: "90+", label: "Events Produced" },
-                { num: "45+", label: "Clients Served" },
-                { num: "1,500+", label: "Photos Delivered" },
-                { num: "9+", label: "Years Running" },
-              ].map((s, i) => (
-                <div key={i}>
-                  <p className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1">{s.num}</p>
-                  <p className="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2">{s.label}</p>
-                </div>
-              ))}
+              <AnimatedCounter end={90} suffix="+" label="Events Produced" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
+              <AnimatedCounter end={45} suffix="+" label="Clients Served" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
+              <AnimatedCounter end={1500} suffix="+" label="Photos Delivered" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
+              <AnimatedCounter end={9} suffix="+" label="Years Running" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
             </div>
           </div>
         </section>
