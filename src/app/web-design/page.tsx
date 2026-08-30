@@ -285,7 +285,7 @@ return (
                       {c.icon}
                     </div>
                     <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] tracking-[0.05em] uppercase mb-3">{c.title}</h3>
-                    <p className="text-[13px] text-[#666] dark:text-white/50 leading-relaxed">{c.desc}</p>
+                    <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed">{c.desc}</p>
                   </div>
                 ))}
               </div>
