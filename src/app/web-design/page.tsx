@@ -150,7 +150,7 @@ function SiteCard({ site, index }: { site: typeof CLIENT_SITES[0]; index: number
         style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
-        <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 group-hover:text-white/60 transition-colors mb-2">{site.category}</span>
+        <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/70 group-hover:text-white/90 transition-colors mb-2">{site.category}</span>
         <h3 className="font-heading font-black text-white text-[1.1rem] sm:text-[1.3rem] tracking-[0.04em] uppercase group-hover:scale-105 transition-transform duration-300 mb-3">{site.name}</h3>
         {/* Hover reveal */}
         <div className="flex items-center gap-2 mt-3 sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-all duration-300 sm:translate-y-3 sm:group-hover:translate-y-0">

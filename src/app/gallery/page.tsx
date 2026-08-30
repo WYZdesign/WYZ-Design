@@ -37,9 +37,9 @@ function GalleryLightbox({ images, index, onClose, onPrev, onNext, onImageTap }:
  return (
  <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={onClose} {...swipe}>
  <button className="absolute top-6 right-6 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={onClose} aria-label="Close"><FiX className="w-8 h-8" /></button>
- <button className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onPrev(); }}><FiChevronLeft className="w-10 h-10" /></button>
+ <button className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onPrev(); }} aria-label="Previous image"><FiChevronLeft className="w-10 h-10" /></button>
  <Image src={images[index].src} alt={images[index].cat} width={900} height={600} unoptimized className="max-h-[85vh] max-w-[90vw] object-contain select-none" draggable={false} onClick={(e) => { e.stopPropagation(); onImageTap(); }} />
- <button className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onNext(); }}><FiChevronRight className="w-10 h-10" /></button>
+ <button className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onNext(); }} aria-label="Next image"><FiChevronRight className="w-10 h-10" /></button>
  <div className="absolute bottom-6 text-white/50 text-sm">{index + 1} / {images.length}</div>
  </div>
  );

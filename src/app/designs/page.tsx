@@ -317,7 +317,7 @@ const faotmImages = [
 
   {/* ═══ COVER ART CAROUSEL ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
-  <section className="-mt-2 pt-1 pb-1 sm:py-4 lg:py-5">
+  <section id="cover-art" className="-mt-2 pt-1 pb-1 sm:py-4 lg:py-5 scroll-mt-24">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
   <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Cover Art</h2>
   <Link href="#cover-art" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
@@ -328,7 +328,7 @@ const faotmImages = [
 
  {/* ═══ FLYERS CAROUSEL ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="pt-1 pb-1 sm:py-4 lg:py-5">
+ <section id="flyers" className="pt-1 pb-1 sm:py-4 lg:py-5 scroll-mt-24">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
   <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Flyers</h2>
   <Link href="#flyers" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
@@ -339,7 +339,7 @@ const faotmImages = [
 
  {/* ═══ LOGOS CAROUSEL ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="pt-1 pb-2 sm:py-4 lg:py-5">
+ <section id="logos" className="pt-1 pb-2 sm:py-4 lg:py-5 scroll-mt-24">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
   <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Logos</h2>
   <Link href="#logos" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>

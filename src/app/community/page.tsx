@@ -532,6 +532,7 @@ export default function ForumPage() {
   );
   const [openThread, setOpenThread] = useState<number | null>(null);
   const [composer, setComposer] = useState({ title: "", body: "", category: "general" });
+  const [composerError, setComposerError] = useState("");
   const [replyBox, setReplyBox] = useState<{ id: number; text: string } | null>(null);
   const [feedPosts, setFeedPosts] = useState<FeedPost[]>(
     NEWS_POSTS.map((p) => ({
@@ -639,7 +640,8 @@ export default function ForumPage() {
   };
 
   const postThread = () => {
-    if (!composer.title.trim() || !composer.body.trim()) return;
+    if (!composer.title.trim() || !composer.body.trim()) { setComposerError("Title and body are both required."); return; }
+    setComposerError("");
     const newThread: Thread = {
       id: Date.now(),
       category: composer.category,
@@ -1065,6 +1067,7 @@ export default function ForumPage() {
                   >
                     Post Thread
                   </button>
+                  {composerError && <p className="text-[#DF3131] text-[13px] mt-2 text-center">{composerError}</p>}
                 </motion.div>
               )}
             </AnimatePresence>
