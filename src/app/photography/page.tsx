@@ -524,7 +524,7 @@ return (
   `}</style>
 
 {/* HERO */}
-   <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
+   <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
    {/* Desktop split: video left, text right */}
    <div className="hidden md:grid md:grid-cols-2 md:h-full">
    <div className="relative h-full">
@@ -551,25 +551,25 @@ return (
    </div>
    </div>
    {/* Mobile merged */}
-   <div className="md:hidden absolute inset-0 flex items-center justify-center">
-   <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
+   <div className="md:hidden absolute inset-0 z-0">
     <video
      src="/videos/hero-banners/photography.mp4"
      autoPlay muted loop playsInline
      className="absolute inset-0 w-full h-full object-cover"
      style={{ filter: "saturate(1.2) contrast(1.1)" }}
      />
-    </div>
-   <div className="absolute inset-0 bg-black/65 z-[1]" />
-   <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
-   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+    <div className="absolute inset-0 bg-black/65 z-[1]" />
+   </div>
+   <div className="md:hidden absolute inset-0 z-10 flex items-center justify-center">
+    <div className="text-center px-6 sm:px-10 lg:px-16 pt-20 pb-12">
+   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-7 sm:mb-9" style={{ lineHeight: 0.9 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
-     <p className="text-[16px] sm:text-[16px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
+     <p className="text-[16px] sm:text-[16px] text-white/70 max-w-md leading-relaxed mb-7 sm:mb-9 mx-auto">
       Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
       </p>
-      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all mt-4 sm:mt-6">
+      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
        BOOK A SHOOT
        </Link>
 </div>

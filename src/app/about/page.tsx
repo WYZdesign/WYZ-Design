@@ -91,7 +91,7 @@ export default function AboutPage() {
             </div>
             {/* 60% black overlay */}
             <div className="absolute inset-0 bg-black/65 z-[15] pointer-events-none" />
-            <div className="relative z-20 max-w-4xl mx-auto px-6 text-center flex items-center justify-center h-full">
+            <div className="relative z-20 max-w-4xl mx-auto px-6 text-center flex items-center justify-center min-h-screen">
               <div className="w-full">
               <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
               <TextMaskReveal direction="up">
