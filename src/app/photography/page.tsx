@@ -166,7 +166,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
 
   return (
     <div
-      className="group relative cursor-pointer min-h-[320px] sm:min-h-[500px] lg:min-h-[624px]"
+      className="group relative cursor-pointer min-h-[368px] sm:min-h-[575px] lg:min-h-[718px]"
       style={{ perspective: "1200px" }}
       role="button"
       tabIndex={0}
@@ -187,10 +187,9 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
   </div>
    <div className="p-4 sm:p-5 text-center">
-  <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{s.cat}</span>
-  <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
-  <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed line-clamp-2">{s.desc}</p>
-  </div>
+   <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{s.cat}</span>
+   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
+   </div>
   </div>
   </div>
   {/* Back */}
@@ -204,7 +203,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
     </div>
     <div className="relative z-10 text-center flex flex-col items-center justify-center">
    <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{s.cat}</span>
-   <h3 className="font-heading font-black text-white text-[22px] sm:text-[24px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
+   <h3 className="font-heading font-black text-white text-[25.3px] sm:text-[27.6px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
    <p className="text-white/80 text-[14px] sm:text-[15px] leading-relaxed mb-5 line-clamp-3 max-w-xs">{s.desc}</p>
    <div className="flex flex-col items-center justify-center gap-0 mb-5">
    <span className="text-[42px] sm:text-[48px] font-black leading-none">{s.price}</span>
@@ -524,8 +523,8 @@ return (
   }
   `}</style>
 
- {/* HERO */}
-    <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
+{/* HERO */}
+   <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
    {/* Desktop split: video left, text right */}
    <div className="hidden md:grid md:grid-cols-2 md:h-full">
    <div className="relative h-full">
@@ -539,7 +538,7 @@ return (
     </div>
     </div>
     <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 pt-24 pb-12 min-h-[500px] h-full">
-   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
+   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
@@ -561,9 +560,9 @@ return (
      style={{ filter: "saturate(1.2) contrast(1.1)" }}
      />
     </div>
-   <div className="absolute inset-0 bg-black/30 z-[1]" />
+   <div className="absolute inset-0 bg-black/65 z-[1]" />
    <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20">
-   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
+   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
@@ -578,7 +577,7 @@ return (
    </section>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
     {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
@@ -602,9 +601,9 @@ return (
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
   {/* Left: Info + Buttons */}
   <div className={`flex flex-col items-center justify-center text-center h-full ${archiveVis ? "animate-slideInLeft" : "opacity-0"}`}>
-   <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] leading-tight mb-4">
+<h2 className="text-[1.75rem] sm:text-[2.25rem] md:text-[2.875rem] lg:text-[3.5rem] xl:text-[4.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] leading-tight mb-6">
    <TextSplit stagger={0.03} direction="up">MODEL</TextSplit><br /><TextSplit stagger={0.03} direction="up">ARCHIVE</TextSplit>
-  </h2>
+   </h2>
    <p className="text-[16px] lg:text-[18px] text-[#666] dark:text-white/60 max-w-md leading-relaxed mb-8 mx-auto">
    Our model archive has 78+ models and client albums to browse. Explore our diverse range of talent, from inexperienced to professional.
   </p>
@@ -623,21 +622,21 @@ return (
    {showModelForm ? "BACK" : "BECOME A MODEL"}
   </button>
  </div>
- {/* Model Count Stats */}
- <div className="flex gap-8 justify-center">
- <div className="text-center">
- <p className="text-[2rem] font-heading font-black text-[#DF3131]">78+</p>
- <p className="text-[12px] text-[#666] tracking-[0.1em] uppercase">Models</p>
- </div>
- <div className="text-center">
- <p className="text-[2rem] font-heading font-black text-[#DF3131]">8</p>
- <p className="text-[12px] text-[#666] tracking-[0.1em] uppercase">Albums</p>
- </div>
- <div className="text-center">
- <p className="text-[2rem] font-heading font-black text-[#DF3131]">500+</p>
- <p className="text-[12px] text-[#666] tracking-[0.1em] uppercase">Photos</p>
- </div>
- </div>
+{/* Model Count Stats */}
+  <div className="flex gap-8 justify-center">
+  <div className="text-center">
+  <p className="text-[2.5rem] font-heading font-black text-[#DF3131]">117+</p>
+  <p className="text-[14px] text-[#666] tracking-[0.1em] uppercase">Models</p>
+  </div>
+  <div className="text-center">
+  <p className="text-[2.5rem] font-heading font-black text-[#DF3131]">12</p>
+  <p className="text-[14px] text-[#666] tracking-[0.1em] uppercase">Albums</p>
+  </div>
+  <div className="text-center">
+  <p className="text-[2.5rem] font-heading font-black text-[#DF3131]">750+</p>
+  <p className="text-[14px] text-[#666] tracking-[0.1em] uppercase">Photos</p>
+  </div>
+  </div>
  </div>
 
  {/* Right: Interactive Content */}
@@ -792,13 +791,13 @@ return (
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
       <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
       </div>
-      {isNsfw && !nsfwSession.ageVerified && (
-        <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/20 pointer-events-none">
-          <div className="bg-[#DF3131]/80 text-white px-3 py-1.5 text-[11px] font-heading font-bold tracking-[0.1em] uppercase flex items-center gap-1.5">
-            <FiLock className="w-3 h-3" /> 18+
+{isNsfw && !nsfwSession.ageVerified && (
+          <div className="absolute top-2 right-2 z-30 bg-black/20 pointer-events-none">
+            <div className="bg-[#DF3131]/80 text-white px-3 py-1.5 text-[11px] font-heading font-bold tracking-[0.1em] uppercase flex items-center gap-1.5">
+              <FiLock className="w-3 h-3" /> 18+
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </Link>
     </ImageHoverReveal>
     </ScrollParallaxCard>
@@ -849,7 +848,7 @@ return (
   <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-12 lg:py-20 bg-white dark:bg-[#111]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
- <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] tracking-[0.1em] text-center mb-4">BOOK TODAY</h2>
+ <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] tracking-[0.1em] text-center mb-8">BOOK TODAY</h2>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
  {[
  { name: "PHOTOSHOOT", price: "$100", dur: "1 HR", cat: "Photography", desc: "Capture authentic moments with sleek, professional photography.", bookLink: "/booking-calendar/photoshoot", img: "/images/photography/photoshoot_camera.jpg" },

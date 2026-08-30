@@ -86,11 +86,11 @@ function ArtistGallery() {
  </div>
  <button onClick={() => flip(-1)} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"‹"}</button>
  <button onClick={() => flip(1)} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"›"}</button>
- <div className="mt-3 flex gap-2 justify-center">
- {ARTIST_GALLERY.map((g, i) => (
- <button key={i} onClick={() => { setDir(i > current ? 1 : -1); setFlipping(true); setTimeout(() => { setCurrent(i); setFlipping(false); }, 350); }}
- className={`w-2 h-2 rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} />
- ))}
+  <div className="mt-3 flex gap-2 justify-center">
+  {ARTIST_GALLERY.map((g, i) => (
+  <button key={i} onClick={() => { setDir(i > current ? 1 : -1); setFlipping(true); setTimeout(() => { setCurrent(i); setFlipping(false); }, 350); }}
+  className={`w-[8px] h-[8px] sm:w-2 sm:h-2 lg:w-[10px] lg:h-[10px] rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} />
+  ))}
  </div>
  {lbIdx !== null && ARTIST_GALLERY[lbIdx].src && (
  <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setLbIdx(null)}>
@@ -202,20 +202,20 @@ export default function FeaturedArtistPage() {
  </div>
  {/* 5 Ws list — text left-aligned on all screens */}
  <div className="space-y-0 text-left">
- {WS.map((w, i) => (
- <div key={w.label} className={`group flex flex-col sm:flex-row items-start gap-5 sm:gap-8 py-7 ${i < WS.length - 1 ? "border-b border-[#E2E2E2]" : ""} hover:bg-[#FAFAF8] transition-colors duration-300 px-4 sm:px-6 text-left`}>
- <div className="flex items-center gap-3 flex-shrink-0 min-w-[100px]">
- <div className="w-10 h-10 flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 rounded-full">
- {w.icon}
- </div>
- <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">{w.label}</span>
- </div>
- <div className="flex-1">
- <h3 className="font-heading font-bold text-[#333] text-[16px] tracking-[0.03em] mb-3">{w.value}</h3>
- <p className="text-[14px] text-[#666] leading-relaxed">{w.desc}</p>
- </div>
- </div>
- ))}
+{WS.map((w, i) => (
+  <div key={w.label} className={`group flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-8 py-7 ${i < WS.length - 1 ? "border-b border-[#E2E2E2]" : ""} hover:bg-[#FAFAF8] transition-colors duration-300 px-4 sm:px-6`}>
+    <div className="flex flex-col items-center gap-1 flex-shrink-0">
+      <div className="w-10 h-10 flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 rounded-full">
+        {w.icon}
+      </div>
+      <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-0">{w.label}</span>
+    </div>
+    <div className="flex-1 text-center sm:text-left">
+      <h3 className="font-heading font-bold text-[#333] text-[16px] tracking-[0.03em] mb-3">{w.value}</h3>
+      <p className="text-[14px] text-[#666] leading-relaxed">{w.desc}</p>
+    </div>
+  </div>
+))}
  </div>
  </div>
  </div>
@@ -229,7 +229,7 @@ export default function FeaturedArtistPage() {
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
  <div className="text-center lg:text-center">
  <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">SUPPORT THE ARTIST</span>
- <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.04em] uppercase text-white mb-4">ART STORE</h2>
+ <h2 className="text-[1.725rem] sm:text-[2rem] md:text-[2.3rem] lg:text-[2.5rem] font-heading font-black tracking-[0.04em] uppercase text-white mb-4">ART STORE</h2>
  <p className="text-white/60 text-[15px] leading-relaxed mb-6">
  Support this month&apos;s featured artist by browsing and purchasing original artwork, prints, and custom pieces. Every purchase directly supports the artist.
  </p>

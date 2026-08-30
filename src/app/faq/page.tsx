@@ -166,7 +166,7 @@ export default function FAQPage() {
                   <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto">
                     <FiHelpCircle className="w-8 h-8 text-[#DF3131]" />
                   </div>
-                  <TextReveal text="F.A.Q." className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] leading-[1.05] mb-3" tag="h1" />
+                  <TextReveal text="F.A.Q." className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] leading-[1.05] mb-4" tag="h1" />
                   <p className="text-white/70 text-base sm:text-lg max-w-md mx-auto">Simplifying Creative Success, Find answers to everything</p>
                 </div>
               </div>

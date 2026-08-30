@@ -260,7 +260,7 @@ export default function PlansPage() {
           {/* Left: Text */}
   <div className="w-full lg:w-1/2 bg-white dark:bg-[#111] flex items-center justify-center px-4 sm:px-10 lg:px-16 py-12 lg:py-0 order-2 lg:order-1">
   <div className="text-center max-w-xl">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
+<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
  CHOOSE YOUR <span className="text-[#DF3131]">PRICING</span> PLAN
  </h1>
  <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
@@ -268,8 +268,11 @@ export default function PlansPage() {
   </p>
   <Link href="/services"
    className="inline-block bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:border-[#DF3131] dark:hover:text-white transition-all">
-  SERVICES
-  </Link>
+   SERVICES
+   </Link>
+   <div className="mt-6 flex justify-center">
+     <svg className="w-6 h-6 text-[#DF3131] animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+   </div>
   </div>
   </div>
           {/* Right: Visual */}

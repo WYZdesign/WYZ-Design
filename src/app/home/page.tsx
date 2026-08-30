@@ -694,11 +694,11 @@ function SmoothCarousel({ items, className = "", speed = 0.5, direction = "left"
  return (
    <div ref={sectionRef} className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
     <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
-     {doubled.map((src, i) => (
-    <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm">
-       <Image src={src} alt="WYZ Design portfolio" fill sizes="(max-width:640px) 32vw, 320px" className="absolute inset-0 w-full h-full object-contain" />
-    </div>
-    ))}
+      {doubled.map((src, i) => (
+     <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm">
+       <Image src={src} alt="WYZ Design portfolio" fill sizes="(max-width:640px) 32vw, 320px" className="absolute inset-0 w-full h-full object-contain" loading="lazy" decoding="async" />
+     </div>
+     ))}
   </div>
   </div>
  );
@@ -902,15 +902,15 @@ export default function HomePage() {
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
-     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-2 sm:mb-3">
+     <p className="text-white/70 text-[6px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-2 sm:mb-3">
        <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
      </p>
-      <TextMaskReveal direction="up">
-      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
-         <span>WE <span className="text-[#DF3131]">MAKE</span></span><br />
-         <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
-      </h1>
-      </TextMaskReveal>
+       <TextMaskReveal direction="up">
+       <h1 className="text-[1.5rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+          <span>WE <span className="text-[#DF3131]">MAKE</span></span><br />
+          <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
+       </h1>
+       </TextMaskReveal>
         <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-6 sm:mb-8 w-full text-center">
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
@@ -934,16 +934,16 @@ export default function HomePage() {
    </section>
 
 {/* ═══ IMAGE GALLERY STRIP ═══ */}
-  <ScrollReveal animation="fadeIn" duration={1}>
-  <ImageReveal direction="up">
-  <section className="py-6 w-full relative overflow-hidden my-8">
-  <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.55} direction="right" />
-  </section>
-  </ImageReveal>
-  </ScrollReveal>
+<ScrollReveal animation="fadeIn" duration={1}>
+   <ImageReveal direction="up">
+   <section className="py-6 w-full relative overflow-hidden my-4">
+   <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.55} direction="right" />
+   </section>
+   </ImageReveal>
+   </ScrollReveal>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
@@ -963,12 +963,12 @@ export default function HomePage() {
  <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#DF3131]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
   <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-  <div className="text-center mb-12 sm:mb-16">
-     <h2 className="text-[1.25rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
-     <TextSplit stagger={0.02} direction="up">WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.02} direction="up">WE DO</TextSplit></span>
-    </h2>
-    <p className="text-[#666] dark:text-white/70 text-[15px] max-w-xl mx-auto leading-relaxed">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel Harris built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
-  </div>
+<div className="text-center mb-12 sm:mb-16 md:mb-20">
+      <h2 className="text-[1.25rem] sm:text-[2.3rem] md:text-[2.875rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-6">
+      <TextSplit stagger={0.02} direction="up">WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.02} direction="up">WE DO</TextSplit></span>
+     </h2>
+     <p className="text-[#666] dark:text-white/70 text-[15px] sm:text-base max-w-xl mx-auto leading-relaxed mt-4">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel Harris built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
+   </div>
   </div>
    {/* Full-width carousel — full bleed stretching to both sides */}
    <div className="relative z-10 my-16 sm:my-24 w-full overflow-hidden">
@@ -996,60 +996,60 @@ export default function HomePage() {
  <div className="min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]">
   {/* ── SERVICES TAB ── */}
   {spTab === "services" && (
-  <div className="max-w-6xl mx-auto animate-fadeIn">
-  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-4">Services</h2>
-  <div className="flex flex-wrap gap-2 mb-8 justify-center">
-  <button onClick={() => setActiveTab("ALL")}
-   className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
-  activeTab === "ALL"
-  ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
-  : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
-  }`}>
-  <span className="relative z-10">ALL</span>
-  </button>
-  {SERVICES.map((s) => (
-   <button key={s.tab} onClick={() => setActiveTab(s.tab)}
-   className={`min-h-[44px] px-4 py-2 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group ${
-  activeTab === s.tab
-  ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
-  : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
-  }`}>
-  <span className="relative z-10">{s.tab}</span>
-  </button>
-  ))}
-  </div>
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {SERVICES.filter(s => activeTab === "ALL" || s.tab === activeTab).map((s) => (
-    <div key={s.name} className="group relative p-8 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 bg-white dark:bg-[#252528] text-center">
-      <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] text-2xl mb-5 group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-        {s.icon}
-      </div>
-      <h3 className="font-heading font-bold text-[#333] dark:text-white text-[15px] tracking-[0.05em] uppercase mb-3">{s.name}</h3>
-      <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed mb-5">{s.desc}</p>
-      <Link href={s.href} className="inline-flex items-center gap-1 text-[#DF3131] text-sm font-bold tracking-[0.08em] uppercase hover:underline">
-        Read More <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
-      </Link>
-    </div>
-  ))}
-  </div>
-  <h3 className="text-center font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-2xl sm:text-3xl md:text-4xl mb-6 mt-12">Popular Services</h3>
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {SERVICE_LIST.map((s) => (
-    <HomeServiceFlipCard key={s.name} s={s} />
-  ))}
-  </div>
-   <div className="text-center mt-10 relative z-10">
-   <Link href="/services" className="inline-block px-8 py-3 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
-   VIEW ALL SERVICES
-   </Link>
+<div className="max-w-6xl mx-auto animate-fadeIn">
+   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-8">Services</h2>
+   <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide mb-10 -mx-6 px-6">
+   <button onClick={() => setActiveTab("ALL")}
+    className={`min-h-[44px] px-6 py-2.5 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group whitespace-nowrap flex-shrink-0 ${
+   activeTab === "ALL"
+   ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
+   : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+   }`}>
+   <span className="relative z-10">ALL</span>
+   </button>
+   {SERVICES.map((s) => (
+    <button key={s.tab} onClick={() => setActiveTab(s.tab)}
+    className={`min-h-[44px] px-6 py-2.5 text-xs font-heading font-bold tracking-[0.1em] uppercase border transition-all duration-300 relative overflow-hidden group whitespace-nowrap flex-shrink-0 ${
+   activeTab === s.tab
+   ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20"
+   : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
+   }`}>
+   <span className="relative z-10">{s.tab}</span>
+   </button>
+   ))}
    </div>
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+   {SERVICES.filter(s => activeTab === "ALL" || s.tab === activeTab).map((s) => (
+     <div key={s.name} className="group relative p-8 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 bg-white dark:bg-[#252528] text-center">
+       <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] text-2xl mb-6 group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+         {s.icon}
+       </div>
+       <h3 className="font-heading font-bold text-[#333] dark:text-white text-[15px] tracking-[0.05em] uppercase mb-4">{s.name}</h3>
+       <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed mb-6">{s.desc}</p>
+       <Link href={s.href} className="inline-flex items-center gap-1 text-[#DF3131] text-sm font-bold tracking-[0.08em] uppercase hover:underline">
+         Read More <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+       </Link>
+     </div>
+   ))}
+   </div>
+   <h3 className="text-center font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-2xl sm:text-3xl md:text-4xl mb-8 mt-16">Popular Services</h3>
+   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+   {SERVICE_LIST.map((s) => (
+     <HomeServiceFlipCard key={s.name} s={s} />
+   ))}
+   </div>
+    <div className="text-center mt-16 relative z-10">
+    <Link href="/services" className="inline-block px-8 py-3 bg-[#333] text-white dark:bg-white dark:text-[#111] border-2 border-[#333] dark:border-white font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
+    VIEW ALL SERVICES
+    </Link>
+    </div>
   </div>
   )}
 
  {/* ── PLANS TAB ── */}
   {spTab === "plans" && (
   <div className="max-w-4xl mx-auto animate-fadeIn">
-   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase .5 text-center mb-4">Pricing Plans</h2>
+   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-4">Pricing Plans</h2>
    <p className="text-[#666] dark:text-white/50 text-sm mb-8 text-center">Affordable Plans for Any Budget</p>
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
  {PRICING_PLANS.map((p, i) => (
@@ -1059,7 +1059,7 @@ export default function HomePage() {
   onClick={() => setFlippedPlans(prev => ({ ...prev, [i]: !prev[i] }))}>
  {/* Card container with 3D flip */}
  <div className="relative w-full transition-transform duration-700"
-  style={{ transformStyle: "preserve-3d", minHeight: "320px", transform: flippedPlans[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}>
+  style={{ transformStyle: "preserve-3d", minHeight: "368px", transform: flippedPlans[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}>
  {/* Front face — just plan name big & bold */}
  <div className={`absolute inset-0 p-8 text-center backface-hidden flex flex-col items-center justify-center transition-all duration-300 ${
   p.badge ? "border-[3px] border-[#DF3131] shadow-lg shadow-[#DF3131]/10 bg-white dark:bg-[#252528]" : "border border-[#E2E2E2] hover:border-[#DF3131] bg-white dark:bg-[#252528]"
@@ -1098,7 +1098,9 @@ export default function HomePage() {
  </div>
  </div>
  </section>
- </ScrollReveal>
+  </ScrollReveal>
+
+<div className="h-12 sm:h-16 lg:h-20" />
 
 {/* ═══ DIGITAL PRINTING BANNER ═══ */}
   <ScrollReveal animation="scaleIn" delay={0.1}>
@@ -1108,7 +1110,7 @@ export default function HomePage() {
   </div>
   <div className="absolute inset-0 bg-black/20 z-[1]" />
   <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-<h2 className="text-[1.05rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase max-sm:whitespace-normal mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
+<h2 className="text-[0.84rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase whitespace-nowrap mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
   <p className="text-white/80 tracking-[0.3em] text-[12px] sm:text-sm uppercase mb-3 max-sm:whitespace-normal max-sm:px-2">Flyers | Stickers | Posters | Prints</p>

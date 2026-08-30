@@ -264,29 +264,60 @@ const faotmImages = [
 
 {/* ═══ HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden bg-white dark:bg-black flex items-center hero-banner">
-  <div className="absolute inset-0 flex flex-col md:flex-row">
+    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden bg-black flex items-center hero-banner">
+  {/* Mobile: full video background */}
+  <div className="md:hidden absolute inset-0 z-0">
+    <video
+     src="/videos/hero-banners/designs.mp4"
+     autoPlay muted loop playsInline
+     className="absolute inset-0 w-full h-full object-cover"
+     />
+    <div className="absolute inset-0 bg-black/65 z-[1]" />
+  </div>
+  {/* Desktop: split layout */}
+  <div className="hidden md:flex absolute inset-0 flex flex-col md:flex-row">
   {/* Left half: text with gradient */}
    <div className="relative w-full md:w-1/2 flex items-center justify-center z-10 overflow-hidden">
    <div className="absolute inset-0 hero-grad-design z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
      <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-32 lg:pt-40 pb-12 md:py-0">
-<h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
-  <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
-   <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131">GET A QUOTE</Link>
-   </div>
-   </div>
-{/* Right half: video - no overlay */}
+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
+    <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
+     <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131">GET A QUOTE</Link>
+     </div>
+     </div>
+  {/* Right half: video - no overlay */}
     <div className="w-full md:w-1/2 relative overflow-hidden">
        <ParallaxVideo src="/videos/hero-banners/designs.mp4" speed={0.25} />
     </div>
   </div>
+  {/* Mobile text overlay */}
+  <div className="md:hidden absolute inset-0 z-10 flex items-center justify-center">
+    <div className="text-center px-6 sm:px-10 lg:px-16 pt-20 pb-12">
+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
+    <p className="text-[16px] sm:text-[17px] text-white/80 max-w-md leading-relaxed mb-6 sm:mb-8 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
+     <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131">GET A QUOTE</Link>
+     </div>
+  </div>
   </section>
   </ScrollReveal>
 
- {/* ═══ COVER ART CAROUSEL ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="-mt-2 pt-1 pb-1 sm:py-4 lg:py-5">
+ {/* ═══ DESIGNS MARQUEE ═══ */}
+   <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+     {(["COVER ART","LOGOS","FLYERS","WEB DESIGN","BRANDING","MERCH"] as const).map((word, i) => {
+       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
+       return (
+         <span key={i} className="inline-flex items-center">
+           <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 3) % 4]}`}>{word}</span>
+           <span className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
+         </span>
+       );
+     })}
+   </EnhancedMarquee>
+
+  {/* ═══ COVER ART CAROUSEL ═══ */}
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+  <section className="-mt-2 pt-1 pb-1 sm:py-4 lg:py-5">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
   <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Cover Art</h2>
   <Link href="#cover-art" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
@@ -341,32 +372,19 @@ const faotmImages = [
  isOpen={openService === 2}
  onToggle={() => setOpenService(openService === 2 ? -1 : 2)}
  />
- </section>
- </ScrollReveal>
-
-{/* ═══ DESIGNS MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
-    {(["COVER ART","LOGOS","FLYERS","WEB DESIGN","BRANDING","MERCH"] as const).map((word, i) => {
-      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
-      return (
-        <span key={i} className="inline-flex items-center">
-          <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 3) % 4]}`}>{word}</span>
-          <span className="inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
-        </span>
-      );
-    })}
-  </EnhancedMarquee>
+</section>
+  </ScrollReveal>
 
   {/* ═══ FOATM — FEATURED ARTIST OF THE MONTH ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
    <section className="py-10 bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
-  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
-    <div className="flex flex-wrap items-center justify-between mb-6 gap-x-6 gap-y-2">
-    <div className="text-left">
-    <span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">FEATURED ARTIST OF THE MONTH</span>
-      <h2 className="text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap !max-w-none">F. A. O. T. M.</h2>
-    </div>
-     <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
+<div className="max-w-[130rem] mx-auto px-6 lg:px-12">
+   <div className="flex flex-col items-center justify-between mb-6 gap-x-6 gap-y-2">
+   <div className="text-center">
+   <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">FEATURED ARTIST OF THE MONTH</span>
+     <h2 className="text-[2rem] lg:text-[2.6rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap !max-w-none">F. A. O. T. M.</h2>
+   </div>
+    <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
    </div>
   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
   {faotmImages.map((p, i) => (

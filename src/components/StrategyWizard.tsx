@@ -155,7 +155,7 @@ export default function StrategyWizard() {
     <>
       <div className="mt-12 p-6 border border-[#DF3131] bg-[#DF3131]/5 flex flex-col sm:flex-row items-start justify-between gap-4">
         <div className="text-left">
-           <h3 className="text-lg font-heading font-bold text-[#333333] dark:text-white">Strategy Wizard</h3>
+           <h3 className="text-[20.7px] font-heading font-bold text-[#333333] dark:text-white">Strategy Wizard</h3>
            <p className="text-[13px] text-[#666665] dark:text-white/60 mt-1 max-w-2xl text-left">
             Answer 4 quick questions and get a personalized service recommendation with exact pricing and the best plan for your needs.
           </p>
@@ -209,7 +209,7 @@ export default function StrategyWizard() {
                       <div className="w-12 h-12 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-3">
                         <FiCheck className="w-6 h-6 text-white" />
                       </div>
-                      <h3 className="text-xl font-heading font-bold text-[#333] dark:text-white">Here's Your Plan</h3>
+                      <h3 className="text-[1.15rem] sm:text-[1.15rem] font-heading font-bold text-[#333] dark:text-white">Here's Your Plan</h3>
                       <p className="text-[13px] text-[#666] dark:text-white/60 mt-1">Based on your answers, here's what we recommend</p>
                     </div>
 
@@ -227,10 +227,10 @@ export default function StrategyWizard() {
                     ))}
 
                     {/* Total */}
-                    <div className="p-4 border border-[#E2E2E2] dark:border-[#444] bg-[#FAFAF9] dark:bg-[#1C1C1E] flex items-center justify-between">
-                      <h4 className="font-heading font-extrabold text-[#333] dark:text-white text-sm !mb-0">À La Carte Total</h4>
-                      <span className="text-[18px] font-bold text-[#DF3131]">{result.total}</span>
-                    </div>
+<div className="p-4 border border-[#E2E2E2] dark:border-[#444] bg-[#FAFAF9] dark:bg-[#1C1C1E] flex flex-col items-center justify-center text-center gap-2">
+                       <h4 className="font-heading font-extrabold text-[#333] dark:text-white text-sm !mb-0">À La Carte Total</h4>
+                       <span className="text-[18px] font-bold text-[#DF3131]">{result.total}</span>
+                     </div>
 
                     {/* Plan recommendation */}
                     {result.plan && (

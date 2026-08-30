@@ -546,6 +546,7 @@ export default function ForumPage() {
   const [nsfwVerified, setNsfwVerified] = useState(false);
   const [showAgeGate, setShowAgeGate] = useState(false);
   const [showComposer, setShowComposer] = useState(false);
+  const [visibleThreadCount, setVisibleThreadCount] = useState(3);
 
   useEffect(() => {
     try {
@@ -715,22 +716,22 @@ export default function ForumPage() {
           <p className="text-[#666] dark:text-[#b0b0b0] text-center mb-8 text-[16px]">Connect with creators, share your work, and grow with the WYZ community.</p>
 
           {/* Stats strip */}
-          <div className="grid grid-cols-3 gap-3 mb-12">
-            {[
-              { v: threads.length, l: "Threads", c: "#DF3131" },
-              { v: 23, l: "Members", c: "#D49341" },
-              { v: CATEGORIES.length, l: "Channels", c: "#5865F2" },
-            ].map((s) => (
-              <div key={s.l} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-                <p className="font-heading font-black text-[28px] tracking-[0.05em]" style={{ color: s.c }}>{s.v}</p>
-                <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2">{s.l}</p>
-              </div>
-            ))}
-          </div>
+<div className="grid grid-cols-3 gap-3 mb-14">
+             {[
+               { v: threads.length, l: "Threads", c: "#DF3131" },
+               { v: 23, l: "Members", c: "#D49341" },
+               { v: CATEGORIES.length, l: "Channels", c: "#5865F2" },
+             ].map((s) => (
+               <div key={s.l} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
+                 <p className="font-heading font-black text-[30px] tracking-[0.05em]" style={{ color: s.c }}>{s.v}</p>
+                 <p className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2">{s.l}</p>
+               </div>
+             ))}
+           </div>
 
           {/* Community Highlights — 3-col grid */}
-          <div className="mb-12">
-            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-4">WHAT HAPPENS HERE</h2>
+<div className="mb-14">
+             <h2 className="font-heading font-bold text-[19px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-6">WHAT HAPPENS HERE</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {COMMUNITY_HIGHLIGHTS.map((h, i) => (
                 <div
@@ -1070,7 +1071,7 @@ export default function ForumPage() {
 
             {/* Thread list — 3-col grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {visibleThreads.map((t) => {
+              {visibleThreads.slice(0, visibleThreadCount).map((t) => {
                 const cat = CATEGORIES.find((c) => c.id === t.category);
                 const isOpen = openThread === t.id;
                 const flair = FLAIRS[t.category];
@@ -1219,11 +1220,21 @@ export default function ForumPage() {
                 );
               })}
             </div>
+            {visibleThreadCount < visibleThreads.length && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => setVisibleThreadCount(prev => prev + 3)}
+                  className="px-6 py-3 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.08em] uppercase rounded-lg hover:bg-[#B82020] transition-all"
+                >
+                  LOAD MORE
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Upcoming Events — 3-col grid */}
           <div className="mb-12">
-            <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-4">UPCOMING</h2>
+            <h2 className="font-heading font-bold text-[19px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-6">UPCOMING</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {UPCOMING_EVENTS.map((ev) => (
                 <div

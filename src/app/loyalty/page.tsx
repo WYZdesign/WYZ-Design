@@ -94,10 +94,10 @@ export default function LoyaltyPage() {
 
   return (
     <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
-      <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
+      <div className="max-w-5xl mx-auto px-6 pt-[3.2rem] sm:pt-32 lg:pt-40">
         <div className="text-center mb-4">
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">EARN ZEAL</h1>
-          <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">The WYZ Design rewards program. Earn Zeal for everything you do here, from showing up daily to uncovering secrets nobody told you about. Climb the tiers, unlock real perks. Sign in to start earning. Everything you do on this site counts once you&apos;re in.</p>
+          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-4 sm:mb-8">EARN ZEAL</h1>
+          <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-6 mt-4">The WYZ Design rewards program. Earn Zeal for everything you do here, from showing up daily to uncovering secrets nobody told you about. Climb the tiers, unlock real perks. Sign in to start earning. Everything you do on this site counts once you&apos;re in.</p>
         </div>
 
         {session && data ? (
@@ -220,7 +220,10 @@ export default function LoyaltyPage() {
         )}
 
         <div className="text-center mb-6">
-          <h2 className="font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4 flex items-center justify-center gap-2"><FiStar className="text-[#DF3131]" /> Ways to Earn</h2>
+          <div className="flex flex-col items-center mb-2">
+            <FiStar className="text-[#DF3131] text-[22px]" />
+          </div>
+          <h2 className="font-heading font-bold text-[20.7px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] flex items-center justify-center gap-2">Ways to Earn</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -249,7 +252,10 @@ export default function LoyaltyPage() {
         </div>
 
         <div className="text-center mb-6">
-          <h2 className="font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4 flex items-center justify-center gap-2"><FiGift className="text-[#DF3131]" /> Tiers</h2>
+          <div className="flex flex-col items-center mb-2">
+            <FiGift className="text-[#DF3131] text-[22px]" />
+          </div>
+          <h2 className="font-heading font-bold text-[20.7px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] flex items-center justify-center gap-2">Tiers</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-16">
           {(data?.catalog.tiers ?? [
@@ -270,8 +276,14 @@ export default function LoyaltyPage() {
         </div>
 
         <div className="text-center mb-8">
-          <p className="text-[13px] text-[#666] dark:text-white/50 flex items-center justify-center gap-2"><FiShield className="text-[#DF3131]" /> Earn honestly. Abuse gets zeroed out.</p>
-          <p className="text-[13px] text-[#666] dark:text-white/50 mt-2 flex items-center justify-center gap-2"><FiZap className="text-[#DF3131]" /> Purchases still earn 1 Zeal per dollar, automatically.</p>
+          <p className="text-[15px] text-[#666] dark:text-white/50 flex flex-col items-center gap-1 mb-2">
+            <FiShield className="text-[#DF3131] text-[22px]" />
+            Earn honestly. Abuse gets zeroed out.
+          </p>
+          <p className="text-[15px] text-[#666] dark:text-white/50 flex flex-col items-center gap-1">
+            <FiZap className="text-[#DF3131] text-[22px]" />
+            Purchases still earn 1 Zeal per dollar, automatically.
+          </p>
         </div>
       </div>
     </main>

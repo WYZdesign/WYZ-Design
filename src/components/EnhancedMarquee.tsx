@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 interface EnhancedMarqueeProps {
   children: ReactNode;
   direction?: "left" | "right";
-  speed?: "slow" | "normal" | "fast";
+  speed?: "slow" | "semislow" | "normal" | "fast";
   pauseOnHover?: boolean;
   className?: string;
   gradientFade?: boolean;
@@ -13,6 +13,7 @@ interface EnhancedMarqueeProps {
 
 const speeds = {
   slow: "35s",
+  semislow: "28s",
   normal: "22s",
   fast: "13s",
 };

@@ -164,7 +164,7 @@ export default function Navbar() {
             <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
               <span className="relative inline-flex">
                 <span className="absolute inset-[-10px] rounded-full bg-[#DF3131]/35 blur-lg logo-glow-pulse pointer-events-none" />
-                <Image src="/wyz-crown-square.png" alt="WYZ Design" width={56} height={56} className="relative hover:scale-110 transition-transform w-[26px] h-[26px] sm:w-[30px] sm:h-[30px] lg:w-[38px] lg:h-[38px] object-contain" loading="lazy" />
+                <Image src="/wyz-crown-square.png" alt="WYZ Design" width={56} height={56} className="relative hover:scale-110 transition-transform w-[22px] h-[22px] sm:w-[26px] sm:h-[26px] lg:w-[32px] lg:h-[32px] object-contain" loading="lazy" />
               </span>
             </Link>
             </MagneticElement>
@@ -382,7 +382,7 @@ export default function Navbar() {
                 className="w-full px-4 py-3 text-[14px] border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] placeholder:text-[#999] focus:border-[#DF3131] outline-none"
                 onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
             </div>
-            <div className="flex-1 overflow-y-auto px-6 py-4 space-y-1">
+            <div className="flex-1 overflow-y-auto px-6 py-5 space-y-1">
               {ALL_LINKS.map((l, i) => (
                 <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                   <Link href={l.href} onClick={() => setMobileOpen(false)}

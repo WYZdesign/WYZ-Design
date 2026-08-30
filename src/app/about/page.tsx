@@ -26,7 +26,7 @@ export default function AboutPage() {
     <main className="pt-0">
       {/* HERO */}
       <ScrollReveal animation="fadeUp">
-        <section className="relative min-h-[75vh] py-24 sm:py-32 lg:py-40 bg-[#111] overflow-hidden hero-banner">
+        <section className="relative min-h-screen bg-[#111] overflow-hidden hero-banner">
           <div className="absolute inset-0">
             <video autoPlay muted loop playsInline preload="metadata"
               className="w-full h-full object-cover opacity-25">
@@ -87,26 +87,28 @@ export default function AboutPage() {
                   })}
                 </div>
               </div>
-            ))}
+              ))}
+            </div>
+            {/* 60% black overlay */}
+            <div className="absolute inset-0 bg-black/65 z-[15] pointer-events-none" />
+            <div className="relative z-20 max-w-4xl mx-auto px-6 text-center flex items-center justify-center h-full">
+              <div className="w-full">
+              <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
+              <TextMaskReveal direction="up">
+              <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white uppercase mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+                <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">BUILT </TextSplit></span><TextSplit stagger={0.03} direction="up">DIFFERENT</TextSplit>
+              </h1>
+              </TextMaskReveal>
+<p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-2xl mx-auto mb-3">
+               WYZ Design is a creative growth studio for artists, brands, and culture. Built from scratch in Chicago. Scaling in Los Angeles.
+             </p>
+            </div>
           </div>
-          {/* 75% black overlay */}
-          <div className="absolute inset-0 bg-black/75 z-[15] pointer-events-none" />
-          <div className="relative z-20 max-w-4xl mx-auto px-6 text-center">
-            <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">About Us</span>
-            <TextMaskReveal direction="up">
-            <h1 className="text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white tracking-[0.05em] uppercase mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
-              <TextSplit stagger={0.03} direction="up">BUILT DIFFERENT</TextSplit>
-            </h1>
-            </TextMaskReveal>
-            <p className="text-white/70 text-[16px] sm:text-lg leading-relaxed max-w-2xl mx-auto mb-3">
-              WYZ Design is a creative growth studio for artists, brands, and culture. Built from scratch in Chicago. Scaling in Los Angeles.
-            </p>
-          </div>
-        </section>
-      </ScrollReveal>
+          </section>
+        </ScrollReveal>
 
-      {/* ═══ BRAND MARQUEE ═══ */}
-      <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+        {/* ═══ BRAND MARQUEE ═══ */}
+      <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
         {(["WILD YET ZEALOUS","DYING BREED CREW","NOMADIC BREED","CHICAGO","LOS ANGELES"] as const).map((word, i) => {
           const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
           return (
@@ -122,9 +124,9 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
-              OUR <span className="text-[#DF3131]">MISSION</span>
-            </h2>
+<h2 className="text-[2.07rem] sm:text-[2.53rem] lg:text-[3.105rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
+               OUR <span className="text-[#DF3131]">MISSION</span>
+</h2>
             <div className="max-w-3xl mx-auto text-center">
                <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
                   We believe every artist, brand, and creative deserves access to professional-grade design, photography, and creative strategy, no gatekeeping, no pretension, and no paying for work that looks like it came from a template.
@@ -134,7 +136,7 @@ export default function AboutPage() {
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed">
                   Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them. We don't outsource or pass you around. We do the work ourselves, start to finish.
-              </p>
+</p>
             </div>
           </div>
         </section>
@@ -152,13 +154,13 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="w-full">
-                <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">The Founder</span>
-                <h2 className="text-[2rem] sm:text-[2.5rem] lg:text-[3.2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-4" style={{ lineHeight: 0.9 }}>
-                  TORREÉ <span className="text-[#DF3131]">MARCEL</span> HARRIS
-                </h2>
+<span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">The Founder</span>
+                 <h2 className="text-[2.3rem] sm:text-[2.875rem] lg:text-[3.68rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-4" style={{ lineHeight: 0.9 }}>
+                   TORREÉ <span className="text-[#DF3131]">MARCEL</span>
+                 </h2>
                 <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">
                   <p>
-                    Torreé Marcel Harris (Torreé Marcel, or Torre Harris) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. It started as flyers for local artists and grew into a brand serving 30+ clients with 60+ events produced.
+                    Torreé Marcel Harris (Torreé Marcel, or Torre Harris, pronunciation tor-eee-aye) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. It started as flyers for local artists and grew into a brand serving 30+ clients with 60+ events produced.
                   </p>
                   <p>
                     With a background in graphic design, event production, and brand strategy, Torreé saw artists and small brands getting underserved by agencies that didn't get their vision or overcharged for work that didn't reflect who they were. WYZ Design was the answer.
@@ -175,17 +177,7 @@ export default function AboutPage() {
                     GET IN TOUCH
                   </Link>
                 </div>
-                <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                  <a href="https://instagram.com/torreMarcel" target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#666] dark:text-white/50 hover:text-[#DF3131] transition-colors underline underline-offset-4">
-                    @torreMarcel
-                  </a>
-                  <a href="https://instagram.com/wyzdesign" target="_blank" rel="noopener noreferrer" className="text-[13px] text-[#666] dark:text-white/50 hover:text-[#DF3131] transition-colors underline underline-offset-4">
-                    @wyzdesign
-                  </a>
-                  <a href="mailto:info@wyzdesign.com" className="text-[13px] text-[#666] dark:text-white/50 hover:text-[#DF3131] transition-colors underline underline-offset-4">
-                    info@wyzdesign.com
-                  </a>
-                </div>
+
               </div>
             </div>
           </div>
@@ -196,9 +188,9 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
-              THE <span className="text-[#DF3131]">BRANDS</span>
-            </h2>
+<h2 className="text-[2.28rem] sm:text-[2.622rem] lg:text-[3.42rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
+               THE <span className="text-[#DF3131]">BRANDS</span>
+</h2>
             <p className="text-[#666] dark:text-white/70 text-[15px] text-center mb-12 max-w-2xl mx-auto">
               Under the WYZ Design umbrella, three distinct brands serve different parts of the creative ecosystem.
             </p>
@@ -249,10 +241,10 @@ export default function AboutPage() {
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
               {[
-                { num: "60+", label: "Events Produced" },
-                { num: "30+", label: "Clients Served" },
-                { num: "1000+", label: "Photos Delivered" },
-                { num: "6+", label: "Years Running" },
+                { num: "90+", label: "Events Produced" },
+                { num: "45+", label: "Clients Served" },
+                { num: "1,500+", label: "Photos Delivered" },
+                { num: "9+", label: "Years Running" },
               ].map((s, i) => (
                 <div key={i}>
                   <p className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1">{s.num}</p>

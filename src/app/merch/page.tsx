@@ -113,7 +113,7 @@ function ParallaxHero() {
   }, []);
 
   return (
-    <div className="relative h-screen overflow-hidden bg-[#111]">
+    <div className="relative h-[85vh] sm:h-[80vh] overflow-hidden bg-[#111]">
       {/* Accordion gallery of crew wearing merch — panels expand on hover */}
       <div className="absolute inset-0 flex">
         {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
@@ -133,7 +133,7 @@ function ParallaxHero() {
         <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-2" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
           Dying Breed Crew
         </p>
-        <h1 className="text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-3 sm:mb-6" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
+        <h1 className="text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-4 sm:mb-8" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
           <span className="block">WORN</span>
           <span className="block text-[#DF3131]">DIFFERENT</span>
         </h1>
@@ -150,11 +150,11 @@ function ParallaxHero() {
 
 function DynamicContentUnderHero() {
    const features = [
-    { title: "PRINTED TO ORDER", desc: "Every design is printed fresh with premium inks. No warehouse full of old stock.", icon: "◆" },
-    { title: "CREW TESTED", desc: "Every design gets worn by the Dying Breed Crew first. If we wouldn't wear it, we don't sell it.", icon: "◆" },
-    { title: "NO HASSLE", desc: "Not feeling it? We'll sort it out. No runaround.", icon: "◆" },
-  ];
-  return (
+     { title: "PRINTED TO ORDER", desc: "Every design is printed fresh with premium inks. No warehouse full of old stock.", icon: <svg className="w-10 h-10 mx-auto text-[#DF3131]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg> },
+     { title: "CREW TESTED", desc: "Every design gets worn by the Dying Breed Crew first. If we wouldn't wear it, we don't sell it.", icon: <svg className="w-10 h-10 mx-auto text-[#DF3131]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg> },
+     { title: "NO HASSLE", desc: "Not feeling it? We'll sort it out. No runaround.", icon: <svg className="w-10 h-10 mx-auto text-[#DF3131]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg> },
+   ];
+   return (
     <section className="py-12 sm:py-16 bg-[#FEFEFD]">
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8 sm:mb-12">
@@ -187,27 +187,11 @@ const DBC_MODEL_MOCKUPS = [
 ];
 
 function AccordionGallery() {
-  const [openId, setOpenId] = useState<number | null>(null);
   const [showContent, setShowContent] = useState(false);
   useEffect(() => {
-    if (openId === null) {
-      const timer = setTimeout(() => setOpenId(0), 200);
-      return () => clearTimeout(timer);
-    }
-  }, [openId]);
-  useEffect(() => {
-    if (openId === null) return;
-    const timer = setTimeout(() => {
-      const next = (openId + 1) % DBC_MODEL_MOCKUPS.length;
-      setOpenId(next);
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, [openId]);
-  useEffect(() => {
-    if (openId === null) return;
     const timer = setTimeout(() => setShowContent(true), 200);
     return () => clearTimeout(timer);
-  }, [openId]);
+  }, []);
   return (
     <ErrorBoundary fallback={
       <section className="py-12 bg-[#FEFEFD]">
@@ -223,55 +207,27 @@ function AccordionGallery() {
           <h3 className="text-[1.3rem] sm:text-[1.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.05em]">Worn By The Crew</h3>
         </div>
         {!showContent ? (
-          <div className="animate-pulse space-y-2">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex items-center gap-4 p-4 sm:p-6 bg-[#f5f5f5] border-b border-[#E2E2E2]">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-[#ddd]" />
-                <div className="flex-1 space-y-2">
-                  <div className="h-4 w-3/4 bg-[#ddd] rounded" />
-                  <div className="h-3 w-1/4 bg-[#ddd] rounded" />
+          <div className="flex gap-4 overflow-hidden">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex-shrink-0 w-[160px] sm:w-[200px] aspect-[3/4] bg-[#ddd] rounded-lg animate-pulse" />
+            ))}
+          </div>
+        ) : (
+        <div className="overflow-hidden -mx-6 px-6 pb-4">
+          <div className="flex gap-4 animate-marquee-left hover:[animation-play-state:paused] whitespace-nowrap">
+            {[...DBC_MODEL_MOCKUPS, ...DBC_MODEL_MOCKUPS].map((item, i) => (
+              <div key={`crew-${i}`} className="flex-none w-[160px] sm:w-[200px]">
+                <div className="aspect-[3/4] rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5] mb-2">
+                  <SafeImage src={item.model} alt={item.name} className="w-full h-full object-cover" />
+                </div>
+                <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[13px] sm:text-[14px] mb-1 text-left">{item.name}</h4>
+                <div className="flex items-center justify-between">
+                  <p className="text-[11px] text-[#666] dark:text-[#aaa] text-left">{item.category}</p>
+                  <span className="text-[#DF3131] font-black text-[14px]">${item.price.toFixed(2)}</span>
                 </div>
               </div>
             ))}
           </div>
-        ) : (
-        <div className="border border-[#E2E2E2] dark:border-[#444] rounded-xl overflow-hidden">
-          {DBC_MODEL_MOCKUPS.map((item) => (
-            <div key={item.id} className="border-b border-[#E2E2E2] dark:border-[#444] last:border-b-0">
-              <button
-                onClick={() => setOpenId(openId === item.id ? null : item.id)}
-                className="w-full flex items-center gap-4 p-4 sm:p-6 text-left hover:bg-[#f5f5f5] dark:hover:bg-[#252528] transition-all"
-              >
-                <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
-                  <SafeImage src={item.model} alt={item.name} className="w-full h-full object-cover" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] sm:text-[17px] mb-1">{item.name}</h4>
-                  <p className="text-[12px] text-[#666] dark:text-[#aaa]">{item.category}</p>
-                </div>
-                <div className="flex-shrink-0 flex items-center gap-3">
-                  <span className="text-[#DF3131] font-black text-[18px]">${item.price.toFixed(2)}</span>
-                  <svg className={`w-5 h-5 text-[#666] transition-transform ${openId === item.id ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </button>
-              <div className={`overflow-hidden transition-all duration-500 ${openId === item.id ? "max-h-[300px] py-4" : "max-h-0"}`}>
-                <div className="px-4 sm:px-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
-                  <div className="w-full sm:w-48 aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444]">
-                    <SafeImage src={item.img} alt={item.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="flex-1 text-center sm:text-left">
-                    <h5 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] mb-2">{item.name}</h5>
-                    <p className="text-[#666] dark:text-[#999] text-[14px] mb-3">Premium quality garment worn by the Dying Breed Crew. Machine washable, true to size.</p>
-                    <Link href={FAOTM_URL} className="inline-block px-6 py-2.5 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[12px] hover:bg-[#B82020] transition-all">
-                      Shop This Item
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
         )}
         <div className="mt-8 text-center">
@@ -286,6 +242,17 @@ function AccordionGallery() {
 }
 
 function DynamicContentUnderShop() {
+  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const designStories = [
+    { id: 1, name: "Crown Tee", image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie-1.jpg", story: "The Crown. A nod to the crew's roots. Printed on premium heavyweight cotton. Each tee is hand-checked before shipping.", meaning: "Represents the crew's identity — the crown symbol is a mark of belonging." },
+    { id: 2, name: "Denim Jacket", image: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", story: "Built to last. vintage-wash denim with custom DBC embroidery. One-of-a-kind — no two are exactly the same. Worn by the crew on location.", meaning: "The jacket is the crew's uniform — durable, timeless, and impossible to ignore." },
+    { id: 3, name: "Crop Hoodie", image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", story: "The crew's favorite. Brushed fleece inside, raw hem, custom DBC tag. Limited drops — once they're gone, they're gone.", meaning: "Scarcity is part of the story. Not everything is available forever." },
+    { id: 4, name: "Dad Hat", image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", story: "Structured crown, flat visor. Adjustable snapback. The DBC dad hat is the crew's on-duty uniform. Worn from the studio to the street.", meaning: "The hat is the crew's flag — visible even when no one is speaking." },
+    { id: 5, name: "Ribbed Beanie", image: "/images/merch/dbc-archive/98442d-60d7fe9cb1a14d4696d62ca1b5902cdf~mv2.jpg", story: "Organic ribbed beanie. One-size-fits-all. Folded cuff with DBC embroidery. The winter staple — crew-tested in freezing conditions.", meaning: "Warmth matters. The beanie is the crew's armor against the elements." },
+    { id: 6, name: "Embroidered Socks", image: "/images/merch/dbc-archive/WYZ-Crown-Embroidered-socks.jpg", story: "Bold minimalist look. US-made. DBC crown embroidered along the ankle. The detail the camera never catches — but the crew knows.", meaning: "The small details are where the crew shows who they really are." },
+    { id: 7, name: "White Glossy Mug", image: "/images/merch/dbc-archive/WYZ-Crown-White-glossy-mug.jpg", story: "11oz black glossy ceramic. Dishwasher safe. The morning ritual, with DBC on the side. The crew drinks coffee before every session.", meaning: "The mug is the crew's downtime — the small moments between the noise." },
+    { id: 8, name: "Denim Tote Bag", image: "/images/merch/dbc-archive/WYZ-Crown-Organic-denim-tote-bag.jpg", story: "Organic denim tote. Spacious, functional. Built for the crew's gear — cameras, sketches, vinyl, whatever the session demands.", meaning: "The tote carries the crew's tools. Without it, nothing moves." },
+  ];
   return (
     <ErrorBoundary fallback={
       <section className="py-12 sm:py-16 bg-[#FEFEFD]">
@@ -297,24 +264,25 @@ function DynamicContentUnderShop() {
     <section className="py-12 sm:py-16 bg-[#FEFEFD]">
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8 sm:mb-12">
-          <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">MEET THE CREW</span>
-          <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Every Piece Tells A Story</h2>
-          <p className="text-[#666] dark:text-[#999] text-[15px] max-w-2xl mx-auto mt-3">The Dying Breed Crew isn't just a band, it's a family of creators, artists, and rebels who refuse to conform. Every design in our collection is worn and approved by the crew members themselves.</p>
+          <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">EVERY PIECE HAS A STORY</span>
+          <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Built From The Crew, For The Crew</h2>
+          <p className="text-[#666] dark:text-[#999] text-[15px] max-w-2xl mx-auto mt-3">Every design comes from a real artist with a real story. No generic graphics. No mass-produced templates. Just art that means something.</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4">
-          {DBC_MODEL_MOCKUPS.slice(0, 8).map((m, i) => (
-            <div key={m.id} className="group cursor-pointer">
-              <div className="aspect-square rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5]">
-                <SafeImage src={m.model} alt={m.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          {designStories.map((d) => (
+            <div key={d.id} className="group cursor-pointer" onClick={() => setExpandedId(expandedId === d.id ? null : d.id)}>
+              <div className="aspect-[3/4] rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5] mb-3">
+                <SafeImage src={d.image} alt={d.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
-              <p className="text-[10px] font-bold text-[#333] dark:text-[#e0e0e0] text-center mt-1 truncate">{m.name}</p>
+              <h4 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.04em] mb-2">{d.name}</h4>
+              <div className={`overflow-hidden transition-all duration-500 ${expandedId === d.id ? "max-h-[200px]" : "max-h-0"}`}>
+                <div className="pb-4">
+                  <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed mb-2">{d.story}</p>
+                  <p className="text-[#DF3131] dark:text-[#DF3131] text-[13px] font-bold tracking-[0.05em] uppercase">{d.meaning}</p>
+                </div>
+              </div>
             </div>
           ))}
-        </div>
-        <div className="mt-10 sm:mt-12 text-center">
-          <Link href="/events" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[13px] hover:bg-[#B82020] transition-all">
-            SEE CREW IN ACTION
-          </Link>
         </div>
       </div>
     </section>
@@ -354,13 +322,13 @@ function SquareQuote() {
       <div className="relative w-full overflow-hidden bg-[#111] border border-[#333]">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative h-64 md:h-auto">
-            <Image src="/images/faotm_1.jpg" alt="Featured Artist of the Month" fill className="object-cover" />
+            <SafeImage src="/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg" alt="Featured Artist" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111]/80 hidden md:block" />
           </div>
           <div className="flex flex-col items-center justify-center text-center p-8 sm:p-12">
             <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3">Featured Artist of the Month</span>
             <h2 className="text-[1.4rem] sm:text-[1.7rem] md:text-[2rem] font-heading font-black text-white tracking-[0.04em] leading-[1.1] mb-4">
-              This month&apos;s merch is built from the art of Donte &quot;Danny&quot; Davis.
+              DONTE &quot;DANNY&quot; DAVIS
             </h2>
             <p className="text-white/60 text-[14px] leading-relaxed mb-6 max-w-md">
               Every piece in this collection comes from a real artist with a real story. No generic graphics. No mass-produced templates. Just art that means something.
@@ -383,12 +351,12 @@ function SquareQuote() {
 function MerchCarousel({ products }: { products: Product[] }) {
   const items = [...products, ...products, ...products];
   return (
-    <div className="py-8 bg-[#FEFEFD] overflow-hidden">
-      <div className="flex whitespace-nowrap animate-marquee-left">
+    <div className="py-8 bg-[#FEFEFD] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-[#f5f5f5]">
+      <div className="flex whitespace-nowrap animate-marquee-left hover:[animation-play-state:paused]">
         {items.map((p, i) => (
-          <Link key={`mc-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer">
-              <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
-               <Image src={p.image} alt={p.name} fill sizes="100vw" className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+          <Link key={`mc-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer w-[140px] sm:w-auto">
+              <div className="bg-[#f5f5f5] w-full sm:w-[200px] aspect-[3/4] overflow-hidden relative mx-2 sm:mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
+               <SafeImage src={p.image} alt={p.name} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h3 className="font-heading font-bold text-[12px] tracking-[0.05em] uppercase text-white">{p.name}</h3>
@@ -404,13 +372,13 @@ function MerchCarousel({ products }: { products: Product[] }) {
 function ProductMarquee({ products }: { products: Product[] }) {
   const items = [...products, ...products, ...products];
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-[#0a0a0a] via-[#1a0a0a] to-[#0a0a0a] py-10 border-y border-white/10">
-      <div className="flex whitespace-nowrap animate-marquee-left">
+    <div className="relative overflow-x-auto overflow-y-hidden bg-gradient-to-r from-[#0a0a0a] via-[#1a0a0a] to-[#0a0a0a] py-10 border-y border-white/10 scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+      <div className="flex whitespace-nowrap animate-marquee-left min-w-max">
         {items.map((p, i) => (
           <Link key={`pm-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer group">
-            <div className="w-[200px] sm:w-[240px] px-4 aspect-square flex flex-col items-center">
+            <div className="w-[140px] sm:w-[200px] lg:w-[240px] px-2 sm:px-4 aspect-square flex flex-col items-center">
               <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden relative flex-1 w-full mb-2 group-hover:border-[#DF3131]/50 group-hover:shadow-xl group-hover:shadow-[#DF3131]/20 transition-all duration-500">
-                <Image src={p.image} alt={p.name} fill sizes="100vw" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" decoding="async" />
+                <SafeImage src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
               <div className="w-full text-center">
@@ -454,7 +422,8 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
               transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
             }}>
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mb-3 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#DF3131]/20 transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-105">
-                <Image src={product.image} alt={product.name} fill sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+              <SafeImage src={product.image} alt={product.name} fill sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" decoding="async" />
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase .5 mb-2">{product.category}</p>
@@ -479,8 +448,8 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
         <div key={product.id} className="group cursor-pointer"
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
-          <div className={`bg-[#f5f5f5] aspect-square overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
-               <Image src={product.image} alt={product.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw" className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+          <div className={`bg-[#f5f5f5] aspect-[4/5] overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
+               <SafeImage src={product.image} alt={product.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw" className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} decoding="async" />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all mb-2">Quick View</span>
             </div>
@@ -628,8 +597,8 @@ export default function MerchPage() {
         <DynamicContentUnderHero />
 
         {/* Gallery Carousel 1 — under hero */}
-        <div className="py-6 bg-[#111] overflow-hidden">
-          <div className="flex whitespace-nowrap animate-marquee-right">
+        <div className="py-6 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+          <div className="flex whitespace-nowrap min-w-max">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
               <div key={`gc1-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
                 <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
@@ -742,6 +711,9 @@ export default function MerchPage() {
             .portal-enter {
               animation: portalOpen 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             }
+            .portal-exit {
+              animation: portalClose 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
             .stagger-1 { animation: staggerFadeIn 0.6s ease-out 0.3s forwards; opacity: 0; }
             .stagger-2 { animation: staggerFadeIn 0.6s ease-out 0.5s forwards; opacity: 0; }
             .stagger-3 { animation: staggerFadeIn 0.6s ease-out 0.7s forwards; opacity: 0; }
@@ -766,7 +738,12 @@ export default function MerchPage() {
           )}
 
           {showStore && storeVisible && (
-            <div className="portal-enter stagger-1">
+            <div className="portal-enter stagger-1 relative z-10">
+              <AccordionGallery />
+            </div>
+          )}
+          {!showStore && storeVisible && (
+            <div className="portal-exit stagger-1 relative z-10">
               <AccordionGallery />
             </div>
           )}
@@ -781,7 +758,7 @@ export default function MerchPage() {
           <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <Image src={selectedProduct.image} alt={selectedProduct.name} fill sizes="(max-width:768px) 100vw, 50vw" className="w-full h-full object-cover" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                <SafeImage src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover" />
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
@@ -830,8 +807,8 @@ export default function MerchPage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
-                      <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
-                          <Image src={cp.image} alt={cp.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 25vw, 20vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" decoding="async" onError={(e: React.SyntheticEvent<HTMLImageElement>) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+<div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
+                           <SafeImage src={cp.image} alt={cp.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
                       <p className="text-[12px] text-[#DF3131] font-bold">${cp.price.toFixed(2)}</p>
@@ -845,11 +822,11 @@ export default function MerchPage() {
       )}
 
     {/* Dynamic Content — under expandable shop */}
-    {showStore && <DynamicContentUnderShop />}
+    <DynamicContentUnderShop />
 
     {/* Gallery Carousel 2 — under store */}
-    <div className="py-6 bg-[#111] overflow-hidden">
-      <div className="flex whitespace-nowrap animate-marquee-left">
+    <div className="py-6 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+      <div className="flex whitespace-nowrap min-w-max">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
           <div key={`gc2-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
             <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />

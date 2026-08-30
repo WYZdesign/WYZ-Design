@@ -72,7 +72,7 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
    <Image src={service.img} alt={service.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
   <div className="absolute inset-0 bg-black/60" />
   <div className="absolute inset-0 flex items-center justify-center z-10">
-  <h3 className="font-heading font-black text-white text-[22px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
+  <h3 className="font-heading font-black text-white text-[30.8px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
   </div>
  </div>
  </div>
@@ -88,7 +88,7 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
    </div>
   <div className="relative z-10 text-center flex flex-col items-center justify-center">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{service.cat}</span>
-  <h3 className="font-heading font-black text-white text-[24px] sm:text-[26px] tracking-[0.03em] mb-3">{service.name}</h3>
+  <h3 className="font-heading font-black text-white text-[27.6px] sm:text-[29.9px] tracking-[0.03em] mb-3">{service.name}</h3>
  <p className="text-white/80 text-[15px] leading-relaxed mb-5 max-w-xs">{service.desc}</p>
  <div className="flex flex-col items-center justify-center gap-0 mb-5">
  <span className="text-[50px] sm:text-[56px] font-black leading-none">{service.price}</span>
@@ -153,22 +153,22 @@ return (
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen flex flex-col lg:flex-row hero-banner">
-  {/* Left: Image */}
-  <div className="w-full lg:w-1/2 h-[40vh] lg:h-auto relative overflow-hidden">
-  <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill className="w-full h-full object-cover" priority />
-   <div className="absolute inset-0 bg-black/20" />
-  </div>
-  {/* Right: Text with gradient */}
- <div className="relative w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 pt-32 lg:pt-40 overflow-hidden">
+   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
+   {/* Desktop: split grid */}
+   <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
+   <div className="relative h-full overflow-hidden">
+    <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill className="w-full h-full object-cover" priority />
+    <div className="absolute inset-0 bg-black/20" />
+   </div>
+   <div className="relative flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 pt-32 lg:pt-40 overflow-hidden">
     <div className="absolute inset-0 hero-grad-services z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
-     <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
- <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
-   <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
-   <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
-   </h1>
-   <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
+    <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+    <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
+    <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
+    </h1>
+    <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
     From photography to web design, we handle the full creative process to make your brand stand out.
     </p>
     <Link href="/plans"
@@ -176,12 +176,33 @@ return (
     VIEW PLANS
     </Link>
     </div>
-    </div>
-  </section>
-  </ScrollReveal>
+   </div>
+   </div>
+   {/* Mobile: merged hero */}
+   <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
+   <div className="absolute inset-0 z-0">
+    <video src="/videos/hero-banners/photography.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+    <div className="absolute inset-0 bg-black/65 z-[1]" />
+   </div>
+   <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
+    <h1 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+    <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
+    <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
+    </h1>
+    <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-3 sm:mb-3 max-w-md mx-auto">
+    From photography to web design, we handle the full creative process to make your brand stand out.
+    </p>
+    <Link href="/plans"
+    className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all mt-4 sm:mt-6">
+    VIEW PLANS
+    </Link>
+   </div>
+   </div>
+   </section>
+   </ScrollReveal>
 
 {/* SERVICES MARQUEE */}
-  <EnhancedMarquee speed="slow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
@@ -197,21 +218,21 @@ return (
 
  {/* ── Category Tabs — pill-style with indicator ── */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <div className="flex flex-wrap gap-2 mb-6 justify-start lg:justify-center pb-2">
- {CATEGORIES.map(cat => {
- const isActive = active === cat;
- return (
- <button key={cat} onClick={() => setActive(cat)}
- className={`relative px-4 py-2.5 text-[12px] font-bold tracking-[0.1em] uppercase rounded-full transition-all duration-300 shrink-0 ${
- isActive
- ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30 scale-105"
-  : "bg-white dark:bg-[#252528] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
- }`}>
- {cat}
- </button>
- );
- })}
- </div>
+<div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide mb-10 -mx-6 px-6">
+  {CATEGORIES.map(cat => {
+  const isActive = active === cat;
+  return (
+    <button key={cat} onClick={() => setActive(cat)}
+    className={`relative px-5 py-2.5 text-[12px] font-bold tracking-[0.1em] uppercase rounded-full transition-all duration-300 shrink-0 whitespace-nowrap ${
+    isActive
+    ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30 scale-105"
+      : "bg-white dark:bg-[#252528] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
+    }`}>
+    {cat}
+    </button>
+  );
+  })}
+  </div>
  </ScrollReveal>
 
  {/* ── Service Count ── */}
@@ -226,7 +247,7 @@ return (
       <p className="text-[#666]">Services temporarily unavailable. Please try again later.</p>
     </div>
   }>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 lg:gap-6 lg:mb-6">
   {filtered.map((s, i) => (
   <ServiceCard key={s.name} service={s} index={i} />
   ))}

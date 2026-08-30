@@ -151,7 +151,7 @@ export default function WYZMiNDPage() {
                creative<br />
                <span className="text-[#DF3131]">AI Brain</span>
              </h1>
-            <p className="text-white/70 text-[16px] sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-white/70 text-[16px] sm:text-lg max-w-md sm:max-w-xl mx-auto leading-relaxed">
               The behind-the-scenes engine that keeps WYZ Design running smooth. Smart automation, organized systems, and creative tools, all built in-house.
             </p>
             </div>
@@ -159,8 +159,8 @@ export default function WYZMiNDPage() {
 
         {/* Features — dynamic interactive cards */}
         <section className="max-w-[90rem] mx-auto px-6 lg:px-12 py-16">
-          <h2 className="text-center font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-4">What It Powers</h2>
-          <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] mb-12">Click any card to explore what each system actually does</p>
+          <h2 className="text-center font-heading font-black text-[1.65rem] sm:text-[2.2rem] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-4">What It Powers</h2>
+          <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] sm:text-[17.6px] mb-12">Click any card to explore what each system actually does</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
               {FEATURES.map((f) => {
                 const isActive = activeFeature === f.id;
@@ -181,7 +181,7 @@ export default function WYZMiNDPage() {
                       <div className="text-4xl mb-4 text-[#DF3131]">
                         {f.icon}
                       </div>
-                      <h3 className="font-heading font-bold text-[17px] text-[#333] dark:text-[#e0e0e0] text-center mb-3">
+                      <h3 className="font-heading font-bold text-[19.5px] sm:text-[19.5px] text-[#333] dark:text-[#e0e0e0] text-center mb-3">
                         {f.title}
                       </h3>
                       <p className="text-[14px] leading-relaxed text-[#666] dark:text-[#b0b0b0] text-center">
@@ -206,14 +206,14 @@ export default function WYZMiNDPage() {
         {/* Stack — interactive tabs */}
         <section className="bg-white dark:bg-[#111] border-y border-[#E2E2E2] dark:border-[#333] py-16 px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] .5 text-[#333] dark:text-white text-center mb-4">How It All Works</h2>
+            <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] text-[#333] dark:text-white text-center mb-4">How It All Works</h2>
             <p className="text-[#666] dark:text-white/30 text-[13px] text-center mb-8">The tools and systems behind WYZ Design, explained in plain English</p>
 
             {/* Category tabs */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <div className="flex overflow-x-auto overflow-y-hidden -mx-6 px-6 sm:mx-0 sm:px-0 gap-2 mb-8 whitespace-nowrap scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-transparent pb-2">
               {STACK_CATEGORIES.map((cat) => (
                 <button key={cat} onClick={() => { setActiveStackCat(cat); setExpandedStack(null); }}
-                  className={`px-4 py-2 rounded-full text-[12px] font-bold tracking-[0.08em] uppercase transition-all ${
+                  className={`flex-shrink-0 px-4 py-2 rounded-full text-[12px] font-bold tracking-[0.08em] uppercase transition-all ${
                     activeStackCat === cat ? "bg-[#DF3131] text-white" : "bg-[#E2E2E2] dark:bg-white/10 text-[#666] dark:text-white/50 hover:bg-[#ccc] dark:hover:bg-white/20 hover:text-[#333] dark:hover:text-white/80"
                   }`}>
                   {cat}

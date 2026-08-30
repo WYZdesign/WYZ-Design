@@ -186,32 +186,45 @@ export default function PrintingPage() {
  return (
  <>
   <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
-{/* ── Hero: Split with Video ── */}
+{/* ── Hero: Split (desktop video/text, mobile merged) ── */}
   <ScrollReveal animation="fadeUp">
-  <section className="relative bg-white dark:bg-black pb-6">
-  <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen pb-10 lg:pb-16">
-  {/* Left: Video filling full half */}
-   <div className="relative overflow-hidden h-[40vh] lg:h-auto">
+  <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
+  {/* Desktop: split grid */}
+  <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
+   <div className="relative h-full">
     <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} />
-    </div>
-  {/* Right: Text with gradient bg */}
+   </div>
    <div className="relative overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-12 lg:pt-32 lg:pb-16">
     <div className="absolute inset-0 hero-grad-print z-0" />
-    <div className="absolute inset-0 bg-black/20 z-[1]" />
+    <div className="absolute inset-0 bg-black/30 z-[1]" />
     <div className="relative z-10 flex flex-col items-center justify-center h-full">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase .5 text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
     <p className="text-white/70 text-[16px] sm:text-lg mb-3 sm:mb-3 max-w-md text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and every price you see reflects industry pricing at a 10% discount.</p>
     <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GET A QUOTE
     </Link>
     </div>
-    </div>
+   </div>
+  </div>
+  {/* Mobile: merged hero */}
+  <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
+   <div className="absolute inset-0 z-0">
+    <video src="/videos/hero-banners/printing.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+    <div className="absolute inset-0 bg-black/65 z-[1]" />
+   </div>
+   <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
+    <h1 className="text-[2rem] sm:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
+    <p className="text-white/70 text-[16px] sm:text-lg mb-3 sm:mb-3 max-w-md text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and every price you see reflects industry pricing at a 10% discount.</p>
+    <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
+    GET A QUOTE
+    </Link>
+   </div>
   </div>
   </section>
   </ScrollReveal>
 
 {/* ═══ PRINTING MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["FLYERS","POSTERS","BUSINESS CARDS","STICKERS","BANNERS","PHOTO PRINTS"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (

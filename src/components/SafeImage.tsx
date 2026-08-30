@@ -8,10 +8,13 @@ interface SafeImageProps {
   className?: string;
   width?: number;
   height?: number;
+  fill?: boolean;
+  sizes?: string;
   loading?: "lazy" | "eager";
   decoding?: "async" | "sync" | "auto";
   onLoad?: () => void;
   priority?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function SafeImage({ src, alt, className = "", loading, decoding = "async", onLoad, priority, ...imgProps }: SafeImageProps & React.ImgHTMLAttributes<HTMLImageElement>) {

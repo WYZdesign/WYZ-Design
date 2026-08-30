@@ -137,7 +137,7 @@ export default function PricingCalculator() {
     <div>
       <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl overflow-hidden">
         {/* Service Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-px bg-[#E2E2E2] dark:bg-[#444]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-px bg-[#E2E2E2] dark:bg-[#444]">
           {SERVICES.map(service => {
             const qty = selected[service.name] || 0;
             const isActive = qty > 0;

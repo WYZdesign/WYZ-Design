@@ -4,14 +4,13 @@ import { useEffect, useState, useRef } from "react";
 import { FiArrowUp } from "react-icons/fi";
 
 export default function ScrollToTop() {
-  const [visible, setVisible] = useState(false);
-  const [hidden, setHidden] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     const handler = () => {
-      const scrolled = window.scrollY > 400;
-      setVisible(scrolled);
+      setScrollY(window.scrollY);
       setHidden(true);
       if (timerRef.current) clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => setHidden(false), 600);
@@ -23,9 +22,10 @@ export default function ScrollToTop() {
     };
   }, []);
 
-  const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const bodyLocked = typeof document !== "undefined" && document.body.style.overflow === "hidden";
+  const visible = scrollY > 400 && !bodyLocked;
 
-  if (!visible) return null;
+  const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <button

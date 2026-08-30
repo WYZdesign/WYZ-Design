@@ -596,7 +596,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   </div>
   </div>
 
-  <div className="absolute inset-0 bg-black/30 z-[15] pointer-events-none" />
+  <div className="absolute inset-0 bg-black/90 z-[15] pointer-events-none" />
 
  <div className="relative z-20 flex flex-col items-center justify-center py-20 sm:py-28 px-6 text-center">
  <div className="yt-float mb-8">
@@ -615,29 +615,24 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   <a href="https://www.youtube.com/@wyzdesign?sub_confirmation=1" target="_blank" rel="noopener noreferrer"
   className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-[#FF0000] text-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#CC0000] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#FF0000]/30">
   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49.1 3.59.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
-  SUBSCRIBE
-  </a>
-  <a href="https://www.youtube.com/playlist?list=PLJ_paMo7iTXEkVi_UWaIdeUzF0Ag-oURT" target="_blank" rel="noopener noreferrer" onClick={() => markRecapPlayed(earn)}
-  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all hover:scale-105">
-  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24"><path d={ytPath}/></svg>
-  WATCH RECAPS
-  </a>
-  <a href="https://www.youtube.com/@wyzdesign" target="_blank" rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all hover:scale-105">
-  VISIT CHANNEL
-  </a>
+SUBSCRIBE
+</a>
+<a href="https://www.youtube.com/@wyzdesign" target="_blank" rel="noopener noreferrer"
+className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] text-[12px] sm:text-[15px] text-center hover:bg-[#FF0000] hover:text-white hover:border-[#FF0000] transition-all hover:scale-105">
+VISIT CHANNEL
+</a>
  </div>
  <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-12 mt-10 pt-8 border-t border-white/10">
  <div className="text-center">
- <p className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#FF0000]">{CLIENT_EVENTS_RAW.length}+</p>
- <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">Client Events</p>
- </div>
- <div className="text-center">
- <p className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#FF0000]">{DIY_SHOWS_RAW.length}+</p>
- <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">DIY Shows</p>
- </div>
- <div className="text-center">
- <p className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#FF0000]">50+</p>
+<p className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]">90+</p>
+  <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">Client Events</p>
+  </div>
+  <div className="text-center">
+  <p className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]">12+</p>
+  <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">DIY Shows</p>
+  </div>
+  <div className="text-center">
+  <p className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]">600+</p>
  <p className="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase">Live Shows</p>
  </div>
  </div>
@@ -715,33 +710,36 @@ export default function EventsPage() {
 
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-   <div className="relative overflow-hidden mx-0 -mt-20 lg:-mt-24 hero-banner">
-   <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-  <div className="relative overflow-hidden bg-white dark:bg-[#111]">
-  <Image src="/images/events/hero_bg.jpg" alt="WYZ Design event production — live concert venue with professional lighting" fill className="w-full h-full object-cover opacity-80" priority />
-  <div className="absolute inset-0 bg-black/30" />
-    </div>
-    <div className="relative flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center pt-24 pb-10 lg:pt-32 lg:pb-0 overflow-hidden">
-    <div className="absolute inset-0 hero-grad-events z-0" />
-    <div className="absolute inset-0 bg-black/20 z-[1]" />
+   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
+   {/* Desktop: video background */}
+   <div className="hidden md:block absolute inset-0 z-0">
+    <video src="/videos/diy-shows/Action Sack Vol. 5.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
+    <div className="absolute inset-0 bg-black/65 z-[1]" />
+   </div>
+   {/* Mobile: video merged */}
+   <div className="md:hidden absolute inset-0 z-0">
+    <video src="/videos/diy-shows/Action Sack Vol. 5.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+    <div className="absolute inset-0 bg-black/65 z-[1]" />
+   </div>
+   {/* Text overlay */}
+   <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center pt-24 pb-10 lg:pt-32 lg:pb-0 overflow-hidden">
     <div className="relative z-10">
-     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-3 sm:mb-6" style={{ lineHeight: 0.9 }}>
-   <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
-  </h1>
-  <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
-  Let our team handle the planning, from the first idea to the final encore. You&apos;ll get an event that&apos;s easy, stress-free, and unforgettable.
-  </p>
-  <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
-  BOOK NOW
-  </Link>
-  </div>
-  </div>
-  </div>
-  </div>
+     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+    <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
+   </h1>
+   <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-md leading-relaxed mb-3 sm:mb-3 mx-auto">
+   Let our team handle the planning, from the first idea to the final encore. You&apos;ll get an event that&apos;s easy, stress-free, and unforgettable.
+   </p>
+   <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
+   BOOK NOW
+    </Link>
+    </div>
+   </div>
+   </section>
   </ScrollReveal>
 
 {/* ═══ EVENTS MARQUEE ═══ */}
-  <EnhancedMarquee speed="normal" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
     {(["CONCERTS","DIY SHOWS","MIXERS","ART SHOWS","RECAPS","LIVE COVERAGE"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
@@ -812,8 +810,8 @@ export default function EventsPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div>
  <div className="text-center mb-4">
-  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">PREVIOUS EVENTS</h2>
-  <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED BY WYZ DESIGN</p>
+  <h2 className="text-[1.05rem] sm:text-[1.225rem] md:text-[1.4rem] lg:text-[1.75rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] mb-4">PREVIOUS EVENTS</h2>
+  <p className="text-[14px] text-[#666] dark:text-[#b0b0b0] mt-2 tracking-wider">ALL FLYERS/EVENTS DESIGNED BY WYZ DESIGN</p>
  </div>
   <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-2">
   {visibleEvents.map((e) => (
