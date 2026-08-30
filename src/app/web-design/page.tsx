@@ -238,11 +238,11 @@ return (
             <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-6 sm:mb-3 max-w-sm mx-auto text-center">
               From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
             </p>
-            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center w-full">
-              <Link href="/booking" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] text-center hover:bg-[#B82020] transition-all justify-center">
+            <div className="flex flex-nowrap gap-3 justify-center w-full">
+              <Link href="/booking" className="inline-flex items-center gap-1 px-5 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[11px] sm:text-[14px] text-center hover:bg-[#B82020] transition-all justify-center">
                 GET A QUOTE <FiArrowRight className="w-4 h-4" />
               </Link>
-              <a href="#portfolio" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all justify-center">
+              <a href="#portfolio" className="inline-flex items-center gap-1 px-5 sm:px-8 py-3 sm:py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[11px] sm:text-[14px] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all justify-center">
                 VIEW WORK
               </a>
             </div>
