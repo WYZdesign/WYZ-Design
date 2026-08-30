@@ -538,14 +538,14 @@ return (
     </div>
     </div>
     <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 pt-24 pb-12 min-h-[500px] h-full">
-   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
-<p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-3 sm:mb-3">
+<p className="text-black/70 text-[16px] sm:text-[17px] max-w-xs sm:max-w-md leading-relaxed mb-6 sm:mb-8 mx-auto">
        Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
        </p>
-       <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#DF3131] text-white bg-[#DF3131] text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#DF3131] hover:border-white transition-all mt-3 sm:mt-6">
+       <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#DF3131] text-white bg-[#DF3131] text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#DF3131] hover:border-white transition-all mt-4 sm:mt-8">
        BOOK A SHOOT
        </Link>
    </div>
@@ -577,7 +577,7 @@ return (
    </section>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 -mt-4 bg-white dark:bg-[#1C1C1E]">
     {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (

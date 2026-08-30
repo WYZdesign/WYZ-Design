@@ -899,23 +899,23 @@ export default function HomePage() {
        <div className="absolute inset-0 bg-black/65 z-[1]" />
      <ParticleBackground count={25} color="#DF3131" maxSize={2} speed={0.2} className="z-[2]" />
      {/* Text content on top */}
-    <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
+    <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-8 sm:py-12 overflow-hidden"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
-     <p className="text-white/70 text-[6px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-4 sm:mb-3">
+     <p className="text-white/70 text-[5px] sm:text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-center mb-6 sm:mb-8 whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
         <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
       </p>
         <TextMaskReveal direction="up">
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
            <span>WE <span className="text-[#DF3131]">MAKE</span></span><br />
            <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
         </h1>
         </TextMaskReveal>
-         <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto text-center">
+         <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-xs sm:max-w-sm mx-auto text-center">
        We help artists, brands, and real people build creative work that actually looks good.
        </p>
        </GyroTilt>
-<div className="flex flex-row gap-3 justify-center mt-6 sm:mt-6">
+<div className="flex flex-row gap-3 justify-center overflow-hidden px-2">
       <MagneticElement tag="div" strength={0.25}>
       <Link href="/about"
        className="inline-block bg-white text-[#111] border-2 border-white px-5 py-3 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] hover:shadow-white/20 transition-all">
@@ -936,7 +936,7 @@ export default function HomePage() {
 {/* ═══ IMAGE GALLERY STRIP ═══ */}
 <ScrollReveal animation="fadeIn" duration={1}>
    <ImageReveal direction="up">
-   <section className="py-6 w-full relative overflow-hidden my-4">
+   <section className="py-2 w-full relative overflow-hidden mt-2 mb-0">
    <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.55} direction="right" />
    </section>
    </ImageReveal>

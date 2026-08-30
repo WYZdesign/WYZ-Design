@@ -196,15 +196,15 @@ return (
             </div>
           </div>
           <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center text-center px-6 lg:px-12 pt-32 lg:pt-40 pb-16 min-h-[500px]">
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-4">WYZ DESIGN - WEB DEVELOPMENT</span>
-            <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#111] tracking-[0.08em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-6 sm:mb-8">WYZ DESIGN - WEB DEVELOPMENT</span>
+            <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#111] tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
               WEBSITES<br />
               THAT <span className="text-[#DF3131]">WORK</span>
             </h1>
-            <p className="text-[#333] text-[16px] sm:text-[16px] leading-relaxed mb-6 max-w-sm">
+            <p className="text-[#333] text-[16px] sm:text-[16px] leading-relaxed mb-8 sm:mb-10 max-w-xs sm:max-w-sm mx-auto">
               From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
             </p>
-            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-center overflow-hidden">
               <Link href="/booking" className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg hover:shadow-[#DF3131]/30">
                 GET A QUOTE <FiArrowRight className="w-4 h-4" />
               </Link>
@@ -230,15 +230,15 @@ return (
           </div>
           <div className="absolute inset-0 bg-black/65 z-[1]" />
           <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 pt-32 lg:pt-40 text-center flex flex-col items-center justify-center h-full">
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block text-center mb-4">WYZ DESIGN - WEB DEVELOPMENT</span>
-            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block text-center mb-6 sm:mb-8">WYZ DESIGN - WEB DEVELOPMENT</span>
+            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
               WEBSITES<br />
               THAT <span className="text-[#DF3131]">WORK</span>
             </h1>
-            <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-6 sm:mb-3 max-w-sm mx-auto text-center">
+            <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-8 sm:mb-10 max-w-xs sm:max-w-sm mx-auto text-center">
               From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
             </p>
-            <div className="flex flex-nowrap gap-3 justify-center w-full">
+            <div className="flex flex-nowrap gap-3 justify-center w-full overflow-hidden">
               <Link href="/booking" className="inline-flex items-center gap-1 px-5 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[11px] sm:text-[14px] text-center hover:bg-[#B82020] transition-all justify-center">
                 GET A QUOTE <FiArrowRight className="w-4 h-4" />
               </Link>
