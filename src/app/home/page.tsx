@@ -902,7 +902,7 @@ export default function HomePage() {
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-16 sm:py-20"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
-     <p className="text-white/70 text-[5px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-2 sm:mb-3">
+     <p className="text-white/70 text-[6px] sm:text-[13px] font-heading font-bold tracking-[0.2em] uppercase text-center mb-3 sm:mb-3">
        <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
      </p>
        <TextMaskReveal direction="up">

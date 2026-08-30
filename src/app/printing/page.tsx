@@ -188,7 +188,7 @@ export default function PrintingPage() {
   <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
 {/* ── Hero: Split (desktop video/text, mobile merged) ── */}
   <ScrollReveal animation="fadeUp">
-  <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
+  <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
   {/* Desktop: split grid */}
   <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
    <div className="relative h-full">

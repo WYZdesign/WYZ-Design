@@ -710,7 +710,7 @@ export default function EventsPage() {
 
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
+   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
    {/* Desktop: video background */}
    <div className="hidden md:block absolute inset-0 z-0">
     <video src="/videos/diy-shows/Action Sack Vol. 5.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />

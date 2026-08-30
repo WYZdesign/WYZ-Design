@@ -153,7 +153,7 @@ return (
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
-   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[72vh] sm:min-h-[80vh] lg:min-h-screen overflow-hidden hero-banner">
+   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
    {/* Desktop: split grid */}
    <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
    <div className="relative h-full overflow-hidden">

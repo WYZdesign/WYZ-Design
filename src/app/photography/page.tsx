@@ -542,10 +542,10 @@ return (
      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
      <span className="text-[#DF3131]">CREATING</span> MEMORIES
      </h1>
-     <p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-2">
-      Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
-      </p>
-      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#DF3131] text-white bg-[#DF3131] text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#DF3131] hover:border-white transition-all mt-4 sm:mt-6">
+<p className="text-black/70 text-[16px] sm:text-[17px] max-w-md leading-relaxed mb-3 sm:mb-3">
+       Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
+       </p>
+       <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#DF3131] text-white bg-[#DF3131] text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#DF3131] hover:border-white transition-all mt-3 sm:mt-6">
        BOOK A SHOOT
        </Link>
    </div>
