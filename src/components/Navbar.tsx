@@ -388,7 +388,8 @@ export default function Navbar() {
                   <Link href={l.href} onClick={() => setMobileOpen(false)}
                     className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
                       isActive(l.href) ? "text-[#DF3131]" : "text-[#333333] dark:text-[#e0e0e0] hover:text-[#DF3131]"
-                    }`}>
+                    }`}
+                    aria-current={isActive(l.href) ? "page" : undefined}>
                     {l.label}
                   </Link>
                 </motion.div>
