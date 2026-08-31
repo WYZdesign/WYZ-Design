@@ -2,6 +2,30 @@
 
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
+import { FiTwitter, FiFacebook, FiLinkedin, FiLink2 } from "react-icons/fi";
+
+const SHARE_URL = "https://wyzdesign.com/case-studies";
+const SHARE_TEXT = "Check out WYZ Design case studies - real projects, real results.";
+
+const SOCIAL_SHARE = [
+  { name: "Twitter", icon: FiTwitter, href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(SHARE_URL)}`, color: "hover:text-[#1DA1F2]" },
+  { name: "Facebook", icon: FiFacebook, href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_URL)}`, color: "hover:text-[#1877F2]" },
+  { name: "LinkedIn", icon: FiLinkedin, href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SHARE_URL)}`, color: "hover:text-[#0A66C2]" },
+];
+
+function ShareButton({ href, icon: Icon, name, color }: { href: string; icon: React.ElementType; name: string; color: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Share on ${name}`}
+      className={`w-10 h-10 flex items-center justify-center rounded-full border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/60 transition-all ${color} hover:border-current hover:scale-110`}
+    >
+      <Icon className="w-4 h-4" />
+    </a>
+  );
+}
 
 const CASE_STUDIES = [
   {
@@ -67,9 +91,24 @@ export default function CaseStudiesIndex() {
           <div className="text-center mt-16 p-12 bg-[#F5F5F3] dark:bg-[#252528]">
             <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-4">Your Project Here</h2>
             <p className="text-[#666] dark:text-[#888] text-[15px] max-w-lg mx-auto mb-6">Want to be the next case study? Let us build something worth documenting.</p>
-            <Link href="/contact" className="inline-block bg-[#DF3131] text-white px-10 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#B82020] transition-all">
-              Start a Project
-            </Link>
+            <div className="flex flex-col items-center gap-4">
+              <Link href="/contact" className="inline-block bg-[#DF3131] text-white px-10 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#B82020] transition-all">
+                Start a Project
+              </Link>
+              <div className="flex items-center gap-3">
+                <span className="text-[13px] text-[#999] dark:text-white/40 font-bold tracking-[0.1em] uppercase">Share</span>
+                {SOCIAL_SHARE.map(s => (
+                  <ShareButton key={s.name} {...s} />
+                ))}
+                <button
+                  onClick={() => navigator.clipboard.writeText(SHARE_URL)}
+                  aria-label="Copy link"
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/60 hover:text-[#DF3131] hover:border-[#DF3131] transition-all hover:scale-110"
+                >
+                  <FiLink2 className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
         </section>
       </ScrollReveal>

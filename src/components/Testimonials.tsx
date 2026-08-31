@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiStar, FiTwitter, FiLinkedin } from "react-icons/fi";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const TESTIMONIALS = [
@@ -81,7 +81,7 @@ function TestimonialsSliderInner() {
         <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-white tracking-[0.1em] uppercase mb-2">
           What Clients <span className="text-[#DF3131]">Say</span>
         </h2>
-        <div className="w-16 h-1 bg-[#DF3131] mx-auto mb-10" />
+        <div className="w-16 h-1 bg-[#DF3131] mx-auto mb-6" />
 
         <div className="relative min-h-[240px] flex items-center justify-center">
           <button
@@ -109,6 +109,16 @@ function TestimonialsSliderInner() {
               </a>
             </p>
             <p className="text-white/70 text-xs mt-1">{t.role} &mdash; {t.location}</p>
+              <div className="mt-3 flex items-center gap-2 text-xs text-[#999] dark:text-white/40">
+                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(t.quote)}&url=${encodeURIComponent(t.link ?? '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
+                  <FiTwitter className="w-3 h-3 mr-1" />
+                  Twitter
+                </a>
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(t.link ?? '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#0A66C2] transition-colors">
+                  <FiLinkedin className="w-3 h-3 mr-1" />
+                  LinkedIn
+                </a>
+              </div>
           </div>
 
           <button

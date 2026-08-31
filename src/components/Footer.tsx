@@ -80,7 +80,7 @@ export default function Footer() {
   const videoBg = (
     <>
       <div className="absolute inset-0 wyz-red-gradient dark:wyz-red-gradient-light" />
-      <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
+      <video src="/videos/wyz-nav-bg-new.mp4" poster="/images/hero-footer.jpg" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
       <div className="absolute inset-0 bg-black/15 dark:bg-black/15" />
     </>
   );
