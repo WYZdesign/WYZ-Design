@@ -46,6 +46,8 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/partnerships", priority: 0.5, changeFrequency: "monthly" },
   { path: "/referral", priority: 0.5, changeFrequency: "monthly" },
   { path: "/loyalty", priority: 0.5, changeFrequency: "monthly" },
+  { path: "/nomadic-breed", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/dying-breed-crew", priority: 0.7, changeFrequency: "monthly" },
   { path: "/model-archive", priority: 0.6, changeFrequency: "monthly" },
   { path: "/service-page/photoshoot", priority: 0.6, changeFrequency: "monthly" },
   { path: "/service-page/photo-retouching", priority: 0.6, changeFrequency: "monthly" },

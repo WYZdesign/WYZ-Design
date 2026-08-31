@@ -23,7 +23,7 @@ export const BRANDS = [
     shortDesc: "The community and clothing arm. A collective of artists, musicians, models, and culture-makers who refuse to blend in. Merch, events, and collaborations that keep authentic culture alive.",
     longDesc: "Dying Breed Crew is the community arm of WYZ Design, a collective of artists, musicians, models, and culture-makers who refuse to blend in. DBC represents the doers, the ones who show up, the ones who create when nobody's watching. Through merch, events, and creative collaborations, DBC keeps the spirit of authentic culture alive.",
     color: "#D49341",
-    href: "/merch",
+    href: "/dying-breed-crew",
     cta: "Shop the merch",
   },
   {
@@ -32,7 +32,7 @@ export const BRANDS = [
     shortDesc: "The mobile arm, built for creators who don't stay in one place. Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
     longDesc: "Nomadic Breed is the mobile arm of WYZ Design, built for creators who don't stay in one place. From pop-up shoots to touring event coverage, Nomadic Breed brings the WYZ standard wherever the work takes us. No studio? No problem. Every location is a set. Every city is an opportunity.",
     color: "#00E5FF",
-    href: "/events",
+    href: "/nomadic-breed",
     cta: "See the events",
   },
 ] as const;
