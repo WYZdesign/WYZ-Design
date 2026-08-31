@@ -190,6 +190,7 @@ return (
           <div className="relative h-full">
             <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#DF3131]/20">
               <video autoPlay muted loop playsInline preload="metadata"
+                poster="/images/hero-web-design.jpg"
                 className="w-full h-full object-cover">
                 <source src="/videos/hero-banners/web-design.mp4" type="video/mp4" />
               </video>
@@ -224,6 +225,7 @@ return (
         <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center pt-20">
           <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#DF3131]/20">
             <video autoPlay muted loop playsInline preload="metadata"
+              poster="/images/hero-web-design.jpg"
               className="w-full h-full object-cover">
               <source src="/videos/hero-banners/web-design.mp4" type="video/mp4" />
             </video>
@@ -257,7 +259,7 @@ return (
         </section>
 
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
-        <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 -mt-6 bg-white dark:bg-[#1C1C1E]">
+        <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-2 bg-white dark:bg-[#1C1C1E]">
           {(["RESPONSIVE","SEO","E-COMMERCE","LANDING PAGES","CMS","CUSTOM CODE"] as const).map((word, i) => {
             const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
             return (

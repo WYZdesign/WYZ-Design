@@ -11,6 +11,7 @@ interface ParallaxVideoProps {
   opacity?: number;
   overlayOpacity?: number;
   playbackRate?: number;
+  poster?: string;
 }
 
 export default function ParallaxVideo({
@@ -21,6 +22,7 @@ export default function ParallaxVideo({
   opacity = 1,
   overlayOpacity,
   playbackRate = 1,
+  poster,
 }: ParallaxVideoProps) {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -73,17 +75,18 @@ export default function ParallaxVideo({
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#FF6B6B]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
       <motion.div className="w-[125%] h-[125%] -ml-[12.5%] -mt-[12.5%]" style={{ y }}>
-        <video
-          ref={videoRef}
-          src={src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className={`w-full h-full object-cover ${className}`}
-          style={{ opacity }}
-        />
+          <video
+            ref={videoRef}
+            src={src}
+            poster={poster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className={`w-full h-full object-cover ${className}`}
+            style={{ opacity }}
+          />
       </motion.div>
       {overlayOpacity !== undefined && (
         <div className="absolute inset-0 bg-black pointer-events-none" style={{ opacity: overlayOpacity }} />

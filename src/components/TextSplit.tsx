@@ -70,6 +70,7 @@ export default function TextSplit({
                     style={{
                       transform: getTransform(visible),
                       opacity: visible ? 1 : 0,
+                      willChange: visible ? "transform, opacity" : "transform",
                       transition: `transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${(base + ci) * stagger}s, opacity 0.4s ease ${(base + ci) * stagger}s`,
                     }}
                   >

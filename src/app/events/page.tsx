@@ -707,12 +707,12 @@ export default function EventsPage() {
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
 {/* Desktop: video background */}
     <div className="hidden md:block absolute inset-0 z-0">
-     <video src={heroVideo} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
+     <video src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
      <div className="absolute inset-0 bg-black/65 z-[1]" />
     </div>
     {/* Mobile: video merged */}
     <div className="md:hidden absolute inset-0 z-0">
-     <video src={heroVideo} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+     <video src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
      <div className="absolute inset-0 bg-black/65 z-[1]" />
     </div>
 {/* Text overlay */}

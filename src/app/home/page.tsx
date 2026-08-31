@@ -933,17 +933,8 @@ export default function HomePage() {
    </div>
    </section>
 
-{/* ═══ IMAGE GALLERY STRIP ═══ */}
-<ScrollReveal animation="fadeIn" duration={1}>
-   <ImageReveal direction="up">
-   <section className="py-2 w-full relative overflow-hidden mt-2 mb-0">
-   <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.55} direction="right" />
-   </section>
-   </ImageReveal>
-   </ScrollReveal>
-
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-4 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-2 bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
@@ -954,6 +945,15 @@ export default function HomePage() {
       );
     })}
   </EnhancedMarquee>
+
+{/* ═══ IMAGE GALLERY STRIP ═══ */}
+<ScrollReveal animation="fadeIn" duration={1}>
+   <ImageReveal direction="up">
+   <section className="py-2 w-full relative overflow-hidden">
+   <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.55} direction="right" />
+   </section>
+   </ImageReveal>
+   </ScrollReveal>
 
 {/* ═══ SERVICES + PRICING PLANS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>

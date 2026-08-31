@@ -193,7 +193,8 @@ export default function PrintingPage() {
   {/* Desktop: split grid */}
   <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
    <div className="relative h-full">
-    <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} />
+    <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} 
+        poster="/images/hero-printing.jpg" />
    </div>
    <div className="relative overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-12 lg:pt-32 lg:pb-16">
     <div className="absolute inset-0 hero-grad-print z-0" />
@@ -210,7 +211,7 @@ export default function PrintingPage() {
   {/* Mobile: merged hero */}
   <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
    <div className="absolute inset-0 z-0">
-    <video src="/videos/hero-banners/printing.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+    <video src="/videos/hero-banners/printing.mp4" poster="/images/hero-printing.jpg" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
     <div className="absolute inset-0 bg-black/65 z-[1]" />
    </div>
    <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
@@ -225,7 +226,7 @@ export default function PrintingPage() {
   </ScrollReveal>
 
 {/* ═══ PRINTING MARQUEE ═══ */}
-  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-2 bg-white dark:bg-[#1C1C1E]">
     {(["FLYERS","POSTERS","BUSINESS CARDS","STICKERS","BANNERS","PHOTO PRINTS"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (

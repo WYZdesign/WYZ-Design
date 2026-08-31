@@ -30,6 +30,7 @@ export default function AboutPage() {
         <section className="relative min-h-screen bg-[#111] overflow-hidden hero-banner">
           <div className="absolute inset-0">
             <video autoPlay muted loop playsInline preload="metadata"
+              poster="/images/hero-about.jpg"
               className="w-full h-full object-cover opacity-25">
               <source src="/videos/hero-banners/about.mp4" type="video/mp4" />
             </video>
