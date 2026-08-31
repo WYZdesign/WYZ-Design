@@ -209,7 +209,10 @@ export default function LoyaltyPage() {
         ) : session && loading ? (
           <div className="text-center py-8 text-[#666] dark:text-white/50">Loading your Zeal...</div>
         ) : session && !data ? (
-          <div className="text-center py-8 text-[#666] dark:text-white/50 mb-10">Couldn't load your Zeal right now. Refresh the page in a moment.</div>
+          <div className="text-center mb-10">
+            <p className="text-[#666] dark:text-[#b0b0b0] mb-4">Sign in to see your Zeal. Rewards wait for you!</p>
+            <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">Sign in to join</Link>
+          </div>
         ) : null}
 
         {!session && (
