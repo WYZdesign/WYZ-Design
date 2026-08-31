@@ -4,6 +4,7 @@ import { getServiceClient } from "@/lib/supabase";
 import { addLoyaltyPoints } from "@/lib/wyzmind";
 import { sendDiscordAlert } from "@/lib/discord";
 import { recordReferralConversion } from "@/lib/referral";
+import { sendBookingConfirmation } from "@/lib/email";
 import Stripe from "stripe";
 import { logger } from "@/lib/logger";
 
@@ -111,6 +112,20 @@ export async function POST(req: NextRequest) {
               logger.warn("webhook:referral", `${result.error} (code: ${referralCode}, session: ${session.id})`);
             }
           } catch (e) { logger.error("webhook:referral", (e as Error).message); }
+        }
+
+        if (email) {
+          try {
+            await sendBookingConfirmation({
+              email,
+              serviceType: plan || "service",
+              serviceName: plan || "Your Order",
+              amount: amountTotal / 100,
+              orderId: session.id.slice(-8).toUpperCase(),
+            });
+          } catch (e) {
+            logger.error("webhook:booking-email", (e as Error).message);
+          }
         }
 
         const n8nUrl = process.env.N8N_WEBHOOK_URL;
