@@ -534,7 +534,7 @@ return (
     <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-32 lg:pt-40">
     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">CAPTURING</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">MOMENTS</TextSplit></span></h1>
      <p className="text-white/80 text-[16px] sm:text-[17px] leading-relaxed mb-8 sm:mb-10 mx-auto">Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.</p>
-      <Link href="/booking-calendar/photoshoot" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all mt-4 sm:mt-8 pb-4 sm:pb-0">BOOK A SHOOT</Link>
+      <Link href="/booking-calendar/photoshoot" className="inline-block px-6 md:px-10 py-3 md:py-4 bg-[#DF3131] text-white text-[12px] md:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all mt-4 md:mt-8">BOOK A SHOOT</Link>
 </div>
     </div>
     {/* Right half: video */}
@@ -569,7 +569,7 @@ return (
       <p className="text-[16px] sm:text-[16px] text-white/70 max-w-sm leading-relaxed mb-6 sm:mb-9 mx-auto">
        Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
        </p>
-       <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all pb-4 sm:pb-0">
+       <Link href="/booking-calendar/photoshoot" className="inline-block px-6 md:px-10 py-3 md:py-4 bg-white text-[#111] border-2 border-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
         BOOK A SHOOT
         </Link>
     </div>

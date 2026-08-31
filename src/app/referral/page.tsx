@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { FiShare2, FiCopy, FiCheck, FiUsers, FiDollarSign } from "react-icons/fi";
+import { FiShare2, FiCopy, FiCheck, FiUsers, FiDollarSign, FiTrendingUp, FiAward, FiClock } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 interface ReferralData {
@@ -14,6 +14,21 @@ interface ReferralData {
   pendingCommission: number;
 }
 
+interface ConversionRow {
+  id: string;
+  event_type: string;
+  commission: number | null;
+  status: string;
+  created_at: string;
+  referred_email?: string;
+}
+
+interface LeaderEntry {
+  name: string;
+  conversions: number;
+  earned: number;
+}
+
 export default function ReferralPage() {
   const sessionResult = useSession();
   const session = sessionResult?.data ?? null;
@@ -21,6 +36,48 @@ export default function ReferralPage() {
   const [loading, setLoading] = useState(true);
   const [creating, setCreating] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [leaderboard, setLeaderboard] = useState<LeaderEntry[]>([]);
+  const [totalConversions, setTotalConversions] = useState(0);
+  const [conversions, setConversions] = useState<ConversionRow[]>([]);
+  const [userRank, setUserRank] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("/api/referral/leaderboard")
+      .then((r) => r.json())
+      .then((d) => {
+        if (d?.leaders) {
+          setLeaderboard(d.leaders);
+          setTotalConversions(d.totals?.conversions || 0);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!session?.user?.email) { setLoading(false); return; }
+    fetch("/api/referral", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "create", email: session.user.email }),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.code) {
+          return Promise.all([
+            fetch(`/api/referral?code=${d.code}`).then((r) => r.json()),
+            fetch(`/api/referral/conversions?code=${d.code}`).then((r) => r.ok ? r.json() : { conversions: [] }).catch(() => ({ conversions: [] })),
+          ]);
+        }
+      })
+      .then((results) => {
+        if (results && results[0]?.code) {
+          setData(results[0]);
+          if (results[1]?.conversions) setConversions(results[1].conversions);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [session]);
 
   useEffect(() => {
     if (!session?.user?.email) { setLoading(false); return; }
@@ -113,21 +170,26 @@ export default function ReferralPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
-                <FiUsers className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-5 text-center">
+                <FiUsers className="w-6 h-6 mx-auto text-[#DF3131] mb-2" />
                 <p className="text-[2rem] font-heading font-black text-[#333] dark:text-white">{data.signups}</p>
-                <p className="text-[13px] text-[#666] dark:text-white/50 uppercase tracking-wider">Signups</p>
+                <p className="text-[11px] text-[#666] dark:text-white/50 uppercase tracking-wider">Signups</p>
               </div>
-              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
-                <FiDollarSign className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
+              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-5 text-center">
+                <FiTrendingUp className="w-6 h-6 mx-auto text-[#D49341] mb-2" />
                 <p className="text-[2rem] font-heading font-black text-[#333] dark:text-white">{data.purchases}</p>
-                <p className="text-[13px] text-[#666] dark:text-white/50 uppercase tracking-wider">Purchases</p>
+                <p className="text-[11px] text-[#666] dark:text-white/50 uppercase tracking-wider">Purchases</p>
               </div>
-              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-6 text-center">
-                <FiDollarSign className="w-8 h-8 mx-auto text-[#DF3131] mb-3" />
-                <p className="text-[2rem] font-heading font-black text-[#DF3131]">${data.pendingCommission.toFixed(2)}</p>
-                <p className="text-[13px] text-[#666] dark:text-white/50 uppercase tracking-wider">Pending Commission</p>
+              <div className="bg-[#DF3131] rounded-xl p-5 text-center">
+                <FiDollarSign className="w-6 h-6 mx-auto text-white mb-2" />
+                <p className="text-[2rem] font-heading font-black text-white">${data.totalCommission.toFixed(2)}</p>
+                <p className="text-[11px] text-white/70 uppercase tracking-wider">Total Earned</p>
+              </div>
+              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-5 text-center">
+                <FiDollarSign className="w-6 h-6 mx-auto text-green-600 mb-2" />
+                <p className="text-[2rem] font-heading font-black text-green-600">${data.paidCommission.toFixed(2)}</p>
+                <p className="text-[11px] text-[#666] dark:text-white/50 uppercase tracking-wider">Paid Out</p>
               </div>
             </div>
 
@@ -151,6 +213,71 @@ export default function ReferralPage() {
                 </div>
               </div>
             </div>
+
+            {leaderboard.length > 0 && (
+              <div className="mt-12 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h2 className="font-heading font-black text-[1.5rem] tracking-[0.08em] uppercase text-[#333] dark:text-white">Top Referrers</h2>
+                    <p className="text-[13px] text-[#666] dark:text-white/50 mt-1">{totalConversions} total conversions from all partners</p>
+                  </div>
+                  <FiAward className="w-8 h-8 text-[#DF3131]" />
+                </div>
+                <div className="space-y-3">
+                  {leaderboard.map((leader, i) => (
+                    <div key={leader.name} className={`flex items-center justify-between p-4 rounded-xl ${i === 0 ? "bg-[#DF3131]/10 border border-[#DF3131]/30" : "bg-[#F5F5F3] dark:bg-[#1C1C1E]"}`}>
+                      <div className="flex items-center gap-4">
+                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-heading font-black text-[14px] ${i === 0 ? "bg-[#DF3131] text-white" : i === 1 ? "bg-[#D49341] text-white" : i === 2 ? "bg-[#888] text-white" : "bg-[#E2E2E2] dark:bg-[#444] text-[#666] dark:text-white/50"}`}>
+                          {i + 1}
+                        </span>
+                        <span className="font-heading font-bold text-[#333] dark:text-white">{leader.name}</span>
+                      </div>
+                      <div className="text-right">
+                        <span className="font-heading font-black text-[#333] dark:text-white">{leader.conversions} conv{leader.conversions !== 1 ? "s" : ""}</span>
+                        <span className="text-[#666] dark:text-white/50 text-[13px] ml-2">${leader.earned.toFixed(0)} earned</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {conversions.length > 0 && (
+              <div className="mt-12 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h2 className="font-heading font-black text-[1.5rem] tracking-[0.08em] uppercase text-[#333] dark:text-white">Your Conversions</h2>
+                    <p className="text-[13px] text-[#666] dark:text-white/50 mt-1">Recent referral activity</p>
+                  </div>
+                  <FiClock className="w-6 h-6 text-[#666] dark:text-white/50" />
+                </div>
+                <div className="space-y-3">
+                  {conversions.slice(0, 10).map((conv) => (
+                    <div key={conv.id} className="flex items-center justify-between p-4 bg-[#F5F5F3] dark:bg-[#1C1C1E] rounded-xl">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${conv.event_type === "purchase" ? "bg-[#DF3131]/10" : "bg-[#D49341]/10"}`}>
+                          {conv.event_type === "purchase" ? (
+                            <FiDollarSign className="w-5 h-5 text-[#DF3131]" />
+                          ) : (
+                            <FiUsers className="w-5 h-5 text-[#D49341]" />
+                          )}
+                        </div>
+                        <div>
+                          <p className="font-heading font-bold text-[14px] text-[#333] dark:text-white capitalize">{conv.event_type}</p>
+                          <p className="text-[12px] text-[#666] dark:text-white/50">{conv.referred_email || "New user"}</p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <span className={`font-heading font-bold text-[14px] ${conv.status === "paid" ? "text-green-600" : "text-[#DF3131]"}`}>
+                          +${conv.commission?.toFixed(2) || "0.00"}
+                        </span>
+                        <p className="text-[11px] text-[#999] dark:text-white/30">{new Date(conv.created_at).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
