@@ -9,6 +9,7 @@ import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ParticleBackground from "@/components/ParticleBackground";
 import TextSplit from "@/components/TextSplit";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import LeadMagnet from "@/components/LeadMagnet";
 import { SUB_BRANDS } from "@/lib/brands";
 
 const VALUES = [
@@ -272,6 +273,7 @@ export default function AboutPage() {
           </div>
         </section>
       </ScrollReveal>
+      <LeadMagnet />
     </main>
   );
 }

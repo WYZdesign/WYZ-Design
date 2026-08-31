@@ -8,6 +8,7 @@ import DynamicForm from "@/components/DynamicForm";
 import { trackMetaEvent } from "@/components/AnalyticsProvider";
 import GyroTilt from "@/components/GyroTilt";
 import PricingCalculator from "@/components/PricingCalculator";
+import LeadMagnet from "@/components/LeadMagnet";
 import type { FormField } from "@/components/DynamicForm";
 
 const FEATURES: Record<string, string[]> = {
@@ -522,11 +523,13 @@ export default function PlansPage() {
             you&apos;ll save 10%.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {WEB_ADDONS.map((w, i) => (
-              <WebAddonCard key={w.name} w={w} i={i} />
-            ))}
+{WEB_ADDONS.map((w, i) => (
+            <WebAddonCard key={w.name} w={w} i={i} />
+          ))}
           </div>
         </div>
+
+        <LeadMagnet />
       </div>
     </main>
   );

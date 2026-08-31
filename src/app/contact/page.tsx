@@ -4,6 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
 import TextMaskReveal from "@/components/TextMaskReveal";
 import ParticleBackground from "@/components/ParticleBackground";
+import LeadMagnet from "@/components/LeadMagnet";
 
 const CONTACT_FIELDS = [
   { name: "name", label: "NAME", type: "text" as const, placeholder: "Your name" },
@@ -50,6 +51,7 @@ export default function ContactPage() {
           </div>
         </div>
       </ScrollReveal>
+      <LeadMagnet />
     </main>
   );
 }
