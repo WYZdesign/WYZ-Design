@@ -46,7 +46,7 @@ export default function DyingBreedCrewPage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-[#0A0A0A] py-24 lg:py-32">
         <div className="absolute inset-0 opacity-20">
-          <Image src="/images/client-logos/dying-breed.jpg" alt="" fill className="object-cover" sizes="100vw" />
+          <Image src="/images/client-logos/dying-breed.jpg" alt="Dying Breed Crew brand identity" fill className="object-cover" sizes="100vw" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/80 via-[#0A0A0A]/60 to-[#0A0A0A]" />
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
