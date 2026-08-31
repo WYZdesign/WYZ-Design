@@ -635,13 +635,16 @@ VISIT CHANNEL
 
 
 export default function EventsPage() {
- const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
- const [modalVideo, setModalVideo] = useState<{ video: string; title: string } | null>(null);
- const [shuffled, setShuffled] = useState(ALL_EVENT_IMAGES);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [modalVideo, setModalVideo] = useState<{ video: string; title: string } | null>(null);
+  const [shuffled, setShuffled] = useState(ALL_EVENT_IMAGES);
+  const [heroVideo, setHeroVideo] = useState("/videos/diy-shows/Action Sack Vol. 6.mp4");
 
- useEffect(() => {
- setShuffled([...ALL_EVENT_IMAGES].sort(() => Math.random() - 0.5));
- }, []);
+  useEffect(() => {
+    setShuffled([...ALL_EVENT_IMAGES].sort(() => Math.random() - 0.5));
+    const vids = DIY_SHOWS_RAW.filter(v => v.title !== "C.O. Reloaded Vol. 1");
+    setHeroVideo(vids[Math.floor(Math.random() * vids.length)].video);
+  }, []);
  const visibleEvents = shuffled.slice(0, visibleCount);
  const hasMore = visibleCount < shuffled.length;
 
@@ -703,18 +706,18 @@ export default function EventsPage() {
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
-   {/* Desktop: video background */}
-   <div className="hidden md:block absolute inset-0 z-0">
-    <video src="/videos/diy-shows/Action Sack Vol. 5.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
-    <div className="absolute inset-0 bg-black/65 z-[1]" />
-   </div>
-   {/* Mobile: video merged */}
-   <div className="md:hidden absolute inset-0 z-0">
-    <video src="/videos/diy-shows/Action Sack Vol. 5.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
-    <div className="absolute inset-0 bg-black/65 z-[1]" />
-   </div>
-   {/* Text overlay */}
-   <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center pt-24 pb-10 lg:pt-32 lg:pb-0 overflow-hidden">
+{/* Desktop: video background */}
+    <div className="hidden md:block absolute inset-0 z-0">
+     <video src={heroVideo} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
+     <div className="absolute inset-0 bg-black/65 z-[1]" />
+    </div>
+    {/* Mobile: video merged */}
+    <div className="md:hidden absolute inset-0 z-0">
+     <video src={heroVideo} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+     <div className="absolute inset-0 bg-black/65 z-[1]" />
+    </div>
+{/* Text overlay */}
+    <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center overflow-hidden">
     <div className="relative z-10">
      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
     <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
@@ -731,7 +734,7 @@ export default function EventsPage() {
   </ScrollReveal>
 
 {/* ═══ EVENTS MARQUEE ═══ */}
-  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-2 bg-white dark:bg-[#1C1C1E]">
     {(["CONCERTS","DIY SHOWS","MIXERS","ART SHOWS","RECAPS","LIVE COVERAGE"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
