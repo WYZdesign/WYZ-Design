@@ -526,56 +526,55 @@ return (
 
 {/* HERO */}
    <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
-   {/* Desktop split: video left, text right */}
-   <div className="hidden md:grid md:grid-cols-2 md:h-full">
-   <div className="relative h-full">
-   <div ref={hVis} className={`absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-black to-[#DF3131]/20 ${heroVisible ? "opacity-100" : "opacity-0"}`} style={{ transition: "opacity 0.8s ease-out" }}>
-    <video
-     src="/videos/hero-banners/photography.mp4"
-     autoPlay muted loop playsInline
-     className="absolute inset-0 w-full h-full object-cover"
-     style={{ filter: "saturate(1.2) contrast(1.1)" }}
-     />
-    </div>
-    </div>
-    <div className="relative z-10 bg-gradient-to-br from-[#e8e8e8] to-[#dadada] flex flex-col items-center justify-center text-center px-6 lg:px-12 pt-24 pb-12 min-h-[500px] h-full">
-   <h1 className="text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-black tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
-     <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
-     <span className="text-[#DF3131]">CREATING</span> MEMORIES
-     </h1>
-<p className="text-black/70 text-[16px] sm:text-[17px] max-w-xs sm:max-w-md leading-relaxed mb-6 sm:mb-8 mx-auto">
-       Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
-       </p>
-       <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 border-2 border-[#DF3131] text-white bg-[#DF3131] text-[12px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#DF3131] hover:border-white transition-all mt-4 sm:mt-8">
-       BOOK A SHOOT
-       </Link>
-   </div>
-   </div>
-   {/* Mobile merged */}
-   <div className="md:hidden absolute inset-0 z-0">
-    <video
-     src="/videos/hero-banners/photography.mp4"
-     autoPlay muted loop playsInline
-     className="absolute inset-0 w-full h-full object-cover"
-     style={{ filter: "saturate(1.2) contrast(1.1)" }}
-     />
-    <div className="absolute inset-0 bg-black/65 z-[1]" />
-   </div>
-   <div className="md:hidden absolute inset-0 z-10 flex items-center justify-center">
-    <div className="text-center px-6 sm:px-10 lg:px-16 pt-20 pb-12">
-   <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-9" style={{ lineHeight: 0.9 }}>
-     <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
-     <span className="text-[#DF3131]">CREATING</span> MEMORIES
-     </h1>
-     <p className="text-[16px] sm:text-[16px] text-white/70 max-w-sm leading-relaxed mb-6 sm:mb-9 mx-auto">
-      Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
-      </p>
-      <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
-       BOOK A SHOOT
-       </Link>
+    {/* Desktop split: text left, video right */}
+    <div className="hidden md:grid md:grid-cols-2 md:h-full">
+    <div className="relative w-full md:w-1/2 flex items-center justify-center z-10 overflow-hidden">
+    <div className="absolute inset-0 hero-grad-design z-0" />
+    <div className="absolute inset-0 bg-black/20 z-[1]" />
+    <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-32 lg:pt-40">
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">CAPTURING</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">MOMENTS</TextSplit></span></h1>
+     <p className="text-white/80 text-[16px] sm:text-[17px] leading-relaxed mb-8 sm:mb-10 mx-auto">Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.</p>
+      <Link href="/booking-calendar/photoshoot" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all mt-4 sm:mt-8">BOOK A SHOOT</Link>
 </div>
     </div>
-   </section>
+    {/* Right half: video */}
+    <div className="relative h-full overflow-hidden">
+    <div className="absolute inset-0 z-0">
+    <video
+     src="/videos/hero-banners/photography.mp4"
+     autoPlay muted loop playsInline
+     className="absolute inset-0 w-full h-full object-cover"
+     style={{ filter: "saturate(1.2) contrast(1.1)" }}
+     />
+    <div className="absolute inset-0 bg-black/20 z-[1]" />
+    </div>
+    </div>
+    </div>
+    {/* Mobile merged */}
+    <div className="md:hidden absolute inset-0 z-0">
+     <video
+      src="/videos/hero-banners/photography.mp4"
+      autoPlay muted loop playsInline
+      className="absolute inset-0 w-full h-full object-cover"
+      style={{ filter: "saturate(1.2) contrast(1.1)" }}
+      />
+     <div className="absolute inset-0 bg-black/65 z-[1]" />
+    </div>
+    <div className="md:hidden absolute inset-0 z-10 flex items-center justify-center">
+     <div className="text-center px-6 sm:px-10 lg:px-16 pt-20 pb-12">
+    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-9" style={{ lineHeight: 0.9 }}>
+      <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
+      <span className="text-[#DF3131]">CREATING</span> MEMORIES
+      </h1>
+      <p className="text-[16px] sm:text-[16px] text-white/70 max-w-sm leading-relaxed mb-6 sm:mb-9 mx-auto">
+       Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
+       </p>
+       <Link href="/booking-calendar/photoshoot" className="inline-block px-8 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
+        BOOK A SHOOT
+        </Link>
+    </div>
+     </div>
+    </section>
 
 {/* ═══ BRAND MARQUEE ═══ */}
   <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 -mt-4 bg-white dark:bg-[#1C1C1E]">
