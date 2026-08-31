@@ -531,7 +531,7 @@ return (
     <div className="relative w-full md:col-span-1 flex items-center justify-center z-10 overflow-hidden">
     <div className="absolute inset-0 hero-grad-design z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
-    <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-32 lg:pt-40">
+    <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-32 lg:pt-40 pb-16 lg:pb-20">
     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">CAPTURING</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">MOMENTS</TextSplit></span></h1>
      <p className="text-white/80 text-[16px] sm:text-[17px] leading-relaxed mb-8 sm:mb-10 mx-auto">Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.</p>
       <Link href="/booking-calendar/photoshoot" className="inline-block px-6 md:px-10 py-3 md:py-4 bg-[#DF3131] text-white text-[12px] md:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all mt-4 md:mt-8">BOOK A SHOOT</Link>

@@ -4,7 +4,9 @@ const PRINTFUL_API = "https://api.printful.com";
 const API_KEY = process.env.PRINTFUL_API_KEY || "";
 
 // Curated product IDs for WYZ Design merch
-const PRODUCT_IDS = [
+// Exported so other build-time code (e.g. sitemap.ts) can stay in sync with
+// the real catalog instead of assuming a sequential 1-14 range.
+export const PRODUCT_IDS = [
   71,   // Unisex Staple T-Shirt (Bella+Canvas 3001)
   12,   // Unisex Basic Softstyle T-Shirt (Gildan 64000)
   831,  // Unisex Organic Hoodie (Stanley/Stella)

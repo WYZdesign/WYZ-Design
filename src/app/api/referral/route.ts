@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
 import { recordReferralConversion } from "@/lib/referral";
@@ -16,12 +17,18 @@ function getIp(req: NextRequest): string {
 }
 
 /**
- * GET /api/referral — Look up a referral code's stats
+ * GET /api/referral — Look up a referral code's stats (own code only)
  * @query code — the referral code
+ * @auth Required — session must match the code's owner
  */
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
   if (!code) return NextResponse.json({ error: "Missing code" }, { status: 400 });
+
+  const session = await auth();
+  if (!session?.user?.email) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
 
   const rl = await rateLimit(`referral-get:${getIp(req)}`, 30, 60_000);
   if (!rl.ok) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
@@ -29,10 +36,20 @@ export async function GET(req: NextRequest) {
   const sb = getServiceClient();
   try {
     const { data: codeRow } = await sb.from("referral_codes")
-      .select("code, referrer_email, created_at")
+      .select("code, created_at")
       .eq("code", code.toUpperCase())
       .maybeSingle();
     if (!codeRow) return NextResponse.json({ error: "Invalid code" }, { status: 404 });
+
+    // Verify the requesting user owns this code
+    const { data: ownerRow } = await sb.from("referral_codes")
+      .select("referrer_email")
+      .eq("code", code.toUpperCase())
+      .maybeSingle();
+
+    if (ownerRow?.referrer_email !== session.user.email.toLowerCase()) {
+      return NextResponse.json({ error: "Not authorized" }, { status: 403 });
+    }
 
     const { count: signups } = await sb.from("referral_conversions")
       .select("id", { count: "exact", head: true })

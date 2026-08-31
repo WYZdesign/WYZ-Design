@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { getSiteUrl } from "@/lib/site-url";
+import { PRODUCT_IDS } from "@/app/api/printful-catalog/route";
 
 const BASE = getSiteUrl();
 
@@ -80,10 +81,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "yearly" as const,
     priority: 0.5,
   }));
-  // Merch product detail pages are keyed by numeric id (1-14 in both the
-  // listing fallback and the [id] page catalog).
-  const merchProducts = Array.from({ length: 14 }, (_, i) => ({
-    url: `${BASE}/merch/${i + 1}`,
+  // Merch product detail pages are keyed by the real Printful catalog id
+  // (e.g. 71, 12, 831 — see PRODUCT_IDS in api/printful-catalog/route.ts),
+  // NOT a sequential 1-14 range. /merch/[id] fetches /api/printful-catalog
+  // and matches on that same id, so this list must stay derived from
+  // PRODUCT_IDS rather than assumed, or these entries soft-404 again.
+  const merchProducts = PRODUCT_IDS.map((id) => ({
+    url: `${BASE}/merch/${id}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
     priority: 0.6,

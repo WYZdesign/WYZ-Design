@@ -20,7 +20,6 @@ interface ConversionRow {
   commission: number | null;
   status: string;
   created_at: string;
-  referred_email?: string;
 }
 
 interface LeaderEntry {
@@ -75,24 +74,6 @@ export default function ReferralPage() {
           if (results[1]?.conversions) setConversions(results[1].conversions);
         }
       })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, [session]);
-
-  useEffect(() => {
-    if (!session?.user?.email) { setLoading(false); return; }
-    fetch("/api/referral", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "create", email: session.user.email }),
-    })
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.code) {
-          return fetch(`/api/referral?code=${d.code}`).then((r) => r.json());
-        }
-      })
-      .then((d) => { if (d?.code) setData(d); })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [session]);
@@ -264,7 +245,7 @@ export default function ReferralPage() {
                         </div>
                         <div>
                           <p className="font-heading font-bold text-[14px] text-[#333] dark:text-white capitalize">{conv.event_type}</p>
-                          <p className="text-[12px] text-[#666] dark:text-white/50">{conv.referred_email || "New user"}</p>
+                          <p className="text-[12px] text-[#666] dark:text-white/50">Referral</p>
                         </div>
                       </div>
                       <div className="text-right">
