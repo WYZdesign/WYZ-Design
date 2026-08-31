@@ -25,19 +25,18 @@ const CLIENT_EVENTS_RAW = [
 ];
 
 const DIY_SHOWS_RAW = [
- { title: "Action Sack Vol. 5", video: "/videos/diy-shows/Action Sack Vol. 5.mp4" },
- { title: "Action Sack Vol. 6", video: "/videos/diy-shows/Action Sack Vol. 6.mp4" },
- { title: "C.O. Reloaded Vol. 1", video: "/videos/diy-shows/C.O. Reloaded Vol. 1 recap.mp4" },
- { title: "C.O. Reloaded Vol. 3", video: "/videos/diy-shows/C.O. Reloaded Vol. 3 recap.mp4" },
- { title: "Creative Cloud Vol. 1", video: "/videos/diy-shows/Creative Cloud Vol. 1.mp4" },
- { title: "Creative Cloud Vol. 2", video: "/videos/diy-shows/Creative Cloud Vol. 2.mp4" },
- { title: "Frequinox Vol. 1", video: "/videos/diy-shows/Frequinox Vol. 1.mp4" },
- { title: "Frequinox Vol. 3", video: "/videos/diy-shows/Frequinox Vol. 3.mp4" },
- { title: "Local Love Vol. 2", video: "/videos/diy-shows/Local Love Vol. 2.mp4" },
- { title: "Local Love Vol. 3", video: "/videos/diy-shows/Local Love Vol. 3.mp4" },
- { title: "Local Love Vol. 4", video: "/videos/diy-shows/Local Love Vol. 4.mp4" },
- { title: "Local Love Vol. 5", video: "/videos/diy-shows/Local Love Vol. 5.mp4" },
- { title: "Secret Stash Vol. 1", video: "/videos/diy-shows/Secret Stash Vol. 1.mp4" },
+  { title: "Action Sack Vol. 5", video: "/videos/diy-shows/Action Sack Vol. 5.mp4" },
+  { title: "Action Sack Vol. 6", video: "/videos/diy-shows/Action Sack Vol. 6.mp4" },
+  { title: "C.O. Reloaded Vol. 3", video: "/videos/diy-shows/C.O. Reloaded Vol. 3 recap.mp4" },
+  { title: "Creative Cloud Vol. 1", video: "/videos/diy-shows/Creative Cloud Vol. 1.mp4" },
+  { title: "Creative Cloud Vol. 2", video: "/videos/diy-shows/Creative Cloud Vol. 2.mp4" },
+  { title: "Frequinox Vol. 1", video: "/videos/diy-shows/Frequinox Vol. 1.mp4" },
+  { title: "Frequinox Vol. 3", video: "/videos/diy-shows/Frequinox Vol. 3.mp4" },
+  { title: "Local Love Vol. 2", video: "/videos/diy-shows/Local Love Vol. 2.mp4" },
+  { title: "Local Love Vol. 3", video: "/videos/diy-shows/Local Love Vol. 3.mp4" },
+  { title: "Local Love Vol. 4", video: "/videos/diy-shows/Local Love Vol. 4.mp4" },
+  { title: "Local Love Vol. 5", video: "/videos/diy-shows/Local Love Vol. 5.mp4" },
+  { title: "Secret Stash Vol. 1", video: "/videos/diy-shows/Secret Stash Vol. 1.mp4" },
 ];
 
 const ALL_EVENT_IMAGES = [
