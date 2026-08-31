@@ -46,19 +46,18 @@ export default function ParallaxVideo({
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0 }
-    );
-    obs.observe(video);
-    return () => obs.disconnect();
-  }, []);
+    const playWhenReady = () => {
+      video.play().catch(() => {});
+    };
+    if (video.readyState >= 2) {
+      playWhenReady();
+    } else {
+      video.addEventListener("canplay", playWhenReady, { once: true });
+    }
+    return () => {
+      video.removeEventListener("canplay", playWhenReady);
+    };
+  }, [src]);
 
   useEffect(() => {
     const video = videoRef.current;
