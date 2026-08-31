@@ -114,7 +114,7 @@ export default function CookieBanner() {
       <div className="bg-white dark:bg-[#1C1C1E] border-t-2 border-[#DF3131] sm:border-2 sm:border-[#E2E2E2] dark:border-[#444] sm:rounded-xl shadow-2xl sm:shadow-xl p-5 sm:p-6 max-h-[75vh] overflow-y-auto">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <FiGlobe className="w-6 h-6 text-[#DF3131] flex-shrink-0" />
+            <FiGlobe className="w-6 h-6 text-[#DF3131] dark:text-[#FF5A5A] flex-shrink-0" />
             <div>
               <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg">Cookie Preferences</h3>
               <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to make the site work better for you.</p>

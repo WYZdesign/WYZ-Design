@@ -6,18 +6,18 @@ import { BRANDS } from "@/lib/brands";
 const SITE = "https://www.wyzdesign.com";
 
 export const metadata: Metadata = {
-  title: "Our Brands | WYZ Design",
+    title: "Our Brands",
   description: "WYZ Design is the parent of Wild Yet Zealous, Dying Breed Crew, and Nomadic Breed. One creative ecosystem, four brands, built by Torreé Marcel Harris.",
   alternates: { canonical: `${SITE}/brands` },
   openGraph: {
-    title: "Our Brands | WYZ Design",
+  title: "Our Brands",
     description: "Wild Yet Zealous, Dying Breed Crew, Nomadic Breed, and WYZ Design. One creative ecosystem built by Torreé Marcel Harris.",
     url: `${SITE}/brands`,
     siteName: "WYZ Design",
     type: "website",
     images: [{ url: `${SITE}/wyz-og-image.png`, width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Our Brands | WYZ Design", description: "One creative ecosystem, four brands.", images: [`${SITE}/wyz-og-image.png`] },
+  twitter: { card: "summary_large_image", title: "Our Brands", description: "One creative ecosystem, four brands.", images: [`${SITE}/wyz-og-image.png`] },
 };
 
 const jsonLd = {

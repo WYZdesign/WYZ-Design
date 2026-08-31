@@ -78,7 +78,7 @@ export default function AnalyticsProvider() {
               width="1"
               style={{ display: "none" }}
               src={`https://www.facebook.com/tr?id=${process.env.NEXT_PUBLIC_META_PIXEL_ID}&ev=PageView&noscript=1`}
-              alt=""
+              alt="Tracking pixel for analytics"
             />
           </noscript>
         </>

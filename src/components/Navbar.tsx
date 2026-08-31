@@ -203,7 +203,8 @@ export default function Navbar() {
                             className={`block px-5 py-3 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
                               isActive(l.href) ? "text-white dark:text-black bg-white/10 dark:bg-black/10 font-bold" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black hover:bg-white/5 dark:hover:bg-black/5 active:text-white/80"
                             }`}>
-                            {l.label}
+                            aria-current={isActive(l.href) ? "page" : undefined}
+                          {l.label}
                           </Link>
                         ))}
                       </div>
@@ -251,6 +252,7 @@ export default function Navbar() {
                   ) : (
                     <motion.button key="search-btn" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                       onClick={() => setSearchOpen(true)}
+                      aria-label="Open search"
                       className="w-11 h-11 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 transition-all">
                       <FiSearch className="w-4 h-4" />
                     </motion.button>
@@ -260,6 +262,7 @@ export default function Navbar() {
               {session?.user ? (
                 <div ref={profileRef} className="relative shrink-0">
                   <button onClick={() => setProfileOpen(!profileOpen)}
+                    aria-label="Account menu"
                     className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/30 hover:border-white transition-all flex items-center justify-center bg-white/10 backdrop-blur">
                     {session.user.image ? (
                       <Image src={session.user.image} alt={session.user.name || "Account"} width={40} height={40}
