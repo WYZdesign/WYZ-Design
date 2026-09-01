@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { earnZeal } from "@/lib/zeal";
 import { logger } from "@/lib/logger";
+import { validateCsrf } from "@/lib/csrf";
 
 /**
  * Awards Zeal points for a validated action.
@@ -11,6 +12,9 @@ import { logger } from "@/lib/logger";
  * @auth Required
  */
 export async function POST(req: NextRequest) {
+  if (!validateCsrf(req)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   try {
     const session = await auth();
     if (!session?.user?.email) {

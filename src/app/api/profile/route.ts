@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { updateUserProfile } from "@/lib/wyzmind";
 import { evaluateProfileAchievements } from "@/lib/zeal";
+import { validateCsrf } from "@/lib/csrf";
 import { logger } from "@/lib/logger";
 
 const FIELD_MAX_LEN: Record<string, number> = {
@@ -17,6 +18,9 @@ const FIELD_MAX_LEN: Record<string, number> = {
  * @auth Required — user must be authenticated
  */
 export async function PUT(req: NextRequest) {
+  if (!validateCsrf(req)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   try {
     const session = await auth();
     if (!session?.user?.email) {

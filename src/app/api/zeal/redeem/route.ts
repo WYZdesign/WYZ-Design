@@ -3,6 +3,7 @@ import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { redeemZeal, ZEAL_REWARDS } from "@/lib/zeal";
 import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
+import { validateCsrf } from "@/lib/csrf";
 
 /**
  * Spends Zeal on a reward and returns a redemption code.
@@ -16,6 +17,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  if (!validateCsrf(req)) {
+    return NextResponse.json({ error: "Invalid origin" }, { status: 403 });
+  }
   try {
     const session = await auth();
     if (!session?.user?.email) {

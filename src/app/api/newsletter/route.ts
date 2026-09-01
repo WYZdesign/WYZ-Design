@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { addNewsletterSubscriber, removeNewsletterSubscriber } from "@/lib/wyzmind";
-import { createHmac } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
 import { validateCsrf } from "@/lib/csrf";
 import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
@@ -35,7 +35,16 @@ function verifyToken(token: string, purpose: string): string | null {
   const secret = process.env.NEXTAUTH_SECRET;
   if (!secret) return null;
   const expected = createHmac("sha256", secret).update(`${email.toLowerCase().trim()}.${purpose}.${timestamp}`).digest("hex").slice(0, 32);
-  if (expected !== hash) return null;
+  // Timing-safe comparison, matching the pattern already used for CSRF
+  // tokens in lib/csrf.ts — a plain !== leaks per-character timing info
+  // that could in principle help brute-force the signature.
+  try {
+    const a = Buffer.from(expected);
+    const b = Buffer.from(hash);
+    if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  } catch {
+    return null;
+  }
   return email;
 }
 
