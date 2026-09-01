@@ -479,7 +479,7 @@ export default function MerchPage() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quickColor, setQuickColor] = useState(0);
   const [quickSize, setQuickSize] = useState("M");
-  const [products, setProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
+  const [products, setProducts] = useState<Product[]>([]);
   const [showStore, setShowStore] = useState(false);
   const [storeVisible, setStoreVisible] = useState(false);
   const [portalAnimating, setPortalAnimating] = useState(false);
@@ -607,25 +607,29 @@ export default function MerchPage() {
           </div>
         </div>
 
-        {/* Auto-Scroll Merch Gallery — Black-to-Red Gradient Background */}
-        <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-16 border-y border-white/5">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
-          <div className="text-center mb-10">
-            <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">DBC CREW COLLECTION</span>
-            <h3 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-white tracking-[0.05em]">Worn By The Crew</h3>
+        {/* Auto-Scroll Merch Gallery — Black-to-Red Gradient Background (only renders after catalog loads) */}
+        {products.length > 0 && (
+          <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-16 border-y border-white/5">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
+            <div className="text-center mb-10">
+              <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">DBC CREW COLLECTION</span>
+              <h3 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-white tracking-[0.05em]">Worn By The Crew</h3>
+            </div>
+            <ProductMarquee products={products} />
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
           </div>
-          <ProductMarquee products={products} />
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
-        </div>
+        )}
 
-        {/* Product Name Marquee Strip */}
-        <div className="relative overflow-hidden bg-[#111] py-3 border-y border-white/5">
-          <div className="flex whitespace-nowrap animate-marquee-left">
-            {[...products, ...products, ...products].map((p, i) => (
-              <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
-            ))}
+        {/* Product Name Marquee Strip (only renders after catalog loads) */}
+        {products.length > 0 && (
+          <div className="relative overflow-hidden bg-[#111] py-3 border-y border-white/5">
+            <div className="flex whitespace-nowrap animate-marquee-left">
+              {[...products, ...products, ...products].map((p, i) => (
+                <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Brand Statement — Animated Square Quote */}
         <section className="py-20 px-6">
@@ -634,10 +638,12 @@ export default function MerchPage() {
           </ScrollReveal>
         </section>
 
-        {/* Merch Carousel */}
-        <ScrollReveal animation="fadeUp" delay={0.1}>
-          <MerchCarousel products={products} />
-        </ScrollReveal>
+        {/* Merch Carousel (only renders after catalog loads) */}
+        {products.length > 0 && (
+          <ScrollReveal animation="fadeUp" delay={0.1}>
+            <MerchCarousel products={products} />
+          </ScrollReveal>
+        )}
 
         {/* Enter Store Toggle */}
         <section className="py-16 px-6 text-center" id="shop">

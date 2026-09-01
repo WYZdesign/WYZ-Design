@@ -1,5 +1,14 @@
 import { logger } from "@/lib/logger";
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = "WYZ Design <orders@wyzdesign.com>";
 const ADMIN_EMAIL = "info@wyzdesign.com";
@@ -56,7 +65,8 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
 
 export async function sendBookingConfirmation(data: BookingConfirmation): Promise<boolean> {
   const { email, customerName, serviceType, serviceName, amount, orderId } = data;
-  const name = customerName || "there";
+  const name = escapeHtml(customerName || "there");
+  const safeServiceName = escapeHtml(serviceName);
 
   const subject = `Your WYZ Design ${serviceName} is confirmed ✦`;
   const html = `
@@ -77,7 +87,7 @@ export async function sendBookingConfirmation(data: BookingConfirmation): Promis
         Hey ${name},
       </p>
       <p style="font-size:16px;color:#333;line-height:1.6;margin:0 0 24px">
-        Your <strong>${serviceName}</strong> is confirmed. We received your payment of <strong>$${amount.toFixed(2)}</strong>${orderId ? ` (Order #${orderId})` : ""}.
+        Your <strong>${safeServiceName}</strong> is confirmed. We received your payment of <strong>$${amount.toFixed(2)}</strong>${orderId ? ` (Order #${escapeHtml(orderId)})` : ""}.
       </p>
       <div style="background:#f9f9f9;border-left:4px solid #DF3131;padding:16px 20px;margin:24px 0;border-radius:0 4px 4px 0">
         <p style="font-size:14px;color:#333;margin:0;line-height:1.6">
@@ -109,7 +119,8 @@ export async function sendBookingConfirmation(data: BookingConfirmation): Promis
 
 export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): Promise<boolean> {
   const { email, customerName, serviceType, serviceName } = data;
-  const name = customerName || "there";
+  const name = escapeHtml(customerName || "there");
+  const safeServiceName = escapeHtml(serviceName);
 
   const subject = `Getting ready for your ${serviceName} at WYZ Design ✦`;
   const html = `
@@ -130,7 +141,7 @@ export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): 
         Hey ${name},
       </p>
       <p style="font-size:16px;color:#333;line-height:1.6;margin:0 0 24px">
-        Your <strong>${serviceName}</strong> is coming up. Here's how to get the most out of it:
+        Your <strong>${safeServiceName}</strong> is coming up. Here's how to get the most out of it:
       </p>
       <div style="margin:24px 0">
         <div style="margin:16px 0;padding:16px;background:#f9f9f9;border-radius:6px">
@@ -162,7 +173,9 @@ export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): 
 
 export async function sendBookingDelivered(data: { email: string; customerName?: string; serviceName: string; deliveryNotes?: string }): Promise<boolean> {
   const { email, customerName, serviceName, deliveryNotes } = data;
-  const name = customerName || "there";
+  const name = escapeHtml(customerName || "there");
+  const safeServiceName = escapeHtml(serviceName);
+  const safeDeliveryNotes = deliveryNotes ? escapeHtml(deliveryNotes) : "";
 
   const subject = `Your ${serviceName} from WYZ Design is ready ✦`;
   const html = `
@@ -183,9 +196,9 @@ export async function sendBookingDelivered(data: { email: string; customerName?:
         Hey ${name},
       </p>
       <p style="font-size:16px;color:#333;line-height:1.6;margin:0 0 24px">
-        Your <strong>${serviceName}</strong> is ready. Log in to your account to view and download your files.
+        Your <strong>${safeServiceName}</strong> is ready. Log in to your account to view and download your files.
       </p>
-      ${deliveryNotes ? `<div style="background:#f9f9f9;border-left:4px solid #D49341;padding:16px 20px;margin:24px 0;border-radius:0 4px 4px 0"><p style="font-size:14px;color:#333;margin:0"><strong>Notes from us:</strong> ${deliveryNotes}</p></div>` : ""}
+      ${safeDeliveryNotes ? `<div style="background:#f9f9f9;border-left:4px solid #D49341;padding:16px 20px;margin:24px 0;border-radius:0 4px 4px 0"><p style="font-size:14px;color:#333;margin:0"><strong>Notes from us:</strong> ${safeDeliveryNotes}</p></div>` : ""}
       <a href="https://www.wyzdesign.com/account/my-account" style="display:inline-block;background:#DF3131;color:#fff;font-size:14px;font-weight:700;letter-spacing:0.08em;text-decoration:none;padding:14px 28px;border-radius:4px;margin:24px 0">
         View My Files
       </a>
