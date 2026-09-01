@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
+import { useRef, useCallback } from "react";
 import { prefersReducedMotion } from "@/lib/utils";
 import { useGyroPermission } from "@/hooks/useGyroPermission";
 
