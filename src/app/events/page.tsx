@@ -200,11 +200,11 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
  useEffect(() => { const vid = videoRef.current; if (vid) vid.muted = isMuted; }, [isMuted]);
 
  return (
- <div className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4" onClick={onClose}>
+ <div className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4" onClick={onClose} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
  <button onClick={onClose} className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Close">
  <FiX className="w-5 h-5 text-white" />
  </button>
- <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
+ <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>
   <video ref={videoRef} src={video} controls autoPlay muted playsInline className="w-full h-auto max-h-[85vh] object-contain rounded-lg" />
  <button
   onClick={(e) => { e.stopPropagation(); e.preventDefault(); toggleVideo("modal"); }}

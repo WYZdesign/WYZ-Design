@@ -54,8 +54,8 @@ export function GlobalImagePicker() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] bg-black/50 flex items-center justify-center p-4" onClick={close}>
-      <div className="bg-white dark:bg-[#252528] rounded-2xl shadow-2xl max-w-lg w-full p-6" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[60] bg-black/50 flex items-center justify-center p-4" onClick={close} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
+      <div className="bg-white dark:bg-[#252528] rounded-2xl shadow-2xl max-w-lg w-full p-6" onClick={e => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-heading font-bold text-lg">{albumMode ? "Set Album Folder" : "Upload Image"}</h3>
           <button onClick={close} className="text-[#666] dark:text-white/70 hover:text-gray-600" aria-label="Close"><FiX className="w-5 h-5" /></button>

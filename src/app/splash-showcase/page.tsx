@@ -72,7 +72,7 @@ export default function SplashShowcasePage() {
  }, []);
 
  if (!ready) {
- return <div className="fixed inset-0 z-[9999] bg-white dark:bg-[#111]"/>;
+ return <div className="fixed inset-0 z-[9999] bg-white dark:bg-[#111]" style={{ animation: "wzFadeIn 0.2s ease-out both" }}/>;
  }
 
  return (
@@ -128,8 +128,8 @@ export default function SplashShowcasePage() {
  </div>
 
  {selected !== null && (
- <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-8" onClick={() => setSelected(null)}>
-   <Image src={SPLASHES[selected].src} alt={SPLASHES[selected].title} width={900} height={506} className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg" />
+ <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-8" onClick={() => setSelected(null)} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
+   <Image src={SPLASHES[selected].src} alt={SPLASHES[selected].title} width={900} height={506} className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg" style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }} />
  <p className="absolute bottom-8 text-[#333] dark:text-white font-heading font-bold tracking-[0.1em] mb-2">{SPLASHES[selected].title}</p>
  </div>
  )}

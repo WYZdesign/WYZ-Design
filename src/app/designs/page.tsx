@@ -53,9 +53,9 @@ function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onCl
  return () => { document.removeEventListener("keydown", hk); document.body.style.overflow = ""; };
  }, [hk]);
  return (
- <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center cursor-pointer" onClick={onClose}>
+ <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center cursor-pointer" onClick={onClose} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
  <button onClick={onClose} className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[210] text-white/60 hover:text-white transition-colors w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:border-white/40">✕</button>
-  <Image src={src} alt={alt || "Design preview"} width={1200} height={800} className="max-w-[92vw] max-h-[92vh] object-contain" onClick={(e) => e.stopPropagation()} loading="lazy" />
+  <Image src={src} alt={alt || "Design preview"} width={1200} height={800} className="max-w-[92vw] max-h-[92vh] object-contain" onClick={(e) => e.stopPropagation()} loading="lazy" style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }} />
  </div>
  );
 }
