@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { FiArrowRight, FiMapPin, FiCamera, FiCalendar, FiPackage } from "react-icons/fi";
+import { FiMapPin, FiCamera } from "react-icons/fi";
 
 const WYZ_RED = "#DF3131";
 const WYZ_GOLD = "#D49341";
 const WYZ_GREEN = "#D49341";
-const WIZARD_O = "#FFFFFF";
-const CHARCOAL = "#262626";
 const DARK = "#161311";
 
 interface SplashConcept {
@@ -105,9 +103,9 @@ export default function MobileSplashPage() {
   }
 
   return (
-    <div className="min-h-screen bg-dark text-white relative overflow-hidden">
+    <div className="min-h-screen text-white relative overflow-hidden" style={{ backgroundColor: DARK }}>
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark to-[#1a1412]" />
+        <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom right, ${DARK}, ${DARK}, #1a1412)` }} />
         <div className="absolute inset-0" style={{ 
           background: `radial-gradient(circle at 20% 20%, ${WYZ_RED}20 0%, transparent 50%), radial-gradient(circle at 80% 80%, ${WYZ_GREEN}20 0%, transparent 50%)` 
         }} />
@@ -186,8 +184,7 @@ export default function MobileSplashPage() {
 
       {selectedConcept && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-6"
-          style={{ animation: "wzFadeIn 0.2s ease-out both" }}
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-6 animate-in fade-in duration-200"
           onClick={() => setSelectedConcept(null)}
         >
           <div 
