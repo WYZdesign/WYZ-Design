@@ -7,6 +7,7 @@ import { FiMapPin, FiCamera } from "react-icons/fi";
 const WYZ_RED = "#DF3131";
 const WYZ_GOLD = "#D49341";
 const WYZ_GREEN = "#D49341";
+const WHITE = "#FFFFFF";
 const DARK = "#161311";
 
 interface SplashConcept {
@@ -114,7 +115,7 @@ export default function MobileSplashPage() {
       <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
         <header className="text-center mb-8">
           <h1 className="text-[1.5rem] sm:text-[2.5rem] font-heading font-black tracking-[0.08em] mb-4">
-            <span style={{ color: WIZARD_O }}>WYZ</span> <span style={{ color: WYZ_RED }}>Mobile Splash Pages</span>
+            <span style={{ color: WHITE }}>WYZ</span> <span style={{ color: WYZ_RED }}>Mobile Splash Pages</span>
           </h1>
           <p className="text-[#999] text-sm max-w-2xl mx-auto">
             10 mobile-first splash concepts inspired by award-winning design sites, with WYZ Design polish and intent.
@@ -141,7 +142,7 @@ export default function MobileSplashPage() {
                 </div>
                 <h3 
                   className="font-heading font-bold text-[1.1rem] mb-2"
-                  style={{ color: WIZARD_O }}
+                  style={{ color: WHITE }}
                 >
                   {concept.title}
                 </h3>
