@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { FiArrowRight, FiMapPin, FiCamera, FiCalendar, FiPackage } from "react-icons/fi";
+import type { IconType } from "react-icons";
+
+const SERVICE_ICONS: Record<string, IconType> = {
+  FiCamera,
+  FiCalendar,
+  FiMapPin,
+  FiPackage,
+};
 
 const SITE = "https://www.wyzdesign.com";
 
@@ -82,15 +90,18 @@ export default function NomadicBreedPage() {
       {/* Services */}
       <section className="max-w-5xl mx-auto px-6 pb-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {services.map((s) => (
-            <div key={s.title} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
-              <div className="w-10 h-10 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center mb-4">
-                <FiCamera className="w-5 h-5 text-[#00E5FF]" />
+          {services.map((s) => {
+            const Icon = SERVICE_ICONS[s.icon] ?? FiCamera;
+            return (
+              <div key={s.title} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
+                <div className="w-10 h-10 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-[#00E5FF]" />
+                </div>
+                <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.03em] mb-3">{s.title}</h3>
+                <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">{s.desc}</p>
               </div>
-              <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.03em] mb-3">{s.title}</h3>
-              <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
