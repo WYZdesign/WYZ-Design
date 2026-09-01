@@ -1,30 +1,12 @@
 "use client";
 
 /*
- WYZ Design — Splash Gallery (20 variants)
+ WYZ Design — Splash Gallery (24 variants)
  Save as: src/app/splash-gallery/page.tsx → live at /splash-gallery
-
- WHAT CHANGED FROM THE 10-VARIANT VERSION
- - Crown uses your real PNG at /public/wyz-crown.png, with an inline SVG crown
- as automatic fallback if the file is ever missing (never a broken icon).
- - DESIGN now scales to EXACTLY match the width of WYZ (measured at runtime).
- - 10 new variants added (Spotlight, Magnetic, Tilt Glass, Sine Waves, Duotone,
- Marquee, Caret Type, Gem Burst, Grid Warp, Mesh Drift).
- - <RandomSplash/> picks a random variant on each load.
-
- GO LIVE WITH RANDOM ROTATION (in src/app/page.tsx):
- import { RandomSplash } from "@/app/splash-gallery/page";
- <RandomSplash onEnter={() => document.getElementById("main-site")
- ?.scrollIntoView({ behavior: "smooth" })} />
- Or pin one: import { TiltGlass } from "@/app/splash-gallery/page";
-
- THE BUG THAT KILLED ANIMATIONS BEFORE: a canvas RAF loop inside useEffect([])
- that read `particles` from React state — which is [] at mount, so the loop
- closed over an empty array forever. Fix: particle data + mouse live in useRef,
- the loop reads the live ref every frame. Every canvas variant here uses that.
 */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useGyroPermission } from "@/hooks/useGyroPermission";
 const R = "#DF3131", RD = "#B82020", G = "#D49341", GL = "#F9AD4D", OW = "#FFFFFF", CH = "#262626", DK = "#161311";
 
 const CSS = `
@@ -80,7 +62,7 @@ function Wordmark({ color = OW }: { color?: string }) {
  if (d > 0) b.current.style.transform = `scaleX(${w / d})`;
  };
  fix(); window.addEventListener("resize", fix);
- const t = setTimeout(fix, 120); // after webfont swap
+ const t = setTimeout(fix, 120);
  return () => { window.removeEventListener("resize", fix); clearTimeout(t); };
  }, []);
  return (
@@ -107,7 +89,30 @@ type VProps = { onEnter?: () => void };
 const center: React.CSSProperties = { position: "absolute", top: 0, right: 0, bottom: 0, left: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", pointerEvents: "none", zIndex: 5 };
 const stageBox = (bg: string): React.CSSProperties => ({ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: bg, overflowX: "hidden", overflowY: "hidden" });
 const fullCanvas: React.CSSProperties = { position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%" };
-const wm = (size: string, color: string): React.CSSProperties => ({ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 900, textTransform: "uppercase", letterSpacing: ".04em", lineHeight: .84, fontSize: size, color });
+
+/* ---------- GYRO POINTER (iOS-gated via useGyroPermission) ---------- */
+function useDeviceTiltAsPointer(ref: React.RefObject<HTMLDivElement | null>) {
+ const p = useRef({ x: -999, y: -999, on: false });
+
+ const onGranted = useCallback((setCleanup: (fn: () => void) => void) => {
+   const handler = (e: DeviceOrientationEvent) => {
+     if (e.gamma === null || e.beta === null || !ref.current) return;
+     const r = ref.current.getBoundingClientRect();
+     const nx = (e.gamma + 45) / 90;
+     const ny = (e.beta + 45) / 90;
+     p.current = {
+       x: Math.max(0, Math.min(1, nx)) * r.width,
+       y: Math.max(0, Math.min(1, ny)) * r.height,
+       on: true
+     };
+   };
+   window.addEventListener("deviceorientation", handler, { passive: true });
+   setCleanup(() => window.removeEventListener("deviceorientation", handler));
+ }, [ref]);
+
+ useGyroPermission(onGranted);
+ return p;
+}
 
 function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
  const p = useRef({ x: -999, y: -999, on: false });
@@ -164,8 +169,24 @@ export function Aurora({ onEnter }: VProps) {
 export function Depth({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null), layers = useRef<HTMLDivElement[]>([]), br = useRef<HTMLDivElement>(null);
  const defs = [{ s: 330, c: R, o: .1, f: .06, rot: 45 }, { s: 450, c: G, o: .08, f: .1, rot: 45 }, { s: 240, c: R, o: .07, f: .16, rot: 0 }];
+ const gyroPointer = useDeviceTiltAsPointer(ref);
  const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; layers.current.forEach((el, i) => { if (el) el.style.transform = `translate(${dx * defs[i].f * 260}px,${dy * defs[i].f * 260}px) rotate(${defs[i].rot}deg)`; }); if (br.current) br.current.style.transform = `translate(${dx * -22}px,${dy * -22}px)`; };
- return <div ref={ref} onMouseMove={onMove} style={stageBox("#1b1714")}>{defs.map((d, i) => <div key={i} ref={el => { if (el) layers.current[i] = el; }} style={{ position: "absolute", border: `1px solid ${d.c}`, opacity: d.o, width: d.s, height: d.s, left: `${20 + i * 22}%`, top: `${15 + i * 18}%`, transition: "transform .3s ease", borderRadius: d.rot ? 0 : "50%", transform: `rotate(${d.rot}deg)` }} />)}<div ref={br} style={{ position: "absolute", inset: 0, transition: "transform .3s ease" }}><Brand onEnter={onEnter} /></div></div>;
+ useEffect(() => {
+   let raf = 0;
+   const t = () => {
+     const gp = gyroPointer.current;
+     if (gp.on) {
+       const dx = (gp.x / (ref.current?.clientWidth || 1)) - .5;
+       const dy = (gp.y / (ref.current?.clientHeight || 1)) - .5;
+       layers.current.forEach((el, i) => { if (el) el.style.transform = `translate(${dx * defs[i].f * 260}px,${dy * defs[i].f * 260}px) rotate(${defs[i].rot}deg)`; });
+       if (br.current) br.current.style.transform = `translate(${dx * -22}px,${dy * -22}px)`;
+     }
+     raf = requestAnimationFrame(t);
+   };
+   raf = requestAnimationFrame(t);
+   return () => cancelAnimationFrame(raf);
+ }, [gyroPointer]);
+ return <div ref={ref} onMouseMove={onMove} onMouseLeave={() => {}} style={stageBox("#1b1714")}>{defs.map((d, i) => <div key={i} ref={el => { if (el) layers.current[i] = el; }} style={{ position: "absolute", border: `1px solid ${d.c}`, opacity: d.o, width: d.s, height: d.s, left: `${20 + i * 22}%`, top: `${15 + i * 18}%`, transition: "transform .3s ease", borderRadius: d.rot ? 0 : "50%", transform: `rotate(${d.rot}deg)` }} />)}<div ref={br} style={{ position: "absolute", inset: 0, transition: "transform .3s ease" }}><Brand onEnter={onEnter} /></div></div>;
 }
 
 export function CrownDraw({ onEnter }: VProps) {
@@ -196,7 +217,33 @@ export function Nebula({ onEnter }: VProps) {
 }
 
 export function Glitch({ onEnter }: VProps) {
- return <div style={stageBox(DK)}><div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px)", pointerEvents: "none" }} /><Brand onEnter={onEnter} /></div>;
+ const ref = useRef<HTMLDivElement>(null);
+ const gyroPointer = useDeviceTiltAsPointer(ref);
+ const [go, setGo] = useState(false);
+
+ useEffect(() => {
+   let raf = 0;
+   const t = () => {
+     const gp = gyroPointer.current;
+     if (gp.on) {
+       if (!go) setGo(true);
+     }
+     raf = requestAnimationFrame(t);
+   };
+   raf = requestAnimationFrame(t);
+   return () => cancelAnimationFrame(raf);
+ }, [gyroPointer, go]);
+
+ return (
+   <div ref={ref} style={stageBox(DK)}>
+     <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px)", pointerEvents: "none" }} />
+     <div style={center}>
+       <span className={`wyz-glitch ${go ? "go" : ""}`} data-t="WYZ DESIGN" style={{ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 900, textTransform: "uppercase", letterSpacing: ".04em", lineHeight: .84, fontSize: "clamp(46px,9vw,104px)", color: OW }}>WYZ DESIGN</span>
+       <p className="wyz-tag" style={{ color: "rgba(254,254,253,.5)" }}>Creative Agency</p>
+       <button className="wyz-enter" onClick={onEnter}>Enter Site</button>
+     </div>
+   </div>
+ );
 }
 
 export function Orbital({ onEnter }: VProps) {
@@ -238,15 +285,48 @@ export function Spotlight({ onEnter }: VProps) {
 
 export function Magnetic({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null); const inner = useRef<HTMLDivElement>(null);
+ const gyroPointer = useDeviceTiltAsPointer(ref);
  const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(); const dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; if (inner.current) inner.current.style.transform = `translate(${dx * 38}px,${dy * 38}px)`; };
  const onLeave = () => { if (inner.current) inner.current.style.transform = "translate(0,0)"; };
+ useEffect(() => {
+   let raf = 0;
+   const t = () => {
+     const gp = gyroPointer.current;
+     if (gp.on && inner.current && ref.current) {
+       const r = ref.current.getBoundingClientRect();
+       const dx = (gp.x / r.width) - .5;
+       const dy = (gp.y / r.height) - .5;
+       inner.current.style.transform = `translate(${dx * 38}px,${dy * 38}px)`;
+     }
+     raf = requestAnimationFrame(t);
+   };
+   raf = requestAnimationFrame(t);
+   return () => cancelAnimationFrame(raf);
+ }, [gyroPointer]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox(DK)}><div ref={inner} style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, transition: "transform .15s ease" }}><Brand onEnter={onEnter} /></div></div>;
 }
 
 export function TiltGlass({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null), card = useRef<HTMLDivElement>(null), gl = useRef<HTMLDivElement>(null);
+ const gyroPointer = useDeviceTiltAsPointer(ref);
  const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height; if (card.current) card.current.style.transform = `perspective(900px) rotateY(${(px - .5) * 18}deg) rotateX(${(.5 - py) * 18}deg)`; if (gl.current) gl.current.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,.22), transparent 55%)`; };
  const onLeave = () => { if (card.current) card.current.style.transform = "perspective(900px) rotateY(0) rotateX(0)"; };
+ useEffect(() => {
+   let raf = 0;
+   const t = () => {
+     const gp = gyroPointer.current;
+     if (gp.on && ref.current && card.current && gl.current) {
+       const r = ref.current.getBoundingClientRect();
+       const px = gp.x / r.width;
+       const py = gp.y / r.height;
+       card.current.style.transform = `perspective(900px) rotateY(${(px - .5) * 18}deg) rotateX(${(.5 - py) * 18}deg)`;
+       gl.current.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,.22), transparent 55%)`;
+     }
+     raf = requestAnimationFrame(t);
+   };
+   raf = requestAnimationFrame(t);
+   return () => cancelAnimationFrame(raf);
+ }, [gyroPointer]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#17130f")}><div style={center}><div ref={card} style={{ position: "relative", padding: "46px 58px", borderRadius: 20, background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.13)", backdropFilter: "blur(10px)", transition: "transform .2s ease", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "auto" }}><div ref={gl} style={{ position: "absolute", inset: 0, borderRadius: 20, pointerEvents: "none" }} /><div style={{ marginBottom: 14 }}><CrownLogo size={62} /></div><Wordmark color={OW} /><p className="wyz-tag" style={{ color: "rgba(254,254,253,.55)" }}>Creative Agency</p><button className="wyz-enter" style={{ pointerEvents: "auto" }} onClick={onEnter}>Enter Site</button></div></div></div>;
 }
 
@@ -264,7 +344,6 @@ export function Duotone({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const li = useRef<HTMLDivElement>(null);
  useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; p.x += (m.x - p.x) * .1; p.y += (m.y - p.y) * .1; if (li.current) li.current.style.background = `radial-gradient(300px circle at ${p.x}px ${p.y}px, rgba(255,255,255,.22), transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#1a1410")}>
- {/* Swap this gradient for: <Image src="/your-photo.jpg" fill loading="lazy" /> */}
  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,#3a2a18,#1a1410 60%)", mixBlendMode: "luminosity", opacity: .5 }} />
  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg,rgba(223,49,49,.35),rgba(212,147,65,.3))", mixBlendMode: "color" }} />
  <div ref={li} style={{ position: "absolute", inset: 0, mixBlendMode: "overlay" }} /><Brand onEnter={onEnter} /></div>;
@@ -277,7 +356,35 @@ export function Marquee({ onEnter }: VProps) {
 }
 
 export function CaretType({ onEnter }: VProps) {
- return <div style={stageBox("#0d0b0a")}><Brand onEnter={onEnter} /></div>;
+ const [displayed, setDisplayed] = useState("");
+ const words = ["WYZ", "DESIGN"];
+ const full = words.join(" ");
+ useEffect(() => {
+   let i = 0;
+   const iv = setInterval(() => {
+     i++;
+     setDisplayed(full.slice(0, i));
+     if (i >= full.length) clearInterval(iv);
+   }, 140);
+   return () => clearInterval(iv);
+ }, []);
+ return (
+   <div style={stageBox("#0d0b0a")}>
+     <div style={center}>
+       <span style={{ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 900, textTransform: "uppercase", letterSpacing: ".04em", lineHeight: .84, fontSize: "clamp(46px,9vw,104px)", color: OW }}>
+         {displayed.split("").map((ch, i) => {
+           const isW = i < 3;
+           return <span key={i} style={{ color: isW ? OW : undefined, opacity: 1 }}>{ch}</span>;
+         })}
+       </span>
+       <span style={{ display: "inline-block", width: 3, height: "clamp(40px,8vw,90px)", background: R, marginLeft: 2, animation: "wyzBlink 1s step-end infinite", verticalAlign: "middle" }} />
+     </div>
+     <div style={{ ...center, top: "auto", bottom: "12%", position: "absolute" }}>
+       <p className="wyz-tag" style={{ color: "rgba(254,254,253,.5)" }}>Creative Agency</p>
+       <button className="wyz-enter" onClick={onEnter}>Enter Site</button>
+     </div>
+   </div>
+ );
 }
 
 export function GemBurst({ onEnter }: VProps) {
@@ -305,7 +412,23 @@ export function GridWarp({ onEnter }: VProps) {
 
 export function MeshDrift({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null), mesh = useRef<HTMLDivElement>(null);
+ const gyroPointer = useDeviceTiltAsPointer(ref);
  const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; if (mesh.current) mesh.current.style.transform = `translate(${dx * 30}px,${dy * 30}px) scale(1.12)`; };
+ useEffect(() => {
+   let raf = 0;
+   const t = () => {
+     const gp = gyroPointer.current;
+     if (gp.on && ref.current && mesh.current) {
+       const r = ref.current.getBoundingClientRect();
+       const dx = (gp.x / r.width) - .5;
+       const dy = (gp.y / r.height) - .5;
+       mesh.current.style.transform = `translate(${dx * 30}px,${dy * 30}px) scale(1.12)`;
+     }
+     raf = requestAnimationFrame(t);
+   };
+   raf = requestAnimationFrame(t);
+   return () => cancelAnimationFrame(raf);
+ }, [gyroPointer]);
  return <div ref={ref} onMouseMove={onMove} style={stageBox(OW)}><div ref={mesh} style={{ position: "absolute", inset: "-12%", transition: "transform .3s ease", filter: "blur(34px)", animation: "wyzPulse 8s ease-in-out infinite", background: "radial-gradient(circle at 25% 30%,rgba(223,49,49,.42),transparent 40%),radial-gradient(circle at 75% 35%,rgba(212,147,65,.42),transparent 40%),radial-gradient(circle at 50% 82%,rgba(249,173,77,.36),transparent 45%)" }} /><Brand theme="light" onEnter={onEnter} /></div>;
 }
 
@@ -398,12 +521,7 @@ const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Ele
   { name: "Vortex", desc: "Spiral particle storm orbits center", Comp: Vortex, bg: "#0d0b09" },
 ];
 
-// 24 variants — randomly picked on root / and browsable at /splash-gallery.
-
 export function RandomSplash(props: VProps) {
- // Pick AFTER mount (client-only) so the server render and the first client
- // render are identical — this is what fixes the hydration mismatch. Until the
- // pick lands we show a deterministic branded stage (crown + WYZ DESIGN + Enter).
  const [i, setI] = useState<number | null>(null);
  useEffect(() => { setI(Math.floor(Math.random() * VARIANTS.length)); }, []);
  if (i === null) return <div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div>;

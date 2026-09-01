@@ -934,7 +934,8 @@ export default function HomePage() {
    </section>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-2 bg-white dark:bg-[#1C1C1E]">
+  <section className="py-6">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
       return (
@@ -945,6 +946,7 @@ export default function HomePage() {
       );
     })}
   </EnhancedMarquee>
+  </section>
 
 {/* ═══ IMAGE GALLERY STRIP ═══ */}
 <ScrollReveal animation="fadeIn" duration={1}>
@@ -1215,9 +1217,8 @@ export default function HomePage() {
  ].map((c, i) => {
  const Icon = c.icon;
   return (
-   <GyroTilt key={i} intensity={6} enableOnDesktop>
-   <CardTilt intensity={10}>
-   <ScrollParallaxCard tiltAmount={4} scaleAmount={1.03}>
+    <CardTilt intensity={10}>
+    <ScrollParallaxCard tiltAmount={4} scaleAmount={1.03}>
     <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-6 sm:p-8 lg:p-12 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1 min-h-[320px] sm:min-h-[360px] flex flex-col justify-center">
   <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
@@ -1232,7 +1233,6 @@ export default function HomePage() {
   </div>
   </ScrollParallaxCard>
   </CardTilt>
-  </GyroTilt>
  );
  })}
  </div>

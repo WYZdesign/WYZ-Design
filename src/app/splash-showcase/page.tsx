@@ -29,18 +29,30 @@ function useGyro() {
 
  let disposed = false;
 
- if (typeof DeviceOrientationEvent !== "undefined") {
+ const requestAndListen = () => {
+ if (typeof DeviceOrientationEvent === "undefined") return;
  if ((DeviceOrientationEvent as any).requestPermission) {
  (DeviceOrientationEvent as any).requestPermission()
- .then(() => { if (!disposed) window.addEventListener("deviceorientation", handler); })
+ .then((state: string) => { if (!disposed && state === "granted") window.addEventListener("deviceorientation", handler); })
  .catch(() => {});
  } else {
  window.addEventListener("deviceorientation", handler);
  }
- }
+ };
+
+ const onTouch = () => {
+ document.removeEventListener("touchend", onTouch);
+ document.removeEventListener("click", onTouch);
+ if (!disposed) requestAndListen();
+ };
+ document.addEventListener("touchend", onTouch, { once: true });
+ document.addEventListener("click", onTouch, { once: true });
+ if (!("ontouchstart" in window)) requestAndListen();
 
  return () => {
  disposed = true;
+ document.removeEventListener("touchend", onTouch);
+ document.removeEventListener("click", onTouch);
  window.removeEventListener("deviceorientation", handler);
  };
  }, []);

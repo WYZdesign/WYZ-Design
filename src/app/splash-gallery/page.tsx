@@ -21,27 +21,40 @@ function useGyro() {
  useEffect(() => {
  const handler = (e: DeviceOrientationEvent) => {
  hasGyro.current = true;
- const x = (e.gamma ?? 0) / 45; // left-right tilt (-1 to 1)
- const y = (e.beta ?? 0) / 90; // front-back tilt (-1 to 1)
- const z = (e.alpha ?? 0) / 180; // compass rotation (-1 to 1)
+ const x = (e.gamma ?? 0) / 45;
+ const y = (e.beta ?? 0) / 90;
+ const z = (e.alpha ?? 0) / 180;
  setGyro({ x: Number(x.toFixed(3)), y: Number(y.toFixed(3)), z: Number(z.toFixed(3)) });
  };
 
  let disposed = false;
 
- if (typeof DeviceOrientationEvent !== "undefined") {
- // iOS requires permission
+ const requestAndListen = () => {
+ if (typeof DeviceOrientationEvent === "undefined") return;
  if ((DeviceOrientationEvent as any).requestPermission) {
  (DeviceOrientationEvent as any).requestPermission()
- .then(() => { if (!disposed) window.addEventListener("deviceorientation", handler); })
+ .then((state: string) => { if (!disposed && state === "granted") window.addEventListener("deviceorientation", handler); })
  .catch(() => {});
  } else {
  window.addEventListener("deviceorientation", handler);
  }
- }
+ };
+
+ // iOS requires permission gated behind first user gesture
+ const onTouch = () => {
+ document.removeEventListener("touchend", onTouch);
+ document.removeEventListener("click", onTouch);
+ if (!disposed) requestAndListen();
+ };
+ document.addEventListener("touchend", onTouch, { once: true });
+ document.addEventListener("click", onTouch, { once: true });
+ // Non-iOS: start immediately
+ if (!("ontouchstart" in window)) requestAndListen();
 
  return () => {
  disposed = true;
+ document.removeEventListener("touchend", onTouch);
+ document.removeEventListener("click", onTouch);
  window.removeEventListener("deviceorientation", handler);
  };
  }, []);

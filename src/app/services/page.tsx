@@ -202,7 +202,8 @@ return (
    </ScrollReveal>
 
 {/* SERVICES MARQUEE */}
-  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-2 bg-white dark:bg-[#1C1C1E]">
+  <section className="py-6">
+  <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOSHOOTS","RETOUCHING","GRAPHIC DESIGN","LOGOS","VIDEO","WEBSITES","SEO","CONSULTATION"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
@@ -213,6 +214,7 @@ return (
       );
     })}
   </EnhancedMarquee>
+  </section>
 
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-12">
 

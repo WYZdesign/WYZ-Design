@@ -580,7 +580,7 @@ export default function MerchPage() {
         <DynamicContentUnderHero />
 
         {/* Gallery Carousel 1 — under hero */}
-        <div className="py-6 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+        <section className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
           <div className="flex whitespace-nowrap min-w-max">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
               <div key={`gc1-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
@@ -588,11 +588,11 @@ export default function MerchPage() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Auto-Scroll Merch Gallery — Black-to-Red Gradient Background (only renders after catalog loads) */}
         {products.length > 0 && (
-          <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-16 border-y border-white/5">
+          <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-12 border-y border-white/5">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
             <div className="text-center mb-10">
               <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">DBC CREW COLLECTION</span>
@@ -605,7 +605,7 @@ export default function MerchPage() {
 
         {/* Product Name Marquee Strip (only renders after catalog loads) */}
         {products.length > 0 && (
-          <div className="relative overflow-hidden bg-[#111] py-3 border-y border-white/5">
+          <div className="relative overflow-hidden bg-[#111] py-12 border-y border-white/5">
             <div className="flex whitespace-nowrap animate-marquee-left">
               {[...products, ...products, ...products].map((p, i) => (
                 <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
@@ -814,7 +814,7 @@ export default function MerchPage() {
     <DynamicContentUnderShop />
 
     {/* Gallery Carousel 2 — under store */}
-    <div className="py-6 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+    <section className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
       <div className="flex whitespace-nowrap min-w-max">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
           <div key={`gc2-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
@@ -822,7 +822,7 @@ export default function MerchPage() {
           </div>
         ))}
       </div>
-      </div>
+      </section>
     </>
   );
 }

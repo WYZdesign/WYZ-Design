@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { prefersReducedMotion } from "@/lib/utils";
+import { useGyroPermission } from "@/hooks/useGyroPermission";
 
 interface GyroTiltProps {
   children: React.ReactNode;
@@ -12,66 +13,30 @@ interface GyroTiltProps {
 
 export default function GyroTilt({ children, intensity = 15, className = "", enableOnDesktop = false }: GyroTiltProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [hasGyro, setHasGyro] = useState(false);
+  const intensityRef = useRef(intensity);
+  intensityRef.current = intensity;
 
-  useEffect(() => {
+  const onGranted = useCallback((setCleanup: (fn: () => void) => void) => {
     if (prefersReducedMotion()) return;
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     if (!isTouch && !enableOnDesktop) return;
 
     const handleOrientation = (e: DeviceOrientationEvent) => {
-      if (e.gamma !== null && e.beta !== null) {
-        setHasGyro(true);
-        const x = Math.max(-intensity, Math.min(intensity, e.gamma / 45 * intensity));
-        const y = Math.max(-intensity, Math.min(intensity, (e.beta - 45) / 45 * intensity));
-        setTilt({ x, y });
+      if (e.gamma !== null && e.beta !== null && ref.current) {
+        const x = Math.max(-intensityRef.current, Math.min(intensityRef.current, e.gamma / 45 * intensityRef.current));
+        const y = Math.max(-intensityRef.current, Math.min(intensityRef.current, (e.beta - 45) / 45 * intensityRef.current));
+        ref.current.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${-y}deg)`;
       }
     };
 
-    type DeviceOrientationEventWithPermission = DeviceOrientationEvent & {
-      requestPermission?: () => Promise<string>;
-    };
-    const DOE = DeviceOrientationEvent as unknown as DeviceOrientationEventWithPermission;
-    let disposed = false;
+    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+    setCleanup(() => window.removeEventListener("deviceorientation", handleOrientation));
+  }, [enableOnDesktop]);
 
-    if (typeof DOE !== "undefined" && typeof DOE.requestPermission === "function") {
-      DOE.requestPermission()!
-        .then((state) => {
-          if (!disposed && state === "granted") {
-            window.addEventListener("deviceorientation", handleOrientation, { passive: true });
-          }
-        })
-        .catch(() => {});
-    } else {
-      window.addEventListener("deviceorientation", handleOrientation, { passive: true });
-    }
-
-    return () => {
-      disposed = true;
-      window.removeEventListener("deviceorientation", handleOrientation);
-    };
-  }, [intensity, enableOnDesktop]);
-
-  useEffect(() => {
-    if (!hasGyro) return;
-    let raf: number;
-    let currentX = 0;
-    let currentY = 0;
-    const animate = () => {
-      currentX += (tilt.x - currentX) * 0.1;
-      currentY += (tilt.y - currentY) * 0.1;
-      if (ref.current) {
-        ref.current.style.transform = `perspective(800px) rotateY(${currentX}deg) rotateX(${-currentY}deg)`;
-      }
-      raf = requestAnimationFrame(animate);
-    };
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
-  }, [tilt, hasGyro]);
+  useGyroPermission(onGranted);
 
   return (
-    <div ref={ref} className={`will-change-transform ${className}`} style={{ transformStyle: "preserve-3d" }}>
+    <div ref={ref} className={`will-change-transform ${className}`} style={{ transformStyle: "preserve-3d", transition: "transform 0.1s ease-out" }}>
       {children}
     </div>
   );

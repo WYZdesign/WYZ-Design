@@ -111,7 +111,8 @@ export default function AboutPage() {
         </ScrollReveal>
 
         {/* ═══ BRAND MARQUEE ═══ */}
-      <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-3 bg-white dark:bg-[#1C1C1E]">
+      <section className="py-6">
+      <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
         {(["WILD YET ZEALOUS","DYING BREED CREW","NOMADIC BREED","CHICAGO","LOS ANGELES"] as const).map((word, i) => {
           const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
           return (
@@ -122,6 +123,7 @@ export default function AboutPage() {
           );
         })}
       </EnhancedMarquee>
+      </section>
 
       {/* MISSION */}
       <ScrollReveal animation="fadeUp">

@@ -259,7 +259,8 @@ return (
         </section>
 
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
-        <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="py-2 bg-white dark:bg-[#1C1C1E]">
+        <section className="py-6">
+        <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
           {(["RESPONSIVE","SEO","E-COMMERCE","LANDING PAGES","CMS","CUSTOM CODE"] as const).map((word, i) => {
             const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
             return (
@@ -270,6 +271,7 @@ return (
             );
           })}
         </EnhancedMarquee>
+        </section>
 
         {/* ═══ CAPABILITIES — Scroll reveal ═══ */}
         <ScrollReveal animation="fadeUp">
