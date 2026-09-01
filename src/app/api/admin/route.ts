@@ -100,7 +100,9 @@ export async function GET(req: NextRequest) {
           submissionsByDay: Object.entries(last7Days).sort().slice(-14),
           ...neo4jStats,
         },
-        recentForms: forms.slice(-10),
+        // forms is already newest-first (query orders by submitted_at desc),
+        // so the "recent" 10 are the first 10, not the last 10 of the batch.
+        recentForms: forms.slice(0, 10),
       });
     }
 
