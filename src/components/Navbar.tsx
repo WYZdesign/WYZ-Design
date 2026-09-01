@@ -200,10 +200,10 @@ export default function Navbar() {
                       <div className="relative z-10">
                         {MORE_LINKS.map((l) => (
                           <Link key={l.href} href={l.href}
+                            aria-current={isActive(l.href) ? "page" : undefined}
                             className={`block px-5 py-3 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
                               isActive(l.href) ? "text-white dark:text-black bg-white/10 dark:bg-black/10 font-bold" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black hover:bg-white/5 dark:hover:bg-black/5 active:text-white/80"
                             }`}>
-                            aria-current={isActive(l.href) ? "page" : undefined}
                           {l.label}
                           </Link>
                         ))}
