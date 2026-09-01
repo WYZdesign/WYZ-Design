@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { FiMapPin, FiCamera } from "react-icons/fi";
 
 const WYZ_RED = "#DF3131";
-const WYZ_GOLD = "#D49341";
 const WYZ_GREEN = "#D49341";
 const WHITE = "#FFFFFF";
 const DARK = "#161311";
@@ -229,26 +227,6 @@ export default function MobileSplashPage() {
         </div>
       )}
 
-      <style jsx global>{`
-        @keyframes wzFadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes wzScaleIn {
-          from { transform: scale(0.95); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
-        @font-face {
-          font-family: 'Montserrat';
-          src: url('/fonts/montserrat.woff2') format('woff2');
-          font-weight: 900;
-          font-style: normal;
-        }
-        .font-heading {
-          font-family: 'Montserrat', system-ui, sans-serif;
-          font-weight: 900;
-        }
-      `}</style>
     </div>
   );
 }
