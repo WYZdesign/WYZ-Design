@@ -71,12 +71,16 @@ export default function AgeGateModal({ open, onClose, onVerified, categoryLabel 
   return (
     <div
       className="fixed inset-0 z-[300] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4"
+      style={{ animation: "wzFadeIn 0.2s ease-out both" }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
       role="dialog"
       aria-modal="true"
       aria-label="Age verification required"
     >
-      <div className="bg-[#1a1a1a] border border-white/10 max-w-md w-full p-8 relative">
+      <div
+        className="bg-[#1a1a1a] border border-white/10 max-w-md w-full p-8 relative"
+        style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"

@@ -93,6 +93,27 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 }
 .btn-gold:hover { background: #F9AD4D; }
 
+/* ── GLOBAL SMOOTH-INTERACTION BASELINE ──
+   Buttery-default motion for every clickable element that doesn't already
+   define its own. Lives in Tailwind's `base` layer, and every rule here is
+   written with :where() (zero specificity) — so ANY existing or future
+   Tailwind utility class (transition-none, duration-*, a hover:scale-*,
+   the .spring-hover / .btn-primary rules above, framer-motion inline
+   styles, etc.) always wins over this without needing !important anywhere.
+   This only fills the gap for the many buttons/links across the site that
+   currently have zero transition class at all, so a click still gets a
+   quick, tactile press-down instead of an instant, jarring state change. */
+@layer base {
+  :where(button, a, [role="button"], input[type="submit"], input[type="button"], select) {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease,
+      color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+  }
+  :where(button, a, [role="button"], input[type="submit"], input[type="button"]):not(:disabled):active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════
    MOBILE (< 768px) — iPhone 13 optimized (390x844)
    ═══════════════════════════════════════════════════════════ */
@@ -650,6 +671,7 @@ select:focus-visible {
 /* ═══════════════════════════════════════════════════════════
    CENTRALIZED KEYFRAMES
    ═══════════════════════════════════════════════════════════ */
+@keyframes wzSlideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes wzFadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes wzFadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes wzSlideLeft { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
