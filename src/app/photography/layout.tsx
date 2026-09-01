@@ -31,7 +31,15 @@ export default function PhotographyLayout({ children }: { children: React.ReactN
             provider: { "@id": "https://www.wyzdesign.com/#organization" },
             areaServed: ["Los Angeles", "Chicago", "United States"],
             url: "https://www.wyzdesign.com/photography",
-            offers: { "@type": "Offer", "price": "100", "priceCurrency": "USD" },
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "Photography Services",
+              itemListElement: [
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photoshoot", description: "Professional photoshoot sessions" }, price: "100", priceCurrency: "USD" },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Event Photography", description: "Live event coverage and documentation" }, price: "200", priceCurrency: "USD" },
+                { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photo Retouching", description: "Professional photo retouching services" } },
+              ],
+            },
           }),
         }}
       />

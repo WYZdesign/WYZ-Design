@@ -10,7 +10,6 @@ import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import TextSplit from "@/components/TextSplit";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { shuffleArray } from "@/lib/utils";
-import { getSiteUrl } from "@/lib/site-url";
 
 const CATEGORIES = ["All Services", "Branding Design", "Photography", "Videography", "Consultation", "Web Design"];
 
@@ -123,33 +122,9 @@ export default function ServicesPage() {
 
 return (
   <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Service",
-        name: "WYZ Design Creative Services",
-        description: "Professional photography, graphic design, videography, web design, and marketing services for artists, brands, and businesses.",
-        provider: {
-          "@type": "Organization",
-          name: "WYZ Design",
-          url: getSiteUrl(),
-        },
-        areaServed: "US",
-        hasOfferCatalog: {
-          "@type": "OfferCatalog",
-          name: "Creative Services",
-          itemListElement: [
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photoshoot", price: "$100", priceCurrency: "USD" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Graphic Design", price: "$150", priceCurrency: "USD" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Website Design", price: "$500", priceCurrency: "USD" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Video Shoot", price: "$200", priceCurrency: "USD" } },
-          ],
-        },
-      }),
-    }}
-  />
+  {/* Structured data for this route now lives in layout.tsx, merged with
+      the offer catalog that used to be duplicated here as a second,
+      conflicting Service schema for the same URL. */}
 
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>

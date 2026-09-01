@@ -14,7 +14,6 @@ import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
 import { shuffleArray } from "@/lib/utils";
-import { getSiteUrl } from "@/lib/site-url";
 import { NSFW_CATEGORIES } from "@/lib/nsfw-constants";
 import { useNsfwSession } from "@/hooks/useNsfwSession";
 import AgeGateModal from "@/components/AgeGateModal";
@@ -468,32 +467,12 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
 
 return (
   <main className="pb-0 bg-white dark:bg-[#111]">
-  <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Service",
-        name: "WYZ Design Photography",
-        description: "Professional photography services including photoshoots, event photography, retouching, and creative portrait sessions in Chicago and Los Angeles.",
-        provider: {
-          "@type": "Organization",
-          name: "WYZ Design",
-          url: getSiteUrl(),
-        },
-        areaServed: "US",
-        hasOfferCatalog: {
-          "@type": "OfferCatalog",
-          name: "Photography Services",
-          itemListElement: [
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photoshoot", description: "Professional photoshoot sessions", price: "$100", priceCurrency: "USD" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Event Photography", description: "Live event coverage and documentation", price: "$200", priceCurrency: "USD" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Photo Retouching", description: "Professional photo retouching services" } },
-          ],
-        },
-      }),
-    }}
-  />
+  {/* Structured data for this route now lives in layout.tsx, merged with
+      the offer catalog that used to be duplicated here as a second,
+      conflicting Service schema (different name, different areaServed
+      format, a fully-inlined Organization instead of the site's one
+      canonical #organization node) — Google was seeing two Service
+      entities for the same URL. */}
   <style>{`
   @keyframes slideInLeft{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:translateX(0)}}
   @keyframes slideInRight{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:translateX(0)}}
