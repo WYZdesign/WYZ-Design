@@ -317,17 +317,18 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
  {...swipe}
  >
  {!flipping && (
- <video
- ref={videoRef}
- src={items[current].video}
- poster={videoThumb(items[current].video)}
- muted={isMuted}
- playsInline
- preload="metadata"
- className="w-full h-full object-cover"
- onPlay={() => markRecapPlayed(earn)}
- onEnded={() => { if (!flipping) flip(1); }}
- />
+  <video
+  ref={videoRef}
+  src={items[current].video}
+  poster={videoThumb(items[current].video)}
+  muted={isMuted}
+  autoPlay
+  playsInline
+  preload="auto"
+  className="w-full h-full object-cover"
+  onPlay={() => markRecapPlayed(earn)}
+  onEnded={() => { if (!flipping) flip(1); }}
+  />
  )}
  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none" />
  <button
@@ -706,16 +707,16 @@ export default function EventsPage() {
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
 {/* Desktop: video background */}
     <div className="hidden md:block absolute inset-0 z-0">
-     <video src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
+     <video key={heroVideo} src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
      <div className="absolute inset-0 bg-black/65 z-[1]" />
     </div>
     {/* Mobile: video merged */}
     <div className="md:hidden absolute inset-0 z-0">
-     <video src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+     <video key={heroVideo} src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover" />
      <div className="absolute inset-0 bg-black/65 z-[1]" />
     </div>
 {/* Text overlay */}
-    <div className="relative z-10 flex flex-col items-center justify-center h-full px-4 sm:px-10 lg:px-16 text-center overflow-hidden">
+    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-10 lg:px-16 text-center">
     <div className="relative z-10">
      <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
     <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>

@@ -30,12 +30,18 @@ export default function AboutPage() {
       <ScrollReveal animation="fadeUp">
         <section className="relative min-h-screen bg-[#111] overflow-hidden hero-banner">
           <div className="absolute inset-0">
-            <video autoPlay muted loop playsInline preload="metadata"
+            <video autoPlay muted loop playsInline preload="auto"
               poster="/images/hero-about.jpg"
               className="w-full h-full object-cover opacity-25">
               <source src="/videos/hero-banners/about.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#111]/80 via-[#111]/60 to-[#111]" />
+            <div className="absolute inset-0 bg-black/65" />
+            <div
+              className="absolute inset-0 z-[2] pointer-events-none"
+              style={{
+                background: `radial-gradient(circle 300px at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(223,49,49,0.2), transparent 70%)`,
+              }}
+            />
           </div>
           <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
           {/* Crown logo marquee — interactive mouse reveal */}
