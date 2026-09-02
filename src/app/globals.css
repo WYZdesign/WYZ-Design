@@ -976,17 +976,7 @@ video { will-change: auto; }
 /* GPU acceleration for animated elements */
 .will-change-transform { will-change: transform; transform: translateZ(0); }
 
-/* Gyroscope interaction utilities */
-.gyro-tilt { transition: transform 0.1s ease-out; transform-style: preserve-3d; }
-.gyro-parallax { transition: transform 0.15s ease-out; }
-.gyro-float { transition: transform 0.2s ease-out; }
-
-/* Gyroscope shadow effect */
-@media (hover: none) and (pointer: coarse) {
-  .gyro-shadow {
-    transition: box-shadow 0.3s ease-out;
-  }
-}
+/* Hero and banner utilities */
 
 @media (max-width: 767px) {
    .hero-section, .hero-banner {
