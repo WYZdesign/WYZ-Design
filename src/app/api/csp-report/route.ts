@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { logger } from "@/lib/logger";
 
 /**
  * Receives CSP violation reports from browsers.
@@ -27,9 +26,14 @@ export async function POST(req: NextRequest) {
     cleanupOldReports();
 
     const body = await req.json();
-    if (process.env.NODE_ENV !== "production") {
-      logger.warn("csp-violation", JSON.stringify(body).slice(0, 500));
-    }
+    // Unlike lib/logger's other call sites, this one is deliberately NOT
+    // gated to non-production: this route runs server-side only, so
+    // console.warn here is never visible to a real user's browser — it
+    // only reaches Vercel's function logs. Production traffic is exactly
+    // where a real CSP violation matters most, and the rate limit above
+    // (1 report per IP per 12s, capped at 500 tracked IPs) already
+    // prevents this from flooding those logs.
+    console.warn("[csp-violation]", JSON.stringify(body).slice(0, 500));
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ ok: true });

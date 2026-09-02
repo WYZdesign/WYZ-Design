@@ -14,29 +14,29 @@ import MagneticElement from "@/components/MagneticElement";
 import { useZeal } from "@/components/ZealProvider";
 
 const NAV_LINKS = [
-  { href: "/home", label: "H O M E" },
-  { href: "/photography", label: "P H O T O G R A P H Y" },
-  { href: "/designs", label: "D E S I G N S" },
-  { href: "/events", label: "E V E N T S" },
-  { href: "/services", label: "S E R V I C E S" },
+  { href: "/home", label: "H O M E" },
+  { href: "/photography", label: "P H O T O G R A P H Y" },
+  { href: "/designs", label: "D E S I G N S" },
+  { href: "/events", label: "E V E N T S" },
+  { href: "/services", label: "S E R V I C E S" },
 ];
 
 const MORE_LINKS = [
-  { href: "/about", label: "A B O U T" },
-  { href: "/plans", label: "P L A N S" },
-  { href: "/merch", label: "M E R C H" },
+  { href: "/about", label: "A B O U T" },
+  { href: "/plans", label: "P L A N S" },
+  { href: "/merch", label: "M E R C H" },
 
-  { href: "/wyzmind", label: "W Y Z M i N D" },
-  { href: "/printing", label: "P R I N T I N G" },
-  { href: "/web-design", label: "W E B . D E S I G N" },
+  { href: "/wyzmind", label: "W Y Z M i N D" },
+  { href: "/printing", label: "P R I N T I N G" },
+  { href: "/web-design", label: "W E B . D E S I G N" },
 
-  { href: "/featured-artist", label: "F. A. O. T. M." },
-  { href: "/blog", label: "B L O G" },
-  { href: "/loyalty", label: "Z E A L . R E W A R D S" },
-  { href: "/gift-card", label: "G I F T . C A R D" },
-  { href: "/contact", label: "C O N T A C T" },
-  { href: "/community", label: "C O M M U N I T Y" },
-  { href: "/faq", label: "F. A. Q." },
+  { href: "/featured-artist", label: "F. A. O. T. M." },
+  { href: "/blog", label: "B L O G" },
+  { href: "/loyalty", label: "Z E A L . R E W A R D S" },
+  { href: "/gift-card", label: "G I F T . C A R D" },
+  { href: "/contact", label: "C O N T A C T" },
+  { href: "/community", label: "C O M M U N I T Y" },
+  { href: "/faq", label: "F. A. Q." },
 ];
 
 const ALL_LINKS = [...NAV_LINKS, ...MORE_LINKS];
@@ -339,10 +339,10 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-white dark:bg-[#1C1C1E] lg:hidden flex flex-col pt-24">
+            className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] lg:hidden flex flex-col pt-24">
             {/* Profile / Account / Login — pinned to top of side menu */}
-            <div className="px-6 pt-2 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
-              {session?.user ? (
+             <div className="px-6 pt-2 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
+               {session?.user ? (
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#DF3131] flex items-center justify-center bg-[#DF3131]/10 shrink-0">
                     {session.user.image ? (

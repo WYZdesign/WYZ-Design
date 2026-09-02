@@ -23,7 +23,7 @@ export default function Services() {
     <section className="py-20 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-[#333333] dark:text-white tracking-[0.15em]">S E R V I C E S</h2>
+          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-[#333333] dark:text-white tracking-[0.15em]">S{" "}E{" "}R{" "}V{" "}I{" "}C{" "}E{" "}S</h2>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

@@ -51,7 +51,7 @@ function SearchContent() {
   return (
     <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-3xl mx-auto px-6">
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">S E A R C H</h1>
+        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] mb-6 sm:mb-8">S{" "}E{" "}A{" "}R{" "}C{" "}H</h1>
         <div className="relative mb-10">
           <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-[#666] w-5 h-5" />
           <input type="text" value={query} onChange={e => setQuery(e.target.value)} autoFocus placeholder="Search pages, services, content..." aria-label="Search"
