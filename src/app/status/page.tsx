@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getNeo4j, getRedis } from "@/lib/wyzmind";
+import { getServiceClient } from "@/lib/supabase";
+import { getRedis } from "@/lib/wyzmind";
 
 export const dynamic = "force-dynamic";
 
@@ -15,30 +16,29 @@ interface ServiceStatus {
   healthy: boolean;
 }
 
-function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
   return Promise.race([
-    promise,
+    Promise.resolve(promise),
     new Promise<T>((_, reject) =>
       setTimeout(() => reject(new Error(`No response within ${ms}ms`)), ms)
     ),
   ]);
 }
 
-async function checkNeo4j(): Promise<ServiceStatus> {
-  const session = getNeo4j().session();
+async function checkZealDatabase(): Promise<ServiceStatus> {
   try {
-    await withTimeout(session.run("RETURN 1"), 4000);
-    return { name: "Neo4j", detail: "Query round trip succeeded", healthy: true };
+    const sb = getServiceClient();
+    await withTimeout(
+      sb.from("zeal_users").select("email", { count: "exact", head: true }).limit(1),
+      4000
+    );
+    return { name: "Zeal DB (Supabase)", detail: "zeal_users query round trip succeeded", healthy: true };
   } catch (err) {
     return {
-      name: "Neo4j",
+      name: "Zeal DB (Supabase)",
       detail: err instanceof Error ? err.message : "Connection failed",
       healthy: false,
     };
-  } finally {
-    try {
-      await session.close();
-    } catch {}
   }
 }
 
@@ -78,17 +78,17 @@ function checkStripe(): ServiceStatus {
 }
 
 export default async function StatusPage() {
-  let neo4j: ServiceStatus;
+  let zealDb: ServiceStatus;
   let redis: ServiceStatus;
   try {
-    [neo4j, redis] = await Promise.all([checkNeo4j(), checkRedis()]);
+    [zealDb, redis] = await Promise.all([checkZealDatabase(), checkRedis()]);
   } catch (err) {
-    neo4j = { name: "Neo4j", detail: err instanceof Error ? err.message : "Check failed", healthy: false };
+    zealDb = { name: "Zeal DB (Supabase)", detail: err instanceof Error ? err.message : "Check failed", healthy: false };
     redis = { name: "Redis", detail: "Check failed", healthy: false };
   }
   const supabase = checkSupabase();
   const stripe = checkStripe();
-  const services = [neo4j, supabase, stripe, redis];
+  const services = [zealDb, supabase, stripe, redis];
 
   const commitSha = process.env.VERCEL_GIT_COMMIT_SHA || "unknown";
   const buildTimestamp = new Date().toISOString();

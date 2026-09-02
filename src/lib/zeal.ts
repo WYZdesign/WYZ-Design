@@ -1,4 +1,5 @@
-import { getNeo4j, addLoyaltyPoints, getLoyaltyHistory, getRedis, isNeo4jReachable } from "@/lib/wyzmind";
+import { getRedis } from "@/lib/wyzmind";
+import { loadZealState, saveZealState, addLoyaltyPoints, getLoyaltyHistory } from "@/lib/zeal-store";
 import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 
@@ -166,35 +167,18 @@ const DEFAULT_STATE: Omit<UserZealState, "points" | "tier"> = {
 };
 
 async function loadUserState(email: string): Promise<UserZealState> {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `MERGE (u:User {email: $email})
-       ON CREATE SET u.points = 0, u.tier = 'recruit',
-         u.zealActions = [], u.achievements = [], u.questsCompleted = [],
-         u.zealCounters = {}, u.visitStreak = 0, u.longestStreak = 0
-       RETURN u.points AS points, u.tier AS tier,
-         u.zealActions AS actions, u.achievements AS achievements,
-         u.questsCompleted AS quests, u.zealCounters AS counters,
-         u.visitStreak AS streak, u.longestStreak AS longest, u.lastVisitDay AS lastDay`,
-      { email }
-    );
-    const r = result.records[0];
-    return {
-      points: r.get("points") || 0,
-      tier: r.get("tier") || "recruit",
-      actions: r.get("actions") || [],
-      achievements: r.get("achievements") || [],
-      questsCompleted: r.get("quests") || [],
-      counters: r.get("counters") || {},
-      visitStreak: r.get("streak") || 0,
-      longestStreak: r.get("longest") || 0,
-      lastVisitDay: r.get("lastDay") || null,
-    };
-  } finally {
-    await session.close();
-  }
+  const row = await loadZealState(email);
+  return {
+    points: row.points,
+    tier: row.tier,
+    actions: row.actions,
+    achievements: row.achievements,
+    questsCompleted: row.quests_completed,
+    counters: row.counters,
+    visitStreak: row.visit_streak,
+    longestStreak: row.longest_streak,
+    lastVisitDay: row.last_visit_day,
+  };
 }
 
 function todayUtc(): string {
@@ -208,29 +192,18 @@ function yesterdayUtc(): string {
 }
 
 async function saveUserState(email: string, state: UserZealState): Promise<void> {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    await session.run(
-      `MATCH (u:User {email: $email})
-       SET u.zealActions = $actions, u.achievements = $achievements,
-           u.questsCompleted = $quests, u.zealCounters = $counters,
-           u.visitStreak = $streak, u.longestStreak = $longest,
-           u.lastVisitDay = $lastDay`,
-      {
-        email,
-        actions: state.actions,
-        achievements: state.achievements,
-        quests: state.questsCompleted,
-        counters: state.counters,
-        streak: state.visitStreak,
-        longest: state.longestStreak,
-        lastDay: state.lastVisitDay,
-      }
-    );
-  } finally {
-    await session.close();
-  }
+  await saveZealState(email, {
+    email,
+    points: state.points,
+    tier: state.tier,
+    actions: state.actions,
+    achievements: state.achievements,
+    quests_completed: state.questsCompleted,
+    counters: state.counters,
+    visit_streak: state.visitStreak,
+    longest_streak: state.longestStreak,
+    last_visit_day: state.lastVisitDay,
+  });
 }
 
 /** Atomic Redis cooldown. Returns false when already earned inside the window. */
@@ -304,10 +277,6 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
 
   const def = ZEAL_ACTIONS[actionId];
   if (!def) return { success: false, error: "Unknown action" };
-
-  if (!(await isNeo4jReachable())) {
-    return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
-  }
 
   // Normalize to top-level path segment so /photography/events can't farm distinct-service tracking
   let normalizedPath: string | undefined;
@@ -530,10 +499,6 @@ export async function redeemZeal(email: string, rewardId: string): Promise<Redee
   const reward = ZEAL_REWARDS.find(r => r.id === rewardId);
   if (!reward) return { success: false, error: "Unknown reward" };
 
-  if (!(await isNeo4jReachable())) {
-    return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
-  }
-
   const locked = await acquireUserLock(email);
   if (!locked) return { success: false, error: "Busy, try again" };
   try {
@@ -578,10 +543,41 @@ export async function redeemZeal(email: string, rewardId: string): Promise<Redee
 }
 
 /** Full status payload for the Zeal HQ page. */
-export async function getZealStatus(email: string, neo4jReachable?: boolean) {
-  const reachable = neo4jReachable ?? (await isNeo4jReachable());
-  if (!reachable) {
-    const zeroHistory = [] as { amount: number; reason: string; timestamp: unknown }[];
+export async function getZealStatus(email: string): Promise<{
+  points: number;
+  tier: string;
+  tierColor: string;
+  tierIndex: number;
+  nextTier: { name: string; min: number; color: string } | null;
+  visitStreak: number;
+  longestStreak: number;
+  counters: Record<string, number>;
+  achievementsUnlocked: string[];
+  questsCompleted: string[];
+  actionsEarned: string[];
+  history: { amount: number; reason: string; timestamp: unknown }[];
+  unavailable?: boolean;
+}> {
+  try {
+    const state = await loadUserState(email);
+    const history = await getLoyaltyHistory(email);
+    const tier = tierForPoints(state.points);
+    return {
+      points: state.points,
+      tier: tier.name,
+      tierColor: tier.color,
+      tierIndex: tier.index,
+      nextTier: tier.index < ZEAL_TIERS.length - 1 ? ZEAL_TIERS[tier.index + 1] : null,
+      visitStreak: state.visitStreak,
+      longestStreak: state.longestStreak,
+      counters: state.counters,
+      achievementsUnlocked: state.achievements,
+      questsCompleted: state.questsCompleted,
+      actionsEarned: state.actions,
+      history: history.slice(0, 20),
+    };
+  } catch (e) {
+    logger.error("zeal:status", e);
     return {
       points: 0,
       tier: ZEAL_TIERS[0].name,
@@ -594,25 +590,8 @@ export async function getZealStatus(email: string, neo4jReachable?: boolean) {
       achievementsUnlocked: [],
       questsCompleted: [],
       actionsEarned: [],
-      history: zeroHistory,
+      history: [],
       unavailable: true,
     };
   }
-  const state = await loadUserState(email);
-  const history = await getLoyaltyHistory(email);
-  const tier = tierForPoints(state.points);
-  return {
-    points: state.points,
-    tier: tier.name,
-    tierColor: tier.color,
-    tierIndex: tier.index,
-    nextTier: tier.index < ZEAL_TIERS.length - 1 ? ZEAL_TIERS[tier.index + 1] : null,
-    visitStreak: state.visitStreak,
-    longestStreak: state.longestStreak,
-    counters: state.counters,
-    achievementsUnlocked: state.achievements,
-    questsCompleted: state.questsCompleted,
-    actionsEarned: state.actions,
-    history: history.slice(0, 20),
-  };
 }

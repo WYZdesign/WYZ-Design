@@ -2,6 +2,7 @@ import neo4j, { Driver } from "neo4j-driver";
 import Redis from "ioredis";
 import { Redis as UpstashRedis } from "@upstash/redis";
 import { logger } from "@/lib/logger";
+import { getServiceClient } from "@/lib/supabase";
 
 let neo4jDriver: Driver | null = null;
 let redisClient: Redis | null = null;
@@ -161,161 +162,128 @@ export function getRedis(): RedisLike {
   return redisClient as unknown as RedisLike;
 }
 
-export async function findOrCreateUser(email: string, name?: string) {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `MERGE (u:User {email: $email})
-       ON CREATE SET u.name = $name, u.createdAt = datetime(), u.role = 'member'
-       ON MATCH SET u.lastLogin = datetime()
-       RETURN u { .email, .name, .role, .createdAt, .bio, .phone, .website, .avatarUrl, .instagram, .facebook, .provider } as user`,
-      { email, name: name || email.split("@")[0] }
-    );
-    return result.records[0]?.get("user") || null;
-  } finally {
-    await session.close();
+/** Normalizes hyphen/underscore Postgres column names to camelCase for callers,
+ *  and safely casts the untyped Supabase row. */
+function datum(row: any): any {
+  if (!row) return null;
+  const out: Record<string, any> = {};
+  for (const [k, v] of Object.entries(row)) {
+    out[k.replace(/_([a-z])/g, (_, c) => c.toUpperCase())] = v;
   }
+  return out;
+}
+
+export async function findOrCreateUser(email: string, name?: string) {
+  const sb = getServiceClient();
+  const { data, error } = await sb.from("profiles").upsert(
+    {
+      email,
+      name: name || email.split("@")[0],
+      last_login: new Date().toISOString(),
+    },
+    { onConflict: "email" }
+  ).select("email, name, role, provider, created_at")
+    .maybeSingle();
+  if (error) { logger.error("[wyzmind:findOrCreateUser]", error.message); return null; }
+  return datum(data);
 }
 
 export async function updateUserIdentity(email: string, data: { provider?: string; providerAccountId?: string; image?: string }) {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const sets: string[] = [];
-    const params: Record<string, any> = { email };
-    if (data.provider) { sets.push("u.provider = $provider"); params.provider = data.provider; }
-    if (data.providerAccountId) { sets.push("u.providerAccountId = $providerAccountId"); params.providerAccountId = data.providerAccountId; }
-    if (data.image) { sets.push("u.avatarUrl = $avatarUrl"); params.avatarUrl = data.image; }
-    if (sets.length === 0) return;
-    await session.run(`MATCH (u:User {email: $email}) SET ${sets.join(", ")}`, params);
-  } finally {
-    await session.close();
-  }
+  const sb = getServiceClient();
+  const patch: Record<string, unknown> = {};
+  if (data.provider) patch.provider = data.provider;
+  if (data.providerAccountId) patch.provider_account_id = data.providerAccountId;
+  if (data.image) patch.avatar_url = data.image;
+  if (Object.keys(patch).length === 0) return;
+  const { error } = await sb.from("profiles").update(patch).eq("email", email);
+  if (error) logger.error("[wyzmind:updateUserIdentity]", error.message);
 }
 
 export async function updateUserProfile(email: string, profile: { name?: string; bio?: string; phone?: string; website?: string; avatarUrl?: string; instagram?: string; facebook?: string }) {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const sets: string[] = [];
-    const params: Record<string, any> = { email };
-    for (const [k, v] of Object.entries(profile)) {
-      if (v !== undefined) { sets.push(`u.${k} = $${k}`); params[k] = v; }
-    }
-    if (sets.length === 0) return null;
-    const result = await session.run(
-      `MATCH (u:User {email: $email}) SET ${sets.join(", ")} RETURN u { .email, .name, .role, .bio, .phone, .website, .avatarUrl, .instagram, .facebook, .provider, .createdAt } as user`,
-      params
-    );
-    return result.records[0]?.get("user") || null;
-  } finally {
-    await session.close();
-  }
+  const sb = getServiceClient();
+  const patch: Record<string, unknown> = {};
+  if (profile.name !== undefined) patch.name = profile.name;
+  if (profile.bio !== undefined) patch.bio = profile.bio;
+  if (profile.phone !== undefined) patch.phone = profile.phone;
+  if (profile.website !== undefined) patch.website = profile.website;
+  if (profile.avatarUrl !== undefined) patch.avatar_url = profile.avatarUrl;
+  if (profile.instagram !== undefined) patch.instagram = profile.instagram;
+  if (profile.facebook !== undefined) patch.facebook = profile.facebook;
+  patch.updated_at = new Date().toISOString();
+  if (Object.keys(patch).filter(k => k !== "updated_at").length === 0) return null;
+  const { data, error } = await sb.from("profiles").update(patch).eq("email", email)
+    .select("email, name, role, bio, phone, website, avatar_url, instagram, facebook, provider, created_at")
+    .maybeSingle();
+  if (error) { logger.error("[wyzmind:updateUserProfile]", error.message); return null; }
+  return datum(data);
 }
 
 export async function isAdmin(email: string): Promise<boolean> {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `MATCH (u:User {email: $email}) RETURN u.role = 'admin' AS isAdmin`,
-      { email }
-    );
-    return result.records[0]?.get("isAdmin") || false;
-  } finally {
-    await session.close();
-  }
+  const sb = getServiceClient();
+  const { data } = await sb.from("profiles").select("role").eq("email", email).maybeSingle();
+  return (data as any)?.role === "admin";
 }
 
 export async function getAllUsers() {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `MATCH (u:User) RETURN u { .email, .name, .role, .createdAt, .lastLogin, .provider } as user ORDER BY u.createdAt DESC`
-    );
-    return result.records.map(r => r.get("user"));
-  } finally {
-    await session.close();
-  }
+  const sb = getServiceClient();
+  const { data, error } = await sb.from("profiles")
+    .select("email, name, role, created_at, last_login, provider")
+    .order("created_at", { ascending: false });
+  if (error) { logger.error("[wyzmind:getAllUsers]", error.message); return []; }
+  return (data as any[] | null || []).map(datum);
 }
 
 export async function addNewsletterSubscriber(email: string, active = true) {
   try {
-    const driver = getNeo4j();
-    const session = driver.session();
-    try {
-      await session.run(
-        `MERGE (s:NewsletterSubscriber {email: $email})
-         ON CREATE SET s.subscribedAt = datetime(), s.active = $active
-         ON MATCH SET s.active = $active, s.resubscribedAt = datetime()`,
-        { email, active }
-      );
-    } finally {
-      await session.close();
-    }
+    const sb = getServiceClient();
+    await sb.from("newsletter_subscribers").upsert(
+      {
+        email,
+        active,
+        subscribed_at: new Date().toISOString(),
+        resubscribed_at: active ? new Date().toISOString() : null,
+        unsubscribed_at: active ? null : new Date().toISOString(),
+      },
+      { onConflict: "email" }
+    );
   } catch (e) { logger.error("[wyzmind:addNewsletterSubscriber]", e); }
 }
 
 export async function removeNewsletterSubscriber(email: string) {
   try {
-    const driver = getNeo4j();
-    const session = driver.session();
-    try {
-      await session.run(
-        `MATCH (s:NewsletterSubscriber {email: $email}) SET s.active = false, s.unsubscribedAt = datetime()`,
-        { email }
-      );
-    } finally {
-      await session.close();
-    }
+    const sb = getServiceClient();
+    await sb.from("newsletter_subscribers").upsert(
+      { email, active: false, unsubscribed_at: new Date().toISOString() },
+      { onConflict: "email" }
+    );
   } catch (e) { logger.error("[wyzmind:removeNewsletterSubscriber]", e); }
 }
 
 export async function getNewsletterSubscribers() {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `MATCH (s:NewsletterSubscriber {active: true}) RETURN s.email AS email, s.subscribedAt AS subscribedAt ORDER BY s.subscribedAt DESC`
-    );
-    return result.records.map(r => ({ email: r.get("email"), subscribedAt: r.get("subscribedAt") }));
-  } finally {
-    await session.close();
-  }
+  const sb = getServiceClient();
+  const { data, error } = await sb.from("newsletter_subscribers")
+    .select("email, subscribed_at")
+    .eq("active", true)
+    .order("subscribed_at", { ascending: false });
+  if (error) { logger.error("[wyzmind:getNewsletterSubscribers]", error.message); return []; }
+  return (data as any[] | null || []).map((r) => ({ email: r.email, subscribedAt: r.subscribed_at }));
 }
 
 export async function getDashboardStats() {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const usersResult = await session.run(
-      `MATCH (u:User) RETURN count(u) AS totalUsers, count(CASE WHEN u.role = 'admin' THEN 1 END) AS adminCount`,
-    );
-    const subCount = await session.run(`MATCH (s:NewsletterSubscriber {active: true}) RETURN count(s) AS count`);
-    return {
-      totalUsers: usersResult.records[0]?.get("totalUsers") || 0,
-      adminCount: usersResult.records[0]?.get("adminCount") || 0,
-      newsletterSubs: subCount.records[0]?.get("count") || 0,
-    };
-  } finally {
-    await session.close();
-  }
+  const sb = getServiceClient();
+  const { count: totalUsers } = await sb.from("profiles").select("email", { count: "exact", head: true });
+  const { count: adminCount } = await sb.from("profiles").select("email", { count: "exact", head: true }).eq("role", "admin");
+  const { count: newsletterSubs } = await sb.from("newsletter_subscribers").select("email", { count: "exact", head: true }).eq("active", true);
+  return { totalUsers: totalUsers ?? 0, adminCount: adminCount ?? 0, newsletterSubs: newsletterSubs ?? 0 };
 }
 
 export async function getUserByEmail(email: string) {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `MATCH (u:User {email: $email}) RETURN u { .email, .name, .role, .createdAt } as user`,
-      { email }
-    );
-    return result.records[0]?.get("user") || null;
-  } finally {
-    await session.close();
-  }
+  const sb = getServiceClient();
+  const { data, error } = await sb.from("profiles")
+    .select("email, name, role, created_at, provider")
+    .eq("email", email).maybeSingle();
+  if (error) { logger.error("[wyzmind:getUserByEmail]", error.message); return null; }
+  return datum(data);
 }
 
 export async function setCache(key: string, value: unknown, ttl = 3600) {
@@ -363,52 +331,19 @@ export async function qdrantSearch(query: string, limit = 5): Promise<{ text: st
   }
 }
 
+// Loyalty points live in Supabase now (see zeal-store.ts). Re-export the store
+// implementations so existing consumers (e.g. /api/admin add-points) keep the
+// same call site without importing the store directly.
+export {
+  addLoyaltyPoints,
+  getLoyaltyHistory,
+} from "@/lib/zeal-store";
+
 export async function getLoyaltyPoints(email: string) {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'recruit'
-       RETURN u.points AS points, u.tier AS tier, u.createdAt AS joined`,
-      { email }
-    );
-    const r = result.records[0];
-    return { points: r.get("points") || 0, tier: r.get("tier") || "recruit", joined: r.get("joined") };
-  } finally { await session.close(); }
-}
-
-export async function addLoyaltyPoints(email: string, amount: number, reason: string): Promise<{ points: number; tier: string }> {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `       MERGE (u:User {email: $email}) ON CREATE SET u.points = 0, u.tier = 'recruit'
-       SET u.points = COALESCE(u.points, 0) + $amount
-       CREATE (u)-[:EARNED_POINTS]->(:LoyaltyTransaction {amount: $amount, reason: $reason, timestamp: datetime()})
-       WITH u,
-         CASE WHEN u.points >= 5000 THEN 'legend'
-              WHEN u.points >= 2000 THEN 'champion'
-              WHEN u.points >= 500 THEN 'zealot'
-              ELSE 'recruit' END AS newTier
-       SET u.tier = newTier
-       RETURN u.points AS points, u.tier AS tier`,
-      { email, amount, reason }
-    );
-    const r = result.records[0];
-    return { points: r.get("points") || 0, tier: r.get("tier") || "recruit" };
-  } finally { await session.close(); }
-}
-
-export async function getLoyaltyHistory(email: string) {
-  const driver = getNeo4j();
-  const session = driver.session();
-  try {
-    const result = await session.run(
-      `MATCH (u:User {email: $email})-[:EARNED_POINTS]->(t:LoyaltyTransaction)
-       RETURN t.amount AS amount, t.reason AS reason, t.timestamp AS timestamp
-       ORDER BY t.timestamp DESC LIMIT 50`,
-      { email }
-    );
-    return result.records.map(r => ({ amount: r.get("amount"), reason: r.get("reason"), timestamp: r.get("timestamp") }));
-  } finally { await session.close(); }
+  const sb = getServiceClient();
+  const { data, error } = await sb.from("zeal_users")
+    .select("points, tier, created_at")
+    .eq("email", email).maybeSingle();
+  if (error) { logger.error("[wyzmind:getLoyaltyPoints]", error.message); }
+  return { points: (data as any)?.points ?? 0, tier: (data as any)?.tier ?? "recruit", joined: (data as any)?.created_at ?? null };
 }
