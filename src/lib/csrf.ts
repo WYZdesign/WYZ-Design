@@ -20,30 +20,3 @@ export function validateCsrf(req: NextRequest): boolean {
 
   return false;
 }
-
-const CSRF_SECRET: string = process.env.CSRF_SECRET || process.env.NEXTAUTH_SECRET || "";
-if (!CSRF_SECRET) {
-  throw new Error("CSRF_SECRET or NEXTAUTH_SECRET must be set");
-}
-
-export function generateCsrfToken(): string {
-  const nonce = randomBytes(32).toString("hex");
-  const hmac = createHmac("sha256", CSRF_SECRET).update(nonce).digest("hex");
-  return `${nonce}.${hmac.slice(0, 32)}`;
-}
-
-export function validateCsrfToken(token: string): boolean {
-  const parts = token.split(".");
-  if (parts.length !== 2) return false;
-  const [nonce, sig] = parts;
-  const expected = createHmac("sha256", CSRF_SECRET).update(nonce).digest("hex").slice(0, 32);
-
-  try {
-    const a = Buffer.from(expected);
-    const b = Buffer.from(sig);
-    if (a.length !== b.length) return false;
-    return timingSafeEqual(a, b);
-  } catch {
-    return false;
-  }
-}
