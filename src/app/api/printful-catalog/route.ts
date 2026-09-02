@@ -3,25 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 const PRINTFUL_API = "https://api.printful.com";
 const API_KEY = process.env.PRINTFUL_API_KEY || "";
 
-// Curated product IDs for WYZ Design merch
-// Exported so other build-time code (e.g. sitemap.ts) can stay in sync with
-// the real catalog instead of assuming a sequential 1-14 range.
 export const PRODUCT_IDS = [
-  71,   // Unisex Staple T-Shirt (Bella+Canvas 3001)
-  12,   // Unisex Basic Softstyle T-Shirt (Gildan 64000)
-  831,  // Unisex Organic Hoodie (Stanley/Stella)
-  77,   // Snapback Cap
-  100,  // 5 Panel Trucker Cap
-  140,  // Closed-Back Structured Cap
-  300,  // Black Glossy Mug
-  2,    // Framed Poster
-  3,    // Canvas
-  350,  // All-Over Print Fanny Pack
-  465,  // All-Over Print Duffle Bag
-  400,  // All-Over Print Joggers
-  200,  // All-Over Print Crop Top
-  619,  // Cropped Windbreaker
-  301,  // Rash Guard
+  71, 12, 831, 77, 100, 140, 300, 2, 3, 350, 465, 400, 200, 619, 301,
 ];
 
 const CATEGORY_MAP: Record<string, number[]> = {
@@ -31,13 +14,6 @@ const CATEGORY_MAP: Record<string, number[]> = {
   Art: [2, 3],
 };
 
-interface PrintfulVariant {
-  id: number;
-  name: string;
-  price: string;
-  in_stock: boolean;
-}
-
 interface PrintfulProductResponse {
   id: number;
   type: string;
@@ -45,7 +21,24 @@ interface PrintfulProductResponse {
   brand: string;
   model: string;
   image: string;
-  variants: PrintfulVariant[];
+}
+
+interface PrintfulVariant {
+  id: number;
+  name: string;
+}
+
+interface PlacementPrice {
+  price: string;
+}
+
+interface PrintfulPricesData {
+  currency: string;
+  product: { placements: PlacementPrice[] };
+}
+
+interface PrintfulAvailabilityData {
+  techniques: { selling_regions: { availability: string }[] }[];
 }
 
 interface PrintfulProduct {
@@ -59,9 +52,50 @@ interface PrintfulProduct {
   category: string;
 }
 
+interface PrintfulPricesResponse {
+  data: PrintfulPricesData;
+}
+
+interface PrintfulAvailabilityResponse {
+  data: PrintfulAvailabilityData;
+}
+
+async function fetchVariantPrices(variantId: number): Promise<number> {
+  try {
+    const res = await fetch(
+      `${PRINTFUL_API}/v2/catalog-variants/${variantId}/prices`,
+      { headers: { Authorization: `Bearer ${API_KEY}` }, signal: AbortSignal.timeout(8000) }
+    );
+    if (!res.ok) return 0;
+    const data: PrintfulPricesResponse = await res.json();
+    const placements: PlacementPrice[] = data.data?.product?.placements || [];
+    const prices = placements.map((p: PlacementPrice) => parseFloat(p.price));
+    if (prices.length === 0) return 0;
+    return Math.min(...prices);
+  } catch {
+    return 0;
+  }
+}
+
+async function fetchVariantAvailability(variantId: number): Promise<boolean> {
+  try {
+    const res = await fetch(
+      `${PRINTFUL_API}/v2/catalog-variants/${variantId}/availability`,
+      { headers: { Authorization: `Bearer ${API_KEY}` }, signal: AbortSignal.timeout(8000) }
+    );
+    if (!res.ok) return false;
+    const data: PrintfulAvailabilityResponse = await res.json();
+    const allRegions: string[] = data.data?.techniques?.flatMap((t: { selling_regions: { availability: string }[] }) =>
+      t.selling_regions?.map((r: { availability: string }) => r.availability) || []
+    ) || [];
+    return allRegions.some((a: string) => a === "in stock" || a === "available");
+  } catch {
+    return false;
+  }
+}
+
 async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
   try {
-    // V2 API: /v2/catalog-products/{id}
     const res = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}`, {
       headers: { Authorization: `Bearer ${API_KEY}` },
       signal: AbortSignal.timeout(10_000),
@@ -72,7 +106,6 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
     const p: PrintfulProductResponse | undefined = data.data;
     if (!p) return null;
 
-    // V2 returns variants separately — fetch them
     const varRes = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}/catalog-variants`, {
       headers: { Authorization: `Bearer ${API_KEY}` },
       signal: AbortSignal.timeout(10_000),
@@ -83,13 +116,20 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
     const variants: PrintfulVariant[] = varData.data || [];
     if (!variants.length) return null;
 
-    // Find cheapest in-stock variant for display price
-    const inStock = variants.filter((v) => v.in_stock);
-    const cheapest = (inStock.length ? inStock : variants).reduce((a, b) =>
-      parseFloat(a.price) < parseFloat(b.price) ? a : b
-    );
+    const prices = await Promise.all(variants.map((v) => fetchVariantPrices(v.id)));
+    const availabilities = await Promise.all(variants.map((v) => fetchVariantAvailability(v.id)));
 
-    // Determine category
+    const cheapestIdx = prices.reduce((bestIdx, price, i, arr) => {
+      if (price === 0 && arr[bestIdx] !== 0) return bestIdx;
+      if (price === 0) return bestIdx;
+      if (arr[bestIdx] === 0) return i;
+      return price < arr[bestIdx] ? i : bestIdx;
+    }, 0);
+
+    const variant = variants[cheapestIdx];
+    const inStock = availabilities[cheapestIdx];
+    const price = prices[cheapestIdx] || 0;
+
     let category = "Apparel";
     for (const [cat, ids] of Object.entries(CATEGORY_MAP)) {
       if (ids.includes(id)) { category = cat; break; }
@@ -100,9 +140,9 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
       title: p.name.split("|")[0].trim(),
       type: p.type,
       image: p.image || "",
-      price: parseFloat(cheapest.price),
-      variantId: cheapest.id,
-      variantName: cheapest.name,
+      price,
+      variantId: variant.id,
+      variantName: variant.name,
       category,
     };
   } catch {
@@ -110,14 +150,6 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
   }
 }
 
-/**
- * Returns curated Printful product catalog, optionally filtered by category.
- * Uses Printful V2 API.
- * @method GET
- * @request Query param `category` (optional) — Apparel, Headwear, Accessories, Art, or All
- * @response JSON with products array and total count
- * @auth None
- */
 export async function GET(req: NextRequest) {
   if (!API_KEY) {
     return NextResponse.json({ error: "PRINTFUL_API_KEY not set" }, { status: 500 });
