@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { getZealStatus, ZEAL_ACTIONS, ZEAL_ACHIEVEMENTS, ZEAL_QUESTS, ZEAL_TIERS } from "@/lib/zeal";
 import { ensureNeo4jConstraints } from "@/lib/neo4j-setup";
+import { isNeo4jReachable } from "@/lib/wyzmind";
 import { logger } from "@/lib/logger";
 
 /**
@@ -12,12 +13,13 @@ import { logger } from "@/lib/logger";
  */
 export async function GET(req: NextRequest) {
   try {
-    void ensureNeo4jConstraints();
     const session = await auth();
     if (!session?.user?.email) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
-    const status = await getZealStatus(session.user.email);
+    const reachable = await isNeo4jReachable();
+    if (reachable) void ensureNeo4jConstraints();
+    const status = await getZealStatus(session.user.email, reachable);
     return NextResponse.json({
       ...status,
       catalog: {

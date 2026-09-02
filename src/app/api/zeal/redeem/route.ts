@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
 
     const result = await redeemZeal(session.user.email, body.rewardId);
     if (!result.success) {
-      return NextResponse.json(result, { status: 400 });
+      return NextResponse.json(result, { status: result.unavailable ? 503 : 400 });
     }
     return NextResponse.json(result);
   } catch (e: unknown) {

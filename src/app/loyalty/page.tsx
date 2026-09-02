@@ -23,6 +23,7 @@ interface ZealStatus {
   questsCompleted: string[];
   actionsEarned: string[];
   history: { amount: number; reason: string; timestamp: string }[];
+  unavailable?: boolean;
   catalog: {
     actions: CatalogAction[];
     achievements: AchievementDef[];
@@ -79,7 +80,7 @@ export default function LoyaltyPage() {
   const load = () => {
     fetch("/api/zeal/status")
       .then(r => (r.ok ? r.json() : Promise.reject(new Error("unauthorized"))))
-      .then(d => { if (d.points !== undefined) setData(d); })
+      .then(d => { if (d.points !== undefined || d.unavailable === true) setData(d); })
       .catch(() => {})
       .finally(() => setLoading(false));
   };
@@ -100,7 +101,21 @@ export default function LoyaltyPage() {
           <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-6 mt-4">The WYZ Design rewards program. Earn Zeal for everything you do here, from showing up daily to uncovering secrets nobody told you about. Climb the tiers, unlock real perks. Sign in to start earning. Everything you do on this site counts once you&apos;re in.</p>
         </div>
 
-        {session && data ? (
+        {session && data && data.unavailable ? (
+          <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10 text-center">
+            <FiZap className="w-6 h-6 mx-auto text-[#DF3131] mb-3" />
+            <h2 className="font-heading font-bold text-[20.7px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Zeal is Taking a Nap</h2>
+            <p className="text-[13px] text-[#666] dark:text-white/50 mb-4 max-w-md mx-auto">
+              We&apos;re syncing our rewards engine right now. Your points are safe — check back shortly and they&apos;ll be right where you left them.
+            </p>
+            <button
+              onClick={load}
+              className="inline-block px-6 py-2.5 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#B82020] transition-all"
+            >
+              Retry
+            </button>
+          </div>
+        ) : session && data ? (
           <>
             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 mb-10 text-center">
               <div className="flex items-center justify-between mb-4">

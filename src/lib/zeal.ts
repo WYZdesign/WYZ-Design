@@ -1,4 +1,4 @@
-import { getNeo4j, addLoyaltyPoints, getLoyaltyHistory, getRedis } from "@/lib/wyzmind";
+import { getNeo4j, addLoyaltyPoints, getLoyaltyHistory, getRedis, isNeo4jReachable } from "@/lib/wyzmind";
 import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 
@@ -291,6 +291,7 @@ export interface EarnResult {
   error?: string;
   cooldown?: boolean;
   busy?: boolean;
+  unavailable?: boolean;
 }
 
 /**
@@ -303,6 +304,10 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
 
   const def = ZEAL_ACTIONS[actionId];
   if (!def) return { success: false, error: "Unknown action" };
+
+  if (!(await isNeo4jReachable())) {
+    return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
+  }
 
   // Normalize to top-level path segment so /photography/events can't farm distinct-service tracking
   let normalizedPath: string | undefined;
@@ -505,6 +510,7 @@ export interface RedeemResult {
   title?: string;
   remaining?: number;
   error?: string;
+  unavailable?: boolean;
 }
 
 function generateRedemptionCode(): string {
@@ -523,6 +529,10 @@ function generateRedemptionCode(): string {
 export async function redeemZeal(email: string, rewardId: string): Promise<RedeemResult> {
   const reward = ZEAL_REWARDS.find(r => r.id === rewardId);
   if (!reward) return { success: false, error: "Unknown reward" };
+
+  if (!(await isNeo4jReachable())) {
+    return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
+  }
 
   const locked = await acquireUserLock(email);
   if (!locked) return { success: false, error: "Busy, try again" };
@@ -568,7 +578,26 @@ export async function redeemZeal(email: string, rewardId: string): Promise<Redee
 }
 
 /** Full status payload for the Zeal HQ page. */
-export async function getZealStatus(email: string) {
+export async function getZealStatus(email: string, neo4jReachable?: boolean) {
+  const reachable = neo4jReachable ?? (await isNeo4jReachable());
+  if (!reachable) {
+    const zeroHistory = [] as { amount: number; reason: string; timestamp: unknown }[];
+    return {
+      points: 0,
+      tier: ZEAL_TIERS[0].name,
+      tierColor: ZEAL_TIERS[0].color,
+      tierIndex: 0,
+      nextTier: ZEAL_TIERS[1] ?? null,
+      visitStreak: 0,
+      longestStreak: 0,
+      counters: {},
+      achievementsUnlocked: [],
+      questsCompleted: [],
+      actionsEarned: [],
+      history: zeroHistory,
+      unavailable: true,
+    };
+  }
   const state = await loadUserState(email);
   const history = await getLoyaltyHistory(email);
   const tier = tierForPoints(state.points);

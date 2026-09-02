@@ -42,6 +42,10 @@ export async function POST(req: NextRequest) {
 
     const result = await earnZeal(session.user.email, action, { localHour, metaPath });
 
+    if (result.unavailable) {
+      return NextResponse.json(result, { status: 503 });
+    }
+
     if (!result.success) {
       const status = result.cooldown ? 429 : result.error === "Rate limit exceeded" ? 429 : 400;
       return NextResponse.json(result, { status });
