@@ -9,7 +9,6 @@ const ALLOWED_ORIGINS = [
 
 export function validateCsrf(req: NextRequest): boolean {
   const origin = req.headers.get("origin");
-  const host = req.headers.get("host") || "";
 
   if (!origin) return false;
   if (origin === "null") return false;
