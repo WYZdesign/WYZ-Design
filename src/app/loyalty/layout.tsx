@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Zeal Rewards",
+  title: "Rewards",
   description: "Earn Zeal for everything you do on the WYZ Design site. Daily visits, quests, achievements, and hidden secrets all stack up toward real perks.",
-  keywords: ["WYZ Design zeal", "creative agency rewards", "earn zeal points", "member perks", "Los Angeles"],
+  keywords: ["WYZ Design rewards", "creative agency rewards", "earn zeal points", "member perks", "Los Angeles"],
   alternates: { canonical: "https://www.wyzdesign.com/loyalty" },
   openGraph: {
-    title: "Zeal Rewards",
+    title: "Rewards",
     description: "Earn Zeal for exploring the site. Climb from Recruit to Legend and unlock real perks.",
     url: "https://www.wyzdesign.com/loyalty",
     siteName: "WYZ Design",

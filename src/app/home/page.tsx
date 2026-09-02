@@ -970,7 +970,7 @@ export default function HomePage() {
       <TextSplit stagger={0.02} direction="up">WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.02} direction="up">WE DO</TextSplit></span>
      </h2>
      <p className="text-[#666] dark:text-white/70 text-[15px] sm:text-base max-w-xl mx-auto leading-relaxed mt-4">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel Harris built this from the ground up: over 60 events produced, over 30 clients supported. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
-   </div>
+    </div>
   </div>
    {/* Full-width carousel — full bleed stretching to both sides */}
    <div className="relative z-10 my-16 sm:my-24 w-full overflow-hidden">

@@ -546,12 +546,13 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
     onMouseEnter={() => setIsHovering(true)}
     onMouseLeave={() => setIsHovering(false)}
   >
-  <div className="absolute inset-0 z-0">
-  <div className="absolute top-0 left-0 w-full h-full bg-black/90" />
-  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0000]/15 via-transparent to-[#DF3131]/10" />
-  <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#FF0000]/8 rounded-full blur-[100px]" />
-  <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-[#DF3131]/8 rounded-full blur-[80px]" />
-  </div>
+  <div className="absolute inset-0 z-0 bg-black/65" />
+  <div
+    className="absolute inset-0 z-[5] pointer-events-none"
+    style={{
+      background: `radial-gradient(circle 280px at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(255,0,0,0.18), transparent 70%)`,
+    }}
+  />
 
   <div className="absolute inset-0 z-10 flex flex-col justify-center gap-6 opacity-40">
   <div className="overflow-hidden py-3">
@@ -595,8 +596,6 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
     </div>
   </div>
   </div>
-
-  <div className="absolute inset-0 bg-black/90 z-[15] pointer-events-none" />
 
  <div className="relative z-20 flex flex-col items-center justify-center py-20 sm:py-28 px-6 text-center">
  <div className="yt-float mb-8">

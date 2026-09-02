@@ -56,7 +56,7 @@ const ALL_PAGES = [
   { title: "FAQ", href: "/faq", desc: "Frequently asked questions", tags: ["faq", "question", "help", "answer", "support"] },
   { title: "Blog", href: "/blog", desc: "News, tips, and behind-the-scenes", tags: ["blog", "news", "post", "article", "update"] },
   { title: "Gallery", href: "/gallery", desc: "Complete portfolio of our work", tags: ["gallery", "portfolio", "collection", "showcase"] },
-  { title: "Zeal Rewards", href: "/loyalty", desc: "Earn points and redeem rewards", tags: ["loyalty", "rewards", "points", "perks", "vip", "zeal"] },
+  { title: "Rewards", href: "/loyalty", desc: "Earn points and redeem rewards", tags: ["loyalty", "rewards", "points", "perks", "vip", "zeal"] },
   { title: "Featured Artist", href: "/featured-artist", desc: "Artist of the Month spotlight", tags: ["artist", "featured", "spotlight", "monthly"] },
   { title: "Creative Consultation", href: "/service-page/creative-consultation", desc: "Free 30-minute strategy session", tags: ["consultation", "strategy", "free", "session"] },
   { title: "Photoshoot", href: "/service-page/photoshoot", desc: "Professional photoshoot services", tags: ["photoshoot", "photo", "session", "studio"] },
@@ -97,7 +97,7 @@ export default function Navbar() {
 
   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
   useEffect(() => { setMobileOpen(false); }, [pathname]);
-  useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; return () => { document.body.style.overflow = ""; }; }, [mobileOpen]);
+  useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; document.body.dataset.mobileOpen = mobileOpen ? "true" : ""; return () => { document.body.style.overflow = ""; document.body.dataset.mobileOpen = ""; }; }, [mobileOpen]);
   useEffect(() => { if (!mobileOpen) return; const close = (e: TouchEvent | MouseEvent) => { const target = e.target as HTMLElement; if (!target.closest("[data-more-dropdown]") && !target.closest("[data-more-btn]")) setMoreOpen(false); }; document.addEventListener("touchstart", close); return () => document.removeEventListener("touchstart", close); }, [mobileOpen]);
 
   useEffect(() => {

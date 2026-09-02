@@ -92,10 +92,24 @@ const concepts: SplashConcept[] = [
 export default function MobileSplashPage() {
   const [ready, setReady] = useState(false);
   const [selectedConcept, setSelectedConcept] = useState<SplashConcept | null>(null);
+  const [bodyOverflowPrev, setBodyOverflowPrev] = useState<string | null>(null);
 
   useEffect(() => {
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    if (selectedConcept) {
+      setBodyOverflowPrev(document.body.style.overflow);
+      document.body.style.overflow = "hidden";
+      document.body.dataset.mobileSplashOpen = "true";
+    } else {
+      if (bodyOverflowPrev) {
+        document.body.style.overflow = bodyOverflowPrev;
+        document.body.dataset.mobileSplashOpen = "";
+      }
+    }
+  }, [selectedConcept]);
 
   if (!ready) {
     return null;

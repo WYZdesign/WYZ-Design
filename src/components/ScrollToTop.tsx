@@ -22,7 +22,7 @@ export default function ScrollToTop() {
     };
   }, []);
 
-  const bodyLocked = typeof document !== "undefined" && document.body.style.overflow === "hidden";
+  const bodyLocked = typeof document !== "undefined" && (document.body.style.overflow === "hidden" || document.body.dataset.mobileOpen === "true");
   const visible = scrollY > 400 && !bodyLocked;
 
   const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" });

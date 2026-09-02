@@ -9,11 +9,12 @@ export default function SplashPage() {
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
+    document.body.dataset.splashOpen = "true";
+    return () => { document.body.style.overflow = prev; document.body.dataset.splashOpen = ""; };
   }, []);
   return (
     <div className="fixed inset-0 z-[9999]" style={{ backgroundColor: "#111" }}>
-      <RandomSplash onEnter={() => { document.body.style.overflow = ""; router.push("/home"); }} />
+      <RandomSplash onEnter={() => { document.body.style.overflow = ""; document.body.dataset.splashOpen = ""; router.push("/home"); }} />
     </div>
   );
 }
