@@ -112,6 +112,21 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
     transform: scale(0.97);
     transition-duration: 0.1s;
   }
+  /* Consistent inline text field focus — smooth ring instead of snapping.
+     Components that define their own focus:border/ring (DynamicForm, etc.)
+     get overridden because their rules carry higher specificity than :where(). */
+  :where(input[type="text"], input[type="email"], input[type="tel"], input[type="url"],
+    input[type="number"], input[type="date"], input[type="search"], input[type="password"],
+    textarea:not([readonly])):not(:disabled) {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  }
+  :where(input[type="text"], input[type="email"], input[type="tel"], input[type="url"],
+    input[type="number"], input[type="date"], input[type="search"], input[type="password"],
+    textarea:not([readonly])):not(:disabled):focus {
+    outline: none;
+    border-color: #DF3131;
+    box-shadow: 0 0 0 1px #DF3131;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
