@@ -31,7 +31,7 @@ export default function ScrollToTop() {
     <button
       onClick={scrollUp}
       aria-label="Scroll to top"
-      className={`fixed bottom-6 left-6 z-[var(--z-toast)] w-11 h-11 bg-[#DF3131] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#B82020] hover:scale-110 transition-all duration-300 ${hidden ? "opacity-0 pointer-events-none translate-y-2" : "opacity-100"}`}
+      className={`fixed bottom-6 left-6 z-[var(--z-toast)] w-11 h-11 bg-[#DF3131] text-white rounded-full flex items-center justify-center shadow-lg hover:bg-[#B82020] hover:scale-110 transition-all duration-300 ${!visible || hidden ? "opacity-0 pointer-events-none translate-y-2" : "opacity-100"}`}
     >
       <FiArrowUp className="w-5 h-5" />
     </button>

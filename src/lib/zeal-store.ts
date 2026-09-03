@@ -77,7 +77,16 @@ export async function loadZealState(email: string): Promise<ZealStateRow> {
   return row as ZealStateRow;
 }
 
-/** Persists the full Zeal state row for a user. Never throws. */
+/** Persists the full "profile-ish" Zeal state row for a user. Never throws.
+ *
+ * Deliberately does NOT write `points`/`tier`: those are owned exclusively by
+ * `addLoyaltyPoints`, which derives them from the immutable
+ * `loyalty_transactions` log. Callers load their `state` via `loadUserState`
+ * *before* any `addLoyaltyPoints` call in the same request, so
+ * `state.points`/`state.tier` are stale by the time this runs — writing them
+ * here would clobber the correct value `addLoyaltyPoints` just computed.
+ * Omitting the columns means the ON CONFLICT UPDATE only touches the fields
+ * listed below, leaving points/tier alone. */
 export async function saveZealState(email: string, state: ZealStateRow): Promise<void> {
   const sb = getServiceClient();
   const { error } = await sb
@@ -85,8 +94,6 @@ export async function saveZealState(email: string, state: ZealStateRow): Promise
     .upsert(
       {
         email,
-        points: state.points,
-        tier: state.tier,
         actions: state.actions,
         achievements: state.achievements,
         quests_completed: state.quests_completed,

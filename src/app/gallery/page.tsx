@@ -113,11 +113,10 @@ export default function GalleryPage() {
  return (
   <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
-<div className="mb-8 text-center">
--  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">G A L L E R Y</h1>
-+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">G{" "}A{" "}L{" "}L{" "}E{" "}R{" "}Y</h1>
-   <p className="text-[#666] dark:text-[#b0b0b0] text-sm mt-2">Our complete portfolio of work</p>
-  </div>
+ <div className="mb-8 text-center">
+  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">G{"\u00a0"}A{"\u00a0"}L{"\u00a0"}L{"\u00a0"}E{"\u00a0"}R{"\u00a0"}Y</h1>
+  <p className="text-[#666] dark:text-[#b0b0b0] text-sm mt-2">Our complete portfolio of work</p>
+ </div>
  <div className="flex gap-3 mb-8 flex-wrap justify-center">
  {CATS.map(c => (
   <button key={c} onClick={() => setCat(c)} className="px-5 py-2.5 text-sm font-semibold tracking-[0.1em] rounded-full border border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-[#e0e0e0] transition-all">{c}</button>

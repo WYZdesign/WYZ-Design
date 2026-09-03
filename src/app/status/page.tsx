@@ -29,8 +29,8 @@ async function checkZealDatabase(): Promise<ServiceStatus> {
   try {
     const sb = getServiceClient();
     await withTimeout(
-      sb.from("zeal_users").select("email", { count: "exact", head: true }).limit(1),
-      4000
+      sb.from("zeal_users").select("email").limit(1),
+      10000
     );
     return { name: "Zeal DB (Supabase)", detail: "zeal_users query round trip succeeded", healthy: true };
   } catch (err) {
@@ -96,7 +96,7 @@ export default async function StatusPage() {
   return (
     <main className="min-h-screen bg-white dark:bg-[#1C1C1E] py-16 px-6">
       <div className="max-w-3xl mx-auto">
-        <h1 className="font-heading font-black text-[#333] dark:text-white tracking-[0.15em] text-[2rem] sm:text-[2.5rem] mb-2">S Y S T E M . S T A T U S</h1>
+        <h1 className="font-heading font-black text-[#333] dark:text-white tracking-[0.15em] text-[2rem] sm:text-[2.5rem] mb-2">S{"\u00a0"}Y{"\u00a0"}S{"\u00a0"}T{"\u00a0"}E{"\u00a0"}M{"\u00a0"}.{"\u00a0"}S{"\u00a0"}T{"\u00a0"}A{"\u00a0"}T{"\u00a0"}U{"\u00a0"}S</h1>
         <p className="text-[#666] dark:text-white/50 text-sm mb-10">
           Live health of the services powering WYZ Design. Checked at request time.
         </p>

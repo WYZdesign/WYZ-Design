@@ -106,7 +106,7 @@ export default function CookieBanner() {
   return (
     <div
       ref={dialogRef}
-      className="fixed bottom-0 left-0 right-0 sm:bottom-6 sm:left-auto sm:right-6 sm:w-[442px] z-[60]"
+      className="fixed bottom-0 left-0 right-0 sm:bottom-6 sm:left-auto sm:right-6 sm:w-[442px] z-[var(--z-modal)]"
       style={{ animation: "wzSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both" }}
       role="dialog"
       aria-label="Cookie consent"

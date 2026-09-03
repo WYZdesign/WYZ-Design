@@ -1,66 +1,10 @@
-import neo4j, { Driver } from "neo4j-driver";
 import Redis from "ioredis";
 import { Redis as UpstashRedis } from "@upstash/redis";
 import { logger } from "@/lib/logger";
 import { getServiceClient } from "@/lib/supabase";
 
-let neo4jDriver: Driver | null = null;
 let redisClient: Redis | null = null;
 let upstashClient: UpstashRedis | null = null;
-
-// Cached Neo4j reachability probe. On Vercel serverless there is no reachable
-// Neo4j (localhost is the edge node and Bolt-over-TCP is blocked), so probe
-// once per cold start, cache the failure briefly, and let Zeal degrade
-// gracefully instead of throwing a 500. Local dev (real bolt:// endpoint)
-// still verifies and returns true.
-let _neo4jChecked = false;
-let _neo4jUp = false;
-let _neo4jCheckedAt = 0;
-const _NEO4J_PROBE_TTL_MS = 15_000;
-
-export function getNeo4j(): Driver {
-  if (!neo4jDriver) {
-    neo4jDriver = neo4j.driver(
-      process.env.NEO4J_URI || "bolt://localhost:7687",
-      neo4j.auth.basic(
-        process.env.NEO4J_USER || "neo4j",
-        process.env.NEO4J_PASSWORD || "password"
-      ),
-      {
-        disableLosslessIntegers: true,
-        // Fail fast instead of hanging a serverless function for the whole
-        // connection-timeout window when the endpoint is unreachable.
-        connectionTimeout: 3000,
-        maxConnectionLifetime: 30 * 60 * 1000,
-        maxTransactionRetryTime: 3000,
-      }
-    );
-  }
-  return neo4jDriver;
-}
-
-/**
- * Lazy, cached reachability check for Neo4j. Returns true when a Bolt
- * connection can be established; false (cached for a short TTL) otherwise.
- * Never throws. Used by the Zeal engine to degrade gracefully on serverless
- * where Neo4j is unreachable.
- */
-export async function isNeo4jReachable(): Promise<boolean> {
-  const now = Date.now();
-  if (_neo4jChecked && now - _neo4jCheckedAt < _NEO4J_PROBE_TTL_MS) {
-    return _neo4jUp;
-  }
-  const driver = getNeo4j();
-  try {
-    await driver.verifyConnectivity();
-    _neo4jUp = true;
-  } catch {
-    _neo4jUp = false;
-  }
-  _neo4jChecked = true;
-  _neo4jCheckedAt = now;
-  return _neo4jUp;
-}
 
 /**
  * Minimal Redis surface used across the app, so the backing client can be
@@ -236,13 +180,19 @@ export async function getAllUsers() {
 export async function addNewsletterSubscriber(email: string, active = true) {
   try {
     const sb = getServiceClient();
+    // Called with active=false to stake out a "pending confirmation" row
+    // before the double opt-in email is confirmed, and with the active=true
+    // default once confirmed. Deliberately never sets `unsubscribed_at`
+    // here — that column means "this person explicitly opted out" and is
+    // owned exclusively by removeNewsletterSubscriber(). Setting it for a
+    // brand-new pending signup would make anyone who hasn't clicked the
+    // confirmation link yet indistinguishable from a real unsubscribe.
     await sb.from("newsletter_subscribers").upsert(
       {
         email,
         active,
         subscribed_at: new Date().toISOString(),
-        resubscribed_at: active ? new Date().toISOString() : null,
-        unsubscribed_at: active ? null : new Date().toISOString(),
+        ...(active ? { resubscribed_at: new Date().toISOString(), unsubscribed_at: null } : {}),
       },
       { onConflict: "email" }
     );

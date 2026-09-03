@@ -137,10 +137,14 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 
   /* Heads — center-aligned on mobile by default; .text-left headings (explicit left-align design intent) are exempted */
   h1:not(.text-left), h2:not(.text-left), h3:not(.text-left), h4:not(.text-left) { text-align: center !important; }
-  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: 95% !important; }
-  h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: 90% !important; }
-  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: 85% !important; }
-  h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: 80% !important; }
+  /* overflow-wrap/word-break: a long single word (e.g. "PHOTOSHOOT" after the
+     uppercase transform) can be wider than the heading's own box at these
+     mobile font sizes; without this it silently overflows past the edge and
+     gets clipped by body's overflow-x:hidden instead of wrapping. */
+  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: 95% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
+  h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: 90% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
+  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: 85% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
+  h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: 80% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
   p { font-size: 14px; }
 
   /* H1 adjacent text — no line spacing with H1 (tags/accents) */
