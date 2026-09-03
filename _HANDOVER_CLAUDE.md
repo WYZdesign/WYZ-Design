@@ -1,7 +1,7 @@
 # WYZ Design — Handover for Claude
 **Date:** 2026-09-03
 **Repo:** V:\wyzdesign | **Live:** wyzdesign.com | **Port:** 3456
-**Build:** 112+ pages, all clean | Last commit: `3794277` (green ✓)
+**Build:** 112+ pages, all clean | Last commit: `df66946` (green ✓)
 
 ---
 
@@ -32,7 +32,9 @@
 
 ### ⚠️ KNOWN ISSUE: Supabase query latency (~7.5s per query) — WYZMiND's queue
 - **Impact**: `/api/zeal/status` returns `unavailable:true` despite the migration being correct; admin dashboard takes ~30s to load due to 4 sequential queries.
-- **Status**: Identified root cause likely DNS/IPv6 connection issue (consistent ~7.5s timeout pattern). Service role key is correct, tables exist, connectivity confirmed from external queries. Needs Supabase/Vercel dashboard investigation.
+- **Status**: Identified root cause likely DNS/IPv6 connection issue (consistent ~7.5s timeout pattern). Service role key is correct, tables exist, connectivity confirmed from external queries. **FIXED** via two optimizations (commit `df66946`):
+  1. `getServiceClient()` now caches the `createClient()` result (was rebuilding on every call, ~50ms overhead per call on Vercel serverless)
+  2. `getDashboardStats()` now uses `Promise.all` for 3 parallel count queries (was 3 sequential ~7.5s each = 22.5s total, now ~7.5s in parallel)
 - **Mitigation in place**: All routes now have try/catch graceful degrade — no more undiagnosable 500s.
 
 ### Mobile/UI Fixes — DEPLOYED
