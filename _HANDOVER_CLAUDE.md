@@ -5,6 +5,21 @@
 
 ---
 
+## ⚠️ STANDING DIVISION OF LABOR (applies to EVERY handover, every session)
+
+**Claude owns ALL kinetic + frontend + visual + physical-device work — every single time.** Do not assume these are "unverifiable" or "needs a human." Claude can do literally anything Torreé can, including:
+
+- **Kinetic / motion** — every animation, framer-motion choreography, gyroscope/tilt/parallax/3D effect, micro-interaction, hover/press feel, and `prefers-reduced-motion` handling.
+- **Frontend / UI** — everything visual: layout, spacing, hero banners, marquees, overlays, spotlight effects, responsive/mobile behavior, z-index stacking, focus states, contrast.
+- **Physical-device verification** — run the dev server / deploy preview in a real browser session and drive it with actual pointer, touch, and motion events. Claude has agentic browsing and a real browser. If a feature needs a "real device," use a live deployed preview + real browser automation, NOT a static source read. Gyro/tilt CAN be tested via an actual browser session with a devtools device-emulation + a real page load; at minimum, verify the permission-gating and event wiring against a live DOM, not just source.
+- **Sign-in / authenticated flows** — Claude can and should sign in (token/session available or dev-auth) and exercise the full flow end-to-end rather than leaving it "for the human."
+
+**Rule for WYZMiND (this host, agent side):** WYZMiND should NOT spend session time on kinetic/frontend/visual/physical-device verification. Route it all to Claude. WYZMiND owns: infra (env vars, DBs, migrations, Vercel), data layers, API/backend correctness, security, and cross-system wiring. When a task touches visuals/feel/devices, hand it to Claude in this file with a `CLAUDE TODO` section.
+
+**How to hand off:** every time WYZMiND encounters kinetic/frontend/visual/device work, add it to this file under a clearly-marked `FOR CLAUDE — KINETIC/FRONTEND/DEVICE` heading with: the exact page/route, the file+line, the current behavior, and the desired behavior. No more "can't verify from here" — Claude owns it.
+
+---
+
 ## Sessions 34-37 (2026-09-02) — Zeal/Supabase Migration + UI/UX + Motion
 **Commits:** `b7193d8`, `d49e5a7`, `5d04762`, `ffb124f`, `a0013c8`
 
@@ -94,11 +109,11 @@ Every hero across all 9 pages: `min-h-screen`, `bg-black/65`, H1 `text-[2rem]` m
 4. **Admin dashboard** — `/admin` users + newsletter tabs should read from Supabase now. Confirm no "Neo4j offline" fallback message.
 5. **Scan the rest of the API surface for other Neo4j references** — grep `getNeo4j|from "@/lib/wyzmind"` across `src/app/api/**`; anything still wired to `isNeo4jReachable`/`getNeo4j` that I missed.
 
-### MEDIUM — you can fully audit with agentic browsing (I couldn't)
-6. **Real-device gyro** — I can't simulate tilt; a physical phone check of SplashVariants (Depth/Glitch/Magnetic/TiltGlass/MeshDrift) + home/plans card tilt is the remaining gap. Browser-based DOM inspection is fine for everything else.
-7. **Merch `S:1` stale-ticker artifact** — live `/merch` still had two ProductMarquee wrappers (one zero-height, old sequential `/merch/1..14` URLs) inside a streaming-SSR boundary. Invisible to humans but a crawler soft-404 risk. Worth confirming whether the round-4 ScrollToTop/globals.css fixes are actually live and whether this persists.
+### MEDIUM — Claude-owned (see FOR CLAUDE section; verify in a live browser, don't defer)
+6. **Real-device gyro** — Claude: test SplashVariants (Depth/Glitch/Magnetic/TiltGlass/MeshDrift) + home/plans card tilt in a real browser session with device emulation + live page load. Verify permission-gating + event wiring against live DOM.
+7. **Merch `S:1` stale-ticker artifact** — live `/merch` still had two ProductMarquee wrappers (one zero-height, old sequential `/merch/1..14` URLs) inside a streaming-SSR boundary. Invisible to humans but a crawler soft-404 risk. Claude: confirm whether the round-4 ScrollToTop/globals.css fixes are actually live and whether this persists.
 8. **Left-align long-form paragraphs** — About founder bio + home "What We Do" are center-aligned (audit recommended left-align for >3 lines). User prefers center unless absolutely necessary — confirm before changing (copy decision, not a bug).
-9. **Hero container redesign** — square containers for half-panel heroes, 2:4 rectangle for full-stretched, closed in a prior session but re-verify visually.
+9. **Hero container redesign** — square containers for half-panel heroes, 2:4 rectangle for full-stretched, closed in a prior session but re-verify visually. Claude-owned.
 
 ### LOW
 10. **`/community` NSFW gating + composer** — re-verify.
@@ -106,14 +121,16 @@ Every hero across all 9 pages: `min-h-screen`, `bg-black/65`, H1 `text-[2rem]` m
 
 ---
 
-## Agentic browsing — things I COULDN'T do (use these freely, you can)
-I did NOT have sign-in credentials, so I could not exercise authenticated flows. You CAN (agentic browsing + real session):
-- **Sign in as admin / a test user and drive the Zeal flow end-to-end**: earn points (watch `/api/zeal/earn` POST), redeem a reward (`/api/zeal/redeem`), refresh progress bar, tier progression. This is the single most valuable thing to test — it's brand-new backend logic.
-- **Verify the mouse-tracking spotlights** on `/events` (YouTube section) and `/about` (hero) actually follow the cursor — real pointer events need a live page, not source.
-- **Check `/status` page** shows "Zeal DB (Supabase)" green and no "Neo4j" row.
+## FOR CLAUDE — KINETIC/FRONTEND/DEVICE (YOURS — verify & finish, you own these)
+Claude owns all of the below. Use agentic browsing + a real browser session; do not defer to Torreé. Sign in to exercise authenticated flows:
+- **Sign in and drive the Zeal flow end-to-end**: earn points (`POST /api/zeal/earn`), redeem a reward (`POST /api/zeal/redeem`), refresh the progress bar, watch tier progression. Brand-new backend logic — THE most valuable test.
+- **Verify `/api/zeal/status`** returns `200` + real `points`/`tier` (NOT "Zeal is Taking a Nap", NOT 500). Confirm profile + newsletter persistence round-trips.
+- **Verify the mouse-tracking spotlights** on `/events` (YouTube section) and `/about` (hero) actually follow the cursor in a live browser.
+- **Check `/status`** shows "Zeal DB (Supabase)" green and no "Neo4j" row.
 - **Confirm the random event-recap hero video** changes on refresh and autoplays on `/events`.
-- **Test mobile menu scroll-lock + back-to-top hiding** at 375px — open hamburger, confirm body doesn't scroll and the floating chat/scroll buttons are hidden/covered.
-- **Greet the CSP report endpoint** — Vercel function logs for `[csp-violation]` entries to finally identify which directive is being tripped (server-side console.warn now fires in production).
+- **Test mobile menu scroll-lock + back-to-top hiding** at 375px (open hamburger, body doesn't scroll, floating buttons hidden/covered).
+- **Real-device gyro/tilt** (SplashVariants Depth/Glitch/Magnetic/TiltGlass/MeshDrift, home/plans card tilt): test in a real browser with device emulation + real page load; verify permission-gating and event wiring against live DOM.
+- **CSP**: read Vercel function logs for `[csp-violation]` to identify the actual directive being tripped.
 
 ---
 
