@@ -342,7 +342,7 @@ function MerchCarousel({ products }: { products: Product[] }) {
                <SafeImage src={p.image} alt={p.name} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <h3 className="font-heading font-bold text-[12px] tracking-[0.05em] uppercase text-white">{p.name}</h3>
+                <h3 className="font-heading font-bold text-size-12 tracking-[0.05em] uppercase text-white">{p.name}</h3>
               </div>
             </div>
           </Link>
@@ -365,7 +365,7 @@ function ProductMarquee({ products }: { products: Product[] }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
               <div className="w-full text-center">
-                <h4 className="font-heading font-bold text-white text-[11px] tracking-[0.05em] uppercase truncate">{p.name}</h4>
+                <h4 className="font-heading font-bold text-white text-size-11 tracking-[0.05em] uppercase truncate">{p.name}</h4>
                 <span className="text-[#DF3131] font-bold text-[13px]">${p.price.toFixed(2)}</span>
               </div>
             </div>
@@ -440,7 +440,7 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
           </div>
           <div className="text-center px-1">
             <p className="text-[10px] text-[#666] font-bold tracking-[0.12em] uppercase .5 mb-2">{product.category}</p>
-            <h3 className="text-[9px] sm:text-[10px] font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
+            <h3 className="text-size-9 font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">${product.price.toFixed(2)}</p>
           </div>
           {product.rating && (

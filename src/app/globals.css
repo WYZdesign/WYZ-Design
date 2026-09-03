@@ -147,6 +147,28 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: 80% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
   p { font-size: 14px; }
 
+  /* The big-hero-heading rules above assume every h1/h2/h3 is a page title.
+     That's wrong for small utility-style headings used as internal labels
+     (e.g. the admin dashboard's section headers) — without this, a 15px
+     admin label was being forced up to 40px, overflowing its box and
+     getting cut off by its own text-ellipsis/truncate class. Scope those
+     screens with .admin-shell so their own font-weight/tracking/size wins;
+     the .text-size-N utilities below restore each heading's intended size. */
+  .admin-shell h1, .admin-shell h2, .admin-shell h3 {
+    font-weight: 700 !important;
+    letter-spacing: normal !important;
+    max-width: none !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+  .text-size-9 { font-size: 9px !important; }
+  .text-size-11 { font-size: 11px !important; }
+  .text-size-12 { font-size: 12px !important; }
+  .text-size-13 { font-size: 13px !important; }
+  .text-size-15 { font-size: 15px !important; }
+  .text-size-24 { font-size: 24px !important; }
+  .text-size-28 { font-size: 28px !important; }
+
   /* H1 adjacent text — no line spacing with H1 (tags/accents) */
   h1 + p, h1 + span, h1 + div > p,
   p + h1, span + h1, div > p + h1,

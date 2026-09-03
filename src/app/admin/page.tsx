@@ -110,7 +110,7 @@ export default function AdminDashboard() {
   if (!session) return <AccountAuth />;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex">
+    <div className="admin-shell min-h-screen bg-[#0a0a0a] text-white flex">
       <style>{ADMIN_STYLES}</style>
       {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={() => setSidebarOpen(false)} />}
       <aside className={`fixed inset-y-0 left-0 z-40 bg-[#111] border-r border-white/10 transition-all duration-300 flex flex-col w-72 -translate-x-full lg:translate-x-0 lg:w-16 ${sidebarOpen ? "translate-x-0 lg:w-72" : ""}`}>
@@ -150,7 +150,7 @@ export default function AdminDashboard() {
             <button className="lg:hidden w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors shrink-0" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
               <FiMenu className="w-5 h-5" />
             </button>
-            <h1 className="text-[15px] font-heading font-bold tracking-[0.12em] uppercase text-white/60 truncate">
+            <h1 className="text-size-15 font-heading font-bold tracking-[0.12em] uppercase text-white/60 truncate">
               {NAV_SECTIONS.flatMap(s => s.items).find(i => i.id === tab)?.label || tab}
             </h1>
           </div>
@@ -203,7 +203,7 @@ function KpiCard({ label, value, color, icon, format }: { label: string; value: 
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-[12px] font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-3 mt-6">{children}</h3>;
+  return <h3 className="text-size-12 font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-3 mt-6">{children}</h3>;
 }
 
 function Empty({ children }: { children: React.ReactNode }) {
@@ -237,10 +237,10 @@ function AccountAuth() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 py-12">
+    <main className="admin-shell min-h-screen bg-[#0a0a0a] flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-[28px] font-heading font-bold text-white">Sign In</h1>
+          <h1 className="text-size-28 font-heading font-bold text-white">Sign In</h1>
           <p className="text-white/60 text-[14px] mt-2">Sign in to access your WYZ Design account and rewards.</p>
         </div>
 
@@ -364,7 +364,7 @@ function ProfileTab({ session, update, signOut }: { session: import("next-auth")
       </div>
 
       <div className="bg-white/5 border border-white/10 p-6 mb-6">
-        <h3 className="text-[12px] font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-4">Account Actions</h3>
+        <h3 className="text-size-12 font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-4">Account Actions</h3>
         <div className="grid grid-cols-2 gap-3">
           <ProfileActionLink href="/plans" label="View Plans" icon={<FiFileText className="w-4 h-4" />} />
           <ProfileActionLink href="/booking-calendar/photoshoot" label="Book a Shoot" icon={<FiCamera className="w-4 h-4" />} />
@@ -451,7 +451,7 @@ function BugReportTab({ session }: { session: import("next-auth").Session | null
     <div className="max-w-2xl">
       <div className="bg-white/5 border border-white/10 p-6">
         <button onClick={() => setOpen(!open)} className="flex items-center justify-between w-full">
-          <h3 className="flex items-center gap-2 text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/80"><FiAlertCircle className="w-4 h-4 text-[#DF3131]" /> Report a Bug / Issue</h3>
+          <h3 className="flex items-center gap-2 text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/80"><FiAlertCircle className="w-4 h-4 text-[#DF3131]" /> Report a Bug / Issue</h3>
           {open ? <FiChevronUp className="w-5 h-5 text-white/50" /> : <FiChevronDown className="w-5 h-5 text-white/50" />}
         </button>
         {open && (
@@ -502,7 +502,7 @@ function BugReportTab({ session }: { session: import("next-auth").Session | null
 }
 
 function NotAuthorized() {
-  return <div className="text-center py-20"><h2 className="text-[24px] font-heading font-bold text-[#EA4335] mb-2">Access Denied</h2><p className="text-white/60 text-[13px]">Your account does not have admin privileges.</p></div>;
+  return <div className="text-center py-20"><h2 className="text-size-24 font-heading font-bold text-[#EA4335] mb-2">Access Denied</h2><p className="text-white/60 text-[13px]">Your account does not have admin privileges.</p></div>;
 }
 
 // ─── OVERVIEW ───
@@ -1269,7 +1269,7 @@ function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClos
 
   return (
     <form onSubmit={handleSubmit} className="bg-white/5 border border-white/10 p-6 space-y-4">
-      <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60">{type === "income" ? "Log Income" : "Log Expense"}</h3>
+      <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60">{type === "income" ? "Log Income" : "Log Expense"}</h3>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
           <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Date</label>
@@ -1438,7 +1438,7 @@ function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRefresh: (
 
       {/* Gated Categories */}
       <div className="bg-white/5 border border-white/10 p-6">
-        <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Gated Categories</h3>
+        <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Gated Categories</h3>
         <div className="flex flex-wrap gap-2">
           {gatedCategories.map(cat => (
             <span key={cat} className="px-3 py-1.5 bg-[#DF3131]/10 border border-[#DF3131]/30 text-[#DF3131] text-[11px] font-heading font-bold tracking-[0.05em] uppercase">
@@ -1455,7 +1455,7 @@ function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRefresh: (
       {/* Scan Results */}
       <div className="bg-white/5 border border-white/10 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60">Scan Results</h3>
+          <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60">Scan Results</h3>
           <button onClick={onRefresh} className="text-[11px] text-white/40 hover:text-white/60 transition-colors font-heading font-bold tracking-[0.05em] uppercase">
             Refresh
           </button>
@@ -1502,7 +1502,7 @@ function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRefresh: (
 
       {/* Verified Users */}
       <div className="bg-white/5 border border-white/10 p-6">
-        <h3 className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Age-Verified Users</h3>
+        <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Age-Verified Users</h3>
         {verifiedUsers.length === 0 ? (
           <p className="text-[12px] text-white/30">No users have verified age yet.</p>
         ) : (

@@ -69,9 +69,28 @@ CREATE TABLE IF NOT EXISTS newsletter_subscribers (
 CREATE INDEX IF NOT EXISTS idx_newsletter_subscribers_active ON newsletter_subscribers(active);
 
 -- ═══════════════════════════════════════════════════════════════
--- 5. Row Level Security — service role bypasses RLS, but lock these
+-- 5. form_submissions — canonical store for all form submissions
+--    (contact/booking/model-application/etc.). The /api/forms route and
+--    the /api/admin overview both read/write this table; it was missing
+--    from the schema, so submissions were silently dropped and admin
+--    showed 0 forms.
+-- ═══════════════════════════════════════════════════════════════
+CREATE TABLE IF NOT EXISTS form_submissions (
+  id           TEXT PRIMARY KEY,
+  form_type    TEXT NOT NULL,
+  data         JSONB NOT NULL DEFAULT '{}'::jsonb,
+  submitted_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  ip           TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_form_submissions_submitted_at ON form_submissions(submitted_at DESC);
+CREATE INDEX IF NOT EXISTS idx_form_submissions_form_type ON form_submissions(form_type);
+
+-- ═══════════════════════════════════════════════════════════════
+-- 6. Row Level Security — service role bypasses RLS, but lock these
 --    down so the anon/publishable key can never read/write them.
 --    (Data is only ever read/written server-side via the service role.)
+-- ═══════════════════════════════════════════════════════════════
+ALTER TABLE form_submissions ENABLE ROW LEVEL SECURITY;
 -- ═══════════════════════════════════════════════════════════════
 ALTER TABLE zeal_users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE loyalty_transactions ENABLE ROW LEVEL SECURITY;

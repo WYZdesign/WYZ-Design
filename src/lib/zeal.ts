@@ -289,6 +289,11 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
   if (!locked) return { success: false, error: "Busy, try again", busy: true };
   try {
     return await earnZealLocked(email, actionId, def, { localHour: opts?.localHour, normalizedPath });
+  } catch (e) {
+    // Degrade gracefully instead of throwing — the store (Supabase) may be
+    // unreachable from serverless. Mirrors getZealStatus' unavailable signal.
+    logger.error("zeal:earn", e);
+    return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
   } finally {
     await releaseUserLock(email);
   }
@@ -537,6 +542,11 @@ export async function redeemZeal(email: string, rewardId: string): Promise<Redee
 
     const updated = await loadUserState(email);
     return { success: true, code, title: reward.title, remaining: updated.points };
+  } catch (e) {
+    // Degrade gracefully instead of throwing — the store (Supabase) may be
+    // unreachable from serverless. Mirrors getZealStatus' unavailable signal.
+    logger.error("zeal:redeem", e);
+    return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
   } finally {
     await releaseUserLock(email);
   }
