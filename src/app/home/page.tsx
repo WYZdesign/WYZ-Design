@@ -1213,10 +1213,10 @@ export default function HomePage() {
  { title: "We Actually Do the Work", body: "We show up, we shoot, we design, we build. No outsourcing to strangers. No passing you around to three different people who don't talk to each other.", color: "#DF3131", icon: FiZap },
  { title: "Good Work Costs What It Costs", body: "We don't work for exposure, good vibes, or vague promises of future referrals. Creativity is real work. Real work earns real money. We also have accessible options for artists just getting started.", color: "#D49341", icon: FiAward },
   { title: "Fast, But Never Sloppy", body: "We move quick because we know what we're doing. But nothing leaves the desk looking rushed, generic, or like someone stopped caring halfway through.", color: "#888888", icon: FiTrendingUp },
- ].map((c, i) => {
+ ].map((c) => {
  const Icon = c.icon;
   return (
-    <CardTilt intensity={10}>
+    <CardTilt key={c.title} intensity={10}>
     <ScrollParallaxCard tiltAmount={4} scaleAmount={1.03}>
     <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-6 sm:p-8 lg:p-12 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1 min-h-[320px] sm:min-h-[360px] flex flex-col justify-center">
   <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />

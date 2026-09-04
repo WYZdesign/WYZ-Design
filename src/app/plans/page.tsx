@@ -357,7 +357,7 @@ export default function PlansPage() {
              </h2>
              {/* Mobile: stacked cards */}
              <div className="lg:hidden space-y-4">
-               {["Starter Pack", "Business Boost", "Pro Plus", "Ultimate Suite"].map((plan, pi) => {
+               {["Starter Pack", "Business Boost", "Pro Plus", "Ultimate Suite"].map((_, pi) => {
                  const p = PLANS[pi];
                  return (
                    <div key={p.name} className={`border rounded-xl p-4 ${p.popular ? "border-[#DF3131]" : "border-[#E2E2E2] dark:border-[#444]"}`}>

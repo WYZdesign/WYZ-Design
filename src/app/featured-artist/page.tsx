@@ -87,7 +87,7 @@ function ArtistGallery() {
  <button onClick={() => flip(-1)} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"‹"}</button>
  <button onClick={() => flip(1)} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"›"}</button>
   <div className="mt-3 flex gap-2 justify-center">
-  {ARTIST_GALLERY.map((g, i) => (
+  {ARTIST_GALLERY.map((_, i) => (
   <button key={i} onClick={() => { setDir(i > current ? 1 : -1); setFlipping(true); setTimeout(() => { setCurrent(i); setFlipping(false); }, 350); }}
   className={`w-[8px] h-[8px] sm:w-2 sm:h-2 lg:w-[10px] lg:h-[10px] rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} />
   ))}

@@ -41,7 +41,7 @@ const ALL_SERVICES_RAW = [
  { cat: "Web Design", name: "Website Redesign", price: "$350", dur: "3 HR", desc: "Modernize your existing site with fresh design and improved performance.", img: "/images/services/SEO.jpg", bookLink: "/booking" },
 ];
 
-function ServiceCard({ service, index }: { service: typeof ALL_SERVICES_RAW[0]; index: number }) {
+function ServiceCard({ service }: { service: typeof ALL_SERVICES_RAW[0] }) {
  const [flipped, setFlipped] = useState(false);
  const canHover = useRef(false);
  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
@@ -217,8 +217,8 @@ return (
     </div>
   }>
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 lg:gap-6 lg:mb-6">
-  {filtered.map((s, i) => (
-  <ServiceCard key={s.name} service={s} index={i} />
+  {filtered.map((s) => (
+  <ServiceCard key={s.name} service={s} />
   ))}
   </div>
   </ErrorBoundary>
