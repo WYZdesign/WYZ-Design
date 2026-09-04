@@ -324,7 +324,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
 
       </head>
-      <body className="min-h-full flex flex-col bg-white dark:bg-[#1C1C1E] text-[#333333] dark:text-[#e0e0e0] antialiased lg:cursor-none max-lg:cursor-auto" style={{ scrollbarGutter: "stable" }}>
+      <body className="min-h-full flex flex-col bg-white dark:bg-[#1C1C1E] text-[#333333] dark:text-[#e0e0e0] antialiased" style={{ scrollbarGutter: "stable" }}>
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
           <AuthProvider>
@@ -358,26 +358,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }
           const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
           const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          if (isTouch || prefersReducedMotion) {
-            document.body.classList.remove('cursor-none');
-            document.body.style.cursor = 'auto';
-          }
-          // P3: WCAG violation - cursor-none hides system cursor breaking keyboard 
-          // navigation. Only hide cursor on large screens with mouse input when 
-          // custom cursor is active. Touch and reduced-motion users get system cursor.
-          document.addEventListener('DOMContentLoaded', () => {
+          // WCAG 2.1.1 fix: cursor-none used to be a bare CSS media-query rule
+          // (hover:hover + pointer:fine) with !important, so it applied purely
+          // based on "a mouse is present" and could never be turned back off by
+          // a plain inline style once a keyboard-only user started tabbing on a
+          // desktop with a mouse attached. It's now gated by this 'using-mouse'
+          // class (see globals.css) so real mouse movement is required, and a
+          // Tab press always restores the native cursor + focus ring.
+          document.addEventListener('mousemove', () => {
             if (!isTouch && !prefersReducedMotion && window.innerWidth >= 1024) {
-              document.body.style.cursor = 'none';
-            }
-          });
-          document.addEventListener('mousemove', (e) => {
-            if (!isTouch && !prefersReducedMotion && window.innerWidth >= 1024) {
-              document.body.style.cursor = 'none';
+              document.body.classList.add('using-mouse');
             }
           });
           document.addEventListener('keydown', (e) => {
             if (e.key === 'Tab') {
-              document.body.style.cursor = 'auto';
+              document.body.classList.remove('using-mouse');
             }
           });
         `}} />

@@ -10,25 +10,23 @@ interface GdriveFile {
 }
 
 export default function PageRenderer() {
- const [html, setHtml] = useState("");
- const [page, setPage] = useState("");
- const [loading, setLoading] = useState(true);
- const [editMode, setEditMode] = useState(false);
- const [pickerOpen, setPickerOpen] = useState(false);
- const [pickerSlot, setPickerSlot] = useState("");
- const [gdrive, setGdrive] = useState<GdriveFile[]>([]);
- const [gdriveFilter, setGdriveFilter] = useState("Pictures");
- const [gdriveSearch, setGdriveSearch] = useState("");
- const [gdrivePage, setGdrivePage] = useState(0);
- const [showUpload, setShowUpload] = useState(false);
- const fileRef = useRef<HTMLInputElement>(null);
- const contentRef = useRef<HTMLDivElement>(null);
- const PER = 18;
+  const [html, setHtml] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [editMode, setEditMode] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerSlot, setPickerSlot] = useState("");
+  const [gdrive, setGdrive] = useState<GdriveFile[]>([]);
+  const [gdriveFilter, setGdriveFilter] = useState("Pictures");
+  const [gdriveSearch, setGdriveSearch] = useState("");
+  const [gdrivePage, setGdrivePage] = useState(0);
+  const [showUpload, setShowUpload] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const PER = 18;
 
- useEffect(() => {
- const p = window.location.pathname.replace("/", "") || "home";
- setPage(p);
- document.title = getTitle(p);
+  useEffect(() => {
+  const p = window.location.pathname.replace("/", "") || "home";
+  document.title = getTitle(p);
  fetch(`/api/pages?page=${p}`).then(r => r.json()).then(d => {
  if (d.exists) { setHtml(d.html); setLoading(false); }
  else if (d.html) {

@@ -326,6 +326,7 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
   playsInline
   preload="auto"
   className="w-full h-full object-cover"
+  onLoadedMetadata={(e) => { e.currentTarget.currentTime = 7; }}
   onPlay={() => markRecapPlayed(earn)}
   onEnded={() => { if (!flipping) flip(1); }}
   />
@@ -463,7 +464,12 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  data-video-id={v.title}
  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
  ref={(el) => { if (el) { el.volume = 0.3; } }}
- onMouseEnter={(e) => { const vid = e.target as HTMLVideoElement; vid.play().catch(() => {}); }}
+ onLoadedMetadata={(e) => { e.currentTarget.currentTime = 7; }}
+ onMouseEnter={(e) => {
+  const vid = e.target as HTMLVideoElement;
+  if (vid.readyState >= 1) vid.currentTime = 7;
+  vid.play().catch(() => {});
+ }}
  onMouseLeave={(e) => { const vid = e.target as HTMLVideoElement; vid.pause(); }}
  />
  <button
@@ -508,10 +514,13 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
     { color: "#FF8080" },
   ];
 
-  const LogoItem = ({ color, idx }: { color: string; idx: number }) => {
+  const LogoItem = ({ color, col, row }: { color: string; col: number; row: number }) => {
+    // col/row map this logo's actual on-screen grid position (0-1 in each axis) so the
+    // spotlight proximity is measured against where the item really sits, not a flattened
+    // index that ignored which of the 8 marquee rows it was in.
     const dist = Math.sqrt(
-      Math.pow((idx % 8) / 7 - mousePos.x, 2) +
-      Math.pow(Math.floor(idx / 8) / 5 - mousePos.y, 2)
+      Math.pow((col % 8) / 7 - mousePos.x, 2) +
+      Math.pow(row / 7 - mousePos.y, 2)
     );
     const proximity = isHovering ? Math.max(0, 1 - dist * 1.5) : 0;
     const glow = proximity * 0.6;
@@ -555,45 +564,45 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
     }}
   />
 
-  <div className="absolute inset-0 z-10 flex flex-col justify-center gap-6 opacity-40">
+  <div className="absolute inset-0 z-10 flex flex-col justify-between gap-6 py-8 opacity-40">
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left">
-      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} idx={i} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r1-${i}`} color={logo.color} col={i} row={0} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right">
-      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} idx={i + 48} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r2-${i}`} color={logo.color} col={i} row={1} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left-fast">
-      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} idx={i + 96} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r3-${i}`} color={logo.color} col={i} row={2} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right">
-      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r4-${i}`} color={logo.color} idx={i + 144} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r4-${i}`} color={logo.color} col={i} row={3} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left">
-      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r5-${i}`} color={logo.color} idx={i + 192} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r5-${i}`} color={logo.color} col={i} row={4} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right-fast">
-      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r6-${i}`} color={logo.color} idx={i + 240} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r6-${i}`} color={logo.color} col={i} row={5} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-left">
-      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r7-${i}`} color={logo.color} idx={i + 288} />))}
+      {buildRow(ytRows, 8).map((logo, i) => (<LogoItem key={`r7-${i}`} color={logo.color} col={i} row={6} />))}
     </div>
   </div>
   <div className="overflow-hidden py-3">
     <div className="flex whitespace-nowrap animate-marquee-right">
-      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r8-${i}`} color={logo.color} idx={i + 336} />))}
+      {buildRow([...ytRows].reverse(), 8).map((logo, i) => (<LogoItem key={`r8-${i}`} color={logo.color} col={i} row={7} />))}
     </div>
   </div>
   </div>
@@ -634,6 +643,7 @@ VISIT CHANNEL
 
 
 export default function EventsPage() {
+  console.log("YT_DEBUG EventsPage render", typeof window === "undefined" ? "SERVER" : "CLIENT");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [modalVideo, setModalVideo] = useState<{ video: string; title: string } | null>(null);
   const [shuffled, setShuffled] = useState(ALL_EVENT_IMAGES);
@@ -705,14 +715,37 @@ export default function EventsPage() {
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
-{/* Desktop: video background */}
-    <div className="hidden md:block absolute inset-0 z-0">
-     <video key={heroVideo} src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "saturate(1.2) contrast(1.1)" }} />
-     <div className="absolute inset-0 bg-black/65 z-[1]" />
-    </div>
-    {/* Mobile: video merged */}
-    <div className="md:hidden absolute inset-0 z-0">
-     <video key={heroVideo} src={heroVideo} poster="/images/hero-diy-shows.jpg" autoPlay muted loop playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover" />
+{/* Single hero video — desktop and mobile previously rendered two separate
+    <video autoPlay> elements of the same file (one hidden via `hidden md:block`,
+    the other via `md:hidden`); both still downloaded/buffered regardless of
+    which was visible, doubling the bandwidth cost of every hero load. The only
+    real difference between them was the saturate/contrast filter, which now
+    applies at the md breakpoint via a plain CSS class instead of a second
+    element. */}
+    <div className="absolute inset-0 z-0">
+     <video
+      key={heroVideo}
+      src={heroVideo}
+      poster="/images/hero-diy-shows.jpg"
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      className="absolute inset-0 w-full h-full object-cover md:[filter:saturate(1.2)_contrast(1.1)]"
+      onLoadedMetadata={(e) => { e.currentTarget.currentTime = 7; }}
+      onTimeUpdate={(e) => {
+        // `loop` restarts silently at 0 without firing `ended`, so re-apply the
+        // 7s start point whenever a loop cycle brings it back near the top.
+        const vid = e.currentTarget;
+        if (vid.currentTime < 0.5 && vid.dataset.wzLooped !== "pending") {
+          vid.dataset.wzLooped = "pending";
+          vid.currentTime = 7;
+        } else if (vid.currentTime > 1) {
+          vid.dataset.wzLooped = "";
+        }
+      }}
+     />
      <div className="absolute inset-0 bg-black/65 z-[1]" />
     </div>
 {/* Text overlay */}

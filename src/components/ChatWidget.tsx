@@ -23,6 +23,13 @@ export default function ChatWidget() {
   const { earn } = useZeal();
   const [isOpen, setIsOpen] = useState(false);
   const [scrollHidden, setScrollHidden] = useState(false);
+  // Mirrors the fix in ScrollToTop.tsx: Navbar's mobile menu sets
+  // document.body.dataset.mobileOpen reactively off its own state, but that's
+  // a plain DOM read with nothing to make THIS component re-render when it
+  // changes — without it the chat bubble stayed fully visible/clickable right
+  // on top of the open mobile nav panel. A MutationObserver gives this
+  // component its own re-render trigger tied to the real DOM change.
+  const [bodyLocked, setBodyLocked] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hey! I'm the WYZ Design assistant. I can help you learn about our services, check pricing, or get you booked. How can I help today?" },
   ]);
@@ -51,6 +58,15 @@ export default function ChatWidget() {
       window.removeEventListener("scroll", handler);
       if (scrollTimerRef.current) clearTimeout(scrollTimerRef.current);
     };
+  }, []);
+
+  useEffect(() => {
+    const body = document.body;
+    const check = () => setBodyLocked(body.style.overflow === "hidden" || body.dataset.mobileOpen === "true");
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(body, { attributes: true, attributeFilter: ["style", "data-mobile-open"] });
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -143,7 +159,7 @@ export default function ChatWidget() {
         onClick={() => { if (!isOpen) void earn("open-chat"); setIsOpen(!isOpen); }}
         className={`fixed bottom-6 right-6 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 ${
           isOpen ? "bg-[#333] rotate-90" : "bg-[#DF3131] animate-pulse"
-        } ${!isOpen && scrollHidden ? "opacity-0 pointer-events-none translate-y-2" : ""}`}
+        } ${!isOpen && (scrollHidden || bodyLocked) ? "opacity-0 pointer-events-none translate-y-2" : ""}`}
         aria-label={isOpen ? "Close chat" : "Open chat assistant"}
       >
         {isOpen ? (

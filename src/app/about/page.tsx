@@ -28,7 +28,20 @@ export default function AboutPage() {
     <main className="pt-0">
       {/* HERO */}
       <ScrollReveal animation="fadeUp">
-        <section className="relative min-h-screen bg-[#111] overflow-hidden hero-banner">
+        <section
+          ref={heroRef}
+          className="relative min-h-screen bg-[#111] overflow-hidden hero-banner"
+          onMouseMove={(e) => {
+            const rect = heroRef.current?.getBoundingClientRect();
+            if (!rect) return;
+            setMousePos({
+              x: (e.clientX - rect.left) / rect.width,
+              y: (e.clientY - rect.top) / rect.height,
+            });
+          }}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <div className="absolute inset-0">
             <video autoPlay muted loop playsInline preload="auto"
               poster="/images/hero-about.jpg"
@@ -44,28 +57,28 @@ export default function AboutPage() {
             />
           </div>
           <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
-          {/* Crown logo marquee — interactive mouse reveal */}
+          {/* Crown logo marquee — interactive mouse reveal. The mouse
+              tracking used to be wired to onMouseMove on this row container
+              specifically; since the text/CTA layer above it (z-20) is a
+              SIBLING, not a descendant, hovering the text or a button never
+              bubbled into this handler and the spotlight would stop
+              responding there. It's now on the outer <section> instead, so
+              every layer's mouse movement counts. All 8 rows now use the
+              same "medium-slow" marquee speed (dropped the `-fast` variants
+              that were mixed in) while still alternating direction by row,
+              and `justify-between` spreads the 8 rows edge-to-edge across
+              the full section height instead of clumping them in the
+              vertical center with blank space above/below. */}
           <div
-            ref={heroRef}
-            className="absolute inset-0 z-10 flex flex-col justify-center gap-4"
-            onMouseMove={(e) => {
-              const rect = heroRef.current?.getBoundingClientRect();
-              if (!rect) return;
-              setMousePos({
-                x: (e.clientX - rect.left) / rect.width,
-                y: (e.clientY - rect.top) / rect.height,
-              });
-            }}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
+            className="absolute inset-0 z-10 flex flex-col justify-between gap-4 py-8"
           >
             {[
               "animate-marquee-left",
               "animate-marquee-right",
-              "animate-marquee-left-fast",
+              "animate-marquee-left",
               "animate-marquee-right",
               "animate-marquee-left",
-              "animate-marquee-right-fast",
+              "animate-marquee-right",
               "animate-marquee-left",
               "animate-marquee-right",
             ].map((dir, row) => (

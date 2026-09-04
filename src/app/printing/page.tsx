@@ -190,8 +190,12 @@ export default function PrintingPage() {
 {/* ── Hero: Split (desktop video/text, mobile merged) ── */}
   <ScrollReveal animation="fadeUp">
   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
-  {/* Desktop: split grid */}
-  <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
+  {/* Desktop: split grid. absolute inset-0 (not lg:h-full) so this sizes against the
+      hero section's actual rendered height even though that height comes from
+      min-h-screen rather than an explicit height — a plain height:100% can't resolve
+      against a min-height-only ancestor and collapses to content height instead,
+      which was leaving a large gap before the marquee below. */}
+  <div className="hidden lg:grid lg:grid-cols-2 absolute inset-0">
    <div className="relative h-full">
     <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} 
         poster="/images/hero-printing.jpg" />

@@ -221,10 +221,25 @@ export async function getNewsletterSubscribers() {
 
 export async function getDashboardStats() {
   const sb = getServiceClient();
-  const { count: totalUsers } = await sb.from("profiles").select("email", { count: "exact", head: true });
-  const { count: adminCount } = await sb.from("profiles").select("email", { count: "exact", head: true }).eq("role", "admin");
-  const { count: newsletterSubs } = await sb.from("newsletter_subscribers").select("email", { count: "exact", head: true }).eq("active", true);
-  return { totalUsers: totalUsers ?? 0, adminCount: adminCount ?? 0, newsletterSubs: newsletterSubs ?? 0 };
+  const [totalUsers, adminCount, newsletterSubs] = await Promise.all([
+    sb.from("profiles").select("email", { count: "exact", head: true }),
+    sb.from("profiles").select("email", { count: "exact", head: true }).eq("role", "admin"),
+    sb.from("newsletter_subscribers").select("email", { count: "exact", head: true }).eq("active", true),
+  ]);
+  return {
+    totalUsers: totalUsers.count ?? 0,
+    adminCount: adminCount.count ?? 0,
+    newsletterSubs: newsletterSubs.count ?? 0,
+  };
+}
+
+export async function getUserProfile(email: string) {
+  const sb = getServiceClient();
+  const { data, error } = await sb.from("profiles")
+    .select("email, name, role, bio, phone, website, avatar_url, instagram, facebook, provider, created_at")
+    .eq("email", email).maybeSingle();
+  if (error) { logger.error("[wyzmind:getUserProfile]", error.message); return null; }
+  return datum(data);
 }
 
 export async function getUserByEmail(email: string) {

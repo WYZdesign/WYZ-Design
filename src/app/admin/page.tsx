@@ -1332,7 +1332,6 @@ function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClos
 
 // ─── TRANSACTION TABLE ───
 function TransactionTable({ transactions, onRefresh }: { transactions: Transaction[]; onRefresh: () => void }) {
-  const [editing, setEditing] = useState<number | null>(null);
   const [filter, setFilter] = useState<"all" | "income" | "expense">("all");
   const filtered = filter === "all" ? transactions : transactions.filter(t => t.type === filter);
   const total = filtered.reduce((a, t) => a + t.amount, 0);

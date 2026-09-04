@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useRef, useMemo, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StrategyWizard from "@/components/StrategyWizard";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
-import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import TextSplit from "@/components/TextSplit";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { shuffleArray } from "@/lib/utils";
@@ -109,16 +108,10 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
  );
 }
 
-export default function ServicesPage() {
- const [active, setActive] = useState("All Services");
- const [hoveredTab, setHoveredTab] = useState<string | null>(null);
- const [allServices, setAllServices] = useState(ALL_SERVICES_RAW);
+ export default function ServicesPage() {
+  const [active, setActive] = useState("All Services");
 
- useEffect(() => {
-  setAllServices(shuffleArray(ALL_SERVICES_RAW));
- }, []);
-
- const filtered = active === "All Services" ? allServices : allServices.filter(s => s.cat === active);
+  const filtered = active === "All Services" ? ALL_SERVICES_RAW : ALL_SERVICES_RAW.filter(s => s.cat === active);
 
 return (
   <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
@@ -130,7 +123,7 @@ return (
   <ScrollReveal animation="fadeIn" duration={1.2}>
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
    {/* Desktop: split grid */}
-   <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
+   <div className="hidden md:grid md:grid-cols-2 absolute inset-0">
    <div className="relative h-full overflow-hidden">
     <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill className="w-full h-full object-cover" priority />
     <div className="absolute inset-0 bg-black/20" />
@@ -154,7 +147,7 @@ return (
    </div>
    </div>
    {/* Mobile: merged hero */}
-   <div className="lg:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
+   <div className="md:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
    <div className="absolute inset-0 z-0">
     <video src="/videos/hero-banners/photography.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
     <div className="absolute inset-0 bg-black/65 z-[1]" />

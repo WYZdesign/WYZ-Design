@@ -5,6 +5,7 @@ import { FiArrowUp } from "react-icons/fi";
 
 export default function ScrollToTop() {
   const [scrollY, setScrollY] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [hidden, setHidden] = useState(false);
 
@@ -22,8 +23,16 @@ export default function ScrollToTop() {
     };
   }, []);
 
-  const bodyLocked = typeof document !== "undefined" && (document.body.style.overflow === "hidden" || document.body.dataset.mobileOpen === "true");
-  const visible = scrollY > 400 && !bodyLocked;
+  useEffect(() => {
+    const checkMenu = () => {
+      const menu = document.querySelector('[data-mobile-menu="true"]');
+      setMenuOpen(!!menu && getComputedStyle(menu).display !== 'none');
+    };
+    const interval = setInterval(checkMenu, 100);
+    return () => clearInterval(interval);
+  }, []);
+
+  const visible = scrollY > 400 && !menuOpen;
 
   const scrollUp = () => window.scrollTo({ top: 0, behavior: "smooth" });
 

@@ -25,7 +25,7 @@ interface NsfwSessionState {
  * Checks Redis-backed age verification via API, shows modal when needed.
  */
 export function useNsfwSession(): NsfwSessionState {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [ageVerified, setAgeVerified] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);

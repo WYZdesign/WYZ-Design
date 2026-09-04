@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect, useCallback } from "react";
-import Image from "next/image";
+import { useState, useMemo, useRef, useEffect } from "react";
 import SafeImage from "@/components/SafeImage";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -276,15 +275,6 @@ function DynamicContentUnderShop() {
 function SquareQuote() {
   const ref = useRef<HTMLDivElement>(null);
   const [scrollOffset, setScrollOffset] = useState(0);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold: 0.2 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
 
   useEffect(() => {
     const handler = () => {
@@ -304,8 +294,10 @@ function SquareQuote() {
     <div className="max-w-4xl mx-auto px-6" ref={ref}>
       <div className="relative w-full overflow-hidden bg-[#111] border border-[#333]">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative h-64 md:h-auto">
-            <SafeImage src="/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg" alt="Featured Artist" className="w-full h-full object-cover" />
+          <div className="relative h-64 md:h-auto overflow-hidden">
+            <div className="absolute inset-0" style={{ transform: `translateY(${scrollOffset}px) scale(1.1)` }}>
+              <SafeImage src="/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg" alt="Featured Artist" className="w-full h-full object-cover" />
+            </div>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111]/80 hidden md:block" />
           </div>
           <div className="flex flex-col items-center justify-center text-center p-8 sm:p-12">
@@ -398,10 +390,12 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
     <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 md:gap-8 lg:gap-10 px-4">
       {products.map((product, i) => {
         const pos = positions[i] || { rotate: 0, offsetX: 0, offsetY: 0, scale: 1 };
+        const depth = (i % 3) - 1;
+        const parallaxY = scrollY * 0.02 * depth;
         return (
           <div key={product.id} className="group cursor-pointer" onClick={() => onSelect(product)}
             style={{
-              transform: `rotate(${pos.rotate}deg) translate(${pos.offsetX}px, ${pos.offsetY}px) scale(${pos.scale})`,
+              transform: `rotate(${pos.rotate}deg) translate(${pos.offsetX}px, ${pos.offsetY + parallaxY}px) scale(${pos.scale})`,
               transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
             }}>
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mb-3 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#DF3131]/20 transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-105">
@@ -633,8 +627,9 @@ export default function MerchPage() {
           <ScrollReveal animation="fadeUp">
             <p className="text-[11px] text-[#666] font-bold tracking-[0.2em] uppercase mb-2">Print-on-Demand via Printful</p>
             <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] tracking-[0.05em] mb-4">The Collection</h2>
-            <button onClick={handleToggleStore}
-              className={`group px-10 py-4 text-[13px] font-bold tracking-[0.15em] uppercase transition-all border-2 ${showStore ? "bg-[#DF3131] text-white border-[#DF3131]" : "bg-transparent text-[#333] border-[#333] hover:bg-[#333] hover:text-white"}`}>
+            <button onClick={handleToggleStore} disabled={portalAnimating}
+              style={portalAnimating ? { animation: "portalGlow 0.8s ease-in-out infinite" } : undefined}
+              className={`group px-10 py-4 text-[13px] font-bold tracking-[0.15em] uppercase transition-all border-2 disabled:cursor-wait ${showStore ? "bg-[#DF3131] text-white border-[#DF3131]" : "bg-transparent text-[#333] border-[#333] hover:bg-[#333] hover:text-white"}`}>
               {showStore ? "Hide Store" : "Enter Store"}
               {!showStore && (
                 <span className="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-1">
@@ -729,6 +724,53 @@ export default function MerchPage() {
           {showStore && storeVisible && (
             <div className="portal-enter stagger-1 relative z-10">
               <AccordionGallery />
+              {filteredProducts.length > 0 && (
+                <div className="max-w-[130rem] mx-auto px-6 lg:px-12 py-12">
+                  <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div className="flex flex-wrap items-center gap-2">
+                      {CATEGORIES.map((cat) => (
+                        <button key={cat} onClick={() => setActiveCategory(cat)}
+                          className={`px-4 py-2 text-[11px] font-bold tracking-[0.1em] uppercase transition-all border ${activeCategory === cat ? "bg-[#333] text-white border-[#333]" : "bg-white text-[#333] border-[#E2E2E2] hover:border-[#333]"}`}>
+                          {cat}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <div className="flex border border-[#E2E2E2] overflow-hidden">
+                        <button
+                          onClick={() => setStoreMode("grid")}
+                          aria-pressed={storeMode === "grid"}
+                          className={`px-3 py-2 text-[11px] font-bold tracking-[0.1em] uppercase transition-all ${storeMode === "grid" ? "bg-[#DF3131] text-white" : "bg-white text-[#333] hover:bg-[#f5f5f5]"}`}
+                        >
+                          Grid
+                        </button>
+                        <button
+                          onClick={() => setStoreMode("explore")}
+                          aria-pressed={storeMode === "explore"}
+                          className={`px-3 py-2 text-[11px] font-bold tracking-[0.1em] uppercase border-l border-[#E2E2E2] transition-all ${storeMode === "explore" ? "bg-[#DF3131] text-white" : "bg-white text-[#333] hover:bg-[#f5f5f5]"}`}
+                        >
+                          Explore
+                        </button>
+                      </div>
+                      <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value)}
+                        className="px-4 py-2 text-[11px] font-bold tracking-[0.1em] uppercase border border-[#E2E2E2] bg-white text-[#333] focus:outline-none focus:border-[#DF3131]"
+                      >
+                        {SORT_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {storeMode === "grid" ? (
+                    <ProductGrid products={filteredProducts} onSelect={(p) => { setSelectedProduct(p); setQuickColor(0); setQuickSize("M"); }} />
+                  ) : (
+                    <ScatteredGrid products={filteredProducts} onSelect={(p) => { setSelectedProduct(p); setQuickColor(0); setQuickSize("M"); }} />
+                  )}
+                </div>
+              )}
             </div>
           )}
           {!showStore && storeVisible && (

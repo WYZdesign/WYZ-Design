@@ -185,8 +185,12 @@ return (
       <main className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
         {/* ═══ HERO — Split (desktop video/text, mobile merged) ═══ */}
         <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
-        {/* Desktop split grid */}
-        <div className="hidden lg:grid lg:grid-cols-2 lg:h-full">
+        {/* Desktop split grid. absolute inset-0 (not lg:h-full) so this sizes against
+            the hero section's actual rendered height even though that height comes
+            from min-h-screen rather than an explicit height — a plain height:100%
+            can't resolve against a min-height-only ancestor and collapses to content
+            height instead, which was leaving a large gap before the marquee below. */}
+        <div className="hidden lg:grid lg:grid-cols-2 absolute inset-0">
           <div className="relative h-full">
             <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#DF3131]/20">
               <video autoPlay muted loop playsInline preload="metadata"
@@ -232,8 +236,8 @@ return (
           </div>
           <div className="absolute inset-0 bg-black/65 z-[1]" />
           <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 pt-32 lg:pt-40 text-center flex flex-col items-center justify-center h-full">
-            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block text-center mb-6 sm:mb-8">WYZ DESIGN - WEB DEVELOPMENT</span>
-            <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
+            <span className="!text-[8px] sm:!text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block text-center mb-6 sm:mb-8">WYZ DESIGN - WEB DEVELOPMENT</span>
+            <h1 className="!text-[1.7rem] sm:!text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
               WEBSITES<br />
               THAT <span className="text-[#DF3131]">WORK</span>
             </h1>
