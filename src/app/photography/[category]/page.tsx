@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import SafeImage from "@/components/SafeImage";
 import NsfwImage from "@/components/NsfwImage";
@@ -8,7 +8,7 @@ import { useNsfwSession } from "@/hooks/useNsfwSession";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { FiChevronLeft, FiX, FiChevronRight, FiLock } from "react-icons/fi";
+import { FiChevronLeft, FiX, FiChevronRight } from "react-icons/fi";
 import { NSFW_CATEGORIES } from "@/lib/nsfw-constants";
 const GATED_CATEGORIES = NSFW_CATEGORIES;
 
@@ -326,7 +326,7 @@ export default function CategoryPage() {
   const categoryKey = Object.keys(CATEGORY_ALBUMS).find(k => k.toLowerCase() === category.toLowerCase()) || category;
   const albums = CATEGORY_ALBUMS[categoryKey] || [];
   const isGated = GATED_CATEGORIES.some(g => g.toLowerCase() === category.toLowerCase());
- const { data: session, status } = useSession();
+ const { status } = useSession();
 
   // Auto-show age gate for NSFW categories when not verified
   useEffect(() => {

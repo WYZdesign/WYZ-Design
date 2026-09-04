@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
-import { updateUserProfile } from "@/lib/wyzmind";
+import { updateUserProfile, getUserProfile } from "@/lib/wyzmind";
 import { evaluateProfileAchievements } from "@/lib/zeal";
 import { validateCsrf } from "@/lib/csrf";
 import { logger } from "@/lib/logger";
@@ -9,6 +9,26 @@ const FIELD_MAX_LEN: Record<string, number> = {
   name: 100, bio: 500, phone: 20, website: 200,
   avatarUrl: 500, instagram: 100, facebook: 100,
 };
+
+/**
+ * Returns the authenticated user's own profile fields.
+ * @method GET
+ * @response JSON `{ user }`
+ * @auth Required — user must be authenticated
+ */
+export async function GET() {
+  try {
+    const session = await auth();
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+    const user = await getUserProfile(session.user.email);
+    return NextResponse.json({ user });
+  } catch (e: unknown) {
+    logger.error("profile:get", e);
+    return NextResponse.json({ error: "Failed to load profile" }, { status: 500 });
+  }
+}
 
 /**
  * Updates the authenticated user's profile fields in Neo4j.

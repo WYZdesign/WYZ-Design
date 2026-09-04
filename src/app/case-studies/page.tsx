@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
-import { FiTwitter, FiFacebook, FiLinkedin, FiLink2 } from "react-icons/fi";
+import { FiTwitter, FiFacebook, FiLinkedin, FiLink2, FiCheck } from "react-icons/fi";
 
 const SHARE_URL = "https://wyzdesign.com/case-studies";
 const SHARE_TEXT = "Check out WYZ Design case studies - real projects, real results.";
@@ -59,6 +60,16 @@ const CASE_STUDIES = [
 ];
 
 export default function CaseStudiesIndex() {
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  const copyShareLink = async () => {
+    try {
+      await navigator.clipboard.writeText(SHARE_URL);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    } catch { /* clipboard unavailable */ }
+  };
+
   return (
     <main className="bg-white dark:bg-[#111] min-h-screen pb-20">
       <ScrollReveal animation="fadeUp">
@@ -101,11 +112,15 @@ export default function CaseStudiesIndex() {
                   <ShareButton key={s.name} {...s} />
                 ))}
                 <button
-                  onClick={() => navigator.clipboard.writeText(SHARE_URL)}
-                  aria-label="Copy link"
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/60 hover:text-[#DF3131] hover:border-[#DF3131] transition-all hover:scale-110"
+                  onClick={copyShareLink}
+                  aria-label={linkCopied ? "Link copied" : "Copy link"}
+                  className={`w-10 h-10 flex items-center justify-center rounded-full border transition-all hover:scale-110 ${
+                    linkCopied
+                      ? "border-green-500 text-green-500"
+                      : "border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/60 hover:text-[#DF3131] hover:border-[#DF3131]"
+                  }`}
                 >
-                  <FiLink2 className="w-4 h-4" />
+                  {linkCopied ? <FiCheck className="w-4 h-4" /> : <FiLink2 className="w-4 h-4" />}
                 </button>
               </div>
             </div>

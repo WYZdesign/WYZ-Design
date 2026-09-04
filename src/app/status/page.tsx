@@ -91,7 +91,9 @@ export default async function StatusPage() {
   const services = [zealDb, supabase, stripe, redis];
 
   const commitSha = process.env.VERCEL_GIT_COMMIT_SHA || "unknown";
-  const buildTimestamp = new Date().toISOString();
+  // force-dynamic means this page re-renders per request, so this is the
+  // check time, not the actual build time -- labeled accordingly below.
+  const checkedAt = new Date().toISOString();
 
   return (
     <main className="min-h-screen bg-white dark:bg-[#1C1C1E] py-16 px-6">
@@ -125,8 +127,8 @@ export default async function StatusPage() {
           <dl className="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-4 gap-y-2 text-sm">
             <dt className="text-[#666] dark:text-white/50">Commit</dt>
             <dd className="text-[#333] dark:text-white font-mono break-all">{commitSha}</dd>
-            <dt className="text-[#666] dark:text-white/50">Build time (UTC)</dt>
-            <dd className="text-[#333] dark:text-white font-mono break-all">{buildTimestamp}</dd>
+            <dt className="text-[#666] dark:text-white/50">Checked at (UTC)</dt>
+            <dd className="text-[#333] dark:text-white font-mono break-all">{checkedAt}</dd>
           </dl>
         </section>
       </div>

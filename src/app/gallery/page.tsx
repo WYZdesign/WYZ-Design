@@ -118,9 +118,16 @@ export default function GalleryPage() {
   <p className="text-[#666] dark:text-[#b0b0b0] text-sm mt-2">Our complete portfolio of work</p>
  </div>
  <div className="flex gap-3 mb-8 flex-wrap justify-center">
- {CATS.map(c => (
-  <button key={c} onClick={() => setCat(c)} className="px-5 py-2.5 text-sm font-semibold tracking-[0.1em] rounded-full border border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-[#e0e0e0] transition-all">{c}</button>
- ))}
+ {CATS.map(c => {
+  const isActive = cat === c;
+  return (
+   <button key={c} onClick={() => setCat(c)} className={`px-5 py-2.5 text-sm font-semibold tracking-[0.1em] rounded-full border transition-all ${
+    isActive
+     ? "bg-[#DF3131] text-white border-[#DF3131] shadow-lg shadow-[#DF3131]/30"
+     : "border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-[#e0e0e0] hover:border-[#DF3131] hover:text-[#DF3131]"
+   }`}>{c}</button>
+  );
+ })}
  </div>
  <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
   {filtered.map((img, i) => (

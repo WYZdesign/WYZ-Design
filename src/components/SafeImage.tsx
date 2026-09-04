@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface SafeImageProps {
   src: string;
@@ -19,17 +19,10 @@ interface SafeImageProps {
   blurWidth?: number;
 }
 
-const IMAGE_BASE_PATH = "/images";
-
 function getWebPSources(src: string): { webp: string; fallback: string } {
   if (src.startsWith("http")) {
-    const url = new URL(src);
-    url.pathname = url.pathname.replace(/\.(jpg|png|jpeg|JPG|PNG|JPEG)$/, ".webp");
     return { webp: src, fallback: src.replace(/\.webp$/, ".jpg") };
   }
-  const baseName = src.replace(/\.(jpg|png|jpeg|JPG|PNG|JPEG)$/, "");
-  const ext = src.match(/\.(jpg|png|jpeg)$/i)?.[1]?.toLowerCase() || "jpg";
-  const webpPath = src.includes("/images/") ? src : `/images${src.substring(src.indexOf("images"))}`;
   return {
     webp: src.replace(/\.(jpg|png|jpeg)$/i, ".webp"),
     fallback: src
@@ -51,19 +44,8 @@ export default function SafeImage({
 }: SafeImageProps & React.ImgHTMLAttributes<HTMLImageElement>) {
   const [broken, setBroken] = useState(false);
   const [loaded, setLoaded] = useState(false);
-  const [blurDataURL, setBlurDataURL] = useState<string>("");
 
   const resolvedLoading = priority ? "eager" : (loading || "lazy");
-  const isExternal = src.startsWith("http");
-
-  useEffect(() => {
-    if (!isExternal && priority) {
-      const loaderImg = new Image();
-      const basePath = src.replace(/\.(jpg|png|jpeg)$/i, ".webp");
-      loaderImg.src = `${IMAGE_BASE_PATH}/blur${basePath.split("/").pop()}`;
-      loaderImg.onload = () => setBlurDataURL(loaderImg.src);
-    }
-  }, [src, isExternal, priority]);
 
   const sources = getWebPSources(src);
 
@@ -75,11 +57,7 @@ export default function SafeImage({
     );
   }
 
-  const baseStyle: React.CSSProperties = {
-    transition: `background-image 0.5s ease`,
-    backgroundImage: blurDataURL ? `url("${blurDataURL}")` : undefined,
-    ...style
-  };
+  const baseStyle: React.CSSProperties = { ...style };
 
   if (imgProps.fill) {
     return (

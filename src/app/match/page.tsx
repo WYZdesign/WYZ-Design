@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
+import StrategyWizard from "@/components/StrategyWizard";
 
 const STEPS = [
   { num: "01", title: "Tell Us Your Style", desc: "Answer a few quick questions about your brand, aesthetic, and goals." },
@@ -48,9 +49,11 @@ export default function MatchPage() {
           </div>
         </div>
 
-        <div className="text-center">
+        <StrategyWizard />
+
+        <div className="text-center mt-12">
           <Link href="/booking" className="inline-flex items-center gap-2 px-10 py-4 bg-[#DF3131] text-white font-semibold tracking-[0.15em] rounded-full hover:bg-[#B82020] transition-all hover:scale-105">
-            Get Started <FiArrowRight className="w-4 h-4" />
+            Skip to Booking <FiArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

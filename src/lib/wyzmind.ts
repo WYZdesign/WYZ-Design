@@ -233,6 +233,15 @@ export async function getDashboardStats() {
   };
 }
 
+export async function getUserProfile(email: string) {
+  const sb = getServiceClient();
+  const { data, error } = await sb.from("profiles")
+    .select("email, name, role, bio, phone, website, avatar_url, instagram, facebook, provider, created_at")
+    .eq("email", email).maybeSingle();
+  if (error) { logger.error("[wyzmind:getUserProfile]", error.message); return null; }
+  return datum(data);
+}
+
 export async function getUserByEmail(email: string) {
   const sb = getServiceClient();
   const { data, error } = await sb.from("profiles")

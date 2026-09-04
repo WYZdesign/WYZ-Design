@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiChevronLeft, FiChevronRight, FiCamera, FiMonitor, FiVideo, FiMessageCircle, FiGlobe, FiSearch, FiZap, FiAward, FiTrendingUp } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
-import { MouseGlow } from "@/components/MouseGlow";
 import CardTilt from "@/components/CardTilt";
 import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";

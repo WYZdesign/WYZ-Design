@@ -579,8 +579,6 @@ export default function ForumPage() {
     } catch (e) { logger.warn("community-page", `Newsletter subscribe failed: ${e}`); toast.error("Subscription failed. Please try again."); }
   };
 
-  const catLabel = (id: string) => CATEGORIES.find((c) => c.id === id)?.label ?? id;
-
   const handleNsfwClick = () => {
     if (!session) {
       setShowAgeGate(true);
@@ -1075,7 +1073,6 @@ export default function ForumPage() {
             {/* Thread list — 3-col grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {visibleThreads.slice(0, visibleThreadCount).map((t) => {
-                const cat = CATEGORIES.find((c) => c.id === t.category);
                 const isOpen = openThread === t.id;
                 const flair = FLAIRS[t.category];
                 return (

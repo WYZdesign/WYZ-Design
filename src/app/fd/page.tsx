@@ -156,7 +156,6 @@ export default function FDOraclePage() {
   const [activeBuilding, setActiveBuilding] = useState(BUILDINGS[0]);
   const [eventTab, setEventTab] = useState<"all" | "LA" | "NY">("all");
   const [selectedEvent, setSelectedEvent] = useState<typeof FD_EVENTS[0] | null>(null);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
   const [showApiSettings, setShowApiSettings] = useState(false);
 
   useModalA11y(() => setSelectedEvent(null), { lockScroll: true, active: selectedEvent !== null });
@@ -358,7 +357,7 @@ export default function FDOraclePage() {
 
           {/* Building Tabs */}
           <div className="flex flex-wrap justify-center gap-2 mb-10">
-            {BUILDINGS.map((b, i) => {
+            {BUILDINGS.map((b) => {
               const count = LA_STUDIOS.filter(s => s.building === b).length;
               return (
                 <button key={b} onClick={() => setActiveBuilding(b)}
@@ -434,7 +433,7 @@ export default function FDOraclePage() {
             ))}
           </div>
 
-          <FDCalendar events={FD_EVENTS} eventTab={eventTab} onEventClick={(e) => { setSelectedEvent(e); setLightboxIndex(FD_EVENTS.indexOf(e)); }} />
+          <FDCalendar events={FD_EVENTS} eventTab={eventTab} onEventClick={(e) => setSelectedEvent(e)} />
         </div>
       </section>
 
@@ -475,14 +474,14 @@ export default function FDOraclePage() {
                   const filtered = FD_EVENTS.filter(e => eventTab === "all" || e.city === eventTab);
                   const idx = filtered.indexOf(selectedEvent);
                   const prev = idx > 0 ? filtered[idx - 1] : filtered[filtered.length - 1];
-                  setSelectedEvent(prev); setLightboxIndex(FD_EVENTS.indexOf(prev));
+                  setSelectedEvent(prev);
                 }} className="text-sm text-zinc-400 hover:text-white transition-colors flex items-center gap-1">← Previous</button>
                 <span className="text-xs text-zinc-600">{(() => { const filtered = FD_EVENTS.filter(e => eventTab === "all" || e.city === eventTab); return `${filtered.indexOf(selectedEvent) + 1} / ${filtered.length}`; })()}</span>
                 <button onClick={() => {
                   const filtered = FD_EVENTS.filter(e => eventTab === "all" || e.city === eventTab);
                   const idx = filtered.indexOf(selectedEvent);
                   const next = idx < filtered.length - 1 ? filtered[idx + 1] : filtered[0];
-                  setSelectedEvent(next); setLightboxIndex(FD_EVENTS.indexOf(next));
+                  setSelectedEvent(next);
                 }} className="text-sm text-zinc-400 hover:text-white transition-colors flex items-center gap-1">Next →</button>
               </div>
               <button onClick={() => setSelectedEvent(null)}

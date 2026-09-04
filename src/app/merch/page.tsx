@@ -724,6 +724,24 @@ export default function MerchPage() {
           {showStore && storeVisible && (
             <div className="portal-enter stagger-1 relative z-10">
               <AccordionGallery />
+              {catalogStatus === "loading" && products.length === 0 && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-8">
+                  {[...Array(8)].map((_, i) => (
+                    <div key={i} className="aspect-[4/5] bg-[#eee] animate-pulse" />
+                  ))}
+                </div>
+              )}
+
+              {catalogStatus === "error" && (
+                <p className="text-center text-[#666] text-[14px] py-12">
+                  We couldn&apos;t load the store right now. Please refresh or check back shortly.
+                </p>
+              )}
+
+              {catalogStatus === "loaded" && filteredProducts.length === 0 && (
+                <p className="text-center text-[#666] text-[14px] py-12">No products in this category yet.</p>
+              )}
+
               {filteredProducts.length > 0 && (
                 <div className="max-w-[130rem] mx-auto px-6 lg:px-12 py-12">
                   <div className="flex flex-wrap items-center justify-between gap-4 mb-6">

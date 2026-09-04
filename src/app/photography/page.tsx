@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,19 +39,6 @@ const ALBUM_COVERS_STATIC: Record<string, string> = {
  Products: "/images/photography-categories/Products.jpg",
    Conceptual: "/images/photography-categories/Conceptual.JPG",
 };
-
-function useInView(threshold = 0.1) {
- const ref = useRef<HTMLDivElement>(null);
- const [vis, setVis] = useState(false);
- useEffect(() => {
- const el = ref.current;
- if (!el) return;
- const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVis(true); o.disconnect(); } }, { threshold });
- o.observe(el);
- return () => o.disconnect();
- }, [threshold]);
- return { ref, vis };
-}
 
 function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
  images: string[]; index: number; onClose: () => void; onPrev: () => void; onNext: () => void; album?: string;
@@ -248,12 +235,10 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   }, []);
 
   // Dynamic model photos from GDrive, best image per model
-  const [modelPhotos, setModelPhotos] = useState<Array<{ model: string; imageUrl: string }>>([]);
   // Dynamic GDrive photos, deduplicated across all sections
  const [albumCovers, setAlbumCovers] = useState<Record<string, string>>(ALBUM_COVERS_STATIC);
  const [carousel1, setCarousel1] = useState<string[]>([]);
  const [carousel2, setCarousel2] = useState<string[]>([]);
- const [carousel3, setCarousel3] = useState<string[]>([]);
 
  const [featuredModels, setFeaturedModels] = useState([
   { name: "ADRIENNE", cover: "/images/photography/carousel_3/wix_0283.jpg", title: "Signed Model" },
@@ -280,14 +265,6 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
  const [modelAutoPlay, setModelAutoPlay] = useState(true);
   const [applicationSubmitted, setApplicationSubmitted] = useState(false);
   const [applicationSubmitting, setApplicationSubmitting] = useState(false);
-
- useEffect(() => {
- // Fetch model best-per-model photos for featuredModels carousel
- fetch("/api/model-photos?mode=best-per-model")
- .then((r) => r.json())
- .then((d) => setModelPhotos(d.photos || []))
- .catch(() => {});
- }, []);
 
  useEffect(() => {
  // Fetch category photos for album covers + carousels
@@ -509,7 +486,7 @@ return (
 {/* HERO */}
    <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
     {/* Desktop split: text left, video right */}
-    <div className="hidden md:grid md:grid-cols-2 md:h-full">
+    <div className="hidden md:grid md:grid-cols-2 absolute inset-0">
     <div className="relative w-full md:col-span-1 flex items-center justify-center z-10 overflow-hidden">
     <div className="absolute inset-0 hero-grad-design z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
@@ -774,8 +751,9 @@ return (
           isNsfw && !nsfwSession.ageVerified ? "blur-xl scale-110" : ""
         }`} />
       <div className="absolute inset-0 z-10 bg-black/30" />
-      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-      <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0">{a}</p>
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-4 text-center">
+      <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0 absolute">{a}</p>
+      <p className="text-white/90 text-[12px] sm:text-[13px] md:text-[14px] leading-snug drop-shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500">{ALBUM_DESC[a]}</p>
       </div>
 {isNsfw && !nsfwSession.ageVerified && (
           <div className="absolute top-2 right-2 z-30 bg-black/20 pointer-events-none">

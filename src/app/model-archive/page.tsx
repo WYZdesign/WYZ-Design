@@ -188,7 +188,7 @@ export default function ModelArchivePage() {
  onClick={() => { setShowApply(false); closeAlbum(); }}
  className={`px-8 py-4 text-[14px] font-bold tracking-[0.12em] transition-all border-2 ${
  !showApply 
- ? "bg-white text-[#111] border-white" 
+ ? "bg-[#333] text-white border-[#333] dark:bg-white dark:text-[#111] dark:border-white" 
  : "bg-transparent text-[#333] dark:text-white border-[#E2E2E2] dark:border-white/30 hover:border-[#333] dark:hover:border-white/60"
  }`}
  >

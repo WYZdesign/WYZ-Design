@@ -15,35 +15,6 @@ import TextSplit from "@/components/TextSplit";
 import { shuffleArray } from "@/lib/utils";
 import { useModalA11y } from "@/hooks/useModalA11y";
 
-const FALLBACK_MERCH = [
- { name: "Cute Ghost Hat", price: "$35.00", img: "/images/wix-extracted/designs/merch/designs_merch_00_98442d_9a9d17df21e54a95832a6eefa209cf53.jpg.jpg" },
- { name: "WYZ Logo Hoodie", price: "$45.00", img: "/images/wix-extracted/designs/merch/designs_merch_01_98442d_cf50acabf53341bab93848f757fe46a8.jpg.jpg" },
- { name: "Anime Tee", price: "$25.00", img: "/images/wix-extracted/designs/merch/designs_merch_02_98442d_502b0119f4e4494888a4a3c7ac88cc0c.jpg.jpg" },
- { name: "Cyberpunk Cap", price: "$30.00", img: "/images/wix-extracted/designs/merch/designs_merch_03_98442d_e4e50dc9a3b141c8b391f2484691794d.jpg.jpg" },
- { name: "Neon Frog Tee", price: "$25.00", img: "/images/wix-extracted/designs/merch/designs_merch_04_98442d_8d5eabc9f79e4dd4a260d5cddef772c4.jpg.jpg" },
- { name: "Studio Backpack", price: "$55.00", img: "/images/wix-extracted/designs/merch/designs_merch_05_98442d_9fc8ea304a2a4858a0966d2f4522a94c.jpg.jpg" },
- { name: "Retro Mug", price: "$15.00", img: "/images/wix-extracted/designs/merch/designs_merch_06_98442d_92fc84c3f5f6450e97f33be06603d04d.jpg.jpg" },
- { name: "WYZ Sticker Pack", price: "$10.00", img: "/images/wix-extracted/designs/merch/designs_merch_07_98442d_f1f818f6a1e042639783e9458b3235da.jpg.jpg" },
-];
-
-function usePrintfulMerch() {
- const [products, setProducts] = useState(FALLBACK_MERCH);
- useEffect(() => {
- fetch("/api/printful-catalog")
- .then((r) => r.json())
- .then((data) => {
- if (!data.products?.length) return;
- setProducts(data.products.map((p: any) => ({
- name: p.title,
- price: `$${p.price.toFixed(2)}`,
-  img: p.image || "/images/wix-extracted/designs/merch/designs_merch_00_98442d_9a9d17df21e54a95832a6eefa209cf53.jpg.jpg",
- })));
- })
- .catch(() => {});
- }, []);
- return products;
-}
-
 function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onClose: () => void }) {
  useModalA11y(onClose);
  const hk = useCallback((e: KeyboardEvent) => { if (e.key === "Escape") onClose(); }, [onClose]);
@@ -58,19 +29,6 @@ function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onCl
   <Image src={src} alt={alt || "Design preview"} width={1200} height={800} className="max-w-[92vw] max-h-[92vh] object-contain" onClick={(e) => e.stopPropagation()} loading="lazy" style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }} />
  </div>
  );
-}
-
-function useInView(threshold = 0.1) {
- const ref = useRef<HTMLDivElement>(null);
- const [vis, setVis] = useState(false);
- useEffect(() => {
- const el = ref.current;
- if (!el) return;
- const o = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVis(true); o.disconnect(); } }, { threshold });
- o.observe(el);
- return () => o.disconnect();
- }, [threshold]);
- return { ref, vis };
 }
 
 function Carousel({ images, direction = "left", whiteBgInDark, scrollRef }: { images: string[]; direction?: "left" | "right"; whiteBgInDark?: boolean; scrollRef?: React.RefObject<HTMLDivElement | null> }) {
@@ -193,7 +151,6 @@ export default function DesignsPage() {
   const flyersScrollRef = useRef<HTMLDivElement>(null);
   const logosScrollRef = useRef<HTMLDivElement>(null);
   const merchScrollRef = useRef<HTMLDivElement>(null);
- const merchProducts = usePrintfulMerch();
   const dbcMerch = useMemo(() => [
   { img: "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg", name: "Dying Breed Crew", price: "$35" },
   { img: "/images/merch/dbc-archive/98442d-b3c114b8dab6450887e3d3aee9c71030~mv2.jpg", name: "Dying Breed Crew", price: "$65" },

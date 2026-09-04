@@ -416,9 +416,17 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   background: linear-gradient(135deg, #C90000 0%, #E63C3C 38%, #DF3131 100%);
 }
 
-/* ── Custom Cursor (desktop only) ── */
+/* ── Custom Cursor (desktop only) ──
+   Scoped to a JS-toggled class, not a bare media query: a media query only
+   detects device capability (mouse present), not current input mode, so a
+   keyboard user on a desktop with a mouse attached would still match
+   `hover:hover and pointer:fine` and lose the system cursor with no way
+   back. `body.using-mouse` is added on real mousemove and removed on Tab
+   (see layout.tsx), so keyboard-only interaction always gets the system
+   cursor + the :focus-visible ring below, while mouse users still get the
+   custom cursor. */
 @media (hover: hover) and (pointer: fine) {
-  *, *::before, *::after { cursor: none !important; }
+  body.using-mouse, body.using-mouse *, body.using-mouse *::before, body.using-mouse *::after { cursor: none !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════
