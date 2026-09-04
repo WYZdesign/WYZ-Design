@@ -11,7 +11,6 @@ interface ReferralData {
   purchases: number;
   totalCommission: number;
   paidCommission: number;
-  pendingCommission: number;
 }
 
 interface ConversionRow {
@@ -33,12 +32,10 @@ export default function ReferralPage() {
   const session = sessionResult?.data ?? null;
   const [data, setData] = useState<ReferralData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [creating, setCreating] = useState(false);
   const [copied, setCopied] = useState(false);
   const [leaderboard, setLeaderboard] = useState<LeaderEntry[]>([]);
   const [totalConversions, setTotalConversions] = useState(0);
   const [conversions, setConversions] = useState<ConversionRow[]>([]);
-  const [userRank, setUserRank] = useState<number | null>(null);
 
   useEffect(() => {
     fetch("/api/referral/leaderboard")

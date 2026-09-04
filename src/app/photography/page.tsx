@@ -232,19 +232,22 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   const [nsfwTarget, setNsfwTarget] = useState<string | null>(null);
 
 
- const { ref: hVis, vis: heroVisibleRaw } = useInView(0.1);
- const [heroVisible, setHeroVisible] = useState(false);
- useEffect(() => { if (heroVisibleRaw) setHeroVisible(true); const t = setTimeout(() => setHeroVisible(true), 1000); return () => clearTimeout(t); }, [heroVisibleRaw]);
+  const [archiveVis, setArchiveVis] = useState(false);
+  const aVisRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = aVisRef.current;
+    if (!el) return;
+    const o = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) {
+        setArchiveVis(true);
+        o.disconnect();
+      }
+    }, { threshold: 0.1 });
+    o.observe(el);
+    return () => o.disconnect();
+  }, []);
 
- const { ref: aVis, vis: archiveVisRaw } = useInView(0.1);
- const [archiveVis, setArchiveVis] = useState(false);
- useEffect(() => { if (archiveVisRaw) setArchiveVis(true); const t = setTimeout(() => setArchiveVis(true), 1200); return () => clearTimeout(t); }, [archiveVisRaw]);
-
- const { ref: bVis, vis: bookVisRaw } = useInView(0.1);
- const [bookVis, setBookVis] = useState(false);
- useEffect(() => { if (bookVisRaw) setBookVis(true); const t = setTimeout(() => setBookVis(true), 1200); return () => clearTimeout(t); }, [bookVisRaw]);
-
- // Dynamic model photos from GDrive, best image per model
+  // Dynamic model photos from GDrive, best image per model
   const [modelPhotos, setModelPhotos] = useState<Array<{ model: string; imageUrl: string }>>([]);
   // Dynamic GDrive photos, deduplicated across all sections
  const [albumCovers, setAlbumCovers] = useState<Record<string, string>>(ALBUM_COVERS_STATIC);
@@ -576,7 +579,7 @@ return (
 
 {/* MODEL ARCHIVE */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
-  <section className="py-12 lg:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
+  <section ref={aVisRef} className="py-12 lg:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
   {/* Left: Info + Buttons */}

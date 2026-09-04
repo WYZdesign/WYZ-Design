@@ -52,7 +52,7 @@ const STEPS: Step[] = [
   },
 ];
 
-interface Recommendation { title: string; services: { name: string; price: string; note: string }[]; plan: string; planPrice: string; planNote: string; total: string; }
+interface Recommendation { title: string; services: { name: string; price: string; note: string }[]; plan: string; planPrice: string; planNote: string; total: string; rushNote?: string; }
 
 function getRecommendation(answers: string[]): Recommendation {
   const [service, goal, budget, timeline] = answers;
@@ -114,6 +114,10 @@ function getRecommendation(answers: string[]): Recommendation {
   }, 0);
 
   rec.total = serviceTotal > 0 ? `$${serviceTotal}` : "Varies";
+
+  if (timeline === "rush") {
+    rec.rushNote = "Rush delivery (24–48 hrs) is available at a 25–50% premium — mention this timeline when you book.";
+  }
 
   return rec;
 }
@@ -234,12 +238,17 @@ export default function StrategyWizard() {
 
                     {/* Plan recommendation */}
                     {result.plan && (
-                      <div className="p-5 bg-[#DF3131] text-white text-center">
+                      <div className="p-5 bg-[#DF3131]131 text-white text-center">
                         <p className="text-[11px] font-bold tracking-[0.15em] uppercase opacity-80">Recommended Plan</p>
                         <h3 className="font-heading font-black text-xl mt-1">{result.plan}</h3>
                         <p className="text-[18px] font-bold mt-1">{result.planPrice}</p>
                         <p className="text-[14px] opacity-90 mt-1">{result.planNote}</p>
                       </div>
+                    )}
+
+                    {/* Rush timeline note */}
+                    {result.rushNote && (
+                      <p className="text-[13px] text-[#666] dark:text-white/60 text-center px-1">{result.rushNote}</p>
                     )}
 
                     {/* Actions */}

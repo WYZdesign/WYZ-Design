@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useRef, useMemo, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StrategyWizard from "@/components/StrategyWizard";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
-import ScrollParallaxCard from "@/components/ScrollParallaxCard";
 import TextSplit from "@/components/TextSplit";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { shuffleArray } from "@/lib/utils";
@@ -109,16 +108,10 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
  );
 }
 
-export default function ServicesPage() {
- const [active, setActive] = useState("All Services");
- const [hoveredTab, setHoveredTab] = useState<string | null>(null);
- const [allServices, setAllServices] = useState(ALL_SERVICES_RAW);
+ export default function ServicesPage() {
+  const [active, setActive] = useState("All Services");
 
- useEffect(() => {
-  setAllServices(shuffleArray(ALL_SERVICES_RAW));
- }, []);
-
- const filtered = active === "All Services" ? allServices : allServices.filter(s => s.cat === active);
+  const filtered = active === "All Services" ? ALL_SERVICES_RAW : ALL_SERVICES_RAW.filter(s => s.cat === active);
 
 return (
   <main className="pb-12 bg-white dark:bg-[#1C1C1E]">

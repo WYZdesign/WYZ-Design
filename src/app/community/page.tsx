@@ -1285,6 +1285,39 @@ export default function ForumPage() {
             ))}
           </div>
 
+          {/* Newsletter Card */}
+          <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] mb-10">
+            <div className="p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
+              <div className="w-14 h-14 rounded-full bg-[#DF3131]/10 flex items-center justify-center shrink-0">
+                <FiMail className="w-6 h-6 text-[#DF3131]" />
+              </div>
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="font-heading font-bold text-[18px] tracking-[0.06em] text-[#333] dark:text-[#e0e0e0] mb-1">JOIN THE NEWSLETTER</h3>
+                <p className="text-[14px] text-[#666] dark:text-[#b0b0b0]">Weekly drops, opportunities, and featured work. No spam.</p>
+              </div>
+              {subscribed ? (
+                <p className="text-[14px] font-bold tracking-[0.08em] text-[#2ECC71] uppercase">Subscribed ✓</p>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex w-full sm:w-auto gap-2">
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@email.com"
+                    className="flex-1 sm:w-56 px-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E] text-[14px] text-[#333] dark:text-[#e0e0e0] outline-none focus:border-[#DF3131] rounded-lg"
+                  />
+                  <button
+                    type="submit"
+                    className="px-5 py-3 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.08em] uppercase rounded-lg hover:bg-[#B82020] transition-colors"
+                  >
+                    Join
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+
           {/* Discord CTA — full width banner */}
           <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] mb-10">
             <div className="bg-[#5865F2] p-8 text-center">

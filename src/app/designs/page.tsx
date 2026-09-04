@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FiArrowRight, FiSearch, FiCpu } from "react-icons/fi";
+import { FiArrowRight, FiArrowLeft, FiSearch, FiCpu } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import SafeImage from "@/components/SafeImage";
@@ -73,17 +73,18 @@ function useInView(threshold = 0.1) {
  return { ref, vis };
 }
 
-function Carousel({ images, direction = "left", whiteBgInDark }: { images: string[]; direction?: "left" | "right"; whiteBgInDark?: boolean }) {
- const scrollRef = useRef<HTMLDivElement>(null);
- const paused = useRef(false);
- const lastTime = useRef<number>(0);
- const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+function Carousel({ images, direction = "left", whiteBgInDark, scrollRef }: { images: string[]; direction?: "left" | "right"; whiteBgInDark?: boolean; scrollRef?: React.RefObject<HTMLDivElement | null> }) {
+  const internalScrollRef = useRef<HTMLDivElement>(null);
+  const resolvedRef = scrollRef || internalScrollRef;
+  const paused = useRef(false);
+  const lastTime = useRef<number>(0);
+  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
- useEffect(() => {
- const el = scrollRef.current;
- if (!el) return;
- let raf: number;
- const dir = direction === "right" ? -1 : 1;
+  useEffect(() => {
+    const el = resolvedRef.current as HTMLDivElement | null;
+    if (!el) return;
+    let raf: number;
+  const dir = direction === "right" ? -1 : 1;
 
  const tick = (now: number) => {
  if (!lastTime.current) lastTime.current = now;
@@ -114,7 +115,7 @@ function Carousel({ images, direction = "left", whiteBgInDark }: { images: strin
  return (
   <div className="overflow-hidden" onClick={handleClick} onTouchStart={handleClick} onTouchEnd={handleClick}>
   <div
-  ref={scrollRef}
+  ref={resolvedRef}
   className="flex flex-nowrap gap-2 cursor-pointer no-scrollbar"
   style={{ overflowX: "auto" }}
   >
@@ -169,7 +170,7 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
  );
 }
 
-function ScrollArrows({ scrollRef, className = "" }: { scrollRef: React.RefObject<HTMLDivElement>; className?: string }) {
+function ScrollArrows({ scrollRef, className = "" }: { scrollRef: React.RefObject<HTMLDivElement | null>; className?: string }) {
  const scroll = (dir: "left" | "right") => {
  if (!scrollRef.current) return;
  scrollRef.current.scrollBy({ left: dir === "left" ? -300 : 300, behavior: "smooth" });
@@ -188,7 +189,10 @@ export default function DesignsPage() {
  const [conceptResponse, setConceptResponse] = useState("");
  const [lbSrc, setLbSrc] = useState<string | null>(null);
  const [openService, setOpenService] = useState(-1);
- const merchScrollRef = useRef<HTMLDivElement>(null);
+ const coverArtScrollRef = useRef<HTMLDivElement>(null);
+  const flyersScrollRef = useRef<HTMLDivElement>(null);
+  const logosScrollRef = useRef<HTMLDivElement>(null);
+  const merchScrollRef = useRef<HTMLDivElement>(null);
  const merchProducts = usePrintfulMerch();
   const dbcMerch = useMemo(() => [
   { img: "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg", name: "Dying Breed Crew", price: "$35" },
@@ -324,31 +328,40 @@ const faotmImages = [
   <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Cover Art</h2>
   <Link href="#cover-art" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
  </div>
- <Carousel images={shuffledCovers} direction="left" />
- </section>
- </ScrollReveal>
+<Carousel images={shuffledCovers} direction="left" scrollRef={coverArtScrollRef} />
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
+    <ScrollArrows scrollRef={coverArtScrollRef} />
+  </div>
+  </section>
+  </ScrollReveal>
 
  {/* ═══ FLYERS CAROUSEL ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
- <section id="flyers" className="pt-1 pb-1 sm:py-4 lg:py-5 scroll-mt-24">
- <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Flyers</h2>
-  <Link href="#flyers" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
- </div>
- <Carousel images={shuffledFlyers} direction="right" />
- </section>
- </ScrollReveal>
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+  <section id="flyers" className="pt-1 pb-1 sm:py-4 lg:py-5 scroll-mt-24">
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
+   <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Flyers</h2>
+   <Link href="#flyers" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
+  </div>
+  <Carousel images={shuffledFlyers} direction="right" scrollRef={flyersScrollRef} />
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
+    <ScrollArrows scrollRef={flyersScrollRef} />
+  </div>
+  </section>
+  </ScrollReveal>
 
  {/* ═══ LOGOS CAROUSEL ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
- <section id="logos" className="pt-1 pb-2 sm:py-4 lg:py-5 scroll-mt-24">
- <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
-  <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Logos</h2>
-  <Link href="#logos" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
- </div>
- <Carousel images={shuffledLogos} direction="left" whiteBgInDark />
- </section>
- </ScrollReveal>
+  <ScrollReveal animation="fadeUp" delay={0.1}>
+  <section id="logos" className="pt-1 pb-2 sm:py-4 lg:py-5 scroll-mt-24">
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 mb-2 flex items-end justify-between">
+   <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Logos</h2>
+   <Link href="#logos" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">See All <FiArrowRight className="w-3 h-3" /></Link>
+  </div>
+  <Carousel images={shuffledLogos} direction="left" whiteBgInDark scrollRef={logosScrollRef} />
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
+    <ScrollArrows scrollRef={logosScrollRef} />
+  </div>
+  </section>
+  </ScrollReveal>
 
  {/* ═══ SERVICE CARDS — ACCORDION ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>

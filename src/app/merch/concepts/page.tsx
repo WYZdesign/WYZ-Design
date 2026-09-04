@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import SafeImage from "@/components/SafeImage";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";

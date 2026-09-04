@@ -200,6 +200,25 @@ export default function FAQPage() {
           </div>
         </ScrollReveal>
 
+        {/* Category Filter */}
+        <ScrollReveal animation="fadeUp" delay={0.15}>
+          <div className="max-w-3xl mx-auto mt-6 flex flex-wrap justify-center gap-3">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-5 py-2 text-[12px] font-heading font-bold tracking-[0.08em] uppercase transition-all rounded-lg border-2 ${
+                  activeCategory === cat
+                    ? "bg-[#DF3131] border-[#DF3131] text-white shadow-md shadow-[#DF3131]/20"
+                    : "border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/70 hover:border-[#DF3131] hover:text-[#DF3131]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </ScrollReveal>
+
         {/* WYZ Design AI Bot */}
         <ScrollReveal animation="scaleIn" delay={0.2}>
           <div className="mt-12 mb-12">
@@ -329,7 +348,7 @@ export default function FAQPage() {
                     <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
                       isOpen ? "bg-[#DF3131] text-white" : "bg-white dark:bg-[#252528] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
                     }`}>
-                      <span className="font-heading font-bold text-[13px]">{String(i + 1).padStart(2, "0")}</span>
+                      {(() => { const Icon = faq.icon; return <Icon className="w-5 h-5" />; })()}
                     </div>
                      <span className={`flex-1 min-w-0 font-heading font-bold text-[16px] pr-4 transition-colors leading-snug ${
                        isOpen ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131]"
