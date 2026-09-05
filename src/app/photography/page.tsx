@@ -694,12 +694,12 @@ return (
   finally { setApplicationSubmitting(false); }
   }} className="space-y-4">
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-   <input name="fullName" placeholder="Full Name *" aria-label="Full name" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
-   <input name="email" placeholder="Email *" type="email" aria-label="Email address" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
+   <input name="fullName" placeholder="Full Name *" aria-label="Full name" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#757575] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
+   <input name="email" placeholder="Email *" type="email" aria-label="Email address" required className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#757575] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
    </div>
    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-   <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
-   <select name="experience" aria-label="Experience level" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] text-[#888] dark:text-white/60 focus:border-[#DF3131] outline-none transition-colors">
+   <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#757575] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none transition-colors" />
+   <select name="experience" aria-label="Experience level" className="px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] text-[#666] dark:text-white/60 focus:border-[#DF3131] outline-none transition-colors">
   <option>Experience Level</option>
   <option>No Experience</option>
   <option>Beginner (1-2 shoots)</option>
@@ -708,7 +708,7 @@ return (
   <option>Professional</option>
   </select>
   </div>
-   <textarea name="about" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={3} className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#888] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none resize-none transition-colors" />
+   <textarea name="about" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={3} className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[14px] placeholder:text-[#757575] dark:placeholder:text-white/40 focus:border-[#DF3131] outline-none resize-none transition-colors" />
    <div className="relative">
    <button type="submit" disabled={applicationSubmitting} className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-[#B82020] transition-all hover:shadow-lg text-center disabled:opacity-50 disabled:cursor-not-allowed">
    {applicationSubmitted ? "SUBMITTED ✓" : applicationSubmitting ? "SUBMITTING..." : "SUBMIT"}

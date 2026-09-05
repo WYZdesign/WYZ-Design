@@ -76,7 +76,7 @@ export default function DyingBreedCrewPage() {
         <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.8rem] lg:text-[2.2rem] tracking-[0.04em] mb-6">
           Not Just a Brand. A <span className="text-[#D49341]">Standard</span>.
         </h2>
-        <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed max-w-2xl mx-auto">
+        <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
           DBC represents the doers. The ones who show up, the ones who create when nobody&apos;s watching. We make gear that reflects that energy. Limited runs, real quality, no mass production. If you know, you know.
         </p>
       </section>
@@ -87,17 +87,17 @@ export default function DyingBreedCrewPage() {
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
             <FiUsers className="w-8 h-8 mx-auto text-[#D49341] mb-4" />
             <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">The Collective</h3>
-            <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">Artists, musicians, models, photographers, and culture-makers. DBC is the crew that makes it happen.</p>
+            <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">Artists, musicians, models, photographers, and culture-makers. DBC is the crew that makes it happen.</p>
           </div>
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
             <FiStar className="w-8 h-8 mx-auto text-[#D49341] mb-4" />
             <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">Limited Runs</h3>
-            <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">We don&apos;t mass produce. Every drop is intentional. When it&apos;s gone, it&apos;s gone. That&apos;s the point.</p>
+            <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">We don&apos;t mass produce. Every drop is intentional. When it&apos;s gone, it&apos;s gone. That&apos;s the point.</p>
           </div>
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
             <FiCalendar className="w-8 h-8 mx-auto text-[#D49341] mb-4" />
             <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">Events & Collabs</h3>
-            <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">Pop-ups, showcase events, creative collaborations. DBC shows up in the real world, not just on screens.</p>
+            <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">Pop-ups, showcase events, creative collaborations. DBC shows up in the real world, not just on screens.</p>
           </div>
         </div>
       </section>
@@ -144,7 +144,7 @@ export default function DyingBreedCrewPage() {
 
       {/* Back to brands */}
       <div className="text-center">
-        <Link href="/brands" className="inline-flex items-center gap-2 text-[#666] dark:text-[#999] text-[14px] hover:text-[#DF3131] transition-colors">
+        <Link href="/brands" className="inline-flex items-center gap-2 text-[#666] dark:text-[#666] text-[14px] hover:text-[#DF3131] transition-colors">
           <FiArrowRight className="w-4 h-4 rotate-180" /> Back to all brands
         </Link>
       </div>

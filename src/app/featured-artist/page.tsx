@@ -317,18 +317,18 @@ export default function FeaturedArtistPage() {
  <form onSubmit={handleSubmit} className="space-y-4">
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  <input name="fullName" placeholder="Full Name *" aria-label="Full name" required value={formData.fullName} onChange={handleChange}
- className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+ className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
  <input name="artistName" placeholder="Artist / Stage Name" aria-label="Artist or stage name" value={formData.artistName} onChange={handleChange}
- className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+ className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  <input name="email" placeholder="Email *" type="email" aria-label="Email address" required value={formData.email} onChange={handleChange}
- className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+ className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
  <input name="socialMedia" placeholder="Social Media / Portfolio Link" aria-label="Social media or portfolio link" value={formData.socialMedia} onChange={handleChange}
- className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+ className="px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
  </div>
  <textarea name="bio" placeholder="Tell us about yourself and your art *" aria-label="About your art" required value={formData.bio} onChange={handleChange}
- className="w-full px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all h-32 resize-none" />
+ className="w-full px-4 py-3 border border-[#E2E2E2] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all h-32 resize-none" />
  <div className="flex flex-wrap gap-4">
  <button type="submit" disabled={submitting} className="px-8 py-4 bg-[#DF3131] text-white text-[14px] font-bold tracking-[0.08em] hover:bg-[#B82020] transition-all disabled:opacity-50 disabled:cursor-not-allowed">
  {submitting ? "SUBMITTING..." : "SUBMIT APPLICATION"}

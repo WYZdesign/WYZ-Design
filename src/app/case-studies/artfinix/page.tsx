@@ -35,7 +35,7 @@ export default function ArtfinixCaseStudy() {
             <SocialShare title="Artfinix Foundation Case Study" url="https://www.wyzdesign.com/case-studies/artfinix" description="Commercial strategy, promotional content, photography, and visual storytelling for a youth arts organization." />
           </div>
 
-          <div className="space-y-6 text-[15px] text-[#666] dark:text-[#888] leading-relaxed mb-12">
+          <div className="space-y-6 text-[15px] text-[#666] dark:text-[#666] leading-relaxed mb-12">
             <p>Artfinix is a youth arts foundation focused on community service and mentorship. They needed more than a promo video. They needed a full narrative strategy that translated their mission into content that moved people: parents, donors, students, and the community.</p>
             <p>WYZ Design developed the commercial blueprint, planned the shoot structure, captured b-roll of performances and student practice sessions, and designed the visual storytelling arc around emotional connection and mission clarity.</p>
           </div>
@@ -52,13 +52,13 @@ export default function ArtfinixCaseStudy() {
             ].map(d => (
               <div key={d.title} className="bg-[#F5F5F3] dark:bg-[#252528] p-6">
                 <h3 className="font-heading font-bold text-[15px] text-[#333] dark:text-[#e0e0e0] mb-3">{d.title}</h3>
-                <p className="text-[14px] text-[#666] dark:text-[#888]">{d.desc}</p>
+                <p className="text-[14px] text-[#666] dark:text-[#666]">{d.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center bg-[#F5F5F3] dark:bg-[#252528] p-12">
-            <p className="text-[#666] dark:text-[#888] text-[15px] italic mb-6 max-w-xl mx-auto leading-relaxed">
+            <p className="text-[#666] dark:text-[#666] text-[15px] italic mb-6 max-w-xl mx-auto leading-relaxed">
               This project shows WYZ Design is not just a content production shop. It is a strategic creative partner that translates mission into visual narrative.
             </p>
             <Link href="/contact" className="inline-block border-2 border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] px-8 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#333] hover:text-white dark:hover:bg-[#e0e0e0] dark:hover:text-[#111] transition-all">

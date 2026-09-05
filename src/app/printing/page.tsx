@@ -233,7 +233,7 @@ export default function PrintingPage() {
   <section className="py-6">
   <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
     {(["FLYERS","POSTERS","BUSINESS CARDS","STICKERS","BANNERS","PHOTO PRINTS"] as const).map((word, i) => {
-      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
           <span className={`inline-flex items-center text-[1.25rem] sm:text-[1.75rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[(i + 2) % 4]}`}>{word}</span>
@@ -373,15 +373,15 @@ export default function PrintingPage() {
   finally { setQuoteSubmitting(false); }
   }} className="max-w-4xl mx-auto space-y-4">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-   <input name="firstName" placeholder="First name" aria-label="First name" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-   <input name="lastName" placeholder="Last name" aria-label="Last name" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <input name="firstName" placeholder="First name" aria-label="First name" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <input name="lastName" placeholder="Last name" aria-label="Last name" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
    </div>
    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-   <input name="email" placeholder="Email *" type="email" aria-label="Email address" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
-   <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <input name="email" placeholder="Email *" type="email" aria-label="Email address" required className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
    </div>
    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-   <input name="sizing" placeholder="Explain Sizing + Quantity" aria-label="Sizing and quantity details" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#888] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
+   <input name="sizing" placeholder="Explain Sizing + Quantity" aria-label="Sizing and quantity details" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[#333] dark:text-[#e0e0e0] text-[14px] placeholder:text-[#757575] focus:border-[#DF3131] focus:ring-2 focus:ring-[#DF3131]/20 outline-none transition-all" />
    <select name="product" aria-label="Product type" className="px-4 py-3 border border-[#E2E2E2] dark:border-[#555] dark:bg-[#2a2a2a] text-[14px] text-[#666] dark:text-[#ccc] focus:border-[#DF3131] outline-none">
  <option>Select a Product</option>
  <option>Business Cards</option>

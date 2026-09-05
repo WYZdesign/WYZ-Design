@@ -53,7 +53,7 @@ export default function TermsAndConditions() {
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">Contact</h2>
               <p>For questions about these terms, contact us at <a href="mailto:info@wyzdesign.com" className="text-[#DF3131] hover:underline">info@wyzdesign.com</a> or <a href="tel:2133999610" className="text-[#DF3131] hover:underline">(213) 399-9610</a>.</p>
             </section>
-            <p className="text-sm text-[#999] dark:text-[#b0b0b0]">Last updated: January 2025</p>
+            <p className="text-sm text-[#666] dark:text-[#b0b0b0]">Last updated: January 2025</p>
           </div>
         </div>
       </main>

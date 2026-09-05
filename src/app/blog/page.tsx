@@ -76,7 +76,7 @@ export default function BlogPage() {
  value={search}
  onChange={(e) => setSearch(e.target.value)}
   aria-label="Search blog posts"
-  className="w-full pl-11 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-lg"
+  className="w-full pl-11 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-all rounded-lg"
 />
  </div>
  </div>
@@ -117,7 +117,7 @@ export default function BlogPage() {
    <span>{p.date}</span>
     </div>
    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] group-hover:text-[#DF3131] transition-colors leading-snug mb-3">{p.title}</h3>
-   <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
+   <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
    <div className="mt-4 flex items-center justify-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
    READ MORE <FiArrowRight className="w-3.5 h-3.5" />
    </div>

@@ -129,7 +129,7 @@ export default function MobileSplashPage() {
           <h1 className="text-[1.5rem] sm:text-[2.5rem] font-heading font-black tracking-[0.08em] mb-4">
             <span style={{ color: WHITE }}>WYZ</span> <span style={{ color: WYZ_RED }}>Mobile Splash Pages</span>
           </h1>
-          <p className="text-[#999] text-sm max-w-2xl mx-auto">
+          <p className="text-[#666] text-sm max-w-2xl mx-auto">
             10 mobile-first splash concepts inspired by award-winning design sites, with WYZ Design polish and intent.
           </p>
         </header>
@@ -159,7 +159,7 @@ export default function MobileSplashPage() {
                   {concept.title}
                 </h3>
                 <p 
-                  className="text-[#999] text-sm leading-relaxed"
+                  className="text-[#666] text-sm leading-relaxed"
                 >
                   {concept.description}
                 </p>
@@ -213,7 +213,7 @@ export default function MobileSplashPage() {
               </h2>
               <button
                 onClick={() => setSelectedConcept(null)}
-                className="text-[#999] hover:text-white text-xl"
+                className="text-[#666] hover:text-white text-xl"
               >
                 ×
               </button>

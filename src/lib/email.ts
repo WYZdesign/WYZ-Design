@@ -104,9 +104,9 @@ export async function sendBookingConfirmation(data: BookingConfirmation): Promis
       </p>
     </div>
     <div style="background:#f0f0f0;padding:20px 40px;text-align:center">
-      <p style="font-size:11px;color:#999;margin:0">
+      <p style="font-size:11px;color:#757575;margin:0">
         © ${new Date().getFullYear()} WYZ Design LLC · Los Angeles, CA · 
-        <a href="https://www.wyzdesign.com/privacy-policy" style="color:#999">Privacy</a>
+        <a href="https://www.wyzdesign.com/privacy-policy" style="color:#757575">Privacy</a>
       </p>
     </div>
   </div>
@@ -158,9 +158,9 @@ export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): 
       </p>
     </div>
     <div style="background:#f0f0f0;padding:20px 40px;text-align:center">
-      <p style="font-size:11px;color:#999;margin:0">
+      <p style="font-size:11px;color:#757575;margin:0">
         © ${new Date().getFullYear()} WYZ Design LLC · Los Angeles, CA · 
-        <a href="https://www.wyzdesign.com/privacy-policy" style="color:#999">Privacy</a>
+        <a href="https://www.wyzdesign.com/privacy-policy" style="color:#757575">Privacy</a>
       </p>
     </div>
   </div>
@@ -211,9 +211,9 @@ export async function sendBookingDelivered(data: { email: string; customerName?:
       </p>
     </div>
     <div style="background:#f0f0f0;padding:20px 40px;text-align:center">
-      <p style="font-size:11px;color:#999;margin:0">
+      <p style="font-size:11px;color:#757575;margin:0">
         © ${new Date().getFullYear()} WYZ Design LLC · Los Angeles, CA · 
-        <a href="https://www.wyzdesign.com/privacy-policy" style="color:#999">Privacy</a>
+        <a href="https://www.wyzdesign.com/privacy-policy" style="color:#757575">Privacy</a>
       </p>
     </div>
   </div>

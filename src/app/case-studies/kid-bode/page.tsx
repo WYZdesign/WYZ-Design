@@ -35,7 +35,7 @@ export default function KidBodeCaseStudy() {
             <SocialShare title="Kid Bode Case Study" url="https://www.wyzdesign.com/case-studies/kid-bode" description="Artist branding, content production, and visual identity for an emerging music artist." />
           </div>
 
-          <div className="space-y-6 text-[15px] text-[#666] dark:text-[#888] leading-relaxed mb-12">
+          <div className="space-y-6 text-[15px] text-[#666] dark:text-[#666] leading-relaxed mb-12">
             <p>Kid Bode came to WYZ Design as an emerging artist needing more than a logo. They needed a visual world: press photos, cover art, social content, and a consistent brand language that translated across every platform and made them look like they belonged at the table.</p>
             <p>WYZ Design built the full brand ecosystem: photography sessions capturing the artist&apos;s energy, cover art and single artwork designs, short form video content for social rollout, and a consistent visual identity that tied everything together under one clear aesthetic.</p>
           </div>
@@ -52,13 +52,13 @@ export default function KidBodeCaseStudy() {
             ].map(d => (
               <div key={d.title} className="bg-[#F5F5F3] dark:bg-[#252528] p-6">
                 <h3 className="font-heading font-bold text-[15px] text-[#333] dark:text-[#e0e0e0] mb-3">{d.title}</h3>
-                <p className="text-[14px] text-[#666] dark:text-[#888]">{d.desc}</p>
+                <p className="text-[14px] text-[#666] dark:text-[#666]">{d.desc}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center bg-[#F5F5F3] dark:bg-[#252528] p-12">
-            <p className="text-[#666] dark:text-[#888] text-[15px] italic mb-6 max-w-xl mx-auto leading-relaxed">
+            <p className="text-[#666] dark:text-[#666] text-[15px] italic mb-6 max-w-xl mx-auto leading-relaxed">
               Artists need more than talent. They need visual infrastructure that makes people take them seriously. This is what WYZ Design builds.
             </p>
             <Link href="/contact" className="inline-block border-2 border-[#DF3131] text-[#DF3131] px-8 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#DF3131] hover:text-white transition-all">

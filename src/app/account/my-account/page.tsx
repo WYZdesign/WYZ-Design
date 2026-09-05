@@ -171,7 +171,7 @@ export default function MyAccountPage() {
   const hasProfileDetails = !!(profile.bio || profile.phone || profile.website || profile.instagram || profile.facebook);
 
   const cardClass = "border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-6 bg-white dark:bg-[#252528]";
-  const inputClass = "w-full bg-white dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-[#e0e0e0] text-[13px] px-3.5 py-2.5 rounded-lg focus:outline-none focus:border-[#DF3131] transition-colors placeholder:text-[#999] dark:placeholder:text-white/30";
+  const inputClass = "w-full bg-white dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-[#e0e0e0] text-[13px] px-3.5 py-2.5 rounded-lg focus:outline-none focus:border-[#DF3131] transition-colors placeholder:text-[#757575] dark:placeholder:text-white/30";
   const labelClass = "block text-[11px] font-heading font-bold tracking-[0.08em] uppercase text-[#666] dark:text-white/50 mb-1";
 
   return (
@@ -197,7 +197,7 @@ export default function MyAccountPage() {
               <p className="text-[13px] text-[#666] dark:text-white/50 truncate flex items-center gap-1.5 mt-0.5">
                 <FiMail className="w-3.5 h-3.5 shrink-0" /> {session?.user?.email}
               </p>
-              <p className="text-[11px] text-[#999] dark:text-white/30 mt-1 uppercase tracking-[0.08em]">
+              <p className="text-[11px] text-[#666] dark:text-white/30 mt-1 uppercase tracking-[0.08em]">
                 Signed in via {profile.provider || (session?.user as { provider?: string } | undefined)?.provider || "email"}
               </p>
             </div>

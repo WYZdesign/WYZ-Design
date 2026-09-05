@@ -936,7 +936,7 @@ export default function HomePage() {
   <section className="py-6">
   <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
-      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#8F8F8F]"];
+      const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
           <span className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[i % 4]}`}>{word}</span>
@@ -1072,7 +1072,7 @@ export default function HomePage() {
  )}
    <h3 className="font-heading font-black text-[#333] dark:text-white text-[28px] sm:text-[32px] tracking-[0.06em] uppercase leading-tight mb-3">{p.name}</h3>
    <p className="text-4xl sm:text-5xl font-black text-[#DF3131] mt-4">{p.price}</p>
-   <p className="text-xs text-[#888] dark:text-white/50 mt-3">Tap to see details</p>
+   <p className="text-xs text-[#666] dark:text-white/50 mt-3">Tap to see details</p>
  </div>
  {/* Back face — all info + subscribe */}
  <div className="absolute inset-0 p-6 text-center bg-[#DF3131] text-white flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
@@ -1147,7 +1147,7 @@ export default function HomePage() {
    <div className="w-16 h-1 bg-[#DF3131] mx-auto mb-3"></div>
   <p className="text-[#666] dark:text-white/70 text-[15px] leading-relaxed mb-4">Have questions? We have answers. If you can&apos;t find what you&apos;re looking for, reach out to our team.</p>
  <div className="relative mb-4">
- <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[#888] dark:text-white/50 w-5 h-5" />
+ <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-[#666] dark:text-white/50 w-5 h-5" />
   <input
   type="text"
   placeholder="Search questions..."
@@ -1157,7 +1157,7 @@ export default function HomePage() {
   className="w-full pl-10 pr-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-sm text-[#333] dark:text-white outline-none focus:border-[#DF3131] transition-colors rounded-lg"
   />
  </div>
- <p className="text-[13px] text-[#888] dark:text-white/50">{filteredFaq.length} question{filteredFaq.length !== 1 ? "s" : ""} found</p>
+ <p className="text-[13px] text-[#666] dark:text-white/50">{filteredFaq.length} question{filteredFaq.length !== 1 ? "s" : ""} found</p>
  </div>
   <div className="lg:w-2/3 pr-2">
  <div className="space-y-3">
@@ -1195,7 +1195,7 @@ export default function HomePage() {
  )}
  {filteredFaq.length === 0 && (
  <div className="text-center py-12">
- <p className="text-[#888] dark:text-white/50 text-[15px]">No questions match your search. Try different keywords.</p>
+ <p className="text-[#666] dark:text-white/50 text-[15px]">No questions match your search. Try different keywords.</p>
  </div>
  )}
  </div>
@@ -1212,7 +1212,7 @@ export default function HomePage() {
  {[
  { title: "We Actually Do the Work", body: "We show up, we shoot, we design, we build. No outsourcing to strangers. No passing you around to three different people who don't talk to each other.", color: "#DF3131", icon: FiZap },
  { title: "Good Work Costs What It Costs", body: "We don't work for exposure, good vibes, or vague promises of future referrals. Creativity is real work. Real work earns real money. We also have accessible options for artists just getting started.", color: "#D49341", icon: FiAward },
-  { title: "Fast, But Never Sloppy", body: "We move quick because we know what we're doing. But nothing leaves the desk looking rushed, generic, or like someone stopped caring halfway through.", color: "#888888", icon: FiTrendingUp },
+  { title: "Fast, But Never Sloppy", body: "We move quick because we know what we're doing. But nothing leaves the desk looking rushed, generic, or like someone stopped caring halfway through.", color: "#666666", icon: FiTrendingUp },
  ].map((c) => {
  const Icon = c.icon;
   return (

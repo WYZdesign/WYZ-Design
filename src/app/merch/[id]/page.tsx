@@ -123,7 +123,7 @@ export default function MerchProductPage({ params }: { params: Promise<{ id: str
                 {addedToCart ? "✓ Added to Cart" : "Add to Cart"}
               </button>
 
-              <p className="text-[#999] dark:text-white/50 text-[12px] text-center mt-3">
+              <p className="text-[#666] dark:text-white/50 text-[12px] text-center mt-3">
                 Print-on-demand via Printful. Ships in 3-5 business days.
               </p>
 

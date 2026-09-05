@@ -12,7 +12,6 @@
   "dependencies": {
     "@calcom/embed-core": "^1.5.3",
     "@calcom/embed-react": "^1.5.3",
-    "@novu/node": "^2.6.6",
     "@sentry/nextjs": "^10.69.0",
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.110.7",

@@ -109,7 +109,7 @@ function TestimonialsSliderInner() {
               </a>
             </p>
             <p className="text-white/70 text-xs mt-1">{t.role} &mdash; {t.location}</p>
-              <div className="mt-3 flex items-center gap-2 text-xs text-[#999] dark:text-white/40">
+              <div className="mt-3 flex items-center gap-2 text-xs text-[#666] dark:text-white/40">
                 <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(t.quote)}&url=${encodeURIComponent(t.link ?? '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
                   <FiTwitter className="w-3 h-3 mr-1" />
                   Twitter

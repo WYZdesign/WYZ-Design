@@ -64,7 +64,7 @@ async function sendCustomerConfirmation(formType: string, data: Record<string, u
       from: "WYZ Design <notifications@wyzdesign.com>",
       to: email,
       subject,
-      html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">${body}<hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"><p style="font-size:14px;color:#888;">- The WYZ Design Team<br/><a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a></p></div>`,
+      html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">${body}<hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"><p style="font-size:14px;color:#757575;">- The WYZ Design Team<br/><a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a></p></div>`,
     });
   } catch (e) { logger.error("forms:sendCustomerConfirmation", e); }
 }

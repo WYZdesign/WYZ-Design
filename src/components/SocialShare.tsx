@@ -27,7 +27,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
 
   return (
     <div className="flex items-center gap-3">
-      <span className="flex items-center gap-1.5 text-[13px] text-[#666] dark:text-[#888]">
+      <span className="flex items-center gap-1.5 text-[13px] text-[#666] dark:text-[#666]">
         <FiShare2 className="w-3.5 h-3.5" /> Share
       </span>
       <a
@@ -35,7 +35,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => void earn("share-social")}
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#888] hover:bg-[#1DA1F2] hover:text-white transition-all"
+        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#666] hover:bg-[#1DA1F2] hover:text-white transition-all"
         aria-label="Share on X"
       >
         <FiTwitter className="w-3.5 h-3.5" />
@@ -45,7 +45,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => void earn("share-social")}
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#888] hover:bg-[#1877F2] hover:text-white transition-all"
+        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#666] hover:bg-[#1877F2] hover:text-white transition-all"
         aria-label="Share on Facebook"
       >
         <FiFacebook className="w-3.5 h-3.5" />
@@ -55,14 +55,14 @@ export default function SocialShare({ title, url, description }: SocialShareProp
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => void earn("share-social")}
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#888] hover:bg-[#0A66C2] hover:text-white transition-all"
+        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#666] hover:bg-[#0A66C2] hover:text-white transition-all"
         aria-label="Share on LinkedIn"
       >
         <FiLinkedin className="w-3.5 h-3.5" />
       </a>
       <button
         onClick={() => { void earn("share-social"); copyLink(); }}
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#888] hover:bg-[#DF3131] hover:text-white transition-all"
+        className="w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#666] hover:bg-[#DF3131] hover:text-white transition-all"
         aria-label="Copy link"
       >
         {copied ? <FiCheck className="w-3.5 h-3.5" /> : <FiLink className="w-3.5 h-3.5" />}

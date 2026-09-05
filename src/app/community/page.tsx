@@ -948,7 +948,7 @@ export default function ForumPage() {
                     <option value="new">⚡ New</option>
                     <option value="top">🏆 Top</option>
                   </select>
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#999]">
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#666]">
                     <FiChevronDown className="w-4 h-4" />
                   </div>
                 </div>
@@ -974,7 +974,7 @@ export default function ForumPage() {
                       </option>
                     ))}
                   </select>
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#999]">
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#666]">
                     <FiChevronDown className="w-4 h-4" />
                   </div>
                 </div>
@@ -1049,7 +1049,7 @@ export default function ForumPage() {
                     onChange={(e) => setComposer({ ...composer, title: e.target.value })}
                     placeholder="Thread title..."
                     aria-label="Post title"
-                    className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] placeholder:text-[#999]"
+                    className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] placeholder:text-[#757575]"
                   />
                   <textarea
                     value={composer.body}
@@ -1057,7 +1057,7 @@ export default function ForumPage() {
                     placeholder="What's on your mind?"
                     aria-label="Post content"
                     rows={3}
-                    className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] resize-none placeholder:text-[#999]"
+                    className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131] resize-none placeholder:text-[#757575]"
                   />
                   <button
                     onClick={postThread}

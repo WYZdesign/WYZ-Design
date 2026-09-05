@@ -61,7 +61,7 @@ const welcomeHtml = (email: string) => {
       We'll send you occasional updates, no spam, no fluff. Just the good stuff.
     </p>
   </div>
-  <p style="font-size:14px;color:#888;margin-top:32px;">
+  <p style="font-size:14px;color:#757575;margin-top:32px;">
     - The WYZ Design Team<br/>
     <a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a>
   </p>
@@ -114,7 +114,7 @@ export async function POST(req: NextRequest) {
   <div style="margin:32px 0;text-align:center;">
     <a href="${confirmUrl}" style="display:inline-block;padding:14px 32px;background:#DF3131;color:#fff;font-weight:bold;text-decoration:none;font-size:14px;letter-spacing:0.05em;">CONFIRM MY EMAIL</a>
   </div>
-  <p style="font-size:14px;color:#888;margin-top:32px;">
+  <p style="font-size:14px;color:#757575;margin-top:32px;">
     - The WYZ Design Team<br/>
     <a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a>
   </p>

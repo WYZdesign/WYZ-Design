@@ -79,7 +79,7 @@ function Brand({ theme = "dark", draw = false, onEnter }: { theme?: "dark" | "li
  <div style={center}>
  <div className={draw ? "wyz-pdraw" : ""} style={{ marginBottom: 18, animation: "wyzFade .8s ease both" }}><CrownLogo size={72} /></div>
  <Wordmark color={dark ? OW : CH} />
- <p className="wyz-tag" style={{ color: dark ? "rgba(254,254,253,.5)" : "#8F8F8F", animation: "wyzFade .8s ease .3s both" }}>Creative Agency</p>
+ <p className="wyz-tag" style={{ color: dark ? "rgba(254,254,253,.5)" : "#757575", animation: "wyzFade .8s ease .3s both" }}>Creative Agency</p>
  <button className="wyz-enter" style={{ animation: "wyzFade .8s ease .5s both", pointerEvents: "auto" }} onClick={onEnter}>Enter Site</button>
  </div>
  );
@@ -539,7 +539,7 @@ export default function SplashGallery() {
  <style>{CSS}</style>
  <div style={{ maxWidth: 1180, margin: "0 auto" }}>
  <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, color: OW, textAlign: "center", letterSpacing: ".05em", fontSize: 38, margin: 0 }}>SPLASH <span style={{ color: R }}>GALLERY</span></h1>
-  <p style={{ color: "#8F8F8F", textAlign: "center", marginTop: 8, fontSize: 15 }}>24 brand-matched variants with mouse, touch &amp; gyroscope support. Only the one you open animates.</p>
+  <p style={{ color: "#757575", textAlign: "center", marginTop: 8, fontSize: 15 }}>24 brand-matched variants with mouse, touch &amp; gyroscope support. Only the one you open animates.</p>
  <div style={{ textAlign: "center", margin: "18px 0 28px" }}><button onClick={surprise} style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", fontSize: 13, color: OW, background: R, border: "none", padding: "12px 26px", borderRadius: 3, cursor: "pointer" }}>Surprise me →</button></div>
  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 18 }}>
  {VARIANTS.map((v, i) => (

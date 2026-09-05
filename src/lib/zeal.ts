@@ -116,7 +116,7 @@ export const ZEAL_QUESTS: Record<string, QuestDef> = {
 };
 
 export const ZEAL_TIERS = [
-  { name: "Recruit",  min: 0,    color: "#8F8F8F" },
+  { name: "Recruit",  min: 0,    color: "#757575" },
   { name: "Zealot",   min: 500,  color: "#DF3131" },
   { name: "Champion", min: 2000, color: "#FFD700" },
   { name: "Legend",   min: 5000, color: "#00D4FF" },

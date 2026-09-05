@@ -10,7 +10,7 @@ export default function NotFound() {
         <h1 className="text-[2.5rem] sm:text-[3.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.03em] leading-none mb-4">
           LET&apos;S GET YOU SOMEWHERE GOOD
         </h1>
-        <p className="text-[#666] dark:text-[#999] text-[15px] leading-relaxed mb-8">
+        <p className="text-[#666] dark:text-[#666] text-[15px] leading-relaxed mb-8">
           That page may have moved, but you&apos;re only one tap away from the good stuff.
         </p>
         <Link

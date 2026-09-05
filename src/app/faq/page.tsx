@@ -194,7 +194,7 @@ export default function FAQPage() {
                 placeholder="Search questions..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-14 pr-5 py-4 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-xl shadow-sm hover:shadow-md"
+                className="w-full pl-14 pr-5 py-4 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-all rounded-xl shadow-sm hover:shadow-md"
               />
             </div>
           </div>
@@ -283,7 +283,7 @@ export default function FAQPage() {
                       onChange={(e) => setChatInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && handleSend()}
                       placeholder="Ask about services, pricing, booking..."
-                      className="flex-1 px-5 py-3 border-2 border-[#E2E2E2] text-[16px] text-[#333] dark:text-[#e0e0e0] dark:bg-[#252528] dark:border-[#444] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-all rounded-lg"
+                      className="flex-1 px-5 py-3 border-2 border-[#E2E2E2] text-[16px] text-[#333] dark:text-[#e0e0e0] dark:bg-[#252528] dark:border-[#444] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-all rounded-lg"
                     />
                     <button
                       onClick={handleSend}

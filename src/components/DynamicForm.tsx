@@ -139,7 +139,7 @@ export default function DynamicForm({
           <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
         </div>
         <h3 className="text-[18px] font-heading font-bold text-[#333] dark:text-[#e0e0e0] mb-2">Submitted!</h3>
-        <p className="text-[15px] text-[#666] dark:text-[#999]">We&apos;ll get back to you within 24 hours.</p>
+        <p className="text-[15px] text-[#666] dark:text-[#666]">We&apos;ll get back to you within 24 hours.</p>
       </div>
     );
   }

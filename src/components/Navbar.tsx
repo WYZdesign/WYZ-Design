@@ -226,7 +226,7 @@ export default function Navbar() {
                         onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
                         onKeyDown={e => { if (e.key === "Enter") { const q = searchQuery.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; } } if (e.key === "Escape") { setSearchOpen(false); setSearchQuery(""); setSearchResults([]); } }}
                         placeholder="Search..."
-                        className="absolute inset-0 w-full pl-4 pr-11 text-[13px] border-[1.5px] border-[#DF3131] rounded-full bg-white text-[#333] placeholder:text-[#999] outline-none transition-colors" />
+                        className="absolute inset-0 w-full pl-4 pr-11 text-[13px] border-[1.5px] border-[#DF3131] rounded-full bg-white text-[#333] placeholder:text-[#757575] outline-none transition-colors" />
                       <button onClick={() => { const q = searchQuery.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; } }}
                         className="absolute right-1 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-full text-[#DF3131] hover:bg-[#DF3131]/10 transition-colors">
                         <FiSearch className="w-4 h-4" />
@@ -408,7 +408,7 @@ export default function Navbar() {
             {/* Mobile search */}
             <div className="px-6 pt-3 pb-2">
               <input type="text" placeholder="Search WYZ..."
-                className="w-full px-4 py-3 text-[14px] border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] placeholder:text-[#999] focus:border-[#DF3131] outline-none"
+                className="w-full px-4 py-3 text-[14px] border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] placeholder:text-[#757575] focus:border-[#DF3131] outline-none"
                 onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-5 space-y-1">

@@ -50,7 +50,7 @@ export default function BrandsPage() {
           <h1 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[2rem] sm:text-[2.5rem] lg:text-[3rem] tracking-[0.04em] leading-tight mb-4">
             One Vision. <span className="text-[#DF3131]">Four Brands.</span>
           </h1>
-          <p className="text-[#666] dark:text-[#999] text-[16px] lg:text-[18px] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[#666] dark:text-[#666] text-[16px] lg:text-[18px] max-w-2xl mx-auto leading-relaxed">
             Everything we make lives under one roof. WYZ Design is the company, and these four brands are how that vision shows up in the world.
           </p>
         </div>
@@ -67,7 +67,7 @@ export default function BrandsPage() {
                 {b.tagline}
               </span>
               <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.5rem] tracking-[0.03em] mb-3">{b.name}</h2>
-              <p className="text-[#666] dark:text-[#999] text-[15px] leading-relaxed mb-5">{b.shortDesc}</p>
+              <p className="text-[#666] dark:text-[#666] text-[15px] leading-relaxed mb-5">{b.shortDesc}</p>
               <span className="inline-flex items-center gap-1.5 text-[#DF3131] text-[13px] font-bold tracking-[0.08em] uppercase group-hover:gap-3 transition-all">
                 {b.cta} <FiArrowRight className="w-4 h-4" />
               </span>
@@ -77,7 +77,7 @@ export default function BrandsPage() {
 
         <div className="text-center p-8 bg-[#F5F5F3] dark:bg-[#252528] rounded-2xl">
           <p className="text-[#333] dark:text-[#e0e0e0] font-heading font-bold text-[1.15rem] mb-1">Built by Torreé Marcel Harris</p>
-          <p className="text-[#666] dark:text-[#999] text-[14px]">
+          <p className="text-[#666] dark:text-[#666] text-[14px]">
             Founder and Creative Director of WYZ Design and its family of brands.{" "}
             <Link href="/about" className="text-[#DF3131] hover:underline font-semibold">Read the full story</Link>
           </p>

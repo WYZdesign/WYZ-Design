@@ -35,7 +35,7 @@ export default function DawneeahsGlowCaseStudy() {
             <SocialShare title="Dawneeah's Glow Case Study" url="https://www.wyzdesign.com/case-studies/dawneeahs-glow" description="Brand identity, photography, e-commerce, and social strategy. $180K revenue in 90 days." />
           </div>
 
-          <div className="space-y-6 text-[15px] text-[#666] dark:text-[#888] leading-relaxed mb-12">
+          <div className="space-y-6 text-[15px] text-[#666] dark:text-[#666] leading-relaxed mb-12">
             <p>Dawneeah&apos;s Glow is a skincare brand built by a founder with a clear vision but no visual system to match it. WYZ Design built the full identity, from logo and color to typography and photography direction, then carried it into a Shopify storefront and social strategy.</p>
             <p>The result: a cohesive brand that converted browsers into buyers. The brand hit $180K in revenue within the first 90 days of launch.</p>
           </div>

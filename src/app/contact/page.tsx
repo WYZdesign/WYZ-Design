@@ -23,7 +23,7 @@ export default function ContactPage() {
           <h1 className="text-[1.35rem] sm:text-[1.8rem] md:text-[2.25rem] lg:text-[2.7rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>CONTACT US</h1>
           </TextMaskReveal>
           </div>
-          <p className="text-[#666] dark:text-[#999] text-center mb-10 text-[15px] leading-relaxed">
+          <p className="text-[#666] dark:text-[#666] text-center mb-10 text-[15px] leading-relaxed">
             Have a question, project idea, or just want to say hello? Drop us a message and we&apos;ll get back to you within 24 hours.
           </p>
 
@@ -46,7 +46,7 @@ export default function ContactPage() {
             </div>
             <div className="p-6 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333]">
               <p className="text-[13px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] mb-2">LOCATION</p>
-              <p className="text-[#666] dark:text-[#999] text-[14px]">Chicago + Los Angeles</p>
+              <p className="text-[#666] dark:text-[#666] text-[14px]">Chicago + Los Angeles</p>
             </div>
           </div>
         </div>

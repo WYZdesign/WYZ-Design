@@ -210,7 +210,7 @@ export default function ModelArchivePage() {
  {!showApply && !selectedModel && (
  <>
  <input type="text" placeholder="Search models..." value={search} onChange={e => setSearch(e.target.value)}
- className="w-full max-w-md px-5 py-3 bg-[#F5F5F3] dark:bg-white/10 border border-[#E2E2E2] dark:border-white/20 rounded-full text-[#333] dark:text-white placeholder-[#888] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors mb-8" />
+ className="w-full max-w-md px-5 py-3 bg-[#F5F5F3] dark:bg-white/10 border border-[#E2E2E2] dark:border-white/20 rounded-full text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors mb-8" />
  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
   {filtered.map((m, i) => (
   <ImageHoverReveal key={i}>
@@ -307,13 +307,13 @@ export default function ModelArchivePage() {
  <form onSubmit={handleSubmit} className="space-y-4">
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  <input name="fullName" placeholder="Full Name *" aria-label="Full name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
- className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#888] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
+ className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
  <input name="email" placeholder="Email *" type="email" aria-label="Email address" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
- className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#888] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
+ className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  <input name="phone" placeholder="Phone" type="tel" aria-label="Phone number" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })}
- className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#888] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
+ className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
  <select name="experience" aria-label="Experience level" value={formData.experience} onChange={e => setFormData({ ...formData, experience: e.target.value })}
  className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white/60 text-sm outline-none focus:border-[#DF3131] transition-colors">
  <option value="">Experience Level</option>
@@ -325,7 +325,7 @@ export default function ModelArchivePage() {
  </select>
  </div>
  <textarea name="message" placeholder="Tell us about yourself and your modeling goals..." aria-label="About yourself" rows={4} value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}
- className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#888] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors resize-none" />
+ className="w-full px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors resize-none" />
  <button type="submit" disabled={submitting} className="w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase hover:bg-[#B82020] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
  <FiSend className="w-4 h-4" /> {submitting ? "SUBMITTING..." : "BE A MODEL"}
  </button>

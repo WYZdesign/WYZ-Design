@@ -205,7 +205,7 @@ export default function ReferralPage() {
                   {leaderboard.map((leader, i) => (
                     <div key={leader.name} className={`flex items-center justify-between p-4 rounded-xl ${i === 0 ? "bg-[#DF3131]/10 border border-[#DF3131]/30" : "bg-[#F5F5F3] dark:bg-[#1C1C1E]"}`}>
                       <div className="flex items-center gap-4">
-                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-heading font-black text-[14px] ${i === 0 ? "bg-[#DF3131] text-white" : i === 1 ? "bg-[#D49341] text-white" : i === 2 ? "bg-[#888] text-white" : "bg-[#E2E2E2] dark:bg-[#444] text-[#666] dark:text-white/50"}`}>
+                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-heading font-black text-[14px] ${i === 0 ? "bg-[#DF3131] text-white" : i === 1 ? "bg-[#D49341] text-white" : i === 2 ? "bg-[#757575] text-white" : "bg-[#E2E2E2] dark:bg-[#444] text-[#666] dark:text-white/50"}`}>
                           {i + 1}
                         </span>
                         <span className="font-heading font-bold text-[#333] dark:text-white">{leader.name}</span>
@@ -249,7 +249,7 @@ export default function ReferralPage() {
                         <span className={`font-heading font-bold text-[14px] ${conv.status === "paid" ? "text-green-600" : "text-[#DF3131]"}`}>
                           +${conv.commission?.toFixed(2) || "0.00"}
                         </span>
-                        <p className="text-[11px] text-[#999] dark:text-white/30">{new Date(conv.created_at).toLocaleDateString()}</p>
+                        <p className="text-[11px] text-[#666] dark:text-white/30">{new Date(conv.created_at).toLocaleDateString()}</p>
                       </div>
                     </div>
                   ))}

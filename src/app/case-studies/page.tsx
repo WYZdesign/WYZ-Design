@@ -77,7 +77,7 @@ export default function CaseStudiesIndex() {
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-6 sm:mb-8">
             CASE <span className="text-[#DF3131]">STUDIES</span>
           </h1>
-          <p className="text-[#666] dark:text-[#888] text-[16px] max-w-xl mx-auto leading-relaxed">
+          <p className="text-[#666] dark:text-[#666] text-[16px] max-w-xl mx-auto leading-relaxed">
             Real projects. Real results. How WYZ Design helps artists, brands, studios, and culture driven businesses turn ideas into execution.
           </p>
         </section>
@@ -91,7 +91,7 @@ export default function CaseStudiesIndex() {
                   <div>
                     <span className="text-[12px] font-heading font-bold tracking-[0.1em] uppercase mb-2" style={{ color: cs.color }}>{cs.tag}</span>
                     <h2 className="text-[20px] sm:text-[24px] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.03em] group-hover:text-[#DF3131] transition-colors mb-4">{cs.title}</h2>
-                    <p className="text-[14px] text-[#666] dark:text-[#888] mt-3 max-w-2xl">{cs.desc}</p>
+                    <p className="text-[14px] text-[#666] dark:text-[#666] mt-3 max-w-2xl">{cs.desc}</p>
                   </div>
                   <span className="text-[#ccc] dark:text-[#666] group-hover:text-[#DF3131] transition-colors text-[24px] hidden sm:block">→</span>
                 </div>
@@ -101,13 +101,13 @@ export default function CaseStudiesIndex() {
 
           <div className="text-center mt-16 p-12 bg-[#F5F5F3] dark:bg-[#252528]">
             <h2 className="font-heading font-black text-[1.5rem] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em] mb-4">Your Project Here</h2>
-            <p className="text-[#666] dark:text-[#888] text-[15px] max-w-lg mx-auto mb-6">Want to be the next case study? Let us build something worth documenting.</p>
+            <p className="text-[#666] dark:text-[#666] text-[15px] max-w-lg mx-auto mb-6">Want to be the next case study? Let us build something worth documenting.</p>
             <div className="flex flex-col items-center gap-4">
               <Link href="/contact" className="inline-block bg-[#DF3131] text-white px-10 py-4 font-heading font-bold tracking-[0.15em] uppercase text-[14px] hover:bg-[#B82020] transition-all">
                 Start a Project
               </Link>
               <div className="flex items-center gap-3">
-                <span className="text-[13px] text-[#999] dark:text-white/40 font-bold tracking-[0.1em] uppercase">Share</span>
+                <span className="text-[13px] text-[#666] dark:text-white/40 font-bold tracking-[0.1em] uppercase">Share</span>
                 {SOCIAL_SHARE.map(s => (
                   <ShareButton key={s.name} {...s} />
                 ))}

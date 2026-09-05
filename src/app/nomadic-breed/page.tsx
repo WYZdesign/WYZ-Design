@@ -82,7 +82,7 @@ export default function NomadicBreedPage() {
         <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.8rem] lg:text-[2.2rem] tracking-[0.04em] mb-6">
           Every Location Is a <span className="text-[#00E5FF]">Set</span>
         </h2>
-        <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed max-w-2xl mx-auto">
+        <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
           Nomadic Breed was built for the creators who move. Artists on tour, brands doing pop-ups, events that happen once — you need a crew that can show up anywhere and deliver the same quality as a studio shoot. That&apos;s us. We pack light, move fast, and never compromise on the standard.
         </p>
       </section>
@@ -98,7 +98,7 @@ export default function NomadicBreedPage() {
                   <Icon className="w-5 h-5 text-[#00E5FF]" />
                 </div>
                 <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.03em] mb-3">{s.title}</h3>
-                <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">{s.desc}</p>
+                <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">{s.desc}</p>
               </div>
             );
           })}
@@ -122,7 +122,7 @@ export default function NomadicBreedPage() {
 
       {/* Back to brands */}
       <div className="text-center">
-        <Link href="/brands" className="inline-flex items-center gap-2 text-[#666] dark:text-[#999] text-[14px] hover:text-[#DF3131] transition-colors">
+        <Link href="/brands" className="inline-flex items-center gap-2 text-[#666] dark:text-[#666] text-[14px] hover:text-[#DF3131] transition-colors">
           <FiArrowRight className="w-4 h-4 rotate-180" /> Back to all brands
         </Link>
       </div>

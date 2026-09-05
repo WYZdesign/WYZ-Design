@@ -150,7 +150,7 @@ function DynamicContentUnderHero() {
             <div key={f.title} className="bg-white dark:bg-[#252528] p-6 sm:p-8 rounded-xl border border-[#E2E2E2] dark:border-[#444] shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 transition-all text-center">
               <div className="text-[2.5rem] sm:text-[3rem] mb-4">{f.icon}</div>
               <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.05em] mb-2">{f.title}</h3>
-              <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed">{f.desc}</p>
+              <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
@@ -250,7 +250,7 @@ function DynamicContentUnderShop() {
         <div className="text-center mb-8 sm:mb-12">
           <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">EVERY PIECE HAS A STORY</span>
           <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Built From The Crew, For The Crew</h2>
-          <p className="text-[#666] dark:text-[#999] text-[15px] max-w-2xl mx-auto mt-3">Every design comes from a real artist with a real story. No generic graphics. No mass-produced templates. Just art that means something.</p>
+          <p className="text-[#666] dark:text-[#666] text-[15px] max-w-2xl mx-auto mt-3">Every design comes from a real artist with a real story. No generic graphics. No mass-produced templates. Just art that means something.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {designStories.map((d) => (
@@ -261,7 +261,7 @@ function DynamicContentUnderShop() {
               <h4 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.04em] mb-2">{d.name}</h4>
               <div className={`overflow-hidden transition-all duration-500 ${expandedId === d.id ? "max-h-[200px]" : "max-h-0"}`}>
                 <div className="pb-4">
-                  <p className="text-[#666] dark:text-[#999] text-[14px] leading-relaxed mb-2">{d.story}</p>
+                  <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed mb-2">{d.story}</p>
                   <p className="text-[#DF3131] dark:text-[#DF3131] text-[13px] font-bold tracking-[0.05em] uppercase">{d.meaning}</p>
                 </div>
               </div>
@@ -854,7 +854,7 @@ export default function MerchPage() {
             </div>
             {crossSells.length > 0 && (
               <div className="border-t border-[#E2E2E2] p-8">
-                <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#999] mb-2">You might also like</p>
+                <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#666] mb-2">You might also like</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">

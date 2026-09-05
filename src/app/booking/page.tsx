@@ -172,19 +172,19 @@ export default function BookingPage() {
               {/* Name */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Full Name *</label>
-                <input type="text" name="name" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
+                <input type="text" name="name" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
               </div>
 
               {/* Email */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Email *</label>
-                <input type="email" name="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
+                <input type="email" name="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
               </div>
 
               {/* Phone */}
               <div>
                 <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Phone</label>
-                <input type="tel" name="phone" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
+                <input type="tel" name="phone" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
               </div>
 
               {/* Service */}
@@ -227,7 +227,7 @@ export default function BookingPage() {
             {/* Message */}
             <div className="mt-6">
               <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Project Details *</label>
-              <textarea name="message" required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#8F8F8F] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
+              <textarea name="message" required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
             </div>
 
             {/* How did you hear about us */}
