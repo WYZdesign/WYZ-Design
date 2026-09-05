@@ -87,6 +87,7 @@ export default function BlogPage() {
  <div className="flex gap-2 flex-wrap">
  {CATS.map(c => (
  <button key={c} onClick={() => setCat(c)}
+ aria-pressed={cat === c}
  className={`px-5 py-2.5 min-h-[44px] text-[13px] font-semibold tracking-[0.08em] rounded-full border-2 transition-all ${cat === c ? "bg-[#DF3131] text-white border-[#DF3131] shadow-md shadow-[#DF3131]/20" : "bg-white text-[#666] border-[#E2E2E2] dark:bg-[#252528] dark:text-[#e0e0e0] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"}`}>
  {c}
  </button>

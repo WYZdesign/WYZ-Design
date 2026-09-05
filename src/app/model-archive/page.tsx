@@ -306,9 +306,9 @@ export default function ModelArchivePage() {
  ) : (
  <form onSubmit={handleSubmit} className="space-y-4">
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
- <input name="fullName" placeholder="Full Name *" aria-label="Full name" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
+ <input name="fullName" placeholder="Full Name *" aria-label="Full name" required aria-required="true" value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
  className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
- <input name="email" placeholder="Email *" type="email" aria-label="Email address" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
+ <input name="email" placeholder="Email *" type="email" aria-label="Email address" required aria-required="true" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
  className="px-4 py-3 bg-[#F5F5F3] dark:bg-white/5 border border-[#E2E2E2] dark:border-white/20 text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors" />
  </div>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

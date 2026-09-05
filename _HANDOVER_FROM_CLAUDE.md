@@ -262,3 +262,40 @@ src/app/gift-card/page.tsx
 - Remaining MEDIUM/LOW items from WYZMiND's list not yet addressed: #6 (generic alt text on home carousel), #9 (lightbox backdrop closes on image click), #11 (booking form errors lack `aria-live`), #14 (`aria-modal` on `useModalA11y`'s own generic overlay markup, if any exists beyond what callers render), #16/#17 (blog/case-studies filter `aria-pressed` — gallery's was already fixed in round 13, these two weren't), #20 (gift-card `aria-live` for form state), #21 (`ServiceFlipCard` div-as-button), #22 (booking form `aria-labelledby`), and the 8 LOW items (touch target sizes, `aria-required`, generic alt text on merch gallery, `useSwipe` keyboard equivalents, lightbox counter `aria-live`).
 - Community page backend decision (flagged rounds 14 & 15, still unaddressed).
 - CSS keyframe consolidation (14 files) and loading-state coverage audit (flagged round 15, still open).
+
+
+---
+
+# Round 17 — Claude Update: Confirmed relay, small remaining a11y cleanup
+
+**Confirmed round 16 landed intact.** All 9 fixes from round 16 (merch modal focus trap, `focusPulse` one-pulse, video `aria-hidden`, color/size `aria-pressed`, product card keyboard nav, 3-Point Program tab semantics, landmark roles, gift-card label association) show up verbatim in commit `39e8206` — same commit message wording as my handover, confirmed byte-identical against local files (CRLF-only diff). A separate commit `4b8df4b` (dark-mode text-contrast fixes on error/not-found pages, Navbar, 3pointprogram) landed on top — unrelated to my open items, no conflict.
+
+## Real fix this round
+
+1. **Blog category filter pills missing `aria-pressed`** (`src/app/blog/page.tsx`) — same pattern already fixed on gallery (round 13) and case-studies filters elsewhere; blog's was still missing. Added.
+2. **Gallery filter pills under the 44px touch-target minimum** (`src/app/gallery/page.tsx`) — `px-5 py-2.5 text-sm` measures under 44px tall. Added `min-h-[44px] inline-flex items-center justify-center`. Fixes violation #23.
+3. **Model-archive required fields missing `aria-required`** (`src/app/model-archive/page.tsx`) — the native `required` attribute was already present (screen readers generally announce this fine on its own), but added explicit `aria-required="true"` to the name and email fields per WYZMiND's violation #25 for completeness.
+
+## Two more items on WYZMiND's list that turned out to be stale/already-fixed (verified, not touched)
+
+- **#17 — "case-studies filter buttons lack `aria-pressed`."** The case-studies page has no filter buttons anymore — just a list of case studies and the copy-share-link button (fixed round 13). Whatever this citation referenced doesn't exist in the current code. No action needed.
+- **#9 — "lightbox backdrop closes on image click (accidental close on tap)."** Checked `GalleryLightbox` in `gallery/page.tsx`: the image's `onClick` already calls `e.stopPropagation()` before firing `onImageTap` (a harmless tap-registration callback, not close) — the backdrop's `onClose` never fires from an image tap. Already correct.
+
+Both are noted here so nobody re-flags them next pass — same self-correction discipline as rounds 15-16, just this time confirming an existing fix rather than finding a false alarm before writing code.
+
+## Still open (WYZMiND's original 30-item list)
+
+- **#1 — brand red contrast** — still needs your design call (see round 16 handover).
+- **#6** (generic alt text on home carousel), **#11** (booking form errors lack `aria-live`), **#14** (`aria-modal` on any remaining bare `useModalA11y` overlay markup), **#20** (gift-card `aria-live` for form state), **#22** (booking form `aria-labelledby`), and the remaining LOW items (touch targets on model-archive/photography lightbox nav buttons, generic alt text on merch gallery carousel, `useSwipe` keyboard equivalents, lightbox counter `aria-live`).
+- Community page backend decision (flagged rounds 14, 15 — still unaddressed).
+- CSS keyframe consolidation (14 files) and loading-state coverage audit (flagged round 15 — still open).
+
+## Files touched this round
+
+```
+src/app/blog/page.tsx
+src/app/gallery/page.tsx
+src/app/model-archive/page.tsx
+```
+
+`npx tsc --noEmit` — clean, 0 errors.

@@ -121,7 +121,7 @@ export default function GalleryPage() {
  {CATS.map(c => {
   const isActive = cat === c;
   return (
-   <button key={c} onClick={() => setCat(c)} className={`px-5 py-2.5 text-sm font-semibold tracking-[0.1em] rounded-full border transition-all ${
+   <button key={c} onClick={() => setCat(c)} className={`px-5 py-2.5 min-h-[44px] inline-flex items-center justify-center text-sm font-semibold tracking-[0.1em] rounded-full border transition-all ${
     isActive
      ? "bg-[#DF3131] text-white border-[#DF3131] shadow-lg shadow-[#DF3131]/30"
      : "border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-[#e0e0e0] hover:border-[#DF3131] hover:text-[#DF3131]"
