@@ -375,5 +375,17 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 
 ### Fix Log
 
+#### 2026-09-04 — Round 15 (`24065c7` — deployed READY, verified live)
+- **E41 Em-Dash Ban:** purged all user-facing em dashes — chat KNOWLEDGE (25), brands longDesc, PricingCalculator FAQ (2), StrategyWizard rushNote (+ en dashes), email.ts signatures (3), fd/drive API error hint, my-account empty-state copy, dying-breed-crew body + OG/twitter card titles. Only comments + dead files retain dashes.
+- **E45 Brand Naming:** "View Loyalty Dashboard" → "View Rewards Dashboard". Silver/Gold/Diamond matches verified = artwork filenames (Diamond Kiss, Gold Drop) + palette description only — legit. No Loyalty Program remnants in user-facing copy.
+- **Referrer-Policy conflict:** unified next.config.ts to `strict-origin-when-cross-origin` (matches vercel.json). Live header verified.
+- **Duplicate themeColor metas:** removed `themeColor` from `viewport` export; production now emits exactly 2 media-queried metas (light #DF3131 / dark #1C1C1E). Verified live.
+- **Sitemap:** added `/splash`. Confirmed J-H2 gaps already resolved in `e2103d5` (booking, booking-calendars, merch/concepts, match, splash-gallery/showcase, merch/[id] derived from PRODUCT_IDS).
+- **Vercl cron:** `/api/backup` 404 already fixed in `e2103d5` → `/api/health` (exists). Closed.
+- **`.5` class token (LOW):** 100+ matches audited — all legitimate Tailwind spacing utilities (px-2.5, py-3.5, w-1.5...). No stray token. Closed no-op.
+- **Admin `↓` arrow (LOW):** admin-only decorative sidebar glyph, not emoji, no public surface. Closed with rationale (icon-library adoption tracked as design-system work).
+- **Housekeeping note:** 13 orphaned `metadata.ts` files (about, community, booking, blog, case-studies, web-design, wyzmind, 3pointprogram, clear-cache, my-account, view, admin, etc.) are superseded by per-route `layout.tsx` metadata — dead files, zero runtime effect. Safe to delete or ignore.
+- **Still open:** E47 emoji policy (MEDIUM — FDDriveBrowser/fd/PageRenderer/api-pages HTML), Printful $0.00, autocomplete/aria Easy-Win-C, Wave 1 HIGH stack.
+
 
 
