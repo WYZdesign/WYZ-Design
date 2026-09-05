@@ -709,8 +709,12 @@ export default function ForumPage() {
   const visibleThreads =
     activeCat === "all" ? sortedThreads : sortedThreads.filter((t) => t.category === activeCat);
 
-  return (
+return (
     <main className="pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
+      <div className="bg-[#DF3131]/10 border-b-2 border-[#DF3131] px-6 py-3 text-center">
+        <p className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#DF3131]">Community Preview</p>
+        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0] mt-0.5">Votes, posts, and threads live on <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="text-[#DF3131] underline">Discord</a> — this page is a demo with local state only.</p>
+      </div>
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6 pt-32 lg:pt-40">
           <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>COMMUNITY</h1>
