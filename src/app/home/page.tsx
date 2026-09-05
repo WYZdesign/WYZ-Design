@@ -805,6 +805,8 @@ function VideoPlaylist({ videos }: { videos: string[] }) {
   style={{ transform: "scale(1.10)" }}
   muted
   playsInline
+  aria-hidden="true"
+  tabIndex={-1}
   onEnded={advance}
   preload="metadata"
   />

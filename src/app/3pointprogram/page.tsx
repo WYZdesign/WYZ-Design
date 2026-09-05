@@ -60,9 +60,10 @@ export default function ThreePointProgramPage() {
           </div>
 
           {/* Pillar tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
+          <div role="tablist" aria-label="Program pillars" className="flex flex-wrap justify-center gap-3 mb-10">
             {PILLARS.map((p, i) => (
               <button key={i} onClick={() => setActivePillar(i)}
+                role="tab" aria-selected={activePillar === i}
                 className={`px-6 py-3 rounded-full text-[12px] font-bold tracking-[0.1em] uppercase transition-all ${
                   activePillar === i ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/70 hover:border-[#DF3131]"
                 }`}>

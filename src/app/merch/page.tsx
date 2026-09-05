@@ -5,6 +5,7 @@ import SafeImage from "@/components/SafeImage";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { useModalA11y } from "@/hooks/useModalA11y";
 import { getSiteUrl } from "@/lib/site-url";
 
 interface Product {
@@ -396,6 +397,8 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
         const parallaxY = scrollY * 0.02 * depth;
         return (
           <div key={product.id} className="group cursor-pointer" onClick={() => onSelect(product)}
+            role="button" tabIndex={0} aria-label={`View ${product.name}`}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(product); } }}
             style={{
               transform: `rotate(${pos.rotate}deg) translate(${pos.offsetX}px, ${pos.offsetY + parallaxY}px) scale(${pos.scale})`,
               transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
@@ -425,6 +428,8 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-8">
       {products.map((product) => (
         <div key={product.id} className="group cursor-pointer"
+          role="button" tabIndex={0} aria-label={`View ${product.name}`}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(product); } }}
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
           <div className={`bg-[#f5f5f5] aspect-[4/5] overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
@@ -458,6 +463,8 @@ export default function MerchPage() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [quickColor, setQuickColor] = useState(0);
   const [quickSize, setQuickSize] = useState("M");
+  const quickViewRef = useRef<HTMLDivElement>(null);
+  useModalA11y(() => setSelectedProduct(null), { lockScroll: true, active: !!selectedProduct, containerRef: quickViewRef });
   const [products, setProducts] = useState<Product[]>([]);
   const [showStore, setShowStore] = useState(false);
   const [storeVisible, setStoreVisible] = useState(false);
@@ -806,7 +813,7 @@ export default function MerchPage() {
       {/* Quick View Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setSelectedProduct(null)}>
-          <div className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div ref={quickViewRef} role="dialog" aria-modal="true" aria-labelledby="quick-view-title" className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
                 <SafeImage src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover" />
@@ -815,7 +822,7 @@ export default function MerchPage() {
               <div className="p-8">
                 <button onClick={() => setSelectedProduct(null)} className="text-[#666] hover:text-[#333] text-[15px] mb-4 block">&larr; Back to shop</button>
                 <p className="text-[12px] text-[#666] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
-                <h2 className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
+                <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
                 <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct.price)}</p>
                 <p className="text-[14px] text-[#666] mb-4">{selectedProduct.description}</p>
                 {selectedProduct.rating && (
@@ -829,6 +836,8 @@ export default function MerchPage() {
                   <div className="flex gap-2">
                     {selectedProduct.colors.map((color, i) => (
                       <button key={i} onClick={() => setQuickColor(i)}
+                        aria-pressed={quickColor === i}
+                        aria-label={`Color option ${i + 1}`}
                         className={`w-9 h-9 rounded-full border-2 transition-all ${quickColor === i ? "border-[#DF3131] ring-2 ring-[#DF3131]/30 scale-110" : "border-[#ccc] hover:scale-105"}`}
                         style={{ backgroundColor: color }} />
                     ))}
@@ -839,6 +848,7 @@ export default function MerchPage() {
                   <div className="flex gap-2">
                     {["XS", "S", "M", "L", "XL", "2XL"].map((size) => (
                       <button key={size} onClick={() => setQuickSize(size)}
+                        aria-pressed={quickSize === size}
                         className={`w-11 h-11 border text-[14px] font-semibold transition-all ${quickSize === size ? "bg-[#DF3131] text-white border-[#DF3131] scale-105" : "border-[#ccc] hover:border-[#DF3131]"}`}>
                         {size}
                       </button>

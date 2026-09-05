@@ -202,3 +202,63 @@ src/app/wyzmind/page.tsx
 - CSS keyframe consolidation (14 files) — cosmetic architecture debt, not urgent.
 - Loading-state coverage audit — not yet done page-by-page.
 - Core Web Vitals real numbers — need to be pulled from the live Vercel dashboard, not obtainable from this sandbox.
+
+
+---
+
+# Round 16 — Claude Update: Working from WYZMiND's honest a11y audit
+
+**Confirmed the relay worked.** All round-15 edits (`layout.tsx` DNS hints, `wyzmind/page.tsx` reduced-motion) show up byte-identical in `967f0f1` — the only diff against my local copies was CRLF vs LF line endings, verified with `git show HEAD:<file> | tr -d '\r'` against the local file. Nothing was lost or overwritten.
+
+**WYZMiND's honest scorecard replaced the old `AUDIT.md`** with a real 100-domain framework (10 clusters A-J) plus a genuinely evidence-based Frontend Performance/UX/Accessibility scoring pass — and it landed lower than mine (5.4/10 Performance, 6.0/10 UX, 4.5/10 Accessibility, vs. my 7.8/7.8). Theirs is more granular — specific WCAG citations, line numbers, 30 named accessibility violations with severity — where mine was subcategory-level. Rather than defend my numbers, I went and fixed the specific violations they found. This is real convergence, not a conflict: two honest passes finding different depths of the same territory.
+
+## Real fixes made this round (from WYZMiND's 30-item a11y violation list)
+
+1. **Merch quick-view modal had zero a11y wiring** (`src/app/merch/page.tsx`) — no `useModalA11y`, no `role="dialog"`/`aria-modal`, no focus trap, no scroll lock. Wired it up: `useModalA11y(..., { lockScroll: true, containerRef })` with `containerRef` passed for the first real end-to-end use of the focus-trap feature WYZMiND added to the hook in `967f0f1` (nobody was actually passing `containerRef` yet). Added `role="dialog"`, `aria-modal="true"`, `aria-labelledby` pointing at the product name heading. Fixes violations #3 and #4.
+
+2. **`focusPulse` infinite animation on `:focus-visible`** (`globals.css:1319`) — WYZMiND flagged this HIGH/WCAG 2.3.3 (photosensitivity risk from an animation that pulses forever on every focused element, independent of `prefers-reduced-motion`). Changed `1.5s ease-in-out infinite` → `0.6s ease-in-out 1` — one visible pulse on focus, then it settles, same brand-red ring stays visible via the base `:focus-visible` rule. Fixes violation #2.
+
+3. **Home hero background video had no `aria-hidden`** (`src/app/home/page.tsx`, `VideoPlaylist`) — WYZMiND flagged missing captions/transcripts (WCAG 1.2.1). Confirmed the video is `muted` with zero audio track — a purely decorative background loop, so captions would be nonsensical. The correct fix is marking it as non-content for assistive tech: added `aria-hidden="true"` and `tabIndex={-1}`. Fixes violation #5.
+
+4. **Merch color/size swatch buttons lacked `aria-pressed`** (`merch/page.tsx:835,845`) — added `aria-pressed` to both, plus `aria-label` on the color swatches (they're bare colored circles with no visible text). Fixes violation #12.
+
+5. **Product cards were unclickable by keyboard** (`ProductGrid` and `ScatteredGrid` in `merch/page.tsx`) — both used `<div onClick>` with no keyboard path at all (WCAG 2.1.1). Rather than restructure the whole card into a `<button>` (risk of breaking the existing nested-image/badge layout), added `role="button"`, `tabIndex={0}`, `aria-label`, and an `onKeyDown` handler for Enter/Space — same effective operability, zero layout risk. Fixes violation #13.
+
+6. **Model-archive search input had no label** (`model-archive/page.tsx`) — placeholder-only, no `<label>` or `aria-label`. Added `aria-label="Search models"`. Fixes violation #10.
+
+7. **3-Point Program pillar tabs lacked tab semantics** (`3pointprogram/page.tsx`) — added `role="tablist"` on the container and `role="tab"` + `aria-selected` on each button. Fixes violation #18.
+
+8. **Landmark gaps** — `<main>` wrapper in `layout.tsx` had `tabIndex={-1}` but no `role="main"` (violation #19); `Footer.tsx` and `Navbar.tsx` had no `aria-label` (violations #27, #28). All three added.
+
+9. **Gift-card email field label wasn't associated with its input** (`gift-card/page.tsx`) — visible `<label>` existed but no `htmlFor`/`id` pairing (violation #15). Added `id="gift-card-email"` + matching `htmlFor`.
+
+## Flagged, not fixed — needs a design decision, not a code fix
+
+- **Violation #1 — brand red contrast.** WYZMiND measured `#DF3131` on white at ~4.48:1, which fails WCAG AA (4.5:1) for normal-size text. It's used as text color in 438 places sitewide — prices, headings, links, accents. Many of those are bold/large text (which only needs 3:1 and already passes), but I didn't audit all 438 usages individually to split "large text, fine" from "small text, fails" — that's real work, and even where it does fail, darkening the brand red is a design decision that affects the whole visual identity, not something to change unilaterally. Recommend: either (a) accept it as a deliberate brand choice for large/bold text and only fix small-text usages case-by-case, or (b) pick a slightly darker red for text-only contexts and keep `#DF3131` for buttons/backgrounds where white text sits on top of it (that pairing is a different, and much better, contrast ratio). Needs your call.
+
+## Environment note
+
+This sandbox's Linux VM can't run `npm run build` — no network route to fetch the SWC binary (`EAI_AGAIN registry.npmjs.org`), so I could only verify with `tsc --noEmit` (clean, 0 errors) this round. Per your own round-17 lesson (tsc doesn't validate CSS, and a `globals.css` edit once shipped a `CssSyntaxError` straight to production), please run a real `npm run build` locally before pushing — my `globals.css` change was a single value edit with no braces touched, so it's low-risk, but "low-risk" isn't "verified."
+
+## Files touched this round
+
+```
+src/app/merch/page.tsx
+src/app/globals.css
+src/app/home/page.tsx
+src/app/model-archive/page.tsx
+src/app/3pointprogram/page.tsx
+src/app/layout.tsx
+src/components/Footer.tsx
+src/components/Navbar.tsx
+src/app/gift-card/page.tsx
+```
+
+`npx tsc --noEmit` — clean, 0 errors. `npm run build` — not runnable from this sandbox (see above); needs local verification before commit.
+
+## Still open
+
+- Violation #1 (color contrast) — needs a design decision, see above.
+- Remaining MEDIUM/LOW items from WYZMiND's list not yet addressed: #6 (generic alt text on home carousel), #9 (lightbox backdrop closes on image click), #11 (booking form errors lack `aria-live`), #14 (`aria-modal` on `useModalA11y`'s own generic overlay markup, if any exists beyond what callers render), #16/#17 (blog/case-studies filter `aria-pressed` — gallery's was already fixed in round 13, these two weren't), #20 (gift-card `aria-live` for form state), #21 (`ServiceFlipCard` div-as-button), #22 (booking form `aria-labelledby`), and the 8 LOW items (touch target sizes, `aria-required`, generic alt text on merch gallery, `useSwipe` keyboard equivalents, lightbox counter `aria-live`).
+- Community page backend decision (flagged rounds 14 & 15, still unaddressed).
+- CSS keyframe consolidation (14 files) and loading-state coverage audit (flagged round 15, still open).

@@ -209,7 +209,7 @@ export default function ModelArchivePage() {
  {/* Model Grid */}
  {!showApply && !selectedModel && (
  <>
- <input type="text" placeholder="Search models..." value={search} onChange={e => setSearch(e.target.value)}
+ <input type="text" placeholder="Search models..." aria-label="Search models" value={search} onChange={e => setSearch(e.target.value)}
  className="w-full max-w-md px-5 py-3 bg-[#F5F5F3] dark:bg-white/10 border border-[#E2E2E2] dark:border-white/20 rounded-full text-[#333] dark:text-white placeholder-[#757575] dark:placeholder-white/40 text-sm outline-none focus:border-[#DF3131] transition-colors mb-8" />
  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
   {filtered.map((m, i) => (

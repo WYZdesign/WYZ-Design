@@ -77,8 +77,8 @@ export default function GiftCardPage() {
         </div>
 
         <div className="max-w-md mx-auto mb-16 text-center">
-          <label className="block text-sm font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-1 text-center">Your Email (for receipt)</label>
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" autoComplete="email" className="w-full border border-gray-300 dark:border-[#555] px-4 py-3 min-h-[44px] text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:outline-none" />
+          <label htmlFor="gift-card-email" className="block text-sm font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-1 text-center">Your Email (for receipt)</label>
+          <input id="gift-card-email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" autoComplete="email" className="w-full border border-gray-300 dark:border-[#555] px-4 py-3 min-h-[44px] text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:outline-none" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-16">

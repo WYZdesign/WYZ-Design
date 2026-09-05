@@ -1316,7 +1316,7 @@ section:first-of-type, section[id], section[data-anchor] { content-visibility: v
   70% { box-shadow: 0 0 0 6px rgba(223, 49, 49, 0); }
   100% { box-shadow: 0 0 0 0 rgba(223, 49, 49, 0); }
 }
-:focus-visible { animation: focusPulse 1.5s ease-in-out infinite; }
+:focus-visible { animation: focusPulse 0.6s ease-in-out 1; }
 
 /* Smooth underline link */
 .link-underline { position: relative; text-decoration: none; }

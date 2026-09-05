@@ -96,7 +96,7 @@ export default function Footer() {
   const precisionColor = "text-white/30 dark:text-white/30";
 
   return (
-    <footer className="relative overflow-hidden bg-[#111] dark:bg-[#111]">
+    <footer aria-label="Site footer" className="relative overflow-hidden bg-[#111] dark:bg-[#111]">
       {/* Newsletter banner */}
       <div className="bg-[#111] dark:bg-[#111]">
         <div className="max-w-[115rem] mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
