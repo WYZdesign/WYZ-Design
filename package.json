@@ -13,7 +13,7 @@
     "@calcom/embed-core": "^1.5.3",
     "@calcom/embed-react": "^1.5.3",
     "@sentry/nextjs": "^10.69.0",
-    "@supabase/ssr": "^0.12.3",
+    "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.110.7",
     "@tensorflow/tfjs": "^4.22.0",
     "@types/better-sqlite3": "^9.6.0",
