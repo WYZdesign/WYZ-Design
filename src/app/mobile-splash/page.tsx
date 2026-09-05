@@ -213,7 +213,8 @@ export default function MobileSplashPage() {
               </h2>
               <button
                 onClick={() => setSelectedConcept(null)}
-                className="text-[#666] hover:text-white text-xl"
+                aria-label="Close concept"
+                className="text-[#666] hover:text-white text-xl min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 ×
               </button>

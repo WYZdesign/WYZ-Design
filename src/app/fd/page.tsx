@@ -484,8 +484,8 @@ export default function FDOraclePage() {
                   setSelectedEvent(next);
                 }} className="text-sm text-zinc-400 hover:text-white transition-colors flex items-center gap-1">Next →</button>
               </div>
-              <button onClick={() => setSelectedEvent(null)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center text-sm hover:bg-black/80 transition-all">✕</button>
+              <button onClick={() => setSelectedEvent(null)} aria-label="Close event detail"
+                className="absolute top-4 right-4 w-8 h-8 min-w-[44px] min-h-[44px] rounded-full bg-black/50 text-white flex items-center justify-center text-sm hover:bg-black/80 transition-all">✕</button>
             </motion.div>
           </motion.div>
         )}

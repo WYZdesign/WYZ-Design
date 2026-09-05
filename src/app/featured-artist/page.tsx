@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FiUser, FiEdit3, FiCalendar, FiMapPin, FiHeart, FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useZeal } from "@/components/ZealProvider";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 const WS = [
   { icon: <FiUser />, label: "WHO", value: "Donte \"Danny\" Davis", desc: "A multidisciplinary creative from the west side of Chicago, writer, painter, and visual storyteller." },
@@ -44,6 +45,8 @@ function ArtistGallery() {
  const item = ARTIST_GALLERY[current];
 
  const openLb = useCallback((idx: number) => { setLbIdx(idx); }, []);
+
+ useModalA11y(() => setLbIdx(null), { lockScroll: true, active: lbIdx !== null });
 
  useEffect(() => {
  if (lbIdx === null) return;
@@ -84,27 +87,27 @@ function ArtistGallery() {
  </div>
  </div>
  </div>
- <button onClick={() => flip(-1)} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"‹"}</button>
- <button onClick={() => flip(1)} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"›"}</button>
+<button onClick={() => flip(-1)} aria-label="Previous artwork" className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"‹"}</button>
+  <button onClick={() => flip(1)} aria-label="Next artwork" className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-11 h-11 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full text-sm">{"›"}</button>
   <div className="mt-3 flex gap-2 justify-center">
   {ARTIST_GALLERY.map((_, i) => (
   <button key={i} onClick={() => { setDir(i > current ? 1 : -1); setFlipping(true); setTimeout(() => { setCurrent(i); setFlipping(false); }, 350); }}
-  className={`w-[8px] h-[8px] sm:w-2 sm:h-2 lg:w-[10px] lg:h-[10px] rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} />
+  className={`w-[8px] h-[8px] sm:w-2 sm:h-2 lg:w-[10px] lg:h-[10px] rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} aria-label={`Go to artwork ${i + 1}`} />
   ))}
  </div>
  {lbIdx !== null && ARTIST_GALLERY[lbIdx].src && (
  <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setLbIdx(null)}>
- <button onClick={() => setLbIdx(null)} className="absolute top-4 right-4 text-white/70 hover:text-white z-10"><FiX className="w-8 h-8" /></button>
- {lbIdx > 0 && (
- <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! - 1); }} className="absolute left-4 text-white/70 hover:text-white z-10">
- <FiChevronLeft className="w-10 h-10" />
- </button>
- )}
- {lbIdx < ARTIST_GALLERY.length - 1 && (
- <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! + 1); }} className="absolute right-4 text-white/70 hover:text-white z-10">
- <FiChevronRight className="w-10 h-10" />
- </button>
- )}
+<button onClick={() => setLbIdx(null)} aria-label="Close artwork" className="absolute top-4 right-4 text-white/70 hover:text-white z-10"><FiX className="w-8 h-8" /></button>
+  {lbIdx > 0 && (
+  <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! - 1); }} aria-label="Previous artwork" className="absolute left-4 text-white/70 hover:text-white z-10">
+  <FiChevronLeft className="w-10 h-10" />
+  </button>
+  )}
+  {lbIdx < ARTIST_GALLERY.length - 1 && (
+  <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! + 1); }} aria-label="Next artwork" className="absolute right-4 text-white/70 hover:text-white z-10">
+  <FiChevronRight className="w-10 h-10" />
+  </button>
+  )}
  <Image src={ARTIST_GALLERY[lbIdx].src} alt={ARTIST_GALLERY[lbIdx].label}
  width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />

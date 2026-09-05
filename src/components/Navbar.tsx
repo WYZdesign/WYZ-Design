@@ -263,7 +263,7 @@ export default function Navbar() {
                 <div ref={profileRef} className="relative shrink-0">
                   <button onClick={() => setProfileOpen(!profileOpen)}
                     aria-label="Account menu"
-                    className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/30 hover:border-white transition-all flex items-center justify-center bg-white/10 backdrop-blur">
+                    className="w-10 h-10 min-w-[44px] min-h-[44px] rounded-full overflow-hidden border-2 border-white/30 hover:border-white transition-all flex items-center justify-center bg-white/10 backdrop-blur">
                     {session.user.image ? (
                       <Image src={session.user.image} alt={session.user.name || "Account"} width={40} height={40}
                         className="w-full h-full object-cover" />

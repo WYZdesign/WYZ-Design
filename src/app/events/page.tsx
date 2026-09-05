@@ -354,18 +354,20 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
  </div>
  </div>
  </div>
- <button
- onClick={() => flip(-1)}
- className="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 sm:-translate-x-4 z-10 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full"
- >
- <FiChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
- </button>
- <button
- onClick={() => flip(1)}
- className="absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 sm:translate-x-4 z-10 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full"
- >
- <FiChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
- </button>
+<button
+  onClick={() => flip(-1)}
+  aria-label="Previous event"
+  className="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 sm:-translate-x-4 z-10 w-10 h-10 sm:w-12 sm:h-12 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full"
+  >
+  <FiChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+  </button>
+  <button
+  onClick={() => flip(1)}
+  aria-label="Next event"
+  className="absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 sm:translate-x-4 z-10 w-10 h-10 sm:w-12 sm:h-12 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/80 text-[#333] hover:bg-[#DF3131] hover:text-white transition-all shadow-lg rounded-full"
+  >
+  <FiChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+  </button>
  </div>
  );
 }
@@ -432,16 +434,18 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  <div ref={secRef} className="relative group/carousel"
  onMouseEnter={() => { paused.current = true; }} onMouseLeave={() => { paused.current = false; }}
  onTouchStart={() => { paused.current = true; }} onTouchEnd={() => { setTimeout(() => { paused.current = false; }, 2000); }}>
- <button onClick={() => scroll(1)}
- className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/70 text-gray-600 hover:bg-[#DF3131] hover:text-white transition-all min-w-[44px] min-h-[44px]"
- style={{ backdropFilter: "blur(4px)" }}>
- <FiChevronLeft className="w-5 h-5" />
- </button>
- <button onClick={() => scroll(-1)}
- className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/70 text-gray-600 hover:bg-[#DF3131] hover:text-white transition-all min-w-[44px] min-h-[44px]"
- style={{ backdropFilter: "blur(4px)" }}>
- <FiChevronRight className="w-5 h-5" />
- </button>
+<button onClick={() => scroll(1)}
+  aria-label="Scroll previous videos"
+  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/70 text-gray-600 hover:bg-[#DF3131] hover:text-white transition-all min-w-[44px] min-h-[44px]"
+  style={{ backdropFilter: "blur(4px)" }}>
+  <FiChevronLeft className="w-5 h-5" />
+  </button>
+  <button onClick={() => scroll(-1)}
+  aria-label="Scroll next videos"
+  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-white/70 text-gray-600 hover:bg-[#DF3131] hover:text-white transition-all min-w-[44px] min-h-[44px]"
+  style={{ backdropFilter: "blur(4px)" }}>
+  <FiChevronRight className="w-5 h-5" />
+  </button>
  <div className="overflow-hidden pb-4"
  onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; paused.current = true; }}
  onTouchEnd={(e) => {

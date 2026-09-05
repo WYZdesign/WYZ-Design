@@ -25,7 +25,7 @@ function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onCl
  }, [hk]);
  return (
  <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center cursor-pointer" onClick={onClose} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
- <button onClick={onClose} className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[210] text-white/60 hover:text-white transition-colors w-10 h-10 flex items-center justify-center rounded-full border border-white/20 hover:border-white/40">✕</button>
+ <button onClick={onClose} aria-label="Close preview" className="absolute top-4 right-4 sm:top-6 sm:right-6 z-[210] text-white/60 hover:text-white transition-colors w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full border border-white/20 hover:border-white/40">✕</button>
   <Image src={src} alt={alt || "Design preview"} width={1200} height={800} className="max-w-[92vw] max-h-[92vh] object-contain" onClick={(e) => e.stopPropagation()} loading="lazy" style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }} />
  </div>
  );
@@ -255,7 +255,7 @@ const faotmImages = [
   {/* Mobile text overlay */}
    <div className="md:hidden absolute inset-0 z-10 flex items-center justify-center">
     <div className="text-center px-6 sm:px-10 lg:px-16 pt-20 pb-12">
-  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
+  <div className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></div>
     <p className="text-[16px] sm:text-[17px] text-white/80 max-w-xs sm:max-w-sm leading-relaxed mb-8 sm:mb-10 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
      <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131 mt-2 sm:mt-4">GET A QUOTE</Link>
      </div>

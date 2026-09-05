@@ -112,7 +112,7 @@ export default function ModelArchivePage() {
  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
  const filtered = MODELS.filter(m => m.name.toLowerCase().includes(search.toLowerCase()));
 
- useModalA11y(() => setLightboxIdx(null), { active: lightboxIdx !== null });
+ useModalA11y(() => setLightboxIdx(null), { lockScroll: true, active: lightboxIdx !== null });
 
  const handleSubmit = async (e: React.FormEvent) => {
  e.preventDefault();
@@ -339,21 +339,23 @@ export default function ModelArchivePage() {
  {/* Full-size Image Lightbox */}
  {lightboxIdx !== null && albumImages.length > 0 && (
  <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setLightboxIdx(null)}>
- <button onClick={() => setLightboxIdx(null)} className="absolute top-4 right-4 text-white/70 hover:text-white z-10">
- <FiX className="w-8 h-8" />
- </button>
- {lightboxIdx > 0 && (
- <button onClick={(e) => { e.stopPropagation(); setLightboxIdx(i => i! - 1); }}
- className="absolute left-4 text-white/70 hover:text-white z-10">
- <FiChevronLeft className="w-10 h-10" />
- </button>
- )}
- {lightboxIdx < albumImages.length - 1 && (
- <button onClick={(e) => { e.stopPropagation(); setLightboxIdx(i => i! + 1); }}
- className="absolute right-4 text-white/70 hover:text-white z-10">
- <FiChevronRight className="w-10 h-10" />
- </button>
- )}
+<button onClick={() => setLightboxIdx(null)} aria-label="Close photo" className="absolute top-4 right-4 text-white/70 hover:text-white z-10">
+  <FiX className="w-8 h-8" />
+  </button>
+  {lightboxIdx > 0 && (
+  <button onClick={(e) => { e.stopPropagation(); setLightboxIdx(i => i! - 1); }}
+  aria-label="Previous photo"
+  className="absolute left-4 text-white/70 hover:text-white z-10">
+  <FiChevronLeft className="w-10 h-10" />
+  </button>
+  )}
+  {lightboxIdx < albumImages.length - 1 && (
+  <button onClick={(e) => { e.stopPropagation(); setLightboxIdx(i => i! + 1); }}
+  aria-label="Next photo"
+  className="absolute right-4 text-white/70 hover:text-white z-10">
+  <FiChevronRight className="w-10 h-10" />
+  </button>
+  )}
  <Image src={albumImages[lightboxIdx]} alt={`${selectedModel} ${lightboxIdx + 1}`}
  width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />

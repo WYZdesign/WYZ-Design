@@ -160,7 +160,7 @@ export default function FAQPage() {
           <div className="relative overflow-hidden -mx-6 lg:-mx-12 mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] max-h-[800px]">
               <div className="relative overflow-hidden flex items-center justify-center" style={{background:"linear-gradient(-45deg, rgba(223,49,49,0.8), rgba(26,26,26,0.9), rgba(139,0,0,0.7), rgba(42,42,42,0.85), rgba(223,49,49,0.8))",backgroundSize:"400% 400%",animation:"heroGradFaq 8s ease infinite"}}>
-                <video src="/videos/wyz-nav-bg.mp4" muted loop autoPlay playsInline className="hidden lg:block absolute inset-0 w-full h-full object-cover" />
+                <video src="/videos/wyz-nav-bg.mp4" muted loop autoPlay playsInline preload="metadata" className="hidden lg:block absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/80 to-[#1a1a1a]/90" />
                 <div className="relative z-10 text-center px-8">
                   <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto">
@@ -365,11 +365,14 @@ export default function FAQPage() {
                     </span>
                   </button>
                   <div
-                    className="overflow-hidden transition-all duration-300"
-                    style={{ maxHeight: isOpen ? "400px" : "0", opacity: isOpen ? 1 : 0 }}
+                    className="grid transition-all duration-300"
+                    style={{ gridTemplateRows: isOpen ? "1fr" : "0fr", opacity: isOpen ? 1 : 0 }}
+                    aria-hidden={!isOpen}
                   >
-                    <div className="px-6 pb-6 pt-4 border-t-2 border-[#E2E2E2] dark:border-[#444] bg-gradient-to-br from-[#FFFFFF] to-white dark:from-[#252528] dark:to-[#252528]">
-                      <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">{faq.a}</p>
+                    <div className="overflow-hidden">
+                      <div className="px-6 pb-6 pt-4 border-t-2 border-[#E2E2E2] dark:border-[#444] bg-gradient-to-br from-[#FFFFFF] to-white dark:from-[#252528] dark:to-[#252528]">
+                        <p className="text-[16px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">{faq.a}</p>
+                      </div>
                     </div>
                   </div>
                 </div>

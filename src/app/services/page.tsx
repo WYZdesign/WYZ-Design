@@ -152,10 +152,10 @@ return (
     <div className="absolute inset-0 bg-black/65 z-[1]" />
    </div>
    <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
-    <h1 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+    <div className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
     <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
     <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
-    </h1>
+    </div>
     <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 max-w-sm mx-auto">
     From photography to web design, we handle the full creative process to make your brand stand out.
     </p>

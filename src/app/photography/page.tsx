@@ -521,10 +521,10 @@ return (
     </div>
     <div className="md:hidden absolute inset-0 z-10 flex items-center justify-center">
      <div className="text-center px-6 sm:px-10 lg:px-16 pt-20 pb-12">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-9" style={{ lineHeight: 0.9 }}>
+    <div className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-4 sm:mb-9" style={{ lineHeight: 0.9 }}>
       <span className="text-[#DF3131]">CAPTURING</span> MOMENTS<br />
       <span className="text-[#DF3131]">CREATING</span> MEMORIES
-      </h1>
+      </div>
       <p className="text-[16px] sm:text-[16px] text-white/70 max-w-sm leading-relaxed mb-6 sm:mb-9 mx-auto">
        Our custom photography services bring your vision to life. We specialize in creative, brand-focused images.
        </p>
@@ -662,12 +662,12 @@ return (
   ))}
   </div>
  {/* Nav Arrows */}
- <button onClick={() => setModelIdx((modelIdx - 1 + featuredModels.length) % featuredModels.length)} className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
- <FiChevronLeft className="w-5 h-5" />
- </button>
- <button onClick={() => setModelIdx((modelIdx + 1) % featuredModels.length)} className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
- <FiChevronRight className="w-5 h-5" />
- </button>
+<button onClick={() => setModelIdx((modelIdx - 1 + featuredModels.length) % featuredModels.length)} aria-label="Previous model" className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
+  <FiChevronLeft className="w-5 h-5" />
+  </button>
+  <button onClick={() => setModelIdx((modelIdx + 1) % featuredModels.length)} aria-label="Next model" className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
+  <FiChevronRight className="w-5 h-5" />
+  </button>
  </div>
  )}
 
