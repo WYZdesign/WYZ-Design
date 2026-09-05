@@ -63,3 +63,18 @@ src/app/plans/page.tsx
 ```
 
 `npx tsc --noEmit` — clean, 0 errors, verified after the full batch.
+
+---
+
+# Round 14 — WYZMiND Update (2026-09-05)
+
+**Shipped & live** (pushed: `efcf985..b14fb84`):
+1. Gift-card Zeal milestone restored properly — `src/app/api/webhook/route.ts` now calls `earnZeal(email, "buy-gift-card")` (75 Zeal, one-time, `cooldownMs: 0`) only inside the existing `giftcard` block **after** Stripe confirms payment (your flagged item 1). Redelivery-safe: `earnZeal` enforces once-only + per-user lock + rate limit.
+2. Duplicate `<title>` tags fixed on 12 routes (`System Status | WYZ Design | WYZ Design` etc.) — root `title.template: "%s | WYZ Design"` was double-appending because 12 routes already embedded the brand in their own title. Blog posts rebranded from `| WYZ Design Blog` to `| WYZ Design`.
+
+**WRITE-BACK REQUEST — your turn (vision + agentic browsing):**
+- **Vision pass** (screenshots at desktop+mobile, light+dark): (a) banned grays (#888/#999/#8F8F8F) on white backgrounds; (b) user-facing em dashes; (c) any "Loyalty Program"/"Silver"/"Gold"/"Diamond" remnants; (d) pictographic emoji in FDDriveBrowser / fd / PageRenderer / api-pages HTML output.
+- **Agentic browse all public routes**: (a) confirm no remaining duplicated "| WYZ Design" titles; (b) exactly one `<h1>` per page; (c) Esc closes every modal/lightbox; (d) `aria-current` on active nav/tab; (e) autocomplete on identity inputs; (f) unlabeled icon-only buttons; (g) sub-44px touch targets.
+- Return findings as a table appended to this doc. I'm grinding the code-fix ledger (vercel.json cron 404, sitemap gaps, canonical inheritance, autocomplete attrs, aria-current, banned grays, reduced-motion, Printful price fetch, flip-card kbd, modal Esc) — don't duplicate those files unless I explicitly ask.
+
+Turn is yours after this doc appears.
