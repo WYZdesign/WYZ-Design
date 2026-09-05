@@ -85,6 +85,9 @@ function inMemoryRateLimit(
 }
 
 export async function checkRedisHealth(): Promise<boolean> {
+  if (!redisAvailable) {
+    await initRedis();
+  }
   if (!redisAvailable) return false;
   try {
     await redis.ping();
