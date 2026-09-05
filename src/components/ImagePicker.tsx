@@ -20,11 +20,12 @@ export function GlobalImagePicker() {
   const [open, setOpen] = useState(false);
   const [albumMode, setAlbumMode] = useState(false);
   const [albumPath, setAlbumPath] = useState("");
+  const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleOpen = () => {
-      setOpen(true); setAlbumMode(_albumMode); setAlbumPath("");
+      setOpen(true); setAlbumMode(_albumMode); setAlbumPath(""); setError("");
     };
     window.addEventListener("wyz-picker-open", handleOpen);
     return () => window.removeEventListener("wyz-picker-open", handleOpen);
@@ -32,12 +33,28 @@ export function GlobalImagePicker() {
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]; if (!f) return;
+    setError("");
     const fd = new FormData(); fd.append("file", f);
-   const res = await fetch("/api/upload", { method: "POST", body: fd });
-   if (!res.ok) return;
-   const data = await res.json();
-   if (_callback && data.url) _callback(data.url);
-    _open = false; setOpen(false);
+    try {
+      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      if (!res.ok) {
+        e.target.value = "";
+        setError(`Upload failed (${res.status}${res.statusText ? ` ${res.statusText}` : ""})`);
+        return;
+      }
+      const data = await res.json();
+      if (data.url) {
+        if (_callback) _callback(data.url);
+        _open = false; setOpen(false);
+      } else {
+        e.target.value = "";
+        setError("Upload failed — server returned no URL");
+      }
+    } catch (err) {
+      e.target.value = "";
+      setError("Upload failed — network error");
+      console.error("ImagePicker upload error", err);
+    }
   };
 
   const setAlbum = () => {
@@ -47,7 +64,7 @@ export function GlobalImagePicker() {
     }
   };
 
-  const close = () => { setOpen(false); _open = false; };
+  const close = () => { setOpen(false); _open = false; setError(""); };
 
   useModalA11y(close, { lockScroll: true, active: open });
 
@@ -86,6 +103,7 @@ export function GlobalImagePicker() {
               <p className="text-sm text-[#666] dark:text-white/70 mt-1">JPG, PNG, WebP, GIF</p>
             </div>
             <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
+            {error && <p className="mt-3 text-sm text-[#DF3131]" role="alert">{error}</p>}
           </div>
         )}
 

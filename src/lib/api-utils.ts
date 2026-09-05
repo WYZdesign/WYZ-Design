@@ -1,3 +1,5 @@
+import { timingSafeEqual } from "node:crypto";
+
 const ALLOWED_MIME: Record<string, string[]> = {
   images: ["image/jpeg", "image/png", "image/gif", "image/webp", "image/avif"],
   videos: ["video/mp4", "video/webm", "video/quicktime"],
@@ -36,4 +38,10 @@ export async function fetchWithRetry(url: string, options: RequestInit = {}, ret
     }
   }
   throw new Error("Max retries reached");
+}
+
+export function safeEquals(a: string, b: string): boolean {
+  const pa = Buffer.concat([Buffer.from(a, "utf8"), Buffer.alloc(256)]);
+  const pb = Buffer.concat([Buffer.from(b, "utf8"), Buffer.alloc(256)]);
+  return timingSafeEqual(pa, pb);
 }

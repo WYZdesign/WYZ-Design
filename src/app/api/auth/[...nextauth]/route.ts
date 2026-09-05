@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import type { Session } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import { safeEquals } from "@/lib/api-utils";
 
 interface ExtendedSession extends Session {
   user: Session["user"] & { provider?: string };
@@ -37,7 +38,7 @@ const providers = [
       }
 
       const adminPass = process.env.ADMIN_PASSWORD;
-      if (!adminPass || pw !== adminPass) {
+      if (!adminPass || !safeEquals(pw, adminPass)) {
         const a = loginAttempts.get(email)!;
         a.count++;
         return null;

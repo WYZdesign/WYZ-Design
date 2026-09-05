@@ -22,7 +22,8 @@ export default function CookieBanner() {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem(CONSENT_KEY);
+    let saved: string | null = null;
+    try { saved = localStorage.getItem(CONSENT_KEY); } catch {}
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
@@ -75,7 +76,7 @@ export default function CookieBanner() {
   }, [show]);
 
   const saveConsent = (c: CookieConsent) => {
-    localStorage.setItem(CONSENT_KEY, JSON.stringify(c));
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(c)); } catch {}
     setShow(false);
   };
 

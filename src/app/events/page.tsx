@@ -113,8 +113,10 @@ const ALL_EVENT_IMAGES = [
 const FLIP_SPEED = 450;
 
 function markRecapPlayed(earn: (action: string) => Promise<unknown>) {
-  if (sessionStorage.getItem("zeal:recap")) return;
-  sessionStorage.setItem("zeal:recap", "1");
+  try {
+    if (sessionStorage.getItem("zeal:recap")) return;
+    sessionStorage.setItem("zeal:recap", "1");
+  } catch {}
   void earn("watch-recap");
 }
 

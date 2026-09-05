@@ -18,8 +18,12 @@ let _sid = "";
 function getSid() {
   if (_sid) return _sid;
   if (typeof window === "undefined") return "";
-  _sid = sessionStorage.getItem("wyz-sid") || Math.random().toString(36).slice(2) + Date.now().toString(36);
-  sessionStorage.setItem("wyz-sid", _sid);
+  try {
+    _sid = sessionStorage.getItem("wyz-sid") || Math.random().toString(36).slice(2) + Date.now().toString(36);
+    sessionStorage.setItem("wyz-sid", _sid);
+  } catch {
+    _sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
+  }
   return _sid;
 }
 

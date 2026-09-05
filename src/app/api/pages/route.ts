@@ -5,6 +5,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeHtml } from "@/lib/dompurify";
 import { getServiceClient } from "@/lib/supabase";
 import { logger } from "@/lib/logger";
+import { safeEquals } from "@/lib/api-utils";
 
 const PAGES_DIR = join(process.cwd(), "_PAGES");
 const ALLOWED_PAGES = new Set(["home", "about", "photography", "designs", "events", "services", "plans", "merch", "faq", "blog", "booking", "community", "contact", "web-design", "printing", "gift-card", "3pointprogram", "model-archive"]);
@@ -93,7 +94,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const token = req.headers.get("x-admin-token") || "";
   const adminPw = process.env.ADMIN_PASSWORD;
-  if (!adminPw || token !== adminPw) {
+  if (!adminPw || !safeEquals(token, adminPw)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

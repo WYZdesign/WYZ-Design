@@ -19,8 +19,10 @@ const STORAGE_KEY = "wyz-theme";
 
 function getStoredTheme(): Theme {
   if (typeof window === "undefined") return "light";
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === "dark" || stored === "light") return stored;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === "dark" || stored === "light") return stored;
+  } catch {}
   return "light";
 }
 
@@ -38,7 +40,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   const toggle = useCallback(() => {
     setTheme((prev) => {
       const next = prev === "dark" ? "light" : "dark";
-      localStorage.setItem(STORAGE_KEY, next);
+      try { localStorage.setItem(STORAGE_KEY, next); } catch {}
       document.documentElement.classList.toggle("dark", next === "dark");
       return next;
     });
