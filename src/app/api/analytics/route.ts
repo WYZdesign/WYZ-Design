@@ -178,13 +178,13 @@ export async function GET(req: NextRequest) {
     if (!admin.ok) return admin.response;
 
     const tab = req.nextUrl.searchParams.get("tab") || "summary";
-    const days = parseInt(req.nextUrl.searchParams.get("days") || "30");
+    const days = Math.min(Math.max(parseInt(req.nextUrl.searchParams.get("days") || "30") || 30, 1), 365);
 
     if (tab === "pageviews") {
       const path = req.nextUrl.searchParams.get("path") || undefined;
       const from = req.nextUrl.searchParams.get("from") || undefined;
       const to = req.nextUrl.searchParams.get("to") || undefined;
-      const limit = parseInt(req.nextUrl.searchParams.get("limit") || "200");
+      const limit = Math.min(Math.max(parseInt(req.nextUrl.searchParams.get("limit") || "200") || 200, 1), 5000);
       return NextResponse.json({ pageviews: getPageviews({ path, from, to, limit }) });
     }
 

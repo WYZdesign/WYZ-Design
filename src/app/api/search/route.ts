@@ -58,7 +58,7 @@ async function qdrantSearchFallback(query: string, limit: number) {
  */
 export async function GET(req: NextRequest) {
   try {
-    const query = req.nextUrl.searchParams.get("q") || req.nextUrl.searchParams.get("query") || "";
+    const query = (req.nextUrl.searchParams.get("q") || req.nextUrl.searchParams.get("query") || "").slice(0, 200);
     if (!query) return NextResponse.json({ results: [] });
 
     if (IS_VERCEL) {
@@ -75,7 +75,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { query } = await req.json();
+    const { query: rawQuery } = await req.json();
+    const query = String(rawQuery ?? "").slice(0, 200);
     if (!query) return NextResponse.json({ error: "Query required" }, { status: 400 });
 
     if (IS_VERCEL) {

@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { FiFolder, FiVideo, FiFilm, FiImage, FiMusic, FiFileText, FiFile, FiArchive, FiCode, FiGrid, FiLayers, FiDownload, FiZap, FiGlobe, FiStar, FiPlay } from "react-icons/fi";
+import type { IconType } from "react-icons";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useModalA11y } from "@/hooks/useModalA11y";
 
@@ -23,31 +25,36 @@ interface DriveFile {
 type ViewMode = "grid" | "list";
 type SortMode = "name" | "date" | "size";
 
-const FILE_ICONS: Record<string, string> = {
-  mp4: "🎬", mov: "🎬", webm: "🎬", avi: "🎬",
-  jpg: "📸", jpeg: "📸", png: "📸", webp: "📸", gif: "📸", tiff: "📸", raw: "📸", cr2: "📸", nef: "📸", dng: "📸",
-  mp3: "🎵", wav: "🎵", flac: "🎵", m4a: "🎵",
-  pdf: "📄", doc: "📝", docx: "📝", xls: "📊", xlsx: "📊", ppt: "📽️", pptx: "📽️",
-  zip: "📦", rar: "📦", "7z": "📦", tar: "📦", gz: "📦",
-  txt: "📄", csv: "📊", json: "📋", xml: "📋", html: "🌐", css: "🎨", js: "⚡",
-  aep: "🎞️", psd: "🎨", ai: "🎨", lrtemplate: "🌈", xmp: "🌈",
+const FILE_ICONS: Record<string, IconType> = {
+  mp4: FiVideo, mov: FiVideo, webm: FiVideo, avi: FiVideo,
+  jpg: FiImage, jpeg: FiImage, png: FiImage, webp: FiImage, gif: FiImage, tiff: FiImage, raw: FiImage, cr2: FiImage, nef: FiImage, dng: FiImage,
+  mp3: FiMusic, wav: FiMusic, flac: FiMusic, m4a: FiMusic,
+  pdf: FiFileText, doc: FiFileText, docx: FiFileText, xls: FiFileText, xlsx: FiFileText, ppt: FiFile, pptx: FiFile,
+  zip: FiArchive, rar: FiArchive, "7z": FiArchive, tar: FiArchive, gz: FiArchive,
+  txt: FiFileText, csv: FiFileText, json: FiFile, xml: FiFile, html: FiGlobe, css: FiLayers, js: FiZap,
+  aep: FiFilm, psd: FiLayers, ai: FiLayers, lrtemplate: FiStar, xmp: FiStar,
 };
 
-const MIME_ICONS: Record<string, string> = {
-  "video": "🎬",
-  "image": "📸",
-  "audio": "🎵",
-  "pdf": "📄",
-  "text": "📄",
+const MIME_ICONS: Record<string, IconType> = {
+  "video": FiVideo,
+  "image": FiImage,
+  "audio": FiMusic,
+  "pdf": FiFileText,
+  "text": FiFileText,
 };
 
-function getIcon(file: DriveFile): string {
-  if (file.isFolder) return "📁";
+function getIcon(file: DriveFile): IconType {
+  if (file.isFolder) return FiFolder;
   const ext = file.fileExtension?.toLowerCase();
   if (ext && FILE_ICONS[ext]) return FILE_ICONS[ext];
   const mime = file.mimeType.split("/")[0];
   if (MIME_ICONS[mime]) return MIME_ICONS[mime];
-  return "📄";
+  return FiFile;
+}
+
+function FileGlyph({ file, className }: { file: DriveFile; className?: string }) {
+  const Icon = getIcon(file);
+  return <Icon className={className} />;
 }
 
 function formatSize(bytes: number | null): string {
@@ -190,7 +197,7 @@ export default function FDDriveBrowser() {
 
       {error && (
         <div className="py-16 text-center">
-          <div className="text-4xl mb-4">📁</div>
+          <div className="flex items-center justify-center"><FiFolder className="w-12 h-12 mb-4 text-zinc-500" /></div>
           <p className="text-zinc-500 text-sm">{error}</p>
           {error.includes("GOOGLE_DRIVE_API_KEY") && (
             <div className="mt-4 max-w-lg mx-auto">
@@ -223,12 +230,12 @@ export default function FDDriveBrowser() {
                 }>
                 {viewMode === "grid" ? (
                   <>
-                    <div className="text-3xl mb-2">📁</div>
+                    <div className="flex items-center justify-center"><FiFolder className="w-9 h-9 mb-2 text-zinc-400" /></div>
                     <p className="text-sm text-zinc-300 group-hover:text-white truncate transition-colors">{f.name}</p>
                   </>
                 ) : (
                   <>
-                    <span className="text-lg shrink-0">📁</span>
+                    <FiFolder className="w-5 h-5 shrink-0 text-zinc-400" />
                     <span className="text-sm text-zinc-300 group-hover:text-white truncate transition-colors">{f.name}</span>
                     <span className="text-xs text-zinc-600 ml-auto">{formatDate(f.createdTime)}</span>
                   </>
@@ -243,7 +250,7 @@ export default function FDDriveBrowser() {
       {!loading && !error && videoFiles.length > 0 && (
         <div className="mb-8">
           <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">
-            <span className="mr-2">🎬</span>Clips &amp; Videos ({videoFiles.length})
+            <FiVideo className="mr-2 w-4 h-4 inline" />Clips &amp; Videos ({videoFiles.length})
           </h4>
           <div className={viewMode === "grid"
             ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
@@ -259,10 +266,10 @@ export default function FDDriveBrowser() {
                     <div className="relative aspect-video bg-zinc-800 flex items-center justify-center">
                       {f.thumbnailLink
                         ? <Image src={f.thumbnailLink} alt={f.name} fill sizes="(max-width:640px) 100vw, (max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw" className="w-full h-full object-cover" />
-                        : <span className="text-3xl">🎬</span>
+                        : <FiVideo className="w-8 h-8 text-zinc-500" />
                       }
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
-                        <div className="w-12 h-12 rounded-full bg-[#DF3131]/90 flex items-center justify-center">▶</div>
+                        <div className="w-12 h-12 rounded-full bg-[#DF3131]/90 flex items-center justify-center"><FiPlay className="w-5 h-5 text-white ml-0.5" /></div>
                       </div>
                     </div>
                     <div className="p-2.5">
@@ -275,12 +282,12 @@ export default function FDDriveBrowser() {
                     <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
                       <a href={f.downloadLink} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
                         className="px-2 py-1 text-xs rounded bg-black/70 text-white hover:bg-[#DF3131] transition-all"
-                        title="Download">⬇</a>
+                        title="Download" aria-label="Download"><FiDownload className="w-4 h-4" /></a>
                     </div>
                   </>
                 ) : (
                   <>
-                    <span className="text-lg shrink-0">🎬</span>
+                    <FiVideo className="w-5 h-5 shrink-0 text-zinc-400" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-zinc-300 group-hover:text-white truncate">{f.name}</p>
                       <p className="text-xs text-zinc-600">{getFileTypeLabel(f.mimeType)}</p>
@@ -288,7 +295,7 @@ export default function FDDriveBrowser() {
                     <span className="text-xs text-zinc-600">{formatSize(f.size)}</span>
                     <span className="text-xs text-zinc-600 w-20 text-right">{formatDate(f.createdTime)}</span>
                     <a href={f.downloadLink} target="_blank" rel="noopener noreferrer"
-                      className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all ml-2">⬇</a>
+                      className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all ml-2" aria-label="Download"><FiDownload className="w-4 h-4" /></a>
                     <a href={f.webViewLink} target="_blank" rel="noopener noreferrer"
                       className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all">View</a>
                   </>
@@ -303,7 +310,7 @@ export default function FDDriveBrowser() {
       {!loading && !error && imageFiles.length > 0 && (
         <div className="mb-8">
           <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">
-            <span className="mr-2">📸</span>Photos &amp; Images ({imageFiles.length})
+            <FiImage className="mr-2 w-4 h-4 inline" />Photos &amp; Images ({imageFiles.length})
           </h4>
           <div className={viewMode === "grid"
             ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
@@ -319,7 +326,7 @@ export default function FDDriveBrowser() {
                     <div className="relative aspect-square bg-zinc-800 overflow-hidden">
                       {f.thumbnailLink
                         ? <Image src={f.thumbnailLink} alt={f.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, (max-width:1024px) 25vw, 20vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
-                        : <div className="w-full h-full flex items-center justify-center text-3xl">📸</div>
+                        : <div className="w-full h-full flex items-center justify-center"><FiImage className="w-8 h-8 text-zinc-500" /></div>
                       }
                     </div>
                     <div className="p-2.5">
@@ -331,12 +338,12 @@ export default function FDDriveBrowser() {
                     </div>
                     <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
                       <a href={f.downloadLink} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-                        className="px-2 py-1 text-xs rounded bg-black/70 text-white hover:bg-[#DF3131] transition-all">⬇</a>
+                        className="px-2 py-1 text-xs rounded bg-black/70 text-white hover:bg-[#DF3131] transition-all" aria-label="Download"><FiDownload className="w-4 h-4" /></a>
                     </div>
                   </>
                 ) : (
                   <>
-                    <span className="text-lg shrink-0">📸</span>
+                    <FiImage className="w-5 h-5 shrink-0 text-zinc-400" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-zinc-300 group-hover:text-white truncate">{f.name}</p>
                       <p className="text-xs text-zinc-600">{getFileTypeLabel(f.mimeType)}</p>
@@ -347,7 +354,7 @@ export default function FDDriveBrowser() {
                       <button onClick={() => { setSelectedFile(f); setImagePreview(f.webViewLink); }}
                         className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all">View</button>
                       <a href={f.downloadLink} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}
-                        className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all">⬇</a>
+                        className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all" aria-label="Download"><FiDownload className="w-4 h-4" /></a>
                     </div>
                   </>
                 )}
@@ -361,7 +368,7 @@ export default function FDDriveBrowser() {
       {!loading && !error && otherFiles.length > 0 && (
         <div className="mb-8">
           <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">
-            <span className="mr-2">📄</span>Documents &amp; Other ({otherFiles.length})
+            <FiFileText className="mr-2 w-4 h-4 inline" />Documents &amp; Other ({otherFiles.length})
           </h4>
           <div className={viewMode === "grid"
             ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"
@@ -374,13 +381,13 @@ export default function FDDriveBrowser() {
                 }>
                 {viewMode === "grid" ? (
                   <>
-                    <div className="text-3xl mb-2">{getIcon(f)}</div>
+                    <div className="text-3xl mb-2 flex items-center justify-center"><FileGlyph file={f} className="w-9 h-9 text-zinc-400" /></div>
                     <p className="text-sm text-zinc-300 group-hover:text-white truncate">{f.name}</p>
                     <p className="text-xs text-zinc-600 mt-1">{formatSize(f.size)}</p>
                   </>
                 ) : (
                   <>
-                    <span className="text-lg shrink-0">{getIcon(f)}</span>
+                    <FileGlyph file={f} className="w-5 h-5 shrink-0 text-zinc-400" />
                     <div className="flex-1 min-w-0">
                       <p className="text-sm text-zinc-300 group-hover:text-white truncate">{f.name}</p>
                       <p className="text-xs text-zinc-600">{getFileTypeLabel(f.mimeType)}</p>
@@ -388,7 +395,7 @@ export default function FDDriveBrowser() {
                     <span className="text-xs text-zinc-600">{formatSize(f.size)}</span>
                     <span className="text-xs text-zinc-600 w-20 text-right">{formatDate(f.createdTime)}</span>
                     <a href={f.downloadLink} target="_blank" rel="noopener noreferrer"
-                      className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all ml-2">⬇</a>
+                      className="px-2.5 py-1 text-xs rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white transition-all ml-2" aria-label="Download"><FiDownload className="w-4 h-4" /></a>
                   </>
                 )}
               </a>
@@ -400,7 +407,7 @@ export default function FDDriveBrowser() {
       {/* Empty state */}
       {!loading && !error && files.length === 0 && (
         <div className="py-16 text-center">
-          <div className="text-4xl mb-4">📂</div>
+          <div className="w-14 h-14 mb-4 text-zinc-500"><FiFolder className="w-14 h-14" /></div>
           <p className="text-zinc-500">This folder is empty</p>
         </div>
       )}

@@ -21,8 +21,8 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import ClientComponents from "@/components/ClientComponents";
 
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap", preload: true });
-const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap", preload: true });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap", preload: false });
+const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.wyzdesign.com"),

@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
     if (!topic || typeof topic !== "string" || topic.length > 500) {
       return NextResponse.json({ error: "Valid topic required (max 500 chars)" }, { status: 400 });
     }
+    const tone = String(style).slice(0, 40);
 
     const prompts: Record<string, string> = {
       medium: "Write a 300-500 word blog post",
@@ -24,7 +25,7 @@ export async function POST(req: NextRequest) {
       long: "Write a 600-900 word blog post",
     };
 
-    const prompt = `${prompts[length] || prompts.medium} about "${topic}" in a ${style} tone.
+    const prompt = `${prompts[length] || prompts.medium} about "${topic}" in a ${tone} tone.
 Use markdown formatting with headings. Include an engaging intro and a clear conclusion.
 Write as the WYZ Design blog, a creative agency in Chicago. Keep it down-to-earth and personable. Use contractions. Avoid em dashes, AI jargon, and buzzwords.`;
 

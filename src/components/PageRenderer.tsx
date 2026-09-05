@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { sanitizeHtml } from "@/lib/dompurify";
+import { FiEdit3, FiFolder } from "react-icons/fi";
 
 interface GdriveFile {
   name: string;
@@ -102,7 +103,7 @@ export default function PageRenderer() {
  {/* Edit toggle */}
  <div className="fixed top-20 right-4 z-40 flex gap-2">
  <button onClick={() => setEditMode(!editMode)} className={`px-4 py-2 rounded-full text-sm font-semibold shadow-lg transition-colors ${editMode ? "bg-[#DF3131] text-white" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-gray-600 dark:text-white/70 hover:border-[#DF3131]"}`}>
- {editMode ? "Done Editing" : "✏️ Edit Images"}
+ {editMode ? "Done Editing" : <><FiEdit3 className="inline mr-1.5 -mt-0.5 w-4 h-4" /> Edit Images</>}
  </button>
  </div>
 
@@ -139,7 +140,7 @@ export default function PageRenderer() {
  {showUpload ? (
  <div className="p-8 text-center">
  <div onClick={() => fileRef.current?.click()} className="border-2 border-dashed border-[#DF3131] rounded-xl p-12 cursor-pointer hover:bg-red-50">
- <span className="text-4xl block mb-3">📁</span>
+ <div className="flex justify-center"><FiFolder className="w-14 h-14 text-4xl block mb-3 text-gray-300 dark:text-[#777]" /></div>
  <p className="font-semibold text-[#DF3131]">Click to Upload</p>
  <p className="text-xs text-[#666] dark:text-white/70 mt-1">JPG, PNG, WebP, GIF</p>
  </div>

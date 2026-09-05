@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import FDDriveBrowser from "@/components/FDDriveBrowser";
 import FDCalendar from "@/components/FDCalendar";
 import { useModalA11y } from "@/hooks/useModalA11y";
+import { FiClock, FiMapPin, FiVideo, FiImage, FiFileText, FiFolder } from "react-icons/fi";
 
 const LOCAL_API = process.env.NEXT_PUBLIC_FD_API || "http://localhost:8080";
 const POLL_INTERVAL = 3000;
@@ -455,9 +456,9 @@ export default function FDOraclePage() {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{selectedEvent.title}</h3>
                 <div className="flex items-center gap-2 text-sm text-zinc-400 mb-1">
-                  <span>🕐 {selectedEvent.time}</span>
+                  <span className="flex items-center gap-1.5"><FiClock className="w-4 h-4 text-zinc-500" /> {selectedEvent.time}</span>
                 </div>
-                <p className="text-sm text-zinc-400 mb-4">📍 {selectedEvent.location}</p>
+                <p className="text-sm text-zinc-400 mb-4 flex items-center gap-1.5"><FiMapPin className="w-4 h-4 shrink-0 text-zinc-500" /> {selectedEvent.location}</p>
                 <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-800/50 border border-zinc-700/50">
                   <div>
                     <p className="text-xs text-zinc-500 mb-1">Price</p>
@@ -502,10 +503,10 @@ export default function FDOraclePage() {
                 Everything is accessible to view and download directly from Google Drive.
               </p>
               <div className="flex items-center justify-center gap-4 mt-4 text-sm text-zinc-600">
-                <span>🎬 Clips &amp; Videos</span>
-                <span>📸 Photos &amp; Images</span>
-                <span>📄 Documents</span>
-                <span>📁 Event Folders</span>
+                <span className="flex items-center gap-1.5"><FiVideo className="w-4 h-4" /> Clips &amp; Videos</span>
+                <span className="flex items-center gap-1.5"><FiImage className="w-4 h-4" /> Photos &amp; Images</span>
+                <span className="flex items-center gap-1.5"><FiFileText className="w-4 h-4" /> Documents</span>
+                <span className="flex items-center gap-1.5"><FiFolder className="w-4 h-4" /> Event Folders</span>
               </div>
             </div>
           </ScrollReveal>
