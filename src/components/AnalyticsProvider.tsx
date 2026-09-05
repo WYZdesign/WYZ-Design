@@ -110,6 +110,18 @@ export default function AnalyticsProvider() {
         </Script>
       )}
 
+      {/* ── Google Tag Manager (noscript fallback — consent-gated) ── */}
+      {consent.analytics && process.env.NEXT_PUBLIC_GTM_ID && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+      )}
+
       {/* ── Google Search Console verification (only if not using DNS method) ── */}
       {/* Add this meta tag to layout.tsx <head> if needed:
           <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> */}

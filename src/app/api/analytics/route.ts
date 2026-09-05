@@ -185,7 +185,7 @@ export async function GET(req: NextRequest) {
       const from = req.nextUrl.searchParams.get("from") || undefined;
       const to = req.nextUrl.searchParams.get("to") || undefined;
       const limit = Math.min(Math.max(parseInt(req.nextUrl.searchParams.get("limit") || "200") || 200, 1), 5000);
-      return NextResponse.json({ pageviews: getPageviews({ path, from, to, limit }) });
+      return NextResponse.json({ pageviews: await getPageviews({ path, from, to, limit }) });
     }
 
     if (tab === "seo") {
@@ -193,7 +193,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ checks, checkedAt: new Date().toISOString(), period: "on-demand" });
     }
 
-    return NextResponse.json(getAnalyticsSummary(days));
+    return NextResponse.json(await getAnalyticsSummary(days));
   } catch {
     return NextResponse.json({ error: "Failed" }, { status: 500 });
   }
