@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book a Photoshoot | WYZ Design",
+  title: "Book a Photoshoot",
   description: "Book your photoshoot session with WYZ Design. Choose your date, time, and package. Professional photography starting at $100/hr. Secure your spot online.",
   keywords: ["book photoshoot", "photoshoot booking", "Los Angeles photographer", "portrait session", "WYZ Design"],
   alternates: { canonical: "https://www.wyzdesign.com/booking-calendar/photoshoot" },

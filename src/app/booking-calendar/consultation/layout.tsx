@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book a Consultation | WYZ Design",
+  title: "Book a Consultation",
   description: "Schedule a free creative consultation with WYZ Design. Pick a time that works for you and get a clear game plan for your brand or project.",
   keywords: ["book consultation", "free creative consultation", "brand strategy", "Los Angeles creative agency", "WYZ Design"],
   alternates: { canonical: "https://www.wyzdesign.com/booking-calendar/consultation" },
