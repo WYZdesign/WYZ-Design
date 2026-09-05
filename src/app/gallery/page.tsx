@@ -125,7 +125,7 @@ export default function GalleryPage() {
     isActive
      ? "bg-[#DF3131] text-white border-[#DF3131] shadow-lg shadow-[#DF3131]/30"
      : "border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-[#e0e0e0] hover:border-[#DF3131] hover:text-[#DF3131]"
-   }`}>{c}</button>
+    }`} aria-pressed={isActive}>{c}</button>
   );
  })}
  </div>

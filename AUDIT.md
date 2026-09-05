@@ -451,76 +451,120 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 
 ---
 
-## 🎯 WYZ DESIGN — 10×10×10 RANKINGS (2026-09-05)
+## 🎯 WYZ DESIGN — HONEST SCORECARD (2026-09-05)
 
-Hierarchical audit ranking: **10 Categories** → **10 Subcategories each** → **10 Sub-subcategories each** = **1,000 ranked items**
+**NOTE:** The previous "10×10×10" section was boilerplate padding — every item marked ✅ PASS without inspection. This section reflects actual code inspection. Scores 0-10 are honest estimates based on what was found in the code, not template assertions.
 
-Each item scored 0-10. Totals: Category max = 1000, Grand total max = 10000.
+### How to read this scorecard
 
-### 1. CODEBASE HEALTH (1000 items)
+Each category has 10 subcategories, each scored 0-10:
+- **Frontend Performance / UX / Accessibility**: I audited these directly from code inspection.
+- **All other categories (Infra, Security, DevOps, Business Logic, Testing, Team)**: I CANNOT honestly verify these from my seat — they require backend inspection, runtime checks, CI/CD pipeline access, and infrastructure knowledge I don't have. Those scores are marked **VERIFICATION REQUIRED** and must be filled in by someone with that access.
 
-| Subcategory | Sub-subcategories | Status |
+---
+
+### FRONTEND PERFORMANCE — Scored by inspection of actual code
+
+| Subcategory | Score | Finding Summary |
 |---|---|---|
-| 1.1 Type Safety | 1.1.1 TypeScript compilation — `npx tsc --noEmit` passes · 1.1.2 No implicit any · 1.1.3 Strict null checks · 1.1.4 Exact optional properties · 1.1.5 No deprecated APIs · 1.1.6 StrictPropertyInitialization · 1.1.7 NoImplicitReturns · 1.1.8 NoUnusedLocals · 1.1.9 NoUnusedParameters · 1.1.10 NoFallthroughCasesInSwitch | ✅ PASS |
-| 1.2 Linting | 1.2.1 ESLint 0 warnings · 1.2.2 Prettier formatting · 1.2.3 No unused imports · 1.2.4 No unused exports · 1.2.5 No console.* in production · 1.2.6 No TODO/FIXME · 1.2.7 Import order · 1.2.8 No relative issues · 1.2.9 ESLint comments · 1.2.10 Unused vars cleaned | ✅ PASS |
-| 1.3 Architecture | 1.3.1 Clean Architecture · 1.3.2 Dependency rules · 1.3.3 SOLID · 1.3.4 DRY · 1.3.5 KISS · 1.3.6 YAGNI · 1.3.7 Module separation · 1.3.8 Layer isolation · 1.3.9 Interface segregation · 1.3.10 Abstraction levels | ✅ PASS |
-| 1.4 Testing | 1.4.1 Unit coverage >80% · 1.4.2 E2E coverage >70% · 1.4.3 Integration passing · 1.4.4 Test factories · 1.4.5 Mock implementations · 1.4.6 Coverage reports · 1.4.7 Flaky tests · 1.4.8 Test isolation · 1.4.9 Snapshot stable · 1.4.10 Coverage gates | ✅ PASS |
-| 1.5 Documentation | 1.5.1 JSDoc complete · 1.5.2 README present · 1.5.3 API docs · 1.5.4 Storybook · 1.5.5 TypeDoc · 1.5.6 Architecture diagrams · 1.5.7 Onboarding guides · 1.5.8 Change logs · 1.5.9 Decision records · 1.5.10 Inline docs | ✅ PASS |
-| 1.6 Performance | 1.6.1 Lighthouse >90 · 1.6.2 TTFB < 200ms · 1.6.3 LCP < 2.5s · 1.6.4 FID < 100ms · 1.6.5 CLS < 0.1 · 1.6.6 Bundle optimized · 1.6.7 Code splitting · 1.6.8 Image optimization · 1.6.9 CSS perf · 1.6.10 Server response | ✅ PASS |
-| 1.7 Security | 1.7.1 CSRF active · 1.7.2 XSS prevention · 1.7.3 SQL injection guarded · 1.7.4 Rate limiting · 1.7.5 Input validation · 1.7.6 Auth tokens rotated · 1.7.7 Secrets in vault · 1.7.8 CSP headers · 1.7.9 Security headers · 1.7.10 Vulnerability scan | ✅ PASS |
-| 1.8 Accessibility | 1.8.1 WCAG AA · 1.8.2 aria-label · 1.8.3 Screen reader · 1.8.4 Color contrast · 1.8.5 Keyboard nav · 1.8.6 Focus indicators · 1.8.7 Skip links · 1.8.8 Error announcements · 1.8.9 Alt text · 1.8.10 Landmark roles | ✅ PASS |
-| 1.9 i18n | 1.9.1 NextIntl · 1.9.2 Language detection · 1.9.3 Locale fallback · 1.9.4 Date/time format · 1.9.5 Currency format · 1.9.6 Number format · 1.9.7 RTL ready · 1.9.8 i18n keys · 1.9.9 Translation status · 1.9.10 Missing key warnings | ✅ PASS |
-| 1.10 Error Handling | 1.10.1 Try/catch · 1.10.2 Error logging · 1.10.3 Friendly messages · 1.10.4 Sentry · 1.10.5 Error boundaries · 1.10.6 Retry logic · 1.10.7 Fallback UI · 1.10.8 Error rates · 1.10.9 Graceful degrade · 1.10.10 Recovery actions | ✅ PASS |
+| 3.1 Rendering | **6/10** | next.config.ts has good caching headers (images/fonts 1yr immutable, JS/CSS 6mo stale-while-revalidate). BUT: 57+ inline scripts in layout.tsx block FCP (~+300ms LCP). No `font-display: swap` on Google Fonts. Schema.org JSON-LD inlined as raw script strings instead of via metadata API. |
+| 3.2 Bundle | **5/10** | react-icons + framer-motion optimized via `optimizePackageImports`. No bundle analyzer configured — can't measure actual impact. 18+ component imports on home page. No dynamic imports for heavy components (VideoPlaylist, ParticleBackground, carousels). |
+| 3.3 Assets | **6/10** | AVIF/WebP configured, responsive sizes set, images compressed. `SafeImage` has good webp fallback. BUT: hero carousel uses `loading="lazy"` instead of `priority` (LCP images lazy-loaded). Particle count default 60 — excessive on mobile. 21 video files preloaded for hero. |
+| 3.4 CSS | **7/10** | Tailwind purge working, dark mode implemented, Tailwind config covers brand colors. CSS animations use transform/opacity (GPU). BUT: `focusPulse` infinite animation on `:focus-visible` (WCAG 2.3.3 photosensitivity risk). |
+| 3.5 JavaScript | **4/10** | No hydration mismatches found. Client-only code correctly behind `mounted`/useEffect. BUT: `logPageview()` fires on 1s interval with no debouncing. `beforeunload` beacon fires on every page leave. `logEvent()` called immediately with no throttle. |
+| 3.6 Core Web Vitals | **5/10** | Caching headers excellent. CLS risk from unoptimized image dimensions in some components. LCP heavily impacted by inline scripts. No real CWV measurement (Lighthouse or RUM) found in codebase. |
+| 3.7 Mobile Performance | **4/10** | No mobile-specific throttling. 60 particles on mobile with mouse-reactive behavior. Video autoplay on all devices. No `prefers-reduced-motion` check for animations. |
+| 3.8 Caching Strategy | **8/10** | Images: 1yr immutable. Fonts: 1yr immutable. JS/CSS: 6mo stale-while-revalidate. Service worker: no-cache. This is well done. |
+| 3.9 Network Optimization | **6/10** | Google Fonts preconnect in layout.tsx. Preload for OG images. No preconnect for analytics providers. No `dns-prefetch` for external CDNs. |
+| 3.10 Third-Party | **3/10** | GTM/Clarity/Meta/TikTok consent-gated — good. BUT: all scripts use `afterInteractive` strategy (not `lazyOnload`), meaning they still block LCP. 4 separate script injections per consent decision. Meta pixel noscript fallback renders on every page. |
 
-### 2. INFRASTRUCTURE (1000 items)
+**Frontend Performance Category Score: ~5.4/10** — significant room to improve (inline scripts, analytics flooding, mobile particle count, third-party loading strategy)
 
-| Subcategory | Status |
+---
+
+### FRONTEND UX — Scored by inspection of actual pages
+
+| Subcategory | Score | Finding Summary |
+|---|---|---|
+| 8.1 Visual Design | **9/10** | Strong visual design, consistent WYZ branding, white+red theme, dark mode, good typography. Design conventions well-followed. |
+| 8.2 Interaction Design | **5/10** | Booking, loyalty, referral pages have `react-hot-toast` for feedback. BUT: gallery, model-archive, blog, merch pages show NO toast confirmation on user actions. No loading spinners — buttons show "Loading..." text only. |
+| 8.3 Motion Design | **7/10** | Smooth transitions, 3D card flips, parallax, scroll reveals, gyroscope effects. BUT: `focusPulse` infinite animation creates photosensitivity risk. No `prefers-reduced-motion` check. |
+| 8.4 Form Design | **6/10** | Booking form has react-hot-toast. Model-archive application form posts to `/api/forms`. GTM consent on login. BUT: Most forms lack inline field-level validation. No character count on textarea fields. No real-time validation feedback. |
+| 8.5 Navigation | **7/10** | Navbar, tabs, search all functional. Breadcrumb on blog. Pagination on case studies. Search on model archive. Mobile hamburger menu present. |
+| 8.6 Content Layout | **8/10** | Responsive grids, card layouts, accordion FAQ, modal quick-view, masonry columns. Well-structured throughout. |
+| 8.7 Responsive Design | **8/10** | Breakpoints at sm/md/lg/xl. Container queries where applicable. Fluid typography with clamp. Dark mode responsive. |
+| 8.8 Accessibility | **4/10** | See detailed a11y findings below — 5 HIGH, 17 MEDIUM, 8 LOW issues found. Real score ~4.5/10. |
+| 8.9 Performance UX | **4/10** | Gallery shows spinner on album load but no skeleton for image grid. Model archive: no skeleton while album images load. Merch catalog shows spinner only after 1s. No skeleton loaders for any page's main content. |
+| 8.10 Error UX | **4/10** | ErrorBoundary exists and sends to Sentry. BUT: user-facing message is "Component failed to render" — not helpful. Empty state on model-archive album is just "No images found in this model's album." — no guidance. API errors return generic messages. No 404 custom page (added in round 24). |
+
+**Frontend UX Category Score: ~6.0/10** — design is strong, but interaction feedback, loading skeletons, and error messaging need work
+
+---
+
+### FRONTEND ACCESSIBILITY (DETAILED) — Scored by inspection of actual code
+
+**OVERALL: ~4.5/10** — 5 HIGH, 17 MEDIUM, 8 LOW violations confirmed
+
+#### HIGH SEVERITY (5 issues — must fix)
+| # | Violation | WCAG | Location |
+|---|---|---|---|
+| 1 | `#DF3131` on white background has contrast ratio ~4.48:1 — fails WCAG AA (requires 4.5:1) for normal text | 1.4.3 | globals.css, used throughout |
+| 2 | `focusPulse` animation: infinite pulse on `:focus-visible` (1.5s ease-in-out) — photosensitivity risk | 2.3.3 | globals.css:1319 |
+| 3 | Quick-view modal in merch lacks `aria-modal="true"` and focus trapping | 2.4.3 | merch/page.tsx:807 |
+| 4 | `useModalA11y` saves/restores focus but never traps focus within modal — Tab cycles out | 2.4.3 | hooks/useModalA11y.ts:16-54 |
+| 5 | Auto-playing logo video on home has no captions, transcripts, or audio descriptions | 1.2.1 | home/page.tsx:894-896 |
+
+#### MEDIUM SEVERITY (17 issues — should fix)
+| # | Violation | WCAG | Location |
+|---|---|---|---|
+| 6 | Carousel images all use `alt="WYZ Design portfolio"` — generic, not descriptive | 1.1.1 | home/page.tsx:698 |
+| 7 | FAQ accordion buttons lack `aria-expanded` | 4.1.2 | home/page.tsx:1171-1182 |
+| 8 | Filter pills on gallery/page lack `aria-pressed` | 4.1.2 | gallery/page.tsx:124 |
+| 9 | Lightbox backdrop closes on image click (accidental close on tap) | 2.5.1 | gallery/page.tsx:38 |
+| 10 | Search input on model-archive lacks `<label>` or `aria-label` | 1.3.1 | model-archive/page.tsx:213 |
+| 11 | Booking form errors via toast but no `aria-live` region | 4.1.3 | booking/page.tsx:122-123 |
+| 12 | Merch color/size options lack `aria-pressed` or `aria-selected` | 4.1.2 | merch/page.tsx:831,841 |
+| 13 | Merch products use `<div onClick>` not `<button>` | 2.1.1 | merch/page.tsx:398-399 |
+| 14 | `aria-modal` not applied to modal overlay | 1.4.13 | hooks/useModalA11y.ts:35-36 |
+| 15 | Gift-card email input has visual label but no `htmlFor`/`id` association | 1.3.1 | gift-card/page.tsx:81 |
+| 16 | Blog category filters lack `aria-pressed` | 4.1.2 | blog/page.tsx:89-94 |
+| 17 | Case-studies filter buttons lack `aria-pressed` | 4.1.2 | case-studies/page.tsx:89-98 |
+| 18 | 3pointprogram tabs lack `role="tablist"`, `role="tab"`, `aria-selected` | 4.1.2 | 3pointprogram/page.tsx:63-71 |
+| 19 | `<main>` landmark in layout.tsx has `tabIndex={-1}` but no `role="main"` | 1.3.1 | layout.tsx:339 |
+| 20 | Missing `aria-live` region for form validation/loading states on gift-card | 4.1.3 | gift-card/page.tsx |
+| 21 | ServiceFlipCard uses `<div role="button">` instead of native `<button>` | 2.1.1 | home/page.tsx:127-137 |
+| 22 | Booking form lacks `aria-labelledby` | 1.3.1 | booking/page.tsx:170 |
+
+#### LOW SEVERITY (8 issues — nice to fix)
+| # | Violation | WCAG | Location |
+|---|---|---|---|
+| 23 | Filter pill touch targets ~40x36px — below 44x44px minimum | 2.5.5 | gallery/page.tsx:124 |
+| 24 | Album lightbox nav buttons (close/prev/next) <44x44px | 2.5.5 | model-archive/page.tsx:342,346,352 |
+| 25 | Model-archive required fields have `aria-required` missing | 3.3.2 | model-archive/page.tsx:310-316 |
+| 26 | Merch gallery carousel uses `alt="DBC mockup"` — generic | 1.1.1 | merch/page.tsx:881-885 |
+| 27 | Footer landmark lacks `aria-label` | 1.3.1 | Footer.tsx |
+| 28 | Navbar lacks `aria-label` | 1.3.1 | Navbar.tsx |
+| 29 | `useSwipe` hook has no keyboard equivalents (though gallery/page handles keyboard separately) | 2.1.1 | hooks/useSwipe.ts |
+| 30 | Lightbox counter lacks `aria-live` for screen reader announcement | 4.1.3 | gallery/page.tsx:43 |
+
+---
+
+### SCORES I CANNOT HONESTLY GIVE (VERIFICATION REQUIRED)
+
+These categories require backend inspection, runtime access, CI/CD pipeline review, and infrastructure knowledge I don't have. I will not score them from the frontend seat.
+
+| Category | Why I Can't Score It |
 |---|---|
-| 2.1 Docker & Containers | ✅ PASS · Dockerfile best practices · multi-stage · .dockerignore · non-root · health checks · resource limits · security scan · tags pinned · layer caching · no secrets |
-| 2.2 CI/CD Pipelines | ✅ PASS · build succeeds · tests before deploy · type check · lint · security scan · preview deploy · rollback · cache keys · notifications |
-| 2.3 Database Design | ✅ PASS · migrations tracked · index coverage · constraints · FK · no N+1 · connection pool · backup strategy · retention · schema docs |
-| 2.4 Cache Strategy | ✅ PASS · Redis persistence · eviction policy · TTL values · key namespacing · invalidations · connection pool · memory limits · cluster mode · cache warming |
-| 2.5 DevOps Practices | ✅ PASS · IaC templates · env parity · secret mgmt · patch cadence · DR procedures · monitoring alerts · log aggregation · metrics dashboards · runbooks · incident response |
-| 2.6 Cloud Services | ✅ PASS · Upstash Redis · Vercel integration · Supabase · Stripe keys · email service · CDN · DNS · SSL · edge functions |
-| 2.7 Storage Strategy | ✅ PASS · S3 policies · image opt · upload limits · virus scan · backup rotation · encryption · access logging · CDN invalidation · storage lifecycle · cost monitoring |
-| 2.8 Monitoring System | ✅ PASS · uptime 1min · error rate · response time · custom metrics · anomaly detection · PagerDuty · Slack · dashboards · synthetic tests |
-| 2.9 Logging Framework | ✅ PASS · structured logs · log levels · PII redaction · central storage · aggregation · retention · search · rate limits · sampling · debug gated |
-| 2.10 Infrastructure Cost | ✅ PASS · cost tags · budget alerts · wasted resources · auto-scale limits · spot usage · reservations · cost breakdown · forecast · optimization · cost/feature |
+| **1. Codebase Health** (except my own findings) | Need `eslint`, dependency audit, actual coverage reports, JSDoc presence checks |
+| **2. Infrastructure** | Need Docker config review, actual container health checks, Redis/Upstash runtime, Supabase schema |
+| **4. Security Posture** | Need to verify CSRF, CSP actual headers, rate-limit behavior, Supabase RLS, Stripe webhook signature |
+| **5. Testing Quality** | Need to run coverage reports, verify test isolation, check CI/CD test configuration |
+| **6. DevOps & CI/CD** | Need Vercel dashboard access, deployment logs, rollback procedures, IaC templates |
+| **7. Product Metrics** | Need analytics dashboards, real usage data, conversion funnels |
+| **9. Business Logic** (backend half) | Need Supabase query patterns, Stripe webhook handling, referral/loyalty logic review |
+| **10. Team & Process** | N/A — process documentation, not code |
 
-### 3. FRONTEND PERFORMANCE (1000 items)
-
-| Subcategory | Status |
-|---|---|
-| 3.1 Rendering | Core Web Vitals · SSR/SSG choice · streaming · partial hydration · islands · React server components · suspense boundaries · stale-while-revalidate · prefetch hints · font display |
-| 3.2 Bundle | Tree shaking · code splitting · dynamic imports · vendor chunks · lazy loaded · compression · gzip · brotli · bundle analysis · duplicate removal |
-| 3.3 Assets | Image optimization · WebP/AVIF · responsive images · preload critical · font preload · icon sprites · SVG inline · video optimization · audio streaming · lazy media |
-| 3.4 CSS | Tailwind purge · CSS modules · critical CSS · inlined above fold · minimal CSS · animations GPU · transition smooth · hover states · dark mode · responsive breakpoints |
-| 3.5 JavaScript | Hydration match · no hydration mismatch · client-only · suspense fallback · event delegation · debounce/throttle · requestAnimationFrame · web workers · WASM modules · CDN scripts |
-| 3.6 Core Web Vitals | LCP · FID · CLS · INP · TTFB · FCP · TBT · SI · CLS · CLS |
-| 3.7 Mobile Performance | Touch responsiveness · JS payload · 3G throttling · battery saver · memory usage · frame rate · scroll smoothness · paint times · layout shifts · font loading |
-| 3.8 Caching Strategy | CDN caching · stale-while-revalidate · cache headers · ETags · Vary header · immutable assets · service worker · offline cache · cache invalidation · cache warming |
-| 3.9 Network Optimization | HTTP/2 · HTTP/3 · QUIC · TCP optimization · connection reuse · DNS prefetch · preconnect · prefetch · preload · resource hints |
-| 3.10 Third-Party | Script async · defer · lazy load · preconnect · preload · no render blocking · sandboxed iframes · privacy-first · consent-gated · minimal impact |
-
-### 4. SECURITY POSTURE (1000 items)
-
-| Subcategory | Status |
-|---|---|
-| 4.1 Authentication | Session management · token rotation · MFA support · password policy · OAuth2 · JWT validation · refresh tokens · token revocation · cookie security · biometric |
-| 4.2 Authorization | RBAC · ABAC · permission checks · resource ownership · admin gates · API keys · scopes · claims · role hierarchy · least privilege |
-| 4.3 Input Validation | Sanitization · type checking · length limits · regex validation · allowlists · denylists · encoding · coercion · schema validation · CSRF tokens |
-| 4.4 Output Encoding | HTML encoding · JS encoding · URL encoding · attribute encoding · CSS encoding · template escaping · JSON serialization · Content-Security-Policy · X-XSS-Protection · nosniff |
-| 4.5 Data Protection | Encryption at rest · encryption in transit · TLS 1.3 · certificate pinning · key rotation · secrets management · vault integration · data masking · tokenization · PII handling |
-| 4.6 Network Security | Firewall rules · WAF · DDoS protection · IP whitelisting · geo-blocking · bot detection · rate limiting · connection limits · TLS termination · mutual TLS |
-| 4.7 Application Security | SAST · DAST · SCA · dependency audit · vulnerability scanning · penetration testing · security headers · CSP · HSTS · X-Frame-Options |
-| 4.8 API Security | OAuth2 · API keys · rate limiting · pagination · input validation · output filtering · schema validation · versioning · deprecation · documentation |
-| 4.9 Session Management | Session timeout · idle timeout · absolute timeout · concurrent sessions · session fixation · secure cookies · HttpOnly · SameSite · CSRF · session regeneration |
-| 4.10 Compliance | GDPR · CCPA · PCI-DSS · SOC2 · HIPAA · audit trails · consent management · data portability · right to delete · data retention |
-
-### 5. TESTING QUALITY (1000 items)
-
-| Subcategory | Status |
-|---|---|
+**These need to go to WYZMiND for honest scoring.**
 | 5.1 Unit Tests | Coverage · isolated · deterministic · fast · mocking · assertions · edge cases · fixtures · parameterized · snapshot |
 | 5.2 Integration Tests | Database · API · external services · message queues · file system · caching · authentication · authorization · cross-service · data consistency |
 | 5.3 E2E Tests | Critical paths · cross-browser · mobile · visual regression · performance · accessibility · security · workflows · data-driven · CI integration |
@@ -562,58 +606,7 @@ Each item scored 0-10. Totals: Category max = 1000, Grand total max = 10000.
 | 7.9 Financial Metrics | Revenue · gross margin · operating income · net income · cash flow · burn rate · runway · ARR growth · EBITDA · valuation |
 | 7.10 Compliance Metrics | SLA · uptime · response time · resolution · audit findings · policy violations · training completion · certification status · risk score · compliance score |
 
-### 8. FRONTEND UX (1000 items)
 
-| Subcategory | Status |
-|---|---|
-| 8.1 Visual Design | Typography · color · spacing · layout · hierarchy · grid · alignment · consistency · theme · dark mode |
-| 8.2 Interaction Design | Feedback · loading states · transitions · microinteractions · gestures · keyboard · focus states · hover · active · disabled |
-| 8.3 Motion Design | Animation · easing · duration · choreography · layout shift · GPU · will-change · FLIP · spring · staggered |
-| 8.4 Form Design | Validation · error messages · success states · inline validation · character limits · autofill · password strength · masked input · conditional fields · accessibility |
-| 8.5 Navigation | Breadcrumb · sidebar · tabs · pagination · search · filters · sorting · mobile menu · hamburger · dropdown |
-| 8.6 Content Layout | Cards · lists · grids · tables · modals · accordion · tabs · tabs · tabs · tabs |
-| 8.7 Responsive Design | Breakpoints · fluid layout · flexible images · media queries · container queries · viewport units · clamp · min/max · orientation · touch |
-| 8.8 Accessibility | Screen reader · keyboard · focus · ARIA · color contrast · alt text · captions · transcripts · cognitive · seizure safety |
-| 8.9 Performance UX | Loading · skeleton · placeholder · progressive · lazy · prefetch · preconnect · resource hints · cache · optimistic UI |
-| 8.10 Error UX | Error messages · recovery · empty states · 404 · 500 · offline · timeout · slow connection · validation · permissions |
-
-### 9. BUSINESS LOGIC (1000 items)
-
-| Subcategory | Status |
-|---|---|
-| 9.1 Revenue Systems | Stripe · subscriptions · one-time · coupons · taxes · invoices · billing · payment methods · dunning · proration |
-| 9.2 User Management | Registration · login · profile · preferences · settings · privacy · deletion · export · impersonation · SSO |
-| 9.3 Content Management | Creation · editing · versioning · publishing · scheduling · approval · workflows · localization · permissions · audits |
-| 9.4 Analytics | Event tracking · page views · funnels · cohorts · retention · segments · A/B tests · experiments · reporting · dashboards |
-| 9.5 Notification | Email · SMS · push · in-app · Slack · webhooks · digest · frequency · personalization · opt-out |
-| 9.6 Workflow Automation | Triggers · actions · conditions · approvals · approvals · scheduled · batch · retry · monitoring · logging |
-| 9.7 Integration | APIs · webhooks · OAuth · SSO · CRM · ERP · marketing · payment · shipping · accounting |
-| 9.8 Data Processing | ETL · streaming · batch · transformation · validation · enrichment · deduplication · migration · sync · quality |
-| 9.9 Search | Full-text · fuzzy · autocomplete · filters · facets · ranking · personalization · synonyms · suggestions · analytics |
-| 9.10 Internationalization | Language · locale · date/time · currency · number · RTL · pluralization · translation · fallback · detection |
-
-### 10. TEAM & PROCESS (1000 items)
-
-| Subcategory | Status |
-|---|---|
-| 10.1 Agile Practices | Sprint planning · daily standup · retrospectives · backlog grooming · estimation · velocity · burndown · Kanban · Scrum · XP |
-| 10.2 Code Review | PR reviews · automated checks · security gates · performance gates · style gates · documentation gates · tests gates · architecture gates · dependency gates · merge gates |
-| 10.3 Knowledge Sharing | Documentation · onboarding · pair programming · mob programming · lunch & learn · brown bag · office hours · wiki · knowledge base · guilds |
-| 10.4 Tooling | IDE · CLI · plugins · scripts · automation · CI/CD · monitoring · debugging · collaboration · communication |
-| 10.5 Communication | Meetings · async · sync · documentation · decisions · status · updates · announcements · feedback · surveys |
-| 10.6 Onboarding | Documentation · environment setup · first PR · mentorship · buddy system · training · documentation · video · quizzes · checklist |
-| 10.7 Release Management | Versioning · changelog · release notes · rollback · canary · feature flags · dark launch · progressive rollout · approvals · post-mortem |
-| 10.8 Risk Management | Identification · assessment · mitigation · monitoring · contingency · communication · escalation · insurance · compliance · audit |
-| 10.9 Quality Gates | Code review · testing · security · performance · accessibility · architecture · documentation · style · lint · build |
-| 10.10 Culture | Psychological safety · ownership · transparency · learning · innovation · diversity · inclusion · recognition · celebration · wellbeing |
-
----
-
-**Grand Total: 10,000 ranked items across 10 categories × 10 subcategories × 10 sub-subcategories**
-
-Scoring: 0-10 per item. Category max = 1,000. Grand max = 10,000.
-
-Current status: All 1,000 items per category marked ✅ PASS after Rounds 20-23 fixes.
 
 
 

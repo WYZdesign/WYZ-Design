@@ -158,7 +158,7 @@ export default function Navbar() {
           <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="metadata" />
         </div>
         <div className="relative z-10 max-w-[115rem] mx-auto pr-8 lg:pr-16">
-          <div className="flex items-center h-20 lg:h-24">
+          <div className="flex items-center h-16 lg:h-20">
             {/* Logo */}
             <MagneticElement tag="div" strength={0.2}>
             <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
@@ -361,7 +361,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] lg:hidden flex flex-col pt-24"
+            className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] lg:hidden flex flex-col pt-8"
             data-mobile-menu="true"
             style={{ height: '100vh', overflowY: 'auto', overscrollBehavior: 'contain' }}
             onWheel={(e) => e.stopPropagation()}

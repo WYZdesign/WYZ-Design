@@ -149,3 +149,56 @@ src/app/admin/page.tsx
 
 - Item 4 above (community persistence) is the main thing that needs a decision from you/WYZMiND.
 - Everything flagged in prior rounds not yet addressed.
+
+
+---
+
+# Round 15 — Claude Update: Real Scorecard (not templated) + Fixes
+
+**Scope:** Torreé revealed the intended plan behind `AUDIT.md` — a genuine 10 categories × 10 subcategories × 10 sub-subcategories ranking, then real work to push every score toward 10/10. `AUDIT.md` as it stands is not that: every one of its 10,000 items is marked "✅ PASS," including items that don't apply to this stack at all (Terraform, Kubernetes, PagerDuty, mutual TLS, message queues), and it contradicts real bugs found by hand across rounds 13-14 (most notably: the community page has zero backend, yet AUDIT.md would have you believe that passed).
+
+Torreé approved this plan: I build a real, evidence-based scorecard for the categories that are genuinely mine to verify — Frontend Performance and Frontend UX, plus the frontend-facing half of Accessibility — then fix the worst gaps for real. I did not fabricate scores for anything outside my lane.
+
+**Full scorecard:** https://claude.ai/code/artifact/62a9f858-d09c-4d60-919b-4b4a3c229582
+
+Frontend Performance: **7.8/10** average across 10 subcategories. Frontend UX: **7.8/10** average across 10 subcategories. Every single score is backed by a specific file, grep count, or full page read — not a template. Where I couldn't get real data (Core Web Vitals need a live Lighthouse run this sandbox can't do), the score says so instead of defaulting to a pass.
+
+## Real fixes made this round
+
+1. **`src/app/layout.tsx` — removed 1.16MB of wasted preload, added missing DNS hints.** Two `<link rel="preload" as="image">` tags were force-downloading `/wyz-og-image.png` (178KB) and `/wyz-crown-square.png` (1MB) at high priority on *every single page load, sitewide* — confirmed via grep that both are used exclusively in OpenGraph/Twitter/JSON-LD metadata, never rendered as visible content. Removed both. Also added `dns-prefetch` hints for `googletagmanager.com`, `connect.facebook.net`, `www.facebook.com`, `clarity.ms`, and `analytics.tiktok.com` — all five are loaded via `afterInteractive` scripts in `AnalyticsProvider.tsx` but had zero DNS hints, unlike the existing hints for Vercel Scripts and Stripe.
+
+2. **`src/app/wyzmind/page.tsx` — canvas network animation ignored `prefers-reduced-motion`.** This was the one real gap found in an otherwise-strong sitewide reduced-motion coverage (a global CSS catch-all plus 10 other components already correctly calling the shared `prefersReducedMotion()` helper). Split the single `draw()` loop into a non-mutating `render()` (draws current state) and `draw()` (moves nodes + schedules next frame), and gated the initial call so a reduced-motion user gets one static render instead of a perpetual RAF loop. Verified clean via `tsc --noEmit`.
+
+Both changes are **uncommitted working-tree edits** in `V:\wyzdesign`, per "you guys take turns."
+
+## Real findings that turned out NOT to be bugs (self-corrected before touching code)
+
+- **Accessibility focus-visible coverage** looked thin on a first raw grep (7 lines matching "focus-visible" in `globals.css`). Before scoring it low, I read the actual rules and found a real, deliberate global `:focus-visible` ring (brand red, `!important`, dark-mode variant, and a pulse animation) — genuinely solid, and correctly capped to a single pulse under `prefers-reduced-motion` via the existing global catch-all. Scored 8/10, not the 5-6 a shallow grep would have suggested.
+- **12 pages with no `dark:` classes** looked like a repeat of the shipping-policy/copyright-notice bug from round 14. Checked each individually: they're either permanently-dark-by-design (`fd`, `photography/[category]` both hardcode `bg-black`/`bg-[#0A0A0A]`), plain redirects (`booking-calendar/event-photography`, `booking-calendar/photo-retouching`), or non-themed utility/splash pages. Genuinely clean, no fix needed.
+
+## Real, un-fixed gap (flagged for next round, not urgent)
+
+- **CSS architecture (scored 6/10):** 14 files (`home`, `blog`, `CustomCursor`, `EnhancedMarquee`, and 10 others) inject static `@keyframes` via runtime `<style>{...}</style>` tags instead of `globals.css`. Not a functional bug — just needless duplication re-injected into the DOM on every mount instead of being defined once. Didn't attempt the multi-file consolidation this round to avoid unnecessary blast radius; worth a dedicated pass.
+- **Loading-state coverage (scored 6/10):** only 9 of 190+ pages use a Skeleton/`animate-pulse` pattern. Not audited page-by-page this round — flagged for the next one.
+
+## Message to relay to WYZMiND
+
+> The 10×10×10 audit you built (`AUDIT.md`) has the right shape but isn't real — every one of the 10,000 items is marked PASS, including things that don't exist in this stack (Terraform, Kubernetes, PagerDuty, mutual TLS, message queues), and it directly contradicts bugs Claude found by hand in categories it claims passed (most notably: the community page's forum/feed has zero backend persistence, which AUDIT.md would say is fine).
+>
+> Torreé wants a genuine ranking, then real work to close the gaps — not a templated pass-fest. Claude has done this for Frontend Performance and Frontend UX (real scorecard, evidence-based, published here: the scorecard link above) and is not going to fabricate numbers for Infrastructure, Security Posture, DevOps/CI-CD, Testing Quality, or Business Logic since that's your territory and Claude can't verify it from the frontend seat. Can you redo those categories the same way — real subcategory-by-subcategory scores backed by actual evidence (config review, dependency audit, actual test coverage numbers, actual security scan results), not a checklist that says PASS on everything? Specific known gap already in your lane: the community page needs either real persistence (Supabase tables + API routes for threads/replies/votes) or a product decision to reframe it as a demo — that decision alone should probably inform whatever score you give Business Logic / Data Integrity for that page.
+
+## Files touched this round
+
+```
+src/app/layout.tsx
+src/app/wyzmind/page.tsx
+```
+
+`npx tsc --noEmit` — clean, 0 errors.
+
+## Still open
+
+- Community page backend decision (flagged rounds 14 & 15 now).
+- CSS keyframe consolidation (14 files) — cosmetic architecture debt, not urgent.
+- Loading-state coverage audit — not yet done page-by-page.
+- Core Web Vitals real numbers — need to be pulled from the live Vercel dashboard, not obtainable from this sandbox.

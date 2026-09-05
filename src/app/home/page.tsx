@@ -917,13 +917,13 @@ export default function HomePage() {
 <div className="flex flex-row gap-3 justify-center overflow-hidden px-2">
       <MagneticElement tag="div" strength={0.25}>
       <Link href="/about"
-       className="inline-block bg-white text-[#111] border-2 border-white px-5 py-3 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] hover:shadow-white/20 transition-all">
+       className="inline-block bg-white text-[#111] border-2 border-white px-5 py-2.5 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] hover:shadow-white/20 transition-all">
       SEE THE STORY
       </Link>
       </MagneticElement>
       <MagneticElement tag="div" strength={0.25}>
       <Link href="/contact"
-       className="inline-block bg-[#DF3131] text-white border-2 border-[#DF3131] px-5 py-3 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#B82020] hover:border-[#B82020] transition-all">
+       className="inline-block bg-[#DF3131] text-white border-2 border-[#DF3131] px-5 py-2.5 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#B82020] hover:border-[#B82020] transition-all">
       START A PROJECT
       </Link>
       </MagneticElement>
