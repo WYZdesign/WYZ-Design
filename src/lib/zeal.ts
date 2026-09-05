@@ -128,10 +128,10 @@ export const ZEAL_TIERS = [
  */
 export const ZEAL_REWARDS = [
   { id: "discount-25",       title: "$25 off any service",              cost: 500,  note: "Discount code honored on any booking" },
-  { id: "free-retouch",      title: "Free photo retouching session",    cost: 750,  note: "$50 value, one session" },
-  { id: "merch-item",        title: "Any merch item under $40",         cost: 1000, note: "Applied at fulfillment" },
-  { id: "shoot-extra-hour",  title: "Extra hour on any photoshoot",     cost: 1200, note: "$100 value, mention when booking" },
-  { id: "discount-100",      title: "$100 off any booking",             cost: 1750, note: "Best value per Zeal" },
+  { id: "free-retouch",      title: "Free photo retouching session",    cost: 1000, note: "$50 value, one session" },
+  { id: "merch-item",        title: "Any merch item under $40",         cost: 800,  note: "Applied at fulfillment" },
+  { id: "shoot-extra-hour",  title: "Extra hour on any photoshoot",     cost: 2000, note: "$100 value, mention when booking" },
+  { id: "discount-100",      title: "$100 off any booking",             cost: 2000, note: "Best value per Zeal" },
 ] as const;
 
 export type ZealRewardId = (typeof ZEAL_REWARDS)[number]["id"];
