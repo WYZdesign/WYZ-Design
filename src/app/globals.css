@@ -22,6 +22,16 @@
 
 /* ── BASE ── */
 html { overflow-x: clip; }
+
+html {
+  scroll-padding-top: 7rem;
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 8rem;
+  }
+}
 body {
   background: #FFFFFF;
   color: #333333;
@@ -776,15 +786,7 @@ p.wz-reveal.wz-revealed { animation: wzFadeInUp 0.45s ease-out forwards; }
    GLOBAL TOUCH FEEDBACK — awwwards-style tap interactions
    ═══════════════════════════════════════════════════════════ */
 @media (hover: none) and (pointer: coarse) {
-html {
-  scroll-padding-top: 7rem;
-}
-
-@media (min-width: 1024px) {
   html {
-    scroll-padding-top: 8rem;
-  }
-}
     -webkit-tap-highlight-color: transparent;
   }
   a:active,
