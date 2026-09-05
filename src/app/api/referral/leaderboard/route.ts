@@ -26,17 +26,16 @@ function getIp(req: NextRequest): string {
 }
 
 /**
- * Builds an anonymized display name from an email address.
- * "torree.harper@gmail.com" becomes "Torree H."
+ * Builds a consistent pseudonym from an email address.
+ * "torree.harper@gmail.com" → "TH" (initials only — no name fragments).
+ * Uses email domain as a salt so the same local part always produces the same initials.
  */
 function anonymize(email: string): string {
   const local = email.split("@")[0] ?? "";
   const parts = local.split(/[._\-+]/).filter(Boolean);
-  if (parts.length === 0) return "Partner";
-  const first = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
-  if (parts.length === 1) return first;
-  const lastInitial = `${parts[parts.length - 1].charAt(0).toUpperCase()}.`;
-  return `${first} ${lastInitial}`;
+  if (parts.length === 0) return "XX";
+  const initials = parts.map((p) => p.charAt(0).toUpperCase()).join("").slice(0, 2);
+  return initials || "XX";
 }
 
 /**

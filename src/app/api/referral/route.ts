@@ -6,10 +6,19 @@ import { rateLimit } from "@/lib/rate-limit";
 import { recordReferralConversion } from "@/lib/referral";
 import { logger } from "@/lib/logger";
 
-function generateCode(email: string): string {
-  const base = email.replace(/[^a-zA-Z0-9]/g, "").slice(0, 6).toUpperCase();
-  const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
-  return `${base}-${rand}`;
+/**
+ * Generates a fully random referral code. The old implementation derived the
+ * first 6 chars from the referrer's email prefix, which let anyone who knew the
+ * email predict the code's base and brute-force the 4-char suffix. Codes are
+ * now purely random; the uniqueness loop below retries on collision.
+ */
+function generateCode(): string {
+  const alphabet = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  let code = "";
+  for (let i = 0; i < 8; i++) {
+    code += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+  return code;
 }
 
 function getIp(req: NextRequest): string {
@@ -154,13 +163,13 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ code: existing.code });
       }
 
-      // Generate unique code
-      let code = generateCode(email);
-      for (let i = 0; i < 5; i++) {
-        const { data: dup } = await sb.from("referral_codes").select("code").eq("code", code).maybeSingle();
-        if (!dup) break;
-        code = generateCode(email);
-      }
+// Generate unique code
+       let code = generateCode();
+       for (let i = 0; i < 5; i++) {
+         const { data: dup } = await sb.from("referral_codes").select("code").eq("code", code).maybeSingle();
+         if (!dup) break;
+         code = generateCode();
+       }
 
       const { error } = await sb.from("referral_codes").insert({ code, referrer_email: email.toLowerCase() });
       if (error) {
