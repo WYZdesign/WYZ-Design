@@ -7,7 +7,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Return & Refund Policy — WYZ Design",
+  title: "Return & Refund Policy",
   description: "WYZ Design return and refund policy. Digital goods non-refundable, physical goods 30-day return window, custom orders non-returnable, damaged items replacement process.",
   robots: { index: true, follow: true },
 };

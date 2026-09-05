@@ -5,7 +5,7 @@ import { getRedis } from "@/lib/wyzmind";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "System Status | WYZ Design",
+  title: "System Status",
   description: "Live health of WYZ Design services.",
   robots: { index: false, follow: false },
 };

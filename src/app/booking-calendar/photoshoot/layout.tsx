@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   keywords: ["book photoshoot", "photoshoot booking", "Los Angeles photographer", "portrait session", "WYZ Design"],
   alternates: { canonical: "https://www.wyzdesign.com/booking-calendar/photoshoot" },
   openGraph: {
-    title: "Book a Photoshoot | WYZ Design",
+title: "Book a Photoshoot",
     description: "Book your photoshoot session with WYZ Design. Professional photography starting at $100/hr.",
     url: "https://www.wyzdesign.com/booking-calendar/photoshoot",
     siteName: "WYZ Design",

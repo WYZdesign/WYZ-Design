@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   keywords: ["book consultation", "free creative consultation", "brand strategy", "Los Angeles creative agency", "WYZ Design"],
   alternates: { canonical: "https://www.wyzdesign.com/booking-calendar/consultation" },
   openGraph: {
-    title: "Book a Consultation | WYZ Design",
+title: "Book a Consultation",
     description: "Schedule a free creative consultation with WYZ Design.",
     url: "https://www.wyzdesign.com/booking-calendar/consultation",
     siteName: "WYZ Design",

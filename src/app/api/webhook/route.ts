@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getStripe } from "@/lib/stripe";
 import { getServiceClient } from "@/lib/supabase";
 import { addLoyaltyPoints } from "@/lib/wyzmind";
+import { earnZeal } from "@/lib/zeal";
 import { sendDiscordAlert } from "@/lib/discord";
 import { recordReferralConversion } from "@/lib/referral";
 import { sendBookingConfirmation } from "@/lib/email";
@@ -75,7 +76,7 @@ export async function POST(req: NextRequest) {
           }
         } catch (e) { logger.error("webhook:loyalty-earn", (e as Error).message); }
 
-        // Gift cards: insert DB record + alert staff
+        // Gift cards: insert DB record + alert staff + award post-payment Zeal milestone
         if (session.metadata?.type === "giftcard") {
           try {
             const gcAmount = Number(session.metadata.amount) || Math.round(amountTotal / 100);
@@ -95,6 +96,19 @@ export async function POST(req: NextRequest) {
               "Session ID": session.id,
             });
           } catch (e) { logger.error("webhook:giftcard", (e as Error).message); }
+
+          // One-time 75-Zeal "Purchased a gift card" milestone — only now that
+          // Stripe has confirmed payment. earnZeal enforces the once-per-user
+          // claim itself and is rate-limited + locked, so Stripe redeliveries
+          // cannot double-award.
+          if (email && session.customer_details?.email?.toLowerCase() === email) {
+            try {
+              const result = await earnZeal(email, "buy-gift-card");
+              if (result.success && (result.zeal ?? 0) > 0) {
+                logger.info("webhook:giftcard-zeal", `Awarded ${result.zeal} Zeal to ${email} (buy-gift-card)`);
+              }
+            } catch (e) { logger.error("webhook:giftcard-zeal", (e as Error).message); }
+          }
         }
 
         // Record referral conversion server-to-server (no client round trip)

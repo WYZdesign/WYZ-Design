@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) return {};
   const url = `${SITE}/blog/${post.slug}`;
   return {
-    title: `${post.title} | WYZ Design Blog`,
+    title: `${post.title} | WYZ Design`,
     description: post.excerpt,
     alternates: { canonical: url },
     openGraph: {
