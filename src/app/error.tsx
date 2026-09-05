@@ -35,7 +35,7 @@ export default function Error({
         <h1 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.03em] leading-none mb-4">
           LET&apos;S GET YOU BACK ON TRACK
         </h1>
-        <p className="text-[#666] dark:text-[#666] text-[15px] leading-relaxed mb-8">
+        <p className="text-[#666] dark:text-white text-[15px] leading-relaxed mb-8">
           Refreshing automatically, and if nothing happens, tap a button below.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">

@@ -10,7 +10,7 @@ export default function NotFound() {
         <h1 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.03em] leading-none mb-4">
           PAGE NOT FOUND
         </h1>
-        <p className="text-[#666] dark:text-[#666] text-[15px] leading-relaxed mb-8">
+        <p className="text-[#666] dark:text-white text-[15px] leading-relaxed mb-8">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">

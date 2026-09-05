@@ -195,7 +195,7 @@ return (
     className={`relative px-5 py-2.5 text-[12px] font-bold tracking-[0.1em] uppercase rounded-full transition-all duration-300 shrink-0 whitespace-nowrap ${
     isActive
     ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30 scale-105"
-      : "bg-white dark:bg-[#252528] text-[#666] dark:text-[#b0b0b0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
+      : "bg-white dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131] hover:scale-105"
     }`}>
     {cat}
     </button>

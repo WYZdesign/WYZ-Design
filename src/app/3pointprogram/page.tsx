@@ -56,7 +56,7 @@ export default function ThreePointProgramPage() {
           <div className="text-center mb-14 pt-32 lg:pt-40">
             <p className="text-[#DF3131] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-2">Framework</p>
             <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>3-POINT PROGRAM</h1>
-            <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto text-[16px] leading-relaxed">A structured framework for building your brand from the ground up. Three pillars, one unified vision. Built for creatives, artists, and small businesses who are tired of guessing.</p>
+            <p className="text-[#666] dark:text-white max-w-xl mx-auto text-[16px] leading-relaxed">A structured framework for building your brand from the ground up. Three pillars, one unified vision. Built for creatives, artists, and small businesses who are tired of guessing.</p>
           </div>
 
           {/* Pillar tabs */}
@@ -65,7 +65,7 @@ export default function ThreePointProgramPage() {
               <button key={i} onClick={() => setActivePillar(i)}
                 role="tab" aria-selected={activePillar === i}
                 className={`px-6 py-3 rounded-full text-[12px] font-bold tracking-[0.1em] uppercase transition-all ${
-                  activePillar === i ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white/70 hover:border-[#DF3131]"
+                  activePillar === i ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white hover:border-[#DF3131]"
                 }`}>
                 {p.title}
               </button>

@@ -175,7 +175,7 @@ export default function Navbar() {
                 <Link key={l.href} href={l.href}
                   aria-current={isActive(l.href) ? "page" : undefined}
                   className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold whitespace-nowrap transition-all duration-[400ms] ${
-                    isActive(l.href) ? "text-white dark:text-black" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black hover:scale-105 active:text-white/80"
+                    isActive(l.href) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:scale-105 active:text-white/80"
                   }`}
                   style={isActive(l.href) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
                   {l.label}
@@ -184,7 +184,7 @@ export default function Navbar() {
               <div className="relative" data-more-dropdown onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
                 <button data-more-btn onClick={() => setMoreOpen(!moreOpen)}
                   className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors duration-[400ms] ${
-                    MORE_LINKS.some(l => isActive(l.href)) ? "text-white dark:text-black" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black active:text-white/80"
+                    MORE_LINKS.some(l => isActive(l.href)) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white active:text-white/80"
                   }`}
                   style={MORE_LINKS.some(l => isActive(l.href)) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
                   M O R E <IoChevronDown className={`w-3 h-3 transition-transform ${moreOpen ? "rotate-180" : ""}`} />
@@ -202,7 +202,7 @@ export default function Navbar() {
                           <Link key={l.href} href={l.href}
                             aria-current={isActive(l.href) ? "page" : undefined}
                             className={`block px-5 py-3 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
-                              isActive(l.href) ? "text-white dark:text-black bg-white/10 dark:bg-black/10 font-bold" : "text-white/70 dark:text-black/70 hover:text-white dark:hover:text-black hover:bg-white/5 dark:hover:bg-black/5 active:text-white/80"
+                              isActive(l.href) ? "text-white dark:text-white bg-white/10 dark:bg-black/10 font-bold" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:bg-white/5 dark:hover:bg-black/5 active:text-white/80"
                             }`}>
                           {l.label}
                           </Link>
@@ -253,7 +253,7 @@ export default function Navbar() {
                     <motion.button key="search-btn" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                       onClick={() => setSearchOpen(true)}
                       aria-label="Open search"
-                      className="w-11 h-11 flex items-center justify-center rounded-full border border-white/30 text-white hover:bg-white/10 transition-all">
+                      className="w-11 h-11 flex items-center justify-center rounded-full border border-white/30 text-white dark:text-white hover:bg-white/10 transition-all">
                       <FiSearch className="w-4 h-4" />
                     </motion.button>
                   )}
