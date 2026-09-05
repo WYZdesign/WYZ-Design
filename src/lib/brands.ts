@@ -3,7 +3,7 @@ export const BRANDS = [
     name: "WYZ Design",
     tagline: "The Company",
     shortDesc: "Full-service creative direction and production. Photography, graphic design, web design, videography, branding, and printing. The umbrella every other brand operates under.",
-    longDesc: "WYZ Design is the full-service creative engine. Photography, graphic design, web design, videography, branding, and printing — everything under one roof. Built in Chicago, scaling in Los Angeles.",
+    longDesc: "WYZ Design is the full-service creative engine. Photography, graphic design, web design, videography, branding, and printing. Everything under one roof. Built in Chicago, scaling in Los Angeles.",
     color: "#DF3131",
     href: "/",
     cta: "Visit the main site",

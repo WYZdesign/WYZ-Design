@@ -99,7 +99,7 @@ export async function sendBookingConfirmation(data: BookingConfirmation): Promis
         Need to reach us sooner? Reply to this email or text/call us directly.
       </p>
       <p style="font-size:14px;color:#666;line-height:1.6;margin:0">
-        — WYZ Design<br>
+        | WYZ Design<br>
         <a href="mailto:info@wyzdesign.com" style="color:#DF3131">info@wyzdesign.com</a>
       </p>
     </div>
@@ -153,7 +153,7 @@ export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): 
         Questions? Just reply to this email. We're here before, during, and after.
       </p>
       <p style="font-size:14px;color:#666;line-height:1.6;margin:0">
-        — WYZ Design<br>
+        | WYZ Design<br>
         <a href="mailto:info@wyzdesign.com" style="color:#DF3131">info@wyzdesign.com</a>
       </p>
     </div>
@@ -206,7 +206,7 @@ export async function sendBookingDelivered(data: { email: string; customerName?:
         Need revisions? Let us know within 7 days and we'll make it right.
       </p>
       <p style="font-size:14px;color:#666;line-height:1.6;margin:24px 0 0">
-        — WYZ Design<br>
+        | WYZ Design<br>
         <a href="mailto:info@wyzdesign.com" style="color:#DF3131">info@wyzdesign.com</a>
       </p>
     </div>

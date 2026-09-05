@@ -32,7 +32,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What's included in the hourly rate?",
-    a: "All time quoted is billable time — shooting, editing, revisions, and delivery. We don't pad hours. You'll always know exactly what you're getting."
+    a: "All time quoted is billable time: shooting, editing, revisions, and delivery. We don't pad hours. You'll always know exactly what you're getting."
   },
   {
     q: "How fast can you turn a project around?",
@@ -44,7 +44,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "Can I cancel or reschedule?",
-    a: "You can reschedule with 48+ hours notice at no charge. Cancellations within 48 hours forfeit the deposit. We understand things come up — just give us as much notice as possible."
+    a: "You can reschedule with 48+ hours notice at no charge. Cancellations within 48 hours forfeit the deposit. We understand things come up. Just give us as much notice as possible."
   },
   {
     q: "Do you work with brands outside Los Angeles?",

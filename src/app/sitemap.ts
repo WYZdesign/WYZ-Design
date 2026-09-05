@@ -61,6 +61,7 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
  { path: "/merch/concepts", priority: 0.6, changeFrequency: "monthly" },
  { path: "/match", priority: 0.5, changeFrequency: "monthly" },
 { path: "/splash-gallery", priority: 0.4, changeFrequency: "monthly" },
+ { path: "/splash", priority: 0.4, changeFrequency: "monthly" },
   { path: "/splash-showcase", priority: 0.4, changeFrequency: "monthly" },
   { path: "/mobile-splash", priority: 0.6, changeFrequency: "monthly" },
   { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },

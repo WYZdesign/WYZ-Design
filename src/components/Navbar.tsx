@@ -301,7 +301,7 @@ export default function Navbar() {
                             <Link href="/loyalty" onClick={() => setProfileOpen(false)}
                               className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
                               <FiZap className="w-3 h-3 text-[#DF3131]" />
-                              View Loyalty Dashboard
+                              View Rewards Dashboard
                             </Link>
                             <Link href="/referral" onClick={() => setProfileOpen(false)}
                               className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">

@@ -10,14 +10,14 @@ export const metadata: Metadata = {
   description: "The community and clothing arm of WYZ Design. A collective of artists, musicians, models, and culture-makers who refuse to blend in.",
   alternates: { canonical: `${SITE}/dying-breed-crew` },
   openGraph: {
-    title: "Dying Breed Crew — WYZ Design",
+title: "Dying Breed Crew | WYZ Design",
     description: "A collective of artists, musicians, models, and culture-makers who refuse to blend in. Merch, events, and creative collaborations.",
     url: `${SITE}/dying-breed-crew`,
     siteName: "WYZ Design",
     type: "website",
     images: [{ url: `${SITE}/images/client-logos/dying-breed.jpg`, width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Dying Breed Crew — WYZ Design", description: "A collective of artists, musicians, models, and culture-makers who refuse to blend in.", images: [`${SITE}/images/client-logos/dying-breed.jpg`] },
+  twitter: { card: "summary_large_image", title: "Dying Breed Crew | WYZ Design", description: "A collective of artists, musicians, models, and culture-makers who refuse to blend in.", images: [`${SITE}/images/client-logos/dying-breed.jpg`] },
 };
 
 const jsonLd = {
@@ -77,7 +77,7 @@ export default function DyingBreedCrewPage() {
           Not Just a Brand. A <span className="text-[#D49341]">Standard</span>.
         </h2>
         <p className="text-[#666] dark:text-[#999] text-[16px] leading-relaxed max-w-2xl mx-auto">
-          DBC represents the doers — the ones who show up, the ones who create when nobody&apos;s watching. We make gear that reflects that energy. Limited runs, real quality, no mass production. If you know, you know.
+          DBC represents the doers. The ones who show up, the ones who create when nobody&apos;s watching. We make gear that reflects that energy. Limited runs, real quality, no mass production. If you know, you know.
         </p>
       </section>
 

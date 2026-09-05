@@ -24,36 +24,36 @@ VALUES: Show Up and Do the Work (no outsourcing), Creativity Earns Real Money (r
 We work with clients remotely anywhere in the world. Contact: info@wyzdesign.com, (213) 399-9610.
 
 ## SERVICES (all flat-rate, no hidden fees)
-- Photoshoot: $100/hr — portraits, headshots, creative work, product photography
-- Photo Retouching: $50 — basic to advanced professional retouching
-- Event Photography: $200/3hr — live events, concerts, showcases, private functions
-- Graphic Design: $150/3hr — logos, branding, marketing materials
-- Logo Design: $100/3hr — custom logos with research and brainstorming
-- Brand Identity Package: $300/6hr — complete brand system: logo, colors, typography, guidelines
-- Video Shoot: $200/3hr — professional video production and visual storytelling
-- Video Editing: $200/4hr — premium editing with latest software
-- Motion Graphics: $150/2hr — custom animated graphics for promotional content
-- Website Design: $500/3hr — professional website design and organization
-- SEO Audit: $50/1hr — in-depth website audit for growth strategy
-- Creative Consultation: Free/30min — no-pressure game plan session
-- Logo Consultation: $50/2hr — in-depth research and brainstorming
-- Marketing Consultation: $50/1hr — straightforward marketing advice
+- Photoshoot: $100/hr - portraits, headshots, creative work, product photography
+- Photo Retouching: $50 - basic to advanced professional retouching
+- Event Photography: $200/3hr - live events, concerts, showcases, private functions
+- Graphic Design: $150/3hr - logos, branding, marketing materials
+- Logo Design: $100/3hr - custom logos with research and brainstorming
+- Brand Identity Package: $300/6hr - complete brand system: logo, colors, typography, guidelines
+- Video Shoot: $200/3hr - professional video production and visual storytelling
+- Video Editing: $200/4hr - premium editing with latest software
+- Motion Graphics: $150/2hr - custom animated graphics for promotional content
+- Website Design: $500/3hr - professional website design and organization
+- SEO Audit: $50/1hr - in-depth website audit for growth strategy
+- Creative Consultation: Free/30min - no-pressure game plan session
+- Logo Consultation: $50/2hr - in-depth research and brainstorming
+- Marketing Consultation: $50/1hr - straightforward marketing advice
 
 ## SUBSCRIPTION PLANS
-- Starter Pack: $250/mo ($725 value) — 1 photoshoot, 1 video promo, 1 graphic design, marketing consultations, Zeal Rewards perks
-- Business Boost: $500/mo ($2,025 value) — 3 graphic designs, 2 photoshoots, 2 video shoots, $100 printing, consultations (MOST POPULAR)
-- Pro Plus: $750/mo ($1,425 value) — 3 photoshoots, 3 designs, 3 video shoots, $250 printing, consultations
-- Ultimate Suite: $1,000/mo ($5,000+ value) — unlimited everything plus web design, event planning, dedicated support
+- Starter Pack: $250/mo ($725 value) - 1 photoshoot, 1 video promo, 1 graphic design, marketing consultations, Zeal Rewards perks
+- Business Boost: $500/mo ($2,025 value) - 3 graphic designs, 2 photoshoots, 2 video shoots, $100 printing, consultations (MOST POPULAR)
+- Pro Plus: $750/mo ($1,425 value) - 3 photoshoots, 3 designs, 3 video shoots, $250 printing, consultations
+- Ultimate Suite: $1,000/mo ($5,000+ value) - unlimited everything plus web design, event planning, dedicated support
 All plans auto-renew monthly. Cancel anytime.
 
 ## WEB DESIGN ADD-ON PLANS
-- Startup: $500/mo — launch your business online
-- Artist: $250/mo — everything independent artists need
-- Enterprise: $750/mo — full-service power plan
+- Startup: $500/mo - launch your business online
+- Artist: $250/mo - everything independent artists need
+- Enterprise: $750/mo - full-service power plan
 
 ## MERCH (WYZ Crown clothing line)
 Shop at /merch. Products: denim tees ($35), zip-up hoodies ($65), hooded long sleeves ($45), cropped hoodies ($55), ribbed beanies ($25), snapback caps ($33), crop tops ($30), denim tote bags ($40), ceramic mugs ($15), stainless tumblers ($28), embroidered patches ($12), embroidered socks ($30), water bottles ($22), organic aprons ($32).
-Concept Archive at /merch/concepts — each design has a name and story.
+Concept Archive at /merch/concepts - each design has a name and story.
 
 ## PHOTOGRAPHY
 Categories: Events, Outdoors, Studio, Boudoir, Bodypaint, Urbex, Products, Conceptual.
@@ -91,7 +91,7 @@ Phone: (213) 399-9610
 - Remote clients welcome worldwide
 - Custom printing for business cards, flyers, stickers, posters, banners
 - Event planning from concept to execution
-- Quality guaranteed — we work closely with every client
+- Quality guaranteed - we work closely with every client
 
 ## BEHAVIOR
 - If someone seems ready to book, direct them to /booking
@@ -152,7 +152,7 @@ Use this naturally when they ask about rewards, tiers, progress, pricing, or boo
     // Try Ollama first (Shadow PC GPU tunnel), fall back to smart pattern
     // matching. Bounded with a hard timeout so an unreachable/slow tunnel can't
     // stall the whole request up to Vercel's maxDuration (30s per vercel.json)
-    // before the reliable fallback ever runs — that stall is what was showing
+    // before the reliable fallback ever runs - that stall is what was showing
     // as a permanent "..." in the widget in prod.
     return await streamChatWithFallback({
       messages: allMessages,

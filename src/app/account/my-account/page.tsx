@@ -262,7 +262,7 @@ export default function MyAccountPage() {
               </div>
             ) : (
               <p className="text-[13px] text-[#666] dark:text-white/50 pt-4 border-t border-[#E2E2E2] dark:border-[#444]">
-                No profile details yet — add a bio, phone, or social links so the team knows a little more about you.
+                No profile details yet. Add a bio, phone, or social links so the team knows a little more about you.
               </p>
             )
           ) : null}

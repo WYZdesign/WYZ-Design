@@ -28,7 +28,7 @@ export async function GET(req: Request) {
   const apiKey = process.env.GOOGLE_DRIVE_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
-      { error: "GOOGLE_DRIVE_API_KEY not set", hint: "Add to .env.local — get from Google Cloud Console (enable Drive API)" },
+      { error: "GOOGLE_DRIVE_API_KEY not set", hint: "Add to .env.local. Get from Google Cloud Console (enable Drive API)" },
       { status: 503 }
     );
   }

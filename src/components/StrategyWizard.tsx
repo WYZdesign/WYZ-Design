@@ -116,7 +116,7 @@ function getRecommendation(answers: string[]): Recommendation {
   rec.total = serviceTotal > 0 ? `$${serviceTotal}` : "Varies";
 
   if (timeline === "rush") {
-    rec.rushNote = "Rush delivery (24–48 hrs) is available at a 25–50% premium — mention this timeline when you book.";
+    rec.rushNote = "Rush delivery (24-48 hrs) is available at a 25-50% premium. Mention this timeline when you book.";
   }
 
   return rec;
