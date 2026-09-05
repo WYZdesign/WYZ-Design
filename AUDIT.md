@@ -375,6 +375,13 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 
 ### Fix Log
 
+#### 2026-09-04 — Round 19 (`0f9b19e` — deployed READY)
+- **Reduced-motion (C-H5 → largely FIXED):** existing guards already covered CustomCursor, CardTilt, GyroTilt, MouseGlow, ParticleBackground, ScrollParallaxCard, ParallaxVideo, EnhancedMarquee. Added the remaining offenders: SmoothScrollProvider (Lenis skips init — `useLenis` has zero consumers, safe), Clients marquee (`x:["0%","-50%"]` loop → static row of 6 when reduced), VideoScrub (rAF scrub loop skipped; video stays paused on poster), RandomSplash (home + /splash entry renders the static Brand instead of drawing a random rAF variant — single gate; splash-gallery tiles stay interactive since only the user-selected one animates). Residual accepted: entrance fades (ScrollReveal/`wyzFade`), SuccessBurst confetti (~1s success-only), decorative `animate-pulse` CSS — all non-sustained.
+- **`/api/health` Redis check wired (LOW → FIXED):** `checkRedisHealth()` (previously dead export in rate-limit-redis) now called by the health route → adds `redis: "ok"|"down"` (kept node/version out).
+- **zeal:svcs unbounded set (LOW → FIXED):** `RedisLike` gained `spop` on both Upstash + ioredis backends; `zeal.ts` caps each user's service-path set at 30 members (`scard` > 30 → `spop` excess). Threshold safely above the view-all-services (6) requirement.
+- **fd/drive err.message echo (LOW → FIXED):** `/api/fd/drive` no longer returns Drive error text to the admin client — logs server-side, returns generic message.
+- **Verified:** `npx tsc --noEmit` clean, local `npm run build` clean.
+
 #### 2026-09-04 — Round 18 (`2eee11b` batch A + `9c5fd33` batch B + `2d6f7f5` batch C/E47 — all deployed READY, verified live)
 - **Multiple h1s (MEDIUM → FIXED, 5 routes):** hero-split routes hid a real duplicate — desktop + mobile blocks each emitted `<h1>` (one CSS-hidden). web-design/designs/printing/photography/services: mobile second `<h1>` → `<div>` preserving classes. my-account/booking/admin/merch h1 pairs verified as early-return branches, not true duplicates.
 - **Unlabeled icon buttons / SVG-only controls (MEDIUM → FIXED):** featured-artist prev/next + lightbox FiX/chevrons + dots (`Go to artwork N`), model-archive lightbox 3 buttons, photography model-carousel arrows, events flip-card + video-carousel arrows all got aria-labels; SocialShare copy button got `aria-label` + `copyFailed` state (`role="alert"`, "Copy failed — try again") with `navigator.clipboard` + execCommand fallback.
