@@ -354,6 +354,10 @@ async function earnZealLocked(
       const redis = getRedis();
       await redis.sadd(`zeal:svcs:${email}`, ctx.normalizedPath);
       distinctServices = await redis.scard(`zeal:svcs:${email}`);
+      if (distinctServices > 30) {
+        await redis.spop(`zeal:svcs:${email}`, distinctServices - 30);
+        distinctServices = 30;
+      }
       state.counters.services_distinct = distinctServices;
     } catch (e) {
       logger.warn("zeal:svc-track", e instanceof Error ? e.message : String(e));

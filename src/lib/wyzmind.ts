@@ -17,6 +17,7 @@ export interface RedisLike {
   del(key: string): Promise<number>;
   sadd(key: string, member: string): Promise<number>;
   scard(key: string): Promise<number>;
+  spop(key: string, count?: number): Promise<string[] | string | null>;
   setex(key: string, seconds: number, value: string): Promise<"OK" | null>;
   ping(): Promise<string>;
 }
@@ -74,6 +75,14 @@ export function getRedis(): RedisLike {
       async scard(key) {
         const res = await r.scard(key);
         return typeof res === "number" ? res : 0;
+      },
+      async spop(key, count) {
+        if (count !== undefined) {
+          const res = await r.spop(key, count);
+          return Array.isArray(res) ? res : res ? [res] : [];
+        }
+        const res = await r.spop(key);
+        return typeof res === "string" ? res : null;
       },
       async setex(key, seconds, value) {
         const res = await r.set(key, value, { ex: seconds });

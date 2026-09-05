@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, createContext, useContext, ReactNode } from "react";
 import Lenis from "lenis";
+import { prefersReducedMotion } from "@/lib/utils";
 
 const LenisContext = createContext<Lenis | null>(null);
 export const useLenis = () => useContext(LenisContext);
@@ -10,6 +11,7 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    if (prefersReducedMotion()) return;
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
     const lenis = new Lenis({

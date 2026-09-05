@@ -7,6 +7,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useGyroPermission } from "@/hooks/useGyroPermission";
+import { prefersReducedMotion } from "@/lib/utils";
 const R = "#DF3131", RD = "#B82020", G = "#D49341", GL = "#F9AD4D", OW = "#FFFFFF", CH = "#262626", DK = "#161311";
 
 const CSS = `
@@ -523,7 +524,10 @@ const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Ele
 
 export function RandomSplash(props: VProps) {
  const [i, setI] = useState<number | null>(null);
- useEffect(() => { setI(Math.floor(Math.random() * VARIANTS.length)); }, []);
+ useEffect(() => {
+   if (prefersReducedMotion()) return;
+   setI(Math.floor(Math.random() * VARIANTS.length));
+ }, []);
  if (i === null) return <div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div>;
  const C = VARIANTS[i].Comp;
  return <><style>{CSS}</style><C {...props} /></>;

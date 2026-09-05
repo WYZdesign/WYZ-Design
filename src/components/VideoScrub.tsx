@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useCallback } from "react";
+import { prefersReducedMotion } from "@/lib/utils";
 
 interface VideoScrubProps {
   src: string;
@@ -50,6 +51,10 @@ export default function VideoScrub({
 
     video.addEventListener("loadedmetadata", onLoaded);
     if (video.readyState >= 1) onLoaded();
+
+    if (prefersReducedMotion()) return () => {
+      video.removeEventListener("loadedmetadata", onLoaded);
+    };
 
     let raf: number;
     const tick = () => {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { logger } from "@/lib/logger";
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const FOLDER_ID = "1x4Ya8VMdtt8wfG8jil-V_TxRuaEWht0T";
@@ -60,6 +61,7 @@ export async function GET(req: Request) {
       folderId: folder,
     });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    logger.error("fd:drive-list", err && err.message ? err.message : String(err));
+    return NextResponse.json({ error: "Could not load Drive files. Check server logs." }, { status: 500 });
   }
 }
