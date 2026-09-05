@@ -44,6 +44,9 @@ interface PlacementPrice {
 interface PrintfulPricesData {
   currency: string;
   product: { placements: PlacementPrice[] };
+  variant?: {
+    techniques: { technique_key: string; price: string }[];
+  };
 }
 
 interface PrintfulAvailabilityData {
@@ -122,12 +125,15 @@ async function fetchVariantPrices(variantId: number): Promise<number> {
     const res = await withConcurrencyLimit(() => jprintful(`/v2/catalog-variants/${variantId}/prices`));
     if (!res.ok) return 0;
     const data: PrintfulPricesResponse = await res.json();
-    const placements: PlacementPrice[] = data.data?.product?.placements || [];
-    const prices = placements
-      .map((p: PlacementPrice) => parseFloat(p.price))
-      .filter((n: number) => Number.isFinite(n) && n > 0);
-    if (prices.length === 0) return 0;
-    return Math.min(...prices);
+    const techniquePrices = (data.data?.variant?.techniques || [])
+      .map((t) => parseFloat(t.price))
+      .filter((n) => Number.isFinite(n) && n > 0);
+    if (techniquePrices.length > 0) return Math.min(...techniquePrices);
+    const placementPrices = (data.data?.product?.placements || [])
+      .map((p) => parseFloat(p.price))
+      .filter((n) => Number.isFinite(n) && n > 0);
+    if (placementPrices.length > 0) return Math.min(...placementPrices);
+    return 0;
   } catch {
     return 0;
   }
