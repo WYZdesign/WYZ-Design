@@ -266,31 +266,34 @@ export async function getFinancialSummary(year: number): Promise<FinancialSummar
     const monthlyExp: Record<string, number> = {};
 
     for (const t of txns as any[]) {
-      const amt = Number(t.amount);
+      const amtCents = Math.round(Number(t.amount) * 100);
       const month = t.date?.slice(0, 7) || "";
       if (t.type === "income") {
-        total_income += amt;
+        total_income += amtCents;
         const client = t.bk_clients?.name || "Unknown";
-        byClient[client] = (byClient[client] || 0) + amt;
+        byClient[client] = (byClient[client] || 0) + amtCents;
         const ch = t.channel || "Unknown";
-        byChannel[ch] = (byChannel[ch] || 0) + amt;
-        monthlyInc[month] = (monthlyInc[month] || 0) + amt;
+        byChannel[ch] = (byChannel[ch] || 0) + amtCents;
+        monthlyInc[month] = (monthlyInc[month] || 0) + amtCents;
       } else {
-        total_expenses += amt;
+        total_expenses += amtCents;
         const cat = t.bk_categories?.name || "Uncategorized";
         const line = t.bk_categories?.schedule_c_line || "";
-        byCategory[cat] = { amount: (byCategory[cat]?.amount || 0) + amt, line };
-        monthlyExp[month] = (monthlyExp[month] || 0) + amt;
+        byCategory[cat] = { amount: (byCategory[cat]?.amount || 0) + amtCents, line };
+        monthlyExp[month] = (monthlyExp[month] || 0) + amtCents;
       }
     }
 
+    const toDollars = (cents: number) => Math.round(cents) / 100;
+
     return {
-      year, total_income, total_expenses, net_profit: total_income - total_expenses,
-      income_by_client: Object.entries(byClient).map(([client, amount]) => ({ client, amount })).sort((a, b) => b.amount - a.amount),
-      expenses_by_category: Object.entries(byCategory).map(([category, v]) => ({ category, schedule_c_line: v.line, amount: v.amount })).sort((a, b) => b.amount - a.amount),
-      income_by_channel: Object.entries(byChannel).map(([channel, amount]) => ({ channel, amount })).sort((a, b) => b.amount - a.amount),
-      monthly_income: Object.entries(monthlyInc).sort().map(([month, amount]) => ({ month, amount })),
-      monthly_expenses: Object.entries(monthlyExp).sort().map(([month, amount]) => ({ month, amount })),
+      year, total_income: toDollars(total_income), total_expenses: toDollars(total_expenses),
+      net_profit: toDollars(total_income - total_expenses),
+      income_by_client: Object.entries(byClient).map(([client, cents]) => ({ client, amount: toDollars(cents) })).sort((a, b) => b.amount - a.amount),
+      expenses_by_category: Object.entries(byCategory).map(([category, v]) => ({ category, schedule_c_line: v.line, amount: toDollars(v.amount) })).sort((a, b) => b.amount - a.amount),
+      income_by_channel: Object.entries(byChannel).map(([channel, cents]) => ({ channel, amount: toDollars(cents) })).sort((a, b) => b.amount - a.amount),
+      monthly_income: Object.entries(monthlyInc).sort().map(([month, cents]) => ({ month, amount: toDollars(cents) })),
+      monthly_expenses: Object.entries(monthlyExp).sort().map(([month, cents]) => ({ month, amount: toDollars(cents) })),
       transaction_count: txns.length,
     };
   } catch { return EMPTY_SUMMARY(year); }
@@ -306,7 +309,7 @@ export async function exportTransactionsCSV(filters?: {
   const rows = [headers.join(",")];
   for (const t of txns) {
     rows.push([
-      t.date, t.type, t.amount.toFixed(2),
+      t.date, t.type, (Number(t.amount) / 100).toFixed(2),
       t.client_name || "", t.vendor || "", t.category_name || "", "",
       t.channel || "", t.description || "", t.business_personal,
     ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(","));

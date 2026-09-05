@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
 import { rateLimit } from "@/lib/rate-limit";
+import { getClientIp, hashIp } from "@/lib/api-utils";
 
 /**
  * Best-effort product-analytics sink for client-side trackEvent() beacons.
@@ -9,7 +10,7 @@ import { rateLimit } from "@/lib/rate-limit";
  */
 export async function POST(req: NextRequest) {
   try {
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const ip = getClientIp(req);
     const rl = await rateLimit(`event:${ip}`, 30, 60_000);
     if (!rl.ok) return NextResponse.json({ ok: true });
 
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest) {
         name,
         props,
         ua: req.headers.get("user-agent") || "",
-        ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "",
+        ip: hashIp(ip),
       });
     } catch {
       /* table may not exist yet — never fail the beacon */

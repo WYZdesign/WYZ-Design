@@ -1,4 +1,4 @@
-import { timingSafeEqual } from "node:crypto";
+import { timingSafeEqual, createHash } from "node:crypto";
 
 const ALLOWED_MIME: Record<string, string[]> = {
   images: ["image/jpeg", "image/png", "image/gif", "image/webp", "image/avif"],
@@ -44,4 +44,16 @@ export function safeEquals(a: string, b: string): boolean {
   const pa = Buffer.concat([Buffer.from(a, "utf8"), Buffer.alloc(256)]);
   const pb = Buffer.concat([Buffer.from(b, "utf8"), Buffer.alloc(256)]);
   return timingSafeEqual(pa, pb);
+}
+
+export function getClientIp(req: Request): string {
+  return (req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "")
+    .split(",")[0]
+    .trim() || "unknown";
+}
+
+export function hashIp(ip: string): string {
+  const salt = process.env.IP_HASH_SALT;
+  if (!salt) return "no-salt-configured";
+  return createHash("sha256").update(ip + salt).digest("hex").slice(0, 16);
 }

@@ -5,6 +5,7 @@ import { sendDiscordAlert } from "@/lib/discord";
 import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeHtml } from "@/lib/dompurify";
 import { validateCsrf } from "@/lib/csrf";
+import { getClientIp, hashIp } from "@/lib/api-utils";
 import { logger } from "@/lib/logger";
 import { requireAdmin } from "@/lib/admin-auth";
 
@@ -108,14 +109,14 @@ export async function POST(req: NextRequest) {
     }
 
     const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-    const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "unknown";
+    const rawIp = getClientIp(req);
     const submittedAt = new Date().toISOString();
 
     // Persist to Supabase (best-effort — don't block on failure)
     const supabase = getServiceClient();
     try {
       const { error } = await supabase.from("form_submissions").insert({
-        id, form_type: formType, data, submitted_at: submittedAt, ip,
+        id, form_type: formType, data, submitted_at: submittedAt, ip: hashIp(rawIp),
       });
       if (error) logger.error("Supabase insert error:", error.message);
     } catch { /* best-effort */ }

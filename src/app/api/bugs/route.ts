@@ -5,6 +5,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { validateCsrf } from "@/lib/csrf";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getServiceClient } from "@/lib/supabase";
+import { getClientIp, hashIp } from "@/lib/api-utils";
 import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;
@@ -38,11 +39,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "title and description required" }, { status: 400 });
     }
 
-    const report = { title, description, severity, id: Date.now(), createdAt: new Date().toISOString(), ip };
+    const report = { title, description, severity, id: Date.now(), createdAt: new Date().toISOString(), ip: hashIp(ip) };
 
     if (IS_VERCEL) {
       const sb = getServiceClient();
-      await sb.from("bug_reports").insert(report);
+      const { error } = await sb.from("bug_reports").insert(report);
+      if (error) throw error;
     } else {
       ensureDir();
       const bugs = JSON.parse(readFileSync(BUGS_FILE, "utf-8"));

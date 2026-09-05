@@ -48,6 +48,11 @@ export async function rateLimit(
       const current = await redis.incr(redisKey);
       if (current === 1) {
         await redis.expire(redisKey, windowSec);
+      } else {
+        // Always reset the TTL on each request — prevents the INCR-EXPIRE race
+        // where a second concurrent request could let the window slide past the
+        // original expiry without a matching EXPIRE.
+        await redis.expire(redisKey, windowSec);
       }
       const ttl = await redis.ttl(redisKey);
       return {

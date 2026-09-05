@@ -42,9 +42,9 @@ export async function recordReferralConversion(
       return { ok: false, status: 400, error: "Cannot refer yourself" };
     }
 
-    // Calculate commission (10% for purchases)
+    // Calculate commission (10% for purchases) — compute in cents and round
     const purchaseAmount = typeof amount === "number" ? amount : 0;
-    const commission = eventType === "purchase" ? Math.floor(purchaseAmount * 0.10) : 0;
+    const commission = eventType === "purchase" ? Math.round(purchaseAmount * 10) : 0;
 
     // Dedup: skip if this event already created a conversion
     if (params.stripeEventId) {
