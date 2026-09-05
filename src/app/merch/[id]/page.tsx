@@ -16,6 +16,8 @@ interface PrintfulProduct {
   category: string;
 }
 
+const fmt = (n: number) => (n > 0 ? `$${n.toFixed(2)}` : "Price on request");
+
 export default function MerchProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const productId = parseInt(id, 10);
@@ -100,7 +102,7 @@ export default function MerchProductPage({ params }: { params: Promise<{ id: str
               </p>
 
               <div className="text-4xl font-black text-[#333] dark:text-white mb-6">
-                ${product.price.toFixed(2)}
+                {fmt(product.price)}
               </div>
 
               <div className="mb-6">

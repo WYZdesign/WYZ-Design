@@ -23,6 +23,8 @@ interface Product {
   materials?: string[];
 }
 
+const fmt = (n: number) => (n > 0 ? `$${n.toFixed(2)}` : "Price on request");
+
 const ARCHIVE_IMAGES = [
   "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg",
   "/images/merch/dbc-archive/98442d-b3c114b8dab6450887e3d3aee9c71030~mv2.jpg",
@@ -358,7 +360,7 @@ function ProductMarquee({ products }: { products: Product[] }) {
               </div>
               <div className="w-full text-center">
                 <h4 className="font-heading font-bold text-white text-size-11 tracking-[0.05em] uppercase truncate">{p.name}</h4>
-                <span className="text-[#DF3131] font-bold text-[13px]">${p.price.toFixed(2)}</span>
+                <span className="text-[#DF3131] font-bold text-[13px]">{fmt(p.price)}</span>
               </div>
             </div>
           </Link>
@@ -403,9 +405,9 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase .5 mb-2">{product.category}</p>
+                <p className="text-white/70 text-[7px] font-bold tracking-[0.15em] uppercase mb-2">{product.category}</p>
                 <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase mb-2">{product.name}</p>
-                 <p className="text-[#DF3131] font-black text-[11px]">${product.price.toFixed(2)}</p>
+                 <p className="text-[#DF3131] font-black text-[11px]">{fmt(product.price)}</p>
               </div>
               {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
             </div>
@@ -433,9 +435,9 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
             {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
           </div>
           <div className="text-center px-1">
-            <p className="text-[10px] text-[#666] font-bold tracking-[0.12em] uppercase .5 mb-2">{product.category}</p>
+            <p className="text-[10px] text-[#666] font-bold tracking-[0.12em] uppercase mb-2">{product.category}</p>
             <h3 className="text-size-9 font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
-            <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">${product.price.toFixed(2)}</p>
+            <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">{fmt(product.price)}</p>
           </div>
           {product.rating && (
             <div className="flex items-center justify-center gap-1.5 mt-1">
@@ -814,7 +816,7 @@ export default function MerchPage() {
                 <button onClick={() => setSelectedProduct(null)} className="text-[#666] hover:text-[#333] text-[15px] mb-4 block">&larr; Back to shop</button>
                 <p className="text-[12px] text-[#666] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
                 <h2 className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
-                <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">${selectedProduct.price.toFixed(2)}</p>
+                <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct.price)}</p>
                 <p className="text-[14px] text-[#666] mb-4">{selectedProduct.description}</p>
                 {selectedProduct.rating && (
                   <div className="flex items-center gap-2 mb-4">
@@ -860,7 +862,7 @@ export default function MerchPage() {
                            <SafeImage src={cp.image} alt={cp.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
-                      <p className="text-[12px] text-[#DF3131] font-bold">${cp.price.toFixed(2)}</p>
+                      <p className="text-[12px] text-[#DF3131] font-bold">{fmt(cp.price)}</p>
                     </button>
                   ))}
                 </div>

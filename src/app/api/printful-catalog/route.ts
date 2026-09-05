@@ -3,6 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 const PRINTFUL_API = "https://api.printful.com";
 const API_KEY = process.env.PRINTFUL_API_KEY || "";
 
+// Printful v2 rate-limits aggressively (~30 req/min). Each product maps to
+// dozens of variants, so unbounded parallel per-variant price+availability
+// fetches (pre-fix: ~1200 uncached requests per page load) string 429s and
+// produced the all-$0.00 catalog. Now: sample a bounded variant set, run all
+// Printful calls through one shared concurrency pool, cache every result for
+// an hour via the Next Data Cache, and retry 429 once.
+const MAX_VARIANTS = 4;
+const CONCURRENCY = 4;
+
 export const PRODUCT_IDS = [
   71, 12, 831, 77, 100, 140, 300, 2, 3, 350, 465, 400, 200, 619, 301,
 ];
@@ -41,6 +50,14 @@ interface PrintfulAvailabilityData {
   techniques: { selling_regions: { availability: string }[] }[];
 }
 
+interface PrintfulPricesResponse {
+  data: PrintfulPricesData;
+}
+
+interface PrintfulAvailabilityResponse {
+  data: PrintfulAvailabilityData;
+}
+
 interface PrintfulProduct {
   id: number;
   title: string;
@@ -50,26 +67,65 @@ interface PrintfulProduct {
   variantId: number;
   variantName: string;
   category: string;
+  inStock: boolean;
 }
 
-interface PrintfulPricesResponse {
-  data: PrintfulPricesData;
+let inFlight = 0;
+let waiters: Array<() => void> = [];
+
+async function withConcurrencyLimit<T>(fn: () => Promise<T>): Promise<T> {
+  while (inFlight >= CONCURRENCY) {
+    await new Promise<void>((resolve) => waiters.push(resolve));
+  }
+  inFlight++;
+  try {
+    return await fn();
+  } finally {
+    inFlight--;
+    const next = waiters.shift();
+    if (next) next();
+  }
 }
 
-interface PrintfulAvailabilityResponse {
-  data: PrintfulAvailabilityData;
+async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = new Array<R>(items.length);
+  let i = 0;
+  const worker = async () => {
+    while (i < items.length) {
+      const idx = i++;
+      results[idx] = await fn(items[idx]);
+    }
+  };
+  const workers = Array.from({ length: Math.min(limit, items.length) }, worker);
+  await Promise.all(workers);
+  return results;
+}
+
+async function jprintful(path: string, timeout = 8000): Promise<Response> {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const res = await fetch(`${PRINTFUL_API}${path}`, {
+      headers: { Authorization: `Bearer ${API_KEY}` },
+      signal: AbortSignal.timeout(timeout),
+      next: { revalidate: 3600 },
+    });
+    if (res.status === 429 && attempt === 0) {
+      await new Promise((r) => setTimeout(r, 600));
+      continue;
+    }
+    return res;
+  }
+  return new Response("{}", { status: 429 });
 }
 
 async function fetchVariantPrices(variantId: number): Promise<number> {
   try {
-    const res = await fetch(
-      `${PRINTFUL_API}/v2/catalog-variants/${variantId}/prices`,
-      { headers: { Authorization: `Bearer ${API_KEY}` }, signal: AbortSignal.timeout(8000) }
-    );
+    const res = await withConcurrencyLimit(() => jprintful(`/v2/catalog-variants/${variantId}/prices`));
     if (!res.ok) return 0;
     const data: PrintfulPricesResponse = await res.json();
     const placements: PlacementPrice[] = data.data?.product?.placements || [];
-    const prices = placements.map((p: PlacementPrice) => parseFloat(p.price));
+    const prices = placements
+      .map((p: PlacementPrice) => parseFloat(p.price))
+      .filter((n: number) => Number.isFinite(n) && n > 0);
     if (prices.length === 0) return 0;
     return Math.min(...prices);
   } catch {
@@ -79,10 +135,7 @@ async function fetchVariantPrices(variantId: number): Promise<number> {
 
 async function fetchVariantAvailability(variantId: number): Promise<boolean> {
   try {
-    const res = await fetch(
-      `${PRINTFUL_API}/v2/catalog-variants/${variantId}/availability`,
-      { headers: { Authorization: `Bearer ${API_KEY}` }, signal: AbortSignal.timeout(8000) }
-    );
+    const res = await withConcurrencyLimit(() => jprintful(`/v2/catalog-variants/${variantId}/availability`));
     if (!res.ok) return false;
     const data: PrintfulAvailabilityResponse = await res.json();
     const allRegions: string[] = data.data?.techniques?.flatMap((t: { selling_regions: { availability: string }[] }) =>
@@ -96,39 +149,31 @@ async function fetchVariantAvailability(variantId: number): Promise<boolean> {
 
 async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
   try {
-    const res = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}`, {
-      headers: { Authorization: `Bearer ${API_KEY}` },
-      signal: AbortSignal.timeout(10_000),
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    const p: PrintfulProductResponse | undefined = data.data;
+    const [productRes, variantsRes] = await Promise.all([
+      withConcurrencyLimit(() => jprintful(`/v2/catalog-products/${id}`, 10000)),
+      withConcurrencyLimit(() => jprintful(`/v2/catalog-products/${id}/catalog-variants`, 10000)),
+    ]);
+    if (!productRes.ok || !variantsRes.ok) return null;
+
+    const productData = await productRes.json();
+    const p: PrintfulProductResponse | undefined = productData.data;
     if (!p) return null;
 
-    const varRes = await fetch(`${PRINTFUL_API}/v2/catalog-products/${id}/catalog-variants`, {
-      headers: { Authorization: `Bearer ${API_KEY}` },
-      signal: AbortSignal.timeout(10_000),
-      next: { revalidate: 3600 },
-    });
-    if (!varRes.ok) return null;
-    const varData = await varRes.json();
-    const variants: PrintfulVariant[] = varData.data || [];
-    if (!variants.length) return null;
+    const varData = await variantsRes.json();
+    const allVariants: PrintfulVariant[] = varData.data || [];
+    if (!allVariants.length) return null;
 
-    const prices = await Promise.all(variants.map((v) => fetchVariantPrices(v.id)));
-    const availabilities = await Promise.all(variants.map((v) => fetchVariantAvailability(v.id)));
+    const variants = allVariants.slice(0, MAX_VARIANTS);
+    const prices = await mapLimit(variants, 2, (v: PrintfulVariant) => fetchVariantPrices(v.id));
 
     const cheapestIdx = prices.reduce((bestIdx, price, i, arr) => {
-      if (price === 0 && arr[bestIdx] !== 0) return bestIdx;
-      if (price === 0) return bestIdx;
-      if (arr[bestIdx] === 0) return i;
-      return price < arr[bestIdx] ? i : bestIdx;
+      if (price > 0 && (arr[bestIdx] <= 0 || price < arr[bestIdx])) return i;
+      return bestIdx;
     }, 0);
 
     const variant = variants[cheapestIdx];
-    const inStock = availabilities[cheapestIdx];
     const price = prices[cheapestIdx] || 0;
+    const inStock = price > 0 ? await withConcurrencyLimit(() => fetchVariantAvailability(variant.id)) : false;
 
     let category = "Apparel";
     for (const [cat, ids] of Object.entries(CATEGORY_MAP)) {
@@ -144,6 +189,7 @@ async function fetchProduct(id: number): Promise<PrintfulProduct | null> {
       variantId: variant.id,
       variantName: variant.name,
       category,
+      inStock,
     };
   } catch {
     return null;
@@ -157,17 +203,19 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url);
   const category = searchParams.get("category");
+  const includeStock = searchParams.get("stock") === "1";
 
   let ids = PRODUCT_IDS;
   if (category && category !== "All" && CATEGORY_MAP[category]) {
     ids = CATEGORY_MAP[category];
   }
 
-  const products = await Promise.all(ids.map(fetchProduct));
-  const valid = products.filter(Boolean) as PrintfulProduct[];
+  const products = await mapLimit(ids, 2, fetchProduct);
+  const valid = (products.filter(Boolean) as PrintfulProduct[])
+    .filter((p) => (includeStock ? p.inStock : true));
 
   return NextResponse.json(
     { products: valid, total: valid.length },
-    { headers: { "Cache-Control": "public, max-age=300" } }
+    { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" } }
   );
 }
