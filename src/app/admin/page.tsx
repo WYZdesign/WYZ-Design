@@ -16,7 +16,6 @@ const ADMIN_STYLES = `
 .admin-scrollbar::-webkit-scrollbar-corner { background: #1a1a1a; }
 `;
 
-interface Stats { totalForms: number; totalChats: number; chatSessions: number; totalUsers: number; adminCount: number; newsletterSubs: number; formTypes: Record<string,number>; submissionsByDay: [string,number][] }
 interface FormEntry { id: string; formType: string; data: Record<string,unknown>; submittedAt: string; ip: string }
 interface User { email: string; name: string; role: string; createdAt: string; provider: string }
 interface Subscriber { email: string; subscribedAt: string }

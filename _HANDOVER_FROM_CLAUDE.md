@@ -98,3 +98,54 @@ Turn is yours after this doc appears.
 **Still open HIGH stack (my next target):** canonical root (A-H1), error.tsx auto-reset (A-H2), reduced-motion (C-H5), plan identity (E-H1), billing contradiction (E-H2), retouch price (E-H3), Neo4j uniqueness (G-H1), resend sig (G-H2), checkout userId (G-H3), concept-generate caps (G-H4), image priority (I-H1), CSRF (G64), Drive N+1/folder injection, referral mint, raw-IP hashing, float money, admin lockout, analytics SQLite, ratelimit TTL race, bugs POST inserts, GTM noscript, CSP, price drift.
 
 Full detail in `AUDIT.md` → Fix Log → Round 18.
+
+---
+
+# Round 14 — Claude Update (continued page audit)
+
+**Scope:** Continued the manual page-by-page audit in `V:\wyzdesign` per Torree's "go" instruction. Picked up where round 13 left off: `blog`, `community`, `contact`, `admin`, `offline`, `splash`, `splash-gallery`, `splash-showcase`, `mobile-splash`, `clear-cache`, and the legal/policy pages. As with round 13, these are uncommitted working-tree edits -- current HEAD when I started and finished this round was `402e53c` (no lock held, so this looks like open ground, but confirm before committing in case WYZMiND is mid-round elsewhere). `npx tsc --noEmit` is clean (0 errors) after every change.
+
+## Real bugs fixed
+
+1. **`blog/page.tsx` hero background pattern was malformed and silently invisible.** The decorative diagonal-line SVG data-URI had its `fill`/`fill-opacity`/`fill-rule` attribute names stripped down to bare `=`/`-` characters (`<g=&quot;%23ffffff&quot;-opacity=&quot;0.3&quot;...>`) -- not valid SVG, so browsers can't parse it and the whole `opacity-20` overlay never renders. Reconstructed the data URI with proper attribute names and encoding.
+
+2. **`splash-showcase/page.tsx`'s gyro-tilt zoom effect was computed but never applied.** `scaleImg` (a tilt-magnitude-based zoom factor, same pattern as the already-working `tx`/`ty`/`tz` translate and the opacity effect on the caption overlay) was calculated every render but the image wrapper's inline style only set `transition`, never `transform: scale(...)`. Wired it in -- now tilting the phone actually zooms the image slightly, matching the rest of that page's gyro-reactive design. Also removed a genuinely-unused `stagger` variable (no entrance-animation system exists on this page to hook it into).
+
+3. **`shipping-policy` and `copyright-notice` pages were missing dark mode entirely.** Every other legal page (`privacy-policy`, `terms-and-conditions`, `refund-return-policy`) has full `dark:` classes on the `<main>` background, headings, and body text. These two had none -- `bg-white` with no `dark:bg-[#111]`, `text-[#333333]` headings with no dark variant, etc. A user with dark mode on would hit a jarring white flash navigating to either page while the rest of the site (navbar/footer) stays dark. Brought both in line with the other three legal pages' pattern.
+
+## Investigated, correctly not a bug
+
+- `text-[#666665]` (used in 40+ files, all the legal/policy and service-detail pages) looked at first like a typo of `#666666`/`#666`, but it's consistently used everywhere as the intentional body-text-secondary token -- a 1-in-255 luminance difference from `#666`, imperceptible and clearly deliberate given the consistency. Left alone.
+
+## Significant finding -- flagged for WYZMiND, not fixed by me
+
+4. **`community/page.tsx`'s entire forum and social feed have no backend at all.** I read the full 1400-line page: thread posting, replies, upvotes/downvotes, feed likes, and feed comments are 100% local React state (`useState`), with zero persistence -- not even `localStorage`. There is no `/api/community`, `/api/threads`, or equivalent route anywhere in `src/app/api`. A user who posts a thread, votes, or comments believes they're participating in a real community -- they even earn real Zeal points for it (`earn("community-comment")`) -- but every bit of it vanishes on refresh and is never visible to any other visitor. The only real backend call on the entire page is the newsletter signup.
+   This is a product-level decision, not a small frontend fix: either it needs real tables + API routes (threads/replies/votes -- Supabase, your territory) to back what's already built client-side, or the product intent needs to change (e.g., frame it explicitly as a demo/preview, or point users to the real Discord for actual community interaction, which the page does link to separately). I did not build a fix myself since standing up persistence and choosing the data model is squarely backend/infra work. Worth deciding deliberately rather than leaving as a silent gap -- it's the most significant thing I've found in either round of this audit.
+
+## Dead code removed
+
+5. `admin/page.tsx`: removed the unused `Stats` interface (never referenced -- the actual overview data uses `OverviewData.stats` inline instead).
+6. `blog/page.tsx`: removed the unused `FiTag` icon import.
+
+## Verified clean, no changes needed
+
+- `contact/page.tsx`, `offline/page.tsx`, `splash/page.tsx`, `splash-gallery/page.tsx`, `clear-cache/page.tsx` -- read in full, all correct. `clear-cache`'s claimed `?reset=1` auto-clean feature cross-checked against `layout.tsx` and confirmed genuinely wired (not a stale claim).
+- `mobile-splash/page.tsx` -- this is an internal concept-gallery/moodboard page (10 unbuilt splash-screen design pitches for future consideration), not a live user-facing feature; read in full, structurally correct for what it is.
+- `admin/page.tsx` (1530 lines) -- given its size and that it's an internal, backend-data-heavy dashboard (financials, analytics, user management, all wired through API routes), I did a structural pass rather than a full line-by-line read: checked for stub handlers, TODO/FIXME markers, and dead-code patterns via the same `tsc --noUnusedLocals` technique used all along. Nothing else surfaced. A full manual read of this file would mostly be verifying backend wiring correctness, which isn't my lane -- flagging that it hasn't had the same full-read treatment as the customer-facing pages, in case that matters to your own audit tracking.
+
+## Files touched this round
+
+```
+src/app/blog/page.tsx
+src/app/splash-showcase/page.tsx
+src/app/shipping-policy/page.tsx
+src/app/copyright-notice/page.tsx
+src/app/admin/page.tsx
+```
+
+`npx tsc --noEmit` -- clean, 0 errors.
+
+## Still open
+
+- Item 4 above (community persistence) is the main thing that needs a decision from you/WYZMiND.
+- Everything flagged in prior rounds not yet addressed.

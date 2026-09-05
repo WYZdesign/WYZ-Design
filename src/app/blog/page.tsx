@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
-import { FiArrowRight, FiClock, FiTag, FiSearch, FiTrendingUp } from "react-icons/fi";
+import { FiArrowRight, FiClock, FiSearch, FiTrendingUp } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import TextReveal from "@/components/TextReveal";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -41,7 +41,7 @@ export default function BlogPage() {
  <div className="relative overflow-hidden -mx-6 lg:-mx-12 mb-12">
   <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] max-h-[800px]">
  <div className="relative overflow-hidden" style={{background:"linear-gradient(-45deg, #DF3131, #c02020, #1a1a1a, #8B0000, #DF3131)",backgroundSize:"400% 400%",animation:"heroGradBlog 8s ease infinite"}}>
- <div className="absolute inset-0 opacity-20" style={{backgroundImage:"url('data:image/svg+xml,%3Csvg width=&quot;40&quot; height=&quot;40&quot; viewBox=&quot;0 0 40 40&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><g=&quot;%23ffffff&quot;-opacity=&quot;0.3&quot;-rule=&quot;evenodd&quot;><path d=&quot;M0 40L40 0H20L0 20M40 40V20L20 40&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;')"}} />
+ <div className="absolute inset-0 opacity-20" style={{backgroundImage:"url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E\")"}} />
  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg">
  <FiTrendingUp className="w-8 h-8 text-[#DF3131]" />

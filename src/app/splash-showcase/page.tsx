@@ -98,7 +98,6 @@ export default function SplashShowcasePage() {
  </div>
  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
  {SPLASHES.map((s, i) => {
- const stagger = i * 0.15;
  const tx = isTouch && hasGyro ? gyro.x * 8 : 0;
  const ty = isTouch && hasGyro ? gyro.y * 8 : 0;
  const tz = isTouch && hasGyro ? gyro.z * 3 : 0;
@@ -119,6 +118,7 @@ export default function SplashShowcasePage() {
  <div
  className="w-full h-full"
  style={{
+ transform: `scale(${scaleImg})`,
  transition: "transform 0.3s ease-out",
  }}
  >
