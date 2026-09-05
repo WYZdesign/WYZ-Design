@@ -1170,6 +1170,7 @@ export default function HomePage() {
  }}>
   <button
   onClick={() => setOpenFaq(openFaq === i ? null : i)}
+  aria-expanded={openFaq === i}
   className="w-full text-left px-4 sm:px-6 py-4 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
   <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold transition-all duration-300 flex-shrink-0 ${
   openFaq === i ? "bg-[#DF3131] text-white rotate-45" : "bg-[#F5F5F3] dark:bg-[#252528] text-[#333] dark:text-white"
