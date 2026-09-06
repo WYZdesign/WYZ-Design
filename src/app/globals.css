@@ -10,6 +10,7 @@
   --color-wyz-muted: #666666;
   --color-wyz-red: #DF3131;
   --color-wyz-red-dark: #B82020;
+  --color-wyz-text-red: #C00000; /* ~5.5:1 on white for small text accessibility */
   --color-wyz-gold: #D49341;
   --color-wyz-gold-light: #F9AD4D;
   --color-wyz-border: #E2E2E2;
