@@ -117,10 +117,10 @@ export default function PageRenderer() {
  </div>
  )}
 
- {/* Image picker overlay */}
- {pickerOpen && (
- <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={() => { setPickerOpen(false); setShowUpload(false); }}>
- <div className="bg-white dark:bg-[#252528] rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
+  {/* Image picker overlay */}
+  {pickerOpen && (
+  <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4" onClick={() => { setPickerOpen(false); setShowUpload(false); }} role="dialog" aria-modal="true" aria-label="Image library">
+  <div className="bg-white dark:bg-[#252528] rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
  <div className="flex items-center justify-between px-4 py-3 border-b dark:border-[#444]">
  <div>
  <h3 className="font-heading font-bold text-sm">Replace Image</h3>

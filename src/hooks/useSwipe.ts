@@ -22,5 +22,10 @@ export function useSwipe(
     start.current = null;
   }, [onSwipeLeft, onSwipeRight, threshold]);
 
-  return { onTouchStart, onTouchEnd };
+  const onKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") onSwipeLeft();
+    if (e.key === "ArrowRight") onSwipeRight();
+  }, [onSwipeLeft, onSwipeRight]);
+
+  return { onTouchStart, onTouchEnd, onKeyDown };
 }

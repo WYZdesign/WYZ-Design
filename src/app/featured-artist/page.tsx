@@ -95,19 +95,19 @@ function ArtistGallery() {
   className={`w-[8px] h-[8px] sm:w-2 sm:h-2 lg:w-[10px] lg:h-[10px] rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} aria-label={`Go to artwork ${i + 1}`} />
   ))}
  </div>
- {lbIdx !== null && ARTIST_GALLERY[lbIdx].src && (
- <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setLbIdx(null)}>
-<button onClick={() => setLbIdx(null)} aria-label="Close artwork" className="absolute top-4 right-4 text-white/70 hover:text-white z-10"><FiX className="w-8 h-8" /></button>
-  {lbIdx > 0 && (
-  <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! - 1); }} aria-label="Previous artwork" className="absolute left-4 text-white/70 hover:text-white z-10">
-  <FiChevronLeft className="w-10 h-10" />
-  </button>
-  )}
-  {lbIdx < ARTIST_GALLERY.length - 1 && (
-  <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! + 1); }} aria-label="Next artwork" className="absolute right-4 text-white/70 hover:text-white z-10">
-  <FiChevronRight className="w-10 h-10" />
-  </button>
-  )}
+  {lbIdx !== null && ARTIST_GALLERY[lbIdx].src && (
+  <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setLbIdx(null)} role="dialog" aria-modal="true" aria-label="Artwork preview">
+ <button onClick={() => setLbIdx(null)} aria-label="Close artwork" className="absolute top-4 right-4 text-white/70 hover:text-white z-10"><FiX className="w-8 h-8" /></button>
+   {lbIdx > 0 && (
+   <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! - 1); }} aria-label="Previous artwork" className="absolute left-4 text-white/70 hover:text-white z-10">
+   <FiChevronLeft className="w-10 h-10" />
+   </button>
+   )}
+   {lbIdx < ARTIST_GALLERY.length - 1 && (
+   <button onClick={(e) => { e.stopPropagation(); setLbIdx(i => i! + 1); }} aria-label="Next artwork" className="absolute right-4 text-white/70 hover:text-white z-10">
+   <FiChevronRight className="w-10 h-10" />
+   </button>
+   )}
  <Image src={ARTIST_GALLERY[lbIdx].src} alt={ARTIST_GALLERY[lbIdx].label}
  width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />

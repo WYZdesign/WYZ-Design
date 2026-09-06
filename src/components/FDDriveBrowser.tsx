@@ -417,7 +417,7 @@ export default function FDDriveBrowser() {
         {imagePreview && selectedFile && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={() => setImagePreview(null)}
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-pointer">
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-pointer" role="dialog" aria-modal="true" aria-label="Image preview">
             <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
               onClick={e => e.stopPropagation()}
               className="relative max-w-5xl max-h-[90vh] w-full">

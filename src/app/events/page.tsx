@@ -201,24 +201,24 @@ function VideoModal({ video, title, onClose }: { video: string; title: string; o
 
  useEffect(() => { const vid = videoRef.current; if (vid) vid.muted = isMuted; }, [isMuted]);
 
- return (
- <div className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4" onClick={onClose} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
- <button onClick={onClose} className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Close">
- <FiX className="w-5 h-5 text-white" />
- </button>
- <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>
-  <video ref={videoRef} src={video} controls autoPlay muted playsInline className="w-full h-auto max-h-[85vh] object-contain rounded-lg" />
- <button
-  onClick={(e) => { e.stopPropagation(); e.preventDefault(); toggleVideo("modal"); }}
-  className="absolute bottom-6 right-4 z-30 w-10 h-10 rounded-full bg-black/70 hover:bg-[#DF3131]/80 flex items-center justify-center transition-all duration-200"
-  aria-label={isMuted ? "Unmute" : "Mute"}
- >
-  {isMuted ? SPEAKER_MUTED_SVG : SPEAKER_ON_SVG}
- </button>
- <p className="text-white text-center font-heading font-bold text-sm tracking-wider mb-2">{title}</p>
- </div>
- </div>
- );
+  return (
+  <div className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4" onClick={onClose} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label="Video player">
+  <button onClick={onClose} className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="Close">
+  <FiX className="w-5 h-5 text-white" />
+  </button>
+  <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>
+   <video ref={videoRef} src={video} controls autoPlay muted playsInline className="w-full h-auto max-h-[85vh] object-contain rounded-lg" />
+  <button
+   onClick={(e) => { e.stopPropagation(); e.preventDefault(); toggleVideo("modal"); }}
+   className="absolute bottom-6 right-4 z-30 w-10 h-10 rounded-full bg-black/70 hover:bg-[#DF3131]/80 flex items-center justify-center transition-all duration-200"
+   aria-label={isMuted ? "Unmute" : "Mute"}
+  >
+   {isMuted ? SPEAKER_MUTED_SVG : SPEAKER_ON_SVG}
+  </button>
+  <p className="text-white text-center font-heading font-bold text-sm tracking-wider mb-2">{title}</p>
+  </div>
+  </div>
+  );
 }
 
 function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: string }[]; onPlay?: (item: { title: string; video: string }) => void }) {
@@ -306,18 +306,19 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
  <div className="relative max-w-4xl mx-auto">
  <canvas ref={canvasRef} className="hidden" />
  <div className="relative mx-auto" style={{ perspective: "1200px" }}>
- <div
- className="relative w-full aspect-video bg-[#1a1a1a] dark:bg-[#111] overflow-hidden cursor-pointer rounded-lg"
- style={{
- transform: `rotateY(${rotateY}deg)`,
- transition: flipping ? `transform ${FLIP_SPEED / 2}ms ease-in` : `transform ${FLIP_SPEED / 2}ms ease-out`,
- transformStyle: "preserve-3d",
- boxShadow: `0 0 60px 20px ${auraColor}44, 0 0 120px 40px ${auraColor}22`,
- background: `linear-gradient(135deg, ${auraColor}22 0%, #1a1a1a 100%)`,
- }}
- onClick={() => onPlay ? onPlay(items[current]) : flip(1)}
- {...swipe}
- >
+  <div
+  className="relative w-full aspect-video bg-[#1a1a1a] dark:bg-[#111] overflow-hidden cursor-pointer rounded-lg"
+  style={{
+  transform: `rotateY(${rotateY}deg)`,
+  transition: flipping ? `transform ${FLIP_SPEED / 2}ms ease-in` : `transform ${FLIP_SPEED / 2}ms ease-out`,
+  transformStyle: "preserve-3d",
+  boxShadow: `0 0 60px 20px ${auraColor}44, 0 0 120px 40px ${auraColor}22`,
+  background: `linear-gradient(135deg, ${auraColor}22 0%, #1a1a1a 100%)`,
+  }}
+  onClick={() => onPlay ? onPlay(items[current]) : flip(1)}
+  {...swipe}
+  tabIndex={0}
+  >
  {!flipping && (
   <video
   ref={videoRef}

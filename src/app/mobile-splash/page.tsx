@@ -196,9 +196,12 @@ export default function MobileSplashPage() {
       </div>
 
       {selectedConcept && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-6 animate-in fade-in duration-200"
           onClick={() => setSelectedConcept(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile concept preview"
         >
           <div 
             className="bg-[#252528] rounded-xl p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto"

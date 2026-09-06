@@ -71,7 +71,7 @@ export function GlobalImagePicker() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] bg-black/50 flex items-center justify-center p-4" onClick={close} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
+    <div className="fixed inset-0 z-[60] bg-black/50 flex items-center justify-center p-4" onClick={close} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label="Image picker">
       <div className="bg-white dark:bg-[#252528] rounded-2xl shadow-2xl max-w-lg w-full p-6" onClick={e => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-heading font-bold text-lg">{albumMode ? "Set Album Folder" : "Upload Image"}</h3>

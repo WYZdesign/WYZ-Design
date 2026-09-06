@@ -55,7 +55,7 @@ function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
  }, [hk]);
  if (!images.length) return null;
 return (
-  <div className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center" onClick={onClose} {...swipe} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label="Image gallery">
+  <div className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center" onClick={onClose} {...swipe} tabIndex={0} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label="Image gallery">
  <button onClick={onClose} className="absolute top-4 right-4 z-[210] text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close"><FiX className="w-8 h-8" /></button>
  <button onClick={(e) => { e.stopPropagation(); onPrev(); }} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-[210] w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors min-w-[44px] min-h-[44px]" aria-label="Previous image"><FiChevronLeft className="w-6 h-6" /></button>
  <div className="max-w-[90vw] max-h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>

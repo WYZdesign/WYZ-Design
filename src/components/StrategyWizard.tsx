@@ -170,7 +170,7 @@ export default function StrategyWizard() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setOpen(false)} role="dialog" aria-modal="true" aria-label="Service strategy wizard">
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} onClick={e => e.stopPropagation()} className="bg-white dark:bg-[#252528] max-w-[560px] w-[calc(100%-2rem)] max-h-[85vh] overflow-y-auto border border-[#E2E2E2] dark:border-[#444] shadow-[0_25px_60px_rgba(0,0,0,.25)]">
             {/* Header */}
             <div className="px-6 py-4 border-b border-[#E2E2E2] dark:border-[#444] flex items-center justify-between">
