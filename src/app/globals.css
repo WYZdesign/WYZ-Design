@@ -690,6 +690,12 @@ select:focus-visible {
   border-color: #FF5252 !important;
 }
 
+/* Small-text red accessibility fix — light mode */
+/* #DF3131 = 3.36:1 on white (WCAG FAIL 4.5:1 for text < 14px bold / < 18px regular) */
+[class*="text-[#DF3131]"]:not([class*="text-[#DF3131]/"]):where([class*="text-[11px]"], [class*="text-[12px]"], [class*="text-[13px]"]) {
+  color: var(--color-wyz-text-red) !important;
+}
+
 /* Hover states — Tailwind v4 generates separate rules */
 @media (hover: hover) {
   .dark a:hover[class*="text-[#DF3131]"],

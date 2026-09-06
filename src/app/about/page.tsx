@@ -115,7 +115,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-black/65 z-[15] pointer-events-none" />
             <div className="relative z-20 max-w-4xl mx-auto px-6 text-center flex items-center justify-center min-h-screen">
               <div className="w-full">
-              <span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-4">About Us</span>
+              <span className="text-[#C00000] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-4">About Us</span>
               <TextMaskReveal direction="up">
               <h1 className="text-[2rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white uppercase mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
                 <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">BUILT </TextSplit></span><TextSplit stagger={0.03} direction="up">DIFFERENT</TextSplit>
@@ -178,7 +178,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="w-full">
-<span className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">The Founder</span>
+<span className="text-[#C00000] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-2">The Founder</span>
                  <h2 className="text-[2.3rem] sm:text-[2.875rem] lg:text-[3.68rem] font-heading font-black text-[#333] dark:text-white tracking-[0.06em] uppercase mb-4" style={{ lineHeight: 0.9 }}>
                    TORREÉ <span className="text-[#DF3131]">MARCEL</span>
                  </h2>
