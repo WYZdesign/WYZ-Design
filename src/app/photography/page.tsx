@@ -54,15 +54,15 @@ function Lightbox({ images, index, onClose, onPrev, onNext, album }: {
  return () => document.removeEventListener("keydown", hk);
  }, [hk]);
  if (!images.length) return null;
- return (
- <div className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center" onClick={onClose} {...swipe} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
+return (
+  <div className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center" onClick={onClose} {...swipe} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label="Image gallery">
  <button onClick={onClose} className="absolute top-4 right-4 z-[210] text-white/70 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close"><FiX className="w-8 h-8" /></button>
  <button onClick={(e) => { e.stopPropagation(); onPrev(); }} className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-[210] w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors min-w-[44px] min-h-[44px]" aria-label="Previous image"><FiChevronLeft className="w-6 h-6" /></button>
  <div className="max-w-[90vw] max-h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>
    <Image src={images[index]} alt={album ? `${album} photo` : "Gallery photo"} width={1200} height={800} className="max-w-full max-h-[85vh] object-contain select-none" loading="lazy" />
  </div>
  <button onClick={(e) => { e.stopPropagation(); onNext(); }} className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[210] w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors min-w-[44px] min-h-[44px]" aria-label="Next image"><FiChevronRight className="w-6 h-6" /></button>
- <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono">{index + 1} / {images.length}</div>
+  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/60 text-sm font-mono" aria-live="polite">{index + 1} / {images.length}</div>
  </div>
  );
 }
@@ -72,13 +72,13 @@ function AlbumModal({ album, onClose }: { album: string; onClose: () => void }) 
  const [lIdx, setLIdx] = useState<number | null>(null);
  useModalA11y(onClose, { lockScroll: true });
  useEffect(() => { fetch(`/api/album-images?album=${encodeURIComponent(album)}`).then(r => r.json()).then(d => setImgs(d.images || [])).catch(() => {}); }, [album]);
- return (
- <>
- <div className="fixed inset-0 z-[150] bg-black/60 flex items-center justify-center p-4" onClick={onClose} style={{ animation: "wzFadeIn 0.2s ease-out both" }}>
+return (
+  <>
+  <div className="fixed inset-0 z-[150] bg-black/60 flex items-center justify-center p-4" onClick={onClose} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label={`Album ${album}`}>
  <div className="bg-white max-w-5xl w-full max-h-[85vh] overflow-y-auto rounded-lg" onClick={e => e.stopPropagation()} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }}>
  <div className="sticky top-0 bg-white border-b border-[#E2E2E2] px-6 py-4 flex items-center justify-between z-10">
  <h3 className="font-heading font-bold text-[#333] text-lg tracking-[0.05em] uppercase mb-3">{album}</h3>
- <button onClick={onClose} className="text-[#666] hover:text-[#333] transition-colors" aria-label="Close"><FiX className="w-6 h-6" /></button>
+  <button onClick={onClose} className="text-[#666] hover:text-[#333] transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Close"><FiX className="w-6 h-6" /></button>
  </div>
  <div className="p-6">
  {imgs.length === 0 ? (
@@ -651,12 +651,12 @@ return (
   {/* Navigation Dots */}
   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
   {featuredModels.map((_, i) => (
-  <button
-  key={i}
-  onClick={() => setModelIdx(i)}
-  className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[20px] min-h-[20px] cursor-pointer"
-  aria-label={`Model ${i + 1}`}
-  >
+    <button
+      key={i}
+      onClick={() => setModelIdx(i)}
+      className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[44px] min-h-[44px] cursor-pointer"
+      aria-label={`Model ${i + 1}`}
+    >
     <span className={`rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-4 h-1.5" : "bg-white/50 dark:bg-white/40 w-1.5 h-1.5"}`} />
   </button>
   ))}

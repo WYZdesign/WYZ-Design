@@ -336,9 +336,9 @@ export default function ModelArchivePage() {
  )}
  </div>
 
- {/* Full-size Image Lightbox */}
- {lightboxIdx !== null && albumImages.length > 0 && (
- <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setLightboxIdx(null)}>
+  {/* Full-size Image Lightbox */}
+  {lightboxIdx !== null && albumImages.length > 0 && (
+  <div role="dialog" aria-modal="true" aria-label={`${selectedModel ?? "Photo"} lightbox`} className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={() => setLightboxIdx(null)}>
 <button onClick={() => setLightboxIdx(null)} aria-label="Close photo" className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/70 hover:text-white z-10">
   <FiX className="w-8 h-8" />
   </button>
@@ -359,7 +359,7 @@ export default function ModelArchivePage() {
  <Image src={albumImages[lightboxIdx]} alt={`${selectedModel} ${lightboxIdx + 1}`}
  width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
- <div className="absolute bottom-4 text-white/50 text-sm">{lightboxIdx + 1} / {albumImages.length}</div>
+  <div className="absolute bottom-4 text-white/50 text-sm" aria-live="polite" aria-atomic="true">{lightboxIdx + 1} / {albumImages.length}</div>
  </div>
  )}
  </main>
