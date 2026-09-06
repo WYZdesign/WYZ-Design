@@ -40,7 +40,7 @@ function GalleryLightbox({ images, index, onClose, onPrev, onNext, onImageTap }:
  <button className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onPrev(); }} aria-label="Previous image"><FiChevronLeft className="w-10 h-10" /></button>
  <Image src={images[index].src} alt={images[index].cat} width={900} height={600} unoptimized className="max-h-[85vh] max-w-[90vw] object-contain select-none" draggable={false} onClick={(e) => { e.stopPropagation(); onImageTap(); }} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }} />
  <button className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onNext(); }} aria-label="Next image"><FiChevronRight className="w-10 h-10" /></button>
- <div className="absolute bottom-6 text-white/50 text-sm">{index + 1} / {images.length}</div>
+ <div aria-live="polite" className="absolute bottom-6 text-white/50 text-sm">{index + 1} / {images.length}</div>
  </div>
  );
 }

@@ -709,7 +709,7 @@ export default function ForumPage() {
   const visibleThreads =
     activeCat === "all" ? sortedThreads : sortedThreads.filter((t) => t.category === activeCat);
 
-return (
+  return (
     <main className="pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <div className="bg-[#DF3131]/10 border-b-2 border-[#DF3131] px-6 py-3 text-center">
         <p className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#DF3131]">Community Preview</p>

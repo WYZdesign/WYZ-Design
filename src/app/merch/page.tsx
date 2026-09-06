@@ -583,11 +583,11 @@ export default function MerchPage() {
         <DynamicContentUnderHero />
 
         {/* Gallery Carousel 1 — under hero */}
-        <section className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+        <section aria-hidden="true" className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
           <div className="flex whitespace-nowrap min-w-max">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
               <div key={`gc1-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
-                <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
+                <SafeImage src={img} alt="" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
               </div>
             ))}
           </div>
@@ -886,11 +886,11 @@ export default function MerchPage() {
     <DynamicContentUnderShop />
 
     {/* Gallery Carousel 2 — under store */}
-    <section className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+    <section aria-hidden="true" className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
       <div className="flex whitespace-nowrap min-w-max">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
           <div key={`gc2-${i}`} className="relative flex-shrink-0 h-56 sm:h-72 overflow-hidden mx-2">
-            <SafeImage src={img} alt="DBC mockup" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
+            <SafeImage src={img} alt="" className="h-full w-auto object-contain hover:scale-110 transition-transform duration-500" />
           </div>
         ))}
       </div>

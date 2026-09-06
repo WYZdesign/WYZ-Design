@@ -152,7 +152,7 @@ export default function BookingPage() {
   return (
     <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-4xl mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>Book a Service</h1>
+        <h1 id="booking-heading" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>Book a Service</h1>
         <p className="text-center text-[#666665] dark:text-[#b0b0b0] text-[15px] mt-2">Tell us about your project and we&apos;ll get back to you within 24 hours.</p>
 
         {submitted ? (
@@ -167,30 +167,31 @@ export default function BookingPage() {
             </Link>
           </div>
         ) : (
-          <form ref={formRef} onSubmit={handleSubmit} className="mt-10 max-w-2xl mx-auto">
+          <form ref={formRef} onSubmit={handleSubmit} aria-labelledby="booking-heading" className="mt-10 max-w-2xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Name */}
               <div>
-                <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Full Name *</label>
-                <input type="text" name="name" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
+                <label htmlFor="booking-name" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Full Name *</label>
+                <input id="booking-name" type="text" name="name" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="Your name" />
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Email *</label>
-                <input type="email" name="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
+                <label htmlFor="booking-email" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Email *</label>
+                <input id="booking-email" type="email" name="email" required className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="you@email.com" />
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Phone</label>
-                <input type="tel" name="phone" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
+                <label htmlFor="booking-phone" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Phone</label>
+                <input id="booking-phone" type="tel" name="phone" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors" placeholder="(555) 555-5555" />
               </div>
 
               {/* Service */}
               <div>
-                <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Service *</label>
+                <label htmlFor="booking-service" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Service *</label>
                 <select
+                  id="booking-service"
                   name="service"
                   required
                   value={selectedService}
@@ -206,8 +207,8 @@ export default function BookingPage() {
 
               {/* Budget */}
               <div>
-                <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Budget Range</label>
-                <select name="budget" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
+                <label htmlFor="booking-budget" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Budget Range</label>
+                <select id="booking-budget" name="budget" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
                   <option value="">Select a range</option>
                   <option>Under $250</option>
                   <option>$250 - $500</option>
@@ -219,21 +220,21 @@ export default function BookingPage() {
 
               {/* Preferred Date */}
               <div>
-                <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Preferred Date</label>
-                <input type="date" name="date" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors" />
+                <label htmlFor="booking-date" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Preferred Date</label>
+                <input id="booking-date" type="date" name="date" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors" />
               </div>
             </div>
 
             {/* Message */}
             <div className="mt-6">
-              <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Project Details *</label>
-              <textarea name="message" required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
+              <label htmlFor="booking-message" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Project Details *</label>
+              <textarea id="booking-message" name="message" required rows={5} className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-colors resize-none" placeholder="Tell us about your project, goals, and timeline..." />
             </div>
 
             {/* How did you hear about us */}
             <div className="mt-6">
-              <label className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">How did you hear about us?</label>
-              <select name="source" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
+              <label htmlFor="booking-source" className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">How did you hear about us?</label>
+              <select id="booking-source" name="source" className="w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[15px] text-[#333] dark:text-white dark:bg-[#252528] outline-none focus:border-[#DF3131] transition-colors">
                 <option value="">Select one</option>
                 <option>Instagram</option>
                 <option>TikTok</option>

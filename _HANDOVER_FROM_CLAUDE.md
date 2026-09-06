@@ -299,3 +299,85 @@ src/app/model-archive/page.tsx
 ```
 
 `npx tsc --noEmit` — clean, 0 errors.
+
+
+---
+
+# Round 18 — Claude Update: Community decision landed, more a11y cleanup
+
+**Community page decision made.** `06ad4c6` added a preview banner: "Votes, posts, and threads live on Discord — this page is a demo with local state only," linking the existing `DISCORD_INVITE` constant. This is the reframe-as-demo option from the round-15 relay message — a real product decision, not a code workaround, and it closes the most significant open finding from rounds 14-15. One trivial nit from that commit: the `return (` right after the new banner lost its 2-space indent (cosmetic only, not a bug) — fixed it while I was in the file.
+
+Also confirmed round 17's fixes (`aria-pressed` on blog filters, gallery 44px touch targets, model-archive `aria-required`) landed verbatim in `07eaafb`.
+
+## Real fixes this round
+
+1. **Home portfolio carousel `alt` text (violation #6)** — every image in `SmoothCarousel` (used for the home/design/photography scrolling strips) shared the identical generic `alt="WYZ Design portfolio"`, repeated across a *doubled* array for the seamless-loop effect — so a screen reader would announce the same non-descriptive string 40+ times per strip. There's no per-image caption data to build real descriptive alt text from (just raw filenames like `wix_0094.jpg`), and the marquee has no click-to-view or unique per-image interaction — it's a decorative flourish, not content. The correct WCAG 1.1.1 treatment for genuinely decorative repeating imagery is `alt=""` plus `aria-hidden="true"` on the container, which I applied — this is also a real screen-reader UX improvement, not just a checkbox: someone using assistive tech no longer hears "WYZ Design portfolio" repeated dozens of times per page for a background-style visual element that carries no independent information.
+
+2. **Booking form has no accessible name (violation #22)** — added `id="booking-heading"` to the page's `<h1>` and `aria-labelledby="booking-heading"` on the `<form>`, so assistive tech announces "Book a Service, form" instead of an unlabeled form landmark.
+
+## Checked and found already correct (not fixed — would've been unnecessary edits)
+
+- **Violation #11 — "booking form errors lack `aria-live`."** Checked how errors surface: all of them go through `react-hot-toast`'s `toast.error(...)`, and the shared `<Toaster />` in `layout.tsx` renders every toast with a `role`/`aria-live` pair built into the library by default (`role="status"`/`aria-live="polite"`, escalating for errors). This is already accessible out of the box — no fix needed. Third stale/already-handled item from WYZMiND's list this pass (after #9 and #17 in round 17).
+
+## Real, bigger gap found but not fixed this round (flagged for next pass)
+
+- **Booking form's 8+ fields all use `<label>` with zero `htmlFor`/`id` pairing** — same root issue as the gift-card field fixed in round 16, but at form-wide scale here (Name, Email, Phone, Service, Budget, Date, Project Details, Referral source). Didn't do it this round because it's 8 paired edits requiring care to match each label to its correct input by position — real work, not a one-liner, and I wanted to land the smaller confirmed wins first rather than risk a rushed mismatch. Next round.
+
+## Files touched this round
+
+```
+src/app/community/page.tsx
+src/app/home/page.tsx
+src/app/booking/page.tsx
+```
+
+`npx tsc --noEmit` — clean, 0 errors.
+
+## Still open
+
+- Booking form's 8 label/input pairs (see above) — next round.
+- Brand red contrast (#1) — still needs your design call.
+- Remaining LOW items: touch targets on model-archive/photography lightbox nav buttons, generic alt text on merch gallery carousel, `useSwipe` keyboard equivalents, lightbox counter `aria-live`, `aria-modal` on any remaining bare overlay markup (#14).
+- CSS keyframe consolidation (14 files) and loading-state coverage audit — flagged round 15, still open.
+
+
+---
+
+# Round 19 — Claude Update: Last of the confirmed WYZMiND a11y items
+
+**Booking form's label/input pairing was already done when I checked** — all 8 fields now have matching `htmlFor`/`id` pairs. This wasn't committed and it wasn't me (I explicitly flagged it as un-done in round 18's handover), so this looks like you or WYZMiND working the same file directly in the shared checkout between rounds. No conflict, just noting it so the credit's accurate — closing that one off my open list.
+
+## Real fixes this round
+
+1. **Model-archive lightbox nav buttons under 44px** — close/prev/next buttons had no sizing beyond their icon (`w-8`/`w-10` with no padding). Added `min-w-[44px] min-h-[44px] flex items-center justify-center` to all three. Photography's `[category]` lightbox already had this — only model-archive was missing it.
+2. **Merch's two "Gallery Carousel" strips reused generic `alt="DBC mockup"` across a tripled array** — same decorative-marquee pattern as the home carousel fixed round 18 (no per-image captions exist, no click-through, pure background flourish). Applied the same fix: `alt=""` on the images, `aria-hidden="true"` on the wrapping `<section>`, for both carousel instances.
+3. **Gallery lightbox image counter lacked `aria-live`** — added `aria-live="polite"` so "3 / 12" announces to screen readers when prev/next changes it.
+
+## Two more items confirmed already-handled (not touched)
+
+- **`useSwipe` "lacks keyboard equivalents" (violation #29).** Checked all three callers (`gallery`, `events`, `photography`) — each already wires its own independent `ArrowLeft`/`ArrowRight` keydown handler at the page level alongside the swipe hook. WYZMiND's own audit note even flagged this caveat ("though gallery/page handles keyboard separately") — now confirmed true for all three, not just gallery. No fix needed.
+- Photography's own lightbox nav buttons were already at `min-w-[44px] min-h-[44px]` — only model-archive's needed the touch-target fix above.
+
+That's the fourth and fifth stale/already-correct items found across rounds 17-19 (after #9, #17, #11) — the remaining short list below is what's actually left.
+
+## Files touched this round
+
+```
+src/app/model-archive/page.tsx
+src/app/merch/page.tsx
+src/app/gallery/page.tsx
+```
+
+`npx tsc --noEmit` — clean, 0 errors.
+
+## What's left from WYZMiND's original 30-item list
+
+- **#1 — brand red contrast** — still needs your design call, unchanged since round 16.
+- **#14 — `aria-modal` on any remaining bare `useModalA11y` overlay markup.** Haven't found a concrete remaining instance yet; every overlay I've checked (merch quick-view, gallery lightbox, model-archive lightbox, photography slideshow) either has `role="dialog"`/`aria-modal` now or is a full-screen lightbox rather than a true modal dialog. Worth one more targeted pass to confirm there's nothing left here, or to close it as resolved.
+
+That's effectively the whole list worked through at this point — 30 violations, all but #1 and (pending confirmation) #14 addressed or found to already be correct.
+
+## Still open (non-a11y, from earlier rounds)
+
+- CSS keyframe consolidation (14 files, cosmetic architecture debt) — flagged round 15.
+- Loading-state coverage audit (only 9/190+ pages use skeletons) — flagged round 15, not yet done page-by-page.

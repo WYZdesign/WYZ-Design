@@ -691,11 +691,11 @@ function SmoothCarousel({ items, className = "", speed = 0.5, direction = "left"
  const doubled = [...items, ...items];
 
  return (
-   <div ref={sectionRef} className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-    <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
+   <div ref={sectionRef} aria-hidden="true" className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+        <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer" aria-hidden="true">
       {doubled.map((src, i) => (
      <div key={i} className="flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm">
-       <Image src={src} alt="WYZ Design portfolio" fill sizes="(max-width:640px) 32vw, 320px" className="absolute inset-0 w-full h-full object-contain" loading="lazy" decoding="async" />
+       <Image src={src} alt="" fill sizes="(max-width:640px) 32vw, 320px" className="absolute inset-0 w-full h-full object-contain" loading="lazy" decoding="async" />
      </div>
      ))}
   </div>
