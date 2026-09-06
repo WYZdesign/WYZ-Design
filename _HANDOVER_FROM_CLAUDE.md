@@ -421,3 +421,59 @@ Both stay on the list as known, honest, low-priority items rather than being eit
 None — this round was verification and a documented decision, not new code changes (the two items #1/#14 were already resolved by the time I checked in).
 
 `npx tsc --noEmit` — clean, 0 errors, confirmed after all recent commits.
+
+
+---
+
+# Round 21 — Claude Update: Root-caused the dark-mode "black buttons with black text" bug
+
+Torreé's report ("on dark mode, static black buttons still have black text, though on hover text turns white") pointed at real breakage, but not where it first looked. Walked through five wrong candidates before finding it — worth documenting the dead ends since they rule out re-investigating the same ground later.
+
+## Ruled out first (all confirmed non-issues)
+
+- `.btn-outline` in `globals.css` — matches the symptom shape exactly (`color: #333333` default, `color: #FFFFFF` on hover) but has zero usages in any `.tsx` file. Dead CSS.
+- `dark:text-black` — zero matches, already fixed in an earlier commit.
+- Plain Tailwind `text-black` — zero matches anywhere; codebase exclusively uses `text-[#hex]` bracket notation.
+- `web-design/page.tsx`'s and `Navbar.tsx`'s `bg-black` buttons — both already carry `text-white` as their base (non-hover) state.
+- The widespread `bg-[#333] text-white dark:bg-white dark:text-[#111] ... dark:hover:bg-[#DF3131] dark:hover:text-white` invert pattern (~10 files) — this is actually implicated (see below), but a first pass wrongly cleared it because it looked self-consistent in isolation without checking the global dark-mode CSS overrides layered on top.
+
+## Actual root cause
+
+`globals.css` has a sitewide dark-mode "auto-invert" layer: attribute selectors like `.dark [class*="bg-white"] { background: var(--dm-surface) !important; }` (line ~498) rewrite common light-mode utility colors to their dark-mode charcoal equivalents wherever they appear — including inside `dark:bg-white`, since the selector is a substring match on the class string, not a Tailwind-variant-aware match.
+
+That's fine on its own, but the companion piece was incomplete: `text-[#333]` and `text-[#666]` each already had a matching `.dark [class*="text-[#XXX]"] { color: ... !important; }` override to keep paired text readable once its background got auto-inverted. `text-[#111]` — the color used specifically on buttons whose default state is `bg-white text-[#111]` (about, events, featured-artist, home, merch, partnerships, photography, plans, printing, services, web-design — 54 usages total) — never got that companion rule.
+
+End result in dark mode: `bg-white` → `#252528` (charcoal) via the existing override, `text-[#111]` stays `#111` (near-black) because nothing touches it — near-black text on a near-black surface, invisible until `hover:text-white` (already present on all of these buttons by design) reveals it. Exactly the reported symptom, and it explains why it looked fine skimming any single file: the JSX itself is correct, it's the interaction with the global dark-mode layer that broke it.
+
+## Fix
+
+`src/app/globals.css` — two additions, following the exact convention already established by the `text-[#333]`/`text-[#666]` overrides and the `#DF3131` hover-preservation block:
+
+1. Right after the existing `bg-[#111]`/`bg-[#111111]` block (~line 504):
+   ```css
+   .dark [class*="text-[#111]"]:not([class*="text-[#111]/"]) {
+     color: var(--dm-text) !important;
+   }
+   ```
+   Gives every `text-[#111]` element a readable light gray (`#e0e0e0`) default in dark mode, matching how `#333`/`#666` are already handled.
+
+2. Alongside the existing `@media (hover: hover)` block that preserves `#DF3131`'s hover color instead of letting the resting `!important` swallow it (~line 716):
+   ```css
+   @media (hover: hover) {
+     .dark a:hover[class*="text-[#111]"],
+     .dark button:hover[class*="text-[#111]"] {
+       color: #fff !important;
+     }
+   }
+   ```
+   Without this, the new resting-state `!important` would have out-prioritized the buttons' own `hover:text-white` utility class and killed the hover transition entirely. This keeps it working exactly as designed — readable gray by default, pure white on hover.
+
+Verified: `grep` confirms no `text-[#111111]` 6-digit variant or `/opacity` variant exists in the codebase, so the guard clause is future-proofing rather than dead weight. Brace count in `globals.css` balanced (495/495) before and after. `npx tsc --noEmit` — clean, 0 errors (expected — this is a CSS-only change; flagging again that a real `npm run build` locally is the only way to catch a CSS syntax slip, since this sandbox still can't run one).
+
+## Files touched this round
+
+```
+src/app/globals.css
+```
+
+Uncommitted, per the standing "you guys take turns" rule — sitting in the working tree for you or WYZMiND to pick up on the next commit.

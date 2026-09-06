@@ -192,8 +192,8 @@ export default function PhotoshootCalendar() {
                 <h3 className="text-lg font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-3">Your Details</h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Session Type</label>
-                    <select value={duration} onChange={(e) => setDuration(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]">
+                    <label htmlFor="photo-duration" className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Session Type</label>
+                    <select id="photo-duration" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]">
                       <option value="1hr">1 Hour - $100</option>
                       <option value="2hr">2 Hours - $200</option>
                       <option value="half">Half Day (4hr) - $350</option>
@@ -201,20 +201,20 @@ export default function PhotoshootCalendar() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Full Name *</label>
-                    <input value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
+                    <label htmlFor="photo-name" className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Full Name *</label>
+                    <input id="photo-name" name="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
-                    <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Email *</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
+                    <label htmlFor="photo-email" className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Email *</label>
+                    <input id="photo-email" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
-                    <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Phone</label>
-                    <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
+                    <label htmlFor="photo-phone" className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Phone</label>
+                    <input id="photo-phone" name="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} autoComplete="tel" className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" />
                   </div>
                   <div>
-                    <label className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Notes</label>
-                    <textarea value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm resize-none bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" placeholder="Location, style, special requests..." />
+                    <label htmlFor="photo-notes" className="block text-xs font-heading font-bold tracking-[0.1em] uppercase text-[#666665] dark:text-white/60 mb-1">Notes</label>
+                    <textarea id="photo-notes" name="notes" value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} className="w-full border border-gray-300 dark:border-[#444] px-3 py-2 text-sm resize-none bg-white dark:bg-[#252528] dark:text-[#e0e0e0]" placeholder="Location, style, special requests..." />
                   </div>
                   <button
                     onClick={handleSubmit}

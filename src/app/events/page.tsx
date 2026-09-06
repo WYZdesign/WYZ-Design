@@ -649,7 +649,6 @@ VISIT CHANNEL
 
 
 export default function EventsPage() {
-  console.log("YT_DEBUG EventsPage render", typeof window === "undefined" ? "SERVER" : "CLIENT");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [modalVideo, setModalVideo] = useState<{ video: string; title: string } | null>(null);
   const [shuffled, setShuffled] = useState(ALL_EVENT_IMAGES);

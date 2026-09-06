@@ -506,6 +506,14 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   background: var(--dm-deep) !important;
 }
 
+/* Dark-mode fix: bg-white buttons auto-invert to a dark surface above,
+   but their paired text-[#111] never got a light-mode override like
+   text-[#333]/text-[#666] did -- default state was black text on a
+   near-black surface, only becoming visible on hover. */
+.dark [class*="text-[#111]"]:not([class*="text-[#111]/"]) {
+  color: var(--dm-text) !important;
+}
+
 .dark [class*="text-[#333]"]:not([class*="text-[#333333]"]) {
   color: var(--dm-text) !important;
 }
@@ -709,6 +717,13 @@ select:focus-visible {
   .dark a:hover[class*="border-[#DF3131]"],
   .dark button:hover[class*="border-[#DF3131]"] {
     border-color: #ff7070 !important;
+  }
+}
+
+@media (hover: hover) {
+  .dark a:hover[class*="text-[#111]"],
+  .dark button:hover[class*="text-[#111]"] {
+    color: #fff !important;
   }
 }
 
