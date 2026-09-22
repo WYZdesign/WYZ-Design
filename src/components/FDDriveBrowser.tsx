@@ -43,17 +43,9 @@ const MIME_ICONS: Record<string, IconType> = {
   "text": FiFileText,
 };
 
-function getIcon(file: DriveFile): IconType {
-  if (file.isFolder) return FiFolder;
-  const ext = file.fileExtension?.toLowerCase();
-  if (ext && FILE_ICONS[ext]) return FILE_ICONS[ext];
-  const mime = file.mimeType.split("/")[0];
-  if (MIME_ICONS[mime]) return MIME_ICONS[mime];
-  return FiFile;
-}
-
 function FileGlyph({ file, className }: { file: DriveFile; className?: string }) {
-  const Icon = getIcon(file);
+  const mime = file.mimeType.split("/")[0];
+  const Icon = MIME_ICONS[mime] || FiFile;
   return <Icon className={className} />;
 }
 

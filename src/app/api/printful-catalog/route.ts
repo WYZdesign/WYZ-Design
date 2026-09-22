@@ -74,7 +74,7 @@ interface PrintfulProduct {
 }
 
 let inFlight = 0;
-let waiters: Array<() => void> = [];
+const waiters: Array<() => void> = [];
 
 async function withConcurrencyLimit<T>(fn: () => Promise<T>): Promise<T> {
   while (inFlight >= CONCURRENCY) {

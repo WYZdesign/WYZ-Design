@@ -375,7 +375,7 @@ async function earnZealLocked(
   for (const [achId, threshold] of [["streak-3", 3], ["streak-7", 7], ["streak-14", 14], ["streak-30", 30]] as const) {
     if (state.visitStreak >= threshold && !state.achievements.includes(achId)) pendingAchievements.push(achId);
   }
-  let bonusDescriptions: string[] = [];
+  const bonusDescriptions: string[] = [];
   if ((state.counters.blogs_read || 0) >= 5 && !state.actions.includes("read-5-blog-posts")) {
     const ok = await awardDirect(email, ZEAL_ACTIONS["read-5-blog-posts"].zeal, ZEAL_ACTIONS["read-5-blog-posts"].reason);
     if (ok) { state.actions.push("read-5-blog-posts"); bonusDescriptions.push(ZEAL_ACTIONS["read-5-blog-posts"].reason); }
