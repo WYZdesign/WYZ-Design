@@ -9,6 +9,10 @@ function escapeHtml(str: string): string {
     .replace(/'/g, "&#39;");
 }
 
+function subjectLine(str: string): string {
+  return str.replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = "WYZ Design <orders@wyzdesign.com>";
 const ADMIN_EMAIL = "info@wyzdesign.com";
@@ -68,7 +72,7 @@ export async function sendBookingConfirmation(data: BookingConfirmation): Promis
   const name = escapeHtml(customerName || "there");
   const safeServiceName = escapeHtml(serviceName);
 
-  const subject = `Your WYZ Design ${serviceName} is confirmed ✦`;
+  const subject = `Your WYZ Design ${subjectLine(serviceName)} is confirmed ✦`;
   const html = `
 <!DOCTYPE html>
 <html>
@@ -122,7 +126,7 @@ export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): 
   const name = escapeHtml(customerName || "there");
   const safeServiceName = escapeHtml(serviceName);
 
-  const subject = `Getting ready for your ${serviceName} at WYZ Design ✦`;
+  const subject = `Getting ready for your ${subjectLine(serviceName)} at WYZ Design ✦`;
   const html = `
 <!DOCTYPE html>
 <html>
@@ -177,7 +181,7 @@ export async function sendBookingDelivered(data: { email: string; customerName?:
   const safeServiceName = escapeHtml(serviceName);
   const safeDeliveryNotes = deliveryNotes ? escapeHtml(deliveryNotes) : "";
 
-  const subject = `Your ${serviceName} from WYZ Design is ready ✦`;
+  const subject = `Your ${subjectLine(serviceName)} from WYZ Design is ready ✦`;
   const html = `
 <!DOCTYPE html>
 <html>

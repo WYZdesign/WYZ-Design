@@ -929,10 +929,33 @@ export default function HomePage() {
       START A PROJECT
       </Link>
       </MagneticElement>
+      <MagneticElement tag="div" strength={0.25}>
+      <Link href="/plans"
+       className="inline-block bg-transparent text-white border-2 border-white px-5 py-2.5 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] transition-all">
+      VIEW PLANS
+      </Link>
+      </MagneticElement>
      </div>
    </div>
    </div>
-   </section>
+    </section>
+
+{/* ═══ TRUST SIGNALS ═══ */}
+  <section aria-label="WYZ Design track record" className="bg-[#111] border-b border-[#333] py-6 sm:py-8">
+    <ul className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 text-center list-none">
+      {[
+        { stat: "90+", label: "Events Produced" },
+        { stat: "45+", label: "Clients Served" },
+        { stat: "1,500+", label: "Photos Delivered" },
+        { stat: "9+", label: "Years Running" },
+      ].map((t) => (
+        <li key={t.label} className="flex flex-col items-center">
+          <span className="text-[#D49341] font-heading font-black text-[26px] sm:text-[32px] leading-none">{t.stat}</span>
+          <span className="text-white/60 text-[10px] sm:text-[11px] font-heading font-bold tracking-[0.15em] uppercase mt-2">{t.label}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
 
 {/* ═══ BRAND MARQUEE ═══ */}
   <section className="py-6">

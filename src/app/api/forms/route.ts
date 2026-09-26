@@ -26,6 +26,67 @@ function formatEntry(data: Record<string, unknown>): string {
     .join("\n");
 }
 
+const ICS_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const ICS_TIME_RE = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i;
+
+function icsEscape(v: string): string {
+  return v.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\r?\n/g, "\\n");
+}
+
+function icsDateAdd(date: string, days: number): string {
+  const [y, m, d] = date.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10).replace(/-/g, "");
+}
+
+/** RFC 5545 VEVENT for a booking that carries a `date` field. Returns null when no valid date. */
+function buildIcs(data: Record<string, unknown>, formType: string): string | null {
+  const date = String(data.date || "").trim();
+  if (!ICS_DATE_RE.test(date)) return null;
+  const day = date.replace(/-/g, "");
+  const serviceName = String(data.service || data.topic || data.serviceName || formType.replace(/-/g, " "));
+  const summary = icsEscape(`WYZ Design — ${serviceName}`);
+  const description = icsEscape(`Booked via wyzdesign.com (${formType.replace(/-/g, " ")}). Questions: info@wyzdesign.com`);
+  const dtStamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const timeRaw = String(data.time || "").trim();
+  const tm = ICS_TIME_RE.exec(timeRaw);
+
+  let dtStart: string;
+  let dtEnd: string;
+  if (tm) {
+    let hour = parseInt(tm[1], 10) % 12;
+    if (/pm/i.test(tm[3])) hour += 12;
+    const minute = tm[2];
+    const start = `${day}T${String(hour).padStart(2, "0")}${minute}00`;
+    const endHour = (hour + 1) % 24;
+    const end = `${day}T${String(endHour).padStart(2, "0")}${minute}00`;
+    dtStart = `DTSTART:${start}`;
+    dtEnd = `DTEND:${end}`;
+  } else {
+    dtStart = `DTSTART;VALUE=DATE:${day}`;
+    dtEnd = `DTEND;VALUE=DATE:${icsDateAdd(date, 1)}`;
+  }
+
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//WYZ Design//Booking//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}@wyzdesign.com`,
+    `DTSTAMP:${dtStamp}`,
+    dtStart,
+    dtEnd,
+    `SUMMARY:${summary}`,
+    `DESCRIPTION:${description}`,
+    "URL:https://www.wyzdesign.com",
+    "ORGANIZER;CN=WYZ Design:mailto:info@wyzdesign.com",
+    "END:VEVENT",
+    "END:VCALENDAR",
+    "",
+  ].join("\r\n");
+}
+
 async function sendAdminNotification(formType: string, data: Record<string, unknown>) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
@@ -50,14 +111,18 @@ async function sendCustomerConfirmation(formType: string, data: Record<string, u
   if (!bookingTypes.includes(formType)) return;
 
   const name = escapeHtml(String(data.name || "there"));
+  const icsTypes = ["photoshoot-booking", "consultation-booking", "booking"];
+  const ics = icsTypes.includes(formType) ? buildIcs(data, formType) : null;
   let subject = "We received your message - WYZ Design";
   let body = `<p>Hi ${name},</p><p>Thanks for reaching out! We've received your ${formType.replace(/-/g, " ")} and will get back to you within 24 hours.</p>`;
   if (formType === "photoshoot-booking") {
     subject = "Photoshoot Booking Confirmed - WYZ Design";
-    body = `<p>Hi ${name},</p><p>Your photoshoot is scheduled for <strong>${escapeHtml(String(data.date || ""))}</strong> at <strong>${escapeHtml(String(data.time || ""))}</strong>.</p><p>Duration: ${escapeHtml(String(data.duration || ""))}</p><p>We'll send a reminder 24 hours before. Questions? Reply to this email.</p>`;
+    body = `<p>Hi ${name},</p><p>Your photoshoot is scheduled for <strong>${escapeHtml(String(data.date || ""))}</strong> at <strong>${escapeHtml(String(data.time || ""))}</strong>.</p><p>Duration: ${escapeHtml(String(data.duration || ""))}</p><p>${ics ? "A calendar invite is attached." : "We'll send a reminder 24 hours before."} Questions? Reply to this email.</p>`;
   } else if (formType === "consultation-booking") {
     subject = "Consultation Confirmed - WYZ Design";
-    body = `<p>Hi ${name},</p><p>Your free consultation is scheduled for <strong>${escapeHtml(String(data.date || ""))}</strong> at <strong>${escapeHtml(String(data.time || ""))}</strong>.</p><p>Topic: ${escapeHtml(String(data.topic || ""))}</p><p>We'll reach out with a calendar invite shortly.</p>`;
+    body = `<p>Hi ${name},</p><p>Your free consultation is scheduled for <strong>${escapeHtml(String(data.date || ""))}</strong> at <strong>${escapeHtml(String(data.time || ""))}</strong>.</p><p>Topic: ${escapeHtml(String(data.topic || ""))}</p><p>${ics ? "A calendar invite is attached — add it so you don't miss it." : "We'll reach out with a calendar invite shortly."}</p>`;
+  } else if (ics) {
+    body += `<p>A calendar invite for your requested date is attached.</p>`;
   }
   try {
     const resend = new Resend(apiKey);
@@ -66,6 +131,9 @@ async function sendCustomerConfirmation(formType: string, data: Record<string, u
       to: email,
       subject,
       html: `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:40px 20px;">${body}<hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"><p style="font-size:14px;color:#757575;">- The WYZ Design Team<br/><a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a></p></div>`,
+      attachments: ics
+        ? [{ filename: "wyz-design-booking.ics", content: Buffer.from(ics, "utf-8") }]
+        : undefined,
     });
   } catch (e) { logger.error("forms:sendCustomerConfirmation", e); }
 }

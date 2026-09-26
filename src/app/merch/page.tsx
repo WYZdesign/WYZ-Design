@@ -496,8 +496,8 @@ export default function MerchPage() {
             colors: ["#333333", "#DF3131", "#FFFFFF"],
             image: (p.image as string) || "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg",
             rating: 4.7,
-            reviews: Math.floor(Math.random() * 150) + 20,
-            trending: Math.floor(Math.random() * 40) + 60,
+            reviews: 20 + (((p.id as number) * 37) % 131),
+            trending: 60 + (((p.id as number) * 17) % 41),
           }));
           setProducts(printfulProducts);
           setCatalogStatus("loaded");

@@ -704,6 +704,12 @@ select:focus-visible {
   color: var(--color-wyz-text-red) !important;
 }
 
+/* Direct #C00000 text is tuned for white (5.5:1) but drops to ~1.9:1 on dark
+   surfaces — boost to the same #FF5252 used for DF3131 in dark mode. */
+.dark [class*="text-[#C00000]"] {
+  color: #FF5252 !important;
+}
+
 /* Hover states — Tailwind v4 generates separate rules */
 @media (hover: hover) {
   .dark a:hover[class*="text-[#DF3131]"],

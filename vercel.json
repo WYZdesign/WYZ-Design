@@ -1,6 +1,7 @@
 {
   "crons": [
-    { "path": "/api/health", "schedule": "*/5 * * * *" }
+    { "path": "/api/health", "schedule": "*/5 * * * *" },
+    { "path": "/api/cron/booking-whatsnext", "schedule": "0 16 * * *" }
   ],
   "headers": [
     {
