@@ -28,10 +28,11 @@ function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
 async function checkZealDatabase(): Promise<ServiceStatus> {
   try {
     const sb = getServiceClient();
-    await withTimeout(
+    const { error } = await withTimeout(
       sb.from("zeal_users").select("email").limit(1),
       10000
     );
+    if (error) throw new Error(error.message);
     return { name: "Zeal DB (Supabase)", detail: "zeal_users query round trip succeeded", healthy: true };
   } catch (err) {
     return {

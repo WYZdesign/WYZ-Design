@@ -71,6 +71,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ ok: true, target, candidates: due.length, sent });
   } catch (e) {
     logger.error("cron:booking-whatsnext", e);
-    return NextResponse.json({ error: "Failed to run booking whats-next" }, { status: 500 });
+    const detail = e instanceof Error ? `${e.message}${e.cause ? " | cause: " + String(e.cause) : ""}` : String(e);
+    return NextResponse.json({ error: "Failed to run booking whats-next", detail }, { status: 500 });
   }
 }
