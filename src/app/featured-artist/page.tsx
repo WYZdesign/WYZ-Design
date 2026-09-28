@@ -92,7 +92,9 @@ function ArtistGallery() {
   <div className="mt-3 flex gap-2 justify-center">
   {ARTIST_GALLERY.map((_, i) => (
   <button key={i} onClick={() => { setDir(i > current ? 1 : -1); setFlipping(true); setTimeout(() => { setCurrent(i); setFlipping(false); }, 350); }}
-  className={`w-[8px] h-[8px] sm:w-2 sm:h-2 lg:w-[10px] lg:h-[10px] rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} aria-label={`Go to artwork ${i + 1}`} />
+  className="w-6 h-6 flex items-center justify-center" aria-label={`Go to artwork ${i + 1}`}>
+  <span className={`w-[8px] h-[8px] sm:w-2 sm:h-2 lg:w-[10px] lg:h-[10px] rounded-full transition-all ${i === current ? "bg-[#DF3131] scale-125" : "bg-gray-300 hover:bg-gray-400"}`} />
+  </button>
   ))}
  </div>
   {lbIdx !== null && ARTIST_GALLERY[lbIdx].src && (

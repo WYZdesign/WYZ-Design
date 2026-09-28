@@ -116,7 +116,7 @@ export default function FDCalendar({ events, eventTab, onEventClick }: {
                       onMouseEnter={(e) => { setHoveredEvent(evt); setHoverPos({ x: e.clientX, y: e.clientY }); }}
                       onMouseLeave={() => setHoveredEvent(null)}
                       onClick={() => onEventClick(evt)}
-                      className={`w-full text-left p-1 rounded text-[10px] leading-tight truncate block transition-all hover:scale-[1.02] ${
+                      className={`w-full text-left p-1 rounded text-[11px] leading-tight truncate block transition-all hover:scale-[1.02] ${
                         evt.status === "upcoming"
                           ? "bg-green-500/20 text-green-300 border border-green-500/30 hover:bg-green-500/30"
                           : "bg-zinc-800/60 text-zinc-400 border border-zinc-700/50 hover:bg-zinc-700/60"
@@ -124,7 +124,7 @@ export default function FDCalendar({ events, eventTab, onEventClick }: {
                       <span className="font-semibold">{evt.title.split(" in ")[0].split(" at ")[0].split(" – ")[0].substring(0, 25)}{evt.title.length > 25 ? "…" : ""}</span>
                     </button>
                   ))}
-                  {dayEvents.length > 3 && <div className="text-[10px] text-zinc-600 text-center">+{dayEvents.length - 3} more</div>}
+                  {dayEvents.length > 3 && <div className="text-[11px] text-zinc-600 text-center">+{dayEvents.length - 3} more</div>}
                 </div>
               </div>
             );

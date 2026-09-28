@@ -144,7 +144,7 @@ export default function FDDriveBrowser() {
     <div className="w-full">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 min-w-0 flex-wrap">
           <button onClick={navigateUp} disabled={folderPath.length <= 1}
             className="px-3 py-1.5 text-xs rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed border border-zinc-700 transition-all">
             ← Back
@@ -159,7 +159,7 @@ export default function FDDriveBrowser() {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
             placeholder="Search files..."
             className="bg-black border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-zinc-400 placeholder-zinc-700 focus:outline-none focus:border-zinc-600 w-40" />

@@ -1349,7 +1349,7 @@ export default function ForumPage() {
             </div>
             <div className="bg-[#2B2D31] p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
               {DISCORD_CHANNELS.map((ch) => (
-                <div key={ch.name} className="flex items-center gap-3 px-3 py-2.5 rounded hover:bg-white/5 transition-colors">
+                <div key={ch.name} className="flex items-center gap-2 px-3 py-2.5 rounded hover:bg-white/5 transition-colors">
                   <FiHash className="w-4 h-4 text-[#80848E] shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-medium text-[#DBDEE1] truncate">{ch.name}</p>

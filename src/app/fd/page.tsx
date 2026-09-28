@@ -315,10 +315,10 @@ export default function FDOraclePage() {
 
               {/* Input */}
               <div className="p-4 border-t border-zinc-800 bg-zinc-900/50">
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && sendMessage()}
                     placeholder="Describe the event you want... (e.g., '3 ideas using Olympic underwater and Hill rain room')"
-                    className="flex-1 bg-black border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#DF3131] transition-all text-sm"
+                    className="flex-1 min-w-0 bg-black border border-zinc-800 rounded-xl px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:border-[#DF3131] transition-all text-sm"
                     disabled={generating} />
                   <button onClick={() => sendMessage()} disabled={generating || !input.trim()}
                     className="px-6 py-3 bg-gradient-to-r from-[#DF3131] to-[#B82020] hover:from-[#B82020] hover:to-[#DF3131] text-white font-bold rounded-xl disabled:opacity-50 transition-all flex items-center gap-2">
@@ -425,7 +425,7 @@ export default function FDOraclePage() {
             </div>
           </ScrollReveal>
 
-          <div className="flex justify-center gap-2 mb-10">
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
             {(["all", "LA", "NY"] as const).map(tab => (
               <button key={tab} onClick={() => setEventTab(tab)}
                 className={`px-6 py-3 text-sm font-bold rounded-lg transition-all uppercase tracking-wider ${eventTab === tab ? "bg-[#DF3131] text-white" : "bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white hover:border-zinc-600"}`}>
@@ -502,7 +502,7 @@ export default function FDOraclePage() {
                 Browse the full FD event archive, clips, recap variants, photos, and production files organized by event.
                 Everything is accessible to view and download directly from Google Drive.
               </p>
-              <div className="flex items-center justify-center gap-4 mt-4 text-sm text-zinc-600">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-4 text-sm text-zinc-600">
                 <span className="flex items-center gap-1.5"><FiVideo className="w-4 h-4" /> Clips &amp; Videos</span>
                 <span className="flex items-center gap-1.5"><FiImage className="w-4 h-4" /> Photos &amp; Images</span>
                 <span className="flex items-center gap-1.5"><FiFileText className="w-4 h-4" /> Documents</span>

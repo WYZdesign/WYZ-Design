@@ -389,7 +389,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 
 /* ── Carousel video titles — override global h3 sizing ── */
 .carousel-video-title {
-  font-size: 0.55rem !important;
+  font-size: 0.7rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.03em !important;
 }
