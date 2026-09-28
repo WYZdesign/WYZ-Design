@@ -118,7 +118,7 @@ export default function BlogPage() {
    <span>{p.date}</span>
     </div>
    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[17px] group-hover:text-[#DF3131] transition-colors leading-snug mb-3">{p.title}</h3>
-   <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed line-clamp-2">{p.excerpt}</p>
+   <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed line-clamp-2 break-words">{p.excerpt}</p>
    <div className="mt-4 flex items-center justify-center gap-1 text-[#DF3131] text-[13px] font-semibold tracking-[0.06em] sm:opacity-0 sm:group-hover:opacity-100 opacity-100 transition-opacity">
    READ MORE <FiArrowRight className="w-3.5 h-3.5" />
    </div>

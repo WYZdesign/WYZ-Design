@@ -232,7 +232,7 @@ return (
             </video>
           </div>
           <div className="absolute inset-0 bg-black/65 z-[1]" />
-          <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 pt-32 lg:pt-40 text-center flex flex-col items-center justify-center h-full">
+          <div className="relative z-10 w-full max-w-lg mx-auto px-4 sm:px-10 lg:px-16 py-16 sm:py-20 pt-32 lg:pt-40 text-center flex flex-col items-center justify-center h-full">
             <span className="!text-[11px] sm:!text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block text-center mb-6 sm:mb-8">WYZ DESIGN - WEB DEVELOPMENT</span>
             <div className="!text-[1.7rem] sm:!text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
               WEBSITES<br />
@@ -241,7 +241,7 @@ return (
             <p className="text-white/70 text-[16px] sm:text-[16px] leading-relaxed mb-8 sm:mb-10 max-w-xs sm:max-w-sm mx-auto text-center">
               From concept to launch, custom-built, responsive, SEO-optimized websites designed to convert visitors into customers.
             </p>
-            <div className="flex flex-nowrap gap-3 justify-center w-full overflow-hidden">
+            <div className="flex flex-wrap gap-3 justify-center w-full">
               <Link href="/booking" className="inline-flex items-center gap-1 px-5 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[11px] sm:text-[14px] text-center hover:bg-[#B82020] transition-all justify-center">
                 GET A QUOTE <FiArrowRight className="w-4 h-4" />
               </Link>
