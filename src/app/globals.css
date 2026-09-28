@@ -948,11 +948,13 @@ a[href*="register"] {
   display: none; /* Chrome/Safari/Edge */
 }
 
-/* Mobile tap targets */
+/* Mobile tap targets — vertical only; never force min-width (it breaks fixed-size icon rows like the footer socials at 320px) */
 @media (max-width: 768px) {
-  a, button {
+  a:not([class*="w-"]):not([class*="h-"]) {
     min-height: 44px;
-    min-width: 44px;
+  }
+  button:not([class*="h-"]) {
+    min-height: 44px;
   }
 }
 

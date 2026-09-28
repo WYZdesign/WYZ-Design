@@ -821,7 +821,7 @@ export default function ForumPage() {
                             {post.author}
                           </p>
                           {post.type === "announcement" && (
-                            <span className="text-[9px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#DF3131] shrink-0 mb-2">
+                            <span className="text-[11px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#DF3131] shrink-0 mb-2">
                               Official
                             </span>
                           )}
@@ -1128,7 +1128,7 @@ export default function ForumPage() {
                       <div className="flex items-center gap-2 mb-2 flex-wrap">
                         {flair && (
                           <span
-                            className="text-[10px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 rounded mb-2"
+                            className="text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 rounded mb-2"
                             style={{ backgroundColor: `${flair.color}18`, color: flair.color }}
                           >
                             {flair.label}
@@ -1306,11 +1306,11 @@ export default function ForumPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@email.com"
-                    className="flex-1 sm:w-56 px-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E] text-[14px] text-[#333] dark:text-[#e0e0e0] outline-none focus:border-[#DF3131] rounded-lg"
+                    className="flex-1 min-w-0 sm:w-56 px-4 py-3 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#1C1C1E] text-[14px] text-[#333] dark:text-[#e0e0e0] outline-none focus:border-[#DF3131] rounded-lg"
                   />
                   <button
                     type="submit"
-                    className="px-5 py-3 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.08em] uppercase rounded-lg hover:bg-[#B82020] transition-colors"
+                    className="shrink-0 px-5 py-3 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.08em] uppercase rounded-lg hover:bg-[#B82020] transition-colors"
                   >
                     Join
                   </button>
@@ -1340,14 +1340,14 @@ export default function ForumPage() {
 
           {/* Discord Channel List — 4-col grid */}
           <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] mb-10">
-            <div className="bg-[#5865F2] px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <FiHash className="w-5 h-5 text-white/80" />
-                <h3 className="font-heading font-bold text-[16px] tracking-[0.06em] text-white mb-3">WYZ DESIGN · CHANNELS</h3>
+            <div className="bg-[#5865F2] px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-3">
+              <div className="flex items-center gap-3 min-w-0">
+                <FiHash className="w-5 h-5 text-white/80 shrink-0" />
+                <h3 className="font-heading font-bold text-[16px] leading-tight tracking-[0.06em] text-white break-normal">WYZ DESIGN · CHANNELS</h3>
               </div>
-              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white/70 mb-2">127 online</span>
+              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white/70 whitespace-nowrap shrink-0">127 online</span>
             </div>
-            <div className="bg-[#2B2D31] p-4 grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div className="bg-[#2B2D31] p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
               {DISCORD_CHANNELS.map((ch) => (
                 <div key={ch.name} className="flex items-center gap-3 px-3 py-2.5 rounded hover:bg-white/5 transition-colors">
                   <FiHash className="w-4 h-4 text-[#80848E] shrink-0" />

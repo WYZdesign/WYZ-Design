@@ -314,19 +314,19 @@ export default function MyAccountPage() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
                 <div>
                   <p className="text-[1.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] leading-none">{referral.signups}</p>
-                  <p className="text-[10px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Signups</p>
+                  <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Signups</p>
                 </div>
                 <div>
                   <p className="text-[1.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] leading-none">{referral.purchases}</p>
-                  <p className="text-[10px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Purchases</p>
+                  <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Purchases</p>
                 </div>
                 <div>
                   <p className="text-[1.5rem] font-heading font-black text-[#DF3131] leading-none">${referral.pendingCommission.toFixed(0)}</p>
-                  <p className="text-[10px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Pending</p>
+                  <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Pending</p>
                 </div>
                 <div>
                   <p className="text-[1.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] leading-none">${referral.paidCommission.toFixed(0)}</p>
-                  <p className="text-[10px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Paid Out</p>
+                  <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-[#666] dark:text-white/40 mt-1">Paid Out</p>
                 </div>
               </div>
             </>

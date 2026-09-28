@@ -903,7 +903,7 @@ export default function HomePage() {
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-8 sm:py-12 overflow-hidden"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
-     <p className="text-white/70 text-[10px] sm:text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-center mb-6 sm:mb-8 max-w-full">
+     <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-center mb-6 sm:mb-8 max-w-full">
         <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
       </p>
         <TextMaskReveal direction="up">
@@ -951,7 +951,7 @@ export default function HomePage() {
       ].map((t) => (
         <li key={t.label} className="flex flex-col items-center">
           <span className="text-[#D49341] font-heading font-black text-[26px] sm:text-[32px] leading-none">{t.stat}</span>
-          <span className="text-white/60 text-[10px] sm:text-[11px] font-heading font-bold tracking-[0.15em] uppercase mt-2">{t.label}</span>
+          <span className="text-white/60 text-[11px] sm:text-[11px] font-heading font-bold tracking-[0.15em] uppercase mt-2">{t.label}</span>
         </li>
       ))}
     </ul>
@@ -1091,7 +1091,7 @@ export default function HomePage() {
   p.badge ? "border-[3px] border-[#DF3131] shadow-lg shadow-[#DF3131]/10 bg-white dark:bg-[#252528]" : "border border-[#E2E2E2] hover:border-[#DF3131] bg-white dark:bg-[#252528]"
  }`} style={{ backfaceVisibility: "hidden" }}>
  {p.badge && (
-  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#DF3131] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 whitespace-nowrap">
+  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#DF3131] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 whitespace-nowrap">
   {p.badge}
   </div>
  )}
@@ -1105,7 +1105,7 @@ export default function HomePage() {
  <p className="text-4xl font-black mb-1">{p.price}</p>
  <p className="text-white/80 text-xs mb-1 font-bold italic">Every 3 months</p>
  <p className="text-white/70 text-xs mb-4">{p.desc}</p>
- <p className="text-white/50 text-[10px] mb-4">{p.valid}</p>
+ <p className="text-white/50 text-[11px] mb-4">{p.valid}</p>
   <Link href="/plans" className="w-full py-3 bg-white text-[#111] font-heading font-bold tracking-[0.1em] uppercase text-sm hover:bg-[#333] dark:hover:bg-[#111] hover:text-white transition-all">
  SUBSCRIBE
  </Link>
@@ -1139,7 +1139,7 @@ export default function HomePage() {
 <h2 className="text-[0.84rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase whitespace-nowrap mb-3" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
-  <p className="text-white/80 tracking-[0.3em] text-[10px] sm:text-sm uppercase mb-3 max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
+  <p className="text-white/80 tracking-[0.3em] text-[11px] sm:text-sm uppercase mb-3 max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
   <Link href="/printing" className="inline-block px-8 py-4 bg-white text-[#111] border-2 border-white text-[14px] font-bold tracking-[0.12em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all whitespace-nowrap mt-4">
   CUSTOM PRINTING →
   </Link>

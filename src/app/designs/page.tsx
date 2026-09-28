@@ -353,7 +353,7 @@ const faotmImages = [
 <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
    <div className="flex flex-col items-center justify-between mb-6 gap-x-6 gap-y-2">
    <div className="text-center">
-   <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">FEATURED ARTIST OF THE MONTH</span>
+   <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">FEATURED ARTIST OF THE MONTH</span>
      <h2 className="text-[2rem] lg:text-[2.6rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-0 whitespace-nowrap !max-w-none">F. A. O. T. M.</h2>
    </div>
     <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>

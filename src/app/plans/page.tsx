@@ -203,7 +203,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
           i === 0 ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">
-            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">Web Design Add-On</span>
+            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">Web Design Add-On</span>
             <h3 className="font-heading font-black text-white text-[20px] tracking-[0.03em] mb-3">{w.name}</h3>
             <div className="mb-3">
               <span className="text-white/50 text-[12px] line-through mr-2">{w.original}</span>

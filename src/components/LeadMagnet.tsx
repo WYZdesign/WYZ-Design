@@ -44,7 +44,7 @@ export default function LeadMagnet() {
         <p className="text-white/80 text-sm mb-6 max-w-md mx-auto">
           7 questions to diagnose what your brand is missing, plus what to do about it.
         </p>
-        <form onSubmit={handleSubmit} className="flex gap-2 max-w-sm mx-auto">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto w-full">
           <input
             type="email"
             value={email}

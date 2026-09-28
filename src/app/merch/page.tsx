@@ -412,7 +412,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
                 <p className="text-white font-heading font-bold text-[8px] tracking-[0.03em] uppercase mb-2">{product.name}</p>
                  <p className="text-[#DF3131] font-black text-[11px]">{fmt(product.price)}</p>
               </div>
-              {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
+              {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
             </div>
           </div>
         );
@@ -437,17 +437,17 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all mb-2">Quick View</span>
             </div>
-            {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[9px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
+            {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
           </div>
           <div className="text-center px-1">
-            <p className="text-[10px] text-[#666] font-bold tracking-[0.12em] uppercase mb-2">{product.category}</p>
+            <p className="text-[11px] text-[#666] font-bold tracking-[0.12em] uppercase mb-2">{product.category}</p>
             <h3 className="text-size-9 font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">{fmt(product.price)}</p>
           </div>
           {product.rating && (
             <div className="flex items-center justify-center gap-1.5 mt-1">
               <StarRating rating={product.rating} />
-              <span className="text-[10px] text-[#666]">({product.reviews})</span>
+              <span className="text-[11px] text-[#666]">({product.reviews})</span>
             </div>
           )}
         </div>
@@ -817,7 +817,7 @@ export default function MerchPage() {
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
                 <SafeImage src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover" />
-                {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[10px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
+                {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[11px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
                 <button onClick={() => setSelectedProduct(null)} className="text-[#666] hover:text-[#333] text-[15px] mb-4 block">&larr; Back to shop</button>

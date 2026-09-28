@@ -287,7 +287,7 @@ export default function PrintingPage() {
           <div key={t.size} className="bg-white/10 border border-white/20 p-3 text-center">
             <p className="text-white/70 text-[11px] mb-1">{t.size}</p>
             <p className="text-white font-black text-[18px]">{t.price}</p>
-            <p className="text-white/50 text-[10px]">per sticker</p>
+            <p className="text-white/50 text-[11px]">per sticker</p>
           </div>
         ))}
       </div>
@@ -310,7 +310,7 @@ export default function PrintingPage() {
           <div key={t.size} className="bg-white/10 border border-white/20 p-3 text-center">
             <p className="text-white/70 text-[11px] mb-1">{t.size}</p>
             <p className="text-white font-black text-[18px]">{t.price}</p>
-            <p className="text-white/50 text-[10px]">per print</p>
+            <p className="text-white/50 text-[11px]">per print</p>
           </div>
         ))}
       </div>
@@ -333,7 +333,7 @@ export default function PrintingPage() {
           <div key={t.size} className="bg-white/10 border border-white/20 p-3 text-center">
             <p className="text-white/70 text-[11px] mb-1">{t.size} diameter</p>
             <p className="text-white font-black text-[18px]">{t.price}</p>
-            <p className="text-white/50 text-[10px]">per button</p>
+            <p className="text-white/50 text-[11px]">per button</p>
           </div>
         ))}
       </div>

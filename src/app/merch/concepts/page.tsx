@@ -71,7 +71,7 @@ export default function ConceptArchivePage() {
                    <SafeImage src={concept.img} alt={concept.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">{concept.category}</span>
+                    <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2 block">{concept.category}</span>
                     <h3 className="font-heading font-black text-white text-[1.5rem] tracking-[0.03em] mb-2">{concept.name}</h3>
                     <p className={`text-white/70 text-[14px] leading-relaxed transition-all duration-500 ${expandedConcept === i ? "max-h-40 opacity-100" : "max-h-0 opacity-0 sm:max-h-0 sm:opacity-0"} overflow-hidden`}>
                       {concept.meaning}
