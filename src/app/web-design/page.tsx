@@ -250,7 +250,7 @@ return (
               </a>
             </div>
             {/* Stats strip */}
-            <div className="flex gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 justify-center w-full">
+            <div className="flex flex-wrap gap-6 sm:gap-10 mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 justify-center w-full">
               <AnimatedCounter end={11} suffix="+" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Sites Built" />
               <AnimatedCounter end={100} suffix="%" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Responsive" />
               <AnimatedCounter end={7} suffix="-Day" className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#DF3131] whitespace-nowrap text-center" labelClassName="text-[11px] text-white/50 tracking-[0.1em] uppercase" label="Turnaround" />
