@@ -62,14 +62,12 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
 
   return (
   <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(608px, 67vh)" }}
-  role="button"
   tabIndex={0}
-  aria-expanded={flipped}
-  aria-label={`${sticker.name || "Sticker"} details`}
+  onFocus={() => setFlipped(true)}
+  onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
   onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
   onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-  onClick={() => setFlipped(f => !f)}
-  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}>
+  onClick={() => setFlipped(f => !f)}>
   <div
     className="relative w-full h-full transition-transform duration-700 ease-in-out"
     style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
@@ -138,14 +136,12 @@ function FlipCardInline({ title, subtitle, backTitle, backContent, backNote, bac
 
   return (
     <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(500px, 80vh)" }}
-      role="button"
       tabIndex={0}
-      aria-expanded={flipped}
-      aria-label={`${title} details`}
+      onFocus={() => setFlipped(true)}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
       onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-      onClick={() => setFlipped(f => !f)}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}>
+      onClick={() => setFlipped(f => !f)}>
       <div
         className="relative w-full h-full transition-transform duration-700 ease-in-out"
         style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}

@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/admin-auth";
+import { rateLimit } from "@/lib/rate-limit";
 import { logger } from "@/lib/logger";
 
 const DRIVE_API = "https://www.googleapis.com/drive/v3";
 const FOLDER_ID = "1x4Ya8VMdtt8wfG8jil-V_TxRuaEWht0T";
+const FOLDER_ID_RE = /^[a-zA-Z0-9_-]{10,}$/;
 
 async function listFiles(folderId: string, apiKey: string, pageToken?: string) {
   const params = new URLSearchParams({
@@ -26,6 +28,12 @@ export async function GET(req: Request) {
   const admin = await requireAdmin();
   if (!admin.ok) return admin.response;
 
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+  const rl = await rateLimit(`fd-drive:${ip}`, 30, 60_000);
+  if (!rl.ok) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   const apiKey = process.env.GOOGLE_DRIVE_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
@@ -36,6 +44,9 @@ export async function GET(req: Request) {
 
   const { searchParams } = new URL(req.url);
   const folder = searchParams.get("folder") || FOLDER_ID;
+  if (!FOLDER_ID_RE.test(folder)) {
+    return NextResponse.json({ error: "Invalid folder id" }, { status: 400 });
+  }
   const pageToken = searchParams.get("pageToken") || undefined;
 
   try {

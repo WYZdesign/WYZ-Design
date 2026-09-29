@@ -255,7 +255,7 @@ function DynamicContentUnderShop() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {designStories.map((d) => (
-            <div key={d.id} className="group cursor-pointer" onClick={() => setExpandedId(expandedId === d.id ? null : d.id)}>
+            <button type="button" key={d.id} className="group cursor-pointer text-left w-full bg-transparent border-0 p-0" aria-expanded={expandedId === d.id} onClick={() => setExpandedId(expandedId === d.id ? null : d.id)}>
               <div className="aspect-[3/4] rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5] mb-3">
                 <SafeImage src={d.image} alt={d.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
@@ -266,7 +266,7 @@ function DynamicContentUnderShop() {
                   <p className="text-[#DF3131] dark:text-[#DF3131] text-[13px] font-bold tracking-[0.05em] uppercase">{d.meaning}</p>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
@@ -396,13 +396,12 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
         const depth = (i % 3) - 1;
         const parallaxY = scrollY * 0.02 * depth;
         return (
-          <div key={product.id} className="group cursor-pointer" onClick={() => onSelect(product)}
-            role="button" tabIndex={0} aria-label={`View ${product.name}`}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(product); } }}
+          <button type="button" key={product.id} className="group cursor-pointer text-left w-full bg-transparent border-0 p-0" aria-label={`View ${product.name}`}
             style={{
-              transform: `rotate(${pos.rotate}deg) translate(${pos.offsetX}px, ${pos.offsetY + parallaxY}px) scale(${pos.scale})`,
-              transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
-            }}>
+            transform: `rotate(${pos.rotate}deg) translate(${pos.offsetX}px, ${pos.offsetY + parallaxY}px) scale(${pos.scale})`,
+            transition: "transform 0.4s cubic-bezier(0.23, 1, 0.32, 1)",
+          }}
+          onClick={() => onSelect(product)}>
             <div className="bg-[#f5f5f5] aspect-[3/4] overflow-hidden relative mb-3 shadow-lg group-hover:shadow-2xl group-hover:shadow-[#DF3131]/20 transition-all duration-500 group-hover:-translate-y-3 group-hover:scale-105">
               <SafeImage src={product.image} alt={product.name} fill sizes="(max-width:768px) 50vw, (max-width:1024px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" decoding="async" />
 
@@ -414,7 +413,7 @@ function ScatteredGrid({ products, onSelect }: { products: Product[]; onSelect: 
               </div>
               {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
             </div>
-          </div>
+          </button>
         );
       })}
     </div>
@@ -427,9 +426,8 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-4 sm:gap-y-8">
       {products.map((product) => (
-        <div key={product.id} className="group cursor-pointer"
-          role="button" tabIndex={0} aria-label={`View ${product.name}`}
-          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(product); } }}
+        <button type="button" key={product.id} className="group cursor-pointer text-left w-full bg-transparent border-0 p-0"
+          aria-label={`View ${product.name}`}
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
           <div className={`bg-[#f5f5f5] aspect-[4/5] overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
@@ -450,7 +448,7 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
               <span className="text-[11px] text-[#666]">({product.reviews})</span>
             </div>
           )}
-        </div>
+        </button>
       ))}
     </div>
   );

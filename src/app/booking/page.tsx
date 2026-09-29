@@ -87,7 +87,13 @@ export default function BookingPage() {
   const [submitted, setSubmitted] = useState(false);
   const [selectedService, setSelectedService] = useState("");
   const [loading, setLoading] = useState(false);
+  const [formMsg, setFormMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+
+  function notify(msg: string) {
+    setFormMsg(msg);
+    toast.error(msg);
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -117,10 +123,10 @@ export default function BookingPage() {
       if (!res.ok) {
         throw new Error("Submission failed");
       }
-      setSubmitted(true);
+      setSubmitted(true); setFormMsg("Booking request submitted successfully.");
     } catch (err) {
       logger.error("booking-page", `Booking submission failed: ${err}`);
-      toast.error("Submission failed. Please try again.");
+      notify("Submission failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -128,7 +134,7 @@ export default function BookingPage() {
 
   async function payNow() {
     const price = SERVICE_PRICES[selectedService];
-    if (!price) { toast.error("This service has custom pricing. Submit a request and we'll send you a quote."); return; }
+    if (!price) { notify("This service has custom pricing. Submit a request and we'll send you a quote."); return; }
     setLoading(true);
     try {
       const res = await fetch("/api/checkout", {
@@ -140,10 +146,10 @@ export default function BookingPage() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        toast.error(data.error || "Checkout failed. Make sure Stripe is configured.");
+        notify(data.error || "Checkout failed. Make sure Stripe is configured.");
       }
     } catch {
-      toast.error("Network error. Please try again.");
+      notify("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -151,6 +157,7 @@ export default function BookingPage() {
 
   return (
     <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+      <div aria-live="polite" className="sr-only">{formMsg}</div>
       <div className="max-w-4xl mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
         <h1 id="booking-heading" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>Book a Service</h1>
         <p className="text-center text-[#666665] dark:text-[#b0b0b0] text-[15px] mt-2">Tell us about your project and we&apos;ll get back to you within 24 hours.</p>

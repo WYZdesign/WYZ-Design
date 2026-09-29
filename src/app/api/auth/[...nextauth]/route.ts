@@ -3,6 +3,7 @@ import type { Session } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { safeEquals } from "@/lib/api-utils";
+import { rateLimit } from "@/lib/rate-limit";
 
 interface ExtendedSession extends Session {
   user: Session["user"] & { provider?: string };
@@ -27,6 +28,9 @@ const providers = [
       const email = String(credentials?.email || "").trim().toLowerCase();
       const pw = String(credentials?.password || "");
       if (!email || !pw) return null;
+
+      const durable = await rateLimit(`admin-login:${email}`, 10, LOCKOUT_MS);
+      if (!durable.ok) return null;
 
       const now = Date.now();
       const attempt = loginAttempts.get(email);

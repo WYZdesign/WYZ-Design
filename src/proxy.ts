@@ -115,6 +115,26 @@ export async function proxy(req: NextRequest) {
       return NextResponse.json({ error: "Unsupported Content-Type", code: "UNSUPPORTED_MEDIA_TYPE", timestamp: new Date().toISOString() }, { status: 415 });
     }
 
+    if (req.method !== "GET" && req.method !== "HEAD") {
+      const csrfExempt = ["/api/webhook", "/api/cron", "/api/health", "/api/csp-report"].some((p) => pathname.startsWith(p));
+      if (!csrfExempt) {
+        const origin = req.headers.get("origin");
+        const referer = req.headers.get("referer");
+        const host = req.headers.get("host");
+        const sameHost = (v: string) => {
+          try {
+            return new URL(v).host === host;
+          } catch {
+            return false;
+          }
+        };
+        const foreign = origin ? !sameHost(origin) : referer ? !sameHost(referer) : false;
+        if (foreign) {
+          return NextResponse.json({ error: "Cross-origin request blocked", code: "CSRF_BLOCKED", timestamp: new Date().toISOString() }, { status: 403 });
+        }
+      }
+    }
+
     const key = `${req.method}:${pathname}:${ip}`;
     const limit = isAdmin ? 30 : req.method === "GET" ? 120 : 20;
     const windowMs = 60_000;

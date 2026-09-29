@@ -1347,6 +1347,7 @@ section:first-of-type, section[id], section[data-anchor] { content-visibility: v
   100% { box-shadow: 0 0 0 0 rgba(223, 49, 49, 0); }
 }
 :focus-visible { animation: focusPulse 0.6s ease-in-out 1; }
+@media (prefers-reduced-motion: reduce) { :focus-visible { animation: none; } }
 
 /* Smooth underline link */
 .link-underline { position: relative; text-decoration: none; }
