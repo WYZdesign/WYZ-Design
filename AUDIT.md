@@ -449,6 +449,20 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 - **CSP `unsafe-eval` removal (MEDIUM → FIXED):** Removed `'unsafe-eval'` from production `Content-Security-Policy` header in `next.config.ts`. Kept in `Content-Security-Policy-Report-Only` for monitoring. Next.js production builds don't need `eval()`/`new Function()`.
 - **Verified:** `npx tsc --noEmit` clean, `npm run build` clean, `git push origin master` clean.
 
+#### 2026-09-28 — Round 24 (`4c4f0ed` — pushed; deploy BLOCKED by Vercel account block)
+- **axe a11y (15 violations / 250+ nodes → 0 across all 10 audited routes):**
+  - `nested-interactive` (37 nodes, serious): services `ServiceCard`, photography model card, plans `PlanCard` + `WebAddonCard` — converted from `role="button"`+click-handler cards to the proven HomeServiceFlipCard pattern (`tabIndex=0` + `onFocus` flip + `onBlur` close, no role/aria-expanded).
+  - `link-in-text-block`: root cause was `layout.tsx:103` inline (unlayered) `a{text-decoration:none}` beating every layered Tailwind `underline` utility — removed the fragment; CookieBanner privacy link + plans "View individual services" given real `underline`.
+  - Navbar clipped controls at 1024–1439px (`html{overflow-x:clip}` hid theme toggle/Login with no scrollbar): 4 spots `lg:` → `min-[1440px]:`; hamburger + full menu now own <1440.
+  - `button-name`/`select-name` (community): aria-labels on 3 selects (Sort/Filter/Post category) + 2 vote buttons.
+  - `scrollable-region-focusable`: faq search results div got `tabIndex=0 role=region aria-label`.
+  - `SafeImage` `.webp` 404 root cause: `getWebPSources` invented `.webp` URLs for local files that only exist as jpg/png (87 broken placeholders on /merch, broken in production too) → local branch returns `{webp: src, fallback: src}`; placeholder text `#ccc`→`#666` (both SafeImage + lib/utils).
+- **Contrast (gold tool 11 failures → 0 on 48 route-width scans):** red text on off-whites → `#C41C1C` (photography READ MORE, about/partnerships taglines via new `taglineColor()` in brands.ts, home quick-links, community chips/featured/flair); `#D49341` gold on light (2.61:1) → `#8F5E1E` for Testimonials stars, web-design star rows, dying-breed-crew 6 spots (icons+text); merch FAOTM `#DF3131`→`#FF5252` on `#111` dark; community Instagram/Facebook brand colors darkened, sidebar `#80848E`→`#949BA4`, white/70→white on `#5865F2`; LeadMagnet/about white/80→white; translucent `text-white/50-90` on red faces → `text-white` (white on `#DF3131` = 4.54 ✓).
+- **Fonts:** self-hosted `next/font/local` (inter/montserrat latin var woff2 in `src/app/fonts/`) — zero `next/font/google`.
+- **Tooling:** `wyz_axe_e2e.py` `prime()` — stepped scroll prime + animation freeze (`.wz-reveal{opacity:1}` + `animation/transition-duration:0`) kills mid-fade false positives deterministically; always run with `$env:WYZ_BASE="http://localhost:3100"` (defaults to live site = false green).
+- **Verified:** `next build` 0 (incl. tsc), lint 0 errors/92 warnings (baseline), vitest 12/12, axe **0/10 routes**, E2E **7/7**, gold contrast **0**, mobile audit **40/40** (0 horizontal overflow at 390+320), py_compile clean.
+- **Deploy blocked:** push `4c4f0ed` → GitHub Vercel status `failure` — `"Account is blocked."` (billing). Production still serves `0c1e8b1` READY. Owner must resolve Vercel overdue invoice, then re-verify with `wyz_deploy_check.py 4c4f0ed... --project wyzdesign`.
+
 ---
 
 ## 🎯 WYZ DESIGN — HONEST SCORECARD (2026-09-05)
