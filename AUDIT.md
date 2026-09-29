@@ -465,6 +465,19 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 
 ---
 
+#### 2026-09-29 — Round 25 (`5559f92` — pushed; wyzdesign.com now returns **402** — site fully down, Vercel block escalated from failed deploys to no-serve)
+
+- **Security backlog (G64/MEDIUM) closed:**
+  - **Edge CSRF enforcement** in `src/proxy.ts` (Next 16 requires `proxy.ts`, not `middleware.ts` — build rejects both): non-safe API methods with foreign `Origin`/`Referer` → `403 CSRF_BLOCKED`; exempt `/api/webhook|cron|health|csp-report|auth`; no Origin + no Referer → allow (server-to-server/cron). Verified live: foreign origin → 403 on `/api/forms` + `/api/bugs`; same-origin passes proxy (route-level `validateCsrf` on 12 routes is pre-existing and still applies).
+  - **Admin login durable lockout**: `[...nextauth]/route.ts` now `rateLimit('admin-login:${email}', 10, 5min)` before the in-memory attempt check — survives restarts.
+  - **`fd/drive` route**: 30 req/60s per IP + `FOLDER_ID_RE` folder-id validation.
+- **A11y backlog closed:** printing `StickerCard`/`FlipCardInline` role=button → focus-flip (onFocus/onBlur); merch 3× `div role=button` → native `<button>` (design-story accordion, parallax product grid, ProductGrid); booking `aria-live` status region + `notify()` helper; gallery lightbox backdrop `e.target === e.currentTarget` guard; `focusPulse` animation gated by `prefers-reduced-motion`.
+- **Scorecard leftovers verified (no fix needed):** I-H1 — 0/38 `fill` images missing `sizes`; priority only on 4 real heroes (lightboxes/grids correctly lazy); banned grays 0 hits; case-studies `aria-pressed` finding stale (page has no filters); `aria-current` present in Navbar.
+- **Verified:** build 0 (tsc), lint 0 errors/92 warnings (baseline), vitest 12/12, axe **0/10 routes**, E2E **7/7**, CSRF functional probes pass.
+- **Live path:** Vercel unpaid → owner will pay when able; interim = local `next start :3100` + Cloudflare quick tunnel for a public URL with all fixes.
+
+---
+
 ## 🎯 WYZ DESIGN — HONEST SCORECARD (2026-09-05)
 
 **NOTE:** The previous "10×10×10" section was boilerplate padding — every item marked ✅ PASS without inspection. This section reflects actual code inspection. Scores 0-10 are honest estimates based on what was found in the code, not template assertions.
