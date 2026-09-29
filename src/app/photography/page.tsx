@@ -654,7 +654,7 @@ return (
     <button
       key={i}
       onClick={() => setModelIdx(i)}
-      className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[44px] min-h-[44px] cursor-pointer"
+      className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] cursor-pointer"
       aria-label={`Model ${i + 1}`}
     >
     <span className={`rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-4 h-1.5" : "bg-white/50 dark:bg-white/40 w-1.5 h-1.5"}`} />
