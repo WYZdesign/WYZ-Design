@@ -10,7 +10,7 @@ import ParticleBackground from "@/components/ParticleBackground";
 import TextSplit from "@/components/TextSplit";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import LeadMagnet from "@/components/LeadMagnet";
-import { SUB_BRANDS } from "@/lib/brands";
+import { SUB_BRANDS, taglineColor } from "@/lib/brands";
 
 const VALUES = [
    { title: "We Do The Work Ourselves", body: "No outsourcing. No passing you around. We shoot, design, build, and deliver, every time." },
@@ -173,7 +173,7 @@ export default function AboutPage() {
             <div className="flex flex-col items-center gap-12 text-center">
               <div className="w-full max-w-md">
                 <div className="relative aspect-[3/4] max-w-sm mx-auto overflow-hidden">
-                   <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel Harris, Founder of WYZ Design" fill className="w-full h-full object-cover" priority />
+                   <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel Harris, Founder of WYZ Design" fill sizes="(max-width: 640px) 90vw, 384px" className="w-full h-full object-cover" priority />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#DF3131]/10 via-transparent to-transparent" />
                 </div>
               </div>
@@ -223,7 +223,7 @@ export default function AboutPage() {
                 <div key={i} className="relative group">
                   <div className="p-8 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full text-center">
                     <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full mx-auto" style={{ background: brand.color }} />
-                    <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: brand.color }}>{brand.tagline}</span>
+                    <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: taglineColor(brand.color) }}>{brand.tagline}</span>
                     <h3 className="font-heading font-black text-[#333] dark:text-white text-[18px] sm:text-[20px] tracking-[0.04em] uppercase mb-3">{brand.name}</h3>
                     <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed">{brand.longDesc}</p>
                   </div>
@@ -280,7 +280,7 @@ export default function AboutPage() {
             <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] uppercase mb-4">
               READY TO BUILD?
             </h2>
-            <p className="text-white/80 text-[16px] leading-relaxed mb-8 max-w-xl mx-auto">
+            <p className="text-white text-[16px] leading-relaxed mb-8 max-w-xl mx-auto">
                Whether you're an artist launching your brand, a business building your identity, or a studio scaling your presence, we're ready when you are.
             </p>
             <div className="flex flex-wrap justify-center gap-4">

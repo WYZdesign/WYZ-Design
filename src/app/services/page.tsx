@@ -18,7 +18,7 @@ const ALL_SERVICES_RAW = [
  { cat: "Photography", name: "Product Photography", price: "$120", dur: "2 HR", desc: "Professional product photography with clean backgrounds and multiple angles.", img: "/images/services/Event Photography.jpg", bookLink: "/booking" },
  { cat: "Photography", name: "Headshot Session", price: "$100", dur: "1 HR", desc: "Professional headshots for profiles, portfolios, and casting calls.", img: "/images/services/Photography.webp", bookLink: "/booking-calendar/photoshoot" },
  { cat: "Photography", name: "Behind the Scenes", price: "$150", dur: "2 HR", desc: "Document your creative process with candid behind-the-scenes content.", img: "/images/services/Event Photography.jpg", bookLink: "/booking" },
- { cat: "Branding Design", name: "Graphic Design", price: "$150", dur: "3 HR", desc: "Bring your vision to life with graphic design that hits.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
+ { cat: "Branding Design", name: "Graphic Design", price: "$75+", dur: "3 HR", desc: "Bring your vision to life with graphic design that hits.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
  { cat: "Branding Design", name: "Logo Design", price: "$100", dur: "3 HR", desc: "Custom logos designed to represent who you are.", img: "/images/services/Logo Design.jpg", bookLink: "/booking" },
  { cat: "Branding Design", name: "Brand Identity Package", price: "$300", dur: "6 HR", desc: "Complete brand identity system with logo, color palette, typography, and brand guidelines.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
  { cat: "Branding Design", name: "Social Media Kit", price: "$200", dur: "4 HR", desc: "Cohesive social media templates and brand assets for consistent posting.", img: "/images/services/Graphic Design.jpg", bookLink: "/booking" },
@@ -50,14 +50,12 @@ function ServiceCard({ service }: { service: typeof ALL_SERVICES_RAW[0] }) {
 <div
 className="group relative cursor-pointer"
 style={{ perspective: "1200px" }}
-role="button"
 tabIndex={0}
-aria-expanded={flipped}
-aria-label={`${service.name ? service.name + " details" : "Service details"}`}
+onFocus={() => setFlipped(true)}
+onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
 onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
 onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
 onClick={() => setFlipped(f => !f)}
-onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}
 >
   <div className="relative w-full" style={{ minHeight: "min(400px, 60vh)" }}>
  {/* Front — full image + 60% overlay + title */}
@@ -84,12 +82,12 @@ onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault()
    <Image src={service.img} alt={service.name} fill sizes="100vw" className="w-full h-full object-cover" />
    </div>
   <div className="relative z-10 text-center flex flex-col items-center justify-center">
- <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{service.cat}</span>
+ <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2 block">{service.cat}</span>
   <h3 className="font-heading font-black text-white text-[27.6px] sm:text-[29.9px] tracking-[0.03em] mb-3">{service.name}</h3>
- <p className="text-white/80 text-[15px] leading-relaxed mb-5 max-w-xs">{service.desc}</p>
+ <p className="text-white text-[15px] leading-relaxed mb-5 max-w-xs">{service.desc}</p>
  <div className="flex flex-col items-center justify-center gap-0 mb-5">
  <span className="text-[50px] sm:text-[56px] font-black leading-none">{service.price}</span>
- <span className="text-white/60 text-[15px] mt-1">· {service.dur}</span>
+ <span className="text-white text-[15px] mt-1">· {service.dur}</span>
  </div>
  </div>
  <div className="relative z-10 flex gap-2 w-full max-w-xs">
@@ -124,7 +122,7 @@ return (
    {/* Desktop: split grid */}
    <div className="hidden md:grid md:grid-cols-2 absolute inset-0">
    <div className="relative h-full overflow-hidden">
-    <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill className="w-full h-full object-cover" priority />
+    <Image src="/images/wix-extracted/services/category-cards/services_category-cards_03_w_1000,h_557,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_auto.jpg" alt="WYZ Design creative services" fill sizes="(max-width: 768px) 100vw, 50vw" className="w-full h-full object-cover" priority />
     <div className="absolute inset-0 bg-black/20" />
    </div>
    <div className="relative flex items-center justify-center px-4 sm:px-10 lg:px-16 py-16 lg:py-0 pt-32 lg:pt-40 overflow-hidden">

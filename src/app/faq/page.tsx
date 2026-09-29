@@ -260,7 +260,7 @@ export default function FAQPage() {
               {/* Chat Body */}
               <div className={`transition-all duration-500 ${chatOpen ? "h-[450px]" : "h-0"} overflow-hidden`}>
                 <div className="h-full flex flex-col bg-gradient-to-b from-[#FFFFFF] to-white dark:from-[#252528] dark:to-[#252528]">
-                  <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                        <div className="flex-1 overflow-y-auto p-6 space-y-4" tabIndex={0} role="region" aria-label="Search results">
                     {chatMessages.map((msg, i) => (
                       <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                         <div className={`max-w-[80%] px-5 py-4 text-[16px] leading-relaxed shadow-md ${

@@ -127,14 +127,14 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
     <div
       className="group relative cursor-pointer w-full"
       style={{ perspective: "1200px" }}
-      role="button"
       tabIndex={0}
-      aria-expanded={flipped}
-      aria-label={`${s.name} details`}
+      onFocus={() => setFlipped(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false);
+      }}
       onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
       onClick={() => setFlipped((f) => !f)}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped((f) => !f); } }}
     >
       <div className="relative w-full" style={{ minHeight: "min(380px, 50vh)" }}>
         {/* Front */}
@@ -185,10 +185,10 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
 }
 
 const PRICING_PLANS = [
- { name: "Starter Pack", price: "$250", badge: "", desc: "For artists, models, and young brands building their foundation. Design tasks, strategy calls, web updates included.", valid: "Every 3 months. Cancel anytime." },
-  { name: "Business Boost", price: "$500", badge: "Most Popular", desc: "For brands, studios, and businesses ready to grow. Content, design, event support, and campaign planning.", valid: "Every 3 months. Cancel anytime." },
-  { name: "Pro Plus", price: "$750", badge: "", desc: "For established businesses needing consistent creative direction. Full visual identity, web, photo, video, and strategy.", valid: "Every 3 months. Cancel anytime." },
-  { name: "Ultimate Suite", price: "$1,000", desc: "For serious brands and studios. Unlimited design, content production, event programming, AI systems, and support.", valid: "Every 3 months. Cancel anytime." },
+ { name: "Starter Pack", price: "$250", badge: "", desc: "For artists, models, and young brands building their foundation. Design tasks, strategy calls, web updates included.", valid: "Every month. Cancel anytime." },
+  { name: "Business Boost", price: "$500", badge: "Most Popular", desc: "For brands, studios, and businesses ready to grow. Content, design, event support, and campaign planning.", valid: "Every month. Cancel anytime." },
+  { name: "Pro Plus", price: "$750", badge: "", desc: "For established businesses needing consistent creative direction. Full visual identity, web, photo, video, and strategy.", valid: "Every month. Cancel anytime." },
+  { name: "Ultimate Suite", price: "$1,000", desc: "For serious brands and studios. Unlimited design, content production, event programming, AI systems, and support.", valid: "Every month. Cancel anytime." },
 ];
 
 const QUICK_LINKS = [
@@ -944,8 +944,8 @@ export default function HomePage() {
   <section aria-label="WYZ Design track record" className="bg-[#111] border-b border-[#333] py-6 sm:py-8">
     <ul className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 text-center list-none">
       {[
-        { stat: "90+", label: "Events Produced" },
-        { stat: "45+", label: "Clients Served" },
+        { stat: "60+", label: "Events Produced" },
+        { stat: "30+", label: "Clients Served" },
         { stat: "1,500+", label: "Photos Delivered" },
         { stat: "9+", label: "Years Running" },
       ].map((t) => (
@@ -1103,7 +1103,7 @@ export default function HomePage() {
  <div className="absolute inset-0 p-6 text-center bg-[#DF3131] text-white flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
  <h3 className="font-heading font-bold text-lg tracking-[0.1em] uppercase mb-3">{p.name}</h3>
  <p className="text-4xl font-black mb-1">{p.price}</p>
- <p className="text-white/80 text-xs mb-1 font-bold italic">Every 3 months</p>
+ <p className="text-white/80 text-xs mb-1 font-bold italic">Every month</p>
  <p className="text-white/70 text-xs mb-4">{p.desc}</p>
  <p className="text-white/50 text-[11px] mb-4">{p.valid}</p>
   <Link href="/plans" className="w-full py-3 bg-white text-[#111] font-heading font-bold tracking-[0.1em] uppercase text-sm hover:bg-[#333] dark:hover:bg-[#111] hover:text-white transition-all">
@@ -1132,7 +1132,7 @@ export default function HomePage() {
   <ScrollReveal animation="scaleIn" delay={0.1}>
   <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-black hero-banner">
   <div className="absolute inset-0">
-   <Image src="/images/printing/wix_0164.jpg" alt="Digital Printing" fill className="w-full h-full object-cover opacity-60" priority />
+   <Image src="/images/printing/wix_0164.jpg" alt="Digital Printing" fill sizes="100vw" className="w-full h-full object-cover opacity-60" priority />
   </div>
   <div className="absolute inset-0 bg-black/20 z-[1]" />
   <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
@@ -1249,7 +1249,7 @@ export default function HomePage() {
   <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
    <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />
      <div className="flex flex-col items-center text-center gap-3">
-     <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color }} />
+      <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color === "#D49341" ? "#A9702F" : c.color }} />
      <div>
     <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] group-hover:text-[#DF3131] transition-colors duration-300 text-center mb-3">{c.title}</h3>
     <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-center">{c.body}</p>
@@ -1273,7 +1273,7 @@ export default function HomePage() {
  <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 sm:gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8 max-w-5xl mx-auto">
  {QUICK_LINKS.map((link) => (
   <Link key={link.label} href={link.href}
-   className="bg-[#F5F5F5] dark:bg-[#252528] border-2 border-[#DF3131] text-[#DF3131] py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:text-white transition-all text-center">
+   className="bg-[#F5F5F5] dark:bg-[#252528] border-2 border-[#DF3131] text-[#C41C1C] py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:text-white transition-all text-center">
  {link.label}
  </Link>
  ))}

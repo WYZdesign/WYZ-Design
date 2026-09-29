@@ -170,7 +170,7 @@ export default function Navbar() {
             </MagneticElement>
 
             {/* Nav links */}
-            <div className="hidden lg:flex flex-1 items-center justify-evenly px-10">
+            <div className="hidden min-[1440px]:flex flex-1 items-center justify-evenly px-10">
               {NAV_LINKS.map((l) => (
                 <Link key={l.href} href={l.href}
                   aria-current={isActive(l.href) ? "page" : undefined}
@@ -215,7 +215,7 @@ export default function Navbar() {
             </div>
 
             {/* Inline Search + Login (desktop) */}
-            <div className="hidden lg:flex items-center gap-4 ml-6 shrink-0" ref={searchContainerRef}>
+            <div className="hidden min-[1440px]:flex items-center gap-4 ml-6 shrink-0" ref={searchContainerRef}>
               <div className="relative">
                 <AnimatePresence initial={false}>
                   {searchOpen ? (
@@ -348,7 +348,7 @@ export default function Navbar() {
               <ThemeToggle />
             </div>
 
-            <div className="lg:hidden ml-auto flex items-center gap-3">
+            <div className="min-[1440px]:hidden ml-auto flex items-center gap-3">
               <ThemeToggle />
               <button aria-label={mobileOpen ? "Close menu" : "Open menu"} className="p-2 text-white" onClick={() => setMobileOpen(!mobileOpen)}>
                 {mobileOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
@@ -361,7 +361,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] lg:hidden flex flex-col pt-8"
+            className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] min-[1440px]:hidden flex flex-col pt-8"
             data-mobile-menu="true"
             style={{ height: '100vh', overflowY: 'auto', overscrollBehavior: 'contain' }}
             onWheel={(e) => e.stopPropagation()}

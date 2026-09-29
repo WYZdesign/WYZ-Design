@@ -22,7 +22,7 @@ export default function SafeImage({ src, alt, className = "", loading, decoding 
 
   if (broken) {
     return (
-      <div className={`bg-[#f5f5f5] flex items-center justify-center text-[#ccc] text-[11px] font-bold tracking-[0.1em] uppercase ${className}`} style={{ minHeight: 60 }}>
+      <div className={`bg-[#f5f5f5] flex items-center justify-center text-[#666] text-[11px] font-bold tracking-[0.1em] uppercase ${className}`} style={{ minHeight: 60 }}>
         {alt || "IMG"}
       </div>
     );

@@ -14,7 +14,7 @@ const SERVICE_CATEGORIES = [
 
 const BOOKINGS = [
   { name: "Photoshoot", price: "$100", duration: "1 hr", desc: "Capture authentic moments with sleek, professional photography.", href: "/booking-calendar/photoshoot" },
-  { name: "Photo Retouching", price: "Varies", duration: "2 hr", desc: "Basic to Advanced Professional Photo Retouching", href: "/booking-calendar/photo-retouching" },
+  { name: "Photo Retouching", price: "$50", duration: "2 hr", desc: "Basic to Advanced Professional Photo Retouching", href: "/booking-calendar/photo-retouching" },
   { name: "Event Photography", price: "$200", duration: "3 hr", desc: "Expertly capturing every moment, from public showcases to private events and behind-the-scenes.", href: "/booking-calendar/event-photography" },
 ];
 

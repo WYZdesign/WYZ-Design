@@ -98,7 +98,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 .btn-outline:hover { background: #333333; color: #FFFFFF; }
 
 .btn-gold {
-  background: #D49341; color: #FFFFFF; border: none;
+  background: #D49341; color: #1C1408; border: none;
   padding: 0.9rem 2.2rem; font-size: 15px; font-weight: 600;
   text-transform: uppercase; transition: background 0.2s;
 }

@@ -95,7 +95,7 @@ function TestimonialsSliderInner() {
           <div className="px-12" key={active}>
             <div className="flex justify-center gap-1 mb-6">
               {[...Array(5)].map((_, i) => (
-                <FiStar key={i} className="w-5 h-5 fill-[#D49341] text-[#D49341]" />
+                <FiStar key={i} className="w-5 h-5 fill-[#8F5E1E] text-[#8F5E1E]" />
               ))}
             </div>
             <blockquote className="text-white text-lg sm:text-xl leading-relaxed mb-6 max-w-2xl mx-auto italic">

@@ -23,10 +23,7 @@ function getWebPSources(src: string): { webp: string; fallback: string } {
   if (src.startsWith("http")) {
     return { webp: src, fallback: src.replace(/\.webp$/, ".jpg") };
   }
-  return {
-    webp: src.replace(/\.(jpg|png|jpeg)$/i, ".webp"),
-    fallback: src
-  };
+  return { webp: src, fallback: src };
 }
 
 export default function SafeImage({
@@ -51,7 +48,7 @@ export default function SafeImage({
 
   if (broken) {
     return (
-      <div className={`bg-[#f5f5f5] flex items-center justify-center text-[#ccc] text-[11px] font-bold tracking-[0.1em] uppercase ${className}`} style={{ minHeight: 60 }}>
+      <div className={`bg-[#f5f5f5] flex items-center justify-center text-[#666] text-[11px] font-bold tracking-[0.1em] uppercase ${className}`} style={{ minHeight: 60 }}>
         {alt || "IMG"}
       </div>
     );

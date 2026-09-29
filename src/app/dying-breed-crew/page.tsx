@@ -61,7 +61,7 @@ export default function DyingBreedCrewPage() {
             A collective of artists, musicians, models, and culture-makers who refuse to blend in. This isn&apos;t just merch. It&apos;s a movement.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/merch" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#D49341] text-white font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#C08230] transition-all">
+            <Link href="/merch" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#D49341] text-[#1C1408] font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#C08230] transition-all">
               Shop the Collection <FiShoppingBag className="w-4 h-4" />
             </Link>
             <Link href="/community" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:border-[#D49341] hover:text-[#D49341] transition-all">
@@ -74,7 +74,7 @@ export default function DyingBreedCrewPage() {
       {/* What We Are */}
       <section className="max-w-4xl mx-auto px-6 py-20 text-center">
         <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.8rem] lg:text-[2.2rem] tracking-[0.04em] mb-6">
-          Not Just a Brand. A <span className="text-[#D49341]">Standard</span>.
+          Not Just a Brand. A <span className="text-[#8F5E1E]">Standard</span>.
         </h2>
         <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
           DBC represents the doers. The ones who show up, the ones who create when nobody&apos;s watching. We make gear that reflects that energy. Limited runs, real quality, no mass production. If you know, you know.
@@ -85,17 +85,17 @@ export default function DyingBreedCrewPage() {
       <section className="max-w-5xl mx-auto px-6 pb-20">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
-            <FiUsers className="w-8 h-8 mx-auto text-[#D49341] mb-4" />
+            <FiUsers className="w-8 h-8 mx-auto text-[#8F5E1E] mb-4" />
             <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">The Collective</h3>
             <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">Artists, musicians, models, photographers, and culture-makers. DBC is the crew that makes it happen.</p>
           </div>
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
-            <FiStar className="w-8 h-8 mx-auto text-[#D49341] mb-4" />
+            <FiStar className="w-8 h-8 mx-auto text-[#8F5E1E] mb-4" />
             <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">Limited Runs</h3>
             <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">We don&apos;t mass produce. Every drop is intentional. When it&apos;s gone, it&apos;s gone. That&apos;s the point.</p>
           </div>
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
-            <FiCalendar className="w-8 h-8 mx-auto text-[#D49341] mb-4" />
+            <FiCalendar className="w-8 h-8 mx-auto text-[#8F5E1E] mb-4" />
             <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">Events & Collabs</h3>
             <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">Pop-ups, showcase events, creative collaborations. DBC shows up in the real world, not just on screens.</p>
           </div>
@@ -108,7 +108,7 @@ export default function DyingBreedCrewPage() {
           <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.5rem] lg:text-[2rem] tracking-[0.04em]">
             Latest Drops
           </h2>
-          <Link href="/merch" className="inline-flex items-center gap-2 text-[#D49341] text-[14px] font-bold tracking-[0.08em] uppercase hover:gap-3 transition-all">
+          <Link href="/merch" className="inline-flex items-center gap-2 text-[#8F5E1E] text-[14px] font-bold tracking-[0.08em] uppercase hover:gap-3 transition-all">
             View All <FiArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -120,7 +120,7 @@ export default function DyingBreedCrewPage() {
               </div>
               <div className="p-4">
                 <p className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[14px] tracking-[0.02em]">{item.name}</p>
-                <p className="text-[#D49341] font-bold text-[13px] mt-1">{item.price}</p>
+                <p className="text-[#8F5E1E] font-bold text-[13px] mt-1">{item.price}</p>
               </div>
             </Link>
           ))}
@@ -136,7 +136,7 @@ export default function DyingBreedCrewPage() {
           <p className="text-white/60 text-[15px] mb-6 max-w-lg mx-auto">
             DBC gear is limited, intentional, and built for the culture. Grab what resonates. Wear it like you mean it.
           </p>
-          <Link href="/merch" className="inline-flex items-center gap-2 px-8 py-4 bg-[#D49341] text-white font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#C08230] transition-all">
+          <Link href="/merch" className="inline-flex items-center gap-2 px-8 py-4 bg-[#D49341] text-[#1C1408] font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#C08230] transition-all">
             Shop DBC <FiArrowRight className="w-4 h-4" />
           </Link>
         </div>

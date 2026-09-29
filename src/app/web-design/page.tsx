@@ -357,7 +357,7 @@ return (
                   { quote: "Consistency in every aspect of service. Made me an established brand and has got me so many opportunities. Don't hesitate to bring your business here.", name: "Robert Sykes Jr", role: "Google Review" },
                 ].map((t) => (
                   <div key={t.name} className="bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 hover:shadow-xl hover:shadow-[#DF3131]/5 transition-all">
-                    <div className="flex gap-1 mb-4 text-[#D49341]">
+                    <div className="flex gap-1 mb-4 text-[#8F5E1E]">
                       {[...Array(5)].map((_, i) => <FiStar key={i} className="w-4 h-4 fill-current" />)}
                     </div>
                     <p className="text-[#333] dark:text-[#e0e0e0] text-[15px] leading-relaxed mb-6 italic">&quot;{t.quote}&quot;</p>

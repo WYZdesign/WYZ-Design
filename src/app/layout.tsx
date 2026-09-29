@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Montserrat, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import ConsentGatedAnalytics from "@/components/ConsentGatedAnalytics";
 import { Toaster } from "react-hot-toast";
 import { RouteBackground } from "@/components/RouteBackground";
@@ -21,8 +21,8 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import ClientComponents from "@/components/ClientComponents";
 
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-heading", weight: ["400","500","600","700","800","900"], display: "swap", preload: false });
-const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300","400","500","600","700"], display: "swap", preload: false });
+const montserrat = localFont({ src: "./fonts/montserrat-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-heading", display: "swap", preload: true });
+const inter = localFont({ src: "./fonts/inter-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-body", display: "swap", preload: true });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.wyzdesign.com"),
@@ -100,7 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="format-detection" content="telephone=no" />
         <meta name="theme-color" content="#DF3131" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)" />
-        <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}a{text-decoration:none}img{max-width:100%;height:auto}` }} />
+        <style dangerouslySetInnerHTML={{ __html: `*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}` }} />
         <script dangerouslySetInnerHTML={{ __html: `
           (function () {
             try {

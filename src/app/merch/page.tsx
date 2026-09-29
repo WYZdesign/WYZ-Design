@@ -304,7 +304,7 @@ function SquareQuote() {
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111]/80 hidden md:block" />
           </div>
           <div className="flex flex-col items-center justify-center text-center p-8 sm:p-12">
-            <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] mb-3">Featured Artist of the Month</span>
+            <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#FF5252] mb-3">Featured Artist of the Month</span>
             <h2 className="text-[1.4rem] sm:text-[1.7rem] md:text-[2rem] font-heading font-black text-white tracking-[0.04em] leading-[1.1] mb-4">
               DONTE &quot;DANNY&quot; DAVIS
             </h2>

@@ -40,3 +40,13 @@ export const BRANDS = [
 export const SUB_BRANDS = BRANDS.slice(1);
 
 export type Brand = (typeof BRANDS)[number];
+
+const TAGLINE_COLORS: Record<string, string> = {
+  "#DF3131": "#C41C1C",
+  "#D49341": "#8F5E1E",
+  "#00E5FF": "#006064",
+};
+
+export function taglineColor(color: string): string {
+  return TAGLINE_COLORS[color] ?? color;
+}

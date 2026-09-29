@@ -155,14 +155,12 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
     <div
       className="group relative cursor-pointer min-h-[368px] sm:min-h-[575px] lg:min-h-[718px]"
       style={{ perspective: "1200px" }}
-      role="button"
       tabIndex={0}
-      aria-expanded={flipped}
-      aria-label={`${s.name} booking details`}
+      onFocus={() => setFlipped(true)}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
       onClick={() => setFlipped(f => !f)}
       onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}
     >
   {/* Front */}
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
@@ -189,12 +187,12 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
      <Image src={s.img} alt={s.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
     <div className="relative z-10 text-center flex flex-col items-center justify-center">
-   <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{s.cat}</span>
+   <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2 block">{s.cat}</span>
    <h3 className="font-heading font-black text-white text-[25.3px] sm:text-[27.6px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
-   <p className="text-white/80 text-[14px] sm:text-[15px] leading-relaxed mb-5 line-clamp-3 max-w-xs">{s.desc}</p>
+   <p className="text-white text-[14px] sm:text-[15px] leading-relaxed mb-5 line-clamp-3 max-w-xs">{s.desc}</p>
    <div className="flex flex-col items-center justify-center gap-0 mb-5">
    <span className="text-[42px] sm:text-[48px] font-black leading-none">{s.price}</span>
-   <span className="text-white/60 text-[14px] mt-1">{s.dur}</span>
+   <span className="text-white text-[14px] mt-1">{s.dur}</span>
    </div>
    </div>
    <div className="relative z-10 flex gap-2 shrink-0 w-full max-w-xs">
@@ -795,7 +793,7 @@ return (
  </div>
  <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] whitespace-pre-line leading-tight mb-3">{b.title}</h3>
    <p className="text-[15px] text-[#333] dark:text-[#aaa] leading-relaxed mb-4 text-center">{b.desc}</p>
-   <Link href="/plans" className="inline-block text-[#DF3131] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-[#B82020] transition-colors">READ MORE +</Link>
+   <Link href="/plans" className="inline-block text-[#C41C1C] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-[#B82020] transition-colors">READ MORE +</Link>
  </div>
  ))}
  </div>
@@ -816,7 +814,7 @@ return (
  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
  {[
  { name: "PHOTOSHOOT", price: "$100", dur: "1 HR", cat: "Photography", desc: "Capture authentic moments with sleek, professional photography.", bookLink: "/booking-calendar/photoshoot", img: "/images/photography/photoshoot_camera.jpg" },
- { name: "PHOTO RETOUCHING", price: "Varies", dur: "2 HR", cat: "Photography", desc: "Basic to advanced professional photo retouching.", bookLink: "/booking", img: "/images/photography/retouching_camera.jpg" },
+ { name: "PHOTO RETOUCHING", price: "$50", dur: "2 HR", cat: "Photography", desc: "Basic to advanced professional photo retouching.", bookLink: "/booking", img: "/images/photography/retouching_camera.jpg" },
  { name: "EVENT PHOTOGRAPHY", price: "$200", dur: "3 HR", cat: "Photography", desc: "Expertly capturing every moment, from public showcases to private events.", bookLink: "/booking-calendar/event-photography", img: "/images/events/event_0002.jpg" },
  ].map((s) => (
  <PhotoFlipCard key={s.name} s={s} />

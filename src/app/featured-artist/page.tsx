@@ -14,7 +14,7 @@ import { useModalA11y } from "@/hooks/useModalA11y";
 const WS = [
   { icon: <FiUser />, label: "WHO", value: "Donte \"Danny\" Davis", desc: "A multidisciplinary creative from the west side of Chicago, writer, painter, and visual storyteller." },
  { icon: <FiEdit3 />, label: "WHAT", value: "Visual Art & Writing", desc: "Original paintings, illustrations, and written works that explore color, emotion, and perspective." },
- { icon: <FiCalendar />, label: "WHEN", value: "Featured June 2026", desc: "Selected as this month's Featured Artist of the Month by WYZ Design curators." },
+ { icon: <FiCalendar />, label: "WHEN", value: "Featured This Month", desc: "Selected as this month's Featured Artist of the Month by WYZ Design curators." },
  { icon: <FiMapPin />, label: "WHERE", value: "Chicago, IL", desc: "Born and raised on the west side. Creating from the heart of the city." },
  { icon: <FiHeart />, label: "WHY", value: "Passion for Color", desc: "Danny uses his passion to show others how beautiful the world can be if you pay attention to the colors." },
 ];
@@ -127,6 +127,11 @@ export default function FeaturedArtistPage() {
  const [submitted, setSubmitted] = useState(false);
  const [submitting, setSubmitting] = useState(false);
  const formRef = useRef<HTMLDivElement>(null);
+ const [featuredWhen, setFeaturedWhen] = useState<string | null>(null);
+
+ useEffect(() => {
+  setFeaturedWhen(`Featured ${new Date().toLocaleString("en-US", { month: "long", year: "numeric" })}`);
+ }, []);
 
  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
  setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -216,7 +221,7 @@ export default function FeaturedArtistPage() {
       <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-0">{w.label}</span>
     </div>
     <div className="flex-1 text-center sm:text-left">
-      <h3 className="font-heading font-bold text-[#333] text-[16px] tracking-[0.03em] mb-3">{w.value}</h3>
+      <h3 className="font-heading font-bold text-[#333] text-[16px] tracking-[0.03em] mb-3">{w.label === "WHEN" ? featuredWhen ?? w.value : w.value}</h3>
       <p className="text-[14px] text-[#666] leading-relaxed">{w.desc}</p>
     </div>
   </div>

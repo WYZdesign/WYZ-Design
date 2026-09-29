@@ -96,11 +96,10 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     <div
       className="relative cursor-pointer"
       style={{ perspective: "1200px", minHeight: "min(550px, 85vh)" }}
-      role="button"
       tabIndex={0}
-      aria-label={`${p.name} plan, ${p.price}/month. ${p.value}. Click to flip and subscribe.`}
+      onFocus={() => setFlipped(true)}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
       onClick={() => setFlipped(f => !f)}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
@@ -137,13 +136,13 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
             <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{p.name}</h3>
             <div className="mb-4">
               <span className="text-[40px] font-black text-white">{p.price}</span>
-              <span className="text-white/60 text-sm">/mo</span>
+              <span className="text-white text-sm">/mo</span>
             </div>
-            <p className="text-white/80 text-[14px] mb-2">{p.value}</p>
-            <p className="text-white/60 text-[12px] mb-4">Valid for 3 months</p>
+            <p className="text-white text-[14px] mb-2">{p.value}</p>
+            <p className="text-white text-[12px] mb-4">Valid for 3 months</p>
             <ul className="space-y-2 text-left max-w-xs mx-auto">
               {FEATURES[p.name].map((f) => (
-                <li key={f} className="text-[17px] text-white/90 flex items-start gap-2">
+                <li key={f} className="text-[17px] text-white flex items-start gap-2">
                   <span className="text-white mt-0.5">✓</span>
                   {f}
                 </li>
@@ -170,11 +169,10 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
     <div
       className="relative cursor-pointer"
       style={{ perspective: "1200px", minHeight: "min(440px, 65vh)" }}
-      role="button"
       tabIndex={0}
-      aria-label={`${w.name} web design add-on - ${w.discounted}/month. Click to flip for details.`}
+      onFocus={() => setFlipped(true)}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
       onClick={() => setFlipped(f => !f)}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setFlipped(f => !f); } }}
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
@@ -203,14 +201,14 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
           i === 0 ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">
-            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2">Web Design Add-On</span>
+            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2">Web Design Add-On</span>
             <h3 className="font-heading font-black text-white text-[20px] tracking-[0.03em] mb-3">{w.name}</h3>
             <div className="mb-3">
-              <span className="text-white/50 text-[12px] line-through mr-2">{w.original}</span>
+              <span className="text-white text-[12px] line-through mr-2">{w.original}</span>
               <span className="text-[28px] font-black text-white">{w.discounted}</span>
             </div>
-            <p className="text-white/80 text-[13px] leading-relaxed mb-2">{w.desc}</p>
-            <p className="text-white/60 text-[11px]">10% discount when added to any subscription plan</p>
+            <p className="text-white text-[13px] leading-relaxed mb-2">{w.desc}</p>
+            <p className="text-white text-[11px]">10% discount when added to any subscription plan</p>
           </div>
           <div className="relative z-10">
             <Link href="/web-design" className="block text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
@@ -474,7 +472,7 @@ export default function PlansPage() {
                 </table>
               </div>
                <p className="mt-6 text-center text-[#666] text-[14px]">
-                 All plans auto-renew monthly. Cancel anytime. <Link href="/services" className="text-[#DF3131] hover:underline">View individual services</Link>
+                 All plans auto-renew monthly. Cancel anytime. <Link href="/services" className="text-[#DF3131] underline">View individual services</Link>
                </p>
           </div>
         </section>

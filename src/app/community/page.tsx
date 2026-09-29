@@ -713,7 +713,7 @@ export default function ForumPage() {
     <main className="pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <div className="bg-[#DF3131]/10 border-b-2 border-[#DF3131] px-6 py-3 text-center">
         <p className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#DF3131]">Community Preview</p>
-        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0] mt-0.5">Votes, posts, and threads live on <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="text-[#DF3131] underline">Discord</a> — this page is a demo with local state only.</p>
+        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0] mt-0.5">Votes, posts, and threads live on <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="text-[#C41C1C] underline">Discord</a> — this page is a demo with local state only.</p>
       </div>
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6 pt-32 lg:pt-40">
@@ -726,7 +726,7 @@ export default function ForumPage() {
                <AnimatedCounter end={threads.length} label="Threads" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#DF3131]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-               <AnimatedCounter end={23} label="Members" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#D49341]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+                <AnimatedCounter end={23} label="Members" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#8F5E1E] dark:text-[#D49341]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
                <AnimatedCounter end={CATEGORIES.length} label="Channels" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#5865F2]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
@@ -760,7 +760,7 @@ export default function ForumPage() {
                   <div className="p-5 sm:p-6 flex items-start gap-4">
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors"
-                      style={{ backgroundColor: `${h.color}15`, color: h.color }}
+                      style={{ backgroundColor: `${h.color}15`, color: h.color === "#D49341" ? "#A9702F" : h.color }}
                     >
                       {h.icon}
                     </div>
@@ -811,7 +811,7 @@ export default function ForumPage() {
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[14px] font-heading font-bold shrink-0"
-                        style={{ backgroundColor: post.avatar }}
+                        style={{ backgroundColor: post.avatar, color: post.avatar === "#D49341" ? "#1C1408" : undefined }}
                       >
                         {post.author.slice(0, 1).toUpperCase()}
                       </div>
@@ -821,7 +821,7 @@ export default function ForumPage() {
                             {post.author}
                           </p>
                           {post.type === "announcement" && (
-                            <span className="text-[11px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#DF3131] shrink-0 mb-2">
+                            <span className="text-[11px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#C41C1C] shrink-0 mb-2">
                               Official
                             </span>
                           )}
@@ -878,7 +878,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: c.avatar }}
+                                style={{ backgroundColor: c.avatar, color: c.avatar === "#D49341" ? "#1C1408" : undefined }}
                               >
                                 {c.author.slice(0, 1).toUpperCase()}
                               </div>
@@ -944,6 +944,7 @@ export default function ForumPage() {
                 {/* Sort Dropdown */}
                 <div className="relative flex-1 sm:flex-[0_0_160px]">
                   <select
+                    aria-label="Sort posts"
                     value={sortTab}
                     onChange={(e) => setSortTab(e.target.value as "hot" | "new" | "top")}
                     className="w-full appearance-none px-4 py-3 pr-10 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[13px] font-bold tracking-[0.05em] uppercase outline-none focus:border-[#DF3131] focus:ring-1 focus:ring-[#DF3131] rounded-lg cursor-pointer"
@@ -960,6 +961,7 @@ export default function ForumPage() {
                 {/* Category Filter — Single Dynamic Dropdown */}
                 <div className="relative flex-1">
                   <select
+                    aria-label="Filter by category"
                     value={activeCat}
                     onChange={(e) => {
                       const val = e.target.value;
@@ -998,7 +1000,7 @@ export default function ForumPage() {
               <div className="hidden sm:flex items-center justify-between gap-4">
                 <div className="flex items-center gap-4 text-[12px] text-[#666] dark:text-[#b0b0b0]">
                   <span>{visibleThreads.length} threads</span>
-                  <span className="px-2 py-1 bg-[#DF3131]/10 text-[#DF3131] rounded-full font-bold tracking-[0.05em] uppercase">
+                  <span className="px-2 py-1 bg-[#DF3131]/10 text-[#C41C1C] rounded-full font-bold tracking-[0.05em] uppercase">
                     {activeCat === "all" ? "All" : CATEGORIES.find(c => c.id === activeCat)?.label}
                   </span>
                   <span className="px-2 py-1 bg-[#333]/10 text-[#333] dark:bg-white/10 dark:text-white rounded-full font-bold tracking-[0.05em] uppercase">
@@ -1038,6 +1040,7 @@ export default function ForumPage() {
                     </button>
                   </div>
                   <select
+                    aria-label="Post category"
                     value={composer.category}
                     onChange={(e) => setComposer({ ...composer, category: e.target.value })}
                     className="w-full mb-3 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border border-[#E2E2E2] dark:border-[#333] text-[#333] dark:text-[#e0e0e0] text-[15px] outline-none focus:border-[#DF3131]"
@@ -1088,6 +1091,7 @@ export default function ForumPage() {
                     <div className="flex items-center gap-2 px-4 py-3 bg-[#F7F7F7] dark:bg-[#1C1C1E] border-b border-[#E2E2E2] dark:border-[#333]">
                       <button
                         onClick={() => voteThread(t.id, "up")}
+                        aria-label={t.voted === "up" ? "Remove upvote" : "Upvote thread"}
                         className={`p-1 rounded transition-colors ${
                           t.voted === "up"
                             ? "text-[#DF3131] bg-[#DF3131]/10"
@@ -1109,6 +1113,7 @@ export default function ForumPage() {
                       </span>
                       <button
                         onClick={() => voteThread(t.id, "down")}
+                        aria-label={t.voted === "down" ? "Remove downvote" : "Downvote thread"}
                         className={`p-1 rounded transition-colors ${
                           t.voted === "down"
                             ? "text-[#5865F2] bg-[#5865F2]/10"
@@ -1129,7 +1134,7 @@ export default function ForumPage() {
                         {flair && (
                           <span
                             className="text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 rounded mb-2"
-                            style={{ backgroundColor: `${flair.color}18`, color: flair.color }}
+                            style={{ backgroundColor: `${flair.color}18`, color: flair.color === "#D49341" ? "#8F5E1E" : flair.color === "#DF3131" ? "#C41C1C" : flair.color }}
                           >
                             {flair.label}
                           </span>
@@ -1172,7 +1177,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: r.avatar }}
+                                style={{ backgroundColor: r.avatar, color: r.avatar === "#D49341" ? "#1C1408" : undefined }}
                               >
                                 {r.author.slice(0, 1).toUpperCase()}
                               </div>
@@ -1267,8 +1272,8 @@ export default function ForumPage() {
           {/* Social Links — 3-col grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
             {[
-              { name: "Instagram", url: "https://instagram.com/wyzdesign", color: "#E4405F", desc: "Behind the scenes and latest work" },
-              { name: "Facebook", url: "https://facebook.com/wyzdesign", color: "#1877F2", desc: "Events and community updates" },
+              { name: "Instagram", url: "https://instagram.com/wyzdesign", color: "#C22E4E", desc: "Behind the scenes and latest work" },
+              { name: "Facebook", url: "https://facebook.com/wyzdesign", color: "#145DBF", desc: "Events and community updates" },
               { name: "Email", url: "mailto:info@wyzdesign.com", color: "#DF3131", desc: "Direct inquiries and support" },
             ].map((s) => (
               <a
@@ -1324,7 +1329,7 @@ export default function ForumPage() {
             <div className="bg-[#5865F2] p-8 text-center">
               <FiUsers className="w-12 h-12 text-white/80 mx-auto mb-4" />
               <h2 className="font-heading font-bold text-[24px] tracking-[0.06em] text-white mb-4">Join Our Discord</h2>
-              <p className="text-white/70 text-[16px] max-w-md mx-auto mb-6">
+              <p className="text-white text-[16px] max-w-md mx-auto mb-6">
                 Real-time chat, voice channels, event announcements, portfolio reviews, and creative collaborations.
               </p>
               <a
@@ -1345,7 +1350,7 @@ export default function ForumPage() {
                 <FiHash className="w-5 h-5 text-white/80 shrink-0" />
                 <h3 className="font-heading font-bold text-[16px] leading-tight tracking-[0.06em] text-white break-normal">WYZ DESIGN · CHANNELS</h3>
               </div>
-              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white/70 whitespace-nowrap shrink-0">127 online</span>
+              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white whitespace-nowrap shrink-0">127 online</span>
             </div>
             <div className="bg-[#2B2D31] p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
               {DISCORD_CHANNELS.map((ch) => (
@@ -1353,7 +1358,7 @@ export default function ForumPage() {
                   <FiHash className="w-4 h-4 text-[#80848E] shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className="text-[14px] font-medium text-[#DBDEE1] truncate">{ch.name}</p>
-                    <p className="text-[11px] text-[#80848E] truncate">{ch.topic}</p>
+                    <p className="text-[11px] text-[#949BA4] truncate">{ch.topic}</p>
                   </div>
                 </div>
               ))}

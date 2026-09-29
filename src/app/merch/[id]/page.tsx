@@ -83,6 +83,7 @@ export default function MerchProductPage({ params }: { params: Promise<{ id: str
                 src={product.image}
                 alt={product.title}
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />
