@@ -907,11 +907,6 @@ a[href*="register"] {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
-
-  .hero-banner > * {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
 }
 
 /* ParallaxVideo full width fix */

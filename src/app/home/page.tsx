@@ -913,7 +913,7 @@ export default function HomePage() {
        <div className="absolute inset-0 bg-black/65 z-[1]" />
      <ParticleBackground count={25} color="#DF3131" maxSize={2} speed={0.2} className="z-[2]" />
      {/* Text content on top */}
-    <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-8 sm:py-12 overflow-hidden"
+    <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-6 sm:px-10 lg:px-16 py-8 sm:py-12 overflow-hidden"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>
      <GyroTilt intensity={8} enableOnDesktop>
      <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-center mb-6 sm:mb-8 max-w-full">
@@ -971,7 +971,7 @@ export default function HomePage() {
   </section>
 
 {/* ═══ BRAND MARQUEE ═══ */}
-  <section className="py-6">
+  <section className="py-3 sm:py-6">
   <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
     {(["PHOTOGRAPHY","DESIGN","PRINT","WEB","VIDEO","EVENTS","BRANDING"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];

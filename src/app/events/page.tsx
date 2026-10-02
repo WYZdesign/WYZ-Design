@@ -754,9 +754,9 @@ export default function EventsPage() {
      <div className="absolute inset-0 bg-black/65 z-[1]" />
     </div>
 {/* Text overlay */}
-    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 sm:px-10 lg:px-16 text-center">
+    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-10 lg:px-16 text-center">
     <div className="relative z-10">
-     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
+     <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
     <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
    </h1>
    <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-xs sm:max-w-sm leading-relaxed mb-8 sm:mb-10 mx-auto">
@@ -771,7 +771,7 @@ export default function EventsPage() {
   </ScrollReveal>
 
 {/* ═══ EVENTS MARQUEE ═══ */}
-  <section className="py-6">
+  <section className="py-3 sm:py-6">
   <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
     {(["CONCERTS","DIY SHOWS","MIXERS","ART SHOWS","RECAPS","LIVE COVERAGE"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];

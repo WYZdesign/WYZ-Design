@@ -329,7 +329,7 @@ function SquareQuote() {
 function MerchCarousel({ products }: { products: Product[] }) {
   const items = [...products, ...products, ...products];
   return (
-    <div className="py-8 bg-[#FEFEFD] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-[#f5f5f5]">
+    <div className="py-4 sm:py-8 bg-[#FEFEFD] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-[#f5f5f5]">
       <div className="flex whitespace-nowrap animate-marquee-left hover:[animation-play-state:paused]">
         {items.map((p, i) => (
           <Link key={`mc-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer w-[140px] sm:w-auto">
@@ -350,7 +350,7 @@ function MerchCarousel({ products }: { products: Product[] }) {
 function ProductMarquee({ products }: { products: Product[] }) {
   const items = [...products, ...products, ...products];
   return (
-    <div className="relative overflow-x-auto overflow-y-hidden bg-gradient-to-r from-[#0a0a0a] via-[#1a0a0a] to-[#0a0a0a] py-10 border-y border-white/10 scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
+    <div className="relative overflow-x-auto overflow-y-hidden bg-gradient-to-r from-[#0a0a0a] via-[#1a0a0a] to-[#0a0a0a] py-4 sm:py-10 border-y border-white/10 scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
       <div className="flex whitespace-nowrap animate-marquee-left min-w-max">
         {items.map((p, i) => (
           <Link key={`pm-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer group">
@@ -593,9 +593,9 @@ export default function MerchPage() {
 
         {/* Auto-Scroll Merch Gallery — Black-to-Red Gradient Background (only renders after catalog loads) */}
         {products.length > 0 && (
-          <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-12 border-y border-white/5">
+          <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-5 sm:py-12 border-y border-white/5">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
-            <div className="text-center mb-10">
+            <div className="text-center mb-6 sm:mb-10 px-6">
               <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">DBC CREW COLLECTION</span>
               <h3 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-white tracking-[0.05em]">Worn By The Crew</h3>
             </div>
@@ -606,7 +606,7 @@ export default function MerchPage() {
 
         {/* Product Name Marquee Strip (only renders after catalog loads) */}
         {products.length > 0 && (
-          <div className="relative overflow-hidden bg-[#111] py-12 border-y border-white/5">
+          <div className="relative overflow-hidden bg-[#111] py-4 sm:py-12 border-y border-white/5">
             <div className="flex whitespace-nowrap animate-marquee-left" aria-hidden="true">
               {[...products, ...products, ...products].map((p, i) => (
                 <span key={`pm1-${i}`} className="flex-none text-white/55 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
