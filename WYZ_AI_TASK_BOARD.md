@@ -1,0 +1,52 @@
+# WYZ Design AI Task Board
+
+**Owner:** Torreé Marcel  
+**Updated:** 2026-10-02
+
+Use this board for shared work. Claim an area before editing it. A task is complete only after its stated validation and the required Git workflow finish.
+
+| # | Task | Owner | Status | Evidence or dependency |
+|---:|---|---|---|---|
+| 1 | Establish the pricing and billing canon | Torreé Marcel | needs decision | Existing audits identify contradictory historic price language. |
+| 2 | Inventory all customer-facing prices, plans, and CTAs against the canon | Codex | blocked by task 1 | No edits until the canon is approved. |
+| 3 | Verify live revenue paths: inquiry, booking, checkout, plans, merch, gift cards | Codex | ready | Read-only review first. |
+| 4 | Verify live analytics and lead attribution | Torreé Marcel + Codex | needs access | Requires owner-authorized dashboard evidence. |
+| 5 | Build the WYZMiND operations map for intake through repeat work | Codex + WYZMiND | ready | Start with existing site and Command Center evidence. |
+| 5a | Verify the deployed mobile gutter and marquee-spacing batch | WYZMiND + Codex | ready | Commit `4943727` has reported production status; collect fresh visual, accessibility, and E2E evidence. |
+| 6 | Create an accessibility and mobile regression gate | Codex | ready | Build from current audited routes and existing tests. |
+| 7 | Audit loading, error, and empty states on revenue-critical routes | Codex | ready | Start with booking, services, merch, contact, and plans. |
+| 8 | Confirm public location, social profiles, and founder copy are consistent | Torreé Marcel + Codex | needs decision | Public materials need owner confirmation where facts differ. |
+
+## File Ownership
+
+| Area | Claimed by | Since |
+|---|---|---|
+| `WYZ_AI_HANDOVER.md` and `WYZ_AI_TASK_BOARD.md` | Codex | 2026-10-02 |
+| Pricing source and customer-facing pricing copy | Unclaimed | - |
+| WYZMiND page and integrations | Unclaimed | - |
+
+## Handoff Index
+
+- 2026-10-02: Codex completed initial business, repository, live-site, and Muses-workflow context discovery. See `HANDOVER.md` for the current session record.
+
+### WYZMiND additions (2026-10-02)
+
+**Evidence correction (Session 37):** the Muses coordination artifacts are
+`AGENT_COLLABORATION_PROTOCOL.md`, `HANDOFF.md`, `HANDOVER.md`,
+`WYZMIND_GO_PROTOCOL.md`, and dated `CHATGPT_*` / `OPENCODE_*` / `CLAUDE_*`
+handoff files at the root of `V:\Muse`. No `AI_HANDOVER.md`,
+`AI_TASK_BOARD.md`, or `_STATE/handovers/` exist there — do not chase those
+names. WYZ Design mirrors the REAL pattern: this board (queue) +
+`WYZ_AI_HANDOVER.md` (context) + `HANDOVER.md` (session log) + `AUDIT.md`
+(findings) + `AGENT_COLLABORATION_PROTOCOL.md` (process).
+
+| # | Task | Owner | Status | Evidence or dependency |
+|---:|---|---|---|---|
+| 9 | Verify marquee-gap + edge-gutter fixes on live `4943727` | WYZMiND | done | 17-route 320px shoot (status 200 ×0 errors), `tight_audit` 0 elements <16px, `mq_summary` sections 12/12px + bands 16/16px, vision reads — AUDIT Round 28 |
+| 10 | Standardize residual 16px gutters to 24px (home/merch px-4 elements) | Codex or WYZMiND | ready | baseline: `_agent/tight_audit.py`; branch `codex/gutter-24`; one bundle |
+| 11 | Land coordination layer batch (protocol, `_agent/`, guard v2, handoffs) | WYZMiND | in progress | gates + deploy evidence in AUDIT Round 28 |
+| 12 | Read-only live revenue-path verification (tasks 3 evidence) | Codex | ready | board task 3; no edits |
+
+| Area | Claimed by | Since |
+|---|---|---|
+| `AGENT_COLLABORATION_PROTOCOL.md`, `_agent/`, `AUDIT.md`, `vercel.json` | WYZMiND | 2026-10-02 |

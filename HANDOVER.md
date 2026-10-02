@@ -1,4 +1,34 @@
-# WYZ Design — Current State (Session 36)
+# WYZ Design — Current State (Session 38)
+
+## Session 38 (2026-10-02) — Edge gutters, marquee spacing, collaboration layer (WYZMiND)
+
+- **Root-caused edge-touching:** unlayered `!important` CSS in `globals.css` — `@media (max-width:768px) .hero-banner > * { padding:0 !important }` stripped horizontal padding from every hero text container (same bug class as Round 24's `a{text-decoration:none}`). Rule removed (section-level full-bleed rules kept).
+- **Shipped `4943727` (live):** hero text `px-4`→`px-6` (home/events), about/events h1 `text-[2rem]`→`text-[1.75rem]` (fits 320), brand marquee `py-6`→`py-3 sm:py-6` on 8 pages, merch marquee bands halved on mobile (4 bands), DBC heading `px-6`.
+- **Verified live:** 17-route 320px shoot (all 200, 0 errors, 0 horizontal overflow), `tight_audit` 0 elements <16px from any edge, `mq_summary` marquees now 12/12px sections + 16/16px bands (was 24/24 + 40-48), vision reads confirm balanced spacing; `/designs minR=-31` = intentional carousel/marquee track bleed.
+- **Collaboration layer landed:** `AGENT_COLLABORATION_PROTOCOL.md` (process contract: roles, worktree rules, gates, cost rules, handoff footer), `WYZ_AI_HANDOVER.md` + `WYZ_AI_TASK_BOARD.md` (Codex Session 37, reviewed by WYZMiND), `_agent/` (narrow_vision/edge_audit/tight_audit), task board rows 9-12.
+- **Build-cost guard v2:** `vercel.json` `ignoreCommand` now builds only on `src/ public/ package*.json next.config.* vercel.json tsconfig.json` — docs, handoffs, and `_agent/` scripts auto-CANCEL (dry-run verified: docs commit exit=0, code commit exit=1).
+- **Vaulted:** `WYZDESIGN_FOUNDER_PUBLIC_NAME` = "Torreé Marcel" (owner decision, 2026-10-02).
+
+### Next Actions
+
+1. Codex: task board #12 — read-only live revenue-path verification (evidence into board).
+2. Owner: price/billing canon decision (board task 1) unlocks pricing inventory (#2).
+3. WYZMiND: AUDIT Round 28 push (guard v2 free-cancel proof) then task #10 gutter standardization when claimed.
+
+## Session 37 (2026-10-02) — Shared AI Operating Foundation
+
+- Completed a read-only discovery pass across the WYZ Design repository, public site, public founder and company context, historic audits, and the actual Muses by WYZ coordination model.
+- Established Torreé Marcel as the official founder name for future WYZ Design work.
+- Added `WYZ_AI_HANDOVER.md`: durable business, technical, evidence, and coordination context for Codex, WYZMiND, and approved future agents.
+- Added `WYZ_AI_TASK_BOARD.md`: explicit owners, task states, decision dependencies, and file-claim protocol.
+- Confirmed WYZ Design's local `master` matched `origin/master` at discovery commit `4943727`.
+- Made no site, database, provider, billing, or production configuration changes.
+
+### Next Actions
+
+1. Torreé confirms the price and billing canon before customer-facing price changes.
+2. Codex performs a read-only live revenue-path verification and records evidence.
+3. Codex turns the verified routes into an accessibility and mobile regression gate.
 
 ## All Sessions Summary (30-36)
 

@@ -1,5 +1,5 @@
 {
-  "ignoreCommand": "if git diff --quiet HEAD^ HEAD -- ':(exclude)*.md' ':(exclude)**/*.md'; then echo 'docs-only change, skipping build'; exit 0; else echo 'code change detected, building'; exit 1; fi",
+  "ignoreCommand": "if git diff --quiet HEAD^ HEAD -- src/ public/ package.json package-lock.json next.config.ts next.config.js vercel.json tsconfig.json; then echo 'no app-path changes, skipping build'; exit 0; else echo 'app-path change detected, building'; exit 1; fi",
   "crons": [
     { "path": "/api/health", "schedule": "*/5 * * * *" },
     { "path": "/api/cron/booking-whatsnext", "schedule": "0 16 * * *" }
