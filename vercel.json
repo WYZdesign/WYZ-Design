@@ -1,5 +1,5 @@
 {
-  "ignoreCommand": "BASE=\"${VERCEL_GIT_PREVIOUS_COMMIT:-HEAD^}\"; if git diff --quiet \"$BASE\" HEAD -- src/ public/ package.json package-lock.json next.config.ts next.config.js vercel.json tsconfig.json; then echo 'no app-path changes in push range, skipping build'; exit 0; else echo 'app-path change detected in push range, building'; exit 1; fi",
+  "ignoreCommand": "B=${VERCEL_GIT_PREVIOUS_COMMIT:-HEAD^}; if git diff --quiet \"$B\" HEAD -- src/ public/ package.json package-lock.json next.config.ts next.config.js vercel.json tsconfig.json; then echo skip-no-app-changes; exit 0; else echo build-app-changes; exit 1; fi",
   "crons": [
     { "path": "/api/health", "schedule": "*/5 * * * *" },
     { "path": "/api/cron/booking-whatsnext", "schedule": "0 16 * * *" }
