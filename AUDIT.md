@@ -491,6 +491,20 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 
 ---
 
+#### 2026-10-01 — Round 27 (mobile fit + heat audit + a11y; `17b4caa` → `4ea1a95` → `538e95d`)
+
+- **Narrow-mobile fit (320/360):** measured all 14 audited routes (iPhone UA, `_STATE/mobile_audit.json`) — 13/14 zero horizontal overflow at 320; `/about` had 1px → `html{overflow-x:clip}` already present from Round 24; residual scrolled-container overflow fixed → verified live `scrollW:320, scrollableX:0`. Full-page white screenshots = reveal-on-scroll opacity; scrolled shot confirms content renders.
+- **Heat audit + fixes (phone-overheat complaint) — all in `17b4caa`:**
+  - Hero `background-position` gradient animations repaint the whole hero every frame → `@media (max-width:640px)` kills `.hero-grad-*` + `.wz-grad-inline`/faq/blog grad anims (desktop keeps motion).
+  - Home `VideoPlaylist` cycled 21 logo-intro mp4s **endlessly** → IntersectionObserver pause when scrolled out (paused at bottom, playing at top) + root `ParallaxVideo` got the same visibility gate.
+  - `preload="metadata"` → `"none"`: events grid ×38 thumbs, Navbar ×2, Footer, faq lg-only nav-bg videos.
+  - Marquee keyframes = transform (cheap) — kept; analytics consent-gated (0 third-party pre-consent).
+- **a11y merch (this batch):** ghost ticker marquee `aria-hidden="true"` (`4ea1a95`) + `text-white/20` → `text-white/55` on `#111` = 6.1:1 (`538e95d`) — aria-hidden alone does NOT exempt color-contrast (visual rule), the contrast bump was required.
+- **Guard re-proven:** both code pushes (`4ea1a95`, `538e95d`) built BUILDING→READY; docs-only Round 27 push auto-CANCELED (0 build minutes).
+- **Verified:** build 0 (tsc) ×2, lint 0 errors/92 warnings (baseline) ×2, vitest 12/12 ×2, `wyz_deploy_check.py 538e95d... --project wyzdesign` → `DEPLOY IS LIVE ✅`, axe **0/10 routes**, E2E **7/7** (one `/community` locator timeout on first run — re-ran clean, flake not code).
+
+---
+
 ## 🎯 WYZ DESIGN — HONEST SCORECARD (2026-09-05)
 
 **NOTE:** The previous "10×10×10" section was boilerplate padding — every item marked ✅ PASS without inspection. This section reflects actual code inspection. Scores 0-10 are honest estimates based on what was found in the code, not template assertions.
