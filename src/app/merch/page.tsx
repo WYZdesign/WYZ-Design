@@ -609,7 +609,7 @@ export default function MerchPage() {
           <div className="relative overflow-hidden bg-[#111] py-12 border-y border-white/5">
             <div className="flex whitespace-nowrap animate-marquee-left" aria-hidden="true">
               {[...products, ...products, ...products].map((p, i) => (
-                <span key={`pm1-${i}`} className="flex-none text-white/20 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
+                <span key={`pm1-${i}`} className="flex-none text-white/55 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
               ))}
             </div>
           </div>
