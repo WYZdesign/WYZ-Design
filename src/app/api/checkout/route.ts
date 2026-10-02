@@ -92,9 +92,11 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ error: "Invalid checkout type" }, { status: 400 });
-  } catch (e: any) {
-    logger.error("Checkout session creation failed", { error: e.message, stack: e.stack });
-    if (e.message?.includes("Price ID not configured")) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unknown checkout error";
+    const stack = error instanceof Error ? error.stack : undefined;
+    logger.error("Checkout session creation failed", { error: message, stack });
+    if (message.includes("Price ID not configured")) {
       return NextResponse.json({ error: "Payment processing is not configured yet. Please contact support." }, { status: 503 });
     }
     return NextResponse.json({ error: "Unable to create checkout session. Please try again." }, { status: 500 });

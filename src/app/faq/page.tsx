@@ -114,7 +114,7 @@ export default function FAQPage() {
   }
 
   return (
-    <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+    <main className="pt-20 pb-12 bg-white dark:bg-[#1C1C1E]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -192,6 +192,7 @@ export default function FAQPage() {
               <input
                 type="text"
                 placeholder="Search questions..."
+                aria-label="Search frequently asked questions"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-14 pr-5 py-4 border-2 border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] text-[16px] text-[#333] dark:text-[#e0e0e0] placeholder-[#757575] outline-none focus:border-[#DF3131] transition-all rounded-xl shadow-sm hover:shadow-md"
@@ -207,6 +208,7 @@ export default function FAQPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
+                aria-pressed={activeCategory === cat}
                 className={`px-5 py-2 text-[12px] font-heading font-bold tracking-[0.08em] uppercase transition-all rounded-lg border-2 ${
                   activeCategory === cat
                     ? "bg-[#DF3131] border-[#DF3131] text-white shadow-md shadow-[#DF3131]/20"
@@ -251,14 +253,17 @@ export default function FAQPage() {
                 </div>
                 <button 
                   onClick={() => setChatOpen(!chatOpen)} 
-                  className="w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-[20px] transition-all hover:scale-110"
+                  aria-expanded={chatOpen}
+                  aria-controls="wyz-ai-chat"
+                  aria-label={chatOpen ? "Collapse WYZ Design AI chat" : "Open WYZ Design AI chat"}
+                  className="w-11 h-11 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-[20px] transition-all hover:scale-110"
                 >
                   {chatOpen ? "−" : "+"}
                 </button>
               </div>
 
               {/* Chat Body */}
-              <div className={`transition-all duration-500 ${chatOpen ? "h-[450px]" : "h-0"} overflow-hidden`}>
+              <div id="wyz-ai-chat" className={`transition-all duration-500 ${chatOpen ? "h-[450px]" : "h-0"} overflow-hidden`}>
                 <div className="h-full flex flex-col bg-gradient-to-b from-[#FFFFFF] to-white dark:from-[#252528] dark:to-[#252528]">
                         <div className="flex-1 overflow-y-auto p-6 space-y-4" tabIndex={0} role="region" aria-label="Search results">
                     {chatMessages.map((msg, i) => (
@@ -280,6 +285,7 @@ export default function FAQPage() {
                     <input
                       type="text"
                       value={chatInput}
+                      aria-label="Ask WYZ Design AI a question"
                       onChange={(e) => setChatInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && handleSend()}
                       placeholder="Ask about services, pricing, booking..."
@@ -343,22 +349,19 @@ export default function FAQPage() {
                     onClick={() => setOpen(isOpen ? null : realIndex)}
                     aria-expanded={isOpen}
                     aria-label={faq.q}
-                    className="w-full flex items-center gap-4 px-6 py-5 text-left group"
+                    className="w-full flex items-center gap-3 px-4 py-5 text-left group sm:gap-4 sm:px-6"
                   >
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${
+                    <div className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-all duration-300 sm:flex ${
                       isOpen ? "bg-[#DF3131] text-white" : "bg-white dark:bg-[#252528] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
                     }`}>
                       {(() => { const Icon = faq.icon; return <Icon className="w-5 h-5" />; })()}
                     </div>
-                     <span className={`flex-1 min-w-0 font-heading font-bold text-[16px] pr-4 transition-colors leading-snug ${
+                     <span className={`flex-1 min-w-0 pr-1 font-heading font-bold text-[16px] leading-snug text-pretty transition-colors sm:pr-4 ${
                        isOpen ? "text-[#DF3131]" : "text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131]"
                      }`}>
-                       <span className="faq-marquee">
-                         <span className="faq-marquee-inner">{faq.q}</span>
-                         <span className="faq-marquee-inner max-md:inline-block hidden" aria-hidden="true">{faq.q}</span>
-                       </span>
+                       {faq.q}
                      </span>
-                    <span className={`text-xl font-bold shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 ${
+                    <span className={`text-xl font-bold shrink-0 w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 ${
                       isOpen ? "bg-[#DF3131] text-white rotate-45" : "bg-white dark:bg-[#252528] text-[#DF3131] border-2 border-[#E2E2E2] dark:border-[#444] group-hover:border-[#DF3131]"
                     }`}>
                       +

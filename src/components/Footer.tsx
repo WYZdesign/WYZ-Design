@@ -131,13 +131,13 @@ export default function Footer() {
                 <div className="w-8 h-8 rounded flex items-center justify-center shrink-0">
                   <Image src="/wyz-crown-square.png" alt="WYZ Crown" width={24} height={24} className="object-contain" loading="lazy" />
                 </div>
-                <span className={`${textPrimary} font-heading font-bold text-xl`}>WYZ <span className="text-[#DF3131]">Design</span></span>
+                <span className={`${textPrimary} font-heading font-bold text-xl`}>WYZ <span className="text-white">Design</span></span>
               </Link>
               <p className={`${textMuted} text-[14px] leading-relaxed mb-5 max-w-sm`}>Creative growth studio for artists, brands, and culture. Built in Chicago. Scaling in Los Angeles. Wild vision. Zealous execution.</p>
-              <div className="flex items-center gap-2 sm:gap-3">
+              <div className="flex max-w-[160px] flex-wrap items-center gap-2 sm:max-w-none sm:flex-nowrap sm:gap-3">
                 {SOCIALS.map((s, i) => (
                   <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                  className={`w-9 h-9 flex items-center justify-center border ${socialBorder} ${socialText} hover:border-white hover:text-white hover:bg-white/10 transition-all rounded-full`}>
+                  className={`h-11 w-11 flex items-center justify-center border ${socialBorder} ${socialText} hover:border-white hover:text-white hover:bg-white/10 transition-all rounded-full sm:h-9 sm:w-9`}>
                     <s.icon className="w-4 h-4" />
                   </a>
                 ))}

@@ -48,6 +48,29 @@ const PILLARS = [
 
 export default function ThreePointProgramPage() {
   const [activePillar, setActivePillar] = useState(0);
+  const selectPillar = (index: number) => {
+    setActivePillar(index);
+    document.getElementById(`program-pillar-tab-${index}`)?.focus();
+  };
+
+  const handlePillarKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      selectPillar((index + 1) % PILLARS.length);
+    }
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      selectPillar((index - 1 + PILLARS.length) % PILLARS.length);
+    }
+    if (event.key === "Home") {
+      event.preventDefault();
+      selectPillar(0);
+    }
+    if (event.key === "End") {
+      event.preventDefault();
+      selectPillar(PILLARS.length - 1);
+    }
+  };
 
   return (
     <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
@@ -62,8 +85,8 @@ export default function ThreePointProgramPage() {
           {/* Pillar tabs */}
           <div role="tablist" aria-label="Program pillars" className="flex flex-wrap justify-center gap-3 mb-10">
             {PILLARS.map((p, i) => (
-              <button key={i} onClick={() => setActivePillar(i)}
-                role="tab" aria-selected={activePillar === i}
+              <button key={i} id={`program-pillar-tab-${i}`} type="button" onClick={() => setActivePillar(i)} onKeyDown={(event) => handlePillarKeyDown(event, i)}
+                role="tab" aria-selected={activePillar === i} aria-controls={`program-pillar-panel-${i}`} tabIndex={activePillar === i ? 0 : -1}
                 className={`px-6 py-3 rounded-full text-[12px] font-bold tracking-[0.1em] uppercase transition-all ${
                   activePillar === i ? "bg-[#DF3131] text-white shadow-lg shadow-[#DF3131]/30" : "bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] text-[#666] dark:text-white hover:border-[#DF3131]"
                 }`}>
@@ -73,7 +96,7 @@ export default function ThreePointProgramPage() {
           </div>
 
           {/* Active pillar */}
-          <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] p-8 sm:p-10 mb-16">
+          <div id={`program-pillar-panel-${activePillar}`} role="tabpanel" aria-labelledby={`program-pillar-tab-${activePillar}`} tabIndex={0} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] p-8 sm:p-10 mb-16">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 rounded-full bg-[#DF3131]/10 flex items-center justify-center text-[#DF3131] text-2xl shrink-0">
                 {PILLARS[activePillar].icon}

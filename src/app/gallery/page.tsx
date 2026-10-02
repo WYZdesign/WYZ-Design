@@ -32,10 +32,10 @@ function GalleryLightbox({ images, index, onClose, onPrev, onNext, onImageTap }:
  images: { src: string; cat: string }[]; index: number; onClose: () => void; onPrev: () => void; onNext: () => void; onImageTap: () => void;
 }) {
  const swipe = useSwipe(onNext, onPrev);
- useModalA11y(onClose);
- useEffect(() => { document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = ""; }; }, []);
+ const modalRef = useRef<HTMLDivElement>(null);
+ useModalA11y(onClose, { lockScroll: true, containerRef: modalRef });
   return (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }} {...swipe} tabIndex={0} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label="Image gallery">
+        <div ref={modalRef} className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }} {...swipe} tabIndex={-1} style={{ animation: "wzFadeIn 0.2s ease-out both" }} role="dialog" aria-modal="true" aria-label="Image gallery">
   <button className="absolute top-6 right-6 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={onClose} aria-label="Close"><FiX className="w-8 h-8" /></button>
   <button className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white min-w-[44px] min-h-[44px] flex items-center justify-center" onClick={(e) => { e.stopPropagation(); onPrev(); }} aria-label="Previous image"><FiChevronLeft className="w-10 h-10" /></button>
   <Image src={images[index].src} alt={images[index].cat} width={900} height={600} unoptimized className="max-h-[85vh] max-w-[90vw] object-contain select-none" draggable={false} onClick={(e) => { e.stopPropagation(); onImageTap(); }} style={{ animation: "wzScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both" }} />
@@ -131,7 +131,7 @@ export default function GalleryPage() {
  </div>
  <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
   {filtered.map((img, i) => (
-  <div key={i} className="break-inside-avoid cursor-pointer group" onClick={() => handleImageOpen(i)}>
+  <button key={i} type="button" className="block w-full break-inside-avoid cursor-pointer group text-left" onClick={() => handleImageOpen(i)} aria-label={`Open ${img.cat} image ${i + 1}`}>
   <ImageHoverReveal>
    <div className="relative overflow-hidden rounded-lg aspect-[3/4]">
     <Image src={img.src} alt={img.cat} fill sizes="(max-width:768px) 50vw, 33vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -140,7 +140,7 @@ export default function GalleryPage() {
   </div>
   </div>
   </ImageHoverReveal>
-  </div>
+  </button>
   ))}
  </div>
  {filtered.length === 0 && <p className="text-center text-[#666] py-20">No images in this category.</p>}

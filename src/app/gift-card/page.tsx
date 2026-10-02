@@ -26,8 +26,8 @@ export default function GiftCardPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "giftcard", amount, email: email || undefined }),
       });
-      const data = await res.json();
-      if (data.url) {
+      const data = await res.json().catch((): { url?: string; error?: string } => ({}));
+      if (res.ok && data.url) {
         trackMetaEvent("InitiateCheckout", { value: amount, content_type: "gift_card" });
         window.location.href = data.url;
       } else {

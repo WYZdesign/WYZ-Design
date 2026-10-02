@@ -30,6 +30,15 @@ export function useModalA11y(onClose: () => void, opts?: { lockScroll?: boolean;
     const id = Symbol("modal");
     stack.push(id);
 
+    const focusInitialElement = requestAnimationFrame(() => {
+      const container = containerRef?.current;
+      if (!container) return;
+      const firstFocusable = container.querySelector<HTMLElement>(
+        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      (firstFocusable ?? container).focus();
+    });
+
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && stack[stack.length - 1] === id) onCloseRef.current();
       if (e.key === "Tab" && containerRef?.current) {
@@ -59,6 +68,7 @@ export function useModalA11y(onClose: () => void, opts?: { lockScroll?: boolean;
     }
 
     return () => {
+      cancelAnimationFrame(focusInitialElement);
       document.removeEventListener("keydown", onKeyDown);
       const idx = stack.lastIndexOf(id);
       if (idx !== -1) stack.splice(idx, 1);

@@ -117,8 +117,8 @@ export default function CookieBanner() {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
             <FiGlobe className="w-6 h-6 text-[#DF3131] dark:text-[#FF5A5A] flex-shrink-0" />
-            <div>
-              <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg">Cookie Preferences</h3>
+            <div className="min-w-0 flex-1">
+              <h3 className="font-heading font-bold text-[#333] dark:text-white text-lg whitespace-nowrap">Cookie Preferences</h3>
               <p className="text-sm text-[#666] dark:text-white/70 mt-0.5">We use cookies to make the site work better for you.</p>
             </div>
           </div>

@@ -152,10 +152,12 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
      uppercase transform) can be wider than the heading's own box at these
      mobile font sizes; without this it silently overflows past the edge and
      gets clipped by body's overflow-x:hidden instead of wrapping. */
-  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: 95% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
-  h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: 90% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
-  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: 85% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
-  h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: 80% !important; overflow-wrap: break-word !important; word-break: break-word !important; }
+  /* Do not split display words on phones. Headings may wrap at a real word
+     boundary, but component layouts own their measure and type scale. */
+  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: none !important; overflow-wrap: normal !important; word-break: normal !important; }
+  h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: none !important; overflow-wrap: normal !important; word-break: normal !important; }
+  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: none !important; overflow-wrap: normal !important; word-break: normal !important; }
+  h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: none !important; overflow-wrap: normal !important; word-break: normal !important; }
   p { font-size: 14px; }
 
   /* The big-hero-heading rules above assume every h1/h2/h3 is a page title.
@@ -239,26 +241,6 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 
   /* Cookie banner spacing — prevent content from hiding behind fixed banner */
   main { padding-bottom: 3.5rem !important; }
-
-  /* FAQ text — slow marquee on mobile so full sentences are readable */
-  .faq-marquee {
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: calc(100vw - 12rem);
-    position: relative;
-  }
-  .faq-marquee-inner {
-    display: inline-block;
-    animation: faqMarquee 10s linear infinite;
-    padding-right: 2rem;
-  }
-  @keyframes faqMarquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .faq-marquee:hover .faq-marquee-inner {
-    animation-play-state: paused;
-  }
 
   /* Marquee animations for YouTube logo rows and other scrolling strips */
   @keyframes marqueeLeft {

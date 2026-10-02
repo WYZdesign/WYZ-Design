@@ -97,6 +97,14 @@ export default function Navbar() {
 
   useEffect(() => { setTimeout(() => setVisible(true), 100); }, []);
   useEffect(() => { setMobileOpen(false); }, [pathname]);
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [mobileOpen]);
   useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; document.body.dataset.mobileOpen = mobileOpen ? "true" : ""; return () => { document.body.style.overflow = ""; document.body.dataset.mobileOpen = ""; }; }, [mobileOpen]);
   useEffect(() => { if (!mobileOpen) return; const close = (e: TouchEvent | MouseEvent) => { const target = e.target as HTMLElement; if (!target.closest("[data-more-dropdown]") && !target.closest("[data-more-btn]")) setMoreOpen(false); }; document.addEventListener("touchstart", close); return () => document.removeEventListener("touchstart", close); }, [mobileOpen]);
 
@@ -164,7 +172,7 @@ export default function Navbar() {
             <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
               <span className="relative inline-flex">
                 <span className="absolute inset-[-10px] rounded-full bg-[#DF3131]/35 blur-lg logo-glow-pulse pointer-events-none" />
-                <Image src="/wyz-crown-square.png" alt="WYZ Design" width={56} height={56} className="relative hover:scale-110 transition-transform w-[15px] h-[15px] sm:w-[18px] sm:h-[18px] lg:w-[22px] lg:h-[22px] object-contain" loading="lazy" />
+                <Image src="/wyz-crown-square.png" alt="WYZ Design logo" width={56} height={56} className="relative hover:scale-110 transition-transform w-[15px] h-[15px] sm:w-[18px] sm:h-[18px] lg:w-[22px] lg:h-[22px] object-contain" loading="lazy" />
               </span>
             </Link>
             </MagneticElement>
@@ -182,7 +190,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="relative" data-more-dropdown onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
-                <button data-more-btn onClick={() => setMoreOpen(!moreOpen)}
+                <button data-more-btn onClick={() => setMoreOpen(!moreOpen)} aria-expanded={moreOpen} aria-controls="more-navigation"
                   className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors duration-[400ms] ${
                     MORE_LINKS.some(l => isActive(l.href)) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white active:text-white/80"
                   }`}
@@ -191,7 +199,7 @@ export default function Navbar() {
                 </button>
                 <AnimatePresence>
                   {moreOpen && (
-                    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
+                    <motion.div id="more-navigation" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
                       className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 shadow-xl z-50 rounded-lg overflow-hidden"
                       >
                        <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
@@ -350,7 +358,7 @@ export default function Navbar() {
 
             <div className="min-[1440px]:hidden ml-auto flex items-center gap-3">
               <ThemeToggle />
-              <button aria-label={mobileOpen ? "Close menu" : "Open menu"} className="p-2 text-white" onClick={() => setMobileOpen(!mobileOpen)}>
+              <button aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} aria-controls="mobile-navigation" className="flex h-11 w-11 items-center justify-center text-white" onClick={() => setMobileOpen(!mobileOpen)}>
                 {mobileOpen ? <HiX className="w-6 h-6" /> : <HiMenu className="w-6 h-6" />}
               </button>
             </div>
@@ -361,7 +369,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] min-[1440px]:hidden flex flex-col pt-8"
+            id="mobile-navigation" className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] min-[1440px]:hidden flex flex-col pt-8"
             data-mobile-menu="true"
             style={{ height: '100vh', overflowY: 'auto', overscrollBehavior: 'contain' }}
             onWheel={(e) => e.stopPropagation()}
@@ -407,7 +415,7 @@ export default function Navbar() {
             </div>
             {/* Mobile search */}
             <div className="px-6 pt-3 pb-2">
-              <input type="text" placeholder="Search WYZ..."
+              <input type="text" placeholder="Search WYZ..." aria-label="Search WYZ Design"
                 className="w-full px-4 py-3 text-[14px] border border-[#E2E2E2] dark:border-[#333] bg-white dark:bg-[#252528] text-[#333] dark:text-[#e0e0e0] placeholder:text-[#757575] focus:border-[#DF3131] outline-none"
                 onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
             </div>

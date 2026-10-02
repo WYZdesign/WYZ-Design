@@ -1203,24 +1203,28 @@ export default function HomePage() {
  <div key={i}
   className="border border-[#E2E2E2] dark:border-[#444] rounded-lg overflow-hidden transition-all duration-300"
  style={{
- maxHeight: openFaq === i ? "300px" : "60px",
  boxShadow: openFaq === i ? "0 4px 20px rgba(0,0,0,0.08)" : "none",
  }}>
   <button
   onClick={() => setOpenFaq(openFaq === i ? null : i)}
   aria-expanded={openFaq === i}
+  aria-controls={`home-faq-answer-${i}`}
    className="w-full text-left px-4 sm:px-6 py-3 sm:py-4 flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
    <span className={`w-8 h-8 flex items-center justify-center text-sm font-bold transition-all duration-300 flex-shrink-0 ${
    openFaq === i ? "bg-[#DF3131] text-white rotate-45" : "bg-[#F5F5F3] dark:bg-[#252528] text-[#333] dark:text-white"
    }`}>+</span>
-    <span className={`font-heading font-bold text-[13px] sm:text-sm tracking-[0.02em] transition-colors whitespace-normal min-w-0 break-words leading-tight ${
+    <span className={`font-heading font-bold text-[13px] sm:text-sm tracking-[0.02em] transition-colors whitespace-normal min-w-0 leading-tight ${
    openFaq === i ? "text-[#DF3131]" : "text-[#333] dark:text-white"
    }`}>
      {faq.q}
    </span>
   </button>
+ <div id={`home-faq-answer-${i}`} className="grid transition-[grid-template-rows,opacity] duration-300" style={{ gridTemplateRows: openFaq === i ? "1fr" : "0fr", opacity: openFaq === i ? 1 : 0 }} aria-hidden={openFaq !== i}>
+ <div className="overflow-hidden">
  <div className="px-6 pb-4 pl-14 sm:pl-[4.5rem]">
  <p className="text-[15px] text-[#666] dark:text-white/70 leading-relaxed">{faq.a}</p>
+ </div>
+ </div>
  </div>
  </div>
  ))}
