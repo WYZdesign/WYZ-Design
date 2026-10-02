@@ -1,4 +1,25 @@
-# WYZ Design — Current State (Session 38)
+# WYZ Design — Current State (Session 39)
+
+## Session 39 (2026-10-02) — FAQ mobile accordion collision repair (Codex)
+
+- **Root cause:** each mobile FAQ row rendered a second copy of its question as a supposed marquee, but the `faq-marquee` classes had no accompanying clipping or animation rules. The duplicate could flow underneath the fixed plus icon.
+- **Fixed locally:** removed the duplicate mobile question node; tightened the mobile row gutter and gap; hid the decorative leading category icon below `sm` so a 320px question keeps a useful text column; kept the text area `min-w-0`; reserved a 40px non-shrinking icon column; increased the plus control to 40px. Questions now use ordinary, readable wrapping rather than an unimplemented marquee.
+- **Interaction repair:** the WYZ AI chat toggle now meets a 44px touch target and exposes its expanded state, control relationship, and descriptive label to assistive technology.
+- **FAQ semantics:** search and chat inputs now carry programmatic labels; category filters expose their pressed state; obsolete mobile FAQ marquee CSS was removed with the broken marquee markup.
+- **Navigation repair:** the mobile menu trigger is now a 44px control with `aria-expanded` and `aria-controls`; the menu closes with Escape; mobile search has a programmatic label; the desktop More menu exposes its state and controlled region; the crown image uses a descriptive logo alt.
+- **Gallery interaction repair:** portfolio tiles are native buttons with descriptive labels, so opening the lightbox works through normal keyboard activation as well as touch or mouse.
+- **Modal repair:** `useModalA11y` now moves focus into a supplied dialog when it opens and cancels that scheduled move during cleanup. Gallery passes its dialog ref and uses the hook's nested-safe scroll lock, yielding Escape close, focus trap, focus restoration, and scroll restoration as one path.
+- **Gift-card checkout resilience:** checkout now requires a successful response and valid redirect URL before navigating; non-JSON and server failures preserve the server message when supplied and otherwise show the existing human error toast.
+- **Checkout route hygiene:** replaced the untyped error path in `/api/checkout` with `unknown` narrowing before logging or testing the message. Existing CSRF, rate limiting, server-derived identity, and server-side service-price validation were confirmed in source and left intact.
+- **3-Point program tabs:** completed tab semantics with connected tab/panel IDs, roving tab stop, and Arrow, Home, and End keyboard navigation.
+- **Audit evidence boundary:** the archived valid 320px FAQ capture shows the original duplicate-question text running beneath the trailing plus control; the local FAQ repair directly addresses that defect. A fresh 17-route production visual runner was attempted, but the host throttled it: most archived full-page captures and metrics are HTTP 429 error documents, not usable visual evidence. Do not label those routes visually passed until the production rate limit permits a paced re-run.
+- **Related mobile repairs retained locally:** prevented global heading rules from splitting individual words; gave the FAQ content clearance below the fixed navigation; stopped Cookie Preferences from breaking mid-word; made footer social controls 44px on phones with wrapping rather than overlap.
+- **Verification:** `npx tsc --noEmit --incremental false` passed and `npm run lint` passed. Local `/faq` returned HTTP 200. Vitest starts when its normal helper processes are permitted but produced no project test-result report, so it is not accepted as coverage. The in-app browser driver timed out before it could produce a local visual capture, so a 320px screenshot recheck remains required after WYZMiND integrates and deploys this code.
+- **Integration note:** these source changes are intentionally unstaged. Codex cannot create the required Git lock in this workspace; WYZMiND remains the master-branch integrator under `AGENT_COLLABORATION_PROTOCOL.md`.
+
+### Next Action
+
+1. WYZMiND: inspect the FAQ accordion at 320px after integration; verify question text never enters the plus-control column, in both closed and open states.
 
 ## Session 38 (2026-10-02) — Edge gutters, marquee spacing, collaboration layer (WYZMiND)
 

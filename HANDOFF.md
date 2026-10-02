@@ -68,7 +68,16 @@ Create one dated handoff per meaningful workstream in this format: objective, ev
 
 **Validation:** TypeScript passed with `npx tsc --noEmit --incremental false`; ESLint passed with `npm run lint`; local `/faq` returned HTTP 200. Browser-driver visual capture timed out locally, so this is not marked visually verified.
 
-**Integration request:** Bring only the five modified source files and `HANDOVER.md` into the approved integration branch, then use the narrow audit tooling at 320px to inspect both closed and expanded FAQ entries. Confirm text ends before the plus column and does not have a duplicated trailing question.
+**Integration request:** Bring only the source files named in this handoff and `HANDOVER.md` into the approved integration branch, then use the narrow audit tooling at 320px to inspect both closed and expanded FAQ entries. Confirm text ends before the plus column and does not have a duplicated trailing question.
+
+### Follow-on local batch
+
+- `Navbar.tsx`: mobile menu trigger is 44px, tied to its controlled menu, and closes with Escape; labels/state added to the mobile search and desktop More menu.
+- `gallery/page.tsx`: image tiles are keyboard-operable buttons; the lightbox now passes its dialog reference to the accessibility hook.
+- `useModalA11y.ts`: supplied dialogs receive initial focus, retain focus while open, restore the trigger focus when closed, and use nested-safe scroll locking.
+- `globals.css`: obsolete FAQ marquee CSS removed.
+
+**Follow-on validation:** TypeScript, ESLint, and whitespace checks all passed. This expanded handoff requires the same post-integration 320px visual pass and keyboard check (Tab/Enter/Space/Escape) before calling it live.
 
 ---
 
