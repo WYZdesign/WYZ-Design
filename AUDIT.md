@@ -478,6 +478,16 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 
 ---
 
+#### 2026-09-29 — Round 26 (Vercel balance PAID — account restored; code `5559f92` + `4af0ef6`)
+
+- **Block cleared:** owner paid the build-cost balance. `wyzdesign.com` back to 200 (was 402) — but production still served `0c1e8b1` (pre-fix) because pushes during the block never built. Redeploy of `master` triggered + verified (see below).
+- **Interim stack (kept as permanent silent fallback):** Cloudflare named tunnel `wyzmind-core` (config `~\.cloudflared\config.yml`) + local `next start` :3100 (wyz) / :3200 (Muse) + `WYZ_Wyzdesign_Watchdog` schtasks (every 5 min + ONSTART as SYSTEM + ONLOGON) — recovers servers/tunnel unattended; local booking-cron disabled (env `WYZ_LOCAL_CRON=1` to re-arm) now that Vercel crons (`/api/health` */5 + booking `0 16 * * *`) resumed.
+- **Domains:** wyzdesign.com + www + muse.wyzdesign.com never left Vercel NS (Namecheap untouched) → all serve again automatically. `wyzmind.com` (GoDaddy, parked, expires 2027-03-16) added to project — GoDaddy NS → `ns1/ns2.vercel-dns.com` paste still owner-pending. `wyzmind.tech` zone (Cloudflare) stays fallback-only ingress; CF `wyzdesign.com` zone sits pending/undeclared — optional dashboard delete.
+- **Vaulted this session:** `CLOUDFLARE_API_TOKEN` (read-only), `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_R2_ACCESS_KEY_ID`, `CLOUDFLARE_R2_SECRET_ACCESS_KEY`, `CLOUDFLARE_R2_ENDPOINT` (token lacks DNS Edit — zone/record writes still need owner panel or an Edit-scoped token).
+- **Backlog fixes live with this deploy:** proxy CSRF edge check, admin-login durable lockout, fd/drive rate limit, merch/printing a11y buttons, booking aria-live, focusPulse reduced-motion, gallery backdrop guard.
+
+---
+
 ## 🎯 WYZ DESIGN — HONEST SCORECARD (2026-09-05)
 
 **NOTE:** The previous "10×10×10" section was boilerplate padding — every item marked ✅ PASS without inspection. This section reflects actual code inspection. Scores 0-10 are honest estimates based on what was found in the code, not template assertions.
