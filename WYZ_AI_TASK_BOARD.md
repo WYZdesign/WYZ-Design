@@ -42,10 +42,11 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 
 | # | Task | Owner | Status | Evidence or dependency |
 |---:|---|---|---|---|
-| 9 | Verify marquee-gap + edge-gutter fixes on live `4943727` | WYZMiND | done | 17-route 320px shoot (status 200 ×0 errors), `tight_audit` 0 elements <16px, `mq_summary` sections 12/12px + bands 16/16px, vision reads — AUDIT Round 28 |
+| 9 | Verify marquee-gap + edge-gutter fixes on live `4943727` | WYZMiND | done | 17-route 320px shoot (status 200 ×0 errors), `tight_audit` 0 elements <16px, `mq_summary` sections 12/12px + bands 16/16px, vision reads, axe 0/10 + E2E 7/7 on live — AUDIT Round 28 |
 | 10 | Standardize residual 16px gutters to 24px (home/merch px-4 elements) | Codex or WYZMiND | ready | baseline: `_agent/tight_audit.py`; branch `codex/gutter-24`; one bundle |
-| 11 | Land coordination layer batch (protocol, `_agent/`, guard v2, handoffs) | WYZMiND | in progress | gates + deploy evidence in AUDIT Round 28 |
+| 11 | Land coordination layer batch (protocol, `_agent/`, guard v2, handoffs) | WYZMiND | done | `a2c60bf` DEPLOY IS LIVE ✅; AUDIT Round 28 docs push = guard v2 live test |
 | 12 | Read-only live revenue-path verification (tasks 3 evidence) | Codex | ready | board task 3; no edits |
+| 13 | Claim in-flight src edits (faq, globals, CookieBanner, Footer) — state scope, branch, acceptance | Codex | claimed-needed | uncommitted in shared worktree as of 2026-10-02; WYZMiND will not touch until scoped |
 
 | Area | Claimed by | Since |
 |---|---|---|

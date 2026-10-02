@@ -13,11 +13,13 @@ Claude/wyzmind/codex trio).
 | `WYZ_AI_TASK_BOARD.md` | Live task queue, claims, ownership | shared (claim before edit) |
 | `WYZ_AI_HANDOVER.md` | Durable business/technical context | Codex |
 | `HANDOVER.md` | Session log (append, reverse-chron at top) | shared (own entry only) |
+| `HANDOFF.md` | Cross-agent round handoff notes (Muse `HANDOFF.md` pattern: From/To/What was done/Next) | shared (own round block) |
 | `AUDIT.md` | Findings + numbered audit rounds | Wyzmind |
 | `_agent/` | Reproducible audit/vision scripts | Wyzmind |
 | `vercel.json` | Build guard + deploy config | Wyzmind only |
 
-There is no `HANDOFF.md` in this repo — the queue role is `WYZ_AI_TASK_BOARD.md`.
+The live queue role belongs to `WYZ_AI_TASK_BOARD.md`; `HANDOFF.md` carries
+round-level dialogue between agents.
 
 ## 1. Objective
 

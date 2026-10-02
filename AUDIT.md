@@ -505,6 +505,18 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 
 ---
 
+#### 2026-10-02 — Round 28 (edge gutters + marquee spacing + collaboration layer; `4943727` → `a2c60bf`)
+
+- **Root cause of edge-touching:** unlayered `!important` CSS in `globals.css` — `@media (max-width:768px) .hero-banner > * { padding-left/right:0 !important }` stripped horizontal padding from every hero text container (about/events h1 computed L=8-9px, p L=0). Same bug class as Round 24's unlayered `a{text-decoration:none}`. Rule removed; `.hero-banner` section-level full-bleed kept. Sibling `section:first-of-type` padding strip left in place (landmine noted) — measured harmless across 17 routes.
+- **Fix batch `4943727` (live):** hero text containers `px-4`→`px-6` (home, events), about/events h1 `text-[2rem]`→`text-[1.75rem]` (fits the 272px content box at 320), brand marquee `<section py-6>`→`py-3 sm:py-6` across 8 pages (home, about, events, printing, services, photography, designs, web-design), merch marquee bands halved on mobile (4 bands `py-10/12/8`→`py-4/5 sm:py-10/12/8`) + DBC heading `px-6`.
+- **Verification (live, `_agent/` scripts):** 17-route 320px shoot — all status 200, 0 JS errors, 0 horizontal overflow; `tight_audit` — 0 elements <16px from any viewport edge (about/events touchers gone; residual px-4 items at L/R=16-19 → board task #10 for 16→24 standardization); `mq_summary` — brand sections 12/12px (was 24/24), merch bands 16/16px (was 40-48), neighbor gaps 12-17px; vision reads (`n320_home_mq0.png`, `n320_designs_mq0.png`, `n320_designs.png`) confirm balanced marquee spacing and clean gutters — `/designs` side `minR=-31` = intentional carousel/marquee track bleed (overflow hidden), not a defect.
+- **Full gates:** build 0 (tsc), lint 0 errors/92 warnings (baseline), vitest 12/12, axe **0/10 routes (0 serious/critical)**, E2E **7/7** (incl. previously flaky community-channel-select), `wyz_deploy_check.py a2c60bf... --project wyzdesign` → `DEPLOY IS LIVE ✅`.
+- **Collaboration layer (`a2c60bf`):** `AGENT_COLLABORATION_PROTOCOL.md` (roles, coordination file map, worktree rules, gates, cost rules, handoff footer) reconciled with Codex's Session 37 `WYZ_AI_HANDOVER.md` + `WYZ_AI_TASK_BOARD.md` (extended: tasks 9-12, WYZMiND ownership rows, Muses evidence correction — the real Muses artifacts are `AGENT_COLLABORATION_PROTOCOL.md`/`HANDOFF.md`/`HANDOVER.md` at `V:\Muse` root, no `AI_HANDOVER.md`/`AI_TASK_BOARD.md` there), `HANDOVER.md` Session 38, `_agent/` runners (narrow_vision/edge_audit/tight_audit), Codex `HANDOFF.md` foundation round exchanged.
+- **Guard v2:** `vercel.json` `ignoreCommand` now builds only on `src/ public/ package.json package-lock.json next.config.* vercel.json tsconfig.json` (dry-run: docs commit exit=0, code commit exit=1) — docs, handoffs, and `_agent/` scripts auto-CANCEL. This Round 28 push is the live test (expected CANCELED, 0 build minutes; confirmation recorded in `HANDOFF.md` reply).
+- **Vaulted:** `WYZDESIGN_FOUNDER_PUBLIC_NAME` = "Torreé Marcel" (owner decision).
+
+---
+
 ## 🎯 WYZ DESIGN — HONEST SCORECARD (2026-09-05)
 
 **NOTE:** The previous "10×10×10" section was boilerplate padding — every item marked ✅ PASS without inspection. This section reflects actual code inspection. Scores 0-10 are honest estimates based on what was found in the code, not template assertions.
