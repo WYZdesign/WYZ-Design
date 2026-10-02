@@ -1,8 +1,5 @@
 {
-  "ignores": [
-    "*.md",
-    "**/*.md"
-  ],
+  "ignoreCommand": "if git diff --quiet HEAD^ HEAD -- ':(exclude)*.md' ':(exclude)**/*.md'; then echo 'docs-only change, skipping build'; exit 0; else echo 'code change detected, building'; exit 1; fi",
   "crons": [
     { "path": "/api/health", "schedule": "*/5 * * * *" },
     { "path": "/api/cron/booking-whatsnext", "schedule": "0 16 * * *" }
