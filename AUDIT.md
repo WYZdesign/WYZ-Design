@@ -486,6 +486,7 @@ CrownDraw Math.random render seed; stray `.5` class token; admin header literal 
 - **Vaulted this session:** `CLOUDFLARE_API_TOKEN` (read-only), `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_R2_ACCESS_KEY_ID`, `CLOUDFLARE_R2_SECRET_ACCESS_KEY`, `CLOUDFLARE_R2_ENDPOINT` (token lacks DNS Edit — zone/record writes still need owner panel or an Edit-scoped token).
 - **Backlog fixes live with this deploy:** proxy CSRF edge check, admin-login durable lockout, fd/drive rate limit, merch/printing a11y buttons, booking aria-live, focusPulse reduced-motion, gallery backdrop guard.
 - **Build-cost guard (this time it was build-minute billing):** `vercel.json` now sets `ignoreCommand` — md-only commits (AUDIT/docs pushes) exit 0 = build CANCELED, code commits exit 1 = build. Plus Vercel Spend Management hard cap (owner: Team → Settings → Billing → set on-demand budget — blocks runaway build spend at the source).
+- **Guard verification:** this very commit is docs-only (AUDIT.md only) — the deployment for it must land CANCELED with zero build minutes.
 
 ---
 
