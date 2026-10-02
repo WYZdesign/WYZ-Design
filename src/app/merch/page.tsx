@@ -630,7 +630,7 @@ export default function MerchPage() {
         )}
 
         {/* Enter Store Toggle */}
-        <section className="py-16 px-6 text-center" id="shop">
+        <section className="py-16 px-6! text-center" id="shop">
           <ScrollReveal animation="fadeUp">
             <p className="text-[11px] text-[#666] font-bold tracking-[0.2em] uppercase mb-2">Print-on-Demand via Printful</p>
             <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] tracking-[0.05em] mb-4">The Collection</h2>

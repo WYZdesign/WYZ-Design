@@ -790,7 +790,7 @@ export default function EventsPage() {
  <div className="relative overflow-hidden bg-black">
    <Image src="/concert-crowd.jpg" alt="Concert Crowd" fill sizes="100vw" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.7 }} priority />
    <div className="absolute inset-0 bg-black/30 z-[1]" />
- <div className="relative z-10 flex flex-col items-center justify-center py-12 sm:py-16 px-4 sm:px-6 text-center">
+  <div className="relative z-10 flex flex-col items-center justify-center py-12 sm:py-16 px-6 text-center">
  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[3rem] xl:text-[4rem] font-heading font-black text-white tracking-[0.08em] leading-tight mb-4">
  SIGN-UP FOR<br />
  <span className="text-[#DF3131]">FUTURE</span> EVENTS

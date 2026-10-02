@@ -149,7 +149,7 @@ return (
     <video src="/videos/hero-banners/photography.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
     <div className="absolute inset-0 bg-black/65 z-[1]" />
    </div>
-   <div className="relative z-10 max-w-lg mx-auto px-4 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
+    <div className="relative z-10 max-w-lg mx-auto px-6 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
     <div className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
     <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
     <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>

@@ -257,7 +257,7 @@ export default function PlansPage() {
       <ScrollReveal animation="fadeIn" duration={1.2}>
         <section className="relative min-h-[50vh] lg:min-h-[70vh] flex flex-col lg:flex-row">
           {/* Left: Text */}
-  <div className="w-full lg:w-1/2 bg-white dark:bg-[#111] flex items-center justify-center px-4 sm:px-10 lg:px-16 py-12 lg:py-0 order-2 lg:order-1">
+  <div className="w-full lg:w-1/2 bg-white dark:bg-[#111] flex items-center justify-center px-6 sm:px-10 lg:px-16 py-12 lg:py-0 order-2 lg:order-1">
   <div className="text-center max-w-xl">
 <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
  CHOOSE YOUR <span className="text-[#DF3131]">PRICING</span> PLAN
