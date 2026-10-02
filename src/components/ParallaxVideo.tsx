@@ -60,6 +60,18 @@ export default function ParallaxVideo({
   }, [src]);
 
   useEffect(() => {
+    const el = videoRef.current;
+    const box = ref.current;
+    if (!el || !box) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.play().catch(() => {}); }
+      else { el.pause(); }
+    }, { threshold: 0.05 });
+    obs.observe(box);
+    return () => obs.disconnect();
+  }, [src]);
+
+  useEffect(() => {
     const video = videoRef.current;
     if (video && playbackRate !== 1) {
       video.playbackRate = playbackRate;

@@ -1024,6 +1024,29 @@ section:first-of-type {
   animation: heroGradShift 11s ease infinite;
 }
 
+/* Mobile heat guard: animating background-position repaints the full hero
+   every frame — top sustained CPU cost on phones. Static gradient under 640px
+   (stops mid-shift, visually near-identical); desktop keeps the motion. */
+@media (max-width: 640px) {
+  .hero-grad-photo,
+  .hero-grad-design,
+  .hero-grad-events,
+  .hero-grad-wyzmind,
+  .hero-grad-print,
+  .hero-grad-web,
+  .hero-grad-home-print,
+  .hero-grad-services,
+  .wz-grad-inline {
+    animation: none !important;
+  }
+}
+
+/* Sub-pixel horizontal-scroll guard (e.g. /about 1px at 320px).
+   clip does not create a scroll container — position:sticky keeps working. */
+html {
+  overflow-x: clip;
+}
+
 .is-standalone .pt-20 {
   padding-top: calc(5rem + env(safe-area-inset-top, 20px));
 }

@@ -776,6 +776,7 @@ function LogoCarousel({ items, speed = 0.5 }: { items: { name: string; img: stri
 function VideoPlaylist({ videos }: { videos: string[] }) {
  const videoRef = useRef<HTMLVideoElement>(null);
  const idxRef = useRef(0);
+ const wrapRef = useRef<HTMLDivElement>(null);
 
  const advance = useCallback(() => {
  idxRef.current = (idxRef.current + 1) % videos.length;
@@ -795,10 +796,22 @@ function VideoPlaylist({ videos }: { videos: string[] }) {
  el.load();
  el.play().catch(() => {});
  }
- }, [videos]);
+  }, [videos]);
 
- return (
- <div className="h-full w-full bg-black relative overflow-hidden flex items-center justify-center">
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const el = videoRef.current;
+    if (!wrap || !el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { el.play().catch(() => {}); }
+      else { el.pause(); }
+    }, { threshold: 0.1 });
+    obs.observe(wrap);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+  <div ref={wrapRef} className="h-full w-full bg-black relative overflow-hidden flex items-center justify-center">
   <video
   ref={videoRef}
   className="absolute w-full h-full object-cover"
