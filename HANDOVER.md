@@ -23,6 +23,7 @@
 - Merch interaction check: the catalog reveal, quick view, and Escape-close/focus restoration work. However, the product-page “Add to Cart” state is cosmetic and the quick-view CTA links to Featured Artist rather than a purchase path. No merchandise checkout route was found. Board task 28 is urgent: build an approved payment/fulfilment path or stop presenting this as a purchasable store.
 - Regression baseline after this audit: `npm run test:run` passed 12 of 12 tests in 2 files. Vitest emitted its existing CommonJS/ESM config migration warning only.
 - Booking-path follow-up: the live Cal.com inline iframe renders to `app.cal.com/torree-harris-ddqqep/embed`; selecting a priced Photoshoot service exposes the enabled `Pay Now - $100` control. Neither a form nor checkout was submitted.
+- Added `PRICING_CANON_DECISION.md` to make the owner decision concrete without guessing at price, subscription, deposit, gift-card, or merch terms. It records the live contradictions and the exact approval fields needed to unlock board task 2.
 - No production source files changed in this session entry.
 
 ---

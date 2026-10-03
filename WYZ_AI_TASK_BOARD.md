@@ -7,7 +7,7 @@ Use this board for shared work. Claim an area before editing it. A task is compl
 
 | # | Task | Owner | Status | Evidence or dependency |
 |---:|---|---|---|---|
-| 1 | Establish the pricing and billing canon | Torreé Marcel | needs decision | Existing audits identify contradictory historic price language. |
+| 1 | Establish the pricing and billing canon | Torreé Marcel | needs decision | Use `PRICING_CANON_DECISION.md`; existing audits identify contradictory historic price language. |
 | 2 | Inventory all customer-facing prices, plans, and CTAs against the canon | Codex | blocked by task 1 | No edits until the canon is approved. |
 | 3 | Verify live revenue paths: inquiry, booking, checkout, plans, merch, gift cards | Codex | partially verified | Contact, booking, plans, gift-card, and merch catalog controls load. Do not submit forms or trigger payment without owner approval. Merch purchase is blocked by task 28; pricing/billing copy is blocked by tasks 1 and 23. |
 | 4 | Verify live analytics and lead attribution | Torreé Marcel + Codex | needs access | Requires owner-authorized dashboard evidence. |
