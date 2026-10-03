@@ -2,6 +2,14 @@
 
 ---
 
+---
+
+## Session 43 (2026-10-02) — Release gates for 56b5498 + Codex watch standing up (WYZMiND)
+
+- **Board #17 CLOSED:** `56b5498` (FAQ mobile-hero dead band) verified READY + `DEPLOY IS LIVE ✅`. Gates: build 0, lint 0 errors/92 warnings (baseline), vitest 12/12, axe **0/10**, E2E **7/7** live; 320px `faq_320_top_deadband.png` shows hero flush under nav (white band gone), scrollW=320. FAQ gap metrics unchanged (closed 12px / expanded 4px).
+- **Scrollbar note:** the ~10px white sliver on the right of full-bleed heroes at 320 = classic scrollbar gutter (hero div measures 310 = documentElement.clientWidth), not a layout defect; overlay scrollbars on real phones do not render it.
+- **Codex watch:** background watcher (`_STATE/codex_watch.log`, 20s cadence: commits + dirty files + src/docs writes) caught every Codex update this session (6bedc5b, 56b5498, 81a1680, 62b94ea, 7fc39d1, aa91cc5). It logs only — no pipes, cannot block the session.
+- **Codex escalations noted:** #28 merch purchase path (urgent, owner decision: real checkout vs relabel as non-purchasable catalog), #24 gift-card redemption, #25 any-inventory, #26 global-error document wrapper, #27 revenue-route loading states, #23 billing-term contradiction (owner), regression baseline vitest 12/12 matches.
 ## Session 42 (2026-10-02) — Outstanding-work triage (Codex)
 
 - Reclassified board task 5a as complete because later live evidence in tasks 9 and 10 already verifies its intended gutter and marquee scope.
@@ -234,3 +242,4 @@
 - `GET/POST /api/referral/leaderboard` - Public leaderboard
 - `GET/POST/GET /api/zeal/*` - Loyalty points system
 - `POST /api/forms` - Contact/booking forms
+
