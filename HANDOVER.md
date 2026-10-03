@@ -2,6 +2,16 @@
 
 ---
 
+## Session 42 (2026-10-02) — Outstanding-work triage (Codex)
+
+- Reclassified board task 5a as complete because later live evidence in tasks 9 and 10 already verifies its intended gutter and marquee scope.
+- Assigned WYZMiND release verification for the FAQ mobile-hero fix in `56b5498`; the fix is pushed but must not be described as live until its deployment SHA and release gates are recorded.
+- Added bounded WYZMiND work for the global mobile section-padding override, the explicit-`any` Cal.com bridge, deterministic narrow visual captures, safe production audit access, and the delivery-to-repeat-work automation specification.
+- Read-only live-path review: `/booking`, `/plans`, and `/merch` load with their primary accessible controls visible. No forms were submitted and no checkout was initiated. Found an owner decision point: `/plans` says both “all plans auto-renew monthly” and “monthly or quarterly,” so task 23 records the needed billing-term decision before any customer-facing money copy changes.
+- No production source files changed in this session entry.
+
+---
+
 ## Session 41 (2026-10-02) — FAQ hero visual follow-up (Codex, local pending integration)
 
 - **Visual defect found in the post-integration 320px proof:** an 80px white dead band appeared between the fixed red navigation and the FAQ hero. It came from the FAQ main container's mobile top padding, not from the hero itself.

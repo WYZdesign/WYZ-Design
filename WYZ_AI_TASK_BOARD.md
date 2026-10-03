@@ -12,7 +12,7 @@ Use this board for shared work. Claim an area before editing it. A task is compl
 | 3 | Verify live revenue paths: inquiry, booking, checkout, plans, merch, gift cards | Codex | ready | Read-only review first. |
 | 4 | Verify live analytics and lead attribution | Torreé Marcel + Codex | needs access | Requires owner-authorized dashboard evidence. |
 | 5 | Build the WYZMiND operations map for intake through repeat work | Codex + WYZMiND | done (WYZMiND half) | `WYZ_OPERATIONS_MAP.md` landed `2fe69e1` — code-evidence stages intake→repeat + gaps; Codex review + delivery-stage notes welcome |
-| 5a | Verify the deployed mobile gutter and marquee-spacing batch | WYZMiND + Codex | ready | Commit `4943727` has reported production status; collect fresh visual, accessibility, and E2E evidence. |
+| 5a | Verify the deployed mobile gutter and marquee-spacing batch | WYZMiND + Codex | done | Superseded by the verified 17-route live audit in task 9 and the final 24px-gutter close in task 10. |
 | 6 | Create an accessibility and mobile regression gate | Codex | ready | Build from current audited routes and existing tests. |
 | 7 | Audit loading, error, and empty states on revenue-critical routes | Codex | ready | Start with booking, services, merch, contact, and plans. |
 | 8 | Confirm public location, social profiles, and founder copy are consistent | Torreé Marcel + Codex | needs decision | Public materials need owner confirmation where facts differ. |
@@ -49,6 +49,13 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 | 13 | Repair narrow FAQ, navigation, gallery, and modal interaction defects | Codex | done (integrated by WYZMiND) | Batch landed `8528ab6` → live `8d0df90`/`a77bca1`: FAQ closed gap=12 ×5 / expanded gap=4 @320, no dup question, no overflow, nav Escape-close, gallery keyboard open/focus-in/Escape/focus-restore all PASS (`_STATE/web_shots/narrow/faq_kb_report.json`), axe 0/10, E2E 7/7 (harness updated: tile selector + cookie-consent step) |
 | 15 | Claim in-flight src edits (faq, globals, CookieBanner, Footer) | Codex | superseded by #13 | Codex scoped and documented the full batch under #13 (Session 39 / HANDOFF follow-on); integration running now |
 | 16 | Cap centered hero text widths (events/fd/home, L=R 16-19) to 24px | anyone | ready | optional; symmetric ≥16px margins already, nothing touches edges — see status update below |
+| 17 | Verify deployment and release gates for `56b5498` | WYZMiND | ready | Confirm the production deployment contains the FAQ mobile-hero fix, then run the required build, lint, Vitest, axe/E2E, and 320px visual checks. Do not mark live without the deployment SHA. |
+| 18 | Remove the mobile/tablet global section-padding override | WYZMiND | ready | `src/app/globals.css` lines 214-218 and 350 overwrite component-owned section gutters. Preserve vertical spacing, remove only forced side padding, then run the gutter audit at 320px and 360px across all routes. |
+| 19 | Type the Cal.com embed bridge without explicit `any` | WYZMiND | ready | `src/app/booking/page.tsx` uses `Record<string, any>` and several `as any` casts. Replace them with a small local interface while preserving the synchronous Cal.com namespace behavior; run TypeScript and booking interaction checks. |
+| 20 | Make narrow visual captures deterministic | WYZMiND | ready | The local narrow audit can capture unrevealed `ScrollReveal` sections. Update the WYZMiND-owned audit harness to wait for settled reveal states and record viewport, route, and capture timestamp with each image. |
+| 21 | Define a safe production visual-audit policy | WYZMiND + Torreé Marcel | needs decision | Production rate limiting can return 429 pages during broad route sweeps. Propose a trusted, rate-limited QA path or staged preview policy without weakening public protections. |
+| 22 | Turn delivery into proof, referral, and repeat-work automation | WYZMiND | ready to spec | Operations map confirms delivery confirmation, testimonial request, referral prompt, and lapsed-client win-back are gaps. Produce a scoped implementation spec with triggers, consent, owners, and success measures; no customer messaging goes live without Torreé's approval. |
+| 23 | Resolve visible subscription-term contradiction | Torreé Marcel | needs decision | Live `/plans` says both “all plans auto-renew monthly” and “monthly or quarterly.” Confirm the actual billing cadence and cancellation policy before Codex inventories and reconciles all price language under task 2. |
 
 | Area | Claimed by | Since |
 |---|---|---|
