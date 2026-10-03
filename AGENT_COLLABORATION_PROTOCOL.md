@@ -84,14 +84,23 @@ product, not attractive claims of completion.
 
 ## 6. Vercel build-cost rules (owner pays per build minute)
 
-1. `vercel.json` `ignoreCommand` builds ONLY when these paths change:
+1. `vercel.json` `ignoreCommand` builds ONLY when these paths change in the
+   PUSH RANGE (`VERCEL_GIT_PREVIOUS_COMMIT..HEAD`):
    `src/ public/ package.json package-lock.json next.config.* vercel.json
    tsconfig.json`. Everything else (docs, `_agent/`, AUDIT.md, handoffs)
-   auto-CANCELS = free. Guard dry-run before any docs push:
-   `git -C V:\wyzdesign diff --quiet HEAD^ HEAD -- src/ public/ package.json package-lock.json next.config.ts next.config.js vercel.json tsconfig.json; echo "exit=$LASTEXITCODE"` —
+   auto-CANCELS = free. (Guard is range-based — a docs-head multi-commit push
+   still builds if any commit in the push touched build paths. Schema max is
+   256 chars; current value is 252.) Dry-run before any push:
+   `git -C V:\wyzdesign diff --quiet <LAST_PROD_SHA> HEAD -- src/ public/ package.json package-lock.json next.config.ts next.config.js vercel.json tsconfig.json; echo "exit=$LASTEXITCODE"` —
    exit 0 = push will cancel (free); exit 1 = push will build (cost).
-2. Batch code work into as few pushes as practical. Never push file-by-file.
-3. Docs/handoff pushes are free — push them liberally.
+   `<LAST_PROD_SHA>` = `CHECKED SHA` line from `wyz_deploy_check.py --project wyzdesign`.
+2. **BUNDLE by default (owner directive 2026-10-02):** accumulate code
+   changes and ship them in ONE push/build per work session. Never push
+   file-by-file, never spin a build for a cosmetic one-liner. Split into a
+   separate push ONLY for serious / highly-impactful issues (site down,
+   revenue path broken, security, data loss) — those ship immediately as a
+   hotfix bundle and get their own deploy check.
+3. Docs/handoff pushes are free — push them liberally (they CANCEL, 0 build minutes).
 4. Never force-push. Never re-run failed builds blindly (a real build error
    costs money on retry — fix first, then push).
 
