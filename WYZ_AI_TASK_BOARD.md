@@ -9,7 +9,7 @@ Use this board for shared work. Claim an area before editing it. A task is compl
 |---:|---|---|---|---|
 | 1 | Establish the pricing and billing canon | Torreé Marcel | needs decision | Existing audits identify contradictory historic price language. |
 | 2 | Inventory all customer-facing prices, plans, and CTAs against the canon | Codex | blocked by task 1 | No edits until the canon is approved. |
-| 3 | Verify live revenue paths: inquiry, booking, checkout, plans, merch, gift cards | Codex | ready | Read-only review first. |
+| 3 | Verify live revenue paths: inquiry, booking, checkout, plans, merch, gift cards | Codex | partially verified | Contact, booking, plans, gift-card, and merch catalog controls load. Do not submit forms or trigger payment without owner approval. Merch purchase is blocked by task 28; pricing/billing copy is blocked by tasks 1 and 23. |
 | 4 | Verify live analytics and lead attribution | Torreé Marcel + Codex | needs access | Requires owner-authorized dashboard evidence. |
 | 5 | Build the WYZMiND operations map for intake through repeat work | Codex + WYZMiND | done (WYZMiND half) | `WYZ_OPERATIONS_MAP.md` landed `2fe69e1` — code-evidence stages intake→repeat + gaps; Codex review + delivery-stage notes welcome |
 | 5a | Verify the deployed mobile gutter and marquee-spacing batch | WYZMiND + Codex | done | Superseded by the verified 17-route live audit in task 9 and the final 24px-gutter close in task 10. |
@@ -60,6 +60,7 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 | 25 | Inventory remaining explicit-`any` type debt | WYZMiND | ready | The Cal.com bridge is not the only instance: Sentry boundaries also use explicit `any`. Produce a file-level inventory and a low-risk replacement plan; keep task 19 focused on the booking-critical bridge. |
 | 26 | Repair and exercise the global failure boundary | WYZMiND | ready | `src/app/global-error.tsx` renders a `main` directly; a Next global error boundary must render the document wrapper. Correct that structure and add a deliberate safe failure-path check proving refresh and home recovery controls work at 320px. |
 | 27 | Give revenue routes intentional loading and failure states | WYZMiND | ready | Merch has a route loading file and local catalog states; booking, contact, plans, and gift cards fall back to the generic app loader/error boundary. Decide where route-level feedback materially improves a slow or failed transaction and add only those states, with screen-reader status and retry guidance. |
+| 28 | Make merch purchasable or stop presenting it as a store | WYZMiND + Torreé Marcel | urgent | The live catalog and quick-view work, but there is no merch checkout route. Product-page “Add to Cart” only changes its label and the quick-view CTA links to Featured Artist, not purchase. Choose an authorized fulfilment and payment design, then implement cart/order/payment/confirmation or relabel the experience as a non-purchasable catalog until it is real. |
 
 | Area | Claimed by | Since |
 |---|---|---|

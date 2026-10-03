@@ -12,6 +12,7 @@
 - Continued revenue-path evidence: contact and gift-card pages load with labeled primary fields and actions; checkout/forms routes enforce CSRF and rate limits, and service checkout validates server-side prices. Gift cards are created after Stripe webhook confirmation, but no customer-facing redemption flow exists even though the live page promises redemption for services or merch. Board task 24 now scopes the secure design work before implementation.
 - Loading/error-state audit: the app has global loading, error, and not-found screens, and merch has catalog loading/error/empty handling. The global error boundary lacks the required document wrapper, while booking, contact, plans, and gift cards have no route-specific loading boundary. Board tasks 26 and 27 define the appropriate repair and scoped state coverage.
 - Fresh 320px local gutter audit across 17 public routes: no true edge-spacing failures. The only reported elements are the previously documented symmetric centered hero text on Home (19px), Events (17px), and FD (16px); task 16 remains optional rather than a defect fix.
+- Merch interaction check: the catalog reveal, quick view, and Escape-close/focus restoration work. However, the product-page “Add to Cart” state is cosmetic and the quick-view CTA links to Featured Artist rather than a purchase path. No merchandise checkout route was found. Board task 28 is urgent: build an approved payment/fulfilment path or stop presenting this as a purchasable store.
 - No production source files changed in this session entry.
 
 ---
