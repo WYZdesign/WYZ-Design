@@ -11,7 +11,7 @@ Use this board for shared work. Claim an area before editing it. A task is compl
 | 2 | Inventory all customer-facing prices, plans, and CTAs against the canon | Codex | blocked by task 1 | No edits until the canon is approved. |
 | 3 | Verify live revenue paths: inquiry, booking, checkout, plans, merch, gift cards | Codex | ready | Read-only review first. |
 | 4 | Verify live analytics and lead attribution | Torreé Marcel + Codex | needs access | Requires owner-authorized dashboard evidence. |
-| 5 | Build the WYZMiND operations map for intake through repeat work | Codex + WYZMiND | ready | Start with existing site and Command Center evidence. |
+| 5 | Build the WYZMiND operations map for intake through repeat work | Codex + WYZMiND | done (WYZMiND half) | `WYZ_OPERATIONS_MAP.md` landed `2fe69e1` — code-evidence stages intake→repeat + gaps; Codex review + delivery-stage notes welcome |
 | 5a | Verify the deployed mobile gutter and marquee-spacing batch | WYZMiND + Codex | ready | Commit `4943727` has reported production status; collect fresh visual, accessibility, and E2E evidence. |
 | 6 | Create an accessibility and mobile regression gate | Codex | ready | Build from current audited routes and existing tests. |
 | 7 | Audit loading, error, and empty states on revenue-critical routes | Codex | ready | Start with booking, services, merch, contact, and plans. |
@@ -46,8 +46,9 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 | 10 | Standardize residual 16px gutters to 24px (home/merch px-4 elements) | WYZMiND | done | `ae7b86c` LIVE: 6 files px-4→px-6 + merch `px-6!`; live re-audit 17 routes = 2 centered-typography artifacts left (documented); axe 0/10 + E2E 7/7 — see status update below |
 | 11 | Land coordination layer batch (protocol, `_agent/`, guard v2, handoffs) | WYZMiND | done | `a2c60bf` DEPLOY IS LIVE ✅; AUDIT Round 28 docs push = guard v2 live test |
 | 12 | Read-only live revenue-path verification (tasks 3 evidence) | Codex | ready | board task 3; no edits |
-| 13 | Repair narrow FAQ, navigation, gallery, and modal interaction defects | Codex | local complete, awaiting integration | FAQ duplicate marquee collision removed; mobile menu state, Escape close, labels, and 44px trigger added; gallery tiles are keyboard-operable; gallery lightbox receives focus management. TypeScript and lint pass; fresh deployed 320px and keyboard evidence still required. |
+| 13 | Repair narrow FAQ, navigation, gallery, and modal interaction defects | Codex | done (integrated by WYZMiND) | Batch landed `8528ab6` → live `8d0df90`/`a77bca1`: FAQ closed gap=12 ×5 / expanded gap=4 @320, no dup question, no overflow, nav Escape-close, gallery keyboard open/focus-in/Escape/focus-restore all PASS (`_STATE/web_shots/narrow/faq_kb_report.json`), axe 0/10, E2E 7/7 (harness updated: tile selector + cookie-consent step) |
 | 15 | Claim in-flight src edits (faq, globals, CookieBanner, Footer) | Codex | superseded by #13 | Codex scoped and documented the full batch under #13 (Session 39 / HANDOFF follow-on); integration running now |
+| 16 | Cap centered hero text widths (events/fd/home, L=R 16-19) to 24px | anyone | ready | optional; symmetric ≥16px margins already, nothing touches edges — see status update below |
 
 | Area | Claimed by | Since |
 |---|---|---|
@@ -61,4 +62,6 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 - **CookieBanner (L=20 x4/route):** blocked on #13 (Codex's dirty file) — fix lands with your batch or hand it to me after you commit.
 - **#5 WYZMiND half done:** WYZ_OPERATIONS_MAP.md (intake→repeat, code-evidence only). Codex review + delivery-stage notes welcome.
 - **New #14:** globals.css section sledgehammer — section, .section { padding: 1rem !important } (line ~214, mobile) + tablet 2rem (line ~370) overrides every section's intended padding (same bug class as Round 24/28 globals). File is Codex-claimed (#13) → whoever owns #13, remove the padding lines (keep margin-bottom) and re-run _agent/gutter_audit.py for regressions; section:first-of-type full-bleed strip (line ~968) also suspect.
-- **#13 integration started (WYZMiND):** full Codex batch (8 src files incl. checkout route + gallery/Navbar/useModalA11y/gift-card) reviewed diff-by-diff — no blockers. Build 0 / lint / tests running; ship → deploy → 320px FAQ closed+expanded + keyboard check → axe/E2E → Round 29 evidence.
+- **#13 integration DONE:** full Codex batch (11 src files) reviewed diff-by-diff, landed `8528ab6`, gates green, acceptance criteria all PASS live @320 (see #13 row).
+- **#10 final close (`a77bca1`):** CookieBanner modal `p-5→p-6` → gutter audit **74→10** (cookie 48→0). Residual 10 = symmetric centered-typography only (events hero 17/17, fd 16/16, home 19/19) — accepted, documented AUDIT R29.
+- **New #16:** optional — cap centered hero text widths (events `SIMPLIFY...`+p, fd `HOW THE ORACLE WORKS`, home `DIGITAL PRINTING`) so L=R ≥ 24: set max-widths to `calc(100vw - 3rem)` / trim `max-w-xs` on the centered hero blocks; re-run `_agent/gutter_audit.py`. Low priority (balanced ≥16px margins, nothing touches edges).

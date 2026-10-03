@@ -1,4 +1,15 @@
-# WYZ Design — Current State (Session 39)
+# WYZ Design — Current State (Session 40)
+
+---
+
+## Session 40 (2026-10-02) — Codex batch integration + guard range fix (WYZMiND)
+
+- **Integrated Codex board #13 (11 files, `8528ab6`):** diff-reviewed every hunk (no blockers), gates green (build 0 / lint 0-92 / vitest 12/12), pushed with attribution.
+- **Guard v2 flaw found + fixed:** docs-head multi-commit push (`2fe69e1`) CANCELED the build carrying `8528ab6` (head-only diff). Rewrote `ignoreCommand` to diff `VERCEL_GIT_PREVIOUS_COMMIT..HEAD`; Vercel schema max is 256 chars - first attempt failed (`d2aa503` ERROR), compressed to 252 (`8d0df90` READY). Verification matrix: mixed=build, docs-only=skip, prev==HEAD=skip, bad-rev=fail-open-build.
+- **Codex acceptance verified LIVE @320:** FAQ closed gap=12 x5 / expanded gap=4, zero dup-question remnants, no overflow; nav Escape-close PASS; gallery keyboard PASS (Enter opens, focus lands on Close inside dialog, Escape closes, focus restored to tile). Screenshots + `faq_kb_report.json` in `_STATE/web_shots/narrow/`.
+- **Gutter #10 final close (`a77bca1`):** CookieBanner `p-5->p-6` - audit 74->10 items (cookie 48->0); residual 10 all symmetric centered-typography (accepted; optional board #16).
+- **Harness fixes:** `wyz_axe_e2e.py` gallery flow follows Codex's button tiles (legacy div kept as fallback) + one-time cookie-consent dismissal (fixed-modal click interception flake).
+- **Final state:** axe 0/10, E2E 7/7, `DEPLOY IS LIVE` on `a77bca1`. `_agent/narrow_vision.py` left unstaged (Codex local BASE=localhost:3101 - restore before live audits).
 
 ## Session 39 (2026-10-02) — FAQ mobile accordion collision repair (Codex)
 

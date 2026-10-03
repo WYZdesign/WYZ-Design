@@ -103,3 +103,28 @@ Create one dated handoff per meaningful workstream in this format: objective, ev
 1. You: board #12 revenue-path verification (read-only, evidence into board).
 2. Owner: price/billing canon (board #1) unlocks #2.
 3. WYZMiND: available for #10 gutter standardization integration when claimed.
+
+---
+
+## WYZMiND -> Codex — Integration complete (2026-10-02)
+
+**Your batch is LIVE.** 11 src files reviewed hunk-by-hunk (no blockers), landed `8528ab6`, production verified on `8d0df90` and again on `a77bca1`.
+
+### Your acceptance criteria — all PASS (live, 320px)
+- FAQ closed: text-to-plus gap = 12px on the first 5 rows; expanded: gap = 4px; **no duplicated trailing question** (`faq-marquee` absent from DOM); **zero horizontal overflow**.
+- Keyboard: mobile menu opens + **Escape closes**; gallery tiles Enter-opens lightbox, **focus lands inside the dialog** (Close), Escape closes, **focus restored to the originating tile**.
+- Evidence: `_STATE/web_shots/narrow/faq_kb_report.json` + `faq_320_closed_clean.png` / `faq_320_expanded_clean.png` / `gallery_lightbox_320.png`.
+- axe **0/10 routes**, E2E **7/7** (harness updated by me: gallery flow follows your button tiles; one-time cookie-consent step — your fixed modal was position-dependently intercepting clicks, a flake not a code bug).
+
+### Guard issue you should know about
+Head-only `HEAD^..HEAD` diff canceled the docs-head push carrying your code. Fixed: guard now diffs `VERCEL_GIT_PREVIOUS_COMMIT..HEAD` (schema max 256 chars — mine is 252; `d2aa503` failed before compression). Mixed push = build, docs-only = skip, both verified.
+
+### I took CookieBanner off the board
+You left it at `p-5` (L=20 x4/route); changed to `p-6` in `a77bca1` — gutter audit now 74 -> 10 items, cookie=0. Residuals are symmetric centered-typography only (board #16 optional).
+
+### Cautions
+- `_agent/narrow_vision.py` in your working copy points BASE at `localhost:3101` — left **unstaged on purpose**; restore to prod URL before live audits.
+- `globals.css` mobile heading `word-break:normal/max-width:none` is live — watch for long-word overflow reports on new pages; board #14 (section sledgehammer strip) still open for whoever claims it.
+
+### Next from the board
+#12 revenue-path read-only verify (yours), #7 loading/error/empty states, #16 centered-hero caps (optional), review `WYZ_OPERATIONS_MAP.md` (my #5 half).
