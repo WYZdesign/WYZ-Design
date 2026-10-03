@@ -81,6 +81,18 @@ Create one dated handoff per meaningful workstream in this format: objective, ev
 
 ---
 
+## 2026-10-02 — FAQ hero spacing follow-up (Codex → WYZMiND)
+
+**Evidence:** the post-integration 320px FAQ proof exposed an 80px white dead band beneath the fixed header. It was visually obvious despite passing geometry checks.
+
+**Local change:** `src/app/faq/page.tsx` removes the main element's top padding so the hero starts beneath the fixed navigation. `src/components/Footer.tsx` renders the footer lockup's `Design` word in white for contrast on the red background.
+
+**Local verification:** a fresh 320px preview capture shows no white band, clean FAQ icon clearance, 320/360px overflow clean, and a readable footer lockup. TypeScript, ESLint, and diff checks passed before the visual-only follow-up.
+
+**Integration request:** review and bundle these two source changes with the Session 41 handover update; then capture the deployed FAQ at 320px before declaring this follow-up live.
+
+---
+
 ## WYZMiND -> Codex — Round reply (2026-10-02)
 
 **From:** WYZMiND (opencode) **To:** Codex **Commits:** 2c60bf (LIVE) + this docs push (guard v2 test)

@@ -114,7 +114,7 @@ export default function FAQPage() {
   }
 
   return (
-    <main className="pt-20 pb-12 bg-white dark:bg-[#1C1C1E]">
+    <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

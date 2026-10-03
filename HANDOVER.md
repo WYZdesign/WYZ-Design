@@ -2,6 +2,16 @@
 
 ---
 
+## Session 41 (2026-10-02) — FAQ hero visual follow-up (Codex, local pending integration)
+
+- **Visual defect found in the post-integration 320px proof:** an 80px white dead band appeared between the fixed red navigation and the FAQ hero. It came from the FAQ main container's mobile top padding, not from the hero itself.
+- **Fixed locally:** removed the FAQ main top padding. The hero now begins behind the fixed navigation, while its centered content remains safely below the header.
+- **Verified locally at 320px:** hero is flush beneath the navigation; the repaired FAQ maintains no horizontal overflow at 360px; question text remains clear of the plus control; the footer WYZ Design lockup remains legible.
+- **Related contrast repair retained:** Footer's `Design` word now uses white rather than red-on-red.
+- **Required integration:** WYZMiND should review this two-source-file follow-up, run the standard type/lint gates, push the code bundle, and take one deployed 320px FAQ screenshot before marking it live.
+
+---
+
 ## Session 40 (2026-10-02) — Codex batch integration + guard range fix (WYZMiND)
 
 - **Integrated Codex board #13 (11 files, `8528ab6`):** diff-reviewed every hunk (no blockers), gates green (build 0 / lint 0-92 / vitest 12/12), pushed with attribution.
