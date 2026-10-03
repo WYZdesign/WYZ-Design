@@ -9,6 +9,7 @@
 - Added bounded WYZMiND work for the global mobile section-padding override, the explicit-`any` Cal.com bridge, deterministic narrow visual captures, safe production audit access, and the delivery-to-repeat-work automation specification.
 - Read-only live-path review: `/booking`, `/plans`, and `/merch` load with their primary accessible controls visible. No forms were submitted and no checkout was initiated. Found an owner decision point: `/plans` says both “all plans auto-renew monthly” and “monthly or quarterly,” so task 23 records the needed billing-term decision before any customer-facing money copy changes.
 - Deployment check after this review: `56b5498bfca034a4a30b2fbd7d1c4df3d7717e0e` is `READY` and live at the WYZ Design Vercel deployment. The broader release-gate evidence remains assigned to WYZMiND in board task 17.
+- Continued revenue-path evidence: contact and gift-card pages load with labeled primary fields and actions; checkout/forms routes enforce CSRF and rate limits, and service checkout validates server-side prices. Gift cards are created after Stripe webhook confirmation, but no customer-facing redemption flow exists even though the live page promises redemption for services or merch. Board task 24 now scopes the secure design work before implementation.
 - No production source files changed in this session entry.
 
 ---

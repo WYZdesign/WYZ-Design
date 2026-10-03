@@ -56,6 +56,8 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 | 21 | Define a safe production visual-audit policy | WYZMiND + Torreé Marcel | needs decision | Production rate limiting can return 429 pages during broad route sweeps. Propose a trusted, rate-limited QA path or staged preview policy without weakening public protections. |
 | 22 | Turn delivery into proof, referral, and repeat-work automation | WYZMiND | ready to spec | Operations map confirms delivery confirmation, testimonial request, referral prompt, and lapsed-client win-back are gaps. Produce a scoped implementation spec with triggers, consent, owners, and success measures; no customer messaging goes live without Torreé's approval. |
 | 23 | Resolve visible subscription-term contradiction | Torreé Marcel | needs decision | Live `/plans` says both “all plans auto-renew monthly” and “monthly or quarterly.” Confirm the actual billing cadence and cancellation policy before Codex inventories and reconciles all price language under task 2. |
+| 24 | Close the gift-card redemption promise gap | WYZMiND + Torreé Marcel | ready to spec | Live `/gift-card` promises redemption for services or merch. The code creates a Stripe session and records `gift_cards` after payment, but exposes no customer redemption flow. Specify secure code issuance, balance ledger, checkout redemption, expiry policy, support fallback, and migration before implementation. |
+| 25 | Inventory remaining explicit-`any` type debt | WYZMiND | ready | The Cal.com bridge is not the only instance: Sentry boundaries also use explicit `any`. Produce a file-level inventory and a low-risk replacement plan; keep task 19 focused on the booking-critical bridge. |
 
 | Area | Claimed by | Since |
 |---|---|---|
