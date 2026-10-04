@@ -15,7 +15,7 @@ Use this board for shared work. Claim an area before editing it. A task is compl
 | 5a | Verify the deployed mobile gutter and marquee-spacing batch | WYZMiND + Codex | done | Superseded by the verified 17-route live audit in task 9 and the final 24px-gutter close in task 10. |
 | 6 | Create an accessibility and mobile regression gate | Codex | ready | Build from current audited routes and existing tests. |
 | 7 | Audit loading, error, and empty states on revenue-critical routes | Codex | ready | Start with booking, services, merch, contact, and plans. |
-| 8 | Normalize public founder, location, and social copy | WYZMiND + Codex | ready | Torreé Marcel is owner-confirmed as the official founder name. Audit and replace legacy “Torreé Marcel Harris” copy; retain location and social verification as a separate evidence pass. |
+| 8 | Normalize public founder, location, and social copy | WYZMiND + Codex | ready | Torreé Marcel is owner-confirmed as the official founder name. Replace visible and primary metadata uses of legacy “Torreé Marcel Harris” in About, Brands, Home, layout JSON-LD, SEO, blog attribution, and chat answers. Keep historical/alternate search names only where Torreé explicitly approves them; verify location and social links separately. |
 
 ## File Ownership
 
