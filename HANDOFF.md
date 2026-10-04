@@ -176,6 +176,51 @@ You left it at `p-5` (L=20 x4/route); changed to `p-6` in `a77bca1` — gutter a
 
 **Git state:** branch `claude/events-video-keyboard-a11y`, commit `598eba0` (on top of current master). Checked back out to `master` immediately after committing.
 
+## 2026-10-04 — Board #29 mobile chat launcher clearance (Claude -> WYZMiND)
+
+**Objective:** Stop the fixed chat launcher (`ChatWidget.tsx`) from sitting on
+top of in-flow content at 320/360px -- specifically Home's trust-signals stat
+bar and the mobile cookie banner, per `_HANDOVER_CLAUDE.md` board #29.
+
+**Root cause:** the bubble is `fixed bottom-6 right-6`, 56px, with zero
+awareness of page content -- it only ever hid for scroll/mobile-menu-lock,
+never for what's actually under it. Home's stat bar is `grid-cols-2` below
+640px, putting "9+ Years Running" bottom-right into the bubble's corner.
+`CookieBanner.tsx` is full-width `fixed bottom-0` on mobile (not inset like
+desktop), so the bubble also sat on top of it on every route.
+
+**Changes (4 files, +37/-3, additive only, nothing removed):**
+- `src/components/ChatWidget.tsx` -- new `clearZone` state + an
+  `IntersectionObserver` scoped to the bubble's own corner via negative
+  `rootMargin` (same technique this repo already uses in `SmoothCarousel`/
+  `LogoCarousel`/`VideoPlaylist`), folded into the existing hide-class check.
+- `src/app/home/page.tsx` -- `data-chat-avoid` on the trust-signals `<section>`.
+- `src/components/Footer.tsx` -- `data-chat-avoid` on the `<footer>` root
+  (covers every route generically, not just Home).
+- `src/components/CookieBanner.tsx` -- `data-chat-avoid` on the dialog root.
+
+**Local verification:** `npx tsc --noEmit` clean. Diff is minimal and
+additive -- no existing className, prop, or behavior removed or altered
+except the one hide-condition line in ChatWidget that now also checks
+`clearZone`.
+
+**Not yet verified:** live 320/360px screenshots. No dev server was running
+in the shared environment; I didn't start one to avoid resource/port
+contention with your active work. Requesting you run the narrow-viewport
+audit (`_agent/` tooling or a deploy preview) on `/`, `/faq`, `/booking`,
+`/plans` -- both chat-open and chat-closed states -- before calling board #29
+closed. Acceptance per the board: bubble never overlaps proof text, a
+primary CTA, a form control, the cookie banner, or safe areas at 320/360px,
+and keeps its 44px target + keyboard access (unchanged -- `aria-label` and
+button semantics untouched).
+
+**Integration note (WYZMiND):** Codex's review finding is correct -- the
+committed rootMargin `-{top} -{right} 0 0` scopes the observer to the
+LOWER-LEFT corner while the launcher sits LOWER-RIGHT. Fixed on integration
+to `-{top} 0 0 -{left}` before the gates run.
+
+---
+
 ## Verification record
 - Build: UNVERIFIED this session (no dev server run)
 - Lint: UNVERIFIED this session
