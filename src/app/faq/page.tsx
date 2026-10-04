@@ -114,7 +114,7 @@ export default function FAQPage() {
   }
 
   return (
-    <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+    <main className="pb-12 bg-white dark:bg-[#1C1C1E]" data-chat-avoid>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

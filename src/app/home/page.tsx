@@ -1149,7 +1149,7 @@ export default function HomePage() {
   </div>
   <div className="absolute inset-0 bg-black/20 z-[1]" />
   <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-<h2 className="text-[0.84rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase whitespace-nowrap mb-3 max-w-[calc(100vw-3rem)] mx-auto" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
+<h2 className="text-[0.78rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase whitespace-nowrap mb-3 max-w-[calc(100vw-3rem)] mx-auto" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
   <p className="text-white/80 tracking-[0.3em] text-[11px] sm:text-sm uppercase mb-3 max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
@@ -1177,7 +1177,7 @@ export default function HomePage() {
 
   {/* ═══ FAQ ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
+ <section className="py-12 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]" data-chat-avoid>
   <div className="max-w-7xl mx-auto px-6">
   <div className="relative flex flex-col lg:flex-row gap-8">
   <div className="lg:w-1/3 lg:sticky lg:top-28 lg:self-start">
