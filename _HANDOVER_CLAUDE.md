@@ -207,17 +207,19 @@ Every hero across all 9 pages now has:
 3. **Photography duplicate hero video** — both desktop and mobile hero blocks render their own `<video autoPlay>` of the same file simultaneously (CSS visibility toggles, both download). Real bandwidth waste on mobile.
 
 ### MEDIUM PRIORITY
-4. **`<div onClick>` as buttons** — gallery, designs, merch, events use div+onClick for lightbox/quick-view with no keyboard access. Convert to `<button>` for a11y.
-5. **Raw `<img>` in gallery lightbox** — full-size view uses `<img>` not `next/image`. Added `loading="lazy"` as partial fix, but full fix means switching to `next/image`.
-6. **No `next.config.js`** — no explicit image-optimization config. Images route through API proxy so not broken, but should exist.
 7. **Profile endpoint** — echoes raw internal error messages to users, doesn't validate website/social links stored (rendered as clickable links elsewhere).
 8. **Three duplicate image-editor components** — confirm with Torreé which to keep, delete the other two.
 
 ### LOW PRIORITY
 9. **`/community` NSFW gating** — needs fresh confirmation (couldn't re-test composer this session).
-10. **Carousel-pause-on-click** — new component logic for `/`, `/photography`, `/designs` carousels.
 11. **Full hero-banner container redesign** — square containers for half-panel heroes, 2:4 rectangle for full-stretched, centered/wrapped text, equal header spacing, side-by-side buttons.
-12. **Dark mode marquee outline** — Session 31 said the fill was `transparent` causing letter bleed, but the live code already has `#111` fill. Verify visually.
+
+### CLOSED THIS ROUND (2026-10-04, Claude, source-verified)
+4. **`<div onClick>` as buttons** — gallery (`page.tsx:134`) and merch (`page.tsx:258`) quick-view/lightbox triggers were already real `<button>` elements by this session. The one surviving instance (events page video-play cards) fixed in `claude/events-video-keyboard-a11y` (commit `598eba0`, board #32) — added role/tabIndex/aria-label/Enter-Space handling.
+5. **Raw `<img>` in gallery lightbox** — confirmed zero `<img>` tags in `src/app/gallery/page.tsx` or `src/app/photography/page.tsx`; both already use `next/image`. Already fixed, not touched this round.
+6. **No `next.config.js` image config** — `next.config.ts` already has a populated `images: { remotePatterns: [...] }` block. Already fixed, not touched this round.
+10. **Carousel-pause-on-click** — confirmed present on the events page carousels (`VideoCarousel`/`ColorAuraVideo` touch handlers) at minimum; treating as already covered unless a specific missing route is reported.
+12. **Dark mode marquee outline** — confirmed in `src/app/globals.css` lines ~1153-1156: `.dark .marquee-outline` uses `color: #111` / `-webkit-text-fill-color: #111` (solid fill, not transparent). Session 31's concern does not reproduce in current source. No visual/live check run this round (source-level confirmation only).
 
 ### ALREADY FIXED (don't chase)
 - `/merch` product carousel links — now point to `/merch/1` through `/merch/14`
