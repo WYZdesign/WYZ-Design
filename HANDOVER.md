@@ -4,6 +4,13 @@
 
 ---
 
+## Session 44 (2026-10-03) - Observability cleanup (Codex)
+
+- Replaced direct client-side console calls in `A11yAudit` and `ImagePicker` with the shared development logger.
+- Replaced intentionally silent telemetry failures with development-only warning logs so failed beacons remain diagnosable without affecting customer-facing flows.
+- Replaced the two user-facing em dashes in image-upload failures with ordinary punctuation to follow the copy rule.
+- Verification: `git diff --check`, `npx tsc --noEmit --incremental false`, `npm run test:run` (15/15), and `npm run lint` all passed. The existing Vitest CommonJS/ESM migration warning remains informational only.
+
 ## Session 43 (2026-10-02) — Release gates for 56b5498 + Codex watch standing up (WYZMiND)
 
 - **Board #17 CLOSED:** `56b5498` (FAQ mobile-hero dead band) verified READY + `DEPLOY IS LIVE ✅`. Gates: build 0, lint 0 errors/92 warnings (baseline), vitest 12/12, axe **0/10**, E2E **7/7** live; 320px `faq_320_top_deadband.png` shows hero flush under nav (white band gone), scrollW=320. FAQ gap metrics unchanged (closed 12px / expanded 4px).

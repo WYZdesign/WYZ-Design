@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logger } from "@/lib/logger";
 
 export default function A11yAudit() {
   useEffect(() => {
@@ -12,14 +13,15 @@ export default function A11yAudit() {
 
       axe.default.run(target, { runOnly: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"] }).then((results) => {
         if (results.violations.length === 0) {
-          console.log("[A11y] No accessibility violations found");
+          logger.info("a11y", "No accessibility violations found");
           return;
         }
-        console.group("[A11y] Accessibility violations:");
         results.violations.forEach((v) => {
-          console.warn(`${v.id}: ${v.help} (${v.impact ?? "unknown"})`, v.nodes.map((n) => n.html));
+          logger.warn("a11y", {
+            issue: `${v.id}: ${v.help} (${v.impact ?? "unknown"})`,
+            nodes: v.nodes.map((n) => n.html),
+          });
         });
-        console.groupEnd();
       });
     });
   }, []);

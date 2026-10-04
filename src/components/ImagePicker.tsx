@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FiUpload, FiFolder, FiX } from "react-icons/fi";
 import { useModalA11y } from "@/hooks/useModalA11y";
+import { logger } from "@/lib/logger";
 
 let _open = false; let _slotId = ""; let _albumMode = false;
 let _callback: ((v: string) => void) | null = null;
@@ -48,12 +49,12 @@ export function GlobalImagePicker() {
         _open = false; setOpen(false);
       } else {
         e.target.value = "";
-        setError("Upload failed — server returned no URL");
+        setError("Upload failed: server returned no URL");
       }
     } catch (err) {
       e.target.value = "";
-      setError("Upload failed — network error");
-      console.error("ImagePicker upload error", err);
+      setError("Upload failed: network error");
+      logger.error("image-picker-upload", err);
     }
   };
 

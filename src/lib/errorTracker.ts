@@ -2,9 +2,11 @@
  * Lightweight client-side error tracker.
  *
  * Chosen over @sentry/nextjs to avoid next.config instrumentation and
- * webpack build risk on Next 16. Logs to the console and best-effort
+ * webpack build risk on Next 16. Logs through the development logger and best-effort
  * POSTs to /api/telemetry which persists to Supabase (muse_error_logs).
  */
+
+import { logger } from "@/lib/logger";
 
 export interface TrackErrorPayload {
   message: string;
@@ -22,15 +24,13 @@ function toMessage(err: unknown): string {
 }
 
 /**
- * Track an error: logs to console and fires a best-effort telemetry beacon.
+ * Track an error: logs locally and fires a best-effort telemetry beacon.
  * Safe to call on both client and server; never throws.
  */
 export function trackError(err: unknown, context?: string): void {
   const message = toMessage(err);
 
-  // Always log locally.
-  // eslint-disable-next-line no-console
-  console.error("[trackError]", context ?? "", err);
+  logger.error(context ?? "track-error", err);
 
   const payload: TrackErrorPayload = { message, context };
 
@@ -48,12 +48,12 @@ export function trackError(err: unknown, context?: string): void {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
         keepalive: true,
-      }).catch(() => {
-        /* swallow — telemetry must never break the app */
+      }).catch((fetchError: unknown) => {
+        logger.warn("telemetry", fetchError);
       });
     }
-  } catch {
-    /* swallow — telemetry must never break the app */
+  } catch (telemetryError) {
+    logger.warn("telemetry", telemetryError);
   }
 }
 
@@ -80,9 +80,11 @@ export function trackEvent(name: string, props?: Record<string, unknown>): void 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
         keepalive: true,
-      }).catch(() => {});
+      }).catch((fetchError: unknown) => {
+        logger.warn("event-telemetry", fetchError);
+      });
     }
-  } catch {
-    /* swallow */
+  } catch (telemetryError) {
+    logger.warn("event-telemetry", telemetryError);
   }
 }
