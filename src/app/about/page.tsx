@@ -156,7 +156,7 @@ export default function AboutPage() {
                   We believe every artist, brand, and creative deserves access to professional-grade design, photography, and creative strategy, no gatekeeping, no pretension, and no paying for work that looks like it came from a template.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
-                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel Harris</span> built this from the ground up: 60+ events, 30+ clients, and a creative standard that doesn't drop based on who's paying.
+                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel</span> built this from the ground up: 60+ events, 30+ clients, and a creative standard that doesn't drop based on who's paying.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed">
                   Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them. We don't outsource or pass you around. We do the work ourselves, start to finish.
@@ -173,7 +173,7 @@ export default function AboutPage() {
             <div className="flex flex-col items-center gap-12 text-center">
               <div className="w-full max-w-md">
                 <div className="relative aspect-[3/4] max-w-sm mx-auto overflow-hidden">
-                   <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel Harris, Founder of WYZ Design" fill sizes="(max-width: 640px) 90vw, 384px" className="w-full h-full object-cover" priority />
+                    <Image src="/images/torre-marcel.jpg" alt="Torreé Marcel, Founder of WYZ Design" fill sizes="(max-width: 640px) 90vw, 384px" className="w-full h-full object-cover" priority />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#DF3131]/10 via-transparent to-transparent" />
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function AboutPage() {
                  </h2>
                 <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">
                   <p>
-                    Torreé Marcel Harris (Torreé Marcel, or Torre Harris, pronunciation tor-eee-aye) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. It started as flyers for local artists and grew into a brand serving 30+ clients with 60+ events produced.
+                    Torreé Marcel (pronounced tor-eee-aye) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. It started as flyers for local artists and grew into a brand serving 30+ clients with 60+ events produced.
                   </p>
                   <p>
                     With a background in graphic design, event production, and brand strategy, Torreé saw artists and small brands getting underserved by agencies that didn't get their vision or overcharged for work that didn't reflect who they were. WYZ Design was the answer.

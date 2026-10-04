@@ -210,10 +210,9 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   /* Forms — prevent overflow */
   input, select, textarea { max-width: 100% !important; box-sizing: border-box !important; }
 
-  /* Consistent section margins — 1rem side, 3rem vertical gap */
+  /* Vertical rhythm only. Side gutters are owned by each component's own
+     px-* classes — forcing 1rem here overrode every section's design gutter. */
   section, .section {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
     margin-bottom: 3rem !important;
   }
   section:last-of-type, .section:last-of-type { margin-bottom: 0 !important; }
@@ -347,7 +346,6 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
    ═══════════════════════════════════════════════════════════ */
 @media (min-width: 768px) and (max-width: 1023px) {
   body { font-size: 17px; line-height: 1.68; }
-  section, .section { padding-left: 2rem !important; padding-right: 2rem !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════

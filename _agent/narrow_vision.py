@@ -99,13 +99,30 @@ def stepped_scroll(pg, h=720):
     pg.evaluate("window.scrollTo(0,0)")
     pg.wait_for_timeout(400)
 
+def settle_reveals(pg, timeout=10000):
+    """Deterministic captures: block until every ScrollReveal wrapper's opacity
+    transition has finished (computed opacity settles at 1 only when the
+    transition completes), so screenshots never catch half-revealed sections."""
+    try:
+        pg.wait_for_function(
+            "() => [...document.querySelectorAll('div[style]')]"
+            ".filter(e => e.style.opacity !== '')"
+            ".every(e => getComputedStyle(e).opacity === '1')",
+            timeout=timeout,
+        )
+    except Exception:
+        pass
+    pg.wait_for_timeout(250)
+
 def main():
     report = {}
     with sync_playwright() as p:
         browser = p.chromium.launch()
         for route in ROUTES:
             sl = slug(route)
-            entry = {"shots": [], "errors": []}
+            entry = {"shots": [], "errors": [],
+                     "meta": {"route": route, "viewport": {"width": 320, "height": 720},
+                              "captured_at": time.strftime("%Y-%m-%dT%H:%M:%S%z")}}
             try:
                 ctx = browser.new_context(viewport={"width": 320, "height": 720},
                     user_agent=CHROME_UA, is_mobile=True, has_touch=True, device_scale_factor=1)
@@ -115,6 +132,7 @@ def main():
                 pg.wait_for_timeout(1500)
                 enter_and_dismiss(pg)
                 stepped_scroll(pg)
+                settle_reveals(pg)
                 pg.add_style_tag(content=PAUSE_CSS)
                 pg.wait_for_timeout(300)
                 # overflow at 360 too

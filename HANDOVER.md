@@ -2,6 +2,15 @@
 
 ---
 
+## Session 45 (2026-10-04) — Bundle: claude merges + tasks 8/18/19/20/22/24/25/26/27 (WYZMiND)
+
+- **Claude branches reviewed + merged:** `claude/handover-housekeeping` (745652a), `claude/hero-text-width-caps` (9c986eb -> 46394a6, board #16), `claude/events-video-keyboard-a11y` (598eba0 -> bbacb85, board #32), `claude/mobile-chat-clearance` (3278627 -> 7591d7d, board #29). HANDOFF/board conflicts resolved keeping both sides (CRLF-drift whole-file conflicts resolved via content-delta review with --ignore-cr-at-eol).
+- **Codex review finding applied:** task-29 rootMargin corrected from `-{top} -{right} 0 0` (lower-LEFT footprint) to `-{top} 0 0 -{left}` (lower-RIGHT, matching the bubble). See integration note in the 2026-10-04 HANDOFF #29 block.
+- **Task 8 (founder name):** all 8 scoped files normalized to Torreé Marcel; identifiers (LinkedIn, Cal.com slug, images) kept; JSON-LD alternateName + keyword aliases removed pending explicit approval. Zero `Marcel Harris` left in src.
+- **Task 18:** globals.css forced section side-padding removed (mobile + tablet), vertical rhythm kept. **Task 19:** CalStub interfaces. **Task 20:** settle_reveals + viewport/route/timestamp metadata in both harnesses + 320/360 WIDTHS + BASE arg. **Task 26:** html/body wrapper + 3-part vitest. **Task 27:** RouteLoading/RouteErrorState shared components, 8 route files.
+- **Task 22/24:** specs written to `SPECS.md` (approval-gated). **Task 25:** `TYPE_DEBT.md` (38 hits / 18 files, 3-tier plan). Codex's uncommitted Session 44 bullets carried in this push.
+- **Gates on the combined tree:** build 0, lint 0 errors/92 warnings, vitest 15/15, py_compile 0 (harness). Single bundle push = one build. 320/360 gutter re-audit + chat-launcher visual verification run against live post-deploy (follow-up docs commit carries evidence).
+
 ---
 
 ## Session 44 (2026-10-03) - Observability cleanup (Codex)
@@ -10,6 +19,8 @@
 - Replaced intentionally silent telemetry failures with development-only warning logs so failed beacons remain diagnosable without affecting customer-facing flows.
 - Replaced the two user-facing em dashes in image-upload failures with ordinary punctuation to follow the copy rule.
 - Verification: `git diff --check`, `npx tsc --noEmit --incremental false`, `npm run test:run` (15/15), and `npm run lint` all passed. The existing Vitest CommonJS/ESM migration warning remains informational only.
+- Fresh production 320px/360px measurements passed for FAQ, home, booking, plans, and merch: each route returned HTTP 200 and had no horizontal overflow. The harness must force `content-visibility: visible` before full-page captures, because deferred offscreen sections otherwise appear as false blank blocks in Chromium screenshots. The booking Cal.com endpoint returned HTTP 200, but its third-party frame needs a longer-load visual interaction check before it can be marked passed.
+- Review finding for Claude task 29: the in-progress chat intersection observer currently shrinks the top and right edges of its root, which tests the lower-left corner. The launcher is lower-right, so the root margin must shrink the top and left edges instead before integration.
 
 ## Session 43 (2026-10-02) — Release gates for 56b5498 + Codex watch standing up (WYZMiND)
 

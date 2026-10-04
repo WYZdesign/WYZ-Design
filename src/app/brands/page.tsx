@@ -7,11 +7,11 @@ const SITE = "https://www.wyzdesign.com";
 
 export const metadata: Metadata = {
     title: "Our Brands",
-  description: "WYZ Design is the parent of Wild Yet Zealous, Dying Breed Crew, and Nomadic Breed. One creative ecosystem, four brands, built by Torreé Marcel Harris.",
+  description: "WYZ Design is the parent of Wild Yet Zealous, Dying Breed Crew, and Nomadic Breed. One creative ecosystem, four brands, built by Torreé Marcel.",
   alternates: { canonical: `${SITE}/brands` },
   openGraph: {
   title: "Our Brands",
-    description: "Wild Yet Zealous, Dying Breed Crew, Nomadic Breed, and WYZ Design. One creative ecosystem built by Torreé Marcel Harris.",
+    description: "Wild Yet Zealous, Dying Breed Crew, Nomadic Breed, and WYZ Design. One creative ecosystem built by Torreé Marcel.",
     url: `${SITE}/brands`,
     siteName: "WYZ Design",
     type: "website",
@@ -24,7 +24,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   name: "WYZ Design Brands",
-  description: "WYZ Design, Wild Yet Zealous, Dying Breed Crew, and Nomadic Breed. One creative ecosystem built by Torreé Marcel Harris.",
+  description: "WYZ Design, Wild Yet Zealous, Dying Breed Crew, and Nomadic Breed. One creative ecosystem built by Torreé Marcel.",
   url: `${SITE}/brands`,
   about: { "@id": `${SITE}/#organization` },
 };
@@ -76,7 +76,7 @@ export default function BrandsPage() {
         </div>
 
         <div className="text-center p-8 bg-[#F5F5F3] dark:bg-[#252528] rounded-2xl">
-          <p className="text-[#333] dark:text-[#e0e0e0] font-heading font-bold text-[1.15rem] mb-1">Built by Torreé Marcel Harris</p>
+          <p className="text-[#333] dark:text-[#e0e0e0] font-heading font-bold text-[1.15rem] mb-1">Built by Torreé Marcel</p>
           <p className="text-[#666] dark:text-[#666] text-[14px]">
             Founder and Creative Director of WYZ Design and its family of brands.{" "}
             <Link href="/about" className="text-[#DF3131] hover:underline font-semibold">Read the full story</Link>

@@ -284,17 +284,33 @@ export default function BookingPage() {
   );
 }
 
+interface CalNamespaceStub {
+  (...args: unknown[]): void;
+  q: unknown[][];
+}
+
+interface CalStub {
+  (...args: unknown[]): void;
+  q: unknown[][];
+  loaded: boolean;
+  ns: Record<string, CalNamespaceStub>;
+}
+
+interface CalWindow extends Window {
+  Cal?: CalStub;
+}
+
 function CalBooking({ calLink }: { calLink: string }) {
   useEffect(() => {
     if (!calLink || typeof window === "undefined") return;
 
-    const w = window as Record<string, any>;
+    const w = window as CalWindow;
     if (!w.Cal) {
       // Official Cal.com embed stub. Namespace APIs must be created
       // SYNCHRONOUSLY during init, before embed.js loads, or callers
       // that invoke Cal.ns.<name> right after init will crash.
       w.Cal = function (...args: unknown[]) {
-        const cal = w.Cal as any;
+        const cal = w.Cal as CalStub;
         if (!cal.loaded) {
           cal.ns = {};
           cal.q = cal.q || [];
@@ -305,7 +321,7 @@ function CalBooking({ calLink }: { calLink: string }) {
         if (args[0] === "init") {
           const namespace = String(args[1] || "");
           if (!namespace) return;
-          const api: any = (...inner: unknown[]) => {
+          const api: CalNamespaceStub = (...inner: unknown[]) => {
             api.q.push(inner);
           };
           api.q = [];
@@ -313,7 +329,7 @@ function CalBooking({ calLink }: { calLink: string }) {
           return;
         }
         cal.q.push(args);
-      };
+      } as CalStub;
       w.Cal.q = [];
       w.Cal.loaded = false;
     }

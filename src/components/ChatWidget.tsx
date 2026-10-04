@@ -88,9 +88,12 @@ export default function ChatWidget() {
       observer?.disconnect();
       const vw = window.innerWidth;
       const vh = window.innerHeight;
+      // Shrink the root to the bubble's own LOWER-RIGHT corner: negative top
+      // margin drops the root's top edge down, negative LEFT margin pushes the
+      // left edge right (Codex review: top+right would test the lower-left).
       observer = new IntersectionObserver(
         (entries) => setClearZone(entries.some((e) => e.isIntersecting)),
-        { rootMargin: `-${Math.max(vh - CLEARANCE - 24, 0)}px -${Math.max(vw - CLEARANCE - 24, 0)}px 0px 0px` }
+        { rootMargin: `-${Math.max(vh - CLEARANCE - 24, 0)}px 0px 0px -${Math.max(vw - CLEARANCE - 24, 0)}px` }
       );
       targets.forEach((t) => observer!.observe(t));
     };

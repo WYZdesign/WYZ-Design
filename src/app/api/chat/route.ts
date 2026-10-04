@@ -17,7 +17,7 @@ interface ChatMessage {
 const KNOWLEDGE = `You are the WYZ Design AI assistant. You help visitors learn about services, pricing, booking, and the brand. Be concise, personable, and helpful. Use contractions. No em dashes. No AI jargon.
 
 ## ABOUT WYZ DESIGN
-WYZ Design is a creative agency founded by Torreé Marcel Harris, based in Los Angeles and Chicago. We work with startup businesses, individual artists, and established companies. Our motto: "Built by Artists, for Artists."
+WYZ Design is a creative agency founded by Torreé Marcel, based in Los Angeles and Chicago. We work with startup businesses, individual artists, and established companies. Our motto: "Built by Artists, for Artists."
 
 VALUES: Show Up and Do the Work (no outsourcing), Creativity Earns Real Money (real work, real compensation), Fast Never Sloppy (speed from skill, not shortcuts), Built by Artists for Artists (we build what we wish existed).
 
@@ -188,7 +188,7 @@ Use this naturally when they ask about rewards, tiers, progress, pricing, or boo
         } else if (lastUser.includes("hello") || lastUser.includes("hi") || lastUser.includes("hey") || lastUser.includes("what's up")) {
           response = "Hey! Welcome to WYZ Design. I can help you learn about our services, check pricing, or get you booked. What are you looking for?";
         } else if (lastUser.includes("who") || lastUser.includes("about") || lastUser.includes("founder")) {
-          response = "WYZ Design was founded by Torreé Marcel Harris. We're a creative agency based in LA and Chicago, working with startups, artists, and established companies. Our motto: Built by Artists, for Artists. Remote clients welcome worldwide.";
+          response = "WYZ Design was founded by Torreé Marcel. We're a creative agency based in LA and Chicago, working with startups, artists, and established companies. Our motto: Built by Artists, for Artists. Remote clients welcome worldwide.";
         } else if (lastUser.includes("thank")) {
           response = "You're welcome! If you need anything else, I'm here. Have a great day!";
         } else {

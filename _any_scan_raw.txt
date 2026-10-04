@@ -1,0 +1,181 @@
+
+## src\app\admin\page.tsx (2)
+  L70: const [data, setData] = useState<any>(null);
+  L1172: const [health, setHealth] = useState<any>(null);
+
+## src\app\api\admin\route.ts (1)
+  L32: return (data || []).map((r: any) => ({
+
+## src\app\api\album-images\route.ts (1)
+  L23: const res = await fetch(url, { next: { revalidate: 60 } } as any);
+
+## src\app\api\chat\route.ts (2)
+  L77: Redeem Zeal on the /loyalty page for real rewards: $25 off any service (500), free photo retouching (750), mer
+  L171: response = "We handle the full creative process: photography ($100/hr), graphic design ($150/3hr), video produ
+
+## src\app\api\fd\drive\route.ts (2)
+  L55: const files = (data.files || []).map((f: any) => ({
+  L74: } catch (err: any) {
+
+## src\app\api\fd\oracle\route.ts (1)
+  L65: | Loft 6 (Sunset Cycwall) | Sunset gradient cyc wall | Golden hour at any time |
+
+## src\app\api\newsletter\route.ts (1)
+  L70: <a href="${BASE_URL}/api/newsletter?unsubscribe=${token}" style="color:#aaa;">Unsubscribe</a> from these email
+
+## src\app\clear-cache\page.tsx (1)
+  L63: You can also visit any page with <code className="bg-white/10 px-1 rounded">?reset=1</code> to auto-clean on l
+
+## src\app\copyright-notice\page.tsx (1)
+  L30: <p>The designs, photographs, and creative works displayed on this website are the work product of WYZ Design. 
+
+## src\app\gift-card\page.tsx (2)
+  L56: <p className="text-lg text-[#666666] dark:text-[#b0b0b0] mb-6 text-center">The perfect gift for anyone who nee
+  L74: <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Apply to any service or merch order. No expiration.<
+
+## src\app\home\page.tsx (1)
+  L607: { q: "What graphic design services do you provide?", a: "We design logos, brand identities, flyers, posters, a
+
+## src\app\layout.tsx (1)
+  L59: { url: "/favicon.ico", sizes: "any" },
+
+## src\app\loyalty\page.tsx (3)
+  L50: { id: "discount-25",      title: "$25 off any service",           cost: 500,  note: "Discount code honored on 
+  L53: { id: "shoot-extra-hour", title: "Extra hour on any photoshoot",  cost: 1200, note: "$100 value, mention when 
+  L54: { id: "discount-100",     title: "$100 off any booking",          cost: 1750, note: "Best value per Zeal" },
+
+## src\app\mobile-splash\page.tsx (1)
+  L186: Swipe or tap any concept to explore deeper implementation details
+
+## src\app\nomadic-breed\page.tsx (1)
+  L41: { icon: "FiCamera", title: "Pop-Up Shoots", desc: "No studio? No problem. We bring the full WYZ setup to any l
+
+## src\app\plans\page.tsx (5)
+  L211: <p className="text-white text-[11px]">10% discount when added to any subscription plan</p>
+  L266: Affordable plans for any budget. Find what works best for you and your brand.
+  L483: All subscription plans auto-renew monthly or quarterly. You can cancel at any time by contacting our
+  L486: you won&apos;t receive a refund for any unused portion.
+  L520: that reflects your brand&apos;s unique identity. Add it to any subscription plan and
+
+## src\app\printing\page.tsx (2)
+  L23: { name: "Die Cut", desc: "The term 'die cut' means your sticker gets cut around the shape of your artwork. Die
+  L324: subtitle="Custom pin-back buttons for any occasion."
+
+## src\app\privacy-policy\page.tsx (1)
+  L27: <p>When you book a service, subscribe, or contact us, we collect personal information including your name, ema
+
+## src\app\refund-return-policy\page.tsx (1)
+  L43: <p>Gift cards are non-refundable once purchased. They do not expire and can be applied to any service or merch
+
+## src\app\search\page.tsx (1)
+  L16: { title: "Gift Cards", href: "/gift-card", desc: "Gift cards for any occasion", tags: ["gift", "card", "presen
+
+## src\app\service-page\photo-retouching\page.tsx (1)
+  L107: <p className="mb-6">Send us your images and we will provide a free estimate before any work begins.</p>
+
+## src\app\splash-showcase\page.tsx (2)
+  L34: if ((DeviceOrientationEvent as any).requestPermission) {
+  L35: (DeviceOrientationEvent as any).requestPermission()
+
+## src\app\web-design\page.tsx (4)
+  L88: { num: "02", title: "Design", desc: "Wireframes and mockups you approve before any code is written. You see it
+  L115: if (typeof DeviceOrientationEvent !== "undefined" && typeof (DeviceOrientationEvent as any).requestPermission 
+  L116: const perm = await (DeviceOrientationEvent as any).requestPermission();
+  L336: <p className="text-[#666] dark:text-white/50 text-[14px] mt-3 max-w-lg mx-auto">Tap any card to visit the live
+
+## src\app\wyzmind\page.tsx (1)
+  L163: <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] sm:text-[17.6px] mb-12">Click any card t
+
+## src\components\AnalyticsProvider.tsx (2)
+  L137: const fbq = (window as any).fbq;
+  L149: const ttq = (window as any).ttq;
+
+## src\components\ChatWidget.tsx (1)
+  L33: // Board #29: true while any [data-chat-avoid] element occupies the bubble's
+
+## src\components\CookieBanner.tsx (1)
+  L194: You can change your preferences at any time from the footer.{" "}
+
+## src\components\DynamicForm.tsx (1)
+  L125: } catch (err: any) {
+
+## src\components\ErrorBoundary.tsx (2)
+  L23: if (typeof window !== "undefined" && (window as any).Sentry) {
+  L24: (window as any).Sentry.captureException(error, {
+
+## src\components\Navbar.tsx (1)
+  L54: { title: "Gift Cards", href: "/gift-card", desc: "Gift cards for any occasion", tags: ["gift", "card", "presen
+
+## src\components\PageRenderer.tsx (1)
+  L116: Click any image to replace it
+
+## src\components\Pricing.tsx (1)
+  L61: All our subscription plans are set to auto-renew on a monthly or quarterly basis, depending on the plan. We wi
+
+## src\components\PricingCalculator.tsx (1)
+  L43: a: "We require a 50% deposit to book any service. Deposits are non-refundable within 48 hours of the scheduled
+
+## src\components\SentryErrorBoundary.tsx (2)
+  L23: if (typeof window !== "undefined" && (window as any).Sentry) {
+  L24: (window as any).Sentry.captureException(error, {
+
+## src\components\SplashVariants.tsx (2)
+  L262: const ref = useRef<HTMLDivElement>(null), cv = useRef<HTMLCanvasElement>(null), puffs = useRef<any[]>([]);
+  L392: const ref = useRef<HTMLDivElement>(null), cv = useRef<HTMLCanvasElement>(null), parts = useRef<any[]>([]), bur
+
+## src\hooks\useGyroPermission.ts (1)
+  L22: const DOE = DeviceOrientationEvent as any;
+
+## src\hooks\useGyroscope.ts (2)
+  L28: typeof (DeviceOrientationEvent as any).requestPermission === "function"
+  L30: const permission = await (DeviceOrientationEvent as any).requestPermission();
+
+## src\lib\blog.ts (4)
+  L75: "Logo trends come and go, but a few things never change. A good logo is simple, it reads clearly at any size, 
+  L325: "The technical stuff, exposure, focus, composition, that's table stakes. The real job is anticipating emotion 
+  L359: "From concept to the finished piece in your hand, we handle the whole thing so you don't have to guess at any 
+  L425: "And the golden rule: get everything in writing. A two-sentence email summary after every call will save you f
+
+## src\lib\bookkeeping.ts (5)
+  L136: return (data || []).map((r: any) => ({
+  L152: client_name: (data as any).bk_clients?.name || null,
+  L153: category_name: (data as any).bk_categories?.name || null,
+  L179: const updates: Record<string, any> = { updated_at: new Date().toISOString() };
+  L268: for (const t of txns as any[]) {
+
+## src\lib\email.ts (1)
+  L99: We'll reach out within 24 hours to confirm your session details, answer any questions, and get you ready to sh
+
+## src\lib\nsfw-constants.ts (1)
+  L5: * Individual images within any category can be auto-detected as NSFW by the
+
+## src\lib\nsfw.ts (1)
+  L8: * Individual images within any category can be auto-detected as NSFW by the
+
+## src\lib\rate-limit-redis.ts (2)
+  L3: let redis: any = null;
+  L9: let Redis: any;
+
+## src\lib\stripe.ts (2)
+  L10: _stripe = new Stripe(key, { apiVersion: "2025-03-31.basil" as any });
+  L87: product_data: { name: "WYZ Design Gift Card", description: "Redeemable for any WYZ Design service" },
+
+## src\lib\supabase.ts (1)
+  L20: return (getSupabase() as any)[prop];
+
+## src\lib\wyzmind.ts (7)
+  L125: function datum(row: any): any {
+  L127: const out: Record<string, any> = {};
+  L182: return (data as any)?.role === "admin";
+  L191: return (data as any[] | null || []).map(datum);
+  L233: return (data as any[] | null || []).map((r) => ({ email: r.email, subscribedAt: r.subscribed_at }));
+  L303: return (searchData.result || []).map((r: any) => ({
+  L327: return { points: (data as any)?.points ?? 0, tier: (data as any)?.tier ?? "recruit", joined: (data as any)?.cr
+
+## src\lib\zeal-store.ts (1)
+  L85: * *before* any `addLoyaltyPoints` call in the same request, so
+
+## src\lib\zeal.ts (3)
+  L130: { id: "discount-25",       title: "$25 off any service",              cost: 500,  note: "Discount code honored
+  L133: { id: "shoot-extra-hour",  title: "Extra hour on any photoshoot",     cost: 2000, note: "$100 value, mention w
+  L134: { id: "discount-100",      title: "$100 off any booking",             cost: 2000, note: "Best value per Zeal" 

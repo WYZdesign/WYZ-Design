@@ -18,7 +18,7 @@ export interface BlogPost {
 }
 
 export const BLOG_AUTHOR = {
-  name: "Torreé Marcel Harris",
+  name: "Torreé Marcel",
   url: "https://www.wyzdesign.com/about",
 };
 
