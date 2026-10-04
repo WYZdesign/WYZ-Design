@@ -2,6 +2,16 @@
 
 ---
 
+## Session 46 (2026-10-04) - Gutter/sliver root causes + final verification (WYZMiND)
+
+- **Live audit found 3 misses (then 1 new one)** -> chased every root cause to source, 4 code pushes total: `b82a48d` (bundle, see S45) -> `989f2ff` -> `d0e1e3e` -> `6005b5f` (all DEPLOYED and verified live).
+- **Root cause 1 - the 10px right sliver:** `<body style={{ scrollbarGutter: "stable" }}>` in `layout.tsx` reserved 10px that no scrollbar fills (overlay/empty) -> content box 310 inside a 320 viewport, asymmetric gutters (e.g. fd L16/R26). Removed the inline style; wrappers now measure 320/0/0.
+- **Root cause 2 - caps dead at mobile:** two `!important` blocks in `globals.css` beat every Tailwind max-width utility: `p { max-width: 36rem !important }` (=576px, the computed-value mystery; also forced mx-auto everywhere) and `h1/h2/h3/h4 { max-width: none !important }` in the mobile heading block. Utilities existed and matched (`matchesCalc: true`) but lost the cascade. Fixed: p -> `min(36rem, calc(100vw - 3rem)) !important`; h1-h4 -> `min(100%, calc(100vw - 3rem)) !important`. Every mobile paragraph/heading now gets >=24px gutters in one place; no per-component edits needed (events p, fd p, fd h2 all hit L24/R24/w272 after this).
+- **Root cause 3 - min-content floor:** events page title is an H1 whose mobile clamp renders ~48px at 320; "PLANNING" min-content = 286px > the 272px capped measure -> shrink-to-fit overflows no matter what max-width says. Added `@media (max-width: 380px) { h1 { font-size: clamp(2rem, 9vw, 2.55rem) !important } }` (iPhone 12+/390px+ untouched).
+- **Root cause 4 - nowrap rule:** globals mobile rule (`a/button[class*="px-"]...:not([class*="whitespace-normal"])` -> `white-space: nowrap !important`) forced about-page CTA min-content to 290px (>272). Used the rule's own escape hatch: `whitespace-normal` + `px-6 sm:px-10` on both about CTAs.
+- **Board #29 close-out:** `data-chat-avoid` added to home FAQ section + `/faq` main (FAQ accordion buttons measured 886/668 px2 under the bubble pre-fix). Live at `6005b5f`: FAQ overlap **0 px2**, footer hide confirmed, bubble opacity -> 0 + pointer-events none; ChatWidget observer itself was fine (earlier "footer fail" was smooth-scroll not reaching bottom in the test harness - use `behavior:'instant'`).
+- **Final gate matrix @ `6005b5f` (all live):** gutter audit **34/34 PASS** (17 routes x 320+360, zero <24px, zero errors) - `web_shots/narrow/gutter_final_run.log` + `gutter24_audit.json`; **axe 0/10 + E2E 7/7**; build 0 / lint 0 err 92 warn / vitest 15/15. NOTE: heavy polling trips a `RATE_LIMITED` 429 JSON page that fakes a broken axe/E2E report (no title/lang, all locators timeout) - cool down ~5 min and rerun; site itself was healthy.
+
 ## Session 45 (2026-10-04) — Bundle: claude merges + tasks 8/18/19/20/22/24/25/26/27 (WYZMiND)
 
 - **Claude branches reviewed + merged:** `claude/handover-housekeeping` (745652a), `claude/hero-text-width-caps` (9c986eb -> 46394a6, board #16), `claude/events-video-keyboard-a11y` (598eba0 -> bbacb85, board #32), `claude/mobile-chat-clearance` (3278627 -> 7591d7d, board #29). HANDOFF/board conflicts resolved keeping both sides (CRLF-drift whole-file conflicts resolved via content-delta review with --ignore-cr-at-eol).
