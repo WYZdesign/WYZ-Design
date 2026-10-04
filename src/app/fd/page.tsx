@@ -530,7 +530,7 @@ export default function FDOraclePage() {
       <section className="py-20 px-4 bg-black border-t border-zinc-900">
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal animation="fadeUp">
-            <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4">HOW THE <span className="text-[#DF3131]">ORACLE</span> WORKS</h2>
+            <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4 max-w-[calc(100vw-3rem)] mx-auto">HOW THE <span className="text-[#DF3131]">ORACLE</span> WORKS</h2>
             <div className="grid md:grid-cols-2 gap-6 text-left">
               <div className="p-6 rounded-xl border border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-transparent">
                 <h3 className="text-blue-400 font-bold text-lg mb-3">THE ANALYST</h3>
