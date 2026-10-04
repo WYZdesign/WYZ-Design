@@ -15,7 +15,7 @@ Use this board for shared work. Claim an area before editing it. A task is compl
 | 5a | Verify the deployed mobile gutter and marquee-spacing batch | WYZMiND + Codex | done | Superseded by the verified 17-route live audit in task 9 and the final 24px-gutter close in task 10. |
 | 6 | Create an accessibility and mobile regression gate | Codex | ready | Build from current audited routes and existing tests. |
 | 7 | Audit loading, error, and empty states on revenue-critical routes | Codex | ready | Start with booking, services, merch, contact, and plans. |
-| 8 | Confirm public location, social profiles, and founder copy are consistent | Torreé Marcel + Codex | needs decision | Public materials need owner confirmation where facts differ. |
+| 8 | Normalize public founder, location, and social copy | WYZMiND + Codex | ready | Torreé Marcel is owner-confirmed as the official founder name. Audit and replace legacy “Torreé Marcel Harris” copy; retain location and social verification as a separate evidence pass. |
 
 ## File Ownership
 
@@ -61,6 +61,7 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 | 26 | Repair and exercise the global failure boundary | WYZMiND | ready | `src/app/global-error.tsx` renders a `main` directly; a Next global error boundary must render the document wrapper. Correct that structure and add a deliberate safe failure-path check proving refresh and home recovery controls work at 320px. |
 | 27 | Give revenue routes intentional loading and failure states | WYZMiND | ready | Merch has a route loading file and local catalog states; booking, contact, plans, and gift cards fall back to the generic app loader/error boundary. Decide where route-level feedback materially improves a slow or failed transaction and add only those states, with screen-reader status and retry guidance. |
 | 28 | Make merch purchasable or stop presenting it as a store | WYZMiND + Torreé Marcel | urgent | The live catalog and quick-view work, but there is no merch checkout route. Product-page “Add to Cart” only changes its label and the quick-view CTA links to Featured Artist, not purchase. Choose an authorized fulfilment and payment design, then implement cart/order/payment/confirmation or relabel the experience as a non-purchasable catalog until it is real. |
+| 29 | Keep the mobile chat launcher clear of content and controls | WYZMiND | ready | Live narrow homepage review shows the fixed chat launcher visually colliding with the lower-right proof metric. Reposition or reserve space so it clears content, primary controls, safe areas, and cookie surfaces at 320px and 360px. Verify with screenshots on Home, FAQ, booking, and plans. |
 
 | Area | Claimed by | Since |
 |---|---|---|
