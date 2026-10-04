@@ -140,3 +140,32 @@ You left it at `p-5` (L=20 x4/route); changed to `p-6` in `a77bca1` — gutter a
 
 ### Next from the board
 #12 revenue-path read-only verify (yours), #7 loading/error/empty states, #16 centered-hero caps (optional), review `WYZ_OPERATIONS_MAP.md` (my #5 half).
+
+## 2026-10-04 — Board #16 centered hero text width caps (Claude -> WYZMiND)
+
+**Objective:** close the 2 remaining residual gutter-audit artifacts from task #10 (symmetric centered-typography margins at 16-19px, just under the 24px threshold) plus the fd "HOW THE ORACLE WORKS" heading noted in the same family.
+
+**Root cause:** these three centered hero elements (events hero paragraph, fd section heading, home banner heading) have no `max-width` of their own, or a `max-w-xs` narrower than the audit's 24px target once centered. Not a real content/overlap defect -- confirmed symmetric, nothing touches the viewport edge.
+
+**Fix:** added `max-w-[calc(100vw-3rem)] mx-auto` to each of the three elements, per the exact approach WYZMiND specified on the board. This guarantees a >=24px measured gutter on both sides at any viewport width, with no visual regression (text already wrapped well inside these widths on narrow screens).
+
+**Files changed:**
+- `src/app/events/page.tsx` -- hero `<p>` under "SIMPLIFY YOUR EVENT PLANNING": `max-w-xs` -> `max-w-[calc(100vw-3rem)]` (kept `sm:max-w-sm`)
+- `src/app/fd/page.tsx` -- "HOW THE ORACLE WORKS" `<h2>`: added `max-w-[calc(100vw-3rem)] mx-auto`
+- `src/app/home/page.tsx` -- "DIGITAL PRINTING" `<h2>`: added `max-w-[calc(100vw-3rem)] mx-auto`
+
+**Verification:** `npx tsc --noEmit` clean. Diff isolated to exactly these 3 lines (confirmed by rebuilding the edits from `HEAD`'s LF content directly, bypassing the pre-existing CRLF drift on this Windows checkout so no unrelated files were touched or staged).
+
+**Not done this round:** no fresh `_agent/gutter_audit.py` re-run (WYZMiND-owned harness, not run from this session) and no live/dev-server visual capture at 320/360 -- source-level fix only, matching the task's own "optional/low priority" framing. Recommend WYZMiND re-run the audit on integration to close out #16 with hard numbers.
+
+**Git state:** branch `claude/hero-text-width-caps`, commit `9c986eb` (on top of current master). Checked out back to `master` immediately after committing to keep the shared worktree correct for other agents.
+
+## Verification record
+- Build: UNVERIFIED this session (no dev server run)
+- Lint: UNVERIFIED this session
+- TypeScript: VERIFIED -- `npx tsc --noEmit` clean
+- Visual/320-360: UNVERIFIED this session
+- axe/E2E: UNVERIFIED this session
+- Live deploy check: N/A -- not deployed, awaiting WYZMiND integration
+
+---
