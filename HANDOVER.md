@@ -27,6 +27,7 @@
 - Live narrow homepage review: the hero, CTA hierarchy, and proof grid are legible, but the fixed chat launcher visually collides with the lower-right proof metric. Also, homepage story copy still says “Founder Torreé Marcel Harris”; Torreé Marcel is the owner-confirmed official founder name. Board tasks 29 and 8 now scope those corrections.
 - Founder-name source inventory for task 8: legacy public copy appears in `src/app/about/layout.tsx`, `src/app/about/page.tsx`, `src/app/brands/page.tsx`, `src/app/home/page.tsx`, `src/app/layout.tsx` JSON-LD, `src/app/api/chat/route.ts`, `src/lib/blog.ts`, and `src/lib/seo.ts`. The Cal.com slug and LinkedIn URL are identifiers, not display-name edits. WYZMiND should bundle these with a deliberate decision on retained search aliases.
 - Three-agent coordination update: Claude owns task 29 and has a route-, source-, and acceptance-specific entry in `_HANDOVER_CLAUDE.md`; WYZMiND's active shared code bundle remains untouched by Codex. Board task 30 records a needed owner decision on proof metrics: Home/About state 60+ events and 30+ clients, while Events states 90+ client events.
+- Truth-in-marketing evidence: `/wyzmind` claims private open-source AI with no third-party transfer and says payments include merch checkout. `src/lib/openrouter.ts` posts chat messages to OpenRouter, and the merch audit found no order/payment path. Board task 31 requires owner-approved, accurate public positioning before these claims are changed.
 - No production source files changed in this session entry.
 
 ---
