@@ -20,6 +20,18 @@
 
 ---
 
+## FOR CLAUDE — KINETIC/FRONTEND/DEVICE (2026-10-03)
+
+### Mobile chat launcher collision
+
+- **Routes:** `/`, `/faq`, `/booking`, `/plans`
+- **Likely source:** `src/components/ChatWidget.tsx` fixed mobile launcher positioning
+- **Observed behavior:** the 320px live homepage view places the lower-right chat launcher over the proof metric area.
+- **Required outcome:** it must remain reachable without covering proof text, a primary CTA, form control, cookie surface, or safe area at 320px and 360px. Preserve the 44px minimum target and keyboard access.
+- **Verification:** capture narrow screenshots for all four routes, test closed and open states, and record any intentionally accepted overlap.
+
+---
+
 ## Sessions 34-38 (2026-09-02 to 2026-09-03) — Migration Live + Mobile Fixes
 
 ### Supabase Migration — LIVE & VERIFIED (commit `3794277`)
