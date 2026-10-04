@@ -248,3 +248,48 @@ node _shot-se.mjs  # creates screenshots/se-*.png
 - Admin auth: `src/lib/admin-auth.ts` (`requireAdmin()`)
 - Marquee: `src/components/EnhancedMarquee.tsx`
 - Navbar: `src/components/Navbar.tsx`
+
+### Claude reply (2026-10-04) — implemented, pending integration
+
+Root cause confirmed by source read, not just the live symptom: the bubble
+(`fixed bottom-6 right-6`, 56px, no content-awareness) sits permanently over
+whatever renders in that viewport corner. Two concrete collisions:
+1. Home's trust-signals stat bar is `grid-cols-2 sm:grid-cols-4` -- below the
+   640px breakpoint it's a 2x2 grid, putting "9+ Years Running" bottom-right,
+   directly under the bubble whenever that section nears the viewport bottom.
+2. `CookieBanner.tsx` is `fixed bottom-0 left-0 right-0` on mobile (full-width,
+   unlike desktop's inset `sm:right-6`) -- the bubble sat on top of it on
+   every route, every time it's shown, not just Home.
+
+**Fix (4 files, +37/-3 lines, `npx tsc --noEmit` clean):**
+- `ChatWidget.tsx`: new `clearZone` state driven by an `IntersectionObserver`
+  whose `rootMargin` is shrunk to just the button's own corner footprint
+  (negative top/left margins, matching the same primitive already used by
+  `SmoothCarousel`/`LogoCarousel`/`VideoPlaylist` elsewhere in this repo).
+  Any `[data-chat-avoid]` element entering that corner folds into the
+  existing `scrollHidden || bodyLocked` hide-class check the bubble already
+  had -- same visible behavior (opacity-0, pointer-events-none), new trigger.
+- `home/page.tsx`: tagged the trust-signals `<section>` with `data-chat-avoid`.
+- `Footer.tsx`: tagged the `<footer>` root -- this alone clears the bubble
+  site-wide (every route including `/faq`, `/booking`, `/plans`) whenever a
+  footer nears the viewport bottom, satisfying the "safe areas" requirement
+  generically rather than per-route.
+- `CookieBanner.tsx`: tagged the dialog root -- satisfies "cookie surfaces."
+
+**What's verified:** TypeScript clean, diff is minimal and additive (no
+existing behavior removed), reasoned through against the actual rendered
+DOM structure of all four required routes (Home/FAQ/booking/plans all share
+the same `Footer`/`CookieBanner`, so the fix generalizes without per-route
+duplication).
+
+**What's NOT yet verified:** live 320px/360px screenshots on a running
+instance. No dev server was up in the shared environment and I didn't want
+to start one mid-session and risk port/resource contention with Codex's or
+your own active work, so this is still source-level + tsc verified only,
+not visually verified. Flagging exactly per protocol instead of claiming
+"done" -- requesting a post-deploy-preview 320/360 pass on `/`, `/faq`,
+`/booking`, `/plans` (open + closed chat states) before this closes out.
+
+Files are in the shared working tree now (uncommitted -- a `.git/index.lock`
+was held, likely by an active WYZMiND process, so I left git alone per
+protocol rather than force anything). Board #29 row updated to reflect this.

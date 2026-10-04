@@ -30,6 +30,9 @@ export default function ChatWidget() {
   // on top of the open mobile nav panel. A MutationObserver gives this
   // component its own re-render trigger tied to the real DOM change.
   const [bodyLocked, setBodyLocked] = useState(false);
+  // Board #29: true while any [data-chat-avoid] element occupies the bubble's
+  // own bottom-right corner footprint — see the IntersectionObserver effect below.
+  const [clearZone, setClearZone] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hey! I'm the WYZ Design assistant. I can help you learn about our services, check pricing, or get you booked. How can I help today?" },
   ]);
@@ -67,6 +70,36 @@ export default function ChatWidget() {
     const observer = new MutationObserver(check);
     observer.observe(body, { attributes: true, attributeFilter: ["style", "data-mobile-open"] });
     return () => observer.disconnect();
+  }, []);
+
+  // Board #29: the bubble is fixed bottom-6 right-6 with no awareness of what's
+  // underneath it, so it was sitting on top of in-flow content (Home's trust-signals
+  // stat bar collapses to a 2x2 grid below sm, putting "9+ Years Running" bottom-right)
+  // and on top of the cookie banner (full-width fixed bottom-0 on mobile). Any element
+  // tagged data-chat-avoid that enters the bubble's own corner footprint hides it, the
+  // same way scrollHidden/bodyLocked already do, by shrinking the IntersectionObserver's
+  // root to just that corner (negative rootMargin) instead of the full viewport.
+  useEffect(() => {
+    const targets = Array.from(document.querySelectorAll<HTMLElement>("[data-chat-avoid]"));
+    if (targets.length === 0) return;
+    const CLEARANCE = 64; // 56px button + 8px breathing room
+    let observer: IntersectionObserver | null = null;
+    const build = () => {
+      observer?.disconnect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      observer = new IntersectionObserver(
+        (entries) => setClearZone(entries.some((e) => e.isIntersecting)),
+        { rootMargin: `-${Math.max(vh - CLEARANCE - 24, 0)}px -${Math.max(vw - CLEARANCE - 24, 0)}px 0px 0px` }
+      );
+      targets.forEach((t) => observer!.observe(t));
+    };
+    build();
+    window.addEventListener("resize", build);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", build);
+    };
   }, []);
 
   useEffect(() => {
@@ -159,7 +192,7 @@ export default function ChatWidget() {
         onClick={() => { if (!isOpen) void earn("open-chat"); setIsOpen(!isOpen); }}
         className={`fixed bottom-6 right-6 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 ${
           isOpen ? "bg-[#333] rotate-90" : "bg-[#DF3131] animate-pulse"
-        } ${!isOpen && (scrollHidden || bodyLocked) ? "opacity-0 pointer-events-none translate-y-2" : ""}`}
+        } ${!isOpen && (scrollHidden || bodyLocked || clearZone) ? "opacity-0 pointer-events-none translate-y-2" : ""}`}
         aria-label={isOpen ? "Close chat" : "Open chat assistant"}
       >
         {isOpen ? (

@@ -954,7 +954,7 @@ export default function HomePage() {
     </section>
 
 {/* ═══ TRUST SIGNALS ═══ */}
-  <section aria-label="WYZ Design track record" className="bg-[#111] border-b border-[#333] py-6 sm:py-8">
+  <section aria-label="WYZ Design track record" data-chat-avoid className="bg-[#111] border-b border-[#333] py-6 sm:py-8">
     <ul className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 text-center list-none">
       {[
         { stat: "60+", label: "Events Produced" },
