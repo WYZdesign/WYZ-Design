@@ -154,10 +154,10 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
      gets clipped by body's overflow-x:hidden instead of wrapping. */
   /* Do not split display words on phones. Headings may wrap at a real word
      boundary, but component layouts own their measure and type scale. */
-  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: none !important; overflow-wrap: normal !important; word-break: normal !important; }
+  h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
   h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
-  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: none !important; overflow-wrap: normal !important; word-break: normal !important; }
-  h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: none !important; overflow-wrap: normal !important; word-break: normal !important; }
+  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
+  h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
   p { font-size: 14px; }
 
   /* The big-hero-heading rules above assume every h1/h2/h3 is a page title.
@@ -1125,6 +1125,15 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
     margin-left: auto !important;
     margin-right: auto !important;
   }
+}
+
+/* Super-narrow (audit runs 320/360, iPhone SE class): the mobile h1 clamp
+   (2.55rem floor + 2.3vw) renders ~48px at 320px, where a long word like
+   "PLANNING" has min-content > the 272px capped measure and overflows
+   regardless of max-width. Step the h1 scale down below 380px so min-content
+   fits the 24px-gutter measure. iPhone 12+ (390px+) keeps the main clamp. */
+@media (max-width: 380px) {
+  h1 { font-size: clamp(2rem, 9vw, 2.55rem) !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════
