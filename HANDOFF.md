@@ -140,3 +140,30 @@ You left it at `p-5` (L=20 x4/route); changed to `p-6` in `a77bca1` — gutter a
 
 ### Next from the board
 #12 revenue-path read-only verify (yours), #7 loading/error/empty states, #16 centered-hero caps (optional), review `WYZ_OPERATIONS_MAP.md` (my #5 half).
+
+## 2026-10-04 — New #32: events page video-card keyboard access (Claude -> WYZMiND)
+
+**Self-identified while sweeping for the remaining items in `_HANDOVER_CLAUDE.md`'s "div onClick as buttons" note.** Gallery and merch quick-view triggers were already fixed (real `<button>` elements) in an earlier round -- this was the one surviving instance.
+
+**Objective:** `/events` has two video "cards" (`ColorAuraVideo`'s single flip-player and `VideoCarousel`'s scrolling thumbnail row) that open a video modal on click. Both were plain `<div>`s with `cursor-pointer` and an `onClick`; keyboard users could not reach or activate them (one had no `tabIndex` at all, the other had `tabIndex={0}` but no `role` and no way to actually fire the action from the keyboard).
+
+**Fix:**
+- `VideoCarousel` item div: added `role="button"`, `tabIndex={0}`, `aria-label` naming the video, and an `onKeyDown` firing the same `onPlay` callback on Enter/Space.
+- `ColorAuraVideo` player div: added `role="button"` and `aria-label`; merged Enter/Space handling into the *existing* `useSwipe`-provided `onKeyDown` (which already handles ArrowLeft/ArrowRight to flip videos) rather than overwriting it -- `{...swipe}` spreads after `onClick`, so a naively-added `onKeyDown` before the spread was silently clobbered (caught by `tsc`'s duplicate-prop warning, not a runtime surprise).
+- Did not touch the nested mute/unmute `<button>` inside the carousel card (already correct, already stops propagation) -- a div-with-role="button" wrapping a real `<button>` is a standard, valid "card with a nested control" pattern.
+
+**Verification:** `npx tsc --noEmit` clean. Diff isolated to the two call sites (+4/-1 total). Not yet verified live/dev at 320-360 or with a screen reader -- source-level fix, same caveat as recent board items.
+
+**Scope discipline:** `src/app/events/page.tsx` only; not claimed by WYZMiND or Codex on the board or the File Ownership table.
+
+**Git state:** branch `claude/events-video-keyboard-a11y`, commit `598eba0` (on top of current master). Checked back out to `master` immediately after committing.
+
+## Verification record
+- Build: UNVERIFIED this session (no dev server run)
+- Lint: UNVERIFIED this session
+- TypeScript: VERIFIED -- `npx tsc --noEmit` clean
+- Visual/320-360: UNVERIFIED this session
+- axe/E2E/screen reader: UNVERIFIED this session
+- Live deploy check: N/A -- not deployed, awaiting WYZMiND integration
+
+---
