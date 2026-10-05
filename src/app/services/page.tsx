@@ -146,7 +146,7 @@ return (
    {/* Mobile: merged hero */}
    <div className="md:hidden absolute inset-0 flex flex-col items-center justify-center text-center">
    <div className="absolute inset-0 z-0">
-    <video src="/videos/hero-banners/photography.mp4" autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" />
+    <video src="/videos/hero-banners/photography.mp4" poster="/images/hero-photography.jpg" autoPlay muted loop playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover" />
     <div className="absolute inset-0 bg-black/65 z-[1]" />
    </div>
     <div className="relative z-10 max-w-lg mx-auto px-6 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">

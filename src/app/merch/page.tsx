@@ -103,7 +103,7 @@ function ParallaxHero() {
       <div className="absolute inset-0 flex">
         {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
           <div key={i} className="relative flex-1 group overflow-hidden transition-all duration-700 ease-out hover:flex-[3.5]">
-            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} className="w-full h-full object-cover" />
+            <SafeImage src={img} alt={`DBC crew wearing merch ${i + 1}`} width={700} className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
           </div>
         ))}
@@ -203,7 +203,7 @@ function AccordionGallery() {
             {[...DBC_MODEL_MOCKUPS, ...DBC_MODEL_MOCKUPS].map((item, i) => (
               <div key={`crew-${i}`} className="flex-none w-[160px] sm:w-[200px]">
                 <div className="aspect-[3/4] rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5] mb-2">
-                  <SafeImage src={item.model} alt={item.name} className="w-full h-full object-cover" />
+                  <SafeImage src={item.model} alt={item.name} width={400} className="w-full h-full object-cover" />
                 </div>
                 <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[13px] sm:text-[14px] mb-1 text-left">{item.name}</h4>
                 <div className="flex items-center justify-between">
@@ -257,7 +257,7 @@ function DynamicContentUnderShop() {
           {designStories.map((d) => (
             <button type="button" key={d.id} className="group cursor-pointer text-left w-full bg-transparent border-0 p-0" aria-expanded={expandedId === d.id} onClick={() => setExpandedId(expandedId === d.id ? null : d.id)}>
               <div className="aspect-[3/4] rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5] mb-3">
-                <SafeImage src={d.image} alt={d.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <SafeImage src={d.image} alt={d.name} width={500} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <h4 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.04em] mb-2">{d.name}</h4>
               <div className={`overflow-hidden transition-all duration-500 ${expandedId === d.id ? "max-h-[200px]" : "max-h-0"}`}>
@@ -299,7 +299,7 @@ function SquareQuote() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative h-64 md:h-auto overflow-hidden">
             <div className="absolute inset-0" style={{ transform: `translateY(${scrollOffset}px) scale(1.1)` }}>
-              <SafeImage src="/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg" alt="Featured Artist" className="w-full h-full object-cover" />
+              <SafeImage src="/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg" alt="Featured Artist" width={700} className="w-full h-full object-cover" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111]/80 hidden md:block" />
           </div>
@@ -334,7 +334,7 @@ function MerchCarousel({ products }: { products: Product[] }) {
         {items.map((p, i) => (
           <Link key={`mc-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer w-[140px] sm:w-auto">
               <div className="bg-[#f5f5f5] w-full sm:w-[200px] aspect-[3/4] overflow-hidden relative mx-2 sm:mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
-               <SafeImage src={p.image} alt={p.name} className="w-full h-full object-cover" />
+               <SafeImage src={p.image} alt={p.name} width={400} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <h3 className="font-heading font-bold text-size-12 tracking-[0.05em] uppercase text-white">{p.name}</h3>
@@ -356,7 +356,7 @@ function ProductMarquee({ products }: { products: Product[] }) {
           <Link key={`pm-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer group">
             <div className="w-[140px] sm:w-[200px] lg:w-[240px] px-2 sm:px-4 aspect-square flex flex-col items-center">
               <div className="bg-white/5 border border-white/10 rounded-lg overflow-hidden relative flex-1 w-full mb-2 group-hover:border-[#DF3131]/50 group-hover:shadow-xl group-hover:shadow-[#DF3131]/20 transition-all duration-500">
-                <SafeImage src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <SafeImage src={p.image} alt={p.name} width={480} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
               <div className="w-full text-center">
@@ -814,7 +814,7 @@ export default function MerchPage() {
           <div ref={quickViewRef} role="dialog" aria-modal="true" aria-labelledby="quick-view-title" className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <SafeImage src={selectedProduct.image} alt={selectedProduct.name} className="w-full h-full object-cover" />
+                <SafeImage src={selectedProduct.image} alt={selectedProduct.name} width={700} className="w-full h-full object-cover" />
                 {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[11px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
               </div>
               <div className="p-8">
@@ -867,7 +867,7 @@ export default function MerchPage() {
                   {crossSells.map((cp) => (
                     <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
 <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
-                           <SafeImage src={cp.image} alt={cp.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                           <SafeImage src={cp.image} alt={cp.name} width={400} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
                       <p className="text-[11px] font-bold text-[#333] truncate">{cp.name}</p>
                       <p className="text-[12px] text-[#DF3131] font-bold">{fmt(cp.price)}</p>

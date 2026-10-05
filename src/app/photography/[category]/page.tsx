@@ -279,7 +279,7 @@ function AutoScrollRow({ images, label, speed, onImageClick, isNsfw, canReveal }
                {isNsfw ? (
                  <NsfwImage src={src} alt={label} className="h-full w-auto" canReveal={canReveal} loading="lazy" />
                ) : (
-                 <SafeImage src={src} alt={label} className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                 <SafeImage src={src} alt={label} width={400} className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                )}
             </div>
           ))}

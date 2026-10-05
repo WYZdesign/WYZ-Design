@@ -43,7 +43,7 @@ export default function AboutPage() {
           onMouseLeave={() => setIsHovering(false)}
         >
           <div className="absolute inset-0">
-            <video autoPlay muted loop playsInline preload="auto"
+            <video autoPlay muted loop playsInline preload="metadata"
               poster="/images/hero-about.jpg"
               className="w-full h-full object-cover opacity-25">
               <source src="/videos/hero-banners/about.mp4" type="video/mp4" />

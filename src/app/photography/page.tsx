@@ -511,7 +511,8 @@ return (
     <div className="md:hidden absolute inset-0 z-0">
      <video
       src="/videos/hero-banners/photography.mp4"
-      autoPlay muted loop playsInline
+      poster="/images/hero-photography.jpg"
+      autoPlay muted loop playsInline preload="metadata"
       className="absolute inset-0 w-full h-full object-cover"
       style={{ filter: "saturate(1.2) contrast(1.1)" }}
       />

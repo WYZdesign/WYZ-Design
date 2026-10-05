@@ -325,12 +325,6 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
     width: 6px !important;
   }
 
-  /* ── Navbar logo — smaller on mobile ── */
-  nav .flex img[src*="crown"] {
-    width: 32px !important;
-    height: 32px !important;
-  }
-
   /* ── Flip cards — center text, flip on first tap ── */
   [style*="perspective"] .text-center, .flip-card .text-center {
     text-align: center !important;
