@@ -230,3 +230,129 @@ to `-{top} 0 0 -{left}` before the gates run.
 - Live deploy check: N/A -- not deployed, awaiting WYZMiND integration
 
 ---
+
+## 2026-10-05 -- Mobile visual audit: logo fix, marquee consistency, overheat + image/video perf (Claude -> WYZMiND, Torree)
+
+**Context:** Torree reported the mobile header logo looked too large/
+misaligned, asked for marquee gap/spacing to match the designs-page marquee
+everywhere, flagged the phone getting hot on the live site, and asked that
+images/videos sitewide (designs page called out specifically) load fast and
+not tax the device. All four addressed on branch
+`claude/mobile-visual-perf-audit` (commit `02bcf55`), docs on this branch.
+
+### 1. Header logo too large/misaligned -- root cause found live, not guessed
+
+Live DOM inspection of www.wyzdesign.com/home at 375x812 (getComputedStyle,
+getBoundingClientRect, full CSSOM rule trace via the stylesheet's own
+cssRules, re-verified after a hard reload) found the rendered logo computing
+to ~56-64px -- neither of two values in the repo's own source. Root cause:
+two different agent passes had independently "fixed" the same complaint with
+conflicting mechanisms that were fighting each other in the cascade:
+- `src/components/Navbar.tsx`: `w-[15px] h-[15px] sm:w-[18px] ... lg:w-[22px]`
+- `src/app/globals.css` (mobile media block): `nav .flex img[src*="crown"] { width: 32px !important; height: 32px !important; }`
+
+Neither value was winning cleanly; the element rendered at a third, unintended
+size. Removed the globals.css override entirely and set one clean responsive
+size directly on the component: `w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12`
+(36/40/48px) -- comfortably smaller than the 44px circular header buttons
+next to it, properly centered via the existing `items-center` flex row.
+Also switched the logo's `loading="lazy"` to `priority` since it's always
+above the fold on every route; lazy-loading an always-visible header logo
+only delays it.
+
+### 2. Marquee gap/spacing consistency
+
+Audited every scrolling-word marquee (`EnhancedMarquee` component) sitewide:
+designs, about, events, home, photography, printing, services, web-design.
+All already use the same `px-4 sm:px-6` gap the designs page uses -- this
+part was already consistent, nothing to fix there.
+
+Found two real outliers that don't go through `EnhancedMarquee` and didn't
+match: `LogoCarousel` (home page "Clients" logo strip, a separate rAF-driven
+component) had a much tighter `gap-4 sm:gap-6 lg:gap-8`, widened to
+`gap-8 sm:gap-12 lg:gap-16` to match the marquee's visual density. The merch
+page's product-name marquee strip used a static `px-6` with no mobile step-
+down, switched to the same responsive `px-4 sm:px-6` pattern as everywhere
+else.
+
+(Also present but left alone: several purely decorative, low-opacity
+background logo marquees behind hero sections on about/events pages --
+different visual role, not comparable to the content tickers.)
+
+### 3. Mobile overheating -- found and fixed a real GPU drain
+
+`src/components/NoiseOverlay.tsx` renders a `fixed inset-0` full-viewport SVG
+with a `feTurbulence` filter composited via `mix-blend-mode: overlay` on
+every route. This forces the browser to recomposite the ENTIRE page through
+an expensive filter graph on every scroll and animation frame -- a
+well-documented mobile GPU/battery/thermal drain pattern. It was previously
+only throttled on mobile (fewer noise octaves, lower opacity, animation
+disabled) rather than removed, so the expensive part (the full-screen
+blended filter itself) was still running on every phone. Changed it to
+return `null` entirely on touch/mobile devices; desktop is unaffected (full
+fidelity, same as before). This is very likely the single biggest
+contributor to the heat complaint.
+
+Also: five mobile-visible hero `<video autoPlay>` elements (about, designs,
+photography, printing, services hero sections) had no `preload` attribute
+at all, which defaults to `"auto"` (eager full-file download) in the
+absence of a hint. Added `preload="metadata"` (+ `poster` where one existed
+on disk but wasn't wired up: designs, photography) to all five -- autoplay
+still starts immediately since `metadata` loads enough for that, but the
+browser no longer greedily buffers the whole file up front. Note: this is
+on top of WYZMiND's earlier `17b4caa` perf pass, which already handled the
+shared nav-background video and the events grid; these five were hero
+videos on individual page routes that pass hadn't reached.
+
+### 4. Image weight -- designs page specifically, and sitewide
+
+`SafeImage` (the shared image wrapper, `src/components/SafeImage.tsx`) is a
+plain `<img>`, not `next/image` -- it never resized source files for the
+box they're displayed in. Checked actual file sizes on disk for the designs
+page's cover-art/logo/flyer carousels: averaging 130-240KB per JPEG,
+displayed in a strip only 96-208px tall, tripled for the infinite-scroll
+illusion. That's real, measurable waste on mobile data/CPU for exactly the
+page Torree called out by name.
+
+Fix: added an opt-in `width` prop path to `SafeImage` that routes local
+("/...") sources through Next's own image optimizer
+(`/_next/image?url=...&w=...&q=...`) -- same optimizer `next/image` uses
+under the hood, so this gets real responsive resizing + automatic
+avif/webp negotiation without touching SafeImage's existing picture/
+fallback/error-handling behavior. Remote/CDN/data/blob sources are left
+untouched (already likely optimized, or not safe to proxy). Wired up on
+designs.tsx's portfolio carousel first (the one named in the request),
+then audited and fixed the remaining 10 non-`fill` SafeImage call sites
+sitewide: blog.tsx (2), merch.tsx (8), merch/concepts.tsx (1),
+photography/[category].tsx (1).
+
+**Not yet done (follow-up, flagging rather than guessing):** 4 remaining
+SafeImage call sites use the `fill` prop (merch.tsx x2, merch/[id]/page.tsx)
+-- `fill` has no intrinsic width to pass through the same opt-in path, it'd
+need either a measured-container-width approach or a small SafeImage
+refactor to accept `sizes` properly. Left alone this round rather than
+guess at a number. Also didn't touch SafeImage's `getWebPSources` CDN-src
+assumption (`src.replace(/\.webp$/, ".jpg")` silently no-ops for a `.jpg`
+http source labeled as a webp `<source>` -- pre-existing, unrelated to this
+pass, not touched).
+
+### Verification record
+- TypeScript: VERIFIED -- `npx tsc --noEmit` clean
+- ESLint: UNVERIFIED -- timed out in this environment (same write/IO
+  slowness noted elsewhere in this file), not forced through
+- Logo fix: VERIFIED via live DOM measurement against the production site
+  (getComputedStyle + getBoundingClientRect + CSSOM rule trace), not just a
+  screenshot
+- Marquee audit: VERIFIED by reading every `EnhancedMarquee` call site's
+  source directly (8 files)
+- NoiseOverlay/video preload changes: VERIFIED in source (tsc clean, logic
+  reviewed); NOT verified against a live deploy or a real device thermal
+  test -- recommend a quick before/after mobile Lighthouse or real-device
+  check once WYZMiND deploys this
+- Image optimizer routing: VERIFIED the Next.js `images` config in
+  `next.config.ts` already supports this (`formats: avif/webp`,
+  `deviceSizes`/`imageSizes` configured) -- NOT verified against a running
+  dev server (none was started, to avoid resource contention)
+- Build: UNVERIFIED this session, no dev server run
+
+---
