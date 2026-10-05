@@ -230,3 +230,28 @@ to `-{top} 0 0 -{left}` before the gates run.
 - Live deploy check: N/A -- not deployed, awaiting WYZMiND integration
 
 ---
+
+## 2026-10-05 -- Board #3/#12 revenue-path verification + critical Cal.com finding (Claude -> WYZMiND, Torree)
+
+**Context:** Codex was working alongside me on this round (including the two new audit docs: `WYZDESIGN_5000_POINT_BOARDROOM_AUDIT.md` and `WYZDESIGN_CLIENT_EXPERIENCE_AUDIT.md`) and hit its usage limit mid-session. Picking up its open read-only verification tasks (#3/#12) per Torree's request, alongside my own #29 follow-up above.
+
+### Critical finding: Cal.com booking widget has zero published event types (new board #33)
+
+Live agentic-browser check on `/booking` at 375x812: the "QUICK BOOK WITH CALENDAR SYNC" section (the Cal.com embed) fully loads and renders **"No links set up / Torreé Harris hasn't set up any booking links yet."** Confirmed this is not a WYZ-side embed bug by loading `cal.com/torree-harris-ddqqep` directly (outside the WYZ site entirely) -- same result. This is a Cal.com **account configuration** gap: the account has no event types published. No code in this repo can fix it; it needs Torree to log into Cal.com and publish at least one event type.
+
+Practical impact: right now, a customer cannot complete a booking through the calendar-sync path at all. The inquiry form above it on the same page (name/email/phone/service/budget/date/project details -> `SUBMIT REQUEST`) still works as a fallback and was not submitted (read-only verification, no forms triggered per board #3's own instruction).
+
+### Other routes checked (read-only, 375x812, no forms submitted, no payment triggered)
+
+- **`/gift-card`** -- renders cleanly, no layout defects. Flagging a copy/evidence note for board #24 (already open, owner-decision-gated): the live page says **"No expiration"** under "How It Works," which conflicts with `SPECS.md` Spec 24's proposed 24-month expiry -- whichever is approved, the live copy and the eventual implementation need to agree. Not a new finding, just fresh live confirmation of the existing #24/#23 conflict with an exact quote.
+- **`/merch`** -- hero and catalog render cleanly at 375px. Did not re-test "Add to Cart" -- board #28 already has this fully documented as urgent/owner-decision, nothing new to add.
+- **`/contact`** -- form renders and is usable; labels present, required fields marked. Noted (low priority, cosmetic) that this form's input/label scale reads visually larger/more spaced than the booking page's inquiry form -- two different form-styling treatments on revenue-adjacent pages. Not blocking, not investigated further this round.
+- **`/booking`** inquiry form (the part above the Cal.com embed) -- renders correctly at 375px, all fields present and labeled (name, email*, phone, service*, budget range, date, project details*, how did you hear about us), submit button present. Not submitted.
+
+### Verification record
+- Build/Lint/TypeScript: N/A -- no code changed by this entry, documentation only
+- Visual/375px: VERIFIED -- live agentic browser, booking/gift-card/merch/contact
+- Forms: NOT submitted, per board #3's explicit instruction and standing payment-action rules
+- Cal.com: VERIFIED BROKEN -- confirmed on both the WYZ embed and cal.com's own public page directly
+
+---
