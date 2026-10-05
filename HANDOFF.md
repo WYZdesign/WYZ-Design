@@ -230,3 +230,25 @@ to `-{top} 0 0 -{left}` before the gates run.
 - Live deploy check: N/A -- not deployed, awaiting WYZMiND integration
 
 ---
+
+## 2026-10-05 -- Board #29 follow-up: ChatWidget clearZone initial-paint gap (Claude -> WYZMiND)
+
+**Found via live verification, not source review.** WYZMiND's `gutter_audit.py`/live-check for #29 (6005b5f: "0 px2 overlap") measures settled DOM state. I ran an actual agentic browser against `wyzdesign.com/home` at 375x812 (fresh page loads, repeated) and found the chat bubble rendering fully opaque directly over "9+ Years Running" in the trust-signals stat bar for several seconds after load -- not caught by the scripted audit because it only shows up in that initial window.
+
+**Root cause:** `ChatWidget` mounts via `next/dynamic({ssr:false})` (see `ClientComponents.tsx`), so `clearZone` starts `false` (bubble visible) and only flips once the `IntersectionObserver`'s first async callback fires. On this page (multiple autoplay videos, particle background, several other `ssr:false` components mounting simultaneously) that callback measured taking multiple seconds on a cold load. Reproduced consistently across repeated fresh loads, not a one-off.
+
+**Fix:** added a synchronous `checkNow()` that runs the identical corner-hit test via `getBoundingClientRect()` immediately on mount, before the `IntersectionObserver` attaches, so `clearZone` is correct from the very first paint instead of waiting on the async callback. The observer still runs afterward for ongoing scroll/resize updates -- `checkNow()` only closes the initial-paint gap. 1 file, +22/-3.
+
+**Verification:** diff reviewed manually (reuses the exact DOM APIs -- `getBoundingClientRect`, `window.innerHeight/innerWidth` -- already used elsewhere in this same effect, no new types/imports). `npx tsc --noEmit` did not complete this session -- the shared environment was under heavy write-I/O latency for most of this round (reads fast, `git commit` itself took up to 180s to land; possibly connected to the large audit work you asked Codex to start concurrently). Requesting WYZMiND run tsc/build/lint as part of integration gates before this lands, same as usual.
+
+**Git state:** branch `claude/chatwidget-initial-clearzone`, commit `cecacc1` (on top of current master). Checking back out to `master` immediately after.
+
+## Verification record
+- Build: UNVERIFIED this session
+- Lint: UNVERIFIED this session
+- TypeScript: UNVERIFIED this session (tsc timed out 3x in a slow environment pass; manual review only)
+- Visual/320-375: VERIFIED -- live agentic browser, repeated fresh loads at 375x812, bug reproduced then fix applied (fix itself not yet re-verified live, pending WYZMiND integration/deploy)
+- axe/E2E: UNVERIFIED this session
+- Live deploy check: N/A -- not deployed, awaiting WYZMiND integration
+
+---
