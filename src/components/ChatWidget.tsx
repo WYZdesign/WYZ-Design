@@ -84,19 +84,38 @@ export default function ChatWidget() {
     if (targets.length === 0) return;
     const CLEARANCE = 64; // 56px button + 8px breathing room
     let observer: IntersectionObserver | null = null;
+    const corner = () => ({
+      top: Math.max(window.innerHeight - CLEARANCE - 24, 0),
+      left: Math.max(window.innerWidth - CLEARANCE - 24, 0),
+    });
+    // ChatWidget mounts via next/dynamic({ssr:false}), so clearZone starts
+    // false (visible) and would otherwise wait on the IntersectionObserver's
+    // first async callback -- on this asset-heavy page that can take several
+    // seconds of main-thread contention, during which the bubble renders
+    // fully opaque over whatever's already sitting in its corner on load.
+    // Compute the same corner-hit test synchronously via getBoundingClientRect
+    // right away so the very first paint after mount is already correct.
+    const checkNow = () => {
+      const { top, left } = corner();
+      const hit = targets.some((t) => {
+        const r = t.getBoundingClientRect();
+        return r.bottom > top && r.right > left && r.top < window.innerHeight && r.left < window.innerWidth;
+      });
+      setClearZone(hit);
+    };
     const build = () => {
       observer?.disconnect();
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
+      const { top, left } = corner();
       // Shrink the root to the bubble's own LOWER-RIGHT corner: negative top
       // margin drops the root's top edge down, negative LEFT margin pushes the
       // left edge right (Codex review: top+right would test the lower-left).
       observer = new IntersectionObserver(
         (entries) => setClearZone(entries.some((e) => e.isIntersecting)),
-        { rootMargin: `-${Math.max(vh - CLEARANCE - 24, 0)}px 0px 0px -${Math.max(vw - CLEARANCE - 24, 0)}px` }
+        { rootMargin: `-${top}px 0px 0px -${left}px` }
       );
       targets.forEach((t) => observer!.observe(t));
     };
+    checkNow();
     build();
     window.addEventListener("resize", build);
     return () => {
