@@ -16,6 +16,19 @@ export default function TextReveal({ text, className = "", delay = 0, speed = 40
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Same gap as TextSplit/TextMaskReveal: a heading already on screen
+    // at load shouldn't wait on an async IntersectionObserver callback
+    // before it first becomes visible. Synchronous rect check at mount
+    // time skips the wait when the element starts in (or near) view.
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible =
+      rect.top < window.innerHeight * 1.2 && rect.bottom > -window.innerHeight * 0.2;
+    if (alreadyVisible) {
+      setVisible(true);
+      return;
+    }
+
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
       { threshold: 0.1, rootMargin: "100px 0px" }
