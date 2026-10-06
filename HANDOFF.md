@@ -394,6 +394,9 @@ pass, not touched).
   `next.config.ts` already supports this (`formats: avif/webp`,
   `deviceSizes`/`imageSizes` configured) -- NOT verified against a running
   dev server (none was started, to avoid resource contention)
+
+---
+
 ## 2026-10-05 -- Hero headlines invisible for seconds after hydration (Claude -> WYZMiND, Torree)
 
 Found this doing a live mobile sweep of other routes after the logo/marquee/

@@ -2,10 +2,20 @@
 
 ---
 
+## Session 55 (2026-10-05) - Multi-agent integration: Codex 47-54 + 4 Claude branches (WYZMiND)
+
+- **Codex sessions 47-54 committed** (`3bed1a1`): two new living audits (`WYZDESIGN_5000_POINT_BOARDROOM_AUDIT.md`, `WYZDESIGN_CLIENT_EXPERIENCE_AUDIT.md`), pricing-canon evidence rows (photoshoot/event/retouch/consultation service detail), booking checkout truth-fix (removed 4 `SERVICE_PRICES` entries `/api/checkout` rejects — Headshot Session, Creative Consultation, Content Planning, Brand Strategy Session; all still bookable via inquiry path), blog-generation prompt now says "Los Angeles creative agency with roots in Chicago's DIY art and music scene", ops-map merch truth (no verified cart/checkout — #28 stays source of truth).
+- **Merged 6 Claude branches** (all based on `636dbaf`): `claude/chatwidget-initial-clearzone` (sync clearZone checkNow on mount — closes the #29 initial-paint gap my settled-state audit could not see), `claude/revenue-path-verification` (board #3/#12 evidence + **critical board #33: Cal.com has zero published event types — no customer can Quick Book; owner must publish an event type**), `claude/mobile-visual-perf-audit` (Navbar logo rebuilt + `priority`, globals !important logo override removed, LogoCarousel gaps 8/12/16, NoiseOverlay skipped entirely on touch devices, preload="metadata" on 5 mobile hero videos, SafeImage opt-in `/_next/image` optimizer with width prop), `claude/hero-text-reveal-flash-fix` (sync getBoundingClientRect mount check in TextSplit/TextMaskReveal/TextReveal — hero H1s no longer invisible for seconds post-hydration), plus their docs branches.
+- **Board reconciliation:** Codex logged tasks 33-36 in HANDOVER but never wrote them; Claude's Cal.com finding took #33. Codex's four rows added as **#36-39** with renumber notes; HANDOVER refs (S48/S49/S54) updated to match. Rows #34/#35 = mobile-perf / hero-flash (Claude).
+- HANDOFF conflicts (4x append collisions) resolved keeping all entries; board row 35's "renumber freely on integration" honored.
+- Gates + live verification: see next session entry / board rows.
+
+---
+
 ## Session 54 (2026-10-04) - Community truth and operational-readiness audit (Codex, pending WYZMiND integration)
 
 - Source review found that `/community` renders static `NEWS_POSTS`, `SEED_THREADS`, community highlights, upcoming events, relative timestamps, engagement counts, and Discord member/online figures. It already has an explicit preview banner stating that forum interactions have local state only, which is an important truthful disclosure.
-- Logged board task 36 for the remaining factual surface: specific weekly programs, Thursday reviews, Chicago/Los Angeles meetups, follower count, and “127 online” still need confirmation, removal, or a dated source. A real community also needs data, moderation, consent, event, and freshness operations. No public community copy was changed because that is an owner product decision.
+- Logged board task 39 (logged as 36 pre-integration; renumbered at WYZMiND integration) for the remaining factual surface: specific weekly programs, Thursday reviews, Chicago/Los Angeles meetups, follower count, and “127 online” still need confirmation, removal, or a dated source. A real community also needs data, moderation, consent, event, and freshness operations. No public community copy was changed because that is an owner product decision.
 - Claude Code is recognized as a parallel visual and frontend owner. Codex did not alter its active work.
 
 ---
@@ -32,12 +42,12 @@
 ## Session 49 (2026-10-04) - Policy truth audit (Codex, pending WYZMiND integration)
 
 - Source-audited privacy, shipping, and refund surfaces. All report “Last updated: January 2025,” so no freshness or operational review is evidenced for the current site.
-- Logged board task 35: refund policy says gift cards do not expire, while unapproved Spec 24 proposes 24-month expiry. No public or implementation term was changed; Torreé must approve one consistent legal and operational policy before redemption work or policy copy changes.
+- Logged board task 38 (logged as 35 pre-integration; renumbered at WYZMiND integration): refund policy says gift cards do not expire, while unapproved Spec 24 proposes 24-month expiry. No public or implementation term was changed; Torreé must approve one consistent legal and operational policy before redemption work or policy copy changes.
 
 ## Session 48 (2026-10-04) - Super-goal truth pass (Codex, pending WYZMiND integration)
 
 - Created the consolidated operating framework: `WYZDESIGN_5000_POINT_BOARDROOM_AUDIT.md` (20 pillars, 100 evidence-scored subcategories, 5,000 points) and `WYZDESIGN_CLIENT_EXPERIENCE_AUDIT.md` (first impression through repeat business).
-- Added board tasks 33 and 34 so both audits are recurring operating systems, not one-time reports.
+- Added board tasks 36 and 37 (logged as 33/34 pre-integration; renumbered at WYZMiND integration — #33 went to Claude's Cal.com finding) so both audits are recurring operating systems, not one-time reports.
 - Corrected `WYZ_OPERATIONS_MAP.md`: Printful catalog integration is not represented as a verified merch checkout. Board #28 remains the source of truth until cart, payment, order, fulfillment, and customer confirmation are tested end-to-end.
 - New consolidated Codex super-goal is active. The audit worktree also contains Claude's active `ChatWidget` refinement; Codex did not modify it.
 
