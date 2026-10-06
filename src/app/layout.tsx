@@ -20,6 +20,7 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import ClientComponents from "@/components/ClientComponents";
+import { CartProvider } from "@/lib/cart";
 
 const montserrat = localFont({ src: "./fonts/montserrat-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-heading", display: "swap", preload: true });
 const inter = localFont({ src: "./fonts/inter-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-body", display: "swap", preload: true });
@@ -336,6 +337,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollProgress />
         <AnalyticsTracker />
         <ScrollToTopOnNavigate />
+          <CartProvider>
           <Navbar />
           <ErrorBoundary>
           <div id="main-content" role="main" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#1C1C1E]" tabIndex={-1}>
@@ -344,6 +346,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <ScrollToTop />
           </ErrorBoundary>
+          </CartProvider>
           </SmoothScrollProvider>
           </ZealProvider>
         </AuthProvider>

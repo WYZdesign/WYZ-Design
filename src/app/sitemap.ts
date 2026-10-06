@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { getSiteUrl } from "@/lib/site-url";
-import { PRODUCT_IDS } from "@/app/api/printful-catalog/route";
+import { listStoreProducts } from "@/lib/printful";
 
 const BASE = getSiteUrl();
 
@@ -71,7 +71,7 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/copyright-notice", priority: 0.2, changeFrequency: "yearly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const routes = PUBLIC_ROUTES.map((r) => ({
     url: `${BASE}${r.path}`,
@@ -85,16 +85,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "yearly" as const,
     priority: 0.5,
   }));
-  // Merch product detail pages are keyed by the real Printful catalog id
-  // (e.g. 71, 12, 831 — see PRODUCT_IDS in api/printful-catalog/route.ts),
-  // NOT a sequential 1-14 range. /merch/[id] fetches /api/printful-catalog
-  // and matches on that same id, so this list must stay derived from
-  // PRODUCT_IDS rather than assumed, or these entries soft-404 again.
-  const merchProducts = PRODUCT_IDS.map((id) => ({
-    url: `${BASE}/merch/${id}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  }));
+  // Merch detail pages are keyed by the live Printful sync product id.
+  let merchProducts: MetadataRoute.Sitemap = [];
+  try {
+    const products = await listStoreProducts();
+    merchProducts = products.map((p) => ({
+      url: `${BASE}/merch/${p.id}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
+  } catch {
+    merchProducts = [];
+  }
   return [...routes, ...posts, ...merchProducts];
 }

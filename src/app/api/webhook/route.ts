@@ -6,6 +6,7 @@ import { earnZeal } from "@/lib/zeal";
 import { sendDiscordAlert } from "@/lib/discord";
 import { recordReferralConversion } from "@/lib/referral";
 import { giftCardExpiry } from "@/lib/gift-cards";
+import { createPrintfulOrder } from "@/lib/printful";
 import { sendBookingConfirmation } from "@/lib/email";
 import Stripe from "stripe";
 import { logger } from "@/lib/logger";
@@ -113,6 +114,72 @@ export async function POST(req: NextRequest) {
               }
             } catch (e) { logger.error("webhook:giftcard-zeal", (e as Error).message); }
           }
+        }
+
+        // Merch: finalize the pending order and place the Printful fulfillment order
+        if (session.metadata?.type === "merch") {
+          try {
+            const orderId = session.metadata.orderId;
+            if (orderId) {
+              const ci = (session as unknown as { collected_information?: { shipping_details?: { name?: string | null; address?: Stripe.Address | null } } }).collected_information;
+              const legacy = (session as unknown as { shipping_details?: { name?: string | null; address?: Stripe.Address | null } }).shipping_details;
+              const ship = ci?.shipping_details || legacy;
+              const addr = ship?.address;
+              await sb.from("orders").update({
+                status: "paid",
+                email: email || null,
+                stripe_payment_intent: typeof session.payment_intent === "string" ? session.payment_intent : session.payment_intent?.id || null,
+                total_cents: amountTotal,
+                shipping_name: ship?.name || null,
+                shipping_address: addr ? { line1: addr.line1, line2: addr.line2, city: addr.city, state: addr.state, postal_code: addr.postal_code, country: addr.country } : null,
+                updated_at: new Date().toISOString(),
+              }).eq("id", orderId);
+
+              const { data: items } = await sb
+                .from("order_items")
+                .select("printful_variant_id, name, quantity, unit_price_cents")
+                .eq("order_id", orderId);
+
+              if (items?.length && ship && addr?.line1 && addr.city) {
+                try {
+                  const po = await createPrintfulOrder({
+                    recipient: {
+                      name: ship.name || email || "WYZ Customer",
+                      address1: addr.line1 || "",
+                      address2: addr.line2 || null,
+                      city: addr.city || "",
+                      state_code: addr.state || null,
+                      country_code: addr.country || "US",
+                      zip: addr.postal_code || "",
+                      email: email || null,
+                    },
+                    items: items.map((it) => ({
+                      syncVariantId: it.printful_variant_id,
+                      quantity: it.quantity,
+                      name: it.name || undefined,
+                      retailPrice: it.unit_price_cents / 100,
+                    })),
+                    externalId: orderId,
+                    shipping: session.metadata?.shipping === "express" ? "EXPRESS" : "STANDARD",
+                  });
+                  await sb.from("orders").update({ printful_order_id: String(po.id), printful_status: po.status }).eq("id", orderId);
+                  logger.info("webhook:merch-printful", `Printful order ${po.id} created for ${orderId}`);
+                } catch (e) {
+                  await sb.from("orders").update({ printful_status: `error: ${(e as Error).message}`.slice(0, 200) }).eq("id", orderId);
+                  logger.error("webhook:merch-printful", (e as Error).message);
+                }
+              } else {
+                logger.error("webhook:merch", `Order ${orderId} paid but shipping details incomplete; needs manual fulfillment`);
+              }
+
+              await sendDiscordAlert("Merch Order Paid", {
+                Email: email || "Unknown",
+                Total: `$${(amountTotal / 100).toFixed(2)}`,
+                Order: orderId,
+                Session: session.id,
+              });
+            }
+          } catch (e) { logger.error("webhook:merch", (e as Error).message); }
         }
 
         // Record referral conversion server-to-server (no client round trip)

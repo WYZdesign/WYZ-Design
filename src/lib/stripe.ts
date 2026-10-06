@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import { createHmac } from "crypto";
 import { getSiteUrl } from "@/lib/site-url";
+import { SHIPPING_OPTIONS, shippingCentsFor, type CartLine } from "@/lib/merch";
 
 let _stripe: Stripe | null = null;
 
@@ -117,5 +118,58 @@ export async function createServiceCheckout(serviceName: string, servicePrice: n
     metadata: { type: "service", name: serviceName, price: String(servicePrice), ...(referralCode ? { referralCode } : {}) },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
+  return session;
+}
+
+/**
+ * Merch cart checkout. `lines` MUST already be server-validated (prices taken
+ * from Printful, never the client). `orderId` is the pre-created pending order
+ * row so the webhook can finalize a real record instead of rebuilding a cart
+ * from Stripe metadata.
+ */
+export async function createMerchCheckout(
+  lines: CartLine[],
+  shippingOptionId: string,
+  orderId: string,
+  email?: string,
+  referralCode?: string
+) {
+  const stripe = getStripe();
+  const subtotal = lines.reduce((n, l) => n + l.unitPriceCents * l.quantity, 0);
+  const shipping = shippingCentsFor(subtotal, shippingOptionId);
+  const option = SHIPPING_OPTIONS.find((o) => o.id === shippingOptionId) || SHIPPING_OPTIONS[0];
+  const idKey = generateIdempotencyKey("merch", orderId);
+
+  const session = await stripe.checkout.sessions.create({
+    mode: "payment",
+    customer_email: email,
+    line_items: lines.map((l) => ({
+      quantity: l.quantity,
+      price_data: {
+        currency: "usd",
+        unit_amount: l.unitPriceCents,
+        product_data: {
+          name: l.title,
+          ...(l.variantName ? { description: l.variantName.slice(0, 180) } : {}),
+          ...(l.image && l.image.startsWith("http") ? { images: [l.image] } : {}),
+        },
+      },
+    })),
+    shipping_address_collection: { allowed_countries: ["US"] },
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: { amount: shipping, currency: "usd" },
+          display_name: shipping === 0 ? "Free shipping" : option.label,
+        },
+      },
+    ],
+    success_url: `${getSiteUrl()}/merch/order?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${getSiteUrl()}/cart`,
+    metadata: { type: "merch", orderId, shipping: shippingOptionId, ...(referralCode ? { referralCode } : {}) },
+    client_reference_id: email || undefined,
+  }, { idempotencyKey: idKey });
+
   return session;
 }

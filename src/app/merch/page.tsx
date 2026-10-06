@@ -17,10 +17,7 @@ interface Product {
   colors: string[];
   image: string;
   hoverImage?: string;
-  rating?: number;
-  reviews?: number;
   badge?: string;
-  trending?: number;
   materials?: string[];
 }
 
@@ -44,22 +41,10 @@ const ARCHIVE_IMAGES = [
 const CATEGORIES = ["All", "Apparel", "Headwear", "Accessories"];
 const FAOTM_URL = "/featured-artist";
 const SORT_OPTIONS = [
-  { value: "trending", label: "Trending" },
+  { value: "featured", label: "Featured" },
   { value: "price-asc", label: "Price: Low to High" },
   { value: "price-desc", label: "Price: High to Low" },
-  { value: "rating", label: "Highest Rated" },
 ];
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-1">
-      <svg className="w-3.5 h-3.5 text-[#DF3131]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-      <span className="text-[12px] font-heading font-bold text-[#DF3131]">{rating}</span>
-    </div>
-  );
-}
 
 function TypewriterText({ text, speed = 40 }: { text: string; speed?: number }) {
   const [displayed, setDisplayed] = useState("");
@@ -442,12 +427,6 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
             <h3 className="text-size-9 font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">{fmt(product.price)}</p>
           </div>
-          {product.rating && (
-            <div className="flex items-center justify-center gap-1.5 mt-1">
-              <StarRating rating={product.rating} />
-              <span className="text-[11px] text-[#666]">({product.reviews})</span>
-            </div>
-          )}
         </button>
       ))}
     </div>
@@ -456,11 +435,9 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
 
 export default function MerchPage() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [sortBy, setSortBy] = useState("trending");
+  const [sortBy, setSortBy] = useState("featured");
   const [storeMode, setStoreMode] = useState<"grid" | "explore">("grid");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [quickColor, setQuickColor] = useState(0);
-  const [quickSize, setQuickSize] = useState("M");
   const quickViewRef = useRef<HTMLDivElement>(null);
   useModalA11y(() => setSelectedProduct(null), { lockScroll: true, active: !!selectedProduct, containerRef: quickViewRef });
   const [products, setProducts] = useState<Product[]>([]);
@@ -493,9 +470,6 @@ export default function MerchPage() {
             description: `Custom ${p.title}, Dying Breed Crew x WYZ Design`,
             colors: ["#333333", "#DF3131", "#FFFFFF"],
             image: (p.image as string) || "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg",
-            rating: 4.7,
-            reviews: 20 + (((p.id as number) * 37) % 131),
-            trending: 60 + (((p.id as number) * 17) % 41),
           }));
           setProducts(printfulProducts);
           setCatalogStatus("loaded");
@@ -516,10 +490,8 @@ export default function MerchPage() {
   const filteredProducts = useMemo(() => {
     const result = activeCategory === "All" ? [...products] : products.filter((p) => p.category === activeCategory);
     switch (sortBy) {
-      case "trending": result.sort((a, b) => (b.trending ?? 0) - (a.trending ?? 0)); break;
       case "price-asc": result.sort((a, b) => a.price - b.price); break;
       case "price-desc": result.sort((a, b) => b.price - a.price); break;
-      case "rating": result.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)); break;
     }
     return result;
   }, [activeCategory, sortBy, products]);
@@ -790,9 +762,9 @@ export default function MerchPage() {
                   </div>
 
                   {storeMode === "grid" ? (
-                    <ProductGrid products={filteredProducts} onSelect={(p) => { setSelectedProduct(p); setQuickColor(0); setQuickSize("M"); }} />
+                    <ProductGrid products={filteredProducts} onSelect={(p) => setSelectedProduct(p)} />
                   ) : (
-                    <ScatteredGrid products={filteredProducts} onSelect={(p) => { setSelectedProduct(p); setQuickColor(0); setQuickSize("M"); }} />
+                    <ScatteredGrid products={filteredProducts} onSelect={(p) => setSelectedProduct(p)} />
                   )}
                 </div>
               )}
@@ -823,41 +795,11 @@ export default function MerchPage() {
                 <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
                 <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct.price)}</p>
                 <p className="text-[14px] text-[#666] mb-4">{selectedProduct.description}</p>
-                {selectedProduct.rating && (
-                  <div className="flex items-center gap-2 mb-4">
-                    <StarRating rating={selectedProduct.rating} />
-                    <span className="text-[12px] text-[#666]">{selectedProduct.rating} ({selectedProduct.reviews} reviews)</span>
-                  </div>
-                )}
-                <div className="mb-4">
-                  <p className="text-[12px] font-heading font-bold tracking-[0.1em] uppercase text-[#666] mb-2">Color</p>
-                  <div className="flex gap-2">
-                    {selectedProduct.colors.map((color, i) => (
-                      <button key={i} onClick={() => setQuickColor(i)}
-                        aria-pressed={quickColor === i}
-                        aria-label={`Color option ${i + 1}`}
-                        className={`w-9 h-9 rounded-full border-2 transition-all ${quickColor === i ? "border-[#DF3131] ring-2 ring-[#DF3131]/30 scale-110" : "border-[#ccc] hover:scale-105"}`}
-                        style={{ backgroundColor: color }} />
-                    ))}
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <p className="text-[12px] font-heading font-bold tracking-[0.1em] uppercase text-[#666] mb-2">Size</p>
-                  <div className="flex gap-2">
-                    {["XS", "S", "M", "L", "XL", "2XL"].map((size) => (
-                      <button key={size} onClick={() => setQuickSize(size)}
-                        aria-pressed={quickSize === size}
-                        className={`w-11 h-11 border text-[14px] font-semibold transition-all ${quickSize === size ? "bg-[#DF3131] text-white border-[#DF3131] scale-105" : "border-[#ccc] hover:border-[#DF3131]"}`}>
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <Link href={FAOTM_URL}
+                <Link href={`/merch/${selectedProduct.id}`}
                   className="block w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-center transition-all text-[14px] hover:bg-[#B82020]">
-                  Shop the FAOTM Art Store
+                  Choose options &amp; add to cart
                 </Link>
-                <p className="text-center text-[12px] text-[#666] mt-3">Each month features a new independent artist</p>
+                <p className="text-center text-[12px] text-[#666] mt-3">Pick your size and color on the product page</p>
               </div>
             </div>
             {crossSells.length > 0 && (
@@ -865,7 +807,7 @@ export default function MerchPage() {
                 <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#666] mb-2">You might also like</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {crossSells.map((cp) => (
-                    <button key={cp.id} onClick={() => { setSelectedProduct(cp); setQuickColor(0); setQuickSize("M"); }} className="text-left group">
+                    <button key={cp.id} onClick={() => setSelectedProduct(cp)} className="text-left group">
 <div className="bg-[#f5f5f5] aspect-square overflow-hidden mb-2">
                            <SafeImage src={cp.image} alt={cp.name} width={400} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                       </div>
