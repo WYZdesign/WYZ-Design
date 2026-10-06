@@ -139,7 +139,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
               <span className="text-white text-sm">/mo</span>
             </div>
             <p className="text-white text-[14px] mb-2">{p.value}</p>
-            <p className="text-white text-[12px] mb-4">Valid for 3 months</p>
+            <p className="text-white text-[12px] mb-4">Billed monthly, cancel anytime</p>
             <ul className="space-y-2 text-left max-w-xs mx-auto">
               {FEATURES[p.name].map((f) => (
                 <li key={f} className="text-[17px] text-white flex items-start gap-2">
@@ -480,7 +480,7 @@ export default function PlansPage() {
 
         {/* Auto-renew disclaimer */}
         <p className="mt-8 text-[16px] text-[#666] text-center max-w-3xl mx-auto leading-relaxed text-center">
-          All subscription plans auto-renew monthly or quarterly. You can cancel at any time by contacting our
+          All subscription plans auto-renew monthly. You can cancel at any time by contacting our
           customer support team or through your online account. If you cancel before the end of your current
           subscription period, your subscription will still be active until the end of the current period, and
           you won&apos;t receive a refund for any unused portion.

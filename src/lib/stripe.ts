@@ -76,7 +76,7 @@ export async function createCheckoutSession(plan: string, email?: string, userId
   return session;
 }
 
-export async function createGiftCardCheckout(amount: number, email?: string, referralCode?: string) {
+export async function createGiftCardCheckout(amount: number, email?: string, referralCode?: string, recipientEmail?: string) {
   const stripe = getStripe();
   const idKey = generateIdempotencyKey("gift", email || "guest");
   const session = await stripe.checkout.sessions.create({
@@ -85,22 +85,37 @@ export async function createGiftCardCheckout(amount: number, email?: string, ref
     line_items: [{
       price_data: {
         currency: "usd",
-        product_data: { name: "WYZ Design Gift Card", description: "Redeemable for any WYZ Design service" },
+        product_data: { name: "WYZ Design Gift Card", description: "Redeemable for any WYZ Design service or merch. Valid 24 months." },
         unit_amount: amount * 100,
       },
       quantity: 1,
     }],
-    success_url: `${getSiteUrl()}/gift-card?success=true`,
+    success_url: `${getSiteUrl()}/gift-card?success=true&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${getSiteUrl()}/gift-card`,
-    metadata: { type: "giftcard", amount: String(amount), ...(referralCode ? { referralCode } : {}) },
+    metadata: { type: "giftcard", amount: String(amount), ...(recipientEmail ? { recipientEmail } : {}), ...(referralCode ? { referralCode } : {}) },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
   return session;
 }
 
-export async function createServiceCheckout(serviceName: string, servicePrice: number, email?: string, referralCode?: string) {
+/** Creates a one-time amount-off coupon for a gift-card redemption. */
+async function createGiftCardCoupon(appliedCents: number): Promise<string> {
+  const stripe = getStripe();
+  const coupon = await stripe.coupons.create({
+    amount_off: appliedCents,
+    currency: "usd",
+    duration: "once",
+    name: "Gift card",
+  });
+  return coupon.id;
+}
+
+export async function createServiceCheckout(serviceName: string, servicePrice: number, email?: string, referralCode?: string, giftCard?: { id: number; code: string; appliedCents: number }) {
   const stripe = getStripe();
   const idKey = generateIdempotencyKey("svc", email || "guest");
+  const discounts = giftCard && giftCard.appliedCents > 0
+    ? [{ coupon: await createGiftCardCoupon(giftCard.appliedCents) }]
+    : undefined;
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     customer_email: email,
@@ -114,8 +129,14 @@ export async function createServiceCheckout(serviceName: string, servicePrice: n
     }],
     success_url: `${getSiteUrl()}/booking?success=true&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${getSiteUrl()}/booking`,
-    allow_promotion_codes: true,
-    metadata: { type: "service", name: serviceName, price: String(servicePrice), ...(referralCode ? { referralCode } : {}) },
+    ...(discounts ? { discounts } : { allow_promotion_codes: true }),
+    metadata: {
+      type: "service",
+      name: serviceName,
+      price: String(servicePrice),
+      ...(giftCard ? { giftCardId: String(giftCard.id), giftCardCode: giftCard.code, giftCardAppliedCents: String(giftCard.appliedCents) } : {}),
+      ...(referralCode ? { referralCode } : {}),
+    },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
   return session;
@@ -132,13 +153,17 @@ export async function createMerchCheckout(
   shippingOptionId: string,
   orderId: string,
   email?: string,
-  referralCode?: string
+  referralCode?: string,
+  giftCard?: { id: number; code: string; appliedCents: number }
 ) {
   const stripe = getStripe();
   const subtotal = lines.reduce((n, l) => n + l.unitPriceCents * l.quantity, 0);
   const shipping = shippingCentsFor(subtotal, shippingOptionId);
   const option = SHIPPING_OPTIONS.find((o) => o.id === shippingOptionId) || SHIPPING_OPTIONS[0];
   const idKey = generateIdempotencyKey("merch", orderId);
+  const discounts = giftCard && giftCard.appliedCents > 0
+    ? [{ coupon: await createGiftCardCoupon(giftCard.appliedCents) }]
+    : undefined;
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
@@ -165,9 +190,16 @@ export async function createMerchCheckout(
         },
       },
     ],
+    ...(discounts ? { discounts } : {}),
     success_url: `${getSiteUrl()}/merch/order?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${getSiteUrl()}/cart`,
-    metadata: { type: "merch", orderId, shipping: shippingOptionId, ...(referralCode ? { referralCode } : {}) },
+    metadata: {
+      type: "merch",
+      orderId,
+      shipping: shippingOptionId,
+      ...(giftCard ? { giftCardId: String(giftCard.id), giftCardCode: giftCard.code, giftCardAppliedCents: String(giftCard.appliedCents) } : {}),
+      ...(referralCode ? { referralCode } : {}),
+    },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
 

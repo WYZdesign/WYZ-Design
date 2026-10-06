@@ -11,9 +11,40 @@ export default function CartPage() {
   const [shipping, setShipping] = useState<string>("standard");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [giftCode, setGiftCode] = useState("");
+  const [giftApplied, setGiftApplied] = useState<number | null>(null);
+  const [giftMsg, setGiftMsg] = useState<string | null>(null);
+  const [giftChecking, setGiftChecking] = useState(false);
 
   const shipCents = shippingCentsFor(subtotalCents, shipping);
-  const totalCents = subtotalCents + shipCents;
+  const grossCents = subtotalCents + shipCents;
+  const discountCents = giftApplied ? Math.min(giftApplied, grossCents) : 0;
+  const totalCents = grossCents - discountCents;
+
+  async function applyGiftCard() {
+    if (!giftCode.trim()) return;
+    setGiftChecking(true);
+    setGiftMsg(null);
+    setGiftApplied(null);
+    try {
+      const res = await fetch("/api/gift-card/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: giftCode }),
+      });
+      const d = await res.json();
+      if (d.valid) {
+        setGiftApplied(d.balanceCents);
+        setGiftMsg(`Gift card applied: ${formatUSD(d.balanceCents)} available`);
+      } else {
+        setGiftMsg(d.message || "That gift card could not be applied.");
+      }
+    } catch {
+      setGiftMsg("Could not check that gift card.");
+    } finally {
+      setGiftChecking(false);
+    }
+  }
 
   async function checkout() {
     setBusy(true);
@@ -25,6 +56,7 @@ export default function CartPage() {
         body: JSON.stringify({
           type: "merch",
           shipping,
+          giftCardCode: giftApplied ? giftCode : undefined,
           items: lines.map((l) => ({
             variantId: l.variantId,
             productId: l.productId,
@@ -110,6 +142,28 @@ export default function CartPage() {
             <div className="flex justify-between font-black text-[16px] pt-2 border-t border-[#E2E2E2] dark:border-[#333]">
               <span>Total</span><span>{formatUSD(totalCents)}</span>
             </div>
+            {discountCents > 0 && (
+              <div className="flex justify-between text-[13px] text-[#DF3131]">
+                <span>Gift card applied</span><span>-{formatUSD(discountCents)}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="gift-code" className="text-[12px] font-bold uppercase tracking-[0.1em] text-[#333] dark:text-[#ddd]">Gift card</label>
+            <div className="flex gap-2">
+              <input
+                id="gift-code"
+                value={giftCode}
+                onChange={(e) => setGiftCode(e.target.value)}
+                placeholder="WYZ-XXXX-XXXX-XXXX-XXXX"
+                className="flex-1 border border-[#ccc] dark:border-[#444] px-3 py-2 text-[13px] dark:bg-[#252528] focus:border-[#DF3131] focus:outline-none"
+              />
+              <button type="button" onClick={applyGiftCard} disabled={giftChecking} className="px-4 py-2 border border-[#333] dark:border-white/30 text-[12px] font-bold uppercase tracking-[0.08em] hover:bg-[#333] hover:text-white transition-colors disabled:opacity-50">
+                {giftChecking ? "…" : "Apply"}
+              </button>
+            </div>
+            {giftMsg && <p className={`text-[12px] ${giftApplied ? "text-green-600" : "text-[#DF3131]"}`}>{giftMsg}</p>}
           </div>
 
           {error && <p role="alert" className="text-[13px] text-[#DF3131]">{error}</p>}

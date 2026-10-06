@@ -5,7 +5,8 @@ import { addLoyaltyPoints } from "@/lib/wyzmind";
 import { earnZeal } from "@/lib/zeal";
 import { sendDiscordAlert } from "@/lib/discord";
 import { recordReferralConversion } from "@/lib/referral";
-import { giftCardExpiry } from "@/lib/gift-cards";
+import { giftCardExpiry, generateGiftCardCode, hashGiftCardCode } from "@/lib/gift-cards";
+import { sendGiftCardEmail } from "@/lib/email";
 import { createPrintfulOrder } from "@/lib/printful";
 import { sendBookingConfirmation } from "@/lib/email";
 import Stripe from "stripe";
@@ -82,17 +83,28 @@ export async function POST(req: NextRequest) {
         if (session.metadata?.type === "giftcard") {
           try {
             const gcAmount = Number(session.metadata.amount) || Math.round(amountTotal / 100);
-            const gcCode = `WYZ-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+            const gcCode = generateGiftCardCode();
+            const gcExpiry = giftCardExpiry();
             const { error: gcErr } = await sb.from("gift_cards").insert({
               stripe_session_id: session.id,
               buyer_email: email || "unknown",
+              recipient_email: session.metadata.recipientEmail || null,
               amount: gcAmount,
+              balance_cents: Math.round(gcAmount * 100),
+              currency: "usd",
               code: gcCode,
+              code_hash: hashGiftCardCode(gcCode),
               status: "active",
               // 24-month policy (Torré 2026-10-06) — single source: lib/gift-cards.ts
-              expires_at: giftCardExpiry().toISOString(),
+              expires_at: gcExpiry.toISOString(),
             });
             if (gcErr) logger.error("webhook:giftcard-insert", gcErr.message);
+
+            if (email) {
+              try {
+                await sendGiftCardEmail({ email, code: gcCode, amount: gcAmount, expiresAt: gcExpiry.toISOString() });
+              } catch (e) { logger.error("webhook:giftcard-email", (e as Error).message); }
+            }
 
             await sendDiscordAlert("Gift Card Purchase", {
               "Buyer Email": email || "Unknown",
@@ -180,6 +192,30 @@ export async function POST(req: NextRequest) {
               });
             }
           } catch (e) { logger.error("webhook:merch", (e as Error).message); }
+        }
+
+        // Gift-card redemption: commit the spend that was reserved at checkout
+        const gcId = session.metadata?.giftCardId;
+        const gcApplied = Number(session.metadata?.giftCardAppliedCents || 0);
+        if (gcId && gcApplied > 0) {
+          try {
+            const gcNumId = Number(gcId);
+            const { data: card } = await sb.from("gift_cards").select("balance_cents").eq("id", gcNumId).maybeSingle();
+            const newBalance = Math.max(0, (card?.balance_cents || 0) - gcApplied);
+            await sb.from("gift_cards").update({
+              balance_cents: newBalance,
+              status: newBalance <= 0 ? "redeemed" : "active",
+              ...(newBalance <= 0 ? { redeemed_at: new Date().toISOString() } : {}),
+            }).eq("id", gcNumId);
+            await sb.from("gift_card_ledger").insert({
+              gift_card_id: gcNumId,
+              delta_cents: -gcApplied,
+              reason: "redeemed at checkout",
+              actor: "webhook",
+              order_id: session.metadata?.orderId || null,
+            });
+            logger.info("webhook:giftcard-redeem", `Applied ${gcApplied} to card ${gcNumId} (balance ${newBalance})`);
+          } catch (e) { logger.error("webhook:giftcard-redeem", (e as Error).message); }
         }
 
         // Record referral conversion server-to-server (no client round trip)

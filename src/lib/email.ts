@@ -227,3 +227,25 @@ export async function sendBookingDelivered(data: { email: string; customerName?:
 
   return await sendEmail(email, subject, html);
 }
+
+
+interface GiftCardEmail {
+  email: string;
+  code: string;
+  amount: number;
+  expiresAt: string;
+}
+
+/** Sends the gift-card code to the buyer. Called only after Stripe confirms payment. */
+export async function sendGiftCardEmail(data: GiftCardEmail): Promise<boolean> {
+  const when = new Date(data.expiresAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  const html = `
+    <div style="font-family:Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#333">
+      <h1 style="font-size:22px;letter-spacing:0.05em;text-transform:uppercase">Your WYZ Design gift card</h1>
+      <p>Thanks for your purchase. Here is your gift card code for <strong>$${data.amount.toFixed(2)}</strong>:</p>
+      <p style="font-size:24px;font-weight:bold;letter-spacing:2px;background:#f5f5f5;padding:16px;text-align:center;border-radius:6px">${escapeHtml(data.code)}</p>
+      <p>Apply it at checkout on any service or merch order. Valid for 24 months, through <strong>${when}</strong>.</p>
+      <p style="color:#777;font-size:13px">WYZ Design LLC &middot; info@wyzdesign.com</p>
+    </div>`;
+  return sendEmail(data.email, "Your WYZ Design gift card", html);
+}

@@ -2,6 +2,21 @@
 
 ---
 
+## Session 58 (2026-10-06) - Gift cards end to end, pricing/subscription canon, metrics unified, audits adopted (WYZMiND)
+
+- **Gift cards are now a real product, not a stub.** Spec 24 phases 2-3 shipped:
+  - Schema: `gift_cards` gained `code_hash`, `balance_cents`, `currency`, `recipient_email`, `redeemed_at`; new append-only `gift_card_ledger`.
+  - Purchase: the webhook issues a crypto-random `WYZ-XXXX-...` code, stores the SHA-256 hash + balance, **emails the code to the buyer** (`sendGiftCardEmail`), and shows it on `/gift-card?success=true`.
+  - Redeem: `/api/gift-card/validate` checks status/expiry/balance; `/cart` and `/booking` accept a gift-card code; Stripe applies it as a one-time coupon; the webhook commits the ledger entry and decrements the balance (status flips to `redeemed` at zero).
+  - Admin: `/api/admin/gift-cards` (GET search by email/last-4 + ledger, POST void/refill), gated by admin email.
+- **Pricing/subscription canon implemented:** photo-retouching page now leads with the **$50 retouch session** and presents $15/$35/$12 per-photo as volume options; plans now read "Billed monthly, cancel anytime" (removed the stray "Valid for 3 months" contradiction) and the disclaimer states one cadence (monthly, cancel anytime, no refund for the unused portion).
+- **Zeal reward costs de-drifted:** the loyalty page's client list now matches the server `ZEAL_REWARDS` (500/800/1000/2000/2000) so the price shown equals the price charged.
+- **Proof metrics unified:** Home now matches About (90+ events, 45+ clients, 1,500+ photos, 9+ years); flagged for owner confirmation against real records.
+- **Audits adopted as a recurring operating system:** `.github/workflows/audit-reminder.yml` opens a monthly, idempotent tracking issue (boardroom + client-experience + truth-pass checklist), runnable on demand. Board #36/#37/#30/#28/#39 closed.
+- Verified: build + tsc + lint + tests green; live deploy after push.
+
+---
+
 ## Session 57 (2026-10-06) - Real merch store: cart + Stripe checkout + Printful fulfillment (WYZMiND)
 
 Owner directive: "no cosmetic, placeholder, or stubs on my site." The store was presentation-only (fake "Add to Cart", fabricated ratings/reviews, a blank-catalog product list that could not actually be ordered). Replaced with a real, orderable store.

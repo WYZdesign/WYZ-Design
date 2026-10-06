@@ -70,6 +70,14 @@ export default function PhotoRetouching() {
             <div className="bg-[#f5f5f5] dark:bg-[#252528] p-8">
               <h3 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-3">Pricing</h3>
               <div className="space-y-4">
+                <div className="pb-4 border-b border-gray-200 dark:border-[#444]">
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-[#333333] dark:text-[#e0e0e0]">Retouch Session</span>
+                    <span className="text-[#DF3131] font-bold">$50</span>
+                  </div>
+                  <p className="text-sm text-[#666665] dark:text-white/60 mt-1">One session: send a focused set, we edit and deliver the finals.</p>
+                </div>
+                <p className="text-[12px] font-bold tracking-[0.12em] uppercase text-[#666665] dark:text-white/50 pt-1">Per-photo volume pricing</p>
                 <div className="border-b border-gray-200 dark:border-[#444] pb-4">
                   <div className="flex justify-between">
                     <span className="font-semibold text-[#333333] dark:text-[#e0e0e0]">Basic Retouch</span>

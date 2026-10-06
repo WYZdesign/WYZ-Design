@@ -8,6 +8,7 @@ import { logger } from "@/lib/logger";
 import { getServiceClient } from "@/lib/supabase";
 import { getVariantInfo } from "@/lib/printful";
 import { sanitizeCartLine, cartSubtotalCents, shippingCentsFor, SHIPPING_OPTIONS, MAX_CART_LINES, MAX_LINE_QUANTITY, type CartLine } from "@/lib/merch";
+import { hashGiftCardCode, isGiftCardExpired } from "@/lib/gift-cards";
 
 const SERVICE_PRICES: Record<string, number> = {
   "Photoshoot": 100,
@@ -19,6 +20,25 @@ const SERVICE_PRICES: Record<string, number> = {
 
 function getIp(req: NextRequest): string {
   return req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+}
+
+/**
+ * Validates a gift-card code and reserves up to `totalCents` of it for this
+ * checkout. Returns null when the code is missing/invalid/expired/empty.
+ */
+async function resolveGiftCard(code: unknown, totalCents: number): Promise<{ id: number; code: string; appliedCents: number } | null> {
+  if (!code || typeof code !== "string" || !code.trim()) return null;
+  const sb = getServiceClient();
+  const { data } = await sb
+    .from("gift_cards")
+    .select("id, code, balance_cents, status, expires_at")
+    .eq("code_hash", hashGiftCardCode(code))
+    .maybeSingle();
+  if (!data || data.status !== "active" || isGiftCardExpired(data.expires_at)) return null;
+  if (!data.balance_cents || data.balance_cents <= 0) return null;
+  const appliedCents = Math.min(data.balance_cents, Math.max(0, totalCents));
+  if (appliedCents <= 0) return null;
+  return { id: data.id, code: data.code, appliedCents };
 }
 
 /**
@@ -41,7 +61,7 @@ export async function POST(req: NextRequest) {
     if (!ok) {
       return errorResponse("Too many requests. Please try again shortly.", 429, { code: "RATE_LIMITED" });
     }
-    const { type, plan, amount, email, serviceName, servicePrice, ref, items, shipping } = await req.json();
+    const { type, plan, amount, email, serviceName, servicePrice, ref, items, shipping, giftCardCode, recipientEmail } = await req.json();
 
     // Server-derived identity only. Client-sent userId is ignored so a
     // forged body cannot write a muse tier to someone else's account.
@@ -77,7 +97,7 @@ export async function POST(req: NextRequest) {
       if (amount < 5 || amount > 500) {
         return NextResponse.json({ error: "Gift card amount must be $5-$500" }, { status: 400 });
       }
-      const session = await createGiftCardCheckout(amount, email, referralCode);
+      const session = await createGiftCardCheckout(amount, email, referralCode, typeof recipientEmail === "string" ? recipientEmail.slice(0, 160) : undefined);
       return NextResponse.json({ url: session.url });
     }
 
@@ -90,7 +110,8 @@ export async function POST(req: NextRequest) {
       if (servicePrice !== expectedPrice) {
         return NextResponse.json({ error: "Invalid service price" }, { status: 400 });
       }
-      const session = await createServiceCheckout(serviceName, servicePrice, email, referralCode);
+      const giftCard = await resolveGiftCard(giftCardCode, Math.round(expectedPrice * 100));
+      const session = await createServiceCheckout(serviceName, servicePrice, email, referralCode, giftCard || undefined);
       return NextResponse.json({ url: session.url });
     }
 
@@ -172,7 +193,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Unable to start checkout. Please try again." }, { status: 500 });
       }
 
-      const session = await createMerchCheckout(lines, shippingId, order.id, email, referralCode);
+      const session = await createMerchCheckout(lines, shippingId, order.id, email, referralCode, (await resolveGiftCard(giftCardCode, subtotal + shipCents)) || undefined);
       await sb.from("orders").update({ stripe_session_id: session.id }).eq("id", order.id);
       return NextResponse.json({ url: session.url });
     }

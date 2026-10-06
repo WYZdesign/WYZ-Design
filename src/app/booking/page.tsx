@@ -84,6 +84,7 @@ export default function BookingPage() {
   const [selectedService, setSelectedService] = useState("");
   const [loading, setLoading] = useState(false);
   const [formMsg, setFormMsg] = useState("");
+  const [giftCode, setGiftCode] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
   function notify(msg: string) {
@@ -136,7 +137,7 @@ export default function BookingPage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "service", serviceName: selectedService, servicePrice: price }),
+        body: JSON.stringify({ type: "service", serviceName: selectedService, servicePrice: price, giftCardCode: giftCode || undefined }),
       });
       const data = await res.json();
       if (data.url) {
@@ -259,6 +260,14 @@ export default function BookingPage() {
                 </button>
               )}
             </div>
+
+            {selectedService && SERVICE_PRICES[selectedService] && (
+              <div className="mt-4">
+                <label htmlFor="booking-gift" className="block text-[12px] font-bold uppercase tracking-[0.1em] text-[#333] dark:text-[#ddd] mb-1">Gift card (optional)</label>
+                <input id="booking-gift" value={giftCode} onChange={(e) => setGiftCode(e.target.value)} placeholder="WYZ-XXXX-XXXX-XXXX-XXXX" className="w-full border border-[#ccc] dark:border-[#444] px-3 py-2.5 text-[13px] dark:bg-[#252528] dark:text-white focus:border-[#DF3131] focus:outline-none" />
+                <p className="text-[11px] text-[#777] dark:text-[#999] mt-1">Any balance is applied on the Stripe checkout page.</p>
+              </div>
+            )}
 
             <p className="text-center text-[13px] text-[#666] dark:text-[#b0b0b0] mt-4">
               Or contact us directly at <a href="mailto:info@wyzdesign.com" className="text-[#DF3131] hover:underline">info@wyzdesign.com</a> or <a href="tel:2133999610" className="text-[#DF3131] hover:underline">(213) 399-9610</a>
