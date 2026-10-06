@@ -73,8 +73,8 @@ Our rewards program is Zeal Rewards and points are called Zeal. Four tiers:
 - Zealot (500 Zeal): early perks and bonus quest access
 - Champion (2,000 Zeal): bigger perks and priority drops
 - Legend (5,000 Zeal): top-tier perks and VIP treatment
-Earn Zeal: daily login (+2), newsletter signup (+50), consultation booking (+100), purchases (1 Zeal per $1), referrals (+500). Quests, achievements, and hidden easter eggs award bonus Zeal too.
-Redeem Zeal on the /loyalty page for real rewards: $25 off any service (500), free photo retouching (750), merch item under $40 (1,000), extra photoshoot hour (1,200), $100 off any booking (1,750).
+Earn Zeal: daily login (+2), newsletter signup (+40), consultation booking (+150), purchases (1 Zeal per $1), referrals (+400). Quests, achievements, and hidden easter eggs award bonus Zeal too. Passive browsing earns very little and is capped at once per day, so real engagement and quests are how you climb.
+Redeem Zeal on the /loyalty page for real rewards: $25 off any service (500), free photo retouching (1,000), merch item under $40 (800), extra photoshoot hour (2,000), $100 off any booking (2,000).
 
 ## EVENTS
 We curate and cover events: concerts, showcases, private functions. Past events include live performances, art shows, and community gatherings. Event photography starts at $200. See /events.
@@ -174,7 +174,7 @@ Use this naturally when they ask about rewards, tiers, progress, pricing, or boo
         } else if (lastUser.includes("merch") || lastUser.includes("shop") || lastUser.includes("clothing")) {
           response = "Check out our WYZ Crown merch at /merch: denim tees, hoodies, beanies, caps, mugs, tumblers, patches, socks. We also have a Concept Archive at /merch/concepts where each design has a name and story. Every purchase supports the crew.";
         } else if (lastUser.includes("loyalty") || lastUser.includes("reward") || lastUser.includes("point")) {
-          response = "It's called Zeal Rewards and points are called Zeal. Four tiers: Recruit (0), Zealot (500), Champion (2,000), Legend (5,000). Earn Zeal with daily logins (+2), newsletter signups (+50), consultation bookings (+100), purchases (1 Zeal per $1), and referrals (+500). Quests, achievements, and easter eggs award bonus Zeal too.";
+          response = "It's called Zeal Rewards and points are called Zeal. Four tiers: Recruit (0), Zealot (500), Champion (2,000), Legend (5,000). Earn Zeal with daily logins (+2), newsletter signups (+40), consultation bookings (+150), purchases (1 Zeal per $1), and referrals (+400). Quests, achievements, and easter eggs award bonus Zeal too. Passive browsing is capped at once per day, so engagement and quests are the real path.";
         } else if (lastUser.includes("photo") || lastUser.includes("camera") || lastUser.includes("shoot")) {
           response = "Photography starts at $100/hr. We cover Events, Outdoors, Studio, Boudoir, Bodypaint, Urbex, Products, and Conceptual. 78+ models in our archive. Book at /booking-calendar/photoshoot or /booking-calendar/event-photography.";
         } else if (lastUser.includes("web") || lastUser.includes("website") || lastUser.includes("site")) {

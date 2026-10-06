@@ -5,6 +5,7 @@ import { addLoyaltyPoints } from "@/lib/wyzmind";
 import { earnZeal } from "@/lib/zeal";
 import { sendDiscordAlert } from "@/lib/discord";
 import { recordReferralConversion } from "@/lib/referral";
+import { giftCardExpiry } from "@/lib/gift-cards";
 import { sendBookingConfirmation } from "@/lib/email";
 import Stripe from "stripe";
 import { logger } from "@/lib/logger";
@@ -86,6 +87,9 @@ export async function POST(req: NextRequest) {
               buyer_email: email || "unknown",
               amount: gcAmount,
               code: gcCode,
+              status: "active",
+              // 24-month policy (Torré 2026-10-06) — single source: lib/gift-cards.ts
+              expires_at: giftCardExpiry().toISOString(),
             });
             if (gcErr) logger.error("webhook:giftcard-insert", gcErr.message);
 

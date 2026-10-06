@@ -18,44 +18,54 @@ export interface ZealActionDef {
   cooldownMs: number;
 }
 
+/**
+ * ZEAL ECONOMY (rebalanced 2026-10-06, Torreé):
+ * Passive browsing is deliberately small and hard-capped at once per day so it
+ * cannot be farmed (the old 1h/6h cooldowns on read-blog-post / visit-service-page
+ * let a single user stack points in minutes). Real engagement -- subscribing,
+ * reviewing, sharing, booking, referring, completing quests/achievements -- is
+ * where the progression lives. Points are spread across categories and over time.
+ *
+ * Keep the headline numbers in `src/app/api/chat/route.ts` in sync with this table.
+ */
 export const ZEAL_ACTIONS: Record<string, ZealActionDef> = {
-  // Daily habits
-  "daily-login":        { zeal: 2,   category: "daily", cooldownMs: 20 * 3600000, reason: "Daily login" },
+  // Daily habits -- small, once per day, anti-farm
+  "daily-login":        { zeal: 2,   category: "daily", cooldownMs: 24 * 3600000, reason: "Daily login" },
   "visit-homepage":     { zeal: 1,   category: "daily", cooldownMs: 24 * 3600000, reason: "Visited homepage" },
-  "visit-service-page": { zeal: 2,   category: "daily", cooldownMs: 6 * 3600000,  reason: "Explored a service" },
-  "visit-pricing":      { zeal: 2,   category: "daily", cooldownMs: 24 * 3600000, reason: "Checked out pricing" },
-  "visit-gallery":      { zeal: 3,   category: "daily", cooldownMs: 24 * 3600000, reason: "Browsed the gallery" },
-  "read-blog-post":     { zeal: 3,   category: "daily", cooldownMs: 1 * 3600000,  reason: "Read a blog post" },
-  "use-search":         { zeal: 1,   category: "daily", cooldownMs: 1 * 3600000,  reason: "Used site search" },
-  "open-chat":          { zeal: 2,   category: "daily", cooldownMs: 24 * 3600000, reason: "Opened the chat widget" },
-  "scroll-full-page":   { zeal: 1,   category: "daily", cooldownMs: 12 * 3600000, reason: "Read a page start to finish" },
+  "visit-service-page": { zeal: 1,   category: "daily", cooldownMs: 24 * 3600000, reason: "Explored a service" },
+  "visit-pricing":      { zeal: 1,   category: "daily", cooldownMs: 24 * 3600000, reason: "Checked out pricing" },
+  "visit-gallery":      { zeal: 1,   category: "daily", cooldownMs: 24 * 3600000, reason: "Browsed the gallery" },
+  "read-blog-post":     { zeal: 2,   category: "daily", cooldownMs: 24 * 3600000, reason: "Read a blog post" },
+  "use-search":         { zeal: 1,   category: "daily", cooldownMs: 24 * 3600000, reason: "Used site search" },
+  "open-chat":          { zeal: 1,   category: "daily", cooldownMs: 24 * 3600000, reason: "Opened the chat widget" },
+  "scroll-full-page":   { zeal: 1,   category: "daily", cooldownMs: 24 * 3600000, reason: "Read a page start to finish" },
 
-  // Weekly engagement
-  "community-comment":    { zeal: 10, category: "weekly", cooldownMs: 4 * 3600000,  reason: "Left a community comment" },
-  "share-social":         { zeal: 15, category: "weekly", cooldownMs: 24 * 3600000, reason: "Shared WYZ on social media" },
+  // Weekly engagement -- real interaction, once per day max
+  "community-comment":    { zeal: 10, category: "weekly", cooldownMs: 24 * 3600000, reason: "Left a community comment" },
+  "share-social":         { zeal: 10, category: "weekly", cooldownMs: 24 * 3600000, reason: "Shared WYZ on social media" },
 
-  // One-time milestones
+  // One-time milestones -- weighted toward meaningful, revenue-adjacent actions
   "visit-about":             { zeal: 5,   category: "milestone", cooldownMs: 0, reason: "Read the About page" },
-  "subscribe-newsletter":    { zeal: 50,  category: "milestone", cooldownMs: 0, reason: "Subscribed to the newsletter" },
-  "complete-wizard":         { zeal: 40,  category: "milestone", cooldownMs: 0, reason: "Completed the strategy wizard" },
-  "leave-review":            { zeal: 30,  category: "milestone", cooldownMs: 0, reason: "Left an honest review" },
-  "book-consultation":       { zeal: 100, category: "milestone", cooldownMs: 0, reason: "Booked a consultation" },
-  "buy-gift-card":           { zeal: 75,  category: "milestone", cooldownMs: 0, reason: "Purchased a gift card" },
-  "refer-friend":            { zeal: 500, category: "milestone", cooldownMs: 0, reason: "Referred a friend" },
-  "upload-model-photo":      { zeal: 30,  category: "milestone", cooldownMs: 0, reason: "Submitted to the model archive" },
-  "submit-featured-artist":  { zeal: 40,  category: "milestone", cooldownMs: 0, reason: "Applied as featured artist" },
-  "submit-design-brief":     { zeal: 35,  category: "milestone", cooldownMs: 0, reason: "Sent a design brief" },
-  "view-all-services":       { zeal: 20,  category: "milestone", cooldownMs: 0, reason: "Viewed every service page" },
-  "read-5-blog-posts":       { zeal: 25,  category: "milestone", cooldownMs: 0, reason: "Read 5 different blog posts" },
-  "browse-gallery-10":       { zeal: 15,  category: "milestone", cooldownMs: 0, reason: "Opened 10 gallery photos" },
+  "subscribe-newsletter":    { zeal: 40,  category: "milestone", cooldownMs: 0, reason: "Subscribed to the newsletter" },
+  "complete-wizard":         { zeal: 30,  category: "milestone", cooldownMs: 0, reason: "Completed the strategy wizard" },
+  "leave-review":            { zeal: 50,  category: "milestone", cooldownMs: 0, reason: "Left an honest review" },
+  "book-consultation":       { zeal: 150, category: "milestone", cooldownMs: 0, reason: "Booked a consultation" },
+  "buy-gift-card":           { zeal: 100, category: "milestone", cooldownMs: 0, reason: "Purchased a gift card" },
+  "refer-friend":            { zeal: 400, category: "milestone", cooldownMs: 0, reason: "Referred a friend" },
+  "upload-model-photo":      { zeal: 25,  category: "milestone", cooldownMs: 0, reason: "Submitted to the model archive" },
+  "submit-featured-artist":  { zeal: 30,  category: "milestone", cooldownMs: 0, reason: "Applied as featured artist" },
+  "submit-design-brief":     { zeal: 40,  category: "milestone", cooldownMs: 0, reason: "Sent a design brief" },
+  "view-all-services":       { zeal: 15,  category: "milestone", cooldownMs: 0, reason: "Viewed every service page" },
+  "read-5-blog-posts":       { zeal: 20,  category: "milestone", cooldownMs: 0, reason: "Read 5 different blog posts" },
+  "browse-gallery-10":       { zeal: 10,  category: "milestone", cooldownMs: 0, reason: "Opened 10 gallery photos" },
 
-  // Easter eggs
-  "logo-easter-egg":  { zeal: 50,  category: "easter", cooldownMs: 0, reason: "Found the logo easter egg" },
+  // Easter eggs -- discoverable bonuses, mostly once-ever
+  "logo-easter-egg":  { zeal: 40,  category: "easter", cooldownMs: 0, reason: "Found the logo easter egg" },
   "hidden-page":      { zeal: 100, category: "easter", cooldownMs: 0, reason: "Found the hidden page" },
-  "scroll-trio":      { zeal: 20,  category: "easter", cooldownMs: 0, reason: "Finished 3 pages in one visit" },
-  "konami-code":      { zeal: 200, category: "easter", cooldownMs: 0, reason: "Entered the Konami code" },
+  "scroll-trio":      { zeal: 15,  category: "easter", cooldownMs: 0, reason: "Finished 3 pages in one visit" },
+  "konami-code":      { zeal: 150, category: "easter", cooldownMs: 0, reason: "Entered the Konami code" },
   "double-tap":       { zeal: 10,  category: "easter", cooldownMs: 0, reason: "Double-tapped a gallery photo" },
-  "speed-reader":     { zeal: 15,  category: "easter", cooldownMs: 0, reason: "Speed reader (skimmed in under 5s)" },
+  "speed-reader":     { zeal: 10,  category: "easter", cooldownMs: 0, reason: "Speed reader (skimmed in under 5s)" },
   "thorough-reader":  { zeal: 20,  category: "easter", cooldownMs: 0, reason: "Thorough reader (3+ minutes on a post)" },
   "watch-recap":      { zeal: 10,  category: "easter", cooldownMs: 7 * 24 * 3600000, reason: "Watched an event recap" },
 };
@@ -68,17 +78,17 @@ export interface AchievementDef {
 
 export const ZEAL_ACHIEVEMENTS: Record<string, AchievementDef> = {
   "first-login":       { zeal: 25,  title: "Ignited",       description: "Sign in for the first time" },
-  "profile-complete":  { zeal: 25,  title: "Identified",    description: "Complete your profile" },
-  "social-connected":  { zeal: 10,  title: "Connected",     description: "Add a social link to your profile" },
+  "profile-complete":  { zeal: 30,  title: "Identified",    description: "Complete your profile" },
+  "social-connected":  { zeal: 15,  title: "Connected",     description: "Add a social link to your profile" },
   "avatar-uploaded":   { zeal: 15,  title: "Visible",       description: "Upload a profile picture" },
   "service-explorer":  { zeal: 30,  title: "Explorer",      description: "Visit all 6 service pages" },
-  "blog-reader":       { zeal: 20,  title: "Bookworm",      description: "Read 10 blog posts" },
+  "blog-reader":       { zeal: 25,  title: "Bookworm",      description: "Read 10 blog posts" },
   "gallery-regular":   { zeal: 20,  title: "Art Lover",     description: "Visit the gallery 5 times" },
   "night-owl":         { zeal: 25,  title: "Night Owl",     description: "Visit between midnight and 5am" },
   "streak-3":          { zeal: 15,  title: "Starter",       description: "Visit 3 days in a row" },
-  "streak-7":          { zeal: 50,  title: "On Fire",       description: "Visit 7 days in a row" },
-  "streak-14":         { zeal: 100, title: "Dedicated",     description: "Visit 14 days in a row" },
-  "streak-30":         { zeal: 200, title: "Unstoppable",   description: "Visit 30 days in a row" },
+  "streak-7":          { zeal: 60,  title: "On Fire",       description: "Visit 7 days in a row" },
+  "streak-14":         { zeal: 120, title: "Dedicated",     description: "Visit 14 days in a row" },
+  "streak-30":         { zeal: 250, title: "Unstoppable",   description: "Visit 30 days in a row" },
 };
 
 export interface QuestDef {
@@ -93,25 +103,25 @@ export const ZEAL_QUESTS: Record<string, QuestDef> = {
     title: "First Steps",
     description: "Get to know WYZ Design",
     steps: ["visit-about", "visit-service-page", "visit-pricing", "subscribe-newsletter", "book-consultation"],
-    bonusZeal: 75,
+    bonusZeal: 100,
   },
   "content-creator": {
     title: "Content Creator",
     description: "Join the conversation and put your work out there",
     steps: ["community-comment", "share-social", "leave-review", "submit-featured-artist"],
-    bonusZeal: 95,
+    bonusZeal: 120,
   },
   "social-butterfly": {
     title: "Social Butterfly",
     description: "Spread the word and bring friends along",
     steps: ["share-social", "refer-friend", "subscribe-newsletter"],
-    bonusZeal: 80,
+    bonusZeal: 100,
   },
   "deep-dive": {
     title: "Deep Dive",
     description: "Explore everything the site has to offer",
     steps: ["read-blog-post", "browse-gallery-10", "complete-wizard", "view-all-services"],
-    bonusZeal: 65,
+    bonusZeal: 80,
   },
 };
 
@@ -123,8 +133,9 @@ export const ZEAL_TIERS = [
 ];
 
 /**
- * Redemption catalog. Priced at roughly 5-6% real-value back
- * (1 Zeal is earned per $1 spent, so 500 Zeal ~= $25 of value).
+ * Redemption catalog. Purchases earn 1 Zeal per $1 spent; browse/engagement
+ * earning is intentionally modest (see ZEAL_ACTIONS above), so these costs
+ * represent a real-effort or spend milestone rather than a quick farm.
  */
 export const ZEAL_REWARDS = [
   { id: "discount-25",       title: "$25 off any service",              cost: 500,  note: "Discount code honored on any booking" },

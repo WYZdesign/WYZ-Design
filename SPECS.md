@@ -50,7 +50,7 @@ SMS, social DMs, third-party marketing platforms, automated pricing/offers.
 
 ## Spec 24 — Gift-Card Redemption Closeout
 
-**Board task:** 24 · **Status:** spec'd, awaiting Torreé approval · **Owner:** WYZMiND (build), Torreé (policy + approval), Codex (review)
+**Board task:** 24 · **Status:** expiry policy APPROVED (24 months) + schema/issuance stamping shipped 2026-10-06; redemption API + ledger still pending · **Owner:** WYZMiND (build), Torreé (policy + approval), Codex (review)
 
 ### Problem
 
@@ -71,7 +71,7 @@ Live `/gift-card` promises redemption "for services or merch". Code creates a St
 - Partial balance: remaining balance survives for next use; zero balance auto-status `redeemed`.
 - Client-side: promo/gift field on checkout with inline validation, screen-reader `role="status"` feedback.
 
-**4. Expiry policy:** 24 months from purchase (config constant `GIFT_CARD_TTL_MONTHS`). Expired codes fail closed with a clear message. Written into `/gift-card` FAQ copy at launch.
+**4. Expiry policy:** 24 months from purchase (config constant `GIFT_CARD_TTL_MONTHS`). Expired codes fail closed with a clear message. Written into `/gift-card` FAQ copy at launch. **APPROVED 2026-10-06 (Torreé).** Shipped slice: `gift_cards.status` + `expires_at` + `created_at` columns added; the Stripe webhook now stamps `status="active"` and `expires_at = purchase + 24 months` (single source `src/lib/gift-cards.ts`); copy updated on `/gift-card` and `/refund-return-policy`.
 
 **5. Support fallback:** admin lookup by purchaser email + last 4 of code (never full code in logs). Manual void/refill writes a ledger row with `actor=admin` and reason. View gated by existing admin auth.
 

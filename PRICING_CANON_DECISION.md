@@ -34,7 +34,7 @@
 | Photo retouching service detail | Visible tiers are $15/photo basic, $35/photo advanced, and $12/photo for 10+ basic images; the page’s structured offer price is $50 | `/service-page/photo-retouching` |
 | Creative consultation service detail | Advertised as a free 30-minute video or phone session, Monday–Saturday 10 AM–7 PM PT | `/service-page/creative-consultation` |
 | Booking terms | 50% deposit required to confirm all bookings | `/terms-and-conditions` |
-| Gift cards | Promised for services or merch with no expiry | `/gift-card`, `/refund-return-policy` |
+| Gift cards | Valid 24 months from purchase (approved 2026-10-06); redeemable for services or merch | `/gift-card`, `/refund-return-policy` |
 | Merch | Store presentation and Printful catalog exist; no order or payment path exists | `/merch`, `/merch/[id]` |
 
 ## Approval record

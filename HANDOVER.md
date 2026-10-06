@@ -2,6 +2,16 @@
 
 ---
 
+## Session 56 (2026-10-06) - Owner decisions: gift-card 24-month expiry, Zeal rebalance; Cal.com resolved (WYZMiND)
+
+- **Cal.com (board #33) resolved by owner:** `Discovery Call` (30 min, Cal Video, America/Los_Angeles) is now published. Live-verified: https://cal.com/torree-harris-ddqqep loads a real booking calendar (previously "No links set up"). Quick Book is functional; the inquiry form remains the fallback.
+- **Gift cards -> 24-month expiry (owner decision, board #38):** added `status`, `expires_at`, `created_at` to `gift_cards` (additive; table was empty, RLS unchanged). The Stripe webhook now stamps `status="active"` and `expires_at = purchase + 24 months` via new `src/lib/gift-cards.ts` (`GIFT_CARD_TTL_MONTHS = 24`). Copy updated: `/gift-card` ("Valid for 24 months from purchase"), `/refund-return-policy`, and gift-card metadata ("valid for 24 months"); `/gift-card` and layout descriptions had claimed "never expire". SPECS Spec 24 marked APPROVED (expiry slice shipped); `PRICING_CANON_DECISION.md` gift-card row updated. Spec 24 phases 2-3 (redeem API, ledger, balance) still pending.
+- **Zeal economy rebalanced (owner: "shouldn't be so easy, spread them out"):** passive browse was farmable (`read-blog-post` 1h cooldown, `visit-service-page` 6h) and bonuses were lumpy. Every passive action is now once-per-day at 1-2 Zeal; weekly social capped to once/day; milestones reweighted to real actions (booking 150, review 50, gift card 100, referral 400, newsletter 40, wizard 30); streak/achievement bonuses raised (streaks 15/60/120/250); quest bonuses raised (100/120/100/80). Tiers (0/500/2,000/5,000) and reward costs unchanged so the effort is now real. Board #40. Also corrected the chat assistant's Zeal copy, which listed stale reward costs (free retouch 750 vs actual 1,000, etc.).
+- **Domains:** owner confirmed `www.wyzdesign.com` + `wyzdesign.com` are the canonical pair (apex 308 -> www set). `wyzmind.com` is a separate future project (own WYZMiND TUI), left untouched on GoDaddy NS.
+- Pre-deploy gates on this change: build 0, lint 0 errors / 91 warnings, vitest 15/15.
+
+---
+
 ## Session 55 (2026-10-05) - Multi-agent integration: Codex 47-54 + 4 Claude branches (WYZMiND)
 
 - **Codex sessions 47-54 committed** (`3bed1a1`): two new living audits (`WYZDESIGN_5000_POINT_BOARDROOM_AUDIT.md`, `WYZDESIGN_CLIENT_EXPERIENCE_AUDIT.md`), pricing-canon evidence rows (photoshoot/event/retouch/consultation service detail), booking checkout truth-fix (removed 4 `SERVICE_PRICES` entries `/api/checkout` rejects — Headshot Session, Creative Consultation, Content Planning, Brand Strategy Session; all still bookable via inquiry path), blog-generation prompt now says "Los Angeles creative agency with roots in Chicago's DIY art and music scene", ops-map merch truth (no verified cart/checkout — #28 stays source of truth).

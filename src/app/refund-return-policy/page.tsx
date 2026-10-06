@@ -40,7 +40,7 @@ export default function RefundReturnPolicy() {
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">Gift Cards</h2>
-              <p>Gift cards are non-refundable once purchased. They do not expire and can be applied to any service or merchandise.</p>
+              <p>Gift cards are non-refundable once purchased. They are valid for 24 months from purchase and can be applied to any service or merchandise.</p>
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">Refund Process</h2>

@@ -71,7 +71,7 @@ export default function GiftCardPage() {
             <div className="text-center">
               <p className="text-3xl font-bold text-[#DF3131] mb-2">03</p>
               <p className="font-heading font-bold tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Redeem</p>
-              <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Apply to any service or merch order. No expiration.</p>
+              <p className="text-sm text-[#666666] dark:text-[#b0b0b0]">Apply to any service or merch order. Valid for 24 months from purchase.</p>
             </div>
           </div>
         </div>
