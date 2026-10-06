@@ -26,6 +26,17 @@ function getWebPSources(src: string): { webp: string; fallback: string } {
   return { webp: src, fallback: src };
 }
 
+// Route local (same-origin) images through Next.js's built-in image
+// optimizer so a thumbnail displayed at e.g. 150px doesn't force a
+// mobile browser to download a full-resolution 150-250KB source file.
+// Remote/already-optimized (CDN) sources are left untouched. A `width`
+// prop (device px) is required to opt in -- callers that don't pass one
+// keep the previous raw-<img> behavior.
+function optimizedSrc(src: string, width?: number, quality = 80): string {
+  if (!width || src.startsWith("http") || src.startsWith("data:") || src.startsWith("blob:")) return src;
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${quality}`;
+}
+
 export default function SafeImage({
   src,
   alt,
@@ -44,7 +55,9 @@ export default function SafeImage({
 
   const resolvedLoading = priority ? "eager" : (loading || "lazy");
 
-  const sources = getWebPSources(src);
+  const widthProp = typeof imgProps.width === "number" ? imgProps.width : undefined;
+  const optimizedBase = optimizedSrc(src, widthProp, quality);
+  const sources = getWebPSources(optimizedBase);
 
   if (broken) {
     return (
