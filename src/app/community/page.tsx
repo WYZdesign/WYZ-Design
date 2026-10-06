@@ -27,14 +27,14 @@ const CATEGORIES = [
 ];
 
 const DISCORD_CHANNELS = [
-  { name: "welcome", topic: "Read first - rules & roles", members: 127 },
-  { name: "general-chat", topic: "Daily creative banter", members: 98 },
-  { name: "showcase", topic: "Post your finished work", members: 84 },
-  { name: "portfolio-review", topic: "Thurs 7PM CT live reviews", members: 45 },
-  { name: "weekly-challenge", topic: "Monday theme drops", members: 72 },
-  { name: "collab-board", topic: "Find your next partner", members: 56 },
-  { name: "nsfw-creatives", topic: "Private - verified only", members: 31 },
-  { name: "event-announcements", topic: "Meetups & showcases", members: 119 },
+  { name: "welcome", topic: "Read first - rules & roles" },
+  { name: "general-chat", topic: "Daily creative banter" },
+  { name: "showcase", topic: "Post your finished work" },
+  { name: "portfolio-review", topic: "Thurs 7PM CT live reviews" },
+  { name: "weekly-challenge", topic: "Monday theme drops" },
+  { name: "collab-board", topic: "Find your next partner" },
+  { name: "nsfw-creatives", topic: "Private - verified only" },
+  { name: "event-announcements", topic: "Meetups & showcases" },
 ];
 
 const FLAIRS: Record<string, { label: string; color: string }> = {
@@ -723,13 +723,13 @@ export default function ForumPage() {
           {/* Stats strip */}
 <div className="grid grid-cols-3 gap-3 mb-14">
              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-               <AnimatedCounter end={threads.length} label="Threads" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#DF3131]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+               <AnimatedCounter end={DISCORD_CHANNELS.length} label="Discord channels" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#DF3131]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-                <AnimatedCounter end={23} label="Members" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#8F5E1E] dark:text-[#D49341]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+                <AnimatedCounter end={CATEGORIES.length} label="Post categories" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#8F5E1E] dark:text-[#D49341]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-               <AnimatedCounter end={CATEGORIES.length} label="Channels" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#5865F2]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+               <AnimatedCounter end={COMMUNITY_HIGHLIGHTS.length} label="Programs" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#5865F2]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
            </div>
 
@@ -1350,7 +1350,6 @@ export default function ForumPage() {
                 <FiHash className="w-5 h-5 text-white/80 shrink-0" />
                 <h3 className="font-heading font-bold text-[16px] leading-tight tracking-[0.06em] text-white break-normal">WYZ DESIGN · CHANNELS</h3>
               </div>
-              <span className="text-[12px] font-bold tracking-[0.1em] uppercase text-white whitespace-nowrap shrink-0">127 online</span>
             </div>
             <div className="bg-[#2B2D31] p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2">
               {DISCORD_CHANNELS.map((ch) => (

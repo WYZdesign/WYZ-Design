@@ -2,6 +2,21 @@
 
 ---
 
+## Session 57 (2026-10-06) - Real merch store: cart + Stripe checkout + Printful fulfillment (WYZMiND)
+
+Owner directive: "no cosmetic, placeholder, or stubs on my site." The store was presentation-only (fake "Add to Cart", fabricated ratings/reviews, a blank-catalog product list that could not actually be ordered). Replaced with a real, orderable store.
+
+- **Catalog now sources the live Printful store** (sync products, store id 18447141 "Dying Breed Crew"): 4 real orderable items (Unisex Hoodie $29.16, Five Panel Cap $22.85, Vintage corduroy cap $20.79, Vintage Cotton Twill Cap $21.83). The old hardcoded ids (71, 12, 831...) are blank catalog products with no print files and were rejected by Printful on order.
+- **Cart:** `CartProvider` + `/cart` page + floating cart button (localStorage, qty/remove). Product page has real variant selection and a working add-to-cart (toast + badge).
+- **Checkout:** `/api/checkout` `type=merch` re-prices every line from Printful server-side (client prices never trusted), creates a **pending order**, then a Stripe session with `shipping_address_collection` + a shipping rate. Success -> `/merch/order`.
+- **Fulfillment:** new `orders` + `order_items` Supabase tables; webhook `checkout.session.completed` (type=merch) finalizes the order and places a real Printful order via `sync_variant_id` (validated with a draft order; `confirm:true` sends to production). Discord alert on each paid order.
+- **Honesty pass:** removed fabricated `rating`/`reviews`/`trending`, the cosmetic quick-view color/size selectors, and the "Shop the FAOTM store" pseudo-purchase (now links to the real product page).
+- **Schema fix:** sync variant ids exceed int4 (~5.4B) -> `order_items.printful_variant_id`/`printful_product_id` widened to bigint.
+- **Verified live (30cac52):** `/api/printful-catalog` returns the 4 real products; `/cart` and `/merch` load; `POST /api/checkout type=merch` returns a live Stripe checkout URL. Printful order payload proven via a draft order (created + canceled). No real payment taken during testing.
+- **Community facts (board #39, partial):** removed invented member total, per-channel member counts, and "127 online"; stats now count real config. Board #28 closed.
+
+---
+
 ## Session 56 (2026-10-06) - Owner decisions: gift-card 24-month expiry, Zeal rebalance; Cal.com resolved (WYZMiND)
 
 - **Cal.com (board #33) resolved by owner:** `Discovery Call` (30 min, Cal Video, America/Los_Angeles) is now published. Live-verified: https://cal.com/torree-harris-ddqqep loads a real booking calendar (previously "No links set up"). Quick Book is functional; the inquiry form remains the fallback.
