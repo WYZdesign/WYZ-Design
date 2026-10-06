@@ -1203,10 +1203,10 @@ p[class*="tracking-"][class*="uppercase"] {
 /* ═══════════════════════════════════════════════════════════
    GLOBAL IMAGE FIT — force cover inside aspect/overflow containers
    ═══════════════════════════════════════════════════════════ */
-[class*="aspect-"] img,
-[class*="overflow-hidden"] img,
-.relative img,
-.absolute img {
+[class*="aspect-"] img:not([class*="object-contain"]),
+[class*="overflow-hidden"] img:not([class*="object-contain"]),
+.relative img:not([class*="object-contain"]),
+.absolute img:not([class*="object-contain"]) {
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -1217,8 +1217,14 @@ img[class*="w-auto"],
 [class*="logo"] img {
   object-fit: contain !important;
 }
-/* Exclude Navbar + Footer logos from global force-fit */
-nav .relative img[class*="object-contain"],
+/* Exclude Navbar + Footer logos from global force-fit.
+   Navbar: NO width/height overrides here -- width:auto!important would beat
+   the utility classes (w-9/sm:w-10/lg:w-12) and fall back to the PNG's
+   intrinsic 48px. Force-fit no longer reaches object-contain imgs (above). */
+nav .relative img[class*="object-contain"] {
+  max-width: none;
+  max-height: none;
+}
 footer img[class*="object-contain"] {
   width: auto !important;
   height: auto !important;

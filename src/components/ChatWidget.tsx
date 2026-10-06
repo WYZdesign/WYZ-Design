@@ -207,14 +207,20 @@ export default function ChatWidget() {
     setIsStreaming(false);
   };
 
+  // animate-pulse sets opacity keyframes, and CSS animations override normal
+  // declarations -- so the pulse kept the bubble visibly rendered at ~0.5-1
+  // opacity even while opacity-0 was active (live-verified on f464966).
+  // Drop the pulse whenever the bubble is meant to be hidden.
+  const bubbleHidden = !isOpen && (scrollHidden || bodyLocked || clearZone);
+
   return (
     <>
       {/* Chat Bubble */}
       <button
         onClick={() => { if (!isOpen) void earn("open-chat"); setIsOpen(!isOpen); }}
         className={`fixed bottom-6 right-6 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 ${
-          isOpen ? "bg-[#333] rotate-90" : "bg-[#DF3131] animate-pulse"
-        } ${!isOpen && (scrollHidden || bodyLocked || clearZone) ? "opacity-0 pointer-events-none translate-y-2" : ""}`}
+          isOpen ? "bg-[#333] rotate-90" : bubbleHidden ? "bg-[#DF3131]" : "bg-[#DF3131] animate-pulse"
+        } ${bubbleHidden ? "opacity-0 pointer-events-none translate-y-2" : ""}`}
         aria-label={isOpen ? "Close chat" : "Open chat assistant"}
       >
         {isOpen ? (
