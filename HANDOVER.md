@@ -2,6 +2,51 @@
 
 ---
 
+## Session 54 (2026-10-04) - Community truth and operational-readiness audit (Codex, pending WYZMiND integration)
+
+- Source review found that `/community` renders static `NEWS_POSTS`, `SEED_THREADS`, community highlights, upcoming events, relative timestamps, engagement counts, and Discord member/online figures. It already has an explicit preview banner stating that forum interactions have local state only, which is an important truthful disclosure.
+- Logged board task 36 for the remaining factual surface: specific weekly programs, Thursday reviews, Chicago/Los Angeles meetups, follower count, and “127 online” still need confirmation, removal, or a dated source. A real community also needs data, moderation, consent, event, and freshness operations. No public community copy was changed because that is an owner product decision.
+- Claude Code is recognized as a parallel visual and frontend owner. Codex did not alter its active work.
+
+---
+
+## Session 53 (2026-10-04) - Generated-content location alignment (Codex, pending WYZMiND integration)
+
+- Corrected the WYZ blog-generation system prompt from “a creative agency in Chicago” to “a Los Angeles creative agency with roots in Chicago's DIY art and music scene.” This prevents new automated public content from contradicting current LA positioning while preserving the real origin story.
+
+## Session 52 (2026-10-04) - Booking checkout truth repair (Codex, pending WYZMiND integration)
+
+- Fixed a customer-facing false checkout affordance in `src/app/booking/page.tsx`: Headshot Session, Content Planning, and Brand Strategy Session showed “Pay Now” but `/api/checkout` rejects them as unknown services. Removed only those unsupported immediate-payment entries; each remains available through the booking-request path.
+- This aligns the visible payment action with the server’s fixed-price allowlist without inventing or changing customer prices. Verification gates are required before WYZMiND integrates.
+
+## Session 51 (2026-10-04) - Offer architecture evidence (Codex, pending WYZMiND integration)
+
+- Extended the owner pricing canon with two more customer-facing offer facts: photo retouching’s structured $50 offer conflicts with visible $15/$35/$12-per-photo tiers; creative consultation is advertised as a free 30-minute video or phone session with stated hours.
+- These are evidence inputs for task 1 and task 2, not approved price changes. The client-experience objective is one coherent choice architecture across search metadata, service detail, booking, payment, and policies.
+
+## Session 50 (2026-10-04) - Service promise and pricing evidence (Codex, pending WYZMiND integration)
+
+- Added precise service-detail evidence to `PRICING_CANON_DECISION.md`: photoshoot lists $100/hr, $350 half day, $600 full day, $75 rush and five-business-day delivery; event photography lists $200 standard, $350 extended, $150 second shooter, 48-hour preview, and five-day gallery delivery.
+- These are customer-facing terms that must reconcile with `/booking` immediate payments and the stated 50% booking-deposit policy. No price, policy, checkout behavior, or delivery promise was changed without Torreé's canon decision.
+
+## Session 49 (2026-10-04) - Policy truth audit (Codex, pending WYZMiND integration)
+
+- Source-audited privacy, shipping, and refund surfaces. All report “Last updated: January 2025,” so no freshness or operational review is evidenced for the current site.
+- Logged board task 35: refund policy says gift cards do not expire, while unapproved Spec 24 proposes 24-month expiry. No public or implementation term was changed; Torreé must approve one consistent legal and operational policy before redemption work or policy copy changes.
+
+## Session 48 (2026-10-04) - Super-goal truth pass (Codex, pending WYZMiND integration)
+
+- Created the consolidated operating framework: `WYZDESIGN_5000_POINT_BOARDROOM_AUDIT.md` (20 pillars, 100 evidence-scored subcategories, 5,000 points) and `WYZDESIGN_CLIENT_EXPERIENCE_AUDIT.md` (first impression through repeat business).
+- Added board tasks 33 and 34 so both audits are recurring operating systems, not one-time reports.
+- Corrected `WYZ_OPERATIONS_MAP.md`: Printful catalog integration is not represented as a verified merch checkout. Board #28 remains the source of truth until cart, payment, order, fulfillment, and customer confirmation are tested end-to-end.
+- New consolidated Codex super-goal is active. The audit worktree also contains Claude's active `ChatWidget` refinement; Codex did not modify it.
+
+## Session 47 (2026-10-04) - 5,000-point operating audit (Codex, pending WYZMiND integration)
+
+- Added `WYZDESIGN_5000_POINT_BOARDROOM_AUDIT.md`: a living 5,000-point system with 20 board pillars, 100 weighted subcategories, evidence-only scoring rules, an initial current-state read, and a 30-day decision cadence.
+- Added `WYZDESIGN_CLIENT_EXPERIENCE_AUDIT.md`: a separate client journey audit covering discovery through repeat business, mobile craft, conversion, payment, onboarding, delivery, support, and retention.
+- Both documents preserve unresolved commercial and proof requirements instead of marking them complete from source presence alone. WYZMiND should include these docs with its next appropriate handover/push; no active Claude source file was changed.
+
 ## Session 46 (2026-10-04) - Gutter/sliver root causes + final verification (WYZMiND)
 
 - **Live audit found 3 misses (then 1 new one)** -> chased every root cause to source, 4 code pushes total: `b82a48d` (bundle, see S45) -> `989f2ff` -> `d0e1e3e` -> `6005b5f` (all DEPLOYED and verified live).

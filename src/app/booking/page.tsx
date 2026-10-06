@@ -76,10 +76,6 @@ const SERVICE_PRICES: Record<string, number> = {
   "Logo Consultation": 50,
   "Marketing Consultation": 50,
   "SEO Audit": 50,
-  "Headshot Session": 100,
-  "Creative Consultation": 0,
-  "Content Planning": 50,
-  "Brand Strategy Session": 75,
 };
 
 export default function BookingPage() {

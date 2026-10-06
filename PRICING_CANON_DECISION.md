@@ -29,6 +29,10 @@
 | Plan catalog | Starter $250, Business $500, Pro $750, Ultimate $1,000 | `/plans` |
 | Alternate plan copy | Startup $500/mo discounted, Artist $250/mo discounted, Enterprise $750/mo discounted | `/plans` source |
 | Booking | Service selector presents a mix of fixed, hourly, starting, and custom prices; selected fixed services expose immediate payment | `/booking` |
+| Photoshoot service detail | $100/hr standard session, $350 half day, $600 full day, and $75 rush delivery; page promises 20/60/120+ edited photos and five-business-day delivery | `/service-page/photoshoot` |
+| Event photography service detail | $200 standard event up to four hours, $350 extended event four to eight hours, $150 second shooter; page promises 48-hour preview and five-day gallery delivery | `/service-page/event-photography` |
+| Photo retouching service detail | Visible tiers are $15/photo basic, $35/photo advanced, and $12/photo for 10+ basic images; the page’s structured offer price is $50 | `/service-page/photo-retouching` |
+| Creative consultation service detail | Advertised as a free 30-minute video or phone session, Monday–Saturday 10 AM–7 PM PT | `/service-page/creative-consultation` |
 | Booking terms | 50% deposit required to confirm all bookings | `/terms-and-conditions` |
 | Gift cards | Promised for services or merch with no expiry | `/gift-card`, `/refund-return-policy` |
 | Merch | Store presentation and Printful catalog exist; no order or payment path exists | `/merch`, `/merch/[id]` |

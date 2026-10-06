@@ -12,7 +12,7 @@ Status key: `VERIFIED` (tested this session) · `IMPL` (code present, not indepe
 | 1 | **Attract** | SEO metadata across page set, sitemap, 40+ pages (services, merch, events, blog, case-studies, portfolio), `src/lib/seo.ts` | IMPL | No channel attribution — board #4 |
 | 2 | **Inquire** | `/contact`, `/partnerships`, `/service-page`, dynamic forms → `POST /api/forms` (CSRF + rate-limited), newsletter → `POST /api/newsletter` (Resend), WYZi chat → `/api/chat`, bugs → `/api/bugs` | VERIFIED (forms path in E2E suite) | Lead source capture in form payloads = GAP |
 | 3 | **Consult / book** | `/booking`, `/booking-calendar`, `POST /api/booking/email`, daily follow-up cron `POST /api/cron/booking-whatsnext` (0 16 UTC), `POST /api/event` | IMPL | Booking→CRM handoff not visible in code = GAP |
-| 4 | **Pay** | Stripe: `POST /api/checkout`, `POST /api/webhook` (signed), `/api/stripe-status`, subscriptions on `/plans`, gift cards (`/gift-card`), merch checkout + Printful (`/api/printful-catalog`) | IMPL | Production revenue-path proof = board #12 (Codex); pricing canon = board #1 (owner) |
+| 4 | **Pay** | Stripe: `POST /api/checkout`, `POST /api/webhook` (signed), `/api/stripe-status`, subscriptions on `/plans`, gift cards (`/gift-card`), and a Printful-backed merch catalog (`/api/printful-catalog`) | IMPL | Service and gift-card payment paths have source evidence. Merch has no verified customer cart, checkout, order, or confirmation path and remains board #28; pricing canon = board #1 (owner). |
 | 5 | **Deliver** | Photos: `gdrive-index/photos/image` + `album-images` + `upload`; merch: Printful fulfill; web/design: repo + client handoff (manual) | IMPL | Automated delivery-confirmation email = GAP |
 | 6 | **Review / proof** | `/community`, `/blog`, `/case-studies`, `/gallery`, `/featured-artist` | IMPL | No review-request flow (ask + collect testimonial) = **GAP** |
 | 7 | **Refer** | `/referral` + `GET/POST /api/referral`, `/api/referral/conversions`, `/api/referral/leaderboard` (initials-only, random codes), gift cards | IMPL | Referral touchpost-delivery = GAP |
@@ -29,10 +29,11 @@ Status key: `VERIFIED` (tested this session) · `IMPL` (code present, not indepe
 ## Top profitability gaps (evidence-ranked)
 
 1. **Board #1 → #2:** no pricing canon; price language historically inconsistent (trust risk).
-2. **Stage 6 GAP:** zero automated review/testimonial collection = weakest proof loop.
-3. **Board #4:** no lead attribution — cannot tell which channel pays.
-4. **Stage 3 GAP:** booking not tied to any CRM/lead state (follow-up cron exists, state does not).
-5. **Stage 5 GAP:** no delivery-confirmation → review-ask → referral-ask sequence (the money loop).
+2. **Board #28:** merch appears shop-ready but lacks a verified end-to-end customer purchase path.
+3. **Stage 6 GAP:** zero automated review/testimonial collection = weakest proof loop.
+4. **Board #4:** no lead attribution — cannot tell which channel pays.
+5. **Stage 3 GAP:** booking not tied to any CRM/lead state (follow-up cron exists, state does not).
+6. **Stage 5 GAP:** no delivery-confirmation → review-ask → referral-ask sequence (the money loop).
 
 ## Next actions
 

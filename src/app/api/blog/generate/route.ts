@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     const prompt = `${prompts[length] || prompts.medium} about "${topic}" in a ${tone} tone.
 Use markdown formatting with headings. Include an engaging intro and a clear conclusion.
-Write as the WYZ Design blog, a creative agency in Chicago. Keep it down-to-earth and personable. Use contractions. Avoid em dashes, AI jargon, and buzzwords.`;
+Write as the WYZ Design blog, a Los Angeles creative agency with roots in Chicago's DIY art and music scene. Keep it down-to-earth and personable. Use contractions. Avoid em dashes, AI jargon, and buzzwords.`;
 
     const content = await openrouterChat({
       messages: [{ role: "user", content: prompt }],
