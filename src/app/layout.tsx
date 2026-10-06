@@ -21,6 +21,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import ClientComponents from "@/components/ClientComponents";
 import { CartProvider } from "@/lib/cart";
+import CartButton from "@/components/CartButton";
 
 const montserrat = localFont({ src: "./fonts/montserrat-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-heading", display: "swap", preload: true });
 const inter = localFont({ src: "./fonts/inter-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-body", display: "swap", preload: true });
@@ -346,6 +347,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <ScrollToTop />
           </ErrorBoundary>
+          <CartButton />
           </CartProvider>
           </SmoothScrollProvider>
           </ZealProvider>
@@ -353,7 +355,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </ThemeProvider>
         <GlobalImagePicker />
         <ConsentGatedAnalytics />
-        <ClientComponents />
         <AnalyticsProvider />
         <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" }, error: { duration: 8000 } }} />
         <script dangerouslySetInnerHTML={{ __html: `

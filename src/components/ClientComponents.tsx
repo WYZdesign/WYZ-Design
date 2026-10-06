@@ -7,7 +7,6 @@ const CookieBanner = dynamic(() => import("@/components/CookieBanner"), { ssr: f
 const CustomCursor = dynamic(() => import("@/components/CustomCursor"), { ssr: false });
 const NoiseOverlay = dynamic(() => import("@/components/NoiseOverlay"), { ssr: false });
 const A11yAudit = dynamic(() => import("@/components/A11yAudit"), { ssr: false });
-const CartButton = dynamic(() => import("@/components/CartButton"), { ssr: false });
 
 export default function ClientComponents() {
   return (
@@ -15,7 +14,6 @@ export default function ClientComponents() {
       <CustomCursor />
       <A11yAudit />
       <ChatWidget />
-      <CartButton />
       <NoiseOverlay />
       <CookieBanner />
     </>
