@@ -19,6 +19,19 @@ export default function TextMaskReveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Same gap as TextSplit: content already on screen at load (a hero
+    // heading) shouldn't have to wait on an async IntersectionObserver
+    // callback before it ever becomes visible. Synchronous rect check at
+    // mount time skips the wait when the element starts in (or near) view.
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible =
+      rect.top < window.innerHeight * 1.2 && rect.bottom > -window.innerHeight * 0.2;
+    if (alreadyVisible) {
+      setInView(true);
+      return;
+    }
+
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {

@@ -25,6 +25,27 @@ export default function TextSplit({
     setHydrated(true);
     const el = ref.current;
     if (!el) return;
+
+    // SSR renders the text fully visible (no flash-of-unstyled-content on
+    // first paint). On hydration it immediately snaps to its hidden,
+    // pre-animation state and waits for an IntersectionObserver callback
+    // to reveal it -- fine for a heading further down the page the user
+    // scrolls to, but for a hero H1 that is ALREADY on screen at load
+    // this created a real flash of invisible text: the headline would
+    // disappear right after hydration and only reappear once the
+    // (async, main-thread-contention-prone) observer callback fired,
+    // sometimes a couple of seconds later on a loaded mobile device.
+    // A synchronous rect check at mount time -- the same pattern already
+    // used in ChatWidget's clearZone fix -- closes that gap by skipping
+    // the hide step entirely when the element starts in (or near) view.
+    const rect = el.getBoundingClientRect();
+    const alreadyVisible =
+      rect.top < window.innerHeight * 1.2 && rect.bottom > -window.innerHeight * 0.2;
+    if (alreadyVisible) {
+      setInView(true);
+      return;
+    }
+
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
