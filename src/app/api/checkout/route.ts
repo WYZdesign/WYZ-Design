@@ -152,7 +152,7 @@ export async function POST(req: NextRequest) {
         .single();
       if (orderErr || !order) {
         logger.error("Checkout: merch order insert failed", orderErr?.message);
-        return NextResponse.json({ error: "Unable to start checkout. Please try again." }, { status: 500 });
+        return NextResponse.json({ error: "Unable to start checkout. Please try again.", detail: orderErr?.message || "no order row returned" }, { status: 500 });
       }
 
       const { error: itemsErr } = await sb.from("order_items").insert(
@@ -169,7 +169,7 @@ export async function POST(req: NextRequest) {
       );
       if (itemsErr) {
         logger.error("Checkout: merch order items insert failed", itemsErr.message);
-        return NextResponse.json({ error: "Unable to start checkout. Please try again." }, { status: 500 });
+        return NextResponse.json({ error: "Unable to start checkout. Please try again.", detail: itemsErr.message }, { status: 500 });
       }
 
       const session = await createMerchCheckout(lines, shippingId, order.id, email, referralCode);
