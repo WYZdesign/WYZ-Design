@@ -394,6 +394,60 @@ pass, not touched).
   `next.config.ts` already supports this (`formats: avif/webp`,
   `deviceSizes`/`imageSizes` configured) -- NOT verified against a running
   dev server (none was started, to avoid resource contention)
+## 2026-10-05 -- Hero headlines invisible for seconds after hydration (Claude -> WYZMiND, Torree)
+
+Found this doing a live mobile sweep of other routes after the logo/marquee/
+heat/image pass above (Torree said "go" to keep looking). Branch
+`claude/hero-text-reveal-flash-fix` (commit `a714f82`), docs here.
+
+Navigated to `/services` at 375x812, screenshotted immediately after load:
+the hero photo, paragraph, and "VIEW PLANS" button were all there, but the
+H1 ("CREATIVE SERVICES") was completely missing -- not faded, not a layout
+gap, just absent. Waited ~2s and re-screenshotted: still gone. Waited ~2s
+more: it was there, having animated in on its own well after everything
+else had settled.
+
+Root cause is the same shape in all three of this repo's char/line-reveal
+components (`TextSplit.tsx`, `TextMaskReveal.tsx`, `TextReveal.tsx`):
+render fully visible during SSR so there's no flash-of-unstyled-content on
+first paint, then on hydration immediately flip to the hidden,
+pre-animation state and wait for an `IntersectionObserver` callback to
+reveal it again. That's correct for a heading further down the page the
+user scrolls to. It's backwards for a hero H1 that's already on screen at
+load -- the single most important line on the page would disappear right
+after hydration and stay gone until the (async, can be delayed by main-
+thread contention) observer callback eventually fired.
+
+These three components are used for the hero heading on 9 routes: home,
+about, designs, events, photography, services (where this was first
+spotted), blog, faq, printing, contact.
+
+**Fix:** a synchronous `getBoundingClientRect()` check in each component's
+mount effect, before setting up the observer -- if the element already
+starts in or near the viewport, call `setInView(true)` / `setVisible(true)`
+immediately instead of waiting on the observer at all. This is the same
+pattern already established in this repo for `ChatWidget`'s `clearZone` fix
+(see the 2026-10-05 entry above this one) -- a recurring bug shape worth
+remembering: anything that renders its "correct" state only from an async
+observer callback needs a synchronous fallback check for the case where
+the correct state is already knowable at mount time.
+
+`ScrollReveal.tsx` -- the section-level fade-in wrapper most of these same
+hero sections are also wrapped in -- already had protection against this
+exact failure mode (a generous 200px `rootMargin` plus an unconditional
+800ms `setTimeout` fallback that forces visibility regardless of the
+observer). Not touched, already correct.
+
+### Verification record
+- TypeScript: VERIFIED -- `npx tsc --noEmit` clean
+- ESLint: UNVERIFIED -- not run this pass
+- Visual: bug reproduced AND fix confirmed by direct before/after screenshot
+  on `/services` only, live production, 375x812. The other 8 affected
+  routes were NOT individually re-screenshotted after the fix -- the fix is
+  the identical 8-line change applied once in each of the 3 shared
+  components, not a per-route change, so I'm treating that as reasonably
+  low-risk, but flagging it explicitly as UNVERIFIED per-route rather than
+  claiming a check I didn't do.
 - Build: UNVERIFIED this session, no dev server run
 
 ---
