@@ -26,15 +26,23 @@ function getWebPSources(src: string): { webp: string; fallback: string } {
   return { webp: src, fallback: src };
 }
 
-// Route local (same-origin) images through Next.js's built-in image
-// optimizer so a thumbnail displayed at e.g. 150px doesn't force a
+// Local (same-origin) images were routed through Next's built-in image
+// optimizer here so a thumbnail displayed at e.g. 150px wouldn't force a
 // mobile browser to download a full-resolution 150-250KB source file.
-// Remote/already-optimized (CDN) sources are left untouched. A `width`
-// prop (device px) is required to opt in -- callers that don't pass one
-// keep the previous raw-<img> behavior.
-function optimizedSrc(src: string, width?: number, quality = 80): string {
-  if (!width || src.startsWith("http") || src.startsWith("data:") || src.startsWith("blob:")) return src;
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${quality}`;
+// TEMPORARILY DISABLED (verified live 2026-10-06): /_next/image?url=...
+// returns 400 INVALID_IMAGE_OPTIMIZE_REQUEST for every file under
+// /images/** on this deployment, at every width in next.config.ts's
+// deviceSizes/imageSizes -- only the root-level /wyz-crown-square.png
+// works. next.config.ts itself has no images.localPatterns restriction,
+// so this needs infra-side root cause (Vercel Image Optimization
+// rejecting the nested path for some other reason). Until fixed, local
+// images route straight to the raw file so real photos render instead of
+// SafeImage's broken-image placeholder. width/quality are kept as params
+// (unused for now) so call sites don't need to change; re-enable by
+// restoring the `/_next/image?url=...` return once a nested /images/**
+// path is confirmed returning 200 in production.
+function optimizedSrc(src: string, _width?: number, _quality = 80): string {
+  return src;
 }
 
 export default function SafeImage({

@@ -471,3 +471,31 @@ Two things live verification caught that source review could not:
 2. **Your logo sizes were dead.** `w-9/sm:w-10/lg:w-12` never applied: the globals "exclude navbar/footer from force-fit" rule used `width:auto!important; height:auto!important`, which beats utility classes and fell back to the PNG's intrinsic 48px at every breakpoint. Fixed in `7dcd0b4`: the force-fit rule now excludes `object-contain` images (`:not([class*="object-contain"])`) and the navbar exclusion only resets max-width/height. Live logo is now exactly your 36 / 40 / 48.
 
 Your noise-overlay removal, video `preload="metadata"`, marquee gaps, and SafeImage optimizer all shipped unchanged. Nice catches -- both of your root causes were correct, the cascade just had one more layer under each.
+
+## 2026-10-06/07 -- URGENT: local-path image optimizer broken live, SafeImage images reverted to raw src (Claude -> WYZMiND, Torree)
+
+**Found via live verification, not source review.** Doing a follow-up mobile sweep of the newly-shipped merch cart/checkout flow (nothing else was left on the task board), the /merch hero loaded with six gray "DBC crew wearing merch N" placeholder boxes instead of real photos -- SafeImage's `broken` fallback state, not a loading-timing artifact (persisted after a 3s wait + reload).
+
+**Root cause, isolated live against production:**
+- Every `/_next/image?url=...` request for a file under `/images/**` returns `400 INVALID_IMAGE_OPTIMIZE_REQUEST`, confirmed via direct `fetch()` against the live `_next/image` endpoint.
+- Tested systematically: swept widths 16 through 3840 against the root-level `/wyz-crown-square.png` (which works, e.g. `w=48` -> 200) to find next.config.ts's actual allowed set: `deviceSizes [640,750,828,1080,1200,1920]` + `imageSizes [16,32,48,64,96,128,256,384]` all return 200 **for that one root-level file**.
+- Re-ran the exact same valid widths against a real `/images/merch/...` file and a real `/images/designs/...` file (both confirmed to exist on disk, both load fine as raw static files at their direct path) -- every one still 400s. Also ruled out the `~` character in one filename (tested URL-encoded vs raw, both 400) and file size (1.1MB and 126KB, nowhere near any plausible limit).
+- Checked `next.config.ts` in the repo: no `images.localPatterns` restriction exists that would explain scoping optimization to root-level files only. So this looks like a Vercel Image Optimization deployment-side rejection I can't root-cause further without deploy logs / dashboard access, which I don't have from this branch.
+
+**Scope of live impact (confirmed via screenshots + network requests on production, not local):** every portfolio thumbnail on `/designs` across every category (FLYERS, LOGOS, etc. -- the page Torree specifically asked to be fast/working), the `/merch` hero strip (6 images) and product grid, and `/merch/concepts`. `/blog` was unaffected because those images are external (Unsplash) URLs that skip this code path entirely.
+
+**This is a regression I introduced.** The opt-in `/_next/image` routing for local SafeImage sources shipped in the mobile-perf audit (board #34, integrated in `f464966`) was verified with `tsc --noEmit` and a manual diff review, not by actually checking that the resulting `/_next/image` URLs returned 200 in production. That gap is on me -- I should have curl'd/fetched at least one resulting URL before calling it done.
+
+**Fix:** `optimizedSrc()` in `SafeImage.tsx` now always returns the raw `src` for local paths instead of building a `/_next/image` URL -- real images render again immediately, same as before the perf audit shipped. `width`/`quality` params are kept (currently unused) so no call sites need to change. This also folds in and supersedes a smaller follow-up I'd made earlier today (defaulting `fill`-mode images to a 960px width hint so the 3 `fill` call sites also routed through the optimizer) -- that commit is superseded/moot now that the optimizer path is disabled, so it's folded into this single commit rather than landing separately.
+
+**Re-enabling the perf win:** once whoever has Vercel dashboard/deploy-log access figures out why nested `/images/**` paths 400 while the root-level file doesn't, restoring the `/_next/image?url=...` return in `optimizedSrc()` is a one-line change. Suggest testing one real nested path manually against production before re-shipping it, this time.
+
+**Git state:** branch `claude/revert-broken-image-optimizer-routing`, commit `a072558` (on top of master `35f7ecc`). Checked back out to `master` immediately after.
+
+## Verification record
+- Build: UNVERIFIED this session (environment `device_bash` had an extended outage -- "workspace failed to start" -- during this session; recovered in time for the fix but not a full build run)
+- Lint: VERIFIED -- `npx eslint src/components/SafeImage.tsx` -- 0 errors, 2 pre-existing/expected warnings (`no-unused-vars` on the now-unused `_quality` param and the pre-existing `blurWidth` prop)
+- TypeScript: VERIFIED -- `npx tsc --noEmit` clean
+- Visual/320-375: VERIFIED live on production for the bug (screenshots + `_next/image` network requests against www.wyzdesign.com/merch and /designs); the fix itself not yet re-verified live, pending WYZMiND integration/deploy
+- axe/E2E: UNVERIFIED this session
+- Live deploy check: N/A -- not deployed, awaiting WYZMiND integration (please prioritize -- this is currently live-broken on /designs and /merch for every visitor)
