@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Founded by Torreé Marcel, WYZ Design is a creative agency built from Chicago's DIY art and music scene. Over 60 events produced, 30+ clients. Now in Los Angeles.",
+  description: "Founded by Torreé Marcel, WYZ Design is a creative agency built from Chicago's DIY art and music scene. 90+ events produced, 45+ clients served. Now in Los Angeles.",
   keywords: ["WYZ Design founder", "Torreé Marcel", "creative agency", "Los Angeles"],
   alternates: { canonical: "https://www.wyzdesign.com/about" },
   openGraph: {
     title: "About | WYZ Design",
-    description: "Founded by Torreé Marcel. Over 60 events produced, 30+ clients supported. Los Angeles creative agency.",
+    description: "Founded by Torreé Marcel. 90+ events produced, 45+ clients served. Los Angeles creative agency.",
     url: "https://www.wyzdesign.com/about",
     siteName: "WYZ Design",
     type: "website",
