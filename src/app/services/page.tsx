@@ -216,16 +216,21 @@ return (
   }>
   {active === "All Services" ? (
     <div className="space-y-12 mb-6">
-      {CATEGORIES.filter(c => c !== "All Services").map((cat) => (
+      {CATEGORIES.filter(c => c !== "All Services").map((cat) => {
+        const group = ALL_SERVICES_RAW.filter(s => s.cat === cat);
+        const min = Math.min(...group.map(s => { const n = parseFloat(String(s.price).replace(/[^0-9.]/g, "")); return isFinite(n) && n > 0 ? n : Infinity; }));
+        return (
         <div key={cat}>
-          <h2 className="font-heading font-black text-[1.4rem] sm:text-[1.8rem] tracking-[0.08em] uppercase text-[#333] dark:text-white mb-5">{cat}</h2>
+          <h2 className="font-heading font-black text-[1.4rem] sm:text-[1.8rem] tracking-[0.08em] uppercase text-[#333] dark:text-white mb-2">{cat}</h2>
+          <p className="text-[#DF3131] font-bold tracking-[0.06em] text-[14px] mb-5">{isFinite(min) ? `From $${min}` : "Free consult available"}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-            {ALL_SERVICES_RAW.filter(s => s.cat === cat).map((s) => (
+            {group.map((s) => (
               <ServiceCard key={s.name} service={s} />
             ))}
           </div>
         </div>
-      ))}
+        );
+      })}
     </div>
   ) : (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 lg:gap-6 lg:mb-6">
