@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Copyright Notice",
   description: "Copyright information for WYZ Design. All rights reserved.",
-  alternates: { canonical: "https://www.wyzdesign.com/copyright-notice" },
+  alternates: { canonical: "https://www.wyzdesign.com/legal/copyright" },
   openGraph: {
     title: "Copyright Notice | WYZ Design",
     description: "All rights reserved.",
-    url: "https://www.wyzdesign.com/copyright-notice",
+    url: "https://www.wyzdesign.com/legal/copyright",
     siteName: "WYZ Design",
     type: "website",
     images: [{ url: "https://www.wyzdesign.com/wyz-og-image.png", width: 1200, height: 630 }],

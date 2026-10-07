@@ -192,7 +192,7 @@ export default function CookieBanner() {
 
         <p className="mt-4 text-center text-xs text-[#666] dark:text-white/50">
           You can change your preferences at any time from the footer.{" "}
-          <a href="/privacy-policy" className="text-[#DF3131] underline">Privacy Policy</a>
+          <a href="/legal/privacy" className="text-[#DF3131] underline">Privacy Policy</a>
         </p>
       </div>
     </div>

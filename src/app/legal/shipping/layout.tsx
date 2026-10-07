@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Shipping Policy",
   description: "Shipping rates, delivery times, and policies for WYZ Design merchandise orders.",
-  alternates: { canonical: "https://www.wyzdesign.com/shipping-policy" },
+  alternates: { canonical: "https://www.wyzdesign.com/legal/shipping" },
   openGraph: {
     title: "Shipping Policy | WYZ Design",
     description: "Shipping rates and delivery times.",
-    url: "https://www.wyzdesign.com/shipping-policy",
+    url: "https://www.wyzdesign.com/legal/shipping",
     siteName: "WYZ Design",
     type: "website",
     images: [{ url: "https://www.wyzdesign.com/wyz-og-image.png", width: 1200, height: 630 }],

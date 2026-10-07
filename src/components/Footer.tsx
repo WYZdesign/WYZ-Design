@@ -33,11 +33,11 @@ const SITEMAP = {
     { href: "/community", label: "Community" },
   ],
   Legal: [
-    { href: "/privacy-policy", label: "Privacy Policy" },
-    { href: "/terms-and-conditions", label: "Terms & Conditions" },
-    { href: "/refund-return-policy", label: "Refund Policy" },
-    { href: "/shipping-policy", label: "Shipping Policy" },
-    { href: "/copyright-notice", label: "Copyright Notice" },
+    { href: "/legal/privacy", label: "Privacy Policy" },
+    { href: "/legal/terms", label: "Terms & Conditions" },
+    { href: "/legal/refund", label: "Refund Policy" },
+    { href: "/legal/shipping", label: "Shipping Policy" },
+    { href: "/legal/copyright", label: "Copyright Notice" },
   ],
 };
 

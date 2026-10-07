@@ -155,6 +155,11 @@ const nextConfig: NextConfig = {
       { source: "/brands", destination: "/about", permanent: true },
       { source: "/gallery", destination: "/photography", permanent: true },
       { source: "/fd", destination: "/about", permanent: true },
+      { source: "/privacy-policy", destination: "/legal/privacy", permanent: true },
+      { source: "/terms-and-conditions", destination: "/legal/terms", permanent: true },
+      { source: "/refund-return-policy", destination: "/legal/refund", permanent: true },
+      { source: "/shipping-policy", destination: "/legal/shipping", permanent: true },
+      { source: "/copyright-notice", destination: "/legal/copyright", permanent: true },
       { source: "/plans-pricing", destination: "/plans", permanent: true },
       { source: "/my-profile", destination: "/account/my-account", permanent: true },
     ];

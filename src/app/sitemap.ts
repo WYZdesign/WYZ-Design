@@ -53,11 +53,11 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
  { path: "/booking-calendar/photo-retouching", priority: 0.5, changeFrequency: "monthly" },
  { path: "/booking", priority: 0.8, changeFrequency: "monthly" },
  { path: "/merch/concepts", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
-  { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },
-  { path: "/refund-return-policy", priority: 0.2, changeFrequency: "yearly" },
-  { path: "/shipping-policy", priority: 0.2, changeFrequency: "yearly" },
-  { path: "/copyright-notice", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/legal/privacy", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/legal/terms", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/legal/refund", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/legal/shipping", priority: 0.2, changeFrequency: "yearly" },
+  { path: "/legal/copyright", priority: 0.2, changeFrequency: "yearly" },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

@@ -31,8 +31,8 @@ const STATIC_PAGES: StaticResult[] = [
   { title: "Booking", href: "/booking-calendar/photoshoot", desc: "Book a photoshoot or consultation" },
   { title: "Search", href: "/search", desc: "Search the entire WYZ Design site" },
   { title: "Sitemap", href: "/sitemap.xml", desc: "XML sitemap of all pages" },
-  { title: "Privacy Policy", href: "/privacy-policy", desc: "How we handle your data" },
-  { title: "Terms of Service", href: "/terms-and-conditions", desc: "Terms and conditions" },
+  { title: "Privacy Policy", href: "/legal/privacy", desc: "How we handle your data" },
+  { title: "Terms of Service", href: "/legal/terms", desc: "Terms and conditions" },
 ];
 
 function simpleTextSearch(query: string, limit: number): StaticResult[] {

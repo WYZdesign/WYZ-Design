@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Refund & Return Policy",
   description: "WYZ Design's refund and return policy for services and merchandise.",
-  alternates: { canonical: "https://www.wyzdesign.com/refund-return-policy" },
+  alternates: { canonical: "https://www.wyzdesign.com/legal/refund" },
   openGraph: {
     title: "Refund & Return Policy | WYZ Design",
     description: "Refund and return policy.",
-    url: "https://www.wyzdesign.com/refund-return-policy",
+    url: "https://www.wyzdesign.com/legal/refund",
     siteName: "WYZ Design",
     type: "website",
     images: [{ url: "https://www.wyzdesign.com/wyz-og-image.png", width: 1200, height: 630 }],

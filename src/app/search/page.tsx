@@ -26,8 +26,8 @@ const ALL_PAGES = [
   { title: "Event Photography", href: "/services/event-photography", desc: "Event coverage and documentation", tags: ["event", "coverage", "documentation"] },
   { title: "Model Archive", href: "/model-archive", desc: "Every talent who has graced our lens", tags: ["model", "talent", "archive", "roster"] },
   { title: "Community", href: "/community", desc: "Community discussions", tags: ["forum", "community", "discussion", "chat"] },
-  { title: "Privacy Policy", href: "/privacy-policy", desc: "How we handle your data", tags: ["privacy", "policy", "data", "gdpr"] },
-  { title: "Terms & Conditions", href: "/terms-and-conditions", desc: "Terms of service", tags: ["terms", "conditions", "legal"] },
+  { title: "Privacy Policy", href: "/legal/privacy", desc: "How we handle your data", tags: ["privacy", "policy", "data", "gdpr"] },
+  { title: "Terms & Conditions", href: "/legal/terms", desc: "Terms of service", tags: ["terms", "conditions", "legal"] },
   { title: "My Account", href: "/account/my-account", desc: "Login and account settings", tags: ["account", "login", "register", "profile"] },
 ];
 
