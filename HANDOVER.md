@@ -22,6 +22,7 @@
 - Locked copy rules (owner): plain words, contractions, no em/en-dashes, no AI tells, one idea per sentence, second person, digits, Home 450 words max.
 - This is a consensus doc: Claude (layout/components), Codex (redirects/sitemap/copy lint), and the owner add opinions in Part 6, then we execute in phases. Board #46. No site change yet.
 - **Owner reply (2026-10-07):** keep every real page (no gutting). Just make it more concise, compact, and combined. Keep the word "Merch". Keep Design and Photography as two separate, big portfolios and add a duality so they read as one studio (a `/work` split-screen gateway plus a cross-switch). Drop `/fd`. Wrote full handovers: `_HANDOVER_CLAUDE.md` (visual/layout + duality, tasks in a new FOR CLAUDE section) and a new `_HANDOVER_CODEX.md` (redirects, copy condense, copy-lint CI). Re-scored v2 at **3,150/5,000** (keep-all direction). Board #46 updated, #47 (Claude duality), #48 (Codex redirects), #49 (copy condense + CI) added. Keep both handovers updated as the work moves.
+- **Audit v3 + confer hub (2026-10-07):** rewrote the audit as a true 5,000-point model for every page: **50 pages x 10 criteria x 10 points**. Baseline **3,053/5,000**; weakest criteria are Density, Brevity, and Conversion focus, which is exactly the "busy" feeling. Added `_CONFER/` consensus hub (README + a brief for every agent: Claude, Codex, General, Plan, Explore, Build, Review) with a shared decision matrix and verdict slots so all agents confer. Board #50. No site change yet.
 
 ---
 
