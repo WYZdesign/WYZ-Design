@@ -214,11 +214,26 @@ return (
       <p className="text-[#666]">Services temporarily unavailable. Please try again later.</p>
     </div>
   }>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 lg:gap-6 lg:mb-6">
-  {filtered.map((s) => (
-  <ServiceCard key={s.name} service={s} />
-  ))}
-  </div>
+  {active === "All Services" ? (
+    <div className="space-y-12 mb-6">
+      {CATEGORIES.filter(c => c !== "All Services").map((cat) => (
+        <div key={cat}>
+          <h2 className="font-heading font-black text-[1.4rem] sm:text-[1.8rem] tracking-[0.08em] uppercase text-[#333] dark:text-white mb-5">{cat}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            {ALL_SERVICES_RAW.filter(s => s.cat === cat).map((s) => (
+              <ServiceCard key={s.name} service={s} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 lg:gap-6 lg:mb-6">
+      {filtered.map((s) => (
+        <ServiceCard key={s.name} service={s} />
+      ))}
+    </div>
+  )}
   </ErrorBoundary>
   </ScrollReveal>
 
