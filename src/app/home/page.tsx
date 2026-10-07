@@ -832,7 +832,7 @@ export default function HomePage() {
  const [spTab, setSpTab] = useState<"services" | "plans">("services");
  const [openFaq, setOpenFaq] = useState<number | null>(null);
  const [faqSearch, setFaqSearch] = useState("");
- const [faqCount, setFaqCount] = useState(7);
+ const [faqCount, setFaqCount] = useState(4);
  const [flippedPlans, setFlippedPlans] = useState<Record<number, boolean>>({});
  const heroRef = useRef<HTMLDivElement>(null);
  const [heroVis, setHeroVis] = useState(false);
@@ -1063,12 +1063,6 @@ export default function HomePage() {
          Read More <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
        </Link>
      </div>
-   ))}
-   </div>
-   <h3 className="text-center font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-2xl sm:text-3xl md:text-4xl mb-8 mt-16">Popular Services</h3>
-   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-   {SERVICE_LIST.map((s) => (
-     <HomeServiceFlipCard key={s.name} s={s} />
    ))}
    </div>
     <div className="text-center mt-16 relative z-10">
