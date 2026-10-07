@@ -926,26 +926,20 @@ export default function HomePage() {
         </h1>
         </TextMaskReveal>
          <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-xs sm:max-w-sm mx-auto text-center">
-       We help artists, brands, and real people build creative work that actually looks good.
+       Photography and brand design in Los Angeles. Book a session or a project.
        </p>
        </GyroTilt>
 <div className="flex flex-wrap gap-3 justify-center w-full px-2">
       <MagneticElement tag="div" strength={0.25}>
-      <Link href="/about"
-       className="inline-block bg-white text-[#111] border-2 border-white px-5 py-2.5 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] hover:shadow-white/20 transition-all">
-      SEE THE STORY
+      <Link href="/booking"
+       className="inline-block bg-[#DF3131] text-white border-2 border-[#DF3131] px-6 py-3 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#B82020] hover:border-[#B82020] transition-all">
+      BOOK A FREE CALL
       </Link>
       </MagneticElement>
       <MagneticElement tag="div" strength={0.25}>
-      <Link href="/contact"
-       className="inline-block bg-[#DF3131] text-white border-2 border-[#DF3131] px-5 py-2.5 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-[#B82020] hover:border-[#B82020] transition-all">
-      START A PROJECT
-      </Link>
-      </MagneticElement>
-      <MagneticElement tag="div" strength={0.25}>
-      <Link href="/plans"
-       className="inline-block bg-transparent text-white border-2 border-white px-5 py-2.5 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] transition-all">
-      VIEW PLANS
+      <Link href="/work"
+       className="inline-block bg-transparent text-white border-2 border-white px-6 py-3 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-[15px] text-center hover:bg-white hover:text-[#111] transition-all">
+      SEE THE WORK
       </Link>
       </MagneticElement>
      </div>
@@ -1247,59 +1241,7 @@ export default function HomePage() {
  </section>
  </ScrollReveal>
 
- {/* ═══ VALUE CARDS ═══ */}
- <ScrollReveal animation="fadeUp">
- <section className="py-8 sm:py-10 lg:py-14 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
- <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
- <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
- {[
- { title: "We Actually Do the Work", body: "We show up, we shoot, we design, we build. No outsourcing to strangers. No passing you around to three different people who don't talk to each other.", color: "#DF3131", icon: FiZap },
- { title: "Good Work Costs What It Costs", body: "We don't work for exposure, good vibes, or vague promises of future referrals. Creativity is real work. Real work earns real money. We also have accessible options for artists just getting started.", color: "#D49341", icon: FiAward },
-  { title: "Fast, But Never Sloppy", body: "We move quick because we know what we're doing. But nothing leaves the desk looking rushed, generic, or like someone stopped caring halfway through.", color: "#666666", icon: FiTrendingUp },
- ].map((c) => {
- const Icon = c.icon;
-  return (
-    <CardTilt key={c.title} intensity={10}>
-    <ScrollParallaxCard tiltAmount={4} scaleAmount={1.03}>
-    <div className="group relative bg-gradient-to-br from-white to-[#FFFFFF] dark:from-[#252528] dark:to-[#252528] border border-[#E2E2E2] dark:border-[#444] p-6 sm:p-8 lg:p-12 hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-1 min-h-[320px] sm:min-h-[360px] flex flex-col justify-center">
-  <div className="absolute top-0 left-0 right-0 h-1 transition-all duration-500 group-hover:h-2" style={{ background: `linear-gradient(90deg, ${c.color}, ${c.color}88)` }} />
-  <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity duration-700" style={{ background: `radial-gradient(circle at 50% 0%, ${c.color}22, transparent 70%)` }} />
-   <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-[0.03] group-hover:opacity-[0.06] transition-all duration-700 group-hover:scale-150 rounded-full" style={{ background: c.color }} />
-     <div className="flex flex-col items-center text-center gap-3">
-      <Icon className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1" style={{ color: c.color === "#D49341" ? "#A9702F" : c.color }} />
-     <div>
-    <h3 className="font-heading font-bold text-[14px] sm:text-[16px] lg:text-[17px] text-[#333] dark:text-white tracking-[0.04em] group-hover:text-[#DF3131] transition-colors duration-300 text-center mb-3">{c.title}</h3>
-    <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed text-center">{c.body}</p>
-    </div>
-   </div>
-  </div>
-  </ScrollParallaxCard>
-  </CardTilt>
- );
- })}
- </div>
- </div>
- </section>
- </ScrollReveal>
-
- {/* ═══ QUICK LINKS ═══ */}
- <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 bg-white dark:bg-[#1C1C1E]">
-  <div className="max-w-6xl mx-auto px-6 text-center">
-  <h2 className="text-[1.1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.15em] uppercase mb-4">Quick Links</h2>
- <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 sm:gap-x-8 md:gap-x-12 gap-y-6 md:gap-y-8 max-w-5xl mx-auto">
- {QUICK_LINKS.map((link) => (
-  <Link key={link.label} href={link.href}
-   className="bg-[#F5F5F5] dark:bg-[#252528] border-2 border-[#DF3131] text-[#C41C1C] py-3 px-4 font-heading font-bold tracking-[0.1em] uppercase text-xs hover:bg-[#DF3131] hover:text-white transition-all text-center">
- {link.label}
- </Link>
- ))}
- </div>
- </div>
- </section>
- </ScrollReveal>
-
- {/* ═══ DESIGN SHOWCASE CAROUSEL ═══ */}
+ {/* DESIGN SHOWCASE CAROUSEL ═══ */}
  <ScrollReveal animation="fadeIn" duration={1}>
  <section className="py-6">
  <SmoothCarousel items={shuffledDesign.length > 0 ? shuffledDesign : DESIGN_SHOWCASE_RAW} speed={0.55} />
