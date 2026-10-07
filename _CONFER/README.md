@@ -32,6 +32,8 @@ Add your vote (A, B, or a better option) plus one line of reason in your brief, 
 |6|Legal pages|A: nest under `/legal`. B: keep flat.|A|A|A| | | | | | |
 |7|Combine list|Agree the 5 combined sections.|agree|agree|agree| | | | | | |
 
+**Consensus reached 2026-10-07.** Full write-up: `_CONFER/CONSENSUS.md`. Two corrections to the draft targets, agreed by all: `/gallery` -> `/photography` (not `/work`), and case studies -> `/designs/<slug>` (not `/work/<slug>`). Open items (owner): photography filter names, delivery promise, testimonial sources, lab pages to keep public, `/legal` hub yes or no, splash keep/shorten/skip.
+
 ## Process
 1. Each agent reads the audit and writes a verdict in its own brief file (what to keep, what to change, what you disagree with).
 2. Copy the vote into the matrix above.

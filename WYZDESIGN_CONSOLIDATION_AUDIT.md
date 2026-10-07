@@ -6,7 +6,15 @@ Model: **10 topics (pillars) x 5 categories x 2 subcategories = 100 subcategorie
 
 Scoring: each subcategory is 0 to 50. Pillar = 500. This doc does not change the site.
 
-Headline result: **2,354 / 5,000 so far.** Weakest topics: Design/Work duality, Services structure, Photography organization, and Copy craft. Strongest: Merch.
+Headline result: **2,504 / 5,000 so far.**
+
+Corrections from the 2026-10-07 agent confer:
+- The `/work` Design + Photography duality gateway is **built and shipped** (commit 4212228, board #47). Topic 5 is rescored up; the only remaining work is wiring it into nav, sitemap, and search, and the pointer/motion polish.
+- `/services` has **27 cards**, not 56.
+- Photography has **8 hub albums**, **13 defined categories**, and **11 in the sitemap**, not 12.
+- Metrics are **not unified**: About's mission line still says "60+ events, 30+ clients" and `lib/seo.ts` still says 60. Only the numbers block was updated.
+
+Weakest topics now: Services structure, Photography organization, Home, and Copy craft. Strongest: Merch.
 
 ---
 
@@ -70,7 +78,7 @@ Headline result: **2,354 / 5,000 so far.** Weakest topics: Design/Work duality, 
 |4.5 Proof|4.5.1 Event photos do not duplicate `/events`|20|Some overlap.|
 ||4.5.2 Real captions|25|Thin.|
 
-## Topic 5. Design and Work plus the duality (128 / 500)
+## Topic 5. Design and Work plus the duality (288 / 500)
 
 | Cat | Subcategory | Score | Evidence |
 |---|---|---:|---|
@@ -78,11 +86,11 @@ Headline result: **2,354 / 5,000 so far.** Weakest topics: Design/Work duality, 
 ||5.1.2 Case studies folded in|18|Separate pages.|
 |5.2 Case studies|5.2.1 Four studies under `/designs`|15|Separate family.|
 ||5.2.2 Each study has outcome and proof|30|Good content.|
-|5.3 Gateway|5.3.1 `/work` split gateway built|5|Not built.|
-||5.3.2 Seam copy "Two sides. One studio."|5|Not built.|
-|5.4 Behavior|5.4.1 Expands on hover or tap|5|Not built.|
-||5.4.2 Works on mobile|5|Not built.|
-|5.5 Cross-links|5.5.1 Design to Photo switch|5|Not built.|
+|5.3 Gateway|5.3.1 `/work` split gateway built|45|Shipped (commit 4212228).|
+||5.3.2 Seam copy "Two sides. One studio."|35|Shipped; cross-switch copy says "Two sides, one studio" (comma). Match both.|
+|5.4 Behavior|5.4.1 Expands on hover or tap|35|Built; gate the expand to fine pointer and add focus-visible.|
+||5.4.2 Works on mobile|30|Built; seam label overlaps panel text on mobile, fix.|
+|5.5 Cross-links|5.5.1 Design to Photo switch|40|Shipped on both hubs.|
 ||5.5.2 Related work links|15|Weak.|
 
 ## Topic 6. Merch store (393 / 500)
@@ -135,7 +143,7 @@ Headline result: **2,354 / 5,000 so far.** Weakest topics: Design/Work duality, 
 | Cat | Subcategory | Score | Evidence |
 |---|---|---:|---|
 |9.1 Proof|9.1.1 Real review sources|12|Links go to broad Google searches.|
-||9.1.2 Metrics consistent|40|Unified to 90 plus.|
+||9.1.2 Metrics consistent|30|Not unified: About mission and lib/seo.ts still say 60/30. Fix.|
 |9.2 Policies|9.2.1 Five legal pages present|45|All exist.|
 ||9.2.2 Nested under `/legal`|15|Flat.|
 |9.3 Community|9.3.1 Demo data labeled|30|Banner present.|
@@ -170,13 +178,13 @@ Headline result: **2,354 / 5,000 so far.** Weakest topics: Design/Work duality, 
 |2. Home and landing|191|500|
 |3. Services|187|500|
 |4. Photography|173|500|
-|5. Design and Work plus duality|128|500|
+|5. Design and Work plus duality|288|500|
 |6. Merch|393|500|
 |7. Booking and conversion|228|500|
 |8. Content and copy craft|228|500|
-|9. Trust, policies, community|309|500|
+|9. Trust, policies, community|299|500|
 |10. Technical quality|322|500|
-|**Total**|**2,354**|**5,000**|
+|**Total**|**2,504**|**5,000**|
 
 ## The condense map (keep everything, tighten and combine)
 
@@ -198,5 +206,5 @@ All agents record their verdict in `_CONFER/` (see README). WYZMiND tallies. Own
 ## Scoring history
 | Date | Score | Note |
 |---|---:|---|
-|2026-10-07|2,354 / 5,000|v4: 10 topics x 50 categories x 100 subcategories|
+|2026-10-07|2,504 / 5,000|v5: corrected after the agent confer (duality shipped, counts fixed)|
 | | | target 4,200 or more after Phases 1 to 4|

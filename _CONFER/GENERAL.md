@@ -8,8 +8,8 @@ Lane: multi-step implementation across the site.
 - Run `npx tsc --noEmit`, build, lint, and tests before handing back.
 - Hand diffs to WYZMiND (the sole integrator).
 
-## Verdict (fill in)
-- What is safe to do first:
-- What needs more evidence:
-- Disagree:
-- Vote (see `_CONFER/README.md` matrix):
+## Verdict (recorded 2026-10-07)
+- What is safe to do first: shared primitives (Hero, Section, one card pattern), the duplicate main landmark fix, the `/work` h1, then the copy condense.
+- What needs more evidence: photography filter names, delivery promise, testimonial sources, prices.
+- Disagree: do not merge `/gallery` into `/work`; use `/photography`. Case studies go to `/designs/<slug>`.
+- Vote: agree on all 7. Full detail in `_CONFER/CONSENSUS.md`.
