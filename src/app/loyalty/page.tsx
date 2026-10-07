@@ -305,6 +305,10 @@ export default function LoyaltyPage() {
           </p>
         </div>
       </div>
+      <div className="max-w-4xl mx-auto px-6 pb-16 text-center">
+        <p className="text-[15px] text-[#666] dark:text-white/60 mb-4">Want to earn 10% when you send us a client? Join the referral program.</p>
+        <Link href="/referral" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#B82020] transition-all">Refer a friend</Link>
+      </div>
     </main>
   );
 }

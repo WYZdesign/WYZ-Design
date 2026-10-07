@@ -154,8 +154,6 @@ const nextConfig: NextConfig = {
       { source: "/case-studies/:slug", destination: "/designs/:slug", permanent: true },
       { source: "/brands", destination: "/about", permanent: true },
       { source: "/gallery", destination: "/photography", permanent: true },
-      { source: "/partnerships", destination: "/contact?type=partnership", permanent: true },
-      { source: "/referral", destination: "/loyalty", permanent: true },
       { source: "/fd", destination: "/about", permanent: true },
       { source: "/plans-pricing", destination: "/plans", permanent: true },
       { source: "/my-profile", destination: "/account/my-account", permanent: true },

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
 import TextMaskReveal from "@/components/TextMaskReveal";
@@ -48,6 +49,11 @@ export default function ContactPage() {
               <p className="text-[13px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] mb-2">LOCATION</p>
               <p className="text-[#666] dark:text-[#666] text-[14px]">Chicago + Los Angeles</p>
             </div>
+          </div>
+
+          <div className="mt-8 sm:mt-10 text-center">
+            <p className="text-[15px] text-[#666] dark:text-[#b0b0b0] mb-3">Looking to partner with us? Brands, studios, venues, and promoters are welcome.</p>
+            <Link href="/partnerships" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#B82020] transition-all">See partnership options</Link>
           </div>
         </div>
       </ScrollReveal>

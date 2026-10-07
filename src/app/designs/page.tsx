@@ -447,6 +447,15 @@ const faotmImages = [
  </section>
  </ScrollReveal>
 
+  <section className="max-w-6xl mx-auto px-6 pb-20">
+    <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.08em] uppercase text-[#333] dark:text-white mb-6 text-center">Case Studies</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {[["Artfinix Foundation","artfinix"],["Kid Bode","kid-bode"],["Dawneeah's Glow","dawneeahs-glow"],["GFT Foods","gft-foods"]].map(([name,slug]) => (
+        <Link key={slug} href={`/designs/${slug}`} className="border border-[#E2E2E2] dark:border-[#444] rounded-lg p-5 text-center font-heading font-bold tracking-[0.04em] text-[#333] dark:text-white hover:border-[#DF3131] hover:text-[#DF3131] transition-colors">{name}</Link>
+      ))}
+    </div>
+  </section>
+
  {lbSrc && <SimpleLightbox src={lbSrc} onClose={() => setLbSrc(null)} />}
  </main>
  );
