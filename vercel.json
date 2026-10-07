@@ -8,6 +8,10 @@
     {
       "path": "/api/cron/booking-whatsnext",
       "schedule": "0 16 * * *"
+    },
+    {
+      "path": "/api/cron/cleanup-orders",
+      "schedule": "0 7 * * *"
     }
   ],
   "headers": [
