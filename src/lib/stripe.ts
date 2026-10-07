@@ -110,7 +110,7 @@ async function createGiftCardCoupon(appliedCents: number): Promise<string> {
   return coupon.id;
 }
 
-export async function createServiceCheckout(serviceName: string, servicePrice: number, email?: string, referralCode?: string, giftCard?: { id: number; code: string; appliedCents: number }) {
+export async function createServiceCheckout(serviceName: string, servicePrice: number, email?: string, referralCode?: string, giftCard?: { id: number; appliedCents: number; ref: string }) {
   const stripe = getStripe();
   const idKey = generateIdempotencyKey("svc", email || "guest");
   const discounts = giftCard && giftCard.appliedCents > 0
@@ -134,7 +134,7 @@ export async function createServiceCheckout(serviceName: string, servicePrice: n
       type: "service",
       name: serviceName,
       price: String(servicePrice),
-      ...(giftCard ? { giftCardId: String(giftCard.id), giftCardCode: giftCard.code, giftCardAppliedCents: String(giftCard.appliedCents) } : {}),
+      ...(giftCard ? { giftCardId: String(giftCard.id), giftCardAppliedCents: String(giftCard.appliedCents), giftCardRef: giftCard.ref } : {}),
       ...(referralCode ? { referralCode } : {}),
     },
     client_reference_id: email || undefined,
@@ -154,7 +154,7 @@ export async function createMerchCheckout(
   orderId: string,
   email?: string,
   referralCode?: string,
-  giftCard?: { id: number; code: string; appliedCents: number }
+  giftCard?: { id: number; appliedCents: number; ref: string }
 ) {
   const stripe = getStripe();
   const subtotal = lines.reduce((n, l) => n + l.unitPriceCents * l.quantity, 0);
@@ -197,7 +197,7 @@ export async function createMerchCheckout(
       type: "merch",
       orderId,
       shipping: shippingOptionId,
-      ...(giftCard ? { giftCardId: String(giftCard.id), giftCardCode: giftCard.code, giftCardAppliedCents: String(giftCard.appliedCents) } : {}),
+      ...(giftCard ? { giftCardId: String(giftCard.id), giftCardAppliedCents: String(giftCard.appliedCents), giftCardRef: giftCard.ref } : {}),
       ...(referralCode ? { referralCode } : {}),
     },
     client_reference_id: email || undefined,

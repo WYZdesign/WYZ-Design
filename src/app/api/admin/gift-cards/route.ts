@@ -29,8 +29,8 @@ export async function GET(req: NextRequest) {
   const sb = getServiceClient();
   const { data: cards, error } = await sb
     .from("gift_cards")
-    .select("id, code, buyer_email, recipient_email, amount, balance_cents, currency, status, expires_at, created_at")
-    .or(`buyer_email.ilike.%${q}%,code.ilike.%${q}%`)
+    .select("id, code_last4, buyer_email, recipient_email, amount, balance_cents, currency, status, expires_at, created_at")
+    .or(`buyer_email.ilike.%${q}%,code_last4.ilike.%${q}%`)
     .order("created_at", { ascending: false })
     .limit(25);
   if (error) {

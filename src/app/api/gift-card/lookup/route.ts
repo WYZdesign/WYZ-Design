@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     const sb = getServiceClient();
     const { data, error } = await sb
       .from("gift_cards")
-      .select("code, amount, expires_at, balance_cents, currency")
+      .select("code_last4, amount, expires_at, balance_cents, currency")
       .eq("stripe_session_id", sessionId)
       .maybeSingle();
     if (error) throw error;

@@ -8,7 +8,8 @@ import { logger } from "@/lib/logger";
 import { getServiceClient } from "@/lib/supabase";
 import { getVariantInfo } from "@/lib/printful";
 import { sanitizeCartLine, cartSubtotalCents, shippingCentsFor, SHIPPING_OPTIONS, MAX_CART_LINES, MAX_LINE_QUANTITY, type CartLine } from "@/lib/merch";
-import { hashGiftCardCode, isGiftCardExpired } from "@/lib/gift-cards";
+import { hashGiftCardCode } from "@/lib/gift-cards";
+import { randomUUID } from "crypto";
 
 const SERVICE_PRICES: Record<string, number> = {
   "Photoshoot": 100,
@@ -23,22 +24,33 @@ function getIp(req: NextRequest): string {
 }
 
 /**
- * Validates a gift-card code and reserves up to `totalCents` of it for this
- * checkout. Returns null when the code is missing/invalid/expired/empty.
+ * Atomically reserves up to `totalCents` from a gift card for this checkout.
+ * The reservation (a single conditional UPDATE inside reserve_gift_card) is what
+ * prevents two concurrent checkouts from spending the same balance; an abandoned
+ * or expired session is released by the webhook. Returns null when the code is
+ * missing, unknown, expired, inactive, or has no usable balance.
  */
-async function resolveGiftCard(code: unknown, totalCents: number): Promise<{ id: number; code: string; appliedCents: number } | null> {
+async function reserveGiftCard(code: unknown, totalCents: number, ref: string): Promise<{ id: number; appliedCents: number; ref: string } | null> {
   if (!code || typeof code !== "string" || !code.trim()) return null;
   const sb = getServiceClient();
-  const { data } = await sb
+  const { data: card } = await sb
     .from("gift_cards")
-    .select("id, code, balance_cents, status, expires_at")
+    .select("id")
     .eq("code_hash", hashGiftCardCode(code))
     .maybeSingle();
-  if (!data || data.status !== "active" || isGiftCardExpired(data.expires_at)) return null;
-  if (!data.balance_cents || data.balance_cents <= 0) return null;
-  const appliedCents = Math.min(data.balance_cents, Math.max(0, totalCents));
-  if (appliedCents <= 0) return null;
-  return { id: data.id, code: data.code, appliedCents };
+  if (!card) return null;
+  const { data: applied, error } = await sb.rpc("reserve_gift_card", {
+    p_id: card.id,
+    p_max: Math.max(0, totalCents),
+    p_ref: ref,
+  });
+  if (error) {
+    logger.error("checkout:gift-card-reserve", error.message);
+    return null;
+  }
+  const cents = typeof applied === "number" ? applied : Number(applied);
+  if (!Number.isFinite(cents) || cents <= 0) return null;
+  return { id: card.id, appliedCents: cents, ref };
 }
 
 /**
@@ -110,7 +122,11 @@ export async function POST(req: NextRequest) {
       if (servicePrice !== expectedPrice) {
         return NextResponse.json({ error: "Invalid service price" }, { status: 400 });
       }
-      const giftCard = await resolveGiftCard(giftCardCode, Math.round(expectedPrice * 100));
+      let giftCard: { id: number; appliedCents: number; ref: string } | null = null;
+      if (giftCardCode) {
+        giftCard = await reserveGiftCard(giftCardCode, Math.round(expectedPrice * 100), `service:${randomUUID()}`);
+        if (!giftCard) return NextResponse.json({ error: "That gift card could not be applied. Check the code or its balance." }, { status: 409 });
+      }
       const session = await createServiceCheckout(serviceName, servicePrice, email, referralCode, giftCard || undefined);
       return NextResponse.json({ url: session.url });
     }
@@ -158,6 +174,14 @@ export async function POST(req: NextRequest) {
       const subtotal = cartSubtotalCents(lines);
       const shipCents = shippingCentsFor(subtotal, shippingId);
 
+      // Reserve the gift-card amount atomically before creating anything, so a
+      // failed/insufficient card does not leave a pending order behind.
+      let giftCard: { id: number; appliedCents: number; ref: string } | null = null;
+      if (giftCardCode) {
+        giftCard = await reserveGiftCard(giftCardCode, subtotal + shipCents, `merch:${randomUUID()}`);
+        if (!giftCard) return NextResponse.json({ error: "That gift card could not be applied. Check the code or its balance." }, { status: 409 });
+      }
+
       const sb = getServiceClient();
       const { data: order, error: orderErr } = await sb
         .from("orders")
@@ -193,7 +217,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Unable to start checkout. Please try again." }, { status: 500 });
       }
 
-      const session = await createMerchCheckout(lines, shippingId, order.id, email, referralCode, (await resolveGiftCard(giftCardCode, subtotal + shipCents)) || undefined);
+      const session = await createMerchCheckout(lines, shippingId, order.id, email, referralCode, giftCard || undefined);
       await sb.from("orders").update({ stripe_session_id: session.id }).eq("id", order.id);
       return NextResponse.json({ url: session.url });
     }

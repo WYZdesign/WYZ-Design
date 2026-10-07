@@ -5,7 +5,7 @@ import { addLoyaltyPoints } from "@/lib/wyzmind";
 import { earnZeal } from "@/lib/zeal";
 import { sendDiscordAlert } from "@/lib/discord";
 import { recordReferralConversion } from "@/lib/referral";
-import { giftCardExpiry, generateGiftCardCode, hashGiftCardCode } from "@/lib/gift-cards";
+import { giftCardExpiry, generateGiftCardCode, hashGiftCardCode, last4 } from "@/lib/gift-cards";
 import { sendGiftCardEmail } from "@/lib/email";
 import { createPrintfulOrder } from "@/lib/printful";
 import { sendBookingConfirmation } from "@/lib/email";
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
               amount: gcAmount,
               balance_cents: Math.round(gcAmount * 100),
               currency: "usd",
-              code: gcCode,
+              code_last4: last4(gcCode),
               code_hash: hashGiftCardCode(gcCode),
               status: "active",
               // 24-month policy (Torré 2026-10-06) — single source: lib/gift-cards.ts
@@ -106,10 +106,12 @@ export async function POST(req: NextRequest) {
               } catch (e) { logger.error("webhook:giftcard-email", (e as Error).message); }
             }
 
+            // Only the last 4 digits go to staff alerts; the full code is
+            // delivered to the buyer by email and never stored in plaintext.
             await sendDiscordAlert("Gift Card Purchase", {
               "Buyer Email": email || "Unknown",
               Amount: `$${gcAmount}`,
-              Code: gcCode,
+              Code: `••••${last4(gcCode)}`,
               "Session ID": session.id,
             });
           } catch (e) { logger.error("webhook:giftcard", (e as Error).message); }
@@ -194,28 +196,15 @@ export async function POST(req: NextRequest) {
           } catch (e) { logger.error("webhook:merch", (e as Error).message); }
         }
 
-        // Gift-card redemption: commit the spend that was reserved at checkout
+        // Gift-card redemption: the balance was reserved atomically at checkout
+        // (reserve_gift_card), so payment only marks that reservation committed.
         const gcId = session.metadata?.giftCardId;
-        const gcApplied = Number(session.metadata?.giftCardAppliedCents || 0);
-        if (gcId && gcApplied > 0) {
+        const gcRef = session.metadata?.giftCardRef;
+        if (gcId && gcRef) {
           try {
-            const gcNumId = Number(gcId);
-            const { data: card } = await sb.from("gift_cards").select("balance_cents").eq("id", gcNumId).maybeSingle();
-            const newBalance = Math.max(0, (card?.balance_cents || 0) - gcApplied);
-            await sb.from("gift_cards").update({
-              balance_cents: newBalance,
-              status: newBalance <= 0 ? "redeemed" : "active",
-              ...(newBalance <= 0 ? { redeemed_at: new Date().toISOString() } : {}),
-            }).eq("id", gcNumId);
-            await sb.from("gift_card_ledger").insert({
-              gift_card_id: gcNumId,
-              delta_cents: -gcApplied,
-              reason: "redeemed at checkout",
-              actor: "webhook",
-              order_id: session.metadata?.orderId || null,
-            });
-            logger.info("webhook:giftcard-redeem", `Applied ${gcApplied} to card ${gcNumId} (balance ${newBalance})`);
-          } catch (e) { logger.error("webhook:giftcard-redeem", (e as Error).message); }
+            await sb.rpc("commit_gift_card", { p_id: Number(gcId), p_ref: gcRef });
+            logger.info("webhook:giftcard-commit", `Committed reservation ${gcRef}`);
+          } catch (e) { logger.error("webhook:giftcard-commit", (e as Error).message); }
         }
 
         // Record referral conversion server-to-server (no client round trip)
@@ -256,6 +245,20 @@ export async function POST(req: NextRequest) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ event: "checkout.session.completed", customer: session.customer, email: session.customer_details?.email, plan }),
           }).catch((e) => logger.error("webhook:n8n-notify", (e as Error).message));
+        }
+        break;
+      }
+      case "checkout.session.expired":
+      case "checkout.session.async_payment_failed": {
+        // Release any gift-card reservation held by a session that never paid.
+        const session = event.data.object as Stripe.Checkout.Session;
+        const gcId = session.metadata?.giftCardId;
+        const gcRef = session.metadata?.giftCardRef;
+        if (gcId && gcRef) {
+          try {
+            await sb.rpc("release_gift_card", { p_id: Number(gcId), p_ref: gcRef });
+            logger.info("webhook:giftcard-release", `Released reservation ${gcRef}`);
+          } catch (e) { logger.error("webhook:giftcard-release", (e as Error).message); }
         }
         break;
       }

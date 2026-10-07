@@ -2,6 +2,16 @@
 
 ---
 
+## Session 60 (2026-10-07) - Integrate Claude branches + fix Codex's urgent gift-card findings (WYZMiND)
+
+- **Merged 3 Claude branches:** `revert-broken-image-optimizer-routing` (SafeImage's `/_next/image?url=` routing returned **400 INVALID_IMAGE_OPTIMIZE_REQUEST for every `/images/**` path** live, so real photos showed the broken-image placeholder; routing disabled, raw `src` restored), `cart-drawer-keyboard-a11y` (Escape/focus-trap/focus-restore on the cart drawer via the shared `useModalA11y`), and `home-about-stale-proof-metrics` (aligned home/about prose to the unified 90+/45+ canon). Also committed Codex Session 59 docs + the screenshot-harness update; discarded 37 stale screenshot PNGs.
+- **Gift-card double-spend race (board #43) fixed:** checkout now reserves atomically via `reserve_gift_card` (row-locked conditional UPDATE) instead of read-then-decrement-later. Two concurrent checkouts on one balance can no longer both get the discount. The webhook commits the reservation on payment and **releases** it on `checkout.session.expired` / `checkout.session.async_payment_failed`. Verified: concurrent reserves -> one wins, one NULL; release restores.
+- **Gift-card code hardening (board #44):** no plaintext code is stored (`code_hash` + `code_last4` only); the Discord staff alert shows last-4; the post-purchase lookup and admin tool return last-4 only; the full code is delivered by email. Full code is never logged.
+- **Schema versioned (board #42):** added `supabase/migrations/0001_merch_and_gift_cards.sql` (orders, order_items, gift_cards, gift_card_ledger, the 3 functions, RLS + service-role-only grants) matching production.
+- Board #41 closed (image revert merged); #43/#44 closed; new #45 = root-cause the `/_next/image` 400 so the optimizer can be re-enabled. Gates green (build 0, tsc 0, lint 0 errors, vitest 15/15).
+
+---
+
 ## Session 59 (2026-10-06) - Post-release proof-source audit (Codex, pending WYZMiND review)
 
 - Reconciled WYZMiND Sessions 55-58 against the shared `master` branch. The integrated releases now cover live Cal.com booking, real Printful-backed merch checkout and fulfillment, gift-card issue/redeem/ledger handling, pricing and subscription copy, unified public metrics, and monthly audit reminders.

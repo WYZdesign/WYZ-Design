@@ -14,7 +14,7 @@ const CARDS = [
 ];
 
 interface Purchased {
-  code: string;
+  last4: string;
   amount: number;
   expires_at?: string;
 }
@@ -46,7 +46,7 @@ export default function GiftCardPage() {
         }
         if (res.ok) {
           const d = await res.json();
-          setPurchased({ code: d.code, amount: d.amount, expires_at: d.expires_at });
+          setPurchased({ last4: d.code_last4, amount: d.amount, expires_at: d.expires_at });
         }
       } catch { /* ignore */ }
       setChecking(false);
@@ -106,9 +106,9 @@ export default function GiftCardPage() {
         {purchased && (
           <div className="bg-[#f5f5f5] dark:bg-[#252528] p-8 mb-12 text-center border border-[#DF3131]/30">
             <h2 className="font-heading font-bold tracking-[0.12em] uppercase text-[#333] dark:text-[#e0e0e0] mb-3">Your Gift Card</h2>
-            <p className="text-[#666] dark:text-[#b0b0b0] mb-4">We also emailed this code to you.</p>
-            <p className="text-2xl sm:text-3xl font-black tracking-[0.15em] text-[#DF3131] bg-white dark:bg-[#1a1a1c] inline-block px-6 py-4 rounded border border-[#E2E2E2] dark:border-[#333] break-all">
-              {purchased.code}
+            <p className="text-[#666] dark:text-[#b0b0b0] mb-4">We emailed the full code to you. For security it is not shown here.</p>
+            <p className="text-2xl sm:text-3xl font-black tracking-[0.15em] text-[#DF3131] bg-white dark:bg-[#1a1a1c] inline-block px-6 py-4 rounded border border-[#E2E2E2] dark:border-[#333]">
+              •••• {purchased.last4}
             </p>
             <p className="text-[#666] dark:text-[#b0b0b0] mt-4">
               ${Number(purchased.amount).toFixed(2)} value. Apply it at checkout on any service or merch order.
