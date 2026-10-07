@@ -1081,56 +1081,15 @@ export default function HomePage() {
 
  {/* ── PLANS TAB ── */}
   {spTab === "plans" && (
-  <div className="max-w-4xl mx-auto animate-fadeIn">
-   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase text-center mb-4">Pricing Plans</h2>
-   <p className="text-[#666] dark:text-white/50 text-sm mb-8 text-center">Affordable Plans for Any Budget</p>
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
- {PRICING_PLANS.map((p, i) => (
- <div key={p.name}
-  className="relative cursor-pointer"
-  style={{ perspective: "1000px" }}
-  onClick={() => setFlippedPlans(prev => ({ ...prev, [i]: !prev[i] }))}>
- {/* Card container with 3D flip */}
- <div className="relative w-full transition-transform duration-700"
-  style={{ transformStyle: "preserve-3d", minHeight: "368px", transform: flippedPlans[i] ? "rotateY(180deg)" : "rotateY(0deg)" }}>
- {/* Front face — just plan name big & bold */}
- <div className={`absolute inset-0 p-8 text-center backface-hidden flex flex-col items-center justify-center transition-all duration-300 ${
-  p.badge ? "border-[3px] border-[#DF3131] shadow-lg shadow-[#DF3131]/10 bg-white dark:bg-[#252528]" : "border border-[#E2E2E2] hover:border-[#DF3131] bg-white dark:bg-[#252528]"
- }`} style={{ backfaceVisibility: "hidden" }}>
- {p.badge && (
-  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#DF3131] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 whitespace-nowrap">
-  {p.badge}
+  <div className="max-w-2xl mx-auto text-center animate-fadeIn">
+    <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-4">Pricing Plans</h2>
+    <p className="text-[#666] dark:text-white/60 text-[15px] mb-8">Monthly plans from $250. Each plan includes design time, revisions, and priority booking.</p>
+    <Link href="/plans" className="inline-block px-8 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#B82020] transition-all">See plans and prices</Link>
   </div>
- )}
-   <h3 className="font-heading font-black text-[#333] dark:text-white text-[28px] sm:text-[32px] tracking-[0.06em] uppercase leading-tight mb-3">{p.name}</h3>
-   <p className="text-4xl sm:text-5xl font-black text-[#DF3131] mt-4">{p.price}</p>
-   <p className="text-xs text-[#666] dark:text-white/50 mt-3">Tap to see details</p>
- </div>
- {/* Back face — all info + subscribe */}
- <div className="absolute inset-0 p-6 text-center bg-[#DF3131] text-white flex flex-col items-center justify-center" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
- <h3 className="font-heading font-bold text-lg tracking-[0.1em] uppercase mb-3">{p.name}</h3>
- <p className="text-4xl font-black mb-1">{p.price}</p>
- <p className="text-white/80 text-xs mb-1 font-bold italic">Every month</p>
- <p className="text-white/70 text-xs mb-4">{p.desc}</p>
- <p className="text-white/50 text-[11px] mb-4">{p.valid}</p>
-  <Link href="/plans" className="w-full py-3 bg-white text-[#111] font-heading font-bold tracking-[0.1em] uppercase text-sm hover:bg-[#333] dark:hover:bg-[#111] hover:text-white transition-all">
- SUBSCRIBE
- </Link>
- </div>
- </div>
- </div>
- ))}
- </div>
- <div className="text-center mt-8">
-  <Link href="/plans" className="inline-block px-6 sm:px-8 py-3 border-2 border-[#333] text-[#333] font-heading font-bold tracking-[0.12em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#DF3131] hover:border-[#DF3131] hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-[#DF3131]/20">
-  VIEW ALL PLANS
-  </Link>
- </div>
- </div>
- )}
- </div>
- </div>
- </section>
+  )}
+  </div>
+  </div>
+  </section>
   </ScrollReveal>
 
 <div className="h-12 sm:h-16 lg:h-20" />
