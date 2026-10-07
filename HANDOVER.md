@@ -2,6 +2,24 @@
 
 ---
 
+## Session 61 (2026-10-07) - Consolidation audit opened (Codex)
+
+- Added `WYZDESIGN_CONSOLIDATION_AUDIT.md`, a second 5,000-point audit focused on layout, formatting, organization, sorting, copy reduction, and ease of use. It covers the full public sitemap by route family and applies a strict keep, merge, make-secondary, or retire decision standard.
+- The proposed user journey is intentionally short: see the work, pick what is needed, see a starting point, book a call. It recommends testing a five-item public navigation: Work, Services, About, Shop, and Book a Call. Help, Client, Culture, and Journal become secondary groups.
+- Added board task 46 for the owner and all agents to form a consensus. No route, copy, metadata, or live behavior was changed. Merges, redirects, and removals require owner approval plus search and analytics evidence.
+
+---
+
+## Session 61 (2026-10-07) - Site consolidation + cleanliness audit (5,000 points) (WYZMiND)
+
+- Owner asked to consolidate a site that feels extensive and busy. Produced `WYZDESIGN_CONSOLIDATION_AUDIT.md`: a 5-domain x 1,000-point audit of layout, formatting, organization, sorting, cleanliness, and ease of use for **every** public route, built from live measurement on 2026-10-07 (53 routes measured, ~23,000 words, 57 sitemap routes, 9 nav links).
+- Baseline score: **3,020 / 5,000**. Main findings: `/` and `/home` are duplicates; "what we do" is split across `/services` + `/web-design` + `/printing` + `/photography` + `/designs` + `/brands` + 4 `/service-page/*`; the same 4 services also exist as `/booking-calendar/*`; merch and proof each sprawl across 6 pages; Home is 1,016 words over 30 blocks; photography has 12 categories.
+- Proposed merge map takes 57 routes to about 28, with 301 redirects (merge home; one `/services` hub + 4 detail pages; one `/work` hub; `/merch`->`/shop`; merge rewards, contact+partnerships, nest `/legal`; hide lab pages).
+- Locked copy rules (owner): plain words, contractions, no em/en-dashes, no AI tells, one idea per sentence, second person, digits, Home 450 words max.
+- This is a consensus doc: Claude (layout/components), Codex (redirects/sitemap/copy lint), and the owner add opinions in Part 6, then we execute in phases. Board #46. No site change yet.
+
+---
+
 ## Session 60 (2026-10-07) - Integrate Claude branches + fix Codex's urgent gift-card findings (WYZMiND)
 
 - **Merged 3 Claude branches:** `revert-broken-image-optimizer-routing` (SafeImage's `/_next/image?url=` routing returned **400 INVALID_IMAGE_OPTIMIZE_REQUEST for every `/images/**` path** live, so real photos showed the broken-image placeholder; routing disabled, raw `src` restored), `cart-drawer-keyboard-a11y` (Escape/focus-trap/focus-restore on the cart drawer via the shared `useModalA11y`), and `home-about-stale-proof-metrics` (aligned home/about prose to the unified 90+/45+ canon). Also committed Codex Session 59 docs + the screenshot-harness update; discarded 37 stale screenshot PNGs.
