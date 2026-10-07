@@ -14,14 +14,14 @@ import MagneticElement from "@/components/MagneticElement";
 import { useZeal } from "@/components/ZealProvider";
 
 const NAV_LINKS = [
-  { href: "/home", label: "H O M E" },
-  { href: "/photography", label: "P H O T O G R A P H Y" },
-  { href: "/designs", label: "D E S I G N S" },
-  { href: "/events", label: "E V E N T S" },
-  { href: "/services", label: "S E R V I C E S" },
+  { href: "/work", label: "W O R K" },
+  { href: "/photography", label: "P H O T O G R A P H Y" },
+  { href: "/designs", label: "D E S I G N S" },
+  { href: "/services", label: "S E R V I C E S" },
 ];
 
 const MORE_LINKS = [
+  { href: "/events", label: "E V E N T S" },
   { href: "/about", label: "A B O U T" },
   { href: "/plans", label: "P L A N S" },
   { href: "/merch", label: "M E R C H" },
@@ -42,6 +42,7 @@ const MORE_LINKS = [
 const ALL_LINKS = [...NAV_LINKS, ...MORE_LINKS];
 
 const ALL_PAGES = [
+  { title: "Work", href: "/work", desc: "Design and photography, side by side", tags: ["work", "portfolio", "design", "photography"] },
   { title: "Photography", href: "/photography", desc: "Portraits, events, and editorial shoots", tags: ["photo", "camera", "portrait", "event", "headshot"] },
   { title: "Designs", href: "/designs", desc: "Logo design, cover art, flyers, and branding", tags: ["logo", "design", "flyer", "brand", "graphic", "cover art"] },
   { title: "Events", href: "/events", desc: "Event photography and videography", tags: ["event", "party", "concert", "mixer", "live"] },

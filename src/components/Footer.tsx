@@ -19,7 +19,7 @@ const SITEMAP = {
     { href: "/services", label: "All Services" },
   ],
   Company: [
-    { href: "/home", label: "Home" },
+    { href: "/work", label: "Work" },
     { href: "/about", label: "About" },
     { href: "/brands", label: "Our Brands" },
     { href: "/plans", label: "Pricing" },

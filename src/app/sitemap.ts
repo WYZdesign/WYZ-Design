@@ -7,7 +7,7 @@ const BASE = getSiteUrl();
 
 const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: "weekly" | "monthly" | "yearly" | "daily" }> = [
   { path: "", priority: 1, changeFrequency: "weekly" },
-  { path: "/home", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/work", priority: 0.9, changeFrequency: "weekly" },
   { path: "/photography", priority: 0.9, changeFrequency: "weekly" },
   { path: "/photography/portraits", priority: 0.7, changeFrequency: "monthly" },
   { path: "/photography/events", priority: 0.7, changeFrequency: "monthly" },
@@ -42,7 +42,6 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/featured-artist", priority: 0.7, changeFrequency: "weekly" },
   { path: "/gallery", priority: 0.6, changeFrequency: "weekly" },
   { path: "/community", priority: 0.5, changeFrequency: "weekly" },
-  { path: "/3pointprogram", priority: 0.6, changeFrequency: "monthly" },
   { path: "/partnerships", priority: 0.5, changeFrequency: "monthly" },
   { path: "/referral", priority: 0.5, changeFrequency: "monthly" },
   { path: "/loyalty", priority: 0.5, changeFrequency: "monthly" },
@@ -59,11 +58,6 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
  { path: "/booking-calendar/photo-retouching", priority: 0.5, changeFrequency: "monthly" },
  { path: "/booking", priority: 0.8, changeFrequency: "monthly" },
  { path: "/merch/concepts", priority: 0.6, changeFrequency: "monthly" },
- { path: "/match", priority: 0.5, changeFrequency: "monthly" },
-{ path: "/splash-gallery", priority: 0.4, changeFrequency: "monthly" },
- { path: "/splash", priority: 0.4, changeFrequency: "monthly" },
-  { path: "/splash-showcase", priority: 0.4, changeFrequency: "monthly" },
-  { path: "/mobile-splash", priority: 0.6, changeFrequency: "monthly" },
   { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
   { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },
   { path: "/refund-return-policy", priority: 0.2, changeFrequency: "yearly" },

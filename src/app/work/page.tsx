@@ -50,6 +50,7 @@ function Panel({
 export default function WorkGateway() {
   return (
     <main className="relative bg-black -mt-20 lg:-mt-24 pt-20 lg:pt-24">
+      <h1 className="sr-only">Our Work</h1>
       <section className="relative flex flex-col sm:flex-row min-h-screen">
         <Panel
           href="/designs"

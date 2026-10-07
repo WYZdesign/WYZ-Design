@@ -48,7 +48,7 @@ export const PAGES: Record<string, PageSEO> = {
   },
   about: {
     title: "About",
-    description: "Founded by Torreé Marcel, WYZ Design is a creative agency built from Chicago's DIY art and music scene. Over 60 events produced, 30+ clients supported. Now based in Los Angeles.",
+    description: "Founded by Torreé Marcel, WYZ Design is a creative agency built from Chicago's DIY art and music scene. Over 90 events produced, 45+ clients supported. Now based in Los Angeles.",
     path: "/about",
     keywords: ["WYZ Design founder", "Torreé Marcel", "creative agency story", "Los Angeles creative"],
     priority: 0.7,

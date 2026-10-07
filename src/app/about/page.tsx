@@ -156,7 +156,7 @@ export default function AboutPage() {
                   We believe every artist, brand, and creative deserves access to professional-grade design, photography, and creative strategy, no gatekeeping, no pretension, and no paying for work that looks like it came from a template.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
-                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel</span> built this from the ground up: 60+ events, 30+ clients, and a creative standard that doesn't drop based on who's paying.
+                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel</span> built this from the ground up: 90+ events, 45+ clients, 1,500+ photos, and a creative standard that doesn't drop based on who's paying.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed">
                   Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them. We don't outsource or pass you around. We do the work ourselves, start to finish.
