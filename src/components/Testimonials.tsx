@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { FiChevronLeft, FiChevronRight, FiStar, FiTwitter, FiLinkedin } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const TESTIMONIALS = [
@@ -9,38 +9,36 @@ const TESTIMONIALS = [
     quote: "I hired him for my wedding. He did remarkable work. If you ever need a photographer I would definitely recommend this person.",
     name: "Andrew Vickers",
     role: "Google Review",
-    location: "Chicago, IL",
-    link: "https://www.google.com/search?q=Andrew+Vickers+review"
+    location: "Chicago, IL"
   },
   {
     quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to help artists level up and build community.",
     name: "Tim Perez",
     role: "Google Review",
-    location: "Chicago, IL",
-    link: "https://www.google.com/search?q=Tim+Perez+review"
+    location: "Chicago, IL"
   },
   {
     quote: "Consistency in every aspect of service. Made me an established brand and has got me so many opportunities. Don't hesitate to bring your business here.",
     name: "Robert Sykes Jr",
     role: "Google Review",
-    location: "Chicago, IL",
-    link: "https://www.google.com/search?q=Robert+Sykes+Jr+review"
+    location: "Chicago, IL"
   },
   {
     quote: "This is a very solid place, the owner is awesome.",
     name: "900 Montae",
     role: "Google Review",
-    location: "Chicago, IL",
-    link: "https://www.google.com/search?q=900+Montae+review"
+    location: "Chicago, IL"
   },
   {
     quote: "Artistic abilities stand out with unique designs and high-quality photography delivered quickly. Work consistently improves before deadlines, reflecting a fast-paced and efficient environment.",
     name: "Atly",
     role: "Business Review",
-    location: "Chicago, IL",
-    link: "https://www.google.com/search?q=Atly+review"
+    location: "Chicago, IL"
   },
 ];
+
+// Real Google Business Profile (resolved from the owner's share link, 2026-10-07).
+const GBP_REVIEWS = "https://www.google.com/search?kgmid=/g/11rnb39zny";
 
 export default function Testimonials() {
   return (
@@ -104,21 +102,11 @@ function TestimonialsSliderInner() {
               &rdquo;
             </blockquote>
             <p className="text-white font-bold text-sm tracking-[0.08em] uppercase">
-              <a href={t.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#DF3131] transition-colors cursor-pointer">
+              <a href={GBP_REVIEWS} target="_blank" rel="noopener noreferrer" className="hover:text-[#DF3131] transition-colors cursor-pointer">
                 {t.name}
               </a>
             </p>
-            <p className="text-white/70 text-xs mt-1">{t.role} &mdash; {t.location}</p>
-              <div className="mt-3 flex items-center gap-2 text-xs text-[#666] dark:text-white/40">
-                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(t.quote)}&url=${encodeURIComponent(t.link ?? '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
-                  <FiTwitter className="w-3 h-3 mr-1" />
-                  Twitter
-                </a>
-                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(t.link ?? '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#0A66C2] transition-colors">
-                  <FiLinkedin className="w-3 h-3 mr-1" />
-                  LinkedIn
-                </a>
-              </div>
+            <p className="text-white/70 text-xs mt-1">{t.role}, {t.location}</p>
           </div>
 
           <button
@@ -142,6 +130,9 @@ function TestimonialsSliderInner() {
             </button>
           ))}
         </div>
+        <a href={GBP_REVIEWS} target="_blank" rel="noopener noreferrer" className="inline-block mt-6 text-[13px] font-bold tracking-[0.1em] uppercase text-white/70 hover:text-[#DF3131] transition-colors">
+          See all reviews on Google
+        </a>
       </div>
     </section>
   );
