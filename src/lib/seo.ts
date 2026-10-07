@@ -206,26 +206,18 @@ export const PAGES: Record<string, PageSEO> = {
     priority: 0.3,
     changeFrequency: "yearly",
   },
-  "case-studies": {
-    title: "Case Studies",
-    description: "See how WYZ Design has helped brands and artists transform their creative presence. Real results, real projects, real impact.",
-    path: "/case-studies",
-    keywords: ["creative case studies", "design portfolio", "client results"],
-    priority: 0.6,
-    changeFrequency: "monthly",
-  },
-  "case-studies-artfinix": {
+  "designs-artfinix": {
     title: "Case Study: Artfinix",
     description: "How WYZ Design helped Artfinix build a complete brand identity, from logo and web to social presence.",
-    path: "/case-studies/artfinix",
+    path: "/designs/artfinix",
     keywords: ["Artfinix", "brand identity", "case study"],
     priority: 0.5,
     changeFrequency: "yearly",
   },
-  "case-studies-kid-bode": {
+  "designs-kid-bode": {
     title: "Case Study: Kid Bode",
     description: "How WYZ Design partnered with Kid Bode for event production, promotional content, and brand growth.",
-    path: "/case-studies/kid-bode",
+    path: "/designs/kid-bode",
     keywords: ["Kid Bode", "event production", "case study"],
     priority: 0.5,
     changeFrequency: "yearly",
@@ -233,7 +225,7 @@ export const PAGES: Record<string, PageSEO> = {
   "service-photoshoot": {
     title: "Photoshoot Service",
     description: "Professional photoshoot sessions starting at $100/hr. Includes lighting, creative direction, and 20+ edited high-resolution images. Book now.",
-    path: "/service-page/photoshoot",
+    path: "/services/photoshoot",
     keywords: ["photoshoot booking", "professional photoshoot", "portrait session", "Los Angeles photoshoot"],
     priority: 0.6,
     changeFrequency: "monthly",
@@ -241,7 +233,7 @@ export const PAGES: Record<string, PageSEO> = {
   "service-retouching": {
     title: "Photo Retouching Service",
     description: "Professional photo retouching from basic cleanup to advanced editing. Fast turnaround, transparent pricing. Starting at $50.",
-    path: "/service-page/photo-retouching",
+    path: "/services/photo-retouching",
     keywords: ["photo retouching", "image editing", "professional retouching"],
     priority: 0.6,
     changeFrequency: "monthly",
@@ -249,7 +241,7 @@ export const PAGES: Record<string, PageSEO> = {
   "service-event-photo": {
     title: "Event Photography Service",
     description: "Expert event photography for concerts, showcases, private events, and corporate functions. Starting at $200 for 3 hours. Book today.",
-    path: "/service-page/event-photography",
+    path: "/services/event-photography",
     keywords: ["event photography", "concert photography", "event documentation"],
     priority: 0.6,
     changeFrequency: "monthly",
@@ -257,7 +249,7 @@ export const PAGES: Record<string, PageSEO> = {
   "service-consultation": {
     title: "Creative Consultation",
     description: "Free creative consultation to get a clear game plan for your brand. A no-pressure strategy session with practical next steps. Book your free call.",
-    path: "/service-page/creative-consultation",
+    path: "/services/consultation",
     keywords: ["creative consultation", "brand strategy", "free consultation"],
     priority: 0.6,
     changeFrequency: "monthly",

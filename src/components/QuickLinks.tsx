@@ -4,7 +4,7 @@ const LINKS = [
   { href: "/model-archive", label: "Be a model" },
   { href: "/merch", label: "Merch Store" },
   { href: "/account/my-account", label: "Members" },
-  { href: "/service-page/creative-consultation", label: "consultation" },
+  { href: "/services/consultation", label: "consultation" },
   { href: "/designs", label: "Designs" },
   { href: "/photography", label: "photography" },
   { href: "/events", label: "DIY events" },

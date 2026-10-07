@@ -112,10 +112,10 @@ const SERVICES = [
 
 const SERVICE_LIST = [
   { cat: "Photography", name: "Photoshoot", desc: "Capture authentic moments with sleek, professional photography.", dur: "1 hr", price: "$100", href: "/booking-calendar/photoshoot", img: "/images/services/Photography.webp" },
-  { cat: "Photography", name: "Event Photography", desc: "Capturing every moment, from public showcases to private events.", dur: "3 hr", price: "$200", href: "/service-page/event-photography", img: "/images/services/Event Photography.jpg" },
+  { cat: "Photography", name: "Event Photography", desc: "Capturing every moment, from public showcases to private events.", dur: "3 hr", price: "$200", href: "/services/event-photography", img: "/images/services/Event Photography.jpg" },
   { cat: "Branding Design", name: "Logo Design", desc: "Custom logos designed to represent who you are.", dur: "3 hr", price: "$100", href: "/booking", img: "/images/services/Logo Design.jpg" },
   { cat: "Web Design", name: "Website Design", desc: "Professional website design to help your business thrive online.", dur: "3 hr", price: "$500", href: "/booking", img: "/images/services/Website Design.jpg" },
-  { cat: "Photography", name: "Photo Retouching", desc: "Basic to Advanced Professional Photo Retouching.", dur: "2 hr", price: "$50", href: "/service-page/photo-retouching", img: "/images/services/Photo Retouching.jpg" },
+  { cat: "Photography", name: "Photo Retouching", desc: "Basic to Advanced Professional Photo Retouching.", dur: "2 hr", price: "$50", href: "/services/photo-retouching", img: "/images/services/Photo Retouching.jpg" },
   { cat: "Videography", name: "Video Shoot", desc: "Make an unforgettable impression with professional video production.", dur: "3 hr", price: "$200", href: "/booking", img: "/images/services/Video Shoot.jpg" },
 ];
 
@@ -197,7 +197,7 @@ const QUICK_LINKS = [
  { label: "DESIGNS", href: "/designs" }, { label: "PHOTOGRAPHY", href: "/photography" },
  { label: "DIY EVENTS", href: "/events" }, { label: "GET FEATURED", href: "/featured-artist" },
  { label: "BE A MODEL", href: "/model-archive" }, { label: "MERCH STORE", href: "/merch" },
- { label: "MEMBERS", href: "/loyalty" }, { label: "CONSULTATION", href: "/service-page/creative-consultation" },
+ { label: "MEMBERS", href: "/loyalty" }, { label: "CONSULTATION", href: "/services/consultation" },
 ];
 
 const DESIGN_SHOWCASE_RAW = [
