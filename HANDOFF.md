@@ -499,3 +499,46 @@ Your noise-overlay removal, video `preload="metadata"`, marquee gaps, and SafeIm
 - Visual/320-375: VERIFIED live on production for the bug (screenshots + `_next/image` network requests against www.wyzdesign.com/merch and /designs); the fix itself not yet re-verified live, pending WYZMiND integration/deploy
 - axe/E2E: UNVERIFIED this session
 - Live deploy check: N/A -- not deployed, awaiting WYZMiND integration (please prioritize -- this is currently live-broken on /designs and /merch for every visitor)
+
+---
+
+## 2026-10-07: Claude's consensus input on the site consolidation audit (board #46)
+
+Torree asked for a consolidation pass (layout, formatting, organization, sorting, cleanliness, ease of use) with all three agents giving an opinion before anything executes. Before reading anyone else's work, I ran my own independent pass: full route inventory (~70 `page.tsx` files), cross-referenced against `Navbar.tsx`'s nav/search arrays and a repo-wide grep for internal links, a line-count density proxy per page, and targeted greps for em dashes and AI-tell phrasing in visible copy.
+
+On opening the repo to write this up, found WYZMiND had already started the same effort and shipped `WYZDESIGN_CONSOLIDATION_AUDIT.md` (commit `3e0079c`), structured exactly as a shared consensus doc with an open slot for each agent's opinion. Rather than duplicate it with a second standalone file, added my findings directly into that doc's consensus log, in the `- Claude (2026-10-07):` slot it was already waiting on.
+
+**Worth flagging to Torree directly:** my independent pass and WYZMiND's landed on the same core findings without either of us reading the other's work first -- same 4 fully orphaned pages (case-studies, partnerships, match, fd -- zero internal links anywhere in the codebase), the same splash-screen page cleanup, and the same em-dash violations in merch, community, loyalty, mobile-splash, and nomadic-breed. Two independent methods agreeing is a good confidence signal that the diagnosis is right, not just one agent's opinion.
+
+My specific contribution (the doc asks me to own layout/component consolidation): recommended building three shared components (one Hero, one Card, one Section wrapper) before any route merges, since the site's "busy" feeling is as much about every page inventing its own visual rhythm as it is about word count. Also flagged `/community`'s own copy telling visitors outright "this page is a demo with local state only" as a trust problem worth fixing ahead of the rest of the consolidation timeline, since a visitor reading that line undermines trust in everything else on the page.
+
+Did not change any route, component, or copy this round -- this is opinion/consensus input only, same ground rule WYZMiND and Codex are both working under. No execution until Torree, WYZMiND, and Codex all weigh in and a final plan is picked.
+
+**Note for whoever integrates next:** at the time of this commit the working tree had uncommitted changes in `HANDOVER.md` (an in-progress Codex entry) and an untracked `WYZDESIGN_ROUTE_DECISION_LEDGER.md` (also Codex, in progress). Neither was touched, staged, or committed by this branch -- confirmed via `git diff -b --stat` before starting (and via `git status --short` + a line-ending-only diff check on unrelated files, which is just the repo's known CRLF/LF noise, not real changes).
+
+## Verification record
+- Build: N/A -- markdown-only change, no code touched
+- Lint/TypeScript: N/A -- no source files touched
+- Visual/320-375: N/A -- no UI touched
+- axe/E2E: N/A -- no UI touched
+- Live deploy check: N/A -- documentation input only, nothing to deploy
+
+---
+
+## 2026-10-07 (later same day): shipped the /work duality gateway (board #47) + recorded consensus vote in _CONFER
+
+Picked up board #47, assigned to Claude with a concrete brief in `_HANDOVER_CLAUDE.md`: build a split-screen gateway for Design and Photography (owner's locked direction: keep both portfolios separate, give them a shared "duality" entry point). Built `/work`: a left/right split, each half expands on hover using the same flex-[1] -> hover:flex-[3.5]-style pattern already proven in `merch/page.tsx`'s `ParallaxHero`, with a center seam reading "Two sides. One studio." Each half links straight into the real, untouched `/designs` or `/photography` page. Added a small `WorkCrossSwitch` component, mounted on both portfolio pages, so each one has a quiet, persistent link to the other and to `/work`. New files: `src/app/work/page.tsx`, `src/app/work/layout.tsx`, `src/components/WorkCrossSwitch.tsx`. Edited `src/app/designs/page.tsx` and `src/app/photography/page.tsx` (2 lines each -- one import, one render call -- no existing content touched).
+
+By the time this was ready to write up, the consolidation audit had moved fast past the version I'd drafted a note into earlier today (that `WYZDESIGN_CONSOLIDATION_AUDIT.md` v1 edit is effectively superseded/gone -- WYZMiND and Codex iterated it to v2, then a 50-page-by-10-criteria v3, then a v4 "10 topics x 50 categories x 100 subcategories" version, plus a new `_CONFER/` consensus hub with a dedicated brief file per agent). Rather than chase the old file, recorded the actual verdict in the place the process now points to: filled in `_CONFER/CLAUDE.md`'s Keep/Change/Disagree/Vote section and copied my votes into the `_CONFER/README.md` decision matrix. Summary of that verdict: agree with the overall merge map; independently found the same orphaned pages and em-dash violations as WYZMiND/Codex before reading their drafts, which is a good cross-check; flagged one real disagreement -- the proposed "keep 6 photography filters" list uses names that don't match the 8 categories actually live in `photography/page.tsx` (Boudoir and Bodypaint are real differentiators, not filler), so that one needs the owner's call rather than a guess.
+
+**Honest gap:** full `tsc --noEmit`, `eslint`, and `npm run build` all timed out in this environment this session (170+ seconds, no output, on more than one retry) -- a repeat of the device instability noted earlier in this file, not a result either way. Verified instead with TypeScript's own parser in isolation on all 5 touched/new files (0 syntax diagnostics each), checked brace/paren balance, and manually cross-checked the `SafeImage` `fill` usage and `Link`/metadata patterns against already-shipped, already-working call sites (`merch/page.tsx`, `about/layout.tsx`) rather than inventing a new pattern. No live screenshot taken -- marking this UNVERIFIED for type-check, build, and visual, same as the honesty standard the rest of this file already holds to. Needs a real `tsc`/`npm run build`/screenshot pass wherever the environment can actually finish one, ideally before or right after WYZMiND integrates.
+
+**Git state:** branch `claude/work-duality-gateway` off `master` at `95adce2`. Checked back out to `master` immediately after committing.
+
+## Verification record
+- Build: UNVERIFIED -- `npm run build` timed out (170s+, no output) in this session's environment
+- Lint: UNVERIFIED -- `eslint` timed out (170s+, no output) in this session's environment
+- TypeScript: PARTIAL -- `tsc --noEmit` (full project) timed out; isolated syntax parse via `ts.transpileModule` on all 5 touched files returned 0 diagnostics. Not a substitute for real type-checking (no cross-file type errors would surface this way), flagged honestly as such.
+- Visual/320-375: UNVERIFIED -- no dev server or live preview reachable this session to screenshot
+- axe/E2E: UNVERIFIED this session
+- Live deploy check: N/A -- not deployed, awaiting WYZMiND integration

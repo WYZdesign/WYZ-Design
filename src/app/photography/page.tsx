@@ -17,6 +17,7 @@ import { shuffleArray } from "@/lib/utils";
 import { NSFW_CATEGORIES } from "@/lib/nsfw-constants";
 import { useNsfwSession } from "@/hooks/useNsfwSession";
 import AgeGateModal from "@/components/AgeGateModal";
+import WorkCrossSwitch from "@/components/WorkCrossSwitch";
 
 const ALBUMS = ["Events", "Outdoors", "Studio", "Boudoir", "Bodypaint", "Urbex", "Products", "Conceptual"];
 const ALBUM_DESC: Record<string, string> = {
@@ -533,6 +534,8 @@ return (
     </div>
      </div>
     </section>
+
+  <WorkCrossSwitch current="photography" />
 
 {/* ═══ BRAND MARQUEE ═══ */}
   <section className="py-3 sm:py-6">

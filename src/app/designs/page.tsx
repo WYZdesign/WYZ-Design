@@ -7,6 +7,7 @@ import { FiArrowRight, FiArrowLeft, FiSearch, FiCpu } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import SafeImage from "@/components/SafeImage";
+import WorkCrossSwitch from "@/components/WorkCrossSwitch";
 import { LOGOS_IMAGES, COVER_ART_WYZ, FLYERS_IMAGES } from "@/data/designs-data";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
@@ -262,6 +263,8 @@ const faotmImages = [
   </div>
   </section>
   </ScrollReveal>
+
+  <WorkCrossSwitch current="design" />
 
  {/* ═══ DESIGNS MARQUEE ═══ */}
    <section className="py-3 sm:py-6">
