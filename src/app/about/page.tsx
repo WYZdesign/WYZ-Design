@@ -184,7 +184,7 @@ export default function AboutPage() {
                  </h2>
                 <div className="space-y-4 text-[#666] dark:text-white/70 text-[15px] leading-relaxed max-w-2xl mx-auto">
                   <p>
-                    Torreé Marcel (pronounced tor-eee-aye) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. It started as flyers for local artists and grew into a brand serving 30+ clients with 60+ events produced.
+                    Torreé Marcel (pronounced tor-eee-aye) is a Chicago-born creative director, photographer, designer, and entrepreneur who built WYZ Design from a side hustle into a full-service creative studio. It started as flyers for local artists and grew into a brand serving 45+ clients with 90+ events produced.
                   </p>
                   <p>
                     With a background in graphic design, event production, and brand strategy, Torreé saw artists and small brands getting underserved by agencies that didn't get their vision or overcharged for work that didn't reflect who they were. WYZ Design was the answer.
