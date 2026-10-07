@@ -1,8 +1,8 @@
-import { chromium } from 'playwright';
 import { mkdir } from 'fs/promises';
 import { join } from 'path';
+import { chromium } from 'playwright';
 
-const pages = [
+const defaultPages = [
   { url: 'https://www.wyzdesign.com/home', name: 'home' },
   { url: 'https://www.wyzdesign.com/about', name: 'about' },
   { url: 'https://www.wyzdesign.com/services', name: 'services' },
@@ -13,6 +13,14 @@ const pages = [
   { url: 'https://www.wyzdesign.com/printing', name: 'printing' },
   { url: 'https://www.wyzdesign.com/featured-artist', name: 'featured-artist' },
 ];
+
+const requestedRoutes = process.argv.slice(2);
+const pages = requestedRoutes.length > 0
+  ? requestedRoutes.map((route) => ({
+      url: `https://www.wyzdesign.com${route.startsWith("/") ? route : `/${route}`}`,
+      name: (route.replace(/^\/+/, "") || "home").replace(/\//g, "-")
+    }))
+  : defaultPages;
 
 const screenshotDir = join(process.cwd(), 'screenshots');
 await mkdir(screenshotDir, { recursive: true });
@@ -40,6 +48,19 @@ async function dismissModals(page) {
   } catch (e) {}
 }
 
+async function prepareForVisualReview(page) {
+  await page.evaluate(async () => {
+    const height = document.documentElement.scrollHeight;
+    for (let y = 0; y < height; y += 600) {
+      window.scrollTo(0, y);
+      await new Promise((resolve) => setTimeout(resolve, 90));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.addStyleTag({ content: "*{content-visibility:visible!important}" });
+  await page.waitForTimeout(2200);
+}
+
 async function capturePage(pageInfo) {
   const { url, name } = pageInfo;
   console.log(`[START] ${name}`);
@@ -50,7 +71,7 @@ async function capturePage(pageInfo) {
     await dLight.goto(url, { waitUntil: 'load', timeout: 30000 });
     await dLight.waitForTimeout(600);
     await dismissModals(dLight);
-    await dLight.waitForTimeout(400);
+    await prepareForVisualReview(dLight);
     await dLight.screenshot({ path: join(screenshotDir, `${name}-desktop-light.png`), fullPage: true });
     await dLight.close();
 
@@ -59,7 +80,7 @@ async function capturePage(pageInfo) {
     await dDark.goto(url, { waitUntil: 'load', timeout: 30000 });
     await dDark.waitForTimeout(600);
     await dismissModals(dDark);
-    await dDark.waitForTimeout(400);
+    await prepareForVisualReview(dDark);
     await dDark.screenshot({ path: join(screenshotDir, `${name}-desktop-dark.png`), fullPage: true });
     await dDark.close();
 
@@ -68,7 +89,7 @@ async function capturePage(pageInfo) {
     await mLight.goto(url, { waitUntil: 'load', timeout: 30000 });
     await mLight.waitForTimeout(600);
     await dismissModals(mLight);
-    await mLight.waitForTimeout(400);
+    await prepareForVisualReview(mLight);
     await mLight.screenshot({ path: join(screenshotDir, `${name}-mobile-light.png`), fullPage: true });
     await mLight.close();
 
@@ -77,7 +98,7 @@ async function capturePage(pageInfo) {
     await mDark.goto(url, { waitUntil: 'load', timeout: 30000 });
     await mDark.waitForTimeout(600);
     await dismissModals(mDark);
-    await mDark.waitForTimeout(400);
+    await prepareForVisualReview(mDark);
     await mDark.screenshot({ path: join(screenshotDir, `${name}-mobile-dark.png`), fullPage: true });
     await mDark.close();
 

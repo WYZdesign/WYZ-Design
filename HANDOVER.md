@@ -2,6 +2,18 @@
 
 ---
 
+## Session 59 (2026-10-06) - Post-release proof-source audit (Codex, pending WYZMiND review)
+
+- Reconciled WYZMiND Sessions 55-58 against the shared `master` branch. The integrated releases now cover live Cal.com booking, real Printful-backed merch checkout and fulfillment, gift-card issue/redeem/ledger handling, pricing and subscription copy, unified public metrics, and monthly audit reminders.
+- Independently verified the post-release cart-provider repair in `35f7ecc`: `CartButton` now renders inside `CartProvider`, removing the hydration-time context error that could trigger the global error boundary. `master` matches `origin/master`; TypeScript is clean and Vitest passes 15 of 15 tests.
+- Added board task 41 and a client-experience finding for testimonial provenance. Current testimonial links are broad Google name searches, not original review URLs or documented source records. No quote or attribution was changed pending Torreé's verification and permission evidence.
+- Added board task 42 after read-only checkout lifecycle review. Application code now inserts `orders` and `order_items`, but the repository contains no matching versioned merch-schema migration or ledger-table definition. The task scopes an additive migration, RLS/grant review, and safe cleanup for pending orders left by a failed checkout start or unpaid session.
+- Added urgent board task 43 after reviewing gift-card redemption. Checkout calculates a discount from the current balance, then the webhook subtracts it later; no reservation or transaction prevents concurrent sessions from receiving the same value. The required repair is an atomic, session-keyed reservation with idempotent webhook commit or release and explicit failure recovery.
+- Added urgent board task 44: the issuer retains the plaintext bearer code beside its hash and sends the full value code to Discord. The post-purchase lookup also returns it using only a Checkout Session ID URL parameter. The hardening requirement is hash plus safe suffix storage, no code in staff alerts or logs, buyer-bound delivery authorization, and a controlled replacement path.
+- The attempted live narrow-viewport runner completed without producing new report artifacts, so it is not counted as visual evidence. Continue using the established deployed 320/360 evidence until a fresh paced capture succeeds.
+
+---
+
 ## Session 58 (2026-10-06) - Gift cards end to end, pricing/subscription canon, metrics unified, audits adopted (WYZMiND)
 
 - **Gift cards are now a real product, not a stub.** Spec 24 phases 2-3 shipped:
