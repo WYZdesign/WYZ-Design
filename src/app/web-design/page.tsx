@@ -342,35 +342,6 @@ return (
           </section>
         </ScrollReveal>
 
-        {/* ═══ TESTIMONIALS ═══ */}
-        <ScrollReveal animation="fadeUp" delay={0.05}>
-          <section className="py-20 bg-white dark:bg-[#111]">
-            <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
-              <div className="text-center mb-12">
-                <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT CLIENTS SAY</span>
-                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">TESTIMONIALS</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {[
-                  { quote: "Hired him for my wedding. He did remarkable work. If you ever need a photographer I would definitely recommend this person.", name: "Andrew Vickers", role: "Google Review" },
-                  { quote: "Whether it's aiding your multimedia needs for your project or hosting awesome events, WYZ Design does a lot of dope work to help artists level up.", name: "Tim Perez", role: "Google Review" },
-                  { quote: "Consistency in every aspect of service. Made me an established brand and has got me so many opportunities. Don't hesitate to bring your business here.", name: "Robert Sykes Jr", role: "Google Review" },
-                ].map((t) => (
-                  <div key={t.name} className="bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 hover:shadow-xl hover:shadow-[#DF3131]/5 transition-all">
-                    <div className="flex gap-1 mb-4 text-[#8F5E1E]">
-                      {[...Array(5)].map((_, i) => <FiStar key={i} className="w-4 h-4 fill-current" />)}
-                    </div>
-                    <p className="text-[#333] dark:text-[#e0e0e0] text-[15px] leading-relaxed mb-6 italic">&quot;{t.quote}&quot;</p>
-                    <div>
-                      <p className="font-heading font-bold text-[14px] text-[#333] dark:text-[#e0e0e0]">{t.name}</p>
-                      <p className="text-[12px] text-[#666] dark:text-[#aaa]">{t.role}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </ScrollReveal>
 
         {/* ═══ PRICING ═══ */}
         <ScrollReveal animation="fadeUp">
@@ -378,7 +349,7 @@ return (
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-14">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">PRICING</span>
-                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">MAKE IT AN ADD-ON</h2>
+                <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">WEBSITE PRICES</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto" style={{ perspective: "1200px" }}>
                 {[
@@ -398,7 +369,7 @@ return (
           <section className="py-16 bg-white dark:bg-[#111] text-center">
             <div className="max-w-3xl mx-auto px-6">
 <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-white mb-4">READY TO BUILD?</h2>
- <p className="text-[#666] dark:text-white/50 text-[15px] mb-8 max-w-lg mx-auto">Let&apos;s create a website that works as hard as you do. Book a free consultation to get started.</p>
+ <p className="text-[#666] dark:text-white/50 text-[15px] mb-8 max-w-lg mx-auto">Book a free 30-minute call. We will tell you what your site needs and what it costs.</p>
               <Link href="/booking" className="inline-block px-12 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[15px] hover:bg-[#B82020] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30">
                 BOOK CONSULTATION
               </Link>

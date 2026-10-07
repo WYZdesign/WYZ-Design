@@ -818,13 +818,6 @@ export default function EventsPage() {
  <VideoCarousel items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
  </ScrollReveal>
 
-   {/* ═══ 4. Autoplay Video Playlist (between recaps & clients) ═══ */}
-   <ScrollReveal animation="fadeUp" delay={0.1}>
-   <div className="mb-12 mt-10 sm:mt-14 max-w-[130rem] mx-auto px-6 lg:px-12">
-   <ColorAuraVideo items={shuffledDiYShows} onPlay={(v) => setModalVideo(v)} />
-   </div>
-   </ScrollReveal>
-
   {/* ═══ 5. Client Events Carousel ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
   <div className="mb-12 max-w-[130rem] mx-auto px-6 lg:px-12">
