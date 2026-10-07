@@ -12,10 +12,10 @@ import SuccessBurst from "@/components/SuccessBurst";
 import { useZeal } from "@/components/ZealProvider";
 
 const PAPER_TYPES = [
- { name: "Premium Gloss", desc: "Premium high gloss paper is the thinnest, glossiest paper you can get. High gloss paper provides vibrant, rich color reproduction, as well as the crispest images possible. Applications include brochures, advertising, flyers, one-sheets, photography, printing and other presentation documents.", details: ["Thinnest gloss available", "Vibrant color reproduction", "Crispest image detail", "Best for brochures & flyers"] },
- { name: "Matte Photo Paper", desc: "Matte paper is regular-based paper that's covered with a thin layer of alkyl ketene sizing. This coating means that every drop of ink that comes from the printer is received properly which makes for an exceptional, professional finish if you are planning on displaying your photo prints behind glass.", details: ["Anti-reflective finish", "Professional look behind glass", "Exceptional ink absorption", "Reduced glare"] },
- { name: "Luster/Pearl", desc: "This instant-drying paper produces vivid, lifelike images that rival those of traditional silver halide prints. Premium Luster Photo Paper delivers highly saturated prints by offering maximum ink coverage and a high L-Max for true photographic reproductions.", details: ["Instant-drying surface", "Lifelike image quality", "Highly saturated colors", "Pearl-white matte surface"] },
- { name: "Satin/Semi-Gloss", desc: "Premium Photo Paper Satinogloss is a remarkable media that has the look and feel of true photographic paper, ideal for printing displays or scenic color photographs where high quality, high impact images are essential.", details: ["True photographic feel", "Finger smudge resistant", "Water droplet resistant", "Great for enlargements"] },
+ { name: "Premium Gloss", desc: "Thinnest, glossiest paper. Vibrant color and crisp images. Great for brochures and flyers.", details: ["Thinnest gloss available", "Vibrant color reproduction", "Crispest image detail", "Best for brochures & flyers"] },
+ { name: "Matte Photo Paper", desc: "A soft, non-reflective finish with rich ink absorption. Looks sharp behind glass.", details: ["Anti-reflective finish", "Professional look behind glass", "Exceptional ink absorption", "Reduced glare"] },
+ { name: "Luster/Pearl", desc: "Instant-drying with vivid, lifelike color and a pearl-white surface.", details: ["Instant-drying surface", "Lifelike image quality", "Highly saturated colors", "Pearl-white matte surface"] },
+ { name: "Satin/Semi-Gloss", desc: "True photo-paper feel. Smudge and water resistant. Great for large prints.", details: ["True photographic feel", "Finger smudge resistant", "Water droplet resistant", "Great for enlargements"] },
 ];
 
 const STICKER_TYPES = [
@@ -201,7 +201,7 @@ export default function PrintingPage() {
     <div className="absolute inset-0 bg-black/30 z-[1]" />
     <div className="relative z-10 flex flex-col items-center justify-center h-full">
     <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
-    <p className="text-white/70 text-[16px] sm:text-lg mb-6 max-w-sm text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and every price you see reflects industry pricing at a 10% discount.</p>
+    <p className="text-white/70 text-[16px] sm:text-lg mb-6 max-w-sm text-center">Print your photos, flyers, posters, and stickers in LA. Prices run about 10% under standard industry rates.</p>
     <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GET A QUOTE
     </Link>
@@ -216,7 +216,7 @@ export default function PrintingPage() {
    </div>
     <div className="relative z-10 max-w-lg mx-auto px-6 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
     <div className="text-[2rem] sm:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-4 sm:mb-6">DIGITAL PRINTING</div>
-    <p className="text-white/70 text-[16px] sm:text-lg mb-6 max-w-sm text-center">Get your art and photos custom printed to either sell at a concert, handout for promotion, or decorate your room. We keep the customer in mind, and every price you see reflects industry pricing at a 10% discount.</p>
+    <p className="text-white/70 text-[16px] sm:text-lg mb-6 max-w-sm text-center">Print your photos, flyers, posters, and stickers in LA. Prices run about 10% under standard industry rates.</p>
     <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GET A QUOTE
     </Link>
@@ -246,7 +246,7 @@ export default function PrintingPage() {
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div className="py-12">
   <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center text-[#333] dark:text-[#e0e0e0] mb-4">PHOTO PAPER TYPES</h2>
-  <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] tracking-[0.1em] uppercase mb-8 max-w-3xl mx-auto">Photo Print Options Include: Premium Gloss, Matte Paper, Luster/Pearl, Semi-Gloss, Satin/Semi-Gloss, Select Sizes, Paper Types, And Quantities Available Upon Request.</p>
+  <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] tracking-[0.1em] uppercase mb-8 max-w-3xl mx-auto">Four paper types. Any size, any quantity.</p>
  <div className="space-y-2 max-w-4xl mx-auto">
  {PAPER_TYPES.map((paper, i) => (
  <PaperAccordion key={paper.name} paper={paper} index={i} />

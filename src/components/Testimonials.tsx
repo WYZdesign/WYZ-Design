@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
-import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiStar, FiTwitter, FiLinkedin } from "react-icons/fi";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 const TESTIMONIALS = [
@@ -107,6 +107,14 @@ function TestimonialsSliderInner() {
               </a>
             </p>
             <p className="text-white/70 text-xs mt-1">{t.role}, {t.location}</p>
+              <div className="mt-3 flex items-center justify-center gap-4 text-xs text-white/50">
+                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(t.quote + " - " + t.name)}&url=${encodeURIComponent(GBP_REVIEWS)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-white transition-colors">
+                  <FiTwitter className="w-3.5 h-3.5" /> Twitter
+                </a>
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(GBP_REVIEWS)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#0A66C2] transition-colors">
+                  <FiLinkedin className="w-3.5 h-3.5" /> LinkedIn
+                </a>
+              </div>
           </div>
 
           <button
