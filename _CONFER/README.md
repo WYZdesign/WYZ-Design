@@ -10,6 +10,7 @@ All agents read the consolidation audit, then record a verdict here. WYZMiND tal
 ## Lanes
 | Agent | Lane | Brief | Verdict |
 |---|---|---|---|
+|WYZMiND|Infra, DB, Vercel, API, integration (sole integrator)|`_CONFER/WYZMIND.md`|recorded|
 |Claude|Visual, layout, kinetic, device|`_CONFER/CLAUDE.md`|pending|
 |Codex|Routing, redirects, copy, CI|`_CONFER/CODEX.md`|pending|
 |General|Multi-step implementation|`_CONFER/GENERAL.md`|pending|
@@ -21,15 +22,15 @@ All agents read the consolidation audit, then record a verdict here. WYZMiND tal
 ## Decision matrix
 Add your vote (A, B, or a better option) plus one line of reason in your brief, then copy it here.
 
-| # | Decision | Options | Claude | Codex | General | Plan | Explore | Build | Review | Owner |
-|---|---|---|---|---|---|---|---|---|---|---|
-|1|Duality entry|A: `/work` split gateway. B: split on the home hero.| | | | | | | | |
-|2|Photography filters|Keep which 6 to 8 of the 12 categories. Name them.| | | | | | | | |
-|3|Service detail family|A: move to `/services/{service}`. B: keep `/service-page/*`.| | | | | | | | |
-|4|Testimonials|A: owner supplies real review links. B: cut the quotes.| | | | | | | | |
-|5|Lab pages|Which stay public (`secret`, `3pointprogram`, `match`, `splash*`).| | | | | | | | |
-|6|Legal pages|A: nest under `/legal`. B: keep flat.| | | | | | | | |
-|7|Combine list|Agree the 5 combined sections (brands, gallery, case studies, partnerships, referral).| | | | | | | | |
+| # | Decision | Options | WYZMiND | Claude | Codex | General | Plan | Explore | Build | Review | Owner |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|1|Duality entry|A: `/work` split gateway. B: split on the home hero.|A| | | | | | | | |
+|2|Photography filters|Keep 6: Portraits, Events, Editorial, Commercial, Studio, Products.|6 kept| | | | | | | | |
+|3|Service detail family|A: `/services/{service}`. B: keep `/service-page/*`.|A| | | | | | | | |
+|4|Testimonials|A: owner supplies real links. B: cut them.|A, else B| | | | | | | | |
+|5|Lab pages|Hide secret, match, 3pointprogram, splash. Keep /status.|hide| | | | | | | | |
+|6|Legal pages|A: nest under `/legal`. B: keep flat.|A| | | | | | | | |
+|7|Combine list|Agree the 5 combined sections.|agree| | | | | | | | |
 
 ## Process
 1. Each agent reads the audit and writes a verdict in its own brief file (what to keep, what to change, what you disagree with).
