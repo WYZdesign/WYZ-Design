@@ -178,7 +178,7 @@ export default function ModelArchivePage() {
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
  {/* Header */}
  <div className="mb-8 text-center">
- <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>M{"\u00a0"}O{"\u00a0"}D{"\u00a0"}E{"\u00a0"}L{"\u00a0"}.{"\u00a0"}A{"\u00a0"}R{"\u00a0"}C{"\u00a0"}H{"\u00a0"}I{"\u00a0"}V{"\u00a0"}E</h1>
+ <h1 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>M{"\u00a0"}O{"\u00a0"}D{"\u00a0"}E{"\u00a0"}L{"\u00a0"}.{"\u00a0"}A{"\u00a0"}R{"\u00a0"}C{"\u00a0"}H{"\u00a0"}I{"\u00a0"}V{"\u00a0"}E</h1>
  <p className="text-[#666] dark:text-white/50 text-sm mt-2">Every talent who has graced our lens, {MODELS.length} models and counting</p>
  </div>
 
@@ -235,7 +235,7 @@ export default function ModelArchivePage() {
  <button onClick={closeAlbum} className="flex items-center gap-2 text-[#666] dark:text-white/60 hover:text-[#333] dark:hover:text-white text-sm mb-6 transition-colors">
  <FiChevronLeft className="w-4 h-4" /> BACK TO ALL MODELS
  </button>
- <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">{selectedModel}</h2>
+ <h2 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">{selectedModel}</h2>
  <p className="text-[#666] dark:text-white/50 text-sm mb-8">{albumImages.length} photos</p>
  {albumLoading ? (
  <div className="flex items-center justify-center py-20">
@@ -261,7 +261,7 @@ export default function ModelArchivePage() {
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
  {/* Left: Info */}
  <div className="text-[#333] dark:text-white">
- <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] mb-4">
+ <h2 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] mb-4">
  JOIN OUR <span className="text-[#DF3131]">ROSTER</span>
  </h2>
  <p className="text-[#666] dark:text-white/70 text-[16px] leading-relaxed mb-8">

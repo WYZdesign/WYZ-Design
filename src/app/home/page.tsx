@@ -971,8 +971,8 @@ export default function HomePage() {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
-          <span className={`inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[i % 4]}`}>{word}</span>
-          <span className="inline-flex items-center text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
+          <span className={`inline-flex items-center text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 ${M[i % 4]}`}>{word}</span>
+          <span className="inline-flex items-center text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase px-4 sm:px-6 opacity-50 text-[#111] dark:text-white">&bull;</span>
         </span>
       );
     })}

@@ -38,7 +38,7 @@ export default function EnhancedMarquee({
         </>
       )}
       <div
-        className={`wyz-marquee-track flex whitespace-nowrap ${pauseOnHover ? "hover:[animation-play-state:paused]" : ""}`}
+        className={`wyz-marquee-track flex items-center whitespace-nowrap ${pauseOnHover ? "hover:[animation-play-state:paused]" : ""}`}
         style={{
           animation: `${animName} ${speeds[speed]} linear infinite`,
           width: "max-content",

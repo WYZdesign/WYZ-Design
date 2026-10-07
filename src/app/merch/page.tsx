@@ -129,7 +129,7 @@ function DynamicContentUnderHero() {
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8 sm:mb-12">
           <span className="text-[11px] sm:text-[13px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">WHY DBC MERCH</span>
-          <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Built By The Crew, For The Crew</h2>
+          <h2 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Built By The Crew, For The Crew</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {features.map((f) => (
@@ -235,7 +235,7 @@ function DynamicContentUnderShop() {
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8 sm:mb-12">
           <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">EVERY PIECE HAS A STORY</span>
-          <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Built From The Crew, For The Crew</h2>
+          <h2 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em]">Built From The Crew, For The Crew</h2>
           <p className="text-[#666] dark:text-[#666] text-[15px] max-w-2xl mx-auto mt-3">Every design comes from a real artist with a real story. No generic graphics. No mass-produced templates. Just art that means something.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">

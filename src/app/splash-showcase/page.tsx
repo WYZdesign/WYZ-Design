@@ -91,7 +91,7 @@ export default function SplashShowcasePage() {
  <main className="pb-16 bg-white dark:bg-[#111]">
  <div className="max-w-[115rem] mx-auto px-4 lg:px-12">
  <div className="text-center mb-8 md:mb-12">
- <h1 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] whitespace-nowrap mb-6 sm:mb-8">
+ <h1 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black tracking-[0.08em] whitespace-nowrap mb-6 sm:mb-8">
  <span className="text-[#333] dark:text-white">SPLASH</span> <span className="text-[#DF3131]">SHOWCASE</span>
  </h1>
  <p className="text-[#666] dark:text-white/40 text-sm">{isTouch && hasGyro ? "Tilt your phone to explore" : "Static splash screen showcase"}</p>

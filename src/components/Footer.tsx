@@ -134,7 +134,7 @@ export default function Footer() {
                 <span className={`${textPrimary} font-heading font-bold text-xl`}>WYZ <span className="text-white">Design</span></span>
               </Link>
               <p className={`${textMuted} text-[14px] leading-relaxed mb-5 max-w-sm`}>Creative growth studio for artists, brands, and culture. Built in Chicago. Scaling in Los Angeles. Wild vision. Zealous execution.</p>
-              <div className="flex max-w-[160px] flex-wrap items-center gap-2 sm:max-w-none sm:flex-nowrap sm:gap-3">
+              <div className="flex max-w-[160px] flex-wrap items-center justify-center gap-2 mx-auto sm:max-w-none sm:flex-nowrap sm:gap-3">
                 {SOCIALS.map((s, i) => (
                   <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
                   className={`h-11 w-11 flex items-center justify-center border ${socialBorder} ${socialText} hover:border-white hover:text-white hover:bg-white/10 transition-all rounded-full sm:h-9 sm:w-9`}>

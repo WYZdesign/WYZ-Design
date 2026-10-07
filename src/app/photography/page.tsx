@@ -814,7 +814,7 @@ return (
   <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-12 lg:py-20 bg-white dark:bg-[#111]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
- <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] tracking-[0.1em] text-center mb-8">BOOK TODAY</h2>
+ <h2 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] tracking-[0.1em] text-center mb-8">BOOK TODAY</h2>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
  {[
  { name: "PHOTOSHOOT", price: "$100", dur: "1 HR", cat: "Photography", desc: "Capture authentic moments with sleek, professional photography.", bookLink: "/booking-calendar/photoshoot", img: "/images/photography/photoshoot_camera.jpg" },

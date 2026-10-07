@@ -622,7 +622,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  <svg className="w-10 h-10 sm:w-12 sm:h-12 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d={ytPath}/></svg>
  </div>
  </div>
- <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3.5rem] font-heading font-black text-white tracking-[0.08em] leading-tight mb-4">
+ <h2 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3.5rem] font-heading font-black text-white tracking-[0.08em] leading-tight mb-4">
  SUBSCRIBE TO OUR<br />
  <span className="text-[#FF0000]">YOUTUBE</span>
  </h2>

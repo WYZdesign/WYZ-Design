@@ -166,20 +166,20 @@ export default function Navbar() {
         <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
           <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="none" />
         </div>
-        <div className="relative z-10 max-w-[115rem] mx-auto pr-8 lg:pr-16">
-          <div className="flex items-center h-16 lg:h-20">
+        <div className="relative z-10 mx-auto w-full px-4">
+          <div className="flex items-center justify-center gap-4 lg:gap-10 h-16 lg:h-20">
             {/* Logo */}
             <MagneticElement tag="div" strength={0.2}>
-            <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative pl-6 sm:pl-8 lg:pl-10">
+            <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative">
               <span className="relative inline-flex">
                 <span className="absolute inset-[-10px] rounded-full bg-[#DF3131]/35 blur-lg logo-glow-pulse pointer-events-none" />
-                <Image src="/wyz-crown-square.png" alt="WYZ Design logo" width={48} height={48} className="relative hover:scale-110 transition-transform w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain" priority />
+                <Image src="/wyz-crown-square.png" alt="WYZ Design logo" width={48} height={48} className="relative hover:scale-110 transition-transform w-[41px] h-[41px] sm:w-[46px] sm:h-[46px] lg:w-[55px] lg:h-[55px] object-contain" priority />
               </span>
             </Link>
             </MagneticElement>
 
             {/* Nav links */}
-            <div className="hidden min-[1440px]:flex flex-1 items-center justify-evenly px-10">
+            <div className="hidden min-[1440px]:flex items-center">
               {NAV_LINKS.map((l) => (
                 <Link key={l.href} href={l.href}
                   aria-current={isActive(l.href) ? "page" : undefined}
@@ -224,7 +224,7 @@ export default function Navbar() {
             </div>
 
             {/* Inline Search + Login (desktop) */}
-            <div className="hidden min-[1440px]:flex items-center gap-4 ml-6 shrink-0" ref={searchContainerRef}>
+            <div className="hidden min-[1440px]:flex items-center gap-4 shrink-0" ref={searchContainerRef}>
               <div className="relative">
                 <AnimatePresence initial={false}>
                   {searchOpen ? (
