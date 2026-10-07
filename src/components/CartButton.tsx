@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from "react";
 import { FiShoppingBag, FiX, FiPlus, FiMinus, FiTrash2 } from "react-icons/fi";
 import { useCart } from "@/lib/cart";
 import { formatUSD } from "@/lib/merch";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 /**
  * Floating cart affordance. Appears once the cart has items so it does not
@@ -12,6 +14,14 @@ import { formatUSD } from "@/lib/merch";
  */
 export default function CartButton() {
   const { lines, count, subtotalCents, open, setOpen, updateQuantity, removeLine } = useCart();
+  const panelRef = useRef<HTMLDivElement>(null);
+  // Escape-to-close, focus trap, and focus restore -- same hook already used
+  // by ImagePicker/FDDriveBrowser for this exact role="dialog" pattern. The
+  // cart drawer shipped without it (found during a live accessibility
+  // audit): it had no keyboard way to close other than tabbing to the
+  // backdrop button, and focus wasn't moved into the drawer or restored to
+  // the trigger on close.
+  useModalA11y(() => setOpen(false), { lockScroll: true, active: open, containerRef: panelRef });
 
   if (!count) return null;
 
@@ -33,7 +43,7 @@ export default function CartButton() {
             className="absolute inset-0 bg-black/50"
             onClick={() => setOpen(false)}
           />
-          <div className="relative w-full max-w-md h-full bg-white dark:bg-[#1a1a1c] flex flex-col shadow-2xl">
+          <div ref={panelRef} className="relative w-full max-w-md h-full bg-white dark:bg-[#1a1a1c] flex flex-col shadow-2xl">
             <div className="flex items-center justify-between px-5 py-4 border-b border-[#E2E2E2] dark:border-[#333]">
               <h2 className="font-heading font-bold tracking-[0.08em] uppercase text-[#333] dark:text-white">
                 Cart ({count})
