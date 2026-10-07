@@ -7,6 +7,10 @@
 - Added `WYZDESIGN_CONSOLIDATION_AUDIT.md`, a second 5,000-point audit focused on layout, formatting, organization, sorting, copy reduction, and ease of use. It covers the full public sitemap by route family and applies a strict keep, merge, make-secondary, or retire decision standard.
 - The proposed user journey is intentionally short: see the work, pick what is needed, see a starting point, book a call. It recommends testing a five-item public navigation: Work, Services, About, Shop, and Book a Call. Help, Client, Culture, and Journal become secondary groups.
 - Added board task 46 for the owner and all agents to form a consensus. No route, copy, metadata, or live behavior was changed. Merges, redirects, and removals require owner approval plus search and analytics evidence.
+- Corrected the consolidation draft's navigation inventory after source review: the desktop header has five direct links plus 13 More links, while mobile presents 18 links as one flat list. Corrected its arithmetic baseline to 2,815/5,000. Codex supports the proposed simplification but recommends reducing visible choices and copy first, then merging URL families only with a measured redirect and search plan.
+- Source review also confirmed 23 footer links: 6 Services, 12 Company, and 5 Legal. The consolidation baseline is therefore 2,795/5,000. The footer should be simplified and regrouped alongside the header, not treated as a harmless secondary detail.
+- Added `WYZDESIGN_ROUTE_DECISION_LEDGER.md`, with a proposed status for every static sitemap route and dynamic public route family. It labels routes Keep, Merge, Secondary, Utility, or Review, while explicitly requiring owner approval, search evidence, and tested redirects before any live route changes.
+- Ran a first public-copy lint against the owner’s banned jargon and em-dash rule. Confirmed customer-facing review targets include the blog “highest-leverage” wording, WYZMiND event wording, the Community demo notice, mobile splash credits, merch archive stories, and Nomadic Breed. Product mechanics such as a reward being unlocked are not automatic copy failures.
 
 ---
 
@@ -17,6 +21,7 @@
 - Proposed merge map takes 57 routes to about 28, with 301 redirects (merge home; one `/services` hub + 4 detail pages; one `/work` hub; `/merch`->`/shop`; merge rewards, contact+partnerships, nest `/legal`; hide lab pages).
 - Locked copy rules (owner): plain words, contractions, no em/en-dashes, no AI tells, one idea per sentence, second person, digits, Home 450 words max.
 - This is a consensus doc: Claude (layout/components), Codex (redirects/sitemap/copy lint), and the owner add opinions in Part 6, then we execute in phases. Board #46. No site change yet.
+- **Owner reply (2026-10-07):** keep every real page (no gutting). Just make it more concise, compact, and combined. Keep the word "Merch". Keep Design and Photography as two separate, big portfolios and add a duality so they read as one studio (a `/work` split-screen gateway plus a cross-switch). Drop `/fd`. Wrote full handovers: `_HANDOVER_CLAUDE.md` (visual/layout + duality, tasks in a new FOR CLAUDE section) and a new `_HANDOVER_CODEX.md` (redirects, copy condense, copy-lint CI). Re-scored v2 at **3,150/5,000** (keep-all direction). Board #46 updated, #47 (Claude duality), #48 (Codex redirects), #49 (copy condense + CI) added. Keep both handovers updated as the work moves.
 
 ---
 

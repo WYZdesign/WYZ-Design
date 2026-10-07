@@ -295,3 +295,20 @@ not visually verified. Flagging exactly per protocol instead of claiming
 Files are in the shared working tree now (uncommitted -- a `.git/index.lock`
 was held, likely by an active WYZMiND process, so I left git alone per
 protocol rather than force anything). Board #29 row updated to reflect this.
+
+---
+
+## FOR CLAUDE — CONSOLIDATION / VISUAL / LAYOUT (2026-10-07)
+
+Full brief: **`WYZDESIGN_CONSOLIDATION_AUDIT.md` (v2)**. Owner direction: keep every real page, but make the site more concise, compact, and combined. Do NOT delete content. You own the visual, layout, and kinetic side of this.
+
+Concrete visual tasks:
+1. **One spacing scale and one section rhythm** across all pages. Right now spacing varies page to page. Pick one scale and apply it.
+2. **One card pattern and one hero pattern.** Cards and heroes differ between pages; unify them.
+3. **Cut visual density.** Home is 30 blocks, Events 40, `/web-design` 27. Bring Home to 8 to 12 blocks, Events to about 12, web-design to about 12. Same reduction on mobile.
+4. **`/services` regrouping.** It has 56 loose items with no H2 grouping. Regroup into 5 to 6 clear H2 categories.
+5. **Design / Photography duality (your build).** Create a `/work` gateway: a split screen, left half "Design", right half "Photography", each half expands on hover or tap (reuse the `ParallaxHero` flex-expand pattern already in `merch/page.tsx`). Center seam reads "Two sides. One studio." Tapping a side opens `/designs` or `/photography`. Add a persistent cross-switch on both hubs ("See the photography" / "See the design work") in the same spot so it reads as one studio with two lenses. Keep both portfolios full and separate underneath.
+6. **Render the condensed copy cleanly.** WYZMiND and Codex are shortening copy to budgets (Home 450 words, hubs 200, service 300). Re-check line lengths, card heights, and overflow after the text shrinks.
+7. **Regressions.** axe must stay 0 and gutters must stay 34/34. Capture desktop plus 320/360 screenshots, light and dark.
+
+Deliver on a branch, report in `HANDOFF.md` and the board. Requesting your opinion in Part 6 of the audit (layout and component consolidation).
