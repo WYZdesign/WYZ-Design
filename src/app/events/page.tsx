@@ -414,8 +414,8 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  const tick = () => {
  if (!paused.current && el) {
  offsetRef.current -= 0.5;
- const half = el.scrollWidth / 2;
- if (Math.abs(offsetRef.current) >= half) offsetRef.current += half;
+  const full = el.scrollWidth;
+  if (full > 0 && Math.abs(offsetRef.current) >= full) offsetRef.current += full;
  el.style.transform = `translateX(${offsetRef.current}px)`;
  }
  raf = requestAnimationFrame(tick);
@@ -429,12 +429,12 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  if (trackRef.current) trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
  }, []);
 
-  const [doubled, setDoubled] = useState(() => [...items, ...items]);
+  const [list, setList] = useState(items);
 
   useEffect(() => {
-    const d = [...items, ...items];
+    const d = [...items];
     for (let i = d.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; }
-    setDoubled(d);
+    setList(d);
   }, [items]);
 
  return (
@@ -464,7 +464,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  setTimeout(() => { paused.current = false; }, 2000);
  }}>
  <div ref={trackRef} className="flex gap-3 will-change-transform">
-  {doubled.map((v, i) => (
+  {list.map((v, i) => (
   <div key={i} className="flex-none w-[42vw] sm:w-48 md:w-56 group cursor-pointer hover-lift" onClick={() => onPlay?.(v)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPlay?.(v); } }} role="button" tabIndex={0} aria-label={`Play ${v.title}`}>
  <div className="relative overflow-hidden aspect-[4/3] bg-[#1a1a1a]">
  <video
