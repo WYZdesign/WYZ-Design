@@ -1,5 +1,20 @@
 # WYZ Design — Current State (Session 40)
 
+## Session 65 (2026-10-08) - Media weight audit + optimization (WYZMiND)
+
+- Owner asked whether all media loads quick and stays clean/legible on every page and subpage. Built `_agent/media_audit.mjs` (per-route image/video bytes, over-serving, oversized, broken) and ran it across all 67 sitemap routes.
+- Result: nothing broken (0 broken images; media_sweep 0 failures). But several heavy raw assets, now fixed:
+  - `/wyz-crown.png` (985KB splash logo) -> `wyz-crown.webp` (9KB); splash uses the webp.
+  - `logo-intro-*.mp4` up to 3.6MB each -> compressed (most 0.3-0.9MB).
+  - hero-banners: printing 3.6->2.4MB, designs 1.5->0.9MB, web-design 1.0->0.6MB, photography 0.9->0.5MB.
+  - merch `dbc-archive` JPEGs (~1MB each) resized/compressed, ~70% smaller (`/merch` images 9.0->3.3MB).
+  - Home images 1.44->0.47MB, designs video 8.2->5.9MB.
+- Restored the corrupt `diy-shows/C.O. Reloaded Vol. 3 recap.mp4` from **G: Drive** (`G:\My Drive\Videos\DIY Shows\C.O. Reloaded Vol. 3 recap.mp4`, valid 60s) and re-added its carousel entry.
+- **Remaining known heavy spot:** `/events` autoplays a full recap (`ColorAuraVideo`, `autoPlay` + `preload="auto"`, ~11MB). The DIY/client `VideoCarousel` already uses `preload="none"`. Making the aura player click-to-play or in-view-only would cut `/events` to a couple MB if a lighter page is wanted.
+- Note: the navbar background video `wyz-nav-bg-new.mp4` (591KB) loads on every desktop page; it is already compressed (no further gain at 720p/CRF30).
+
+---
+
 ## Session 64 (2026-10-08) - Splash entry, logo routing, merch image CSP (WYZMiND)
 
 - **ENTER SITE -> home, every time:** `/splash` ENTER now stamps `wyz-splash-seen` and pushes `/` (it pushed `/home`, which redirects to `/` and re-shows the splash). On `/`, ENTER still just reveals the home content.

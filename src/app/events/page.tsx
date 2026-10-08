@@ -27,6 +27,7 @@ const CLIENT_EVENTS_RAW = [
 const DIY_SHOWS_RAW = [
   { title: "Action Sack Vol. 5", video: "/videos/diy-shows/Action Sack Vol. 5.mp4" },
   { title: "Action Sack Vol. 6", video: "/videos/diy-shows/Action Sack Vol. 6.mp4" },
+  { title: "C.O. Reloaded Vol. 3 recap", video: "/videos/diy-shows/C.O. Reloaded Vol. 3 recap.mp4" },
 
   { title: "Creative Cloud Vol. 1", video: "/videos/diy-shows/Creative Cloud Vol. 1.mp4" },
   { title: "Creative Cloud Vol. 2", video: "/videos/diy-shows/Creative Cloud Vol. 2.mp4" },

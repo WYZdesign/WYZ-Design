@@ -51,7 +51,7 @@ const CSS = `
 function CrownLogo({ size = 70, style }: { size?: number; style?: React.CSSProperties }) {
  const [broken, setBroken] = useState(false);
  if (!broken) {
- return <img src="/wyz-crown.png" alt="WYZ Design" width={size} height={Math.round(size * 0.66)} style={{ objectFit: "contain", ...style }} onError={() => setBroken(true)} />;
+  return <img src="/wyz-crown.webp" alt="WYZ Design" width={size} height={Math.round(size * 0.66)} style={{ objectFit: "contain", ...style }} onError={() => setBroken(true)} />;
  }
  return (
  <svg viewBox="0 0 128 84" width={size} height={size * 84 / 128} style={style} aria-hidden="true">
