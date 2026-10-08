@@ -13,7 +13,6 @@ import TextMaskReveal from "@/components/TextMaskReveal";
 import MagneticElement from "@/components/MagneticElement";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
-import ParticleBackground from "@/components/ParticleBackground";
 import TextSplit from "@/components/TextSplit";
 import ImageReveal from "@/components/ImageReveal";
 import { shuffleArray } from "@/lib/utils";
@@ -814,7 +813,7 @@ function VideoPlaylist({ videos }: { videos: string[] }) {
   <div ref={wrapRef} className="h-full w-full bg-black relative overflow-hidden flex items-center justify-center">
   <video
   ref={videoRef}
-  className="absolute w-full h-full object-cover"
+  className="absolute inset-0 w-full h-full object-cover"
   style={{ transform: "scale(1.10)" }}
   muted
   playsInline
@@ -911,7 +910,6 @@ export default function HomePage() {
     </div>
      {/* 80% + 30% black overlay (or overall opacity increase) between video and text */}
        <div className="absolute inset-0 bg-black/65 z-[1]" />
-     <ParticleBackground count={25} color="#DF3131" maxSize={2} speed={0.2} className="z-[2]" />
      {/* Text content on top */}
     <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center justify-center text-center px-6 sm:px-10 lg:px-16 py-8 sm:py-12 overflow-hidden"
     style={{ opacity: heroVis ? 1 : 0, transform: heroVis ? "none" : "translateY(24px)", transition: "all 0.8s ease-out" }}>

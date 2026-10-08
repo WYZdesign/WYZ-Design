@@ -148,10 +148,13 @@ export default function CustomCursor() {
         className="fixed top-0 left-0 pointer-events-none z-[99999] hidden lg:block rounded-full"
         style={{
           width: 20, height: 20, borderWidth: 2, borderStyle: "solid",
-          borderColor: "#FFD700", backgroundColor: "transparent",
-          willChange: "transform", mixBlendMode: "difference",
+          borderColor: "#FFD700", backgroundColor: "rgba(223,49,49,0.06)",
+          boxShadow: "0 0 0 1.5px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.35)",
+          willChange: "transform",
         }}
-      />
+      >
+        <span style={{ position: "absolute", left: "50%", top: "50%", width: 4, height: 4, marginLeft: -2, marginTop: -2, borderRadius: "50%", background: "#FFD700", boxShadow: "0 0 0 1px rgba(0,0,0,0.55)" }} />
+      </div>
       <div
         ref={trailRef}
         className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-[99998] hidden lg:block"

@@ -79,8 +79,9 @@ export default function Footer() {
   const videoBg = (
     <>
       <div className="absolute inset-0 wyz-red-gradient dark:wyz-red-gradient-light" />
-      <video src="/videos/wyz-nav-bg-new.mp4" poster="/images/hero-footer.jpg" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="none" />
+      <video src="/videos/wyz-nav-bg-new.mp4" poster="/images/hero-footer.jpg" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "left top", transform: "scale(1.18)" }} autoPlay muted loop playsInline preload="none" />
       <div className="absolute inset-0 bg-black/15 dark:bg-black/15" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.98) 100%)" }} />
     </>
   );
   const textPrimary = "text-white dark:text-white";
@@ -169,11 +170,7 @@ export default function Footer() {
             <p className={`text-[13px] ${copyrightColor}`}>&copy; {new Date().getFullYear()} WYZ Design LLC. All rights reserved.</p>
             <div className="flex items-center gap-4">
               <p className={`text-[13px] ${precisionColor}`}>Designed & built with precision.</p>
-               <Image src="/images/wix-extracted/common/logo/common_logo_00_98442d_d7e48f1e01ab4d7b87f7e4f779f4dfd9.png.png" alt="Wix Editor X Partner" width={80} height={80} className="opacity-60 hover:opacity-100 transition-opacity w-8 h-8 object-contain" />
             </div>
-          </div>
-          <div className="mt-10 flex justify-center">
-            <Image src="/wyz-crown-square.png" alt="WYZ Design" width={32} height={32} className="w-8 h-8 object-contain opacity-60" loading="lazy" />
           </div>
         </div>
       </div>

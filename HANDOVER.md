@@ -1,5 +1,15 @@
 # WYZ Design — Current State (Session 40)
 
+## Session 66 (2026-10-08) - Nav dropdowns/alignment, cursor, footer + hero cleanup (WYZMiND)
+
+- **Header:** switched from centered to **logo-left, search/login/theme-right**. Each top-level category is now its own **dropdown** on desktop (PHOTOGRAPHY, DESIGNS, SERVICES, STORE, STUDIO; hover + focus open, chevron), with grouped sections in the mobile menu. Data is one `NAV_CATEGORIES` list (no more flat `NAV_LINKS` + `MORE`); `moreOpen` -> `openCat`.
+- **Custom cursor:** it used `mix-blend-mode: difference`, so it vanished on some backgrounds. Now a gold ring + center dot with a dark outline (always visible). Native-cursor hiding is unchanged (still gated to >=1024px + real mouse via `using-mouse`).
+- **Footer:** removed the Wix "Editor X Partner" gold crown badge on the right (owner flagged it as an extra crown) and removed the earlier centered crown; framed the bg video to top-left with a right-edge gradient so the video's "Pattern Soup" watermark is hidden. Kept the brand-column crown.
+- **Home hero:** removed the `ParticleBackground` "comet" layer (too busy) and made the logo-intro videos full-bleed (`inset-0 object-cover`).
+- Gates: build 0, tsc 0, eslint 0 errors, copy-lint clean, media_sweep 0 failures.
+
+---
+
 ## Session 65 (2026-10-08) - Media weight audit + optimization (WYZMiND)
 
 - Owner asked whether all media loads quick and stays clean/legible on every page and subpage. Built `_agent/media_audit.mjs` (per-route image/video bytes, over-serving, oversized, broken) and ran it across all 67 sitemap routes.
