@@ -123,7 +123,15 @@ function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
  useEffect(() => {
   const el = ref.current;
   if (!el) return;
-  const onMove = (e: MouseEvent) => { const r = el.getBoundingClientRect(); p.current = { x: e.clientX - r.left, y: e.clientY - r.top, on: true }; };
+  // Touch devices fire synthetic mouse events on tap/swipe; ignore those so the
+  // splash is driven only by real mouse movement, or by device motion/tilt.
+  const touchPrimary = (typeof window !== "undefined") && (window.matchMedia("(hover: none), (pointer: coarse)").matches || "ontouchstart" in window);
+  if (touchPrimary) return;
+  const onMove = (e: MouseEvent) => {
+   const sc = (e as MouseEvent & { sourceCapabilities?: { firesTouchEvents?: boolean } }).sourceCapabilities;
+   if (sc && sc.firesTouchEvents) return;
+   const r = el.getBoundingClientRect(); p.current = { x: e.clientX - r.left, y: e.clientY - r.top, on: true };
+  };
   const onLeave = () => { p.current.on = false; };
   el.addEventListener("mousemove", onMove, { passive: true });
   el.addEventListener("mouseleave", onLeave, { passive: true });

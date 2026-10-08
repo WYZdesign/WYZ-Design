@@ -641,7 +641,7 @@ className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 bg
 VISIT CHANNEL
 </a>
  </div>
- <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-12 mt-10 pt-8 border-t border-white/10">
+  <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-12 mt-10 pt-8 border-t border-white/25">
  <AnimatedCounter end={90} suffix="+" label="Client Events" className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]" labelClassName="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase" />
  <AnimatedCounter end={12} suffix="+" label="DIY Shows" className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]" labelClassName="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase" />
  <AnimatedCounter end={600} suffix="+" label="Live Shows" className="text-[2.1rem] sm:text-[2.8rem] font-heading font-black text-[#FF0000]" labelClassName="text-[11px] sm:text-[12px] text-white/40 tracking-[0.15em] uppercase" />
@@ -849,8 +849,9 @@ export default function EventsPage() {
   <div key={e.title} className="group cursor-pointer relative overflow-hidden bg-[#f5f5f5] dark:bg-[#252528] mb-2 break-inside-avoid">
   <Image src={e.img} alt={e.title} width={400} height={300} className="w-full h-full object-cover group-hover:scale-95 transition-transform duration-500" loading="lazy"
   onError={(ev) => { (ev.target as HTMLImageElement).style.display = 'none'; }} />
-  <div className="absolute inset-0 bg-black/50 group-hover:bg-gradient-to-br group-hover:from-[#DF3131]/30 group-hover:via-black/60 group-hover:to-white/10 transition-all duration-500 pointer-events-none" />
- </div>
+  <div className="absolute inset-0 bg-black/50 pointer-events-none" />
+  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" style={{ background: "radial-gradient(circle at 50% 42%, rgba(255,255,255,0.28), rgba(0,0,0,0) 62%)" }} />
+  </div>
  ))}
  </div>
  {hasMore && (
