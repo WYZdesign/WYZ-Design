@@ -22,6 +22,7 @@ const WS = [
 const ARTIST_GALLERY = [
  { src: "/images/featured-artist/artwork_1.jpg", label: "Artwork" },
  { src: "/images/featured-artist/artwork_2.jpg", label: "Bodypaint" },
+ { src: "/images/faotm_1.jpg", label: "Artwork" },
  { src: "/images/danny-davis.png", label: "Danny Davis" },
 ];
 
