@@ -1,0 +1,24 @@
+name: Site gate
+
+# Accessibility (axe) + mobile 320px overflow regression gate (Codex #6).
+# Runs daily against production and on demand.
+
+on:
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run site gate
+        run: node _agent/site_gate.mjs
+        env:
+          WYZ_BASE: https://www.wyzdesign.com

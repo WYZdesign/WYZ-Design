@@ -1,7 +1,7 @@
 "use client";
 
 /*
- WYZ Design - Splash Gallery (16 curated variants)
+ WYZ Design - Splash Gallery (16 selected variants)
  Save as: src/app/splash-gallery/page.tsx -> live at /splash-gallery
 
  2026-10-08 pass (Claude): cut from 24 down to the 13 strongest, most
@@ -440,7 +440,7 @@ export function GrainReveal({ onEnter }: VProps) {
   const cv = useRef<HTMLCanvasElement>(null); const mask = useRef<HTMLDivElement>(null);
   const pos = useRef({ x: -1, y: -1 });
   useEffect(() => {
-    const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0;
+    const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c); const raf = 0;
     const draw = () => {
       const img = x.createImageData(W, H);
       for (let i = 0; i < img.data.length; i += 4) {

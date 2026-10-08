@@ -172,7 +172,7 @@ export default function Footer() {
             </div>
           </div>
           <div className="mt-10 flex justify-center">
-            <Image src="/wyz-crown-square.png" alt="WYZ Design" width={16} height={16} className="w-4 h-4 object-contain opacity-50" loading="lazy" />
+            <Image src="/wyz-crown-square.png" alt="WYZ Design" width={32} height={32} className="w-8 h-8 object-contain opacity-60" loading="lazy" />
           </div>
         </div>
       </div>
