@@ -146,7 +146,7 @@ export default function AboutPage() {
 
       {/* MISSION */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
+        <section className="section-gap bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-5xl mx-auto px-6">
 <h2 className="text-[2.07rem] sm:text-[2.53rem] lg:text-[3.105rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
                OUR <span className="text-[#DF3131]">MISSION</span>
@@ -168,7 +168,7 @@ export default function AboutPage() {
 
       {/* FOUNDER */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-[#F5F5F3] dark:bg-[#252528]">
+        <section className="section-gap bg-[#F5F5F3] dark:bg-[#252528]">
           <div className="max-w-4xl mx-auto px-6">
             <div className="flex flex-col items-center gap-12 text-center">
               <div className="w-full max-w-md">
@@ -210,7 +210,7 @@ export default function AboutPage() {
 
       {/* BRANDS UNDER WYZ */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
+        <section className="section-gap bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-7xl mx-auto px-6">
 <h2 className="text-[2.28rem] sm:text-[2.622rem] lg:text-[3.42rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
                THE <span className="text-[#DF3131]">BRANDS</span>
@@ -236,7 +236,7 @@ export default function AboutPage() {
 
       {/* VALUES */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-[#111]">
+        <section className="section-gap bg-[#111]">
           <div className="max-w-6xl mx-auto px-6">
             <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] uppercase text-center mb-4">
               WHAT WE <span className="text-[#DF3131]">STAND FOR</span>
@@ -258,7 +258,7 @@ export default function AboutPage() {
 
       {/* BY THE NUMBERS */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[#1C1C1E]">
+        <section className="section-gap bg-white dark:bg-[#1C1C1E]">
           <div className="max-w-5xl mx-auto px-6">
             <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] uppercase text-center mb-4">
               BY THE <span className="text-[#DF3131]">NUMBERS</span>
@@ -275,7 +275,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <ScrollReveal animation="fadeUp">
-        <section className="py-16 sm:py-20 lg:py-24 bg-[#DF3131]">
+        <section className="section-gap bg-[#DF3131]">
           <div className="max-w-3xl mx-auto px-6 text-center">
             <h2 className="text-[1.8rem] sm:text-[2.2rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] uppercase mb-4">
               READY TO BUILD?

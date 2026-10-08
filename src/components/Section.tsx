@@ -14,7 +14,7 @@ type SectionProps = {
  */
 export default function Section({ as: Tag = "section", className = "", children, ...rest }: SectionProps) {
   return (
-    <Tag className={`section-gap content-w ${className}`.trim()} {...rest}>
+    <Tag className={`section-gap ${className}`.trim()} {...rest}>
       {children}
     </Tag>
   );
