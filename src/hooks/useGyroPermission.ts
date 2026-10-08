@@ -1,7 +1,15 @@
 "use client";
-import { useEffect, useRef, useCallback, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 
 type GyroStatus = "pending" | "granted" | "denied" | "unavailable";
+type OrientationPermissionRequest = typeof DeviceOrientationEvent & {
+  requestPermission?: () => Promise<"granted" | "denied">;
+};
+
+function getOrientationPermissionApi(): OrientationPermissionRequest | null {
+  if (typeof DeviceOrientationEvent === "undefined") return null;
+  return DeviceOrientationEvent as OrientationPermissionRequest;
+}
 
 /**
  * Single hook for DeviceOrientation permission flow.
@@ -10,21 +18,21 @@ type GyroStatus = "pending" | "granted" | "denied" | "unavailable";
  */
 export function useGyroPermission(
   onGranted: (done: (cleanup: () => void) => void) => void
-): GyroStatus {
+): { status: GyroStatus; requestPermission: () => Promise<void> } {
   const [status, setStatus] = useState<GyroStatus>("pending");
 
   const requestPerm = useCallback(async () => {
     try {
-      if (typeof DeviceOrientationEvent === "undefined") {
+      const orientationApi = getOrientationPermissionApi();
+      if (!orientationApi) {
         setStatus("unavailable");
         return;
       }
-      const DOE = DeviceOrientationEvent as any;
-      if (typeof DOE.requestPermission !== "function") {
+      if (typeof orientationApi.requestPermission !== "function") {
         setStatus("granted");
         return;
       }
-      const perm = await DOE.requestPermission();
+      const perm = await orientationApi.requestPermission();
       setStatus(perm === "granted" ? "granted" : "denied");
     } catch {
       setStatus("denied");
@@ -38,20 +46,14 @@ export function useGyroPermission(
     return () => { cleanup?.(); };
   }, [status, onGranted]);
 
-  // iOS: bind to first user gesture
   useEffect(() => {
-    const onTouch = () => {
-      document.removeEventListener("touchend", onTouch);
-      document.removeEventListener("click", onTouch);
-      if (status === "pending") requestPerm();
-    };
-    document.addEventListener("touchend", onTouch, { once: true });
-    document.addEventListener("click", onTouch, { once: true });
-    return () => {
-      document.removeEventListener("touchend", onTouch);
-      document.removeEventListener("click", onTouch);
-    };
-  }, [requestPerm, status]);
+    const orientationApi = getOrientationPermissionApi();
+    if (!orientationApi) {
+      setStatus("unavailable");
+      return;
+    }
+    if (typeof orientationApi.requestPermission !== "function") requestPerm();
+  }, [requestPerm]);
 
-  return status;
+  return { status, requestPermission: requestPerm };
 }

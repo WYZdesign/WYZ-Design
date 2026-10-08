@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { RandomSplash } from "@/components/SplashVariants";
+import { useSplashScrollLock } from "@/hooks/useSplashScrollLock";
 import HomePage from "./home/page";
 
 const SEEN_KEY = "wyz-splash-seen";
@@ -17,17 +18,10 @@ export default function Page() {
     } catch {}
   }, []);
 
-  // Lock body scroll while splash is visible
-  useEffect(() => {
-    if (entered) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
-  }, [entered]);
+  useSplashScrollLock(!entered);
 
   const handleEnter = () => {
     setEntered(true);
-    document.body.style.overflow = "";
     try {
       sessionStorage.setItem(SEEN_KEY, "1");
     } catch {}

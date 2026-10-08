@@ -17,7 +17,7 @@ const LINKS = [
 
 export default function QuickLinks() {
   return (
-    <section className="py-16 bg-white dark:bg-[#1C1C1E]">
+    <section className="section-gap bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
         <h2 className="text-2xl font-heading font-bold text-[#333333] dark:text-white tracking-[0.1em] mb-8">QUICK LINKS</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">

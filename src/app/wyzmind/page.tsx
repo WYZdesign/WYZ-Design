@@ -140,7 +140,7 @@ export default function WYZMiNDPage() {
     <main className="bg-white dark:bg-[#1C1C1E] min-h-screen text-[#333] dark:text-[#e0e0e0] pb-20">
       <ScrollReveal animation="fadeUp">
 {/* Hero */}
-          <section className="relative min-h-[75vh] py-24 px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
+          <section className="relative min-h-[75vh] section-gap px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
     <div className="absolute inset-0 hero-grad-wyzmind z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     {/* Neural network canvas background */}
@@ -158,7 +158,7 @@ export default function WYZMiNDPage() {
           </section>
 
         {/* Features - dynamic interactive cards */}
-        <section className="max-w-[90rem] mx-auto px-6 lg:px-12 py-16">
+        <section className="max-w-[90rem] mx-auto px-6 lg:px-12 section-gap">
           <h2 className="text-center font-heading font-black text-[1.65rem] sm:text-[2.2rem] tracking-[0.05em] text-[#333] dark:text-[#e0e0e0] mb-4">What It Powers</h2>
           <p className="text-center text-[#666] dark:text-[#b0b0b0] text-[16px] sm:text-[17.6px] mb-12">Click any card to explore what each system actually does</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
@@ -204,7 +204,7 @@ export default function WYZMiNDPage() {
         </section>
 
         {/* Stack - interactive tabs */}
-        <section className="bg-white dark:bg-[#111] border-y border-[#E2E2E2] dark:border-[#333] py-16 px-6">
+        <section className="bg-white dark:bg-[#111] border-y border-[#E2E2E2] dark:border-[#333] section-gap px-6">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] text-[#333] dark:text-white text-center mb-4">How It All Works</h2>
             <p className="text-[#666] dark:text-white/30 text-[13px] text-center mb-8">The tools and systems behind WYZ Design, explained in plain English</p>
@@ -256,7 +256,7 @@ export default function WYZMiNDPage() {
         </section>
 
         {/* CTA */}
-        <section className="max-w-4xl mx-auto px-6 py-16 text-center">
+        <section className="max-w-4xl mx-auto px-6 section-gap text-center">
           <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.05em] mb-4">Want Something Like This for Your Business?</h2>
           <p className="text-[#666] dark:text-[#b0b0b0] text-[16px] max-w-xl mx-auto mb-8 leading-relaxed">
             WYZMiND is our internal system, but we build custom versions for brands and studios who need smart automation, better workflows, and creative tools that actually work.

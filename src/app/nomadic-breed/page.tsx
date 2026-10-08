@@ -50,7 +50,7 @@ export default function NomadicBreedPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0A0A0A] py-24 lg:py-32">
+      <section className="relative overflow-hidden bg-[#0A0A0A] section-gap">
         <div className="absolute inset-0 opacity-20">
           <Image src="/images/client-logos/nomadic-breed.jpg" alt="Nomadic Breed brand identity" fill className="object-cover" sizes="100vw" />
         </div>
@@ -78,7 +78,7 @@ export default function NomadicBreedPage() {
       </section>
 
       {/* Philosophy */}
-      <section className="max-w-4xl mx-auto px-6 py-20 text-center">
+      <section className="max-w-4xl mx-auto px-6 section-gap text-center">
         <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.8rem] lg:text-[2.2rem] tracking-[0.04em] mb-6">
           Every Location Is a <span className="text-[#00E5FF]">Set</span>
         </h2>

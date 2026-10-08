@@ -71,7 +71,7 @@ export default function PartnershipsPage() {
   return (
     <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       {/* Hero */}
-      <section className="relative min-h-screen py-20 sm:py-28 lg:py-36 bg-[#111] overflow-hidden hero-banner">
+      <section className="relative min-h-screen section-gap bg-[#111] overflow-hidden hero-banner">
         <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1a1a1a] to-[#DF3131]/20" />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-32 lg:pt-40">
           <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-2">Collaborate With Us</p>
@@ -85,7 +85,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Our Brands */}
-      <section className="py-16 sm:py-20 bg-white dark:bg-[#1C1C1E]">
+      <section className="section-gap bg-white dark:bg-[#1C1C1E]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
@@ -107,7 +107,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Why Partner */}
-      <section className="py-16 sm:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
+      <section className="section-gap bg-[#F5F5F3] dark:bg-[#252528]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
@@ -141,7 +141,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Partnership Tiers */}
-      <section className="py-16 sm:py-20 bg-white dark:bg-[#1C1C1E]">
+      <section className="section-gap bg-white dark:bg-[#1C1C1E]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
@@ -170,7 +170,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Referral Leaderboard */}
-      <section className="py-16 sm:py-20 bg-[#F5F5F3] dark:bg-[#252528]">
+      <section className="section-gap bg-[#F5F5F3] dark:bg-[#252528]">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] mb-4">
@@ -217,7 +217,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 bg-[#DF3131]">
+      <section className="section-gap bg-[#DF3131]">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-heading font-black text-white tracking-[0.08em] mb-4">
             READY TO BUILD?

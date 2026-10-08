@@ -13,7 +13,7 @@ function ClientsCarousel() {
   }, []);
 
   return (
-      <section className="py-16 bg-white dark:bg-[#1C1C1E] overflow-hidden">
+      <section className="section-gap bg-white dark:bg-[#1C1C1E] overflow-hidden">
       <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
         <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="text-2xl font-heading font-bold text-[#333333] dark:text-white text-center mb-10 tracking-[0.1em]">Clients</motion.h2>
@@ -39,7 +39,7 @@ function ClientsCarousel() {
 export default function Clients() {
   return (
     <ErrorBoundary fallback={
-    <section className="py-16 bg-white dark:bg-[#1C1C1E] overflow-hidden">
+    <section className="section-gap bg-white dark:bg-[#1C1C1E] overflow-hidden">
         <div className="max-w-[115rem] mx-auto px-6 lg:px-12 text-center">
           <p className="text-[#666] dark:text-white/70 text-sm">Clients section temporarily unavailable</p>
         </div>

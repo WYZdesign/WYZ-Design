@@ -347,7 +347,7 @@ export default function FDOraclePage() {
       </section>
 
       {/* ═══ STUDIO EXPLORER ═══ */}
-      <section className="py-24 px-4 bg-gradient-to-b from-black to-zinc-900">
+      <section className="section-gap px-4 bg-gradient-to-b from-black to-zinc-900">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal animation="fadeUp">
             <div className="text-center mb-12">
@@ -416,7 +416,7 @@ export default function FDOraclePage() {
       </section>
 
       {/* ═══ INTERACTIVE CALENDAR ═══ */}
-      <section className="py-24 px-4 bg-zinc-950">
+      <section className="section-gap px-4 bg-zinc-950">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal animation="fadeUp">
             <div className="text-center mb-12">
@@ -493,7 +493,7 @@ export default function FDOraclePage() {
       </AnimatePresence>
 
       {/* ═══ GOOGLE DRIVE ARCHIVE ═══ */}
-      <section className="py-24 px-4 bg-gradient-to-b from-zinc-950 to-black border-t border-zinc-900">
+      <section className="section-gap px-4 bg-gradient-to-b from-zinc-950 to-black border-t border-zinc-900">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal animation="fadeUp">
             <div className="text-center mb-12">
@@ -527,7 +527,7 @@ export default function FDOraclePage() {
       </section>
 
       {/* ═══ HOW IT WORKS ═══ */}
-      <section className="py-20 px-4 bg-black border-t border-zinc-900">
+      <section className="section-gap px-4 bg-black border-t border-zinc-900">
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal animation="fadeUp">
             <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4 max-w-[calc(100vw-3rem)] mx-auto">HOW THE <span className="text-[#DF3131]">ORACLE</span> WORKS</h2>

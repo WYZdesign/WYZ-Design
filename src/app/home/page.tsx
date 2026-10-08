@@ -1090,7 +1090,7 @@ export default function HomePage() {
 
 {/* ═══ DIGITAL PRINTING BANNER ═══ */}
   <ScrollReveal animation="scaleIn" delay={0.1}>
-  <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden bg-black hero-banner">
+  <section className="relative py-8 sm:section-gap overflow-hidden bg-black hero-banner">
   <div className="absolute inset-0">
    <Image src="/images/printing/wix_0164.jpg" alt="Digital Printing" fill sizes="100vw" className="w-full h-full object-cover opacity-60" priority />
   </div>
@@ -1109,7 +1109,7 @@ export default function HomePage() {
 
  {/* ═══ CLIENTS ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 bg-white dark:bg-[#1C1C1E] overflow-hidden">
+ <section className="section-gap bg-white dark:bg-[#1C1C1E] overflow-hidden">
   <div className="max-w-6xl mx-auto px-6 text-center mb-4">
   <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-4">Clients</h2>
  </div>
@@ -1124,7 +1124,7 @@ export default function HomePage() {
 
   {/* ═══ FAQ ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]" data-chat-avoid>
+ <section className="section-gap bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]" data-chat-avoid>
   <div className="max-w-7xl mx-auto px-6">
   <div className="relative flex flex-col lg:flex-row gap-8">
   <div className="lg:w-1/3 lg:sticky lg:top-28 lg:self-start">

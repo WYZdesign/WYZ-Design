@@ -76,7 +76,7 @@ export default function WorkGateway() {
         </div>
       </section>
 
-      <section className="bg-[#FEFEFD] dark:bg-[#111] py-12 sm:py-16 text-center px-6">
+      <section className="bg-[#FEFEFD] dark:bg-[#111] section-gap text-center px-6">
         <p className="text-[#333] dark:text-[#ccc] text-[14px] sm:text-[16px] max-w-md mx-auto mb-6">
           Not sure which one you need? Most projects use both. Tell us what you are building and we will point you the right way.
         </p>

@@ -43,7 +43,7 @@ const GBP_REVIEWS = "https://www.google.com/search?kgmid=/g/11rnb39zny";
 export default function Testimonials() {
   return (
     <ErrorBoundary fallback={
-      <section className="py-16 bg-gradient-to-b from-zinc-950 to-black text-center">
+      <section className="section-gap bg-gradient-to-b from-zinc-950 to-black text-center">
         <p className="text-white/50 text-sm">Testimonials temporarily unavailable</p>
       </section>
     }>
@@ -74,7 +74,7 @@ function TestimonialsSliderInner() {
   const t = TESTIMONIALS[active];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-zinc-950 to-black overflow-hidden">
+    <section className="section-gap bg-gradient-to-b from-zinc-950 to-black overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 text-center">
         <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-white tracking-[0.1em] uppercase mb-2">
           What Clients <span className="text-[#DF3131]">Say</span>

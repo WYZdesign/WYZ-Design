@@ -25,6 +25,22 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
 
     lenisRef.current = lenis;
 
+    const onSplashLock = (event: Event) => {
+      const locked = (event as CustomEvent<boolean>).detail;
+      if (locked) {
+        lenis.stop();
+        lenis.scrollTo(0, { immediate: true });
+        return;
+      }
+      lenis.start();
+      lenis.scrollTo(0, { immediate: true });
+    };
+    window.addEventListener("wyz:splash-lock", onSplashLock);
+    if (document.documentElement.dataset.splashLocked === "true") {
+      lenis.stop();
+      lenis.scrollTo(0, { immediate: true });
+    }
+
     let raf: number;
     function tick(time: number) {
       lenis.raf(time);
@@ -34,6 +50,7 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
 
     return () => {
       cancelAnimationFrame(raf);
+      window.removeEventListener("wyz:splash-lock", onSplashLock);
       lenis.destroy();
     };
   }, []);

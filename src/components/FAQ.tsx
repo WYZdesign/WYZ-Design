@@ -15,7 +15,7 @@ const FAQS = [
 export default function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <section className="py-20 bg-white dark:bg-[#1C1C1E]">
+    <section className="section-gap bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-3xl mx-auto px-6 lg:px-12">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
           <h2 className="text-3xl font-heading font-bold text-[#333333] dark:text-white tracking-[0.1em]">Services</h2>

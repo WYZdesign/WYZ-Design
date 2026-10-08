@@ -352,7 +352,7 @@ const faotmImages = [
 
   {/* ═══ FOATM - FEATURED ARTIST OF THE MONTH ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
-   <section className="py-10 bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
+   <section className="section-gap bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
 <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
    <div className="flex flex-col items-center justify-between mb-6 gap-x-6 gap-y-2">
    <div className="text-center">
@@ -410,7 +410,7 @@ const faotmImages = [
 
  {/* ═══ CONCEPT GENERATOR (Ollama connected) ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
-  <section className="py-6 lg:py-20 bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
+  <section className="py-6 lg:section-gap bg-white dark:bg-[#1C1C1E] border-t border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-2 items-start">
  <div className="text-center"><span className="text-[13px] font-bold tracking-[0.2em] uppercase text-[#DF3131] mb-2">LET&apos;S GET CREATIVE</span>  <h2 className="text-[1rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-4">DESIGN CONCEPT<br />GENERATOR</h2>  <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.8]">Not sure where to start? Tell us your vision and our AI will toss out creative ideas built for your brand.</p></div>
   <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] p-4 sm:p-6 lg:p-8 shadow-sm rounded-lg">

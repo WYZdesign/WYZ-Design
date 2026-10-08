@@ -27,7 +27,7 @@ export default function LeadMagnet() {
 
   if (done) {
     return (
-      <section className="py-12 bg-[#DF3131]">
+      <section className="section-gap bg-[#DF3131]">
         <div className="max-w-2xl mx-auto px-6 text-center text-white">
           <FiCheck className="w-10 h-10 mx-auto mb-3" />
           <h3 className="text-2xl font-heading font-bold mb-2">You're on the list</h3>
@@ -38,7 +38,7 @@ export default function LeadMagnet() {
   }
 
   return (
-    <section className="py-12 bg-[#DF3131]">
+    <section className="section-gap bg-[#DF3131]">
       <div className="max-w-2xl mx-auto px-6 text-center text-white">
         <h3 className="text-xl sm:text-2xl font-heading font-bold mb-2">Free Brand Audit Guide</h3>
         <p className="text-white text-sm mb-6 max-w-md mx-auto">

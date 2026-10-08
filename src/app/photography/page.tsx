@@ -728,7 +728,7 @@ return (
 
 {/* ALBUM CATEGORIES */}
   <ScrollReveal animation="fadeUp" delay={0.05}>
-  <section className="py-6 sm:py-8 lg:py-12">
+  <section className="py-6 sm:py-8 lg:section-gap">
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
   {ALBUMS.map((a, i) => {
@@ -783,7 +783,7 @@ return (
 
  {/* BENEFITS CARDS */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-6 sm:py-8 lg:py-12">
+ <section className="py-6 sm:py-8 lg:section-gap">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
  {[
@@ -812,7 +812,7 @@ return (
 
  {/* BOOK TODAY */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
- <section className="py-12 lg:py-20 bg-white dark:bg-[#111]">
+ <section className="section-gap bg-white dark:bg-[#111]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
  <h2 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] xl:text-[3.5rem] font-heading font-black text-[#333] tracking-[0.1em] text-center mb-8">BOOK TODAY</h2>
  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

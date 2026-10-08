@@ -7,7 +7,7 @@ export default function GftFoodsCaseStudy() {
   return (
     <main className="bg-white dark:bg-[#111] min-h-screen pb-20">
       <ScrollReveal animation="fadeUp">
-        <section className="bg-[#1a2e1a] text-white py-24 px-6 text-center">
+        <section className="bg-[#1a2e1a] text-white section-gap px-6 text-center">
           <p className="text-[#6fcf6f] text-[13px] font-heading font-bold tracking-[0.2em] uppercase mb-2">Case Study</p>
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.05em] mb-6 sm:mb-8">
             GFT <span className="text-[#6fcf6f]">FOODS</span>
@@ -17,7 +17,7 @@ export default function GftFoodsCaseStudy() {
           </p>
         </section>
 
-        <section className="max-w-5xl mx-auto px-6 py-16">
+        <section className="max-w-5xl mx-auto px-6 section-gap">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[
               { label: "Client", value: "GFT Foods" },

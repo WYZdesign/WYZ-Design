@@ -125,7 +125,7 @@ function DynamicContentUnderHero() {
      { title: "NO HASSLE", desc: "Not feeling it? We'll sort it out. No runaround.", icon: <svg className="w-10 h-10 mx-auto text-[#DF3131]" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg> },
    ];
    return (
-    <section className="py-12 sm:py-16 bg-[#FEFEFD]">
+    <section className="section-gap bg-[#FEFEFD]">
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8 sm:mb-12">
           <span className="text-[11px] sm:text-[13px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">WHY DBC MERCH</span>
@@ -164,13 +164,13 @@ function AccordionGallery() {
   }, []);
   return (
     <ErrorBoundary fallback={
-      <section className="py-12 bg-[#FEFEFD]">
+      <section className="section-gap bg-[#FEFEFD]">
         <div className="max-w-[130rem] mx-auto px-6 lg:px-12 text-center">
           <p className="text-[#666]">Crew gallery temporarily unavailable</p>
         </div>
       </section>
     }>
-    <section className="py-12 bg-[#FEFEFD]">
+    <section className="section-gap bg-[#FEFEFD]">
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8">
           <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#DF3131] block mb-2">DBC CREW MODEL MOCKUPS</span>
@@ -225,13 +225,13 @@ function DynamicContentUnderShop() {
   ];
   return (
     <ErrorBoundary fallback={
-      <section className="py-12 sm:py-16 bg-[#FEFEFD]">
+      <section className="section-gap bg-[#FEFEFD]">
         <div className="max-w-[130rem] mx-auto px-6 lg:px-12 text-center">
           <p className="text-[#666]">Crew content temporarily unavailable</p>
         </div>
       </section>
     }>
-    <section className="py-12 sm:py-16 bg-[#FEFEFD]">
+    <section className="section-gap bg-[#FEFEFD]">
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-8 sm:mb-12">
           <span className="text-[11px] font-bold tracking-[0.3em] uppercase text-[#DF3131] block mb-2">EVERY PIECE HAS A STORY</span>
@@ -588,7 +588,7 @@ export default function MerchPage() {
         )}
 
         {/* Brand Statement - Animated Square Quote */}
-        <section className="py-20 px-6">
+        <section className="section-gap px-6">
           <ScrollReveal animation="fadeUp">
             <SquareQuote />
           </ScrollReveal>
@@ -602,7 +602,7 @@ export default function MerchPage() {
         )}
 
         {/* Enter Store Toggle */}
-        <section className="py-16 px-6! text-center" id="shop">
+        <section className="section-gap px-6! text-center" id="shop">
           <ScrollReveal animation="fadeUp">
             <p className="text-[11px] text-[#666] font-bold tracking-[0.2em] uppercase mb-2">Print-on-Demand via Printful</p>
             <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] tracking-[0.05em] mb-4">The Collection</h2>

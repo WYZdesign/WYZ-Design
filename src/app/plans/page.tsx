@@ -357,7 +357,7 @@ export default function PlansPage() {
 
         {/* Interactive Pricing Calculator */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
-          <section className="py-12 border-t border-[#E2E2E2] dark:border-[#444]">
+          <section className="section-gap border-t border-[#E2E2E2] dark:border-[#444]">
             <div className="max-w-4xl mx-auto px-6">
               <div className="text-center mb-8">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">ESTIMATE YOUR COST</span>

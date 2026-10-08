@@ -300,7 +300,7 @@ return (
 
         {/* ═══ PROCESS - Auto-cycling timeline ═══ */}
         <ScrollReveal animation="fadeUp">
-          <section className="py-20 bg-[#111]">
+          <section className="section-gap bg-[#111]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-10">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">HOW IT WORKS</span>
@@ -345,7 +345,7 @@ return (
 
         {/* ═══ PRICING ═══ */}
         <ScrollReveal animation="fadeUp">
-          <section className="py-20 bg-white dark:bg-[#1C1C1E]">
+          <section className="section-gap bg-white dark:bg-[#1C1C1E]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
               <div className="text-center mb-14">
                 <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">PRICING</span>
@@ -366,7 +366,7 @@ return (
 
         {/* ═══ CTA ═══ */}
         <ScrollReveal animation="fadeUp">
-          <section className="py-16 bg-white dark:bg-[#111] text-center">
+          <section className="section-gap bg-white dark:bg-[#111] text-center">
             <div className="max-w-3xl mx-auto px-6">
 <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] dark:text-white mb-4">READY TO BUILD?</h2>
  <p className="text-[#666] dark:text-white/50 text-[15px] mb-8 max-w-lg mx-auto">Book a free 30-minute call. We will tell you what your site needs and what it costs.</p>

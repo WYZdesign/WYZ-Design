@@ -91,6 +91,37 @@ const center: React.CSSProperties = { position: "absolute", top: 0, right: 0, bo
 const stageBox = (bg: string): React.CSSProperties => ({ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: bg, overflowX: "hidden", overflowY: "hidden" });
 const fullCanvas: React.CSSProperties = { position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%" };
 
+function TiltMotionFrame({ children }: { children: React.ReactNode }) {
+ const frame = useRef<HTMLDivElement>(null);
+ const onGranted = useCallback((setCleanup: (fn: () => void) => void) => {
+   const onOrientation = (event: DeviceOrientationEvent) => {
+     if (!frame.current || event.beta === null || event.gamma === null) return;
+     const x = Math.max(-1, Math.min(1, event.gamma / 35));
+     const y = Math.max(-1, Math.min(1, (event.beta - 45) / 45));
+     frame.current.style.transform = `perspective(1000px) rotateX(${y * -1.25}deg) rotateY(${x * 1.25}deg) scale(1.015)`;
+   };
+   window.addEventListener("deviceorientation", onOrientation, { passive: true });
+   setCleanup(() => window.removeEventListener("deviceorientation", onOrientation));
+ }, []);
+ const { status, requestPermission } = useGyroPermission(onGranted);
+
+ return (
+   <div ref={frame} style={{ position: "fixed", inset: 0, overflow: "hidden", transform: "perspective(1000px) scale(1.015)", transition: "transform 180ms ease-out", willChange: "transform" }}>
+     {children}
+     {status === "pending" && (
+       <button
+         type="button"
+         className="wyz-enter"
+         onClick={() => { void requestPermission(); }}
+         style={{ position: "absolute", right: 16, bottom: 16, zIndex: 20, marginTop: 0, padding: "10px 14px", fontSize: 11 }}
+       >
+         Enable tilt
+       </button>
+     )}
+   </div>
+ );
+}
+
 /* ---------- GYRO POINTER (iOS-gated via useGyroPermission) ---------- */
 function useDeviceTiltAsPointer(ref: React.RefObject<HTMLDivElement | null>) {
  const p = useRef({ x: -999, y: -999, on: false });
@@ -499,26 +530,14 @@ const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Ele
  { name: "Constellation", desc: "Particle web links to your cursor", Comp: Constellation, bg: DK },
  { name: "Aurora", desc: "Soft red/gold light follows the mouse", Comp: Aurora, bg: OW },
  { name: "Depth parallax", desc: "Layers tilt in perspective", Comp: Depth, bg: "#1b1714" },
- { name: "Crown draw", desc: "Logo draws itself, editorial light", Comp: CrownDraw, bg: OW },
- { name: "Split reveal", desc: "Red/gold halves slide apart", Comp: Split, bg: DK },
  { name: "Nebula", desc: "Particles flee the cursor", Comp: Nebula, bg: "#13100e" },
- { name: "Glitch type", desc: "RGB-split wordmark jitter", Comp: Glitch, bg: DK },
  { name: "Orbital", desc: "Particles orbit, cursor speeds them", Comp: Orbital, bg: "#13100e" },
- { name: "Smoke trail", desc: "Wisps follow your cursor", Comp: Smoke, bg: "#141110" },
- { name: "Ripple", desc: "Move or click for expanding rings", Comp: Ripple, bg: OW },
  { name: "Spotlight", desc: "A torch reveals the mark", Comp: Spotlight, bg: DK },
  { name: "Magnetic", desc: "Letters lean toward your cursor", Comp: Magnetic, bg: DK },
  { name: "Tilt glass", desc: "Glass card tilts in 3D with glare", Comp: TiltGlass, bg: "#17130f" },
  { name: "Sine waves", desc: "Wave field bends with mouse height", Comp: SineWaves, bg: "#13100e" },
- { name: "Duotone", desc: "Photo behind red/gold, lit by cursor", Comp: Duotone, bg: "#1a1410" },
- { name: "Marquee", desc: "Kinetic type bands scroll past", Comp: Marquee, bg: DK },
- { name: "Caret type", desc: "Terminal-style typed reveal", Comp: CaretType, bg: "#0d0b0a" },
- { name: "Gem burst", desc: "Cyan/gold shards explode outward", Comp: GemBurst, bg: "#0f0c0b" },
  { name: "Grid warp", desc: "Dot grid bends around the cursor", Comp: GridWarp, bg: "#13100e" },
   { name: "Mesh drift", desc: "Gradient mesh drifts with parallax", Comp: MeshDrift, bg: OW },
-  { name: "Particles", desc: "Swarming dots converge on pointer", Comp: Particles, bg: DK },
-  { name: "Wave ripple", desc: "Layered sine waves follow cursor", Comp: WaveRipple, bg: "#0e0c0b" },
-  { name: "Hex grid", desc: "Honeycomb glows near your pointer", Comp: HexGrid, bg: DK },
   { name: "Vortex", desc: "Spiral particle storm orbits center", Comp: Vortex, bg: "#0d0b09" },
 ];
 
@@ -528,9 +547,9 @@ export function RandomSplash(props: VProps) {
    if (prefersReducedMotion()) return;
    setI(Math.floor(Math.random() * VARIANTS.length));
  }, []);
- if (i === null) return <div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div>;
+ if (i === null) return <TiltMotionFrame><div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div></TiltMotionFrame>;
  const C = VARIANTS[i].Comp;
- return <><style>{CSS}</style><C {...props} /></>;
+ return <TiltMotionFrame><style>{CSS}</style><C {...props} /></TiltMotionFrame>;
 }
 
 export default function SplashGallery() {

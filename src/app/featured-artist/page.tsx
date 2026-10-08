@@ -199,7 +199,7 @@ export default function FeaturedArtistPage() {
 
  {/* ═══ 5 Ws - Biography-style flow ═══ */}
  <ScrollReveal animation="fadeUp">
- <section className="py-16 bg-white">
+ <section className="section-gap bg-white">
  <div className="max-w-[80rem] mx-auto px-6 lg:px-12">
  <div className="text-center mb-12">
  <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">THE BASICS</span>
@@ -234,7 +234,7 @@ export default function FeaturedArtistPage() {
 
  {/* ═══ ART STORE ═══ */}
  <ScrollReveal animation="fadeUp">
- <section className="py-16 bg-[#111]">
+ <section className="section-gap bg-[#111]">
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
  <div className="text-center lg:text-center">
@@ -274,7 +274,7 @@ export default function FeaturedArtistPage() {
 
  {/* ═══ ABOUT FAOTM ═══ */}
  <ScrollReveal animation="fadeUp">
- <section className="py-16 bg-white dark:bg-[#111]">
+ <section className="section-gap bg-white dark:bg-[#111]">
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
  <div className="text-center mb-12">
  <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">WHAT IS FAOTM?</span>
