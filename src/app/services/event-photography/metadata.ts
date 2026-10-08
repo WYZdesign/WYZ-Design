@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Event Photography — Concerts, Showcases & Private Events",
+  title: "Event Photography - Concerts, Showcases & Private Events",
   description: "Expert event photography for concerts, showcases, and private events. $200/3hr. Live energy captured, every moment preserved. Book your date.",
   keywords: ["event photography", "concert photography", "showcase photography", "private event photographer", "event coverage", "WYZ Design events"],
   openGraph: {

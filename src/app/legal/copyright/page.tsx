@@ -35,7 +35,7 @@ export default function CopyrightNotice() {
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">DMCA</h2>
-              <p>If you believe content on this site infringes your copyright, send a written notice to our designated DMCA agent at <a href="mailto:info@wyzdesign.com" className="text-[#DF3131] hover:underline">info@wyzdesign.com</a> with: (1) identification of the copyrighted work, (2) the allegedly infringing material, (3) your contact information, (4) a statement of good faith belief, and (5) a statement under penalty of perjury that the information is accurate.</p>
+              <p>If you believe content on this site infringes your copyright, send a written notice to our designated DMCA agent at <a href="mailto:info@wyzdesign.com" className="text-[#DF3131] hover:underline">info@wyzdesign.com</a> with: (1) identification of the copyrighted work, (2) the allegedly infringing material, (3) your contact information, (4) a statement of good faith belief, and (5) a statement under penalty of perjury that the information is achand-pick.</p>
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">Contact</h2>

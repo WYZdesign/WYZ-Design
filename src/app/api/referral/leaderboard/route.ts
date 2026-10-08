@@ -27,7 +27,7 @@ function getIp(req: NextRequest): string {
 
 /**
  * Builds a consistent pseudonym from an email address.
- * "torree.harper@gmail.com" → "TH" (initials only — no name fragments).
+ * "torree.harper@gmail.com" → "TH" (initials only - no name fragments).
  * Uses email domain as a salt so the same local part always produces the same initials.
  */
 function anonymize(email: string): string {
@@ -39,7 +39,7 @@ function anonymize(email: string): string {
 }
 
 /**
- * GET /api/referral/leaderboard — Public top-5 referral partners plus all-time totals
+ * GET /api/referral/leaderboard - Public top-5 referral partners plus all-time totals
  */
 export async function GET(req: NextRequest) {
   const rl = await rateLimit(`referral-leaderboard:${getIp(req)}`, 10, 60_000);

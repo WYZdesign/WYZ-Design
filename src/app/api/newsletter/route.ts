@@ -36,7 +36,7 @@ function verifyToken(token: string, purpose: string): string | null {
   if (!secret) return null;
   const expected = createHmac("sha256", secret).update(`${email.toLowerCase().trim()}.${purpose}.${timestamp}`).digest("hex").slice(0, 32);
   // Timing-safe comparison, matching the pattern already used for CSRF
-  // tokens in lib/csrf.ts — a plain !== leaks per-character timing info
+  // tokens in lib/csrf.ts - a plain !== leaks per-character timing info
   // that could in principle help brute-force the signature.
   try {
     const a = Buffer.from(expected);
@@ -136,7 +136,7 @@ export async function POST(req: NextRequest) {
 /**
  * Unsubscribes an email from the newsletter via a one-click link.
  * @method GET
- * @request Query param `unsubscribe` (required) — email to remove
+ * @request Query param `unsubscribe` (required) - email to remove
  * @response HTML confirmation page
  * @auth None
  */

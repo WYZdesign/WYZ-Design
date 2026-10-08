@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Splash Showcase — Interactive Visual Gallery",
+  title: "Splash Showcase - Interactive Visual Gallery",
   description: "WYZ Design splash showcase. Interactive gallery with gyroscope-powered parallax effects. 10 visual experiments: Abstract Flow, Neon Nights, Urban Pulse, Color Storm, Digital Dreams, Retro Wave, Minimal Edge, Bold Statement, Creative Fire, Fresh Cut.",
   keywords: ["splash showcase", "interactive gallery", "gyroscope parallax", "creative showcase", "WYZ Design showcase"],
   openGraph: {

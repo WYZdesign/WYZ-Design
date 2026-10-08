@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About — WYZ Design",
+  title: "About - WYZ Design",
   description: "WYZ Design is a creative studio built by artists, for artists. Photography, design, video, web. Los Angeles + Chicago. No outsourcing, no cutting corners.",
   keywords: ["about WYZ Design", "creative studio Los Angeles", "artist-led agency", "creative team"],
   openGraph: {

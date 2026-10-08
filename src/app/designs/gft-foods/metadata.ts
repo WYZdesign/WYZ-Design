@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "GFT Foods — Case Study | WYZ Design",
+  title: "GFT Foods - Case Study | WYZ Design",
   description: "Complete rebrand from local shop to national player: new logo, packaging system, e-commerce site, and social content. 3x inquiry rate in 30 days.",
   keywords: ["case study", "GFT Foods", "rebrand", "packaging design", "e-commerce", "food branding", "WYZ Design clients"],
   openGraph: {

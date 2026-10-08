@@ -57,7 +57,7 @@ export default function AboutPage() {
             />
           </div>
           <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
-          {/* Crown logo marquee — interactive mouse reveal. The mouse
+          {/* Crown logo marquee - interactive mouse reveal. The mouse
               tracking used to be wired to onMouseMove on this row container
               specifically; since the text/CTA layer above it (z-20) is a
               SIBLING, not a descendant, hovering the text or a button never

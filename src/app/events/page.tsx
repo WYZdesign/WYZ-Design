@@ -723,7 +723,7 @@ export default function EventsPage() {
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
-{/* Single hero video — desktop and mobile previously rendered two separate
+{/* Single hero video - desktop and mobile previously rendered two separate
     <video autoPlay> elements of the same file (one hidden via `hidden md:block`,
     the other via `md:hidden`); both still downloaded/buffered regardless of
     which was visible, doubling the bandwidth cost of every hero load. The only

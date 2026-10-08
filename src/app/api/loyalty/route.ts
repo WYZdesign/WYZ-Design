@@ -8,7 +8,7 @@ import { logger } from "@/lib/logger";
  * @method GET
  * @request None
  * @response JSON with points balance and transaction history
- * @auth Required — user must be authenticated
+ * @auth Required - user must be authenticated
  */
 export async function GET(req: NextRequest) {
   try {

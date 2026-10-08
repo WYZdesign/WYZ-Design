@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Designs — Logos, Cover Art, Flyers & Brand Identity Gallery",
+  title: "Designs - Logos, Cover Art, Flyers & Brand Identity Gallery",
   description: "Browse WYZ Design portfolio. Logo design, cover art, flyers, brand identity, social media kits. Custom design work for artists, brands, and businesses.",
   keywords: ["logo design portfolio", "cover art design", "flyer design", "brand identity gallery", "custom design work", "WYZ Design portfolio"],
   openGraph: {

@@ -1,4 +1,4 @@
-// Auto-generated — do not edit manually
+// Auto-generated - do not edit manually
 export const LOGOS_IMAGES: string[] = [
   "/images/designs/logos_jpegs/1 Accord Border (1).jpg",
   "/images/designs/logos_jpegs/1 Accord Border (2).jpg",

@@ -290,7 +290,7 @@ export const POSTS: BlogPost[] = [
         heading: "What a good one actually does",
         paragraphs: [
           "It loads fast, it's clear within seconds what you do and who it's for, and it makes the next step obvious. That's it. You don't need every animation or widget. You need clarity and speed.",
-          "We build sites starting at $500 flat for up to five pages. If yours isn't pulling its weight, that's the highest-leverage fix you can make this quarter.",
+          "We build sites starting at $500 flat for up to five pages. If yours isn't pulling its weight, that's the highest-use fix you can make this quarter.",
         ],
       },
     ],

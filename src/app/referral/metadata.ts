@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Referral Program — Earn 10% Commission on Every Referral",
+  title: "Referral Program - Earn 10% Commission on Every Referral",
   description: "Join the WYZ Design referral program. Earn 10% commission on every client you refer. Free to join, quarterly payouts, co-branded materials provided.",
   keywords: ["referral program", "earn commission", "affiliate program", "creative agency referral", "WYZ Design referral"],
   openGraph: {

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "FD Studios — Los Angeles Creative Studio Rental",
+  title: "FD Studios - Los Angeles Creative Studio Rental",
   description: "FD Studios: Olympic, Hill, Yukon buildings. 30+ creative spaces for rent. Underwater studio, cyclorama walls, car turntable, jet interior, rain room, raw concrete gallery. Los Angeles.",
   keywords: ["studio rental Los Angeles", "creative studio space", "photo studio rental", "video studio LA", "FD Studios", "Olympic Studios", "Hill Studios", "Yukon Studios"],
   openGraph: {

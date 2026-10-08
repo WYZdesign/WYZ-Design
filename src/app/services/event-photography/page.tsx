@@ -81,7 +81,7 @@ export default function EventPhotography() {
                     <span className="font-semibold">Extended Event</span>
                     <span className="text-[#DF3131] font-bold">$350/event</span>
                   </div>
-                  <p className="text-sm text-[#666] mt-1">4–8 hours. Includes 100+ edited photos.</p>
+                  <p className="text-sm text-[#666] mt-1">4 - 8 hours. Includes 100+ edited photos.</p>
                 </div>
                 <div className="border-b border-gray-600 pb-4">
                   <div className="flex justify-between">

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Photo Retouching — Basic to Advanced Professional Editing",
+  title: "Photo Retouching - Basic to Advanced Professional Editing",
   description: "Professional photo retouching from basic cleanup to advanced editing. Skin smoothing, color correction, background removal, composite work. $50/session.",
   keywords: ["photo retouching", "photo editing", "image retouching", "skin smoothing", "color correction", "background removal", "WYZ Design retouching"],
   openGraph: {

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Gallery — Photography Portfolio & Image Archive",
+  title: "Gallery - Photography Portfolio & Image Archive",
   description: "Full photography gallery. Portraits, editorial, creative, bodypaint, lifestyle, fashion, concerts, street, urbex, outdoors. Browse the complete image archive.",
   keywords: ["photography gallery", "photo portfolio", "portrait photography", "editorial photography", "fashion photography", "WYZ Design gallery"],
   openGraph: {

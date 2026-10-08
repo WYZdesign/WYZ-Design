@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Photoshoot — Professional Photography Sessions",
+  title: "Photoshoot - Professional Photography Sessions",
   description: "Professional photoshoot sessions including lighting, creative direction, and edited high-resolution images. Portraits, editorial, commercial, studio. $100/hr.",
   keywords: ["photoshoot", "professional photography", "portrait session", "editorial photography", "commercial photography", "studio photography", "WYZ Design photoshoot"],
   openGraph: {

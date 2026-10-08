@@ -18,14 +18,14 @@ export const metadata: Metadata = {
   description: "The mobile arm of WYZ Design. Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
   alternates: { canonical: `${SITE}/nomadic-breed` },
   openGraph: {
-    title: "Nomadic Breed — WYZ Design",
+    title: "Nomadic Breed - WYZ Design",
     description: "Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
     url: `${SITE}/nomadic-breed`,
     siteName: "WYZ Design",
     type: "website",
     images: [{ url: `${SITE}/images/client-logos/nomadic-breed.jpg`, width: 1200, height: 630 }],
   },
-  twitter: { card: "summary_large_image", title: "Nomadic Breed — WYZ Design", description: "Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.", images: [`${SITE}/images/client-logos/nomadic-breed.jpg`] },
+  twitter: { card: "summary_large_image", title: "Nomadic Breed - WYZ Design", description: "Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.", images: [`${SITE}/images/client-logos/nomadic-breed.jpg`] },
 };
 
 const jsonLd = {
@@ -38,7 +38,7 @@ const jsonLd = {
 };
 
 const services = [
-  { icon: "FiCamera", title: "Pop-Up Shoots", desc: "No studio? No problem. We bring the full WYZ setup to any location — warehouse rooftops, parking garages, desert highways. Every location is a set." },
+  { icon: "FiCamera", title: "Pop-Up Shoots", desc: "No studio? No problem. We bring the full WYZ setup to any location - warehouse rooftops, parking garages, desert highways. Every location is a set." },
   { icon: "FiCalendar", title: "Touring Event Coverage", desc: "Concerts, festivals, brand activations, private events. We travel with the culture and document it at the highest level." },
   { icon: "FiMapPin", title: "On-Location Branding", desc: "Your brand deserves more than a white-wall studio. We shoot on-location to give your visuals real context and real energy." },
   { icon: "FiPackage", title: "Travel Packages", desc: "Multi-day shoots, city-to-city coverage, content batching for touring artists and traveling brands. One crew, one standard, everywhere." },
@@ -83,7 +83,7 @@ export default function NomadicBreedPage() {
           Every Location Is a <span className="text-[#00E5FF]">Set</span>
         </h2>
         <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
-          Nomadic Breed was built for the creators who move. Artists on tour, brands doing pop-ups, events that happen once — you need a crew that can show up anywhere and deliver the same quality as a studio shoot. That&apos;s us. We pack light, move fast, and never compromise on the standard.
+          Nomadic Breed was built for the creators who move. Artists on tour, brands doing pop-ups, events that happen once - you need a crew that can show up anywhere and deliver the same quality as a studio shoot. That&apos;s us. We pack light, move fast, and never compromise on the standard.
         </p>
       </section>
 

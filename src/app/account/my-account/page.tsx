@@ -15,7 +15,7 @@ interface ZealSummary {
   tier?: string;
   tierColor?: string;
   visitStreak?: number;
-  achievementsUnlocked?: string[];
+  achievementsEarned?: string[];
   nextTier?: { name: string; min: number; color: string } | null;
 }
 
@@ -88,7 +88,7 @@ export default function MyAccountPage() {
       })
       .catch(() => setProfileLoaded(true));
 
-    // Referral code lookup — create-or-fetch the user's own code, then load its stats
+    // Referral code lookup - create-or-fetch the user's own code, then load its stats
     if (session?.user?.email) {
       fetch("/api/referral", {
         method: "POST",
@@ -120,8 +120,8 @@ export default function MyAccountPage() {
       if (res.ok) {
         const data = await res.json();
         if (data.user) setProfile(data.user);
-        if (data.unlockedAchievements?.length) {
-          toast.success(`Achievement unlocked: profile updated! +Zeal`, { duration: 5000 });
+        if (data.earnedAchievements?.length) {
+          toast.success(`Achievement earned: profile updated! +Zeal`, { duration: 5000 });
         } else {
           toast.success("Profile saved");
         }
@@ -165,7 +165,7 @@ export default function MyAccountPage() {
   const name = profile.name || session?.user?.name || "Member";
   const firstName = name.split(" ")[0];
   // Rendered via next/image, which only allow-lists a handful of remote
-  // hosts (see next.config.ts) — stick to the OAuth-provided avatar here
+  // hosts (see next.config.ts) - stick to the OAuth-provided avatar here
   // rather than the free-text avatarUrl field, which could point anywhere.
   const avatarSrc = session?.user?.image || "";
   const hasProfileDetails = !!(profile.bio || profile.phone || profile.website || profile.instagram || profile.facebook);
@@ -291,8 +291,8 @@ export default function MyAccountPage() {
           <Link href="/loyalty" className="border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-6 hover:border-[#DF3131] transition-all bg-white dark:bg-[#252528] flex flex-col justify-between">
             <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#666] dark:text-white/50 mb-2">Rewards</p>
             <p className="text-[16px] text-[#333] dark:text-[#e0e0e0] leading-snug">
-              {zeal?.achievementsUnlocked?.length
-                ? `${zeal.achievementsUnlocked.length} achievement${zeal.achievementsUnlocked.length === 1 ? "" : "s"} unlocked. Spend your Zeal on discounts, retouching, and merch.`
+              {zeal?.achievementsEarned?.length
+                ? `${zeal.achievementsEarned.length} achievement${zeal.achievementsEarned.length === 1 ? "" : "s"} earned. Spend your Zeal on discounts, retouching, and merch.`
                 : "Spend your Zeal on discounts, retouching, and merch."}
             </p>
           </Link>

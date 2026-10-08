@@ -58,7 +58,7 @@ onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
 onClick={() => setFlipped(f => !f)}
 >
   <div className="relative w-full" style={{ minHeight: "min(400px, 60vh)" }}>
- {/* Front — full image + 60% overlay + title */}
+ {/* Front - full image + 60% overlay + title */}
  <div
     className="absolute inset-0 transition-all duration-700 ease-in-out"
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}
@@ -72,7 +72,7 @@ onClick={() => setFlipped(f => !f)}
  </div>
  </div>
 
- {/* Back — info, details, price, button (centered) */}
+ {/* Back - info, details, price, button (centered) */}
  <div
     className="absolute inset-0 transition-all duration-700 ease-in-out"
     style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
@@ -183,7 +183,7 @@ return (
 
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 pt-12">
 
- {/* ── Category Tabs — pill-style with indicator ── */}
+ {/* ── Category Tabs - pill-style with indicator ── */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
 <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide mb-10 -mx-6 px-6">
   {CATEGORIES.map(cat => {
@@ -207,7 +207,7 @@ return (
   <span className="text-[16px] text-[#666] dark:text-[#b0b0b0] tracking-wider">{filtered.length} SERVICE{filtered.length !== 1 ? "S" : ""} AVAILABLE</span>
  </div>
 
-  {/* ── Service Grid — flip cards ── */}
+  {/* ── Service Grid - flip cards ── */}
   <ScrollReveal animation="fadeUp" delay={0.15}>
   <ErrorBoundary fallback={
     <div className="text-center py-16 col-span-full">

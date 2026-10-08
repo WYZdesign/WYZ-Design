@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Artfinix Foundation — Case Study | WYZ Design",
+  title: "Artfinix Foundation - Case Study | WYZ Design",
   description: "Commercial strategy, promotional content, photography, and visual storytelling for a youth arts organization built on community service and mentorship.",
   keywords: ["case study", "Artfinix Foundation", "commercial strategy", "youth arts", "visual storytelling", "WYZ Design clients"],
   openGraph: {

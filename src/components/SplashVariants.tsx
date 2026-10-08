@@ -1,7 +1,7 @@
 "use client";
 
 /*
- WYZ Design — Splash Gallery (24 variants)
+ WYZ Design - Splash Gallery (24 variants)
  Save as: src/app/splash-gallery/page.tsx → live at /splash-gallery
 */
 

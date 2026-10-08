@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Featured Artist of the Month — FAOTM Gallery",
+  title: "Featured Artist of the Month - FAOTM Gallery",
   description: "Monthly featured artist showcase. Original artwork, prints, merchandise. Current artist: Donte \"Danny\" Davis. New artist every month. Shop the collection.",
   keywords: ["featured artist", "artist of the month", "art gallery", "original artwork", "artist prints", "WYZ Design FAOTM"],
   openGraph: {

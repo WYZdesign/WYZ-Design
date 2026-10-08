@@ -116,7 +116,7 @@ export async function getPageviews(filters?: {
   limit?: number;
   offset?: number;
 }): Promise<Pageview[]> {
-  // In-memory fallback returns nothing — analytics is best-effort.
+  // In-memory fallback returns nothing - analytics is best-effort.
   const r = redis();
   if (!r) return [];
   const from = filters?.from || "";

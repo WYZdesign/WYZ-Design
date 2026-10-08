@@ -105,7 +105,7 @@ export default function CreativeConsultation() {
                 </div>
                 <div className="flex justify-between border-b border-gray-200 dark:border-[#444] pb-3">
                   <span>Availability</span>
-                  <span className="font-semibold text-[#333333] dark:text-[#e0e0e0]">Mon–Sat, 10AM–7PM PT</span>
+                  <span className="font-semibold text-[#333333] dark:text-[#e0e0e0]">Mon - Sat, 10AM - 7PM PT</span>
                 </div>
               </div>
               <Link href="/booking" className="mt-8 bg-[#DF3131] text-white px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition-colors inline-block w-full text-center">

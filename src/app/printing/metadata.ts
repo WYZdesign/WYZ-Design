@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Printing — Stickers, Posters, Cards & Custom Print Services",
+  title: "Printing - Stickers, Posters, Cards & Custom Print Services",
   description: "Custom printing in Los Angeles. Vinyl stickers (kiss cut, die cut), prints, posters, cards, bulk discounts. Premium paper, frame-ready quality. Order online.",
   keywords: ["custom printing Los Angeles", "vinyl stickers", "die cut stickers", "poster printing", "card printing", "bulk printing", "WYZ Design"],
   openGraph: {

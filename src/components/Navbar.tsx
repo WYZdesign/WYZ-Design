@@ -375,7 +375,7 @@ export default function Navbar() {
             style={{ height: '100vh', overflowY: 'auto', overscrollBehavior: 'contain' }}
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}>
-            {/* Profile / Account / Login — pinned to top of side menu */}
+            {/* Profile / Account / Login - pinned to top of side menu */}
              <div className="px-6 pt-2 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
                {session?.user ? (
                 <div className="flex items-center gap-3 mb-3">

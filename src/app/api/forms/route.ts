@@ -44,7 +44,7 @@ function buildIcs(data: Record<string, unknown>, formType: string): string | nul
   if (!ICS_DATE_RE.test(date)) return null;
   const day = date.replace(/-/g, "");
   const serviceName = String(data.service || data.topic || data.serviceName || formType.replace(/-/g, " "));
-  const summary = icsEscape(`WYZ Design — ${serviceName}`);
+  const summary = icsEscape(`WYZ Design - ${serviceName}`);
   const description = icsEscape(`Booked via wyzdesign.com (${formType.replace(/-/g, " ")}). Questions: info@wyzdesign.com`);
   const dtStamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
   const timeRaw = String(data.time || "").trim();
@@ -120,7 +120,7 @@ async function sendCustomerConfirmation(formType: string, data: Record<string, u
     body = `<p>Hi ${name},</p><p>Your photoshoot is scheduled for <strong>${escapeHtml(String(data.date || ""))}</strong> at <strong>${escapeHtml(String(data.time || ""))}</strong>.</p><p>Duration: ${escapeHtml(String(data.duration || ""))}</p><p>${ics ? "A calendar invite is attached." : "We'll send a reminder 24 hours before."} Questions? Reply to this email.</p>`;
   } else if (formType === "consultation-booking") {
     subject = "Consultation Confirmed - WYZ Design";
-    body = `<p>Hi ${name},</p><p>Your free consultation is scheduled for <strong>${escapeHtml(String(data.date || ""))}</strong> at <strong>${escapeHtml(String(data.time || ""))}</strong>.</p><p>Topic: ${escapeHtml(String(data.topic || ""))}</p><p>${ics ? "A calendar invite is attached — add it so you don't miss it." : "We'll reach out with a calendar invite shortly."}</p>`;
+    body = `<p>Hi ${name},</p><p>Your free consultation is scheduled for <strong>${escapeHtml(String(data.date || ""))}</strong> at <strong>${escapeHtml(String(data.time || ""))}</strong>.</p><p>Topic: ${escapeHtml(String(data.topic || ""))}</p><p>${ics ? "A calendar invite is attached - add it so you don't miss it." : "We'll reach out with a calendar invite shortly."}</p>`;
   } else if (ics) {
     body += `<p>A calendar invite for your requested date is attached.</p>`;
   }
@@ -180,7 +180,7 @@ export async function POST(req: NextRequest) {
     const rawIp = getClientIp(req);
     const submittedAt = new Date().toISOString();
 
-    // Persist to Supabase (best-effort — don't block on failure)
+    // Persist to Supabase (best-effort - don't block on failure)
     const supabase = getServiceClient();
     try {
       const { error } = await supabase.from("form_submissions").insert({

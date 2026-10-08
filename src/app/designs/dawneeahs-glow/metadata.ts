@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dawneea's Glow — Case Study | WYZ Design",
+  title: "Dawneea's Glow - Case Study | WYZ Design",
   description: "Full brand identity, product photography, Shopify build, and social strategy for skincare founder. $180K revenue in first 90 days.",
   keywords: ["case study", "Dawneea's Glow", "skincare branding", "Shopify build", "product photography", "WYZ Design clients"],
   openGraph: {

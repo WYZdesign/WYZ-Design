@@ -19,7 +19,7 @@ export function printfulConfigured(): boolean {
 }
 
 export interface MerchVariant {
-  id: number; // sync_variant_id — the id used to order
+  id: number; // sync_variant_id - the id used to order
   name: string;
   size: string | null;
   color: string | null;

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book Photoshoot — Professional Photography Sessions",
+  title: "Book Photoshoot - Professional Photography Sessions",
   description: "Book a professional photoshoot with WYZ Design. Portraits, events, editorial, commercial. 1hr, 2hr, 3hr sessions. Real-time calendar availability.",
   keywords: ["book photoshoot", "photography booking", "portrait session", "event photography booking", "WYZ Design photoshoot"],
   openGraph: {

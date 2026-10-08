@@ -97,7 +97,7 @@ a{color:#DF3131;text-decoration:none}a:hover{color:#B82020}img{max-width:100%}
 /**
  * Returns HTML content for a named page, or the default WYZ template if not found.
  * @method GET
- * @request Query param `page` (default "home") — page name
+ * @request Query param `page` (default "home") - page name
  * @response JSON with html string and exists boolean
  * @auth None
  */

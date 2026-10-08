@@ -58,7 +58,7 @@ async function reserveGiftCard(code: unknown, totalCents: number, ref: string): 
  * @method POST
  * @request Body `{ type: "subscription"|"giftcard"|"service", plan?: string, amount?: number, email?: string, serviceName?: string, servicePrice?: number, ref?: string }`
  * @response JSON with Stripe checkout session URL
- * @auth Optional — NextAuth session supplies the userId; client-sent values ignored
+ * @auth Optional - NextAuth session supplies the userId; client-sent values ignored
  */
 export async function POST(req: NextRequest) {
   if (!validateCsrf(req)) {

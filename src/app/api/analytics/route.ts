@@ -112,7 +112,7 @@ async function runSeoChecks(): Promise<{ check: string; status: string; detail?:
 }
 
 /**
- * POST /api/analytics — log a pageview or event
+ * POST /api/analytics - log a pageview or event
  * Body: { path, referrer?, user_agent?, session_id?, event_type?, label?, value?, metadata? }
  */
 export async function POST(req: NextRequest) {
@@ -162,15 +162,15 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ ok: true });
   } catch (e) {
-    return NextResponse.json({ ok: true }); // silent fail — tracking shouldn't break UX
+    return NextResponse.json({ ok: true }); // silent fail - tracking shouldn't break UX
   }
 }
 
 /**
- * GET /api/analytics — get analytics summary or raw pageviews
- * @query tab — summary | pageviews
- * @query days — for summary (default 30)
- * @query path — filter pageviews
+ * GET /api/analytics - get analytics summary or raw pageviews
+ * @query tab - summary | pageviews
+ * @query days - for summary (default 30)
+ * @query path - filter pageviews
  */
 export async function GET(req: NextRequest) {
   try {

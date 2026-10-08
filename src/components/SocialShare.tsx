@@ -84,7 +84,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
       <button
         onClick={() => { void earn("share-social"); copyLink(); }}
         className="min-w-[44px] min-h-[44px] w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] hover:bg-[#DF3131] hover:text-white transition-all"
-        aria-label={copyFailed ? "Copy failed — try again" : copied ? "Link copied" : "Copy link"}
+        aria-label={copyFailed ? "Copy failed - try again" : copied ? "Link copied" : "Copy link"}
       >
         {copied ? <FiCheck className="w-3.5 h-3.5" /> : <FiLink className="w-3.5 h-3.5" />}
       </button>

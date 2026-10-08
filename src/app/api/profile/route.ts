@@ -14,7 +14,7 @@ const FIELD_MAX_LEN: Record<string, number> = {
  * Returns the authenticated user's own profile fields.
  * @method GET
  * @response JSON `{ user }`
- * @auth Required — user must be authenticated
+ * @auth Required - user must be authenticated
  */
 export async function GET() {
   try {
@@ -35,7 +35,7 @@ export async function GET() {
  * @method PUT
  * @request Body `{ name?, bio?, phone?, website?, avatarUrl?, instagram?, facebook? }`
  * @response JSON with updated user object
- * @auth Required — user must be authenticated
+ * @auth Required - user must be authenticated
  */
 export async function PUT(req: NextRequest) {
   if (!validateCsrf(req)) {
@@ -55,10 +55,10 @@ export async function PUT(req: NextRequest) {
     }
 
     const updated = await updateUserProfile(session.user.email, raw);
-    let unlockedAchievements: string[] = [];
+    let earnedAchievements: string[] = [];
     if (updated && typeof updated === "object") {
       const u = updated as Record<string, unknown>;
-      unlockedAchievements = await evaluateProfileAchievements(session.user.email, {
+      earnedAchievements = await evaluateProfileAchievements(session.user.email, {
         avatarUrl: typeof u.avatarUrl === "string" ? u.avatarUrl : null,
         instagram: typeof u.instagram === "string" ? u.instagram : null,
         facebook: typeof u.facebook === "string" ? u.facebook : null,
@@ -67,7 +67,7 @@ export async function PUT(req: NextRequest) {
         phone: typeof u.phone === "string" ? u.phone : null,
       }).catch(() => []);
     }
-    return NextResponse.json({ user: updated, unlockedAchievements });
+    return NextResponse.json({ user: updated, earnedAchievements });
   } catch (e: unknown) {
     logger.error("profile:update", e);
     return NextResponse.json({ error: "Failed to update profile" }, { status: 500 });

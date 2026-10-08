@@ -336,7 +336,7 @@ const SEED_THREADS = [
   {
     id: 13,
     category: "general",
-    title: "Printing tips: getting accurate color on CMYK transfers",
+    title: "Printing tips: getting achand-pick color on CMYK transfers",
     author: "maya.k",
     avatar: "#DF3131",
     time: "1d",
@@ -713,7 +713,7 @@ export default function ForumPage() {
     <main className="pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <div className="bg-[#DF3131]/10 border-b-2 border-[#DF3131] px-6 py-3 text-center">
         <p className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#DF3131]">Community Preview</p>
-        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0] mt-0.5">Votes, posts, and threads live on <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="text-[#C41C1C] underline">Discord</a> — this page is a demo with local state only.</p>
+        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0] mt-0.5">Votes, posts, and threads live on <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="text-[#C41C1C] underline">Discord</a> - this page is a demo with local state only.</p>
       </div>
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6 pt-32 lg:pt-40">
@@ -733,7 +733,7 @@ export default function ForumPage() {
              </div>
            </div>
 
-          {/* Community Highlights — 3-col grid */}
+          {/* Community Highlights - 3-col grid */}
 <div className="mb-14">
              <h2 className="font-heading font-bold text-[19px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-6">WHAT HAPPENS HERE</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -797,7 +797,7 @@ export default function ForumPage() {
             </div>
           </div>
 
-          {/* News Feed — 3-col grid */}
+          {/* News Feed - 3-col grid */}
           <div className="mb-12">
             <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-4">NEWS FEED</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -931,7 +931,7 @@ export default function ForumPage() {
             </div>
           </div>
 
-          {/* Forum — Reddit-style discussions */}
+          {/* Forum - Reddit-style discussions */}
           <div className="mb-12">
             <div className="flex items-center justify-between mb-6">
               <h2 className="font-heading font-bold text-[18px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] mb-4">DISCUSSIONS</h2>
@@ -958,7 +958,7 @@ export default function ForumPage() {
                   </div>
                 </div>
 
-                {/* Category Filter — Single Dynamic Dropdown */}
+                {/* Category Filter - Single Dynamic Dropdown */}
                 <div className="relative flex-1">
                   <select
                     aria-label="Filter by category"
@@ -985,7 +985,7 @@ export default function ForumPage() {
                   </div>
                 </div>
 
-                {/* Quick Actions — Mobile Stack */}
+                {/* Quick Actions - Mobile Stack */}
                 <div className="flex gap-2 sm:hidden">
                   <button
                     onClick={() => setShowComposer(!showComposer)}
@@ -1016,7 +1016,7 @@ export default function ForumPage() {
               </div>
 </div>
 
-            {/* Dynamic Composer — Slide Down */}
+            {/* Dynamic Composer - Slide Down */}
             <AnimatePresence>
               {showComposer && (
                 <motion.div
@@ -1077,7 +1077,7 @@ export default function ForumPage() {
               )}
             </AnimatePresence>
 
-            {/* Thread list — 3-col grid */}
+            {/* Thread list - 3-col grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {visibleThreads.slice(0, visibleThreadCount).map((t) => {
                 const isOpen = openThread === t.id;
@@ -1241,7 +1241,7 @@ export default function ForumPage() {
             )}
           </div>
 
-          {/* Upcoming Events — 3-col grid */}
+          {/* Upcoming Events - 3-col grid */}
           <div className="mb-12">
             <h2 className="font-heading font-bold text-[19px] tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] text-center mb-6">UPCOMING</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1269,7 +1269,7 @@ export default function ForumPage() {
             </div>
           </div>
 
-          {/* Social Links — 3-col grid */}
+          {/* Social Links - 3-col grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
             {[
               { name: "Instagram", url: "https://instagram.com/wyzdesign", color: "#C22E4E", desc: "Behind the scenes and latest work" },
@@ -1324,7 +1324,7 @@ export default function ForumPage() {
             </div>
           </div>
 
-          {/* Discord CTA — full width banner */}
+          {/* Discord CTA - full width banner */}
           <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] mb-10">
             <div className="bg-[#5865F2] p-8 text-center">
               <FiUsers className="w-12 h-12 text-white/80 mx-auto mb-4" />
@@ -1343,7 +1343,7 @@ export default function ForumPage() {
             </div>
           </div>
 
-          {/* Discord Channel List — 4-col grid */}
+          {/* Discord Channel List - 4-col grid */}
           <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] mb-10">
             <div className="bg-[#5865F2] px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-3">
               <div className="flex items-center gap-3 min-w-0">

@@ -83,7 +83,7 @@ export async function loadZealState(email: string): Promise<ZealStateRow> {
  * `addLoyaltyPoints`, which derives them from the immutable
  * `loyalty_transactions` log. Callers load their `state` via `loadUserState`
  * *before* any `addLoyaltyPoints` call in the same request, so
- * `state.points`/`state.tier` are stale by the time this runs — writing them
+ * `state.points`/`state.tier` are stale by the time this runs - writing them
  * here would clobber the correct value `addLoyaltyPoints` just computed.
  * Omitting the columns means the ON CONFLICT UPDATE only touches the fields
  * listed below, leaving points/tier alone. */

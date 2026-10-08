@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Rewards — Earn Points, Unlock Perks, Get Free Work",
+  title: "Rewards - Earn Points, Earn Perks, Get Free Work",
   description: "Earn Zeal points for bookings, referrals, and engagement. Redeem for discounts, free services, merch, and exclusive access. Loyalty program for WYZ Design clients.",
   keywords: ["loyalty program", "rewards program", "creative agency rewards", "zeal points", "referral discounts", "client rewards"],
   openGraph: {

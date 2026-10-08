@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Services — Photography, Design, Video, Web & Consultation",
+  title: "Services - Photography, Design, Video, Web & Consultation",
   description: "27 creative services across 6 categories. Photography, branding design, videography, consultation, web design. Transparent pricing. Book online or get a custom quote.",
   keywords: ["creative services", "photography services", "graphic design", "branding", "videography", "web design", "Los Angeles", "WYZ Design"],
   openGraph: {

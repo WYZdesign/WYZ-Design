@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     // Unlike lib/logger's other call sites, this one is deliberately NOT
     // gated to non-production: this route runs server-side only, so
-    // console.warn here is never visible to a real user's browser — it
+    // console.warn here is never visible to a real user's browser - it
     // only reaches Vercel's function logs. Production traffic is exactly
     // where a real CSP violation matters most, and the rate limit above
     // (1 report per IP per 12s, capped at 500 tracked IPs) already

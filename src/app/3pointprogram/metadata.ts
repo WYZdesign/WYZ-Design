@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "3-Point Program — Brand Identity, Growth Strategy, Community Building",
+  title: "3-Point Program - Brand Identity, Growth Strategy, Community Building",
   description: "WYZ Design 3-Point Program: 1) Brand Identity (logo, voice, social kit), 2) Growth Strategy (content calendar, paid media, SEO), 3) Community Building (engagement, events, email marketing, partnerships). 2-8 week timelines.",
   keywords: ["3-point program", "brand identity", "growth strategy", "community building", "creative program", "WYZ Design"],
   openGraph: {

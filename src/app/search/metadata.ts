@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Search — Find Services, Content & Resources",
+  title: "Search - Find Services, Content & Resources",
   description: "Search WYZ Design. Find photography, designs, events, services, plans, merch, printing, web design, booking, FAQ, blog, gallery, rewards, featured artist, consultations.",
   keywords: ["search WYZ Design", "find services", "search photography", "search designs", "search events"],
   openGraph: {

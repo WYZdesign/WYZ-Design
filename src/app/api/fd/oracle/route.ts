@@ -69,7 +69,7 @@ FD Photo Studio is LA's premier studio rental company with 60+ stages across LA 
 |--------|---------|----------|
 | Main A (Classic) | Versatile open, track lighting | Everything |
 | Main B (Blackout) | Full blackout | Rim light, dramatic |
-| Main C (Cyc Wall) | Seamless white infinity | Product, clean fashion |
+| Main C (Cyc Wall) | Smooth white infinity | Product, clean fashion |
 | Main D (Bookshelf) | Dark wood shelving, vintage desk | Noir, library editorial |
 | Main E (Soft Light) | North-facing window | Diffused natural, airy |
 | Main F (DT View) | DTLA skyline windows | City lights at night |

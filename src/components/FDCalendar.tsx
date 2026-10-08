@@ -121,7 +121,7 @@ export default function FDCalendar({ events, eventTab, onEventClick }: {
                           ? "bg-green-500/20 text-green-300 border border-green-500/30 hover:bg-green-500/30"
                           : "bg-zinc-800/60 text-zinc-400 border border-zinc-700/50 hover:bg-zinc-700/60"
                       }`}>
-                      <span className="font-semibold">{evt.title.split(" in ")[0].split(" at ")[0].split(" – ")[0].substring(0, 25)}{evt.title.length > 25 ? "…" : ""}</span>
+                      <span className="font-semibold">{evt.title.split(" in ")[0].split(" at ")[0].split(" - ")[0].substring(0, 25)}{evt.title.length > 25 ? "…" : ""}</span>
                     </button>
                   ))}
                   {dayEvents.length > 3 && <div className="text-[11px] text-zinc-600 text-center">+{dayEvents.length - 3} more</div>}

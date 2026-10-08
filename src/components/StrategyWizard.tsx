@@ -35,8 +35,8 @@ const STEPS: Step[] = [
     q: "What's your budget range?",
     options: [
       { label: "Under $200", value: "low" },
-      { label: "$200 – $500", value: "mid" },
-      { label: "$500 – $1,000", value: "high" },
+      { label: "$200 - $500", value: "mid" },
+      { label: "$500 - $1,000", value: "high" },
       { label: "$1,000+", value: "premium" },
       { label: "Monthly Plan", value: "monthly" },
     ],
@@ -44,7 +44,7 @@ const STEPS: Step[] = [
   {
     q: "How soon do you need this?",
     options: [
-      { label: "ASAP (24–48 hrs)", value: "rush" },
+      { label: "ASAP (24 - 48 hrs)", value: "rush" },
       { label: "This Week", value: "week" },
       { label: "Within 2 Weeks", value: "twoweeks" },
       { label: "No Rush", value: "flexible" },

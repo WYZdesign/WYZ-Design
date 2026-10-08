@@ -64,7 +64,7 @@ export function errorResponse(
 
 /**
  * Standardized success response. Wraps arbitrary data and adds a timestamp.
- * Passing `data` directly mirrors `NextResponse.json(data)` — the `timestamp`
+ * Passing `data` directly mirrors `NextResponse.json(data)` - the `timestamp`
  * is only included when `withTimestamp` is true to avoid breaking exact-shape clients.
  */
 export function successResponse(data: unknown, init?: { status?: number; headers?: Record<string, string> }): NextResponse {

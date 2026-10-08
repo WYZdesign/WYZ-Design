@@ -26,12 +26,12 @@ export default function ChatWidget() {
   // Mirrors the fix in ScrollToTop.tsx: Navbar's mobile menu sets
   // document.body.dataset.mobileOpen reactively off its own state, but that's
   // a plain DOM read with nothing to make THIS component re-render when it
-  // changes — without it the chat bubble stayed fully visible/clickable right
+  // changes - without it the chat bubble stayed fully visible/clickable right
   // on top of the open mobile nav panel. A MutationObserver gives this
   // component its own re-render trigger tied to the real DOM change.
   const [bodyLocked, setBodyLocked] = useState(false);
   // Board #29: true while any [data-chat-avoid] element occupies the bubble's
-  // own bottom-right corner footprint — see the IntersectionObserver effect below.
+  // own bottom-right corner footprint - see the IntersectionObserver effect below.
   const [clearZone, setClearZone] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hey! I'm the WYZ Design assistant. I can help you learn about our services, check pricing, or get you booked. How can I help today?" },

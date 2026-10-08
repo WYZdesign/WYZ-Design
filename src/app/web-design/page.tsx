@@ -180,11 +180,11 @@ export default function WebDesignPage() {
 return (
     <>
       <main className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
-        {/* ═══ HERO — Split (desktop video/text, mobile merged) ═══ */}
+        {/* ═══ HERO - Split (desktop video/text, mobile merged) ═══ */}
         <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
         {/* Desktop split grid. absolute inset-0 (not lg:h-full) so this sizes against
             the hero section's actual rendered height even though that height comes
-            from min-h-screen rather than an explicit height — a plain height:100%
+            from min-h-screen rather than an explicit height - a plain height:100%
             can't resolve against a min-height-only ancestor and collapses to content
             height instead, which was leaving a large gap before the marquee below. */}
         <div className="hidden lg:grid lg:grid-cols-2 absolute inset-0">
@@ -274,7 +274,7 @@ return (
         </EnhancedMarquee>
         </section>
 
-        {/* ═══ CAPABILITIES — Scroll reveal ═══ */}
+        {/* ═══ CAPABILITIES - Scroll reveal ═══ */}
         <ScrollReveal animation="fadeUp">
           <section className="pt-6 pb-20 bg-white dark:bg-[#1C1C1E]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
@@ -298,7 +298,7 @@ return (
           </section>
         </ScrollReveal>
 
-        {/* ═══ PROCESS — Auto-cycling timeline ═══ */}
+        {/* ═══ PROCESS - Auto-cycling timeline ═══ */}
         <ScrollReveal animation="fadeUp">
           <section className="py-20 bg-[#111]">
             <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
@@ -326,7 +326,7 @@ return (
           </section>
         </ScrollReveal>
 
-        {/* ═══ CLIENT PORTFOLIO — Interactive grid ═══ */}
+        {/* ═══ CLIENT PORTFOLIO - Interactive grid ═══ */}
         <ScrollReveal animation="fadeUp" delay={0.1}>
           <section id="portfolio" className="py-20 bg-[#F5F5F3] dark:bg-[#252528]">
             <div className="max-w-[130rem] mx-auto px-6 lg:px-12">

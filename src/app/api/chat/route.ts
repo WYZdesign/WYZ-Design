@@ -77,7 +77,7 @@ Earn Zeal: daily login (+2), newsletter signup (+40), consultation booking (+150
 Redeem Zeal on the /loyalty page for real rewards: $25 off any service (500), free photo retouching (1,000), merch item under $40 (800), extra photoshoot hour (2,000), $100 off any booking (2,000).
 
 ## EVENTS
-We curate and cover events: concerts, showcases, private functions. Past events include live performances, art shows, and community gatherings. Event photography starts at $200. See /events.
+We hand-pick and cover events: concerts, showcases, private functions. Past events include live performances, art shows, and community gatherings. Event photography starts at $200. See /events.
 
 ## BOOKING
 Free creative consultation: /booking
@@ -182,7 +182,7 @@ Use this naturally when they ask about rewards, tiers, progress, pricing, or boo
         } else if (lastUser.includes("print") || lastUser.includes("sticker") || lastUser.includes("flyer")) {
           response = "We offer custom printing: vinyl stickers, prints/posters, buttons, business cards, flyers, banners. Paper types include Premium Gloss, Matte, Luster/Pearl, and Satin. Sticker cuts: Kiss Cut and Die Cut. Get a quote at /printing.";
         } else if (lastUser.includes("event")) {
-          response = "We curate and cover events: concerts, showcases, private functions. Event photography starts at $200/3hr. We handle everything from concept to execution. See /events or book at /booking-calendar/event-photography.";
+          response = "We hand-pick and cover events: concerts, showcases, private functions. Event photography starts at $200/3hr. We handle everything from concept to execution. See /events or book at /booking-calendar/event-photography.";
         } else if (lastUser.includes("consult")) {
           response = "Free creative consultation (30 min) at /booking. We also offer Logo Consultation ($50/2hr) and Marketing Consultation ($50/1hr). No pressure, just a clear game plan for your brand.";
         } else if (lastUser.includes("hello") || lastUser.includes("hi") || lastUser.includes("hey") || lastUser.includes("what's up")) {

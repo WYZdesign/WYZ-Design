@@ -30,7 +30,7 @@ export function useGyroscope() {
           const permission = await (DeviceOrientationEvent as any).requestPermission();
           setPermissionGranted(permission === "granted");
         } else {
-          // Android or older iOS — no permission needed
+          // Android or older iOS - no permission needed
           setPermissionGranted(true);
         }
       } catch {

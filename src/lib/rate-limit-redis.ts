@@ -11,7 +11,7 @@ async function initRedis() {
       const mod = await import("@upstash/redis");
       Redis = mod.Redis;
     } catch {
-      logger.warn("rate-limit", "@upstash/redis not installed — using in-memory fallback");
+      logger.warn("rate-limit", "@upstash/redis not installed - using in-memory fallback");
       return null;
     }
     const url = process.env.UPSTASH_REDIS_REST_URL;
@@ -22,10 +22,10 @@ async function initRedis() {
       redisAvailable = true;
       logger.info("rate-limit", "Upstash Redis connected");
     } else {
-      logger.warn("rate-limit", "Upstash env vars not set — using in-memory fallback");
+      logger.warn("rate-limit", "Upstash env vars not set - using in-memory fallback");
     }
   } catch {
-    logger.warn("rate-limit", "Upstash Redis unavailable — using in-memory fallback");
+    logger.warn("rate-limit", "Upstash Redis unavailable - using in-memory fallback");
   }
   return redis;
 }
@@ -49,7 +49,7 @@ export async function rateLimit(
       if (current === 1) {
         await redis.expire(redisKey, windowSec);
       } else {
-        // Always reset the TTL on each request — prevents the INCR-EXPIRE race
+        // Always reset the TTL on each request - prevents the INCR-EXPIRE race
         // where a second concurrent request could let the window slide past the
         // original expiry without a matching EXPIRE.
         await redis.expire(redisKey, windowSec);

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Merch Concepts — Dying Breed Crew Design Archive",
+  title: "Merch Concepts - Dying Breed Crew Design Archive",
   description: "Explore the meaning behind every Dying Breed Crew design. Arc Collection, Crater Collection, Era Collection. 18 concepts with deep narratives: Yu Yi, Divine Woman, Entropy, Femme Fatale, Galactic Spill, Toxic Blossom, Crown Heights, Neon Dystopia, Last of a Dying Breed.",
   keywords: ["merch concepts", "Dying Breed Crew designs", "Arc Collection", "Crater Collection", "Era Collection", "design meaning", "WYZ Design merch"],
   openGraph: {

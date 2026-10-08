@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         ip: hashIp(ip),
       });
     } catch {
-      /* table may not exist yet — never fail the beacon */
+      /* table may not exist yet - never fail the beacon */
     }
     return NextResponse.json({ ok: true });
   } catch {

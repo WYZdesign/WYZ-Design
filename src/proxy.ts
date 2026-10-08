@@ -168,7 +168,7 @@ export async function proxy(req: NextRequest) {
       res.headers.set("X-Request-Id", crypto.randomUUID());
       return res;
     } catch {
-      // Rate limiter failure must never block the site — allow through.
+      // Rate limiter failure must never block the site - allow through.
       const res = NextResponse.next();
       res.headers.set("X-Request-Id", crypto.randomUUID());
       return res;

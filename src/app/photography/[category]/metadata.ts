@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Photography Category — WYZ Design",
+  title: "Photography Category - WYZ Design",
   description: "Browse WYZ Design photography by category: Portraits, Events, Editorial, Commercial, Studio, Urbex, Outdoors, Conceptual, Concerts, Street, Products, Bodypaint, Boudoir.",
   keywords: ["photography category", "portrait photography", "event photography", "editorial photography", "commercial photography", "studio photography", "WYZ Design gallery"],
   openGraph: {

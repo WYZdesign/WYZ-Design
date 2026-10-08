@@ -15,7 +15,7 @@ function isAdmin(session: Session | null): boolean {
 }
 
 /**
- * GET /api/bookkeeping — list transactions, summary, or export CSV/Schedule C
+ * GET /api/bookkeeping - list transactions, summary, or export CSV/Schedule C
  */
 export async function GET(req: NextRequest) {
   try {
@@ -74,7 +74,7 @@ export async function GET(req: NextRequest) {
 }
 
 /**
- * POST /api/bookkeeping — create a transaction
+ * POST /api/bookkeeping - create a transaction
  */
 export async function POST(req: NextRequest) {
   try {
@@ -121,7 +121,7 @@ export async function POST(req: NextRequest) {
 }
 
 /**
- * PUT /api/bookkeeping?id=123 — update a transaction
+ * PUT /api/bookkeeping?id=123 - update a transaction
  */
 export async function PUT(req: NextRequest) {
   try {
@@ -146,7 +146,7 @@ export async function PUT(req: NextRequest) {
 }
 
 /**
- * DELETE /api/bookkeeping?id=123 — delete a transaction
+ * DELETE /api/bookkeeping?id=123 - delete a transaction
  */
 export async function DELETE(req: NextRequest) {
   try {

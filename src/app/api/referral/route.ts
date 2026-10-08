@@ -26,9 +26,9 @@ function getIp(req: NextRequest): string {
 }
 
 /**
- * GET /api/referral — Look up a referral code's stats (own code only)
- * @query code — the referral code
- * @auth Required — session must match the code's owner
+ * GET /api/referral - Look up a referral code's stats (own code only)
+ * @query code - the referral code
+ * @auth Required - session must match the code's owner
  */
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");
@@ -92,7 +92,7 @@ export async function GET(req: NextRequest) {
 }
 
 /**
- * POST /api/referral — Create a new referral code or record a conversion
+ * POST /api/referral - Create a new referral code or record a conversion
  *
  * Create code: { action: "create", email: string }
  * Record conversion (server-to-server only): { action: "convert", code: string, email: string, eventType: "signup"|"purchase", amount?: number }

@@ -24,7 +24,7 @@ const ALBUM_DESC: Record<string, string> = {
  Events: "Live event coverage, concerts, showcases, and private functions.",
  Outdoors: "Natural light sessions in urban and rural environments.",
  Studio: "Controlled lighting for portraits, headshots, and creative work.",
- Boudoir: "Intimate, empowering portrait sessions.",
+ Boudoir: "Intimate, helping portrait sessions.",
  Bodypaint: "Body art captured through the lens.",
  Urbex: "Exploring abandoned spaces through photography.",
  Products: "Professional product shots for brands and e-commerce.",
@@ -450,7 +450,7 @@ return (
       the offer catalog that used to be duplicated here as a second,
       conflicting Service schema (different name, different areaServed
       format, a fully-inlined Organization instead of the site's one
-      canonical #organization node) — Google was seeing two Service
+      canonical #organization node) - Google was seeing two Service
       entities for the same URL. */}
   <style>{`
   @keyframes slideInLeft{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:translateX(0)}}
@@ -828,7 +828,7 @@ return (
  </section>
  </ScrollReveal>
 
- {/* IMAGE CAROUSEL 3 — bottom above footer */}
+ {/* IMAGE CAROUSEL 3 - bottom above footer */}
  <section className="py-6">
    <AutoScrollRow items={carouselImages3} />
  </section>

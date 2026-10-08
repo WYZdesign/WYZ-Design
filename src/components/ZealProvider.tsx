@@ -104,7 +104,7 @@ export default function ZealProvider({ children }: { children: React.ReactNode }
       toast.success(`Quest Complete: ${payload.quest.title} +${payload.quest.bonusZeal} Zeal`, { duration: 6000 });
     }
     if (payload.achievement) {
-      toast.success(`Achievement Unlocked: ${payload.achievement.title}`, { duration: 6000 });
+      toast.success(`Achievement Earned: ${payload.achievement.title}`, { duration: 6000 });
     }
     toast.success(`+${payload.zeal} Zeal! ${payload.reason ?? ""}`);
     return payload;

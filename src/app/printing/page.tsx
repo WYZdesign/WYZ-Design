@@ -188,7 +188,7 @@ export default function PrintingPage() {
   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
   {/* Desktop: split grid. absolute inset-0 (not lg:h-full) so this sizes against the
       hero section's actual rendered height even though that height comes from
-      min-h-screen rather than an explicit height — a plain height:100% can't resolve
+      min-h-screen rather than an explicit height - a plain height:100% can't resolve
       against a min-height-only ancestor and collapses to content height instead,
       which was leaving a large gap before the marquee below. */}
   <div className="hidden lg:grid lg:grid-cols-2 absolute inset-0">
@@ -242,7 +242,7 @@ export default function PrintingPage() {
 
  <div className="max-w-[115rem] mx-auto px-6 lg:px-12">
 
- {/* ── Paper Types — Accordion ── */}
+ {/* ── Paper Types - Accordion ── */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <div className="py-12">
   <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center text-[#333] dark:text-[#e0e0e0] mb-4">PHOTO PAPER TYPES</h2>
@@ -255,7 +255,7 @@ export default function PrintingPage() {
  </div>
  </ScrollReveal>
 
- {/* ── Sticker Cut Types — Interactive Cards ── */}
+ {/* ── Sticker Cut Types - Interactive Cards ── */}
  <ScrollReveal animation="fadeUp" delay={0.15}>
   <div className="py-12 border-t border-[#E2E2E2] dark:border-[#444]">
   <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-center text-[#333] dark:text-[#e0e0e0] mb-4">STICKER CUT TYPES</h2>

@@ -323,7 +323,7 @@ const faotmImages = [
   </section>
   </ScrollReveal>
 
- {/* ═══ SERVICE CARDS — ACCORDION ═══ */}
+ {/* ═══ SERVICE CARDS - ACCORDION ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-6 max-w-[1100px] mx-auto px-6">
  <AccordionServiceCard
@@ -350,7 +350,7 @@ const faotmImages = [
 </section>
   </ScrollReveal>
 
-  {/* ═══ FOATM — FEATURED ARTIST OF THE MONTH ═══ */}
+  {/* ═══ FOATM - FEATURED ARTIST OF THE MONTH ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
    <section className="py-10 bg-white dark:bg-[#252528] border-y border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
 <div className="max-w-[130rem] mx-auto px-6 lg:px-12">

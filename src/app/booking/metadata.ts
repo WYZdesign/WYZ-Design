@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Booking — Schedule Your Creative Session",
+  title: "Booking - Schedule Your Creative Session",
   description: "Book WYZ Design services online. Photography, design, video, web, consultation. Select date, time, and service. Real-time availability.",
   keywords: ["book photography", "schedule design consultation", "book video shoot", "creative services booking", "WYZ Design booking"],
   openGraph: {

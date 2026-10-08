@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact — Start a Project, Ask a Question, Say Hello",
+  title: "Contact - Start a Project, Ask a Question, Say Hello",
   description: "Get in touch with WYZ Design. Los Angeles + Chicago. info@wyzdesign.com • (213) 399-9610. We respond within 24 hours.",
   keywords: ["contact WYZ Design", "creative agency contact", "start a project", "Los Angeles creative studio"],
   openGraph: {

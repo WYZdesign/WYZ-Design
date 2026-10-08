@@ -14,7 +14,7 @@ interface TriggerBody {
 }
 
 /**
- * POST /api/booking/email — Manually trigger post-booking emails
+ * POST /api/booking/email - Manually trigger post-booking emails
  *
  * @auth Admin only
  * @body { action: "confirm" | "what-to-expect" | "delivered", email, serviceName, customerName?, amount?, notes? }
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
           sent_at: new Date().toISOString(),
         });
       } catch {
-        // email_log table may not exist yet — best-effort
+        // email_log table may not exist yet - best-effort
       }
       return NextResponse.json({ success: true, message });
     } else {

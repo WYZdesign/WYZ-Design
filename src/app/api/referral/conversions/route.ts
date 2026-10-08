@@ -9,10 +9,10 @@ function getIp(req: NextRequest): string {
 }
 
 /**
- * GET /api/referral/conversions — Conversion history for the authenticated user's own code
- * @query code — the referral code (must belong to the authenticated user)
- * @auth Required — session must match the code's owner
- * Never returns raw email addresses — only anonymized initials + event data.
+ * GET /api/referral/conversions - Conversion history for the authenticated user's own code
+ * @query code - the referral code (must belong to the authenticated user)
+ * @auth Required - session must match the code's owner
+ * Never returns raw email addresses - only anonymized initials + event data.
  */
 export async function GET(req: NextRequest) {
   const code = req.nextUrl.searchParams.get("code");

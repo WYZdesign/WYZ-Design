@@ -903,7 +903,7 @@ export default function HomePage() {
  `}</style>
 
     <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[80vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden hero-banner">
-    {/* Single wrapper — keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
+    {/* Single wrapper - keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
     <div className="absolute inset-0 flex items-center justify-center">
     {/* Background: video fills entire hero */}
     <div className="absolute inset-0 z-0 bg-black">
@@ -1003,7 +1003,7 @@ export default function HomePage() {
      <p className="text-[#666] dark:text-white/70 text-[15px] sm:text-base max-w-xl mx-auto leading-relaxed mt-4">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: 90+ events produced, 45+ clients served. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
     </div>
   </div>
-   {/* Full-width carousel — full bleed stretching to both sides */}
+   {/* Full-width carousel - full bleed stretching to both sides */}
    <div className="relative z-10 my-16 sm:my-24 w-full overflow-hidden">
       <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.55} />
    </div>

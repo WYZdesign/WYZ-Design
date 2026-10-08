@@ -110,7 +110,7 @@ export default function AnalyticsProvider() {
         </Script>
       )}
 
-      {/* ── Google Tag Manager (noscript fallback — consent-gated) ── */}
+      {/* ── Google Tag Manager (noscript fallback - consent-gated) ── */}
       {consent.analytics && process.env.NEXT_PUBLIC_GTM_ID && (
         <noscript>
           <iframe

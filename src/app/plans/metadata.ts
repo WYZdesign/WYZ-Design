@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Plans — Monthly Creative Subscriptions & Custom Packages",
+  title: "Plans - Monthly Creative Subscriptions & Custom Packages",
   description: "Creative subscription plans for ongoing work. Starter ($250/mo), Business Boost ($500/mo), Pro Plus ($750/mo), Ultimate ($1,000/mo). Custom packages available. Cancel anytime.",
   keywords: ["creative subscription", "monthly design plan", "creative retainer", "branding package", "ongoing creative work", "WYZ Design"],
   openGraph: {

@@ -174,7 +174,7 @@ export default function MobileSplashPage() {
                 className="absolute bottom-4 left-4 text-xs italic"
                 style={{ color: "#666" }}
               >
-                — {concept.author}
+                - {concept.author}
               </div>
               <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>

@@ -58,7 +58,7 @@ const providers = [
   }),
 ];
 
-// Facebook disabled — app ID invalid on Meta's side. Re-enable when app is recreated.
+// Facebook disabled - app ID invalid on Meta's side. Re-enable when app is recreated.
 // To re-enable: uncomment below and set FACEBOOK_CLIENT_ID + FACEBOOK_CLIENT_SECRET
 // import Facebook from "next-auth/providers/facebook";
 // if (process.env.FACEBOOK_CLIENT_ID && process.env.FACEBOOK_CLIENT_SECRET) {
@@ -98,7 +98,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
  * NextAuth.js catch-all route handler for authentication.
  * Supports Facebook, Google OAuth, and admin credential sign-in.
  * @method GET, POST
- * @request Varies by provider — OAuth callbacks or `{ email, password }` for credentials
+ * @request Varies by provider - OAuth callbacks or `{ email, password }` for credentials
  * @response Session object or redirect to sign-in page
  * @auth Required for authenticated routes; public for sign-in
  */

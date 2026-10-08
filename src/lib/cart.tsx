@@ -48,7 +48,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
     } catch {
-      /* storage full or blocked — cart still works for this session */
+      /* storage full or blocked - cart still works for this session */
     }
   }, [lines, ready]);
 

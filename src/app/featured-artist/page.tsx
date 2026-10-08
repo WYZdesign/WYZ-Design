@@ -165,7 +165,7 @@ export default function FeaturedArtistPage() {
 
  return (
  <main className="pt-0 pb-0 bg-white">
- {/* ═══ HERO — Full biography split ═══ */}
+ {/* ═══ HERO - Full biography split ═══ */}
  <section className="relative -mt-20 lg:-mt-24 min-h-screen flex flex-col lg:flex-row overflow-hidden">
  {/* Left: Image */}
  <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen bg-white dark:bg-[#111] flex items-center justify-center overflow-hidden">
@@ -197,7 +197,7 @@ export default function FeaturedArtistPage() {
  </div>
  </section>
 
- {/* ═══ 5 Ws — Biography-style flow ═══ */}
+ {/* ═══ 5 Ws - Biography-style flow ═══ */}
  <ScrollReveal animation="fadeUp">
  <section className="py-16 bg-white">
  <div className="max-w-[80rem] mx-auto px-6 lg:px-12">
@@ -206,11 +206,11 @@ export default function FeaturedArtistPage() {
  <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.08em] uppercase text-[#333] mb-4">GET TO KNOW THE ARTIST</h2>
  </div>
  <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-10 items-start">
- {/* Flipcard gallery — visible on all screens, sticky on desktop */}
+ {/* Flipcard gallery - visible on all screens, sticky on desktop */}
  <div className="block">
  <ArtistGallery />
  </div>
- {/* 5 Ws list — text left-aligned on all screens */}
+ {/* 5 Ws list - text left-aligned on all screens */}
  <div className="space-y-0 text-left">
 {WS.map((w, i) => (
   <div key={w.label} className={`group flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-8 py-7 ${i < WS.length - 1 ? "border-b border-[#E2E2E2]" : ""} hover:bg-[#FAFAF8] transition-colors duration-300 px-4 sm:px-6`}>

@@ -24,7 +24,7 @@ export interface RedisLike {
 }
 
 /**
- * Prefers Upstash REST (the only reachable Redis on Vercel serverless —
+ * Prefers Upstash REST (the only reachable Redis on Vercel serverless  - 
  * ioredis needs raw TCP, which Vercel functions don't allow). Falls back to
  * ioredis for local dev where REDIS_HOST is a real endpoint. This fixes the
  * split-brain where rate limiting used Upstash while zeal cooldowns/locks/
@@ -197,7 +197,7 @@ export async function addNewsletterSubscriber(email: string, active = true) {
     // Called with active=false to stake out a "pending confirmation" row
     // before the double opt-in email is confirmed, and with the active=true
     // default once confirmed. Deliberately never sets `unsubscribed_at`
-    // here — that column means "this person explicitly opted out" and is
+    // here - that column means "this person explicitly opted out" and is
     // owned exclusively by removeNewsletterSubscriber(). Setting it for a
     // brand-new pending signup would make anyone who hasn't clicked the
     // confirmation link yet indistinguishable from a real unsubscribe.

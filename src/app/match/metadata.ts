@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Match — Find Your Perfect Creative Services",
+  title: "Match - Find Your Perfect Creative Services",
   description: "Not sure where to start? WYZ Design matches you with the perfect creative services for your brand. Personalized recommendations, custom pricing, style-matched creatives.",
   keywords: ["service matching", "creative services finder", "personalized recommendations", "WYZ Design match"],
   openGraph: {

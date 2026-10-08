@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Product Details — WYZ Design Merch Store",
+  title: "Product Details - WYZ Design Merch Store",
   description: "View product details, colors, sizes, materials, and reviews. Dying Breed Crew apparel, headwear, accessories. Print-on-demand via Printful.",
   keywords: ["product details", "merch product", "Dying Breed Crew", "apparel", "headwear", "accessories", "WYZ Design merch"],
   openGraph: {

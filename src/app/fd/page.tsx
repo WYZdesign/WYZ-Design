@@ -28,7 +28,7 @@ const LA_STUDIOS = [
   { name: "Hill 6", building: "Hill", feature: "Moroccan tile shower set - textured architectural detail for editorial and boudoir", image: "/images/fd-studios/Hill/Hill_6.webp", color: "#EC4899" },
   { name: "Hill 7", building: "Hill", feature: "Rain room - programmable overhead water system for dramatic wet-weather fashion and fine art", image: "/images/fd-studios/Hill/Hill_7.webp", color: "#3B82F6" },
   { name: "Hill 8", building: "Hill", feature: "Raw concrete gallery - brutalist industrial backdrop for avant-garde and street-style", image: "/images/fd-studios/Hill/Hill_8.webp", color: "#64748B" },
-  { name: "Yukon 1", building: "Yukon", feature: "White seamless infinity cove - floating, boundary-less fashion and beauty looks", image: "/images/fd-studios/Yukon/Yukon_1.jpg", color: "#F9AD4D" },
+  { name: "Yukon 1", building: "Yukon", feature: "White smooth infinity cove - floating, boundary-less fashion and beauty looks", image: "/images/fd-studios/Yukon/Yukon_1.jpg", color: "#F9AD4D" },
   { name: "Yukon 2", building: "Yukon", feature: "Gritty warehouse corner with metal beams - urban industrial for streetwear and bands", image: "/images/fd-studios/Yukon/Yukon_2.webp", color: "#A855F7" },
   { name: "Yukon 3", building: "Yukon", feature: "Water studio - splash pool and wet surface for dynamic aquatic editorial", image: "/images/fd-studios/Yukon/Yukon_3.webp", color: "#0EA5E9" },
   { name: "Yukon 4", building: "Yukon", feature: "Abstract painted backdrop room - colorful expressionist walls for playful, artistic portraiture", image: "/images/fd-studios/Yukon/Yukon_4.jpg", color: "#F97316" },
@@ -48,7 +48,7 @@ const LA_STUDIOS = [
   { name: "Main C", building: "Main", feature: "White brick gallery wall - clean editorial look with architectural character", image: "/images/fd-studios/Main/Main_C.webp", color: "#64748B" },
   { name: "Main D", building: "Main", feature: "Dark painted set with practical window light - moody portraiture and film-style scenes", image: "/images/fd-studios/Main/Main_D.jpg", color: "#A855F7" },
   { name: "Main E", building: "Main", feature: "Neutral beige cyclorama with softbox grid - beauty and commercial headshots", image: "/images/fd-studios/Main/Main_E.webp", color: "#F9AD4D" },
-  { name: "Main F", building: "Main", feature: "High-key white infinity cove - floating product, beauty, and fashion on seamless white", image: "/images/fd-studios/Main/Main_F.webp", color: "#0EA5E9" },
+  { name: "Main F", building: "Main", feature: "High-key white infinity cove - floating product, beauty, and fashion on smooth white", image: "/images/fd-studios/Main/Main_F.webp", color: "#0EA5E9" },
 ];
 
 const PROMPTS = [
@@ -83,7 +83,7 @@ const FD_EVENTS = [
   { title: "April Photo Mixer in Los Angeles", date: "2026-04-25", dateLabel: "Sat, Apr 25", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Hill, Los Angeles CA", url: "https://www.eventbrite.com/e/april-photo-mixer-in-los-angeles-tickets-1986567923135", price: "$15", city: "LA", status: "past" },
   { title: "Spring Photography Mixer Event in New York", date: "2026-04-11", dateLabel: "Sat, Apr 11", time: "1:00 PM - 4:00 PM", location: "FD Photo Studio Astoria, Queens NY", url: "https://www.eventbrite.com/e/spring-photography-mixer-event-in-new-york-tickets-1983586757388", price: "$15", city: "NY", status: "past" },
   { title: "Rain Photography Workshop in Los Angeles", date: "2026-03-28", dateLabel: "Sat, Mar 28", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Olympic, Los Angeles CA", url: "https://www.fdphotostudio.com/events/rain-photography-workshop-in-los-angeles/", price: "$135", city: "LA", status: "past" },
-  { title: "Brooklyn Photo Mixer – RGB & Rain Effects", date: "2026-03-26", dateLabel: "Thu, Mar 26", time: "5:00 PM - 8:00 PM", location: "FD Photo Studio Metro, Brooklyn NY", url: "https://www.eventbrite.com/e/brooklyn-photo-mixer-3-studios-including-rgb-lighting-rain-effects-tickets-1984404435084", price: "$15", city: "NY", status: "past" },
+  { title: "Brooklyn Photo Mixer - RGB & Rain Effects", date: "2026-03-26", dateLabel: "Thu, Mar 26", time: "5:00 PM - 8:00 PM", location: "FD Photo Studio Metro, Brooklyn NY", url: "https://www.eventbrite.com/e/brooklyn-photo-mixer-3-studios-including-rgb-lighting-rain-effects-tickets-1984404435084", price: "$15", city: "NY", status: "past" },
   { title: "Spring Photo Mixer at FD Photo Studio in DTLA", date: "2026-03-07", dateLabel: "Sat, Mar 7", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Art, Los Angeles CA", url: "https://www.eventbrite.com/e/spring-photo-mixer-event-at-fd-photo-studio-in-downtown-la-tickets-1983052930698", price: "$15", city: "LA", status: "past" },
   { title: "Creature Captures - Photo Mixer with Exotic Animals in NY", date: "2026-02-28", dateLabel: "Sat, Feb 28", time: "1:00 PM - 4:00 PM", location: "FD Photo Studio Metro, Brooklyn NY", url: "https://www.eventbrite.com/o/fd-photo-studio-14334915883", price: "$25", city: "NY", status: "past" },
   { title: "Valentine's Day Photography Mixer in DTLA", date: "2026-02-14", dateLabel: "Sat, Feb 14", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Main, Los Angeles CA", url: "https://www.eventbrite.com/o/fd-photo-studio-14334915883", price: "$15", city: "LA", status: "past" },
@@ -100,7 +100,7 @@ const FD_EVENTS = [
   { title: "October Photo Mixer in Los Angeles", date: "2025-10-19", dateLabel: "Sun, Oct 19", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Hill, Los Angeles CA", url: "", price: "$15", city: "LA", status: "past" },
   { title: "Cosplay & Connect: Brooklyn Photography Mixer", date: "2025-10-12", dateLabel: "Sun, Oct 12", time: "4:00 PM - 7:00 PM", location: "FD Photo Studio Metro, Brooklyn NY", url: "", price: "$20", city: "NY", status: "past" },
   { title: "Cosplay & Connect: DTLA Photography Mixer", date: "2025-09-27", dateLabel: "Sat, Sep 27", time: "4:00 PM - 7:00 PM", location: "FD Photo Studio Art, Los Angeles CA", url: "", price: "$20", city: "LA", status: "past" },
-  { title: "Open Studio Photography Mixer – DTLA", date: "2025-09-13", dateLabel: "Sat, Sep 13", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Main, Los Angeles CA", url: "", price: "$15", city: "LA", status: "past" },
+  { title: "Open Studio Photography Mixer - DTLA", date: "2025-09-13", dateLabel: "Sat, Sep 13", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Main, Los Angeles CA", url: "", price: "$15", city: "LA", status: "past" },
   { title: "Blackout Studio & RGB Lights Workshop w/ Aaron Ram", date: "2025-09-06", dateLabel: "Sat, Sep 6", time: "3:00 PM - 6:00 PM", location: "FD Photo Studio Yukon, Hawthorne CA", url: "", price: "$135", city: "LA", status: "past" },
   { title: "Ballerinas in Frame: Ballet-Themed Photoshoot", date: "2025-08-27", dateLabel: "Wed, Aug 27", time: "5:00 PM - 8:00 PM", location: "FD Photo Studio Metro, Brooklyn NY", url: "", price: "$25", city: "NY", status: "past" },
   { title: "Color Pop Social: NY Photography Mixer", date: "2025-08-24", dateLabel: "Sun, Aug 24", time: "1:00 PM - 4:00 PM", location: "FD Photo Studio LIC, Queens NY", url: "", price: "$15", city: "NY", status: "past" },
@@ -246,7 +246,7 @@ export default function FDOraclePage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* ═══ HERO — ORACLE GENERATOR ═══ */}
+      {/* ═══ HERO - ORACLE GENERATOR ═══ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-900" />
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 25% 50%, rgba(223,49,49,0.3) 0%, transparent 50%), radial-gradient(circle at 75% 50%, rgba(139,92,246,0.2) 0%, transparent 50%)" }} />

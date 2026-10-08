@@ -59,9 +59,9 @@ function checkAdmin(session: Session | null): boolean {
 /**
  * Returns admin dashboard data (analytics, users, newsletter, forms, chats, or CSV export).
  * @method GET
- * @request Query param `tab` — one of: overview, analytics, users, newsletter, forms, chats, export
+ * @request Query param `tab` - one of: overview, analytics, users, newsletter, forms, chats, export
  * @response JSON with tab-specific data, or CSV for export tab
- * @auth Required — admin email must be in ADMIN_EMAILS env var
+ * @auth Required - admin email must be in ADMIN_EMAILS env var
  */
 export async function GET(req: NextRequest) {
   try {
@@ -121,7 +121,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ submissions: await getFormSubmissions() });
     }
 
-    // Chat tab — chats are not currently persisted (stateless /api/chat)
+    // Chat tab - chats are not currently persisted (stateless /api/chat)
     if (tab === "chats") {
       return NextResponse.json({
         totalMessages: 0,
@@ -157,7 +157,7 @@ export async function GET(req: NextRequest) {
  * @method POST
  * @request Body `{ action: "add-points", email, amount, reason }` or `{ action: "validate-redemption", code }`
  * @response `{ success: true }` on success; redemption lookup returns the stored record
- * @auth Required — admin email must be in ADMIN_EMAILS env var
+ * @auth Required - admin email must be in ADMIN_EMAILS env var
  */
 export async function POST(req: NextRequest) {
   try {

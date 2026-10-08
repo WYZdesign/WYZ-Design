@@ -301,7 +301,7 @@ export async function earnZeal(email: string, actionId: string, opts?: { localHo
   try {
     return await earnZealLocked(email, actionId, def, { localHour: opts?.localHour, normalizedPath });
   } catch (e) {
-    // Degrade gracefully instead of throwing — the store (Supabase) may be
+    // Degrade gracefully instead of throwing - the store (Supabase) may be
     // unreachable from serverless. Mirrors getZealStatus' unavailable signal.
     logger.error("zeal:earn", e);
     return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
@@ -470,27 +470,27 @@ export async function evaluateProfileAchievements(email: string, profile: {
   phone?: string | null;
 }): Promise<string[]> {
   const state = await loadUserState(email);
-  const unlocked: string[] = [];
+  const earned: string[] = [];
   const bioDone = Boolean(profile.bio && profile.phone);
   const socialDone = Boolean(profile.instagram || profile.facebook || profile.website);
 
   if (bioDone && !state.achievements.includes("profile-complete")) {
     state.achievements.push("profile-complete");
-    unlocked.push("profile-complete");
+    earned.push("profile-complete");
     await awardDirect(email, ZEAL_ACHIEVEMENTS["profile-complete"].zeal, `Achievement: ${ZEAL_ACHIEVEMENTS["profile-complete"].title}`);
   }
   if (socialDone && !state.achievements.includes("social-connected")) {
     state.achievements.push("social-connected");
-    unlocked.push("social-connected");
+    earned.push("social-connected");
     await awardDirect(email, ZEAL_ACHIEVEMENTS["social-connected"].zeal, `Achievement: ${ZEAL_ACHIEVEMENTS["social-connected"].title}`);
   }
   if (profile.avatarUrl && !state.achievements.includes("avatar-uploaded")) {
     state.achievements.push("avatar-uploaded");
-    unlocked.push("avatar-uploaded");
+    earned.push("avatar-uploaded");
     await awardDirect(email, ZEAL_ACHIEVEMENTS["avatar-uploaded"].zeal, `Achievement: ${ZEAL_ACHIEVEMENTS["avatar-uploaded"].title}`);
   }
-  if (unlocked.length > 0) await saveUserState(email, state);
-  return unlocked;
+  if (earned.length > 0) await saveUserState(email, state);
+  return earned;
 }
 
 export interface RedeemResult {
@@ -558,7 +558,7 @@ export async function redeemZeal(email: string, rewardId: string): Promise<Redee
     const updated = await loadUserState(email);
     return { success: true, code, title: reward.title, remaining: updated.points };
   } catch (e) {
-    // Degrade gracefully instead of throwing — the store (Supabase) may be
+    // Degrade gracefully instead of throwing - the store (Supabase) may be
     // unreachable from serverless. Mirrors getZealStatus' unavailable signal.
     logger.error("zeal:redeem", e);
     return { success: false, error: "Zeal is temporarily unavailable", unavailable: true };
@@ -577,7 +577,7 @@ export async function getZealStatus(email: string): Promise<{
   visitStreak: number;
   longestStreak: number;
   counters: Record<string, number>;
-  achievementsUnlocked: string[];
+  achievementsEarned: string[];
   questsCompleted: string[];
   actionsEarned: string[];
   history: { amount: number; reason: string; timestamp: unknown }[];
@@ -596,7 +596,7 @@ export async function getZealStatus(email: string): Promise<{
       visitStreak: state.visitStreak,
       longestStreak: state.longestStreak,
       counters: state.counters,
-      achievementsUnlocked: state.achievements,
+      achievementsEarned: state.achievements,
       questsCompleted: state.questsCompleted,
       actionsEarned: state.actions,
       history: history.slice(0, 20),
@@ -612,7 +612,7 @@ export async function getZealStatus(email: string): Promise<{
       visitStreak: 0,
       longestStreak: 0,
       counters: {},
-      achievementsUnlocked: [],
+      achievementsEarned: [],
       questsCompleted: [],
       actionsEarned: [],
       history: [],

@@ -3,7 +3,7 @@ import { getCategories, getClients } from "@/lib/bookkeeping";
 import { requireAdmin } from "@/lib/admin-auth";
 
 /**
- * GET /api/bookkeeping/meta — get categories and clients for form dropdowns
+ * GET /api/bookkeeping/meta - get categories and clients for form dropdowns
  */
 export async function GET() {
   try {

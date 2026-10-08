@@ -23,22 +23,22 @@ export default function ShippingPolicy() {
           <div className="space-y-8 text-[#666665] dark:text-[#b0b0b0] leading-relaxed">
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">Order Processing</h2>
-              <p>All physical merchandise orders are fulfilled through Printful. Orders are typically processed within 2–7 business days. Processing times may vary depending on the product and current demand.</p>
+              <p>All physical merchandise orders are fulfilled through Printful. Orders are typically processed within 2 - 7 business days. Processing times may vary depending on the product and current demand.</p>
             </section>
             <section>
               <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-4">Shipping Methods &amp; Times</h2>
               <div className="mt-4 space-y-3">
                 <div className="flex justify-between border-b border-gray-200 dark:border-[#333] pb-3">
                   <span className="font-semibold text-[#333333] dark:text-[#e0e0e0]">Standard Shipping (US)</span>
-                  <span>5–8 business days</span>
+                  <span>5 - 8 business days</span>
                 </div>
                 <div className="flex justify-between border-b border-gray-200 dark:border-[#333] pb-3">
                   <span className="font-semibold text-[#333333] dark:text-[#e0e0e0]">Expedited Shipping (US)</span>
-                  <span>3–5 business days</span>
+                  <span>3 - 5 business days</span>
                 </div>
                 <div className="flex justify-between border-b border-gray-200 dark:border-[#333] pb-3">
                   <span className="font-semibold text-[#333333] dark:text-[#e0e0e0]">International Shipping</span>
-                  <span>10–21 business days</span>
+                  <span>10 - 21 business days</span>
                 </div>
               </div>
               <p className="mt-4">Shipping costs are calculated at checkout based on destination, weight, and selected shipping method.</p>

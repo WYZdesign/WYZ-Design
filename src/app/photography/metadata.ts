@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Photography — Portraits, Events, Editorial, Commercial",
+  title: "Photography - Portraits, Events, Editorial, Commercial",
   description: "Professional photography services in Los Angeles. Portraits, events, editorial, commercial, studio, urbex, outdoors, conceptual, concerts, street. Book online.",
   keywords: ["photography Los Angeles", "portrait photographer", "event photography", "commercial photography", "editorial photography", "WYZ Design"],
   openGraph: {

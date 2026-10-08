@@ -19,7 +19,7 @@ interface ZealStatus {
   nextTier: { name: string; min: number; color: string } | null;
   visitStreak: number;
   longestStreak: number;
-  achievementsUnlocked: string[];
+  achievementsEarned: string[];
   questsCompleted: string[];
   actionsEarned: string[];
   history: { amount: number; reason: string; timestamp: string }[];
@@ -99,7 +99,7 @@ export default function LoyaltyPage() {
       <div className="max-w-5xl mx-auto px-6 pt-[3.2rem] sm:pt-32 lg:pt-40">
         <div className="text-center mb-4">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-4 sm:mb-8">EARN ZEAL</h1>
-          <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-6 mt-4">The WYZ Design rewards program. Earn Zeal for everything you do here, from showing up daily to uncovering secrets nobody told you about. Climb the tiers, unlock real perks. Sign in to start earning. Everything you do on this site counts once you&apos;re in.</p>
+          <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-6 mt-4">The WYZ Design rewards program. Earn Zeal for everything you do here, from showing up daily to uncovering secrets nobody told you about. Climb the tiers, earn real perks. Sign in to start earning. Everything you do on this site counts once you&apos;re in.</p>
         </div>
 
         {session && data && data.unavailable ? (
@@ -107,7 +107,7 @@ export default function LoyaltyPage() {
             <FiZap className="w-6 h-6 mx-auto text-[#DF3131] mb-3" />
             <h2 className="font-heading font-bold text-[20.7px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">Zeal is Taking a Nap</h2>
             <p className="text-[13px] text-[#666] dark:text-white/50 mb-4 max-w-md mx-auto">
-              We&apos;re syncing our rewards engine right now. Your points are safe — check back shortly and they&apos;ll be right where you left them.
+              We&apos;re syncing our rewards engine right now. Your points are safe - check back shortly and they&apos;ll be right where you left them.
             </p>
             <button
               onClick={load}
@@ -195,12 +195,12 @@ export default function LoyaltyPage() {
             <h2 className="font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4 flex items-center gap-2"><FiAward className="text-[#DF3131]" /> Achievements</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-12">
               {data.catalog.achievements.map(a => {
-                const unlocked = data.achievementsUnlocked.includes(a.id);
+                const earned = data.achievementsEarned.includes(a.id);
                 return (
-                  <div key={a.id} className={`rounded-xl p-4 border text-center transition-all ${unlocked ? "border-[#DF3131] bg-[#DF3131]/5 dark:bg-[#DF3131]/10" : "border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] opacity-60"}`}>
-                    <p className={`font-heading font-bold text-[13px] tracking-[0.05em] uppercase mb-1 ${unlocked ? "text-[#DF3131]" : "text-[#666] dark:text-white/50"}`}>{a.title}</p>
+                  <div key={a.id} className={`rounded-xl p-4 border text-center transition-all ${earned ? "border-[#DF3131] bg-[#DF3131]/5 dark:bg-[#DF3131]/10" : "border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] opacity-60"}`}>
+                    <p className={`font-heading font-bold text-[13px] tracking-[0.05em] uppercase mb-1 ${earned ? "text-[#DF3131]" : "text-[#666] dark:text-white/50"}`}>{a.title}</p>
                     <p className="text-[12px] text-[#666] dark:text-white/50 leading-snug mb-2">{a.description}</p>
-                    <p className={`text-[11px] font-bold ${unlocked ? "text-[#DF3131]" : "text-[#666] dark:text-white/40"}`}>{unlocked ? `+${a.zeal} earned` : `+${a.zeal} Zeal`}</p>
+                    <p className={`text-[11px] font-bold ${earned ? "text-[#DF3131]" : "text-[#666] dark:text-white/40"}`}>{earned ? `+${a.zeal} earned` : `+${a.zeal} Zeal`}</p>
                   </div>
                 );
               })}

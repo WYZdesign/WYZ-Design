@@ -84,7 +84,7 @@ function ParallaxHero() {
 
   return (
     <div className="relative h-[85vh] sm:h-[80vh] overflow-hidden bg-[#111]">
-      {/* Accordion gallery of crew wearing merch — panels expand on hover */}
+      {/* Accordion gallery of crew wearing merch - panels expand on hover */}
       <div className="absolute inset-0 flex">
         {ARCHIVE_IMAGES.slice(0, 6).map((img, i) => (
           <div key={i} className="relative flex-1 group overflow-hidden transition-all duration-700 ease-out hover:flex-[3.5]">
@@ -214,14 +214,14 @@ function AccordionGallery() {
 function DynamicContentUnderShop() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const designStories = [
-    { id: 1, name: "Crown Tee", image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie-1.jpg", story: "The Crown. A nod to the crew's roots. Printed on premium heavyweight cotton. Each tee is hand-checked before shipping.", meaning: "Represents the crew's identity — the crown symbol is a mark of belonging." },
-    { id: 2, name: "Denim Jacket", image: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", story: "Built to last. vintage-wash denim with custom DBC embroidery. One-of-a-kind — no two are exactly the same. Worn by the crew on location.", meaning: "The jacket is the crew's uniform — durable, timeless, and impossible to ignore." },
-    { id: 3, name: "Crop Hoodie", image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", story: "The crew's favorite. Brushed fleece inside, raw hem, custom DBC tag. Limited drops — once they're gone, they're gone.", meaning: "Scarcity is part of the story. Not everything is available forever." },
-    { id: 4, name: "Dad Hat", image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", story: "Structured crown, flat visor. Adjustable snapback. The DBC dad hat is the crew's on-duty uniform. Worn from the studio to the street.", meaning: "The hat is the crew's flag — visible even when no one is speaking." },
-    { id: 5, name: "Ribbed Beanie", image: "/images/merch/dbc-archive/98442d-60d7fe9cb1a14d4696d62ca1b5902cdf~mv2.jpg", story: "Organic ribbed beanie. One-size-fits-all. Folded cuff with DBC embroidery. The winter staple — crew-tested in freezing conditions.", meaning: "Warmth matters. The beanie is the crew's armor against the elements." },
-    { id: 6, name: "Embroidered Socks", image: "/images/merch/dbc-archive/WYZ-Crown-Embroidered-socks.jpg", story: "Bold minimalist look. US-made. DBC crown embroidered along the ankle. The detail the camera never catches — but the crew knows.", meaning: "The small details are where the crew shows who they really are." },
-    { id: 7, name: "White Glossy Mug", image: "/images/merch/dbc-archive/WYZ-Crown-White-glossy-mug.jpg", story: "11oz black glossy ceramic. Dishwasher safe. The morning ritual, with DBC on the side. The crew drinks coffee before every session.", meaning: "The mug is the crew's downtime — the small moments between the noise." },
-    { id: 8, name: "Denim Tote Bag", image: "/images/merch/dbc-archive/WYZ-Crown-Organic-denim-tote-bag.jpg", story: "Organic denim tote. Spacious, functional. Built for the crew's gear — cameras, sketches, vinyl, whatever the session demands.", meaning: "The tote carries the crew's tools. Without it, nothing moves." },
+    { id: 1, name: "Crown Tee", image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie-1.jpg", story: "The Crown. A nod to the crew's roots. Printed on premium heavyweight cotton. Each tee is hand-checked before shipping.", meaning: "Represents the crew's identity - the crown symbol is a mark of belonging." },
+    { id: 2, name: "Denim Jacket", image: "/images/merch/dbc-archive/WYZ-Crown-Unisex-denim-jacket.jpg", story: "Built to last. vintage-wash denim with custom DBC embroidery. One-of-a-kind - no two are exactly the same. Worn by the crew on location.", meaning: "The jacket is the crew's uniform - durable, timeless, and impossible to ignore." },
+    { id: 3, name: "Crop Hoodie", image: "/images/merch/dbc-archive/WYZ-Crown-Crop-Hoodie.jpg", story: "The crew's favorite. Brushed fleece inside, raw hem, custom DBC tag. Limited drops - once they're gone, they're gone.", meaning: "Scarcity is part of the story. Not everything is available forever." },
+    { id: 4, name: "Dad Hat", image: "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg", story: "Structured crown, flat visor. Adjustable snapback. The DBC dad hat is the crew's on-duty uniform. Worn from the studio to the street.", meaning: "The hat is the crew's flag - visible even when no one is speaking." },
+    { id: 5, name: "Ribbed Beanie", image: "/images/merch/dbc-archive/98442d-60d7fe9cb1a14d4696d62ca1b5902cdf~mv2.jpg", story: "Organic ribbed beanie. One-size-fits-all. Folded cuff with DBC embroidery. The winter staple - crew-tested in freezing conditions.", meaning: "Warmth matters. The beanie is the crew's armor against the elements." },
+    { id: 6, name: "Embroidered Socks", image: "/images/merch/dbc-archive/WYZ-Crown-Embroidered-socks.jpg", story: "Bold minimalist look. US-made. DBC crown embroidered along the ankle. The detail the camera never catches - but the crew knows.", meaning: "The small details are where the crew shows who they really are." },
+    { id: 7, name: "White Glossy Mug", image: "/images/merch/dbc-archive/WYZ-Crown-White-glossy-mug.jpg", story: "11oz black glossy ceramic. Dishwasher safe. The morning ritual, with DBC on the side. The crew drinks coffee before every session.", meaning: "The mug is the crew's downtime - the small moments between the noise." },
+    { id: 8, name: "Denim Tote Bag", image: "/images/merch/dbc-archive/WYZ-Crown-Organic-denim-tote-bag.jpg", story: "Organic denim tote. Spacious, functional. Built for the crew's gear - cameras, sketches, vinyl, whatever the session demands.", meaning: "The tote carries the crew's tools. Without it, nothing moves." },
   ];
   return (
     <ErrorBoundary fallback={
@@ -552,7 +552,7 @@ export default function MerchPage() {
         <ParallaxHero />
         <DynamicContentUnderHero />
 
-        {/* Gallery Carousel 1 — under hero */}
+        {/* Gallery Carousel 1 - under hero */}
         <section aria-hidden="true" className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
           <div className="flex whitespace-nowrap min-w-max">
             {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (
@@ -563,7 +563,7 @@ export default function MerchPage() {
           </div>
         </section>
 
-        {/* Auto-Scroll Merch Gallery — Black-to-Red Gradient Background (only renders after catalog loads) */}
+        {/* Auto-Scroll Merch Gallery - Black-to-Red Gradient Background (only renders after catalog loads) */}
         {products.length > 0 && (
           <div className="relative overflow-hidden bg-gradient-to-b from-black via-[#1a0a0a] to-[#111] py-5 sm:py-12 border-y border-white/5">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#DF3131] to-transparent opacity-50" />
@@ -587,7 +587,7 @@ export default function MerchPage() {
           </div>
         )}
 
-        {/* Brand Statement — Animated Square Quote */}
+        {/* Brand Statement - Animated Square Quote */}
         <section className="py-20 px-6">
           <ScrollReveal animation="fadeUp">
             <SquareQuote />
@@ -620,7 +620,7 @@ export default function MerchPage() {
           </ScrollReveal>
         </section>
 
-        {/* Store Section — Portal Expansion */}
+        {/* Store Section - Portal Expansion */}
         <div className="relative">
           <style>{`
             @keyframes portalOpen {
@@ -822,10 +822,10 @@ export default function MerchPage() {
         </div>
       )}
 
-    {/* Dynamic Content — under expandable shop */}
+    {/* Dynamic Content - under expandable shop */}
     <DynamicContentUnderShop />
 
-    {/* Gallery Carousel 2 — under store */}
+    {/* Gallery Carousel 2 - under store */}
     <section aria-hidden="true" className="py-12 bg-[#111] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
       <div className="flex whitespace-nowrap min-w-max">
         {[...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES, ...ARCHIVE_IMAGES].map((img, i) => (

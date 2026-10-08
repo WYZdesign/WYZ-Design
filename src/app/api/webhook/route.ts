@@ -15,7 +15,7 @@ import { logger } from "@/lib/logger";
 export async function POST(req: NextRequest) {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
   if (!endpointSecret) {
-    logger.error("webhook", "STRIPE_WEBHOOK_SECRET not set — refusing unverified request");
+    logger.error("webhook", "STRIPE_WEBHOOK_SECRET not set - refusing unverified request");
     return NextResponse.json({ error: "Webhook not configured" }, { status: 500 });
   }
   if (!process.env.STRIPE_SECRET_KEY) {
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
     if (existing) {
       return NextResponse.json({ received: true });
     }
-  } catch { /* table may not exist yet — continue */ }
+  } catch { /* table may not exist yet - continue */ }
 
   // Process first, record after. Recording before processing made Stripe
   // retries see a recorded ID and skip, permanently dropping failed events.
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
               code_last4: last4(gcCode),
               code_hash: hashGiftCardCode(gcCode),
               status: "active",
-              // 24-month policy (Torré 2026-10-06) — single source: lib/gift-cards.ts
+              // 24-month policy (Torré 2026-10-06) - single source: lib/gift-cards.ts
               expires_at: gcExpiry.toISOString(),
             });
             if (gcErr) logger.error("webhook:giftcard-insert", gcErr.message);
@@ -116,7 +116,7 @@ export async function POST(req: NextRequest) {
             });
           } catch (e) { logger.error("webhook:giftcard", (e as Error).message); }
 
-          // One-time 75-Zeal "Purchased a gift card" milestone — only now that
+          // One-time 75-Zeal "Purchased a gift card" milestone - only now that
           // Stripe has confirmed payment. earnZeal enforces the once-per-user
           // claim itself and is rate-limited + locked, so Stripe redeliveries
           // cannot double-award.
