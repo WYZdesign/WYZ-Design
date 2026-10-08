@@ -68,3 +68,5 @@ _AUDIT_SCREENSHOTS/
 screenshot-audit.js
 wyz_*.mjs
 verify_*.mjs
+screenshots/current/
+_AUDIT_SCREENSHOTS/
