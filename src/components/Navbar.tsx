@@ -173,7 +173,7 @@ export default function Navbar() {
           <div className="flex items-center justify-center gap-4 lg:gap-10 h-16 lg:h-20">
             {/* Logo */}
             <MagneticElement tag="div" strength={0.2}>
-            <Link href="/" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative">
+            <Link href="/splash" onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 relative">
               <span className="relative inline-flex">
                 <span className="absolute inset-[-10px] rounded-full bg-[#DF3131]/35 blur-lg logo-glow-pulse pointer-events-none" />
                 <Image src="/wyz-crown-square.png" alt="WYZ Design logo" width={48} height={48} className="relative hover:scale-110 transition-transform w-[41px] h-[41px] sm:w-[46px] sm:h-[46px] lg:w-[55px] lg:h-[55px] object-contain" priority />

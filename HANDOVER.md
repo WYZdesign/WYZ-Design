@@ -1,5 +1,14 @@
 # WYZ Design — Current State (Session 40)
 
+## Session 64 (2026-10-08) - Splash entry, logo routing, merch image CSP (WYZMiND)
+
+- **ENTER SITE -> home, every time:** `/splash` ENTER now stamps `wyz-splash-seen` and pushes `/` (it pushed `/home`, which redirects to `/` and re-shows the splash). On `/`, ENTER still just reveals the home content.
+- **Nav logo -> splash:** the header logo link is now `/splash` (was `/`). The logo easter-egg click handler is unchanged.
+- **Merch images unblocked:** the site CSP `img-src` allowed `images.printful.com`, but merch product previews load from `files.cdn.printful.com`, so every product image was CSP-blocked live. `img-src` now allows `https://*.printful.com` and the host was added to `images.remotePatterns`.
+- Verified locally: logo href `/splash`, `/splash` ENTER lands on `/` with home content (splash gone), `/merch` 0 printful failures + 0 broken images. eslint 0 errors, copy-lint clean.
+
+---
+
 ## Session 63 (2026-10-08) - Full outstanding-task sweep: nav/menu, /work removal, media integrity (WYZMiND)
 
 - Owner asked for every remembered task done with no skimping. One batch (board #53).
