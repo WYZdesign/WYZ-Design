@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { logger } from "@/lib/logger";
 import { FiExternalLink, FiMonitor, FiSmartphone, FiTrendingUp, FiZap, FiGlobe, FiLock, FiArrowRight, FiStar } from "react-icons/fi";
@@ -8,7 +9,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 
-function FlipCard({ plan }: { plan: { name: string; price: string; features: string[]; accent: boolean } }) {
+function FlipCard({ plan }: { plan: { name: string; price: string; features: string[]; accent: boolean; img: string } }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -27,17 +28,19 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
       >
       {/* Front */}
       <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
-        <div className={`w-full h-full p-8 text-center flex flex-col items-center justify-center ${plan.accent ? "bg-[#DF3131] text-white shadow-xl shadow-[#DF3131]/30 border-4 border-[#DF3131]" : "bg-white border border-[#E2E2E2] hover:border-[#DF3131] hover:shadow-xl hover:shadow-[#DF3131]/10"}`}>
-          {plan.accent && <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#333] dark:bg-[#111] text-white text-[11px] font-bold tracking-[0.1em] px-4 py-1 uppercase mb-2">★ Most Popular</span>}
-          <h3 className={`font-heading font-bold text-[18px] tracking-[0.1em] uppercase mb-2 ${plan.accent ? "text-white" : "text-[#333]"}`}>{plan.name}</h3>
-          <p className={`text-[2.5rem] font-heading font-black mb-4 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.price}</p>
-          <p className={`text-[12px] tracking-[0.15em] uppercase ${plan.accent ? "text-white/60" : "text-[#666]"}`}>Tap to see what&apos;s included</p>
+        <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] hover:border-[#DF3131] transition-all shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
+          <Image src={plan.img} alt={plan.name} fill sizes="(max-width:640px) 100vw, 33vw" className="object-cover" />
+          <div className="absolute inset-0 bg-black/80" />
+          <div className="absolute inset-0 flex items-center justify-center z-10 px-6 text-center">
+            <h3 className="font-heading font-black text-white text-[22px] tracking-[0.1em] uppercase text-center drop-shadow-lg">{plan.name}</h3>
+          </div>
         </div>
       </div>
       {/* Back */}
       <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
         <div className={`w-full h-full p-8 flex flex-col justify-between ${plan.accent ? "bg-[#DF3131] text-white border-4 border-[#DF3131]" : "bg-[#333] dark:bg-[#111] text-white border border-[#444] dark:border-[#333]"}`}>
           <div className="text-center">
+            {plan.accent && <span className="inline-block bg-white text-[#DF3131] text-[11px] font-bold tracking-[0.1em] px-4 py-1 uppercase mb-2">★ Most Popular</span>}
             <h3 className={`font-heading font-bold text-[16px] tracking-[0.1em] uppercase mb-1 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.name}</h3>
             <p className={`font-heading font-black text-[1.8rem] mb-4 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.price}</p>
             <ul className="space-y-2 text-[13px]">
@@ -353,9 +356,9 @@ return (
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto" style={{ perspective: "1200px" }}>
                 {[
-                  { name: "Starter", price: "$499", features: ["1-page landing", "Mobile responsive", "Contact form", "Basic SEO", "7-day delivery"], accent: false },
-                  { name: "Business", price: "$1,299", features: ["Up to 5 pages", "Custom design", "CMS integration", "Advanced SEO", "Analytics setup", "14-day delivery"], accent: true },
-                  { name: "E-Commerce", price: "$2,499", features: ["Unlimited products", "Payment processing", "Inventory management", "Custom checkout", "Full SEO suite", "30-day delivery"], accent: false },
+                  { name: "Starter", price: "$499", features: ["1-page landing", "Mobile responsive", "Contact form", "Basic SEO", "7-day delivery"], accent: false, img: "/images/web-design/site_1.jpg" },
+                  { name: "Business", price: "$1,299", features: ["Up to 5 pages", "Custom design", "CMS integration", "Advanced SEO", "Analytics setup", "14-day delivery"], accent: true, img: "/images/web-design/site_2.jpg" },
+                  { name: "E-Commerce", price: "$2,499", features: ["Unlimited products", "Payment processing", "Inventory management", "Custom checkout", "Full SEO suite", "30-day delivery"], accent: false, img: "/images/web-design/site_3.jpg" },
                 ].map((plan) => (
                   <FlipCard key={plan.name} plan={plan} />
                 ))}

@@ -65,7 +65,7 @@ onClick={() => setFlipped(f => !f)}
   >
    <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
    <Image src={service.img} alt={service.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-  <div className="absolute inset-0 bg-black/60" />
+  <div className="absolute inset-0 bg-black/80" />
   <div className="absolute inset-0 flex items-center justify-center z-10">
   <h3 className="font-heading font-black text-white text-[30.8px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
   </div>

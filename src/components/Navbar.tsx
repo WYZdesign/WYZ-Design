@@ -14,35 +14,38 @@ import MagneticElement from "@/components/MagneticElement";
 import { useZeal } from "@/components/ZealProvider";
 
 const NAV_LINKS = [
-  { href: "/work", label: "W O R K" },
   { href: "/photography", label: "P H O T O G R A P H Y" },
   { href: "/designs", label: "D E S I G N S" },
   { href: "/services", label: "S E R V I C E S" },
 ];
 
-const MORE_LINKS = [
-  { href: "/events", label: "E V E N T S" },
-  { href: "/about", label: "A B O U T" },
-  { href: "/plans", label: "P L A N S" },
-  { href: "/merch", label: "M E R C H" },
-
-  { href: "/wyzmind", label: "W Y Z M i N D" },
-  { href: "/printing", label: "P R I N T I N G" },
-  { href: "/web-design", label: "W E B . D E S I G N" },
-
-  { href: "/featured-artist", label: "F. A. O. T. M." },
-  { href: "/blog", label: "B L O G" },
-  { href: "/loyalty", label: "R E W A R D S" },
-  { href: "/gift-card", label: "G I F T . C A R D" },
-  { href: "/contact", label: "C O N T A C T" },
-  { href: "/community", label: "C O M M U N I T Y" },
-  { href: "/faq", label: "F. A. Q." },
+const MORE_GROUPS = [
+  { title: "S E R V I C E S", links: [
+    { href: "/events", label: "E V E N T S" },
+    { href: "/plans", label: "P L A N S" },
+    { href: "/printing", label: "P R I N T I N G" },
+    { href: "/web-design", label: "W E B . D E S I G N" },
+  ] },
+  { title: "S T O R E", links: [
+    { href: "/merch", label: "M E R C H" },
+    { href: "/gift-card", label: "G I F T . C A R D" },
+    { href: "/loyalty", label: "R E W A R D S" },
+    { href: "/featured-artist", label: "F. A. O. T. M." },
+  ] },
+  { title: "S T U D I O", links: [
+    { href: "/about", label: "A B O U T" },
+    { href: "/blog", label: "B L O G" },
+    { href: "/community", label: "C O M M U N I T Y" },
+    { href: "/wyzmind", label: "W Y Z M i N D" },
+    { href: "/contact", label: "C O N T A C T" },
+    { href: "/faq", label: "F. A. Q." },
+  ] },
 ];
 
-const ALL_LINKS = [...NAV_LINKS, ...MORE_LINKS];
+const MORE_LINKS = MORE_GROUPS.flatMap((g) => g.links);
+
 
 const ALL_PAGES = [
-  { title: "Work", href: "/work", desc: "Design and photography, side by side", tags: ["work", "portfolio", "design", "photography"] },
   { title: "Photography", href: "/photography", desc: "Portraits, events, and editorial shoots", tags: ["photo", "camera", "portrait", "event", "headshot"] },
   { title: "Designs", href: "/designs", desc: "Logo design, cover art, flyers, and branding", tags: ["logo", "design", "flyer", "brand", "graphic", "cover art"] },
   { title: "Events", href: "/events", desc: "Event photography and videography", tags: ["event", "party", "concert", "mixer", "live"] },
@@ -206,15 +209,20 @@ export default function Navbar() {
                        <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
                          <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="none" />
                        </div>
-                      <div className="relative z-10">
-                        {MORE_LINKS.map((l) => (
-                          <Link key={l.href} href={l.href}
-                            aria-current={isActive(l.href) ? "page" : undefined}
-                            className={`block px-5 py-3 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
-                              isActive(l.href) ? "text-white dark:text-white bg-white/10 dark:bg-black/10 font-bold" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:bg-white/5 dark:hover:bg-black/5 active:text-white/80"
-                            }`}>
-                          {l.label}
-                          </Link>
+                      <div className="relative z-10 py-1">
+                        {MORE_GROUPS.map((g) => (
+                          <div key={g.title}>
+                            <p className="px-5 pt-3 pb-1 text-[10px] tracking-[0.25em] font-bold text-white/40 uppercase">{g.title}</p>
+                            {g.links.map((l) => (
+                              <Link key={l.href} href={l.href}
+                                aria-current={isActive(l.href) ? "page" : undefined}
+                                className={`block px-5 py-2 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
+                                  isActive(l.href) ? "text-white dark:text-white bg-white/10 dark:bg-black/10 font-bold" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:bg-white/5 dark:hover:bg-black/5 active:text-white/80"
+                                }`}>
+                                {l.label}
+                              </Link>
+                            ))}
+                          </div>
                         ))}
                       </div>
                     </motion.div>
@@ -375,8 +383,12 @@ export default function Navbar() {
             style={{ height: '100vh', overflowY: 'auto', overscrollBehavior: 'contain' }}
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}>
+            <button aria-label="Close menu" onClick={() => setMobileOpen(false)}
+              className="absolute top-4 right-4 z-30 w-11 h-11 flex items-center justify-center text-[#333] dark:text-[#e0e0e0] border border-[#E2E2E2] dark:border-[#333] rounded-full bg-white dark:bg-[#252528] active:scale-95 transition-all">
+              <HiX className="w-6 h-6" />
+            </button>
             {/* Profile / Account / Login - pinned to top of side menu */}
-             <div className="px-6 pt-2 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
+             <div className="pl-6 pr-16 pt-2 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
                {session?.user ? (
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#DF3131] flex items-center justify-center bg-[#DF3131]/10 shrink-0">
@@ -421,16 +433,33 @@ export default function Navbar() {
                 onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-5 space-y-1">
-              {ALL_LINKS.map((l, i) => (
-                <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
-                  <Link href={l.href} onClick={() => setMobileOpen(false)}
-                    className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
-                      isActive(l.href) ? "text-[#DF3131]" : "text-[#333333] dark:text-[#e0e0e0] hover:text-[#DF3131]"
-                    }`}
-                    aria-current={isActive(l.href) ? "page" : undefined}>
-                    {l.label}
-                  </Link>
-                </motion.div>
+              <p className="px-1 pt-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">Portfolio</p>
+              {NAV_LINKS.map((l, i) => (
+                  <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
+                    <Link href={l.href} onClick={() => setMobileOpen(false)}
+                      className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
+                        isActive(l.href) ? "text-[#DF3131]" : "text-[#333333] dark:text-[#e0e0e0] hover:text-[#DF3131]"
+                      }`}
+                      aria-current={isActive(l.href) ? "page" : undefined}>
+                      {l.label}
+                    </Link>
+                  </motion.div>
+              ))}
+              {MORE_GROUPS.map((g) => (
+                <div key={g.title} className="pt-4">
+                  <p className="px-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">{g.title}</p>
+                  {g.links.map((l, i) => (
+                      <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
+                        <Link href={l.href} onClick={() => setMobileOpen(false)}
+                          className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
+                            isActive(l.href) ? "text-[#DF3131]" : "text-[#333333] dark:text-[#e0e0e0] hover:text-[#DF3131]"
+                          }`}
+                          aria-current={isActive(l.href) ? "page" : undefined}>
+                          {l.label}
+                        </Link>
+                      </motion.div>
+                  ))}
+                </div>
               ))}
             </div>
           </motion.div>

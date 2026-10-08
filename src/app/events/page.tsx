@@ -27,7 +27,7 @@ const CLIENT_EVENTS_RAW = [
 const DIY_SHOWS_RAW = [
   { title: "Action Sack Vol. 5", video: "/videos/diy-shows/Action Sack Vol. 5.mp4" },
   { title: "Action Sack Vol. 6", video: "/videos/diy-shows/Action Sack Vol. 6.mp4" },
-  { title: "C.O. Reloaded Vol. 3", video: "/videos/diy-shows/C.O. Reloaded Vol. 3 recap.mp4" },
+
   { title: "Creative Cloud Vol. 1", video: "/videos/diy-shows/Creative Cloud Vol. 1.mp4" },
   { title: "Creative Cloud Vol. 2", video: "/videos/diy-shows/Creative Cloud Vol. 2.mp4" },
   { title: "Frequinox Vol. 1", video: "/videos/diy-shows/Frequinox Vol. 1.mp4" },
@@ -40,74 +40,74 @@ const DIY_SHOWS_RAW = [
 ];
 
 const ALL_EVENT_IMAGES = [
- { title: "Action Sack Flyer (2)", img: "/images/event-flyers/Action%20Sack%20Flyer%20%282%29.jpg" },
- { title: "Action Sack Flyer", img: "/images/event-flyers/Action%20Sack%20Flyer.jpg" },
- { title: "Action Sack in the Trap", img: "/images/event-flyers/Action%20Sack%20in%20the%20Trap.jpg" },
- { title: "Action Sack Lineup", img: "/images/event-flyers/Action%20Sack%20Lineup.jpg" },
- { title: "Action Sack pt. 4 (artist cover flyer)", img: "/images/event-flyers/Action%20Sack%20pt.%204%20%28artist%20cover%20flyer%29.jpg" },
- { title: "Action Sack pt. 4 (artist flyer)", img: "/images/event-flyers/Action%20Sack%20pt.%204%20%28artist%20flyer%29.jpg" },
- { title: "Action Sack Vol 6 event banner (names)", img: "/images/event-flyers/Action%20Sack%20Vol%206%20event%20banner%20%28names%29.jpg" },
- { title: "Action Sack vol. 3", img: "/images/event-flyers/Action%20Sack%20vol.%203.jpg" },
- { title: "Action Sack vol. 7", img: "/images/event-flyers/Action%20Sack%20vol.%207.jpg" },
- { title: "Action Sack vol.2 artist flyer", img: "/images/event-flyers/Action%20Sack%20vol.2%20artist%20flyer.jpg" },
- { title: "B.Y.O.C. flyer 2", img: "/images/event-flyers/B.Y.O.C.%20flyer%202.jpg" },
- { title: "B.Y.O.C. flyer", img: "/images/event-flyers/B.Y.O.C.%20flyer.jpg" },
- { title: "BOW 3 FLyer (Square)", img: "/images/event-flyers/BOW%203%20FLyer%20%28Square%29.jpg" },
- { title: "BPRS Flyer (square)", img: "/images/event-flyers/BPRS%20Flyer%20%28square%29.jpg" },
- { title: "BPRS Flyer2 (square)", img: "/images/event-flyers/BPRS%20Flyer2%20%28square%29.jpg" },
- { title: "C.O. Reloaded Vol. 1 Flyer", img: "/images/event-flyers/C.O.%20Reloaded%20Vol.%201%20Flyer.jpg" },
- { title: "C.O. Reloaded Vol. 2 flyer", img: "/images/event-flyers/C.O.%20Reloaded%20Vol.%202%20flyer.jpg" },
- { title: "C.O. Reloaded Vol. 3 flyer", img: "/images/event-flyers/C.O.%20Reloaded%20Vol.%203%20flyer.jpg" },
- { title: "C.O. Reloaded Vol. 4 flyer", img: "/images/event-flyers/C.O.%20Reloaded%20Vol.%204%20flyer.jpg" },
- { title: "C.O. Reloaded Vol. 5 flyer copy", img: "/images/event-flyers/C.O.%20Reloaded%20Vol.%205%20flyer%20copy.jpg" },
- { title: "C.O. vol 4 (square)", img: "/images/event-flyers/C.O.%20vol%204%20%28square%29.jpg" },
- { title: "C.O. vol 5 (square)", img: "/images/event-flyers/C.O.%20vol%205%20%28square%29.jpg" },
- { title: "C.O. vol 6 (square)", img: "/images/event-flyers/C.O.%20vol%206%20%28square%29.jpg" },
- { title: "C.O. vol 7 (square) - Copy", img: "/images/event-flyers/C.O.%20vol%207%20%28square%29%20-%20Copy.jpg" },
- { title: "C.O. vol. 2 (S2)", img: "/images/event-flyers/C.O.%20vol.%202%20%28S2%29.jpg" },
- { title: "C.O. vol. 3 (S2)(flyer)", img: "/images/event-flyers/C.O.%20vol.%203%20%28S2%29%28flyer%29.jpg" },
- { title: "C.O. Vol. 6 IG flyer", img: "/images/event-flyers/C.O.%20Vol.%206%20IG%20flyer.jpg" },
- { title: "Chronotopia Flyer (January)", img: "/images/event-flyers/Chronotopia%20Flyer%20%28January%29.jpg" },
- { title: "Chronotopia Flyer (March)", img: "/images/event-flyers/Chronotopia%20Flyer%20%28March%29.jpg" },
- { title: "Chronotopia Flyer", img: "/images/event-flyers/Chronotopia%20Flyer.jpg" },
- { title: "Common Unity (reloaded) Vol. 2 Street flyer", img: "/images/event-flyers/Common%20Unity%20%28reloaded%29%20Vol.%202%20Street%20flyer.jpg" },
- { title: "Common Unity Flyer", img: "/images/event-flyers/Common%20Unity%20Flyer.jpg" },
- { title: "Common Unity Reloaded Vol. 1. (Facebook)", img: "/images/event-flyers/Common%20Unity%20Reloaded%20Vol.%201.%20%28Facebook%29.jpg" },
- { title: "Common Unity Vol. II Flyer", img: "/images/event-flyers/Common%20Unity%20Vol.%20II%20Flyer.jpg" },
- { title: "Creative Cloud Event Flyer", img: "/images/event-flyers/Creative%20Cloud%20Event%20Flyer.jpg" },
- { title: "Creative Cloud Event vol. 2 Flyer", img: "/images/event-flyers/Creative%20Cloud%20Event%20vol.%202%20Flyer.jpg" },
- { title: "Creative Cloud Flyer", img: "/images/event-flyers/Creative%20Cloud%20Flyer.jpg" },
- { title: "Creative Cloud Vol. 2 Flyer", img: "/images/event-flyers/Creative%20Cloud%20Vol.%202%20Flyer.jpg" },
- { title: "Creative Cloud Vol. 3 Flyer", img: "/images/event-flyers/Creative%20Cloud%20Vol.%203%20Flyer.jpg" },
- { title: "Creative Cloud Vol. 4 flyer 2", img: "/images/event-flyers/Creative%20Cloud%20Vol.%204%20flyer%202.jpg" },
- { title: "Creative Cloud Vol. 4 flyer", img: "/images/event-flyers/Creative%20Cloud%20Vol.%204%20flyer.jpg" },
- { title: "Creative Oasis flyer", img: "/images/event-flyers/Creative%20Oasis%20flyer.jpg" },
- { title: "D.I.Chi. Open Call Flyer", img: "/images/event-flyers/D.I.Chi.%20Open%20Call%20Flyer.jpg" },
- { title: "dark arts flyer", img: "/images/event-flyers/dark%20arts%20flyer.jpg" },
- { title: "First Friday (September)", img: "/images/event-flyers/First%20Friday%20%28September%29.jpg" },
- { title: "Frequinox Event Flyer", img: "/images/event-flyers/Frequinox%20Event%20Flyer.jpg" },
- { title: "Frequinox Flyer vol. 2", img: "/images/event-flyers/Frequinox%20Flyer%20vol.%202.jpg" },
- { title: "Frequinox Flyer vol. 3 flyer", img: "/images/event-flyers/Frequinox%20Flyer%20vol.%203%20flyer.jpg" },
- { title: "Frequinox Flyer vol. 4 flyer", img: "/images/event-flyers/Frequinox%20Flyer%20vol.%204%20flyer.jpg" },
- { title: "Frequinox Reloaded Vol. 1 flyer (square)", img: "/images/event-flyers/Frequinox%20Reloaded%20Vol.%201%20flyer%20%28square%29.jpg" },
- { title: "Local Love event flyer (facebook)", img: "/images/event-flyers/Local%20Love%20event%20flyer%20%28facebook%29.jpg" },
- { title: "Local Love event flyer (names)", img: "/images/event-flyers/Local%20Love%20event%20flyer%20%28names%29.jpg" },
- { title: "Local Love Reloaded (1)", img: "/images/event-flyers/Local%20Love%20Reloaded%20%281%29.jpg" },
- { title: "Local Love Vol. 2", img: "/images/event-flyers/Local%20Love%20Vol.%202.jpg" },
- { title: "Local Love Vol. 3", img: "/images/event-flyers/Local%20Love%20Vol.%203.jpg" },
- { title: "Local Love vol. 4", img: "/images/event-flyers/Local%20Love%20vol.%204.jpg" },
- { title: "Local Love Vol. 5", img: "/images/event-flyers/Local%20Love%20Vol.%205.jpg" },
- { title: "Local Love Vol. 6 flyer", img: "/images/event-flyers/Local%20Love%20Vol.%206%20flyer.jpg" },
- { title: "Secret Stash (Event)", img: "/images/event-flyers/Secret%20Stash%20%28Event%29.jpg" },
- { title: "SSTR1 Flyer", img: "/images/event-flyers/SSTR1%20Flyer.jpg" },
+ { title: "Action Sack Flyer (2)", img: "/images/event-flyers/Action Sack Flyer (2).jpg" },
+ { title: "Action Sack Flyer", img: "/images/event-flyers/Action Sack Flyer.jpg" },
+ { title: "Action Sack in the Trap", img: "/images/event-flyers/Action Sack in the Trap.jpg" },
+ { title: "Action Sack Lineup", img: "/images/event-flyers/Action Sack Lineup.jpg" },
+ { title: "Action Sack pt. 4 (artist cover flyer)", img: "/images/event-flyers/Action Sack pt. 4 (artist cover flyer).jpg" },
+ { title: "Action Sack pt. 4 (artist flyer)", img: "/images/event-flyers/Action Sack pt. 4 (artist flyer).jpg" },
+ { title: "Action Sack Vol 6 event banner (names)", img: "/images/event-flyers/Action Sack Vol 6 event banner (names).jpg" },
+ { title: "Action Sack vol. 3", img: "/images/event-flyers/Action Sack vol. 3.jpg" },
+ { title: "Action Sack vol. 7", img: "/images/event-flyers/Action Sack vol. 7.jpg" },
+ { title: "Action Sack vol.2 artist flyer", img: "/images/event-flyers/Action Sack vol.2 artist flyer.jpg" },
+ { title: "B.Y.O.C. flyer 2", img: "/images/event-flyers/B.Y.O.C. flyer 2.jpg" },
+ { title: "B.Y.O.C. flyer", img: "/images/event-flyers/B.Y.O.C. flyer.jpg" },
+ { title: "BOW 3 FLyer (Square)", img: "/images/event-flyers/BOW 3 FLyer (Square).jpg" },
+ { title: "BPRS Flyer (square)", img: "/images/event-flyers/BPRS Flyer (square).jpg" },
+ { title: "BPRS Flyer2 (square)", img: "/images/event-flyers/BPRS Flyer2 (square).jpg" },
+ { title: "C.O. Reloaded Vol. 1 Flyer", img: "/images/event-flyers/C.O. Reloaded Vol. 1 Flyer.jpg" },
+ { title: "C.O. Reloaded Vol. 2 flyer", img: "/images/event-flyers/C.O. Reloaded Vol. 2 flyer.jpg" },
+ { title: "C.O. Reloaded Vol. 3 flyer", img: "/images/event-flyers/C.O. Reloaded Vol. 3 flyer.jpg" },
+ { title: "C.O. Reloaded Vol. 4 flyer", img: "/images/event-flyers/C.O. Reloaded Vol. 4 flyer.jpg" },
+ { title: "C.O. Reloaded Vol. 5 flyer copy", img: "/images/event-flyers/C.O. Reloaded Vol. 5 flyer copy.jpg" },
+ { title: "C.O. vol 4 (square)", img: "/images/event-flyers/C.O. vol 4 (square).jpg" },
+ { title: "C.O. vol 5 (square)", img: "/images/event-flyers/C.O. vol 5 (square).jpg" },
+ { title: "C.O. vol 6 (square)", img: "/images/event-flyers/C.O. vol 6 (square).jpg" },
+ { title: "C.O. vol 7 (square) - Copy", img: "/images/event-flyers/C.O. vol 7 (square) - Copy.jpg" },
+ { title: "C.O. vol. 2 (S2)", img: "/images/event-flyers/C.O. vol. 2 (S2).jpg" },
+ { title: "C.O. vol. 3 (S2)(flyer)", img: "/images/event-flyers/C.O. vol. 3 (S2)(flyer).jpg" },
+ { title: "C.O. Vol. 6 IG flyer", img: "/images/event-flyers/C.O. Vol. 6 IG flyer.jpg" },
+ { title: "Chronotopia Flyer (January)", img: "/images/event-flyers/Chronotopia Flyer (January).jpg" },
+ { title: "Chronotopia Flyer (March)", img: "/images/event-flyers/Chronotopia Flyer (March).jpg" },
+ { title: "Chronotopia Flyer", img: "/images/event-flyers/Chronotopia Flyer.jpg" },
+ { title: "Common Unity (reloaded) Vol. 2 Street flyer", img: "/images/event-flyers/Common Unity (reloaded) Vol. 2 Street flyer.jpg" },
+ { title: "Common Unity Flyer", img: "/images/event-flyers/Common Unity Flyer.jpg" },
+ { title: "Common Unity Reloaded Vol. 1. (Facebook)", img: "/images/event-flyers/Common Unity Reloaded Vol. 1. (Facebook).jpg" },
+ { title: "Common Unity Vol. II Flyer", img: "/images/event-flyers/Common Unity Vol. II Flyer.jpg" },
+ { title: "Creative Cloud Event Flyer", img: "/images/event-flyers/Creative Cloud Event Flyer.jpg" },
+ { title: "Creative Cloud Event vol. 2 Flyer", img: "/images/event-flyers/Creative Cloud Event vol. 2 Flyer.jpg" },
+ { title: "Creative Cloud Flyer", img: "/images/event-flyers/Creative Cloud Flyer.jpg" },
+ { title: "Creative Cloud Vol. 2 Flyer", img: "/images/event-flyers/Creative Cloud Vol. 2 Flyer.jpg" },
+ { title: "Creative Cloud Vol. 3 Flyer", img: "/images/event-flyers/Creative Cloud Vol. 3 Flyer.jpg" },
+ { title: "Creative Cloud Vol. 4 flyer 2", img: "/images/event-flyers/Creative Cloud Vol. 4 flyer 2.jpg" },
+ { title: "Creative Cloud Vol. 4 flyer", img: "/images/event-flyers/Creative Cloud Vol. 4 flyer.jpg" },
+ { title: "Creative Oasis flyer", img: "/images/event-flyers/Creative Oasis flyer.jpg" },
+ { title: "D.I.Chi. Open Call Flyer", img: "/images/event-flyers/D.I.Chi. Open Call Flyer.jpg" },
+ { title: "dark arts flyer", img: "/images/event-flyers/dark arts flyer.jpg" },
+ { title: "First Friday (September)", img: "/images/event-flyers/First Friday (September).jpg" },
+ { title: "Frequinox Event Flyer", img: "/images/event-flyers/Frequinox Event Flyer.jpg" },
+ { title: "Frequinox Flyer vol. 2", img: "/images/event-flyers/Frequinox Flyer vol. 2.jpg" },
+ { title: "Frequinox Flyer vol. 3 flyer", img: "/images/event-flyers/Frequinox Flyer vol. 3 flyer.jpg" },
+ { title: "Frequinox Flyer vol. 4 flyer", img: "/images/event-flyers/Frequinox Flyer vol. 4 flyer.jpg" },
+ { title: "Frequinox Reloaded Vol. 1 flyer (square)", img: "/images/event-flyers/Frequinox Reloaded Vol. 1 flyer (square).jpg" },
+ { title: "Local Love event flyer (facebook)", img: "/images/event-flyers/Local Love event flyer (facebook).jpg" },
+ { title: "Local Love event flyer (names)", img: "/images/event-flyers/Local Love event flyer (names).jpg" },
+ { title: "Local Love Reloaded (1)", img: "/images/event-flyers/Local Love Reloaded (1).jpg" },
+ { title: "Local Love Vol. 2", img: "/images/event-flyers/Local Love Vol. 2.jpg" },
+ { title: "Local Love Vol. 3", img: "/images/event-flyers/Local Love Vol. 3.jpg" },
+ { title: "Local Love vol. 4", img: "/images/event-flyers/Local Love vol. 4.jpg" },
+ { title: "Local Love Vol. 5", img: "/images/event-flyers/Local Love Vol. 5.jpg" },
+ { title: "Local Love Vol. 6 flyer", img: "/images/event-flyers/Local Love Vol. 6 flyer.jpg" },
+ { title: "Secret Stash (Event)", img: "/images/event-flyers/Secret Stash (Event).jpg" },
+ { title: "SSTR1 Flyer", img: "/images/event-flyers/SSTR1 Flyer.jpg" },
  { title: "Untitled-1", img: "/images/event-flyers/Untitled-1.jpg" },
- { title: "Vibrant Vibes Event Flyer", img: "/images/event-flyers/Vibrant%20Vibes%20Event%20Flyer.jpg" },
- { title: "Vibrant Vibes Reloaded (flyer)", img: "/images/event-flyers/Vibrant%20Vibes%20Reloaded%20%28flyer%29.jpg" },
- { title: "Vibrant Vibes Reloaded vol. 2(flyer)", img: "/images/event-flyers/Vibrant%20Vibes%20Reloaded%20vol.%202%28flyer%29.jpg" },
- { title: "Vibrant Vibes Reloaded vol. 2(square)", img: "/images/event-flyers/Vibrant%20Vibes%20Reloaded%20vol.%202%28square%29.jpg" },
- { title: "Vibrant Vibes Reloaded vol. 3 (flyer)", img: "/images/event-flyers/Vibrant%20Vibes%20Reloaded%20vol.%203%20%28flyer%29.jpg" },
- { title: "Vibrant Vibes Vol. 2", img: "/images/event-flyers/Vibrant%20Vibes%20Vol.%202.jpg" },
- { title: "Vibrant Vibes Vol. 3", img: "/images/event-flyers/Vibrant%20Vibes%20Vol.%203.jpg" },
+ { title: "Vibrant Vibes Event Flyer", img: "/images/event-flyers/Vibrant Vibes Event Flyer.jpg" },
+ { title: "Vibrant Vibes Reloaded (flyer)", img: "/images/event-flyers/Vibrant Vibes Reloaded (flyer).jpg" },
+ { title: "Vibrant Vibes Reloaded vol. 2(flyer)", img: "/images/event-flyers/Vibrant Vibes Reloaded vol. 2(flyer).jpg" },
+ { title: "Vibrant Vibes Reloaded vol. 2(square)", img: "/images/event-flyers/Vibrant Vibes Reloaded vol. 2(square).jpg" },
+ { title: "Vibrant Vibes Reloaded vol. 3 (flyer)", img: "/images/event-flyers/Vibrant Vibes Reloaded vol. 3 (flyer).jpg" },
+ { title: "Vibrant Vibes Vol. 2", img: "/images/event-flyers/Vibrant Vibes Vol. 2.jpg" },
+ { title: "Vibrant Vibes Vol. 3", img: "/images/event-flyers/Vibrant Vibes Vol. 3.jpg" },
 ];
 
 const FLIP_SPEED = 450;
@@ -332,7 +332,7 @@ function ColorAuraVideo({ items, onPlay }: { items: { title: string; video: stri
   playsInline
   preload="auto"
   className="w-full h-full object-cover"
-  onLoadedMetadata={(e) => { e.currentTarget.currentTime = 7; }}
+  onLoadedMetadata={(e) => { e.currentTarget.currentTime = 5; }}
   onPlay={() => markRecapPlayed(earn)}
   onEnded={() => { if (!flipping) flip(1); }}
   />
@@ -474,10 +474,10 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
   data-video-id={v.title}
  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
  ref={(el) => { if (el) { el.volume = 0.3; } }}
- onLoadedMetadata={(e) => { e.currentTarget.currentTime = 7; }}
+ onLoadedMetadata={(e) => { e.currentTarget.currentTime = 5; }}
  onMouseEnter={(e) => {
   const vid = e.target as HTMLVideoElement;
-  if (vid.readyState >= 1) vid.currentTime = 7;
+  if (vid.readyState >= 1) vid.currentTime = 5;
   vid.play().catch(() => {});
  }}
  onMouseLeave={(e) => { const vid = e.target as HTMLVideoElement; vid.pause(); }}
@@ -741,14 +741,14 @@ export default function EventsPage() {
       playsInline
       preload="auto"
       className="absolute inset-0 w-full h-full object-cover md:[filter:saturate(1.2)_contrast(1.1)]"
-      onLoadedMetadata={(e) => { e.currentTarget.currentTime = 7; }}
+      onLoadedMetadata={(e) => { const v = e.currentTarget; v.currentTime = 5; void v.play().catch(() => {}); }}
       onTimeUpdate={(e) => {
         // `loop` restarts silently at 0 without firing `ended`, so re-apply the
-        // 7s start point whenever a loop cycle brings it back near the top.
+        // 5s start point whenever a loop cycle brings it back near the top.
         const vid = e.currentTarget;
         if (vid.currentTime < 0.5 && vid.dataset.wzLooped !== "pending") {
           vid.dataset.wzLooped = "pending";
-          vid.currentTime = 7;
+          vid.currentTime = 5;
         } else if (vid.currentTime > 1) {
           vid.dataset.wzLooped = "";
         }

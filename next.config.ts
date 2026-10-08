@@ -137,6 +137,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/home", destination: "/", permanent: true },
+      { source: "/work", destination: "/", permanent: true },
       { source: "/booking-events", destination: "/booking?service=event-photography", permanent: true },
       { source: "/booking-photoshoot", destination: "/booking?service=photoshoot", permanent: true },
       { source: "/booking-retouching", destination: "/booking?service=photo-retouching", permanent: true },

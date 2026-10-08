@@ -19,7 +19,6 @@ const SITEMAP = {
     { href: "/services", label: "All Services" },
   ],
   Company: [
-    { href: "/work", label: "Work" },
     { href: "/about", label: "About" },
     { href: "/brands", label: "Our Brands" },
     { href: "/plans", label: "Pricing" },
@@ -119,6 +118,16 @@ export default function Footer() {
           </form>
         </div>
       </div>
+        <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pb-6 flex justify-center">
+          <div className="flex flex-wrap justify-center gap-3">
+            {SOCIALS.map((s, i) => (
+              <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                className={`h-11 w-11 flex items-center justify-center border ${socialBorder} ${socialText} hover:border-white hover:text-white hover:bg-white/10 transition-all rounded-full`}>
+                <s.icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
+        </div>
 
       {/* Main footer */}
       <div className={footerBg}>
@@ -134,14 +143,6 @@ export default function Footer() {
                 <span className={`${textPrimary} font-heading font-bold text-xl`}>WYZ <span className="text-white">Design</span></span>
               </Link>
               <p className={`${textMuted} text-[14px] leading-relaxed mb-5 max-w-sm`}>Creative growth studio for artists, brands, and culture. Built in Chicago. Scaling in Los Angeles. Wild vision. Zealous execution.</p>
-              <div className="flex max-w-[160px] flex-wrap items-center justify-center gap-2 mx-auto sm:max-w-none sm:flex-nowrap sm:gap-3">
-                {SOCIALS.map((s, i) => (
-                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                  className={`h-11 w-11 flex items-center justify-center border ${socialBorder} ${socialText} hover:border-white hover:text-white hover:bg-white/10 transition-all rounded-full sm:h-9 sm:w-9`}>
-                    <s.icon className="w-4 h-4" />
-                  </a>
-                ))}
-              </div>
               <div className={`mt-5 space-y-1.5 text-[14px] ${textMuted}`}>
                 <p className="flex items-center gap-2"><FiPhone className="w-3.5 h-3.5" /> (213) 399-9610</p>
                 <p className="flex items-center gap-2"><FiMail className="w-3.5 h-3.5" /> info@wyzdesign.com</p>

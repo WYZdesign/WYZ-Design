@@ -3,6 +3,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
 import { trackMetaEvent } from "@/components/AnalyticsProvider";
@@ -48,16 +49,16 @@ const FEATURES: Record<string, string[]> = {
 };
 
 const PLANS = [
-  { name: "Starter Pack", price: "$250", value: "$725 Value", popular: false },
-  { name: "Business Boost", price: "$500", value: "$2,025 Value", popular: true },
-  { name: "Pro Plus", price: "$750", value: "$1,425 Value", popular: false },
-  { name: "Ultimate Suite", price: "$1,000", value: "$5,000+ Value", popular: false },
+  { name: "Starter Pack", price: "$250", value: "$725 Value", popular: false, img: "/images/services/Photography.webp" },
+  { name: "Business Boost", price: "$500", value: "$2,025 Value", popular: true, img: "/images/services/Logo Design.jpg" },
+  { name: "Pro Plus", price: "$750", value: "$1,425 Value", popular: false, img: "/images/services/Video Shoot.jpg" },
+  { name: "Ultimate Suite", price: "$1,000", value: "$5,000+ Value", popular: false, img: "/images/services/Website Design.jpg" },
 ];
 
 const WEB_ADDONS = [
-  { name: "Startup", original: "$650/mo", discounted: "$500/mo", desc: "Launch your dream business with confidence. Our startup plan offers the essential tools and support you need to succeed." },
-  { name: "Artist", original: "$400/mo", discounted: "$250/mo", desc: "Keep it simple. Our subscription plan gives independent artists and brands everything they need to succeed." },
-  { name: "Enterprise", original: "$900/mo", discounted: "$750/mo", desc: "Power up your business with a plan that does it all. Built to help you cut costs, work smarter, and grow." },
+  { name: "Startup", original: "$650/mo", discounted: "$500/mo", desc: "Launch your dream business with confidence. Our startup plan offers the essential tools and support you need to succeed.", img: "/images/web-design/site_1.jpg" },
+  { name: "Artist", original: "$400/mo", discounted: "$250/mo", desc: "Keep it simple. Our subscription plan gives independent artists and brands everything they need to succeed.", img: "/images/web-design/site_2.jpg" },
+  { name: "Enterprise", original: "$900/mo", discounted: "$750/mo", desc: "Power up your business with a plan that does it all. Built to help you cut costs, work smarter, and grow.", img: "/images/web-design/site_3.jpg" },
 ];
 
 const PLAN_KEYS: Record<string, string> = {
@@ -103,24 +104,11 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
-        <div className={`relative bg-white dark:bg-[#252528] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl h-full flex flex-col items-center justify-center ${
-          p.popular
-            ? "border-[4px] border-[#DF3131] shadow-lg shadow-[#DF3131]/20 scale-[1.03]"
-            : "border border-[#E2E2E2] hover:border-[#DF3131]/50"
-        }`}>
-          {p.popular && (
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#DF3131] text-white text-[13px] font-bold px-5 py-1.5 tracking-[0.08em] shadow-lg shadow-[#DF3131]/40 z-10">
-              Most Popular
-            </div>
-          )}
-          <div className="p-7 text-center flex flex-col items-center justify-center h-full">
-            <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center mb-3">{p.name}</h3>
-            <div className="mt-2 text-center">
-              <span className="whitespace-nowrap text-[2rem] sm:text-[2.5rem] md:text-[3rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0]">{p.price}</span>
-              <span className="text-[#666] text-sm ml-2">/month</span>
-            </div>
-            <span className="inline-block mt-1 text-[14px] text-[#DF3131] font-semibold text-center">{p.value}</span>
-            <p className="text-[14px] text-[#666] text-center mt-4">Click to flip for full details</p>
+        <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
+          <Image src={p.img} alt={p.name} fill sizes="(max-width:640px) 100vw, 25vw" className="object-cover" />
+          <div className="absolute inset-0 bg-black/80" />
+          <div className="absolute inset-0 flex items-center justify-center z-10 px-6 text-center">
+            <h3 className="font-heading font-black text-white text-[26px] tracking-[0.06em] text-center drop-shadow-lg uppercase">{p.name}</h3>
           </div>
         </div>
       </div>
@@ -133,6 +121,9 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
           p.popular ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">
+            {p.popular && (
+              <div className="inline-block bg-white text-[#DF3131] text-[12px] font-bold px-4 py-1 tracking-[0.08em] mb-3">★ MOST POPULAR</div>
+            )}
             <h3 className="font-heading font-black text-white text-[22px] tracking-[0.03em] mb-3">{p.name}</h3>
             <div className="mb-4">
               <span className="text-[40px] font-black text-white">{p.price}</span>
@@ -176,20 +167,12 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
-        <div className={`border p-5 bg-white dark:bg-[#252528] text-center transition-all hover:-translate-y-1 hover:shadow-lg h-full ${
-          i === 0
-            ? "border-[4px] border-[#DF3131] shadow-md shadow-[#DF3131]/20"
-            : "border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131]/50"
-        }`}>
-          {i === 0 && (
-            <span className="text-[13px] font-bold text-[#DF3131] tracking-[0.08em] mb-2">Recommended</span>
-          )}
-          <h3 className="font-heading font-bold text-[#333333] dark:text-[#e0e0e0] text-center mb-3">{w.name}</h3>
-          <div className="mt-2 text-center">
-            <span className="text-xs text-[#666] dark:text-white/40 line-through">{w.original}</span>{" "}
-            <span className="whitespace-nowrap text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] font-heading font-black text-[#333333] dark:text-white">{w.discounted}</span>
+        <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
+          <Image src={w.img} alt={w.name} fill sizes="(max-width:640px) 100vw, 33vw" className="object-cover" />
+          <div className="absolute inset-0 bg-black/80" />
+          <div className="absolute inset-0 flex items-center justify-center z-10 px-6 text-center">
+            <h3 className="font-heading font-black text-white text-[24px] tracking-[0.06em] text-center drop-shadow-lg uppercase">{w.name}</h3>
           </div>
-          <p className="text-[16px] text-[#666666] dark:text-white/60 mt-2 text-center">{w.desc}</p>
         </div>
       </div>
       {/* Back */}
@@ -201,6 +184,9 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
           i === 0 ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">
+            {i === 0 && (
+              <div className="inline-block bg-white text-[#DF3131] text-[11px] font-bold px-3 py-1 tracking-[0.1em] mb-2">★ RECOMMENDED</div>
+            )}
             <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2">Web Design Add-On</span>
             <h3 className="font-heading font-black text-white text-[20px] tracking-[0.03em] mb-3">{w.name}</h3>
             <div className="mb-3">

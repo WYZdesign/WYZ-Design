@@ -7,7 +7,6 @@ const BASE = getSiteUrl();
 
 const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: "weekly" | "monthly" | "yearly" | "daily" }> = [
   { path: "", priority: 1, changeFrequency: "weekly" },
-  { path: "/work", priority: 0.9, changeFrequency: "weekly" },
   { path: "/photography", priority: 0.9, changeFrequency: "weekly" },
   { path: "/photography/events", priority: 0.7, changeFrequency: "monthly" },
   { path: "/photography/urbex", priority: 0.6, changeFrequency: "monthly" },

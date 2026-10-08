@@ -3,11 +3,10 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FiArrowRight, FiArrowLeft, FiSearch, FiCpu } from "react-icons/fi";
+import { FiArrowRight, FiSearch, FiCpu } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import SafeImage from "@/components/SafeImage";
-import WorkCrossSwitch from "@/components/WorkCrossSwitch";
 import { LOGOS_IMAGES, COVER_ART_WYZ, FLYERS_IMAGES } from "@/data/designs-data";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
@@ -125,19 +124,6 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
  </div>
  </div>
  </div>
- </div>
- );
-}
-
-function ScrollArrows({ scrollRef, className = "" }: { scrollRef: React.RefObject<HTMLDivElement | null>; className?: string }) {
- const scroll = (dir: "left" | "right") => {
- if (!scrollRef.current) return;
- scrollRef.current.scrollBy({ left: dir === "left" ? -300 : 300, behavior: "smooth" });
- };
- return (
- <div className={`flex items-center gap-3 ${className}`}>
- <button onClick={() => scroll("left")} className="w-11 h-11 flex items-center justify-center border-[1.5px] border-[#333] text-[#333] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-lg" aria-label="Scroll left">←</button>
- <button onClick={() => scroll("right")} className="w-11 h-11 flex items-center justify-center border-[1.5px] border-[#333] text-[#333] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-lg" aria-label="Scroll right">→</button>
  </div>
  );
 }
@@ -264,7 +250,6 @@ const faotmImages = [
   </section>
   </ScrollReveal>
 
-  <WorkCrossSwitch current="design" />
 
  {/* ═══ DESIGNS MARQUEE ═══ */}
    <section className="py-3 sm:py-6">
@@ -290,7 +275,6 @@ const faotmImages = [
  </div>
 <Carousel images={shuffledCovers} direction="left" scrollRef={coverArtScrollRef} />
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
-    <ScrollArrows scrollRef={coverArtScrollRef} />
   </div>
   </section>
   </ScrollReveal>
@@ -304,7 +288,6 @@ const faotmImages = [
   </div>
   <Carousel images={shuffledFlyers} direction="right" scrollRef={flyersScrollRef} />
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
-    <ScrollArrows scrollRef={flyersScrollRef} />
   </div>
   </section>
   </ScrollReveal>
@@ -318,7 +301,6 @@ const faotmImages = [
   </div>
   <Carousel images={shuffledLogos} direction="left" whiteBgInDark scrollRef={logosScrollRef} />
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
-    <ScrollArrows scrollRef={logosScrollRef} />
   </div>
   </section>
   </ScrollReveal>
@@ -379,7 +361,7 @@ const faotmImages = [
  </section>
  </ScrollReveal>
 
- {/* ═══ MERCH WIDGET (with scroll arrows) ═══ */}
+ {/* ═══ MERCH WIDGET ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
   <section className="py-8 bg-white dark:bg-[#1C1C1E] border-b border-[1.5px] border-[#E2E2E2] dark:border-[#444]">
  <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
@@ -390,7 +372,6 @@ const faotmImages = [
    <Link href="/merch" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
  </div>
  <div className="relative">
-  <button onClick={() => merchScrollRef.current?.scrollBy({ left: -300, behavior: "smooth" })} className="absolute sm:-left-5 left-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#252528]" aria-label="Scroll left">←</button>
  <div ref={merchScrollRef} className="flex gap-2 overflow-x-auto pb-2 px-6" style={{ scrollbarWidth: "none" }}>
  {dbcMerch.map((p, i) => (
  <Link key={i} href="/merch" className="flex-none w-[21vw] min-w-[190px] sm:w-[13vw] sm:min-w-[120px] group cursor-pointer block">
@@ -402,7 +383,6 @@ const faotmImages = [
  </Link>
  ))}
  </div>
-  <button onClick={() => merchScrollRef.current?.scrollBy({ left: 300, behavior: "smooth" })} className="absolute sm:-right-5 right-0 top-1/2 -translate-y-1/2 z-10 w-11 h-11 sm:w-11 sm:h-11 flex items-center justify-center border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] hover:text-white transition-all rounded-full flex-shrink-0 text-sm sm:text-lg bg-white dark:bg-[#252528]" aria-label="Scroll right">→</button>
  </div>
  </div>
  </section>

@@ -17,7 +17,6 @@ import { shuffleArray } from "@/lib/utils";
 import { NSFW_CATEGORIES } from "@/lib/nsfw-constants";
 import { useNsfwSession } from "@/hooks/useNsfwSession";
 import AgeGateModal from "@/components/AgeGateModal";
-import WorkCrossSwitch from "@/components/WorkCrossSwitch";
 
 const ALBUMS = ["Events", "Studio", "Products", "Outdoors", "Urbex", "Conceptual"];
 const ALBUM_DESC: Record<string, string> = {
@@ -166,16 +165,19 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   {/* Front */}
   <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
-   <div className="aspect-[16/10] sm:aspect-[4/3] overflow-hidden relative">
-  <Image src={s.img} alt={s.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-  <div className="absolute top-3 right-3 bg-[#DF3131] text-white px-3 py-1 text-[14px] font-bold tracking-wider">{s.price}</div>
-  <div className="absolute bottom-3 left-3 text-white/90 text-[13px] font-mono bg-black/40 px-2 py-0.5 rounded">{s.dur}</div>
+   <div className="absolute inset-0 overflow-hidden">
+
+  <Image src={s.img} alt={s.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+
+  <div className="absolute inset-0 bg-black/80" />
+
+  <div className="absolute inset-0 flex items-center justify-center z-10">
+
+  <h3 className="font-heading font-black text-white text-[24px] sm:text-[28px] tracking-[0.06em] text-center drop-shadow-lg px-4 uppercase">{s.name}</h3>
+
+  </div>
+
   </div>
-   <div className="p-4 sm:p-5 text-center">
-   <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#DF3131] mb-2">{s.cat}</span>
-   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[18px] group-hover:text-[#DF3131] transition-colors mb-3">{s.name}</h3>
-   </div>
   </div>
   </div>
   {/* Back */}
@@ -535,7 +537,6 @@ return (
      </div>
     </section>
 
-  <WorkCrossSwitch current="photography" />
 
 {/* ═══ BRAND MARQUEE ═══ */}
   <section className="py-3 sm:py-6">
@@ -650,20 +651,7 @@ return (
  })}
  </div>
  </div>
-  {/* Navigation Dots */}
-  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
-  {featuredModels.map((_, i) => (
-    <button
-      key={i}
-      onClick={() => setModelIdx(i)}
-      className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] cursor-pointer"
-      aria-label={`Model ${i + 1}`}
-    >
-    <span className={`rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-4 h-1.5" : "bg-white/50 dark:bg-white/40 w-1.5 h-1.5"}`} />
-  </button>
-  ))}
-  </div>
- {/* Nav Arrows */}
+  {/* Nav Arrows */}
 <button onClick={() => setModelIdx((modelIdx - 1 + featuredModels.length) % featuredModels.length)} aria-label="Previous model" className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg text-[#333] transition-all hover:scale-110">
   <FiChevronLeft className="w-5 h-5" />
   </button>
@@ -673,6 +661,21 @@ return (
  </div>
  )}
 
+  {/* Navigation Dots */}
+  {!showModelForm && (
+  <div className="mt-5 flex items-center justify-center gap-1.5">
+  {featuredModels.map((_, i) => (
+    <button
+      key={i}
+      onClick={() => setModelIdx(i)}
+      className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] cursor-pointer"
+      aria-label={`Model ${i + 1}`}
+    >
+    <span className={`rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-4 h-1.5" : "bg-white/50 dark:bg-white/40 w-1.5 h-1.5"}`} />
+  </button>
+  ))}
+  </div>
+  )}
 {/* Become A Model Form */}
   {showModelForm && (
   <div className="bg-white dark:bg-[#252528] p-6 lg:p-8 shadow-xl rounded-lg border border-[#E2E2E2] dark:border-[#444]">

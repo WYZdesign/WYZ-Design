@@ -1,5 +1,22 @@
 # WYZ Design — Current State (Session 40)
 
+## Session 63 (2026-10-08) - Full outstanding-task sweep: nav/menu, /work removal, media integrity (WYZMiND)
+
+- Owner asked for every remembered task done with no skimping. One batch (board #53).
+- **Header/menu rework:** the "More" dropdown and the mobile menu are grouped into SERVICES / STORE / STUDIO with section headers; the mobile overlay got a real close X (top-right, profile block padded to clear it). Added `media_sweep`/`site_gate` improvements below.
+- **`/work` gateway removed (owner reversal):** `src/app/work/*` + `WorkCrossSwitch.tsx` deleted, `/work` now 301 -> `/`, nav/footer sitemap/home references cleaned.
+- **Footer:** social icons moved out of the brand column into a centered row directly under the newsletter signup.
+- **Designs:** slideshow arrows (`ScrollArrows`) + merch-widget arrow buttons removed (rows still scroll by touch/trackpad).
+- **Flip cards:** fronts rebuilt as full-bleed image + black/80 scrim + white name on photography, plans, web-design, printing, services, home; price/plan/duration chips and badges moved to the backs.
+- **Photography:** Model Archive nav dots moved out of the overflow-hidden card carousel to a static centered row fully under the cards.
+- **Events:** hero + inline videos start at 5s (was 7s) with a defensive muted `play()` on loadedmetadata.
+- **SafeImage (this is the real "blank designs images" root cause):** Next 16's image optimizer 400s on `&` and `'` in a local filename, the static handler 404s percent-encoded parens (`%28`), and events/home stored pre-encoded paths that the optimizer then double-encoded. SafeImage now normalizes any existing encoding to the true path, strictly re-encodes (space/`&`/`+` encoded; parens/apostrophes left literal as the handler requires), and skips the optimizer for `&`/`?`/`#`/`'` paths. Events and home image arrays decoded to raw paths; generated the 7 missing client-event video thumbnails so /events video cards render.
+- **Video compression:** `_agent/compress_videos.py` re-ran from pristine sources (CRF 30, maxrate 1600k, bufsize 3200k, 720p, faststart); 24 clips. One source, `diy-shows/C.O. Reloaded Vol. 3 recap.mp4`, is corrupt in the repo (moov atom missing, no local backup); its carousel entry was removed. **Owner: re-upload that recap to restore it.**
+- **New `_agent/media_sweep.mjs`:** real-Chrome-UA sweep of all 51 public routes, full scroll, flags broken images, 4xx/5xx media, non-75 `q`, video errors, and slow (>5s) fetches; blocks `<Link>` prefetch so it does not trip the site's 600/min page limiter. `_agent/site_gate.mjs` got the real Chrome UA + a reveal-settling step so its axe run is deterministic.
+- **Gates (all green):** build 0, tsc 0, eslint 0 errors, vitest 15/15, copy-lint clean, axe 0/10, E2E 7/7, gutter clean, site_gate clean, media_sweep **0 failures / 0 slow**.
+
+---
+
 ## Session 62 (2026-10-07) - Splash interaction boundary and motion audit (Codex)
 
 - Added `useSplashScrollLock`, used by the root first-visit splash and `/splash`. It locks document root and body, blocks wheel, touch-move, and keyboard scroll input, disables overscroll chaining, stops Lenis, and returns visitors to the top on exit. The invisible Home page can no longer move behind the fixed splash.
