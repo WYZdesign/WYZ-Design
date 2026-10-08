@@ -61,6 +61,14 @@
 - Added `SPLASH_SYSTEM_HANDOVER.md` with the ownership map, exact route behavior, verified changes, required device checks, and remaining engineering work. Root Home is now `aria-hidden` and inert while its splash is active; the Enter control receives initial keyboard focus.
 - Corrected the existing `webkitMaskImage` style property casing in the Spotlight effect, then re-ran `npx tsc --noEmit --incremental false` successfully (exit 0).
 
+## Session 63 (2026-10-08) - Visual audit restart: Merch evidence and repair order (Codex)
+
+- Used a local real-browser render and image inspection for `/merch` at 1440px and 390px, including stepped mobile scrolling and the opened-store state. Production direct capture remains blocked by the site edge-security policy, and the in-app browser service is unavailable because its local browser-service module is missing. Neither condition is presented as a customer-facing failure.
+- Recorded evidence, verified strengths, confirmed information-architecture defects, non-defects, and a precise repair order in `VISUAL_AUDIT_2026-10-08.md`.
+- Core Merch finding: real shopping is too deeply buried under duplicate editorial modules; the product-story cards look like merchandise but expand copy instead of offering price/cart/product actions. Move the real shop directly below the hero, reduce editorial duplication, and preserve only one proof/story module ahead of it.
+- Local Printful catalog was empty because the local audit environment lacks the production catalog credentials. This verifies layout and interaction shell only. WYZMiND must use the live configured environment for catalog, cart, checkout, and confirmation verification.
+- **Merch layout repair in progress:** replaced the gate-heavy, duplicate storefront render with a direct storefront immediately after the hero. Product cards now use consistent square, padded `object-contain` frames so short, narrow, and tall product assets do not crop or visually collapse. Removed product text overlays from the primary grid, moved purchase details below each image, and kept only the concise proof cards plus one featured-artist module after shopping. Local desktop and 390px re-capture confirm the simplified hierarchy. `npx tsc --noEmit --incremental false` passed after the refactor.
+
 ---
 
 ## Session 61 (2026-10-07) - Consolidation audit opened (Codex)

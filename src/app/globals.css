@@ -271,6 +271,32 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
     animation: marqueeRightFast 52s linear infinite;
   }
 
+  /* 2026-10-08 (Claude, desktop visual audit): the marqueeLeft keyframe above
+     translates the track from 0 -> -50%, which only loops seamlessly when the
+     track holds exactly TWO copies of its content (the standard infinite-
+     marquee trick: at -50% you're showing copy #2 in the exact position copy
+     #1 started in, so the snap back to 0% is invisible). /merch builds three
+     of its scrollers -- ProductMarquee, the product-name strip, and
+     MerchCarousel -- by tripling the product array ([...p, ...p, ...p]) to
+     guarantee enough track width for wide desktop viewports when the live
+     Printful catalog only has a handful of items. Animating a 3-copy track to
+     -50% (= -1.5 copies) lands mid-way through copy #2, which is NOT the same
+     frame as the 0% restart position, so every 72s loop produces a visible
+     jump/stutter instead of a seamless scroll. This class pairs with that
+     same tripled-content pattern but eases to -33.3333% (-1 full copy) so the
+     loop boundary is exact. Scoped as its own class rather than editing
+     .animate-marquee-left in place, since that shared class/keyframe is also
+     used correctly elsewhere (e.g. AccordionGallery's DBC_MODEL_MOCKUPS
+     scroller, which duplicates its content exactly 2x) and changing its
+     translation target would break those. */
+  .animate-marquee-left-x3 {
+    animation: marqueeLeftX3 72s linear infinite;
+  }
+  @keyframes marqueeLeftX3 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.3333%); }
+  }
+
   /* Hero text readability: handled by an explicit 30% black overlay div in each
      hero section's markup now (consistent across all viewports). The legacy
      ::after gradient here was removed — it stacked on top of the explicit
@@ -1133,9 +1159,26 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
 /* ═══════════════════════════════════════════════════════════
    TAGLINES / KICKERS — small uppercase labels above headings.
    Match the heading width so title + tagline align as one frame.
+
+   2026-10-08 (Claude, desktop visual audit): this attribute selector
+   matches ANY span/p anywhere on the site with both a `tracking-*` and
+   `uppercase` class -- an extremely common combo this codebase also uses
+   for plain row items inside horizontal flex marquees/tickers (e.g. the
+   product-name ticker on /merch: `<span className="flex-none ...
+   tracking-[0.15em] uppercase ...">{p.name}</span>`). Those are marked
+   `flex-none` specifically so each one sizes to its own text, not the
+   full row -- but this rule's `width: 100% !important` overrode that,
+   forcing every single ticker item to the full container width. Net
+   effect, confirmed live via getComputedStyle: a 12-item scrolling name
+   ticker rendered as one word taking the entire row, so only ever one
+   name was visible/legible at a time and the marquee looked frozen/
+   broken instead of scrolling. `:not(.flex-none)` scopes this rule back
+   to its real job (standalone centered kickers, none of which are
+   flex-none) and leaves flex-row text items to size to their own
+   content like their className already asked for.
    ═══════════════════════════════════════════════════════════ */
-span[class*="tracking-"][class*="uppercase"],
-p[class*="tracking-"][class*="uppercase"] {
+span[class*="tracking-"][class*="uppercase"]:not(.flex-none),
+p[class*="tracking-"][class*="uppercase"]:not(.flex-none) {
   display: block !important;
   width: 100% !important;
   margin-left: auto !important;

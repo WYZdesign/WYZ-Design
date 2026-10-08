@@ -315,7 +315,10 @@ function MerchCarousel({ products }: { products: Product[] }) {
   const items = [...products, ...products, ...products];
   return (
     <div className="py-4 sm:py-8 bg-[#FEFEFD] overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-[#f5f5f5]">
-      <div className="flex whitespace-nowrap animate-marquee-left hover:[animation-play-state:paused]">
+      {/* 2026-10-08 (Claude): tripled content (3x) needs the -33.3333% loop
+          variant, not the shared 2x/-50% one -- see globals.css comment on
+          .animate-marquee-left-x3 for why. */}
+      <div className="flex whitespace-nowrap animate-marquee-left-x3 hover:[animation-play-state:paused]">
         {items.map((p, i) => (
           <Link key={`mc-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer w-[140px] sm:w-auto">
               <div className="bg-[#f5f5f5] w-full sm:w-[200px] aspect-[3/4] overflow-hidden relative mx-2 sm:mx-3 shadow-lg hover:shadow-2xl hover:shadow-[#DF3131]/20 transition-all duration-500 hover:-translate-y-2">
@@ -336,7 +339,9 @@ function ProductMarquee({ products }: { products: Product[] }) {
   const items = [...products, ...products, ...products];
   return (
     <div className="relative overflow-x-auto overflow-y-hidden bg-gradient-to-r from-[#0a0a0a] via-[#1a0a0a] to-[#0a0a0a] py-4 sm:py-10 border-y border-white/10 scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-black/20">
-      <div className="flex whitespace-nowrap animate-marquee-left min-w-max">
+      {/* 2026-10-08 (Claude): tripled content (3x) -- see
+          .animate-marquee-left-x3 comment in globals.css. */}
+      <div className="flex whitespace-nowrap animate-marquee-left-x3 min-w-max">
         {items.map((p, i) => (
           <Link key={`pm-${i}`} href={`/merch/${p.id}`} className="flex-none cursor-pointer group">
             <div className="w-[140px] sm:w-[200px] lg:w-[240px] px-2 sm:px-4 aspect-square flex flex-col items-center">
@@ -415,8 +420,8 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
           aria-label={`View ${product.name}`}
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
-          <div className={`bg-[#f5f5f5] aspect-[4/5] overflow-hidden relative mb-2 transition-all duration-500 ${hoveredId === product.id ? "shadow-2xl shadow-[#DF3131]/20 -translate-y-2" : "shadow-sm"}`}>
-               <SafeImage src={product.image} alt={product.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw" className={`w-full h-full object-cover transition-transform duration-700 ${hoveredId === product.id ? "scale-110" : "scale-100"}`} decoding="async" />
+          <div className={`bg-[#f7f7f5] aspect-square overflow-hidden relative mb-3 transition-all duration-300 ${hoveredId === product.id ? "shadow-xl shadow-[#DF3131]/15 -translate-y-1" : "shadow-sm"}`}>
+               <SafeImage src={product.image} alt={product.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw" className={`w-full h-full object-contain p-3 transition-transform duration-500 ${hoveredId === product.id ? "scale-[1.03]" : "scale-100"}`} decoding="async" />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all mb-2">Quick View</span>
             </div>
@@ -520,6 +525,67 @@ export default function MerchPage() {
   return (
     <>
       <main className="min-h-screen bg-[#FEFEFD]">
+        <ParallaxHero />
+        <section id="shop" className="section-gap">
+          <div className="max-w-[82rem] mx-auto px-6 lg:px-12">
+            <div className="flex flex-col gap-5 border-b border-[#e5e2df] pb-8 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-[#DF3131] mb-2">WYZ Design Merch</p>
+                <h2 className="text-[2rem] sm:text-[2.5rem] sm:whitespace-nowrap font-heading font-black tracking-[0.03em] text-[#333]">Shop the collection</h2>
+                <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#666]">Crew-made pieces, printed to order. Pick a piece, choose your options, and check out securely.</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.map((category) => (
+                  <button key={category} type="button" onClick={() => setActiveCategory(category)} aria-pressed={activeCategory === category}
+                    className={`min-h-11 px-4 text-[11px] font-bold tracking-[0.08em] uppercase border transition-colors ${activeCategory === category ? "bg-[#333] text-white border-[#333]" : "bg-white text-[#333] border-[#d9d6d3] hover:border-[#DF3131]"}`}>
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <label className="flex items-center gap-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#555]">
+                Sort
+                <select value={sortBy} onChange={(event) => setSortBy(event.target.value)} className="min-h-11 border border-[#d9d6d3] bg-white px-3 text-[12px] text-[#333] focus:border-[#DF3131] focus:outline-none">
+                  {SORT_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+                </select>
+              </label>
+            </div>
+            <div className="mt-8">
+              {catalogStatus === "loading" && <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">{Array.from({ length: 8 }, (_, index) => <div key={index} className="aspect-square animate-pulse bg-[#efedeb]" />)}</div>}
+              {catalogStatus === "error" && <p className="py-12 text-center text-[15px] text-[#555]">The collection is unavailable right now. Please try again shortly.</p>}
+              {catalogStatus === "loaded" && filteredProducts.length === 0 && <p className="py-12 text-center text-[15px] text-[#555]">No pieces in this category yet.</p>}
+              {filteredProducts.length > 0 && <ProductGrid products={filteredProducts} onSelect={setSelectedProduct} />}
+            </div>
+          </div>
+        </section>
+        <DynamicContentUnderHero />
+        <section className="pb-16 pt-4 sm:pb-24"><SquareQuote /></section>
+      </main>
+
+      {selectedProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setSelectedProduct(null)}>
+          <div ref={quickViewRef} role="dialog" aria-modal="true" aria-labelledby="quick-view-title" className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(event) => event.stopPropagation()}>
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="bg-[#f7f7f5] aspect-square flex items-center justify-center overflow-hidden relative"><SafeImage src={selectedProduct.image} alt={selectedProduct.name} width={700} className="w-full h-full object-contain p-6" /></div>
+              <div className="p-6 sm:p-8">
+                <button type="button" onClick={() => setSelectedProduct(null)} className="min-h-11 text-[#555] hover:text-[#111] text-[14px] mb-4 block">Back to shop</button>
+                <p className="text-[12px] text-[#666] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
+                <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.06em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
+                <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct.price)}</p>
+                <p className="text-[14px] text-[#666] mb-6">{selectedProduct.description}</p>
+                <Link href={`/merch/${selectedProduct.id}`} className="block w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-center text-[13px] hover:bg-[#B82020]">Choose options and add to cart</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+
+  if (false) return (
+    <>
+      <main className="min-h-screen bg-[#FEFEFD]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -579,7 +645,9 @@ export default function MerchPage() {
         {/* Product Name Marquee Strip (only renders after catalog loads) */}
         {products.length > 0 && (
           <div className="relative overflow-hidden bg-[#111] py-4 sm:py-12 border-y border-white/5">
-            <div className="flex whitespace-nowrap animate-marquee-left" aria-hidden="true">
+            {/* 2026-10-08 (Claude): tripled content (3x) -- see
+                .animate-marquee-left-x3 comment in globals.css. */}
+            <div className="flex whitespace-nowrap animate-marquee-left-x3" aria-hidden="true">
               {[...products, ...products, ...products].map((p, i) => (
                 <span key={`pm1-${i}`} className="flex-none text-white/55 text-[11px] font-heading font-bold tracking-[0.15em] uppercase px-6 mb-2">{p.name}</span>
               ))}
@@ -786,16 +854,16 @@ export default function MerchPage() {
           <div ref={quickViewRef} role="dialog" aria-modal="true" aria-labelledby="quick-view-title" className="bg-white max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="bg-[#f5f5f5] aspect-square flex items-center justify-center overflow-hidden relative">
-                <SafeImage src={selectedProduct.image} alt={selectedProduct.name} width={700} className="w-full h-full object-cover" />
-                {selectedProduct.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[11px] font-bold px-3 py-1">{selectedProduct.badge}</span>}
+                <SafeImage src={selectedProduct!.image} alt={selectedProduct!.name} width={700} className="w-full h-full object-cover" />
+                {selectedProduct!.badge && <span className="absolute top-3 left-3 bg-[#DF3131] text-white text-[11px] font-bold px-3 py-1">{selectedProduct!.badge}</span>}
               </div>
               <div className="p-8">
                 <button onClick={() => setSelectedProduct(null)} className="text-[#666] hover:text-[#333] text-[15px] mb-4 block">&larr; Back to shop</button>
-                <p className="text-[12px] text-[#666] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
-                <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
-                <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct.price)}</p>
-                <p className="text-[14px] text-[#666] mb-4">{selectedProduct.description}</p>
-                <Link href={`/merch/${selectedProduct.id}`}
+                <p className="text-[12px] text-[#666] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct!.category}</p>
+                <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.1em] uppercase text-[#333] mb-4">{selectedProduct!.name}</h2>
+                <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct!.price)}</p>
+                <p className="text-[14px] text-[#666] mb-4">{selectedProduct!.description}</p>
+                <Link href={`/merch/${selectedProduct!.id}`}
                   className="block w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-center transition-all text-[14px] hover:bg-[#B82020]">
                   Choose options &amp; add to cart
                 </Link>
