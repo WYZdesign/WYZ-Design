@@ -20,6 +20,7 @@ import ScrollAnimator from "@/components/ScrollAnimator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import ClientComponents from "@/components/ClientComponents";
+import CustomCursor from "@/components/CustomCursor";
 import { CartProvider } from "@/lib/cart";
 import CartButton from "@/components/CartButton";
 
@@ -357,24 +358,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ConsentGatedAnalytics />
         <AnalyticsProvider />
         <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" }, error: { duration: 8000 } }} />
+        <CustomCursor />
         <script dangerouslySetInnerHTML={{ __html: `
           if (window.matchMedia('(display-mode: standalone)').matches) {
             document.documentElement.classList.add('is-standalone');
           }
-          const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-          const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          // WCAG 2.1.1 fix: cursor-none used to be a bare CSS media-query rule
-          // (hover:hover + pointer:fine) with !important, so it applied purely
-          // based on "a mouse is present" and could never be turned back off by
-          // a plain inline style once a keyboard-only user started tabbing on a
-          // desktop with a mouse attached. It's now gated by this 'using-mouse'
-          // class (see globals.css) so real mouse movement is required, and a
-          // Tab press always restores the native cursor + focus ring.
-          document.addEventListener('mousemove', () => {
-            if (!isTouch && !prefersReducedMotion && window.innerWidth >= 1024) {
-              document.body.classList.add('using-mouse');
-            }
-          });
+          // Native-cursor hiding is owned by CustomCursor, which adds the
+          // 'using-mouse' class only while the custom pointer is actually
+          // mounted, so the native cursor can never be hidden without a
+          // replacement on screen. A Tab press still restores it for keyboard.
           document.addEventListener('keydown', (e) => {
             if (e.key === 'Tab') {
               document.body.classList.remove('using-mouse');

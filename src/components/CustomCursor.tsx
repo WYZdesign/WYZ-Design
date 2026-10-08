@@ -129,9 +129,13 @@ export default function CustomCursor() {
     document.addEventListener("mousemove", onMove, { passive: true });
     document.addEventListener("mousedown", onDown);
     document.addEventListener("mouseup", onUp);
+    // Own the native-cursor hiding: only hide it while this sprite is live, in
+    // sync with the `body.using-mouse` rule in globals.css.
+    document.body.classList.add("using-mouse");
 
     return () => {
       cancelAnimationFrame(raf);
+      document.body.classList.remove("using-mouse");
       document.removeEventListener("mousemove", onMove);
       document.removeEventListener("mousedown", onDown);
       document.removeEventListener("mouseup", onUp);

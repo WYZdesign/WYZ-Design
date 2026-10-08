@@ -13,36 +13,26 @@ import { useTheme } from "@/components/ThemeProvider";
 import MagneticElement from "@/components/MagneticElement";
 import { useZeal } from "@/components/ZealProvider";
 
-const NAV_CATEGORIES = [
-  { href: "/photography", label: "P H O T O G R A P H Y", links: [
-    { href: "/photography/events", label: "E V E N T S" },
-    { href: "/photography/studio", label: "S T U D I O" },
-    { href: "/photography/products", label: "P R O D U C T S" },
-    { href: "/photography/outdoors", label: "O U T D O O R S" },
-    { href: "/photography/urbex", label: "U R B E X" },
-    { href: "/photography/conceptual", label: "C O N C E P T U A L" },
-  ] },
-  { href: "/designs", label: "D E S I G N S", links: [
-    { href: "/designs/artfinix", label: "A R T F I N I X" },
-    { href: "/designs/kid-bode", label: "K I D . B O D E" },
-    { href: "/designs/dawneeahs-glow", label: "D A W N E E A H S" },
-    { href: "/designs/gft-foods", label: "G F T . F O O D S" },
-  ] },
-  { href: "/services", label: "S E R V I C E S", links: [
-    { href: "/services/photoshoot", label: "P H O T O S H O O T" },
-    { href: "/services/photo-retouching", label: "R E T O U C H I N G" },
-    { href: "/services/event-photography", label: "E V E N T . P H O T O" },
-    { href: "/services/consultation", label: "C O N S U L T A T I O N" },
-    { href: "/web-design", label: "W E B . D E S I G N" },
+const NAV_LINKS = [
+  { href: "/photography", label: "P H O T O G R A P H Y" },
+  { href: "/designs", label: "D E S I G N S" },
+  { href: "/services", label: "S E R V I C E S" },
+];
+
+const MORE_GROUPS = [
+  { title: "S E R V I C E S", links: [
+    { href: "/events", label: "E V E N T S" },
+    { href: "/plans", label: "P L A N S" },
     { href: "/printing", label: "P R I N T I N G" },
+    { href: "/web-design", label: "W E B . D E S I G N" },
   ] },
-  { href: "/merch", label: "S T O R E", links: [
+  { title: "S T O R E", links: [
     { href: "/merch", label: "M E R C H" },
     { href: "/gift-card", label: "G I F T . C A R D" },
     { href: "/loyalty", label: "R E W A R D S" },
     { href: "/featured-artist", label: "F. A. O. T. M." },
   ] },
-  { href: "/about", label: "S T U D I O", links: [
+  { title: "S T U D I O", links: [
     { href: "/about", label: "A B O U T" },
     { href: "/blog", label: "B L O G" },
     { href: "/community", label: "C O M M U N I T Y" },
@@ -51,6 +41,8 @@ const NAV_CATEGORIES = [
     { href: "/faq", label: "F. A. Q." },
   ] },
 ];
+
+const MORE_LINKS = MORE_GROUPS.flatMap((g) => g.links);
 
 
 const ALL_PAGES = [
@@ -189,46 +181,56 @@ export default function Navbar() {
             </Link>
             </MagneticElement>
 
-{/* Nav links */}
+            {/* Nav links */}
             <div className="hidden min-[1440px]:flex items-center">
-              {NAV_CATEGORIES.map((cat) => (
-                <div key={cat.href} data-cat-dropdown className="relative" onMouseEnter={() => setOpenCat(cat.href)} onMouseLeave={() => setOpenCat(null)}>
-                  <Link href={cat.href}
-                    aria-current={isActive(cat.href) ? "page" : undefined}
-                    aria-expanded={openCat === cat.href}
-                    onFocus={() => setOpenCat(cat.href)}
-                    className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold flex items-center gap-1 whitespace-nowrap transition-all duration-[400ms] ${
-                      isActive(cat.href) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:scale-105 active:text-white/80"
-                    }`}
-                    style={isActive(cat.href) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
-                    {cat.label} <IoChevronDown className={`w-3 h-3 transition-transform ${openCat === cat.href ? "rotate-180" : ""}`} />
-                  </Link>
-                  <AnimatePresence>
-                    {openCat === cat.href && (
-                      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-60 shadow-xl z-50 rounded-lg overflow-hidden">
-                        <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
-                          <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="none" />
-                        </div>
-                        <div className="relative z-10 py-1">
-                          {cat.links.map((l) => (
-                            <Link key={l.href} href={l.href}
-                              aria-current={isActive(l.href) ? "page" : undefined}
-                              className={`block px-5 py-2.5 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
-                                isActive(l.href) ? "text-white bg-white/10 font-bold" : "text-white/70 hover:text-white hover:bg-white/5"
-                              }`}>
-                              {l.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+              {NAV_LINKS.map((l) => (
+                <Link key={l.href} href={l.href}
+                  aria-current={isActive(l.href) ? "page" : undefined}
+                  className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold whitespace-nowrap transition-all duration-[400ms] ${
+                    isActive(l.href) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:scale-105 active:text-white/80"
+                  }`}
+                  style={isActive(l.href) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
+                  {l.label}
+                </Link>
               ))}
+              <div className="relative" data-cat-dropdown onMouseEnter={() => setOpenCat("more")} onMouseLeave={() => setOpenCat(null)}>
+                <button onClick={() => setOpenCat(openCat === "more" ? null : "more")} aria-expanded={openCat === "more"} aria-controls="more-navigation"
+                  className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors duration-[400ms] ${
+                    MORE_LINKS.some(l => isActive(l.href)) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white active:text-white/80"
+                  }`}
+                  style={MORE_LINKS.some(l => isActive(l.href)) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
+                  M O R E <IoChevronDown className={`w-3 h-3 transition-transform ${openCat === "more" ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {openCat === "more" && (
+                    <motion.div id="more-navigation" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-64 shadow-xl z-50 rounded-lg overflow-hidden">
+                      <div className="absolute inset-0 overflow-hidden wyz-red-gradient">
+                        <video src="/videos/wyz-nav-bg-new.mp4" className="hidden lg:block absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top" }} autoPlay muted loop playsInline preload="none" />
+                      </div>
+                      <div className="relative z-10 py-1">
+                        {MORE_GROUPS.map((g) => (
+                          <div key={g.title}>
+                            <p className="px-5 pt-3 pb-1 text-[10px] tracking-[0.25em] font-bold text-white/40 uppercase">{g.title}</p>
+                            {g.links.map((l) => (
+                              <Link key={l.href} href={l.href}
+                                aria-current={isActive(l.href) ? "page" : undefined}
+                                className={`block px-5 py-2 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
+                                  isActive(l.href) ? "text-white bg-white/10 font-bold" : "text-white/70 hover:text-white hover:bg-white/5"
+                                }`}>
+                                {l.label}
+                              </Link>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
-                        {/* Inline Search + Login (desktop) */}
+            {/* Inline Search + Login (desktop) */}
             <div className="hidden min-[1440px]:flex items-center gap-4 shrink-0" ref={searchContainerRef}>
               <div className="relative">
                 <AnimatePresence initial={false}>
@@ -430,13 +432,22 @@ export default function Navbar() {
                 onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-5 space-y-1">
-              {NAV_CATEGORIES.map((cat) => (
-                <div key={cat.href} className="pt-3">
-                  <Link href={cat.href} onClick={() => setMobileOpen(false)}
-                    className="block py-2 text-[12px] tracking-[0.25em] font-bold uppercase text-[#DF3131]">
-                    {cat.label}
+                            <p className="px-1 pt-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">Portfolio</p>
+              {NAV_LINKS.map((l, i) => (
+                <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
+                  <Link href={l.href} onClick={() => setMobileOpen(false)}
+                    className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
+                      isActive(l.href) ? "text-[#DF3131]" : "text-[#333333] dark:text-[#e0e0e0] hover:text-[#DF3131]"
+                    }`}
+                    aria-current={isActive(l.href) ? "page" : undefined}>
+                    {l.label}
                   </Link>
-                  {cat.links.map((l, i) => (
+                </motion.div>
+              ))}
+              {MORE_GROUPS.map((g) => (
+                <div key={g.title} className="pt-4">
+                  <p className="px-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">{g.title}</p>
+                  {g.links.map((l, i) => (
                     <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                       <Link href={l.href} onClick={() => setMobileOpen(false)}
                         className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
