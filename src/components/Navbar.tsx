@@ -12,17 +12,19 @@ import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
 import MagneticElement from "@/components/MagneticElement";
 import { useZeal } from "@/components/ZealProvider";
+import { useCart } from "@/lib/cart";
 
 const NAV_LINKS = [
   { href: "/photography", label: "P H O T O G R A P H Y" },
   { href: "/designs", label: "D E S I G N S" },
   { href: "/services", label: "S E R V I C E S" },
+  { href: "/events", label: "E V E N T S" },
 ];
 
 const MORE_GROUPS = [
   { title: "S E R V I C E S", links: [
-    { href: "/events", label: "E V E N T S" },
     { href: "/printing", label: "P R I N T I N G" },
+    { href: "/wyzmind", label: "W Y Z M i N D" },
   ] },
   { title: "S T O R E", links: [
     { href: "/merch", label: "M E R C H" },
@@ -33,7 +35,6 @@ const MORE_GROUPS = [
     { href: "/about", label: "A B O U T" },
     { href: "/blog", label: "B L O G" },
     { href: "/community", label: "C O M M U N I T Y" },
-    { href: "/wyzmind", label: "W Y Z M i N D" },
     { href: "/contact", label: "C O N T A C T" },
     { href: "/faq", label: "F. A. Q." },
   ] },
@@ -83,7 +84,8 @@ function ThemeToggle({ className = "" }: { className?: string }) {
 export default function Navbar() {
   const pathname = usePathname();
   const { data: session } = useSession();
-  const { earn } = useZeal();
+  const { earn, points } = useZeal();
+ const { count: cartCount, setOpen: setCartOpen } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openCat, setOpenCat] = useState<string | null>(null);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -380,11 +382,11 @@ export default function Navbar() {
             onWheel={(e) => e.stopPropagation()}
             onTouchMove={(e) => e.stopPropagation()}>
             <button aria-label="Close menu" onClick={() => setMobileOpen(false)}
-              className="absolute top-4 right-4 z-30 w-11 h-11 flex items-center justify-center text-[#333] dark:text-[#e0e0e0] border border-[#E2E2E2] dark:border-[#333] rounded-full bg-white dark:bg-[#252528] active:scale-95 transition-all">
-              <HiX className="w-6 h-6" />
+              className="absolute top-4 right-4 z-30 w-7 h-7 flex items-center justify-center text-[#333] dark:text-[#e0e0e0] active:scale-95 transition-transform">
+              <HiX className="w-full h-full" />
             </button>
             {/* Profile / Account / Login - pinned to top of side menu */}
-             <div className="pl-6 pr-16 pt-2 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
+             <div className="pl-6 pr-16 pt-3 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
                {session?.user ? (
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#DF3131] flex items-center justify-center bg-[#DF3131]/10 shrink-0">
@@ -401,27 +403,58 @@ export default function Navbar() {
                     <p className="text-[12px] text-[#666] truncate">{session.user.email}</p>
                   </div>
                 </div>
-              ) : (
-                <a href="/account/my-account" onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center w-full px-4 py-2.5 text-[13px] font-semibold tracking-[0.12em] rounded-lg bg-[#DF3131] text-white active:scale-[0.98] transition-all mb-3 min-h-[40px]">
-                  <span className="font-heading font-bold tracking-[0.12em] uppercase">Login</span>
-                </a>
-              )}
-              <div className="flex items-center gap-3">
-                {session?.user && (
-                  <Link href="/account/my-account" onClick={() => setMobileOpen(false)}
-                    className="flex-1 text-center py-3 px-4 text-[14px] font-semibold border-[1.5px] border-[#DF3131] text-[#DF3131] hover:bg-[#DF3131] hover:text-white rounded-full transition-all">
-                    My Account
-                  </Link>
-                )}
-                {session?.user && (
-                  <button onClick={() => { signOut(); setMobileOpen(false); }}
-                    className="flex-1 text-center py-3 px-4 text-[14px] font-semibold border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] dark:hover:bg-[#e0e0e0] hover:text-white dark:hover:text-[#1C1C1E] rounded-full transition-all">
-                    Sign Out
-                  </button>
-                )}
-              </div>
-            </div>
+               ) : (
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-12 h-12 rounded-full border-2 border-dashed border-[#E2E2E2] dark:border-[#333] flex items-center justify-center bg-[#f5f5f5] dark:bg-[#252528] shrink-0">
+                    <FiUser className="w-5 h-5 text-[#999]" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[15px] font-semibold text-[#333] dark:text-[#e0e0e0]">Guest</p>
+                    <p className="text-[12px] text-[#666]">Sign in to track orders & rewards</p>
+                  </div>
+                </div>
+               )}
+
+               {/* Account widget: rewards + cart */}
+               <div className="grid grid-cols-2 gap-2 mb-3">
+                 <Link href="/loyalty" onClick={() => setMobileOpen(false)}
+                   className={`flex items-center gap-2 px-3 py-2.5 rounded-lg border ${session?.user ? "border-[#E2E2E2] dark:border-[#333]" : "border-dashed border-[#E2E2E2] dark:border-[#333] opacity-60 pointer-events-none"}`}>
+                   <FiZap className="w-4 h-4 text-[#DF3131] shrink-0" />
+                   <span className="flex flex-col leading-tight min-w-0">
+                     <span className="text-[10px] uppercase tracking-[0.12em] text-[#999]">Rewards</span>
+                     <span className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0]">{session?.user && points !== null ? `${points} Zeal` : "\u2014 Zeal"}</span>
+                   </span>
+                 </Link>
+                 <button onClick={() => { setCartOpen(true); setMobileOpen(false); }}
+                   className={`flex items-center gap-2 px-3 py-2.5 rounded-lg border text-left ${session?.user ? "border-[#E2E2E2] dark:border-[#333]" : "border-dashed border-[#E2E2E2] dark:border-[#333] opacity-60 pointer-events-none"}`}>
+                   <FiGift className="w-4 h-4 text-[#DF3131] shrink-0" />
+                   <span className="flex flex-col leading-tight min-w-0">
+                     <span className="text-[10px] uppercase tracking-[0.12em] text-[#999]">Cart</span>
+                     <span className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0]">{cartCount} item{cartCount === 1 ? "" : "s"}</span>
+                   </span>
+                 </button>
+               </div>
+
+               <div className="flex items-center gap-3">
+                 {session?.user ? (
+                   <>
+                     <Link href="/account/my-account" onClick={() => setMobileOpen(false)}
+                       className="flex-1 text-center py-2.5 px-4 text-[13px] font-semibold border-[1.5px] border-[#DF3131] text-[#DF3131] hover:bg-[#DF3131] hover:text-white rounded-full transition-all">
+                       My Account
+                     </Link>
+                     <button onClick={() => { signOut(); setMobileOpen(false); }}
+                       className="flex-1 text-center py-2.5 px-4 text-[13px] font-semibold border-[1.5px] border-[#333] dark:border-[#e0e0e0] text-[#333] dark:text-[#e0e0e0] hover:bg-[#333] dark:hover:bg-[#e0e0e0] hover:text-white dark:hover:text-[#1C1C1E] rounded-full transition-all">
+                       Sign Out
+                     </button>
+                   </>
+                 ) : (
+                   <a href="/account/my-account" onClick={() => setMobileOpen(false)}
+                     className="flex items-center justify-center w-full px-4 py-2.5 text-[13px] font-semibold tracking-[0.12em] rounded-lg bg-[#DF3131] text-white active:scale-[0.98] transition-all min-h-[40px]">
+                     <span className="font-heading font-bold tracking-[0.12em] uppercase">Login</span>
+                   </a>
+                 )}
+               </div>
+             </div>
             {/* Mobile search */}
             <div className="px-6 pt-3 pb-2">
               <input type="text" placeholder="Search WYZ..." aria-label="Search WYZ Design"
