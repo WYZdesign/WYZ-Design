@@ -57,7 +57,7 @@ onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
 onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
 onClick={() => setFlipped(f => !f)}
 >
-  <div className="relative w-full" style={{ minHeight: "min(400px, 60vh)" }}>
+  <div className="relative w-full" style={{ minHeight: "min(460px, 69vh)" }}>
  {/* Front - full image + 60% overlay + title */}
  <div
     className="absolute inset-0 transition-all duration-700 ease-in-out"
@@ -67,7 +67,7 @@ onClick={() => setFlipped(f => !f)}
    <Image src={service.img} alt={service.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
   <div className="absolute inset-0 bg-black/80" />
   <div className="absolute inset-0 flex items-center justify-center z-10">
-  <h3 className="font-heading font-black text-white text-[30.8px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
+  <h3 className="font-heading font-black text-white text-[46px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
   </div>
  </div>
  </div>

@@ -657,6 +657,7 @@ export default function EventsPage() {
   const [modalVideo, setModalVideo] = useState<{ video: string; title: string } | null>(null);
   const [shuffled, setShuffled] = useState(ALL_EVENT_IMAGES);
   const [heroVideo, setHeroVideo] = useState("/videos/diy-shows/Action Sack Vol. 6.mp4");
+ const [heroReady, setHeroReady] = useState(false);
 
   useEffect(() => {
     setShuffled([...ALL_EVENT_IMAGES].sort(() => Math.random() - 0.5));
@@ -735,14 +736,14 @@ export default function EventsPage() {
      <video
       key={heroVideo}
       src={heroVideo}
-      poster="/images/hero-diy-shows.jpg"
       autoPlay
       muted
       loop
       playsInline
       preload="auto"
+      style={{ opacity: heroReady ? 1 : 0, transition: "opacity 0.7s ease-in" }}
       className="absolute inset-0 w-full h-full object-cover md:[filter:saturate(1.2)_contrast(1.1)]"
-      onLoadedMetadata={(e) => { const v = e.currentTarget; v.currentTime = 5; void v.play().catch(() => {}); }}
+      onLoadedMetadata={(e) => { const v = e.currentTarget; v.currentTime = 5; void v.play().catch(() => {}); setHeroReady(true); }}
       onTimeUpdate={(e) => {
         // `loop` restarts silently at 0 without firing `ended`, so re-apply the
         // 5s start point whenever a loop cycle brings it back near the top.
@@ -755,6 +756,7 @@ export default function EventsPage() {
         }
       }}
      />
+     <div className="absolute inset-0 bg-black z-0" />
      <div className="absolute inset-0 bg-black/65 z-[1]" />
     </div>
 {/* Text overlay */}

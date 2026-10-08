@@ -4,7 +4,6 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
 import TextMaskReveal from "@/components/TextMaskReveal";
-import ParticleBackground from "@/components/ParticleBackground";
 import LeadMagnet from "@/components/LeadMagnet";
 
 const CONTACT_FIELDS = [
@@ -18,7 +17,6 @@ export default function ContactPage() {
     <main className="pb-10 sm:pb-16 lg:pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <ScrollReveal animation="fadeUp">
         <div className="relative max-w-2xl mx-auto px-6 pt-20 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
-          <ParticleBackground count={15} color="#DF3131" maxSize={2} speed={0.2} className="z-0 opacity-40" />
           <div className="relative z-10">
           <TextMaskReveal direction="up">
           <h1 className="text-[1.35rem] sm:text-[1.8rem] md:text-[2.25rem] lg:text-[2.7rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>CONTACT US</h1>

@@ -99,7 +99,7 @@ export default function Footer() {
     <footer aria-label="Site footer" data-chat-avoid className="relative overflow-hidden bg-[#111] dark:bg-[#111]">
       {/* Newsletter banner */}
       <div className="bg-[#111] dark:bg-[#111]">
-        <div className="max-w-[115rem] mx-auto px-6 lg:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-[115rem] mx-auto px-6 lg:px-12 py-14 lg:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="text-center md:text-left">
             <h3 className="text-white dark:text-white font-heading font-bold text-xl sm:text-2xl tracking-[0.08em] whitespace-nowrap">STAY IN THE LOOP</h3>
             <p className={`${textSecondary} text-[14px] mt-1`}>Get exclusive updates, promotions, and behind-the-scenes content.</p>
@@ -119,7 +119,7 @@ export default function Footer() {
           </form>
         </div>
       </div>
-        <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pb-6 flex justify-center">
+        <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pb-10 flex justify-center">
           <div className="flex flex-wrap justify-center gap-3">
             {SOCIALS.map((s, i) => (
               <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}

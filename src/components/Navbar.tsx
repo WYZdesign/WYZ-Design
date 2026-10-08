@@ -22,13 +22,10 @@ const NAV_LINKS = [
 const MORE_GROUPS = [
   { title: "S E R V I C E S", links: [
     { href: "/events", label: "E V E N T S" },
-    { href: "/plans", label: "P L A N S" },
     { href: "/printing", label: "P R I N T I N G" },
-    { href: "/web-design", label: "W E B . D E S I G N" },
   ] },
   { title: "S T O R E", links: [
     { href: "/merch", label: "M E R C H" },
-    { href: "/gift-card", label: "G I F T . C A R D" },
     { href: "/loyalty", label: "R E W A R D S" },
     { href: "/featured-artist", label: "F. A. O. T. M." },
   ] },

@@ -128,7 +128,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
 }
 
 function FlipCardInline({ title, subtitle, img, backTitle, backContent, backNote, backBg, orderLink, orderLabel, orderClass }: {
-  title: string; subtitle: string; img: string; backTitle: string; backContent: React.ReactNode; backNote: string; backBg: string; orderLink: string; orderLabel: string; orderClass: string;
+  title: string; subtitle: string; img?: string; backTitle: string; backContent: React.ReactNode; backNote: string; backBg: string; orderLink: string; orderLabel: string; orderClass: string;
 }) {
   const [flipped, setFlipped] = useState(false);
   const canHover = useRef(false);
@@ -148,6 +148,7 @@ function FlipCardInline({ title, subtitle, img, backTitle, backContent, backNote
       >
       {/* Front */}
       <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
+        {img ? (
         <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10">
           <Image src={img} alt={title} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover" />
           <div className="absolute inset-0 bg-black/80" />
@@ -156,6 +157,16 @@ function FlipCardInline({ title, subtitle, img, backTitle, backContent, backNote
             <p className="text-white/80 text-[15px] tracking-[0.1em] uppercase mt-3">{subtitle}</p>
           </div>
         </div>
+        ) : (
+        <div className="border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] p-8 lg:p-10 text-center hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10 h-full flex flex-col justify-center">
+          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-[#333] dark:text-[#e0e0e0] group-hover:text-[#DF3131] transition-colors mb-4">{title}</h2>
+          <p className="text-[#DF3131] text-[16px] tracking-[0.1em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">{subtitle}</p>
+          <div className="mt-6 flex items-center justify-center gap-2 text-[13px] text-[#666] dark:text-[#aaa]">
+            <span>Hover or tap to see pricing</span>
+            <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </div>
+        )}
       </div>
       {/* Back */}
       <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
@@ -300,7 +311,6 @@ export default function PrintingPage() {
   <FlipCardInline
     title="PRINTS + POSTERS"
     subtitle="Prices based on size, calculated by average inches."
-    img="/images/printing/print_1.jpg"
     backTitle="PRINT + POSTER PRICING"
     backContent={
       <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">

@@ -6,7 +6,6 @@ import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import TextMaskReveal from "@/components/TextMaskReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
-import ParticleBackground from "@/components/ParticleBackground";
 import TextSplit from "@/components/TextSplit";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import LeadMagnet from "@/components/LeadMagnet";
@@ -56,7 +55,6 @@ export default function AboutPage() {
               }}
             />
           </div>
-          <ParticleBackground count={20} color="#DF3131" maxSize={2} speed={0.2} className="z-[1]" />
           {/* Crown logo marquee - interactive mouse reveal. The mouse
               tracking used to be wired to onMouseMove on this row container
               specifically; since the text/CTA layer above it (z-20) is a
