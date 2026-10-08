@@ -34,7 +34,11 @@ export default function Page() {
           <RandomSplash onEnter={handleEnter} />
         </div>
       )}
-      <div style={entered ? undefined : { opacity: 0, pointerEvents: "none" }}>
+      <div
+        aria-hidden={!entered}
+        inert={!entered ? true : undefined}
+        style={entered ? undefined : { opacity: 0, pointerEvents: "none" }}
+      >
         <HomePage />
       </div>
     </>

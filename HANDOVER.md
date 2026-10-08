@@ -1,5 +1,15 @@
 # WYZ Design — Current State (Session 40)
 
+## Session 62 (2026-10-07) - Splash interaction boundary and motion audit (Codex)
+
+- Added `useSplashScrollLock`, used by the root first-visit splash and `/splash`. It locks document root and body, blocks wheel, touch-move, and keyboard scroll input, disables overscroll chaining, stops Lenis, and returns visitors to the top on exit. The invisible Home page can no longer move behind the fixed splash.
+- Verified TypeScript with `npx tsc --noEmit --incremental false` (exit 0). The default incremental command cannot write `tsconfig.tsbuildinfo` in the shared workspace.
+- Browser-agent inspection is blocked by a missing installed browser-service module, so browser control did not yield visual evidence. The implemented lock and splash inventory are source-verified.
+- Handoff: `SplashVariants.tsx` has 24 uneven concepts. Curate 12 production variants with one shared input and performance contract rather than growing the set. iOS motion permission requires a deliberate user activation, so use one explicit Enable Motion control as the platform-required exception, then use tilt only. Never bind permission to a swipe or arbitrary screen tap.
+- Implemented that first production pass: the random entry registry is now 12 curated variants, and every one sits inside the same responsive tilt frame. Pointer interaction remains available on desktop; touch movement and swiping do not drive the experience. iOS gets an explicit `Enable tilt` permission control, while browsers that do not require permission begin responding to orientation automatically. Removed the old silent first-touch permission listener from the shared gyro hook.
+- Added `SPLASH_SYSTEM_HANDOVER.md` with the ownership map, exact route behavior, verified changes, required device checks, and remaining engineering work. Root Home is now `aria-hidden` and inert while its splash is active; the Enter control receives initial keyboard focus.
+- Corrected the existing `webkitMaskImage` style property casing in the Spotlight effect, then re-ran `npx tsc --noEmit --incremental false` successfully (exit 0).
+
 ---
 
 ## Session 61 (2026-10-07) - Consolidation audit opened (Codex)

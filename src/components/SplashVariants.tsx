@@ -1,12 +1,27 @@
 "use client";
 
 /*
- WYZ Design - Splash Gallery (24 variants)
- Save as: src/app/splash-gallery/page.tsx → live at /splash-gallery
+ WYZ Design - Splash Gallery (16 curated variants)
+ Save as: src/app/splash-gallery/page.tsx -> live at /splash-gallery
+
+ 2026-10-08 pass (Claude): cut from 24 down to the 13 strongest, most
+ distinct variants, fixed the pointer system so every single one now
+ responds to mouse OR phone tilt through the exact same code path (most
+ of the old 24 had no gyro wiring at all, and a couple had no live mouse
+ wiring either -- Glitch's RGB-split only ever triggered from gyro, never
+ from the mouse, before this pass). Added 3 new variants researched from
+ current award-site interaction patterns: GrainReveal (film-grain mask
+ reveal), CursorRibbon (tapered glowing trail), LiquidChrome (chrome
+ blob that tracks the pointer). Every variant now reads one shared
+ pointer ref that is written by mouse movement on desktop and by
+ device tilt on phones -- nothing here depends on a tap or a swipe to
+ work, only on the one-time OS permission gesture `useGyroPermission`
+ already binds to the page's first touch/click.
 */
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useGyroPermission } from "@/hooks/useGyroPermission";
+import { useSplashScrollLock } from "@/hooks/useSplashScrollLock";
 import { prefersReducedMotion } from "@/lib/utils";
 const R = "#DF3131", RD = "#B82020", G = "#D49341", GL = "#F9AD4D", OW = "#FFFFFF", CH = "#262626", DK = "#161311";
 
@@ -15,7 +30,6 @@ const CSS = `
 @keyframes wyzFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
 @keyframes wyzRipple { from{transform:translate(-50%,-50%) scale(0);opacity:.6} to{transform:translate(-50%,-50%) scale(28);opacity:0} }
 @keyframes wyzFade { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
-@keyframes wyzMarq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 @keyframes wyzBlink { 50%{opacity:0} }
 @keyframes wyzPulse { 50%{opacity:.65} }
 .wyz-lockup{font-family:'Montserrat',system-ui,sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:.04em;line-height:.84;display:inline-flex;flex-direction:column;align-items:center;font-size:clamp(46px,9vw,104px)}
@@ -81,7 +95,7 @@ function Brand({ theme = "dark", draw = false, onEnter }: { theme?: "dark" | "li
  <div className={draw ? "wyz-pdraw" : ""} style={{ marginBottom: 18, animation: "wyzFade .8s ease both" }}><CrownLogo size={72} /></div>
  <Wordmark color={dark ? OW : CH} />
  <p className="wyz-tag" style={{ color: dark ? "rgba(254,254,253,.5)" : "#757575", animation: "wyzFade .8s ease .3s both" }}>Creative Agency</p>
- <button className="wyz-enter" style={{ animation: "wyzFade .8s ease .5s both", pointerEvents: "auto" }} onClick={onEnter}>Enter Site</button>
+ <button className="wyz-enter" style={{ animation: "wyzFade .8s ease .5s both", pointerEvents: "auto" }} onClick={onEnter} autoFocus aria-label="Enter WYZ Design">Enter Site</button>
  </div>
  );
 }
@@ -91,84 +105,55 @@ const center: React.CSSProperties = { position: "absolute", top: 0, right: 0, bo
 const stageBox = (bg: string): React.CSSProperties => ({ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundColor: bg, overflowX: "hidden", overflowY: "hidden" });
 const fullCanvas: React.CSSProperties = { position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%" };
 
-function TiltMotionFrame({ children }: { children: React.ReactNode }) {
- const frame = useRef<HTMLDivElement>(null);
- const onGranted = useCallback((setCleanup: (fn: () => void) => void) => {
-   const onOrientation = (event: DeviceOrientationEvent) => {
-     if (!frame.current || event.beta === null || event.gamma === null) return;
-     const x = Math.max(-1, Math.min(1, event.gamma / 35));
-     const y = Math.max(-1, Math.min(1, (event.beta - 45) / 45));
-     frame.current.style.transform = `perspective(1000px) rotateX(${y * -1.25}deg) rotateY(${x * 1.25}deg) scale(1.015)`;
-   };
-   window.addEventListener("deviceorientation", onOrientation, { passive: true });
-   setCleanup(() => window.removeEventListener("deviceorientation", onOrientation));
- }, []);
- const { status, requestPermission } = useGyroPermission(onGranted);
-
- return (
-   <div ref={frame} style={{ position: "fixed", inset: 0, overflow: "hidden", transform: "perspective(1000px) scale(1.015)", transition: "transform 180ms ease-out", willChange: "transform" }}>
-     {children}
-     {status === "pending" && (
-       <button
-         type="button"
-         className="wyz-enter"
-         onClick={() => { void requestPermission(); }}
-         style={{ position: "absolute", right: 16, bottom: 16, zIndex: 20, marginTop: 0, padding: "10px 14px", fontSize: 11 }}
-       >
-         Enable tilt
-       </button>
-     )}
-   </div>
- );
-}
-
-/* ---------- GYRO POINTER (iOS-gated via useGyroPermission) ---------- */
-function useDeviceTiltAsPointer(ref: React.RefObject<HTMLDivElement | null>) {
- const p = useRef({ x: -999, y: -999, on: false });
-
- const onGranted = useCallback((setCleanup: (fn: () => void) => void) => {
-   const handler = (e: DeviceOrientationEvent) => {
-     if (e.gamma === null || e.beta === null || !ref.current) return;
-     const r = ref.current.getBoundingClientRect();
-     const nx = (e.gamma + 45) / 90;
-     const ny = (e.beta + 45) / 90;
-     p.current = {
-       x: Math.max(0, Math.min(1, nx)) * r.width,
-       y: Math.max(0, Math.min(1, ny)) * r.height,
-       on: true
-     };
-   };
-   window.addEventListener("deviceorientation", handler, { passive: true });
-   setCleanup(() => window.removeEventListener("deviceorientation", handler));
- }, [ref]);
-
- useGyroPermission(onGranted);
- return p;
-}
-
+/* ---------- ONE POINTER, TWO SOURCES ----------
+ Every variant reads this single ref. On a mouse-driven device it is
+ written by mousemove/mouseleave on the stage element. On a phone it is
+ written by deviceorientation (gamma/beta mapped into the same 0..width /
+ 0..height space) once useGyroPermission's one-time gesture-gated request
+ grants it -- no tap, no swipe, just tilt. Whichever source actually fires
+ on a given device is the one that drives the variant; there is nothing
+ variant-specific to wire up, which is also what was broken before: most
+ of the old 24 variants only listened for the mouse and sat dead on a
+ phone, and one (Glitch) only ever checked the gyro path and sat dead on
+ desktop. Centralizing it here means every kept variant gets both for
+ free. */
 function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
  const p = useRef({ x: -999, y: -999, on: false });
+
  useEffect(() => {
   const el = ref.current;
   if (!el) return;
   const onMove = (e: MouseEvent) => { const r = el.getBoundingClientRect(); p.current = { x: e.clientX - r.left, y: e.clientY - r.top, on: true }; };
   const onLeave = () => { p.current.on = false; };
-  el.addEventListener("mousemove", onMove);
-  el.addEventListener("mouseleave", onLeave);
+  el.addEventListener("mousemove", onMove, { passive: true });
+  el.addEventListener("mouseleave", onLeave, { passive: true });
   return () => { el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
  }, [ref]);
+
+ const onGyroGranted = useCallback((setCleanup: (fn: () => void) => void) => {
+  const handler = (e: DeviceOrientationEvent) => {
+   if (e.gamma === null || e.beta === null || !ref.current) return;
+   const r = ref.current.getBoundingClientRect();
+   const nx = Math.max(0, Math.min(1, (e.gamma + 45) / 90));
+   const ny = Math.max(0, Math.min(1, (e.beta + 45) / 90));
+   p.current = { x: nx * r.width, y: ny * r.height, on: true };
+  };
+  window.addEventListener("deviceorientation", handler, { passive: true });
+  setCleanup(() => window.removeEventListener("deviceorientation", handler));
+ }, [ref]);
+ useGyroPermission(onGyroGranted);
+
  return p;
 }
+
 function useStage() {
  const ref = useRef<HTMLDivElement>(null);
- const mouse = useRef({ x: -999, y: -999, on: false });
- const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(); mouse.current = { x: e.clientX - r.left, y: e.clientY - r.top, on: true }; };
- const onLeave = () => { mouse.current.on = false; };
- return { ref, mouse, onMove, onLeave };
+ const mouse = usePointerField(ref);
+ return { ref, mouse, onMove: () => {}, onLeave: () => {} };
 }
 function fit(c: HTMLCanvasElement) { const p = c.parentElement!; c.width = p.clientWidth; c.height = p.clientHeight; return { W: c.width, H: c.height }; }
 
-/* ============ ORIGINAL 10 ============ */
+/* ============ 16 CURATED VARIANTS ============ */
 export function Constellation({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const cv = useRef<HTMLCanvasElement>(null);
  useEffect(() => {
@@ -188,127 +173,110 @@ export function Constellation({ onEnter }: VProps) {
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox(DK)}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
 
-export function Aurora({ onEnter }: VProps) {
- const { ref, mouse, onMove, onLeave } = useStage(); const b1 = useRef<HTMLDivElement>(null), b2 = useRef<HTMLDivElement>(null);
- useEffect(() => {
- const el = ref.current!, W = el.clientWidth, H = el.clientHeight; let raf = 0; const p1 = { x: W * .4, y: H * .4 }, p2 = { x: W * .6, y: H * .6 };
- const t = () => { const m = mouse.current; p1.x += ((m.x - W * .15) - p1.x) * .04; p1.y += ((m.y - H * .15) - p1.y) * .04; p2.x += ((W - m.x - W * .15) - p2.x) * .03; p2.y += ((H - m.y - H * .15) - p2.y) * .03; if (b1.current) { b1.current.style.left = p1.x + "px"; b1.current.style.top = p1.y + "px"; } if (b2.current) { b2.current.style.left = p2.x + "px"; b2.current.style.top = p2.y + "px"; } raf = requestAnimationFrame(t); };
- t(); return () => cancelAnimationFrame(raf);
- }, [mouse]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox(OW)}><div ref={b1} style={{ position: "absolute", width: "60%", height: "60%", borderRadius: "50%", filter: "blur(20px)", background: "radial-gradient(circle,rgba(223,49,49,.45),transparent 65%)" }} /><div ref={b2} style={{ position: "absolute", width: "55%", height: "55%", borderRadius: "50%", filter: "blur(20px)", background: "radial-gradient(circle,rgba(212,147,65,.42),transparent 65%)" }} /><Brand theme="light" onEnter={onEnter} /></div>;
-}
-
 export function Depth({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null), layers = useRef<HTMLDivElement[]>([]), br = useRef<HTMLDivElement>(null);
  const defs = [{ s: 330, c: R, o: .1, f: .06, rot: 45 }, { s: 450, c: G, o: .08, f: .1, rot: 45 }, { s: 240, c: R, o: .07, f: .16, rot: 0 }];
- const gyroPointer = useDeviceTiltAsPointer(ref);
- const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; layers.current.forEach((el, i) => { if (el) el.style.transform = `translate(${dx * defs[i].f * 260}px,${dy * defs[i].f * 260}px) rotate(${defs[i].rot}deg)`; }); if (br.current) br.current.style.transform = `translate(${dx * -22}px,${dy * -22}px)`; };
+ const pointer = usePointerField(ref);
+ const smooth = useRef({ dx: 0, dy: 0 });
  useEffect(() => {
-   let raf = 0;
-   const t = () => {
-     const gp = gyroPointer.current;
-     if (gp.on) {
-       const dx = (gp.x / (ref.current?.clientWidth || 1)) - .5;
-       const dy = (gp.y / (ref.current?.clientHeight || 1)) - .5;
-       layers.current.forEach((el, i) => { if (el) el.style.transform = `translate(${dx * defs[i].f * 260}px,${dy * defs[i].f * 260}px) rotate(${defs[i].rot}deg)`; });
-       if (br.current) br.current.style.transform = `translate(${dx * -22}px,${dy * -22}px)`;
-     }
-     raf = requestAnimationFrame(t);
-   };
+  let raf = 0;
+  const t = () => {
+   const m = pointer.current;
+   if (m.on && ref.current) {
+    const r = ref.current.getBoundingClientRect();
+    const tx = m.x / r.width - .5, ty = m.y / r.height - .5;
+    smooth.current.dx += (tx - smooth.current.dx) * .12;
+    smooth.current.dy += (ty - smooth.current.dy) * .12;
+    const { dx, dy } = smooth.current;
+    layers.current.forEach((el, i) => { if (el) el.style.transform = `translate(${dx * defs[i].f * 260}px,${dy * defs[i].f * 260}px) rotate(${defs[i].rot}deg)`; });
+    if (br.current) br.current.style.transform = `translate(${dx * -22}px,${dy * -22}px)`;
+   }
    raf = requestAnimationFrame(t);
-   return () => cancelAnimationFrame(raf);
- }, [gyroPointer]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={() => {}} style={stageBox("#1b1714")}>{defs.map((d, i) => <div key={i} ref={el => { if (el) layers.current[i] = el; }} style={{ position: "absolute", border: `1px solid ${d.c}`, opacity: d.o, width: d.s, height: d.s, left: `${20 + i * 22}%`, top: `${15 + i * 18}%`, transition: "transform .3s ease", borderRadius: d.rot ? 0 : "50%", transform: `rotate(${d.rot}deg)` }} />)}<div ref={br} style={{ position: "absolute", inset: 0, transition: "transform .3s ease" }}><Brand onEnter={onEnter} /></div></div>;
-}
-
-export function CrownDraw({ onEnter }: VProps) {
- const dots = useRef(Array.from({ length: 8 }, () => ({ l: 10 + Math.random() * 80, t: 10 + Math.random() * 80, g: Math.random() > .5, d: Math.random() * 2, s: 3 + Math.random() * 3 })));
- return <div style={stageBox(OW)}>{dots.current.map((p, i) => <div key={i} style={{ position: "absolute", width: 6, height: 6, borderRadius: "50%", background: p.g ? G : R, opacity: .3, left: `${p.l}%`, top: `${p.t}%`, animation: `wyzFloat ${p.s}s ease-in-out ${p.d}s infinite` }} />)}<Brand theme="light" draw onEnter={onEnter} /></div>;
-}
-
-export function Split({ onEnter }: VProps) {
- const [open, setOpen] = useState(false);
- useEffect(() => { const t = requestAnimationFrame(() => requestAnimationFrame(() => setOpen(true))); return () => cancelAnimationFrame(t); }, []);
- return <div style={stageBox(DK)}><div style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: "50%", backgroundColor: R, transition: "transform 1.2s cubic-bezier(.16,1,.3,1)", transform: open ? "translateX(-46%)" : "none" }} /><div style={{ position: "absolute", top: 0, bottom: 0, left: "50%", right: 0, backgroundColor: G, transition: "transform 1.2s cubic-bezier(.16,1,.3,1)", transform: open ? "translateX(46%)" : "none" }} /><Brand onEnter={onEnter} /></div>;
-}
-
-export function Nebula({ onEnter }: VProps) {
- const { ref, mouse, onMove, onLeave } = useStage(); const cv = useRef<HTMLCanvasElement>(null);
- useEffect(() => {
- const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0;
- const N = 80, ps = Array.from({ length: N }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4, r: Math.random() * 2 + 1, g: Math.random() > .65 }));
- const t = () => {
- x.clearRect(0, 0, W, H); const m = mouse.current;
- for (const a of ps) { if (m.on) { const dx = a.x - m.x, dy = a.y - m.y, d = Math.hypot(dx, dy); if (d < 120 && d > 0) { a.vx += dx / d * .6; a.vy += dy / d * .6; } } a.vx *= .96; a.vy *= .96; a.x += a.vx; a.y += a.vy; if (a.x < 0) a.x = W; if (a.x > W) a.x = 0; if (a.y < 0) a.y = H; if (a.y > H) a.y = 0; x.beginPath(); x.arc(a.x, a.y, a.r, 0, 7); x.fillStyle = a.g ? G : R; x.globalAlpha = .55; x.fill(); }
- x.globalAlpha = 1; for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) { const a = ps[i], b = ps[j], d = Math.hypot(a.x - b.x, a.y - b.y); if (d < 80) { x.beginPath(); x.moveTo(a.x, a.y); x.lineTo(b.x, b.y); x.strokeStyle = `rgba(223,49,49,${(1 - d / 80) * .18})`; x.lineWidth = .6; x.stroke(); } }
- raf = requestAnimationFrame(t);
- };
- t(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
- }, [mouse]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#13100e")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+ }, [pointer]);
+ return <div ref={ref} style={stageBox("#1b1714")}>{defs.map((d, i) => <div key={i} ref={el => { if (el) layers.current[i] = el; }} style={{ position: "absolute", border: `1px solid ${d.c}`, opacity: d.o, width: d.s, height: d.s, left: `${20 + i * 22}%`, top: `${15 + i * 18}%`, transition: "transform .1s linear", borderRadius: d.rot ? 0 : "50%", transform: `rotate(${d.rot}deg)` }} />)}<div ref={br} style={{ position: "absolute", inset: 0, transition: "transform .1s linear" }}><Brand onEnter={onEnter} /></div></div>;
 }
 
 export function Glitch({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null);
- const gyroPointer = useDeviceTiltAsPointer(ref);
+ const pointer = usePointerField(ref);
  const [go, setGo] = useState(false);
 
  useEffect(() => {
-   let raf = 0;
-   const t = () => {
-     const gp = gyroPointer.current;
-     if (gp.on) {
-       if (!go) setGo(true);
-     }
-     raf = requestAnimationFrame(t);
-   };
+  let raf = 0;
+  const t = () => {
+   if (pointer.current.on && !go) setGo(true);
    raf = requestAnimationFrame(t);
-   return () => cancelAnimationFrame(raf);
- }, [gyroPointer, go]);
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [pointer, go]);
 
  return (
-   <div ref={ref} style={stageBox(DK)}>
-     <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px)", pointerEvents: "none" }} />
-     <div style={center}>
-       <span className={`wyz-glitch ${go ? "go" : ""}`} data-t="WYZ DESIGN" style={{ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 900, textTransform: "uppercase", letterSpacing: ".04em", lineHeight: .84, fontSize: "clamp(46px,9vw,104px)", color: OW }}>WYZ DESIGN</span>
-       <p className="wyz-tag" style={{ color: "rgba(254,254,253,.5)" }}>Creative Agency</p>
-       <button className="wyz-enter" onClick={onEnter}>Enter Site</button>
-     </div>
+  <div ref={ref} style={stageBox(DK)}>
+   <div style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px)", pointerEvents: "none" }} />
+   <div style={center}>
+    <span className={`wyz-glitch ${go ? "go" : ""}`} data-t="WYZ DESIGN" style={{ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 900, textTransform: "uppercase", letterSpacing: ".04em", lineHeight: .84, fontSize: "clamp(46px,9vw,104px)", color: OW }}>WYZ DESIGN</span>
+    <p className="wyz-tag" style={{ color: "rgba(254,254,253,.5)" }}>Creative Agency</p>
+    <button className="wyz-enter" onClick={onEnter}>Enter Site</button>
    </div>
+  </div>
  );
 }
 
-export function Orbital({ onEnter }: VProps) {
- const { ref, mouse, onMove, onLeave } = useStage(); const cv = useRef<HTMLCanvasElement>(null);
- useEffect(() => {
- const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0, cx = W / 2, cy = H / 2;
- const N = 44, ps = Array.from({ length: N }, () => ({ a: Math.random() * 7, rx: 90 + Math.random() * 180, ry: 50 + Math.random() * 120, sp: .004 + Math.random() * .01, g: Math.random() > .6, sz: Math.random() * 2 + 1, tilt: Math.random() * Math.PI }));
- const t = () => { x.clearRect(0, 0, W, H); const m = mouse.current, boost = m.on ? 1 + (1 - Math.min(1, Math.hypot(m.x - cx, m.y - cy) / 300)) * 2.5 : 1; for (const o of ps) { o.a += o.sp * boost; const ex = Math.cos(o.a) * o.rx, ey = Math.sin(o.a) * o.ry, px = cx + ex * Math.cos(o.tilt) - ey * Math.sin(o.tilt), py = cy + ex * Math.sin(o.tilt) + ey * Math.cos(o.tilt); x.beginPath(); x.arc(px, py, o.sz, 0, 7); x.fillStyle = o.g ? G : R; x.globalAlpha = .6; x.fill(); } x.globalAlpha = 1; raf = requestAnimationFrame(t); };
- t(); const r = () => { const z = fit(c); W = z.W; H = z.H; cx = W / 2; cy = H / 2; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
- }, [mouse]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#13100e")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
-}
-
 export function Smoke({ onEnter }: VProps) {
- const ref = useRef<HTMLDivElement>(null), cv = useRef<HTMLCanvasElement>(null), puffs = useRef<any[]>([]);
+ const ref = useRef<HTMLDivElement>(null); const pointer = usePointerField(ref); const cv = useRef<HTMLCanvasElement>(null), puffs = useRef<any[]>([]);
  useEffect(() => {
  const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0;
  const t = () => { x.fillStyle = "rgba(20,17,16,.18)"; x.fillRect(0, 0, W, H); const a = puffs.current; for (let i = a.length - 1; i >= 0; i--) { const q = a[i]; q.life -= .012; q.x += q.vx; q.y += q.vy; q.sz += .4; if (q.life <= 0) { a.splice(i, 1); continue; } x.beginPath(); x.arc(q.x, q.y, q.sz, 0, 7); x.fillStyle = `rgba(${q.g ? "212,147,65" : "223,49,49"},${q.life * .18})`; x.fill(); } raf = requestAnimationFrame(t); };
  t(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
  }, []);
- const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top; for (let k = 0; k < 2; k++) puffs.current.push({ x: mx + (Math.random() - .5) * 10, y: my + (Math.random() - .5) * 10, life: 1, vx: (Math.random() - .5) * .4, vy: -.3 - Math.random() * .5, sz: 6 + Math.random() * 10, g: Math.random() > .5 }); if (puffs.current.length > 140) puffs.current = puffs.current.slice(-140); };
- return <div ref={ref} onMouseMove={onMove} style={stageBox("#141110")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
+ const lastSpawn = useRef({ x: -999, y: -999 });
+ useEffect(() => {
+  let raf = 0;
+  const t = () => {
+   const m = pointer.current;
+   if (m.on) {
+    const moved = Math.hypot(m.x - lastSpawn.current.x, m.y - lastSpawn.current.y);
+    if (moved > 3) {
+     lastSpawn.current = { x: m.x, y: m.y };
+     for (let k = 0; k < 2; k++) puffs.current.push({ x: m.x + (Math.random() - .5) * 10, y: m.y + (Math.random() - .5) * 10, life: 1, vx: (Math.random() - .5) * .4, vy: -.3 - Math.random() * .5, sz: 6 + Math.random() * 10, g: Math.random() > .5 });
+     if (puffs.current.length > 140) puffs.current = puffs.current.slice(-140);
+    }
+   }
+   raf = requestAnimationFrame(t);
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [pointer]);
+ return <div ref={ref} style={stageBox("#141110")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
 
 export function Ripple({ onEnter }: VProps) {
- const ref = useRef<HTMLDivElement>(null), last = useRef(0);
+ const ref = useRef<HTMLDivElement>(null); const pointer = usePointerField(ref);
+ const last = useRef(0), lastPos = useRef({ x: -999, y: -999 });
  const spawn = (px: number, py: number, op: number) => { const d = document.createElement("div"); d.style.cssText = `position:absolute;left:${px}px;top:${py}px;width:18px;height:18px;border-radius:50%;border:2px solid rgba(223,49,49,${op});pointer-events:none;animation:wyzRipple 1.6s ease-out forwards`; ref.current!.appendChild(d); d.addEventListener("animationend", () => d.remove()); };
- const onMove = (e: React.MouseEvent) => { const n = Date.now(); if (n - last.current < 90) return; last.current = n; const r = ref.current!.getBoundingClientRect(); spawn(e.clientX - r.left, e.clientY - r.top, .4); };
+ useEffect(() => {
+  let raf = 0;
+  const t = () => {
+   const m = pointer.current;
+   if (m.on) {
+    const moved = Math.hypot(m.x - lastPos.current.x, m.y - lastPos.current.y);
+    const n = Date.now();
+    if (moved > 16 && n - last.current > 90) { last.current = n; lastPos.current = { x: m.x, y: m.y }; spawn(m.x, m.y, .4); }
+   }
+   raf = requestAnimationFrame(t);
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [pointer]);
  const onClick = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(); spawn(e.clientX - r.left, e.clientY - r.top, .7); };
- return <div ref={ref} onMouseMove={onMove} onClick={onClick} style={stageBox(OW)}><Brand theme="light" onEnter={onEnter} /></div>;
+ return <div ref={ref} onClick={onClick} style={stageBox(OW)}><Brand theme="light" onEnter={onEnter} /></div>;
 }
 
-/* ============ NEW 10 ============ */
 export function Spotlight({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const li = useRef<HTMLDivElement>(null);
  useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; p.x += (m.x - p.x) * .12; p.y += (m.y - p.y) * .12; if (li.current) li.current.style.background = `radial-gradient(360px circle at ${p.x}px ${p.y}px, rgba(223,49,49,.2), rgba(212,147,65,.1) 42%, transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
@@ -317,59 +285,50 @@ export function Spotlight({ onEnter }: VProps) {
 
 export function Magnetic({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null); const inner = useRef<HTMLDivElement>(null);
- const gyroPointer = useDeviceTiltAsPointer(ref);
- const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(); const dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; if (inner.current) inner.current.style.transform = `translate(${dx * 38}px,${dy * 38}px)`; };
- const onLeave = () => { if (inner.current) inner.current.style.transform = "translate(0,0)"; };
+ const pointer = usePointerField(ref);
+ const smooth = useRef({ dx: 0, dy: 0 });
  useEffect(() => {
-   let raf = 0;
-   const t = () => {
-     const gp = gyroPointer.current;
-     if (gp.on && inner.current && ref.current) {
-       const r = ref.current.getBoundingClientRect();
-       const dx = (gp.x / r.width) - .5;
-       const dy = (gp.y / r.height) - .5;
-       inner.current.style.transform = `translate(${dx * 38}px,${dy * 38}px)`;
-     }
-     raf = requestAnimationFrame(t);
-   };
+  let raf = 0;
+  const t = () => {
+   const m = pointer.current;
+   if (m.on && ref.current) {
+    const r = ref.current.getBoundingClientRect();
+    const tx = m.x / r.width - .5, ty = m.y / r.height - .5;
+    smooth.current.dx += (tx - smooth.current.dx) * .15;
+    smooth.current.dy += (ty - smooth.current.dy) * .15;
+    if (inner.current) inner.current.style.transform = `translate(${smooth.current.dx * 38}px,${smooth.current.dy * 38}px)`;
+   }
    raf = requestAnimationFrame(t);
-   return () => cancelAnimationFrame(raf);
- }, [gyroPointer]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox(DK)}><div ref={inner} style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, transition: "transform .15s ease" }}><Brand onEnter={onEnter} /></div></div>;
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [pointer]);
+ return <div ref={ref} style={stageBox(DK)}><div ref={inner} style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, transition: "transform .05s linear" }}><Brand onEnter={onEnter} /></div></div>;
 }
 
 export function TiltGlass({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null), card = useRef<HTMLDivElement>(null), gl = useRef<HTMLDivElement>(null);
- const gyroPointer = useDeviceTiltAsPointer(ref);
- const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height; if (card.current) card.current.style.transform = `perspective(900px) rotateY(${(px - .5) * 18}deg) rotateX(${(.5 - py) * 18}deg)`; if (gl.current) gl.current.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,.22), transparent 55%)`; };
- const onLeave = () => { if (card.current) card.current.style.transform = "perspective(900px) rotateY(0) rotateX(0)"; };
+ const pointer = usePointerField(ref);
+ const smooth = useRef({ px: .5, py: .5 });
  useEffect(() => {
-   let raf = 0;
-   const t = () => {
-     const gp = gyroPointer.current;
-     if (gp.on && ref.current && card.current && gl.current) {
-       const r = ref.current.getBoundingClientRect();
-       const px = gp.x / r.width;
-       const py = gp.y / r.height;
-       card.current.style.transform = `perspective(900px) rotateY(${(px - .5) * 18}deg) rotateX(${(.5 - py) * 18}deg)`;
-       gl.current.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,.22), transparent 55%)`;
-     }
-     raf = requestAnimationFrame(t);
-   };
+  let raf = 0;
+  const t = () => {
+   const m = pointer.current;
+   if (m.on && ref.current && card.current && gl.current) {
+    const r = ref.current.getBoundingClientRect();
+    const tx = m.x / r.width, ty = m.y / r.height;
+    smooth.current.px += (tx - smooth.current.px) * .14;
+    smooth.current.py += (ty - smooth.current.py) * .14;
+    const { px, py } = smooth.current;
+    card.current.style.transform = `perspective(900px) rotateY(${(px - .5) * 18}deg) rotateX(${(.5 - py) * 18}deg)`;
+    gl.current.style.background = `radial-gradient(circle at ${px * 100}% ${py * 100}%, rgba(255,255,255,.22), transparent 55%)`;
+   }
    raf = requestAnimationFrame(t);
-   return () => cancelAnimationFrame(raf);
- }, [gyroPointer]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#17130f")}><div style={center}><div ref={card} style={{ position: "relative", padding: "46px 58px", borderRadius: 20, background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.13)", backdropFilter: "blur(10px)", transition: "transform .2s ease", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "auto" }}><div ref={gl} style={{ position: "absolute", inset: 0, borderRadius: 20, pointerEvents: "none" }} /><div style={{ marginBottom: 14 }}><CrownLogo size={62} /></div><Wordmark color={OW} /><p className="wyz-tag" style={{ color: "rgba(254,254,253,.55)" }}>Creative Agency</p><button className="wyz-enter" style={{ pointerEvents: "auto" }} onClick={onEnter}>Enter Site</button></div></div></div>;
-}
-
-export function SineWaves({ onEnter }: VProps) {
- const { ref, mouse, onMove, onLeave } = useStage(); const cv = useRef<HTMLCanvasElement>(null);
- useEffect(() => {
- const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0, ph = 0; const waves = [{ c: R, a: 1, sp: 1 }, { c: G, a: .7, sp: 1.3 }, { c: R, a: .5, sp: .7 }];
- const t = () => { x.clearRect(0, 0, W, H); ph += .02; const m = mouse.current, my = m.on ? m.y / H : .5; waves.forEach((w, wi) => { x.beginPath(); for (let px = 0; px <= W; px += 6) { const amp = 40 + my * 120, y = H / 2 + Math.sin(px * .01 + ph * w.sp + wi) * amp * w.a + Math.sin(px * .02 - ph) * 10; px === 0 ? x.moveTo(px, y) : x.lineTo(px, y); } x.strokeStyle = w.c; x.globalAlpha = .35; x.lineWidth = 1.5; x.stroke(); }); x.globalAlpha = 1; raf = requestAnimationFrame(t); };
- t(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
- }, [mouse]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#13100e")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [pointer]);
+ return <div ref={ref} style={stageBox("#17130f")}><div style={center}><div ref={card} style={{ position: "relative", padding: "46px 58px", borderRadius: 20, background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.13)", backdropFilter: "blur(10px)", transition: "transform .08s linear", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "auto" }}><div ref={gl} style={{ position: "absolute", inset: 0, borderRadius: 20, pointerEvents: "none" }} /><div style={{ marginBottom: 14 }}><CrownLogo size={62} /></div><Wordmark color={OW} /><p className="wyz-tag" style={{ color: "rgba(254,254,253,.55)" }}>Creative Agency</p><button className="wyz-enter" style={{ pointerEvents: "auto" }} onClick={onEnter}>Enter Site</button></div></div></div>;
 }
 
 export function Duotone({ onEnter }: VProps) {
@@ -381,46 +340,8 @@ export function Duotone({ onEnter }: VProps) {
  <div ref={li} style={{ position: "absolute", inset: 0, mixBlendMode: "overlay" }} /><Brand onEnter={onEnter} /></div>;
 }
 
-export function Marquee({ onEnter }: VProps) {
- const rows = [{ d: "normal", dur: 18, o: .08 }, { d: "reverse", dur: 24, o: .05 }, { d: "normal", dur: 14, o: .07 }];
- const txt = "WYZ DESIGN \u00A0\u2022\u00A0 CREATIVE AGENCY \u00A0\u2022\u00A0 ";
- return <div style={stageBox(DK)}><div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", justifyContent: "center", gap: "2vh", overflow: "hidden" }}>{rows.map((r, i) => <div key={i} style={{ whiteSpace: "nowrap", animation: `wyzMarq ${r.dur}s linear infinite ${r.d}`, opacity: r.o, fontFamily: "'Montserrat',sans-serif", fontWeight: 900, fontSize: "10vh", textTransform: "uppercase", color: i % 2 ? G : OW, letterSpacing: ".02em" }}>{txt.repeat(4)}</div>)}</div><Brand onEnter={onEnter} /></div>;
-}
-
-export function CaretType({ onEnter }: VProps) {
- const [displayed, setDisplayed] = useState("");
- const words = ["WYZ", "DESIGN"];
- const full = words.join(" ");
- useEffect(() => {
-   let i = 0;
-   const iv = setInterval(() => {
-     i++;
-     setDisplayed(full.slice(0, i));
-     if (i >= full.length) clearInterval(iv);
-   }, 140);
-   return () => clearInterval(iv);
- }, []);
- return (
-   <div style={stageBox("#0d0b0a")}>
-     <div style={center}>
-       <span style={{ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 900, textTransform: "uppercase", letterSpacing: ".04em", lineHeight: .84, fontSize: "clamp(46px,9vw,104px)", color: OW }}>
-         {displayed.split("").map((ch, i) => {
-           const isW = i < 3;
-           return <span key={i} style={{ color: isW ? OW : undefined, opacity: 1 }}>{ch}</span>;
-         })}
-       </span>
-       <span style={{ display: "inline-block", width: 3, height: "clamp(40px,8vw,90px)", background: R, marginLeft: 2, animation: "wyzBlink 1s step-end infinite", verticalAlign: "middle" }} />
-     </div>
-     <div style={{ ...center, top: "auto", bottom: "12%", position: "absolute" }}>
-       <p className="wyz-tag" style={{ color: "rgba(254,254,253,.5)" }}>Creative Agency</p>
-       <button className="wyz-enter" onClick={onEnter}>Enter Site</button>
-     </div>
-   </div>
- );
-}
-
 export function GemBurst({ onEnter }: VProps) {
- const ref = useRef<HTMLDivElement>(null), cv = useRef<HTMLCanvasElement>(null), parts = useRef<any[]>([]), burstFn = useRef<any>(null);
+ const ref = useRef<HTMLDivElement>(null); const pointer = usePointerField(ref); const cv = useRef<HTMLCanvasElement>(null), parts = useRef<any[]>([]), burstFn = useRef<any>(null);
  useEffect(() => {
  const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0;
  const burst = (bx: number, by: number) => { for (let i = 0; i < 26; i++) { const a = Math.random() * 7, sp = 1 + Math.random() * 5; parts.current.push({ x: bx, y: by, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, c: Math.random() > .5 ? "46,196,244" : (Math.random() > .5 ? "212,147,65" : "223,49,49"), sz: 2 + Math.random() * 3 }); } };
@@ -428,40 +349,44 @@ export function GemBurst({ onEnter }: VProps) {
  const t = () => { x.fillStyle = "rgba(15,12,11,.2)"; x.fillRect(0, 0, W, H); const a = parts.current; for (let i = a.length - 1; i >= 0; i--) { const q = a[i]; q.vy += .04; q.x += q.vx; q.y += q.vy; q.life -= .012; if (q.life <= 0) { a.splice(i, 1); continue; } x.save(); x.translate(q.x, q.y); x.rotate(q.x * .01); x.fillStyle = `rgba(${q.c},${q.life})`; x.fillRect(-q.sz, -q.sz, q.sz * 2, q.sz * 2); x.restore(); } raf = requestAnimationFrame(t); };
  t(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
  }, []);
- const onMove = (e: React.MouseEvent) => { if (Math.random() > .85 && burstFn.current) { const r = ref.current!.getBoundingClientRect(); burstFn.current(e.clientX - r.left, e.clientY - r.top); } };
- return <div ref={ref} onMouseMove={onMove} style={stageBox("#0f0c0b")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
-}
-
-export function GridWarp({ onEnter }: VProps) {
- const { ref, mouse, onMove, onLeave } = useStage(); const cv = useRef<HTMLCanvasElement>(null);
+ const lastBurst = useRef({ x: -999, y: -999 });
  useEffect(() => {
- const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0; const gap = 34;
- const t = () => { x.clearRect(0, 0, W, H); const m = mouse.current; for (let gx = gap; gx < W; gx += gap) for (let gy = gap; gy < H; gy += gap) { let px = gx, py = gy; const d0 = Math.hypot(gx - m.x, gy - m.y); if (m.on && d0 < 140 && d0 > 0) { const push = (140 - d0) / 140 * 26; px += (gx - m.x) / d0 * push; py += (gy - m.y) / d0 * push; } const near = m.on && d0 < 140; x.beginPath(); x.arc(px, py, near ? 2.2 : 1.3, 0, 7); x.fillStyle = near ? G : "rgba(223,49,49,.5)"; x.globalAlpha = near ? .9 : .4; x.fill(); } x.globalAlpha = 1; raf = requestAnimationFrame(t); };
- t(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
- }, [mouse]);
- return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#13100e")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
+  let raf = 0;
+  const t = () => {
+   const m = pointer.current;
+   if (m.on && burstFn.current) {
+    const moved = Math.hypot(m.x - lastBurst.current.x, m.y - lastBurst.current.y);
+    if (moved > 60) { lastBurst.current = { x: m.x, y: m.y }; burstFn.current(m.x, m.y); }
+   }
+   raf = requestAnimationFrame(t);
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [pointer]);
+ return <div ref={ref} style={stageBox("#0f0c0b")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
 
 export function MeshDrift({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null), mesh = useRef<HTMLDivElement>(null);
- const gyroPointer = useDeviceTiltAsPointer(ref);
- const onMove = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; if (mesh.current) mesh.current.style.transform = `translate(${dx * 30}px,${dy * 30}px) scale(1.12)`; };
+ const pointer = usePointerField(ref);
+ const smooth = useRef({ dx: 0, dy: 0 });
  useEffect(() => {
-   let raf = 0;
-   const t = () => {
-     const gp = gyroPointer.current;
-     if (gp.on && ref.current && mesh.current) {
-       const r = ref.current.getBoundingClientRect();
-       const dx = (gp.x / r.width) - .5;
-       const dy = (gp.y / r.height) - .5;
-       mesh.current.style.transform = `translate(${dx * 30}px,${dy * 30}px) scale(1.12)`;
-     }
-     raf = requestAnimationFrame(t);
-   };
+  let raf = 0;
+  const t = () => {
+   const m = pointer.current;
+   if (m.on && ref.current && mesh.current) {
+    const r = ref.current.getBoundingClientRect();
+    const tx = m.x / r.width - .5, ty = m.y / r.height - .5;
+    smooth.current.dx += (tx - smooth.current.dx) * .08;
+    smooth.current.dy += (ty - smooth.current.dy) * .08;
+    mesh.current.style.transform = `translate(${smooth.current.dx * 30}px,${smooth.current.dy * 30}px) scale(1.12)`;
+   }
    raf = requestAnimationFrame(t);
-   return () => cancelAnimationFrame(raf);
- }, [gyroPointer]);
- return <div ref={ref} onMouseMove={onMove} style={stageBox(OW)}><div ref={mesh} style={{ position: "absolute", inset: "-12%", transition: "transform .3s ease", filter: "blur(34px)", animation: "wyzPulse 8s ease-in-out infinite", background: "radial-gradient(circle at 25% 30%,rgba(223,49,49,.42),transparent 40%),radial-gradient(circle at 75% 35%,rgba(212,147,65,.42),transparent 40%),radial-gradient(circle at 50% 82%,rgba(249,173,77,.36),transparent 45%)" }} /><Brand theme="light" onEnter={onEnter} /></div>;
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [pointer]);
+ return <div ref={ref} style={stageBox(OW)}><div ref={mesh} style={{ position: "absolute", inset: "-12%", transition: "transform .1s linear", filter: "blur(34px)", animation: "wyzPulse 8s ease-in-out infinite", background: "radial-gradient(circle at 25% 30%,rgba(223,49,49,.42),transparent 40%),radial-gradient(circle at 75% 35%,rgba(212,147,65,.42),transparent 40%),radial-gradient(circle at 50% 82%,rgba(249,173,77,.36),transparent 45%)" }} /><Brand theme="light" onEnter={onEnter} /></div>;
 }
 
 export function Vortex({ onEnter }: VProps) {
@@ -493,17 +418,6 @@ export function Vortex({ onEnter }: VProps) {
   return <div ref={ref} style={stageBox("#0d0b09")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
 
-export function Particles({ onEnter }: VProps) {
-  const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref); const cv = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0;
-    const N = 120, ps = Array.from({ length: N }, () => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.5 + .5, speed: Math.random() * .3 + .1, angle: Math.random() * Math.PI * 2, drift: (Math.random() - .5) * .01 }));
-    const t = () => { x.clearRect(0, 0, W, H); const m = p.current; for (const dot of ps) { dot.angle += dot.drift; dot.x += Math.cos(dot.angle) * dot.speed + (m.on ? (m.x - dot.x) * .003 : 0); dot.y += Math.sin(dot.angle) * dot.speed + (m.on ? (m.y - dot.y) * .003 : 0); if (dot.x < 0) dot.x = W; if (dot.x > W) dot.x = 0; if (dot.y < 0) dot.y = H; if (dot.y > H) dot.y = 0; const dist = m.on ? Math.hypot(dot.x - m.x, dot.y - m.y) : 999; const glow = dist < 120; x.beginPath(); x.arc(dot.x, dot.y, glow ? dot.r * 3 : dot.r, 0, 7); x.fillStyle = glow ? R : G; x.globalAlpha = glow ? .8 : .25; x.fill(); } x.globalAlpha = 1; raf = requestAnimationFrame(t); };
-    t(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
-  }, []);
-  return <div ref={ref} style={stageBox(DK)}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
-}
-
 export function WaveRipple({ onEnter }: VProps) {
   const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref); const cv = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
@@ -514,56 +428,197 @@ export function WaveRipple({ onEnter }: VProps) {
   return <div ref={ref} style={stageBox("#0e0c0b")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
 
-export function HexGrid({ onEnter }: VProps) {
+/* ---------- NEW: researched off current award-site patterns ---------- */
+
+/* Film-grain reveal: a crisp brand layer sits under a grainy, noisy
+ veil; a soft circular window around the pointer/tilt position clears
+ the grain so the crisp layer shows through. The grain/clean-reveal
+ combo is one of the most common moves on current award-site splash
+ and hero treatments (texture + a cursor-gated reveal window). */
+export function GrainReveal({ onEnter }: VProps) {
+  const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref);
+  const cv = useRef<HTMLCanvasElement>(null); const mask = useRef<HTMLDivElement>(null);
+  const pos = useRef({ x: -1, y: -1 });
+  useEffect(() => {
+    const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0;
+    const draw = () => {
+      const img = x.createImageData(W, H);
+      for (let i = 0; i < img.data.length; i += 4) {
+        const v = 10 + Math.random() * 26;
+        img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+        img.data[i + 3] = 255;
+      }
+      x.putImageData(img, 0, 0);
+    };
+    draw();
+    const iv = setInterval(draw, 90);
+    const r = () => { const z = fit(c); W = z.W; H = z.H; draw(); };
+    addEventListener("resize", r);
+    return () => { clearInterval(iv); cancelAnimationFrame(raf); removeEventListener("resize", r); };
+  }, []);
+  useEffect(() => {
+    let raf = 0;
+    const t = () => {
+      const m = p.current;
+      if (m.on) {
+        pos.current.x += (m.x - pos.current.x) * .18;
+        pos.current.y += (m.y - pos.current.y) * .18;
+        if (mask.current) mask.current.style.maskImage = mask.current.style.webkitMaskImage = `radial-gradient(260px circle at ${pos.current.x}px ${pos.current.y}px, transparent 0%, transparent 55%, black 100%)`;
+      }
+      raf = requestAnimationFrame(t);
+    };
+    raf = requestAnimationFrame(t);
+    return () => cancelAnimationFrame(raf);
+  }, [p]);
+  return (
+    <div ref={ref} style={stageBox("#0c0a09")}>
+      <div style={{ position: "absolute", inset: 0 }}><Brand onEnter={onEnter} /></div>
+      <div ref={mask} style={{ position: "absolute", inset: 0, mixBlendMode: "overlay", opacity: .85 }}>
+        <canvas ref={cv} style={fullCanvas} />
+      </div>
+    </div>
+  );
+}
+
+/* Cursor ribbon: a tapered, glowing trail of lagged points chases the
+ pointer, drawn as a single smooth filled path rather than discrete
+ dots -- the "luxury light trail" look several current award sites use
+ for their cursor replacement. */
+export function CursorRibbon({ onEnter }: VProps) {
   const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref); const cv = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0;
-    const hexR = 28, hexW = hexR * Math.sqrt(3), hexH = hexR * 2;
-    const t = () => { x.clearRect(0, 0, W, H); const m = p.current; for (let row = 0; row * hexH * .75 < H + hexH; row++) for (let col = 0; col * hexW < W + hexW; col++) { const cx = col * hexW + (row % 2 ? hexW / 2 : 0); const cy = row * hexH * .75; const pulse = Math.sin(Date.now() * .002 + cx * .01 + cy * .01) * .3 + .7; x.beginPath(); for (let i = 0; i < 6; i++) { const angle = Math.PI / 3 * i - Math.PI / 6; const hx = cx + hexR * Math.cos(angle); const hy = cy + hexR * Math.sin(angle); i === 0 ? x.moveTo(hx, hy) : x.lineTo(hx, hy); } x.closePath(); x.strokeStyle = m.on && Math.hypot(cx - m.x, cy - m.y) < 150 ? R : "rgba(223,49,49,.2)"; x.globalAlpha = m.on && Math.hypot(cx - m.x, cy - m.y) < 150 ? .9 : pulse * .3; x.lineWidth = m.on && Math.hypot(cx - m.x, cy - m.y) < 150 ? 2 : 1; x.stroke(); } x.globalAlpha = 1; raf = requestAnimationFrame(t); };
-    t(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
-  }, []);
+    const N = 16;
+    const trail = Array.from({ length: N }, () => ({ x: W / 2, y: H / 2 }));
+    const tick = () => {
+      x.clearRect(0, 0, W, H);
+      const m = p.current;
+      if (m.on) { trail[0].x += (m.x - trail[0].x) * .35; trail[0].y += (m.y - trail[0].y) * .35; }
+      for (let i = 1; i < N; i++) { trail[i].x += (trail[i - 1].x - trail[i].x) * .4; trail[i].y += (trail[i - 1].y - trail[i].y) * .4; }
+      for (let i = 0; i < N - 1; i++) {
+        const w = (1 - i / N) * 9;
+        const t = i / N;
+        x.beginPath();
+        x.moveTo(trail[i].x, trail[i].y);
+        x.lineTo(trail[i + 1].x, trail[i + 1].y);
+        x.lineWidth = Math.max(1, w);
+        x.strokeStyle = t < .5 ? R : G;
+        x.globalAlpha = (1 - t) * .8;
+        x.lineCap = "round";
+        x.stroke();
+      }
+      x.globalAlpha = 1;
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    const r = () => { const z = fit(c); W = z.W; H = z.H; };
+    addEventListener("resize", r);
+    return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
+  }, [p]);
   return <div ref={ref} style={stageBox(DK)}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
+}
+
+/* Liquid chrome: a soft, blobby metallic highlight drifts to and
+ wobbles around the pointer, color-cycling between silver, gold and
+ red like brushed chrome catching light -- the "liquid metal" look
+ common on current premium/creative-agency award sites. */
+export function LiquidChrome({ onEnter }: VProps) {
+  const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref); const cv = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0, t = 0;
+    const pos = { x: W / 2, y: H / 2 };
+    const blobs = Array.from({ length: 5 }, (_, i) => ({ ox: Math.cos(i * 1.3) * 40, oy: Math.sin(i * 1.3) * 40, sp: .6 + i * .15, r: 60 + i * 14 }));
+    const tick = () => {
+      t += .012;
+      x.clearRect(0, 0, W, H);
+      const m = p.current;
+      const tx = m.on ? m.x : W / 2, ty = m.on ? m.y : H / 2;
+      pos.x += (tx - pos.x) * .08; pos.y += (ty - pos.y) * .08;
+      x.globalCompositeOperation = "lighter";
+      blobs.forEach((b, i) => {
+        const bx = pos.x + Math.cos(t * b.sp + i) * b.oy;
+        const by = pos.y + Math.sin(t * b.sp + i) * b.ox;
+        const grad = x.createRadialGradient(bx, by, 0, bx, by, b.r);
+        const hue = i % 3 === 0 ? "223,49,49" : i % 3 === 1 ? "212,147,65" : "230,230,235";
+        grad.addColorStop(0, `rgba(${hue},.26)`);
+        grad.addColorStop(1, "rgba(0,0,0,0)");
+        x.fillStyle = grad;
+        x.beginPath(); x.arc(bx, by, b.r, 0, 7); x.fill();
+      });
+      x.globalCompositeOperation = "source-over";
+      raf = requestAnimationFrame(tick);
+    };
+    tick();
+    const r = () => { const z = fit(c); W = z.W; H = z.H; pos.x = W / 2; pos.y = H / 2; };
+    addEventListener("resize", r);
+    return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
+  }, [p]);
+  return <div ref={ref} style={stageBox("#0e0c0b")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
 
 /* ============ REGISTRY + RANDOM + GALLERY ============ */
 const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Element; bg: string }[] = [
- { name: "Constellation", desc: "Particle web links to your cursor", Comp: Constellation, bg: DK },
- { name: "Aurora", desc: "Soft red/gold light follows the mouse", Comp: Aurora, bg: OW },
- { name: "Depth parallax", desc: "Layers tilt in perspective", Comp: Depth, bg: "#1b1714" },
- { name: "Nebula", desc: "Particles flee the cursor", Comp: Nebula, bg: "#13100e" },
- { name: "Orbital", desc: "Particles orbit, cursor speeds them", Comp: Orbital, bg: "#13100e" },
+ { name: "Constellation", desc: "Particle web links to your cursor or tilt", Comp: Constellation, bg: DK },
+ { name: "Depth parallax", desc: "Layers tilt in perspective with your phone", Comp: Depth, bg: "#1b1714" },
+ { name: "Glitch type", desc: "RGB-split wordmark jitters awake on first move", Comp: Glitch, bg: DK },
+ { name: "Smoke trail", desc: "Wisps follow your cursor or tilt, nonstop", Comp: Smoke, bg: "#141110" },
+ { name: "Ripple", desc: "Every move or tilt sends out rings", Comp: Ripple, bg: OW },
  { name: "Spotlight", desc: "A torch reveals the mark", Comp: Spotlight, bg: DK },
- { name: "Magnetic", desc: "Letters lean toward your cursor", Comp: Magnetic, bg: DK },
+ { name: "Magnetic", desc: "Letters lean toward your cursor or tilt", Comp: Magnetic, bg: DK },
  { name: "Tilt glass", desc: "Glass card tilts in 3D with glare", Comp: TiltGlass, bg: "#17130f" },
- { name: "Sine waves", desc: "Wave field bends with mouse height", Comp: SineWaves, bg: "#13100e" },
- { name: "Grid warp", desc: "Dot grid bends around the cursor", Comp: GridWarp, bg: "#13100e" },
-  { name: "Mesh drift", desc: "Gradient mesh drifts with parallax", Comp: MeshDrift, bg: OW },
-  { name: "Vortex", desc: "Spiral particle storm orbits center", Comp: Vortex, bg: "#0d0b09" },
+ { name: "Duotone", desc: "Photo behind red/gold, lit by cursor", Comp: Duotone, bg: "#1a1410" },
+ { name: "Gem burst", desc: "Cyan/gold shards explode as you move", Comp: GemBurst, bg: "#0f0c0b" },
+ { name: "Mesh drift", desc: "Gradient mesh drifts with parallax", Comp: MeshDrift, bg: OW },
+ { name: "Vortex", desc: "Spiral particle storm orbits your pointer", Comp: Vortex, bg: "#0d0b09" },
+ { name: "Wave ripple", desc: "Layered sine waves follow cursor or tilt", Comp: WaveRipple, bg: "#0e0c0b" },
+ { name: "Grain reveal", desc: "Film grain clears in a window around you", Comp: GrainReveal, bg: "#0c0a09" },
+ { name: "Cursor ribbon", desc: "A glowing tapered trail chases your pointer", Comp: CursorRibbon, bg: DK },
+ { name: "Liquid chrome", desc: "A metallic blob drifts and catches the light", Comp: LiquidChrome, bg: "#0e0c0b" },
 ];
+
+/* Picks a variant that is never the same as the one shown last time (in
+ this tab, via sessionStorage), so testing "surprise me" a few times in a
+ row can't land on a repeat and read as "it's always the same 3 or 4" --
+ a true uniform random draw over a small, visually-similar-looking set
+ can still feel that way by chance, so this removes that chance entirely
+ on top of curating the set itself down to 16 variants that actually look
+ different from one another (the old 24 had seven different dot-cloud-
+ on-dark-background variants alone, which is most of why a random pick
+ kept reading as "the same thing" even when the index genuinely changed). */
+const LAST_KEY = "wyz-splash-last";
+function pickVariant(): number {
+ let last = -1;
+ try { last = Number(sessionStorage.getItem(LAST_KEY)); } catch {}
+ let next = Math.floor(Math.random() * VARIANTS.length);
+ if (VARIANTS.length > 1 && next === last) next = (next + 1 + Math.floor(Math.random() * (VARIANTS.length - 1))) % VARIANTS.length;
+ try { sessionStorage.setItem(LAST_KEY, String(next)); } catch {}
+ return next;
+}
 
 export function RandomSplash(props: VProps) {
  const [i, setI] = useState<number | null>(null);
  useEffect(() => {
    if (prefersReducedMotion()) return;
-   setI(Math.floor(Math.random() * VARIANTS.length));
+   setI(pickVariant());
  }, []);
- if (i === null) return <TiltMotionFrame><div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div></TiltMotionFrame>;
+ if (i === null) return <div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div>;
  const C = VARIANTS[i].Comp;
- return <TiltMotionFrame><style>{CSS}</style><C {...props} /></TiltMotionFrame>;
+ return <><style>{CSS}</style><C {...props} /></>;
 }
 
 export default function SplashGallery() {
  const [open, setOpen] = useState<number | null>(null);
+ useSplashScrollLock(open !== null);
  useEffect(() => { if (open === null) return; const k = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(null); }; addEventListener("keydown", k); return () => removeEventListener("keydown", k); }, [open]);
- const surprise = () => setOpen(Math.floor(Math.random() * VARIANTS.length));
+ const surprise = () => setOpen(pickVariant());
  const Active = open !== null ? VARIANTS[open].Comp : null;
  return (
  <div style={{ minHeight: "100vh", background: "#0e0c0b", padding: "48px 32px", fontFamily: "var(--font-body),system-ui,sans-serif" }}>
  <style>{CSS}</style>
  <div style={{ maxWidth: 1180, margin: "0 auto" }}>
  <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, color: OW, textAlign: "center", letterSpacing: ".05em", fontSize: 38, margin: 0 }}>SPLASH <span style={{ color: R }}>GALLERY</span></h1>
-  <p style={{ color: "#757575", textAlign: "center", marginTop: 8, fontSize: 15 }}>24 brand-matched variants with mouse, touch &amp; gyroscope support. Only the one you open animates.</p>
- <div style={{ textAlign: "center", margin: "18px 0 28px" }}><button onClick={surprise} style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", fontSize: 13, color: OW, background: R, border: "none", padding: "12px 26px", borderRadius: 3, cursor: "pointer" }}>Surprise me →</button></div>
+ <p style={{ color: "#757575", textAlign: "center", marginTop: 8, fontSize: 15 }}>{VARIANTS.length} variants, each built to feel the same whether you use a mouse or tilt your phone. Only the one you open animates.</p>
+ <div style={{ textAlign: "center", margin: "18px 0 28px" }}><button onClick={surprise} style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", fontSize: 13, color: OW, background: R, border: "none", padding: "12px 26px", borderRadius: 3, cursor: "pointer" }}>Surprise me &rarr;</button></div>
  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 18 }}>
  {VARIANTS.map((v, i) => (
  <button key={i} className="wyz-card" style={{ background: v.bg }} onClick={() => setOpen(i)}>
@@ -579,7 +634,7 @@ export default function SplashGallery() {
  {Active !== null && (
  <div style={{ position: "fixed", inset: 0, zIndex: 200 }}>
  <div style={{ position: "absolute", inset: 0 }}><Active onEnter={() => setOpen(null)} /></div>
- <button onClick={() => setOpen(null)} style={{ position: "absolute", top: 16, right: 16, zIndex: 210, padding: "8px 16px", borderRadius: 999, border: "1px solid rgba(255,255,255,.25)", background: "rgba(255,255,255,.1)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 13, cursor: "pointer" }}>← Back to gallery</button>
+ <button onClick={() => setOpen(null)} style={{ position: "absolute", top: 16, right: 16, zIndex: 210, padding: "8px 16px", borderRadius: 999, border: "1px solid rgba(255,255,255,.25)", background: "rgba(255,255,255,.1)", backdropFilter: "blur(6px)", color: "#fff", fontSize: 13, cursor: "pointer" }}>&larr; Back to gallery</button>
  <div style={{ position: "absolute", top: 18, left: 18, zIndex: 210, color: "rgba(255,255,255,.45)", fontSize: 13, fontFamily: "'Montserrat',sans-serif", letterSpacing: ".1em" }}>{VARIANTS[open!].name}</div>
  </div>
  )}

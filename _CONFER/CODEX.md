@@ -2,6 +2,15 @@
 
 **Lane:** routing, redirects, copy, audit structure, search-risk review, and measurement.
 
+## New splash-system handoff (2026-10-07)
+
+- **Fixed now:** root and `/splash` use the same document-level lock. A splash blocks wheel, touch move, keyboard scroll keys, overscroll chaining, and Lenis motion of the invisible Home page behind it. It always releases at scroll position zero.
+- **Current inventory:** `SplashVariants.tsx` contains 24 concepts, but their behavior is not consistent. Only Depth, Glitch, and Mesh Drift use the shared gyro path. Several variants are pointer-only, and the gallery text still promises touch/click behavior that conflicts with the owner direction.
+- **Recommendation:** curate 12 production variants: Constellation, Aurora, Depth, Nebula, Orbital, Spotlight, Magnetic, Tilt Glass, Sine Waves, Mesh Drift, Grid Warp, and Vortex. Hold the remainder as non-production experiments until they meet the same input, performance, and accessibility contract.
+- **Required contract:** one mouse/pointer response on desktop; tilt-only scene response on phones; a motion-reduced static or cross-fade fallback; no scrolling; `visibilitychange` pauses canvases; DPR-capped canvases; `ResizeObserver` or resize cleanup; keyboard-accessible Enter action; and a 320px, 390px, 768px, 1440px review.
+- **Important platform constraint:** iOS requires a transient user gesture to grant orientation access. Do not hide that consent behind a swipe or random tap. Use one explicit `Enable motion` control as the only permission step, then avoid touch-driven scene interaction.
+- **Implemented:** the random production registry now contains 12 curated variants, each within the same tilt frame. Desktop pointer interaction remains intact; phone motion is orientation-driven. The prior silent first-touch sensor request was removed in favor of an explicit `Enable tilt` permission action where the platform requires it.
+
 ## Evidence reviewed
 
 - `WYZDESIGN_CONSOLIDATION_AUDIT.md`, including the current 2,354/5,000 baseline.

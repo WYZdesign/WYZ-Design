@@ -2,11 +2,13 @@
 import { ReactNode, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useLenis } from "@/components/SmoothScrollProvider";
 
 const CURTAIN_EASE = [0.76, 0, 0.24, 1] as const;
 
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const lenis = useLenis();
   const isRoot = pathname === "/";
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -16,7 +18,16 @@ export default function PageTransition({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => { setIsFirstRender(false); }, []);
-  useEffect(() => { if (!isFirstRender) window.scrollTo(0, 0); }, [pathname, isFirstRender]);
+  // 2026-10-08 (Claude): keep Lenis's own internal scroll state in sync
+  // with the manual reset -- otherwise Lenis's rAF loop can reapply its
+  // own stale scroll position right after this runs and the page does not
+  // actually stay at the top.
+  useEffect(() => {
+    if (!isFirstRender) {
+      window.scrollTo(0, 0);
+      lenis?.scrollTo(0, { immediate: true });
+    }
+  }, [pathname, isFirstRender, lenis]);
 
   useEffect(() => {
     if (isFirstRender) return;

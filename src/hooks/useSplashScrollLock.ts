@@ -16,6 +16,18 @@ const SCROLL_KEYS = new Set([
  * Makes a full-viewport brand intro a real interaction boundary. A fixed
  * overlay alone does not stop a wheel, touch move, or smooth-scroll provider
  * from moving the page beneath it.
+ *
+ * 2026-10-08 (Claude): preventDefault() alone only suppresses the browser's
+ * own native scroll action -- it does NOT stop any other listener on the
+ * same event from running. Lenis (SmoothScrollProvider) registers its own
+ * wheel/touchmove listeners in a child-after-parent effect that, due to
+ * React's child-effects-run-before-parent-effects order on first mount,
+ * attaches AFTER this hook's blockers. That meant Lenis kept processing
+ * wheel/touch input and driving its own internal scroll position even
+ * while this hook had "locked" native scrolling, which is what let a
+ * scroll/swipe on the splash leak through to the home page underneath.
+ * stopImmediatePropagation() closes that gap by stopping every other
+ * listener (Lenis's included) on the same event from firing at all.
  */
 export function useSplashScrollLock(locked: boolean) {
   useEffect(() => {
@@ -33,9 +45,15 @@ export function useSplashScrollLock(locked: boolean) {
       bodyTouchAction: body.style.touchAction,
     };
 
-    const blockScroll = (event: Event) => event.preventDefault();
+    const blockScroll = (event: Event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    };
     const blockKeyScroll = (event: KeyboardEvent) => {
-      if (SCROLL_KEYS.has(event.key)) event.preventDefault();
+      if (SCROLL_KEYS.has(event.key)) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
     };
 
     root.dataset.splashLocked = "true";
@@ -49,14 +67,18 @@ export function useSplashScrollLock(locked: boolean) {
     body.style.overscrollBehavior = "none";
     body.style.touchAction = "none";
 
-    window.addEventListener("wheel", blockScroll, { passive: false });
-    window.addEventListener("touchmove", blockScroll, { passive: false });
-    window.addEventListener("keydown", blockKeyScroll);
+    // capture: true so these run before any bubble-phase listener Lenis or
+    // anything else registers on window, regardless of attach order.
+    window.addEventListener("wheel", blockScroll, { passive: false, capture: true });
+    window.addEventListener("touchmove", blockScroll, { passive: false, capture: true });
+    window.addEventListener("touchstart", blockScroll, { passive: false, capture: true });
+    window.addEventListener("keydown", blockKeyScroll, { capture: true });
 
     return () => {
-      window.removeEventListener("wheel", blockScroll);
-      window.removeEventListener("touchmove", blockScroll);
-      window.removeEventListener("keydown", blockKeyScroll);
+      window.removeEventListener("wheel", blockScroll, { capture: true } as EventListenerOptions);
+      window.removeEventListener("touchmove", blockScroll, { capture: true } as EventListenerOptions);
+      window.removeEventListener("touchstart", blockScroll, { capture: true } as EventListenerOptions);
+      window.removeEventListener("keydown", blockKeyScroll, { capture: true } as EventListenerOptions);
       root.style.overflow = previous.rootOverflow;
       root.style.height = previous.rootHeight;
       root.style.overscrollBehavior = previous.rootOverscrollBehavior;
