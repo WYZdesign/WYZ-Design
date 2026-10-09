@@ -11,6 +11,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import LeadMagnet from "@/components/LeadMagnet";
 import { SUB_BRANDS, taglineColor } from "@/lib/brands";
 
+import NomadicBreedPage from "@/app/nomadic-breed/page";
+import DyingBreedCrewPage from "@/app/dying-breed-crew/page";
 const VALUES = [
    { title: "We Do The Work Ourselves", body: "No outsourcing. No passing you around. We shoot, design, build, and deliver, every time." },
   { title: "Creativity Earns Real Money", body: "We don't work for exposure or vague promises. Real work gets real compensation. Period." },
@@ -293,6 +295,10 @@ export default function AboutPage() {
         </section>
       </ScrollReveal>
       <LeadMagnet />
-    </main>
+          {/* merged from /nomadic-breed */}
+      <NomadicBreedPage />
+      {/* merged from /dying-breed-crew */}
+      <DyingBreedCrewPage />
+</main>
   );
 }

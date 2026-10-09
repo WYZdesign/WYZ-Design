@@ -1,24 +1,10 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { FiArrowRight, FiUsers, FiShoppingBag, FiStar, FiCalendar } from "react-icons/fi";
 
 const SITE = "https://www.wyzdesign.com";
 
-export const metadata: Metadata = {
-  title: "Dying Breed Crew",
-  description: "The community and clothing arm of WYZ Design. A collective of artists, musicians, models, and culture-makers who refuse to blend in.",
-  alternates: { canonical: `${SITE}/dying-breed-crew` },
-  openGraph: {
-title: "Dying Breed Crew | WYZ Design",
-    description: "A collective of artists, musicians, models, and culture-makers who refuse to blend in. Merch, events, and creative collaborations.",
-    url: `${SITE}/dying-breed-crew`,
-    siteName: "WYZ Design",
-    type: "website",
-    images: [{ url: `${SITE}/images/client-logos/dying-breed.jpg`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Dying Breed Crew | WYZ Design", description: "A collective of artists, musicians, models, and culture-makers who refuse to blend in.", images: [`${SITE}/images/client-logos/dying-breed.jpg`] },
-};
+
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -40,7 +26,7 @@ const merchItems = [
 
 export default function DyingBreedCrewPage() {
   return (
-    <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
+    <section className="pb-20 bg-white dark:bg-[#1C1C1E]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
@@ -148,6 +134,6 @@ export default function DyingBreedCrewPage() {
           <FiArrowRight className="w-4 h-4 rotate-180" /> Back to all brands
         </Link>
       </div>
-    </main>
+    </section>
   );
 }

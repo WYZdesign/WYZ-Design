@@ -9,6 +9,8 @@ import EnhancedMarquee from "@/components/EnhancedMarquee";
 import TextSplit from "@/components/TextSplit";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
+import PlansPage from "@/app/plans/page";
+import WebDesignPage from "@/app/web-design/page";
 const CATEGORIES = ["All Services", "Branding Design", "Photography", "Videography", "Consultation", "Web Design"];
 
 const ALL_SERVICES_RAW = [
@@ -247,6 +249,10 @@ return (
  <StrategyWizard />
  </ScrollReveal>
  </div>
- </main>
+       {/* merged from /plans */}
+      <PlansPage />
+      {/* merged from /web-design */}
+      <WebDesignPage />
+</main>
  );
 }

@@ -6,6 +6,7 @@ import DynamicForm from "@/components/DynamicForm";
 import TextMaskReveal from "@/components/TextMaskReveal";
 import LeadMagnet from "@/components/LeadMagnet";
 
+import PartnershipsPage from "@/app/partnerships/page";
 const CONTACT_FIELDS = [
   { name: "name", label: "NAME", type: "text" as const, placeholder: "Your name" },
   { name: "email", label: "EMAIL", type: "email" as const, required: true, placeholder: "you@example.com" },
@@ -56,6 +57,8 @@ export default function ContactPage() {
         </div>
       </ScrollReveal>
       <LeadMagnet />
-    </main>
+          {/* merged from /partnerships */}
+      <PartnershipsPage />
+</main>
   );
 }

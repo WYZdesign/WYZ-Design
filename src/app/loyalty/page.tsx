@@ -6,6 +6,8 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { FiStar, FiGift, FiZap, FiShield, FiTarget, FiAward, FiRefreshCw } from "react-icons/fi";
 
+import GiftCardPage from "@/app/gift-card/page";
+import ReferralPage from "@/app/referral/page";
 interface CatalogAction { id: string; zeal: number; category: string; reason: string; repeatable: boolean }
 interface AchievementDef { id: string; zeal: number; title: string; description: string }
 interface QuestDef { id: string; title: string; description: string; steps: string[]; bonusZeal: number }
@@ -309,6 +311,10 @@ export default function LoyaltyPage() {
         <p className="text-[15px] text-[#666] dark:text-white/60 mb-4">Want to earn 10% when you send us a client? Join the referral program.</p>
         <Link href="/referral" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#B82020] transition-all">Refer a friend</Link>
       </div>
-    </main>
+          {/* merged from /gift-card */}
+      <GiftCardPage />
+      {/* merged from /referral */}
+      <ReferralPage />
+</main>
   );
 }

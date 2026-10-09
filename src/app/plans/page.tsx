@@ -238,7 +238,7 @@ export default function PlansPage() {
   }
 
   return (
-    <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+    <section className="pb-12 bg-white dark:bg-[#1C1C1E]">
       {/* ── Hero: Split Layout ── */}
       <ScrollReveal animation="fadeIn" duration={1.2}>
         <section className="relative min-h-[50vh] lg:min-h-[70vh] flex flex-col lg:flex-row">
@@ -384,6 +384,6 @@ export default function PlansPage() {
 
         <LeadMagnet />
       </div>
-    </main>
+    </section>
   );
 }

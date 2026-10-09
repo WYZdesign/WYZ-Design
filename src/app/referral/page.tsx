@@ -92,7 +92,7 @@ export default function ReferralPage() {
   const shareText = "Check out WYZ Design for photography, design, and branding!";
 
   return (
-    <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
+    <section className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
         <div className="text-center mb-12">
           <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-2">Earn Together</p>
@@ -259,6 +259,6 @@ export default function ReferralPage() {
           </>
         )}
       </div>
-    </main>
+    </section>
   );
 }

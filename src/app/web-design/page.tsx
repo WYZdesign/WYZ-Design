@@ -182,7 +182,7 @@ export default function WebDesignPage() {
 
 return (
     <>
-      <main className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
+      <section className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
         {/* ═══ HERO - Split (desktop video/text, mobile merged) ═══ */}
         <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
         {/* Desktop split grid. absolute inset-0 (not lg:h-full) so this sizes against
@@ -379,7 +379,7 @@ return (
             </div>
           </section>
         </ScrollReveal>
-      </main>
+      </section>
     </>
   );
 }

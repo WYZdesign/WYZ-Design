@@ -89,7 +89,7 @@ export default function GiftCardPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
+    <section className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
       <div className="max-w-4xl mx-auto px-6 pt-8">
         <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm text-center mb-2">Give the Gift of Creative</p>
         <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] text-center mb-6 sm:mb-8">
@@ -176,6 +176,6 @@ export default function GiftCardPage() {
           </Link>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

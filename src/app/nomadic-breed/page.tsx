@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { FiArrowRight, FiMapPin, FiCamera, FiCalendar, FiPackage } from "react-icons/fi";
@@ -13,20 +12,7 @@ const SERVICE_ICONS: Record<string, IconType> = {
 
 const SITE = "https://www.wyzdesign.com";
 
-export const metadata: Metadata = {
-  title: "Nomadic Breed",
-  description: "The mobile arm of WYZ Design. Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
-  alternates: { canonical: `${SITE}/nomadic-breed` },
-  openGraph: {
-    title: "Nomadic Breed - WYZ Design",
-    description: "Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
-    url: `${SITE}/nomadic-breed`,
-    siteName: "WYZ Design",
-    type: "website",
-    images: [{ url: `${SITE}/images/client-logos/nomadic-breed.jpg`, width: 1200, height: 630 }],
-  },
-  twitter: { card: "summary_large_image", title: "Nomadic Breed - WYZ Design", description: "Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.", images: [`${SITE}/images/client-logos/nomadic-breed.jpg`] },
-};
+
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -46,7 +32,7 @@ const services = [
 
 export default function NomadicBreedPage() {
   return (
-    <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
+    <section className="pb-20 bg-white dark:bg-[#1C1C1E]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
@@ -126,6 +112,6 @@ export default function NomadicBreedPage() {
           <FiArrowRight className="w-4 h-4 rotate-180" /> Back to all brands
         </Link>
       </div>
-    </main>
+    </section>
   );
 }

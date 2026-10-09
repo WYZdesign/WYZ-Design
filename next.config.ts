@@ -165,6 +165,13 @@ const nextConfig: NextConfig = {
       { source: "/shipping-policy", destination: "/legal/shipping", permanent: true },
       { source: "/copyright-notice", destination: "/legal/copyright", permanent: true },
       { source: "/plans-pricing", destination: "/plans", permanent: true },
+      { source: "/plans", destination: "/services", permanent: true },
+      { source: "/web-design", destination: "/services", permanent: true },
+      { source: "/gift-card", destination: "/loyalty", permanent: true },
+      { source: "/referral", destination: "/loyalty", permanent: true },
+      { source: "/partnerships", destination: "/contact", permanent: true },
+      { source: "/nomadic-breed", destination: "/about", permanent: true },
+      { source: "/dying-breed-crew", destination: "/about", permanent: true },
       { source: "/my-profile", destination: "/account/my-account", permanent: true },
     ];
   },

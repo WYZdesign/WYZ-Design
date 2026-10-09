@@ -69,7 +69,7 @@ export default function PartnershipsPage() {
   const hasLeaders = (board?.leaders.length ?? 0) > 0;
 
   return (
-    <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
+    <section className="pb-16 bg-white dark:bg-[#1C1C1E]">
       {/* Hero */}
       <section className="relative min-h-screen section-gap bg-[#111] overflow-hidden hero-banner">
         <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1a1a1a] to-[#DF3131]/20" />
@@ -235,6 +235,6 @@ export default function PartnershipsPage() {
           </div>
         </div>
       </section>
-    </main>
+    </section>
   );
 }
