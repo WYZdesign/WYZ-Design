@@ -1677,4 +1677,7 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: tran
 ::selection { background: #DF3131; color: #fff; }
 :focus-visible { outline: 2px solid #DF3131; outline-offset: 3px; border-radius: 2px; }
 img, video { max-width: 100%; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+h1, h2 { margin-bottom: 0.75rem; }
+h3, h4 { margin-bottom: 0.5rem; }
