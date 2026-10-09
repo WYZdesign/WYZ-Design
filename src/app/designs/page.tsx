@@ -375,8 +375,8 @@ const faotmImages = [
  <div ref={merchScrollRef} className="flex gap-2 overflow-x-auto pb-2 px-6" style={{ scrollbarWidth: "none" }}>
  {dbcMerch.map((p, i) => (
  <Link key={i} href="/merch" className="flex-none w-[21vw] min-w-[190px] sm:w-[13vw] sm:min-w-[120px] group cursor-pointer block">
- <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
-    <Image src={p.img} alt={p.name} fill sizes="13vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+    <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
+      <Image src={p.img} alt={p.name} fill sizes="13vw" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
    </div>
    <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
   <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{p.price}</p>

@@ -188,7 +188,7 @@ function AccordionGallery() {
             {[...DBC_MODEL_MOCKUPS, ...DBC_MODEL_MOCKUPS].map((item, i) => (
               <div key={`crew-${i}`} className="flex-none w-[160px] sm:w-[200px]">
                 <div className="aspect-[3/4] rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5] mb-2">
-                  <SafeImage src={item.model} alt={item.name} width={400} className="w-full h-full object-cover" />
+                  <SafeImage src={item.model} alt={item.name} width={400} className="w-full h-full object-contain" />
                 </div>
                 <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[13px] sm:text-[14px] mb-1 text-left">{item.name}</h4>
                 <div className="flex items-center justify-between">
