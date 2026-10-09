@@ -30,32 +30,7 @@ export default function DyingBreedCrewPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0A0A0A] section-gap">
-        <div className="absolute inset-0 opacity-20">
-          <Image src="/images/client-logos/dying-breed.jpg" alt="Dying Breed Crew brand identity" fill className="object-cover" sizes="100vw" />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/80 via-[#0A0A0A]/60 to-[#0A0A0A]" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block px-4 py-1.5 bg-[#D49341]/10 text-[#D49341] text-[12px] font-bold tracking-[0.15em] uppercase rounded-full mb-6">
-            The Community
-          </span>
-          <h1 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.9] mb-6">
-            DYING BREED<br />
-            <span className="text-[#D49341]">CREW</span>
-          </h1>
-          <p className="text-white/70 text-[16px] lg:text-[18px] max-w-xl mx-auto leading-relaxed mb-8">
-            A collective of artists, musicians, models, and culture-makers who refuse to blend in. This isn&apos;t just merch. It&apos;s a movement.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/merch" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#D49341] text-[#1C1408] font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#C08230] transition-all">
-              Shop the Collection <FiShoppingBag className="w-4 h-4" />
-            </Link>
-            <Link href="/community" className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 text-white font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:border-[#D49341] hover:text-[#D49341] transition-all">
-              Join the Crew <FiArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      
 
       {/* What We Are */}
       <section className="max-w-4xl mx-auto px-6 section-gap text-center">

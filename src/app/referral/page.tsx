@@ -94,16 +94,6 @@ export default function ReferralPage() {
   return (
     <section className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
-        <div className="text-center mb-12">
-          <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-2">Earn Together</p>
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-6 sm:mb-8">
-            REFER <span className="text-[#DF3131]">&</span> EARN
-          </h1>
-          <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-3">
-            Share your unique referral link. When someone signs up or purchases, you earn 10% commission. No limits, no caps.
-          </p>
-        </div>
-
         {!session && (
           <div className="text-center mb-10">
             <p className="text-[#666] dark:text-[#b0b0b0] mb-4">Sign in to get your referral code and track earnings.</p>

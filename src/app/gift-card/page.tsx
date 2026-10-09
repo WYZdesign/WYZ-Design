@@ -91,12 +91,6 @@ export default function GiftCardPage() {
   return (
     <section className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
       <div className="max-w-4xl mx-auto px-6 pt-8">
-        <p className="text-[#DF3131] font-heading font-bold tracking-[0.15em] uppercase text-sm text-center mb-2">Give the Gift of Creative</p>
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] text-center mb-6 sm:mb-8">
-          Gift Cards
-        </h1>
-        <p className="text-lg text-[#666666] dark:text-[#b0b0b0] mb-6 text-center">The perfect gift for anyone who needs design, photography, or creative services. Redeemable for any WYZ Design service or merch.</p>
-
         {checking && !purchased && (
           <div className="bg-[#f5f5f5] dark:bg-[#252528] p-6 mb-12 text-center text-[#666] dark:text-[#b0b0b0]">
             Finalizing your gift card…
