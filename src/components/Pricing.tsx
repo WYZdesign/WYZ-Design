@@ -51,7 +51,7 @@ export default function Pricing() {
                 </ul>
               </div>
               <div className="px-6 pb-6">
-                <Link href="/plans" className="block text-center py-2.5 bg-[#333333] text-white text-[15px] font-bold tracking-[0.1em] hover:bg-[#DF3131] dark:border dark:border-white dark:bg-white dark:text-[#111] dark:hover:bg-[#DF3131] dark:hover:text-white transition-all">Subscribe</Link>
+                <Link href="/services#plans" className="block text-center py-2.5 bg-[#333333] text-white text-[15px] font-bold tracking-[0.1em] hover:bg-[#DF3131] dark:border dark:border-white dark:bg-white dark:text-[#111] dark:hover:bg-[#DF3131] dark:hover:text-white transition-all">Subscribe</Link>
               </div>
             </motion.div>
           ))}

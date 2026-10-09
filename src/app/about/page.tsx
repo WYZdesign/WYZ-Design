@@ -287,7 +287,7 @@ export default function AboutPage() {
               <Link href="/booking" className="inline-block whitespace-normal px-6 sm:px-10 py-4 bg-white text-[#111] font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white transition-all">
                 BOOK A FREE CONSULTATION
               </Link>
-              <Link href="/plans" className="inline-block whitespace-normal px-6 sm:px-10 py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
+              <Link href="/services#plans" className="inline-block whitespace-normal px-6 sm:px-10 py-4 bg-white text-[#111] border-2 border-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all">
                 VIEW PLANS
               </Link>
             </div>

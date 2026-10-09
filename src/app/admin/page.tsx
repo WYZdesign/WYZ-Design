@@ -365,9 +365,9 @@ function ProfileTab({ session, update, signOut }: { session: import("next-auth")
       <div className="bg-white/5 border border-white/10 p-6 mb-6">
         <h3 className="text-size-12 font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-4">Account Actions</h3>
         <div className="grid grid-cols-2 gap-3">
-          <ProfileActionLink href="/plans" label="View Plans" icon={<FiFileText className="w-4 h-4" />} />
+          <ProfileActionLink href="/services#plans" label="View Plans" icon={<FiFileText className="w-4 h-4" />} />
           <ProfileActionLink href="/booking-calendar/photoshoot" label="Book a Shoot" icon={<FiCamera className="w-4 h-4" />} />
-          <ProfileActionLink href="/gift-card" label="Gift Cards" icon={<FiGift className="w-4 h-4" />} />
+          <ProfileActionLink href="/loyalty#gift-card" label="Gift Cards" icon={<FiGift className="w-4 h-4" />} />
           <ProfileActionLink href={process.env.NEXT_PUBLIC_STRIPE_PORTAL_URL || "/plans"} label="Billing Portal" icon={<FiCreditCard className="w-4 h-4" />} external />
           <ProfileActionLink href="/loyalty" label="Rewards" icon={<FiStar className="w-4 h-4" />} />
           <ProfileActionLink href="/community" label="Community" icon={<FiMessageCircle className="w-4 h-4" />} />

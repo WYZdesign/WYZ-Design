@@ -171,7 +171,7 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
                 <Link href={s.href} className="flex-1 text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
                   BOOK NOW
                 </Link>
-                <Link href="/plans" className="flex-1 text-center py-2.5 border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
+                <Link href="/services#plans" className="flex-1 text-center py-2.5 border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
                   VIEW PLANS
                 </Link>
               </div>
@@ -1076,7 +1076,7 @@ export default function HomePage() {
   <div className="max-w-2xl mx-auto text-center animate-fadeIn">
     <h2 className="text-[1.5rem] sm:text-[2rem] font-heading font-black text-[#333] dark:text-white tracking-[0.1em] uppercase mb-4">Pricing Plans</h2>
     <p className="text-[#666] dark:text-white/60 text-[15px] mb-8">Monthly plans from $250. Each plan includes design time, revisions, and priority booking.</p>
-    <Link href="/plans" className="inline-block px-8 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#B82020] transition-all">See plans and prices</Link>
+    <Link href="/services#plans" className="inline-block px-8 py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:bg-[#B82020] transition-all">See plans and prices</Link>
   </div>
   )}
   </div>

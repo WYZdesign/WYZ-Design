@@ -116,7 +116,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
      <Link href="/booking" className="flex-1 text-center py-3 px-4 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
      GET A QUOTE
     </Link>
-    <Link href="/plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
+    <Link href="/services#plans" className="flex-1 text-center py-3 px-4 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all rounded-lg" onClick={(e) => e.stopPropagation()}>
      VIEW PLANS
     </Link>
     </div>

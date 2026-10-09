@@ -1681,3 +1681,16 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 h1, h2 { margin-bottom: 0.75rem; }
 h3, h4 { margin-bottom: 0.5rem; }
+
+/* Card hover lift (referenced by event/portfolio cards; was an undefined class) */
+.hover-lift { transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; will-change: transform; }
+@media (hover: hover) {
+  .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 18px 44px -20px rgba(0,0,0,.5); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift { transition: none; }
+  .hover-lift:hover { transform: none; box-shadow: none; }
+}
+
+/* Every in-page anchor target clears the sticky header */
+[id] { scroll-margin-top: 5rem; }

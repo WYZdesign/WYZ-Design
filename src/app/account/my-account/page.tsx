@@ -304,7 +304,7 @@ export default function MyAccountPage() {
             <h2 className="font-heading font-bold text-[15px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] flex items-center gap-2">
               <FiUsers className="text-[#DF3131]" /> Referral Program
             </h2>
-            <Link href="/referral" className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#DF3131] hover:underline">Details</Link>
+            <Link href="/loyalty#referral" className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#DF3131] hover:underline">Details</Link>
           </div>
           {referral ? (
             <>
@@ -333,7 +333,7 @@ export default function MyAccountPage() {
           ) : (
             <p className="text-[13px] text-[#666] dark:text-white/50">
               No referral activity yet. Head to your{" "}
-              <Link href="/referral" className="text-[#DF3131] hover:underline">referral page</Link> to grab your code and start earning commission.
+              <Link href="/loyalty#referral" className="text-[#DF3131] hover:underline">referral page</Link> to grab your code and start earning commission.
             </p>
           )}
         </section>

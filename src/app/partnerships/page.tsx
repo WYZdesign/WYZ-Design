@@ -197,7 +197,7 @@ export default function PartnershipsPage() {
           ) : (
             <div className="border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-10 text-center bg-white dark:bg-[#1C1C1E]">
               <p className="text-[15px] text-[#666] dark:text-white/60 mb-6">The board resets every quarter. Be the first name on it.</p>
-              <Link href="/referral" className="inline-block px-6 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:opacity-90 transition-all">
+              <Link href="/loyalty#referral" className="inline-block px-6 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-[13px] hover:opacity-90 transition-all">
                 Join the Program
               </Link>
             </div>

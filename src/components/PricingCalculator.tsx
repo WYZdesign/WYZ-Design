@@ -185,7 +185,7 @@ export default function PricingCalculator() {
               <p className="text-[14px] font-heading font-bold tracking-[0.03em] text-[#333] dark:text-[#e0e0e0] mb-1">{comparison.headline}</p>
               <p className="text-[13px] text-[#666] dark:text-[#aaa] leading-relaxed mb-3">{comparison.body}</p>
               <div className="flex items-center gap-4">
-                <Link href="/plans" className="inline-block px-5 py-2 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.1em] uppercase hover:bg-[#B82020] transition-all">
+                <Link href="/services#plans" className="inline-block px-5 py-2 bg-[#DF3131] text-white text-[12px] font-bold tracking-[0.1em] uppercase hover:bg-[#B82020] transition-all">
                   Compare plans
                 </Link>
                 {comparison.beats && (
