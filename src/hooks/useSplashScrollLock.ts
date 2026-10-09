@@ -49,6 +49,17 @@ export function useSplashScrollLock(locked: boolean) {
       event.preventDefault();
       event.stopImmediatePropagation();
     };
+    // touchstart: stop propagation only, never preventDefault.
+    // Canceling touchstart makes the browser suppress the compatibility
+    // mouse events (mousedown/mouseup/click) it would synthesize from the
+    // tap, so a preventDefault here silently killed every tappable element
+    // on the splash -- most visibly the Enter Site button, which did
+    // nothing at all on a phone while still working fine with a mouse.
+    // stopImmediatePropagation() is still enough to keep Lenis and any
+    // other gesture listener from driving scroll off this event.
+    const blockTouchStart = (event: Event) => {
+      event.stopImmediatePropagation();
+    };
     const blockKeyScroll = (event: KeyboardEvent) => {
       if (SCROLL_KEYS.has(event.key)) {
         event.preventDefault();
@@ -71,13 +82,13 @@ export function useSplashScrollLock(locked: boolean) {
     // anything else registers on window, regardless of attach order.
     window.addEventListener("wheel", blockScroll, { passive: false, capture: true });
     window.addEventListener("touchmove", blockScroll, { passive: false, capture: true });
-    window.addEventListener("touchstart", blockScroll, { passive: false, capture: true });
+    window.addEventListener("touchstart", blockTouchStart, { passive: true, capture: true });
     window.addEventListener("keydown", blockKeyScroll, { capture: true });
 
     return () => {
       window.removeEventListener("wheel", blockScroll, { capture: true } as EventListenerOptions);
       window.removeEventListener("touchmove", blockScroll, { capture: true } as EventListenerOptions);
-      window.removeEventListener("touchstart", blockScroll, { capture: true } as EventListenerOptions);
+      window.removeEventListener("touchstart", blockTouchStart, { capture: true } as EventListenerOptions);
       window.removeEventListener("keydown", blockKeyScroll, { capture: true } as EventListenerOptions);
       root.style.overflow = previous.rootOverflow;
       root.style.height = previous.rootHeight;
