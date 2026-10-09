@@ -52,7 +52,7 @@ export default function ContactPage() {
 
           <div className="mt-8 sm:mt-10 text-center">
             <p className="text-[15px] text-[#666] dark:text-[#b0b0b0] mb-3">Looking to partner with us? Brands, studios, venues, and promoters are welcome.</p>
-            <Link href="/partnerships" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#B82020] transition-all">See partnership options</Link>
+            <Link href="#partnerships" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#B82020] transition-all">See partnership options</Link>
           </div>
         </div>
       </ScrollReveal>

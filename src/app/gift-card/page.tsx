@@ -89,7 +89,7 @@ export default function GiftCardPage() {
   }
 
   return (
-    <section className="bg-white dark:bg-[#1C1C1E] pb-20">
+    <section id="gift-card" className="bg-white dark:bg-[#1C1C1E] pb-10 scroll-mt-24">
       <div className="max-w-4xl mx-auto px-6 pt-8">
         {checking && !purchased && (
           <div className="bg-[#f5f5f5] dark:bg-[#252528] p-6 mb-12 text-center text-[#666] dark:text-[#b0b0b0]">

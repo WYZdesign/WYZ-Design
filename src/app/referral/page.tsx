@@ -92,11 +92,13 @@ export default function ReferralPage() {
   const shareText = "Check out WYZ Design for photography, design, and branding!";
 
   return (
-    <section className="pb-16 bg-white dark:bg-[#1C1C1E]">
+    <section id="referral" className="pb-10 bg-white dark:bg-[#1C1C1E] scroll-mt-24">
       <div className="max-w-5xl mx-auto px-6 pt-10">
         {!session && (
-          <div className="text-center mb-10">
-            <p className="text-[#666] dark:text-[#b0b0b0] mb-4">Sign in to get your referral code and track earnings.</p>
+          <div className="bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-8 sm:p-10 text-center max-w-2xl mx-auto">
+            <p className="text-[#DF3131] text-[12px] font-heading font-bold tracking-[0.25em] uppercase mb-3">Refer &amp; Earn</p>
+            <p className="text-[17px] text-[#333] dark:text-white mb-1">Sign in to get your referral code and track earnings.</p>
+            <p className="text-[14px] text-[#666] dark:text-[#b0b0b0] mb-6">Share it anywhere. You earn 10% on every purchase your link sends.</p>
             <Link href="/account/my-account" className="inline-block px-8 py-3 bg-[#DF3131] text-white font-heading font-bold tracking-[0.1em] uppercase text-[14px] hover:bg-[#B82020] transition-all">
               Sign in
             </Link>

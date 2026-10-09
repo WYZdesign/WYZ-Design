@@ -96,7 +96,7 @@ onClick={() => setFlipped(f => !f)}
   <Link href={service.bookLink} className="flex-1 text-center py-3 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
  BOOK NOW
   </Link>
-  <Link href="/plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
+  <Link href="#plans" className="flex-1 text-center py-3 border-2 border-white text-white text-[14px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
  VIEW PLANS
   </Link>
  </div>
@@ -138,7 +138,7 @@ return (
     <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 max-w-sm mx-auto">
     From photography to web design, we handle the full creative process to make your brand stand out.
     </p>
-    <Link href="/plans"
+    <Link href="#plans"
     className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all mt-4 sm:mt-6">
     VIEW PLANS
     </Link>
@@ -159,7 +159,7 @@ return (
     <p className="text-white/70 text-[16px] sm:text-base leading-relaxed mb-6 max-w-sm mx-auto">
     From photography to web design, we handle the full creative process to make your brand stand out.
     </p>
-    <Link href="/plans"
+    <Link href="#plans"
     className="inline-block bg-[#DF3131] text-white px-6 sm:px-8 py-3 sm:py-4 font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all mt-4 sm:mt-6">
     VIEW PLANS
     </Link>

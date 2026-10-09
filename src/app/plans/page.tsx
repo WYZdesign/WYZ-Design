@@ -197,7 +197,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
             <p className="text-white text-[11px]">10% discount when added to any subscription plan</p>
           </div>
           <div className="relative z-10">
-            <Link href="/web-design" className="block text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
+            <Link href="#web-design" className="block text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
               GET STARTED
             </Link>
           </div>
@@ -238,7 +238,7 @@ export default function PlansPage() {
   }
 
   return (
-    <section className="pb-12 bg-white dark:bg-[#1C1C1E]">
+    <section id="plans" className="pb-12 bg-white dark:bg-[#1C1C1E] scroll-mt-24">
       <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pt-12">
 
         {/* Plan Cards */}

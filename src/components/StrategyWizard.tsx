@@ -261,7 +261,7 @@ export default function StrategyWizard() {
                       </button>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 pt-1">
-                      <Link href="/web-design" className="flex-1 inline-flex items-center justify-center px-4 py-2.5 border border-[#E2E2E2] dark:border-[#444] text-[13px] font-bold text-[#333] dark:text-white/70 hover:border-[#DF3131] hover:text-[#DF3131] transition-all">
+                      <Link href="/services#web-design" className="flex-1 inline-flex items-center justify-center px-4 py-2.5 border border-[#E2E2E2] dark:border-[#444] text-[13px] font-bold text-[#333] dark:text-white/70 hover:border-[#DF3131] hover:text-[#DF3131] transition-all">
                         Price It Yourself
                       </Link>
                       <button

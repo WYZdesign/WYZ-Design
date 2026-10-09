@@ -69,7 +69,7 @@ export default function PartnershipsPage() {
   const hasLeaders = (board?.leaders.length ?? 0) > 0;
 
   return (
-    <section className="pb-16 bg-white dark:bg-[#1C1C1E]">
+    <section id="partnerships" className="pb-16 bg-white dark:bg-[#1C1C1E] scroll-mt-24">
       {/* Hero */}
       
 
