@@ -225,7 +225,7 @@ return (
         <div key={cat}>
           <h2 className="font-heading font-black text-[1.4rem] sm:text-[1.8rem] tracking-[0.08em] uppercase text-[#333] dark:text-white mb-2">{cat}</h2>
           <p className="text-[#DF3131] font-bold tracking-[0.06em] text-[14px] mb-5">{isFinite(min) ? `From $${min}` : "Free consult available"}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-3">
             {group.map((s) => (
               <ServiceCard key={s.name} service={s} />
             ))}
@@ -235,7 +235,7 @@ return (
       })}
     </div>
   ) : (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4 lg:gap-6 lg:mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-2 lg:gap-3 lg:mb-3">
       {filtered.map((s) => (
         <ServiceCard key={s.name} service={s} />
       ))}

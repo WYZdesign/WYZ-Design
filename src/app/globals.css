@@ -1655,3 +1655,20 @@ h1, h2, h3, h4, h5, h6, .text-balance {
 h1 + p, h2 + p, h3 + p, h4 + p { margin-top: 0.5rem; }
 @media (min-width: 768px) { h1 + p, h2 + p, h3 + p, h4 + p { margin-top: 0.75rem; } }
 h1, h2, h3, h4 { margin-bottom: 0.5rem; }
+
+/* ── Interaction polish (owner 2026-10-08) ────────────────────────────
+   GPU-cheap (transform/opacity only); disabled under reduced-motion. */
+a, button, [role="button"] {
+  transition: color .25s ease, background-color .25s ease, border-color .25s ease,
+    box-shadow .3s ease, transform .22s cubic-bezier(.2,.7,.2,1), opacity .3s ease;
+}
+@media (hover: hover) {
+  button:not(:disabled):hover, a:hover { transform: translateY(-1px); }
+}
+button:not(:disabled):active, a:active, [role="button"]:active { transform: translateY(0) scale(.97); }
+@keyframes wzRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+.wz-rise { animation: wzRise .6s cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  a, button, [role="button"] { transition: none !important; }
+  .wz-rise { animation: none !important; }
+}

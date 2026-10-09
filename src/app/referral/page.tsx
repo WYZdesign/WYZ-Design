@@ -93,7 +93,7 @@ export default function ReferralPage() {
 
   return (
     <section className="pb-16 bg-white dark:bg-[#1C1C1E]">
-      <div className="max-w-5xl mx-auto px-6 pt-32 lg:pt-40">
+      <div className="max-w-5xl mx-auto px-6 pt-10">
         {!session && (
           <div className="text-center mb-10">
             <p className="text-[#666] dark:text-[#b0b0b0] mb-4">Sign in to get your referral code and track earnings.</p>
