@@ -13,7 +13,7 @@ const SITEMAP = {
   Services: [
     { href: "/photography", label: "Photography" },
     { href: "/designs", label: "Graphic Design" },
-    { href: "/web-design", label: "Web Design" },
+    { href: "/services#web-design", label: "Web Design" },
     { href: "/printing", label: "Custom Printing" },
     { href: "/events", label: "Event Planning" },
     { href: "/services", label: "All Services" },
@@ -21,11 +21,11 @@ const SITEMAP = {
   Company: [
     { href: "/about", label: "About" },
     { href: "/brands", label: "Our Brands" },
-    { href: "/plans", label: "Pricing" },
+    { href: "/services#plans", label: "Pricing" },
     { href: "/merch", label: "Merch Store" },
-    { href: "/gift-card", label: "Gift Cards" },
+    { href: "/loyalty#gift-card", label: "Gift Cards" },
     { href: "/loyalty", label: "Rewards" },
-    { href: "/referral", label: "Referral Program" },
+    { href: "/loyalty#referral", label: "Referral Program" },
     { href: "/featured-artist", label: "Featured Artist" },
     { href: "/blog", label: "Blog" },
     { href: "/contact", label: "Contact" },

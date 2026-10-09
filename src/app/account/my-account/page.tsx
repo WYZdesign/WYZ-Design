@@ -43,10 +43,10 @@ interface ProfileData {
 const QUICK_LINKS = [
   { href: "/booking-calendar/photoshoot", label: "Book a Shoot", icon: FiCamera },
   { href: "/loyalty", label: "Rewards", icon: FiStar },
-  { href: "/gift-card", label: "Gift Cards", icon: FiGift },
-  { href: "/referral", label: "Referral Program", icon: FiUsers },
+  { href: "/loyalty#gift-card", label: "Gift Cards", icon: FiGift },
+  { href: "/loyalty#referral", label: "Referral Program", icon: FiUsers },
   { href: "/community", label: "Community", icon: FiMessageCircle },
-  { href: "/plans", label: "Plans & Pricing", icon: FiCreditCard },
+  { href: "/services#plans", label: "Plans & Pricing", icon: FiCreditCard },
   { href: "/faq", label: "FAQ", icon: FiHelpCircle },
   { href: "/merch", label: "Merch Store", icon: FiHeart },
 ];

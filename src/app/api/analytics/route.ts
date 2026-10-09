@@ -38,7 +38,7 @@ async function runSeoChecks(): Promise<{ check: string; status: string; detail?:
   const base = "https://wyzdesign.com";
 
   // Check meta descriptions on key pages
-  const pages = ["/", "/home", "/about", "/services", "/designs", "/contact", "/portfolio", "/testimonials", "/photography", "/partnerships"];
+  const pages = ["/", "/home", "/about", "/services", "/designs", "/contact", "/portfolio", "/testimonials", "/photography", "/contact"];
   for (const p of pages) {
     try {
       const r = await fetch(`${base}${p}`, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(5000) });

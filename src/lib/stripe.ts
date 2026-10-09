@@ -90,8 +90,8 @@ export async function createGiftCardCheckout(amount: number, email?: string, ref
       },
       quantity: 1,
     }],
-    success_url: `${getSiteUrl()}/gift-card?success=true&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${getSiteUrl()}/gift-card`,
+    success_url: `${getSiteUrl()}/loyalty?success=true&session_id={CHECKOUT_SESSION_ID}#gift-card`,
+    cancel_url: `${getSiteUrl()}/loyalty#gift-card`,
     metadata: { type: "giftcard", amount: String(amount), ...(recipientEmail ? { recipientEmail } : {}), ...(referralCode ? { referralCode } : {}) },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });

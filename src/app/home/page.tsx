@@ -102,9 +102,9 @@ const CLIENT_LOGOS_RAW = [
 ];
 
 const SERVICES = [
- { icon: <FiCamera />, name: "Artist Launch Kit", desc: "Creative direction, photoshoot, cover art, social graphics, landing page. For musicians, models, performers ready to level up.", href: "/plans", tab: "FOR ARTISTS" },
- { icon: <FiMonitor />, name: "Brand Identity System", desc: "Logo refresh, visual identity, web design, photo content, social kit. For businesses tired of looking forgettable.", href: "/plans", tab: "FOR BRANDS" },
- { icon: <FiVideo />, name: "Studio Growth System", desc: "Event programming, promotional assets, recap content, booking strategy. For studios and production spaces.", href: "/plans", tab: "FOR STUDIOS" },
+ { icon: <FiCamera />, name: "Artist Launch Kit", desc: "Creative direction, photoshoot, cover art, social graphics, landing page. For musicians, models, performers ready to level up.", href: "/services#plans", tab: "FOR ARTISTS" },
+ { icon: <FiMonitor />, name: "Brand Identity System", desc: "Logo refresh, visual identity, web design, photo content, social kit. For businesses tired of looking forgettable.", href: "/services#plans", tab: "FOR BRANDS" },
+ { icon: <FiVideo />, name: "Studio Growth System", desc: "Event programming, promotional assets, recap content, booking strategy. For studios and production spaces.", href: "/services#plans", tab: "FOR STUDIOS" },
  { icon: <FiMessageCircle />, name: "Event Production", desc: "Flyers, social rollout, Eventbrite setup, photo/video recap, artist coordination. From concept to curtains.", href: "/events", tab: "EVENTS" },
  { icon: <FiGlobe />, name: "WYZMiND Systems", desc: "AI intake bots, client portals, booking tools, and automated workflows. Systems that keep up as you grow.", href: "/services", tab: "SYSTEMS" },
 ];
@@ -191,8 +191,8 @@ const PRICING_PLANS = [
 ];
 
 const QUICK_LINKS = [
- { label: "PARTNERSHIPS", href: "/partnerships" }, { label: "SUBSCRIPTIONS", href: "/plans" },
- { label: "GIFT CARD", href: "/gift-card" }, { label: "MODEL ARCHIVE", href: "/model-archive" },
+ { label: "PARTNERSHIPS", href: "/contact#partnerships" }, { label: "SUBSCRIPTIONS", href: "/services#plans" },
+ { label: "GIFT CARD", href: "/loyalty#gift-card" }, { label: "MODEL ARCHIVE", href: "/model-archive" },
  { label: "DESIGNS", href: "/designs" }, { label: "PHOTOGRAPHY", href: "/photography" },
  { label: "DIY EVENTS", href: "/events" }, { label: "GET FEATURED", href: "/featured-artist" },
  { label: "BE A MODEL", href: "/model-archive" }, { label: "MERCH STORE", href: "/merch" },

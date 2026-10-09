@@ -9,7 +9,7 @@ const SERVICE_CATEGORIES = [
   { icon: FiPenTool, title: "Graphic Design", href: "/designs" },
   { icon: FiVideo, title: "Videography", href: "/services" },
   { icon: FiUsers, title: "Consultation", href: "/services" },
-  { icon: FiGlobe, title: "Web Design", href: "/web-design" },
+  { icon: FiGlobe, title: "Web Design", href: "/services#web-design" },
 ];
 
 const BOOKINGS = [
