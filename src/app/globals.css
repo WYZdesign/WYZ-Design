@@ -1672,3 +1672,9 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: tran
   a, button, [role="button"] { transition: none !important; }
   .wz-rise { animation: none !important; }
 }
+
+/* Final polish (owner 2026-10-08) */
+::selection { background: #DF3131; color: #fff; }
+:focus-visible { outline: 2px solid #DF3131; outline-offset: 3px; border-radius: 2px; }
+img, video { max-width: 100%; }
+html { -webkit-text-size-adjust: 100%; }
