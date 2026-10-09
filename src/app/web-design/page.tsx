@@ -182,7 +182,7 @@ export default function WebDesignPage() {
 
 return (
     <>
-      <section className="min-h-screen bg-white dark:bg-[#111] pt-0 pb-0">
+      <section className="bg-white dark:bg-[#111] pt-0 pb-0">
         {/* ═══ HERO - Split (desktop video/text, mobile merged) ═══ */}
         
 
