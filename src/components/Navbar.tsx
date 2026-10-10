@@ -15,6 +15,7 @@ import { useZeal } from "@/components/ZealProvider";
 import { useCart } from "@/lib/cart";
 
 const NAV_LINKS = [
+  { href: "/", label: "H O M E" },
   { href: "/photography", label: "P H O T O G R A P H Y" },
   { href: "/designs", label: "D E S I G N S" },
   { href: "/services", label: "S E R V I C E S" },
@@ -22,19 +23,19 @@ const NAV_LINKS = [
 ];
 
 const MORE_GROUPS = [
-  { title: "S E R V I C E S", links: [
-    { href: "/printing", label: "P R I N T I N G" },
-    { href: "/wyzmind", label: "W Y Z M i N D" },
-  ] },
-  { title: "S T O R E", links: [
-    { href: "/merch", label: "M E R C H" },
-    { href: "/loyalty", label: "R E W A R D S" },
-    { href: "/featured-artist", label: "F. A. O. T. M." },
-  ] },
   { title: "S T U D I O", links: [
     { href: "/about", label: "A B O U T" },
     { href: "/blog", label: "B L O G" },
     { href: "/community", label: "C O M M U N I T Y" },
+  ] },
+  { title: "S H O P", links: [
+    { href: "/merch", label: "M E R C H" },
+    { href: "/loyalty", label: "R E W A R D S" },
+    { href: "/featured-artist", label: "F. A. O. T. M." },
+  ] },
+  { title: "T O O L S", links: [
+    { href: "/printing", label: "P R I N T I N G" },
+    { href: "/wyzmind", label: "W Y Z M i N D" },
     { href: "/contact", label: "C O N T A C T" },
     { href: "/faq", label: "F. A. Q." },
   ] },
@@ -462,7 +463,7 @@ export default function Navbar() {
                 onKeyDown={(e) => { if (e.key === "Enter") { const q = (e.target as HTMLInputElement).value.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; setMobileOpen(false); } } }} />
             </div>
             <div className="flex-1 overflow-y-auto px-6 py-5 space-y-1">
-                            <p className="px-1 pt-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">Portfolio</p>
+                            <p className="px-1 pt-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">Main</p>
               {NAV_LINKS.map((l, i) => (
                 <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                   <Link href={l.href} onClick={() => setMobileOpen(false)}
