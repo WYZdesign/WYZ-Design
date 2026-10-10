@@ -720,16 +720,25 @@ export default function ForumPage() {
           <h1 className="text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>COMMUNITY</h1>
           <p className="text-[#666] dark:text-[#b0b0b0] text-center mb-8 text-[16px]">Connect with creators, share your work, and grow with the WYZ community.</p>
 
-          {/* Stats strip */}
-<div className="grid grid-cols-3 gap-3 mb-14">
-             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-               <AnimatedCounter end={DISCORD_CHANNELS.length} label="Discord channels" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#DF3131]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+          {/* Stats strip. 2026-10-10 (Claude, full-site audit): at this grid's
+              narrowest (3 cols, 390px and below), p-5 left too little width
+              per cell for the single unbreakable word "Programs" at the
+              original text-[11px]/tracking-[0.12em] -- it rendered past its
+              own cell border and off the right edge of the viewport
+              ("DISCORD CHANNELS" and "POST CATEGORIES" survived because each
+              is two shorter words that wrap onto two lines; "Programs" has
+              no second word to wrap to). Tightened padding + label
+              size/tracking below sm so every label now fits inside its cell;
+              unchanged at sm and up. */}
+<div className="grid grid-cols-3 gap-2 sm:gap-3 mb-14">
+             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-3 sm:p-5 text-center">
+               <AnimatedCounter end={DISCORD_CHANNELS.length} label="Discord channels" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#DF3131]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
-             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-                <AnimatedCounter end={CATEGORIES.length} label="Post categories" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#8F5E1E] dark:text-[#D49341]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-3 sm:p-5 text-center">
+                <AnimatedCounter end={CATEGORIES.length} label="Post categories" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#8F5E1E] dark:text-[#D49341]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
-             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-5 text-center">
-               <AnimatedCounter end={COMMUNITY_HIGHLIGHTS.length} label="Programs" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#5865F2]" labelClassName="text-[11px] font-bold tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+             <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-3 sm:p-5 text-center">
+               <AnimatedCounter end={COMMUNITY_HIGHLIGHTS.length} label="Programs" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#5865F2]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
            </div>
 

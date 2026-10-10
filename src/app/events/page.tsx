@@ -431,10 +431,24 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
 
   const [list, setList] = useState(items);
 
+  // 2026-10-10 (Claude, board K10): the auto-scroll loop below resets the
+  // track's translateX once it has scrolled past the track's own full
+  // scrollWidth -- which only looks seamless if the track's rendered width
+  // already comfortably exceeds the viewport. With the Client Events
+  // carousel's 7 items (vs. DIY Shows' 11), the track ran out of real
+  // content well before the reset point on most desktop viewports, leaving
+  // a visible blank gap at the right edge for the remainder of each loop.
+  // Fix: render the shuffled order tripled back-to-back (same technique
+  // already used for the merch marquees) so the track is always wide
+  // enough to stay full regardless of item count or viewport width. The
+  // reset math itself (`full = el.scrollWidth`) is computed from whatever
+  // is actually rendered, so tripling here needs no change to that logic --
+  // unlike the merch CSS-keyframe bug, there's no hardcoded percentage to
+  // keep in sync with the copy count.
   useEffect(() => {
     const d = [...items];
     for (let i = d.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [d[i], d[j]] = [d[j], d[i]]; }
-    setList(d);
+    setList([...d, ...d, ...d]);
   }, [items]);
 
  return (
@@ -566,10 +580,19 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
     onMouseEnter={() => setIsHovering(true)}
     onMouseLeave={() => setIsHovering(false)}
   >
+  {/* 2026-10-10 (Claude, board K11): the dark overlay below was already
+      unconditional (good, keep it always on). The red radial-gradient
+      "spotlight" right after it was NOT gated on isHovering at all -- it
+      always rendered, centered at the default mousePos (0.5, 0.5) whenever
+      the cursor wasn't actively over the section, so a faint glow sat
+      visible at rest instead of appearing only on hover. Fixed by fading
+      it in/out with isHovering, same transition duration as the per-logo
+      hover effects elsewhere in this component. */}
   <div className="absolute inset-0 z-0 bg-black/65" />
   <div
-    className="absolute inset-0 z-[5] pointer-events-none"
+    className="absolute inset-0 z-[5] pointer-events-none transition-opacity duration-300"
     style={{
+      opacity: isHovering ? 1 : 0,
       background: `radial-gradient(circle 280px at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(255,0,0,0.18), transparent 70%)`,
     }}
   />

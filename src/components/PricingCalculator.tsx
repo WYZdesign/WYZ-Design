@@ -204,14 +204,21 @@ export default function PricingCalculator() {
       {/* FAQ Section */}
       <div className="mt-8 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl overflow-hidden">
         <div className="p-4 sm:p-6 border-b border-[#E2E2E2] dark:border-[#444]">
-          <div className="flex items-center justify-between">
+          {/* 2026-10-10 (Claude, full-site audit): items-center + no gap let
+              "Frequently Asked" wrap to 2 lines at narrow widths (its own
+              letter-spacing/weight push it past the available width next to
+              the button) while the button re-centered against that taller
+              row, landing right against the wrapped second line. items-start
+              + gap-3 + shrink-0 keeps the button pinned to the top with
+              breathing room regardless of how many lines the heading wraps to. */}
+          <div className="flex items-start justify-between gap-3">
             <div>
               <h3 className="font-heading font-black text-[18px] text-[#333] dark:text-[#e0e0e0] tracking-[0.05em]">FREQUENTLY ASKED</h3>
               <p className="text-[12px] text-[#666] dark:text-[#aaa] mt-1">Common questions about pricing and services</p>
             </div>
             <button
               onClick={() => setShowFAQ(!showFAQ)}
-              className={`px-4 py-2 text-[12px] font-bold tracking-[0.1em] uppercase border-2 transition-all ${
+              className={`shrink-0 px-4 py-2 text-[12px] font-bold tracking-[0.1em] uppercase border-2 transition-all ${
                 showFAQ
                   ? "bg-[#DF3131] text-white border-[#DF3131]"
                   : "border-[#DF3131] text-[#DF3131] hover:bg-[#DF3131] hover:text-white"

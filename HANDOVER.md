@@ -1,5 +1,13 @@
 # WYZ Design — Current State (Session 40)
 
+## Session 64 (2026-10-10) - Route-wide visual regression audit (Codex)
+
+- Audited the primary public route set with rendered production checks at iPhone 13 width (390px), narrow width (320px), and desktop width (1440px). The 390px and 320px passes returned 200 for all 29 checked public routes, found no horizontal overflow, and found no rendered application-error state. The 1440px pass remained clean through 21 routes, then correctly hit the site rate limiter; the remaining desktop results are therefore unverified rather than failed.
+- Visually inspected live Merch at 1440px and 390px, including the actual cookie state and Shop section. The hierarchy, mobile gutters, product frames, and no-overflow behavior are sound after the earlier storefront cleanup. Live product image lazy-loading needs a paced post-deploy check rather than full-page screenshot inference.
+- Found and fixed the most material layout duplication in `src/app/services/page.tsx`: Services embedded the full Plans page and full Web Design page below its own 27-card catalogue, causing a roughly 31,000px iPhone page. Removed those embedded pages, set Photography as the initial focused category, and reduced mobile card height and oversized front-card title sizing. The scoped source check (`npx tsc -p tsconfig.audit.json --noEmit`) passes after the final change. The normal check is presently blocked by a malformed generated `.next/dev/types/validator.ts`, not an application source error.
+- Required follow-up: WYZMiND should deploy the Services change, then run one fresh physical-device or preview capture because the local development browser held an old client bundle during the immediate visual recheck. Do not close this visual change without that deployed screenshot.
+- Local rendered-browser diagnostics also found oversized `sizes="100vw"` declarations on service-card background images. Scoped them to the real card width to avoid downloading viewport-sized assets for a three-column grid.
+
 ## Session 66 (2026-10-08) - Nav dropdowns/alignment, cursor, footer + hero cleanup (WYZMiND)
 
 - **Header:** switched from centered to **logo-left, search/login/theme-right**. Each top-level category is now its own **dropdown** on desktop (PHOTOGRAPHY, DESIGNS, SERVICES, STORE, STUDIO; hover + focus open, chevron), with grouped sections in the mobile menu. Data is one `NAV_CATEGORIES` list (no more flat `NAV_LINKS` + `MORE`); `moreOpen` -> `openCat`.

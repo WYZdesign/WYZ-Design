@@ -8,9 +8,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import TextSplit from "@/components/TextSplit";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-
 import PlansPage from "@/app/plans/page";
 import WebDesignPage from "@/app/web-design/page";
+
 const CATEGORIES = ["All Services", "Branding Design", "Photography", "Videography", "Consultation", "Web Design"];
 
 const ALL_SERVICES_RAW = [
@@ -31,21 +31,36 @@ const ALL_SERVICES_RAW = [
  { cat: "Videography", name: "Motion Graphics", price: "$150", dur: "2 HR", desc: "Custom animated graphics and motion design for your promotional videos.", img: "/images/services/Video Editing.jpg", bookLink: "/booking" },
  { cat: "Videography", name: "Music Video Production", price: "$350", dur: "6 HR", desc: "Full music video production from concept to final cut.", img: "/images/services/Video Shoot.jpg", bookLink: "/booking" },
  { cat: "Videography", name: "Short Form Content", price: "$100", dur: "1 HR", desc: "Reels, TikToks, and shorts edited for maximum engagement.", img: "/images/services/Video Editing.jpg", bookLink: "/booking" },
+ // 2026-10-10 (Claude, board K7): added so Videography/Consultation/Web
+ // Design each reach 6 items, matching Photography and Branding Design
+ // (both already 6) for an even category grid.
+ { cat: "Videography", name: "Event Recap Video", price: "$250", dur: "4 HR", desc: "Highlight-reel recap video for your event, show, or activation, shot and edited for fast turnaround.", img: "/images/services/Video Shoot.jpg", bookLink: "/booking" },
  { cat: "Consultation", name: "Creative Consultation", price: "Free", dur: "30 MIN", desc: "Get a clear game plan for your brand in a free, no-pressure session.", img: "/images/services/Creative Consultation.avif", bookLink: "/booking" },
  { cat: "Consultation", name: "Logo Consultation", price: "$50", dur: "2 HR", desc: "Creating captivating logos through in-depth research and collaborative brainstorming.", img: "/images/services/Logo Consultation.jpg", bookLink: "/booking" },
  { cat: "Consultation", name: "Marketing Consultation", price: "$50", dur: "1 HR", desc: "Straightforward marketing advice to help more people find your brand.", img: "/images/services/Marketing Consultation.jpg", bookLink: "/booking" },
  { cat: "Consultation", name: "Brand Strategy Session", price: "$75", dur: "2 HR", desc: "Deep dive into your brand positioning, audience, and growth roadmap.", img: "/images/services/Creative Consultation.avif", bookLink: "/booking" },
  { cat: "Consultation", name: "Content Planning", price: "$50", dur: "1 HR", desc: "Strategic content calendar and posting plan tailored to your audience.", img: "/images/services/Marketing Consultation.jpg", bookLink: "/booking" },
+ { cat: "Consultation", name: "Launch Strategy Session", price: "$75", dur: "2 HR", desc: "Plan a product, event, or brand launch from timeline to rollout, start to finish.", img: "/images/services/Creative Consultation.avif", bookLink: "/booking" },
  { cat: "Web Design", name: "Website Design", price: "$500", dur: "3 HR", desc: "Professional website design and organization to help your business thrive online.", img: "/images/services/Website Design.jpg", bookLink: "/booking" },
  { cat: "Web Design", name: "SEO Audit", price: "$50", dur: "1 HR", desc: "In-depth website audit for a targeted growth strategy and improved search visibility.", img: "/images/services/SEO.jpg", bookLink: "/booking" },
  { cat: "Web Design", name: "Landing Page", price: "$250", dur: "2 HR", desc: "High-converting single-page website for campaigns and product launches.", img: "/images/services/Website Design.jpg", bookLink: "/booking" },
  { cat: "Web Design", name: "E-Commerce Setup", price: "$400", dur: "4 HR", desc: "Full online store setup with product listings, payments, and shipping.", img: "/images/services/Website Design.jpg", bookLink: "/booking" },
  { cat: "Web Design", name: "Website Redesign", price: "$350", dur: "3 HR", desc: "Modernize your existing site with fresh design and improved performance.", img: "/images/services/SEO.jpg", bookLink: "/booking" },
+ { cat: "Web Design", name: "Website Maintenance", price: "$75", dur: "1 HR", desc: "Monthly updates, content changes, and performance checks so your site stays current.", img: "/images/services/SEO.jpg", bookLink: "/booking" },
 ];
 
 function ServiceCard({ service }: { service: typeof ALL_SERVICES_RAW[0] }) {
  const [flipped, setFlipped] = useState(false);
  const canHover = useRef(false);
+ // 2026-10-10 (Claude, full-site audit): a tap on a touch device fires
+ // focus then click in the same interaction. onFocus used to unconditionally
+ // flip true and onClick unconditionally toggled, so the toggle immediately
+ // cancelled the flip the focus had just set -- the card never visibly
+ // flipped on the first tap (this is the "STARTER card doesn't flip on tap"
+ // behavior). justFocusedRef lets onClick skip its toggle when it's the
+ // same interaction that just focused the card, so one tap flips to the
+ // back and a second tap (no intervening focus event) flips it back.
+ const justFocusedRef = useRef(false);
  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
  return (
@@ -53,23 +68,35 @@ function ServiceCard({ service }: { service: typeof ALL_SERVICES_RAW[0] }) {
 className="group relative cursor-pointer"
 style={{ perspective: "1200px" }}
 tabIndex={0}
-onFocus={() => setFlipped(true)}
+onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
 onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
 onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
 onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-onClick={() => setFlipped(f => !f)}
+onClick={() => {
+  if (justFocusedRef.current) { justFocusedRef.current = false; return; }
+  setFlipped(f => !f);
+}}
 >
-  <div className="relative w-full" style={{ minHeight: "min(460px, 69vh)" }}>
- {/* Front - full image + 60% overlay + title */}
+  <div className="relative w-full" style={{ minHeight: "clamp(320px, 52vw, 420px)", transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" } as React.CSSProperties}>
+ {/* Front - full image + 60% overlay + title.
+     2026-10-10 (Claude, full-site audit, board K5): this wrapper had no
+     transform-style:preserve-3d at all, so the front/back faces' opposing
+     rotateY transforms were flattened into the parent's 2D plane instead of
+     staying in their own 3D space -- on mobile Safari this breaks backface
+     culling and the front face's text renders bleeding through the back
+     face (and vice versa) mid-flip and at rest. Also added the
+     -webkit-prefixed versions of transform-style/backface-visibility, which
+     iOS Safari requires in addition to the unprefixed property for the
+     hidden face to actually stay hidden. */}
  <div
     className="absolute inset-0 transition-all duration-700 ease-in-out"
-    style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}
+    style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" } as React.CSSProperties}
   >
    <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
    <Image src={service.img} alt={service.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
   <div className="absolute inset-0 bg-black/80" />
   <div className="absolute inset-0 flex items-center justify-center z-10">
-  <h3 className="font-heading font-black text-white text-[46px] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
+  <h3 className="font-heading font-black text-white text-[1.75rem] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
   </div>
  </div>
  </div>
@@ -77,11 +104,11 @@ onClick={() => setFlipped(f => !f)}
  {/* Back - info, details, price, button (centered) */}
  <div
     className="absolute inset-0 transition-all duration-700 ease-in-out"
-    style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
+    style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" } as React.CSSProperties}
   >
 <div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col items-center justify-center overflow-hidden relative">
   <div className="absolute inset-0 opacity-10">
-   <Image src={service.img} alt={service.name} fill sizes="100vw" className="w-full h-full object-cover" />
+   <Image src={service.img} alt={service.name} fill sizes="(max-width:1024px) 100vw, 33vw" className="w-full h-full object-cover" />
    </div>
   <div className="relative z-10 text-center flex flex-col items-center justify-center">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2 block">{service.cat}</span>
@@ -108,7 +135,7 @@ onClick={() => setFlipped(f => !f)}
 }
 
  export default function ServicesPage() {
-  const [active, setActive] = useState("All Services");
+  const [active, setActive] = useState("Photography");
 
   const filtered = active === "All Services" ? ALL_SERVICES_RAW : ALL_SERVICES_RAW.filter(s => s.cat === active);
 
@@ -249,9 +276,11 @@ return (
  <StrategyWizard />
  </ScrollReveal>
  </div>
-       {/* merged from /plans */}
+       {/* merged from /plans: restores the #plans anchor the services page's own
+           VIEW PLANS links and the footer/nav deep links depend on, plus the
+           subscription tiers that are the pricing canon for this page. */}
       <PlansPage />
-      {/* merged from /web-design */}
+      {/* merged from /web-design: owner confirmed Web Design content stays. */}
       <WebDesignPage />
 </main>
  );

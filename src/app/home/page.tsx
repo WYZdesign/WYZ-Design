@@ -107,6 +107,11 @@ const SERVICES = [
  { icon: <FiVideo />, name: "Studio Growth System", desc: "Event programming, promotional assets, recap content, booking strategy. For studios and production spaces.", href: "/services#plans", tab: "FOR STUDIOS" },
  { icon: <FiMessageCircle />, name: "Event Production", desc: "Flyers, social rollout, Eventbrite setup, photo/video recap, artist coordination. From concept to curtains.", href: "/events", tab: "EVENTS" },
  { icon: <FiGlobe />, name: "WYZMiND Systems", desc: "AI intake bots, client portals, booking tools, and automated workflows. Systems that keep up as you grow.", href: "/services", tab: "SYSTEMS" },
+ // 2026-10-10 (Claude, board K6): added so the ALL tab renders 6 cards
+ // instead of 5 -- at lg:grid-cols-3 that fills two clean rows of 3
+ // instead of a 3+2 orphan row, and at md:grid-cols-2 it fills three
+ // clean rows of 2 instead of 2+2+1.
+ { icon: <FiAward />, name: "Custom Print & Merch", desc: "Stickers, apparel, and branded merch printed to order. For artists and brands who want their identity on something real.", href: "/printing", tab: "PRINT & MERCH" },
 ];
 
 const SERVICE_LIST = [
@@ -121,25 +126,42 @@ const SERVICE_LIST = [
 function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
   const [flipped, setFlipped] = useState(false);
   const canHover = useRef(false);
+  // 2026-10-10 (Claude, full-site audit): see the matching note on
+  // ServiceCard in src/app/services/page.tsx -- same onFocus/onClick race
+  // made a tap on touch devices do nothing (focus sets flipped true, then
+  // the click handler's toggle immediately flips it back to false before
+  // paint). justFocusedRef skips that toggle for the click that caused the
+  // focus, so tap-to-flip actually works.
+  const justFocusedRef = useRef(false);
   useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
   return (
     <div
       className="group relative cursor-pointer w-full"
       style={{ perspective: "1200px" }}
       tabIndex={0}
-      onFocus={() => setFlipped(true)}
+      onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false);
       }}
       onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-      onClick={() => setFlipped((f) => !f)}
+      onClick={() => {
+        if (justFocusedRef.current) { justFocusedRef.current = false; return; }
+        setFlipped((f) => !f);
+      }}
     >
-      <div className="relative w-full" style={{ minHeight: "min(380px, 50vh)" }}>
-        {/* Front */}
+      <div className="relative w-full" style={{ minHeight: "min(380px, 50vh)", transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" } as React.CSSProperties}>
+        {/* Front.
+            2026-10-10 (Claude, full-site audit, board K5): see the matching
+            note on ServiceCard in src/app/services/page.tsx -- this wrapper
+            was missing transform-style:preserve-3d entirely, flattening the
+            front/back faces into the parent's 2D plane and breaking
+            backface culling on mobile Safari (front text bled through the
+            back face). Added preserve-3d + the -webkit- prefixed variants
+            iOS Safari needs alongside the unprefixed properties. */}
         <div
           className="absolute inset-0 transition-all duration-700 ease-in-out"
-          style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" } as React.CSSProperties}
         >
           <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
              <Image src={s.img} alt={s.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -153,7 +175,7 @@ function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
         {/* Back */}
         <div
           className="absolute inset-0 transition-all duration-700 ease-in-out"
-          style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
+          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" } as React.CSSProperties}
         >
           <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col items-center justify-center overflow-hidden relative">
             <div className="absolute inset-0 opacity-10">
@@ -1006,8 +1028,12 @@ export default function HomePage() {
       <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.55} />
    </div>
   <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-  {/* Animated tab switcher */}
- <div className="flex justify-center gap-4 mb-10">
+  {/* Animated tab switcher. data-chat-avoid (2026-10-10, Claude): this pair
+     of buttons lands in ScrollToTop's fixed bottom-left corner at common
+     scroll stop points, and ScrollToTop already dodges anything tagged
+     data-chat-avoid (board #29/#52's clear-zone IntersectionObserver) --
+     reusing that instead of inventing a new mechanism. */}
+ <div className="flex justify-center gap-4 mb-10" data-chat-avoid>
  <button onClick={() => setSpTab("services")}
  className={`px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase text-sm border-2 transition-all duration-500 relative overflow-hidden group ${
  spTab === "services" ? "bg-[#333] text-white border-[#333] shadow-lg shadow-[#333]/20" : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
@@ -1177,6 +1203,7 @@ export default function HomePage() {
  {faqCount < filteredFaq.length && (
  <button
  onClick={() => setFaqCount(prev => Math.min(prev + 7, filteredFaq.length))}
+ data-chat-avoid
    className="mt-6 w-full py-3 border-2 border-[#E2E2E2] dark:border-[#444] text-[#333] dark:text-white text-sm font-bold tracking-[0.08em] hover:border-[#DF3131] hover:text-[#DF3131] transition-all rounded-lg text-center">
   Load More ({filteredFaq.length - faqCount} remaining)
  </button>

@@ -58,22 +58,40 @@ function PaperAccordion({ paper, index }: { paper: typeof PAPER_TYPES[0]; index:
 function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
  const [flipped, setFlipped] = useState(false);
  const canHover = useRef(false);
+ // 2026-10-10 (Claude, full-site audit): a tap on a touch device fires focus
+ // then click in the same interaction. onFocus used to unconditionally flip
+ // true and onClick unconditionally toggled, so the toggle immediately
+ // cancelled the flip the focus had just set -- the card never visibly
+ // flipped on first tap, exactly matching "Hover or tap to see pricing" not
+ // doing anything when tapped. justFocusedRef lets onClick skip its toggle
+ // when it's the same interaction that just focused the card, so one tap
+ // flips to the back and a second tap (no intervening focus event) flips
+ // it back.
+ const justFocusedRef = useRef(false);
  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
   <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(608px, 67vh)" }}
   tabIndex={0}
-  onFocus={() => setFlipped(true)}
+  onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
   onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
   onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
   onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-  onClick={() => setFlipped(f => !f)}>
+  onClick={() => {
+    if (justFocusedRef.current) { justFocusedRef.current = false; return; }
+    setFlipped(f => !f);
+  }}>
   <div
     className="relative w-full h-full transition-transform duration-700 ease-in-out"
-    style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+    style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" } as React.CSSProperties}
   >
-  {/* Front */}
-  <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
+  {/* Front.
+      2026-10-10 (Claude, full-site audit, board K5): this card already had
+      transform-style:preserve-3d on the parent, but was missing the
+      -webkit- prefixed variants of preserve-3d/backface-visibility that
+      iOS Safari needs alongside the unprefixed properties -- without them
+      the back face can still bleed through on some mobile Safari versions. */}
+  <div className="absolute inset-0" style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
   <div className="overflow-hidden bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-500 hover:shadow-2xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
   <div className="aspect-[4/3] overflow-hidden relative">
    <Image src={sticker.img} alt={sticker.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -95,7 +113,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   </div>
   </div>
    {/* Back */}
-<div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
+<div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
     <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center overflow-hidden relative">
     <div className="absolute inset-0 opacity-10">
       <Image src={sticker.img} alt={sticker.name} fill sizes="100vw" className="w-full h-full object-cover" />
@@ -132,22 +150,29 @@ function FlipCardInline({ title, subtitle, img, backTitle, backContent, backNote
 }) {
   const [flipped, setFlipped] = useState(false);
   const canHover = useRef(false);
+  // 2026-10-10 (Claude, full-site audit): see the matching note on
+  // StickerCard above -- same onFocus/onClick race made tapping
+  // "Hover or tap to see pricing" do nothing on touch devices.
+  const justFocusedRef = useRef(false);
   useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
     <div className="group relative cursor-pointer" style={{ perspective: "1200px", minHeight: "min(500px, 80vh)" }}
       tabIndex={0}
-      onFocus={() => setFlipped(true)}
+      onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
       onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-      onClick={() => setFlipped(f => !f)}>
+      onClick={() => {
+        if (justFocusedRef.current) { justFocusedRef.current = false; return; }
+        setFlipped(f => !f);
+      }}>
       <div
         className="relative w-full h-full transition-transform duration-700 ease-in-out"
-        style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
+        style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" } as React.CSSProperties}
       >
-      {/* Front */}
-      <div className="absolute inset-0" style={{ backfaceVisibility: "hidden" }}>
+      {/* Front -- see K5 note on StickerCard above re: -webkit- prefixes */}
+      <div className="absolute inset-0" style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
         {img ? (
         <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all hover:shadow-xl hover:shadow-[#DF3131]/10">
           <Image src={img} alt={title} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover" />
@@ -169,7 +194,7 @@ function FlipCardInline({ title, subtitle, img, backTitle, backContent, backNote
         )}
       </div>
       {/* Back */}
-      <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}>
+      <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
         <div className={`w-full h-full ${backBg} text-white p-8 lg:p-12 flex flex-col justify-between overflow-hidden relative`}>
           <div className="relative z-10 text-center">
             <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.1em] uppercase mb-4">{backTitle}</h2>

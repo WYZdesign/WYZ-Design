@@ -109,7 +109,8 @@ export default function BlogPage() {
     <Link href={`/blog/${p.slug}`} className="blog-card group block bg-white dark:bg-[#252528] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333]">
       <div className="relative h-56 overflow-hidden">
       <SafeImage src={p.img} alt={p.title} width={600} className="blog-img w-full h-full object-cover dark:brightness-110" loading="lazy" priority={false} />
-      <span className="absolute top-3 left-3 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded z-10">{p.cat}</span>
+      {/* 2026-10-10 (Claude, board K14): moved from top-left to top-right per request. */}
+      <span className="absolute top-3 right-3 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded z-10">{p.cat}</span>
       </div>
     <div className="p-5 sm:p-6 text-center">
     <div className="flex items-center justify-center gap-3 text-[#666] dark:text-[#aaa] text-[12px] mb-3">

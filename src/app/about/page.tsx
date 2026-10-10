@@ -273,7 +273,16 @@ export default function AboutPage() {
         </section>
       </ScrollReveal>
 
-      {/* CTA */}
+      <LeadMagnet />
+          {/* merged from /nomadic-breed */}
+      <NomadicBreedPage />
+      {/* merged from /dying-breed-crew */}
+      <DyingBreedCrewPage />
+
+      {/* CTA -- 2026-10-10 (Claude, board K13): moved to the bottom of the
+          page, below the merged Nomadic Breed / Dying Breed Crew sections,
+          per the owner's request to put the closing "Ready to build" CTA
+          after every other section instead of mid-page. */}
       <ScrollReveal animation="fadeUp">
         <section className="section-gap bg-[#DF3131]">
           <div className="max-w-3xl mx-auto px-6 text-center">
@@ -294,11 +303,6 @@ export default function AboutPage() {
           </div>
         </section>
       </ScrollReveal>
-      <LeadMagnet />
-          {/* merged from /nomadic-breed */}
-      <NomadicBreedPage />
-      {/* merged from /dying-breed-crew */}
-      <DyingBreedCrewPage />
 </main>
   );
 }
