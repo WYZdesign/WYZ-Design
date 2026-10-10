@@ -169,6 +169,13 @@ export default function Footer() {
           <div className={`mt-12 pt-6 ${borderColor} flex flex-col sm:flex-row items-center justify-between gap-3`}>
             <p className={`text-[13px] ${copyrightColor}`}>&copy; {new Date().getFullYear()} WYZ Design LLC. All rights reserved.</p>
             <div className="flex items-center gap-4">
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("wyz:open-cookie-preferences"))}
+                className={`text-[13px] ${precisionColor} hover:text-white transition-colors underline-offset-2 hover:underline`}
+              >
+                Cookie Preferences
+              </button>
               <p className={`text-[13px] ${precisionColor}`}>Designed & built with precision.</p>
             </div>
           </div>

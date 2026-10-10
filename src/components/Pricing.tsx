@@ -58,7 +58,7 @@ export default function Pricing() {
         </div>
 
         <p className="mt-8 text-[15px] text-[#666] dark:text-white/70 text-center max-w-3xl mx-auto leading-relaxed">
-          All our subscription plans are set to auto-renew on a monthly or quarterly basis, depending on the plan. We will automatically charge the payment method on file for the renewal period, unless you cancel the subscription before the renewal date. You can cancel your subscription at any time by contacting our customer support team or through your online account. If you cancel before the end of your current subscription period, your subscription will still be active until the end of the current period, and you will not receive a refund for any unused portion of the subscription.
+          All our subscription plans are billed monthly and auto-renew every month until you cancel. We will automatically charge the payment method on file for each renewal period at the then-current price. You can cancel your subscription at any time by contacting our customer support team or through your online account before your next renewal date. Cancellation takes effect at the end of the current billing period, and unless required by law you will not receive a refund for any unused portion of the current period.
         </p>
       </div>
     </section>

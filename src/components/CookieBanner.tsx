@@ -38,6 +38,12 @@ export default function CookieBanner() {
     }
   }, []);
 
+  useEffect(() => {
+    const open = () => setShow(true);
+    window.addEventListener("wyz:open-cookie-preferences", open);
+    return () => window.removeEventListener("wyz:open-cookie-preferences", open);
+  }, []);
+
   // Focus trap: move focus into dialog on open, trap Tab/Shift+Tab, restore on close
   useEffect(() => {
     if (!show) return;

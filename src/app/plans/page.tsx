@@ -256,7 +256,8 @@ export default function PlansPage() {
           All subscription plans auto-renew monthly. You can cancel at any time by contacting our
           customer support team or through your online account. If you cancel before the end of your current
           subscription period, your subscription will still be active until the end of the current period, and
-          you won&apos;t receive a refund for any unused portion.
+          unless required by law you won&apos;t receive a refund for any unused portion. If you cancel within
+          your first 14 days and no work has begun, we refund that first monthly charge in full.
         </p>
 
         {/* Interactive Pricing Calculator */}
