@@ -19,7 +19,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import ScrollAnimator from "@/components/ScrollAnimator";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
-import CookieBanner from "@/components/CookieBanner";
+import ClientComponents from "@/components/ClientComponents";
 import CustomCursor from "@/components/CustomCursor";
 import { CartProvider } from "@/lib/cart";
 import CartButton from "@/components/CartButton";
@@ -358,7 +358,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ConsentGatedAnalytics />
         <AnalyticsProvider />
         <Toaster position="bottom-right" toastOptions={{ duration: 4000, style: { background: "#fff", color: "#333", fontSize: "14px" }, error: { duration: 8000 } }} />
-        <CookieBanner />
+        <ClientComponents />
         <CustomCursor />
         <script dangerouslySetInnerHTML={{ __html: `
           if (window.matchMedia('(display-mode: standalone)').matches) {

@@ -157,7 +157,7 @@ const faotmImages = [
   { img: "/images/faotm_1.jpg", name: "F. A. O. T. M. #1", price: "Artist Spotlight" },
   { img: "/images/faotm_2.jpg", name: "F. A. O. T. M. #2", price: "Artist Spotlight" },
   { img: "/images/faotm_3.jpg", name: "F. A. O. T. M. #3", price: "Artist Spotlight" },
-  { img: "/images/faotm_1.jpg", name: "F. A. O. T. M. #4", price: "Artist Spotlight" },
+      { img: "/images/danny-davis.png", name: "F. A. O. T. M. #4", price: "Artist Spotlight" },
 ];
 
  const [shuffledLogos, setShuffledLogos] = useState(LOGOS_IMAGES);
