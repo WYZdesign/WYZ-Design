@@ -119,7 +119,7 @@ export default function Footer() {
           </form>
         </div>
       </div>
-        <div className="max-w-[115rem] mx-auto px-6 lg:px-12 pb-10 flex justify-center">
+        <div className="relative z-20 max-w-[115rem] mx-auto px-6 lg:px-12 pt-2 pb-14 flex justify-center">
           <div className="flex flex-wrap justify-center gap-3">
             {SOCIALS.map((s, i) => (
               <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}

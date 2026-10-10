@@ -61,6 +61,11 @@ const welcomeHtml = (email: string) => {
       We'll send you occasional updates, no spam, no fluff. Just the good stuff.
     </p>
   </div>
+  <p style="font-size:15px;color:#111;margin-top:24px;font-weight:bold;">Your Brand Audit Guide</p>
+  <p style="font-size:14px;color:#444;line-height:1.6;">
+    Seven questions to find what your brand is missing, plus what to do about it.
+    <a href="${BASE_URL}/downloads/wyz-brand-audit-guide.pdf" style="color:#DF3131;font-weight:bold;">Download the PDF</a>.
+  </p>
   <p style="font-size:14px;color:#757575;margin-top:32px;">
     - The WYZ Design Team<br/>
     <a href="https://www.wyzdesign.com" style="color:#DF3131;">wyzdesign.com</a>
@@ -113,6 +118,13 @@ export async function POST(req: NextRequest) {
   </p>
   <div style="margin:32px 0;text-align:center;">
     <a href="${confirmUrl}" style="display:inline-block;padding:14px 32px;background:#DF3131;color:#fff;font-weight:bold;text-decoration:none;font-size:14px;letter-spacing:0.05em;">CONFIRM MY EMAIL</a>
+  </div>
+  <div style="margin:32px 0;padding:24px;background:#F5F5F3;border-left:4px solid #DF3131;">
+    <p style="font-size:15px;color:#111;margin:0 0 8px;font-weight:bold;">Your Free Brand Audit Guide</p>
+    <p style="font-size:14px;color:#444;line-height:1.6;margin:0 0 14px;">
+      Seven questions to find what your brand is missing, with a fix for each. Grab it now:
+    </p>
+    <a href="${BASE_URL}/downloads/wyz-brand-audit-guide.pdf" style="display:inline-block;padding:12px 26px;background:#111;color:#fff;font-weight:bold;text-decoration:none;font-size:13px;letter-spacing:0.05em;">DOWNLOAD THE GUIDE (PDF)</a>
   </div>
   <p style="font-size:14px;color:#757575;margin-top:32px;">
     - The WYZ Design Team<br/>
