@@ -128,3 +128,26 @@ Per-page visual + interaction polish (continuing its in-flight audit; it already
 4. Codex batch: C1, C2, C4, C5.
 5. WYZMiND: W9 primitives, then Claude applies (K4); W1, W4, W8.
 6. K3 (per-page unique heroes) last, as its own multi-PR effort.
+
+---
+
+## 6. Progress update (2026-10-10, evening, WYZMiND)
+
+Shipped since the ledger was written:
+
+- Nav: Home link, duplicate Services removed, mega-menu balanced (e5602c6).
+- All Codex work landed and verified: PaginatedSection + tests, tsconfig hardening, QA policy, handover (1c4bda4).
+- All Claude work landed and verified, reconciled so Services keeps Web Design content and the #plans/#web-design anchors (1c4bda4).
+- ChatWidget, NoiseOverlay, A11yAudit enabled via a single ClientComponents mount; verified live chat button (b444a9a).
+- Designs FAOTM strip slot #4 now uses danny-davis.png instead of duplicating #1 (b444a9a).
+- Splash: tap anywhere (mobile-safe) enters home and scrolls to top (b7c0da1).
+- Footer socials row given z-20 + extra bottom padding so the circles are not clipped (b7c0da1).
+- Real 5-page Brand Audit Guide PDF authored, served at /downloads/wyz-brand-audit-guide.pdf (200, application/pdf), and linked from the newsletter confirm and welcome emails (b7c0da1).
+
+Still open and owned:
+
+- WYZMiND: W2/W3 (page top and side gaps, hero flush on all pages), W4 (horizontal-scroll filter/sort/tab strips on mobile), W7 (about scroll reverses halfway), W9 (interaction primitives), wire C1 PaginatedSection into long pages as tabs.
+- Claude: K3 (per-page unique hero motion + balanced red/grey dots), confirm K9/K10/K11 (designs carousels, events carousel blanks, YouTube overlay always-on), K12 (about crown marquee opposite directions), K13 ("Ready to build" to bottom), K14 (blog labels top-right), K1/K2 if not already in the audit pass.
+- Owner: the four tracker IDs (NEXT_PUBLIC_GTM_ID, NEXT_PUBLIC_CLARITY_ID, NEXT_PUBLIC_META_PIXEL_ID, NEXT_PUBLIC_TIKTOK_PIXEL_ID) so analytics can be enabled, and faotm_4.jpg if a distinct fourth FAOTM image is wanted (Danny is used meanwhile).
+
+Note: NoiseOverlay class was not detectable by class-name probe on the live page; confirm it is rendering as intended.
