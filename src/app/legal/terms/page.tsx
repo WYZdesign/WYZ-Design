@@ -15,7 +15,7 @@ const HREF = "text-[#DF3131] hover:underline";
 export default function TermsAndConditions() {
   return (
     <>
-      <main className="min-h-screen bg-white dark:bg-[#111] pb-20">
+      <main data-legal className="min-h-screen bg-white dark:bg-[#111] pb-20">
         <div className="max-w-4xl mx-auto px-6 pt-28">
           <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-[#e0e0e0] mb-6 sm:mb-8">
             Terms &amp; Conditions

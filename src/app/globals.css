@@ -1340,6 +1340,7 @@ footer img[class*="object-contain"] {
 /* Content visibility — skip offscreen rendering for performance */
 section { content-visibility: auto; contain-intrinsic-size: 0 500px; }
 section:first-of-type, section[id], section[data-anchor] { content-visibility: visible; }
+main[data-legal] section { content-visibility: visible; contain-intrinsic-size: none; }
 
 /* Scroll-driven animation enhancements */
 @supports (animation-timeline: scroll()) {
