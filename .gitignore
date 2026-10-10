@@ -70,3 +70,4 @@ wyz_*.mjs
 verify_*.mjs
 screenshots/current/
 _AUDIT_SCREENSHOTS/
+.playwright-mcp/

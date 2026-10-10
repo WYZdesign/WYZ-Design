@@ -83,6 +83,7 @@ export default function CookieBanner() {
 
   const saveConsent = (c: CookieConsent) => {
     try { localStorage.setItem(CONSENT_KEY, JSON.stringify(c)); } catch {}
+    try { window.dispatchEvent(new CustomEvent("wyz:consent-changed", { detail: c })); } catch {}
     setShow(false);
   };
 

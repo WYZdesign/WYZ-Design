@@ -34,7 +34,14 @@ export default function AnalyticsProvider() {
       }
     };
     window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
+    // Same-tab updates: storage events do not fire in the tab that wrote the
+    // value, so listen for the event the cookie banner dispatches on save.
+    const handleLocal = () => setConsent(getConsent());
+    window.addEventListener("wyz:consent-changed", handleLocal);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("wyz:consent-changed", handleLocal);
+    };
   }, []);
 
   if (!loaded) return null;

@@ -27,7 +27,19 @@ export default function ConsentGatedAnalytics() {
       }
     };
     window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
+    // Same-tab updates: the storage event never fires in the tab that made the
+    // change, so the banner dispatches this event when the user saves a choice.
+    const handleLocal = () => {
+      try {
+        const raw = localStorage.getItem(CONSENT_KEY);
+        if (raw) setConsent(JSON.parse(raw).analytics === true);
+      } catch {}
+    };
+    window.addEventListener("wyz:consent-changed", handleLocal);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("wyz:consent-changed", handleLocal);
+    };
   }, []);
 
   if (!consent) return null;
