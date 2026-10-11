@@ -180,3 +180,17 @@ Still open: K2 (stacked min-content typography on every hero title, per-page res
 - Note: the about hero tag is multi-line, so its dots were not injected; add HeroDots inside its ScrollReveal section if wanted.
 
 Everything pushed and deployed: f0b462a (K2 + K3 first 5), f4cc545 (home/featured-artist/wyzmind dots). Both READY.
+
+## 10. Progress update 5 (2026-10-10, late, WYZMiND) - "do all else"
+
+- Blog now paginates 9 articles per page with branded Prev/Next and a page indicator; resets to page 1 on category or search change. Verified live: 2 pages, 9 cards page 1, Prev disabled at start (cd34b41).
+- 3pointprogram pillar tablist switched to .wz-hscroll (scrolls instead of wrapping on mobile).
+- W4 filter strips now covered: blog categories, merchandise categories, photography filters, 3pointprogram tabs (services already scrolled). No wrapping filter/tab rows remain by scan.
+
+Remaining, and why they are not done:
+- Pagination on gallery / model-archive / community / designs: each is a different list shape (masonry gallery, model grid, community feed). Blog was the clear text-heavy one; the others can adopt the same Prev/Next pattern on request, page by page.
+- Trackers (NEXT_PUBLIC_GTM_ID / CLARITY_ID / META_PIXEL_ID / TIKTOK_PIXEL_ID): need the four IDs from the owner; code is ready and consent-gated.
+- Board #31 (wyzmind page capability/privacy claims): needs the owner to approve the corrected positioning before copy changes.
+- Legal attorney items and FAOTM images: owner/attorney.
+
+K3 dots: owner said skip, so no further dots work.
