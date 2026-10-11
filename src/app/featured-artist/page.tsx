@@ -1,4 +1,5 @@
 "use client";
+import HeroDots from "@/components/HeroDots";
 
 import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
@@ -168,6 +169,7 @@ export default function FeaturedArtistPage() {
  <main className="pt-0 pb-0 bg-white">
  {/* ═══ HERO - Full biography split ═══ */}
  <section className="relative -mt-20 lg:-mt-24 min-h-screen flex flex-col lg:flex-row overflow-hidden">
+      <HeroDots variant={1} />
  {/* Left: Image */}
  <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-screen bg-white dark:bg-[#111] flex items-center justify-center overflow-hidden">
  <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/20 via-[#FFFFFF] dark:via-[#111] to-[#DF3131]/10 blur-[70%]" />

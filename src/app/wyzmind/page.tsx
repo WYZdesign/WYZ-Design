@@ -1,4 +1,5 @@
 "use client";
+import HeroDots from "@/components/HeroDots";
 import { useState, useRef, useEffect, ReactNode, useCallback } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
@@ -141,6 +142,7 @@ export default function WYZMiNDPage() {
       <ScrollReveal animation="fadeUp">
 {/* Hero */}
           <section className="relative min-h-[75vh] section-gap px-6 text-center border-b border-[#E2E2E2] dark:border-[#444] overflow-hidden hero-banner">
+      <HeroDots variant={4} />
     <div className="absolute inset-0 hero-grad-wyzmind z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     {/* Neural network canvas background */}
