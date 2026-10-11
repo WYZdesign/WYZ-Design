@@ -117,7 +117,7 @@ export default function AboutPage() {
               <div className="w-full">
               <span className="text-[#C00000] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.25em] uppercase block mb-4">About Us</span>
               <TextMaskReveal direction="up">
-              <h1 className="text-[1.75rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white uppercase mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+              <h1 className="wz-stack text-[1.75rem] sm:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white uppercase mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
                 <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">BUILT </TextSplit></span><TextSplit stagger={0.03} direction="up">DIFFERENT</TextSplit>
               </h1>
               </TextMaskReveal>

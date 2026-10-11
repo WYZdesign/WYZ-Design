@@ -940,7 +940,7 @@ export default function HomePage() {
         <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
       </p>
         <TextMaskReveal direction="up">
-        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
+        <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
            <span>WE <span className="text-[#DF3131]">MAKE</span></span><br />
            <span>WHAT <span className="text-[#DF3131]">WORKS</span></span>
         </h1>

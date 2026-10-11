@@ -100,7 +100,7 @@ export default function LoyaltyPage() {
     <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
       <div className="max-w-5xl mx-auto px-6 pt-[3.2rem] sm:pt-32 lg:pt-40">
         <div className="text-center mb-4">
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-4 sm:mb-8">EARN ZEAL</h1>
+          <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.15em] mb-4 sm:mb-8">EARN ZEAL</h1>
           <p className="text-[#666] dark:text-[#b0b0b0] max-w-xl mx-auto mb-6 mt-4">The WYZ Design rewards program. Earn Zeal for everything you do here, from showing up daily to uncovering secrets nobody told you about. Climb the tiers, earn real perks. Sign in to start earning. Everything you do on this site counts once you&apos;re in.</p>
         </div>
 

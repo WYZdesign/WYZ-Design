@@ -1,4 +1,5 @@
 "use client";
+import HeroDots from "@/components/HeroDots";
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
@@ -148,6 +149,7 @@ return (
 {/* ── Hero: Split Layout ── */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
+      <HeroDots variant={1} />
    {/* Desktop: split grid */}
    <div className="hidden md:grid md:grid-cols-2 absolute inset-0">
    <div className="relative h-full overflow-hidden">
@@ -158,7 +160,7 @@ return (
     <div className="absolute inset-0 hero-grad-services z-0" />
     <div className="absolute inset-0 bg-black/20 z-[1]" />
     <div className="relative z-10 text-center max-w-xl mx-auto flex flex-col items-center justify-center h-full">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
+    <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.12em] mb-4 sm:mb-8" style={{ lineHeight: 0.9 }}>
     <TextSplit stagger={0.03} direction="up">CREATIVE</TextSplit><br />
     <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">SERVICES</TextSplit></span>
     </h1>

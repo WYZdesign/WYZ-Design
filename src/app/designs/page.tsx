@@ -1,4 +1,5 @@
 "use client";
+import HeroDots from "@/components/HeroDots";
 
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
@@ -213,6 +214,7 @@ const faotmImages = [
 {/* ═══ HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
     <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden bg-black flex items-center hero-banner">
+      <HeroDots variant={2} />
   {/* Mobile: full video background */}
   <div className="md:hidden absolute inset-0 z-0">
     <video
@@ -229,7 +231,7 @@ const faotmImages = [
    <div className="absolute inset-0 hero-grad-design z-0" />
    <div className="absolute inset-0 bg-black/20 z-[1]" />
       <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-32 lg:pt-40 pb-12 md:py-0">
-  <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
+  <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
     <p className="text-[16px] sm:text-[17px] text-white/80 max-w-xs sm:max-w-sm leading-relaxed mb-8 sm:mb-10 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
      <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-[#DF3131] text-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#B82020] transition-all pulse3131 mt-2 sm:mt-4">GET A QUOTE</Link>
      </div>

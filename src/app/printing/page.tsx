@@ -1,4 +1,5 @@
 "use client";
+import HeroDots from "@/components/HeroDots";
 
 import { useState, useRef, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -222,6 +223,7 @@ export default function PrintingPage() {
 {/* ── Hero: Split (desktop video/text, mobile merged) ── */}
   <ScrollReveal animation="fadeUp">
   <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
+      <HeroDots variant={4} />
   {/* Desktop: split grid. absolute inset-0 (not lg:h-full) so this sizes against the
       hero section's actual rendered height even though that height comes from
       min-h-screen rather than an explicit height - a plain height:100% can't resolve
@@ -236,7 +238,7 @@ export default function PrintingPage() {
     <div className="absolute inset-0 hero-grad-print z-0" />
     <div className="absolute inset-0 bg-black/30 z-[1]" />
     <div className="relative z-10 flex flex-col items-center justify-center h-full">
-    <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
+    <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
     <p className="text-white/70 text-[16px] sm:text-lg mb-6 max-w-sm text-center">Print your photos, flyers, posters, and stickers in LA. Prices run about 10% under standard industry rates.</p>
     <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GET A QUOTE

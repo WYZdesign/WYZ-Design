@@ -20,7 +20,7 @@ export default function ContactPage() {
         <div className="relative max-w-2xl mx-auto px-6 pt-20 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
           <div className="relative z-10">
           <TextMaskReveal direction="up">
-          <h1 className="text-[1.35rem] sm:text-[1.8rem] md:text-[2.25rem] lg:text-[2.7rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>CONTACT US</h1>
+          <h1 className="wz-stack text-[1.35rem] sm:text-[1.8rem] md:text-[2.25rem] lg:text-[2.7rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.08em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>CONTACT US</h1>
           </TextMaskReveal>
           </div>
           <p className="text-[#666] dark:text-[#666] text-center mb-10 text-[15px] leading-relaxed">

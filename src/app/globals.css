@@ -519,6 +519,21 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: scal
    ═══════════════════════════════════════════════════════════ */
 .hero-banner p, .hero-section p { max-width: 46ch; margin-left: auto; margin-right: auto; }
 
+/* Stacked typography: the box shrinks to the longest word (min-content),
+   so a multi-word hero title stacks one word per line at the width of the
+   primary word. Add .wz-stack to a hero <h1>. */
+.wz-stack { width: min-content; margin-left: auto; margin-right: auto; max-width: 100%; text-wrap: balance; }
+.wz-stack-left { width: min-content; max-width: 100%; text-wrap: balance; }
+
+/* Hero dots (per-page motion via variant) */
+.wz-dot { animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+@keyframes wzDotFloat { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-22px) } }
+@keyframes wzDotDrift { 0% { transform: translate(0,0) } 50% { transform: translate(20px,-14px) } 100% { transform: translate(0,0) } }
+@keyframes wzDotRise { 0% { transform: translateY(14px); opacity:.15 } 50% { opacity:.85 } 100% { transform: translateY(-34px); opacity:.15 } }
+@keyframes wzDotOrbit { 0% { transform: translate(0,0) } 25% { transform: translate(16px,10px) } 50% { transform: translate(0,22px) } 75% { transform: translate(-16px,10px) } 100% { transform: translate(0,0) } }
+@keyframes wzDotPulse { 0%,100% { transform: scale(.7); opacity:.2 } 50% { transform: scale(1.25); opacity:.8 } }
+@media (prefers-reduced-motion: reduce) { .wz-dot { animation: none !important; } }
+
 /* ═══════════════════════════════════════════════════════════
    FOCUS RING — additive, works alongside outline-none
    ═══════════════════════════════════════════════════════════ */

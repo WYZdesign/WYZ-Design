@@ -1,4 +1,5 @@
 "use client";
+import HeroDots from "@/components/HeroDots";
 
 import { useRef, useState, useEffect, useCallback, createContext, useContext } from "react";
 import Image from "next/image";
@@ -748,6 +749,7 @@ export default function EventsPage() {
 {/* ═══ 1. HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
    <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden hero-banner">
+      <HeroDots variant={3} />
 {/* Single hero video - desktop and mobile previously rendered two separate
     <video autoPlay> elements of the same file (one hidden via `hidden md:block`,
     the other via `md:hidden`); both still downloaded/buffered regardless of
@@ -785,7 +787,7 @@ export default function EventsPage() {
 {/* Text overlay */}
     <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-10 lg:px-16 text-center">
     <div className="relative z-10">
-     <h1 className="text-[1.75rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
+     <h1 className="wz-stack text-[1.75rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
     <span><TextSplit stagger={0.03} direction="up">SIMPLIFY YOUR</TextSplit></span> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">EVENT</TextSplit></span> <span><TextSplit stagger={0.03} direction="up">PLANNING</TextSplit></span>
    </h1>
    <p className="text-[16px] sm:text-[16px] lg:text-[17px] text-white/70 max-w-[calc(100vw-3rem)] sm:max-w-sm leading-relaxed mb-8 sm:mb-10 mx-auto">
