@@ -570,7 +570,8 @@ return (
    <p className="text-[16px] lg:text-[18px] text-[#666] dark:text-white/60 max-w-md leading-relaxed mb-8 mx-auto">
    Our model archive has 78+ models and client albums to browse. Explore our diverse range of talent, from inexperienced to professional.
   </p>
- <div className="flex flex-wrap gap-4 justify-center mb-8">
+          <div className="wz-hscroll mb-8 justify-start sm:justify-center">
+
    <Link href="/model-archive" className="inline-block px-8 py-4 border-2 border-[#333] text-[#333] text-[12px] font-bold tracking-[0.12em] text-center hover:bg-[#333] hover:text-white transition-all hover:scale-105">
   ARCHIVE
   </Link>

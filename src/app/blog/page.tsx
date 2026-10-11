@@ -84,7 +84,7 @@ export default function BlogPage() {
 
  <ScrollReveal animation="fadeUp" delay={0.15}>
  <div className="sticky top-20 lg:top-24 z-10 bg-white dark:bg-[#1C1C1E] py-3 -mx-6 px-6 lg:-mx-12 lg:px-12">
- <div className="flex gap-2 flex-wrap">
+            <div className="wz-hscroll">
  {CATS.map(c => (
  <button key={c} onClick={() => setCat(c)}
  aria-pressed={cat === c}

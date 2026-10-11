@@ -342,7 +342,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CartProvider>
           <Navbar />
           <ErrorBoundary>
-          <div id="main-content" className="flex-1 pt-20 lg:pt-24 bg-white dark:bg-[#1C1C1E]" tabIndex={-1}>
+          <div id="main-content" className="flex-1 pt-16 lg:pt-20 bg-white dark:bg-[#1C1C1E]" tabIndex={-1}>
             <PageTransition>{children}</PageTransition>
           </div>
           <Footer />

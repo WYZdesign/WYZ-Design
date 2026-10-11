@@ -534,7 +534,7 @@ export default function MerchPage() {
                 <h2 className="text-[2rem] sm:text-[2.5rem] sm:whitespace-nowrap font-heading font-black tracking-[0.03em] text-[#333]">Shop the collection</h2>
                 <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#666]">Crew-made pieces, printed to order. Pick a piece, choose your options, and check out securely.</p>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="wz-hscroll">
                 {CATEGORIES.map((category) => (
                   <button key={category} type="button" onClick={() => setActiveCategory(category)} aria-pressed={activeCategory === category}
                     className={`min-h-11 px-4 text-[11px] font-bold tracking-[0.08em] uppercase border transition-colors ${activeCategory === category ? "bg-[#333] text-white border-[#333]" : "bg-white text-[#333] border-[#d9d6d3] hover:border-[#DF3131]"}`}>

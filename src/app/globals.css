@@ -481,6 +481,45 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 }
 
 /* ═══════════════════════════════════════════════════════════
+   MOBILE HORIZONTAL SCROLL STRIPS (filters / sort / tabs)
+   ═══════════════════════════════════════════════════════════ */
+.wz-hscroll {
+  display: flex; flex-wrap: nowrap; align-items: center; gap: 0.5rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; -ms-overflow-style: none;
+  scroll-snap-type: x proximity; padding-bottom: 2px;
+}
+.wz-hscroll::-webkit-scrollbar { display: none; }
+.wz-hscroll > * { scroll-snap-align: start; flex: none; }
+@media (min-width: 768px) {
+  .wz-hscroll { flex-wrap: wrap; overflow-x: visible; padding-bottom: 0; }
+  .wz-hscroll > * { flex: initial; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INTERACTION PRIMITIVES (site-wide, mouse + touch)
+   ═══════════════════════════════════════════════════════════ */
+button, a, [role="button"], summary { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled), a, [role="button"] {
+  transition: color .25s ease, background-color .25s ease, border-color .25s ease,
+    transform .18s ease, box-shadow .25s ease, opacity .25s ease;
+}
+button:not(:disabled):active, a:active, [role="button"]:active { transform: scale(.97); }
+.wz-lift { transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease; }
+.wz-lift:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,.14); }
+.wz-underline { background-image: linear-gradient(#C9A227, #C9A227); background-size: 0% 2px;
+  background-position: 0 100%; background-repeat: no-repeat; transition: background-size .3s ease; }
+.wz-underline:hover { background-size: 100% 2px; }
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled), a, [role="button"], .wz-lift, .wz-underline { transition: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO TYPE: constrain the lede to the title stack width
+   ═══════════════════════════════════════════════════════════ */
+.hero-banner p, .hero-section p { max-width: 46ch; margin-left: auto; margin-right: auto; }
+
+/* ═══════════════════════════════════════════════════════════
    FOCUS RING — additive, works alongside outline-none
    ═══════════════════════════════════════════════════════════ */
 :focus-visible {
