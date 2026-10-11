@@ -194,3 +194,9 @@ Remaining, and why they are not done:
 - Legal attorney items and FAOTM images: owner/attorney.
 
 K3 dots: owner said skip, so no further dots work.
+
+## 11. Progress update 6 (2026-10-10, late, WYZMiND)
+
+- Board #31 APPROVED and fixed: wyzmind page claims corrected (removed the false "No data is sent to third parties"; now discloses the hosted third-party AI provider and that we do not sell data; softened absolute uptime claims). Live 13ba94a.
+- Pagination scoped to where it makes sense: blog only (long text list). Not added to gallery/model-archive/community/designs (left as-is per "only where it makes sense").
+- Vault checked for analytics IDs: NONE present (no GTM/CLARITY/META_PIXEL/TIKTOK keys). The vault does hold wyzdesign business facts usable for the legal package: WYZDESIGN_EIN, WYZDESIGN_ENTITY, WYZDESIGN_LEGAL_NAME, WYZDESIGN_BUSINESS_ADDRESS, WYZDESIGN_FOUNDER_PUBLIC_NAME, WYZDESIGN_INSTAGRAM. Still need the four tracker IDs to enable analytics.
