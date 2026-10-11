@@ -151,3 +151,13 @@ Still open and owned:
 - Owner: the four tracker IDs (NEXT_PUBLIC_GTM_ID, NEXT_PUBLIC_CLARITY_ID, NEXT_PUBLIC_META_PIXEL_ID, NEXT_PUBLIC_TIKTOK_PIXEL_ID) so analytics can be enabled, and faotm_4.jpg if a distinct fourth FAOTM image is wanted (Danny is used meanwhile).
 
 Note: NoiseOverlay class was not detectable by class-name probe on the live page; confirm it is rendering as intended.
+
+## 7. Progress update 2 (2026-10-10, late, WYZMiND)
+
+- FIXED the site-wide "cannot scroll to the bottom" bug. Root cause: `section { content-visibility: auto; contain-intrinsic-size: 0 500px }` understated page height, so scroll stalled and snapped backward on long pages. Now `content-visibility: visible`. Verified live: /about reaches scrollY 8901 of 8901 and /merch 3661 of 3661, footer fully in view (609cf97).
+- Palette folded to red/gold/white/gray/black across 19 files: removed Discord blue #5865F2, all tailwind blue-* utilities, platform blues (twitter/facebook/linkedin), and the cyan/purple/green chart strays. Verified zero blue utilities remain.
+- Gold updated to the logo tone: --color-wyz-gold #C9A227, light #E7C873, deep #8C6A1D; added .wz-gold/.wz-gold-line/.wz-gold-text/.wz-gold-glow utilities, gold scrollbar hover, gold footer precision line.
+
+Still open (WYZMiND): W2/W3 top+side gaps (thin light strip under the nav and at the page edges; hero should sit flush), W4 horizontal-scroll filter/sort/tab strips on mobile, W9 interaction primitives, wire PaginatedSection as tabs.
+Still open (Claude): K1/K2 hero paragraph width + stacked (min-content) typography, K3 per-page hero motion + balanced gold/red dots, K12 about crown marquee opposite directions, K13 Ready-to-build to bottom, K14 blog labels top-right, verify K9-K11.
+Owner: four tracker IDs; faotm_4.jpg optional.
