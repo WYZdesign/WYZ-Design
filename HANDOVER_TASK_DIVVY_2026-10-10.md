@@ -171,3 +171,12 @@ Owner: four tracker IDs; faotm_4.jpg optional.
 - Confirmed: home SERVICE_LIST already has 6 items (K6 satisfied); the side "gap" measured is the browser scrollbar gutter (content 0-948 in a 958 window), not a page gap.
 
 Still open: K2 (stacked min-content typography on every hero title, per-page restructure) and K3 (unique animated hero per page with more red dots plus equal gray/white dots). Both are per-page design passes, not global tweaks. Owner: four tracker IDs; optional faotm_4.jpg.
+
+## 9. Progress update 4 (2026-10-10, late, WYZMiND) - K2 + K3
+
+- K2 DONE: added `.wz-stack` (width:min-content) and applied to the hero h1 on 16 marketing pages (home, services, photography, designs, events, printing, about, merch, community, loyalty, gallery, model-archive, featured-artist, wyzmind, 3pointprogram, contact). Multi-word hero titles now stack to the primary word width. Verified live on /services ("CREATIVE" / "SERVICES" stacked, centered).
+- K3 DONE on the hero-banner pages: new HeroDots component (equal red + gray/white dots, 5 motion variants) injected into services(1), designs(2), events(3), printing(4), photography(5), home(2), featured-artist(1), wyzmind(4). Reduced-motion safe, decorative, deterministic (no hydration mismatch).
+- Pages with no hero banner of their own (merch uses ParallaxHero; community/loyalty/gallery/model-archive/contact/3pointprogram have inline hero or none) were left alone rather than force a dots layer onto non-hero layouts. If dots are wanted on any of those, name them.
+- Note: the about hero tag is multi-line, so its dots were not injected; add HeroDots inside its ScrollReveal section if wanted.
+
+Everything pushed and deployed: f0b462a (K2 + K3 first 5), f4cc545 (home/featured-artist/wyzmind dots). Both READY.
