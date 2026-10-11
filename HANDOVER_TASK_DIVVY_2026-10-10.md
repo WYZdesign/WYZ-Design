@@ -200,3 +200,23 @@ K3 dots: owner said skip, so no further dots work.
 - Board #31 APPROVED and fixed: wyzmind page claims corrected (removed the false "No data is sent to third parties"; now discloses the hosted third-party AI provider and that we do not sell data; softened absolute uptime claims). Live 13ba94a.
 - Pagination scoped to where it makes sense: blog only (long text list). Not added to gallery/model-archive/community/designs (left as-is per "only where it makes sense").
 - Vault checked for analytics IDs: NONE present (no GTM/CLARITY/META_PIXEL/TIKTOK keys). The vault does hold wyzdesign business facts usable for the legal package: WYZDESIGN_EIN, WYZDESIGN_ENTITY, WYZDESIGN_LEGAL_NAME, WYZDESIGN_BUSINESS_ADDRESS, WYZDESIGN_FOUNDER_PUBLIC_NAME, WYZDESIGN_INSTAGRAM. Still need the four tracker IDs to enable analytics.
+
+## 12. Progress update 7 (2026-10-11, WYZMiND) - owner approved the outstanding decisions
+
+Owner approved: pricing canon, QA policy, delivery automation, gift-card redemption, and metrics ("correct, but I have way more stuff"). Shipped a99cf14 (LIVE):
+
+- **#1 Pricing canon APPROVED.** `PRICING_CANON_DECISION.md` approval record filled from the live values (monthly plans Starter $250 / Business $500 / Pro $750 / Ultimate $1,000; 50% deposit; gift cards 24mo; merch live). Reconciled the two flagged contradictions: photo retouching now "from $15/photo" (chat + booking), event photography "$200 up to 4 hrs" everywhere.
+- **#24 Gift-card redemption: CONFIRMED COMPLETE.** It was already built (atomic reserve at checkout for services + merch, commit on webhook, release on expiry + cleanup cron, admin void/refill, cart field). Verified in code; marked done.
+- **#22 Delivery automation: Phase 1 shipped.** `supabase/migrations/0002_client_comms_and_delivery.sql` (client_comm_preferences, delivery_events), `src/lib/delivery.ts` (4 stage drafts + per-stage flags, all OFF, hard-blocked while PHASE < 3), `/api/cron/delivery-outreach` dry-run runner that logs would-be sends and never sends. Phase 3 needs Torreé's per-stage copy sign-off.
+- **#21 QA policy: DONE** (`QA_RATE_LIMIT_POLICY.md`, preview-first + paced production smoke rules).
+- **#30 Metrics: reconciled.** `PORTFOLIO_METRICS_RECONCILIATION.md` backs all four public metrics with counted artifacts. On-site inventory: 1,860 images, 48 videos, 712 design pieces, 359 model photos, 243 photography, 68 event flyers, 43 client logos, 24 referenced. Events 90+ / clients 45+ / photos 1,500+ / years 9+ all hold. To raise any number, need the owner's lifetime counts from channels the repo cannot see (Instagram, Model Mayhem, client records).
+
+### FAOTM finding (owner said "all 4 faotm images are named faotm with a number")
+
+Only **three** exist: `public/images/faotm_1.jpg`, `faotm_2.jpg`, `faotm_3.jpg`. There is no `faotm_4` anywhere on V:/W:. The designs FAOTM strip's 4th slot uses `danny-davis.png` (owner approved). Action: supply `faotm_4.jpg` (or confirm 3 is right) and the strip can show 4 real pieces.
+
+### Still owner-only (no agent work left)
+- Tracker IDs (GTM/Clarity/Meta/TikTok) - analytics stays dark without them.
+- Spec 22 Phase 3 per-stage copy sign-off (before any delivery email sends).
+- Raise-metrics counts from external channels, and optional faotm_4.jpg.
+- Lawyer items on the owner's own time (no reminders, per owner).
