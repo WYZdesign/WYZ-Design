@@ -161,3 +161,13 @@ Note: NoiseOverlay class was not detectable by class-name probe on the live page
 Still open (WYZMiND): W2/W3 top+side gaps (thin light strip under the nav and at the page edges; hero should sit flush), W4 horizontal-scroll filter/sort/tab strips on mobile, W9 interaction primitives, wire PaginatedSection as tabs.
 Still open (Claude): K1/K2 hero paragraph width + stacked (min-content) typography, K3 per-page hero motion + balanced gold/red dots, K12 about crown marquee opposite directions, K13 Ready-to-build to bottom, K14 blog labels top-right, verify K9-K11.
 Owner: four tracker IDs; faotm_4.jpg optional.
+
+## 8. Progress update 3 (2026-10-10, late, WYZMiND)
+
+- Top gap fixed: layout content spacer now pt-16 lg:pt-20 (exact nav height); hero sits flush under the nav (verified live on /about: navBottom 80, heroTop -16). Hero lede capped at 46ch (K1).
+- Mobile filter strips: .wz-hscroll utility added and applied to blog categories, merchandise categories, photography filters (services already scrolled).
+- Interaction primitives: global tap/hover transitions, active scale, .wz-lift, .wz-underline, reduced-motion guard.
+- Confirmed already done in the Claude pass: K11 (YouTube overlay always on, spotlight hover-only), K12 (about marquee alternates direction per row), K13 (Ready to build moved to the end), K14 (blog labels top-right), K9 designs carousel uses object-contain.
+- Confirmed: home SERVICE_LIST already has 6 items (K6 satisfied); the side "gap" measured is the browser scrollbar gutter (content 0-948 in a 958 window), not a page gap.
+
+Still open: K2 (stacked min-content typography on every hero title, per-page restructure) and K3 (unique animated hero per page with more red dots plus equal gray/white dots). Both are per-page design passes, not global tweaks. Owner: four tracker IDs; optional faotm_4.jpg.
