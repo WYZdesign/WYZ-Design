@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
 import { FiArrowRight, FiClock, FiSearch, FiTrendingUp } from "react-icons/fi";
@@ -14,6 +14,8 @@ const CATS = ["All", "Events", "Design", "Photography", "Branding", "Web Design"
 export default function BlogPage() {
  const [cat, setCat] = useState("All");
  const [search, setSearch] = useState("");
+ const [page, setPage] = useState(1);
+ const PER_PAGE = 9;
 
  const featured = POSTS.find(p => p.featured) ?? POSTS[0];
  const filtered = useMemo(() => {
@@ -24,6 +26,10 @@ export default function BlogPage() {
  }
  return list;
  }, [cat, search]);
+
+ const pageCount = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+ useEffect(() => { setPage(1); }, [cat, search]);
+ const pageItems = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
 
  return (
  <main className="pb-16 bg-white dark:bg-[#1C1C1E]">
@@ -104,7 +110,7 @@ export default function BlogPage() {
     </div>
   }>
   <div id="articles" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {filtered.map((p, i) => (
+  {pageItems.map((p, i) => (
     <ScrollReveal key={p.id} animation="fadeUp" delay={0.08 * i}>
     <Link href={`/blog/${p.slug}`} className="blog-card group block bg-white dark:bg-[#252528] rounded-xl overflow-hidden border border-[#E2E2E2] dark:border-[#333]">
       <div className="relative h-56 overflow-hidden">
@@ -128,6 +134,19 @@ export default function BlogPage() {
     </ScrollReveal>
   ))}
   </div>
+  {pageCount > 1 && (
+  <nav aria-label="Articles pages" className="mt-10 flex items-center justify-center gap-4">
+  <button type="button" onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1}
+  className="min-h-11 px-5 border-2 border-[#DF3131] text-[#DF3131] font-heading font-bold text-[12px] tracking-[0.1em] uppercase rounded-full hover:bg-[#DF3131] hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+  Prev
+  </button>
+  <span className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0]" aria-live="polite">{page} / {pageCount}</span>
+  <button type="button" onClick={() => setPage(p => Math.min(pageCount, p + 1))} disabled={page === pageCount}
+  className="min-h-11 px-5 border-2 border-[#DF3131] text-[#DF3131] font-heading font-bold text-[12px] tracking-[0.1em] uppercase rounded-full hover:bg-[#DF3131] hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+  Next
+  </button>
+  </nav>
+  )}
   </ErrorBoundary>
 
  {filtered.length === 0 && (

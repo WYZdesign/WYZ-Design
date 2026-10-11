@@ -83,7 +83,7 @@ export default function ThreePointProgramPage() {
           </div>
 
           {/* Pillar tabs */}
-          <div role="tablist" aria-label="Program pillars" className="flex flex-wrap justify-center gap-3 mb-10">
+          <div role="tablist" aria-label="Program pillars" className="wz-hscroll justify-center mb-10">
             {PILLARS.map((p, i) => (
               <button key={i} id={`program-pillar-tab-${i}`} type="button" onClick={() => setActivePillar(i)} onKeyDown={(event) => handlePillarKeyDown(event, i)}
                 role="tab" aria-selected={activePillar === i} aria-controls={`program-pillar-panel-${i}`} tabIndex={activePillar === i ? 0 : -1}
