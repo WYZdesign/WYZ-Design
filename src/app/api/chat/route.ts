@@ -25,8 +25,8 @@ We work with clients remotely anywhere in the world. Contact: info@wyzdesign.com
 
 ## SERVICES (all flat-rate, no hidden fees)
 - Photoshoot: $100/hr - portraits, headshots, creative work, product photography
-- Photo Retouching: $50 - basic to advanced professional retouching
-- Event Photography: $200/3hr - live events, concerts, showcases, private functions
+- Photo Retouching: from $15/photo (basic) - professional retouching
+- Event Photography: $200 (up to 4 hrs) - live events, concerts, showcases, private functions
 - Graphic Design: $150/3hr - logos, branding, marketing materials
 - Logo Design: $100/3hr - custom logos with research and brainstorming
 - Brand Identity Package: $300/6hr - complete brand system: logo, colors, typography, guidelines

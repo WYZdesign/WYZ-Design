@@ -6,7 +6,7 @@ Scoped, approval-gated implementation specs. Nothing in this file ships customer
 
 ## Spec 22 — Delivery into Proof, Referral, and Repeat Work
 
-**Board task:** 22 · **Status:** spec'd, awaiting Torreé approval · **Owner:** WYZMiND (build), Torreé (copy approval + send authority), Codex (review)
+**Board task:** 22 · **Status:** APPROVED 2026-10-11; **Phase 1 shipped** (schema `0002`, `src/lib/delivery.ts` drafts, `/api/cron/delivery-outreach` dry-run). Sends hard-off until Phase 3 and per-stage copy sign-off. · **Owner:** WYZMiND (build), Torreé (copy approval + send authority), Codex (review)
 
 ### Problem
 
@@ -50,7 +50,7 @@ SMS, social DMs, third-party marketing platforms, automated pricing/offers.
 
 ## Spec 24 — Gift-Card Redemption Closeout
 
-**Board task:** 24 · **Status:** expiry policy APPROVED (24 months) + schema/issuance stamping shipped 2026-10-06; redemption API + ledger still pending · **Owner:** WYZMiND (build), Torreé (policy + approval), Codex (review)
+**Board task:** 24 · **Status:** COMPLETE 2026-10-11. Expiry policy APPROVED (24 months), schema/issuance stamped, and redemption shipped live: atomic reserve at checkout (services + merch), commit on payment webhook, release on expiry/failure + cleanup cron, admin void/refill. · **Owner:** WYZMiND (build), Torreé (policy + approval), Codex (review)
 
 ### Problem
 

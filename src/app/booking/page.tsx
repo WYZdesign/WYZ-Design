@@ -40,8 +40,8 @@ const SERVICES = [
 
 const PRICING_MAP: Record<string, string> = {
   "Photoshoot": "$100/hr",
-  "Photo Retouching": "$50",
-  "Event Photography": "$200/event",
+  "Photo Retouching": "from $15",
+  "Event Photography": "from $200",
   "Product Photography": "$120",
   "Headshot Session": "$100",
   "Behind the Scenes": "$150",

@@ -41,15 +41,17 @@
 
 Fill this in before task 2 changes any customer-facing money language.
 
+APPROVED 2026-10-11 (Torreé). The live values below are the canon; customer-facing copy is reconciled to them.
+
 | Item | Approved answer | Effective date |
 |---|---|---|
-| Subscription cadence |  |  |
-| Approved plan catalog |  |  |
-| Individual-service pricing rules |  |  |
-| Deposit and payment rules |  |  |
-| Cancellation and refund rules |  |  |
-| Gift-card redemption scope |  |  |
-| Merch selling status and fulfilment model |  |  |
+| Subscription cadence | Monthly only. Auto-renew monthly, cancel anytime. | 2026-10-11 |
+| Approved plan catalog | Starter Pack $250 / Business Boost $500 / Pro Plus $750 / Ultimate Suite $1,000, all monthly. | 2026-10-11 |
+| Individual-service pricing rules | Photoshoot $100/hr (1hr $100, 2hr $200, half day 4hr $350); Event photography $200 up to 4 hrs ($350 4-8 hrs, $150 second shooter); Photo retouching from $15/photo basic, $35/photo advanced; Graphic design $150/3 hr; Product photography $120; Creative consultation free 30 min. Complex/custom scope = quote. | 2026-10-11 |
+| Deposit and payment rules | 50% deposit confirms all bookings; fixed-price services are payable at checkout. | 2026-10-11 |
+| Cancellation and refund rules | As published at /legal/refund (24-month gift cards; refunds per policy). | 2026-10-11 |
+| Gift-card redemption scope | Services and merch, 24 months from purchase. Redemption flow live (Spec 24). | 2026-10-11 |
+| Merch selling status and fulfilment model | Live: Stripe checkout with server-revalidated prices + Printful fulfilment (board 28). | 2026-10-11 |
 
 ## Implementation sequence after approval
 
