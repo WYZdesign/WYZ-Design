@@ -59,7 +59,7 @@ const WIX_TEMPLATE = `<style>
 body{font-family:'Inter',-apple-system,sans-serif;font-size:22px;color:#333;background:#FEFEFD;line-height:1.75;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4,h5,h6{font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#333}
 a{color:#DF3131;text-decoration:none}a:hover{color:#B82020}img{max-width:100%}
-.wyz-red{color:#DF3131}.wyz-gold{color:#D49341}.wyz-bg-red{background:#DF3131}.wyz-bg-white{background:#fff}.wyz-bg-offwhite{background:#FEFEFD}
+.wyz-red{color:#DF3131}.wyz-gold{color:#C9A227}.wyz-bg-red{background:#DF3131}.wyz-bg-white{background:#fff}.wyz-bg-offwhite{background:#FEFEFD}
 .wyz-container{max-width:115rem;margin:0 auto;padding:0 2rem}.wyz-container-sm{max-width:50rem;margin:0 auto;padding:0 2rem}
 .wyz-navbar{background:#fff;border-bottom:1px solid #E2E2E2;position:sticky;top:0;z-index:50}.wyz-nav-inner{max-width:115rem;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:6rem}
 .wyz-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:.05em;color:#333}.wyz-nav-links{display:flex;gap:1.5rem}.wyz-nav-links a{color:#333;font-size:.8rem;letter-spacing:.15em;font-weight:600;text-transform:uppercase}

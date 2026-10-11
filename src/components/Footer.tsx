@@ -176,7 +176,7 @@ export default function Footer() {
               >
                 Cookie Preferences
               </button>
-              <p className={`text-[13px] ${precisionColor}`}>Designed & built with precision.</p>
+              <p className="text-[13px] wz-gold-text font-semibold">Designed &amp; built with precision.</p>
             </div>
           </div>
         </div>

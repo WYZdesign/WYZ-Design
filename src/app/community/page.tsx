@@ -20,8 +20,8 @@ const DISCORD_INVITE = "https://discord.gg/RqQngbtXrs";
 
 const CATEGORIES = [
   { id: "general", label: "General", desc: "Hang out, intro yourself, off-topic", color: "#DF3131" },
-  { id: "showcase", label: "Showcase", desc: "Drop your best work", color: "#D49341" },
-  { id: "critique", label: "Critique", desc: "Get and give feedback", color: "#5865F2" },
+  { id: "showcase", label: "Showcase", desc: "Drop your best work", color: "#C9A227" },
+  { id: "critique", label: "Critique", desc: "Get and give feedback", color: "#C9A227" },
   { id: "collab", label: "Collabs", desc: "Find partners for projects", color: "#2ECC71" },
   { id: "nsfw", label: "NSFW", desc: "Adult-industry creatives only", color: "#9B59B6" },
 ];
@@ -38,8 +38,8 @@ const DISCORD_CHANNELS = [
 ];
 
 const FLAIRS: Record<string, { label: string; color: string }> = {
-  showcase: { label: "Showcase", color: "#D49341" },
-  critique: { label: "Critique", color: "#5865F2" },
+  showcase: { label: "Showcase", color: "#C9A227" },
+  critique: { label: "Critique", color: "#C9A227" },
   collab: { label: "Collab", color: "#2ECC71" },
   general: { label: "Discussion", color: "#DF3131" },
   nsfw: { label: "18+", color: "#9B59B6" },
@@ -63,7 +63,7 @@ const NEWS_POSTS = [
     id: 2,
     author: "maya.k",
     handle: "@mayakphoto",
-    avatar: "#D49341",
+    avatar: "#C9A227",
     time: "5h",
     body: "Just wrapped a 12-hour editorial shoot. The golden hour shots came out insane. Full set dropping in Showcase this week.",
     likes: 83,
@@ -89,7 +89,7 @@ const NEWS_POSTS = [
     id: 4,
     author: "devon",
     handle: "@devonmotion",
-    avatar: "#5865F2",
+    avatar: "#C9A227",
     time: "1d",
     body: "Anyone else feel like the best work happens at 2AM? Just finished a motion piece that I've been reworking for 3 weeks.",
     likes: 29,
@@ -136,7 +136,7 @@ const COMMUNITY_HIGHLIGHTS = [
       "Not a roast session, constructive critique focused on making your work stronger and more hireable.",
     ],
     icon: <FiAward className="w-5 h-5" />,
-    color: "#D49341",
+    color: "#C9A227",
   },
   {
     name: "Event Meetups",
@@ -170,7 +170,7 @@ const SEED_THREADS = [
     likes: 24,
     views: 312,
     replies: [
-      { author: "devon", avatar: "#5865F2", time: "1h", body: "The grade is unreal. What LUT did you start from?" },
+      { author: "devon", avatar: "#C9A227", time: "1h", body: "The grade is unreal. What LUT did you start from?" },
       { author: "robyn", avatar: "#2ECC71", time: "40m", body: "This belongs in the next newsletter. DMing you." },
     ],
   },
@@ -179,7 +179,7 @@ const SEED_THREADS = [
     category: "critique",
     title: "Is my logo too busy? Client says it feels cluttered",
     author: "jin",
-    avatar: "#D49341",
+    avatar: "#C9A227",
     time: "5h",
     body: "Three marks, two typefaces. I think the secondary mark is the problem but the client loves it. Kill it or keep it?",
     likes: 11,
@@ -212,7 +212,7 @@ const SEED_THREADS = [
     views: 203,
     replies: [
       { author: "maya.k", avatar: "#DF3131", time: "5h", body: "Sigma 85mm all day. The rendering on skin is unmatched at that price." },
-      { author: "jin", avatar: "#D49341", time: "4h", body: "Depends on whether you want compression or versatility. For editorial I'd go primes." },
+      { author: "jin", avatar: "#C9A227", time: "4h", body: "Depends on whether you want compression or versatility. For editorial I'd go primes." },
     ],
   },
   {
@@ -226,7 +226,7 @@ const SEED_THREADS = [
     likes: 42,
     views: 567,
     replies: [
-      { author: "devon", avatar: "#5865F2", time: "7h", body: "That logotype is butter. The weight on the serifs is perfect." },
+      { author: "devon", avatar: "#C9A227", time: "7h", body: "That logotype is butter. The weight on the serifs is perfect." },
       { author: "kai", avatar: "#2ECC71", time: "6h", body: "Do you have a case study PDF? Would love to reference this for a similar project." },
     ],
   },
@@ -235,7 +235,7 @@ const SEED_THREADS = [
     category: "general",
     title: "Web design trends for 2026 that actually matter",
     author: "devon",
-    avatar: "#5865F2",
+    avatar: "#C9A227",
     time: "10h",
     body: "Stop with the bento grids. Here's what I'm seeing work in real client projects: variable type, micro-interactions over hero animations, 3D elements used sparingly, and actually legible content. What trends are you all adopting?",
     likes: 67,
@@ -257,7 +257,7 @@ const SEED_THREADS = [
     views: 445,
     replies: [
       { author: "maya.k", avatar: "#DF3131", time: "11h", body: "The hierarchy is strong. Your featured work section hits immediately. Minor note: the about page could use a stronger CTA." },
-      { author: "jin", avatar: "#D49341", time: "10h", body: "Font pairing is solid. Love the contrast between the display and body type." },
+      { author: "jin", avatar: "#C9A227", time: "10h", body: "Font pairing is solid. Love the contrast between the display and body type." },
     ],
   },
   {
@@ -279,7 +279,7 @@ const SEED_THREADS = [
     category: "collab",
     title: "Need a typographer for a music festival identity",
     author: "devon",
-    avatar: "#5865F2",
+    avatar: "#C9A227",
     time: "16h",
     body: "Looking for someone who specializes in custom lettering or type design. This is for a 3-day outdoor music festival in Nashville. Budget: $2,500-4,000 for the logotype and supporting type system.",
     likes: 19,
@@ -293,7 +293,7 @@ const SEED_THREADS = [
     category: "general",
     title: "How do you handle client revisions without losing your mind?",
     author: "jin",
-    avatar: "#D49341",
+    avatar: "#C9A227",
     time: "18h",
     body: "Just got revision round 7 on a project I quoted for 3 rounds. The client keeps saying 'make it pop' without real direction. How do you all set boundaries while keeping the relationship intact?",
     likes: 89,
@@ -301,7 +301,7 @@ const SEED_THREADS = [
     replies: [
       { author: "robyn", avatar: "#2ECC71", time: "17h", body: "Contract language is everything. State revision rounds upfront, charge for extras. 'Make it pop' = ask for 3 specific references." },
       { author: "maya.k", avatar: "#DF3131", time: "16h", body: "I send a revision questionnaire now. Forces them to articulate what they actually want." },
-      { author: "devon", avatar: "#5865F2", time: "15h", body: "Kill the revision round limit mentality. Instead, set a scope. If they want to change scope, the price changes." },
+      { author: "devon", avatar: "#C9A227", time: "15h", body: "Kill the revision round limit mentality. Instead, set a scope. If they want to change scope, the price changes." },
     ],
   },
   {
@@ -329,8 +329,8 @@ const SEED_THREADS = [
     likes: 44,
     views: 678,
     replies: [
-      { author: "devon", avatar: "#5865F2", time: "23h", body: "Minimalism isn't dead, it's just matured. The new minimalism is about intent, not emptiness." },
-      { author: "jin", avatar: "#D49341", time: "22h", body: "I think the pendulum swings but the fundamentals stay. Typography and hierarchy matter regardless of trend." },
+      { author: "devon", avatar: "#C9A227", time: "23h", body: "Minimalism isn't dead, it's just matured. The new minimalism is about intent, not emptiness." },
+      { author: "jin", avatar: "#C9A227", time: "22h", body: "I think the pendulum swings but the fundamentals stay. Typography and hierarchy matter regardless of trend." },
     ],
   },
   {
@@ -366,7 +366,7 @@ const SEED_THREADS = [
     category: "showcase",
     title: "Motion graphics reel - 1 year of work",
     author: "devon",
-    avatar: "#5865F2",
+    avatar: "#C9A227",
     time: "2d",
     body: "Just finished my annual motion reel. 60 seconds of client work and personal experiments. Every frame is After Effects + Cinema 4D. Link in the thread if you want to watch.",
     likes: 94,
@@ -387,8 +387,8 @@ const SEED_THREADS = [
     likes: 112,
     views: 2034,
     replies: [
-      { author: "jin", avatar: "#D49341", time: "2d", body: "Brand identity: $3K-8K depending on scope. Web: $5K-15K. Motion: $150-300/hr. These are mid-market US rates." },
-      { author: "devon", avatar: "#5865F2", time: "2d", body: "I've been undercharging for motion. $150/hr minimum. Thanks for this." },
+      { author: "jin", avatar: "#C9A227", time: "2d", body: "Brand identity: $3K-8K depending on scope. Web: $5K-15K. Motion: $150-300/hr. These are mid-market US rates." },
+      { author: "devon", avatar: "#C9A227", time: "2d", body: "I've been undercharging for motion. $150/hr minimum. Thanks for this." },
       { author: "robyn", avatar: "#2ECC71", time: "2d", body: "Let's normalize talking about money. The industry benefits from opacity and that hurts all of us." },
     ],
   },
@@ -452,13 +452,13 @@ const SEED_THREADS = [
     category: "showcase",
     title: "Custom typeface I designed for a streetwear brand",
     author: "jin",
-    avatar: "#D49341",
+    avatar: "#C9A227",
     time: "3d",
     body: "Spent 6 months designing a custom display typeface for a streetwear client. 26 uppercase, 26 lowercase, numerals, and punctuation. Variable weight from Thin to Black. This is the most ambitious type project I've done.",
     likes: 88,
     views: 1234,
     replies: [
-      { author: "devon", avatar: "#5865F2", time: "3d", body: "The ink traps on the lowercase g are gorgeous. What software did you use for interpolation?" },
+      { author: "devon", avatar: "#C9A227", time: "3d", body: "The ink traps on the lowercase g are gorgeous. What software did you use for interpolation?" },
       { author: "robyn", avatar: "#2ECC71", time: "3d", body: "This is portfolio-worthy for sure. The consistency across weights is impressive." },
     ],
   },
@@ -475,7 +475,7 @@ const SEED_THREADS = [
     replies: [
       { author: "maya.k", avatar: "#DF3131", time: "4d", body: "Personal projects. Even 30 minutes a day on something just for you makes a difference." },
       { author: "sol", avatar: "#9B59B6", time: "4d", body: "Take a class in something completely unrelated. I took a ceramics course and it changed my design thinking." },
-      { author: "devon", avatar: "#5865F2", time: "3d", body: "Set constraints. Client gives you a boring brief? Add your own creative challenge within it." },
+      { author: "devon", avatar: "#C9A227", time: "3d", body: "Set constraints. Client gives you a boring brief? Add your own creative challenge within it." },
     ],
   },
   {
@@ -489,7 +489,7 @@ const SEED_THREADS = [
     likes: 19,
     views: 298,
     replies: [
-      { author: "jin", avatar: "#D49341", time: "4d", body: "Try bumping to 1.333 (perfect fourth). Gives more breathing room between levels without feeling disconnected." },
+      { author: "jin", avatar: "#C9A227", time: "4d", body: "Try bumping to 1.333 (perfect fourth). Gives more breathing room between levels without feeling disconnected." },
     ],
   },
   {
@@ -735,10 +735,10 @@ export default function ForumPage() {
                <AnimatedCounter end={DISCORD_CHANNELS.length} label="Discord channels" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#DF3131]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-3 sm:p-5 text-center">
-                <AnimatedCounter end={CATEGORIES.length} label="Post categories" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#8F5E1E] dark:text-[#D49341]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+                <AnimatedCounter end={CATEGORIES.length} label="Post categories" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#8C6A1D] dark:text-[#C9A227]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
              <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] p-3 sm:p-5 text-center">
-               <AnimatedCounter end={COMMUNITY_HIGHLIGHTS.length} label="Programs" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#5865F2]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
+               <AnimatedCounter end={COMMUNITY_HIGHLIGHTS.length} label="Programs" className="font-heading font-black text-[30px] tracking-[0.05em] text-[#C9A227]" labelClassName="text-[9px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.12em] uppercase text-[#666] dark:text-[#b0b0b0] mb-2" />
              </div>
            </div>
 
@@ -769,7 +769,7 @@ export default function ForumPage() {
                   <div className="p-5 sm:p-6 flex items-start gap-4">
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors"
-                      style={{ backgroundColor: `${h.color}15`, color: h.color === "#D49341" ? "#A9702F" : h.color }}
+                      style={{ backgroundColor: `${h.color}15`, color: h.color === "#C9A227" ? "#8C6A1D" : h.color }}
                     >
                       {h.icon}
                     </div>
@@ -820,7 +820,7 @@ export default function ForumPage() {
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[14px] font-heading font-bold shrink-0"
-                        style={{ backgroundColor: post.avatar, color: post.avatar === "#D49341" ? "#1C1408" : undefined }}
+                        style={{ backgroundColor: post.avatar, color: post.avatar === "#C9A227" ? "#1C1408" : undefined }}
                       >
                         {post.author.slice(0, 1).toUpperCase()}
                       </div>
@@ -887,7 +887,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: c.avatar, color: c.avatar === "#D49341" ? "#1C1408" : undefined }}
+                                style={{ backgroundColor: c.avatar, color: c.avatar === "#C9A227" ? "#1C1408" : undefined }}
                               >
                                 {c.author.slice(0, 1).toUpperCase()}
                               </div>
@@ -1114,7 +1114,7 @@ export default function ForumPage() {
                           t.voted === "up"
                             ? "text-[#DF3131]"
                             : t.voted === "down"
-                              ? "text-[#5865F2]"
+                              ? "text-[#C9A227]"
                               : "text-[#333] dark:text-[#e0e0e0]"
                         }`}
                       >
@@ -1125,8 +1125,8 @@ export default function ForumPage() {
                         aria-label={t.voted === "down" ? "Remove downvote" : "Downvote thread"}
                         className={`p-1 rounded transition-colors ${
                           t.voted === "down"
-                            ? "text-[#5865F2] bg-[#5865F2]/10"
-                            : "text-[#666] hover:text-[#5865F2]"
+                            ? "text-[#C9A227] bg-[#C9A227]/10"
+                            : "text-[#666] hover:text-[#C9A227]"
                         }`}
                       >
                         <FiChevronDown className="w-5 h-5" />
@@ -1143,7 +1143,7 @@ export default function ForumPage() {
                         {flair && (
                           <span
                             className="text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 rounded mb-2"
-                            style={{ backgroundColor: `${flair.color}18`, color: flair.color === "#D49341" ? "#8F5E1E" : flair.color === "#DF3131" ? "#C41C1C" : flair.color }}
+                            style={{ backgroundColor: `${flair.color}18`, color: flair.color === "#C9A227" ? "#8C6A1D" : flair.color === "#DF3131" ? "#C41C1C" : flair.color }}
                           >
                             {flair.label}
                           </span>
@@ -1186,7 +1186,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: r.avatar, color: r.avatar === "#D49341" ? "#1C1408" : undefined }}
+                                style={{ backgroundColor: r.avatar, color: r.avatar === "#C9A227" ? "#1C1408" : undefined }}
                               >
                                 {r.author.slice(0, 1).toUpperCase()}
                               </div>
@@ -1335,7 +1335,7 @@ export default function ForumPage() {
 
           {/* Discord CTA - full width banner */}
           <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] mb-10">
-            <div className="bg-[#5865F2] p-8 text-center">
+            <div className="bg-[#C9A227] p-8 text-center">
               <FiUsers className="w-12 h-12 text-white/80 mx-auto mb-4" />
               <h2 className="font-heading font-bold text-[24px] tracking-[0.06em] text-white mb-4">Join Our Discord</h2>
               <p className="text-white text-[16px] max-w-md mx-auto mb-6">
@@ -1345,7 +1345,7 @@ export default function ForumPage() {
                 href={DISCORD_INVITE}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-10 py-4 bg-white text-[#5865F2] font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center gap-2 px-10 py-4 bg-white text-[#C9A227] font-heading font-bold tracking-[0.12em] uppercase text-[14px] hover:bg-gray-100 transition-colors"
               >
                 JOIN THE SERVER <FiExternalLink className="w-4 h-4" />
               </a>
@@ -1354,7 +1354,7 @@ export default function ForumPage() {
 
           {/* Discord Channel List - 4-col grid */}
           <div className="rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#333] mb-10">
-            <div className="bg-[#5865F2] px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-3">
+            <div className="bg-[#C9A227] px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-3">
               <div className="flex items-center gap-3 min-w-0">
                 <FiHash className="w-5 h-5 text-white/80 shrink-0" />
                 <h3 className="font-heading font-bold text-[16px] leading-tight tracking-[0.06em] text-white break-normal">WYZ DESIGN · CHANNELS</h3>
@@ -1375,7 +1375,7 @@ export default function ForumPage() {
               href={DISCORD_INVITE}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#5865F2] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#4752C4] transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-3 bg-[#C9A227] text-white font-heading font-bold tracking-[0.1em] uppercase text-[13px] hover:bg-[#4752C4] transition-colors"
             >
               Join to chat <FiExternalLink className="w-4 h-4" />
             </a>

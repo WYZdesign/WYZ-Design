@@ -977,7 +977,7 @@ export default function HomePage() {
         { stat: "9+", label: "Years Running" },
       ].map((t) => (
         <li key={t.label} className="flex flex-col items-center">
-          <span className="text-[#D49341] font-heading font-black text-[26px] sm:text-[32px] leading-none">{t.stat}</span>
+          <span className="text-[#C9A227] font-heading font-black text-[26px] sm:text-[32px] leading-none">{t.stat}</span>
           <span className="text-white/60 text-[11px] sm:text-[11px] font-heading font-bold tracking-[0.15em] uppercase mt-2">{t.label}</span>
         </li>
       ))}

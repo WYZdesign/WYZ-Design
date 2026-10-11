@@ -195,7 +195,7 @@ export default function FDDriveBrowser() {
             <div className="mt-4 max-w-lg mx-auto">
               <p className="text-zinc-600 text-xs mb-3">The file browser needs a Google API key. If you have access to the server:</p>
               <ol className="text-left text-xs text-zinc-600 space-y-1 bg-zinc-900/50 p-4 rounded-xl border border-zinc-800">
-                <li>1. Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Google Cloud Console</a></li>
+                <li>1. Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer" className="text-[#DF3131] hover:underline">Google Cloud Console</a></li>
                 <li>2. Create or select a project</li>
                 <li>3. Enable the Google Drive API</li>
                 <li>4. Create an API key (restrict to Drive API)</li>

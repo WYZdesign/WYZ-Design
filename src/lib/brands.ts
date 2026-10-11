@@ -22,7 +22,7 @@ export const BRANDS = [
     tagline: "The Community",
     shortDesc: "The community and clothing arm. A collective of artists, musicians, models, and culture-makers who refuse to blend in. Merch, events, and collaborations that keep authentic culture alive.",
     longDesc: "Dying Breed Crew is the community arm of WYZ Design, a collective of artists, musicians, models, and culture-makers who refuse to blend in. DBC represents the doers, the ones who show up, the ones who create when nobody's watching. Through merch, events, and creative collaborations, DBC keeps the spirit of authentic culture alive.",
-    color: "#D49341",
+    color: "#C9A227",
     href: "/about",
     cta: "Shop the merch",
   },
@@ -31,7 +31,7 @@ export const BRANDS = [
     tagline: "The Movement",
     shortDesc: "The mobile arm, built for creators who don't stay in one place. Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
     longDesc: "Nomadic Breed is the mobile arm of WYZ Design, built for creators who don't stay in one place. From pop-up shoots to touring event coverage, Nomadic Breed brings the WYZ standard wherever the work takes us. No studio? No problem. Every location is a set. Every city is an opportunity.",
-    color: "#00E5FF",
+    color: "#6E6E6E",
     href: "/about",
     cta: "See the events",
   },
@@ -43,8 +43,8 @@ export type Brand = (typeof BRANDS)[number];
 
 const TAGLINE_COLORS: Record<string, string> = {
   "#DF3131": "#C41C1C",
-  "#D49341": "#8F5E1E",
-  "#00E5FF": "#006064",
+  "#C9A227": "#8C6A1D",
+  "#6E6E6E": "#006064",
 };
 
 export function taglineColor(color: string): string {

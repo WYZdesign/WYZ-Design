@@ -11,8 +11,9 @@
   --color-wyz-red: #DF3131;
   --color-wyz-red-dark: #B82020;
   --color-wyz-text-red: #C00000; /* ~5.5:1 on white for small text accessibility */
-  --color-wyz-gold: #B8860B; /* ~5.2:1 on white (WCAG AA) */
-  --color-wyz-gold-light: #D4A017; /* ~4.8:1 on white (WCAG AA border) */
+  --color-wyz-gold: #C9A227; /* real metallic gold, logo tone */
+  --color-wyz-gold-light: #E7C873; /* highlight / glow */
+  --color-wyz-gold-deep: #8C6A1D; /* gold text on light bg (contrast safe) */
   --color-wyz-border: #E2E2E2;
   --color-wyz-card: #FFFFFF;
   --font-heading: 'Montserrat', sans-serif;
@@ -98,7 +99,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 .btn-outline:hover { background: #333333; color: #FFFFFF; }
 
 .btn-gold {
-  background: #D49341; color: #1C1408; border: none;
+  background: #C9A227; color: #1C1408; border: none;
   padding: 0.9rem 2.2rem; font-size: 15px; font-weight: 600;
   text-transform: uppercase; transition: background 0.2s;
 }
@@ -461,8 +462,22 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: #f5f5f5; }
   ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #999; }
+  ::-webkit-scrollbar-thumb:hover { background: #C9A227; }
   * { scrollbar-width: thin; scrollbar-color: #ccc #f5f5f5; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GOLD TERTIARY ACCENT (logo gold)
+   ═══════════════════════════════════════════════════════════ */
+.wz-gold { color: var(--color-wyz-gold-deep); }
+.wz-gold-bg { background-color: var(--color-wyz-gold); }
+.wz-gold-border { border-color: var(--color-wyz-gold); }
+.wz-gold-glow { box-shadow: 0 0 24px rgba(201, 162, 39, 0.35); }
+.wz-gold-line { display: block; height: 3px; width: 56px; border-radius: 2px;
+  background: linear-gradient(90deg, #DF3131 0%, #C9A227 100%); }
+.wz-gold-text {
+  background: linear-gradient(90deg, #E7C873 0%, #C9A227 50%, #8C6A1D 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -657,7 +672,7 @@ select {
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid #D49341 !important;
+  outline: 2px solid #C9A227 !important;
   outline-offset: 2px !important;
 }
 
@@ -1337,10 +1352,13 @@ footer img[class*="object-contain"] {
 .w-fit-content { width: fit-content; }
 .max-w-prose { max-width: 65ch; }
 
-/* Content visibility — skip offscreen rendering for performance */
-section { content-visibility: auto; contain-intrinsic-size: 0 500px; }
-section:first-of-type, section[id], section[data-anchor] { content-visibility: visible; }
-main[data-legal] section { content-visibility: visible; contain-intrinsic-size: none; }
+/* Content visibility removed (2026-10-10): contain-intrinsic-size was
+   estimated at 500px while real sections are far taller, so the document
+   height was understated and the browser kept recalculating as sections
+   rendered in, which stalled scroll and snapped it backward before the
+   bottom on long pages (about, merch, others). Correct scroll beats the
+   offscreen-render saving on a content site. */
+section { content-visibility: visible; contain-intrinsic-size: none; }
 
 /* Scroll-driven animation enhancements */
 @supports (animation-timeline: scroll()) {
@@ -1383,7 +1401,7 @@ main[data-legal] section { content-visibility: visible; contain-intrinsic-size: 
 .gradient-border { position: relative; }
 .gradient-border::before {
   content: ""; position: absolute; inset: 0; padding: 2px;
-  background: linear-gradient(135deg, #DF3131, #D49341, #DF3131);
+  background: linear-gradient(135deg, #DF3131, #C9A227, #DF3131);
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);

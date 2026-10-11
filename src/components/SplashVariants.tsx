@@ -23,7 +23,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { useGyroPermission } from "@/hooks/useGyroPermission";
 import { useSplashScrollLock } from "@/hooks/useSplashScrollLock";
 import { prefersReducedMotion } from "@/lib/utils";
-const R = "#DF3131", RD = "#B82020", G = "#D49341", GL = "#F9AD4D", OW = "#FFFFFF", CH = "#262626", DK = "#161311";
+const R = "#DF3131", RD = "#B82020", G = "#C9A227", GL = "#F9AD4D", OW = "#FFFFFF", CH = "#262626", DK = "#161311";
 
 const CSS = `
 @keyframes wyzDraw { to { stroke-dashoffset: 0; } }

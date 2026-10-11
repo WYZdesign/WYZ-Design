@@ -202,7 +202,7 @@ export async function sendBookingDelivered(data: { email: string; customerName?:
       <p style="font-size:16px;color:#333;line-height:1.6;margin:0 0 24px">
         Your <strong>${safeServiceName}</strong> is ready. Log in to your account to view and download your files.
       </p>
-      ${safeDeliveryNotes ? `<div style="background:#f9f9f9;border-left:4px solid #D49341;padding:16px 20px;margin:24px 0;border-radius:0 4px 4px 0"><p style="font-size:14px;color:#333;margin:0"><strong>Notes from us:</strong> ${safeDeliveryNotes}</p></div>` : ""}
+      ${safeDeliveryNotes ? `<div style="background:#f9f9f9;border-left:4px solid #C9A227;padding:16px 20px;margin:24px 0;border-radius:0 4px 4px 0"><p style="font-size:14px;color:#333;margin:0"><strong>Notes from us:</strong> ${safeDeliveryNotes}</p></div>` : ""}
       <a href="https://www.wyzdesign.com/account/my-account" style="display:inline-block;background:#DF3131;color:#fff;font-size:14px;font-weight:700;letter-spacing:0.08em;text-decoration:none;padding:14px 28px;border-radius:4px;margin:24px 0">
         View My Files
       </a>

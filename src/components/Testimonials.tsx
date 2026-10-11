@@ -93,7 +93,7 @@ function TestimonialsSliderInner() {
           <div className="px-12" key={active}>
             <div className="flex justify-center gap-1 mb-6">
               {[...Array(5)].map((_, i) => (
-                <FiStar key={i} className="w-5 h-5 fill-[#8F5E1E] text-[#8F5E1E]" />
+                <FiStar key={i} className="w-5 h-5 fill-[#8C6A1D] text-[#8C6A1D]" />
               ))}
             </div>
             <blockquote className="text-white text-lg sm:text-xl leading-relaxed mb-6 max-w-2xl mx-auto italic">
@@ -111,7 +111,7 @@ function TestimonialsSliderInner() {
                 <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(t.quote + " - " + t.name)}&url=${encodeURIComponent(GBP_REVIEWS)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-white transition-colors">
                   <FiTwitter className="w-3.5 h-3.5" /> Twitter
                 </a>
-                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(GBP_REVIEWS)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#0A66C2] transition-colors">
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(GBP_REVIEWS)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-[#C9A227] transition-colors">
                   <FiLinkedin className="w-3.5 h-3.5" /> LinkedIn
                 </a>
               </div>

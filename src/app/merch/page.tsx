@@ -757,7 +757,7 @@ export default function MerchPage() {
             <>
               <div className="absolute top-10 left-[10%] w-16 h-16 border border-[#DF3131]/20 rotate-45 pointer-events-none z-20"
                 style={{ animation: "floatGeo1 6s ease-in-out infinite" }} />
-              <div className="absolute top-32 right-[15%] w-8 h-8 rounded-full border border-[#D49341]/20 pointer-events-none z-20"
+              <div className="absolute top-32 right-[15%] w-8 h-8 rounded-full border border-[#C9A227]/20 pointer-events-none z-20"
                 style={{ animation: "floatGeo2 8s ease-in-out infinite 1s" }} />
               <div className="absolute bottom-20 left-[20%] w-12 h-12 border border-[#DF3131]/15 pointer-events-none z-20"
                 style={{ animation: "floatGeo3 7s ease-in-out infinite 0.5s", clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }} />

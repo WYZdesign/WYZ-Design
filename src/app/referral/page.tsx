@@ -147,7 +147,7 @@ export default function ReferralPage() {
                 <p className="text-[11px] text-[#666] dark:text-white/50 uppercase tracking-wider">Signups</p>
               </div>
               <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-xl p-5 text-center">
-                <FiTrendingUp className="w-6 h-6 mx-auto text-[#D49341] mb-2" />
+                <FiTrendingUp className="w-6 h-6 mx-auto text-[#C9A227] mb-2" />
                 <p className="text-[2rem] font-heading font-black text-[#333] dark:text-white">{data.purchases}</p>
                 <p className="text-[11px] text-[#666] dark:text-white/50 uppercase tracking-wider">Purchases</p>
               </div>
@@ -197,7 +197,7 @@ export default function ReferralPage() {
                   {leaderboard.map((leader, i) => (
                     <div key={leader.name} className={`flex items-center justify-between p-4 rounded-xl ${i === 0 ? "bg-[#DF3131]/10 border border-[#DF3131]/30" : "bg-[#F5F5F3] dark:bg-[#1C1C1E]"}`}>
                       <div className="flex items-center gap-4">
-                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-heading font-black text-[14px] ${i === 0 ? "bg-[#DF3131] text-white" : i === 1 ? "bg-[#D49341] text-[#1C1408]" : i === 2 ? "bg-[#757575] text-white" : "bg-[#E2E2E2] dark:bg-[#444] text-[#666] dark:text-white/50"}`}>
+                        <span className={`w-8 h-8 rounded-full flex items-center justify-center font-heading font-black text-[14px] ${i === 0 ? "bg-[#DF3131] text-white" : i === 1 ? "bg-[#C9A227] text-[#1C1408]" : i === 2 ? "bg-[#757575] text-white" : "bg-[#E2E2E2] dark:bg-[#444] text-[#666] dark:text-white/50"}`}>
                           {i + 1}
                         </span>
                         <span className="font-heading font-bold text-[#333] dark:text-white">{leader.name}</span>
@@ -225,11 +225,11 @@ export default function ReferralPage() {
                   {conversions.slice(0, 10).map((conv) => (
                     <div key={conv.id} className="flex items-center justify-between p-4 bg-[#F5F5F3] dark:bg-[#1C1C1E] rounded-xl">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${conv.event_type === "purchase" ? "bg-[#DF3131]/10" : "bg-[#D49341]/10"}`}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${conv.event_type === "purchase" ? "bg-[#DF3131]/10" : "bg-[#C9A227]/10"}`}>
                           {conv.event_type === "purchase" ? (
                             <FiDollarSign className="w-5 h-5 text-[#DF3131]" />
                           ) : (
-                            <FiUsers className="w-5 h-5 text-[#D49341]" />
+                            <FiUsers className="w-5 h-5 text-[#C9A227]" />
                           )}
                         </div>
                         <div>

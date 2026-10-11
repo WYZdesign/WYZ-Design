@@ -56,7 +56,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => void earn("share-social")}
-        className="min-w-[44px] min-h-[44px] w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] hover:bg-[#1DA1F2] hover:text-white transition-all"
+        className="min-w-[44px] min-h-[44px] w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] hover:bg-[#C9A227] hover:text-white transition-all"
         aria-label="Share on X"
       >
         <FiTwitter className="w-3.5 h-3.5" />
@@ -66,7 +66,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => void earn("share-social")}
-        className="min-w-[44px] min-h-[44px] w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] hover:bg-[#1877F2] hover:text-white transition-all"
+        className="min-w-[44px] min-h-[44px] w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] hover:bg-[#C9A227] hover:text-white transition-all"
         aria-label="Share on Facebook"
       >
         <FiFacebook className="w-3.5 h-3.5" />
@@ -76,7 +76,7 @@ export default function SocialShare({ title, url, description }: SocialShareProp
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => void earn("share-social")}
-        className="min-w-[44px] min-h-[44px] w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] hover:bg-[#0A66C2] hover:text-white transition-all"
+        className="min-w-[44px] min-h-[44px] w-8 h-8 flex items-center justify-center rounded-full bg-[#F5F5F3] dark:bg-[#252528] text-[#666] dark:text-[#e0e0e0] hover:bg-[#C9A227] hover:text-white transition-all"
         aria-label="Share on LinkedIn"
       >
         <FiLinkedin className="w-3.5 h-3.5" />

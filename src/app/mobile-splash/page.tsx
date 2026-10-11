@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FiMapPin, FiCamera } from "react-icons/fi";
 
 const WYZ_RED = "#DF3131";
-const WYZ_GREEN = "#D49341";
+const WYZ_GREEN = "#C9A227";
 const WHITE = "#FFFFFF";
 const DARK = "#161311";
 
@@ -237,7 +237,7 @@ export default function MobileSplashPage() {
                   <strong>Technical approach:</strong> Mobile-first with touch interactions, support for both iOS (DeviceOrientationEvent) and Android, progressive enhancement.
                 </p>
                 <p className="text-sm mt-2">
-                  <strong>Visual style:</strong> Gold (#D49341) and Red (#DF3131) color palette with dark background, Swiss grid typography, print-inspired effects.
+                  <strong>Visual style:</strong> Gold (#C9A227) and Red (#DF3131) color palette with dark background, Swiss grid typography, print-inspired effects.
                 </p>
               </div>
             </div>

@@ -41,7 +41,7 @@ export default function NomadicBreedPage() {
       {/* Philosophy */}
       <section className="max-w-4xl mx-auto px-6 section-gap text-center">
         <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.8rem] lg:text-[2.2rem] tracking-[0.04em] mb-6">
-          Every Location Is a <span className="text-[#00E5FF]">Set</span>
+          Every Location Is a <span className="text-[#6E6E6E]">Set</span>
         </h2>
         <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
           Nomadic Breed was built for the creators who move. Artists on tour, brands doing pop-ups, events that happen once - you need a crew that can show up anywhere and deliver the same quality as a studio shoot. That&apos;s us. We pack light, move fast, and never compromise on the standard.
@@ -55,8 +55,8 @@ export default function NomadicBreedPage() {
             const Icon = SERVICE_ICONS[s.icon] ?? FiCamera;
             return (
               <div key={s.title} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
-                <div className="w-10 h-10 rounded-lg bg-[#00E5FF]/10 flex items-center justify-center mb-4">
-                  <Icon className="w-5 h-5 text-[#00E5FF]" />
+                <div className="w-10 h-10 rounded-lg bg-[#6E6E6E]/10 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-[#6E6E6E]" />
                 </div>
                 <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.03em] mb-3">{s.title}</h3>
                 <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">{s.desc}</p>
@@ -75,7 +75,7 @@ export default function NomadicBreedPage() {
           <p className="text-white/60 text-[15px] mb-6 max-w-lg mx-auto">
             Whether it&apos;s a single pop-up or a multi-city tour, Nomadic Breed delivers. Let&apos;s talk about where we&apos;re headed next.
           </p>
-          <Link href="/booking" className="inline-flex items-center gap-2 px-8 py-4 bg-[#00E5FF] text-[#0A0A0A] font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#00CCE6] transition-all">
+          <Link href="/booking" className="inline-flex items-center gap-2 px-8 py-4 bg-[#6E6E6E] text-[#0A0A0A] font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#00CCE6] transition-all">
             Book a Shoot <FiArrowRight className="w-4 h-4" />
           </Link>
         </div>

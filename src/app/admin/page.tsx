@@ -245,7 +245,7 @@ function AccountAuth() {
 
         <button onClick={() => signIn("google", { callbackUrl: "/admin" })}
           className="w-full flex items-center justify-center gap-3 bg-white text-[#333] py-3 font-bold text-sm hover:bg-gray-200 transition-colors">
-          <svg className="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          <svg className="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#DF3131" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#C9A227" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#C00000" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
           Continue with Google
         </button>
 
@@ -333,7 +333,7 @@ function ProfileTab({ session, update, signOut }: { session: import("next-auth")
           </button>
         </div>
 
-        {saved && <p className="text-[#34A853] text-sm mb-4 text-center font-bold">Profile saved!</p>}
+        {saved && <p className="text-[#DF3131] text-sm mb-4 text-center font-bold">Profile saved!</p>}
 
         {editMode ? (
           <div className="space-y-4">
@@ -457,7 +457,7 @@ function BugReportTab({ session }: { session: import("next-auth").Session | null
           <div className="mt-5 space-y-4">
             {bugSent ? (
               <div className="text-center py-6">
-                <div className="w-12 h-12 rounded-full bg-[#34A853]/20 text-[#34A853] flex items-center justify-center mx-auto mb-3"><FiCheck className="w-6 h-6" /></div>
+                <div className="w-12 h-12 rounded-full bg-[#DF3131]/20 text-[#DF3131] flex items-center justify-center mx-auto mb-3"><FiCheck className="w-6 h-6" /></div>
                 <p className="text-white font-heading font-bold text-lg mb-1">Submitted!</p>
                 <p className="text-white/50 text-sm">Thanks, we&apos;ll review it and fix the issue.</p>
                 <button onClick={() => { setBugSent(false); setBugCat(""); setBugChecks([]); setBugDesc(""); }} className="mt-4 text-[13px] text-[#DF3131] font-bold underline">Report another</button>
@@ -501,7 +501,7 @@ function BugReportTab({ session }: { session: import("next-auth").Session | null
 }
 
 function NotAuthorized() {
-  return <div className="text-center py-20"><h2 className="text-size-24 font-heading font-bold text-[#EA4335] mb-2">Access Denied</h2><p className="text-white/60 text-[13px]">Your account does not have admin privileges.</p></div>;
+  return <div className="text-center py-20"><h2 className="text-size-24 font-heading font-bold text-[#C00000] mb-2">Access Denied</h2><p className="text-white/60 text-[13px]">Your account does not have admin privileges.</p></div>;
 }
 
 // ─── OVERVIEW ───
@@ -515,20 +515,20 @@ function OverviewTab({ data }: { data: OverviewData }) {
       {/* KPI Row */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         <KpiCard label="Forms" value={s.totalForms} color="#DF3131" icon="□" />
-        <KpiCard label="Chats" value={s.totalChats} color="#5865F2" icon="○" />
-        <KpiCard label="Users" value={s.totalUsers} color="#34A853" icon="◆" />
-        <KpiCard label="Newsletter" value={s.newsletterSubs} color="#FBBC05" icon="●" />
-        <KpiCard label="Admins" value={s.adminCount} color="#EA4335" icon="◉" />
-        <KpiCard label="Sessions" value={s.chatSessions} color="#D49341" icon="◎" />
+        <KpiCard label="Chats" value={s.totalChats} color="#C9A227" icon="○" />
+        <KpiCard label="Users" value={s.totalUsers} color="#DF3131" icon="◆" />
+        <KpiCard label="Newsletter" value={s.newsletterSubs} color="#C9A227" icon="●" />
+        <KpiCard label="Admins" value={s.adminCount} color="#C00000" icon="◉" />
+        <KpiCard label="Sessions" value={s.chatSessions} color="#C9A227" icon="◎" />
       </div>
 
       {/* Activity Summary */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Total Engagements", value: total, color: "#00E5FF" },
+          { label: "Total Engagements", value: total, color: "#6E6E6E" },
           { label: "Form Rate", value: total > 0 ? `${Math.round((s.totalForms / total) * 100)}%` : "0%", color: "#DF3131" },
-          { label: "Newsletter Rate", value: total > 0 ? `${Math.round((s.newsletterSubs / Math.max(total, 1)) * 100)}%` : "0%", color: "#FBBC05" },
-          { label: "Active Users", value: s.totalUsers, color: "#34A853" },
+          { label: "Newsletter Rate", value: total > 0 ? `${Math.round((s.newsletterSubs / Math.max(total, 1)) * 100)}%` : "0%", color: "#C9A227" },
+          { label: "Active Users", value: s.totalUsers, color: "#DF3131" },
         ].map((m) => (
           <div key={m.label} className="bg-white/5 border border-white/10 p-4">
             <p className="text-[10px] text-white/50 font-bold tracking-[0.1em] uppercase mb-1">{m.label}</p>
@@ -546,7 +546,7 @@ function OverviewTab({ data }: { data: OverviewData }) {
         {Object.entries(s.formTypes).length > 0 ? (
           <div className="space-y-3">
             {Object.entries(s.formTypes).sort((a,b) => b[1]-a[1]).map(([type, count], i) => {
-              const colors = ["#DF3131","#34A853","#FBBC05","#5865F2","#D49341","#EA4335","#00E5FF","#8E24AA"];
+              const colors = ["#DF3131","#DF3131","#C9A227","#C9A227","#C9A227","#C00000","#6E6E6E","#8C6A1D"];
               const maxCount = Math.max(...Object.values(s.formTypes));
               const pct = maxCount > 0 ? (count / maxCount) * 100 : 0;
               return (
@@ -605,10 +605,10 @@ function BookkeepingDashboard({ data, onRefresh }: { data: FinancialSummary; onR
 return (
      <div className="space-y-8">
        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-         <KpiCard label="Gross Income" value={data.total_income} color="#34A853" icon="$" format="currency" />
-         <KpiCard label="Total Expenses" value={data.total_expenses} color="#EA4335" icon="$" format="currency" />
-         <KpiCard label="Net Profit" value={data.net_profit} color="#D49341" icon="$" format="currency" />
-         <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="◇" />
+         <KpiCard label="Gross Income" value={data.total_income} color="#DF3131" icon="$" format="currency" />
+         <KpiCard label="Total Expenses" value={data.total_expenses} color="#C00000" icon="$" format="currency" />
+         <KpiCard label="Net Profit" value={data.net_profit} color="#C9A227" icon="$" format="currency" />
+         <KpiCard label="Transactions" value={data.transaction_count} color="#C9A227" icon="◇" />
        </div>
 
        {/* Monthly Income vs Expenses Bar Chart */}
@@ -624,8 +624,8 @@ return (
                return (
                  <div key={m.month} className="flex flex-col items-center gap-1 flex-1 group">
                    <div className="flex gap-0.5 h-full">
-                     <div className="w-4 bg-[#34A853] rounded-t transition-all duration-500 group-hover:bg-[#34A853]/70" style={{ height: `${incH}%` }} />
-                     <div className="w-4 bg-[#EA4335] rounded-t transition-all duration-500 group-hover:bg-[#EA4335]/70" style={{ height: `${expH}%` }} />
+                     <div className="w-4 bg-[#DF3131] rounded-t transition-all duration-500 group-hover:bg-[#DF3131]/70" style={{ height: `${incH}%` }} />
+                     <div className="w-4 bg-[#C00000] rounded-t transition-all duration-500 group-hover:bg-[#C00000]/70" style={{ height: `${expH}%` }} />
                    </div>
                    <span className="text-[8px] text-white/60 text-center">{m.month.slice(5)}</span>
                  </div>
@@ -635,8 +635,8 @@ return (
          </div>
        )}
        <div className="flex gap-3 flex-wrap">
-        <button onClick={() => setShowForm("income")} className="px-5 py-3 bg-[#34A853]/20 text-[#34A853] border border-[#34A853]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#34A853]/30 transition-all">+ Log Income</button>
-        <button onClick={() => setShowForm("expense")} className="px-5 py-3 bg-[#EA4335]/20 text-[#EA4335] border border-[#EA4335]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#EA4335]/30 transition-all">+ Log Expense</button>
+        <button onClick={() => setShowForm("income")} className="px-5 py-3 bg-[#DF3131]/20 text-[#DF3131] border border-[#DF3131]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#DF3131]/30 transition-all">+ Log Income</button>
+        <button onClick={() => setShowForm("expense")} className="px-5 py-3 bg-[#C00000]/20 text-[#C00000] border border-[#C00000]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#C00000]/30 transition-all">+ Log Expense</button>
         <a href="/api/bookkeeping?tab=csv&type=business" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV</a>
         <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Schedule C</a>
       </div>
@@ -649,7 +649,7 @@ return (
             {data.income_by_client.map((c, i) => (
               <div key={i} className="flex items-center justify-between px-5 py-3 border-b border-white/5 last:border-0">
                 <span className="text-[13px] text-white/70">{c.client}</span>
-                <span className="text-[14px] font-heading font-bold text-[#34A853]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
+                <span className="text-[14px] font-heading font-bold text-[#DF3131]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
               </div>
             ))}
           </div>
@@ -665,7 +665,7 @@ return (
                   <span className="text-[13px] text-white/70">{c.category}</span>
                   {c.schedule_c_line && <span className="text-[10px] text-white/50 ml-2">{c.schedule_c_line}</span>}
                 </div>
-                <span className="text-[14px] font-heading font-bold text-[#EA4335]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
+                <span className="text-[14px] font-heading font-bold text-[#C00000]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
               </div>
             ))}
           </div>
@@ -682,7 +682,7 @@ return (
                 return (
                   <div key={m.month} className="flex-1 flex flex-col items-center gap-1 group">
                     <span className="text-[10px] text-white/60 group-hover:text-white/80">${(m.amount/1000).toFixed(1)}k</span>
-                    <div className="w-full bg-[#34A853]/40 group-hover:bg-[#34A853] transition-colors rounded-t" style={{ height: `${h}%` }} />
+                    <div className="w-full bg-[#DF3131]/40 group-hover:bg-[#DF3131] transition-colors rounded-t" style={{ height: `${h}%` }} />
                     <span className="text-[9px] text-white/50">{m.month.slice(5)}</span>
                   </div>
                 );
@@ -729,7 +729,7 @@ function RevenueByCategoryCard({ year }: { year: number }) {
               <div key={r.category}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[13px] text-white/70">{r.category}</span>
-                  <span className="text-[14px] font-heading font-bold text-[#34A853]">${r.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
+                  <span className="text-[14px] font-heading font-bold text-[#DF3131]">${r.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
                 </div>
                 <div className="h-2 w-full rounded overflow-hidden bg-gray-100 dark:bg-[#444]">
                   <div className="h-full rounded" style={{ width: `${max > 0 ? Math.max((r.amount / max) * 100, 2) : 100}%`, backgroundColor: "#DF3131" }} />
@@ -752,11 +752,11 @@ function IncomeTab({ data, onRefresh }: { data: { transactions: Transaction[] };
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <p className="text-[24px] font-heading font-bold text-[#34A853]">${total.toLocaleString(undefined,{minimumFractionDigits:2})}</p>
+          <p className="text-[24px] font-heading font-bold text-[#DF3131]">${total.toLocaleString(undefined,{minimumFractionDigits:2})}</p>
           <p className="text-[11px] text-white/50">{txns.length} transactions</p>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#34A853]/20 text-[#34A853] border border-[#34A853]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#34A853]/30 transition-all">+ Log Income</button>
+          <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#DF3131]/20 text-[#DF3131] border border-[#DF3131]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#DF3131]/30 transition-all">+ Log Income</button>
           <a href="/api/bookkeeping?tab=csv&type=income" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 CSV</a>
         </div>
       </div>
@@ -775,11 +775,11 @@ function ExpensesTab({ data, onRefresh }: { data: { transactions: Transaction[] 
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
-          <p className="text-[24px] font-heading font-bold text-[#EA4335]">${total.toLocaleString(undefined,{minimumFractionDigits:2})}</p>
+          <p className="text-[24px] font-heading font-bold text-[#C00000]">${total.toLocaleString(undefined,{minimumFractionDigits:2})}</p>
           <p className="text-[11px] text-white/50">{txns.length} transactions</p>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#EA4335]/20 text-[#EA4335] border border-[#EA4335]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#EA4335]/30 transition-all">+ Log Expense</button>
+          <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#C00000]/20 text-[#C00000] border border-[#C00000]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#C00000]/30 transition-all">+ Log Expense</button>
           <a href="/api/bookkeeping?tab=csv&type=expense" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 CSV</a>
         </div>
       </div>
@@ -795,10 +795,10 @@ function ReportsTab({ data }: { data: FinancialSummary }) {
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Gross Income" value={data.total_income} color="#34A853" icon="$" format="currency" />
-        <KpiCard label="Total Expenses" value={data.total_expenses} color="#EA4335" icon="$" format="currency" />
-        <KpiCard label="Net Profit" value={data.net_profit} color="#D49341" icon="$" format="currency" />
-        <KpiCard label="Transactions" value={data.transaction_count} color="#5865F2" icon="◇" />
+        <KpiCard label="Gross Income" value={data.total_income} color="#DF3131" icon="$" format="currency" />
+        <KpiCard label="Total Expenses" value={data.total_expenses} color="#C00000" icon="$" format="currency" />
+        <KpiCard label="Net Profit" value={data.net_profit} color="#C9A227" icon="$" format="currency" />
+        <KpiCard label="Transactions" value={data.transaction_count} color="#C9A227" icon="◇" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {data.income_by_channel?.length > 0 && (
@@ -808,7 +808,7 @@ function ReportsTab({ data }: { data: FinancialSummary }) {
               {data.income_by_channel.map((c, i) => (
                 <div key={i} className="flex items-center justify-between px-5 py-3 border-b border-white/5 last:border-0">
                   <span className="text-[13px] text-white/70 capitalize">{c.channel}</span>
-                  <span className="text-[14px] font-heading font-bold text-[#34A853]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
+                  <span className="text-[14px] font-heading font-bold text-[#DF3131]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
                 </div>
               ))}
             </div>
@@ -821,7 +821,7 @@ function ReportsTab({ data }: { data: FinancialSummary }) {
               {data.income_by_client.map((c, i) => (
                 <div key={i} className="flex items-center justify-between px-5 py-3 border-b border-white/5 last:border-0">
                   <span className="text-[13px] text-white/70">{c.client}</span>
-                  <span className="text-[14px] font-heading font-bold text-[#34A853]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
+                  <span className="text-[14px] font-heading font-bold text-[#DF3131]">${c.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</span>
                 </div>
               ))}
             </div>
@@ -844,8 +844,8 @@ function ReportsTab({ data }: { data: FinancialSummary }) {
                   return (
                     <tr key={m.month} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
                       <td className="px-5 py-3 text-[13px] text-white/70">{m.month}</td>
-                      <td className="px-5 py-3 text-[13px] text-[#34A853] text-right font-heading font-bold">${m.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</td>
-                      <td className="px-5 py-3 text-[13px] text-[#EA4335] text-right font-heading font-bold">${exp.toLocaleString(undefined,{minimumFractionDigits:2})}</td>
+                      <td className="px-5 py-3 text-[13px] text-[#DF3131] text-right font-heading font-bold">${m.amount.toLocaleString(undefined,{minimumFractionDigits:2})}</td>
+                      <td className="px-5 py-3 text-[13px] text-[#C00000] text-right font-heading font-bold">${exp.toLocaleString(undefined,{minimumFractionDigits:2})}</td>
                     </tr>
                   );
                 })}
@@ -857,7 +857,7 @@ function ReportsTab({ data }: { data: FinancialSummary }) {
       <div className="flex gap-3">
         <a href="/api/bookkeeping?tab=csv&type=business" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV (Business Only)</a>
         <a href="/api/bookkeeping?tab=csv" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV (All)</a>
-        <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-[#D49341]/20 text-[#D49341] border border-[#D49341]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#D49341]/30 transition-all inline-block">\u2193 Schedule C Export</a>
+        <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-[#C9A227]/20 text-[#C9A227] border border-[#C9A227]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#C9A227]/30 transition-all inline-block">\u2193 Schedule C Export</a>
       </div>
     </div>
   );
@@ -872,10 +872,10 @@ function AnalyticsTab({ data }: { data: AnalyticsSummary }) {
     <div className="space-y-8">
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <KpiCard label="Pageviews" value={data.total_pageviews} color="#DF3131" icon="◎" />
-        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#5865F2" icon="◆" />
-        <KpiCard label="Unique Pages" value={data.unique_pages} color="#34A853" icon="□" />
-        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#EA4335" icon="○" />
-        <KpiCard label="Pages/Session" value={Math.round(data.pages_per_session * 10) / 10} color="#FBBC05" icon="◇" />
+        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#C9A227" icon="◆" />
+        <KpiCard label="Unique Pages" value={data.unique_pages} color="#DF3131" icon="□" />
+        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#C00000" icon="○" />
+        <KpiCard label="Pages/Session" value={Math.round(data.pages_per_session * 10) / 10} color="#C9A227" icon="◇" />
       </div>
 
       {data.daily_views?.length > 0 && (
@@ -920,7 +920,7 @@ function AnalyticsTab({ data }: { data: AnalyticsSummary }) {
               {data.top_referrers.slice(0, 10).map((r, i) => (
                 <div key={i} className="flex items-center justify-between px-5 py-2.5 border-b border-white/5 last:border-0">
                   <span className="text-[12px] text-white/70 truncate mr-4">{r.referrer}</span>
-                  <span className="text-[12px] text-[#5865F2] font-heading font-bold">{r.count}</span>
+                  <span className="text-[12px] text-[#C9A227] font-heading font-bold">{r.count}</span>
                 </div>
               ))}
             </div>
@@ -962,7 +962,7 @@ function AnalyticsTab({ data }: { data: AnalyticsSummary }) {
               {data.top_utm_sources.map((u, i) => (
                 <div key={i} className="flex items-center justify-between px-5 py-2.5 border-b border-white/5 last:border-0">
                   <span className="text-[13px] text-white/70">{u.source}</span>
-                  <span className="text-[13px] text-[#FBBC05] font-heading font-bold">{u.count}</span>
+                  <span className="text-[13px] text-[#C9A227] font-heading font-bold">{u.count}</span>
                 </div>
               ))}
             </div>
@@ -982,8 +982,8 @@ function SeoTab({ data }: { data: SeoData }) {
   return (
     <div className="space-y-8">
       <div className="flex items-center gap-6">
-        <div className="w-24 h-24 rounded-full border-4 flex items-center justify-center" style={{ borderColor: score >= 80 ? "#34A853" : score >= 50 ? "#FBBC05" : "#EA4335" }}>
-          <span className="text-[28px] font-heading font-bold" style={{ color: score >= 80 ? "#34A853" : score >= 50 ? "#FBBC05" : "#EA4335" }}>{score}</span>
+        <div className="w-24 h-24 rounded-full border-4 flex items-center justify-center" style={{ borderColor: score >= 80 ? "#DF3131" : score >= 50 ? "#C9A227" : "#C00000" }}>
+          <span className="text-[28px] font-heading font-bold" style={{ color: score >= 80 ? "#DF3131" : score >= 50 ? "#C9A227" : "#C00000" }}>{score}</span>
         </div>
         <div>
           <p className="text-[13px] text-white/50">{passed}/{total} checks passed</p>
@@ -993,14 +993,14 @@ function SeoTab({ data }: { data: SeoData }) {
       <div className="bg-white/5 border border-white/10 overflow-hidden">
         {data.checks.map((c, i: number) => (
           <div key={i} className="flex items-center gap-4 px-5 py-3 border-b border-white/5 last:border-0">
-            <span className={`text-[14px] ${c.status === "pass" ? "text-[#34A853]" : c.status === "warn" ? "text-[#FBBC05]" : "text-[#EA4335]"}`}>
+            <span className={`text-[14px] ${c.status === "pass" ? "text-[#DF3131]" : c.status === "warn" ? "text-[#C9A227]" : "text-[#C00000]"}`}>
               {c.status === "pass" ? "\u2713" : c.status === "warn" ? "\u26A0" : "\u2717"}
             </span>
             <div className="flex-1">
               <p className="text-[13px] text-white/70">{c.check}</p>
               {c.detail && <p className="text-[11px] text-white/50 mt-0.5">{c.detail}</p>}
             </div>
-            <span className={`text-[10px] font-heading font-bold tracking-[0.1em] uppercase ${c.status === "pass" ? "text-[#34A853]" : c.status === "warn" ? "text-[#FBBC05]" : "text-[#EA4335]"}`}>{c.status}</span>
+            <span className={`text-[10px] font-heading font-bold tracking-[0.1em] uppercase ${c.status === "pass" ? "text-[#DF3131]" : c.status === "warn" ? "text-[#C9A227]" : "text-[#C00000]"}`}>{c.status}</span>
           </div>
         ))}
       </div>
@@ -1015,9 +1015,9 @@ function TrafficTab({ data }: { data: AnalyticsSummary }) {
     <div className="space-y-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard label="Total Views" value={data.total_pageviews} color="#DF3131" icon="◎" />
-        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#5865F2" icon="◆" />
-        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#EA4335" icon="○" />
-        <KpiCard label="Avg Duration" value={Math.round(data.avg_duration_ms / 1000)} color="#34A853" icon="⊙" />
+        <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#C9A227" icon="◆" />
+        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#C00000" icon="○" />
+        <KpiCard label="Avg Duration" value={Math.round(data.avg_duration_ms / 1000)} color="#DF3131" icon="⊙" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -1044,7 +1044,7 @@ function TrafficTab({ data }: { data: AnalyticsSummary }) {
                 <div key={i} className="flex items-center gap-4 px-5 py-3 border-b border-white/5 last:border-0">
                   <span className="text-[11px] text-white/40 font-heading font-bold w-6">{i + 1}</span>
                   <span className="text-[12px] text-white/70 flex-1 truncate">{r.referrer}</span>
-                  <span className="text-[12px] text-[#5865F2] font-heading font-bold">{r.count}</span>
+                  <span className="text-[12px] text-[#C9A227] font-heading font-bold">{r.count}</span>
                 </div>
               ))}
             </div>
@@ -1110,7 +1110,7 @@ function UsersTab({ data }: { data: User[] }) {
             <tr key={u.email} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
               <td className="px-5 py-3 text-[13px] text-white/70">{u.email}</td>
               <td className="px-5 py-3 text-[13px] text-white/50">{u.name || "-"}</td>
-              <td className="px-5 py-3"><span className={`px-2 py-1 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${u.role === "admin" ? "bg-[#EA4335]/10 text-[#EA4335]" : "bg-white/5 text-white/50"}`}>{u.role}</span></td>
+              <td className="px-5 py-3"><span className={`px-2 py-1 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${u.role === "admin" ? "bg-[#C00000]/10 text-[#C00000]" : "bg-white/5 text-white/50"}`}>{u.role}</span></td>
               <td className="px-5 py-3 text-[12px] text-white/60">{u.provider}</td>
             </tr>
           ))}
@@ -1181,21 +1181,21 @@ function HealthTab() {
         <SectionTitle>Site Health</SectionTitle>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
           <div className="text-center">
-            <div className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 ${health?.status === "ok" ? "bg-[#34A853]/20 text-[#34A853]" : "bg-[#EA4335]/20 text-[#EA4335]"}`}>
+            <div className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 ${health?.status === "ok" ? "bg-[#DF3131]/20 text-[#DF3131]" : "bg-[#C00000]/20 text-[#C00000]"}`}>
               {health?.status === "ok" ? "\u2713" : "\u2717"}
             </div>
             <p className="text-[11px] text-white/60">API Status</p>
           </div>
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#34A853]/20 text-[#34A853]">{"\u2713"}</div>
+            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#DF3131]/20 text-[#DF3131]">{"\u2713"}</div>
             <p className="text-[11px] text-white/60">DB Connected</p>
           </div>
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#34A853]/20 text-[#34A853]">{"\u2713"}</div>
+            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#DF3131]/20 text-[#DF3131]">{"\u2713"}</div>
             <p className="text-[11px] text-white/60">Analytics Active</p>
           </div>
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#FBBC05]/20 text-[#FBBC05]">{"\u26A0"}</div>
+            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#C9A227]/20 text-[#C9A227]">{"\u26A0"}</div>
             <p className="text-[11px] text-white/60">Vault Locked</p>
           </div>
         </div>
@@ -1367,14 +1367,14 @@ function TransactionTable({ transactions, onRefresh }: { transactions: Transacti
             {filtered.map((t) => (
               <tr key={t.id} className="border-b border-white/5 last:border-0 hover:bg-white/5 transition-colors">
                 <td className="px-4 py-3 text-[12px] text-white/60 whitespace-nowrap">{t.date}</td>
-                <td className="px-4 py-3"><span className={`px-2 py-0.5 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${t.type === "income" ? "bg-[#34A853]/10 text-[#34A853]" : "bg-[#EA4335]/10 text-[#EA4335]"}`}>{t.type}</span></td>
-                <td className="px-4 py-3 text-[13px] font-heading font-bold" style={{ color: t.type === "income" ? "#34A853" : "#EA4335" }}>${t.amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
+                <td className="px-4 py-3"><span className={`px-2 py-0.5 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${t.type === "income" ? "bg-[#DF3131]/10 text-[#DF3131]" : "bg-[#C00000]/10 text-[#C00000]"}`}>{t.type}</span></td>
+                <td className="px-4 py-3 text-[13px] font-heading font-bold" style={{ color: t.type === "income" ? "#DF3131" : "#C00000" }}>${t.amount.toLocaleString(undefined, {minimumFractionDigits: 2})}</td>
                 <td className="px-4 py-3 text-[12px] text-white/60">{t.client_name || t.vendor || "-"}</td>
                 <td className="px-4 py-3 text-[12px] text-white/60">{t.category_name || "-"}</td>
                 <td className="px-4 py-3 text-[12px] text-white/60 capitalize">{t.channel || "-"}</td>
                 <td className="px-4 py-3 text-[12px] text-white/60 capitalize">{t.business_personal || "business"}</td>
                 <td className="px-4 py-3">
-                  <button onClick={() => handleDelete(t.id)} className="text-[11px] text-[#EA4335]/60 hover:text-[#EA4335] transition-colors">Delete</button>
+                  <button onClick={() => handleDelete(t.id)} className="text-[11px] text-[#C00000]/60 hover:text-[#C00000] transition-colors">Delete</button>
                 </td>
               </tr>
             ))}
@@ -1478,7 +1478,7 @@ function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRefresh: (
                     <td className="px-4 py-2.5 text-[11px] text-white/50 max-w-[250px] truncate font-mono">{entry.path}</td>
                     <td className="px-4 py-2.5">
                       <span className={`px-2 py-0.5 text-[10px] font-heading font-bold tracking-[0.05em] uppercase ${
-                        entry.label === "Neutral" ? "bg-[#34A853]/10 text-[#34A853]" : "bg-[#EA4335]/10 text-[#EA4335]"
+                        entry.label === "Neutral" ? "bg-[#DF3131]/10 text-[#DF3131]" : "bg-[#C00000]/10 text-[#C00000]"
                       }`}>
                         {entry.label}
                       </span>
@@ -1486,7 +1486,7 @@ function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRefresh: (
                     <td className="px-4 py-2.5 text-[12px] text-white/50">{(entry.confidence * 100).toFixed(1)}%</td>
                     <td className="px-4 py-2.5 text-[11px] text-white/40">{new Date(entry.ts).toLocaleDateString()}</td>
                     <td className="px-4 py-2.5">
-                      <button onClick={() => handleClearCache(entry.path)} disabled={clearing} className="text-[11px] text-[#EA4335]/60 hover:text-[#EA4335] transition-colors disabled:opacity-30">
+                      <button onClick={() => handleClearCache(entry.path)} disabled={clearing} className="text-[11px] text-[#C00000]/60 hover:text-[#C00000] transition-colors disabled:opacity-30">
                         Clear
                       </button>
                     </td>

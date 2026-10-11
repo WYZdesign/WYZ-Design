@@ -26,7 +26,7 @@ const LA_STUDIOS = [
   { name: "Hill 4", building: "Hill", feature: "Exposed brick with vintage furniture set - retro, gritty, character-driven portraits", image: "/images/fd-studios/Hill/Hill_4.webp", color: "#EF4444" },
   { name: "Hill 5", building: "Hill", feature: "Adjustable LED color backdrop wall - chroma-key flexibility for music, fashion, conceptual", image: "/images/fd-studios/Hill/Hill_5.webp", color: "#8B5CF6" },
   { name: "Hill 6", building: "Hill", feature: "Moroccan tile shower set - textured architectural detail for editorial and boudoir", image: "/images/fd-studios/Hill/Hill_6.webp", color: "#EC4899" },
-  { name: "Hill 7", building: "Hill", feature: "Rain room - programmable overhead water system for dramatic wet-weather fashion and fine art", image: "/images/fd-studios/Hill/Hill_7.webp", color: "#3B82F6" },
+  { name: "Hill 7", building: "Hill", feature: "Rain room - programmable overhead water system for dramatic wet-weather fashion and fine art", image: "/images/fd-studios/Hill/Hill_7.webp", color: "#DF3131" },
   { name: "Hill 8", building: "Hill", feature: "Raw concrete gallery - brutalist industrial backdrop for avant-garde and street-style", image: "/images/fd-studios/Hill/Hill_8.webp", color: "#64748B" },
   { name: "Yukon 1", building: "Yukon", feature: "White smooth infinity cove - floating, boundary-less fashion and beauty looks", image: "/images/fd-studios/Yukon/Yukon_1.jpg", color: "#F9AD4D" },
   { name: "Yukon 2", building: "Yukon", feature: "Gritty warehouse corner with metal beams - urban industrial for streetwear and bands", image: "/images/fd-studios/Yukon/Yukon_2.webp", color: "#A855F7" },
@@ -43,7 +43,7 @@ const LA_STUDIOS = [
   { name: "Loft 4", building: "Loft", feature: "Brick-walled bedroom set - intimate boudoir, editorial sleep scenes, lifestyle", image: "/images/fd-studios/Loft/Loft_4.webp", color: "#8B5CF6" },
   { name: "Loft 5", building: "Loft", feature: "Rooftop deck with skyline view - golden hour, cityscape, outdoor lifestyle and fashion", image: "/images/fd-studios/Loft/Loft_5.webp", color: "#F59E0B" },
   { name: "Loft 6", building: "Loft", feature: "White-washed studio with vintage distressed walls - shabby-chic editorial and fashion", image: "/images/fd-studios/Loft/Loft_6.webp", color: "#14B8A6" },
-  { name: "Main A", building: "Main", feature: "Large cyclorama stage - full-body fashion, automotive, group shots, unlimited backdrop", image: "/images/fd-studios/Main/Main_A.webp", color: "#3B82F6" },
+  { name: "Main A", building: "Main", feature: "Large cyclorama stage - full-body fashion, automotive, group shots, unlimited backdrop", image: "/images/fd-studios/Main/Main_A.webp", color: "#DF3131" },
   { name: "Main B", building: "Main", feature: "Textured concrete with roll-up door - industrial edge for urban fashion and music video", image: "/images/fd-studios/Main/Main_B.webp", color: "#EF4444" },
   { name: "Main C", building: "Main", feature: "White brick gallery wall - clean editorial look with architectural character", image: "/images/fd-studios/Main/Main_C.webp", color: "#64748B" },
   { name: "Main D", building: "Main", feature: "Dark painted set with practical window light - moody portraiture and film-style scenes", image: "/images/fd-studios/Main/Main_D.jpg", color: "#A855F7" },
@@ -56,7 +56,7 @@ const PROMPTS = [
   { label: "Profitable Workshops", prompt: "Generate 3 profitable workshop ideas ($100-250 ticket) for FD Photo Studio LA using unique studio spaces", icon: " ", color: "#10B981" },
   { label: "TFP-Only Events", prompt: "Generate 3 TFP-model-only photography mixer ideas for FD Photo Studio LA using Olympic underwater, Hill rain room, and Yukon RGB cave", icon: " ", color: "#F59E0B" },
   { label: "Cross-Building", prompt: "Generate 3 creative event concepts combining multiple FD buildings in LA for maximum visual variety", icon: " ", color: "#EC4899" },
-  { label: "Rain Room Ideas", prompt: "Generate 3 creative photo events specifically designed around Hill 7's rain room feature", icon: " ", color: "#3B82F6" },
+  { label: "Rain Room Ideas", prompt: "Generate 3 creative photo events specifically designed around Hill 7's rain room feature", icon: " ", color: "#DF3131" },
   { label: "Night Concepts", prompt: "Generate 3 after-dark photo mixer concepts using Yukon's RGB cave, Olympic's car turntable, and Loft's rooftop", icon: " ", color: "#F97316" },
 ];
 
@@ -238,7 +238,7 @@ export default function FDOraclePage() {
   const formatContent = (text: string) => {
     const formatted = text
       .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
-      .replace(/\[ANALYST\]/gi, '<div class="flex items-center gap-2 mt-4 mb-2"><span class="w-2 h-2 rounded-full bg-blue-500"></span><span class="text-blue-400 font-bold text-xs tracking-wider">ANALYST</span></div>')
+      .replace(/\[ANALYST\]/gi, '<div class="flex items-center gap-2 mt-4 mb-2"><span class="w-2 h-2 rounded-full bg-[#DF3131]"></span><span class="text-[#C9A227] font-bold text-xs tracking-wider">ANALYST</span></div>')
       .replace(/\[MUSE\]/gi, '<div class="flex items-center gap-2 mt-4 mb-2"><span class="w-2 h-2 rounded-full bg-purple-500"></span><span class="text-purple-400 font-bold text-xs tracking-wider">MUSE</span></div>')
       .replace(/\n/g, "<br>");
     return sanitizeHtml(formatted);
@@ -532,13 +532,13 @@ export default function FDOraclePage() {
           <ScrollReveal animation="fadeUp">
             <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-4 max-w-[calc(100vw-3rem)] mx-auto">HOW THE <span className="text-[#DF3131]">ORACLE</span> WORKS</h2>
             <div className="grid md:grid-cols-2 gap-6 text-left">
-              <div className="p-6 rounded-xl border border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-transparent">
-                <h3 className="text-blue-400 font-bold text-lg mb-3">THE ANALYST</h3>
+              <div className="p-6 rounded-xl border border-[#DF3131]/30 bg-gradient-to-br from-[#DF3131]/10 to-transparent">
+                <h3 className="text-[#C9A227] font-bold text-lg mb-3">THE ANALYST</h3>
                 <ul className="space-y-2 text-zinc-400 text-sm">
-                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />Checks 82+ past events for redundancy</li>
-                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />Validates pricing and profitability</li>
-                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />Ensures TFP/low-cost model viability</li>
-                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />LA-only unless NY explicitly requested</li>
+                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#DF3131] mt-2 shrink-0" />Checks 82+ past events for redundancy</li>
+                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#DF3131] mt-2 shrink-0" />Validates pricing and profitability</li>
+                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#DF3131] mt-2 shrink-0" />Ensures TFP/low-cost model viability</li>
+                  <li className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#DF3131] mt-2 shrink-0" />LA-only unless NY explicitly requested</li>
                 </ul>
               </div>
               <div className="p-6 rounded-xl border border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-transparent">
