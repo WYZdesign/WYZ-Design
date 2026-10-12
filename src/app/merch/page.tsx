@@ -103,7 +103,7 @@ function ParallaxHero() {
         <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-2" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
           Dying Breed Crew
         </p>
-        <h1 className="wz-stack text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-4 sm:mb-8" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
+        <h1 className="text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-4 sm:mb-8" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
           <span className="block">WORN</span>
           <span className="block text-[#DF3131]">DIFFERENT</span>
         </h1>
@@ -188,7 +188,7 @@ function AccordionGallery() {
             {[...DBC_MODEL_MOCKUPS, ...DBC_MODEL_MOCKUPS].map((item, i) => (
               <div key={`crew-${i}`} className="flex-none w-[160px] sm:w-[200px]">
                 <div className="aspect-[3/4] rounded-lg overflow-hidden border border-[#E2E2E2] dark:border-[#444] bg-[#f5f5f5] mb-2">
-                  <SafeImage src={item.model} alt={item.name} width={400} className="w-full h-full object-contain" />
+                  <SafeImage src={item.model} alt={item.name} width={400} className="w-full h-full object-cover" />
                 </div>
                 <h4 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[13px] sm:text-[14px] mb-1 text-left">{item.name}</h4>
                 <div className="flex items-center justify-between">
@@ -534,7 +534,7 @@ export default function MerchPage() {
                 <h2 className="text-[2rem] sm:text-[2.5rem] sm:whitespace-nowrap font-heading font-black tracking-[0.03em] text-[#333]">Shop the collection</h2>
                 <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#666]">Crew-made pieces, printed to order. Pick a piece, choose your options, and check out securely.</p>
               </div>
-              <div className="wz-hscroll">
+              <div className="flex flex-wrap gap-2">
                 {CATEGORIES.map((category) => (
                   <button key={category} type="button" onClick={() => setActiveCategory(category)} aria-pressed={activeCategory === category}
                     className={`min-h-11 px-4 text-[11px] font-bold tracking-[0.08em] uppercase border transition-colors ${activeCategory === category ? "bg-[#333] text-white border-[#333]" : "bg-white text-[#333] border-[#d9d6d3] hover:border-[#DF3131]"}`}>
@@ -757,7 +757,7 @@ export default function MerchPage() {
             <>
               <div className="absolute top-10 left-[10%] w-16 h-16 border border-[#DF3131]/20 rotate-45 pointer-events-none z-20"
                 style={{ animation: "floatGeo1 6s ease-in-out infinite" }} />
-              <div className="absolute top-32 right-[15%] w-8 h-8 rounded-full border border-[#C9A227]/20 pointer-events-none z-20"
+              <div className="absolute top-32 right-[15%] w-8 h-8 rounded-full border border-[#D49341]/20 pointer-events-none z-20"
                 style={{ animation: "floatGeo2 8s ease-in-out infinite 1s" }} />
               <div className="absolute bottom-20 left-[20%] w-12 h-12 border border-[#DF3131]/15 pointer-events-none z-20"
                 style={{ animation: "floatGeo3 7s ease-in-out infinite 0.5s", clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)" }} />
