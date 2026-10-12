@@ -975,8 +975,8 @@ export default function HomePage() {
       {[
         { stat: "90+", label: "Events Produced" },
         { stat: "45+", label: "Clients Served" },
-        { stat: "1,500+", label: "Photos Delivered" },
-        { stat: "9+", label: "Years Running" },
+        { stat: "10,000+", label: "Photos Delivered" },
+        { stat: "13+", label: "Years Running" },
       ].map((t) => (
         <li key={t.label} className="flex flex-col items-center">
           <span className="text-[#C9A227] font-heading font-black text-[26px] sm:text-[32px] leading-none">{t.stat}</span>

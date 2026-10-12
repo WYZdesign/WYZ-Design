@@ -220,3 +220,13 @@ Only **three** exist: `public/images/faotm_1.jpg`, `faotm_2.jpg`, `faotm_3.jpg`.
 - Spec 22 Phase 3 per-stage copy sign-off (before any delivery email sends).
 - Raise-metrics counts from external channels, and optional faotm_4.jpg.
 - Lawyer items on the owner's own time (no reminders, per owner).
+
+## 13. Progress update 8 (2026-10-11, WYZMiND) - Spec 22 live-ready + lifetime metrics
+
+- **Spec 22 approved + live-ready.** Migration `0002` APPLIED to prod Supabase (verified: `client_comm_preferences` + `delivery_events` exist). Copy approved by Torreé; `OUTREACH_PHASE=3`. A stage still only sends when `WYZ_OUTREACH_ENABLED=1` AND that stage's flag are set in Vercel AND a `delivery_events` source exists; until then the cron only logs would-be sends.
+- **Lifetime metrics updated** after a full media sweep of every source (G: Drive, iCloud, V:, site, IG export):
+  - Photos Delivered: 1,500+ -> **10,000+**
+  - Years Running: 9+ -> **13+**
+  - Events 90+ / Clients 45+ unchanged (site-backed).
+  - Evidence: G: Drive ~1.0 TB media (Pictures 171,677 / Videos 16,553 / Archive 1,977 / Graphics 2,045), iCloud Photos 53,714, Lightroom 6,604 + Luminar 6,603, site 1,860 images + 48 videos, IG export 2,683 media + 3,362 posts. Full write-up: `MEDIA_INVENTORY.md` + `PORTFOLIO_METRICS_RECONCILIATION.md`.
+- FAOTM confirmed: 3 `faotm_N.jpg` + the Danny Davis slot (labeled F. A. O. T. M. #4 on the designs strip). Nothing to change.

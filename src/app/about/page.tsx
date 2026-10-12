@@ -156,7 +156,7 @@ export default function AboutPage() {
                   We believe every artist, brand, and creative deserves access to professional-grade design, photography, and creative strategy, no gatekeeping, no pretension, and no paying for work that looks like it came from a template.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed mb-6">
-                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel</span> built this from the ground up: 90+ events, 45+ clients, 1,500+ photos, and a creative standard that doesn't drop based on who's paying.
+                  WYZ Design started in Chicago's DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder <span className="text-[#DF3131] font-bold">Torreé Marcel</span> built this from the ground up: 90+ events, 45+ clients, 10,000+ photos, and a creative standard that doesn't drop based on who's paying.
               </p>
               <p className="text-[#666] dark:text-white/70 text-[16px] sm:text-[17px] leading-relaxed">
                   Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them. We don't outsource or pass you around. We do the work ourselves, start to finish.
@@ -266,8 +266,8 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
               <AnimatedCounter end={90} suffix="+" label="Events Produced" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
               <AnimatedCounter end={45} suffix="+" label="Clients Served" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
-              <AnimatedCounter end={1500} suffix="+" label="Photos Delivered" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
-              <AnimatedCounter end={9} suffix="+" label="Years Running" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
+              <AnimatedCounter end={10000} suffix="+" label="Photos Delivered" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
+              <AnimatedCounter end={13} suffix="+" label="Years Running" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
             </div>
           </div>
         </section>

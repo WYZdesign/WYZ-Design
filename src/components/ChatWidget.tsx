@@ -74,7 +74,7 @@ export default function ChatWidget() {
 
   // Board #29: the bubble is fixed bottom-6 right-6 with no awareness of what's
   // underneath it, so it was sitting on top of in-flow content (Home's trust-signals
-  // stat bar collapses to a 2x2 grid below sm, putting "9+ Years Running" bottom-right)
+  // stat bar collapses to a 2x2 grid below sm, putting "13+ Years Running" bottom-right)
   // and on top of the cookie banner (full-width fixed bottom-0 on mobile). Any element
   // tagged data-chat-avoid that enters the bubble's own corner footprint hides it, the
   // same way scrollHidden/bodyLocked already do, by shrinking the IntersectionObserver's

@@ -6,7 +6,7 @@ Scoped, approval-gated implementation specs. Nothing in this file ships customer
 
 ## Spec 22 — Delivery into Proof, Referral, and Repeat Work
 
-**Board task:** 22 · **Status:** APPROVED 2026-10-11; **Phase 1 shipped** (schema `0002`, `src/lib/delivery.ts` drafts, `/api/cron/delivery-outreach` dry-run). Sends hard-off until Phase 3 and per-stage copy sign-off. · **Owner:** WYZMiND (build), Torreé (copy approval + send authority), Codex (review)
+**Board task:** 22 · **Status:** APPROVED 2026-10-11; Phase 1 shipped, copy approved, migration 0002 applied to prod. Phase 3 ready: a send needs `WYZ_OUTREACH_ENABLED=1` + that stage's flag + a populated `delivery_events` source. · **Owner:** WYZMiND (build), Torreé (copy approval + send authority), Codex (review)
 
 ### Problem
 

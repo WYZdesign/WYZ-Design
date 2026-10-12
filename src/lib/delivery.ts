@@ -3,17 +3,14 @@ import { logger } from "@/lib/logger";
 /**
  * Spec 22 (board task 22): delivery -> proof -> referral -> repeat work.
  *
- * PHASE 1 (this file = source of truth for the copy). No send path can fire yet:
- *  - every stage defaults OFF,
- *  - the master switch defaults OFF,
- *  - and PHASE < 3 hard-blocks any send regardless of flags.
- *
- * Copy below is a DRAFT and must be approved by Torreé per stage before a
- * stage is switched on. Nothing here sends email on its own; the cron route
- * only logs would-be sends until a stage is explicitly enabled.
+ * Copy APPROVED by Torreé 2026-10-11 (Phase 3 ready). A send still requires ALL of:
+ *  - WYZ_OUTREACH_ENABLED=1 (master switch),
+ *  - that stage's flag=1 (WYZ_OUTREACH_STAGE1..4),
+ *  - a populated delivery_events source.
+ * Until all three are true the cron route only logs would-be sends.
  */
 
-export const OUTREACH_PHASE = 1; // 1 schema+events, 2 dry-run staging, 3 live per-stage
+export const OUTREACH_PHASE = 3; // 1 schema+events, 2 dry-run staging, 3 live per-stage
 export const CADENCE_MAX_DAYS = 14; // max 1 marketing message per client per 14 days
 
 export type StageKey = "stage1" | "stage2" | "stage3" | "stage4";
