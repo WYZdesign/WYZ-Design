@@ -123,3 +123,11 @@ names. WYZ Design mirrors the REAL pattern: this board (queue) +
 - **Console noise, not a defect:** one transient `416` on `/videos/logo-intro-02.mp4` during a headless load. All 21 intro videos probe valid locally (h264/aac) and serve `206` with range requests against the live origin, so this is a src-swap range race when the element picks the next clip, not a corrupt asset. Videos play.
 - **NoiseOverlay:** not detected by class probe on the live home page. Board #34 skips it entirely on touch devices; headless Chrome is not touch, so it should render. Decorative only; confirm visually if wanted.
 - **Net: no agent-owned work remains on the board.** Everything still open is an owner decision.
+
+### Codex oversized-file status (2026-10-12)
+
+| File | Owner | Status | Evidence |
+|---|---|---|---|
+| `src/app/community/page.tsx` | Codex | done | `39b5816`; build, lint, tests green |
+| `src/app/events/page.tsx` | Codex | done | `b1db895`; build, lint, tests green |
+| `src/app/photography/page.tsx` | Codex | done | `b8e0ad3`; build, lint, tests green |
