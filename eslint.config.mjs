@@ -26,6 +26,9 @@ const eslintConfig = defineConfig([
     "screenshot-audit.js",
     "wyz_*.mjs",
     "verify_*.mjs",
+    // one-off tooling and archived docs are not app code
+    "scripts/**",
+    "_ARCHIVE/**",
   ]),
 ]);
 
