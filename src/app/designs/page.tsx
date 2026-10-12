@@ -179,12 +179,8 @@ export default function DesignsPage() {
   { img: "/images/merch/dbc-archive/98442d-422f5f161e544ce9bf0e06f901881db4~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
 ], []);
 
-const faotmImages = [
-  { img: "/images/faotm_1.jpg", name: "F. A. O. T. M. #1", price: "Artist Spotlight" },
-  { img: "/images/faotm_2.jpg", name: "F. A. O. T. M. #2", price: "Artist Spotlight" },
-  { img: "/images/faotm_3.jpg", name: "F. A. O. T. M. #3", price: "Artist Spotlight" },
-      { img: "/images/danny-davis.png", name: "F. A. O. T. M. #4", price: "Artist Spotlight" },
-];
+
+
 
  const [shuffledLogos, setShuffledLogos] = useState(LOGOS_IMAGES);
  const [shuffledCovers, setShuffledCovers] = useState(COVER_ART_WYZ);
@@ -370,19 +366,16 @@ const faotmImages = [
    </div>
     <Link href="/featured-artist" className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#333] text-white dark:bg-white dark:text-[#111] border-[1.5px] border-[#333] dark:border-white text-[14px] font-bold tracking-[0.1em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] dark:hover:bg-[#DF3131] dark:hover:text-white dark:hover:border-[#DF3131] transition-all">VIEW ALL <FiArrowRight className="w-4 h-4" /></Link>
    </div>
-  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-  {faotmImages.map((p, i) => (
-   <ScrollParallaxCard key={i} tiltAmount={4} scaleAmount={1.03}>
+  <Link href="/featured-artist" className="group block max-w-md mx-auto">
+   <ScrollParallaxCard tiltAmount={4} scaleAmount={1.02}>
    <ImageHoverReveal>
-   <Link href="/merch" className="group cursor-pointer block">
-   <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
-     <Image src={p.img} alt={p.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 25vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+   <div className="aspect-[4/5] relative overflow-hidden rounded-xl border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] group-hover:border-[#DF3131] group-hover:shadow-lg group-hover:shadow-[#DF3131]/10 transition-all duration-300">
+     <Image src="/images/danny-davis.png" alt="Donte 'Danny' Davis, Featured Artist of the Month" fill sizes="(max-width:640px) 90vw, 28rem" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
      </div>
-    </Link>
    </ImageHoverReveal>
    </ScrollParallaxCard>
-   ))}
-  </div>
+   <p className="text-center text-[13px] font-bold tracking-[0.12em] uppercase text-[#333] dark:text-[#e0e0e0] mt-4">Donte &quot;Danny&quot; Davis</p>
+  </Link>
  </div>
  </section>
  </ScrollReveal>
