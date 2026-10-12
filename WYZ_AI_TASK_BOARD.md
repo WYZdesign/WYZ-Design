@@ -175,3 +175,12 @@ Work done by Codex (its scope) + WYZMiND (completed and verified the admin/fd/me
 Gate: tsc 0, lint 0 errors, tests 18, build 0, deploy LIVE (b64f724), refactored routes smoke-tested 200.
 
 NOTE: Claude Code CLI is OUT OF ANTHROPIC CREDITS ("Credit balance is too low"), so it could not run; its scope was completed by WYZMiND. merch + photography splits are shallow and can be deepened in a follow-up.
+
+### Dead-code + newline cleanup (2026-10-12, WYZMiND) — final
+
+- **merch/page.tsx: 908 -> 317 lines.** Deleted an unreachable `if (false) return (...)` block (~320 lines) plus the 5 components only it used (AccordionGallery, DynamicContentUnderShop, MerchCarousel, ProductMarquee, ScatteredGrid) and their now-dead imports/state.
+- **photography/page.tsx: 1674 -> 855 lines.** Repaired malformed CR-CR-LF line endings that split every line into two (a corrupted write).
+- **Tests: 4 files / 18 -> 6 files / 30.** Added src/lib/data/home.test.ts and src/lib/delivery.test.ts.
+- Gate: tsc 0, lint 0 errors, build 0, tests 30, **deploy LIVE (79e56de)**. /merch + /photography verified rendering live; /api/printful-catalog returns 4 products.
+
+Working tree clean. No agent-owned work remains.
