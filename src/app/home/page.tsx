@@ -1,6 +1,4 @@
 "use client";
-import HeroDots from "@/components/HeroDots";
-
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -925,7 +923,6 @@ export default function HomePage() {
  `}</style>
 
     <section ref={heroRef} className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-[80vh] sm:min-h-[90vh] lg:min-h-screen flex items-center justify-center overflow-hidden hero-banner">
-      <HeroDots variant={2} />
     {/* Single wrapper - keeps this the only direct child of .hero-banner so mobile padding-stripping CSS doesn't hit the text container */}
     <div className="absolute inset-0 flex items-center justify-center">
     {/* Background: video fills entire hero */}

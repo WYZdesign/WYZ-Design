@@ -32,60 +32,85 @@ function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onCl
  );
 }
 
-function Carousel({ images, direction = "left", whiteBgInDark, scrollRef }: { images: string[]; direction?: "left" | "right"; whiteBgInDark?: boolean; scrollRef?: React.RefObject<HTMLDivElement | null> }) {
-  const internalScrollRef = useRef<HTMLDivElement>(null);
-  const resolvedRef = scrollRef || internalScrollRef;
+const CASE_STUDIES = [
+  { slug: "artfinix", name: "Artfinix Foundation", tag: "Nonprofit", blurb: "Brand system, talent-show campaign, and merch for a youth arts foundation.", stat: "Youth Arts", accent: "#e94560" },
+  { slug: "kid-bode", name: "Kid Bode", tag: "Music", blurb: "Artist identity and campaign strategy for a rising musician.", stat: "Artist Brand", accent: "#DF3131" },
+  { slug: "dawneeahs-glow", name: "Dawneeah's Glow", tag: "Skincare", blurb: "Brand identity, product photography, and a Shopify build for a skincare founder.", stat: "$180K in 90 days", accent: "#b39dfb" },
+  { slug: "gft-foods", name: "GFT Foods", tag: "Food & Beverage", blurb: "Complete rebrand, packaging design, and e-commerce for a food brand.", stat: "Full Rebrand", accent: "#6fcf6f" },
+];
+
+function Carousel({ images, direction = "left", whiteBgInDark }: { images: string[]; direction?: "left" | "right"; whiteBgInDark?: boolean; scrollRef?: React.RefObject<HTMLDivElement | null> }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
   const paused = useRef(false);
-  const lastTime = useRef<number>(0);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const dirRef = useRef(direction === "right" ? -1 : 1);
+
+  useEffect(() => { dirRef.current = direction === "right" ? -1 : 1; }, [direction]);
 
   useEffect(() => {
-    const el = resolvedRef.current as HTMLDivElement | null;
+    const sec = sectionRef.current;
+    if (!sec) return;
+    const obs = new IntersectionObserver(([e]) => { paused.current = !e.isIntersecting; }, { threshold: 0 });
+    obs.observe(sec);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const el = trackRef.current;
     if (!el) return;
     let raf: number;
-  const dir = direction === "right" ? -1 : 1;
+    const speed = 0.55;
+    const tick = () => {
+      if (!paused.current && el) {
+        offsetRef.current -= speed * dirRef.current;
+        const half = el.scrollWidth / 2;
+        if (Math.abs(offsetRef.current) >= half) offsetRef.current += half;
+        el.style.transform = `translateX(${offsetRef.current}px)`;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
- const tick = (now: number) => {
- if (!lastTime.current) lastTime.current = now;
- const dt = (now - lastTime.current) / 1000;
- lastTime.current = now;
+  const handleClick = () => {
+    paused.current = true;
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+    clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
+  };
 
- if (!paused.current && el.scrollWidth > 0) {
- const oneSet = el.scrollWidth / 3;
- el.scrollLeft += 33.6 * dt * dir;
- if (direction === "left" && el.scrollLeft >= oneSet * 2) {
- el.scrollLeft -= oneSet;
- } else if (direction === "right" && el.scrollLeft <= 0) {
- el.scrollLeft += oneSet;
- }
- }
- raf = requestAnimationFrame(tick);
- };
- raf = requestAnimationFrame(tick);
- return () => cancelAnimationFrame(raf);
- }, [direction]);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    paused.current = true;
+  };
 
- const handleClick = () => {
-  paused.current = true;
-  if (clickTimer.current) clearTimeout(clickTimer.current);
-  clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
- };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current !== null) {
+      const dx = e.changedTouches[0].clientX - touchStartX.current;
+      offsetRef.current += dx * 2;
+      if (trackRef.current) trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
+    }
+    touchStartX.current = null;
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+    clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
+  };
 
- return (
-  <div className="overflow-hidden" onClick={handleClick} onTouchStart={handleClick} onTouchEnd={handleClick}>
-  <div
-  ref={resolvedRef}
-  className="flex flex-nowrap gap-2 cursor-pointer no-scrollbar"
-  style={{ overflowX: "auto" }}
-  >
-  {[...images, ...images, ...images].map((src, i) => (
-  <button key={i} className={`flex-none h-24 sm:h-36 md:h-52 overflow-hidden group cursor-pointer ${whiteBgInDark ? "dark:bg-white" : "dark:bg-[#252528]"}`}>
-  <SafeImage src={src} alt="WYZ Design portfolio" width={384} className="h-full w-auto object-contain group-hover:scale-95 transition-transform duration-700" />
-  </button>
-  ))}
- </div>
- </div>
- );
+  const doubled = [...images, ...images];
+
+  return (
+    <div ref={sectionRef} aria-hidden="true" className="overflow-hidden" onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+      <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
+        {doubled.map((src, i) => (
+          <div key={i} className={`flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm ${whiteBgInDark ? "dark:bg-white" : ""}`}>
+            <SafeImage src={src} alt="WYZ Design portfolio" width={384} className="absolute inset-0 w-full h-full object-contain" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, onToggle }: {
@@ -214,7 +239,6 @@ const faotmImages = [
 {/* ═══ HERO ═══ */}
   <ScrollReveal animation="fadeIn" duration={1.2}>
     <section className="relative -mt-20 lg:-mt-24 pt-20 lg:pt-24 min-h-screen overflow-hidden bg-black flex items-center hero-banner">
-      <HeroDots variant={2} />
   {/* Mobile: full video background */}
   <div className="md:hidden absolute inset-0 z-0">
     <video
@@ -227,9 +251,10 @@ const faotmImages = [
   {/* Desktop: split layout */}
   <div className="hidden md:flex absolute inset-0 flex flex-col md:flex-row">
   {/* Left half: text with gradient */}
-   <div className="relative w-full md:w-1/2 flex items-center justify-center z-10 overflow-hidden">
-   <div className="absolute inset-0 hero-grad-design z-0" />
-   <div className="absolute inset-0 bg-black/20 z-[1]" />
+    <div className="relative w-full md:w-1/2 flex items-center justify-center z-10 overflow-hidden">
+    <div className="absolute inset-0 hero-grad-design z-0" />
+    <div className="absolute inset-0 bg-black/20 z-[1]" />
+    <HeroDots variant={2} />
       <div className="relative z-10 text-center px-4 sm:px-10 lg:px-16 pt-32 lg:pt-40 pb-12 md:py-0">
   <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}><TextSplit stagger={0.03} direction="up">DESIGNING THE</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">FUTURE</TextSplit></span></h1>
     <p className="text-[16px] sm:text-[17px] text-white/80 max-w-xs sm:max-w-sm leading-relaxed mb-8 sm:mb-10 mx-auto">Our creative design services blend bold style with smart strategy to build brands that dominate.</p>
@@ -352,8 +377,7 @@ const faotmImages = [
    <Link href="/merch" className="group cursor-pointer block">
    <div className="aspect-square relative overflow-hidden mb-2 rounded-lg border border-[#E2E2E2] dark:border-[#444] bg-white dark:bg-[#252528] hover:border-[#DF3131] hover:shadow-lg hover:shadow-[#DF3131]/10 transition-all duration-300">
      <Image src={p.img} alt={p.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 25vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-    </div>
-     <p className="text-[13px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
+     </div>
     </Link>
    </ImageHoverReveal>
    </ScrollParallaxCard>
@@ -429,11 +453,30 @@ const faotmImages = [
  </section>
  </ScrollReveal>
 
-  <section className="max-w-6xl mx-auto px-6 pb-20">
-    <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.08em] uppercase text-[#333] dark:text-white mb-6 text-center">Case Studies</h2>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      {[["Artfinix Foundation","artfinix"],["Kid Bode","kid-bode"],["Dawneeah's Glow","dawneeahs-glow"],["GFT Foods","gft-foods"]].map(([name,slug]) => (
-        <Link key={slug} href={`/designs/${slug}`} className="border border-[#E2E2E2] dark:border-[#444] rounded-lg p-5 text-center font-heading font-bold tracking-[0.04em] text-[#333] dark:text-white hover:border-[#DF3131] hover:text-[#DF3131] transition-colors">{name}</Link>
+  <section className="max-w-6xl mx-auto px-6 pb-24">
+    <div className="text-center mb-10">
+      <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-[#DF3131] block mb-2">Proof</span>
+      <h2 className="font-heading font-black text-[1.5rem] sm:text-[2rem] tracking-[0.08em] uppercase text-[#333] dark:text-white">Case Studies</h2>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {CASE_STUDIES.map((c) => (
+        <Link key={c.slug} href={`/designs/${c.slug}`}
+          className="group relative overflow-hidden rounded-xl border border-[#E2E2E2] dark:border-[#444] p-7 min-h-[190px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl"
+          style={{ background: `linear-gradient(135deg, ${c.accent}14, transparent 60%)` }}>
+          <span className="pointer-events-none absolute -right-12 -top-12 w-44 h-44 rounded-full opacity-20 transition-all duration-700 group-hover:scale-150 group-hover:opacity-30" style={{ background: `radial-gradient(circle, ${c.accent}, transparent 70%)` }} />
+          <div className="relative z-10">
+            <span className="text-[11px] font-bold tracking-[0.25em] uppercase" style={{ color: c.accent }}>{c.tag}</span>
+            <h3 className="font-heading font-black text-[1.35rem] sm:text-[1.6rem] tracking-[0.02em] text-[#333] dark:text-white mt-2 leading-tight">{c.name}</h3>
+            <p className="text-[14px] text-[#666] dark:text-white/60 mt-2 max-w-md leading-relaxed">{c.blurb}</p>
+          </div>
+          <div className="relative z-10 flex items-end justify-between mt-6">
+            <span className="font-heading font-black text-[1.5rem] leading-none" style={{ color: c.accent }}>{c.stat}</span>
+            <span className="inline-flex items-center gap-2 text-[12px] font-bold tracking-[0.12em] uppercase text-[#333] dark:text-white transition-all">
+              Read <FiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </div>
+          <span className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500" style={{ background: c.accent }} />
+        </Link>
       ))}
     </div>
   </section>
