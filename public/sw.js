@@ -2,7 +2,7 @@
 const SW_VERSION = "v2-2026";
 const CACHE_NAME = `wyzdesign-${SW_VERSION}`;
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", (_event) => {
   self.skipWaiting();
 });
 

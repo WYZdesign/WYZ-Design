@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Link from "next/link";
-import { FiSearch, FiMessageCircle, FiZap, FiDollarSign, FiCamera, FiLayout, FiCalendar, FiPrinter, FiSend, FiHelpCircle, FiArrowRight } from "react-icons/fi";
+
+import { FiSearch, FiMessageCircle, FiZap, FiCamera, FiLayout, FiCalendar, FiPrinter, FiSend, FiHelpCircle } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import TextReveal from "@/components/TextReveal";
@@ -337,7 +337,6 @@ export default function FAQPage() {
           {filteredFaqs.map((faq, i) => {
             const realIndex = FAQS.indexOf(faq);
             const isOpen = open === realIndex;
-            const Icon = faq.icon;
             return (
               <ScrollReveal key={realIndex} animation="fadeUp" delay={0.04 * i}>
                 <div

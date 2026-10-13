@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Image from "next/image";
-import { FiUser, FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import { useZeal } from "@/components/ZealProvider";
 import { useModalA11y } from "@/hooks/useModalA11y";

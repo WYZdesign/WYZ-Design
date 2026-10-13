@@ -3,7 +3,7 @@ import { SUBSCRIPTION_PRICES, getMissingPriceIds } from "@/lib/stripe";
 import { requireAdmin } from "@/lib/admin-auth";
 import { logger } from "@/lib/logger";
 
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const admin = await requireAdmin();
     if (!admin.ok) return admin.response;

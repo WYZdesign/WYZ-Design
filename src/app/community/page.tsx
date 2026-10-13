@@ -7,9 +7,9 @@ import { useSession, signIn } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import {
-  FiUsers, FiInstagram, FiMail, FiExternalLink, FiCalendar, FiAward,
-  FiZap, FiMessageCircle, FiPlus, FiTrendingUp, FiHash, FiThumbsUp,
-  FiCornerDownRight, FiStar, FiImage, FiFilm, FiSmile, FiShare2,
+  FiUsers, FiMail, FiExternalLink, FiCalendar, FiAward,
+  FiZap, FiMessageCircle, FiPlus, FiHash, FiThumbsUp,
+  FiCornerDownRight, FiImage, FiShare2,
   FiChevronUp, FiChevronDown, FiEye, FiSend, FiMessageSquare,
   FiX,
 } from "react-icons/fi";

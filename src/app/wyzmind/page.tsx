@@ -1,6 +1,6 @@
 "use client";
 import HeroDots from "@/components/HeroDots";
-import { useState, useRef, useEffect, ReactNode, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
 import Link from "next/link";
 import { FiCpu, FiLayers, FiBarChart2, FiZap, FiFolder, FiMaximize } from "react-icons/fi";

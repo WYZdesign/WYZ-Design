@@ -71,7 +71,6 @@ export default function SafeImage({
   priority,
   style,
   quality = 75,
-  blurWidth = 8,
   ...imgProps
 }: SafeImageProps & React.ImgHTMLAttributes<HTMLImageElement>) {
   const [broken, setBroken] = useState(false);

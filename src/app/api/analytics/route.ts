@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logPageview, logEvent, getAnalyticsSummary, getPageviews } from "@/lib/analytics";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+
 import { createHash } from "crypto";
 import { requireAdmin } from "@/lib/admin-auth";
 import { validateCsrf } from "@/lib/csrf";

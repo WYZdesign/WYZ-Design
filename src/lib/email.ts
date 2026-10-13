@@ -15,7 +15,6 @@ function subjectLine(str: string): string {
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = "WYZ Design <orders@wyzdesign.com>";
-const ADMIN_EMAIL = "info@wyzdesign.com";
 
 interface BookingConfirmation {
   email: string;
@@ -68,7 +67,7 @@ async function sendEmail(to: string, subject: string, html: string): Promise<boo
 }
 
 export async function sendBookingConfirmation(data: BookingConfirmation): Promise<boolean> {
-  const { email, customerName, serviceType, serviceName, amount, orderId } = data;
+  const { email, customerName, serviceName, amount, orderId } = data;
   const name = escapeHtml(customerName || "there");
   const safeServiceName = escapeHtml(serviceName);
 
@@ -122,7 +121,7 @@ export async function sendBookingConfirmation(data: BookingConfirmation): Promis
 }
 
 export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): Promise<boolean> {
-  const { email, customerName, serviceType, serviceName } = data;
+  const { email, customerName, serviceName } = data;
   const name = escapeHtml(customerName || "there");
   const safeServiceName = escapeHtml(serviceName);
 

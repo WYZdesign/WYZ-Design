@@ -10,7 +10,7 @@ import { logger } from "@/lib/logger";
  * @response JSON with points balance and transaction history
  * @auth Required - user must be authenticated
  */
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const session = await auth();
     if (!session?.user?.email) {

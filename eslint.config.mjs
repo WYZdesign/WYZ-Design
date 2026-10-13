@@ -14,6 +14,10 @@ const eslintConfig = defineConfig([
       "react-hooks/immutability": "off",
       "react/no-unescaped-entities": "off",
       "react-hooks/rules-of-hooks": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrors: "none", ignoreRestSiblings: true },
+      ],
     },
   },
   // Override default ignores of eslint-config-next.

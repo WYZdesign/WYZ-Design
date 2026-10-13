@@ -17,7 +17,7 @@ export function useSwipe(
     const dx = e.changedTouches[0].clientX - start.current.x;
     const dy = e.changedTouches[0].clientY - start.current.y;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
-      dx > 0 ? onSwipeRight() : onSwipeLeft();
+      if (dx > 0) onSwipeRight(); else onSwipeLeft();
     }
     start.current = null;
   }, [onSwipeLeft, onSwipeRight, threshold]);

@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { logger } from "@/lib/logger";
-import { FiExternalLink, FiMonitor, FiSmartphone, FiTrendingUp, FiZap, FiGlobe, FiLock, FiArrowRight, FiStar } from "react-icons/fi";
+import { FiExternalLink, FiMonitor, FiSmartphone, FiTrendingUp, FiZap, FiGlobe, FiLock } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
-import AnimatedCounter from "@/components/AnimatedCounter";
+
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 
 function FlipCard({ plan }: { plan: { name: string; price: string; features: string[]; accent: boolean; img: string } }) {
@@ -185,7 +185,6 @@ return (
       <section id="web-design" className="bg-white dark:bg-[#111] pt-0 pb-0 scroll-mt-24">
         {/* ═══ HERO - Split (desktop video/text, mobile merged) ═══ */}
         
-
         {/* ═══ WEB DESIGN MARQUEE ═══ */}
         <section className="py-3 sm:py-6">
         <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
@@ -268,7 +267,6 @@ return (
             </div>
           </section>
         </ScrollReveal>
-
 
         {/* ═══ PRICING ═══ */}
         <ScrollReveal animation="fadeUp">

@@ -3,9 +3,9 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiFolder, FiVideo, FiFilm, FiImage, FiMusic, FiFileText, FiFile, FiArchive, FiCode, FiGrid, FiLayers, FiDownload, FiZap, FiGlobe, FiStar, FiPlay } from "react-icons/fi";
+import { FiFolder, FiVideo, FiFilm, FiImage, FiMusic, FiFileText, FiFile, FiArchive, FiLayers, FiDownload, FiZap, FiGlobe, FiStar, FiPlay } from "react-icons/fi";
 import type { IconType } from "react-icons";
-import ScrollReveal from "@/components/ScrollReveal";
+
 import { useModalA11y } from "@/hooks/useModalA11y";
 
 interface DriveFile {
@@ -24,16 +24,6 @@ interface DriveFile {
 
 type ViewMode = "grid" | "list";
 type SortMode = "name" | "date" | "size";
-
-const FILE_ICONS: Record<string, IconType> = {
-  mp4: FiVideo, mov: FiVideo, webm: FiVideo, avi: FiVideo,
-  jpg: FiImage, jpeg: FiImage, png: FiImage, webp: FiImage, gif: FiImage, tiff: FiImage, raw: FiImage, cr2: FiImage, nef: FiImage, dng: FiImage,
-  mp3: FiMusic, wav: FiMusic, flac: FiMusic, m4a: FiMusic,
-  pdf: FiFileText, doc: FiFileText, docx: FiFileText, xls: FiFileText, xlsx: FiFileText, ppt: FiFile, pptx: FiFile,
-  zip: FiArchive, rar: FiArchive, "7z": FiArchive, tar: FiArchive, gz: FiArchive,
-  txt: FiFileText, csv: FiFileText, json: FiFile, xml: FiFile, html: FiGlobe, css: FiLayers, js: FiZap,
-  aep: FiFilm, psd: FiLayers, ai: FiLayers, lrtemplate: FiStar, xmp: FiStar,
-};
 
 const MIME_ICONS: Record<string, IconType> = {
   "video": FiVideo,

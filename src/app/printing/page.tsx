@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
-import TextReveal from "@/components/TextReveal";
+
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import SuccessBurst from "@/components/SuccessBurst";
 import { useZeal } from "@/components/ZealProvider";

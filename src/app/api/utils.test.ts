@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { NextRequest, NextResponse } from "next/server";
+import { describe, it, expect, beforeEach } from "vitest";
+
 import { hashIp } from "@/lib/api-utils";
 
 describe("hashIp", () => {

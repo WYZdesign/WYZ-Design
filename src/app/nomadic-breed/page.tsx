@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+
 import { FiArrowRight, FiMapPin, FiCamera, FiCalendar, FiPackage } from "react-icons/fi";
 import type { IconType } from "react-icons";
 
@@ -11,8 +11,6 @@ const SERVICE_ICONS: Record<string, IconType> = {
 };
 
 const SITE = "https://www.wyzdesign.com";
-
-
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -37,7 +35,6 @@ export default function NomadicBreedPage() {
 
       {/* Hero */}
       
-
       {/* Philosophy */}
       <section className="max-w-4xl mx-auto px-6 section-gap text-center">
         <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.8rem] lg:text-[2.2rem] tracking-[0.04em] mb-6">

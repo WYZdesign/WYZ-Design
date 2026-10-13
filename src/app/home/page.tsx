@@ -2,20 +2,20 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FiArrowRight, FiChevronLeft, FiChevronRight, FiCamera, FiMonitor, FiVideo, FiMessageCircle, FiGlobe, FiSearch, FiZap, FiAward, FiTrendingUp } from "react-icons/fi";
+import { FiCamera, FiMonitor, FiVideo, FiMessageCircle, FiGlobe, FiSearch, FiAward } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
-import CardTilt from "@/components/CardTilt";
+
 import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
 import GyroTilt from "@/components/GyroTilt";
 import TextMaskReveal from "@/components/TextMaskReveal";
 import MagneticElement from "@/components/MagneticElement";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
-import ScrollParallaxCard from "@/components/ScrollParallaxCard";
+
 import TextSplit from "@/components/TextSplit";
 import ImageReveal from "@/components/ImageReveal";
 import { shuffleArray } from "@/lib/utils";
-import { LOGO_INTROS_RAW, HERO_IMAGES_RAW, CLIENT_LOGOS_RAW, DESIGN_SHOWCASE_RAW, MODELS_RAW_RECORDS, FAQ_ITEMS, SERVICE_LIST, PRICING_PLANS, QUICK_LINKS } from "@/lib/data/home";
+import { LOGO_INTROS_RAW, HERO_IMAGES_RAW, CLIENT_LOGOS_RAW, DESIGN_SHOWCASE_RAW, MODELS_RAW_RECORDS, FAQ_ITEMS, SERVICE_LIST } from "@/lib/data/home";
 
 const SERVICES = [
  { icon: <FiCamera />, name: "Artist Launch Kit", desc: "Creative direction, photoshoot, cover art, social graphics, landing page. For musicians, models, performers ready to level up.", href: "/services#plans", tab: "FOR ARTISTS" },
@@ -29,88 +29,6 @@ const SERVICES = [
  // clean rows of 2 instead of 2+2+1.
  { icon: <FiAward />, name: "Custom Print & Merch", desc: "Stickers, apparel, and branded merch printed to order. For artists and brands who want their identity on something real.", href: "/printing", tab: "PRINT & MERCH" },
 ];
-
-function HomeServiceFlipCard({ s }: { s: typeof SERVICE_LIST[0] }) {
-  const [flipped, setFlipped] = useState(false);
-  const canHover = useRef(false);
-  // 2026-10-10 (Claude, full-site audit): see the matching note on
-  // ServiceCard in src/app/services/page.tsx -- same onFocus/onClick race
-  // made a tap on touch devices do nothing (focus sets flipped true, then
-  // the click handler's toggle immediately flips it back to false before
-  // paint). justFocusedRef skips that toggle for the click that caused the
-  // focus, so tap-to-flip actually works.
-  const justFocusedRef = useRef(false);
-  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
-  return (
-    <div
-      className="group relative cursor-pointer w-full"
-      style={{ perspective: "1200px" }}
-      tabIndex={0}
-      onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false);
-      }}
-      onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
-      onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
-      onClick={() => {
-        if (justFocusedRef.current) { justFocusedRef.current = false; return; }
-        setFlipped((f) => !f);
-      }}
-    >
-      <div className="relative w-full" style={{ minHeight: "min(380px, 50vh)", transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" } as React.CSSProperties}>
-        {/* Front.
-            2026-10-10 (Claude, full-site audit, board K5): see the matching
-            note on ServiceCard in src/app/services/page.tsx -- this wrapper
-            was missing transform-style:preserve-3d entirely, flattening the
-            front/back faces into the parent's 2D plane and breaking
-            backface culling on mobile Safari (front text bled through the
-            back face). Added preserve-3d + the -webkit- prefixed variants
-            iOS Safari needs alongside the unprefixed properties. */}
-        <div
-          className="absolute inset-0 transition-all duration-700 ease-in-out"
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" } as React.CSSProperties}
-        >
-          <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
-             <Image src={s.img} alt={s.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-black/80" />
-            <div className="absolute inset-0 flex items-center justify-center z-10">
-              <h3 className="font-heading font-black text-white text-[20px] sm:text-[22px] md:text-[24px] tracking-[0.06em] text-center drop-shadow-lg px-4 uppercase">{s.name}</h3>
-            </div>
-          </div>
-        </div>
-
-        {/* Back */}
-        <div
-          className="absolute inset-0 transition-all duration-700 ease-in-out"
-          style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" } as React.CSSProperties}
-        >
-          <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col items-center justify-center overflow-hidden relative">
-            <div className="absolute inset-0 opacity-10">
-               <Image src={s.img} alt={s.name} fill sizes="100vw" className="w-full h-full object-cover" />
-            </div>
-            <div className="relative z-10 text-center flex flex-col items-center justify-center">
-              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 mb-2 block">{s.cat}</span>
-              <h3 className="font-heading font-black text-white text-[22px] sm:text-[24px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
-              <p className="text-white/80 text-[14px] sm:text-[15px] leading-relaxed mb-4 max-w-xs">{s.desc}</p>
-              <div className="flex flex-col items-center justify-center gap-0 mb-5">
-                <span className="text-[48px] sm:text-[56px] font-black leading-none">{s.price}</span>
-                <span className="text-white/60 text-[15px] mt-1">{s.dur}</span>
-              </div>
-              <div className="flex gap-2 w-full max-w-xs">
-                <Link href={s.href} className="flex-1 text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#333] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
-                  BOOK NOW
-                </Link>
-                <Link href="/services#plans" className="flex-1 text-center py-2.5 border-2 border-white text-white text-[13px] font-bold tracking-[0.08em] hover:bg-white hover:text-[#DF3131] transition-all" onClick={(e) => e.stopPropagation()}>
-                  VIEW PLANS
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function SmoothCarousel({ items, className = "", speed = 0.5, direction = "left" }: { items: string[]; className?: string; speed?: number; direction?: "left" | "right" }) {
  const trackRef = useRef<HTMLDivElement>(null);

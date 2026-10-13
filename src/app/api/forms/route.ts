@@ -3,7 +3,7 @@ import { getServiceClient } from "@/lib/supabase";
 import { Resend } from "resend";
 import { sendDiscordAlert } from "@/lib/discord";
 import { rateLimit } from "@/lib/rate-limit";
-import { sanitizeHtml } from "@/lib/dompurify";
+
 import { validateCsrf } from "@/lib/csrf";
 import { getClientIp, hashIp } from "@/lib/api-utils";
 import { logger } from "@/lib/logger";

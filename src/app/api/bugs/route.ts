@@ -5,7 +5,7 @@ import { rateLimit } from "@/lib/rate-limit";
 import { validateCsrf } from "@/lib/csrf";
 import { requireAdmin } from "@/lib/admin-auth";
 import { getServiceClient } from "@/lib/supabase";
-import { getClientIp, hashIp } from "@/lib/api-utils";
+import { hashIp } from "@/lib/api-utils";
 import { logger } from "@/lib/logger";
 
 const IS_VERCEL = !!process.env.VERCEL;

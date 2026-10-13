@@ -104,8 +104,6 @@ return (
   );
 }
 
-
-
 export function RevenueByCategoryCard({ year }: { year: number }) {
   const [rows, setRows] = useState<{ category: string; amount: number }[] | null>(null);
 
@@ -272,8 +270,6 @@ export function ReportsTab({ data }: { data: FinancialSummary }) {
   );
 }
 
-
-
 // ─── ANALYTICS TAB ───
 
 export function TransactionForm({ type, onClose }: { type: "income" | "expense"; onClose: () => void }) {
@@ -423,10 +419,3 @@ export function TransactionTable({ transactions, onRefresh }: { transactions: Tr
     </div>
   );
 }
-
-interface NsfwAdminData {
-  gatedCategories: string[];
-  cachedEntries: { path: string; label: string; confidence: number; ts: number }[];
-  verifiedUsers: { email: string; ts: number }[];
-}
-

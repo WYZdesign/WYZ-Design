@@ -167,16 +167,6 @@ interface UserZealState {
   lastVisitDay: string | null;
 }
 
-const DEFAULT_STATE: Omit<UserZealState, "points" | "tier"> = {
-  actions: [],
-  achievements: [],
-  questsCompleted: [],
-  counters: {},
-  visitStreak: 0,
-  longestStreak: 0,
-  lastVisitDay: null,
-};
-
 async function loadUserState(email: string): Promise<UserZealState> {
   const row = await loadZealState(email);
   return {

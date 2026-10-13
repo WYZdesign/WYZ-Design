@@ -9,7 +9,7 @@ import { logger } from "@/lib/logger";
  * @response JSON with points, tier, streaks, achievements, quests, catalog
  * @auth Required
  */
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const session = await auth();
     if (!session?.user?.email) {

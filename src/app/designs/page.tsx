@@ -4,7 +4,7 @@ import HeroDots from "@/components/HeroDots";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FiArrowRight, FiSearch, FiCpu } from "react-icons/fi";
+import { FiArrowRight, FiSearch } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
 import SafeImage from "@/components/SafeImage";
@@ -179,9 +179,6 @@ export default function DesignsPage() {
   { img: "/images/merch/dbc-archive/98442d-422f5f161e544ce9bf0e06f901881db4~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
 ], []);
 
-
-
-
  const [shuffledLogos, setShuffledLogos] = useState(LOGOS_IMAGES);
  const [shuffledCovers, setShuffledCovers] = useState(COVER_ART_WYZ);
  const [shuffledFlyers, setShuffledFlyers] = useState(FLYERS_IMAGES);
@@ -272,7 +269,6 @@ export default function DesignsPage() {
   </div>
   </section>
   </ScrollReveal>
-
 
  {/* ═══ DESIGNS MARQUEE ═══ */}
    <section className="py-3 sm:py-6">

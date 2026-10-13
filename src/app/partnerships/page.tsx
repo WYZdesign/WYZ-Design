@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FiArrowRight, FiUsers, FiTarget, FiTrendingUp } from "react-icons/fi";
+import { FiUsers, FiTarget, FiTrendingUp } from "react-icons/fi";
 import { SUB_BRANDS, taglineColor } from "@/lib/brands";
 
 interface LeaderEntry {
@@ -72,7 +72,6 @@ export default function PartnershipsPage() {
     <section id="partnerships" className="pb-16 bg-white dark:bg-[#1C1C1E] scroll-mt-24">
       {/* Hero */}
       
-
       {/* Our Brands */}
       <section className="section-gap bg-white dark:bg-[#1C1C1E]">
         <div className="max-w-6xl mx-auto px-6">
