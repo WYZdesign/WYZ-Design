@@ -34,7 +34,8 @@ export const CSS = `
 /* ---------- LOGO ---------- */
 export function CrownLogo({ size = 70, style }: { size?: number; style?: React.CSSProperties }) {
  const [broken, setBroken] = useState(false);
- if (!broken) {
+  if (!broken) {
+  // eslint-disable-next-line @next/next/no-img-element -- tiny inline brand mark with an onError raster fallback
   return <img src="/wyz-crown.webp" alt="WYZ Design" width={size} height={Math.round(size * 0.66)} style={{ objectFit: "contain", ...style }} onError={() => setBroken(true)} />;
  }
  return (

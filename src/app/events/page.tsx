@@ -5,7 +5,6 @@ import { useRef, useState, useEffect, useCallback, createContext, useContext } f
 import Image from "next/image";
 import Link from "next/link";
 import { FiChevronLeft, FiChevronRight, FiPlay, FiX } from "react-icons/fi";
-import { useSwipe } from "@/hooks/useSwipe";
 import { useModalA11y } from "@/hooks/useModalA11y";
 import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -17,7 +16,6 @@ import { getSiteUrl } from "@/lib/site-url";
 
 import { ALL_EVENT_IMAGES, CLIENT_EVENTS_RAW, DIY_SHOWS_RAW } from "@/lib/data/events";
 
-const FLIP_SPEED = 450;
 
 function markRecapPlayed(earn: (action: string) => Promise<unknown>) {
   try {
@@ -31,26 +29,6 @@ function videoThumb(videoPath: string): string {
  const name = videoPath.split("/").pop()?.replace(/\.mp4$/, "") || "";
  const safe = name.replace(/[^a-zA-Z0-9]/g, "_");
  return `/images/event-thumbnails/${safe}.jpg`;
-}
-
-function extractColor(canvas: HTMLCanvasElement, video: HTMLVideoElement): string {
- const ctx = canvas.getContext("2d");
- if (!ctx) return "#DF3131";
- canvas.width = 64;
- canvas.height = 36;
- ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
- const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
- let r = 0, g = 0, b = 0, count = 0;
- for (let i = 0; i < data.length; i += 16) {
- r += data[i];
- g += data[i + 1];
- b += data[i + 2];
- count++;
- }
- r = Math.round(r / count);
- g = Math.round(g / count);
- b = Math.round(b / count);
- return `rgb(${r},${g},${b})`;
 }
 
 /* ═══ GLOBAL VIDEO MUTE CONTEXT ═══ */

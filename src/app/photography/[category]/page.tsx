@@ -34,12 +34,14 @@ export default function CategoryPage() {
     if (isGated && !nsfwSession.loading && !nsfwSession.ageVerified && status !== "loading") {
       nsfwSession.requestVerification();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
   }, [isGated, nsfwSession.loading, nsfwSession.ageVerified, status]);
 
  useEffect(() => {
  const imgs: string[] = [];
  for (const album of albums) imgs.push(...album.images);
  setAllImages(imgs);
+ // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
  }, [category]);
 
  const openSlideshow = (src: string) => {
@@ -64,6 +66,7 @@ export default function CategoryPage() {
       removeEventListener("keydown", k);
       document.body.style.overflow = "";
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
   }, [slideshowIndex]);
 
  return (

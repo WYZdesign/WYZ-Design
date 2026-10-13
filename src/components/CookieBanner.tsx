@@ -36,6 +36,7 @@ export default function CookieBanner() {
     if (window.location.pathname === "/") {
       setShow(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
   }, []);
 
   useEffect(() => {

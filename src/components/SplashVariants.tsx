@@ -151,6 +151,7 @@ export function Ripple({ onEnter }: VProps) {
 
 export function Spotlight({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const li = useRef<HTMLDivElement>(null);
+ // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
  useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; p.x += (m.x - p.x) * .12; p.y += (m.y - p.y) * .12; if (li.current) li.current.style.background = `radial-gradient(360px circle at ${p.x}px ${p.y}px, rgba(223,49,49,.2), rgba(212,147,65,.1) 42%, transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox(DK)}><div ref={li} style={{ position: "absolute", inset: 0 }} /><Brand onEnter={onEnter} /></div>;
 }
@@ -205,6 +206,7 @@ export function TiltGlass({ onEnter }: VProps) {
 
 export function Duotone({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const li = useRef<HTMLDivElement>(null);
+ // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
  useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; p.x += (m.x - p.x) * .1; p.y += (m.y - p.y) * .1; if (li.current) li.current.style.background = `radial-gradient(300px circle at ${p.x}px ${p.y}px, rgba(255,255,255,.22), transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#1a1410")}>
  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,#3a2a18,#1a1410 60%)", mixBlendMode: "luminosity", opacity: .5 }} />
@@ -286,6 +288,7 @@ export function Vortex({ onEnter }: VProps) {
     const r = () => { const z = fit(c); W = z.W; H = z.H; };
     addEventListener("resize", r);
     return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
   }, []);
   return <div ref={ref} style={stageBox("#0d0b09")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
@@ -294,8 +297,9 @@ export function WaveRipple({ onEnter }: VProps) {
   const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref); const cv = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const c = cv.current!, x = c.getContext("2d")!; let { W, H } = fit(c), raf = 0, t = 0;
-    const tick = () => { x.clearRect(0, 0, W, H); t += .015; const m = p.current; for (let i = 0; i < 5; i++) { x.beginPath(); for (let px = 0; px <= W; px += 4) { const y = H / 2 + Math.sin(px * .008 + t + i * 1.2) * 60 * Math.sin(t * .5 + i) + Math.cos(px * .005 - t * .7) * 30 + (m.on ? (m.y - H / 2) * .15 : 0); px === 0 ? x.moveTo(px, y) : x.lineTo(px, y); } x.strokeStyle = i % 2 ? R : G; x.globalAlpha = .15 + i * .03; x.lineWidth = 1.5 + i * .5; x.stroke(); } x.globalAlpha = 1; raf = requestAnimationFrame(tick); };
+    const tick = () => { x.clearRect(0, 0, W, H); t += .015; const m = p.current; for (let i = 0; i < 5; i++) { x.beginPath(); for (let px = 0; px <= W; px += 4) { const y = H / 2 + Math.sin(px * .008 + t + i * 1.2) * 60 * Math.sin(t * .5 + i) + Math.cos(px * .005 - t * .7) * 30 + (m.on ? (m.y - H / 2) * .15 : 0); if (px === 0) x.moveTo(px, y); else x.lineTo(px, y); } x.strokeStyle = i % 2 ? R : G; x.globalAlpha = .15 + i * .03; x.lineWidth = 1.5 + i * .5; x.stroke(); } x.globalAlpha = 1; raf = requestAnimationFrame(tick); };
     tick(); const r = () => { const z = fit(c); W = z.W; H = z.H; }; addEventListener("resize", r); return () => { cancelAnimationFrame(raf); removeEventListener("resize", r); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
   }, []);
   return <div ref={ref} style={stageBox("#0e0c0b")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }

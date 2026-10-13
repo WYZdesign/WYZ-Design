@@ -29,16 +29,19 @@ export default function SafeImage({ src, alt, className = "", loading, decoding 
   }
 
   return (
-    <img
-      src={src}
-      alt={alt}
-      className={`${className} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
-      loading={resolvedLoading}
-      decoding={decoding}
-      onLoad={() => { setLoaded(true); onLoad?.(); }}
-      onError={() => setBroken(true)}
-      {...imgProps}
-    />
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element -- this module is the custom image primitive (raw img with load/error fallback) */}
+      <img
+        src={src}
+        alt={alt}
+        className={`${className} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
+        loading={resolvedLoading}
+        decoding={decoding}
+        onLoad={() => { setLoaded(true); onLoad?.(); }}
+        onError={() => setBroken(true)}
+        {...imgProps}
+      />
+    </>
   );
 }
 

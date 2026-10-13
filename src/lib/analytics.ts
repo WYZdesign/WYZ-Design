@@ -137,10 +137,8 @@ export async function getPageviews(filters?: {
 
   const collected: Pageview[] = [];
   for (const day of days) {
-    // eslint-disable-next-line no-await-in-loop
     const keys = await r.keys(`${pvKey(day)}:*`).catch(() => []);
     for (const k of keys) {
-      // eslint-disable-next-line no-await-in-loop
       const raw = await r.get(k).catch(() => null);
       if (raw) {
         const pv: Pageview = JSON.parse(raw);

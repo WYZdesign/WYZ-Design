@@ -289,7 +289,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
  if (!modelAutoPlay) return;
  const t = setInterval(() => setModelIdx(i => (i + 1) % featuredModels.length), 2500);
  return () => clearInterval(t);
- }, [modelAutoPlay]);
+  }, [modelAutoPlay, featuredModels.length]);
 
  const CAROUSEL_IMAGES_1 = carousel1.length > 0 ? carousel1 : [
  "/images/photography/carousel_1/wix_0216.jpg",

@@ -52,6 +52,7 @@ export default function PageRenderer() {
  loadGdrive();
  };
  });
+ // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
  }, [editMode, html]);
 
  const loadGdrive = () => {
@@ -159,8 +160,9 @@ export default function PageRenderer() {
  const rel = f.path.replace("G:\\My Drive\\", "").replace(/\\/g, "/");
  return (
  <button key={i} onClick={() => replaceImage(f.path)}
-  className="aspect-square rounded-lg overflow-hidden border-2 border-gray-200 dark:border-[#444] hover:border-[#DF3131] hover:shadow-md transition-all">
- <img src={`/api/media/${rel}`} alt="Page content image" width={400} height={300} className="w-full h-full object-cover" loading="lazy"
+   className="aspect-square rounded-lg overflow-hidden border-2 border-gray-200 dark:border-[#444] hover:border-[#DF3131] hover:shadow-md transition-all">
+   {/* eslint-disable-next-line @next/next/no-img-element -- dynamic /api/media route, not a static asset */}
+   <img src={`/api/media/${rel}`} alt="Page content image" width={400} height={300} className="w-full h-full object-cover" loading="lazy"
  onError={e => { (e.target as HTMLImageElement).style.display = "none"; }} />
  </button>
  );

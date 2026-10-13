@@ -15,7 +15,7 @@ import EnhancedMarquee from "@/components/EnhancedMarquee";
 import TextSplit from "@/components/TextSplit";
 import ImageReveal from "@/components/ImageReveal";
 import { shuffleArray } from "@/lib/utils";
-import { LOGO_INTROS_RAW, HERO_IMAGES_RAW, CLIENT_LOGOS_RAW, DESIGN_SHOWCASE_RAW, MODELS_RAW_RECORDS, FAQ_ITEMS, SERVICE_LIST } from "@/lib/data/home";
+import { LOGO_INTROS_RAW, HERO_IMAGES_RAW, CLIENT_LOGOS_RAW, DESIGN_SHOWCASE_RAW, MODELS_RAW_RECORDS, FAQ_ITEMS } from "@/lib/data/home";
 
 const SERVICES = [
  { icon: <FiCamera />, name: "Artist Launch Kit", desc: "Creative direction, photoshoot, cover art, social graphics, landing page. For musicians, models, performers ready to level up.", href: "/services#plans", tab: "FOR ARTISTS" },
@@ -233,7 +233,6 @@ export default function HomePage() {
  const [openFaq, setOpenFaq] = useState<number | null>(null);
  const [faqSearch, setFaqSearch] = useState("");
  const [faqCount, setFaqCount] = useState(4);
- const [flippedPlans, setFlippedPlans] = useState<Record<number, boolean>>({});
  const heroRef = useRef<HTMLDivElement>(null);
  const [heroVis, setHeroVis] = useState(false);
   const [shuffledHero, setShuffledHero] = useState<string[]>([]);

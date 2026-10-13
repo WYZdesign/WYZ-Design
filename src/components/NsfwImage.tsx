@@ -119,6 +119,7 @@ export default function NsfwImage({
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element -- needs a raw ref + onLoad gate for the NSFW blur overlay */}
       <img
         ref={imgRef}
         src={src}

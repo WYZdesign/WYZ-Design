@@ -75,7 +75,7 @@ export function ScatteredGrid({ products, onSelect }: { products: Product[]; onS
       offsetY: ((i * 31) % 30) - 15,
       scale: 0.95 + ((i * 17) % 10) / 100,
     }));
-  }, [products.length]);
+  }, [products]);
 
   return (
     <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 md:gap-8 lg:gap-10 px-4">

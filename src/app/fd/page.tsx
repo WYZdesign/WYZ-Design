@@ -271,6 +271,7 @@ export default function FDOraclePage() {
                   style={{ boxShadow: activeStudio === studio.name ? `0 0 30px ${studio.color}20` : "none" }}
                 >
                   <div className="aspect-[4/3] overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- remote studio image from data, not a build asset */}
                     <img src={studio.image} alt={studio.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"

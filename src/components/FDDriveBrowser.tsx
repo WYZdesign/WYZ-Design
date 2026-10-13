@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiFolder, FiVideo, FiFilm, FiImage, FiMusic, FiFileText, FiFile, FiArchive, FiLayers, FiDownload, FiZap, FiGlobe, FiStar, FiPlay } from "react-icons/fi";
+import { FiFolder, FiVideo, FiImage, FiMusic, FiFileText, FiFile, FiDownload, FiPlay } from "react-icons/fi";
 import type { IconType } from "react-icons";
 
 import { useModalA11y } from "@/hooks/useModalA11y";
@@ -403,6 +403,7 @@ export default function FDDriveBrowser() {
             <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
               onClick={e => e.stopPropagation()}
               className="relative max-w-5xl max-h-[90vh] w-full">
+              {/* eslint-disable-next-line @next/next/no-img-element -- blob/data preview URL from the drive API */}
               <img src={imagePreview} alt={selectedFile.name} className="w-full h-full object-contain rounded-lg"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
