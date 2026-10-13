@@ -184,3 +184,10 @@ NOTE: Claude Code CLI is OUT OF ANTHROPIC CREDITS ("Credit balance is too low"),
 - Gate: tsc 0, lint 0 errors, build 0, tests 30, **deploy LIVE (79e56de)**. /merch + /photography verified rendering live; /api/printful-catalog returns 4 products.
 
 Working tree clean. No agent-owned work remains.
+
+### Lint + dead-code cleanup (2026-10-12, WYZMiND)
+
+- **Lint warnings 93 -> 35** (0 errors). Removed unused imports/vars across ~30 files; eslint now allows `_`-prefixed and catch-clause unused vars.
+- **Deleted dead components:** HomeServiceFlipCard (home), ColorAuraVideo (events), FILE_ICONS (FDDriveBrowser), NsfwAdminData interface (AdminFinanceTabs), DEFAULT_STATE (zeal).
+- Remaining 35 warnings are exhaustive-deps (15), no-img-element (6), and a few minor - none are errors.
+- Gate: tsc 0, lint 0 errors, tests 30, build 0, **deploy LIVE (12361db)**; routes smoke-tested 200; home verified rendering all 6 services.
