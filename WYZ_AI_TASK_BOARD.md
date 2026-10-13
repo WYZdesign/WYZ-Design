@@ -191,3 +191,11 @@ Working tree clean. No agent-owned work remains.
 - **Deleted dead components:** HomeServiceFlipCard (home), ColorAuraVideo (events), FILE_ICONS (FDDriveBrowser), NsfwAdminData interface (AdminFinanceTabs), DEFAULT_STATE (zeal).
 - Remaining 35 warnings are exhaustive-deps (15), no-img-element (6), and a few minor - none are errors.
 - Gate: tsc 0, lint 0 errors, tests 30, build 0, **deploy LIVE (12361db)**; routes smoke-tested 200; home verified rendering all 6 services.
+
+### Lint fully clean (2026-10-13, WYZMiND)
+
+- **ESLint now reports 0 problems** (was 93 warnings at the start of cleanup).
+- exhaustive-deps: added the two genuine value deps (`featuredModels.length`, `products`); documented the intentional function/ref effects with a disable reason.
+- Removed the last unused imports/vars (events `useSwipe`/`FLIP_SPEED`/`extractColor`, home `SERVICE_LIST`/`flippedPlans`, FDDriveBrowser icons); dropped a redundant `useMemo` dep and an unused directive; fixed a ternary-as-statement.
+- no-img-element: documented the intentional raw `<img>` uses (dynamic src, NSFW gate, custom primitive).
+- Gate: tsc 0, lint 0, tests 30, build 0, **deploy LIVE (2982df9)**; routes smoke-tested 200.
