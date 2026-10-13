@@ -199,3 +199,10 @@ Working tree clean. No agent-owned work remains.
 - Removed the last unused imports/vars (events `useSwipe`/`FLIP_SPEED`/`extractColor`, home `SERVICE_LIST`/`flippedPlans`, FDDriveBrowser icons); dropped a redundant `useMemo` dep and an unused directive; fixed a ternary-as-statement.
 - no-img-element: documented the intentional raw `<img>` uses (dynamic src, NSFW gate, custom primitive).
 - Gate: tsc 0, lint 0, tests 30, build 0, **deploy LIVE (2982df9)**; routes smoke-tested 200.
+
+### Tests + dead-file sweep (2026-10-13, WYZMiND)
+
+- **Tests 30 -> 40** (8 files): added src/lib/gift-cards.test.ts (TTL/expiry/label/code format/normalize/hash/last4/isExpired) and src/lib/utils.test.ts (shuffleArray permutation/no-mutate/edge cases).
+- **Deleted dead files:** src/components/merch/MerchContentSections.tsx (250 lines) + MerchProductViews.tsx (126 lines) - imported nowhere.
+- Dead-export scan run across src; remaining hits are false positives (Next.js `generateStaticParams`, SplashVariants' internally-referenced variants) or intentional public helpers.
+- Gate: tsc 0, lint 0, tests 40, build 0, **deploy LIVE (0dbbae3)**.
