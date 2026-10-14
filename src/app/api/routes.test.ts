@@ -111,3 +111,44 @@ describe("POST /api/gift-card/validate", () => {
     expect(data.currency).toBe("usd");
   });
 });
+
+describe("POST /api/event (analytics beacon, never fails)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    process.env.IP_HASH_SALT = "test-salt";
+    mocks.rateOk.mockResolvedValue({ ok: true });
+    mocks.from.mockReturnValue({ insert: vi.fn().mockResolvedValue({ error: null }) });
+  });
+
+  function evReq() {
+    return new NextRequest("https://test.com/api/event", {
+      method: "POST",
+      body: JSON.stringify({ name: "cta_click", props: { id: 1 } }),
+      headers: { "x-forwarded-for": "1.2.3.4" },
+    });
+  }
+
+  it("returns 200 ok on success", async () => {
+    const { POST } = await import("@/app/api/event/route");
+    const res = await POST(evReq());
+    expect(res.status).toBe(200);
+    expect((await res.json()).ok).toBe(true);
+  });
+
+  it("still returns 200 ok when the sink throws", async () => {
+    mocks.from.mockReturnValue({ insert: vi.fn().mockRejectedValue(new Error("db down")) });
+    const { POST } = await import("@/app/api/event/route");
+    const res = await POST(evReq());
+    expect(res.status).toBe(200);
+    expect((await res.json()).ok).toBe(true);
+  });
+
+  it("still returns 200 ok when rate limited", async () => {
+    mocks.rateOk.mockResolvedValue({ ok: false });
+    const { POST } = await import("@/app/api/event/route");
+    const res = await POST(evReq());
+    expect(res.status).toBe(200);
+    expect((await res.json()).ok).toBe(true);
+  });
+});
+
