@@ -32,7 +32,12 @@ interface BookingConfirmationWhatsNext {
   serviceName: string;
 }
 
-async function sendEmail(to: string, subject: string, html: string): Promise<boolean> {
+/**
+ * Generic Resend sender. Returns false (never throws) when the key is missing
+ * or the API rejects the message, so callers can treat false as "not sent".
+ * Exported for Spec 22's delivery-outreach sender.
+ */
+export async function sendEmail(to: string, subject: string, html: string): Promise<boolean> {
   if (!RESEND_API_KEY) {
     logger.warn("email:send", `RESEND_API_KEY not set, skipping email to ${to}`);
     return false;

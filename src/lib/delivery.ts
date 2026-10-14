@@ -1,3 +1,5 @@
+import type { SupabaseClient } from "@supabase/supabase-js";
+
 import { logger } from "@/lib/logger";
 
 /**
@@ -119,4 +121,138 @@ export function maySend(stage: OutreachStage): boolean {
 /** Emits a would-be send to the log (never sends). Used by the dry-run cron. */
 export function logPreview(stage: OutreachStage, to: string, subject: string): void {
   logger.info("outreach:preview", `[${stage.key}] would email ${to}: ${subject}`);
+}
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/** Shape of a delivery_events row as the runner reads it. */
+export interface DeliveryRow {
+  id: number;
+  email: string;
+  client_name?: string | null;
+  service_name?: string | null;
+  delivered_at?: string | null;
+  stage1_sent_at?: string | null;
+  stage2_sent_at?: string | null;
+  stage3_sent_at?: string | null;
+  stage4_sent_at?: string | null;
+}
+
+/** Has this stage already been sent for this delivery? */
+export function stageSent(row: DeliveryRow, key: StageKey): boolean {
+  return Boolean(row[`${key}_sent_at`]);
+}
+
+/** Ms of the most recent MARKETING send (stages 2-4) for this delivery, or 0. */
+export function lastMarketingSentMs(row: DeliveryRow): number {
+  let latest = 0;
+  for (const s of OUTREACH_STAGES) {
+    if (s.transactional) continue;
+    const v = row[`${s.key}_sent_at`];
+    if (!v) continue;
+    const ms = new Date(v).getTime();
+    if (Number.isFinite(ms) && ms > latest) latest = ms;
+  }
+  return latest;
+}
+
+/**
+ * Cadence cap: at most 1 marketing message per client per CADENCE_MAX_DAYS,
+ * counted across stages 2-4 combined. Stage 1 is transactional and exempt.
+ */
+export function cadenceBlocked(stage: OutreachStage, row: DeliveryRow, now: number): boolean {
+  if (stage.transactional) return false;
+  const last = lastMarketingSentMs(row);
+  if (!last) return false;
+  return now - last < CADENCE_MAX_DAYS * DAY_MS;
+}
+
+/** Row shape of client_comm_preferences as the runner reads it. */
+export interface CommPref {
+  email: string;
+  email_opt_in?: boolean | null;
+  opt_out_at?: string | null;
+}
+
+/**
+ * Consent gate. No record = not opted out (table defaults to opt-in).
+ * Any explicit opt-out wins, including a false email_opt_in flag.
+ */
+export function consentAllows(pref: CommPref | null | undefined): boolean {
+  if (!pref) return true;
+  if (pref.opt_out_at) return false;
+  if (pref.email_opt_in === false) return false;
+  return true;
+}
+
+function esc(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+/**
+ * Renders a plain-text stage body into a minimal branded HTML email.
+ * Newlines become line breaks, blank lines become paragraphs. Everything is
+ * escaped, so copy can never inject markup.
+ */
+export function bodyToHtml(subject: string, body: string): string {
+  const paragraphs = body
+    .split(/\n{2,}/)
+    .map((p) => `<p style="margin:0 0 16px;color:#e8e8e8;font-size:15px;line-height:1.6">${esc(p).replace(/\n/g, "<br/>")}</p>`)
+    .join("");
+  return [
+    '<!doctype html><html><body style="margin:0;padding:0;background:#0a0a0a">',
+    '<div style="max-width:560px;margin:0 auto;padding:32px 24px;font-family:Helvetica,Arial,sans-serif">',
+    `<h1 style="margin:0 0 20px;color:#fff;font-size:20px;font-weight:800">${esc(subject)}</h1>`,
+    paragraphs,
+    '<p style="margin:24px 0 0;color:#8a8a8a;font-size:13px">WYZ Design &middot; Los Angeles &middot; https://www.wyzdesign.com</p>',
+    "</div></body></html>",
+  ].join("");
+}
+
+export interface DeliveryInput {
+  email: string;
+  clientName?: string | null;
+  serviceName?: string | null;
+  orderId?: string | null;
+  deliveredAt?: string | null;
+  notes?: string | null;
+}
+
+/**
+ * Emitter: records one delivery event (the row all four stages key off).
+ * Idempotent on (email, delivered_at) so a double-submit cannot create two
+ * send streams for the same delivery.
+ */
+export async function recordDelivery(
+  sb: SupabaseClient,
+  input: DeliveryInput,
+): Promise<{ ok: boolean; id?: number; skipped?: string; error?: string }> {
+  const email = (input.email || "").trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, skipped: "invalid-email" };
+
+  const deliveredAt = input.deliveredAt || new Date().toISOString();
+  const { data: dup, error: dupErr } = await sb
+    .from("delivery_events")
+    .select("id")
+    .eq("email", email)
+    .eq("delivered_at", deliveredAt)
+    .maybeSingle();
+  if (dupErr) return { ok: false, error: dupErr.message };
+  if (dup) return { ok: true, id: Number(dup.id), skipped: "already-recorded" };
+
+  const { data, error } = await sb
+    .from("delivery_events")
+    .insert({
+      email,
+      client_name: input.clientName || null,
+      service_name: input.serviceName || null,
+      order_id: input.orderId || null,
+      delivered_at: deliveredAt,
+      notes: input.notes || null,
+    })
+    .select("id")
+    .single();
+
+  if (error) return { ok: false, error: error.message };
+  return { ok: true, id: Number(data.id) };
 }
