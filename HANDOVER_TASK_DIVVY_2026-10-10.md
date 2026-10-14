@@ -246,3 +246,12 @@ Phase 3 (live per-stage outreach) shipped and verified end to end.
 - **Commit `6dbf69f` - DEPLOY IS LIVE.**
 
 Note: nothing will send until deliveries exist. Record one with `POST /api/admin/delivery-events {email, clientName, serviceName}` or wire a fulfillment hook later.
+
+## Progress 10 - Codex UI interactions batch landed (2026-10-14, WYZMiND)
+
+Codex finished the UI-interactions pass and handed it over in `HANDOVER_UI_INTERACTIONS_2026-10-13.md`, with WYZMiND assigned the visual pass plus the commit. Done.
+
+- **Verified visually** at 1440x900 and 390x844 with headless Playwright: home hero (no dots, by design), designs hero dots on the copy side plus the Danny Davis feature, services centered controls and content-height plan cards, events hero plus the video row and YouTube spotlight, desktop More menu (centered, SHOP contains Services and Printing), mobile nav entering from the right, and the mobile footer. Shots in `W:\WYZ_Command_Center\_STATE\web_shots\qa_*.png`.
+- **Gate re-run on the working tree:** tsc 0, lint 0, tests 69, build 0.
+- **Commit `1579bd1` - DEPLOY IS LIVE** (16 files: the 15 modified + the handover doc).
+- One check remains for the owner: iPhone motion-permission prompt, then tilt-test the splash variants. iOS withholds `DeviceOrientationEvent` until a user gesture, so that cannot be verified headlessly. The splash stays ambient until permission is granted, which is the intended fallback.

@@ -211,3 +211,10 @@ Working tree clean. No agent-owned work remains.
 
 - **Tests 40 -> 52** (9 files). Added src/app/api/routes.test.ts: /api/health (redis up/down) + /api/gift-card/validate (no-code 400, rate-limit 429, not-found, inactive, expired, zero-balance, valid balance) + /api/event beacon resilience (200 on success, on sink throw, on rate limit).
 - Gate: tsc 0, lint 0, build 0, tests 52, push 02b09a5.
+
+### Codex UI interactions batch - landed and deployed (2026-10-14, WYZMiND)
+
+- Codex shipped the UI interactions pass (`HANDOVER_UI_INTERACTIONS_2026-10-13.md`): per-instance hero dots, splash pointer + iOS orientation handling, events video fade + YouTube overlay, services card sizing, footer/mobile-footer spacing, desktop nav with SHOP grouping (Services + Printing) and a centered More menu, mobile nav entering from the right.
+- **Visual pass by WYZMiND:** 1440x900 + 390x844 headless shots covering home, designs (Danny feature), services, events (video row + YouTube spotlight), desktop More menu, mobile nav open, mobile footer. Console noise limited to the two pre-existing items (CSP report-only warning, `_next/image` 400 on filenames with spaces/apostrophes).
+- **Gate:** tsc 0, lint 0, tests **69**, build 0. Commit `1579bd1` - **DEPLOY IS LIVE**.
+- Open for the owner only: iPhone motion-permission prompt + tilt-test of the splash variants (iOS withholds `DeviceOrientationEvent` until a gesture; cannot be verified headlessly).
