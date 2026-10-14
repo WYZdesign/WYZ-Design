@@ -206,3 +206,8 @@ Working tree clean. No agent-owned work remains.
 - **Deleted dead files:** src/components/merch/MerchContentSections.tsx (250 lines) + MerchProductViews.tsx (126 lines) - imported nowhere.
 - Dead-export scan run across src; remaining hits are false positives (Next.js `generateStaticParams`, SplashVariants' internally-referenced variants) or intentional public helpers.
 - Gate: tsc 0, lint 0, tests 40, build 0, **deploy LIVE (0dbbae3)**.
+
+### API route tests (2026-10-13, WYZMiND)
+
+- **Tests 40 -> 52** (9 files). Added src/app/api/routes.test.ts: /api/health (redis up/down) + /api/gift-card/validate (no-code 400, rate-limit 429, not-found, inactive, expired, zero-balance, valid balance) + /api/event beacon resilience (200 on success, on sink throw, on rate limit).
+- Gate: tsc 0, lint 0, build 0, tests 52, push 02b09a5.
