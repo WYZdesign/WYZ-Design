@@ -230,3 +230,19 @@ Only **three** exist: `public/images/faotm_1.jpg`, `faotm_2.jpg`, `faotm_3.jpg`.
   - Events 90+ / Clients 45+ unchanged (site-backed).
   - Evidence: G: Drive ~1.0 TB media (Pictures 171,677 / Videos 16,553 / Archive 1,977 / Graphics 2,045), iCloud Photos 53,714, Lightroom 6,604 + Luminar 6,603, site 1,860 images + 48 videos, IG export 2,683 media + 3,362 posts. Full write-up: `MEDIA_INVENTORY.md` + `PORTFOLIO_METRICS_RECONCILIATION.md`.
 - FAOTM confirmed: 3 `faotm_N.jpg` + the Danny Davis slot (labeled F. A. O. T. M. #4 on the designs strip). Nothing to change.
+
+## Progress 9 - Spec 22 Phase 3 (2026-10-14, WYZMiND)
+
+Phase 3 (live per-stage outreach) shipped and verified end to end.
+
+- **`src/lib/email.ts`:** exported the generic `sendEmail` (was private) so delivery reuses the same Resend path; documented it returns false instead of throwing.
+- **`src/lib/delivery.ts`:** added `stageSent()`, `lastMarketingSentMs()`, `cadenceBlocked()` (1 marketing msg / 14d across stages 2-4, transactional exempt), `consentAllows()` (any opt-out wins), `bodyToHtml()` (escaped plain-text to branded HTML), and `recordDelivery()` (the emitter, idempotent on email + delivered_at).
+- **`src/app/api/cron/delivery-outreach/route.ts`:** real send path. Order: consent -> cadence -> allowlist (`WYZ_OUTREACH_ENABLED` + stage flag) -> dry-run override -> send -> stamp `<stage>_sent_at`. One batch consent query instead of per row. Failures are not stamped, so they retry next run. Summary JSON: sent / previewed / optedOut / cadenceSkipped / failed.
+- **`src/app/api/admin/delivery-events/route.ts` (new):** admin-gated emitter (GET list, POST record) since there is no delivery flow in the app yet (orders table has 0 rows).
+- **`vercel.json`:** cron `/api/cron/delivery-outreach` daily `0 15 * * *`.
+- **Vercel env set:** `WYZ_OUTREACH_ENABLED=1`, `WYZ_OUTREACH_STAGE1=1` (production/preview/development). Stages 2-4 deliberately still off, per "flip one at a time, starting with stage 1".
+- **Tests:** 52 -> 69 (consent, cadence, stage stamps, HTML escaping, emitter idempotency). tsc 0, lint 0, build 0.
+- **Verified live:** cron answered 401 without the secret, 401 gate = CRON_SECRET active; emitter answered 403 without an admin session. Real E2E: recorded one delivery to the owner's own inbox -> cron returned `sent: 1`, `stage1_sent_at` stamped, test row deleted (delivery_events back to 0).
+- **Commit `6dbf69f` - DEPLOY IS LIVE.**
+
+Note: nothing will send until deliveries exist. Record one with `POST /api/admin/delivery-events {email, clientName, serviceName}` or wire a fulfillment hook later.

@@ -6,7 +6,7 @@ Scoped, approval-gated implementation specs. Nothing in this file ships customer
 
 ## Spec 22 — Delivery into Proof, Referral, and Repeat Work
 
-**Board task:** 22 · **Status:** APPROVED 2026-10-11; Phase 1 shipped, copy approved, migration 0002 applied to prod. Phase 3 ready: a send needs `WYZ_OUTREACH_ENABLED=1` + that stage's flag + a populated `delivery_events` source. · **Owner:** WYZMiND (build), Torreé (copy approval + send authority), Codex (review)
+**Board task:** 22 · **Status:** PHASE 3 LIVE 2026-10-14. Migration 0002 applied; sender + consent/cadence gates + emitter shipped; daily cron `/api/cron/delivery-outreach` registered (`0 15 * * *`). Vercel flags: `WYZ_OUTREACH_ENABLED=1` and `WYZ_OUTREACH_STAGE1=1` (transactional stage 1 only; stages 2-4 still OFF, flip one at a time). E2E verified: one real send to the owner's inbox, `stage1_sent_at` stamped, test row removed. `delivery_events` is empty until deliveries are recorded (manual `POST /api/admin/delivery-events` or a future fulfillment hook); `WYZ_OUTREACH_DRY_RUN=1` forces preview-only. · **Owner:** WYZMiND (build), Torreé (copy approval + send authority), Codex (review)
 
 ### Problem
 
