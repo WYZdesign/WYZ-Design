@@ -11,6 +11,7 @@ import { useGyroPermission } from "@/hooks/useGyroPermission";
 
 export function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
  const p = useRef({ x: -999, y: -999, on: false });
+ const gyro = useRef({ x: .5, y: .5 });
 
  useEffect(() => {
   const el = ref.current;
@@ -36,7 +37,11 @@ export function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
    const r = ref.current.getBoundingClientRect();
    const nx = Math.max(0, Math.min(1, (e.gamma + 45) / 90));
    const ny = Math.max(0, Math.min(1, (e.beta + 45) / 90));
-   p.current = { x: nx * r.width, y: ny * r.height, on: true };
+   // Physical sensors are noisy. Ease the raw reading before each splash
+   // receives it, so a phone tilt feels direct without looking jittery.
+   gyro.current.x += (nx - gyro.current.x) * .2;
+   gyro.current.y += (ny - gyro.current.y) * .2;
+   p.current = { x: gyro.current.x * r.width, y: gyro.current.y * r.height, on: true };
   };
   window.addEventListener("deviceorientation", handler, { passive: true });
   setCleanup(() => window.removeEventListener("deviceorientation", handler));

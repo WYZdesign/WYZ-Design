@@ -274,15 +274,12 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
       Math.pow(row / 7 - mousePos.y, 2)
     );
     const proximity = isHovering ? Math.max(0, 1 - dist * 1.5) : 0;
-    const glow = proximity * 0.6;
 
     return (
       <div
         className="flex-none flex items-center gap-2 px-6 py-3 transition-all duration-300"
         style={{
           opacity: isHovering ? 0.2 + proximity * 0.8 : undefined,
-          filter: glow > 0 ? `drop-shadow(0 0 ${8 * glow}px ${color}) brightness(${1 + glow * 0.5})` : undefined,
-          transform: isHovering && proximity > 0.3 ? `scale(${1 + proximity * 0.15})` : undefined,
         }}
       >
         <svg className="w-10 h-10 sm:w-12 sm:h-12" fill={color} viewBox="0 0 24 24"><path d={ytPath}/></svg>
@@ -493,7 +490,7 @@ export default function EventsPage() {
       preload="auto"
       style={{ opacity: heroReady ? 1 : 0, transition: "opacity 0.7s ease-in" }}
       className="absolute inset-0 w-full h-full object-cover md:[filter:saturate(1.2)_contrast(1.1)]"
-      onLoadedMetadata={(e) => { const v = e.currentTarget; v.currentTime = 5; void v.play().catch(() => {}); setHeroReady(true); }}
+      onCanPlay={(e) => { const v = e.currentTarget; if (v.currentTime < 4.5) v.currentTime = 5; void v.play().catch(() => {}); setHeroReady(true); }}
       onTimeUpdate={(e) => {
         // `loop` restarts silently at 0 without firing `ended`, so re-apply the
         // 5s start point whenever a loop cycle brings it back near the top.

@@ -212,7 +212,7 @@ export default function WYZMiNDPage() {
             <p className="text-[#666] dark:text-white/30 text-[13px] text-center mb-8">The tools and systems behind WYZ Design, explained in plain English</p>
 
             {/* Category tabs */}
-            <div className="flex overflow-x-auto overflow-y-hidden -mx-6 px-6 sm:mx-0 sm:px-0 gap-2 mb-8 whitespace-nowrap scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-transparent pb-2">
+            <div className="flex justify-center overflow-x-auto overflow-y-hidden -mx-6 px-6 sm:mx-0 sm:px-0 gap-2 mb-8 whitespace-nowrap scrollbar-thin scrollbar-thumb-[#DF3131] scrollbar-track-transparent pb-2">
               {STACK_CATEGORIES.map((cat) => (
                 <button key={cat} onClick={() => { setActiveStackCat(cat); setExpandedStack(null); }}
                   className={`flex-shrink-0 px-4 py-2 rounded-full text-[12px] font-bold tracking-[0.08em] uppercase transition-all ${

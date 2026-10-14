@@ -532,6 +532,11 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: scal
 @keyframes wzDotRise { 0% { transform: translateY(14px); opacity:.15 } 50% { opacity:.85 } 100% { transform: translateY(-34px); opacity:.15 } }
 @keyframes wzDotOrbit { 0% { transform: translate(0,0) } 25% { transform: translate(16px,10px) } 50% { transform: translate(0,22px) } 75% { transform: translate(-16px,10px) } 100% { transform: translate(0,0) } }
 @keyframes wzDotPulse { 0%,100% { transform: scale(.7); opacity:.2 } 50% { transform: scale(1.25); opacity:.8 } }
+@keyframes wzDotWander {
+  0%,100% { transform: translate3d(0,0,0) scale(.8); opacity:.22 }
+  32% { transform: translate3d(var(--wz-dot-x1),var(--wz-dot-y1),0) scale(1.14); opacity:.82 }
+  68% { transform: translate3d(var(--wz-dot-x2),var(--wz-dot-y2),0) scale(.94); opacity:.48 }
+}
 @media (prefers-reduced-motion: reduce) { .wz-dot { animation: none !important; } }
 
 /* ═══════════════════════════════════════════════════════════

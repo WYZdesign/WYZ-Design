@@ -145,8 +145,7 @@ export function Ripple({ onEnter }: VProps) {
   raf = requestAnimationFrame(t);
   return () => cancelAnimationFrame(raf);
  }, [pointer]);
- const onClick = (e: React.MouseEvent) => { const r = ref.current!.getBoundingClientRect(); spawn(e.clientX - r.left, e.clientY - r.top, .7); };
- return <div ref={ref} onClick={onClick} style={stageBox(OW)}><Brand theme="light" onEnter={onEnter} /></div>;
+ return <div ref={ref} style={stageBox(OW)}><Brand theme="light" onEnter={onEnter} /></div>;
 }
 
 export function Spotlight({ onEnter }: VProps) {

@@ -97,7 +97,7 @@ onClick={() => {
    <Image src={service.img} alt={service.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
   <div className="absolute inset-0 bg-black/80" />
   <div className="absolute inset-0 flex items-center justify-center z-10">
-  <h3 className="font-heading font-black text-white text-[1.75rem] sm:text-[26px] md:text-[30px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
+  <h3 className="font-heading font-black text-white text-[1.75rem] sm:text-[26px] md:text-[45px] tracking-[0.06em] text-center drop-shadow-lg px-4">{service.name}</h3>
   </div>
  </div>
  </div>
@@ -216,7 +216,7 @@ return (
 
  {/* ── Category Tabs - pill-style with indicator ── */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
-<div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide mb-10 -mx-6 px-6">
+<div className="flex justify-center gap-3 overflow-x-auto pb-4 scrollbar-hide mb-10 -mx-6 px-6">
   {CATEGORIES.map(cat => {
   const isActive = active === cat;
   return (

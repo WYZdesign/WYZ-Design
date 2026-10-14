@@ -119,7 +119,7 @@ export default function Footer() {
           </form>
         </div>
       </div>
-        <div className="relative z-20 max-w-[115rem] mx-auto px-6 lg:px-12 pt-2 pb-14 flex justify-center">
+        <div className="relative z-20 max-w-[115rem] mx-auto px-6 lg:px-12 pt-2 pb-20 sm:pb-16 flex justify-center">
           <div className="flex flex-wrap justify-center gap-3">
             {SOCIALS.map((s, i) => (
               <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
@@ -152,11 +152,11 @@ export default function Footer() {
             </div>
 
             {/* Sitemap columns */}
-            <div className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-6">
+            <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {Object.entries(SITEMAP).map(([title, links]) => (
               <div key={title} className="text-center">
                 <h4 className={`font-heading font-bold ${headingColor} text-[13px] tracking-[0.15em] uppercase mb-4`}>{title}</h4>
-                <div className="space-y-2">
+                <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 sm:block sm:space-y-2">
                   {links.map(l => (
                     <Link key={l.label} href={l.href} className={`block text-[14px] ${textLink} hover:translate-x-1 transition-all duration-200`}>{l.label}</Link>
                   ))}

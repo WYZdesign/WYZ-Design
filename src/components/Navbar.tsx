@@ -18,7 +18,6 @@ const NAV_LINKS = [
   { href: "/", label: "H O M E" },
   { href: "/photography", label: "P H O T O G R A P H Y" },
   { href: "/designs", label: "D E S I G N S" },
-  { href: "/services", label: "S E R V I C E S" },
   { href: "/events", label: "E V E N T S" },
 ];
 
@@ -29,12 +28,13 @@ const MORE_GROUPS = [
     { href: "/community", label: "C O M M U N I T Y" },
   ] },
   { title: "S H O P", links: [
+    { href: "/services", label: "S E R V I C E S" },
     { href: "/merch", label: "M E R C H" },
+    { href: "/printing", label: "P R I N T I N G" },
     { href: "/loyalty", label: "R E W A R D S" },
     { href: "/featured-artist", label: "F. A. O. T. M." },
   ] },
   { title: "T O O L S", links: [
-    { href: "/printing", label: "P R I N T I N G" },
     { href: "/wyzmind", label: "W Y Z M i N D" },
     { href: "/contact", label: "C O N T A C T" },
     { href: "/faq", label: "F. A. Q." },
@@ -186,7 +186,7 @@ export default function Navbar() {
               {NAV_LINKS.map((l) => (
                 <Link key={l.href} href={l.href}
                   aria-current={isActive(l.href) ? "page" : undefined}
-                  className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold whitespace-nowrap transition-all duration-[400ms] ${
+                  className={`px-5 py-3 text-[14px] tracking-[0.2em] font-semibold whitespace-nowrap transition-all duration-[400ms] ${
                     isActive(l.href) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white hover:scale-105 active:text-white/80"
                   }`}
                   style={isActive(l.href) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
@@ -195,7 +195,7 @@ export default function Navbar() {
               ))}
               <div className="relative" data-cat-dropdown onMouseEnter={() => setOpenCat("more")} onMouseLeave={() => setOpenCat(null)}>
                 <button onClick={() => setOpenCat(openCat === "more" ? null : "more")} aria-expanded={openCat === "more"} aria-controls="more-navigation"
-                  className={`px-4 py-3 text-[14px] tracking-[0.2em] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors duration-[400ms] ${
+                  className={`px-5 py-3 text-[14px] tracking-[0.2em] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors duration-[400ms] ${
                     MORE_LINKS.some(l => isActive(l.href)) ? "text-white dark:text-white" : "text-white/70 dark:text-white/70 hover:text-white dark:hover:text-white active:text-white/80"
                   }`}
                   style={MORE_LINKS.some(l => isActive(l.href)) ? { textShadow: "0 0 8px rgba(255,255,255,0.8)" } : undefined}>
@@ -211,11 +211,11 @@ export default function Navbar() {
                       <div className="relative z-10 py-1">
                         {MORE_GROUPS.map((g) => (
                           <div key={g.title}>
-                            <p className="px-5 pt-3 pb-1 text-[10px] tracking-[0.25em] font-bold text-white/40 uppercase">{g.title}</p>
+                            <p className="px-5 pt-3 pb-1 text-center text-[10px] tracking-[0.25em] font-bold text-white/40 uppercase">{g.title}</p>
                             {g.links.map((l) => (
                               <Link key={l.href} href={l.href}
                                 aria-current={isActive(l.href) ? "page" : undefined}
-                                className={`block px-5 py-2 text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
+                                className={`block px-5 py-2 text-center text-[13px] tracking-[0.15em] font-semibold transition-colors duration-[400ms] ${
                                   isActive(l.href) ? "text-white bg-white/10 font-bold" : "text-white/70 hover:text-white hover:bg-white/5"
                                 }`}>
                                 {l.label}
@@ -237,7 +237,7 @@ export default function Navbar() {
                   {searchOpen ? (
                     <motion.div key="search-input" initial={{ width: 0, opacity: 0 }} animate={{ width: 288, opacity: 1 }} exit={{ width: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                      className="relative h-11">
+                      className="relative h-11 overflow-hidden">
                       <input ref={searchInputRef} type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
                         onFocus={() => setSearchFocused(true)} onBlur={() => setSearchFocused(false)}
                         onKeyDown={e => { if (e.key === "Enter") { const q = searchQuery.trim(); if (q) { void earn("use-search"); window.location.href = `/search?q=${encodeURIComponent(q)}`; } } if (e.key === "Escape") { setSearchOpen(false); setSearchQuery(""); setSearchResults([]); } }}
@@ -315,14 +315,14 @@ export default function Navbar() {
                           <div className="px-4 py-3 border-b border-white/10">
                             <p className="text-xs font-bold tracking-[0.15em] uppercase text-white/50 mb-2">Your Activity</p>
                             <Link href="/loyalty" onClick={() => setProfileOpen(false)}
-                              className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                              className="flex items-center justify-center gap-2 px-3 py-2 text-center text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
                               <FiZap className="w-3 h-3 text-[#DF3131]" />
-                              View Rewards Dashboard
+                              Rewards Dashboard
                             </Link>
                             <Link href="/loyalty#referral" onClick={() => setProfileOpen(false)}
-                              className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                              className="flex items-center justify-center gap-2 px-3 py-2 text-center text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
                               <FiShare2 className="w-3 h-3 text-[#DF3131]" />
-                              My Referral Code & Earnings
+                              Referrals &amp; Earnings
                             </Link>
                           </div>
 
@@ -330,24 +330,24 @@ export default function Navbar() {
                           <div className="px-4 py-3 border-b border-white/10">
                             <p className="text-xs font-bold tracking-[0.15em] uppercase text-white/50 mb-2">Quick Links</p>
                             <Link href="/booking" onClick={() => setProfileOpen(false)}
-                              className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                              className="flex items-center justify-center gap-2 px-3 py-2 text-center text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
                               <FiCalendar className="w-3 h-3 text-[#DF3131]" />
                               Book a Session
                             </Link>
                             <Link href="/loyalty#gift-card" onClick={() => setProfileOpen(false)}
-                              className="block px-3 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                              className="flex items-center justify-center gap-2 px-3 py-2 text-center text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
                               <FiGift className="w-3 h-3 text-[#DF3131]" />
                               Gift Cards
                             </Link>
                           </div>
 
                           <Link href="/account/my-account" onClick={() => setProfileOpen(false)}
-                            className="block px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all flex items-center gap-2">
+                            className="flex items-center justify-center gap-2 px-4 py-2 text-center text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
                             <FiUser className="w-3 h-3 text-[#DF3131]" />
                             My Account
                           </Link>
                           <button onClick={() => signOut()}
-                            className="w-full text-left px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
+                            className="w-full px-4 py-2 text-center text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all">
                             Sign Out
                           </button>
                         </div>
@@ -376,7 +376,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          <motion.div initial={{ opacity: 0, x: "100%" }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: "100%" }} transition={{ type: "tween", duration: .28, ease: [0.22, 1, 0.36, 1] }}
             id="mobile-navigation" className="fixed inset-0 z-[var(--z-modal)] bg-white dark:bg-[#1C1C1E] min-[1440px]:hidden flex flex-col pt-8"
             data-mobile-menu="true"
             style={{ height: '100vh', overflowY: 'auto', overscrollBehavior: 'contain' }}
@@ -465,7 +465,7 @@ export default function Navbar() {
             <div className="flex-1 overflow-y-auto px-6 py-5 space-y-1">
                             <p className="px-1 pt-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">Main</p>
               {NAV_LINKS.map((l, i) => (
-                <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
+                <motion.div key={l.href} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                   <Link href={l.href} onClick={() => setMobileOpen(false)}
                     className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
                       isActive(l.href) ? "text-[#DF3131]" : "text-[#333333] dark:text-[#e0e0e0] hover:text-[#DF3131]"
@@ -479,7 +479,7 @@ export default function Navbar() {
                 <div key={g.title} className="pt-4">
                   <p className="px-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">{g.title}</p>
                   {g.links.map((l, i) => (
-                    <motion.div key={l.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
+                    <motion.div key={l.href} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                       <Link href={l.href} onClick={() => setMobileOpen(false)}
                         className={`block py-3 text-[15px] tracking-[0.15em] font-semibold ${
                           isActive(l.href) ? "text-[#DF3131]" : "text-[#333333] dark:text-[#e0e0e0] hover:text-[#DF3131]"

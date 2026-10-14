@@ -104,7 +104,7 @@ function Carousel({ images, direction = "left", whiteBgInDark }: { images: strin
     <div ref={sectionRef} aria-hidden="true" className="overflow-hidden" onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
         {doubled.map((src, i) => (
-          <div key={i} className={`flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-32 sm:h-48 md:h-64 relative overflow-hidden rounded-sm ${whiteBgInDark ? "dark:bg-white" : ""}`}>
+          <div key={i} className={`flex-none w-[32vw] sm:w-[230px] md:w-[320px] h-44 sm:h-64 md:h-80 relative overflow-hidden rounded-sm ${whiteBgInDark ? "dark:bg-white" : ""}`}>
             <SafeImage src={src} alt="WYZ Design portfolio" width={384} className="absolute inset-0 w-full h-full object-contain" />
           </div>
         ))}
@@ -372,6 +372,13 @@ export default function DesignsPage() {
    </ScrollParallaxCard>
    <p className="text-center text-[13px] font-bold tracking-[0.12em] uppercase text-[#333] dark:text-[#e0e0e0] mt-4">Donte &quot;Danny&quot; Davis</p>
   </Link>
+  <div className="mx-auto mt-5 max-w-md text-center">
+    <p className="text-[15px] leading-relaxed text-[#666] dark:text-white/65">See Danny&apos;s featured work, learn what&apos;s behind it, and explore the artist spotlight.</p>
+    <div className="mt-4 flex flex-wrap justify-center gap-3">
+      <Link href="/featured-artist" className="inline-flex items-center gap-2 border border-[#DF3131] px-5 py-2.5 text-[12px] font-bold tracking-[0.1em] text-[#DF3131] transition-colors hover:bg-[#DF3131] hover:text-white">MEET DANNY <FiArrowRight className="w-4 h-4" /></Link>
+      <Link href="/featured-artist#work" className="inline-flex items-center gap-2 border border-[#333] dark:border-white px-5 py-2.5 text-[12px] font-bold tracking-[0.1em] text-[#333] dark:text-white transition-colors hover:bg-[#333] hover:text-white dark:hover:bg-white dark:hover:text-[#111]">VIEW FEATURE</Link>
+    </div>
+  </div>
  </div>
  </section>
  </ScrollReveal>

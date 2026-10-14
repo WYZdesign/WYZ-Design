@@ -53,6 +53,8 @@ export default function AboutPage() {
             <div
               className="absolute inset-0 z-[2] pointer-events-none"
               style={{
+                opacity: isHovering ? 1 : 0,
+                transition: "opacity 180ms ease-out",
                 background: `radial-gradient(circle 300px at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(223,49,49,0.2), transparent 70%)`,
               }}
             />
@@ -92,15 +94,12 @@ export default function AboutPage() {
                       Math.pow(logoY - mousePos.y, 2)
                     );
                     const proximity = isHovering ? Math.max(0, 1 - dist * 1.8) : 0;
-                    const glow = proximity * 0.6;
                     return (
                       <div
                         key={i}
                         className="flex-none flex items-center px-6 transition-all duration-300"
                         style={{
                           opacity: isHovering ? 0.08 + proximity * 0.92 : 0.25,
-                          filter: glow > 0 ? `drop-shadow(0 0 ${10 * glow}px #DF3131) brightness(${1 + glow * 0.5})` : undefined,
-                          transform: isHovering && proximity > 0.3 ? `scale(${1 + proximity * 0.2})` : undefined,
                         }}
                       >
                         <Image src="/images/wyz-crown.png" alt="WYZ Design crown logo" width={48} height={48} className="w-12 h-12 flex-none object-contain" />

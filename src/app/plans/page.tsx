@@ -96,7 +96,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
-      style={{ perspective: "1200px", minHeight: "min(550px, 85vh)" }}
+      style={{ perspective: "1200px", minHeight: `${500 + FEATURES[p.name].length * 45}px` }}
       tabIndex={0}
       onFocus={() => setFlipped(true)}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
