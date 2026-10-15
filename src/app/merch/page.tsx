@@ -244,8 +244,12 @@ export default function MerchPage() {
           return r.json();
         })
         .then((data) => {
-          if (!data.products?.length) return;
-          const printfulProducts: Product[] = data.products.map((p: Record<string, unknown>) => ({
+          // An empty (but successful) catalog must land in a real empty state,
+          // not sit on the loading skeleton forever: the early return here used
+          // to skip setCatalogStatus("loaded") entirely.
+          const list: Record<string, unknown>[] = Array.isArray(data.products) ? data.products : [];
+          if (list.length === 0) { setProducts([]); setCatalogStatus("loaded"); return; }
+          const printfulProducts: Product[] = list.map((p) => ({
             id: p.id as number,
             name: p.title as string,
             category: (p.category as string) || "Apparel",
@@ -311,7 +315,7 @@ export default function MerchPage() {
             <div className="mt-8">
               {catalogStatus === "loading" && <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">{Array.from({ length: 8 }, (_, index) => <div key={index} className="aspect-square animate-pulse bg-[#efedeb]" />)}</div>}
               {catalogStatus === "error" && <p className="py-12 text-center text-[15px] text-[#555]">The collection is unavailable right now. Please try again shortly.</p>}
-              {catalogStatus === "loaded" && filteredProducts.length === 0 && <p className="py-12 text-center text-[15px] text-[#555]">No pieces in this category yet.</p>}
+              {catalogStatus === "loaded" && filteredProducts.length === 0 && <p className="py-12 text-center text-[15px] text-[#555]">{activeCategory === "All" ? "New pieces are coming soon. Check back shortly." : "No pieces in this category yet."}</p>}
               {filteredProducts.length > 0 && <ProductGrid products={filteredProducts} onSelect={setSelectedProduct} />}
             </div>
           </div>

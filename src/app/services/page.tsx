@@ -263,6 +263,8 @@ return (
         );
       })}
     </div>
+  ) : filtered.length === 0 ? (
+    <p className="py-16 text-center text-[15px] text-[#666] dark:text-[#b0b0b0]">No services in this category yet. Pick All Services to see everything.</p>
   ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mb-2 lg:gap-3 lg:mb-3">
       {filtered.map((s) => (
