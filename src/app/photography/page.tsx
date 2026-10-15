@@ -144,7 +144,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
     >
   {/* Front */}
-  <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
+  <div className="absolute inset-0 transition-all duration-700 ease-in-out" style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
   <div className="bg-white dark:bg-[#252528] overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10 hover:-translate-y-1 h-full">
    <div className="absolute inset-0 overflow-hidden">
   <Image src={s.img} alt={s.name} fill sizes="(max-width:640px) 50vw, (max-width:768px) 33vw, 25vw" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -158,7 +158,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   {/* Back */}
   <div
   className="absolute inset-0 transition-all duration-700 ease-in-out"
-  style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
+  style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col items-center justify-center overflow-hidden relative">
    <div className="absolute inset-0 opacity-10">

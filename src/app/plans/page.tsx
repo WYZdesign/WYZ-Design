@@ -103,7 +103,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
       onClick={() => setFlipped(f => !f)}
     >
       {/* Front */}
-      <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
+      <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
         <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
           <Image src={p.img} alt={p.name} fill sizes="(max-width:640px) 100vw, 25vw" className="object-cover" />
           <div className="absolute inset-0 bg-black/80" />
@@ -115,7 +115,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
       {/* Back */}
       <div
         className="absolute inset-0 transition-all duration-700 ease-in-out"
-        style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
+        style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
       >
         <div className={`w-full h-full bg-[#DF3131] text-white p-7 flex flex-col justify-between overflow-hidden relative ${
           p.popular ? "border-[4px] border-[#DF3131]" : ""
@@ -166,7 +166,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
       onClick={() => setFlipped(f => !f)}
     >
       {/* Front */}
-      <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
+      <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
         <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
           <Image src={w.img} alt={w.name} fill sizes="(max-width:640px) 100vw, 33vw" className="object-cover" />
           <div className="absolute inset-0 bg-black/80" />
@@ -178,7 +178,7 @@ function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
       {/* Back */}
       <div
         className="absolute inset-0 transition-all duration-700 ease-in-out"
-        style={{ backfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
+        style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
       >
         <div className={`w-full h-full bg-[#DF3131] text-white p-5 flex flex-col justify-between overflow-hidden relative ${
           i === 0 ? "border-[4px] border-[#DF3131]" : ""

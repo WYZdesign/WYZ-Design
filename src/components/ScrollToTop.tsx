@@ -57,15 +57,15 @@ export default function ScrollToTop() {
   }, []);
 
   useEffect(() => {
-    const targets = Array.from(document.querySelectorAll<HTMLElement>("[data-chat-avoid]"));
-    if (targets.length === 0) { setClearZone(false); return; }
-    const CLEARANCE = 56; // 44px button + ~12px breathing room
+    let disposed = false;
     let observer: IntersectionObserver | null = null;
+    let lastCount = -1;
+    const CLEARANCE = 56; // 44px button + ~12px breathing room
     const corner = () => ({
       top: Math.max(window.innerHeight - CLEARANCE - 24, 0),
       right: Math.max(window.innerWidth - CLEARANCE - 24, 0),
     });
-    const checkNow = () => {
+    const checkNow = (targets: HTMLElement[]) => {
       const { top, right } = corner();
       const hit = targets.some((t) => {
         const r = t.getBoundingClientRect();
@@ -73,24 +73,44 @@ export default function ScrollToTop() {
       });
       setClearZone(hit);
     };
-    const build = () => {
-      observer?.disconnect();
-      const { top, right } = corner();
-      // Shrink the root to this button's own LOWER-LEFT corner: negative top
-      // margin drops the root's top edge down, negative RIGHT margin pulls
-      // the right edge in (mirrors ChatWidget's lower-right version).
-      observer = new IntersectionObserver(
-        (entries) => setClearZone(entries.some((e) => e.isIntersecting)),
-        { rootMargin: `-${top}px -${right}px 0px 0px` }
-      );
-      targets.forEach((t) => observer!.observe(t));
+    // CookieBanner mounts after consent state resolves from localStorage, so
+    // on a first visit there are zero [data-chat-avoid] targets at this
+    // component's mount time. The original one-shot version returned early
+    // and never watched the dialog when it appeared, which left this button
+    // sitting on top of the cookie panel at 99999 z-index. Rebuild the
+    // observer whenever the target set changes (MutationObserver mirrors the
+    // fix already applied to ChatWidget for board #29).
+    const sync = () => {
+      if (disposed) return;
+      const targets = Array.from(document.querySelectorAll<HTMLElement>("[data-chat-avoid]"));
+      if (targets.length !== lastCount) {
+        lastCount = targets.length;
+        observer?.disconnect();
+        if (targets.length === 0) {
+          setClearZone(false);
+          return;
+        }
+        const { top, right } = corner();
+        // Shrink the root to this button's own LOWER-LEFT corner: negative top
+        // margin drops the root's top edge down, negative RIGHT margin pulls
+        // the right edge in (mirrors ChatWidget's lower-right version).
+        observer = new IntersectionObserver(
+          (entries) => setClearZone(entries.some((e) => e.isIntersecting)),
+          { rootMargin: `-${top}px -${right}px 0px 0px` }
+        );
+        targets.forEach((t) => observer!.observe(t));
+      }
+      if (targets.length > 0) checkNow(targets);
     };
-    checkNow();
-    build();
-    window.addEventListener("resize", build);
+    sync();
+    const mutations = new MutationObserver(sync);
+    mutations.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("resize", sync);
     return () => {
+      disposed = true;
       observer?.disconnect();
-      window.removeEventListener("resize", build);
+      mutations.disconnect();
+      window.removeEventListener("resize", sync);
     };
   }, []);
 
