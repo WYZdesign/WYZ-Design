@@ -255,3 +255,19 @@ Codex finished the UI-interactions pass and handed it over in `HANDOVER_UI_INTER
 - **Gate re-run on the working tree:** tsc 0, lint 0, tests 69, build 0.
 - **Commit `1579bd1` - DEPLOY IS LIVE** (16 files: the 15 modified + the handover doc).
 - One check remains for the owner: iPhone motion-permission prompt, then tilt-test the splash variants. iOS withholds `DeviceOrientationEvent` until a user gesture, so that cannot be verified headlessly. The splash stays ambient until permission is granted, which is the intended fallback.
+
+## Progress 11 - Board rows #52 / #57 / #58 / #59 verified (2026-10-14, WYZMiND)
+
+Those four rows were stuck on "needs verification" (Claude's audit work). Read-only source verification ran first, then everything found was fixed, gated, shipped, and the rows were moved to done.
+
+- **One real bug found and fixed (#52).** `ScrollToTop`'s cookie-dialog clear-zone ran once on mount, saw zero `[data-chat-avoid]` targets (CookieBanner only mounts after consent resolves from localStorage) and returned early, so it never watched the dialog. That left the button at 99999 z-index sitting on top of the dialog, which is exactly the failure the row claimed was fixed. Rewritten to rebuild the observer on a `MutationObserver` whenever the target set changes. Verified on the production build: dialog open + scrolled = ScrollToTop opacity 0, console clean apart from the known CSP report-only warning.
+- **Cart stacking re-measured (#52).** 1-item cart at 390x844: CartButton `bottom-24` at y=775, ScrollToTop `bottom-96` at y=704, overlap 0px2. Correct.
+- **#52 watermark item is moot.** There is no footer crown watermark element anywhere in `src`, so the "16px -> 32px" claim has no matching code. Noted in the row rather than left pending.
+- **#57.** The `:not(.flex-none)` frozen-word scoping is live. The marquee loop-seam class it added (`.animate-marquee-left-x3` + keyframes) had 0 usages because the three tripled merch marquees were removed in the 908 -> 317 dead-code sweep, so the orphaned CSS was deleted.
+- **#58.** `justFocusedRef` present on printing and services (the only two pages with `onFocus` + `setFlipped`); community stats strip fix live and fitting at 390px; flip-on-tap retested (`matrix3d(-1,...)` on tap 1, reverts on tap 2).
+- **#59.** `preserve-3d`, the events `buildRow()` gap fix, the YouTube `isHovering` spotlight gate, and the home 6th service are all in source. The `-webkit-backface-visibility` prefix existed only on home, so it was added to photography, plans and web-design; all three tap-flip-tested after the edit.
+- **Gate:** tsc 0, lint 0, tests **69/69**, build 0.
+- **Commit `ce30e0d` - DEPLOY IS LIVE** (sha `ce30e0da656f8903db7db19ff377f5d065045934`), 5 files: `ScrollToTop.tsx`, `globals.css`, `photography`, `plans`, `web-design`.
+- Evidence shots: `v52_A_dialog_open.png`, `v52_B_cart_stacked.png`, `v52_community_stats.png`, `v58_printing_flip.png`, `v58_flip_before/after.png`, `flip_photography.png`, `flip_plans.png`, `flip_web_design.png`.
+
+Note for whoever runs QA next: port 3100 is `next start` serving the production build, not a dev server. A stale `next start` will keep answering after a rebuild and serve the old manifests (symptom: JS/CSS rejected with MIME `text/plain` and hydration never runs, so cookie dialog and client effects look "broken"). Kill every listener on 3100 before rebuilding, then start a fresh one.
