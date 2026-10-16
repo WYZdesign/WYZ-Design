@@ -285,3 +285,17 @@ Audited the five revenue-critical routes (booking, services, merch, contact, pla
 - Shots: `v7_merch_empty.png`. Verification scripts asserted the empty state, the no-skeleton condition, and the mocked non-empty happy path.
 
 Still owner-gated: #23 (subscription-term wording needs the real billing cadence), #24 (gift-card implementation awaits policy approval), #6 (regression gate, Codex-owned), and the analytics IDs (not in the vault).
+
+## Progress 13 - Board row #6, accessibility + mobile regression gate (2026-10-15, WYZMiND)
+
+Built the gate as an in-repo test so it runs on every `npm run test:run` (and via the new `npm run test:a11y`), rather than a separate harness.
+
+- **New file `src/app/a11y-mobile-gate.test.tsx`**, 19 checks, four groups:
+  1. **Route contract:** booking, services, merch, contact and plans each keep `page.tsx` + `loading.tsx` + `error.tsx`, their error files are client boundaries that accept `reset` and render `RouteErrorState`, and the app-level `error.tsx`, `global-error.tsx`, `not-found.tsx` still exist.
+  2. **Shared-state a11y:** `RouteLoading` is a polite live region (`aria-live="polite"`, `role="status"`) with an accessible loading message; `RouteErrorState` is `role="alert"` with a labelled Retry button, a Go Home link and an `h1`.
+  3. **axe-core** on the rendered shared states: zero serious/critical violations (color-contrast rule disabled, jsdom has no layout to evaluate it).
+  4. **Mobile regression locks (source-level):** ScrollToTop cart stacking (`useCart`, `bottom-24`) plus the cookie `MutationObserver`, CookieBanner `data-chat-avoid`, the `-webkit-` backface prefix on all six flip pages, and the merch empty-catalog empty state.
+- Uses only existing dev dependencies (vitest, jsdom, testing-library, axe-core), so no dependency changes.
+- **Suite 69 -> 88.** Gate: tsc 0, lint 0, tests **88/88**, build 0. **Commit `e5bd9cb` - DEPLOY IS LIVE** (`e5bd9cb5ea04b1a8e9fe9d105138694dd0e1d5e1`).
+
+This clears the last non-owner-gated ready row. What remains is owner-gated (#1/#2 pricing canon, #4 analytics access, #21 audit policy, #23 cadence, #24 gift-card policy, #31 capability claims) or Codex-owned page splits (S2/S4/S5/S8).
