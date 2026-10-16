@@ -1,8 +1,15 @@
 "use client";
 
 /*
- WYZ Design - Splash Gallery (16 selected variants)
- Save as: src/app/splash-gallery/page.tsx -> live at /splash-gallery
+ WYZ Design - Splash Gallery (18 selected variants)
+
+ 2026-10-15 pass: phones now draw only from the tilt-native variants. Four
+ pieces in the desktop set are cursor-oriented (CursorRibbon, Spotlight's
+ torch, GrainReveal's cursor window, Duotone's cursor light) and have no
+ meaning without a pointer, so each entry carries a `mobile` flag and
+ RandomSplash filters by `isTouchPrimary()`; two new tilt-first variants
+ (TiltLevel, TiltSheen) were added so the phone set is built around the
+ tilt gesture rather than a mouse effect standing in for one.
 
  2026-10-08 pass (Claude): cut from 24 down to the 13 strongest, most
  distinct variants, fixed the pointer system so every single one now
@@ -23,6 +30,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSplashScrollLock } from "@/hooks/useSplashScrollLock";
 import { prefersReducedMotion } from "@/lib/utils";
 import { usePointerField, useStage, fit } from "@/hooks/useSplashPointer";
+import { useGyroPermission, gyroNeedsGesture } from "@/hooks/useGyroPermission";
 import { R, G, OW, DK, CSS, CrownLogo, Wordmark, Brand, center, stageBox, fullCanvas, type VProps } from "@/components/splash/SplashBrand";
 
 /* ============ 16 CURATED VARIANTS ============ */
@@ -431,25 +439,115 @@ export function LiquidChrome({ onEnter }: VProps) {
   return <div ref={ref} style={stageBox("#0e0c0b")}><canvas ref={cv} style={fullCanvas} /><Brand onEnter={onEnter} /></div>;
 }
 
+/* ============ MOBILE-FIRST TILT VARIANTS ============ */
+/*
+  These two exist because the desktop set has cursor-oriented pieces (a
+  trailing cursor ribbon, a cursor torch, a cursor-gated reveal window) that
+  lose their meaning on a phone, where there is no pointer and the only live
+  input is device tilt. Both of these are built around tilt as the primary
+  gesture: a horizon that levels with gravity and a light that rakes across
+  the mark as the phone turns. They read correctly on desktop too (the same
+  shared pointer/tilt field drives them), but they are designed so that on a
+  phone they are the *native* interaction, not a mouse effect pretending to
+  be one.
+*/
+
+/* Tilt level: a horizon line levels against gravity and a bead slides to the
+  tilt position, like a spirit level / bubble gauge that lives on the brand. */
+export function TiltLevel({ onEnter }: VProps) {
+ const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref);
+ const horizon = useRef<HTMLDivElement>(null), bead = useRef<HTMLDivElement>(null), fill = useRef<HTMLDivElement>(null);
+ const s = useRef({ x: .5, y: .5 });
+ useEffect(() => {
+  let raf = 0;
+  const t = () => {
+   const m = p.current; const el = ref.current;
+   if (el && horizon.current && bead.current && fill.current) {
+    const r = el.getBoundingClientRect();
+    const nx = m.on ? Math.max(0, Math.min(1, m.x / r.width)) : .5;
+    const ny = m.on ? Math.max(0, Math.min(1, m.y / r.height)) : .5;
+    s.current.x += (nx - s.current.x) * .1;
+    s.current.y += (ny - s.current.y) * .1;
+    horizon.current.style.transform = `rotate(${(s.current.x - .5) * 24 * -1}deg)`;
+    bead.current.style.left = `${10 + s.current.x * 80}%`;
+    bead.current.style.top = `${10 + s.current.y * 80}%`;
+    fill.current.style.transform = `translateX(${(s.current.x - .5) * 40}px)`;
+   }
+   raf = requestAnimationFrame(t);
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [p]);
+ return <div ref={ref} style={stageBox("#0e0c0b")}>
+  <div ref={fill} style={{ position: "absolute", inset: "-20%", transition: "transform .12s linear", background: `radial-gradient(circle at ${R} 30%, rgba(223,49,49,.22), transparent 42%), radial-gradient(circle at ${G} 70%, rgba(212,147,65,.2), transparent 46%)`, filter: "blur(30px)" }} />
+  <div ref={horizon} style={{ position: "absolute", left: "-12%", right: "-12%", top: "50%", height: 2, background: `linear-gradient(90deg, transparent, ${R}, ${G}, transparent)`, transition: "transform .1s linear" }} />
+  <div ref={bead} style={{ position: "absolute", width: 18, height: 18, marginLeft: -9, marginTop: -9, borderRadius: "50%", background: OW, boxShadow: `0 0 22px ${G}, 0 0 6px ${OW}`, transition: "left .12s linear, top .12s linear" }} />
+  <div style={center}><Brand onEnter={onEnter} /></div>
+ </div>;
+}
+
+/* Tilt sheen: a raking light band sweeps across the lockup as the phone turns,
+  the way a physical card catches light. Driven by tilt x only, so it feels
+  like the highlight has weight and direction. */
+export function TiltSheen({ onEnter }: VProps) {
+ const ref = useRef<HTMLDivElement>(null); const p = usePointerField(ref);
+ const sheen = useRef<HTMLDivElement>(null), glow = useRef<HTMLDivElement>(null);
+ const s = useRef(.5);
+ useEffect(() => {
+  let raf = 0;
+  const t = () => {
+   const m = p.current; const el = ref.current;
+   if (el && sheen.current && glow.current) {
+     const r = el.getBoundingClientRect();
+     const nx = m.on ? Math.max(0, Math.min(1, m.x / r.width)) : .5;
+     s.current += (nx - s.current) * .12;
+     const x = s.current * 100;
+     sheen.current.style.background = `linear-gradient(105deg, transparent ${x - 22}%, rgba(255,255,255,.45) ${x}%, rgba(212,147,65,.7) ${x + 3}%, transparent ${x + 24}%)`;
+     glow.current.style.transform = `translateX(${(s.current - .5) * 46}px)`;
+   }
+   raf = requestAnimationFrame(t);
+  };
+  raf = requestAnimationFrame(t);
+  return () => cancelAnimationFrame(raf);
+ }, [p]);
+ return <div ref={ref} style={stageBox("#0e0c0b")}>
+  <div ref={glow} style={{ position: "absolute", inset: 0, transition: "transform .12s linear", background: "radial-gradient(circle at 50% 46%, rgba(223,49,49,.16), transparent 60%)", pointerEvents: "none" }} />
+  <div style={center}><Brand onEnter={onEnter} /></div>
+  <div ref={sheen} style={{ position: "absolute", inset: 0, mixBlendMode: "overlay", pointerEvents: "none", background: "linear-gradient(105deg, transparent 44%, rgba(255,255,255,.45) 50%, rgba(212,147,65,.7) 53%, transparent 62%)" }} />
+ </div>;
+}
+
 /* ============ REGISTRY + RANDOM + GALLERY ============ */
-const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Element; bg: string }[] = [
- { name: "Constellation", desc: "Particle web links to your cursor or tilt", Comp: Constellation, bg: DK },
- { name: "Depth parallax", desc: "Layers tilt in perspective with your phone", Comp: Depth, bg: "#1b1714" },
- { name: "Glitch type", desc: "RGB-split wordmark jitters awake on first move", Comp: Glitch, bg: DK },
- { name: "Smoke trail", desc: "Wisps follow your cursor or tilt, nonstop", Comp: Smoke, bg: "#141110" },
- { name: "Ripple", desc: "Every move or tilt sends out rings", Comp: Ripple, bg: OW },
- { name: "Spotlight", desc: "A torch reveals the mark", Comp: Spotlight, bg: DK },
- { name: "Magnetic", desc: "Letters lean toward your cursor or tilt", Comp: Magnetic, bg: DK },
- { name: "Tilt glass", desc: "Glass card tilts in 3D with glare", Comp: TiltGlass, bg: "#17130f" },
- { name: "Duotone", desc: "Photo behind red/gold, lit by cursor", Comp: Duotone, bg: "#1a1410" },
- { name: "Gem burst", desc: "Cyan/gold shards explode as you move", Comp: GemBurst, bg: "#0f0c0b" },
- { name: "Mesh drift", desc: "Gradient mesh drifts with parallax", Comp: MeshDrift, bg: OW },
- { name: "Vortex", desc: "Spiral particle storm orbits your pointer", Comp: Vortex, bg: "#0d0b09" },
- { name: "Wave ripple", desc: "Layered sine waves follow cursor or tilt", Comp: WaveRipple, bg: "#0e0c0b" },
- { name: "Grain reveal", desc: "Film grain clears in a window around you", Comp: GrainReveal, bg: "#0c0a09" },
- { name: "Cursor ribbon", desc: "A glowing tapered trail chases your pointer", Comp: CursorRibbon, bg: DK },
- { name: "Liquid chrome", desc: "A metallic blob drifts and catches the light", Comp: LiquidChrome, bg: "#0e0c0b" },
+const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Element; bg: string; mobile: boolean }[] = [
+ { name: "Constellation", desc: "Particle web links to your cursor or tilt", Comp: Constellation, bg: DK, mobile: true },
+ { name: "Depth parallax", desc: "Layers tilt in perspective with your phone", Comp: Depth, bg: "#1b1714", mobile: true },
+ { name: "Glitch type", desc: "RGB-split wordmark jitters awake on first move", Comp: Glitch, bg: DK, mobile: true },
+ { name: "Smoke trail", desc: "Wisps follow your cursor or tilt, nonstop", Comp: Smoke, bg: "#141110", mobile: true },
+ { name: "Ripple", desc: "Every move or tilt sends out rings", Comp: Ripple, bg: OW, mobile: true },
+ { name: "Spotlight", desc: "A torch reveals the mark", Comp: Spotlight, bg: DK, mobile: false },
+ { name: "Magnetic", desc: "Letters lean toward your cursor or tilt", Comp: Magnetic, bg: DK, mobile: true },
+ { name: "Tilt glass", desc: "Glass card tilts in 3D with glare", Comp: TiltGlass, bg: "#17130f", mobile: true },
+ { name: "Duotone", desc: "Photo behind red/gold, lit by cursor", Comp: Duotone, bg: "#1a1410", mobile: false },
+ { name: "Gem burst", desc: "Cyan/gold shards explode as you move", Comp: GemBurst, bg: "#0f0c0b", mobile: true },
+ { name: "Mesh drift", desc: "Gradient mesh drifts with parallax", Comp: MeshDrift, bg: OW, mobile: true },
+ { name: "Vortex", desc: "Spiral particle storm orbits your pointer", Comp: Vortex, bg: "#0d0b09", mobile: true },
+ { name: "Wave ripple", desc: "Layered sine waves follow cursor or tilt", Comp: WaveRipple, bg: "#0e0c0b", mobile: true },
+ { name: "Grain reveal", desc: "Film grain clears in a window around you", Comp: GrainReveal, bg: "#0c0a09", mobile: false },
+ { name: "Cursor ribbon", desc: "A glowing tapered trail chases your pointer", Comp: CursorRibbon, bg: DK, mobile: false },
+ { name: "Liquid chrome", desc: "A metallic blob drifts and catches the light", Comp: LiquidChrome, bg: "#0e0c0b", mobile: true },
+ { name: "Tilt level", desc: "A horizon levels and a bead slides with tilt", Comp: TiltLevel, bg: "#0e0c0b", mobile: true },
+ { name: "Tilt sheen", desc: "A raking light sweeps the mark as you tilt", Comp: TiltSheen, bg: "#0e0c0b", mobile: true },
 ];
+
+/** True on phones/tablets: no hover, coarse pointer, touch events present. */
+export function isTouchPrimary(): boolean {
+ if (typeof window === "undefined") return false;
+ try {
+  return window.matchMedia("(hover: none), (pointer: coarse)").matches || "ontouchstart" in window;
+ } catch {
+  return false;
+ }
+}
 
 /* Picks a variant that is never the same as the one shown last time (in
  this tab, via sessionStorage), so testing "surprise me" a few times in a
@@ -461,24 +559,53 @@ const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Ele
  on-dark-background variants alone, which is most of why a random pick
  kept reading as "the same thing" even when the index genuinely changed). */
 const LAST_KEY = "wyz-splash-last";
-function pickVariant(): number {
+function pickVariant(mobileOnly = false): number {
+ // On touch devices only the tilt-native variants are eligible: the
+ // cursor-oriented pieces (cursor ribbon, torch reveal, cursor-gated grain,
+ // duotone lit by cursor) have no meaning without a pointer.
+ const pool = VARIANTS.map((_, i) => i).filter((i) => (mobileOnly ? VARIANTS[i].mobile : true));
  let last = -1;
  try { last = Number(sessionStorage.getItem(LAST_KEY)); } catch {}
- let next = Math.floor(Math.random() * VARIANTS.length);
- if (VARIANTS.length > 1 && next === last) next = (next + 1 + Math.floor(Math.random() * (VARIANTS.length - 1))) % VARIANTS.length;
+ let next = pool[Math.floor(Math.random() * pool.length)];
+ if (pool.length > 1 && next === last) { const others = pool.filter((i) => i !== last); next = others[Math.floor(Math.random() * others.length)]; }
  try { sessionStorage.setItem(LAST_KEY, String(next)); } catch {}
  return next;
 }
 
 export function RandomSplash(props: VProps) {
  const [i, setI] = useState<number | null>(null);
+ const [gate, setGate] = useState(false);
+ const { status, requestPermission } = useGyroPermission(() => {});
  useEffect(() => {
    if (prefersReducedMotion()) return;
-   setI(pickVariant());
+   setI(pickVariant(isTouchPrimary()));
  }, []);
+ // iOS 13+ needs one user gesture before device-orientation events flow, and on
+ // the splash the first tap would otherwise enter the site, so the tilt never
+ // got a chance to run (this is why tilt "worked on maybe one" device). Show a
+ // single-tap gate first on those devices; the tap grants motion and stays put.
+ useEffect(() => {
+   if (isTouchPrimary() && gyroNeedsGesture()) setGate(true);
+ }, []);
+ useEffect(() => {
+   if (status === "granted" || status === "denied" || status === "unavailable") setGate(false);
+ }, [status]);
  if (i === null) return <div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div>;
  const C = VARIANTS[i].Comp;
- return <><style>{CSS}</style><C {...props} /></>;
+ return <><style>{CSS}</style><C {...props} />
+   {gate && (
+     <div
+       onClick={(e) => { e.stopPropagation(); requestPermission(); setGate(false); }}
+       style={{ position: "fixed", inset: 0, zIndex: 10001, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(10,9,8,.94)", cursor: "pointer" }}
+     >
+       <div style={{ textAlign: "center", padding: 24 }}>
+         <div style={{ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 800, letterSpacing: ".22em", textTransform: "uppercase", fontSize: 12, color: "#bdbdbd" }}>WYZ Design</div>
+         <div style={{ marginTop: 12, fontSize: 16, color: OW }}>Tap to enable tilt</div>
+         <div style={{ marginTop: 6, fontSize: 12.5, color: "#8a8a8a" }}>Tilt your phone to drive the animation</div>
+       </div>
+     </div>
+   )}
+ </>;
 }
 
 export default function SplashGallery() {
@@ -492,7 +619,7 @@ export default function SplashGallery() {
  <style>{CSS}</style>
  <div style={{ maxWidth: 1180, margin: "0 auto" }}>
  <h1 style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 900, color: OW, textAlign: "center", letterSpacing: ".05em", fontSize: 38, margin: 0 }}>SPLASH <span style={{ color: R }}>GALLERY</span></h1>
- <p style={{ color: "#757575", textAlign: "center", marginTop: 8, fontSize: 15 }}>{VARIANTS.length} variants, each built to feel the same whether you use a mouse or tilt your phone. Only the one you open animates.</p>
+ <p style={{ color: "#757575", textAlign: "center", marginTop: 8, fontSize: 15 }}>{VARIANTS.length} variants. Phones get only the {VARIANTS.filter((v) => v.mobile).length} tilt-native ones; desktop gets all {VARIANTS.length}. Only the one you open animates.</p>
  <div style={{ textAlign: "center", margin: "18px 0 28px" }}><button onClick={surprise} style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", fontSize: 13, color: OW, background: R, border: "none", padding: "12px 26px", borderRadius: 3, cursor: "pointer" }}>Surprise me &rarr;</button></div>
  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 18 }}>
  {VARIANTS.map((v, i) => (

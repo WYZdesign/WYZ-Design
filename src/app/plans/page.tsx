@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import DynamicForm from "@/components/DynamicForm";
@@ -53,12 +52,6 @@ const PLANS = [
   { name: "Business Boost", price: "$500", value: "$2,025 Value", popular: true, img: "/images/services/Logo Design.jpg" },
   { name: "Pro Plus", price: "$750", value: "$1,425 Value", popular: false, img: "/images/services/Video Shoot.jpg" },
   { name: "Ultimate Suite", price: "$1,000", value: "$5,000+ Value", popular: false, img: "/images/services/Website Design.jpg" },
-];
-
-const WEB_ADDONS = [
-  { name: "Startup", original: "$650/mo", discounted: "$500/mo", desc: "Launch your dream business with confidence. Our startup plan offers the essential tools and support you need to succeed.", img: "/images/web-design/site_1.jpg" },
-  { name: "Artist", original: "$400/mo", discounted: "$250/mo", desc: "Keep it simple. Our subscription plan gives independent artists and brands everything they need to succeed.", img: "/images/web-design/site_2.jpg" },
-  { name: "Enterprise", original: "$900/mo", discounted: "$750/mo", desc: "Power up your business with a plan that does it all. Built to help you cut costs, work smarter, and grow.", img: "/images/web-design/site_3.jpg" },
 ];
 
 const PLAN_KEYS: Record<string, string> = {
@@ -152,62 +145,6 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
   );
 }
 
-function WebAddonCard({ w, i }: { w: typeof WEB_ADDONS[0]; i: number }) {
-  const [flipped, setFlipped] = useState(false);
-
-  return (
-    <GyroTilt intensity={5} enableOnDesktop>
-    <div
-      className="relative cursor-pointer"
-      style={{ perspective: "1200px", minHeight: "min(440px, 65vh)" }}
-      tabIndex={0}
-      onFocus={() => setFlipped(true)}
-      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
-      onClick={() => setFlipped(f => !f)}
-    >
-      {/* Front */}
-      <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>
-        <div className="relative w-full h-full overflow-hidden border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-[#DF3131]/10">
-          <Image src={w.img} alt={w.name} fill sizes="(max-width:640px) 100vw, 33vw" className="object-cover" />
-          <div className="absolute inset-0 bg-black/80" />
-          <div className="absolute inset-0 flex items-center justify-center z-10 px-6 text-center">
-            <h3 className="font-heading font-black text-white text-[24px] tracking-[0.06em] text-center drop-shadow-lg uppercase">{w.name}</h3>
-          </div>
-        </div>
-      </div>
-      {/* Back */}
-      <div
-        className="absolute inset-0 transition-all duration-700 ease-in-out"
-        style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
-      >
-        <div className={`w-full h-full bg-[#DF3131] text-white p-5 flex flex-col justify-between overflow-hidden relative ${
-          i === 0 ? "border-[4px] border-[#DF3131]" : ""
-        }`}>
-          <div className="relative z-10 text-center">
-            {i === 0 && (
-              <div className="inline-block bg-white text-[#DF3131] text-[11px] font-bold px-3 py-1 tracking-[0.1em] mb-2">★ RECOMMENDED</div>
-            )}
-            <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2">Web Design Add-On</span>
-            <h3 className="font-heading font-black text-white text-[20px] tracking-[0.03em] mb-3">{w.name}</h3>
-            <div className="mb-3">
-              <span className="text-white text-[12px] line-through mr-2">{w.original}</span>
-              <span className="text-[28px] font-black text-white">{w.discounted}</span>
-            </div>
-            <p className="text-white text-[13px] leading-relaxed mb-2">{w.desc}</p>
-            <p className="text-white text-[11px]">10% discount when added to any subscription plan</p>
-          </div>
-          <div className="relative z-10">
-            <Link href="#web-design" className="block text-center py-2.5 bg-white text-[#111] text-[13px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
-              GET STARTED
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-    </GyroTilt>
-  );
-}
-
 export default function PlansPage() {
   const [loading, setLoading] = useState<string | null>(null);
 
@@ -284,21 +221,6 @@ export default function PlansPage() {
             className="max-w-2xl mx-auto"
             paginated
           />
-        </div>
-
-        {/* Web Design Add-Ons */}
-        <div className="mt-10 pb-10">
-          <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold text-[#333333] dark:text-[#e0e0e0] tracking-[0.1em] text-center mb-4">Web Design</h2>
-          <p className="text-[16px] text-[#666666] max-w-2xl mb-6 text-center mx-auto">
-            Want to look your best online? Our Web Design service can help you build a website
-            that reflects your brand&apos;s unique identity. Add it to any subscription plan and
-            you&apos;ll save 10%.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-{WEB_ADDONS.map((w, i) => (
-            <WebAddonCard key={w.name} w={w} i={i} />
-          ))}
-          </div>
         </div>
 
         <LeadMagnet />

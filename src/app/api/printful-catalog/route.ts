@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { listStoreProducts, printfulConfigured } from "@/lib/printful";
+import { listStoreProductsStrict, printfulConfigured } from "@/lib/printful";
 
 /**
  * Live merch catalog, sourced from the Printful store's sync products (the real,
@@ -22,7 +22,17 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const category = searchParams.get("category");
 
-  const products = await listStoreProducts();
+  let products;
+  try {
+    products = await listStoreProductsStrict();
+  } catch (e) {
+    // Never present a stale/empty store as if it were the real catalog.
+    console.error(`[printful-catalog] ${(e as Error).message}`);
+    return NextResponse.json(
+      { error: "The merch store is temporarily unavailable." },
+      { status: 503 }
+    );
+  }
   const mapped = products
     .map((p) => {
       const priced = p.variants.filter((v) => v.price > 0);

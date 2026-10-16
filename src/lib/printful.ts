@@ -96,16 +96,55 @@ function previewImage(v: RawSyncVariant, fallback: string): string {
   return preview?.preview_url || preview?.thumbnail_url || fallback;
 }
 
+class PrintfulError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+    this.name = "PrintfulError";
+  }
+}
+
 async function fetchStoreProductList(): Promise<RawSyncProduct[]> {
   const res = await printful(`/store/products?store_id=${PRINTFUL_STORE_ID}`);
-  if (!res.ok) return [];
+  if (!res.ok) {
+    // Surface the real reason instead of silently presenting an empty store: a
+    // bad/expired key and a genuinely empty store both used to look identical.
+    const detail = await res.text().catch(() => "");
+    throw new PrintfulError(res.status, `Printful store list failed: HTTP ${res.status} ${detail.slice(0, 200)}`);
+  }
   const data = await res.json();
-  return (data?.result || []) as RawSyncProduct[];
+  const result = (data?.result || []) as RawSyncProduct[];
+  if (result.length === 0) {
+    console.warn(`[printful] store ${PRINTFUL_STORE_ID} returned 0 sync products`);
+  }
+  return result;
 }
 
 /** All sellable store products with their variants. Cached 1h via Next data cache. */
 export async function listStoreProducts(): Promise<MerchProduct[]> {
   if (!printfulConfigured()) return [];
+  try {
+    return await loadStoreProducts();
+  } catch (e) {
+    // Tolerant path for internal callers (cart validation, checkout): a Printful
+    // hiccup must not throw inside a purchase flow.
+    console.error(`[printful] ${(e as Error).message}`);
+    return [];
+  }
+}
+
+/**
+ * Strict variant for the public catalog route: throws on an upstream failure so
+ * the store can show "temporarily unavailable" instead of a misleading empty
+ * collection when the key is bad or Printful is down.
+ */
+export async function listStoreProductsStrict(): Promise<MerchProduct[]> {
+  if (!printfulConfigured()) {
+    throw new PrintfulError(503, "PRINTFUL_API_KEY not set");
+  }
+  return loadStoreProducts();
+}
+
+async function loadStoreProducts(): Promise<MerchProduct[]> {
   const list = await fetchStoreProductList();
   const details = await Promise.all(
     list.map(async (p) => {

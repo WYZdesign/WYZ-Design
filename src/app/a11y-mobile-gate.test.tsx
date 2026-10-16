@@ -117,3 +117,33 @@ describe("mobile regression locks (source-level)", () => {
     expect(src).toMatch(/New pieces are coming soon/);
   });
 });
+
+describe("splash mobile policy", () => {
+  const splash = () => read("components", "SplashVariants.tsx");
+
+  it("excludes cursor-oriented variants from the mobile set", () => {
+    const src = splash();
+    for (const name of ["Spotlight", "Duotone", "GrainReveal", "CursorRibbon"]) {
+      expect(src, `${name} must be mobile:false`).toMatch(new RegExp(`Comp:\\s*${name}\\b[^}]*mobile:\\s*false`));
+    }
+  });
+
+  it("ships tilt-first mobile variants and marks them eligible", () => {
+    const src = splash();
+    for (const name of ["TiltLevel", "TiltSheen"]) {
+      expect(src, `${name} must be mobile:true`).toMatch(new RegExp(`Comp:\\s*${name}\\b[^}]*mobile:\\s*true`));
+    }
+  });
+
+  it("RandomSplash filters by touch input", () => {
+    expect(splash()).toMatch(/pickVariant\(isTouchPrimary\(\)\)/);
+    expect(splash()).toMatch(/gyroNeedsGesture\(\)/);
+  });
+
+  it("requests device-orientation on the first user gesture (iOS gate)", () => {
+    const gyro = read("hooks", "useGyroPermission.ts");
+    expect(gyro).toMatch(/pointerdown/);
+    expect(gyro).toMatch(/touchstart/);
+    expect(gyro).toMatch(/requestPerm\(\)/);
+  });
+});
