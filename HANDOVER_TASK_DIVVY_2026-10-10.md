@@ -270,4 +270,18 @@ Those four rows were stuck on "needs verification" (Claude's audit work). Read-o
 - **Commit `ce30e0d` - DEPLOY IS LIVE** (sha `ce30e0da656f8903db7db19ff377f5d065045934`), 5 files: `ScrollToTop.tsx`, `globals.css`, `photography`, `plans`, `web-design`.
 - Evidence shots: `v52_A_dialog_open.png`, `v52_B_cart_stacked.png`, `v52_community_stats.png`, `v58_printing_flip.png`, `v58_flip_before/after.png`, `flip_photography.png`, `flip_plans.png`, `flip_web_design.png`.
 
-Note for whoever runs QA next: port 3100 is `next start` serving the production build, not a dev server. A stale `next start` will keep answering after a rebuild and serve the old manifests (symptom: JS/CSS rejected with MIME `text/plain` and hydration never runs, so cookie dialog and client effects look "broken"). Kill every listener on 3100 before rebuilding, then start a fresh one.
+Note for whoever runs QA next: port 3100 is `next start` serving the production build, not a dev server. A stale `next start` will keep answering after a rebuild and serve the old manifests (symptom: JS/CSS rejected with MIME `text/plain` and hydration never runs, so cookie dialog and client effects look "broken"). Kill every listener on 3100 before rebuilding, then start a fresh one. Something in this environment also respawns a `next start` on 3100 on its own, so verify on a private port (e.g. `next start -p 3210`) if you need a guaranteed-fresh server.
+
+## Progress 12 - Board row #7, loading/error/empty states (2026-10-15, WYZMiND)
+
+Audited the five revenue-critical routes (booking, services, merch, contact, plans) for loading, error and empty states, then fixed what was missing.
+
+- **All five already ship route-level `loading.tsx` + `error.tsx`** built on the shared `RouteLoading` / `RouteErrorState` components, so loading and error coverage was already complete and uniform.
+- **One real bug fixed (merch empty catalog).** The catalog fetch returned early when `data.products` was empty, so `catalogStatus` never left `"loading"` and the grid skeleton pulsed forever. Now an empty-but-successful catalog sets a real empty state. The message is context-aware: "New pieces are coming soon" for All, "No pieces in this category yet" for a filtered category.
+- **Live context:** `/api/printful-catalog` currently returns `{"products":[],"total":0}`, so production `/merch` was sitting on a stuck skeleton. It now shows the empty state. With a non-empty catalog (verified by mocking the route) the grid renders tiles, the quick view opens, and the `/merch/[id]` add-to-cart CTA is present, so the earlier "no Add to Cart" observation was an empty-catalog symptom, not a page defect.
+- **services:** added an empty guard for a category filter that yields no services.
+- **booking:** submission and checkout already surface failures with try/catch plus an `aria-live` region, no change needed. **contact / plans:** static content, empty state not applicable.
+- **Gate:** tsc 0, lint 0, tests **69/69**, build 0. **Commit `7349f28` - DEPLOY IS LIVE** (`7349f285bd44e5a73adeb8878c5a4c11a94f922a`), 2 files (`merch/page.tsx`, `services/page.tsx`).
+- Shots: `v7_merch_empty.png`. Verification scripts asserted the empty state, the no-skeleton condition, and the mocked non-empty happy path.
+
+Still owner-gated: #23 (subscription-term wording needs the real billing cadence), #24 (gift-card implementation awaits policy approval), #6 (regression gate, Codex-owned), and the analytics IDs (not in the vault).
