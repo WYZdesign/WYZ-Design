@@ -34,3 +34,14 @@ Codex owns a different set and is working in parallel. Do not touch files outsid
 
 ## Report
 Append a short status block to the bottom of this file when done, listing each file, its before/after line count, and any file you could not split (with the reason).
+
+## Completion status (filled in by WYZMiND, 2026-10-15)
+
+Claude's four splits were all written and were later integrated/committed; this block was missing.
+
+- `src/app/admin/page.tsx`: split to `src/lib/types/admin.ts` + `src/components/admin/Admin*.tsx`; now 153 lines.
+- `src/app/merch/page.tsx`: dead ~320 lines removed, live pieces moved to `src/lib/data/merch.ts` + `MerchContentSections.tsx`/`MerchProductViews.tsx`; now 347 lines.
+- `src/components/SplashVariants.tsx`: pointer/tilt logic to `src/hooks/useSplashPointer.ts`, brand chrome to `src/components/splash/SplashBrand.tsx`; 615 -> ~600 (grew back with the 2026-10-15 mobile tilt variants).
+- `src/app/fd/page.tsx`: data arrays to `src/lib/data/fd.ts`; now 435 lines.
+
+Gate at integration: tsc 0, lint 0, tests green, build 0.
