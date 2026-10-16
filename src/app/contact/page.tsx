@@ -56,9 +56,9 @@ export default function ContactPage() {
           </div>
         </div>
       </ScrollReveal>
-      <LeadMagnet />
-          {/* merged from /partnerships */}
+      {/* merged from /partnerships */}
       <PartnershipsPage />
+      <LeadMagnet />
 </main>
   );
 }

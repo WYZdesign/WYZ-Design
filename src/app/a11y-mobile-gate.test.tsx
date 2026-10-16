@@ -147,3 +147,14 @@ describe("splash mobile policy", () => {
     expect(gyro).toMatch(/requestPerm\(\)/);
   });
 });
+
+describe("page section order", () => {
+  it("contact renders the brand-audit lead magnet last (K15)", () => {
+    const src = read("app", "contact", "page.tsx");
+    const partners = src.indexOf("<PartnershipsPage");
+    const lead = src.indexOf("<LeadMagnet");
+    expect(partners, "PartnershipsPage missing").toBeGreaterThan(-1);
+    expect(lead, "LeadMagnet missing").toBeGreaterThan(-1);
+    expect(lead, "LeadMagnet must render after PartnershipsPage").toBeGreaterThan(partners);
+  });
+});
