@@ -336,3 +336,11 @@ Audited everything the other agents were assigned and found the backlog was almo
 - **Payment map verified:** `SERVICE_PRICES` (Photoshoot $100, Event Photography $200, Logo Consultation $50, Marketing Consultation $50, SEO Audit $50) all agree with the canon.
 - **Canon-silent services** (logo/brand/social/business-card/flyer, video line, web line) are listed with live prices and flagged as not governed by the canon, not in conflict. If any should move, extend the canon first.
 - **Gate:** tsc 0, lint 0, tests **95/95**, build 0. **Commit `88f73f0` - DEPLOY IS LIVE** (`88f73f0a94059473ddb4ed829ed4f335d1b65fb3`), 4 files. Regression locks added to `src/app/a11y-mobile-gate.test.tsx`.
+
+## Progress 18 - Splash entry: button only (2026-10-15, WYZMiND)
+
+- **Owner bug:** on the splash, any tap anywhere entered the site, which defeated the mobile tilt gate (the tap meant to grant motion permission also navigated away).
+- **Cause:** `src/app/page.tsx` put `onClick={handleEnter}` on the full-screen splash wrapper. `/splash` itself never had one.
+- **Fix:** removed the wrapper `onClick`; the only enter path is the "Enter Site" button (`Brand`'s `wyz-enter` button, plus Glitch's own button), which calls `onEnter`.
+- **Verified on production, mobile context:** tapping (30,30) and (360,760) left the splash up; clicking Enter Site dismissed it and rendered the home page (`WE MAKEWHAT WORKS`).
+- **Gate:** tsc 0, lint 0, tests **96/96**, build 0. **Commit `1d16abe` - DEPLOY IS LIVE** (`1d16abe91a683134c425c5a799c9f2231c48a4fb`). Regression lock added (`splash entry` block).
