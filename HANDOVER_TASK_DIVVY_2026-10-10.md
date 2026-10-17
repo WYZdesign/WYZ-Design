@@ -344,3 +344,13 @@ Audited everything the other agents were assigned and found the backlog was almo
 - **Fix:** removed the wrapper `onClick`; the only enter path is the "Enter Site" button (`Brand`'s `wyz-enter` button, plus Glitch's own button), which calls `onEnter`.
 - **Verified on production, mobile context:** tapping (30,30) and (360,760) left the splash up; clicking Enter Site dismissed it and rendered the home page (`WE MAKEWHAT WORKS`).
 - **Gate:** tsc 0, lint 0, tests **96/96**, build 0. **Commit `1d16abe` - DEPLOY IS LIVE** (`1d16abe91a683134c425c5a799c9f2231c48a4fb`). Regression lock added (`splash entry` block).
+
+## Progress 19 - Integrated Claude + Codex updates (2026-10-17, WYZMiND)
+
+Both agents had written to the shared tree without committing. Reviewed every diff, then ran the real gate and shipped as integrator.
+
+- **Claude (`HANDOVER_SPLASH_FIX_2026-10-17.md`):** (1) fixed a real one-axis dead zone in `useSplashPointer`, where `beta` was centered on 0 (phone flat) instead of 90 (phone held up), so vertical tilt was pinned at an extreme; now `(beta - 45) / 90`. (2) Spotlight and Duotone eased their glow toward the `(-999,-999)` sentinel before the first real pointer event; added the same `m.on` guards the other cursor variants use, and bumped their radius/opacity. (3) replaced the random picker with a shuffled bag (Fisher-Yates, persisted in `localStorage`, separate desktop/mobile bags) so every variant is seen once before any repeat; exported `VARIANT_COUNT`/`MOBILE_VARIANT_COUNT` and made the gallery metadata use them.
+- **Codex (`HANDOVER_RECONCILIATION_2026-10-17.md`):** added `src/app/page.test.tsx` locking the button-only splash entry, reconciled `WYZ_OPERATIONS_MAP.md`, closed board #5.
+- **WYZMiND:** added noindex layouts for `mobile-splash`, `splash-showcase`, `splash-gallery` (only `/splash` had one) and a test locking all four; the splash policy still holds because `pickVariant(isTouchPrimary())` and the mobile flags are unchanged.
+- **Verified live:** all four preview routes return 200 with `noindex`; the splash renders and still enters only via the button.
+- **Gate:** tsc 0, lint 0, tests **98/98** (11 files), build 0. **Commits `89c43ea` (code) + `76743b2` (docs) - DEPLOY IS LIVE** (`76743b2aae46956ea3c138ba93bd925564765d0a`). The docs commit carried the code because it is a descendant; Vercel built it READY.
