@@ -169,6 +169,15 @@ describe("splash entry", () => {
   });
 });
 
+describe("preview routes", () => {
+  it("internal splash previews are noindexed", () => {
+    for (const route of ["mobile-splash", "splash-showcase", "splash-gallery", "splash"]) {
+      const src = read("app", route, "layout.tsx");
+      expect(src, `${route} must be noindex`).toMatch(/robots:\s*\{\s*index:\s*false/);
+    }
+  });
+});
+
 describe("pricing canon", () => {
   it("plans match the approved catalog and are monthly only", () => {
     const plans = read("app", "plans", "page.tsx");

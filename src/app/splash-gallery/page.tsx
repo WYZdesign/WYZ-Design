@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import SplashGallery from "@/components/SplashVariants";
+import SplashGallery, { VARIANT_COUNT } from "@/components/SplashVariants";
 
 export const metadata: Metadata = {
   title: "Splash Gallery",
-  description: "16 animated splash screen designs and motion graphics - WYZ Design",
+  description: `${VARIANT_COUNT} animated splash screen designs and motion graphics - WYZ Design`,
 };
 
 export default function Page() {

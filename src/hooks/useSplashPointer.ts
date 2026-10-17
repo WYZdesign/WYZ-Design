@@ -36,7 +36,12 @@ export function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
    if (e.gamma === null || e.beta === null || !ref.current) return;
    const r = ref.current.getBoundingClientRect();
    const nx = Math.max(0, Math.min(1, (e.gamma + 45) / 90));
-   const ny = Math.max(0, Math.min(1, (e.beta + 45) / 90));
+   // beta is front-to-back tilt, 0deg = device lying flat. A phone actually
+   // held up to look at it sits near beta=90deg, not 0deg, so centering the
+   // range on 0 (the old code) pins this axis at one extreme the whole time
+   // during normal handheld use and only the left-right axis ever visibly
+   // moves. Center on 90deg instead, the natural "looking at it" angle.
+   const ny = Math.max(0, Math.min(1, (e.beta - 45) / 90));
    // Physical sensors are noisy. Ease the raw reading before each splash
    // receives it, so a phone tilt feels direct without looking jittery.
    gyro.current.x += (nx - gyro.current.x) * .2;

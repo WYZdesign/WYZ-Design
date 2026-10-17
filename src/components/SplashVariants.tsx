@@ -159,7 +159,7 @@ export function Ripple({ onEnter }: VProps) {
 export function Spotlight({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const li = useRef<HTMLDivElement>(null);
  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
- useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; p.x += (m.x - p.x) * .12; p.y += (m.y - p.y) * .12; if (li.current) li.current.style.background = `radial-gradient(360px circle at ${p.x}px ${p.y}px, rgba(223,49,49,.2), rgba(212,147,65,.1) 42%, transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
+ useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; if (m.on) { p.x += (m.x - p.x) * .12; p.y += (m.y - p.y) * .12; } if (li.current) li.current.style.background = `radial-gradient(420px circle at ${p.x}px ${p.y}px, rgba(223,49,49,.3), rgba(212,147,65,.16) 42%, transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox(DK)}><div ref={li} style={{ position: "absolute", inset: 0 }} /><Brand onEnter={onEnter} /></div>;
 }
 
@@ -214,7 +214,7 @@ export function TiltGlass({ onEnter }: VProps) {
 export function Duotone({ onEnter }: VProps) {
  const { ref, mouse, onMove, onLeave } = useStage(); const li = useRef<HTMLDivElement>(null);
  // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: effect keyed to the deps shown; adding the flagged value would re-run it unnecessarily
- useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; p.x += (m.x - p.x) * .1; p.y += (m.y - p.y) * .1; if (li.current) li.current.style.background = `radial-gradient(300px circle at ${p.x}px ${p.y}px, rgba(255,255,255,.22), transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
+ useEffect(() => { const el = ref.current!; const p = { x: el.clientWidth / 2, y: el.clientHeight / 2 }; let raf = 0; const t = () => { const m = mouse.current; if (m.on) { p.x += (m.x - p.x) * .1; p.y += (m.y - p.y) * .1; } if (li.current) li.current.style.background = `radial-gradient(360px circle at ${p.x}px ${p.y}px, rgba(255,255,255,.32), transparent 70%)`; raf = requestAnimationFrame(t); }; t(); return () => cancelAnimationFrame(raf); }, [mouse]);
  return <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} style={stageBox("#1a1410")}>
  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,#3a2a18,#1a1410 60%)", mixBlendMode: "luminosity", opacity: .5 }} />
  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg,rgba(223,49,49,.35),rgba(212,147,65,.3))", mixBlendMode: "color" }} />
@@ -539,6 +539,9 @@ const VARIANTS: { name: string; desc: string; Comp: (p: VProps) => React.JSX.Ele
  { name: "Tilt sheen", desc: "A raking light sweeps the mark as you tilt", Comp: TiltSheen, bg: "#0e0c0b", mobile: true },
 ];
 
+export const VARIANT_COUNT = VARIANTS.length;
+export const MOBILE_VARIANT_COUNT = VARIANTS.filter((v) => v.mobile).length;
+
 /** True on phones/tablets: no hover, coarse pointer, touch events present. */
 export function isTouchPrimary(): boolean {
  if (typeof window === "undefined") return false;
@@ -549,27 +552,40 @@ export function isTouchPrimary(): boolean {
  }
 }
 
-/* Picks a variant that is never the same as the one shown last time (in
- this tab, via sessionStorage), so testing "surprise me" a few times in a
- row can't land on a repeat and read as "it's always the same 3 or 4" --
- a true uniform random draw over a small, visually-similar-looking set
- can still feel that way by chance, so this removes that chance entirely
- on top of curating the set itself down to 16 variants that actually look
- different from one another (the old 24 had seven different dot-cloud-
- on-dark-background variants alone, which is most of why a random pick
- kept reading as "the same thing" even when the index genuinely changed). */
-const LAST_KEY = "wyz-splash-last";
+/* Picks the next variant from a shuffled "bag": every eligible variant goes
+ in once, in random order, and each call pops one off. A true uniform random
+ draw can by chance keep landing on the same few variants for a long run of
+ visits -- with 18 (and growing) variants that reads as "it's always the
+ same 3 or 4" even though nothing is actually broken, just unlucky. Drawing
+ from a bag instead guarantees every variant is seen exactly once before any
+ repeat, re-shuffling once the bag empties. The bag lives in localStorage
+ (not sessionStorage) so it persists across tabs and visits on the same
+ browser/device -- the whole point is that repeat visits, not just repeat
+ calls in one tab, eventually surface everything. Desktop and mobile track
+ separate bags since they draw from different pools. */
+function shuffledBag(pool: number[]): number[] {
+ const bag = [...pool];
+ for (let i = bag.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [bag[i], bag[j]] = [bag[j], bag[i]];
+ }
+ return bag;
+}
 function pickVariant(mobileOnly = false): number {
  // On touch devices only the tilt-native variants are eligible: the
  // cursor-oriented pieces (cursor ribbon, torch reveal, cursor-gated grain,
  // duotone lit by cursor) have no meaning without a pointer.
  const pool = VARIANTS.map((_, i) => i).filter((i) => (mobileOnly ? VARIANTS[i].mobile : true));
- let last = -1;
- try { last = Number(sessionStorage.getItem(LAST_KEY)); } catch {}
- let next = pool[Math.floor(Math.random() * pool.length)];
- if (pool.length > 1 && next === last) { const others = pool.filter((i) => i !== last); next = others[Math.floor(Math.random() * others.length)]; }
- try { sessionStorage.setItem(LAST_KEY, String(next)); } catch {}
- return next;
+ const bagKey = `wyz-splash-bag-${mobileOnly ? "mobile" : "all"}`;
+ let bag: number[] = [];
+ try {
+  const raw = localStorage.getItem(bagKey);
+  if (raw) bag = (JSON.parse(raw) as number[]).filter((i) => pool.includes(i));
+ } catch {}
+ if (bag.length === 0) bag = shuffledBag(pool);
+ const next = bag.pop();
+ try { localStorage.setItem(bagKey, JSON.stringify(bag)); } catch {}
+ return next ?? pool[0];
 }
 
 export function RandomSplash(props: VProps) {
