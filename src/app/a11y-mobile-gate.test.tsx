@@ -159,6 +159,16 @@ describe("page section order", () => {
   });
 });
 
+describe("splash entry", () => {
+  it("enters only via the Enter Site button, never a full-screen tap", () => {
+    const root = read("app", "page.tsx");
+    expect(root, "full-screen tap must not enter").not.toMatch(/onClick=\{handleEnter\}/);
+    expect(root).toMatch(/<RandomSplash onEnter=\{handleEnter\} \/>/);
+    const brand = read("components", "splash", "SplashBrand.tsx");
+    expect(brand, "Enter Site button must call onEnter").toMatch(/<button[^>]*onClick=\{onEnter\}/);
+  });
+});
+
 describe("pricing canon", () => {
   it("plans match the approved catalog and are monthly only", () => {
     const plans = read("app", "plans", "page.tsx");

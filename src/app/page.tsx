@@ -36,7 +36,6 @@ export default function Page() {
         <div
           className="fixed inset-0 z-[9999]"
           style={{ backgroundColor: "#111" }}
-          onClick={handleEnter}
         >
           <RandomSplash onEnter={handleEnter} />
         </div>
