@@ -327,3 +327,12 @@ Audited everything the other agents were assigned and found the backlog was almo
 - **K-tasks (K1-K16): all done** per the divvy's sections 6-13 (K1/K2 `.wz-stack` hero titles on 16 pages, K3 `HeroDots`, K4 site-wide interaction layer, K5-K14 per-page fixes, K16 `/wyzmind` claim correction).
 - **K15 was the one real gap.** It was written to the device but never reached git, so `/contact` still rendered the "Free Brand Audit Guide" `LeadMagnet` in the middle of the page (before the merged `/partnerships` content) instead of last. Fixed: `PartnershipsPage` now renders first and `LeadMagnet` last, and a regression test asserts that order.
 - **Gate:** tsc 0, lint 0, tests **93/93**, build 0. **Commit `f0a4b6d` - DEPLOY IS LIVE** (`f0a4b6d6078563761c9fb1daf4c73ae52b1d6031`), 2 files.
+
+## Progress 17 - Board #2, price/CTA inventory vs the canon (2026-10-15, WYZMiND)
+
+- **Inventory written:** `PRICING_INVENTORY.md` maps every plan, service price, deposit rule, gift-card and merch claim to the approved canon.
+- **Plans:** Starter Pack $250 / Business Boost $500 / Pro Plus $750 / Ultimate Suite $1,000, monthly, auto-renew, cancel anytime, all MATCH; no "quarterly" claim anywhere in `src`.
+- **Two real conflicts fixed (display copy only):** Graphic Design was `$75+` on `/services` and the booking label while the canon says `$150 / 3hr`; Photo Retouching was `$50` on the services card while the canon and booking both say `from $15`. Both service strings now match the canon. Neither is in the checkout `SERVICE_PRICES` map (they are quote-based), so nothing about payment changed.
+- **Payment map verified:** `SERVICE_PRICES` (Photoshoot $100, Event Photography $200, Logo Consultation $50, Marketing Consultation $50, SEO Audit $50) all agree with the canon.
+- **Canon-silent services** (logo/brand/social/business-card/flyer, video line, web line) are listed with live prices and flagged as not governed by the canon, not in conflict. If any should move, extend the canon first.
+- **Gate:** tsc 0, lint 0, tests **95/95**, build 0. **Commit `88f73f0` - DEPLOY IS LIVE** (`88f73f0a94059473ddb4ed829ed4f335d1b65fb3`), 4 files. Regression locks added to `src/app/a11y-mobile-gate.test.tsx`.
