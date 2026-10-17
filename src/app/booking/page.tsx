@@ -45,7 +45,7 @@ const PRICING_MAP: Record<string, string> = {
   "Product Photography": "$120",
   "Headshot Session": "$100",
   "Behind the Scenes": "$150",
-  "Graphic Design": "$75+",
+  "Graphic Design": "$150",
   "Logo Design": "$100+",
   "Brand Identity Package": "$300+",
   "Social Media Kit": "$200+",

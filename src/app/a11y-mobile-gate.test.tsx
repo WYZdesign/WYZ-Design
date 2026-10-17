@@ -158,3 +158,21 @@ describe("page section order", () => {
     expect(lead, "LeadMagnet must render after PartnershipsPage").toBeGreaterThan(partners);
   });
 });
+
+describe("pricing canon", () => {
+  it("plans match the approved catalog and are monthly only", () => {
+    const plans = read("app", "plans", "page.tsx");
+    for (const [name, price] of [["Starter Pack", "$250"], ["Business Boost", "$500"], ["Pro Plus", "$750"], ["Ultimate Suite", "$1,000"]] as const) {
+      expect(plans, `${name} price`).toMatch(new RegExp(`name: "${name}", price: "${price.replace("$", "\\$")}"`));
+    }
+    expect(plans).toMatch(/auto-renew monthly/);
+    expect(plans).not.toMatch(/quarterly/i);
+  });
+
+  it("services + booking carry the canon graphic-design and retouching prices", () => {
+    const svc = read("app", "services", "page.tsx");
+    expect(svc).toMatch(/name: "Graphic Design", price: "\$150"/);
+    expect(svc).toMatch(/name: "Photo Retouching", price: "from \$15"/);
+    expect(read("app", "booking", "page.tsx")).toMatch(/"Graphic Design": "\$150"/);
+  });
+});
