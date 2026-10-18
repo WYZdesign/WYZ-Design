@@ -216,9 +216,16 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
 
   // Dynamic model photos from GDrive, best image per model
   // Dynamic GDrive photos, deduplicated across all sections
- const [albumCovers, setAlbumCovers] = useState<Record<string, string>>(ALBUM_COVERS_STATIC);
- const [carousel1, setCarousel1] = useState<string[]>([]);
- const [carousel2, setCarousel2] = useState<string[]>([]);
+ // Album covers + carousel fill images. These used to be refreshed from
+ // /api/gdrive-photos on every page load, but that route requires admin
+ // auth (src/app/api/gdrive-photos/route.ts calls requireAdmin()) and was
+ // never going to succeed for a real visitor -- every load fired 6 doomed
+ // requests (12 counting StrictMode's double-invoke) that always 403'd,
+ // then silently fell back to these same static values anyway. Removed the
+ // dead fetch; this is the value it always ended up using in production.
+ const albumCovers = ALBUM_COVERS_STATIC;
+ const carousel1: string[] = [];
+ const carousel2: string[] = [];
 
  const [featuredModels, setFeaturedModels] = useState([
   { name: "ADRIENNE", cover: "/images/photography/carousel_3/wix_0283.jpg", title: "Signed Model" },
@@ -245,49 +252,6 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
  const [modelAutoPlay, setModelAutoPlay] = useState(true);
   const [applicationSubmitted, setApplicationSubmitted] = useState(false);
   const [applicationSubmitting, setApplicationSubmitting] = useState(false);
-
- useEffect(() => {
- // Fetch category photos for album covers + carousels
- const cats = ALBUMS;
- const used = new Set<string>();
- const allCovers: Record<string, string> = {};
- const allCarousel: string[] = [];
-
- Promise.all(
- cats.map((cat) =>
- fetch(`/api/gdrive-photos?category=${cat.toLowerCase()}&per_page=20`)
- .then((r) => r.json())
- .then((d) => ({ cat, images: d.images || [] }))
- .catch(() => ({ cat, images: [] as string[] }))
- )
- ).then((results) => {
- for (const { cat, images } of results) {
- const fresh = images.find((img: string) => !used.has(img));
- if (fresh) {
- allCovers[cat] = fresh;
- used.add(fresh);
- } else {
- allCovers[cat] = ALBUM_COVERS_STATIC[cat];
- }
- }
- for (const { images } of results) {
- for (const img of images) {
- if (!used.has(img)) {
- allCarousel.push(img);
- used.add(img);
- }
- }
- }
- for (let i = allCarousel.length - 1; i > 0; i--) {
- const j = Math.floor(Math.random() * (i + 1));
- [allCarousel[i], allCarousel[j]] = [allCarousel[j], allCarousel[i]];
- }
- const mid = Math.ceil(allCarousel.length / 2);
- setCarousel1(shuffleArray(allCarousel.slice(0, mid)));
- setCarousel2(shuffleArray(allCarousel.slice(mid)));
- setAlbumCovers(allCovers);
- });
- }, []);
 
  useEffect(() => {
  if (!modelAutoPlay) return;
@@ -548,7 +512,7 @@ return (
    <TextSplit stagger={0.03} direction="up">MODEL</TextSplit><br /><TextSplit stagger={0.03} direction="up">ARCHIVE</TextSplit>
    </h2>
    <p className="text-[16px] lg:text-[18px] text-[#666] dark:text-white/60 max-w-md leading-relaxed mb-8 mx-auto">
-   Our model archive has 78+ models and client albums to browse. Explore our diverse range of talent, from inexperienced to professional.
+   Our model archive has 90+ models and client albums to browse. Explore our diverse range of talent, from inexperienced to professional.
   </p>
           <div className="wz-hscroll mb-8 justify-start sm:justify-center">
 
@@ -642,21 +606,51 @@ return (
  </div>
  )}
 
-  {/* Navigation Dots */}
-  {!showModelForm && (
-  <div className="mt-5 flex items-center justify-center gap-1.5">
-  {featuredModels.map((_, i) => (
-    <button
-      key={i}
-      onClick={() => setModelIdx(i)}
-      className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] cursor-pointer"
-      aria-label={`Model ${i + 1}`}
-    >
-    <span className={`rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-4 h-1.5" : "bg-white/50 dark:bg-white/40 w-1.5 h-1.5"}`} />
-  </button>
-  ))}
-  </div>
-  )}
+  {/* Navigation Dots */}
+
+
+  {!showModelForm && (
+
+
+  <div className="mt-5 flex items-center justify-center gap-1.5">
+
+
+  {featuredModels.map((_, i) => (
+
+
+    <button
+
+
+      key={i}
+
+
+      onClick={() => setModelIdx(i)}
+
+
+      className="p-1 border-0 bg-transparent flex items-center justify-center min-w-[36px] min-h-[36px] sm:min-w-[44px] sm:min-h-[44px] cursor-pointer"
+
+
+      aria-label={`Model ${i + 1}`}
+
+
+    >
+
+
+    <span className={`rounded-full transition-all duration-300 ${i === modelIdx ? "bg-[#DF3131] w-4 h-1.5" : "bg-white/50 dark:bg-white/40 w-1.5 h-1.5"}`} />
+
+
+  </button>
+
+
+  ))}
+
+
+  </div>
+
+
+  )}
+
+
 {/* Become A Model Form */}
   {showModelForm && (
   <div className="bg-white dark:bg-[#252528] p-6 lg:p-8 shadow-xl rounded-lg border border-[#E2E2E2] dark:border-[#444]">
