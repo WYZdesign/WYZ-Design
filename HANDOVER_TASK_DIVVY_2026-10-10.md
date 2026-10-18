@@ -354,3 +354,15 @@ Both agents had written to the shared tree without committing. Reviewed every di
 - **WYZMiND:** added noindex layouts for `mobile-splash`, `splash-showcase`, `splash-gallery` (only `/splash` had one) and a test locking all four; the splash policy still holds because `pickVariant(isTouchPrimary())` and the mobile flags are unchanged.
 - **Verified live:** all four preview routes return 200 with `noindex`; the splash renders and still enters only via the button.
 - **Gate:** tsc 0, lint 0, tests **98/98** (11 files), build 0. **Commits `89c43ea` (code) + `76743b2` (docs) - DEPLOY IS LIVE** (`76743b2aae46956ea3c138ba93bd925564765d0a`). The docs commit carried the code because it is a descendant; Vercel built it READY.
+
+## Progress 20 - Mobile splash: continuous animation, no gate (2026-10-17, WYZMiND)
+
+Owner direction: the mobile splash should always be animating on its own (10-15 varied, site-colored pieces), with tilt as an optional influence rather than something you must enable first.
+
+- **Root cause of "no tilt at all":** three `useGyroPermission` instances (the tilt gate plus the active variant's pointer hook) each called `DeviceOrientationEvent.requestPermission()` on the same tap. iOS services that prompt once, and the extra concurrent calls can reject, so the variant's instance could lose the race even when the gate was granted. Permission is now a single shared module promise, so every instance gets the same result from one prompt.
+- **Continuous mobile animation:** `usePointerField` now runs a slow autonomous orbit on touch devices and feeds it through the same pointer ref every variant already reads, so all 14 mobile variants animate with no input. The first real `deviceorientation` event flips `gyroActive` and tilt takes over, so movement still influences each piece.
+- **Gate removed:** no more blocking "Tap to enable tilt" overlay. The first gesture still requests motion permission in the background; if granted, tilt starts influencing, otherwise the animation just continues.
+- **Glitch** now replays every 2.6s instead of firing once, so it is not static.
+- **Mobile set:** 14 tilt-native variants (in the 10-15 range), all distinct: constellation, depth parallax, glitch, smoke, ripple, magnetic, tilt glass, gem burst, mesh drift, vortex, wave ripple, liquid chrome, tilt level, tilt sheen.
+- **Verified live, zero interaction:** mobile frames 1.2s apart differ by 37,780 bytes (animating), no gate present. Desktop stays mouse-driven as before.
+- **Gate:** tsc 0, lint 0, tests **100/100**, build 0. **Commit `72ea30d` - DEPLOY IS LIVE** (`72ea30d0f8e278a8c0970b4598e434b404318b9a`).
