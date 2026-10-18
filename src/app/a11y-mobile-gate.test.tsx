@@ -196,6 +196,16 @@ describe("image sizing", () => {
   });
 });
 
+describe("photography delivery", () => {
+  it("allows the catalog origin through Next Image and both image CSP policies", () => {
+    const config = read("..", "next.config.ts");
+    const origin = "ccznkpcmpadgftqhwvdx.supabase.co";
+    expect(config).toMatch(new RegExp(`hostname: "${origin}"`));
+    expect(config.match(new RegExp(`img-src[^\"]*${origin}`, "g"))).toHaveLength(2);
+    expect(config).not.toMatch(/img-src[^\"]*https:\/\/\*\.supabase\.co/);
+  });
+});
+
 describe("carousel scale", () => {
   it("image carousels use the 15% larger card sizes", () => {
     expect(read("app", "designs", "page.tsx")).toMatch(/md:w-\[368px\]/);
