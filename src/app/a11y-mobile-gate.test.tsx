@@ -190,6 +190,12 @@ describe("preview routes", () => {
   });
 });
 
+describe("image sizing", () => {
+  it("h-full images are not defeated by the preflight height:auto reset", () => {
+    expect(read("app", "globals.css")).toMatch(/img\.h-full\s*\{[\s\S]*?height:\s*100%\s*!important/);
+  });
+});
+
 describe("pricing canon", () => {
   it("plans match the approved catalog and are monthly only", () => {
     const plans = read("app", "plans", "page.tsx");

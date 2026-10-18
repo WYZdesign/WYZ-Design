@@ -1323,6 +1323,17 @@ footer img[class*="object-contain"] {
   max-height: none;
 }
 
+/* Tailwind's preflight `img,video{max-width:100%;height:auto}` wins over the
+   `h-full` utility in this build, so any image asked to fill a fixed-height
+   card collapsed to its intrinsic height and got clipped by the card's
+   overflow-hidden. That is why portrait flyers in the /designs carousels
+   looked cropped. Restore the explicit intent only where the class is actually
+   present, so auto-height images (logos, inline art) are untouched. With
+   object-contain alongside it, the whole image is letterboxed instead of cut. */
+img.h-full {
+  height: 100% !important;
+}
+
 /* ═══════════════════════════════════════════════════════════
    MICRO-INTERACTIONS — Hover Glow, Spring Curves, Glassmorphism
    ═══════════════════════════════════════════════════════════ */
