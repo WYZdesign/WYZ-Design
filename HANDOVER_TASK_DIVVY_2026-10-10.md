@@ -374,3 +374,21 @@ Owner direction: the mobile splash should always be animating on its own (10-15 
 - **Fix:** one rule in `globals.css`, `img.h-full { height: 100% !important; }`, scoped to images that explicitly ask for it so logos and auto-height art are untouched. Now the box matches the card and `object-contain` letterboxes the whole image instead of cropping it.
 - **Verified live:** measured all 564 carousel images on `/designs`: zero exceed their card (was 100+). Screenshot confirmation of the flyers carousel shows full portrait posters with side letterboxing. This also fixes the same pattern anywhere else `h-full` was silently losing (`PhotographyCategoryRows`, merch tiles).
 - **Gate:** tsc 0, lint 0, tests **101/101**, build 0. **Commit `021df9f` - DEPLOY IS LIVE** (`021df9f507faa490d66ca7a5c117f80f3493f81f`). Regression lock added (`image sizing`).
+
+## Progress 22 - Carousels +15%, flip-card consistency audit (2026-10-17, WYZMiND)
+
+- **Every image carousel scaled 15%** (measured live at desktop width):
+  - `/designs` cover art, flyers, logos: 320x320 -> **368x368** (mobile 32vw -> 36.8vw, sm 230 -> 265, heights 176/256/320 -> 202/294/368)
+  - `/designs` MERCH SHOP row: 21vw/190 -> 24.15vw/219, sm 13vw/120 -> 14.95vw/138
+  - `/home` work carousel: 320x256 -> **368x294**
+  - `/photography` carousel: 440x320 -> **506x368** (sm 280 -> 322, md 380 -> 437)
+  - `PhotographyCategoryRows`: heights 224/256/288 -> **258/294/331**
+  - `/events` video carousel: 224 wide -> **258** (42vw -> 48.3vw, sm 192 -> 221)
+  - Text marquees (about/printing/services/web-design/events) are typography strips, not image galleries, so they were left alone.
+- **Flip-card audit (5 implementations: services, printing StickerCard, printing FlipCardInline, plans PlanCard, web-design, photography PhotoFlipCard):**
+  - **Clipping:** services and printing StickerCard used `justify-center` + `overflow-hidden`, so tall backs could clip top and bottom. Both now `justify-between` with the CTA pinned to the bottom above the padding, and the services card min-height rose from `clamp(320px,52vw,420px)` to `clamp(360px,54vw,440px)` so the price and buttons always fit on a phone.
+  - **Tap race:** plans PlanCard and photography PhotoFlipCard were missing the `justFocusedRef` guard the other cards already had, so the first tap (focus then click) could cancel its own flip. Both now use the same guard, and plans also gained hover parity.
+  - **Overflow:** web-design's back had no `overflow-hidden`; added.
+  - **Even spacing:** all backs now share the same shape, a centered details block and a bottom-pinned CTA row with consistent padding.
+- **Verified live:** 13 flip cards on `/services` (services + embedded plans + web-design) all report 0px back overflow and the CTA fully inside the card; a single tap swaps the face transforms as expected.
+- **Gate:** tsc 0, lint 0, tests **103/103**, build 0. **Commit `0b51607` - DEPLOY IS LIVE** (`0b51607257c8b4c4b88343c1b07d88d1f1c803ce`). Regression locks added (`carousel scale`, `flip cards`).
