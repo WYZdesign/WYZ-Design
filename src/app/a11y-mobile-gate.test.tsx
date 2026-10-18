@@ -196,6 +196,24 @@ describe("image sizing", () => {
   });
 });
 
+describe("carousel scale", () => {
+  it("image carousels use the 15% larger card sizes", () => {
+    expect(read("app", "designs", "page.tsx")).toMatch(/md:w-\[368px\]/);
+    expect(read("app", "home", "page.tsx")).toMatch(/md:w-\[368px\]/);
+    expect(read("app", "photography", "page.tsx")).toMatch(/lg:w-\[506px\]/);
+    expect(read("components", "PhotographyCategoryRows.tsx")).toMatch(/md:h-\[331px\]/);
+    expect(read("app", "events", "page.tsx")).toMatch(/md:w-\[258px\]/);
+  });
+});
+
+describe("flip cards", () => {
+  it("every flipping card guards the focus+click tap race", () => {
+    for (const route of ["plans", "photography", "services", "printing"]) {
+      expect(read("app", route, "page.tsx"), `${route} missing justFocusedRef`).toMatch(/justFocusedRef/);
+    }
+  });
+});
+
 describe("pricing canon", () => {
   it("plans match the approved catalog and are monthly only", () => {
     const plans = read("app", "plans", "page.tsx");

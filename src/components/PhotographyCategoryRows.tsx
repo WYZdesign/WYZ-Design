@@ -53,7 +53,7 @@ export function AutoScrollRow({ images, label, speed, onImageClick, isNsfw, canR
           {tripledImages.map((src, index) => (
             <div
               key={index}
-              className="flex-shrink-0 h-56 sm:h-64 md:h-72 overflow-hidden group rounded-sm"
+              className="flex-shrink-0 h-[258px] sm:h-[294px] md:h-[331px] overflow-hidden group rounded-sm"
               onClick={() => {
                 paused.current = true;
                 if (resumeTimer.current) clearTimeout(resumeTimer.current);

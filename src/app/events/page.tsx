@@ -206,7 +206,7 @@ function VideoCarousel({ items, onPlay }: { items: { title: string; video: strin
  }}>
  <div ref={trackRef} className="flex gap-3 will-change-transform">
   {list.map((v, i) => (
-  <div key={i} className="flex-none w-[42vw] sm:w-48 md:w-56 group cursor-pointer hover-lift" onClick={() => onPlay?.(v)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPlay?.(v); } }} role="button" tabIndex={0} aria-label={`Play ${v.title}`}>
+  <div key={i} className="flex-none w-[48.3vw] sm:w-[221px] md:w-[258px] group cursor-pointer hover-lift" onClick={() => onPlay?.(v)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPlay?.(v); } }} role="button" tabIndex={0} aria-label={`Play ${v.title}`}>
  <div className="relative overflow-hidden aspect-[4/3] bg-[#1a1a1a]">
  <video
  src={v.video}

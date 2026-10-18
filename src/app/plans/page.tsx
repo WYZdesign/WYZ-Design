@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -84,6 +84,12 @@ const CUSTOM_PLAN_FIELDS: FormField[] = [
 
 function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (name: string) => void; loading: string | null }) {
   const [flipped, setFlipped] = useState(false);
+  const canHover = useRef(false);
+  // Same tap-race guard the services/printing cards use: on touch, one tap
+  // fires focus (flip true) then click (toggle), which used to cancel the
+  // flip so the card appeared not to respond.
+  const justFocusedRef = useRef(false);
+  useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
     <GyroTilt intensity={5} enableOnDesktop>
@@ -91,9 +97,14 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
       className="relative cursor-pointer"
       style={{ perspective: "1200px", minHeight: `${500 + FEATURES[p.name].length * 45}px` }}
       tabIndex={0}
-      onFocus={() => setFlipped(true)}
+      onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
-      onClick={() => setFlipped(f => !f)}
+      onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
+      onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
+      onClick={() => {
+        if (justFocusedRef.current) { justFocusedRef.current = false; return; }
+        setFlipped(f => !f);
+      }}
     >
       {/* Front */}
       <div className={`absolute inset-0 transition-all duration-700 ease-in-out`} style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(-180deg)" : "rotateY(0deg)" }}>

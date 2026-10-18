@@ -115,11 +115,11 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   </div>
    {/* Back */}
 <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
-    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center overflow-hidden relative">
+    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-between overflow-hidden relative">
     <div className="absolute inset-0 opacity-10">
       <Image src={sticker.img} alt={sticker.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
-    <div className="relative z-10 text-center flex flex-col items-center justify-center">
+    <div className="relative z-10 text-center flex flex-col items-center justify-center w-full">
      <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white/70 block text-center mb-2">Sticker Type</span>
      <h3 className="font-heading font-black text-white text-[24px] tracking-[0.03em] text-center mb-3">{sticker.name}</h3>
      <p className="text-white/80 text-[15px] leading-relaxed mb-4 text-center">{sticker.desc}</p>

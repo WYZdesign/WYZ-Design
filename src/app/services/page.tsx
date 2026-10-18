@@ -78,7 +78,7 @@ onClick={() => {
   setFlipped(f => !f);
 }}
 >
-  <div className="relative w-full" style={{ minHeight: "clamp(320px, 52vw, 420px)", transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" } as React.CSSProperties}>
+  <div className="relative w-full" style={{ minHeight: "clamp(360px, 54vw, 440px)", transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" } as React.CSSProperties}>
  {/* Front - full image + 60% overlay + title.
      2026-10-10 (Claude, full-site audit, board K5): this wrapper had no
      transform-style:preserve-3d at all, so the front/back faces' opposing
@@ -107,20 +107,20 @@ onClick={() => {
     className="absolute inset-0 transition-all duration-700 ease-in-out"
     style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" } as React.CSSProperties}
   >
-<div className="w-full h-full bg-[#DF3131] text-white p-6 flex flex-col items-center justify-center overflow-hidden relative">
+<div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 flex flex-col items-center justify-between overflow-hidden relative">
   <div className="absolute inset-0 opacity-10">
    <Image src={service.img} alt={service.name} fill sizes="(max-width:1024px) 100vw, 33vw" className="w-full h-full object-cover" />
    </div>
-  <div className="relative z-10 text-center flex flex-col items-center justify-center">
+   <div className="relative z-10 text-center flex flex-col items-center justify-center w-full">
  <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2 block">{service.cat}</span>
-  <h3 className="font-heading font-black text-white text-[27.6px] sm:text-[29.9px] tracking-[0.03em] mb-3">{service.name}</h3>
+ <h3 className="font-heading font-black text-white text-[27.6px] sm:text-[29.9px] tracking-[0.03em] mb-3">{service.name}</h3>
  <p className="text-white text-[15px] leading-relaxed mb-5 max-w-xs">{service.desc}</p>
- <div className="flex flex-col items-center justify-center gap-0 mb-5">
- <span className="text-[50px] sm:text-[56px] font-black leading-none">{service.price}</span>
+ <div className="flex flex-col items-center justify-center gap-0">
+ <span className="text-[46px] sm:text-[52px] font-black leading-none">{service.price}</span>
  <span className="text-white text-[15px] mt-1">· {service.dur}</span>
  </div>
  </div>
- <div className="relative z-10 flex gap-2 w-full max-w-xs">
+ <div className="relative z-10 flex gap-2 w-full max-w-xs shrink-0">
   <Link href={service.bookLink} className="flex-1 text-center py-3 bg-white text-[#111] text-[14px] font-bold tracking-[0.08em] hover:bg-[#DF3131] hover:text-white transition-all" onClick={(e) => e.stopPropagation()}>
  BOOK NOW
   </Link>

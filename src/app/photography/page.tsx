@@ -118,7 +118,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
  <div className={`overflow-hidden ${className}`} onClick={handleClick}>
   <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
    {[...items, ...items].map((src, i) => (
-    <div key={i} className="flex-none w-[40vw] sm:w-[280px] md:w-[380px] lg:w-[440px] h-44 sm:h-60 md:h-80 relative overflow-hidden cursor-pointer group">
+          <div key={i} className="flex-none w-[46vw] sm:w-[322px] md:w-[437px] lg:w-[506px] h-[202px] sm:h-[276px] md:h-[368px] relative overflow-hidden cursor-pointer group">
       <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 40vw, 440px" className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
    </div>
    ))}
@@ -130,6 +130,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
  function PhotoFlipCard({ s }: { s: { name: string; price: string; dur: string; cat: string; desc: string; bookLink: string; img: string } }) {
   const [flipped, setFlipped] = useState(false);
   const canHover = useRef(false);
+  const justFocusedRef = useRef(false);
   useEffect(() => { canHover.current = window.matchMedia("(hover: hover)").matches; }, []);
 
   return (
@@ -137,9 +138,12 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
       className="group relative cursor-pointer min-h-[368px] sm:min-h-[575px] lg:min-h-[718px]"
       style={{ perspective: "1200px" }}
       tabIndex={0}
-      onFocus={() => setFlipped(true)}
+      onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
-      onClick={() => setFlipped(f => !f)}
+      onClick={() => {
+        if (justFocusedRef.current) { justFocusedRef.current = false; return; }
+        setFlipped(f => !f);
+      }}
       onMouseEnter={() => { if (canHover.current) setFlipped(true); }}
       onMouseLeave={() => { if (canHover.current) setFlipped(false); }}
     >
@@ -160,11 +164,11 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   className="absolute inset-0 transition-all duration-700 ease-in-out"
   style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
-   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col items-center justify-center overflow-hidden relative">
+   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col items-center justify-between overflow-hidden relative">
    <div className="absolute inset-0 opacity-10">
      <Image src={s.img} alt={s.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
-    <div className="relative z-10 text-center flex flex-col items-center justify-center">
+    <div className="relative z-10 text-center flex flex-col items-center justify-center w-full">
    <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-white mb-2 block">{s.cat}</span>
    <h3 className="font-heading font-black text-white text-[25.3px] sm:text-[27.6px] tracking-[0.03em] mb-3 uppercase">{s.name}</h3>
    <p className="text-white text-[14px] sm:text-[15px] leading-relaxed mb-5 line-clamp-3 max-w-xs">{s.desc}</p>
