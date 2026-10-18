@@ -366,3 +366,11 @@ Owner direction: the mobile splash should always be animating on its own (10-15 
 - **Mobile set:** 14 tilt-native variants (in the 10-15 range), all distinct: constellation, depth parallax, glitch, smoke, ripple, magnetic, tilt glass, gem burst, mesh drift, vortex, wave ripple, liquid chrome, tilt level, tilt sheen.
 - **Verified live, zero interaction:** mobile frames 1.2s apart differ by 37,780 bytes (animating), no gate present. Desktop stays mouse-driven as before.
 - **Gate:** tsc 0, lint 0, tests **100/100**, build 0. **Commit `72ea30d` - DEPLOY IS LIVE** (`72ea30d0f8e278a8c0970b4598e434b404318b9a`).
+
+## Progress 21 - Designs carousel images no longer cropped (2026-10-17, WYZMiND)
+
+- **Reported:** carousel art on `/designs` still looked cropped and should show the full image.
+- **Root cause:** Tailwind's preflight `img,video{max-width:100%;height:auto}` was beating the `h-full` utility in this build, so the carousel image's box was its intrinsic height (e.g. a 384x512 flyer rendered 320x427) inside a fixed 320px card with `overflow-hidden`, which clipped the bottom. `object-fit: contain` was already set but cannot help when the box itself is too tall. Even a fresh `<img class="absolute inset-0 w-full h-full object-contain">` in a 320px parent measured 0/auto, confirming it was not the card or the data.
+- **Fix:** one rule in `globals.css`, `img.h-full { height: 100% !important; }`, scoped to images that explicitly ask for it so logos and auto-height art are untouched. Now the box matches the card and `object-contain` letterboxes the whole image instead of cropping it.
+- **Verified live:** measured all 564 carousel images on `/designs`: zero exceed their card (was 100+). Screenshot confirmation of the flyers carousel shows full portrait posters with side letterboxing. This also fixes the same pattern anywhere else `h-full` was silently losing (`PhotographyCategoryRows`, merch tiles).
+- **Gate:** tsc 0, lint 0, tests **101/101**, build 0. **Commit `021df9f` - DEPLOY IS LIVE** (`021df9f507faa490d66ca7a5c117f80f3493f81f`). Regression lock added (`image sizing`).
