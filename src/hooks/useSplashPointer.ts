@@ -12,6 +12,7 @@ import { useGyroPermission } from "@/hooks/useGyroPermission";
 export function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
  const p = useRef({ x: -999, y: -999, on: false });
  const gyro = useRef({ x: .5, y: .5 });
+ const gyroActive = useRef(false);
 
  useEffect(() => {
   const el = ref.current;
@@ -31,9 +32,34 @@ export function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
   return () => { el.removeEventListener("mousemove", onMove); el.removeEventListener("mouseleave", onLeave); };
  }, [ref]);
 
+ // Mobile: never sit still waiting for a tilt permission the visitor may not
+ // grant. On touch devices drive a slow autonomous orbit so every variant
+ // animates continuously by itself; the first real device orientation takes
+ // over (gyroActive) so tilt still influences it once available.
+ useEffect(() => {
+  const el = ref.current;
+  if (!el) return;
+  const touchPrimary = (typeof window !== "undefined") && (window.matchMedia("(hover: none), (pointer: coarse)").matches || "ontouchstart" in window);
+  if (!touchPrimary) return;
+  let raf = 0, t = Math.random() * 6.283;
+  const tick = () => {
+   if (!gyroActive.current) {
+    t += 0.006;
+    const r = el.getBoundingClientRect();
+    const nx = 0.5 + 0.34 * Math.sin(t * 1.1) * Math.cos(t * 0.37);
+    const ny = 0.5 + 0.28 * Math.sin(t * 0.73 + 1.7);
+    p.current = { x: nx * r.width, y: ny * r.height, on: true };
+   }
+   raf = requestAnimationFrame(tick);
+  };
+  tick();
+  return () => cancelAnimationFrame(raf);
+ }, [ref]);
+
  const onGyroGranted = useCallback((setCleanup: (fn: () => void) => void) => {
   const handler = (e: DeviceOrientationEvent) => {
    if (e.gamma === null || e.beta === null || !ref.current) return;
+   gyroActive.current = true;
    const r = ref.current.getBoundingClientRect();
    const nx = Math.max(0, Math.min(1, (e.gamma + 45) / 90));
    // beta is front-to-back tilt, 0deg = device lying flat. A phone actually

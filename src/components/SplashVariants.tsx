@@ -30,7 +30,6 @@ import { useEffect, useRef, useState } from "react";
 import { useSplashScrollLock } from "@/hooks/useSplashScrollLock";
 import { prefersReducedMotion } from "@/lib/utils";
 import { usePointerField, useStage, fit } from "@/hooks/useSplashPointer";
-import { useGyroPermission, gyroNeedsGesture } from "@/hooks/useGyroPermission";
 import { R, G, OW, DK, CSS, CrownLogo, Wordmark, Brand, center, stageBox, fullCanvas, type VProps } from "@/components/splash/SplashBrand";
 
 /* ============ 16 CURATED VARIANTS ============ */
@@ -82,18 +81,14 @@ export function Depth({ onEnter }: VProps) {
 
 export function Glitch({ onEnter }: VProps) {
  const ref = useRef<HTMLDivElement>(null);
- const pointer = usePointerField(ref);
  const [go, setGo] = useState(false);
 
+ // Continuous, not one-shot: replay the RGB-split every few seconds so the
+ // mobile splash always has motion even with no tilt or pointer input.
  useEffect(() => {
-  let raf = 0;
-  const t = () => {
-   if (pointer.current.on && !go) setGo(true);
-   raf = requestAnimationFrame(t);
-  };
-  raf = requestAnimationFrame(t);
-  return () => cancelAnimationFrame(raf);
- }, [pointer, go]);
+  const iv = setInterval(() => setGo((g) => !g), 2600);
+  return () => clearInterval(iv);
+ }, []);
 
  return (
   <div ref={ref} style={stageBox(DK)}>
@@ -590,38 +585,13 @@ function pickVariant(mobileOnly = false): number {
 
 export function RandomSplash(props: VProps) {
  const [i, setI] = useState<number | null>(null);
- const [gate, setGate] = useState(false);
- const { status, requestPermission } = useGyroPermission(() => {});
  useEffect(() => {
    if (prefersReducedMotion()) return;
    setI(pickVariant(isTouchPrimary()));
  }, []);
- // iOS 13+ needs one user gesture before device-orientation events flow, and on
- // the splash the first tap would otherwise enter the site, so the tilt never
- // got a chance to run (this is why tilt "worked on maybe one" device). Show a
- // single-tap gate first on those devices; the tap grants motion and stays put.
- useEffect(() => {
-   if (isTouchPrimary() && gyroNeedsGesture()) setGate(true);
- }, []);
- useEffect(() => {
-   if (status === "granted" || status === "denied" || status === "unavailable") setGate(false);
- }, [status]);
  if (i === null) return <div style={stageBox(DK)}><style>{CSS}</style><Brand onEnter={props.onEnter} /></div>;
  const C = VARIANTS[i].Comp;
- return <><style>{CSS}</style><C {...props} />
-   {gate && (
-     <div
-       onClick={(e) => { e.stopPropagation(); requestPermission(); setGate(false); }}
-       style={{ position: "fixed", inset: 0, zIndex: 10001, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(10,9,8,.94)", cursor: "pointer" }}
-     >
-       <div style={{ textAlign: "center", padding: 24 }}>
-         <div style={{ fontFamily: "'Montserrat',system-ui,sans-serif", fontWeight: 800, letterSpacing: ".22em", textTransform: "uppercase", fontSize: 12, color: "#bdbdbd" }}>WYZ Design</div>
-         <div style={{ marginTop: 12, fontSize: 16, color: OW }}>Tap to enable tilt</div>
-         <div style={{ marginTop: 6, fontSize: 12.5, color: "#8a8a8a" }}>Tilt your phone to drive the animation</div>
-       </div>
-     </div>
-   )}
- </>;
+ return <><style>{CSS}</style><C {...props} /></>;
 }
 
 export default function SplashGallery() {

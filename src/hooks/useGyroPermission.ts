@@ -12,6 +12,25 @@ function getOrientationPermissionApi(): OrientationPermissionRequest | null {
 }
 
 let grantedOnce = false;
+// iOS services the motion prompt once. The splash has several hook instances
+// alive at the same time (the tilt gate plus the active variant's pointer
+// field), and a single tap fires all of their first-gesture handlers at once.
+// Concurrent requestPermission() calls can reject, and the instance that must
+// win (the variant that actually attaches the orientation listener) could lose
+// that race, leaving the gate dismissed but tilt dead. Share one promise so
+// every caller gets the same answer from a single prompt.
+let permissionPromise: Promise<"granted" | "denied"> | null = null;
+
+function requestOrientationPermission(
+  api: OrientationPermissionRequest
+): Promise<"granted" | "denied"> {
+  if (!permissionPromise) {
+    permissionPromise = Promise.resolve(api.requestPermission!())
+      .then((res) => (res === "granted" ? "granted" : "denied"))
+      .catch(() => "denied");
+  }
+  return permissionPromise;
+}
 
 /**
  * True when the platform gates device-orientation behind a user gesture (iOS
@@ -45,7 +64,8 @@ export function useGyroPermission(
         setStatus("granted");
         return;
       }
-      const perm = await orientationApi.requestPermission();
+      const perm = await requestOrientationPermission(orientationApi);
+      if (perm === "granted") grantedOnce = true;
       setStatus(perm === "granted" ? "granted" : "denied");
     } catch {
       setStatus("denied");

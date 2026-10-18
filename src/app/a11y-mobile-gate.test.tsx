@@ -135,9 +135,15 @@ describe("splash mobile policy", () => {
     }
   });
 
-  it("RandomSplash filters by touch input", () => {
+  it("RandomSplash filters by touch input and never gates on permission", () => {
     expect(splash()).toMatch(/pickVariant\(isTouchPrimary\(\)\)/);
-    expect(splash()).toMatch(/gyroNeedsGesture\(\)/);
+    expect(splash(), "no blocking tilt gate on mobile").not.toMatch(/Tap to enable tilt/);
+  });
+
+  it("mobile splash animates continuously without input", () => {
+    const hook = read("hooks", "useSplashPointer.ts");
+    expect(hook, "touch devices get an autonomous drift").toMatch(/gyroActive/);
+    expect(hook).toMatch(/Math\.sin\(t/);
   });
 
   it("requests device-orientation on the first user gesture (iOS gate)", () => {
@@ -145,6 +151,12 @@ describe("splash mobile policy", () => {
     expect(gyro).toMatch(/pointerdown/);
     expect(gyro).toMatch(/touchstart/);
     expect(gyro).toMatch(/requestPerm\(\)/);
+  });
+
+  it("shares one motion permission request across hook instances (iOS race)", () => {
+    const gyro = read("hooks", "useGyroPermission.ts");
+    expect(gyro, "must dedupe to a single permission promise").toMatch(/permissionPromise/);
+    expect(gyro).toMatch(/requestOrientationPermission/);
   });
 });
 
