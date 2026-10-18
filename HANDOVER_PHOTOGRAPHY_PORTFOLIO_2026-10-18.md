@@ -131,12 +131,17 @@ multi-image galleries should be sourced from if that is wired next.
 `next.config.ts` sets a strict Content-Security-Policy. `img-src` did **not**
 include Supabase, so every portfolio image was blocked by the browser and
 `SafeImage` fell back to its alt-text tile (the page looked like blank white
-rows). `c5c5bb6` adds `https://*.supabase.co` to `img-src` in **both** the
-enforced and the Report-Only policy.
+rows). `c5c5bb6` first added `https://*.supabase.co` to `img-src` in **both** the
+enforced and the Report-Only policy. That wildcard was then narrowed in
+`0b4df7f` to the exact project origin
+`https://ccznkpcmpadgftqhwvdx.supabase.co`, which is the only host any of the
+3,619 portfolio URLs use (verified live: 1,728 image elements on
+`/photography/studio`, 0 broken). `images.remotePatterns` now also lists that
+exact host with the `/storage/v1/object/public/portfolio/**` path.
 
 If images ever go blank again:
 1. Check the response header `Content-Security-Policy` on the category page.
-2. Confirm `img-src` lists `https://*.supabase.co`.
+2. Confirm `img-src` lists `https://ccznkpcmpadgftqhwvdx.supabase.co`.
 3. Check `SafeImage` did not flip to `broken` (it renders a `<div>` with the alt
    text instead of an `<img>`).
 
@@ -229,7 +234,9 @@ python W:\WYZ_Command_Center\wyz_deploy_check.py <full-sha> --project wyzdesign
 - Do not hand-edit `src/lib/data/photography-category.ts` (generated).
 - Do not commit the `.bak_*` copies of the data file (they live in
   `W:\WYZ_Command_Center\_ARCHIVE`).
-- Do not drop `https://*.supabase.co` from `img-src`.
+- Do not remove `https://ccznkpcmpadgftqhwvdx.supabase.co` from `img-src` (the
+  admin/API origins are still on `connect-src`/`media-src`; only the image policy
+  was narrowed to this exact host, which is the sole origin the portfolio uses).
 - Do not delete the `portfolio` bucket without regenerating `reviewed.json`
   picks and re-running export + upload (the picks are the only record of the
   curation).
