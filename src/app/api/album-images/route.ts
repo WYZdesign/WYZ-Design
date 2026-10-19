@@ -17,6 +17,16 @@ function cloudinaryUrl(publicId: string, w?: number, h?: number): string {
   });
 }
 
+// Cloudinary env vars are optional; a missing cloud_name makes cloudinary.url()
+// throw and previously turned every model-album request into a 500.
+function safeCloudinaryUrl(publicId: string, w?: number, h?: number): string | null {
+  try {
+    return cloudinaryUrl(publicId, w, h);
+  } catch {
+    return null;
+  }
+}
+
 // ── S3-compatible HTTP listing via Cloudflare Tunnel ──
 async function listMinioS3(prefix: string, max = 30): Promise<string[]> {
   try {
@@ -250,7 +260,8 @@ export async function GET(req: NextRequest) {
 
   if (headshotId || minioFolder) {
     if (headshotId) {
-      images.push(cloudinaryUrl(headshotId, 400, 500));
+      const headshot = safeCloudinaryUrl(headshotId, 400, 500);
+      if (headshot) images.push(headshot);
     }
     if (mode !== "cover" && minioFolder) {
       const minioFiles = await listMinioS3(`models/${minioFolder}/`, limit);
@@ -267,7 +278,8 @@ export async function GET(req: NextRequest) {
   // 2. Check if it's a photography category
   const catCover = PHOTO_COVERS[album];
   if (catCover) {
-    images.push(cloudinaryUrl(catCover, 800, 600));
+    const cover = safeCloudinaryUrl(catCover, 800, 600);
+    if (cover) images.push(cover);
     if (mode !== "cover") {
       const catFiles = await listMinioS3(`events/${album.toLowerCase()}/`, limit);
       images.push(...catFiles);
@@ -278,3 +290,4 @@ export async function GET(req: NextRequest) {
   // 3. Fallback
   return NextResponse.json({ album, images: [], count: 0 });
 }
+
