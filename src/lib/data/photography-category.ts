@@ -20,8 +20,17 @@ export const CATEGORY_META: Record<string, { label: string; desc: string }> = {
 export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: string[] }>> = {
   Events: [
     {
-      name: "Red Room: A Birthday in Red",
+      name: "November 5, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/08.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18752045_red-room--a-birthday-in-red/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18752045_red-room--a-birthday-in-red/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18752045_red-room--a-birthday-in-red/02.jpg",
@@ -33,11 +42,10 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18752045_red-room--a-birthday-in-red/08.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18752045_red-room--a-birthday-in-red/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18752045_red-room--a-birthday-in-red/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18752045_red-room--a-birthday-in-red/11.jpg",
       ],
     },
     {
-      name: "Kilts on the Roof",
+      name: "April 15, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18665580_kilts-on-the-roof/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18665580_kilts-on-the-roof/01.jpg",
@@ -54,7 +62,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gallery Night Live",
+      name: "August 7, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18658930_gallery-night-live/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18658930_gallery-night-live/01.jpg",
@@ -71,7 +79,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Show Day",
+      name: "August 31, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18652665_show-day/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18652665_show-day/01.jpg",
@@ -88,16 +96,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Bridal Prep, Purple Hour",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/03.jpg",
-      ],
-    },
-    {
-      name: "Reception, After Hours",
+      name: "December 11, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651597_reception--after-hours/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651597_reception--after-hours/01.jpg",
@@ -111,10 +110,14 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651597_reception--after-hours/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651597_reception--after-hours/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651597_reception--after-hours/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18651653_bridal-prep--purple-hour/03.jpg",
       ],
     },
     {
-      name: "Gallery After Hours",
+      name: "December 18, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18647411_gallery-after-hours/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18647411_gallery-after-hours/01.jpg",
@@ -131,7 +134,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Christmas Morning, Plaid Pajamas",
+      name: "December 20, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18646698_christmas-morning--plaid-pajamas/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18646698_christmas-morning--plaid-pajamas/01.jpg",
@@ -148,8 +151,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "First Hours: Birth Day",
+      name: "February 9, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18640117_first-hours--birth-day/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18640117_first-hours--birth-day/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18640117_first-hours--birth-day/02.jpg",
@@ -161,7 +176,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Winter Onederland First Birthday",
+      name: "February 10, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18639948_winter-onederland-first-birthday/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18639948_winter-onederland-first-birthday/01.jpg",
@@ -178,7 +193,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "No Signal",
+      name: "February 6, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635981_no-signal/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635981_no-signal/01.jpg",
@@ -195,24 +210,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "First Hours",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18635914_first-hours/11.jpg",
-      ],
-    },
-    {
-      name: "Blush Baby Shower",
+      name: "January 21, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18634764_blush-baby-shower/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18634764_blush-baby-shower/01.jpg",
@@ -222,7 +220,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Pink Balloon Baby Shower",
+      name: "January 25, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18634607_pink-balloon-baby-shower/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18634607_pink-balloon-baby-shower/01.jpg",
@@ -239,7 +237,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Ink Night",
+      name: "January 27, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18634276_neon-ink-night/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18634276_neon-ink-night/01.jpg",
@@ -256,7 +254,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Sunday Worship Band",
+      name: "January 29, 2022 (3)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18632660_sunday-worship-band/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18632660_sunday-worship-band/01.jpg",
@@ -271,7 +269,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Youth Worship Set",
+      name: "January 29, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18632629_youth-worship-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18632629_youth-worship-set/01.jpg",
@@ -285,7 +283,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Night Out, Downtown",
+      name: "July 15, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18628203_night-out--downtown/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18628203_night-out--downtown/01.jpg",
@@ -294,7 +292,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "First Birthday Party",
+      name: "June 29, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18621466_first-birthday-party/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18621466_first-birthday-party/01.jpg",
@@ -311,7 +309,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Party Set",
+      name: "June 19, 2024 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18617683_neon-party-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18617683_neon-party-set/01.jpg",
@@ -328,7 +326,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Music School Day",
+      name: "March 14, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18606137_music-school-day/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18606137_music-school-day/01.jpg",
@@ -345,7 +343,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Red Wedding, May 2023",
+      name: "May 29, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18589265_red-wedding--may-2023/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18589265_red-wedding--may-2023/01.jpg",
@@ -362,7 +360,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fall Festival, Nomadic Studio",
+      name: "Nomadic Studio Shoot",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586761_fall-festival--nomadic-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586761_fall-festival--nomadic-studio/01.jpg",
@@ -379,21 +377,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Red Party",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586619_red-party/08.jpg",
-      ],
-    },
-    {
-      name: "Red Room Party",
+      name: "November 13, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586332_red-room-party/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18586332_red-room-party/01.jpg",
@@ -405,50 +389,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Block Party, Face Painting",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/11.jpg",
-      ],
-    },
-    {
-      name: "Harvest Festival, Costumes and Pumpkins",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/11.jpg",
-      ],
-    },
-    {
-      name: "Tent Stage Performance",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/03.jpg",
-      ],
-    },
-    {
-      name: "Halloween Block Party",
+      name: "October 29, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18581376_halloween-block-party/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18581376_halloween-block-party/01.jpg",
@@ -462,10 +403,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18581376_halloween-block-party/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18581376_halloween-block-party/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18581376_halloween-block-party/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584195_block-party--face-painting/07.jpg",
       ],
     },
     {
-      name: "Harvest Block Party",
+      name: "October 30, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18580268_harvest-block-party/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18580268_harvest-block-party/01.jpg",
@@ -479,11 +428,40 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18580268_harvest-block-party/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18580268_harvest-block-party/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18580268_harvest-block-party/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18584044_harvest-festival--costumes-and-pumpkins/07.jpg",
       ],
     },
     {
-      name: "Gallery Opening, Pink Light",
+      name: "October 1, 2022",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18583629_tent-stage-performance/03.jpg",
+      ],
+    },
+    {
+      name: "September 24, 2022",
+      images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/02.jpg",
@@ -492,14 +470,10 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18578134_gallery-opening--pink-light/11.jpg",
       ],
     },
     {
-      name: "Tattoo Night, Neon",
+      name: "September 24, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18577368_tattoo-night--neon/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18577368_tattoo-night--neon/01.jpg",
@@ -516,7 +490,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Community Block Party Concert",
+      name: "September 17, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18576246_community-block-party-concert/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18576246_community-block-party-concert/01.jpg",
@@ -533,24 +507,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gallery Night Party",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575648_gallery-night-party/11.jpg",
-      ],
-    },
-    {
-      name: "Backyard Gellyball Party",
+      name: "September 25, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575295_backyard-gellyball-party/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575295_backyard-gellyball-party/01.jpg",
@@ -567,7 +524,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Paint and Sip Evening",
+      name: "September 30, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575267_paint-and-sip-evening/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Events/18575267_paint-and-sip-evening/01.jpg",
@@ -582,24 +539,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Outdoors: [
     {
-      name: "Railyard to Fence Line",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/11.jpg",
-      ],
-    },
-    {
-      name: "White Slip Dress in the Park",
+      name: "August 11, 2021 (3)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659526_white-slip-dress-in-the-park/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659526_white-slip-dress-in-the-park/01.jpg",
@@ -611,10 +551,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659526_white-slip-dress-in-the-park/07.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659526_white-slip-dress-in-the-park/08.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659526_white-slip-dress-in-the-park/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659573_railyard-to-fence-line/09.jpg",
       ],
     },
     {
-      name: "Golden Hour Fence Line",
+      name: "August 18, 2021 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659393_golden-hour-fence-line/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659393_golden-hour-fence-line/01.jpg",
@@ -631,17 +581,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Riverfront Denim",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/04.jpg",
-      ],
-    },
-    {
-      name: "Riverside Summer",
+      name: "August 5, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659192_riverside-summer/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659192_riverside-summer/01.jpg",
@@ -655,20 +595,15 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659192_riverside-summer/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659192_riverside-summer/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659192_riverside-summer/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18659329_riverfront-denim/04.jpg",
       ],
     },
     {
-      name: "Garden in Bloom",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/04.jpg",
-      ],
-    },
-    {
-      name: "Palm Court Bloom",
+      name: "December 26, 2020",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651071_palm-court-bloom/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651071_palm-court-bloom/01.jpg",
@@ -682,10 +617,15 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651071_palm-court-bloom/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651071_palm-court-bloom/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651071_palm-court-bloom/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18651239_garden-in-bloom/04.jpg",
       ],
     },
     {
-      name: "Desert Wildfire",
+      name: "December 29, 2020",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18650139_desert-wildfire/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18650139_desert-wildfire/01.jpg",
@@ -702,7 +642,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Boardwalk Blues",
+      name: "December 30, 2020",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18649285_boardwalk-blues/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18649285_boardwalk-blues/01.jpg",
@@ -719,7 +659,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fae in the Brush",
+      name: "Fae",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18640504_fae-in-the-brush/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18640504_fae-in-the-brush/01.jpg",
@@ -736,7 +676,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Alley Wall: Summer Dress Session",
+      name: "June 20, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18622082_alley-wall--summer-dress-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18622082_alley-wall--summer-dress-session/01.jpg",
@@ -753,7 +693,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Pink Tracksuit, Skyline",
+      name: "May 1, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18598552_pink-tracksuit--skyline/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18598552_pink-tracksuit--skyline/01.jpg",
@@ -764,7 +704,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Park Pavilion",
+      name: "May 12, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18597263_park-pavilion/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18597263_park-pavilion/01.jpg",
@@ -781,7 +721,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Leaf Shadow",
+      name: "May 14, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18597189_leaf-shadow/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18597189_leaf-shadow/01.jpg",
@@ -790,7 +730,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Park in Bloom",
+      name: "May 19, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18594255_park-in-bloom/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18594255_park-in-bloom/01.jpg",
@@ -807,7 +747,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fur Coat in the Park Pavilion",
+      name: "September 25, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18574137_fur-coat-in-the-park-pavilion/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Outdoors/18574137_fur-coat-in-the-park-pavilion/01.jpg",
@@ -821,7 +761,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Studio: [
     {
-      name: "White Cyc: Blazer Study",
+      name: "November 2, 2025 (2)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18752029_white-cyc--blazer-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18752029_white-cyc--blazer-study/01.jpg",
@@ -830,8 +770,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Grid: Streetwear Session",
+      name: "August 22, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/02.jpg",
@@ -840,14 +792,10 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18751246_neon-grid--streetwear-session/11.jpg",
       ],
     },
     {
-      name: "Gel Study",
+      name: "April 3, 2024 (2)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18661976_gel-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18661976_gel-study/01.jpg",
@@ -864,7 +812,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Studio, April 2024",
+      name: "April 8, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18660339_neon-studio--april-2024/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18660339_neon-studio--april-2024/01.jpg",
@@ -881,7 +829,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Blush Studio and Window Light",
+      name: "August 12, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18659452_blush-studio-and-window-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18659452_blush-studio-and-window-light/01.jpg",
@@ -895,24 +843,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Infinite Room",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18655518_infinite-room/11.jpg",
-      ],
-    },
-    {
-      name: "Denim and White",
+      name: "Christina",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651669_denim-and-white/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651669_denim-and-white/01.jpg",
@@ -929,7 +860,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Holiday Morning, Studio Set",
+      name: "December 15, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651520_holiday-morning--studio-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651520_holiday-morning--studio-set/01.jpg",
@@ -946,8 +877,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Pink and Gold",
+      name: "December 20, 2022",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651359_pink-and-gold/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651359_pink-and-gold/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651359_pink-and-gold/02.jpg",
@@ -959,8 +902,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Golden Hour Pink",
+      name: "December 22, 2021",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651314_golden-hour-pink/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651314_golden-hour-pink/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18651314_golden-hour-pink/02.jpg",
@@ -969,8 +924,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Crimson Studio",
+      name: "December 4, 2021",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/02.jpg",
@@ -979,15 +946,23 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18650078_crimson-studio/11.jpg",
       ],
     },
     {
-      name: "Cream Hour",
+      name: "December 7, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/02.jpg",
@@ -996,15 +971,23 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649209_cream-hour/11.jpg",
       ],
     },
     {
-      name: "Two Tone",
+      name: "December 8, 2021",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/02.jpg",
@@ -1013,13 +996,10 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18649172_two-tone/10.jpg",
       ],
     },
     {
-      name: "Blue Room",
+      name: "December 15, 2021 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18648955_blue-room/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18648955_blue-room/01.jpg",
@@ -1036,7 +1016,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Crimson Room",
+      name: "December 16, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18647542_crimson-room/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18647542_crimson-room/01.jpg",
@@ -1053,92 +1033,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gold Slip, Orange Seamless",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646891_gold-slip--orange-seamless/11.jpg",
-      ],
-    },
-    {
-      name: "Gel Light, Braids",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18646547_gel-light--braids/11.jpg",
-      ],
-    },
-    {
-      name: "Crimson Corset",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18641366_crimson-corset/11.jpg",
-      ],
-    },
-    {
-      name: "Backstage Glow",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640789_backstage-glow/11.jpg",
-      ],
-    },
-    {
-      name: "Color Block Studio",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640614_color-block-studio/11.jpg",
-      ],
-    },
-    {
-      name: "Leopard and Blue",
+      name: "December 9, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640583_leopard-and-blue/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640583_leopard-and-blue/01.jpg",
@@ -1152,8 +1047,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon and Shadow",
+      name: "February 21, 2024",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/02.jpg",
@@ -1162,15 +1069,23 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640358_neon-and-shadow/11.jpg",
       ],
     },
     {
-      name: "Pink Slip Dress Studio Session",
+      name: "February 24, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/02.jpg",
@@ -1179,14 +1094,10 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640253_pink-slip-dress-studio-session/11.jpg",
       ],
     },
     {
-      name: "Bodysuit, Blazer and Brick",
+      name: "February 7, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640148_bodysuit--blazer-and-brick/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18640148_bodysuit--blazer-and-brick/01.jpg",
@@ -1203,41 +1114,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Room and Shadow Play",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18638458_neon-room-and-shadow-play/11.jpg",
-      ],
-    },
-    {
-      name: "Lilac and Amber",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18637934_lilac-and-amber/11.jpg",
-      ],
-    },
-    {
-      name: "Plaid Studio Sessions",
+      name: "January 28, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635750_plaid-studio-sessions/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635750_plaid-studio-sessions/01.jpg",
@@ -1249,8 +1126,12 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Sage Turban Study",
+      name: "January 4, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/03.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635326_sage-turban-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635326_sage-turban-study/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635326_sage-turban-study/02.jpg",
@@ -1258,16 +1139,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Sage Studio Minimal",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18635306_sage-studio-minimal/03.jpg",
-      ],
-    },
-    {
-      name: "Little Rockers: Studio Set",
+      name: "July 10, 2022 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18629264_little-rockers--studio-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18629264_little-rockers--studio-set/01.jpg",
@@ -1284,21 +1156,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Wig Series Studio Session",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/08.jpg",
-      ],
-    },
-    {
-      name: "Studio Lookbook: Wig and Wardrobe Changes",
+      name: "June 18, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622216_studio-lookbook--wig-and-wardrobe-changes/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622216_studio-lookbook--wig-and-wardrobe-changes/01.jpg",
@@ -1312,10 +1170,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622216_studio-lookbook--wig-and-wardrobe-changes/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622216_studio-lookbook--wig-and-wardrobe-changes/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622216_studio-lookbook--wig-and-wardrobe-changes/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18622343_wig-series-studio-session/07.jpg",
       ],
     },
     {
-      name: "Studio Noir Sessions",
+      name: "June 27, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18621261_studio-noir-sessions/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18621261_studio-noir-sessions/01.jpg",
@@ -1332,7 +1198,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Jun 3 2022 Studio",
+      name: "June 3, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18621079_jun-3-2022-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18621079_jun-3-2022-studio/01.jpg",
@@ -1349,7 +1215,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Jun 7 2022 Studio",
+      name: "June 7, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18620920_jun-7-2022-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18620920_jun-7-2022-studio/01.jpg",
@@ -1366,7 +1232,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Jun 8 2022 Studio",
+      name: "June 8, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18619615_jun-8-2022-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18619615_jun-8-2022-studio/01.jpg",
@@ -1381,24 +1247,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Marquee Green",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/11.jpg",
-      ],
-    },
-    {
-      name: "Marquee Glow",
+      name: "June 5, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18609922_marquee-glow/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18609922_marquee-glow/01.jpg",
@@ -1412,10 +1261,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18609922_marquee-glow/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18609922_marquee-glow/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18609922_marquee-glow/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18611292_marquee-green/07.jpg",
       ],
     },
     {
-      name: "Neon Room",
+      name: "May 1, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18597964_neon-room/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18597964_neon-room/01.jpg",
@@ -1432,7 +1289,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Brick and White Studio",
+      name: "May 15, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18595878_brick-and-white-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18595878_brick-and-white-studio/01.jpg",
@@ -1449,18 +1306,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Studio Set, May 17",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/05.jpg",
-      ],
-    },
-    {
-      name: "Blue Studio Session",
+      name: "May 17, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594444_blue-studio-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594444_blue-studio-session/01.jpg",
@@ -1474,10 +1320,16 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594444_blue-studio-session/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594444_blue-studio-session/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594444_blue-studio-session/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18594622_studio-set--may-17/05.jpg",
       ],
     },
     {
-      name: "Wet Studio, May 2025",
+      name: "May 27, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18590305_wet-studio--may-2025/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18590305_wet-studio--may-2025/01.jpg",
@@ -1494,7 +1346,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Yellow Backdrop, May 2022",
+      name: "May 8, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18588666_yellow-backdrop--may-2022/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18588666_yellow-backdrop--may-2022/01.jpg",
@@ -1505,7 +1357,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Family Band Studio Portraits",
+      name: "November 14, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18586241_family-band-studio-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18586241_family-band-studio-portraits/01.jpg",
@@ -1522,7 +1374,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Green Screen Crew Session",
+      name: "November 26, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18585944_green-screen-crew-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18585944_green-screen-crew-session/01.jpg",
@@ -1539,7 +1391,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Wet Look Studio Session",
+      name: "November 5, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18585333_wet-look-studio-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18585333_wet-look-studio-session/01.jpg",
@@ -1556,7 +1408,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gel Light Studio",
+      name: "October 29, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18581596_gel-light-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18581596_gel-light-studio/01.jpg",
@@ -1573,7 +1425,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Yellow Studio and Light Painting",
+      name: "October 7, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18578452_yellow-studio-and-light-painting/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18578452_yellow-studio-and-light-painting/01.jpg",
@@ -1590,7 +1442,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Newborn Session",
+      name: "September 2, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18578335_newborn-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18578335_newborn-session/01.jpg",
@@ -1599,7 +1451,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Light Painting Portraits",
+      name: "September 27, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18576295_neon-light-painting-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18576295_neon-light-painting-portraits/01.jpg",
@@ -1616,7 +1468,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Window Light and Blue Bokeh",
+      name: "September 7, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18574165_window-light-and-blue-bokeh/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18574165_window-light-and-blue-bokeh/01.jpg",
@@ -1633,7 +1485,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fringe Jacket Sessions",
+      name: "September 29, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18107285_fringe-jacket-sessions/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/18107285_fringe-jacket-sessions/01.jpg",
@@ -1650,7 +1502,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "LED Wall Band Portraits",
+      name: "August 14, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/11821065_led-wall-band-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Studio/11821065_led-wall-band-portraits/01.jpg",
@@ -1669,7 +1521,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Boudoir: [
     {
-      name: "Midnight Marquee",
+      name: "April 15, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18664955_midnight-marquee/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18664955_midnight-marquee/01.jpg",
@@ -1686,7 +1538,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "After Hours",
+      name: "April 3, 2024 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18662427_after-hours/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18662427_after-hours/01.jpg",
@@ -1703,7 +1555,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Flower Wall Glamour",
+      name: "August 18, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18658691_flower-wall-glamour/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18658691_flower-wall-glamour/01.jpg",
@@ -1720,7 +1572,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Pink and Amber",
+      name: "February 24, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18640299_pink-and-amber/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18640299_pink-and-amber/01.jpg",
@@ -1737,7 +1589,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Ink and Ivory",
+      name: "January 13, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18634961_ink-and-ivory/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18634961_ink-and-ivory/01.jpg",
@@ -1754,7 +1606,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fur and Plaid, Dot Light",
+      name: "July 6, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18622983_fur-and-plaid--dot-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18622983_fur-and-plaid--dot-light/01.jpg",
@@ -1771,7 +1623,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Golden Hour Lingerie",
+      name: "June 27, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18621662_golden-hour-lingerie/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18621662_golden-hour-lingerie/01.jpg",
@@ -1785,7 +1637,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Loft Denim Boudoir",
+      name: "June 19, 2024 (2)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18615945_loft-denim-boudoir/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18615945_loft-denim-boudoir/01.jpg",
@@ -1802,7 +1654,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Yellow Room",
+      name: "June 8, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18608987_yellow-room/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18608987_yellow-room/01.jpg",
@@ -1819,24 +1671,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Boudoir",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/11.jpg",
-      ],
-    },
-    {
-      name: "Neon X Stage Boudoir",
+      name: "March 27, 2024 (3)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18601907_neon-x-stage-boudoir/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18601907_neon-x-stage-boudoir/01.jpg",
@@ -1850,10 +1685,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18601907_neon-x-stage-boudoir/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18601907_neon-x-stage-boudoir/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18601907_neon-x-stage-boudoir/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18605766_neon-boudoir/07.jpg",
       ],
     },
     {
-      name: "Burgundy Boudoir",
+      name: "May 20, 2023 (3)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593839_burgundy-boudoir/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593839_burgundy-boudoir/01.jpg",
@@ -1870,7 +1713,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Boudoir Studio II",
+      name: "May 20, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593778_boudoir-studio-ii/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593778_boudoir-studio-ii/01.jpg",
@@ -1887,24 +1730,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "White Lingerie Set",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/11.jpg",
-      ],
-    },
-    {
-      name: "Lingerie Studio II",
+      name: "May 21, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593356_lingerie-studio-ii/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593356_lingerie-studio-ii/01.jpg",
@@ -1918,26 +1744,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593356_lingerie-studio-ii/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593356_lingerie-studio-ii/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593356_lingerie-studio-ii/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18593405_white-lingerie-set/07.jpg",
       ],
     },
     {
-      name: "Amber Studio Lingerie",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/10.jpg",
-      ],
-    },
-    {
-      name: "Curly Hair Studio Poses",
+      name: "October 16, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585075_curly-hair-studio-poses/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585075_curly-hair-studio-poses/01.jpg",
@@ -1951,12 +1769,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585075_curly-hair-studio-poses/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585075_curly-hair-studio-poses/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585075_curly-hair-studio-poses/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Boudoir/18585145_amber-studio-lingerie/07.jpg",
       ],
     },
   ],
   Bodypaint: [
     {
-      name: "Thornwood",
+      name: "December 15, 2023 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18651438_thornwood/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18651438_thornwood/01.jpg",
@@ -1973,8 +1799,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Painted in Teal",
+      name: "December 26, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18651258_painted-in-teal/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18651258_painted-in-teal/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18651258_painted-in-teal/02.jpg",
@@ -1982,7 +1820,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Ultraviolet",
+      name: "December 13, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18649128_ultraviolet/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18649128_ultraviolet/01.jpg",
@@ -1996,7 +1834,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Painted Florals, Holiday Set",
+      name: "December 24, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18644325_painted-florals--holiday-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18644325_painted-florals--holiday-set/01.jpg",
@@ -2013,24 +1851,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Teal on Gold",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18643889_teal-on-gold/11.jpg",
-      ],
-    },
-    {
-      name: "Sunflower Bodypaint",
+      name: "June 19, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18619587_sunflower-bodypaint/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18619587_sunflower-bodypaint/01.jpg",
@@ -2043,7 +1864,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Painted Form",
+      name: "June 5, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18611267_painted-form/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18611267_painted-form/01.jpg",
@@ -2055,7 +1876,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Rain Shower Bodypaint",
+      name: "May 22, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18591930_rain-shower-bodypaint/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18591930_rain-shower-bodypaint/01.jpg",
@@ -2072,7 +1893,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Bodypaint Live Art",
+      name: "September 24, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18575374_neon-bodypaint-live-art/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/18575374_neon-bodypaint-live-art/01.jpg",
@@ -2089,7 +1910,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Underwater Rainbow Body Art",
+      name: "August 10, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/11802383_underwater-rainbow-body-art/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Bodypaint/11802383_underwater-rainbow-body-art/01.jpg",
@@ -2108,7 +1929,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Urbex: [
     {
-      name: "Concrete Ghosts",
+      name: "August 1, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18659640_concrete-ghosts/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18659640_concrete-ghosts/01.jpg",
@@ -2125,7 +1946,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Graffiti Studio",
+      name: "August 6, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18659063_graffiti-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18659063_graffiti-studio/01.jpg",
@@ -2138,24 +1959,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Alley Graffiti: Red Tee",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/11.jpg",
-      ],
-    },
-    {
-      name: "Rooftop Graffiti: Black Tee",
+      name: "July 22, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630058_rooftop-graffiti--black-tee/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630058_rooftop-graffiti--black-tee/01.jpg",
@@ -2169,27 +1973,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630058_rooftop-graffiti--black-tee/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630058_rooftop-graffiti--black-tee/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630058_rooftop-graffiti--black-tee/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18630359_alley-graffiti--red-tee/07.jpg",
       ],
     },
     {
-      name: "Broken Window Portraits",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/11.jpg",
-      ],
-    },
-    {
-      name: "Concrete Light",
+      name: "June 6, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18609636_concrete-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18609636_concrete-light/01.jpg",
@@ -2203,27 +1998,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18609636_concrete-light/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18609636_concrete-light/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18609636_concrete-light/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18620960_broken-window-portraits/07.jpg",
       ],
     },
     {
-      name: "Abandoned Warehouse",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/11.jpg",
-      ],
-    },
-    {
-      name: "Warehouse, Leather and Graffiti",
+      name: "October 17, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584250_warehouse--leather-and-graffiti/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584250_warehouse--leather-and-graffiti/01.jpg",
@@ -2237,27 +2023,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584250_warehouse--leather-and-graffiti/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584250_warehouse--leather-and-graffiti/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584250_warehouse--leather-and-graffiti/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18584945_abandoned-warehouse/07.jpg",
       ],
     },
     {
-      name: "Leopard Dress, Derelict Factory",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/11.jpg",
-      ],
-    },
-    {
-      name: "Leopard Dress, Factory Windows",
+      name: "October 6, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583691_leopard-dress--factory-windows/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583691_leopard-dress--factory-windows/01.jpg",
@@ -2271,27 +2048,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583691_leopard-dress--factory-windows/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583691_leopard-dress--factory-windows/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583691_leopard-dress--factory-windows/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18583959_leopard-dress--derelict-factory/07.jpg",
       ],
     },
     {
-      name: "Red Set in the Warehouse",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/11.jpg",
-      ],
-    },
-    {
-      name: "Red Set, Warehouse Wide",
+      name: "September 23, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18577533_red-set--warehouse-wide/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18577533_red-set--warehouse-wide/01.jpg",
@@ -2305,12 +2073,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18577533_red-set--warehouse-wide/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18577533_red-set--warehouse-wide/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18577533_red-set--warehouse-wide/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Urbex/18578183_red-set-in-the-warehouse/07.jpg",
       ],
     },
   ],
   Products: [
     {
-      name: "Fear the Lord 7000 Hoodie",
+      name: "December 23, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18651274_fear-the-lord-7000-hoodie/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18651274_fear-the-lord-7000-hoodie/01.jpg",
@@ -2327,7 +2103,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fear the Zoo Hoodie, Ivy Wall",
+      name: "December 23, 2023 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18646219_fear-the-zoo-hoodie--ivy-wall/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18646219_fear-the-zoo-hoodie--ivy-wall/01.jpg",
@@ -2344,24 +2120,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Oil Bottles, Glitter Set",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/11.jpg",
-      ],
-    },
-    {
-      name: "Botanical Apothecary Set",
+      name: "June 15, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622374_botanical-apothecary-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622374_botanical-apothecary-set/01.jpg",
@@ -2375,36 +2134,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622374_botanical-apothecary-set/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622374_botanical-apothecary-set/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622374_botanical-apothecary-set/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18622831_oil-bottles--glitter-set/07.jpg",
       ],
     },
     {
-      name: "Fear The Zoo Merch",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/11.jpg",
-      ],
-    },
-    {
-      name: "Blaxit Apparel",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/03.jpg",
-      ],
-    },
-    {
-      name: "FEAR THE ZOO Flat-Lay Set",
+      name: "March 17, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605239_fear-the-zoo-flat-lay-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605239_fear-the-zoo-flat-lay-set/01.jpg",
@@ -2418,10 +2159,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605239_fear-the-zoo-flat-lay-set/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605239_fear-the-zoo-flat-lay-set/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605239_fear-the-zoo-flat-lay-set/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18606058_fear-the-zoo-merch/07.jpg",
       ],
     },
     {
-      name: "BLAXIT GHANA Merch",
+      name: "March 30, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18600222_blaxit-ghana-merch/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18600222_blaxit-ghana-merch/01.jpg",
@@ -2431,10 +2180,14 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18600222_blaxit-ghana-merch/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18600222_blaxit-ghana-merch/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18600222_blaxit-ghana-merch/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18605906_blaxit-apparel/03.jpg",
       ],
     },
     {
-      name: "Streetwear Apparel Drop",
+      name: "November 3, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18586650_streetwear-apparel-drop/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Products/18586650_streetwear-apparel-drop/01.jpg",
@@ -2453,7 +2206,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Conceptual: [
     {
-      name: "Hedge Witch",
+      name: "December 15, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18647946_hedge-witch/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18647946_hedge-witch/01.jpg",
@@ -2470,7 +2223,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Purple Clown Session",
+      name: "January 5, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18631033_purple-clown-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18631033_purple-clown-session/01.jpg",
@@ -2487,7 +2240,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Nightcap",
+      name: "July 17, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18630472_neon-nightcap/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18630472_neon-nightcap/01.jpg",
@@ -2496,7 +2249,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Winged: Neon and Floral",
+      name: "July 11, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18628233_winged--neon-and-floral/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18628233_winged--neon-and-floral/01.jpg",
@@ -2513,7 +2266,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fallen Angel Concept",
+      name: "June 25, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18614807_fallen-angel-concept/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18614807_fallen-angel-concept/01.jpg",
@@ -2530,7 +2283,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Foil Light",
+      name: "June 28, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18612965_foil-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18612965_foil-light/01.jpg",
@@ -2547,7 +2300,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Color Study",
+      name: "March 27, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18605922_color-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18605922_color-study/01.jpg",
@@ -2564,7 +2317,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Projected Light Portrait Study",
+      name: "March 27, 2024 (2)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18604449_projected-light-portrait-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18604449_projected-light-portrait-study/01.jpg",
@@ -2581,7 +2334,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Glitter Floor and Light Ring",
+      name: "March 27, 2024 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18600250_glitter-floor-and-light-ring/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18600250_glitter-floor-and-light-ring/01.jpg",
@@ -2598,7 +2351,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gel Light Dance Studies",
+      name: "October 29, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18584797_gel-light-dance-studies/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18584797_gel-light-dance-studies/01.jpg",
@@ -2615,7 +2368,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Light Paint Portraits",
+      name: "October 7, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18583645_light-paint-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18583645_light-paint-portraits/01.jpg",
@@ -2632,7 +2385,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Layered Studio",
+      name: "October 22, 2025 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18582034_layered-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18582034_layered-studio/01.jpg",
@@ -2649,7 +2402,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Projection Experiments",
+      name: "September 27, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18576441_projection-experiments/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/18576441_projection-experiments/01.jpg",
@@ -2666,7 +2419,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Crimson Guitar Study",
+      name: "July 10, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/11734976_crimson-guitar-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Conceptual/11734976_crimson-guitar-study/01.jpg",
@@ -2685,7 +2438,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Portraits: [
     {
-      name: "Studio Portraits, October 2026",
+      name: "October 16, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/19233305_studio-portraits--october-2026/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/19233305_studio-portraits--october-2026/01.jpg",
@@ -2702,8 +2455,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Cap and Gown, Class of 2021",
+      name: "June 20, 2021 (2)",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18751614_cap-and-gown--class-of-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18751614_cap-and-gown--class-of-2021/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18751614_cap-and-gown--class-of-2021/02.jpg",
@@ -2713,7 +2478,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Three Fits, One Light",
+      name: "April 19, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18664412_three-fits--one-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18664412_three-fits--one-light/01.jpg",
@@ -2730,7 +2495,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Leopard Coat Study",
+      name: "April 2, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18664390_leopard-coat-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18664390_leopard-coat-study/01.jpg",
@@ -2740,7 +2505,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Curls and Gold Light",
+      name: "April 2, 2022 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18664374_curls-and-gold-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18664374_curls-and-gold-light/01.jpg",
@@ -2749,7 +2514,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Varsity Blue",
+      name: "April 9, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18660284_varsity-blue/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18660284_varsity-blue/01.jpg",
@@ -2766,7 +2531,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "The Wallpaper Room",
+      name: "Chicago Loop",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18652639_the-wallpaper-room/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18652639_the-wallpaper-room/01.jpg",
@@ -2777,7 +2542,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Blue and Amber Portraits",
+      name: "December 15, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651563_blue-and-amber-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651563_blue-and-amber-portraits/01.jpg",
@@ -2792,7 +2557,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Holiday Red",
+      name: "December 17, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651406_holiday-red/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651406_holiday-red/01.jpg",
@@ -2801,7 +2566,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Christmas Morning Pajamas",
+      name: "December 20, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651340_christmas-morning-pajamas/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651340_christmas-morning-pajamas/01.jpg",
@@ -2811,7 +2576,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Christmas Morning",
+      name: "December 24, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651184_christmas-morning/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18651184_christmas-morning/01.jpg",
@@ -2828,7 +2593,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Night Lights",
+      name: "December 28, 2020",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18650823_night-lights/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18650823_night-lights/01.jpg",
@@ -2838,7 +2603,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Wrap Party",
+      name: "December 15, 2023 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18647585_wrap-party/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18647585_wrap-party/01.jpg",
@@ -2855,7 +2620,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Scarlet Veil",
+      name: "December 2, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18647365_scarlet-veil/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18647365_scarlet-veil/01.jpg",
@@ -2872,7 +2637,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Little Moments",
+      name: "December 2, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18647160_little-moments/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18647160_little-moments/01.jpg",
@@ -2889,7 +2654,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Ink and Skin",
+      name: "January 13, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635853_ink-and-skin/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635853_ink-and-skin/01.jpg",
@@ -2906,33 +2671,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Soft Light Maternity",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/09.jpg",
-      ],
-    },
-    {
-      name: "Gel Light Portraits",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/05.jpg",
-      ],
-    },
-    {
-      name: "Maternity in Monochrome",
+      name: "January 16, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18634783_maternity-in-monochrome/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18634783_maternity-in-monochrome/01.jpg",
@@ -2946,10 +2685,41 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18634783_maternity-in-monochrome/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18634783_maternity-in-monochrome/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18634783_maternity-in-monochrome/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635806_soft-light-maternity/07.jpg",
       ],
     },
     {
-      name: "Golden Backdrop Portraits",
+      name: "January 8, 2022",
+      images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18635255_gel-light-portraits/05.jpg",
+      ],
+    },
+    {
+      name: "January 27, 2022 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18634248_golden-backdrop-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18634248_golden-backdrop-portraits/01.jpg",
@@ -2962,7 +2732,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Wrap and Lace Studio",
+      name: "January 4, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18631196_wrap-and-lace-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18631196_wrap-and-lace-studio/01.jpg",
@@ -2979,7 +2749,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Braids on Blue",
+      name: "January 7, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630926_braids-on-blue/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630926_braids-on-blue/01.jpg",
@@ -2996,24 +2766,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gradient Backdrop Portraits",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630862_gradient-backdrop-portraits/11.jpg",
-      ],
-    },
-    {
-      name: "Jessica: Gold and Concrete",
+      name: "Jessica (Retouched)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630795_jessica--gold-and-concrete/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630795_jessica--gold-and-concrete/01.jpg",
@@ -3030,16 +2783,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gray Dress in the Park",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/03.jpg",
-      ],
-    },
-    {
-      name: "Park Light and Laughter",
+      name: "July 23, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629993_park-light-and-laughter/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629993_park-light-and-laughter/01.jpg",
@@ -3053,10 +2797,14 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629993_park-light-and-laughter/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629993_park-light-and-laughter/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629993_park-light-and-laughter/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18630042_gray-dress-in-the-park/03.jpg",
       ],
     },
     {
-      name: "Yellow Dress on the Stairs",
+      name: "July 25, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629955_yellow-dress-on-the-stairs/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629955_yellow-dress-on-the-stairs/01.jpg",
@@ -3068,24 +2816,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Concrete Portraits",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/11.jpg",
-      ],
-    },
-    {
-      name: "Brick and Shadow",
+      name: "July 8, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629380_brick-and-shadow/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629380_brick-and-shadow/01.jpg",
@@ -3099,10 +2830,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629380_brick-and-shadow/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629380_brick-and-shadow/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629380_brick-and-shadow/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18629810_concrete-portraits/07.jpg",
       ],
     },
     {
-      name: "Rooftop and Arcade",
+      name: "July 27, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18626567_rooftop-and-arcade/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18626567_rooftop-and-arcade/01.jpg",
@@ -3119,40 +2858,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Graduation: Gold Backdrop",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621958_graduation--gold-backdrop/11.jpg",
-      ],
-    },
-    {
-      name: "Botanical Shirt: Garden Portraits",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/10.jpg",
-      ],
-    },
-    {
-      name: "Floral and Gold Street Style",
+      name: "June 23, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621841_floral-and-gold-street-style/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621841_floral-and-gold-street-style/01.jpg",
@@ -3165,10 +2871,19 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621841_floral-and-gold-street-style/08.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621841_floral-and-gold-street-style/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621841_floral-and-gold-street-style/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621918_botanical-shirt--garden-portraits/08.jpg",
       ],
     },
     {
-      name: "Mural Queen",
+      name: "June 24, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621758_mural-queen/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18621758_mural-queen/01.jpg",
@@ -3185,7 +2900,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Brick and Neon Duo",
+      name: "June 22, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18614491_brick-and-neon-duo/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18614491_brick-and-neon-duo/01.jpg",
@@ -3202,7 +2917,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Studio Noir",
+      name: "June 7, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18609454_studio-noir/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18609454_studio-noir/01.jpg",
@@ -3219,7 +2934,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Olive Trench",
+      name: "March 12, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18607186_olive-trench/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18607186_olive-trench/01.jpg",
@@ -3236,7 +2951,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gold Sequin",
+      name: "March 13, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606468_gold-sequin/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606468_gold-sequin/01.jpg",
@@ -3253,7 +2968,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Music Students",
+      name: "March 14, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606436_music-students/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606436_music-students/01.jpg",
@@ -3266,8 +2981,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "35th Birthday Portraits",
+      name: "March 19, 2022",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606033_35th-birthday-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606033_35th-birthday-portraits/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606033_35th-birthday-portraits/02.jpg",
@@ -3278,8 +3005,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Headshot Series",
+      name: "March 2, 2022",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606004_headshot-series/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606004_headshot-series/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18606004_headshot-series/02.jpg",
@@ -3290,7 +3029,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Denim and Teal",
+      name: "March 27, 2024 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605854_denim-and-teal/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605854_denim-and-teal/01.jpg",
@@ -3307,7 +3046,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Leather and Wide-Brim",
+      name: "March 6, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605631_leather-and-wide-brim/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605631_leather-and-wide-brim/01.jpg",
@@ -3324,41 +3063,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "35th Birthday Balloons",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605157_35th-birthday-balloons/11.jpg",
-      ],
-    },
-    {
-      name: "Studio Headshot Series",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18605090_studio-headshot-series/11.jpg",
-      ],
-    },
-    {
-      name: "Mother and Daughter",
+      name: "May 10, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18597379_mother-and-daughter/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18597379_mother-and-daughter/01.jpg",
@@ -3375,7 +3080,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Stairwell Portraits",
+      name: "May 13, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18597205_stairwell-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18597205_stairwell-portraits/01.jpg",
@@ -3392,7 +3097,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Window Light Portraits",
+      name: "May 15, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18594644_window-light-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18594644_window-light-portraits/01.jpg",
@@ -3409,7 +3114,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Sunlit Wall, May 2021",
+      name: "May 29, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18589240_sunlit-wall--may-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18589240_sunlit-wall--may-2021/01.jpg",
@@ -3420,7 +3125,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Camo at Home, May 2021",
+      name: "May 4, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18589193_camo-at-home--may-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18589193_camo-at-home--may-2021/01.jpg",
@@ -3437,7 +3142,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Rooftop, May 2021",
+      name: "May 5, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18589086_rooftop--may-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18589086_rooftop--may-2021/01.jpg",
@@ -3448,7 +3153,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Silhouettes, May 2021",
+      name: "May 5, 2021 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18588816_silhouettes--may-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18588816_silhouettes--may-2021/01.jpg",
@@ -3464,7 +3169,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Green Room",
+      name: "November 26, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18586721_green-room/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18586721_green-room/01.jpg",
@@ -3481,7 +3186,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Fence Line",
+      name: "November 7, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18586584_fence-line/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18586584_fence-line/01.jpg",
@@ -3495,7 +3200,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Little Witch",
+      name: "November 10, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18586357_little-witch/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18586357_little-witch/01.jpg",
@@ -3512,7 +3217,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Mother and Child, Floral Dress",
+      name: "October 17, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18584925_mother-and-child--floral-dress/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18584925_mother-and-child--floral-dress/01.jpg",
@@ -3521,7 +3226,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Mother and Baby, White Studio",
+      name: "October 12, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18583372_mother-and-baby--white-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18583372_mother-and-baby--white-studio/01.jpg",
@@ -3538,7 +3243,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Mural and Waterfront Portraits",
+      name: "October 16, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18583317_mural-and-waterfront-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18583317_mural-and-waterfront-portraits/01.jpg",
@@ -3555,7 +3260,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "White Cutout Set",
+      name: "September 11, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578398_white-cutout-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578398_white-cutout-set/01.jpg",
@@ -3571,8 +3276,12 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Closet Set",
+      name: "September 15, 2023",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/03.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578368_closet-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578368_closet-set/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578368_closet-set/02.jpg",
@@ -3580,54 +3289,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Yellow Backdrop and Backstage",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/06.jpg",
-      ],
-    },
-    {
-      name: "Closet Set (Alt)",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576811_closet-set--alt/03.jpg",
-      ],
-    },
-    {
-      name: "Newborn Studio Portraits",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/03.jpg",
-      ],
-    },
-    {
-      name: "Baby Studio Session",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/11.jpg",
-      ],
-    },
-    {
-      name: "Yellow Backdrop Portrait Session",
+      name: "September 20, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575781_yellow-backdrop-portrait-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575781_yellow-backdrop-portrait-session/01.jpg",
@@ -3641,10 +3303,38 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575781_yellow-backdrop-portrait-session/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575781_yellow-backdrop-portrait-session/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575781_yellow-backdrop-portrait-session/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18578310_yellow-backdrop-and-backstage/06.jpg",
       ],
     },
     {
-      name: "Navy Dress, White Chair",
+      name: "September 2, 2023",
+      images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18575977_baby-studio-session/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/18576193_newborn-studio-portraits/03.jpg",
+      ],
+    },
+    {
+      name: "September 7, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/12993704_navy-dress--white-chair/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/12993704_navy-dress--white-chair/01.jpg",
@@ -3661,7 +3351,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Bassist Studio Portraits",
+      name: "August 22, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/11851130_bassist-studio-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/11851130_bassist-studio-portraits/01.jpg",
@@ -3678,7 +3368,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Yellow Crate Portraits",
+      name: "June 15, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/11695978_yellow-crate-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Portraits/11695978_yellow-crate-portraits/01.jpg",
@@ -3697,24 +3387,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Concerts: [
     {
-      name: "Live at the Pink Room",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/11.jpg",
-      ],
-    },
-    {
-      name: "House Show, Magenta Light",
+      name: "December 29, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18641484_house-show--magenta-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18641484_house-show--magenta-light/01.jpg",
@@ -3728,20 +3401,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18641484_house-show--magenta-light/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18641484_house-show--magenta-light/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18641484_house-show--magenta-light/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18650665_live-at-the-pink-room/07.jpg",
       ],
     },
     {
-      name: "Pink Room DJ Set",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/04.jpg",
-      ],
-    },
-    {
-      name: "Neon Decks: DJ Night",
+      name: "February 12, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18639875_neon-decks--dj-night/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18639875_neon-decks--dj-night/01.jpg",
@@ -3755,10 +3426,15 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18639875_neon-decks--dj-night/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18639875_neon-decks--dj-night/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18639875_neon-decks--dj-night/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18640485_pink-room-dj-set/04.jpg",
       ],
     },
     {
-      name: "House Show in Red",
+      name: "February 14, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18638418_house-show-in-red/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18638418_house-show-in-red/01.jpg",
@@ -3775,7 +3451,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Stage Lights Live",
+      name: "January 28, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18634159_stage-lights-live/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18634159_stage-lights-live/01.jpg",
@@ -3788,24 +3464,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Spring Recital, May 2022",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/11.jpg",
-      ],
-    },
-    {
-      name: "Spring Recital II, May 2022",
+      name: "May 28, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18589541_spring-recital-ii--may-2022/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18589541_spring-recital-ii--may-2022/01.jpg",
@@ -3819,10 +3478,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18589541_spring-recital-ii--may-2022/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18589541_spring-recital-ii--may-2022/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18589541_spring-recital-ii--may-2022/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18590178_spring-recital--may-2022/07.jpg",
       ],
     },
     {
-      name: "Courtyard Jazz, May 2021",
+      name: "May 3, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18589108_courtyard-jazz--may-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18589108_courtyard-jazz--may-2021/01.jpg",
@@ -3839,7 +3506,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon DJ Set",
+      name: "November 1, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18586484_neon-dj-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18586484_neon-dj-set/01.jpg",
@@ -3856,7 +3523,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Live Band and Venue Night",
+      name: "November 21, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18586146_live-band-and-venue-night/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18586146_live-band-and-venue-night/01.jpg",
@@ -3873,7 +3540,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Red Light Night",
+      name: "October 22, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18581940_red-light-night/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/18581940_red-light-night/01.jpg",
@@ -3890,7 +3557,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Guitar Merchant Jazz Night",
+      name: "August 16, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/11821795_guitar-merchant-jazz-night/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Concerts/11821795_guitar-merchant-jazz-night/01.jpg",
@@ -3909,7 +3576,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Street: [
     {
-      name: "Denim and Burgundy, Block by Block",
+      name: "April 21, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18664337_denim-and-burgundy--block-by-block/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18664337_denim-and-burgundy--block-by-block/01.jpg",
@@ -3925,7 +3592,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Tracks and Bloom",
+      name: "April 23, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18664189_tracks-and-bloom/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18664189_tracks-and-bloom/01.jpg",
@@ -3942,7 +3609,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Yellow Pants, Pavilion Light",
+      name: "August 11, 2021 (3)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18659500_yellow-pants--pavilion-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18659500_yellow-pants--pavilion-light/01.jpg",
@@ -3951,17 +3618,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Denim and Daylight",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/04.jpg",
-      ],
-    },
-    {
-      name: "City Denim",
+      name: "December 27, 2020",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18650842_city-denim/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18650842_city-denim/01.jpg",
@@ -3975,10 +3632,15 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18650842_city-denim/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18650842_city-denim/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18650842_city-denim/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18651165_denim-and-daylight/04.jpg",
       ],
     },
     {
-      name: "Underpass Portraits",
+      name: "January 6, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18635284_underpass-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18635284_underpass-portraits/01.jpg",
@@ -3989,7 +3651,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Mural Movement",
+      name: "July 15, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18630488_mural-movement/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18630488_mural-movement/01.jpg",
@@ -4006,8 +3668,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Striped Jersey, Rail Yard",
+      name: "June 10, 2021",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/02.jpg",
@@ -4016,14 +3690,10 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622940_striped-jersey--rail-yard/11.jpg",
       ],
     },
     {
-      name: "Graffiti Wall: Pink Slip Dress",
+      name: "June 20, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622191_graffiti-wall--pink-slip-dress/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18622191_graffiti-wall--pink-slip-dress/01.jpg",
@@ -4035,7 +3705,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Brick and Denim",
+      name: "June 24, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18621819_brick-and-denim/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18621819_brick-and-denim/01.jpg",
@@ -4046,7 +3716,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Black Girl Magic Streetwear",
+      name: "June 29, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18621125_black-girl-magic-streetwear/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18621125_black-girl-magic-streetwear/01.jpg",
@@ -4063,7 +3733,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Graffiti Alley",
+      name: "June 4, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18621053_graffiti-alley/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18621053_graffiti-alley/01.jpg",
@@ -4074,24 +3744,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Rubble Lot Street",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18619649_rubble-lot-street/11.jpg",
-      ],
-    },
-    {
-      name: "Mural Walk",
+      name: "March 11, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18607383_mural-walk/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18607383_mural-walk/01.jpg",
@@ -4103,7 +3756,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Denim and Wide-Brim Street",
+      name: "March 5, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18600187_denim-and-wide-brim-street/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18600187_denim-and-wide-brim-street/01.jpg",
@@ -4115,7 +3768,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Pastel Set, Two Models",
+      name: "May 1, 2021 (2)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18598473_pastel-set--two-models/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18598473_pastel-set--two-models/01.jpg",
@@ -4132,7 +3785,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Varsity Jacket, Industrial Lot",
+      name: "May 10, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18597929_varsity-jacket--industrial-lot/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18597929_varsity-jacket--industrial-lot/01.jpg",
@@ -4145,7 +3798,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Alley Summer",
+      name: "May 14, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18597112_alley-summer/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18597112_alley-summer/01.jpg",
@@ -4162,7 +3815,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Mural District",
+      name: "May 18, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18594361_mural-district/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18594361_mural-district/01.jpg",
@@ -4179,20 +3832,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Houndstooth Street",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/07.jpg",
-      ],
-    },
-    {
-      name: "Alley Street Session",
+      name: "May 23, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591735_alley-street-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591735_alley-street-session/01.jpg",
@@ -4206,10 +3846,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591735_alley-street-session/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591735_alley-street-session/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591735_alley-street-session/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591898_houndstooth-street/07.jpg",
       ],
     },
     {
-      name: "Neon Night Portraits",
+      name: "May 23, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591626_neon-night-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18591626_neon-night-portraits/01.jpg",
@@ -4226,7 +3874,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Brick and CAT",
+      name: "May 8, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18588583_brick-and-cat/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18588583_brick-and-cat/01.jpg",
@@ -4243,7 +3891,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Graffiti Wall Street Style",
+      name: "November 7, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18585214_graffiti-wall-street-style/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18585214_graffiti-wall-street-style/01.jpg",
@@ -4260,7 +3908,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Chicago Street Portraits",
+      name: "October 21, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18584879_chicago-street-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18584879_chicago-street-portraits/01.jpg",
@@ -4277,7 +3925,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Emmett Till Mural",
+      name: "October 27, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18581924_emmett-till-mural/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18581924_emmett-till-mural/01.jpg",
@@ -4286,7 +3934,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Green Lens on Concrete",
+      name: "October 4, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18579241_green-lens-on-concrete/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18579241_green-lens-on-concrete/01.jpg",
@@ -4303,24 +3951,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Cream Set, Red Braids",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/11.jpg",
-      ],
-    },
-    {
-      name: "Cream Set, City Blocks",
+      name: "September 25, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18576827_cream-set--city-blocks/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18576827_cream-set--city-blocks/01.jpg",
@@ -4334,12 +3965,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18576827_cream-set--city-blocks/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18576827_cream-set--city-blocks/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18576827_cream-set--city-blocks/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Street/18577436_cream-set--red-braids/07.jpg",
       ],
     },
   ],
   Editorial: [
     {
-      name: "Session: Please Close",
+      name: "May 12, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18751656_session--please-close/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18751656_session--please-close/01.jpg",
@@ -4356,7 +3995,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Plaid and Shadow: Two Looks",
+      name: "April 17, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18749561_plaid-and-shadow--two-looks/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18749561_plaid-and-shadow--two-looks/01.jpg",
@@ -4373,7 +4012,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Artfinix Sessions",
+      name: "Artfinix (Retouched)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18659779_artfinix-sessions/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18659779_artfinix-sessions/01.jpg",
@@ -4390,7 +4029,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Last Call, Bar Light",
+      name: "August 19, 2021 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18659356_last-call--bar-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18659356_last-call--bar-light/01.jpg",
@@ -4399,7 +4038,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Floral on the Boardwalk",
+      name: "August 5, 2021 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18659098_floral-on-the-boardwalk/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18659098_floral-on-the-boardwalk/01.jpg",
@@ -4416,7 +4055,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Scarlet Hour",
+      name: "August 21, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18655570_scarlet-hour/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18655570_scarlet-hour/01.jpg",
@@ -4433,7 +4072,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Attitude",
+      name: "December 16, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18651422_neon-attitude/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18651422_neon-attitude/01.jpg",
@@ -4442,7 +4081,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Scarlet and Gold",
+      name: "December 2, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18651387_scarlet-and-gold/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18651387_scarlet-and-gold/01.jpg",
@@ -4452,7 +4091,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Under the Lights",
+      name: "December 28, 2020",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18650705_under-the-lights/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18650705_under-the-lights/01.jpg",
@@ -4469,7 +4108,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Holiday Velvet",
+      name: "December 17, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18647478_holiday-velvet/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18647478_holiday-velvet/01.jpg",
@@ -4486,7 +4125,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Window Light, City View",
+      name: "December 27, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18641671_window-light--city-view/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18641671_window-light--city-view/01.jpg",
@@ -4503,20 +4142,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "The Painter and Her Portraits",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/07.jpg",
-      ],
-    },
-    {
-      name: "Painted Selves",
+      name: "February 26, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18637888_painted-selves/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18637888_painted-selves/01.jpg",
@@ -4530,10 +4156,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18637888_painted-selves/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18637888_painted-selves/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18637888_painted-selves/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18640225_the-painter-and-her-portraits/07.jpg",
       ],
     },
     {
-      name: "Black on Brick",
+      name: "February 7, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18636021_black-on-brick/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18636021_black-on-brick/01.jpg",
@@ -4550,8 +4184,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Violet Carnival",
+      name: "January 28, 2024",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18635349_violet-carnival/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18635349_violet-carnival/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18635349_violet-carnival/02.jpg",
@@ -4563,7 +4209,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Bass Lesson",
+      name: "January 15, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18635218_bass-lesson/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18635218_bass-lesson/01.jpg",
@@ -4579,7 +4225,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Carnival Violet Edit",
+      name: "January 8, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18635190_carnival-violet-edit/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18635190_carnival-violet-edit/01.jpg",
@@ -4590,7 +4236,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Plaid and Western",
+      name: "January 28, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18634190_plaid-and-western/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18634190_plaid-and-western/01.jpg",
@@ -4607,24 +4253,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Purple Room Crew",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18632694_purple-room-crew/11.jpg",
-      ],
-    },
-    {
-      name: "Champion Hoodie Story",
+      name: "January 30, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18631254_champion-hoodie-story/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18631254_champion-hoodie-story/01.jpg",
@@ -4641,7 +4270,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Pink Plaid Alley",
+      name: "July 13, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18630696_pink-plaid-alley/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18630696_pink-plaid-alley/01.jpg",
@@ -4655,7 +4284,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon in Yellow",
+      name: "July 17, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18630414_neon-in-yellow/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18630414_neon-in-yellow/01.jpg",
@@ -4672,7 +4301,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Leopard in the City",
+      name: "July 28, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18629877_leopard-in-the-city/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18629877_leopard-in-the-city/01.jpg",
@@ -4689,7 +4318,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Wings in Neon",
+      name: "July 11, 2023 (3)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18628375_wings-in-neon/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18628375_wings-in-neon/01.jpg",
@@ -4706,7 +4335,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Black Bodysuit, Shadow Study",
+      name: "July 29, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18624385_black-bodysuit--shadow-study/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18624385_black-bodysuit--shadow-study/01.jpg",
@@ -4723,8 +4352,20 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Arcade: Night Session",
+      name: "June 23, 2022",
       images: [
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/08.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/09.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/11.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/01.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/02.jpg",
@@ -4733,13 +4374,10 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/05.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/06.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621881_neon-arcade--night-session/10.jpg",
       ],
     },
     {
-      name: "Rooftop Collective",
+      name: "June 26, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621693_rooftop-collective/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18621693_rooftop-collective/01.jpg",
@@ -4756,24 +4394,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Arcade Neon Editorial",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18615786_arcade-neon-editorial/11.jpg",
-      ],
-    },
-    {
-      name: "Leather and Light",
+      name: "June 3, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18612637_leather-and-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18612637_leather-and-light/01.jpg",
@@ -4790,7 +4411,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Little Rebel",
+      name: "June 8, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18607408_little-rebel/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18607408_little-rebel/01.jpg",
@@ -4807,7 +4428,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Studio",
+      name: "March 5, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605725_neon-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605725_neon-studio/01.jpg",
@@ -4823,24 +4444,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gold Gown City Edit",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/08.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/09.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/10.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/11.jpg",
-      ],
-    },
-    {
-      name: "Gold Gown Studio and Street",
+      name: "March 13, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605539_gold-gown-studio-and-street/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605539_gold-gown-studio-and-street/01.jpg",
@@ -4853,10 +4457,19 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605539_gold-gown-studio-and-street/08.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605539_gold-gown-studio-and-street/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605539_gold-gown-studio-and-street/10.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/07.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18605576_gold-gown-city-edit/08.jpg",
       ],
     },
     {
-      name: "Gel Light Studio Fashion",
+      name: "March 5, 2022 (1)",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18600015_gel-light-studio-fashion/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18600015_gel-light-studio-fashion/01.jpg",
@@ -4873,7 +4486,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Leather and Wide Brim",
+      name: "March 6, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18598574_leather-and-wide-brim/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18598574_leather-and-wide-brim/01.jpg",
@@ -4890,7 +4503,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Checkered Suit, May 2021",
+      name: "May 5, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18588859_checkered-suit--may-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18588859_checkered-suit--may-2021/01.jpg",
@@ -4907,7 +4520,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Orange Hoodie, May 2021",
+      name: "May 7, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18588688_orange-hoodie--may-2021/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18588688_orange-hoodie--may-2021/01.jpg",
@@ -4924,7 +4537,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Garage, October 2025",
+      name: "Monday, October 20, 2025 4:31 PM",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18588458_neon-garage--october-2025/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18588458_neon-garage--october-2025/01.jpg",
@@ -4941,7 +4554,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Masquerade Neon Portraits",
+      name: "November 5, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585712_masquerade-neon-portraits/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585712_masquerade-neon-portraits/01.jpg",
@@ -4951,19 +4564,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Yellow Studio Editorial",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/06.jpg",
-      ],
-    },
-    {
-      name: "Yellow Seamless, Denim and Flowers",
+      name: "October 12, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18583430_yellow-seamless--denim-and-flowers/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18583430_yellow-seamless--denim-and-flowers/01.jpg",
@@ -4977,10 +4578,17 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18583430_yellow-seamless--denim-and-flowers/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18583430_yellow-seamless--denim-and-flowers/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18583430_yellow-seamless--denim-and-flowers/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18585182_yellow-studio-editorial/06.jpg",
       ],
     },
     {
-      name: "Streetwear Studio",
+      name: "October 21, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18583091_streetwear-studio/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18583091_streetwear-studio/01.jpg",
@@ -4997,7 +4605,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Santa Monica, Striped Linen",
+      name: "Santa Monica",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18578606_santa-monica--striped-linen/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18578606_santa-monica--striped-linen/01.jpg",
@@ -5014,7 +4622,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Studio Fashion Portrait Session",
+      name: "September 19, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18576209_studio-fashion-portrait-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/18576209_studio-fashion-portrait-session/01.jpg",
@@ -5030,7 +4638,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Band Press Day",
+      name: "September 13, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/13319846_band-press-day/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/13319846_band-press-day/01.jpg",
@@ -5047,7 +4655,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Stripes and the Pool Hall",
+      name: "July 27, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11961298_stripes-and-the-pool-hall/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11961298_stripes-and-the-pool-hall/01.jpg",
@@ -5064,7 +4672,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Recording Studio Session",
+      name: "August 11, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11821799_recording-studio-session/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11821799_recording-studio-session/01.jpg",
@@ -5081,7 +4689,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Leaf Wall Fashion Editorial",
+      name: "July 16, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11758827_leaf-wall-fashion-editorial/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11758827_leaf-wall-fashion-editorial/01.jpg",
@@ -5098,7 +4706,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Loft Star Editorial",
+      name: "July 6, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11734152_loft-star-editorial/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11734152_loft-star-editorial/01.jpg",
@@ -5115,7 +4723,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Velvet Manor Editorial",
+      name: "June 25, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11733662_velvet-manor-editorial/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Editorial/11733662_velvet-manor-editorial/01.jpg",
@@ -5138,7 +4746,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
   ],
   Commercial: [
     {
-      name: "Four Looks",
+      name: "August 3, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18653263_four-looks/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18653263_four-looks/01.jpg",
@@ -5155,7 +4763,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Neon Garage",
+      name: "December 20, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18647060_neon-garage/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18647060_neon-garage/01.jpg",
@@ -5172,7 +4780,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gold Room",
+      name: "January 27, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18635775_gold-room/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18635775_gold-room/01.jpg",
@@ -5186,7 +4794,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Little Rockers",
+      name: "July 10, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18630754_little-rockers/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18630754_little-rockers/01.jpg",
@@ -5201,7 +4809,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Maroon Set, Window Light",
+      name: "July 21, 2025",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18626613_maroon-set--window-light/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18626613_maroon-set--window-light/01.jpg",
@@ -5218,7 +4826,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Band Promo Set",
+      name: "June 12, 2024",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18620031_band-promo-set/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18620031_band-promo-set/01.jpg",
@@ -5235,7 +4843,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Skate Kid",
+      name: "Kid Bodie",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18607352_skate-kid/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18607352_skate-kid/01.jpg",
@@ -5245,7 +4853,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Holiday Music Campaign",
+      name: "November 14, 2021",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18588409_holiday-music-campaign/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18588409_holiday-music-campaign/01.jpg",
@@ -5262,21 +4870,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Studio Interiors and DJ Gear",
-      images: [
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/00.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/01.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/02.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/03.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/04.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/05.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/06.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/07.jpg",
-        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/08.jpg",
-      ],
-    },
-    {
-      name: "Venue Interiors and DJ Gear",
+      name: "November 3, 2022",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18585892_venue-interiors-and-dj-gear/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18585892_venue-interiors-and-dj-gear/01.jpg",
@@ -5290,10 +4884,18 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18585892_venue-interiors-and-dj-gear/09.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18585892_venue-interiors-and-dj-gear/10.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18585892_venue-interiors-and-dj-gear/11.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/00.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/01.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/02.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/03.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/04.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/05.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/06.jpg",
+        "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18586690_studio-interiors-and-dj-gear/07.jpg",
       ],
     },
     {
-      name: "Fear Tha Zoo Lookbook",
+      name: "November 3, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18585731_fear-tha-zoo-lookbook/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18585731_fear-tha-zoo-lookbook/01.jpg",
@@ -5310,7 +4912,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Odu Studio Shoot, Black Conscious",
+      name: "Odu Studio Shoot",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18578667_odu-studio-shoot--black-conscious/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18578667_odu-studio-shoot--black-conscious/01.jpg",
@@ -5327,7 +4929,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gentlefactory Streetwear Lookbook",
+      name: "September 15, 2023",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18576386_gentlefactory-streetwear-lookbook/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/18576386_gentlefactory-streetwear-lookbook/01.jpg",
@@ -5344,7 +4946,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Barber School Lookbook",
+      name: "September 20, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/13368438_barber-school-lookbook/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/13368438_barber-school-lookbook/01.jpg",
@@ -5361,7 +4963,7 @@ export const CATEGORY_ALBUMS: Record<string, Array<{ name: string; images: strin
       ],
     },
     {
-      name: "Gold Cape Cuts",
+      name: "August 18, 2026",
       images: [
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/11958200_gold-cape-cuts/00.jpg",
         "https://ccznkpcmpadgftqhwvdx.supabase.co/storage/v1/object/public/portfolio/Commercial/11958200_gold-cape-cuts/01.jpg",
