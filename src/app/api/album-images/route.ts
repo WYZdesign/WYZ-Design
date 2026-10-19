@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import MODEL_GALLERIES from "@/lib/data/model-galleries.json";
 
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "",
@@ -254,6 +255,11 @@ export async function GET(req: NextRequest) {
     if (mode !== "cover" && minioFolder) {
       const minioFiles = await listMinioS3(`models/${minioFolder}/`, limit);
       images.push(...minioFiles);
+      // Supabase fallback: curated per-model galleries uploaded 2026-10-18
+      if (minioFiles.length === 0) {
+        const fallback = (MODEL_GALLERIES as Record<string, string[]>)[album] || [];
+        images.push(...fallback.slice(0, limit));
+      }
     }
     return NextResponse.json({ album, images, count: images.length, isModel: true });
   }
