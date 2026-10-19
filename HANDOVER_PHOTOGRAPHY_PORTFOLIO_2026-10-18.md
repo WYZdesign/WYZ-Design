@@ -104,9 +104,14 @@ Public URL shape:
 
 - Emits `CATEGORY_META` (13 categories + descriptions) and `CATEGORY_ALBUMS`
   (`Record<category, Array<{ name, images[] }>>`).
+- **Album labels are the shoot dates**, normalized to `Month D, YYYY` (the catalog
+  stores them inconsistently: "Aug 7, 2021", "Dec 11 2021", "December 18, 2022").
+  Duplicate suffixes are preserved as `(2)`. Non-date names pass through.
+- **Same-date albums are merged per category.** The catalog often holds one shoot
+  twice ("Dec 11 2021" + "Dec 11, 2021"); they render as one carousel with the
+  union of images (deduped), capped at `MAX_PER_ALBUM = 20`.
+- Result: 343 source albums → **286 carousels**, 3,506 images shown.
 - Album order inside a category: newest first (descending Lightroom collection id).
-- `name` = the curated display label, e.g. "Kilts on the Roof", "Winter Onederland
-  First Birthday", "Neon Studio, April 2024".
 - File is ~500 KB, auto-generated. **Do not hand-edit** — regenerate.
 
 The existing `[category]/page.tsx` consumes this unchanged: one `AutoScrollRow`
