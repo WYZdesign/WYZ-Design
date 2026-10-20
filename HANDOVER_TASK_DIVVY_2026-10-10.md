@@ -447,3 +447,15 @@ Audited the source of truth against the site and closed every gap found.
 **Accuracy caveats (so the numbers are read correctly):** the 189,022 is records, not shoots; 15,279 are virtual copies and 102,415 photos live in no album. Site totals are curated picks per album, not the full catalog.
 
 - **Gate:** tsc 0, lint 0, tests **108/108**, build 0. **Commit `23cf7d3` - DEPLOY IS LIVE** (`23cf7d3e3a64a2bc048d3368f1d90090caa976b0`). Live check: `/photography/portraits` and `/studio` 0 broken, all 1150px.
+
+## Progress 26 - Final verification pass (2026-10-20, WYZMiND)
+
+Closed out everything left and proved it against the live site.
+
+- **All 13 photography categories reachable:** 78/78 sampled Supabase URLs return 200 (HEAD), and the per-category URL counts in the deployed HTML match the data file exactly (624 / 272 / 914 / 348 / 169 / 187 / 126 / 298 / 1035 / 245 / 432 / 953 / 274 = **5,877**).
+- **Recovered albums confirmed in the deployed HTML:** `January 28, 2023` (Concerts), `Santa Monica Beach` and `April 8, 2021` (Street), `March 4, 2022` (Events).
+- **Earlier "broken" counts were a headless artifact:** a browser sweep showed 459 `naturalWidth === 0` on boudoir/bodypaint with zero HTTP errors; direct HEAD checks returned 200 for every sampled file. Lazy-loaded images simply had not painted when measured.
+- **Model roster complete:** 91 roster entries = 91 galleries, no gaps either way. The only G: folders not on the site are `FARREN BODYPAINT` (intentionally unlisted, second shot of FARREN) and `_venice_test_output`. Thin galleries are source-complete: AJA 8/9, TORREE 8/8, LORIE 11/12, BRYSON 14/15, CLAUDIA 14/17, HANNAH 17/17.
+- **Supabase October 30 change covered:** re-applied `wyz_supabase_grants.py --only wyzdesign --apply` -> `service_role grants: OK (HTTP 201)`, including `ALTER DEFAULT PRIVILEGES`, so tables created after the cutoff stay reachable.
+- **Documented, not broken:** `G:\My Drive\Pictures\Events` holds 19 folders / 1,958 media files, but `/events` is a hand-curated video list, not driven by that folder. Wiring it is a product decision, not a defect.
+- **Nothing else open.** Tree clean, `master` in sync with origin. Live code `23cf7d3`; this handover is docs-only.
