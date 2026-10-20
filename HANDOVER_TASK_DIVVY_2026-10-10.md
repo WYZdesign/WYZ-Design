@@ -418,3 +418,32 @@ Executed the depth run the audit specified, on the free tier, with no padding.
 - **Storage:** ~583 MB of the 1 GB free tier (438.7 photography + 144.7 models), inside the 800 MB target with headroom.
 - **Honest gaps:** thin sources stay thin (AJA/TORREE 8; 22 source folders were empty/placeholder). No repeats or rejects were added to hit a floor.
 - **Gate:** tsc 0, lint 0, tests **108/108**, build 0. Live SHAs: `6a7879b` (photography), `9c29c98` (models), `19f4a5b` (route fix) - all `DEPLOY IS LIVE`.
+
+## Progress 25 - Full count reconciliation: LR catalog, G: Drive, site (2026-10-20, WYZMiND)
+
+Audited the source of truth against the site and closed every gap found.
+
+**Lightroom catalog** (`Lightroom_Master_TEST.lrcat`, read-only):
+- 189,022 photo records = **173,743 unique files + 15,279 virtual copies**.
+- 444 user albums; **398 have images, 46 are empty**.
+- 123,243 album memberships; 86,607 distinct photos are in an album, **102,415 photo records are in no album**.
+- Largest: All Portfolio 48,911, CC Edited 18,586, sync photos 13,844, WYZ Catalog 4,441; date albums 600-1,051.
+
+**Gap found and fixed — 51 albums were culled but never curated:**
+- Catalog non-meta albums 394; site had 343, so **51 albums / 414 images were missing**.
+- 35 collided by date with existing albums (their images now union into the same carousel); 16 were new dates.
+- 5 had **stale samples** (culled while the originals were offline): re-culled, e.g. "Jan 28 2023" went from 1 scoreable frame to **38 unique**.
+- "July 17, 2024 (1)" really is a near-identical burst: 185 files but only 2 distinct frames, so it gets 2 (no padding).
+- 2 single-image albums failed the exposure filter; included anyway since it is the entire album.
+- Removed one cross-album duplicate: "Dec 21, 2020" is the identical photo as "Santa Monica Beach" (same phash), so only one is kept.
+- Result: **393 curated albums -> 307 carousels -> 5,877 images** (was 286/5,772); 6,300 source images uploaded, 0 errors. **Zero catalog albums missing** except that one intentional duplicate.
+
+**G: Drive:**
+- `Events`: **19 folders, 1,958 media files** (jpg/png/raw/mp4/mov). Note: `/events` on the site is a hand-curated video list, not driven by this folder.
+- `Models (Old)`: 93 folders; site roster 91 models with 2,420 curated images.
+
+**Storage:** photography 442.9 MB + models 144.7 MB = **~588 MB of the 1 GB free tier**.
+
+**Accuracy caveats (so the numbers are read correctly):** the 189,022 is records, not shoots; 15,279 are virtual copies and 102,415 photos live in no album. Site totals are curated picks per album, not the full catalog.
+
+- **Gate:** tsc 0, lint 0, tests **108/108**, build 0. **Commit `23cf7d3` - DEPLOY IS LIVE** (`23cf7d3e3a64a2bc048d3368f1d90090caa976b0`). Live check: `/photography/portraits` and `/studio` 0 broken, all 1150px.
