@@ -404,3 +404,17 @@ Reviewed every handover and the Lightroom session's commits, then integrated and
 - **Verified live:** `/photography/studio` 1,644 Supabase images, `/photography/events` 906, both **0 broken** and 200 with no page errors; `/model-archive` 200, 93 images, 0 broken.
 - **Still open (per `HANDOVER_GALLERY_DEPTH_AUDIT_2026-10-19.md`):** model-archive galleries are still a flat 6 each (not curated), and the category target is 25-30/album. That needs the full cull -> vision-curate -> export (<= ~68.6 KB/image, free tier) -> upload -> regenerate pipeline; the ~800 MB budget and the no-padding rule are already decided. This pass was integration and verification, not the depth run.
 - **Gate:** tsc 0, lint 0, tests **107/107**, build 0. **Live code SHA `27c301f` - DEPLOY IS LIVE** (`27c301fc3d153d50be58c56dca23f6217cb9640c`).
+
+## Progress 24 - Gallery depth: photography 28/album, model archive curated (2026-10-19, WYZMiND)
+
+Executed the depth run the audit specified, on the free tier, with no padding.
+
+- **Photography:** new `_ENGINE/wyz_repick.py` keeps the vision picks first (so existing files stay valid), then appends quality-ranked frames from the same 40-frame `sample.json`, de-duplicated by phash (threshold 6). Result: 3,619 -> **6,190 picks** (227 albums grew), max 28.
+- **Re-export tuned empirically:** tested real files at several EDGE/quality combos; chose **1150px / q64 = 70.4 KB avg** (vs 161 KB before). Exported 6,190, **0 failed**, **438.7 MB** in 26 min with `WYZ_EXPORT_FORCE=1`.
+- **Upload:** 6,190 files, **0 errors**, 4.9 min (x-upsert, 1-year cache).
+- **Catalog:** `MAX_PER_ALBUM` 20 -> 30; same-date merge gives **286 carousels / 5,772 images shown** (up from 3,506).
+- **Model archive:** parameterized `wyz_model_galleries.py` (target 28, sample 60 instead of 20, best-of by sharpness after phash dedupe, **1050px/q60**). Merged into the existing JSON so models without a usable source keep their gallery instead of disappearing. Result: **91 galleries / 2,420 images, avg 26.6, 80 of 91 at 28, min 8, 0 duplicate URLs**, 144.7 MB.
+- **Bug fixed:** `/api/album-images` only consulted the curated Supabase gallery inside a `minioFolder` branch, so models with no MinIO mapping (TORREE) returned 0 images. Now a curated gallery alone marks the album as a model. Verified live: TORREE 8, ADRIENNE 22, AECH DOT 28, AJA 8.
+- **Storage:** ~583 MB of the 1 GB free tier (438.7 photography + 144.7 models), inside the 800 MB target with headroom.
+- **Honest gaps:** thin sources stay thin (AJA/TORREE 8; 22 source folders were empty/placeholder). No repeats or rejects were added to hit a floor.
+- **Gate:** tsc 0, lint 0, tests **108/108**, build 0. Live SHAs: `6a7879b` (photography), `9c29c98` (models), `19f4a5b` (route fix) - all `DEPLOY IS LIVE`.
