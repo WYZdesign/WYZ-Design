@@ -392,3 +392,15 @@ Owner direction: the mobile splash should always be animating on its own (10-15 
   - **Even spacing:** all backs now share the same shape, a centered details block and a bottom-pinned CTA row with consistent padding.
 - **Verified live:** 13 flip cards on `/services` (services + embedded plans + web-design) all report 0px back overflow and the CTA fully inside the card; a single tap swaps the face transforms as expected.
 - **Gate:** tsc 0, lint 0, tests **103/103**, build 0. **Commit `0b51607` - DEPLOY IS LIVE** (`0b51607257c8b4c4b88343c1b07d88d1f1c803ce`). Regression locks added (`carousel scale`, `flip cards`).
+
+## Progress 23 - Integrated the Lightroom gallery work + catalog invariants (2026-10-19, WYZMiND)
+
+Reviewed every handover and the Lightroom session's commits, then integrated and verified them.
+
+- **Lightroom session delivered (all live):** `73f6bda` normalizes album labels to `Month D, YYYY` and merges same-date albums per category into one carousel (union of images, deduped, `MAX_PER_ALBUM = 20`), taking the catalog from 343 source albums to **286 carousels / 3,506 images**; `aa9faae` + `efe8dbf` added per-model galleries (546 images) with a Supabase fallback and a fix so a missing Cloudinary env no longer 500s; `626e417` documented the merge.
+- **Fixed the resulting red gate:** `photography-category.test.ts` hardcoded 343 albums / 3,619 images and failed after the merge. Replaced the fixed counts with invariants that survive future regenerations: catalog is non-trivially sized, **image URLs are globally unique** (no redundancies), every album has 1-20 images, and the category keys match the metadata.
+- **Cleaned stray artifacts:** the generator drops `photography-category.ts.bak_<timestamp>` into `src/lib/data/`; three of them were moved to `W:\WYZ_Command_Center\_ARCHIVE\wyzdesign_data_baks` (not committed).
+- **Measured the merge win:** avg images/album 10.55 -> **12.26**, max 16 -> **20**, thin albums (<8) 58 -> **37**, 0 duplicate URLs, 0 overlap with model galleries.
+- **Verified live:** `/photography/studio` 1,644 Supabase images, `/photography/events` 906, both **0 broken** and 200 with no page errors; `/model-archive` 200, 93 images, 0 broken.
+- **Still open (per `HANDOVER_GALLERY_DEPTH_AUDIT_2026-10-19.md`):** model-archive galleries are still a flat 6 each (not curated), and the category target is 25-30/album. That needs the full cull -> vision-curate -> export (<= ~68.6 KB/image, free tier) -> upload -> regenerate pipeline; the ~800 MB budget and the no-padding rule are already decided. This pass was integration and verification, not the depth run.
+- **Gate:** tsc 0, lint 0, tests **107/107**, build 0. **Live code SHA `27c301f` - DEPLOY IS LIVE** (`27c301fc3d153d50be58c56dca23f6217cb9640c`).
