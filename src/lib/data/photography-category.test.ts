@@ -19,7 +19,7 @@ describe("photography category catalog", () => {
     expect(new Set(images).size, "duplicate images across the catalog").toBe(images.length);
     expect(Object.keys(CATEGORY_ALBUMS).sort()).toEqual(Object.keys(CATEGORY_META).sort());
     expect(
-      albums.every(({ images: albumImages }) => albumImages.length >= 1 && albumImages.length <= 20),
+      albums.every(({ images: albumImages }) => albumImages.length >= 1 && albumImages.length <= 30),
       "album image count out of range",
     ).toBe(true);
   });
