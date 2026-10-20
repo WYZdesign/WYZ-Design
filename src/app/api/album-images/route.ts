@@ -257,19 +257,23 @@ export async function GET(req: NextRequest) {
   // 1. Check if it's a model album
   const headshotId = HEADSHOTS[album];
   const minioFolder = MINIO_FOLDER[album];
+  const curated = (MODEL_GALLERIES as Record<string, string[]>)[album] || [];
+  // A curated Supabase gallery alone makes it a model album. Previously the
+  // fallback lived inside a `minioFolder` check, so any model without a MinIO
+  // mapping (e.g. TORREE) returned 0 images despite having a gallery.
+  const isModel = !!headshotId || !!minioFolder || curated.length > 0;
 
-  if (headshotId || minioFolder) {
+  if (isModel) {
     if (headshotId) {
       const headshot = safeCloudinaryUrl(headshotId, 400, 500);
       if (headshot) images.push(headshot);
     }
-    if (mode !== "cover" && minioFolder) {
-      const minioFiles = await listMinioS3(`models/${minioFolder}/`, limit);
+    if (mode !== "cover") {
+      const minioFiles = minioFolder ? await listMinioS3(`models/${minioFolder}/`, limit) : [];
       images.push(...minioFiles);
-      // Supabase fallback: curated per-model galleries uploaded 2026-10-18
+      // Curated per-model galleries uploaded to Supabase Storage.
       if (minioFiles.length === 0) {
-        const fallback = (MODEL_GALLERIES as Record<string, string[]>)[album] || [];
-        images.push(...fallback.slice(0, limit));
+        images.push(...curated.slice(0, limit));
       }
     }
     return NextResponse.json({ album, images, count: images.length, isModel: true });

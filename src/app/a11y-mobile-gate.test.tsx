@@ -224,6 +224,14 @@ describe("flip cards", () => {
   });
 });
 
+describe("model galleries", () => {
+  it("serves curated Supabase galleries even without a MinIO mapping", () => {
+    const src = read("app", "api", "album-images", "route.ts");
+    expect(src, "curated gallery must count as a model album").toMatch(/curated\.length > 0/);
+    expect(src).toMatch(/const isModel/);
+  });
+});
+
 describe("pricing canon", () => {
   it("plans match the approved catalog and are monthly only", () => {
     const plans = read("app", "plans", "page.tsx");
