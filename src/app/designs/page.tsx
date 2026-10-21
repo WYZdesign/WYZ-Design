@@ -321,10 +321,20 @@ export default function DesignsPage() {
   <Carousel images={shuffledLogos} direction="left" whiteBgInDark scrollRef={logosScrollRef} />
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
   </div>
-  </section>
-  </ScrollReveal>
+   </section>
+   </ScrollReveal>
 
- {/* ═══ SERVICE CARDS - ACCORDION ═══ */}
+  {/* ═══ FULL GALLERY CTA ═══ */}
+  <div className="max-w-[130rem] mx-auto px-6 lg:px-12 py-8 flex justify-center">
+    <Link
+      href="/designs/gallery"
+      className="inline-flex items-center gap-2 px-7 py-3 bg-[#DF3131] text-white text-[13px] font-bold tracking-[0.1em] uppercase hover:bg-[#B82020] transition-colors"
+    >
+      Browse the Full Design Gallery <FiArrowRight className="w-4 h-4" />
+    </Link>
+  </div>
+
+  {/* ═══ SERVICE CARDS - ACCORDION ═══ */}
  <ScrollReveal animation="fadeUp" delay={0.1}>
  <section className="py-6 max-w-[1100px] mx-auto px-6">
  <AccordionServiceCard

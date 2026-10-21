@@ -18,6 +18,7 @@ import axe from "axe-core";
 
 import RouteLoading from "@/components/RouteLoading";
 import RouteErrorState from "@/components/RouteErrorState";
+import { DESIGN_CATEGORIES } from "@/lib/data/design-galleries";
 
 vi.mock("@/lib/errorTracker", () => ({ trackError: vi.fn() }));
 
@@ -229,6 +230,30 @@ describe("model galleries", () => {
     const src = read("app", "api", "album-images", "route.ts");
     expect(src, "curated gallery must count as a model album").toMatch(/curated\.length > 0/);
     expect(src).toMatch(/const isModel/);
+  });
+});
+
+describe("design gallery", () => {
+  it("ships all three categories with items, unique sources and subcategories", () => {
+    expect(Object.keys(DESIGN_CATEGORIES).sort()).toEqual(["cover-art", "flyers", "logos"]);
+    for (const [key, cat] of Object.entries(DESIGN_CATEGORIES)) {
+      expect(cat.items.length, `${key} too small`).toBeGreaterThan(40);
+      const srcs = cat.items.map((i) => i.src);
+      expect(new Set(srcs).size, `${key} has duplicate sources`).toBe(srcs.length);
+      expect(srcs.every((s) => s.startsWith("/images/designs/")), `${key} bad source path`).toBe(true);
+      expect(cat.items.every((i) => i.title.trim() && i.sub.trim()), `${key} empty title/sub`).toBe(true);
+      expect(new Set(cat.items.map((i) => i.sub)).size, `${key} needs subcategories`).toBeGreaterThan(1);
+    }
+  });
+
+  it("exposes the routes and links from the designs page", () => {
+    expect(fs.existsSync(srcPath("app", "designs", "gallery", "page.tsx"))).toBe(true);
+    expect(fs.existsSync(srcPath("app", "designs", "gallery", "[category]", "page.tsx"))).toBe(true);
+    const designs = read("app", "designs", "page.tsx");
+    for (const cat of ["cover-art", "logos", "flyers"]) {
+      expect(designs, `designs page must link ${cat}`).toContain(`/designs/gallery/${cat}`);
+    }
+    expect(designs).toContain("/designs/gallery");
   });
 });
 
