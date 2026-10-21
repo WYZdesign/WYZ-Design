@@ -19,6 +19,8 @@ import axe from "axe-core";
 import RouteLoading from "@/components/RouteLoading";
 import RouteErrorState from "@/components/RouteErrorState";
 import { DESIGN_CATEGORIES } from "@/lib/data/design-galleries";
+import { EVENT_GALLERIES, EVENT_KEYS } from "@/lib/data/event-galleries";
+import MODEL_GALLERIES from "@/lib/data/model-galleries.json";
 
 vi.mock("@/lib/errorTracker", () => ({ trackError: vi.fn() }));
 
@@ -254,6 +256,36 @@ describe("design gallery", () => {
       expect(designs, `designs page must link ${cat}`).toContain(`/designs/gallery/${cat}`);
     }
     expect(designs).toContain("/designs/gallery");
+  });
+});
+
+describe("event and model galleries", () => {
+  it("event galleries have items and unique sources", () => {
+    expect(EVENT_KEYS.length).toBeGreaterThan(10);
+    for (const key of EVENT_KEYS) {
+      const g = EVENT_GALLERIES[key];
+      expect(g.images.length, key).toBeGreaterThan(0);
+      expect(new Set(g.images).size, key).toBe(g.images.length);
+      expect(g.slug, key).toMatch(/^[a-z0-9-]+$/);
+    }
+  });
+
+  it("model galleries have items and unique sources", () => {
+    const entries = Object.entries(MODEL_GALLERIES as Record<string, string[]>);
+    expect(entries.length).toBeGreaterThan(80);
+    for (const [name, images] of entries) {
+      expect(images.length, name).toBeGreaterThan(0);
+      expect(new Set(images).size, name).toBe(images.length);
+    }
+  });
+
+  it("routes and entry links exist", () => {
+    expect(fs.existsSync(srcPath("app", "events", "gallery", "page.tsx"))).toBe(true);
+    expect(fs.existsSync(srcPath("app", "events", "gallery", "[event]", "page.tsx"))).toBe(true);
+    expect(fs.existsSync(srcPath("app", "model-archive", "gallery", "page.tsx"))).toBe(true);
+    expect(fs.existsSync(srcPath("app", "model-archive", "gallery", "[model]", "page.tsx"))).toBe(true);
+    expect(read("app", "events", "page.tsx")).toContain("/events/gallery");
+    expect(read("app", "model-archive", "page.tsx")).toContain("/model-archive/gallery");
   });
 });
 

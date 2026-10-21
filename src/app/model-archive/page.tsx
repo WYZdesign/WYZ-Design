@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Image from "next/image";
+import Link from "next/link";
 import { FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import { useZeal } from "@/components/ZealProvider";
@@ -198,6 +199,12 @@ export default function ModelArchivePage() {
  >
  VIEW MODELS
  </button>
+ <Link
+ href="/model-archive/gallery"
+ className="px-8 py-4 text-[14px] font-bold tracking-[0.12em] transition-all border-2 bg-transparent text-[#333] dark:text-white border-[#E2E2E2] dark:border-white/30 hover:border-[#DF3131] hover:text-[#DF3131]"
+ >
+ GALLERIES
+ </Link>
  <button
  onClick={() => { setShowApply(true); closeAlbum(); }}
  className={`px-8 py-4 text-[14px] font-bold tracking-[0.12em] transition-all border-2 ${

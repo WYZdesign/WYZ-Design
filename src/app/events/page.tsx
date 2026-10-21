@@ -518,6 +518,9 @@ export default function EventsPage() {
    <Link href="/booking" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-white text-[#111] border-2 border-white text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all mt-2 sm:mt-4">
    BOOK NOW
     </Link>
+   <Link href="/events/gallery" className="inline-block px-6 sm:px-10 py-3 sm:py-4 bg-transparent text-white border-2 border-white/60 text-[12px] sm:text-[15px] font-bold tracking-[0.12em] text-center hover:bg-white hover:text-[#111] transition-all mt-3 sm:mt-4 sm:ml-4">
+   PHOTO GALLERIES
+    </Link>
     </div>
    </div>
    </section>
