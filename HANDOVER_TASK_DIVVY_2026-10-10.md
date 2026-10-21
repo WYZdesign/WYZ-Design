@@ -459,3 +459,15 @@ Closed out everything left and proved it against the live site.
 - **Supabase October 30 change covered:** re-applied `wyz_supabase_grants.py --only wyzdesign --apply` -> `service_role grants: OK (HTTP 201)`, including `ALTER DEFAULT PRIVILEGES`, so tables created after the cutoff stay reachable.
 - **Documented, not broken:** `G:\My Drive\Pictures\Events` holds 19 folders / 1,958 media files, but `/events` is a hand-curated video list, not driven by that folder. Wiring it is a product decision, not a defect.
 - **Nothing else open.** Tree clean, `master` in sync with origin. Live code `23cf7d3`; this handover is docs-only.
+
+## Progress 27 - Designs gallery: browsable categories + subcategories (2026-10-20, WYZMiND)
+
+Added a photography-style browsing surface for design work. The carousels on `/designs` are unchanged.
+
+- **New routes:** `/designs/gallery` (category index) and `/designs/gallery/[category]` for `cover-art`, `logos`, `flyers`, statically generated.
+- **New view:** `src/components/DesignGalleryView.tsx` - marquee title, count, subcategory filter chips with counts, responsive masonry grid with full images (`object-contain`, no cropping), and a lightbox with prev/next, arrow keys, Escape and a position counter.
+- **Carousels now link out:** each section's "See All" became **Browse all** pointing at its gallery; the carousels themselves were not touched.
+- **Data:** `src/lib/data/design-galleries.ts`, generated from the real folders (`public/images/designs/cover_art_*`, `flyers_*`, `logos_*`), deduped by normalised name with JPEG preferred over PNG. Counts: **97 cover art (90 WYZ / 7 client), 179 flyers, 210 logos**. Subcategories come from filename heuristics: covers (WYZ Originals / Client Covers), logos (Wordmarks / Alternates & Drafts / Illustrated & Mascots / Emblems & Badges / Apparel), flyers (Nightlife & Parties / Shows & Concerts / Community & Business / Flyers).
+- **Data quirk found:** the existing `COVER_ART_IMAGES` array is populated from the flyers folders with Facebook-style numeric filenames, so it is not a clean cover-art list. The new gallery builds from the folders instead. The carousels were left as-is per the request, but that array is worth regenerating later.
+- **Verified live:** all four routes 200; 97 cards, `Client Covers` filter -> 7 cards; lightbox opens, ArrowRight changes the piece, Escape closes. Screenshot confirms the masonry layout and filters.
+- **Gate:** tsc 0, lint 0 (0 warnings), tests **108/108**, build 0. **Commit `88e184a` - DEPLOY IS LIVE** (`88e184a51353a29c2e4fe92d57535e7913a86e13`).
