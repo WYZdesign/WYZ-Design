@@ -472,3 +472,16 @@ Added a photography-style browsing surface for design work. The carousels on `/d
 - **Wired up:** `/designs` now has a "Browse the Full Design Gallery" CTA, all four gallery routes are in `sitemap.xml`, and two tests lock the gallery contract (3 categories, 40+ items each, unique sources, non-empty titles/subcategories, 2+ subcategories per category, routes and links present).
 - **Verified live:** all four routes 200; 97 cards, `Client Covers` filter -> 7 cards; lightbox opens, ArrowRight changes the piece, Escape closes. Screenshot confirms the masonry layout and filters.
 - **Gate:** tsc 0, lint 0 (0 warnings), tests **110/110**, build 0. **Commits `88e184a` (gallery) + `5d988d7` (sitemap/CTA/tests) - DEPLOY IS LIVE** (`5d988d71a1ede34582d5845aa5f82f696cbf6841`).
+
+## Progress 28 - Events galleries, model index, shared gallery + spacing (2026-10-20, WYZMiND)
+
+Built the remaining gallery surfaces from the owner's answers and gave them more room.
+
+- **Shared gallery component:** `src/components/GalleryView.tsx` (design, events and models all use it). More breathing room than the first version: `px-6 sm:px-10 lg:px-16`, `gap-5 sm:gap-6 lg:gap-8`, larger card padding, bigger filter chips, `pt-28` header and `pb-28` footer space. Masonry grid, subcategory chips, lightbox with arrows/Escape/counter.
+- **Events galleries:** new `_ENGINE/wyz_event_galleries.py` culls each G: folder (sample 48 -> score -> phash dedupe -> best 24), exports 1150px/q64 and uploads to `portfolio/events-gallery/<slug>/`. Result: **19 events, 404 images, 32.4 MB (82 KB avg)**. Routes `/events/gallery` + `/events/gallery/[event]`; `/events` hero now has a **PHOTO GALLERIES** button.
+- **Model index:** `/model-archive/gallery` (grid of all **91 models**) and `/model-archive/gallery/[model]` (full gallery). `/model-archive` gained a **GALLERIES** tab.
+- **Design titles:** numeric/social filenames now get distinguishable readable labels (`Flyers 01`, `Logos 01`, ...) instead of one repeated word; real filenames keep their cleaned titles.
+- **Sitemap:** `/events/gallery` and `/model-archive/gallery` added.
+- **Storage:** photography 442.9 MB + models 144.7 MB + events 32.4 MB = **~620 MB of the 1 GB tier**.
+- **Verified live:** `/events/gallery` 200 (19 cards), `/model-archive/gallery` 200 (91 cards), `/designs/gallery` 200, `/events` 200; sample detail images on an event and a model page all 200. The four black tiles in the full-page screenshot were lazy-load timing (every cover HEADs 200). Visual check confirms the new spacing.
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. **Commit `ede0dee` - DEPLOY IS LIVE** (`ede0dee5a4b6249b15575a10acdfeb9198e670e1`).
