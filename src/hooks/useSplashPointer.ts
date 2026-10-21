@@ -68,10 +68,13 @@ export function usePointerField(ref: React.RefObject<HTMLDivElement | null>) {
    // during normal handheld use and only the left-right axis ever visibly
    // moves. Center on 90deg instead, the natural "looking at it" angle.
    const ny = Math.max(0, Math.min(1, (e.beta - 45) / 90));
-   // Physical sensors are noisy. Ease the raw reading before each splash
-   // receives it, so a phone tilt feels direct without looking jittery.
-   gyro.current.x += (nx - gyro.current.x) * .2;
-   gyro.current.y += (ny - gyro.current.y) * .2;
+    // Physical sensors are noisy. Ease the raw reading before each splash
+    // receives it, so a phone tilt feels direct without looking jittery.
+    // 0.2 per event was too slow to read as "real time" on a phone (it took
+    // ~200ms to catch up); 0.5 tracks the device almost immediately while
+    // still smoothing sensor noise.
+    gyro.current.x += (nx - gyro.current.x) * .5;
+    gyro.current.y += (ny - gyro.current.y) * .5;
    p.current = { x: gyro.current.x * r.width, y: gyro.current.y * r.height, on: true };
   };
   window.addEventListener("deviceorientation", handler, { passive: true });

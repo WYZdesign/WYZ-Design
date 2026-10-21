@@ -127,7 +127,6 @@ export default function GalleryView({
                 />
                 <span className="flex items-center justify-between gap-3 px-4 py-3">
                   <span className="text-white/70 text-[12px] truncate">{it.title}</span>
-                  <span className="text-[9px] uppercase tracking-[0.12em] text-white/30 shrink-0">{it.sub}</span>
                 </span>
               </button>
             ))}
@@ -178,7 +177,7 @@ export default function GalleryView({
             />
             <div className="text-center">
               <p className="text-white text-sm">{active.title}</p>
-              <p className="text-white/40 text-xs mt-1">{active.sub} - {idx! + 1} / {items.length}</p>
+              <p className="text-white/40 text-xs mt-1">{idx! + 1} / {items.length}</p>
             </div>
           </div>
           <button

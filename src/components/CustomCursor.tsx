@@ -31,6 +31,8 @@ export default function CustomCursor() {
   const isClicking = useRef(false);
   const currentStyle = useRef<CursorState>({ ...DEFAULT_STATE });
   const lastTarget = useRef<EventTarget | null>(null);
+  const lastKind = useRef("");
+  const applied = useRef({ size: -1, border: -1, color: "", opacity: -1 });
   const rippleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -50,8 +52,13 @@ export default function CustomCursor() {
       lastTarget.current = target;
 
       const interactive = target.closest(INTERACTIVE_SEL);
-      const heading = target.closest("h1, h2, h3, h4, h5, h6, .font-heading");
       const image = target.closest("img, video, [data-cursor-view]");
+      const heading = target.closest("h1, h2, h3, h4, h5, h6, .font-heading");
+      // getComputedStyle is expensive; only run it when the *kind* of element
+      // under the pointer changes, not on every element it passes over.
+      const key = interactive ? "i" : image ? "m" : heading ? "h" : "d";
+      if (key === lastKind.current) return;
+      lastKind.current = key;
 
       let next: CursorState;
       if (interactive) {
@@ -96,8 +103,10 @@ export default function CustomCursor() {
       const c = cursorPos.current;
       const t = trailPos.current;
 
-      const cursorLerp = 1 - Math.pow(1 - 0.15, dt);
-      const trailLerp = 1 - Math.pow(1 - 0.08, dt);
+      // Snappier than the old 0.15/0.08, which felt like the cursor was
+      // dragging a second behind the real pointer.
+      const cursorLerp = 1 - Math.pow(1 - 0.45, dt);
+      const trailLerp = 1 - Math.pow(1 - 0.2, dt);
 
       c.x += (p.x - c.x) * cursorLerp;
       c.y += (p.y - c.y) * cursorLerp;
@@ -106,20 +115,34 @@ export default function CustomCursor() {
       t.y += (p.y - t.y) * trailLerp;
 
       const s = currentStyle.current;
-      const shrink = isClicking.current ? 0.8 : 1;
-      const finalSize = s.size * shrink;
+      const shrink = isClicking.current ? 0.82 : 1;
+      const el = cursorRef.current;
 
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${c.x - finalSize / 2}px, ${c.y - finalSize / 2}px)`;
-        cursorRef.current.style.width = `${finalSize}px`;
-        cursorRef.current.style.height = `${finalSize}px`;
-        cursorRef.current.style.borderWidth = `${s.border}px`;
-        cursorRef.current.style.borderColor = s.color;
-        cursorRef.current.style.opacity = `${s.opacity}`;
+      if (el) {
+        const a = applied.current;
+        // Width/height/border changes force layout, so only touch them when the
+        // state actually changed. Position and click-shrink are transform-only
+        // and stay on the compositor.
+        if (a.size !== s.size || a.border !== s.border || a.color !== s.color) {
+          el.style.width = `${s.size}px`;
+          el.style.height = `${s.size}px`;
+          el.style.borderWidth = `${s.border}px`;
+          el.style.borderColor = s.color;
+          a.size = s.size;
+          a.border = s.border;
+          a.color = s.color;
+        }
+        if (a.opacity !== s.opacity) {
+          el.style.opacity = `${s.opacity}`;
+          a.opacity = s.opacity;
+        }
+        el.style.transform = `translate3d(${c.x - s.size / 2}px, ${c.y - s.size / 2}px, 0) scale(${shrink})`;
       }
       if (trailRef.current) {
-        trailRef.current.style.transform = `translate(${t.x - 4}px, ${t.y - 4}px)`;
-        trailRef.current.style.backgroundColor = s.color;
+        trailRef.current.style.transform = `translate3d(${t.x - 4}px, ${t.y - 4}px, 0)`;
+        if (trailRef.current.style.backgroundColor !== s.color) {
+          trailRef.current.style.backgroundColor = s.color;
+        }
       }
 
       raf = requestAnimationFrame(animate);

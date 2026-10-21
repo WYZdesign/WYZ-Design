@@ -7,43 +7,40 @@ interface NoiseOverlayProps {
   className?: string;
 }
 
-export default function NoiseOverlay({ opacity = 0.045, className = "" }: NoiseOverlayProps) {
-  // A fixed, full-viewport SVG feTurbulence filter composited with
-  // mix-blend-mode is cheap on a desktop GPU but forces an expensive
-  // recomposite of the ENTIRE page on every scroll/animation frame on
-  // mobile GPUs -- a well-known battery/thermal drain pattern. The grain
-  // texture is a subtle decorative touch, not core to the brand, so it is
-  // skipped entirely on touch/mobile devices rather than just throttled.
-  const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+/**
+ * Subtle film grain over the page.
+ *
+ * This used to be a fixed, full-viewport SVG `feTurbulence` filter with an
+ * `<animate>` on its seed, which forces the browser to re-run a fractal-noise
+ * filter for the whole screen several times a second and re-composite the
+ * entire page. That is a well-known jank/thermal pattern, especially on
+ * laptops and mobile GPUs. The grain is decorative, so it is now a small,
+ * pre-baked tiled PNG: one cheap layer, no filter, no animation, no blend mode.
+ * Still skipped on touch/mobile and for reduced-motion users.
+ */
+export default function NoiseOverlay({ opacity = 0.035, className = "" }: NoiseOverlayProps) {
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 1024 || ("ontouchstart" in window && navigator.maxTouchPoints > 0));
-    setMounted(true);
+    const mobile =
+      window.innerWidth < 1024 ||
+      ("ontouchstart" in window && navigator.maxTouchPoints > 0);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setShow(!mobile && !reduced);
   }, []);
 
-  if (!mounted || isMobile) return null;
+  if (!show) return null;
 
   return (
     <div
       className={`pointer-events-none fixed inset-0 z-[9990] ${className}`}
-      style={{ opacity, mixBlendMode: "overlay" }}
+      style={{
+        opacity,
+        backgroundImage: "url(/images/noise.png)",
+        backgroundRepeat: "repeat",
+        backgroundSize: "160px 160px",
+      }}
       aria-hidden="true"
-    >
-      <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-        <filter id="wyz-noise">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.75"
-            numOctaves={4}
-            stitchTiles="stitch"
-          >
-            <animate attributeName="seed" from="0" to="100" dur="0.8s" repeatCount="indefinite" />
-          </feTurbulence>
-          <feColorMatrix type="saturate" values="0" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#wyz-noise)" />
-      </svg>
-    </div>
+    />
   );
 }

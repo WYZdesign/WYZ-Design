@@ -15,12 +15,14 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
     const lenis = new Lenis({
-      duration: isTouch ? 0.5 : 0.8,
+      // Snappier than the old 0.8/0.5s. Long durations make the whole site feel
+      // like it is lagging behind the wheel.
+      duration: isTouch ? 0.4 : 0.55,
       easing: (t: number) => 1 - Math.pow(1 - t, 3),
       smoothWheel: !isTouch,
-      syncTouchLerp: isTouch ? 0.15 : 0.1,
-      touchMultiplier: isTouch ? 1 : 1.5,
-      wheelMultiplier: 1.3,
+      syncTouchLerp: isTouch ? 0.28 : 0.1,
+      touchMultiplier: isTouch ? 1.1 : 1.5,
+      wheelMultiplier: 1.15,
     });
 
     lenisRef.current = lenis;

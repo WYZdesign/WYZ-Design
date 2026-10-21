@@ -2,6 +2,9 @@ import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { getSiteUrl } from "@/lib/site-url";
 import { listStoreProducts } from "@/lib/printful";
+import { EVENT_GALLERIES, EVENT_KEYS } from "@/lib/data/event-galleries";
+import { DESIGN_CATEGORY_KEYS } from "@/lib/data/design-galleries";
+import MODEL_GALLERIES from "@/lib/data/model-galleries.json";
 
 const BASE = getSiteUrl();
 
@@ -85,5 +88,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch {
     merchProducts = [];
   }
-  return [...routes, ...posts, ...merchProducts];
+
+  const modelSlug = (s: string) =>
+    s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+
+  const designPages: MetadataRoute.Sitemap = DESIGN_CATEGORY_KEYS.map((k) => ({
+    url: `${BASE}/designs/gallery/${k}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+  const eventPages: MetadataRoute.Sitemap = EVENT_KEYS.map((k) => ({
+    url: `${BASE}/events/gallery/${EVENT_GALLERIES[k].slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+  const modelPages: MetadataRoute.Sitemap = Object.keys(MODEL_GALLERIES).map((name) => ({
+    url: `${BASE}/model-archive/gallery/${modelSlug(name)}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.4,
+  }));
+
+  return [...routes, ...posts, ...merchProducts, ...designPages, ...eventPages, ...modelPages];
 }
