@@ -485,3 +485,26 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Storage:** photography 442.9 MB + models 144.7 MB + events 32.4 MB = **~620 MB of the 1 GB tier**.
 - **Verified live:** `/events/gallery` 200 (19 cards), `/model-archive/gallery` 200 (91 cards), `/designs/gallery` 200, `/events` 200; sample detail images on an event and a model page all 200. The four black tiles in the full-page screenshot were lazy-load timing (every cover HEADs 200). Visual check confirms the new spacing.
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. **Commit `ede0dee` - DEPLOY IS LIVE** (`ede0dee5a4b6249b15575a10acdfeb9198e670e1`).
+
+## Progress 29 - Performance pass, gallery polish, totality audit integrated (2026-10-21, WYZMiND)
+
+**Performance (owner report: mouse felt slow/laggy, mobile tilt delayed):**
+- **NoiseOverlay was the biggest cost:** a fixed full-viewport `feTurbulence` SVG filter with an animated seed, re-running a fractal-noise filter for the whole screen continuously. Replaced with a pre-baked 160px tiled grain PNG (`public/images/noise.png`), no filter, no animation, no blend mode. Still skipped on touch/mobile and reduced motion.
+- **CustomCursor:** the 0.15/0.08 lerp made the sprite visibly trail the real pointer, and it rewrote width/height/border/colour every frame (layout thrash). Now 0.45/0.2 (snappy), click-shrink via transform `scale`, layout props only written when the state changes, and `getComputedStyle` only runs when the element *kind* changes instead of on every element transition.
+- **Lenis:** duration 0.8 -> 0.55 desktop (0.4 touch), `syncTouchLerp` 0.15 -> 0.28, wheelMultiplier 1.3 -> 1.15.
+- **Tilt:** gyro easing per event 0.2 -> 0.5, so the splash tracks the phone instead of taking ~200ms to catch up.
+- Note: headless-Chromium FPS numbers are not representative here (even `/contact` measures ~17fps because of software rendering), so these were targeted code-cost fixes, not benchmark-driven.
+
+**Gallery polish:**
+- Removed the redundant per-card sub labels ("Flyers", "Event", "Model", "WYZ Originals") from gallery cards and the lightbox caption (owner request; also addresses the audit note about the identical "Event" badge).
+- Sitemap now emits the 3 design categories, 19 event galleries and 91 model galleries; duplicate `/designs` and duplicate design-category entries removed. 176 URLs, no duplicates.
+
+**Claude totality audit integrated (`HANDOVER_TOTALITY_AUDIT_2026-10-21.md`):**
+- `/printing` "Prints + Posters" card had no photo background -> now uses `print_1.jpg` (previously unused).
+- `/services` plan cards were uneven because each used its own feature count for minHeight -> shared `MAX_FEATURE_COUNT`; verified live all four are **860px**.
+- `/services` Product Photography and Behind the Scenes reused Event Photography's image -> now `Products.jpg` and `URBEX.jpg`; verified live all three differ.
+- Claude's own audit of the new gallery surfaces found no bugs.
+
+**Storage:** measured from the export trees: photography 445.9 MB + models 144.7 MB + events 32.4 MB = **623 MB of the 1,024 MB free tier (60.8%)**.
+
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. Live SHAs: `bf203e1` (perf), `52cbb56` + `3ad47b8` (sitemap), `0693ec1` (audit fixes + handover) - all `DEPLOY IS LIVE`.
