@@ -47,6 +47,11 @@ const FEATURES: Record<string, string[]> = {
   ],
 };
 
+// 2026-10-21 (Claude, totality audit): all four tier cards must share one
+// card height regardless of feature-list length, or the row looks uneven
+// (Starter Pack/Business Boost visibly shorter than Pro Plus/Ultimate Suite).
+const MAX_FEATURE_COUNT = Math.max(...Object.values(FEATURES).map((f) => f.length));
+
 const PLANS = [
   { name: "Starter Pack", price: "$250", value: "$725 Value", popular: false, img: "/images/services/Photography.webp" },
   { name: "Business Boost", price: "$500", value: "$2,025 Value", popular: true, img: "/images/services/Logo Design.jpg" },
@@ -95,7 +100,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
-      style={{ perspective: "1200px", minHeight: `${500 + FEATURES[p.name].length * 45}px` }}
+      style={{ perspective: "1200px", minHeight: `${500 + MAX_FEATURE_COUNT * 45}px` }}
       tabIndex={0}
       onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}

@@ -338,6 +338,7 @@ export default function PrintingPage() {
   <FlipCardInline
     title="PRINTS + POSTERS"
     subtitle="Prices based on size, calculated by average inches."
+    img="/images/printing/print_1.jpg"
     backTitle="PRINT + POSTER PRICING"
     backContent={
       <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
