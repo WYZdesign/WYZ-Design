@@ -29,7 +29,6 @@ const PUBLIC_ROUTES: Array<{ path: string; priority?: number; changeFrequency?: 
   { path: "/faq", priority: 0.5, changeFrequency: "yearly" },
   { path: "/merch", priority: 0.6, changeFrequency: "monthly" },
   { path: "/wyzmind", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/designs", priority: 0.6, changeFrequency: "monthly" },
   { path: "/designs/artfinix", priority: 0.5, changeFrequency: "yearly" },
   { path: "/designs/kid-bode", priority: 0.5, changeFrequency: "yearly" },
   { path: "/designs/dawneeahs-glow", priority: 0.5, changeFrequency: "yearly" },
