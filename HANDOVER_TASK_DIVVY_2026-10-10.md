@@ -544,3 +544,15 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. Running SHAs: `82ffe8a` (batch) + `83f3217` (blog tag).
 
 **Still outstanding (larger, not done in this pass):** merch page immersive redesign, a dynamic form system for every service/download/upload/payment flow, and the about-page deep research. Those need dedicated passes.
+
+## Progress 32 - Narrow-mobile audit integrated, brand positioning corrected, adaptive form (2026-10-22, WYZMiND)
+
+- **Integrated `HANDOVER_NARROW_MOBILE_CLIPPING_AUDIT_2026-10-22.md` (6 fixes):** flip-card backs are now `overflow-y-auto` (buttons reachable at 320px instead of hard-clipped) on printing/services/photography, plan SUBSCRIBE got `px-8`, and the `MODEL.ARCHIVE` / `SYSTEM.STATUS` headings got one breakable space so they wrap instead of clipping. Verified the six diffs were 1-line each and my earlier centered/600px work survived.
+- **Brand positioning corrected to the locked 2026 model** (the master doc flagged this as a live conflict):
+  - Nomadic Breed is described as a **2026 independent magazine, digital-first**, with interviews/photo essays/process documentation/Nomadic Status. The "mobile arm / pop-up shoots / touring coverage" copy is gone from `brands.ts` and `/nomadic-breed`.
+  - Dying Breed Crew is described as a **separate clothing label under WYZ**, not the community arm; `/dying-breed-crew` and `brands.ts` updated.
+  - About page "13+ Years Running" was false against the 2022 LLC date; now **4+ Years**.
+- **Adaptive forms:** new `src/components/ServiceForm.tsx` on `/services` with a service select built from the real service list, plus name/email/phone/timeline/budget/details, posting to the existing `/api/forms` `booking` type. One component, one endpoint, per-page service options. The API already supports `printing-quote`, `photoshoot-booking`, `web-design-quote`, `consultation-booking` and `custom-plan`.
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `0920519` (mobile audit), `9d64f0f` (brand copy), `bf14887` (form).
+
+**Still outstanding:** merch page immersive/dynamic redesign; the same ServiceForm wired into `/printing`, `/photography`, `/web-design` and `/events`; file-upload support in forms; and the about-page deep research needs owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year) that are not in local sources.
