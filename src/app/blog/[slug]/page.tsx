@@ -88,7 +88,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <FiArrowLeft className="w-4 h-4" /> Back to Blog
         </Link>
 
-        <span className="inline-block px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded mb-4">{post.cat}</span>
         <h1 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.75rem] sm:text-[2.25rem] lg:text-[2.75rem] leading-tight tracking-[0.02em] mb-4">{post.title}</h1>
 
         <div className="flex flex-wrap items-center gap-4 text-[#666] dark:text-[#aaa] text-[13px] mb-8">
@@ -100,6 +99,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <div className="relative w-full h-[16rem] sm:h-[22rem] lg:h-[26rem] rounded-xl overflow-hidden mb-10">
           <Image src={post.img} alt={post.title} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 52rem" />
+          <span className="absolute top-3 right-3 px-3 py-1 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase rounded z-10">{post.cat}</span>
         </div>
 
         <div className="space-y-8">
