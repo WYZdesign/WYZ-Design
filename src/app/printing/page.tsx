@@ -115,7 +115,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   </div>
    {/* Back */}
 <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
-    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center gap-4 overflow-hidden relative">
+    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center gap-4 overflow-y-auto relative">
     <div className="absolute inset-0 opacity-10">
       <Image src={sticker.img} alt={sticker.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
@@ -196,7 +196,7 @@ function FlipCardInline({ title, subtitle, img, backTitle, backContent, backNote
       </div>
       {/* Back */}
       <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
-        <div className={`w-full h-full ${backBg} text-white p-8 lg:p-12 flex flex-col justify-between overflow-hidden relative`}>
+        <div className={`w-full h-full ${backBg} text-white p-5 sm:p-8 lg:p-12 flex flex-col justify-between overflow-y-auto relative`}>
           <div className="relative z-10 text-center">
             <h2 className="font-heading font-black text-white text-[1.5rem] tracking-[0.1em] uppercase mb-4">{backTitle}</h2>
             {backContent}

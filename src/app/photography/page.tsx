@@ -164,7 +164,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   className="absolute inset-0 transition-all duration-700 ease-in-out"
   style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
-   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 flex flex-col items-center justify-center gap-4 overflow-hidden relative">
+   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 flex flex-col items-center justify-center gap-4 overflow-y-auto relative">
    <div className="absolute inset-0 opacity-10">
      <Image src={s.img} alt={s.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
