@@ -320,6 +320,25 @@ export default function MerchPage() {
             </div>
           </div>
         </section>
+                {/* Lookbook: archive strip, swipeable, hover zoom */}
+        <section className="py-14 bg-[#0A0A0A] overflow-hidden">
+          <div className="max-w-[82rem] mx-auto px-6 lg:px-12 mb-6 flex items-end justify-between gap-6">
+            <div>
+              <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-[#DF3131] mb-2">Lookbook</p>
+              <h2 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-white">DBC in the wild</h2>
+            </div>
+            <p className="hidden sm:block text-white/50 text-[13px] max-w-xs">Crew shots from the archive. Swipe through the full set.</p>
+          </div>
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 lg:px-12 pb-2">
+            {ARCHIVE_IMAGES.map((img, i) => (
+              <div key={i} className="relative flex-none w-[62vw] sm:w-[300px] aspect-[4/5] snap-start overflow-hidden rounded-xl group bg-[#1C1C1E]">
+                <SafeImage src={img} alt={`Dying Breed Crew lookbook ${i + 1}`} width={600} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <span className="absolute bottom-3 left-3 px-2 py-1 bg-black/70 text-white text-[10px] font-bold tracking-[0.1em] uppercase opacity-0 group-hover:opacity-100 transition-opacity">DBC Archive</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <DynamicContentUnderHero />
         <section className="pb-16 pt-4 sm:pb-24"><SquareQuote /></section>
       </main>
