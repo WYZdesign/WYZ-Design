@@ -11,6 +11,7 @@ import TextSplit from "@/components/TextSplit";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import PlansPage from "@/app/plans/page";
 import WebDesignPage from "@/app/web-design/page";
+import ServiceForm from "@/components/ServiceForm";
 
 const CATEGORIES = ["All Services", "Branding Design", "Photography", "Videography", "Consultation", "Web Design"];
 
@@ -286,6 +287,13 @@ return (
       <PlansPage />
       {/* merged from /web-design: owner confirmed Web Design content stays. */}
       <WebDesignPage />
+      <ServiceForm
+        services={ALL_SERVICES_RAW.map((s) => s.name)}
+        formType="booking"
+        title="Book a Service"
+        subtitle="Pick what you need and tell us the details. We will come back with a plan and a price."
+        submitLabel="REQUEST A BOOKING"
+      />
 </main>
  );
 }
