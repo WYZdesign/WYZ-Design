@@ -211,11 +211,11 @@ describe("photography delivery", () => {
 
 describe("carousel scale", () => {
   it("image carousels use the 15% larger card sizes", () => {
-    expect(read("app", "designs", "page.tsx")).toMatch(/md:w-\[368px\]/);
-    expect(read("app", "home", "page.tsx")).toMatch(/md:w-\[368px\]/);
-    expect(read("app", "photography", "page.tsx")).toMatch(/lg:w-\[506px\]/);
-    expect(read("components", "PhotographyCategoryRows.tsx")).toMatch(/md:h-\[331px\]/);
-    expect(read("app", "events", "page.tsx")).toMatch(/md:w-\[258px\]/);
+    expect(read("app", "designs", "page.tsx")).toMatch(/md:w-\[423px\]/);
+    expect(read("app", "home", "page.tsx")).toMatch(/md:w-\[423px\]/);
+    expect(read("app", "photography", "page.tsx")).toMatch(/lg:w-\[582px\]/);
+    expect(read("components", "PhotographyCategoryRows.tsx")).toMatch(/md:h-\[381px\]/);
+    expect(read("app", "events", "page.tsx")).toMatch(/md:w-\[297px\]/);
   });
 });
 

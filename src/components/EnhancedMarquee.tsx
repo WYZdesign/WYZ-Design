@@ -51,6 +51,14 @@ export default function EnhancedMarquee({
       </div>
 
       <style>{`
+        /* One size for every text marquee on the site, regardless of the
+           inline size classes a page passes in. Placement/format already come
+           from this shared component. */
+        .wyz-marquee-track { font-size: 2.25rem; }
+        @media (min-width: 640px) { .wyz-marquee-track { font-size: 2.5rem; } }
+        @media (min-width: 768px) { .wyz-marquee-track { font-size: 3rem; } }
+        .wyz-marquee-track span { font-size: inherit !important; }
+
         @keyframes wyzMarqueeLeft {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }

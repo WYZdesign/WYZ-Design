@@ -107,7 +107,7 @@ onClick={() => {
     className="absolute inset-0 transition-all duration-700 ease-in-out"
     style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" } as React.CSSProperties}
   >
-<div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 flex flex-col items-center justify-between overflow-hidden relative">
+<div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 flex flex-col items-center justify-center gap-4 overflow-hidden relative">
   <div className="absolute inset-0 opacity-10">
    <Image src={service.img} alt={service.name} fill sizes="(max-width:1024px) 100vw, 33vw" className="w-full h-full object-cover" />
    </div>

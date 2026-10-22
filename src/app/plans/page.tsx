@@ -100,7 +100,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
     <GyroTilt intensity={5} enableOnDesktop>
     <div
       className="relative cursor-pointer"
-      style={{ perspective: "1200px", minHeight: `${500 + MAX_FEATURE_COUNT * 45}px` }}
+      style={{ perspective: "1200px", minHeight: `${360 + MAX_FEATURE_COUNT * 30}px` }}
       tabIndex={0}
       onFocus={() => { justFocusedRef.current = true; setFlipped(true); }}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setFlipped(false); }}
@@ -126,7 +126,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
         className="absolute inset-0 transition-all duration-700 ease-in-out"
         style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
       >
-        <div className={`w-full h-full bg-[#DF3131] text-white p-7 flex flex-col justify-between overflow-hidden relative ${
+        <div className={`w-full h-full bg-[#DF3131] text-white p-6 flex flex-col items-center justify-center gap-4 overflow-y-auto relative ${
           p.popular ? "border-[4px] border-[#DF3131]" : ""
         }`}>
           <div className="relative z-10 text-center">

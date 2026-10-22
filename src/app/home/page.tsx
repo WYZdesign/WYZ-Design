@@ -88,14 +88,15 @@ function SmoothCarousel({ items, className = "", speed = 0.5, direction = "left"
  clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
  };
 
- const doubled = [...items, ...items];
+ const unique = Array.from(new Set(items));
+ const doubled = [...unique, ...unique];
 
  return (
    <div ref={sectionRef} aria-hidden="true" className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer" aria-hidden="true">
       {doubled.map((src, i) => (
-          <div key={i} className="group flex-none w-[36.8vw] sm:w-[265px] md:w-[368px] h-[147px] sm:h-[221px] md:h-[294px] relative overflow-hidden rounded-sm">
-       <Image src={src} alt="" fill sizes="(max-width:640px) 32vw, 320px" className="absolute inset-0 w-full h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.035]" loading="lazy" decoding="async" />
+          <div key={i} className="group flex-none w-[42.32vw] sm:w-[305px] md:w-[423px] h-[169px] sm:h-[254px] md:h-[338px] relative overflow-hidden rounded-sm bg-[#F2F2F2] dark:bg-[#1C1C1E]">
+       <Image src={src} alt="" fill sizes="(max-width:640px) 42vw, 423px" className="absolute inset-0 w-full h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.035]" loading="eager" decoding="async" />
      </div>
      ))}
   </div>
@@ -158,14 +159,15 @@ function LogoCarousel({ items, speed = 0.5 }: { items: { name: string; img: stri
  clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
  };
 
- const tripled = [...items, ...items, ...items];
+ const uniqueLogos = Array.from(new Map(items.map((l) => [l.img, l])).values());
+ const tripled = [...uniqueLogos, ...uniqueLogos, ...uniqueLogos];
 
  return (
  <div ref={sectionRef} className="overflow-hidden" onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
   <div ref={trackRef} className="flex gap-8 sm:gap-12 lg:gap-16 items-center py-3 will-change-transform cursor-pointer">
   {tripled.map((logo, i) => (
   <div key={i} className="flex-none flex items-center justify-center opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110">
-    <Image src={logo.img} alt={logo.name} width={64} height={64} className="h-6 sm:h-8 max-w-[60px] sm:max-w-[90px] w-auto object-contain transition-all duration-300" />
+    <Image src={logo.img} alt={logo.name} width={96} height={96} className="h-10 sm:h-12 max-w-[110px] sm:max-w-[150px] w-auto object-contain transition-all duration-300" />
  </div>
  ))}
  </div>
@@ -501,7 +503,7 @@ export default function HomePage() {
 <h2 className="text-[0.78rem] sm:text-[1.25rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.15em] uppercase whitespace-nowrap mb-3 max-w-[calc(100vw-3rem)] mx-auto" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}>
   DIGITAL <span className="text-[#DF3131]">PRINTING</span>
   </h2>
-  <p className="text-white/80 tracking-[0.3em] text-[11px] sm:text-sm uppercase mb-3 max-sm:px-2">Flyers | Stickers | Posters | Prints</p>
+  <p className="text-white/80 tracking-[0.12em] sm:tracking-[0.3em] text-[9px] sm:text-sm uppercase mb-3 whitespace-nowrap">Flyers | Stickers | Posters | Prints</p>
   <Link href="/printing" className="inline-block px-8 py-4 bg-white text-[#111] border-2 border-white text-[14px] font-bold tracking-[0.12em] hover:bg-[#DF3131] hover:text-white hover:border-[#DF3131] transition-all whitespace-nowrap mt-4">
   CUSTOM PRINTING →
   </Link>

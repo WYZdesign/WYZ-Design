@@ -115,7 +115,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   </div>
    {/* Back */}
 <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" } as React.CSSProperties}>
-    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-between overflow-hidden relative">
+    <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 lg:p-8 flex flex-col items-center justify-center gap-4 overflow-hidden relative">
     <div className="absolute inset-0 opacity-10">
       <Image src={sticker.img} alt={sticker.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>
@@ -338,7 +338,7 @@ export default function PrintingPage() {
   <FlipCardInline
     title="PRINTS + POSTERS"
     subtitle="Prices based on size, calculated by average inches."
-    img="/images/printing/print_1.jpg"
+    img="/images/printing/paper_1.jpg"
     backTitle="PRINT + POSTER PRICING"
     backContent={
       <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">

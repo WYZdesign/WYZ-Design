@@ -38,7 +38,7 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
       </div>
       {/* Back */}
       <div className="absolute inset-0" style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
-        <div className={`w-full h-full p-8 flex flex-col justify-between overflow-hidden ${plan.accent ? "bg-[#DF3131] text-white border-4 border-[#DF3131]" : "bg-[#333] dark:bg-[#111] text-white border border-[#444] dark:border-[#333]"}`}>
+        <div className={`w-full h-full p-8 flex flex-col items-center justify-center gap-4 overflow-hidden ${plan.accent ? "bg-[#DF3131] text-white border-4 border-[#DF3131]" : "bg-[#333] dark:bg-[#111] text-white border border-[#444] dark:border-[#333]"}`}>
           <div className="text-center">
             {plan.accent && <span className="inline-block bg-white text-[#DF3131] text-[11px] font-bold tracking-[0.1em] px-4 py-1 uppercase mb-2">★ Most Popular</span>}
             <h3 className={`font-heading font-bold text-[16px] tracking-[0.1em] uppercase mb-1 ${plan.accent ? "text-white" : "text-[#DF3131]"}`}>{plan.name}</h3>

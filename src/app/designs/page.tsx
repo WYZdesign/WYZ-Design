@@ -98,14 +98,16 @@ function Carousel({ images, direction = "left", whiteBgInDark }: { images: strin
     clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
   };
 
-  const doubled = [...images, ...images];
+  // Never show the same piece twice in one carousel.
+  const unique = Array.from(new Set(images));
+  const doubled = [...unique, ...unique];
 
   return (
     <div ref={sectionRef} aria-hidden="true" className="overflow-hidden" onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
         {doubled.map((src, i) => (
-          <div key={i} className={`flex-none w-[36.8vw] sm:w-[265px] md:w-[368px] h-[202px] sm:h-[294px] md:h-[368px] relative overflow-hidden rounded-sm ${whiteBgInDark ? "dark:bg-white" : ""}`}>
-            <SafeImage src={src} alt="WYZ Design portfolio" width={384} className="absolute inset-0 w-full h-full object-contain" />
+          <div key={i} className={`flex-none w-[42.32vw] sm:w-[305px] md:w-[423px] h-[232px] sm:h-[338px] md:h-[423px] relative overflow-hidden rounded-sm bg-[#F2F2F2] dark:bg-[#1C1C1E] ${whiteBgInDark ? "dark:bg-white" : ""}`}>
+            <SafeImage src={src} alt="WYZ Design portfolio" width={384} loading="eager" className="absolute inset-0 w-full h-full object-contain" />
           </div>
         ))}
       </div>
@@ -406,9 +408,9 @@ export default function DesignsPage() {
  <div className="relative">
  <div ref={merchScrollRef} className="flex gap-2 overflow-x-auto pb-2 px-6" style={{ scrollbarWidth: "none" }}>
  {dbcMerch.map((p, i) => (
- <Link key={i} href="/merch" className="flex-none w-[24.15vw] min-w-[219px] sm:w-[14.95vw] sm:min-w-[138px] group cursor-pointer block">
+ <Link key={i} href="/merch" className="flex-none w-[27.8vw] min-w-[252px] sm:w-[17.2vw] sm:min-w-[159px] group cursor-pointer block">
     <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
-      <Image src={p.img} alt={p.name} fill sizes="15vw" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+      <Image src={p.img} alt={p.name} fill sizes="17vw" loading="eager" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
    </div>
    <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
   <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{p.price}</p>

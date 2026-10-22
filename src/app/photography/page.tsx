@@ -117,9 +117,9 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
  return (
  <div className={`overflow-hidden ${className}`} onClick={handleClick}>
   <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
-   {[...items, ...items].map((src, i) => (
-          <div key={i} className="flex-none w-[46vw] sm:w-[322px] md:w-[437px] lg:w-[506px] h-[202px] sm:h-[276px] md:h-[368px] relative overflow-hidden cursor-pointer group">
-      <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 40vw, 440px" className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
+   {[...Array.from(new Set(items)), ...Array.from(new Set(items))].map((src, i) => (
+          <div key={i} className="flex-none w-[52.9vw] sm:w-[370px] md:w-[503px] lg:w-[582px] h-[232px] sm:h-[317px] md:h-[423px] relative overflow-hidden cursor-pointer group bg-[#F2F2F2] dark:bg-[#1C1C1E]">
+      <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 53vw, 582px" loading="eager" className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-300" />
    </div>
    ))}
   </div>
@@ -164,7 +164,7 @@ function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: string[
   className="absolute inset-0 transition-all duration-700 ease-in-out"
   style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: flipped ? "rotateY(0deg)" : "rotateY(180deg)" }}
   >
-   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 pb-8 sm:pb-10 flex flex-col items-center justify-between overflow-hidden relative">
+   <div className="w-full h-full bg-[#DF3131] text-white p-5 sm:p-6 flex flex-col items-center justify-center gap-4 overflow-hidden relative">
    <div className="absolute inset-0 opacity-10">
      <Image src={s.img} alt={s.name} fill sizes="100vw" className="w-full h-full object-cover" />
     </div>

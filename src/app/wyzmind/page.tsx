@@ -15,10 +15,10 @@ const FEATURES = [
   },
   {
     id: "strategy",
-    title: "Creative Strategy Engine",
+    title: "Brand Operations Engine",
     icon: <FiLayers />,
-    layman: "A brainstorming partner that actually remembers your brand.",
-    details: "It studies your style, your past work, and your audience. Then it generates campaign ideas, content calendars, and creative briefs that actually fit your vibe, not generic templates. Think of it as your creative co-pilot."
+    layman: "One place that keeps your brand rules and project context straight.",
+    details: "It keeps your brand rules, past decisions, and audience notes in one shared brief, so every quote, proposal, and handoff starts from the same facts instead of someone guessing."
   },
   {
     id: "portals",
@@ -43,15 +43,15 @@ const FEATURES = [
   },
   {
     id: "3d",
-    title: "3D & Interactive Systems",
+    title: "3D & Interactive Tools",
     icon: <FiMaximize />,
-    layman: "Go beyond flat screens into immersive experiences.",
-    details: "3D modeling pipelines for product visualization, VR integration for virtual galleries, and interactive media tools for installations. This is where we push creative output past what a flat JPEG can do."
+    layman: "Interactive product and space previews that help people decide.",
+    details: "Product configurators, walkthroughs, and interactive previews for sales pages and showrooms. Buyers can inspect details, change options, and understand what they are getting before they commit."
   },
 ];
 
 const STACK_ITEMS = [
-  { name: "AI Assistant", category: "AI", layman: "A smart assistant that reads messages, answers questions, and handles busywork around the clock", detail: "Runs on AI models hosted by a third-party provider, so the messages you send to the assistant are processed there to generate a response. We do not sell your data, and your project data stays in your own workspace." },
+  { name: "AI Assistant", category: "AI", layman: "A smart assistant that reads messages, answers questions, and handles busywork around the clock", detail: "Runs on AI models hosted by a third-party provider, so the messages you send to the assistant are processed there to answer. We do not sell your data, and your project data stays in your own workspace." },
   { name: "Smart Memory", category: "Data", layman: "Remembers everything about your projects, clients, and past work so nothing gets lost", detail: "A knowledge system that connects the dots between people, projects, and ideas. Ask it a question and it finds the right answer instantly." },
   { name: "Relationship Map", category: "Data", layman: "Visualizes how everything connects: who worked on what, who knows who, what goes where", detail: "A map of your business relationships. See how a client connects to a project, a skill, and a past deliverable all at once." },
   { name: "Task Queue", category: "Infra", layman: "A smart to-do list that makes sure nothing slips through the cracks", detail: "Handles scheduling, reminders, and background tasks. If something needs doing, it's in the queue." },

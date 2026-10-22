@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Image from "next/image";
 import Link from "next/link";
+import MODEL_GALLERIES from "@/lib/data/model-galleries.json";
 import { FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ImageHoverReveal from "@/components/ImageHoverReveal";
 import { useZeal } from "@/components/ZealProvider";
@@ -184,7 +185,7 @@ export default function ModelArchivePage() {
  {/* Header */}
  <div className="mb-8 text-center">
  <h1 className="wz-stack text-[2.25rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[4rem] font-heading font-black text-[#333] dark:text-white tracking-[0.08em] sm:tracking-[0.15em] mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>M{"\u00a0"}O{"\u00a0"}D{"\u00a0"}E{"\u00a0"}L{"\u00a0"}.{"\u00a0"}A{"\u00a0"}R{"\u00a0"}C{"\u00a0"}H{"\u00a0"}I{"\u00a0"}V{"\u00a0"}E</h1>
- <p className="text-[#666] dark:text-white/50 text-sm mt-2">Every talent who has graced our lens, {MODELS.length} models and counting</p>
+ <p className="text-[#666] dark:text-white/50 text-sm mt-2">Every talent who has graced our lens. {MODELS.length} models, {Object.values(MODEL_GALLERIES as Record<string, string[]>).reduce((n, imgs) => n + imgs.length, 0).toLocaleString()} images.</p>
  </div>
 
  {/* Toggle Buttons */}

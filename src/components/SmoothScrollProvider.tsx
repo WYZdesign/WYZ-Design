@@ -50,8 +50,32 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     }
     raf = requestAnimationFrame(tick);
 
+    // Lenis caches the scrollable height when it starts. Lazy images below the
+    // fold then grow the page, leaving that cached limit too short: scrolling
+    // stops early and then rebounds upward, which is what /services was doing.
+    // Keep the limit in sync with the real document height.
+    let resizeRaf: number | null = null;
+    const scheduleResize = () => {
+      if (resizeRaf !== null) return;
+      resizeRaf = requestAnimationFrame(() => {
+        resizeRaf = null;
+        lenis.resize();
+      });
+    };
+    const ro = new ResizeObserver(scheduleResize);
+    ro.observe(document.body);
+    window.addEventListener("load", scheduleResize);
+    window.addEventListener("resize", scheduleResize);
+    document.querySelectorAll("img").forEach((img) => {
+      if (!img.complete) img.addEventListener("load", scheduleResize, { once: true });
+    });
+
     return () => {
       cancelAnimationFrame(raf);
+      if (resizeRaf !== null) cancelAnimationFrame(resizeRaf);
+      ro.disconnect();
+      window.removeEventListener("load", scheduleResize);
+      window.removeEventListener("resize", scheduleResize);
       window.removeEventListener("wyz:splash-lock", onSplashLock);
       lenis.destroy();
     };

@@ -53,7 +53,7 @@ export function AutoScrollRow({ images, label, speed, onImageClick, isNsfw, canR
           {tripledImages.map((src, index) => (
             <div
               key={index}
-              className="flex-shrink-0 h-[258px] sm:h-[294px] md:h-[331px] overflow-hidden group rounded-sm"
+              className="flex-shrink-0 h-[297px] sm:h-[338px] md:h-[381px] overflow-hidden group rounded-sm"
               onClick={() => {
                 paused.current = true;
                 if (resumeTimer.current) clearTimeout(resumeTimer.current);
@@ -69,7 +69,7 @@ export function AutoScrollRow({ images, label, speed, onImageClick, isNsfw, canR
               {isNsfw ? (
                 <NsfwImage src={src} alt={label} className="h-full w-auto" canReveal={canReveal} loading="lazy" />
               ) : (
-                <SafeImage src={src} alt={label} width={400} className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <SafeImage src={src} alt={label} width={400} className="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" loading="eager" />
               )}
             </div>
           ))}
