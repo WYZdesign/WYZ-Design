@@ -1,4 +1,5 @@
 "use client";
+import ServiceForm from "@/components/ServiceForm";
 import HeroDots from "@/components/HeroDots";
 
 import { useState, useRef, useEffect } from "react";
@@ -444,6 +445,13 @@ export default function PrintingPage() {
  </form>
  </div>
  </ScrollReveal>
+ <ServiceForm
+  services={["Vinyl Stickers", "Prints + Posters", "Buttons", "Business Cards", "Flyers", "Banners"]}
+  formType="printing-quote"
+  title="Get a Print Quote"
+  subtitle="Tell us what you are printing, the size, and the quantity. We will price it out."
+  submitLabel="REQUEST A QUOTE"
+ />
  </div>
  </main>
  </>

@@ -1,4 +1,5 @@
 "use client";
+import ServiceForm from "@/components/ServiceForm";
 import HeroDots from "@/components/HeroDots";
 
 import { useState, useEffect, useCallback, useRef } from "react";
@@ -818,6 +819,13 @@ return (
  </section>
 
   {activeAlbum && <AlbumModal album={activeAlbum} onClose={() => setActiveAlbum(null)} />}
+  <ServiceForm
+    services={["Photoshoot", "Event Photography", "Product Photography", "Headshots", "Photo Retouching", "Behind the Scenes"]}
+    formType="photoshoot-booking"
+    title="Book a Shoot"
+    subtitle="Tell us the shoot type, the date you have in mind, and what the images are for."
+    submitLabel="REQUEST A SHOOT"
+  />
   </main>
  );
 }

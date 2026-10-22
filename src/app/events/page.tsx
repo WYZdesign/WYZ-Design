@@ -1,4 +1,5 @@
 "use client";
+import ServiceForm from "@/components/ServiceForm";
 import HeroDots from "@/components/HeroDots";
 
 import { useRef, useState, useEffect, useCallback, createContext, useContext } from "react";
@@ -620,6 +621,13 @@ export default function EventsPage() {
  </ScrollReveal>
  </div>
  {modalVideo && <VideoModal video={modalVideo.video} title={modalVideo.title} onClose={() => setModalVideo(null)} />}
+ <ServiceForm
+  services={["Event Coverage", "Event Photography", "Recap Video", "Full Event Production", "Artist Coordination"]}
+  formType="booking"
+  title="Book Event Coverage"
+  subtitle="Tell us the event, the date, and what you need covered."
+  submitLabel="REQUEST COVERAGE"
+ />
  </main>
  </VideoMuteProvider>
  );
