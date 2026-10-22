@@ -517,3 +517,30 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Full-route smoke:** 26 routes across photography, designs galleries, events galleries, model archive, services, prints, merch, contact, booking, about, community, gallery, featured artist, wyzmind, faq and gift cards: **all 200, zero page errors**.
 - **Bucket usage measured:** 623 MB of 1,024 MB (60.8%), inside the 800 MB target.
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. **Commit `6dec291` - DEPLOY IS LIVE** (`6dec2913d43c56ee38a7d2ac669d870ec0a60b1c`).
+
+## Progress 31 - Batch fixes + owner number fact-check (2026-10-21, WYZMiND)
+
+**Fixed this pass:**
+- **Services scroll rebound:** Lenis cached the page height at start; lazy images then grew it, so scrolling stopped early and bounced. Added a `ResizeObserver` + image `load`/window `resize` hooks calling `lenis.resize()`.
+- **Carousels:** dedupe inside each track (designs/home/photography/clients), eager image loading so pieces never scroll by blank, neutral card background instead of white, and another **+15%** (designs/home 423px, photography 582px, category rows 381px, events 297px, merch 252px). Clients logos enlarged (96px, 150px max).
+- **Marquees:** one shared size in `EnhancedMarquee` (2.25rem / 2.5rem / 3rem), so every text marquee matches in size, format and placement.
+- **One-line text:** home Digital Printing subtitle is `whitespace-nowrap` (9px mobile), `EARN ZEAL` and `CONTACT US` no longer use `wz-stack` (which forced min-content wrapping).
+- **Full-bleed heroes:** blog and FAQ hero now `w-screen` + `ml-[calc(50%-50vw)]` (verified blog left 0, width 1440 at a 1440 viewport).
+- **Plan cards:** 860px -> **600px**, content centered, scrolls only if a plan overflows.
+- **Flip-card backs:** services, printing, photography, web-design and plans are centered on both axes with even gaps, nothing pinned to the edges.
+- **Images:** Prints + Posters now uses `paper_1.jpg` (it was Jakayla); merch replaces the blank denim back with a black jacket back that shows the crown (`98442d-84cab...`).
+- **Model archive:** now states the real numbers, "91 models, 2,420 images".
+- **Newsletter:** more space under the social row (`pb-28 sm:pb-24`).
+- **Blog posts:** category tag moved to the image's top-right.
+- **WYZMIND copy:** removed creative/AI-generation framing (Creative Strategy Engine -> Brand Operations Engine; 3D creative output -> product/space preview tools; "generate a response" -> "answer").
+
+**Fact-check of the owner's numbers (sources named):**
+- **"Over 180k images":** 189,022 photo records in `Lightroom_Master_TEST.lrcat`, but **173,743 unique files** + 15,279 virtual copies. Over 180k is true only if counting records; unique files are under.
+- **"Almost 500 albums":** **444 user albums** (398 have images, 46 empty; 449 collections incl. 5 system). "Almost 500" is fair.
+- **"70+ DIY shows":** **not supported by local sources.** `DIY_SHOWS_RAW` = 12, `CLIENT_EVENTS_RAW` = 7, G: Events = 19 folders. The `ALL_EVENT_IMAGES` array has 68 image entries, which is not a show count.
+- **"40-60 clients":** **43 client logo files** in `public/images/client-logos`, consistent; the site's own copy says "45+ clients served".
+- **LLC date:** earliest Gmail receipt naming "WYZ Design LLC" is **2022-07-09** (Nav credit alert); Google Business Profile went live 2022-07-17. No formation certificate email found, so "since 2022" is supported but the exact filing date is not in Gmail.
+
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. Running SHAs: `82ffe8a` (batch) + `83f3217` (blog tag).
+
+**Still outstanding (larger, not done in this pass):** merch page immersive redesign, a dynamic form system for every service/download/upload/payment flow, and the about-page deep research. Those need dedicated passes.
