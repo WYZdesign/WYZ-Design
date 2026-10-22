@@ -508,3 +508,12 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 **Storage:** measured from the export trees: photography 445.9 MB + models 144.7 MB + events 32.4 MB = **623 MB of the 1,024 MB free tier (60.8%)**.
 
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. Live SHAs: `bf203e1` (perf), `52cbb56` + `3ad47b8` (sitemap), `0693ec1` (audit fixes + handover) - all `DEPLOY IS LIVE`.
+
+## Progress 30 - Final perf cleanup + full-route smoke (2026-10-21, WYZMiND)
+
+- **ScrollProgress** held its value in React state, so every scroll frame re-rendered the component. It now writes `transform: scaleX()` directly to a ref from inside the existing rAF (no React render per frame) and the 0.08s CSS transition was removed (it made the bar trail the scroll). This was the last global per-frame render.
+- **Correction to the totality audit's cleanup suggestion:** `public/images/photography/` (243 files, 25.7 MB) is **not** unreferenced. It is used heavily by the photography landing page (`src/app/photography/page.tsx` lines 231-388). Do not delete it.
+- **`COVER_ART_IMAGES`** in `designs-data.ts` is genuinely unused, but it is tree-shaken in production and the file is auto-generated; left in place rather than hand-editing generated output.
+- **Full-route smoke:** 26 routes across photography, designs galleries, events galleries, model archive, services, prints, merch, contact, booking, about, community, gallery, featured artist, wyzmind, faq and gift cards: **all 200, zero page errors**.
+- **Bucket usage measured:** 623 MB of 1,024 MB (60.8%), inside the 800 MB target.
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. **Commit `6dec291` - DEPLOY IS LIVE** (`6dec2913d43c56ee38a7d2ac669d870ec0a60b1c`).
