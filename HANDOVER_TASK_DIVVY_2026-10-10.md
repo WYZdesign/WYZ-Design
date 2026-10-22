@@ -556,3 +556,16 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `0920519` (mobile audit), `9d64f0f` (brand copy), `bf14887` (form).
 
 **Still outstanding:** merch page immersive/dynamic redesign; the same ServiceForm wired into `/printing`, `/photography`, `/web-design` and `/events`; file-upload support in forms; and the about-page deep research needs owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year) that are not in local sources.
+
+## Progress 33 - Forms on every service page + merch lookbook (2026-10-22, WYZMiND)
+
+- **Adaptive forms wired into the remaining service pages** using the shared `ServiceForm` + the existing `/api/forms` types:
+  - `/printing` -> `printing-quote`, services = Vinyl Stickers / Prints + Posters / Buttons / Business Cards / Flyers / Banners.
+  - `/photography` -> `photoshoot-booking`, services = Photoshoot / Event / Product / Headshots / Retouching / Behind the Scenes.
+  - `/web-design` -> `web-design-quote`, services = Website Design / Redesign / Landing Page / E-Commerce / SEO Audit / Maintenance.
+  - `/events` -> `booking`, services = Event Coverage / Event Photography / Recap Video / Full Event Production / Artist Coordination.
+  - Each posts name/email/phone/timeline/budget/details plus the chosen service, so one endpoint now covers booking, quotes and service inquiries. Verified live: all four pages render the form.
+- **Merch:** added a full-bleed, swipeable **Lookbook** strip (all 12 archive images, scroll-snap, hover zoom, DBC Archive tag) between the shop grid and the editorial content. The page already had an accordion hero, category filters, sort, quick view and editorial blocks. Verified live.
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `dcfe82a` (forms), `a739eae` (lookbook) - `DEPLOY IS LIVE`.
+
+**Remaining:** file-upload fields in the form system; deeper merch merchandising (bundles, size guide, stock badges); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
