@@ -266,7 +266,7 @@ export default function AboutPage() {
               <AnimatedCounter end={90} suffix="+" label="Events Produced" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
               <AnimatedCounter end={45} suffix="+" label="Clients Served" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
               <AnimatedCounter end={10000} suffix="+" label="Photos Delivered" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
-              <AnimatedCounter end={13} suffix="+" label="Years Running" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
+              <AnimatedCounter end={4} suffix="+" label="Years Running" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
             </div>
           </div>
         </section>

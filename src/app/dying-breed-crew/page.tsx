@@ -8,7 +8,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Brand",
   name: "Dying Breed Crew",
-  description: "The community and clothing arm of WYZ Design. A collective of artists, musicians, models, and culture-makers who refuse to blend in.",
+  description: "A separate clothing label under the WYZ Design umbrella. Limited-run streetwear drops, lookbooks, and collaborations.",
   url: `${SITE}/dying-breed-crew`,
   parentOrganization: { "@type": "Organization", name: "WYZ Design", url: SITE },
 };
@@ -44,8 +44,8 @@ export default function DyingBreedCrewPage() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
             <FiUsers className="w-8 h-8 mx-auto text-[#8C6A1D] mb-4" />
-            <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">The Collective</h3>
-            <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">Artists, musicians, models, photographers, and culture-makers. DBC is the crew that makes it happen.</p>
+            <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1rem] tracking-[0.03em] mb-2">The Label</h3>
+            <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">A separate clothing label under the WYZ umbrella. Built around drops and collaborations for the people who make culture.</p>
           </div>
           <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 text-center">
             <FiStar className="w-8 h-8 mx-auto text-[#8C6A1D] mb-4" />

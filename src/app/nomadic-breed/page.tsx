@@ -1,31 +1,31 @@
 import Link from "next/link";
 
-import { FiArrowRight, FiMapPin, FiCamera, FiCalendar, FiPackage } from "react-icons/fi";
+import { FiArrowRight, FiBookOpen, FiImage, FiEdit3, FiStar } from "react-icons/fi";
 import type { IconType } from "react-icons";
 
 const SERVICE_ICONS: Record<string, IconType> = {
-  FiCamera,
-  FiCalendar,
-  FiMapPin,
-  FiPackage,
+  FiBookOpen,
+  FiImage,
+  FiEdit3,
+  FiStar,
 };
 
 const SITE = "https://www.wyzdesign.com";
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Brand",
+  "@type": "Periodical",
   name: "Nomadic Breed",
-  description: "The mobile arm of WYZ Design. Pop-up shoots, touring event coverage, and the WYZ standard delivered wherever the work takes us.",
+  description: "A 2026 independent magazine from WYZ Design, digital-first, documenting the people, places and scenes that move culture.",
   url: `${SITE}/nomadic-breed`,
-  parentOrganization: { "@type": "Organization", name: "WYZ Design", url: SITE },
+  publisher: { "@type": "Organization", name: "WYZ Design", url: SITE },
 };
 
-const services = [
-  { icon: "FiCamera", title: "Pop-Up Shoots", desc: "No studio? No problem. We bring the full WYZ setup to any location - warehouse rooftops, parking garages, desert highways. Every location is a set." },
-  { icon: "FiCalendar", title: "Touring Event Coverage", desc: "Concerts, festivals, brand activations, private events. We travel with the culture and document it at the highest level." },
-  { icon: "FiMapPin", title: "On-Location Branding", desc: "Your brand deserves more than a white-wall studio. We shoot on-location to give your visuals real context and real energy." },
-  { icon: "FiPackage", title: "Travel Packages", desc: "Multi-day shoots, city-to-city coverage, content batching for touring artists and traveling brands. One crew, one standard, everywhere." },
+const sections = [
+  { icon: "FiBookOpen", title: "Long-Form Interviews", desc: "Artists, builders, and organizers on how the work actually gets made. The decisions, the dead ends, and the parts nobody puts in a press release." },
+  { icon: "FiImage", title: "Photo Essays", desc: "Full shoots from the archive, sequenced as stories instead of a grid of highlights. One body of work, told properly." },
+  { icon: "FiEdit3", title: "Process Documentation", desc: "The brief, the references, the revisions and the reasoning. Documentation of the process, not just the final image." },
+  { icon: "FiStar", title: "Nomadic Status", desc: "A recurring editorial spotlight on one person or crew per issue: where they are, what they are building, and what comes next." },
 ];
 
 export default function NomadicBreedPage() {
@@ -33,23 +33,27 @@ export default function NomadicBreedPage() {
     <section className="pb-20 bg-white dark:bg-[#1C1C1E]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* Hero */}
-      
-      {/* Philosophy */}
+      {/* The publication */}
       <section className="max-w-4xl mx-auto px-6 section-gap text-center">
         <h2 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[1.8rem] lg:text-[2.2rem] tracking-[0.04em] mb-6">
-          Every Location Is a <span className="text-[#6E6E6E]">Set</span>
+          The <span className="text-[#6E6E6E]">Magazine</span>
         </h2>
         <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
-          Nomadic Breed was built for the creators who move. Artists on tour, brands doing pop-ups, events that happen once - you need a crew that can show up anywhere and deliver the same quality as a studio shoot. That&apos;s us. We pack light, move fast, and never compromise on the standard.
+          Nomadic Breed is a 2026 independent magazine published under WYZ Design. It is digital-first,
+          with print to follow, and it is built around one idea: document the people and scenes that
+          move culture, properly and on the record. The 2017 collective is historical context only.
+          This is a publication.
         </p>
       </section>
 
-      {/* Services */}
+      {/* What is inside */}
       <section className="max-w-5xl mx-auto px-6 pb-20">
+        <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.12em] uppercase text-center mb-8">
+          What&apos;s Inside
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {services.map((s) => {
-            const Icon = SERVICE_ICONS[s.icon] ?? FiCamera;
+          {sections.map((s) => {
+            const Icon = SERVICE_ICONS[s.icon] ?? FiBookOpen;
             return (
               <div key={s.title} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg transition-all">
                 <div className="w-10 h-10 rounded-lg bg-[#6E6E6E]/10 flex items-center justify-center mb-4">
@@ -67,13 +71,14 @@ export default function NomadicBreedPage() {
       <section className="max-w-4xl mx-auto px-6 pb-16">
         <div className="bg-[#0A0A0A] rounded-2xl p-10 text-center">
           <h2 className="font-heading font-black text-white text-[1.5rem] lg:text-[2rem] tracking-[0.04em] mb-4">
-            Ready to Take It on the Road?
+            Pitch It, Shoot It, or Write for It
           </h2>
           <p className="text-white/60 text-[15px] mb-6 max-w-lg mx-auto">
-            Whether it&apos;s a single pop-up or a multi-city tour, Nomadic Breed delivers. Let&apos;s talk about where we&apos;re headed next.
+            The magazine runs on contributors: photographers, writers, and the people doing the work.
+            If you have a story that belongs in it, start the conversation.
           </p>
-          <Link href="/booking" className="inline-flex items-center gap-2 px-8 py-4 bg-[#6E6E6E] text-[#0A0A0A] font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#00CCE6] transition-all">
-            Book a Shoot <FiArrowRight className="w-4 h-4" />
+          <Link href="/contact" className="inline-flex items-center gap-2 px-8 py-4 bg-[#6E6E6E] text-[#0A0A0A] font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-[#00CCE6] transition-all">
+            Get in Touch <FiArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </section>
