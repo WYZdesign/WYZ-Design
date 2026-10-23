@@ -192,6 +192,63 @@ function SquareQuote() {
   );
 }
 
+function BundleSets({ products }: { products: Product[] }) {
+  const pick = (cat: string) => products.find((p) => p.category === cat);
+  const apparel = pick("Apparel");
+  const headwear = pick("Headwear");
+  const accessory = pick("Accessories");
+
+  const sets: { name: string; items: Product[] }[] = [];
+  if (apparel && headwear) sets.push({ name: "Tee + Cap", items: [apparel, headwear] });
+  if (apparel && accessory) sets.push({ name: "Top + Carry", items: [apparel, accessory] });
+  if (apparel && headwear && accessory) sets.push({ name: "The Full Fit", items: [apparel, headwear, accessory] });
+
+  if (sets.length === 0) return null;
+
+  return (
+    <section className="py-14 bg-[#F5F5F3] dark:bg-[#1C1C1E]">
+      <div className="max-w-[82rem] mx-auto px-6 lg:px-12">
+        <p className="text-[11px] font-bold tracking-[0.22em] uppercase text-[#DF3131] mb-2">Sets</p>
+        <h2 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-[#333] dark:text-white mb-2">Complete the fit</h2>
+        <p className="text-[#666] dark:text-[#aaa] text-[15px] mb-8 max-w-xl">
+          Pieces we actually shoot together. Everything is printed to order, so a set is made when you order it.
+          Prices shown are the exact sum of the items, no padding.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {sets.map((set) => {
+            const total = set.items.reduce((n, p) => n + p.price, 0);
+            return (
+              <div key={set.name} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-xl overflow-hidden">
+                <div className="grid grid-cols-2 gap-1 p-2 bg-[#f7f7f5] dark:bg-[#1C1C1E]">
+                  {set.items.map((p) => (
+                    <div key={p.id} className="relative aspect-square">
+                      <SafeImage src={p.image} alt={p.name} fill sizes="200px" className="object-contain p-2" />
+                    </div>
+                  ))}
+                </div>
+                <div className="p-5">
+                  <h3 className="font-heading font-bold uppercase tracking-[0.04em] text-[#333] dark:text-white mb-1">{set.name}</h3>
+                  <p className="text-[12px] text-[#666] dark:text-[#aaa] mb-3">{set.items.map((p) => p.name).join(" + ")}</p>
+                  <p className="text-[#DF3131] font-black mb-4">
+                    {fmt(total)} <span className="text-[11px] font-bold text-[#999] uppercase tracking-[0.08em]">set</span>
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {set.items.map((p) => (
+                      <Link key={p.id} href={`/merch/${p.id}`} className="px-3 py-2 border border-[#d9d6d3] text-[11px] font-bold uppercase tracking-[0.06em] text-[#333] hover:border-[#DF3131] hover:text-[#DF3131] transition-colors">
+                        {p.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p: Product) => void }) {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
@@ -330,7 +387,9 @@ export default function MerchPage() {
             </div>
           </div>
         </section>
-                {/* Lookbook: archive strip, swipeable, hover zoom */}
+                {products.length > 0 && <BundleSets products={products} />}
+
+        {/* Lookbook: archive strip, swipeable, hover zoom */}
         <section className="py-14 bg-[#0A0A0A] overflow-hidden">
           <div className="max-w-[82rem] mx-auto px-6 lg:px-12 mb-6 flex items-end justify-between gap-6">
             <div>
@@ -394,7 +453,8 @@ export default function MerchPage() {
                 <p className="text-[12px] text-[#666] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
                 <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.06em] uppercase text-[#333] mb-4">{selectedProduct.name}</h2>
                 <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct.price)}</p>
-                <p className="text-[14px] text-[#666] mb-6">{selectedProduct.description}</p>
+                <p className="text-[14px] text-[#666] mb-3">{selectedProduct.description}</p>
+              <p className="text-[12px] text-[#666] dark:text-[#aaa] mb-6">Printed to order. Usually ships in 3-6 business days.</p>
                 <Link href={`/merch/${selectedProduct.id}`} className="block w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-center text-[13px] hover:bg-[#B82020]">Choose options and add to cart</Link>
               </div>
             </div>

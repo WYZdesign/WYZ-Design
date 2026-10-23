@@ -268,6 +268,7 @@ export default function AboutPage() {
               <AnimatedCounter end={10000} suffix="+" label="Photos Delivered" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
               <AnimatedCounter end={4} suffix="+" label="Years Running" className="text-[2.5rem] sm:text-[3rem] font-heading font-black text-[#DF3131] mb-1" labelClassName="text-[#666] dark:text-white/60 text-[13px] font-heading font-bold tracking-[0.1em] uppercase mb-2" />
             </div>
+            <p className="text-center text-[#666] dark:text-white/50 text-[13px] mt-8">WYZ Design LLC, established January 2022 in Chicago. Founded by Torreé Marcel.</p>
           </div>
         </section>
       </ScrollReveal>
