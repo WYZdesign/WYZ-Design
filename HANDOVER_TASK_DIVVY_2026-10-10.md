@@ -569,3 +569,13 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `dcfe82a` (forms), `a739eae` (lookbook) - `DEPLOY IS LIVE`.
 
 **Remaining:** file-upload fields in the form system; deeper merch merchandising (bundles, size guide, stock badges); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
+
+## Progress 34 - File uploads in every service form (2026-10-22, WYZMiND)
+
+- **New public intake endpoint** `POST /api/upload/intake` (trailing-slash route): CSRF-checked, rate-limited to 5/min per IP, 10MB cap, images/video only (reuses `validateUpload`/`sanitizeFileName`), uploads to a **private** Supabase bucket `wyzdesign-intake` under `YYYY-MM-DD/{images|videos}/<safe>-<ts>.<ext>` and returns the storage path (not a public URL). Admin uploads keep using `/api/upload`.
+- **`DynamicForm` gained a `file` field:** uploads immediately on select, shows uploading/attached/error state, stores the returned path in the normal form data, and honours `required` through the existing validation.
+- **Every service form now has a "Reference files" field** (services, printing, photography, web design, events) with the accepted types and the 10MB limit stated inline.
+- **Verified live:** browser-origin upload returned `{ path: "wyzdesign-intake/2026-10-23/images/test-....png" }` with HTTP 200; all five service pages render `type="file"`.
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `5683418` (upload + field) and `0db1f2d` (drop the 308 hop) - `DEPLOY IS LIVE`.
+
+**Remaining:** deeper merch merchandising (bundles, size guide, stock badges); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
