@@ -587,3 +587,11 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `5877526` + `df57299` - `DEPLOY IS LIVE`.
 
 **Remaining:** bundles/stock badges (need real inventory or bundle policy); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
+
+## Progress 36 - Regression locks + full smoke (2026-10-22, WYZMiND)
+
+- **New tests (113 -> 116):** every service page must ship `ServiceForm`; the private intake upload route must stay `public: false` and be wired through `DynamicForm`'s file field; and `brands.ts` / `/nomadic-breed` must never regress to "mobile arm" / "community and clothing arm" or the old pop-up/touring copy.
+- **Full-route smoke:** 29 routes (home, photography + category, all three galleries, events + gallery, model archive + gallery, services, printing, plans, merch, contact, booking, about, community, gallery, featured artist, wyzmind, faq, gift cards, nomadic-breed, dying-breed-crew, brands, loyalty) returned **200 with zero page errors**.
+- **Gate:** tsc 0, lint 0, tests **116/116**, build 0. **Commit `af29b15` - DEPLOY IS LIVE**.
+
+**Remaining:** bundles/stock badges (need real inventory or bundle policy); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
