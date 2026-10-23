@@ -579,3 +579,11 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `5683418` (upload + field) and `0db1f2d` (drop the 308 hop) - `DEPLOY IS LIVE`.
 
 **Remaining:** deeper merch merchandising (bundles, size guide, stock badges); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
+
+## Progress 35 - Merch merchandising: size guide + made-to-order (2026-10-22, WYZMiND)
+
+- **Size guide:** a "Size Guide" button in the shop controls opens a modal with the tops chart (S-3XL chest/length), headwear note and care instructions. Verified live: opens with 6 rows, Tops and Headwear present, closes on Escape and on backdrop click.
+- **Made-to-order clarity:** every product card now states "Printed to order" under the price, alongside the existing badge, hover quick view and hover lift.
+- **Gate:** tsc 0, lint 0, tests **113/113**, build 0. SHAs: `5877526` + `df57299` - `DEPLOY IS LIVE`.
+
+**Remaining:** bundles/stock badges (need real inventory or bundle policy); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
