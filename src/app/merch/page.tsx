@@ -199,7 +199,7 @@ function BundleSets({ products }: { products: Product[] }) {
   const accessory = pick("Accessories");
 
   const sets: { name: string; items: Product[] }[] = [];
-  if (apparel && headwear) sets.push({ name: "Tee + Cap", items: [apparel, headwear] });
+  if (apparel && headwear) sets.push({ name: "Top + Cap", items: [apparel, headwear] });
   if (apparel && accessory) sets.push({ name: "Top + Carry", items: [apparel, accessory] });
   if (apparel && headwear && accessory) sets.push({ name: "The Full Fit", items: [apparel, headwear, accessory] });
 
