@@ -162,7 +162,7 @@ export default function DynamicForm({
     try {
       const fd = new FormData();
       fd.append("file", file);
-      const res = await fetch("/api/upload/intake", { method: "POST", body: fd });
+      const res = await fetch("/api/upload/intake/", { method: "POST", body: fd });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Upload failed");
       update(field.name, data.path);
