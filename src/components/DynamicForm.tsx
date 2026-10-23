@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { trackMetaEvent, trackTikTokEvent } from "@/components/AnalyticsProvider";
 
-export type FieldType = "text" | "email" | "tel" | "select" | "textarea" | "date" | "checkbox" | "number";
+export type FieldType = "text" | "email" | "tel" | "select" | "textarea" | "date" | "checkbox" | "number" | "file";
 
 export interface FormField {
   name: string;
@@ -49,6 +49,7 @@ export default function DynamicForm({
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [page, setPage] = useState(0);
+  const [uploads, setUploads] = useState<Record<string, { status: "idle" | "uploading" | "done" | "error"; name?: string; error?: string }>>({});
 
   const maxPage = paginated ? Math.max(...fields.map(f => f.page ?? 0)) : 0;
   const visibleFields = paginated ? fields.filter(f => (f.page ?? 0) === page) : fields;
@@ -151,6 +152,26 @@ export default function DynamicForm({
     return undefined;
   };
 
+  const handleFile = async (field: FormField, file: File | null) => {
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      setUploads((u) => ({ ...u, [field.name]: { status: "error", error: "File exceeds the 10MB limit" } }));
+      return;
+    }
+    setUploads((u) => ({ ...u, [field.name]: { status: "uploading", name: file.name } }));
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/upload/intake", { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Upload failed");
+      update(field.name, data.path);
+      setUploads((u) => ({ ...u, [field.name]: { status: "done", name: file.name } }));
+    } catch (e) {
+      setUploads((u) => ({ ...u, [field.name]: { status: "error", error: (e as Error).message || "Upload failed" } }));
+    }
+  };
+
   const renderField = (field: FormField) => {
     const inputClasses = "w-full px-4 py-3 border border-[#E2E2E2] dark:border-[#555] text-[14px] placeholder:text-[#666] text-[#333] dark:text-white dark:bg-[#252528] focus:border-[#DF3131] focus:ring-1 focus:ring-[#DF3131]/20 outline-none transition-all";
     const wrapperClass = field.halfWidth ? "" : "sm:col-span-2";
@@ -160,7 +181,23 @@ export default function DynamicForm({
         <label htmlFor={field.name} className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">
           {field.label}{field.required && " *"}
         </label>
-        {field.type === "textarea" ? (
+        {field.type === "file" ? (
+          <div>
+            <input
+              id={field.name}
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime"
+              onChange={(e) => handleFile(field, e.target.files?.[0] || null)}
+              className="block w-full text-[13px] text-[#666] file:mr-3 file:px-4 file:py-2 file:border-0 file:bg-[#333] file:text-white file:text-[12px] file:font-bold file:tracking-[0.08em] file:uppercase hover:file:bg-[#DF3131] file:cursor-pointer"
+            />
+            <div className="mt-2 text-[12px]">
+              {uploads[field.name]?.status === "uploading" && <span className="text-[#666]">Uploading {uploads[field.name]?.name}...</span>}
+              {uploads[field.name]?.status === "done" && <span className="text-[#2E7D32]">Attached: {uploads[field.name]?.name}</span>}
+              {uploads[field.name]?.status === "error" && <span className="text-[#DF3131]">{uploads[field.name]?.error}</span>}
+              {!uploads[field.name] && <span className="text-[#999]">Optional. Images, PDF or video, max 10MB.</span>}
+            </div>
+          </div>
+        ) : field.type === "textarea" ? (
           <textarea
             id={field.name}
             value={form[field.name] || ""}

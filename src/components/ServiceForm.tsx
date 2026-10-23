@@ -47,6 +47,7 @@ export default function ServiceForm({
     },
     { name: "budget", label: "Budget", type: "text", placeholder: "A range is fine", halfWidth: true },
     { name: "details", label: "Project details", type: "textarea", required: true, placeholder: "What are you making, who is it for, and when do you need it?" },
+    { name: "reference", label: "Reference files", type: "file" },
   ];
 
   return (
