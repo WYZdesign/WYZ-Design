@@ -227,6 +227,33 @@ describe("flip cards", () => {
   });
 });
 
+describe("service forms", () => {
+  it("ships the adaptive form on every service page", () => {
+    for (const route of ["services", "printing", "photography", "web-design", "events"]) {
+      expect(read("app", route, "page.tsx"), `${route} missing ServiceForm`).toMatch(/ServiceForm/);
+    }
+  });
+
+  it("supports file uploads through the private intake route", () => {
+    expect(fs.existsSync(srcPath("app", "api", "upload", "intake", "route.ts"))).toBe(true);
+    const intake = read("app", "api", "upload", "intake", "route.ts");
+    expect(intake).toMatch(/public: false/);
+    expect(read("components", "DynamicForm.tsx")).toMatch(/field\.type === "file"/);
+    expect(read("components", "DynamicForm.tsx")).toMatch(/api\/upload\/intake/);
+  });
+});
+
+describe("brand positioning", () => {
+  it("keeps the locked 2026 model", () => {
+    const brands = read("lib", "brands.ts");
+    expect(brands, "Nomadic Breed must not be the mobile arm").not.toMatch(/mobile arm/i);
+    expect(brands, "Dying Breed Crew must not be the community arm").not.toMatch(/community and clothing arm/i);
+    expect(brands).toMatch(/2026 independent magazine/i);
+    const nomadic = read("app", "nomadic-breed", "page.tsx");
+    expect(nomadic).not.toMatch(/mobile arm|Pop-Up Shoots|Touring Event Coverage/i);
+  });
+});
+
 describe("model galleries", () => {
   it("serves curated Supabase galleries even without a MinIO mapping", () => {
     const src = read("app", "api", "album-images", "route.ts");
