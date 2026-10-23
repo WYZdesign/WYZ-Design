@@ -225,6 +225,13 @@ export default function MerchPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
   const [sizeGuide, setSizeGuide] = useState(false);
+
+  useEffect(() => {
+    if (!sizeGuide) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setSizeGuide(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [sizeGuide]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const quickViewRef = useRef<HTMLDivElement>(null);
   useModalA11y(() => setSelectedProduct(null), { lockScroll: true, active: !!selectedProduct, containerRef: quickViewRef });
