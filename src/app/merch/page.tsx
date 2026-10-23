@@ -213,6 +213,7 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
             <p className="text-[11px] text-[#666] font-bold tracking-[0.12em] uppercase mb-2">{product.category}</p>
             <h3 className="text-size-9 font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">{fmt(product.price)}</p>
+            <p className="text-[9px] uppercase tracking-[0.12em] text-[#999] mt-1">Printed to order</p>
           </div>
         </button>
       ))}
@@ -223,6 +224,7 @@ function ProductGrid({ products, onSelect }: { products: Product[]; onSelect: (p
 export default function MerchPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
+  const [sizeGuide, setSizeGuide] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const quickViewRef = useRef<HTMLDivElement>(null);
   useModalA11y(() => setSelectedProduct(null), { lockScroll: true, active: !!selectedProduct, containerRef: quickViewRef });
@@ -304,7 +306,8 @@ export default function MerchPage() {
                 ))}
               </div>
             </div>
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex items-center justify-end gap-4">
+              <button type="button" onClick={() => setSizeGuide(true)} className="min-h-11 border border-[#d9d6d3] bg-white px-4 text-[11px] font-bold tracking-[0.08em] uppercase text-[#333] hover:border-[#DF3131] transition-colors">Size Guide</button>
               <label className="flex items-center gap-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#555]">
                 Sort
                 <select value={sortBy} onChange={(event) => setSortBy(event.target.value)} className="min-h-11 border border-[#d9d6d3] bg-white px-3 text-[12px] text-[#333] focus:border-[#DF3131] focus:outline-none">
@@ -342,6 +345,37 @@ export default function MerchPage() {
         <DynamicContentUnderHero />
         <section className="pb-16 pt-4 sm:pb-24"><SquareQuote /></section>
       </main>
+
+      {sizeGuide && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setSizeGuide(false)}>
+          <div role="dialog" aria-modal="true" aria-label="Size guide" className="bg-white max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-start justify-between gap-4 mb-5">
+              <h2 className="text-[1.25rem] font-heading font-black tracking-[0.06em] uppercase text-[#333]">Size Guide</h2>
+              <button type="button" onClick={() => setSizeGuide(false)} aria-label="Close size guide" className="min-h-11 min-w-11 text-[#666] hover:text-[#DF3131] text-xl leading-none">&times;</button>
+            </div>
+            <h3 className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#DF3131] mb-2">Tops</h3>
+            <table className="w-full text-[13px] text-[#444] mb-6 border-collapse">
+              <thead>
+                <tr className="text-left text-[11px] uppercase tracking-[0.08em] text-[#888] border-b border-[#e5e2df]">
+                  <th className="py-2">Size</th><th className="py-2">Chest (in)</th><th className="py-2">Length (in)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[["S","34-36","27"],["M","38-40","28"],["L","42-44","29"],["XL","46-48","30"],["2XL","50-52","31"],["3XL","54-56","32"]].map((r) => (
+                  <tr key={r[0]} className="border-b border-[#f0eeec]">
+                    <td className="py-2 font-bold">{r[0]}</td><td className="py-2">{r[1]}</td><td className="py-2">{r[2]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <h3 className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#DF3131] mb-2">Headwear</h3>
+            <p className="text-[13px] text-[#444] mb-6">One size fits most. Adjustable strap where applicable.</p>
+            <h3 className="text-[11px] font-bold tracking-[0.12em] uppercase text-[#DF3131] mb-2">Care</h3>
+            <p className="text-[13px] text-[#444]">Machine wash cold, inside out. No bleach. Tumble dry low or hang dry. Do not iron the print.</p>
+            <p className="text-[11px] text-[#999] mt-6">Measured flat, garment to garment. Allow about half an inch of variance.</p>
+          </div>
+        </div>
+      )}
 
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setSelectedProduct(null)}>
