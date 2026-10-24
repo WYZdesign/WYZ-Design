@@ -608,3 +608,15 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - Removed the unreachable `/gallery` page (`page.tsx`, `layout.tsx`, `metadata.ts`). It has been permanently redirected to `/photography` in `next.config.ts`, so the URL still works through the redirect while the dead code and its duplicate heading are gone.
 - Removed the stale `/gallery` entry from `sitemap.ts` so the sitemap only advertises real pages. Verified live: `/gallery` still returns the configured 308 to `/photography`; the sitemap lists only the events/designs/model-archive gallery routes.
 - **Gate:** tsc 0, lint 0, tests **116/116**, build 0. **Commit `819dca4` - DEPLOY IS LIVE**.
+## Progress 39 - Real bundle discount + all brands founded 2022 (2026-10-23, WYZMiND)
+
+- **Bundle discount is real and server-validated.** New `src/lib/bundles.ts`: `bundleDiscountCents()` gives **10% off the item subtotal when an order contains 2+ distinct products** (same product twice does not qualify; shipping is excluded). The checkout recomputes it from Printful-validated lines, never from the client.
+  - `/api/checkout` computes it after price validation and passes it to `createMerchCheckout`.
+  - Stripe Checkout allows one coupon, so the bundle discount and any gift-card redemption are **added into a single amount-off coupon** (labelled "Bundle discount" / "Gift card" / both). The coupon is capped at the subtotal.
+  - The session metadata records `bundleDiscountCents`; the webhook already writes the real charged total to `orders.total_cents`, so the order record stays correct.
+  - Merch sets copy now states the rule: "Buy any 2 or more pieces in one order and 10% comes off the item subtotal at checkout."
+  - Tests: `bundleDiscountCents` cases (single item 0, same product twice 0, two distinct 10%, quantities included) -> suite **117/117**.
+- **All three brands founded together in January 2022** (verified by the IRS CP 575 G notice dated 01-24-2022): About now says WYZ Design LLC, Nomadic Breed and Dying Breed Crew were all founded together in January 2022 in Chicago. `brands.ts`, `/nomadic-breed` and `/dying-breed-crew` carry the same founding line; public copy no longer leans on the 2017 framing. The brand test now locks "independent magazine" + "January 2022".
+- **Incoming checkbox fix kept:** `DynamicForm` no longer renders a duplicate outer label for checkbox fields.
+- **Verified live:** `/about`, `/nomadic-breed` and `/dying-breed-crew` show January 2022; the merch bundle heading, "10% comes off" rule and the "Top + Cap" set render client-side.
+- **Gate:** tsc 0, lint 0, tests **117/117**, build 0. SHAs: `7dde9d5` (discount) + `4fed3d0` (founding) - `DEPLOY IS LIVE`.
