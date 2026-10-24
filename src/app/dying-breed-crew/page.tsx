@@ -35,7 +35,7 @@ export default function DyingBreedCrewPage() {
           Not Just a Brand. A <span className="text-[#8C6A1D]">Standard</span>.
         </h2>
         <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
-          DBC represents the doers. The ones who show up, the ones who create when nobody&apos;s watching. We make gear that reflects that energy. Limited runs, real quality, no mass production. If you know, you know.
+          Founded in January 2022 alongside WYZ Design and Nomadic Breed. DBC represents the doers: the ones who show up, the ones who create when nobody&apos;s watching. Limited runs, real quality, no mass production.
         </p>
       </section>
 

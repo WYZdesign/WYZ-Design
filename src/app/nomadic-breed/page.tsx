@@ -39,10 +39,9 @@ export default function NomadicBreedPage() {
           The <span className="text-[#6E6E6E]">Magazine</span>
         </h2>
         <p className="text-[#666] dark:text-[#666] text-[16px] leading-relaxed max-w-2xl mx-auto">
-          Nomadic Breed is a 2026 independent magazine published under WYZ Design. It is digital-first,
-          with print to follow, and it is built around one idea: document the people and scenes that
-          move culture, properly and on the record. The 2017 collective is historical context only.
-          This is a publication.
+          Nomadic Breed is an independent magazine published under WYZ Design. Founded in January 2022
+          alongside the agency, it is digital-first with print to follow, and it is built around one idea:
+          document the people and scenes that move culture, properly and on the record.
         </p>
       </section>
 

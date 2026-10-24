@@ -249,7 +249,8 @@ describe("brand positioning", () => {
     const brands = read("lib", "brands.ts");
     expect(brands, "Nomadic Breed must not be the mobile arm").not.toMatch(/mobile arm/i);
     expect(brands, "Dying Breed Crew must not be the community arm").not.toMatch(/community and clothing arm/i);
-    expect(brands).toMatch(/2026 independent magazine/i);
+    expect(brands).toMatch(/independent magazine/i);
+    expect(brands).toMatch(/January 2022/i);
     const nomadic = read("app", "nomadic-breed", "page.tsx");
     expect(nomadic).not.toMatch(/mobile arm|Pop-Up Shoots|Touring Event Coverage/i);
   });
