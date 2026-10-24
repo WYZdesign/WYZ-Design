@@ -603,3 +603,8 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Gate:** tsc 0, lint 0, tests **116/116**, build 0. SHAs: `baf35a5`, `7bbbbdc` - `DEPLOY IS LIVE`.
 
 **Remaining:** a true bundle discount would need a server-side pricing rule in the merch checkout (doable, but it must be validated against Printful prices); deeper brand facts for the About page (Nomadic Breed issue details, DBC founding year) still need the owner.
+## Progress 38 - Dead route cleanup (2026-10-22, WYZMiND)
+
+- Removed the unreachable `/gallery` page (`page.tsx`, `layout.tsx`, `metadata.ts`). It has been permanently redirected to `/photography` in `next.config.ts`, so the URL still works through the redirect while the dead code and its duplicate heading are gone.
+- Removed the stale `/gallery` entry from `sitemap.ts` so the sitemap only advertises real pages. Verified live: `/gallery` still returns the configured 308 to `/photography`; the sitemap lists only the events/designs/model-archive gallery routes.
+- **Gate:** tsc 0, lint 0, tests **116/116**, build 0. **Commit `819dca4` - DEPLOY IS LIVE**.
