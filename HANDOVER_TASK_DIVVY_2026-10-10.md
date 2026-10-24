@@ -594,4 +594,12 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **Full-route smoke:** 29 routes (home, photography + category, all three galleries, events + gallery, model archive + gallery, services, printing, plans, merch, contact, booking, about, community, gallery, featured artist, wyzmind, faq, gift cards, nomadic-breed, dying-breed-crew, brands, loyalty) returned **200 with zero page errors**.
 - **Gate:** tsc 0, lint 0, tests **116/116**, build 0. **Commit `af29b15` - DEPLOY IS LIVE**.
 
-**Remaining:** bundles/stock badges (need real inventory or bundle policy); about-page deep research blocked on owner facts (LLC filing date/state, Nomadic Breed issue details, DBC founding year).
+## Progress 37 - Verified founding date + honest merch bundles/badges (2026-10-22, WYZMiND)
+
+- **Founding date now verified from the IRS CP 575 G notice (dated 01-24-2022):** EIN assigned to WYZ Design, sole member, Chicago. The EIN was saved to the vault (`WYZ_EIN`) and is **never rendered on the site**; the street address is also not published. The About page now states "WYZ Design LLC, established January 2022 in Chicago. Founded by Torreé Marcel." (the 4+ years stat is consistent with it).
+- **Merch bundles:** a "Complete the fit" section built from the **live catalog**, not hardcoded products. It composes an honest set only from items that actually exist (currently "Top + Cap": hoodie + cap), shows the exact **sum** of the item prices, and links each item to its own product page. No invented discount, because checkout re-prices from Printful server-side and a fake saving would be a lie.
+- **Stock/fulfillment badges, truthful for print-on-demand:** no "only X left" scarcity. Cards keep "Printed to order"; the quick view adds "Printed to order. Usually ships in 3-6 business days." There is no real inventory to badge, so the badge states the actual fulfilment model.
+- **Verified live:** bundle heading + set render (1 set with the current 4-product catalog), "Printed to order" on cards, quick-view shipping line present, and the About founding line present.
+- **Gate:** tsc 0, lint 0, tests **116/116**, build 0. SHAs: `baf35a5`, `7bbbbdc` - `DEPLOY IS LIVE`.
+
+**Remaining:** a true bundle discount would need a server-side pricing rule in the merch checkout (doable, but it must be validated against Printful prices); deeper brand facts for the About page (Nomadic Breed issue details, DBC founding year) still need the owner.
