@@ -178,9 +178,11 @@ export default function DynamicForm({
 
     return (
       <div key={`${field.name}-${field.label}`} className={wrapperClass}>
-        <label htmlFor={field.name} className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">
-          {field.label}{field.required && " *"}
-        </label>
+        {field.type !== "checkbox" && (
+          <label htmlFor={field.name} className="block text-[13px] font-heading font-semibold tracking-[0.08em] uppercase text-[#333] dark:text-[#e0e0e0] mb-2">
+            {field.label}{field.required && " *"}
+          </label>
+        )}
         {field.type === "file" ? (
           <div>
             <input

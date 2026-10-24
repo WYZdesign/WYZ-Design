@@ -7,6 +7,7 @@ import { errorResponse } from "@/lib/http";
 import { logger } from "@/lib/logger";
 import { getServiceClient } from "@/lib/supabase";
 import { getVariantInfo } from "@/lib/printful";
+import { bundleDiscountCents } from "@/lib/bundles";
 import { sanitizeCartLine, cartSubtotalCents, shippingCentsFor, SHIPPING_OPTIONS, MAX_CART_LINES, MAX_LINE_QUANTITY, type CartLine } from "@/lib/merch";
 import { hashGiftCardCode } from "@/lib/gift-cards";
 import { randomUUID } from "crypto";
@@ -172,6 +173,7 @@ export async function POST(req: NextRequest) {
       }
       const lines = [...merged.values()];
       const subtotal = cartSubtotalCents(lines);
+      const bundleDiscount = bundleDiscountCents(lines);
       const shipCents = shippingCentsFor(subtotal, shippingId);
 
       // Reserve the gift-card amount atomically before creating anything, so a
@@ -217,7 +219,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Unable to start checkout. Please try again." }, { status: 500 });
       }
 
-      const session = await createMerchCheckout(lines, shippingId, order.id, email, referralCode, giftCard || undefined);
+      const session = await createMerchCheckout(lines, shippingId, order.id, email, referralCode, giftCard || undefined, bundleDiscount);
       await sb.from("orders").update({ stripe_session_id: session.id }).eq("id", order.id);
       return NextResponse.json({ url: session.url });
     }

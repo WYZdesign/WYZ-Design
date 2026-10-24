@@ -20,6 +20,7 @@ import RouteLoading from "@/components/RouteLoading";
 import RouteErrorState from "@/components/RouteErrorState";
 import { DESIGN_CATEGORIES } from "@/lib/data/design-galleries";
 import { EVENT_GALLERIES, EVENT_KEYS } from "@/lib/data/event-galleries";
+import { bundleDiscountCents } from "@/lib/bundles";
 import MODEL_GALLERIES from "@/lib/data/model-galleries.json";
 
 vi.mock("@/lib/errorTracker", () => ({ trackError: vi.fn() }));
@@ -251,6 +252,17 @@ describe("brand positioning", () => {
     expect(brands).toMatch(/2026 independent magazine/i);
     const nomadic = read("app", "nomadic-breed", "page.tsx");
     expect(nomadic).not.toMatch(/mobile arm|Pop-Up Shoots|Touring Event Coverage/i);
+  });
+});
+
+describe("merch bundle", () => {
+  it("takes 10% off only when 2+ distinct products are in the cart", () => {
+    const a = { productId: 1, unitPriceCents: 3000, quantity: 1 };
+    const b = { productId: 2, unitPriceCents: 2000, quantity: 1 };
+    expect(bundleDiscountCents([a])).toBe(0);
+    expect(bundleDiscountCents([{ ...a, quantity: 2 }])).toBe(0);
+    expect(bundleDiscountCents([a, b])).toBe(500);
+    expect(bundleDiscountCents([a, b, b])).toBe(700);
   });
 });
 

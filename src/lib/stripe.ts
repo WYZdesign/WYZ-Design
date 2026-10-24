@@ -98,14 +98,14 @@ export async function createGiftCardCheckout(amount: number, email?: string, ref
   return session;
 }
 
-/** Creates a one-time amount-off coupon for a gift-card redemption. */
-async function createGiftCardCoupon(appliedCents: number): Promise<string> {
+/** Creates a one-time amount-off coupon (gift card, bundle discount, or both). */
+async function createAmountCoupon(appliedCents: number, name: string): Promise<string> {
   const stripe = getStripe();
   const coupon = await stripe.coupons.create({
     amount_off: appliedCents,
     currency: "usd",
     duration: "once",
-    name: "Gift card",
+    name,
   });
   return coupon.id;
 }
@@ -114,7 +114,7 @@ export async function createServiceCheckout(serviceName: string, servicePrice: n
   const stripe = getStripe();
   const idKey = generateIdempotencyKey("svc", email || "guest");
   const discounts = giftCard && giftCard.appliedCents > 0
-    ? [{ coupon: await createGiftCardCoupon(giftCard.appliedCents) }]
+    ? [{ coupon: await createAmountCoupon(giftCard.appliedCents, "Gift card") }]
     : undefined;
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
@@ -135,7 +135,7 @@ export async function createServiceCheckout(serviceName: string, servicePrice: n
       name: serviceName,
       price: String(servicePrice),
       ...(giftCard ? { giftCardId: String(giftCard.id), giftCardAppliedCents: String(giftCard.appliedCents), giftCardRef: giftCard.ref } : {}),
-      ...(referralCode ? { referralCode } : {}),
+     ...(referralCode ? { referralCode } : {}),
     },
     client_reference_id: email || undefined,
   }, { idempotencyKey: idKey });
@@ -154,15 +154,23 @@ export async function createMerchCheckout(
   orderId: string,
   email?: string,
   referralCode?: string,
-  giftCard?: { id: number; appliedCents: number; ref: string }
+  giftCard?: { id: number; appliedCents: number; ref: string },
+  bundleDiscountCents = 0
 ) {
   const stripe = getStripe();
   const subtotal = lines.reduce((n, l) => n + l.unitPriceCents * l.quantity, 0);
   const shipping = shippingCentsFor(subtotal, shippingOptionId);
   const option = SHIPPING_OPTIONS.find((o) => o.id === shippingOptionId) || SHIPPING_OPTIONS[0];
   const idKey = generateIdempotencyKey("merch", orderId);
-  const discounts = giftCard && giftCard.appliedCents > 0
-    ? [{ coupon: await createGiftCardCoupon(giftCard.appliedCents) }]
+  const giftCents = giftCard?.appliedCents || 0;
+  // Checkout allows one coupon, so bundle + gift card combine into one amount.
+  const totalDiscount = Math.min(subtotal, bundleDiscountCents + giftCents);
+  const discountName = [
+    bundleDiscountCents > 0 ? "Bundle discount" : null,
+    giftCents > 0 ? "Gift card" : null,
+  ].filter(Boolean).join(" + ") || "Discount";
+  const discounts = totalDiscount > 0
+    ? [{ coupon: await createAmountCoupon(totalDiscount, discountName) }]
     : undefined;
 
   const session = await stripe.checkout.sessions.create({
@@ -198,6 +206,7 @@ export async function createMerchCheckout(
       orderId,
       shipping: shippingOptionId,
       ...(giftCard ? { giftCardId: String(giftCard.id), giftCardAppliedCents: String(giftCard.appliedCents), giftCardRef: giftCard.ref } : {}),
+      ...(bundleDiscountCents > 0 ? { bundleDiscountCents: String(bundleDiscountCents) } : {}),
       ...(referralCode ? { referralCode } : {}),
     },
     client_reference_id: email || undefined,

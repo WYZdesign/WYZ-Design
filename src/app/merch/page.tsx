@@ -212,7 +212,8 @@ function BundleSets({ products }: { products: Product[] }) {
         <h2 className="text-[2rem] sm:text-[2.5rem] font-heading font-black text-[#333] dark:text-white mb-2">Complete the fit</h2>
         <p className="text-[#666] dark:text-[#aaa] text-[15px] mb-8 max-w-xl">
           Pieces we actually shoot together. Everything is printed to order, so a set is made when you order it.
-          Prices shown are the exact sum of the items, no padding.
+          Buy any 2 or more pieces in one order and 10% comes off the item subtotal at checkout. Prices above are
+          the exact sum of the items before that bundle discount.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {sets.map((set) => {
