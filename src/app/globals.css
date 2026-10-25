@@ -154,6 +154,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
      tag-selector rules were silently out-ranking component text-size
      utilities like text-[9px]. */
   @layer base {
+  h2 { font-size: 1.4rem; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
   body { font-size: 15px; line-height: 1.6; }
   }
 
@@ -166,7 +167,6 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   /* Do not split display words on phones. Headings may wrap at a real word
      boundary, but component layouts own their measure and type scale. */
   h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
-  h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
   /* 2026-10-25 (Claude): font-size no longer !important here -- h3/h4 are
      usually component-level subheadings (card titles, etc.), not page hero
      titles, so their own text-[...] utility should win when a component sets
