@@ -457,12 +457,12 @@ export default function HomePage() {
    </div>
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
    {SERVICES.filter(s => activeTab === "ALL" || s.tab === activeTab).map((s) => (
-     <div key={s.name} className="group relative p-8 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 bg-white dark:bg-[#252528] text-center">
+     <div key={s.name} className="group relative p-6 sm:p-7 lg:p-8 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 bg-white dark:bg-[#252528] text-center">
        <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] text-2xl mb-6 group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
          {s.icon}
        </div>
        <h3 className="font-heading font-bold text-[#333] dark:text-white text-[15px] tracking-[0.05em] uppercase mb-4">{s.name}</h3>
-       <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed mb-6">{s.desc}</p>
+       <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed mb-6 max-w-[22rem] mx-auto">{s.desc}</p>
        <Link href={s.href} className="inline-flex items-center gap-1 text-[#DF3131] text-sm font-bold tracking-[0.08em] uppercase hover:underline">
          Read More <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
        </Link>

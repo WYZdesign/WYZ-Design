@@ -211,13 +211,13 @@ return (
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {CAPABILITIES.map((c, i) => (
-                  <div key={c.title} className="group text-center p-10 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 cursor-default"
+                  <div key={c.title} className="group text-center p-6 sm:p-8 lg:p-10 border border-[#E2E2E2] dark:border-[#444] hover:border-[#DF3131] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#DF3131]/10 cursor-default"
                     style={{ animationDelay: `${i * 0.08}s` }}>
                     <div className="w-14 h-14 mx-auto flex items-center justify-center bg-[#DF3131]/10 text-[#DF3131] text-xl mb-5 group-hover:bg-[#DF3131] group-hover:text-white transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
                       {c.icon}
                     </div>
-                    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] tracking-[0.05em] uppercase mb-3">{c.title}</h3>
-                    <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed">{c.desc}</p>
+                    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[15px] tracking-[0.05em] uppercase mb-2.5">{c.title}</h3>
+                    <p className="text-[13px] text-[#666] dark:text-white/70 leading-relaxed max-w-[22rem] mx-auto">{c.desc}</p>
                   </div>
                 ))}
               </div>
