@@ -172,9 +172,9 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
      titles, so their own text-[...] utility should win when a component sets
      one. The overflow-safety properties (max-width/overflow-wrap/word-break)
      stay forced since those are layout-safety, not a sizing choice. */
+  @layer base {
   h3 { font-size: 1.1rem; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
   h4 { font-size: 1rem; font-weight: 700 !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
-  @layer base {
   p { font-size: 14px; }
   }
 
