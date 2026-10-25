@@ -636,3 +636,13 @@ Built the remaining gallery surfaces from the owner's answers and gave them more
 - **SHAs:** `6bb3c3f` (layers), `6a99ced` (type/spacing), `95592e2` (h3/h4 layer fix) - all `DEPLOY IS LIVE`.
 
 **Remaining (open-ended, owner direction):** the broader "redo mobile spacing from scratch" sweep across every page/component (now that the cascade no longer overrides component sizing) is still a large visual pass; the systemic cause is fixed, so per-page tweaks can now actually stick.
+## Progress 42 - Mobile type/spacing sweep completed (2026-10-25, WYZMiND)
+
+Ran a measured audit (computed font-size vs each element's own `text-[Npx]` class, plus page overflow) across 16 pages at 390px, fixed what it found, then re-audited at 320px.
+
+- **Buttons were still forced to 13px.** A blanket `button[class*="px-"][class*="py-"] / a[...] { font-size: 13px !important }` rule overrode intended sizes ("Start Wizard" 15 -> 13, "/events" LOAD MORE 16 -> 13, merch bundle chips 11 -> 13). Removed the forced font-size; kept the centering/nowrap. Buttons now render at their designed size.
+- **h2 was the last blanket size.** The mobile `h2 { font-size: 1.4rem !important }` rule forced /community section headings from their intended 18-19px up to 22.4px. Moved the h2 default into `@layer base` without `!important` so component sizes win; h1 keeps its forced hero size and every overflow-safety property (max-width/overflow-wrap/word-break) stays `!important`.
+- **Responsive brand CTA cards:** the Nomadic Breed and Dying Breed Crew CTA panels on /about were flat `p-10`; now `p-6 sm:p-8 lg:p-10`.
+- **Cleanup:** removed the untracked `Claude outputs/` folder (two handover copies, verified byte-identical to the root files).
+- **Verified after deploy:** 16 pages at **390px** -> zero overflow and zero type mismatches; 16 pages at **320px** -> zero horizontal overflow.
+- **Gate:** tsc 0, lint 0, tests **117/117**, build 0. SHAs: `a8b5d33` (buttons + CTA padding) and `c2d6d83` (h2 layer) - `DEPLOY IS LIVE`.
