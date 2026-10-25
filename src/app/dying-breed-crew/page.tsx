@@ -87,7 +87,7 @@ export default function DyingBreedCrewPage() {
 
       {/* CTA */}
       <section className="max-w-4xl mx-auto px-6 pb-16">
-        <div className="bg-[#0A0A0A] rounded-2xl p-10 text-center">
+        <div className="bg-[#0A0A0A] rounded-2xl p-6 sm:p-8 lg:p-10 text-center">
           <h2 className="font-heading font-black text-white text-[1.5rem] lg:text-[2rem] tracking-[0.04em] mb-4">
             Rep the Crew
           </h2>

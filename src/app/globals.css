@@ -223,7 +223,8 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   .btn-primary, .btn-outline, .btn-gold,
   a[class*="px-"][class*="py-"]:not([class*="whitespace-normal"]),
   button[class*="px-"][class*="py-"]:not([class*="whitespace-normal"]) {
-    font-size: 13px !important;
+    /* font-size intentionally NOT forced: a button's own text-[Npx] class
+       should win (2026-10-25, same cascade principle as the type stack). */
     white-space: nowrap !important;
     text-align: center !important;
     justify-content: center !important;
