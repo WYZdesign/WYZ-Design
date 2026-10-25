@@ -413,16 +413,16 @@ export default function HomePage() {
      scroll stop points, and ScrollToTop already dodges anything tagged
      data-chat-avoid (board #29/#52's clear-zone IntersectionObserver) --
      reusing that instead of inventing a new mechanism. */}
- <div className="flex justify-center gap-4 mb-10" data-chat-avoid>
+ <div className="flex flex-wrap justify-center gap-4 mb-10" data-chat-avoid>
  <button onClick={() => setSpTab("services")}
- className={`px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase text-sm border-2 transition-all duration-500 relative overflow-hidden group ${
+ className={`flex-shrink-0 px-5 sm:px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase text-sm border-2 transition-all duration-500 relative overflow-hidden group ${
  spTab === "services" ? "bg-[#333] text-white border-[#333] shadow-lg shadow-[#333]/20" : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
  }`}>
  <span className="relative z-10">Services</span>
  {spTab !== "services" && <div className="absolute inset-0 bg-[#DF3131]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />}
  </button>
  <button onClick={() => setSpTab("plans")}
- className={`px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase text-sm border-2 transition-all duration-500 relative overflow-hidden group ${
+ className={`flex-shrink-0 px-5 sm:px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase text-sm border-2 transition-all duration-500 relative overflow-hidden group ${
  spTab === "plans" ? "bg-[#333] text-white border-[#333] shadow-lg shadow-[#333]/20" : "bg-white dark:bg-[#1C1C1E] text-[#333] dark:text-white border-[#ccc] dark:border-[#444] hover:border-[#DF3131] hover:text-[#DF3131]"
  }`}>
  <span className="relative z-10">Pricing Plans</span>
