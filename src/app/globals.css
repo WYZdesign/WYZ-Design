@@ -145,7 +145,17 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
    MOBILE (< 768px) — iPhone 13 optimized (390x844)
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
+  /* 2026-10-25 (Claude, CSS cascade-layers audit): body/p font-size here
+     wrapped in @layer base -- see the matching note further down this file
+     for the full explanation. Everything else in this block keeps its
+     !important and stays un-layered on purpose: !important already beats
+     ordinary (non-!important) Tailwind utilities regardless of layer, so
+     those rules were never the bug; only these two bare (non-!important)
+     tag-selector rules were silently out-ranking component text-size
+     utilities like text-[9px]. */
+  @layer base {
   body { font-size: 15px; line-height: 1.6; }
+  }
 
   /* Heads — center-aligned on mobile by default; .text-left headings (explicit left-align design intent) are exempted */
   h1:not(.text-left), h2:not(.text-left), h3:not(.text-left), h4:not(.text-left) { text-align: center !important; }
@@ -157,9 +167,16 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
      boundary, but component layouts own their measure and type scale. */
   h1 { font-size: 2.5rem !important; font-weight: 900 !important; letter-spacing: 0.03em !important; line-height: 0.9 !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
   h2 { font-size: 1.4rem !important; font-weight: 800 !important; letter-spacing: 0.04em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
-  h3 { font-size: 1.1rem !important; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
-  h4 { font-size: 1rem !important; font-weight: 700 !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
+  /* 2026-10-25 (Claude): font-size no longer !important here -- h3/h4 are
+     usually component-level subheadings (card titles, etc.), not page hero
+     titles, so their own text-[...] utility should win when a component sets
+     one. The overflow-safety properties (max-width/overflow-wrap/word-break)
+     stay forced since those are layout-safety, not a sizing choice. */
+  h3 { font-size: 1.1rem; font-weight: 700 !important; letter-spacing: 0.05em !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
+  h4 { font-size: 1rem; font-weight: 700 !important; max-width: min(100%, calc(100vw - 3rem)) !important; overflow-wrap: normal !important; word-break: normal !important; }
+  @layer base {
   p { font-size: 14px; }
+  }
 
   /* The big-hero-heading rules above assume every h1/h2/h3 is a page title.
      That's wrong for small utility-style headings used as internal labels
@@ -195,8 +212,12 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   [class*="text-2xl"][class*="font-black"],
   [class*="text-3xl"][class*="font-black"] { font-size: 2.25rem !important; }
 
-  /* Nav */
+  /* Nav. Wrapped in @layer base (2026-10-25, same reason as body/p above):
+     this is also a bare, non-!important tag-combinator rule, so it was also
+     silently out-ranking any component text-size utility on a nav link. */
+  @layer base {
   nav a, nav button { font-size: 13px; }
+  }
 
   /* All buttons — centered text, single line */
   .btn-primary, .btn-outline, .btn-gold,
@@ -1170,16 +1191,40 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
    even spacing, centered alignment, medium paragraph measure
    ═══════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
-  h1 { font-size: clamp(2.55rem, 2.55rem + 2.3vw, 3.7rem) !important; }
-  h2 { font-size: clamp(1.5rem, 1.5rem + 1vw, 1.9rem) !important; }
-  h3 { font-size: clamp(1.15rem, 1.15rem + 0.6vw, 1.4rem) !important; }
-  h4, h5, h6 { font-size: 1rem !important; }
+  /* 2026-10-25 (Claude, CSS cascade-layers audit): wrapped in @layer base.
+     Tailwind v4 wraps all its generated utility classes (text-[...], etc.)
+     in @layer, and un-layered CSS always wins over layered CSS regardless
+     of specificity -- so this block, left un-layered, was silently
+     overriding component-level text-size utilities sitewide on mobile with
+     no way for a component to opt out. Wrapping it here restores normal
+     specificity-based cascade: a component's own text-[9px] (or similar)
+     class now correctly outranks this generic tag-selector default, same
+     as the FLUID TYPOGRAPHY block above already does and as this block's
+     own header comment ("component Tailwind size utilities... correctly
+     override these defaults") always intended. */
+  @layer base {
+  /* 2026-10-25 (Claude): removed !important from font-size and from the
+     margin-top/margin-bottom pair on this whole block. This block is a
+     fallback/default type scale for *unstyled* headings and paragraphs on
+     mobile -- it should not force its own numbers over a component's own
+     deliberate choices (e.g. a card subheading sized with text-[15px] and
+     spaced with mb-3). Removing !important here means: a component's own
+     Tailwind classes win when it sets them (normal cascade-layer behavior,
+     utilities > base), and these clamp()/spacing values still apply as the
+     sensible default for any heading/paragraph that doesn't set its own
+     size or margin. line-height/text-align stay forced (not something
+     anyone's complained about, low risk either way); p's max-width/margin
+     centering also stay forced (width *constraint*, not a sizing fight). */
+  h1 { font-size: clamp(2.55rem, 2.55rem + 2.3vw, 3.7rem); }
+  h2 { font-size: clamp(1.5rem, 1.5rem + 1vw, 1.9rem); }
+  h3 { font-size: clamp(1.15rem, 1.15rem + 0.6vw, 1.4rem); }
+  h4, h5, h6 { font-size: 1rem; }
 
   h1, h2, h3, h4, h5, h6 {
     line-height: 0.9 !important;
     text-align: center !important;
-    margin-top: 0.75rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
   }
   h1:first-child, h2:first-child, h3:first-child,
   h4:first-child, h5:first-child, h6:first-child {
@@ -1187,11 +1232,12 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
   }
 
   p {
-    font-size: 0.9375rem !important;
+    font-size: 0.9375rem;
     line-height: 1.65 !important;
     max-width: min(36rem, calc(100vw - 3rem)) !important;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
   }
 }
 
@@ -1199,9 +1245,12 @@ h4 { font-size: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem); }
    (2.55rem floor + 2.3vw) renders ~48px at 320px, where a long word like
    "PLANNING" has min-content > the 272px capped measure and overflows
    regardless of max-width. Step the h1 scale down below 380px so min-content
-   fits the 24px-gutter measure. iPhone 12+ (390px+) keeps the main clamp. */
+   fits the 24px-gutter measure. iPhone 12+ (390px+) keeps the main clamp.
+   Also wrapped in @layer base for the same reason as the block above. */
 @media (max-width: 380px) {
+  @layer base {
   h1 { font-size: clamp(2rem, 9vw, 2.55rem) !important; }
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
