@@ -1,0 +1,83 @@
+/* Design Tokens as CSS Custom Properties — WYZ Design
+ * Generated from src/lib/design-tokens.ts — keep in sync.
+ * All component code should reference these variables instead of hardcoding hex/rgb.
+ */
+
+:root {
+  /* ── Brand Core ── */
+  --color-wyz-red: #DF3131;
+  --color-wyz-red-dark: #B82020;
+  --color-wyz-text-red: #C00000;
+  --color-wyz-gold: #C9A227;
+  --color-wyz-gold-light: #E7C873;
+  --color-wyz-gold-deep: #8C6A1D;
+
+  /* ── Neutrals ── */
+  --color-wyz-white: #FFFFFF;
+  --color-wyz-text: #333333;
+  --color-wyz-text-secondary: #666665;
+  --color-wyz-muted: #666666;
+  --color-wyz-border: #E2E2E2;
+  --color-wyz-card: #FFFFFF;
+  --color-wyz-bg: #FFFFFF;
+
+  /* ── Dark Mode Surfaces ── */
+  --color-wyz-dark-surface: #252528;
+  --color-wyz-dark-page: #1C1C1E;
+  --color-wyz-dark-deep: #111;
+  --color-wyz-dark-text: #E0E0E0;
+  --color-wyz-dark-muted: #B0B0B0;
+  --color-wyz-dark-border: #444;
+
+  /* ── Typography ── */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-h1: clamp(2rem, 2rem + 2.5vw, 4.8rem);
+  --font-size-h2: clamp(1.35rem, 1.35rem + 1.5vw, 3.3rem);
+  --font-size-h3: clamp(1.05rem, 1.05rem + 1vw, 2.1rem);
+  --font-size-h4: clamp(0.875rem, 0.875rem + 0.75vw, 1.5rem);
+  --font-size-body: 17px;
+  --line-height-body: 1.65;
+  --font-weight-heading: 700;
+  --letter-spacing-heading: 0.06em;
+  --text-transform-heading: uppercase;
+
+  /* ── Spacing ── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 2.5rem;
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  /* ── Z-Index Scale ── */
+  --z-base: 1;
+  --z-dropdown: 40;
+  --z-sticky: 50;
+  --z-overlay: 60;
+  --z-modal: 200;
+  --z-lightbox: 210;
+  --z-cursor: 99997;
+  --z-toast: 99999;
+
+  /* ── Touch Targets (WCAG AA) ── */
+  --touch-min-height: 44px;
+
+  /* ── Motion ── */
+  --motion-standard: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-tap: 0.97;
+  --motion-reduced: 0.01ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-standard: 0.01ms;
+    --motion-tap: 1;
+  }
+}
