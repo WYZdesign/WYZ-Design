@@ -223,7 +223,7 @@ export const MODELS_RAW_RECORDS = [
   "/images/models/STAR.jpg",
   "/images/models/SYDNEY.JPG",
   "/images/models/SYETA.JPG",
-  "/images/models/TE'JUAN.JPG",
+  "/images/models/TE_JUAN.JPG",
   "/images/models/TED___SYLVIA.jpg",
   "/images/models/TEREZA.jpg",
   "/images/models/TONI.jpg",
