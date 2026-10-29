@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react";
 
 import { FiSearch, FiMessageCircle, FiZap, FiCamera, FiLayout, FiCalendar, FiPrinter, FiSend, FiHelpCircle } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
-import AnimatedCounter from "@/components/AnimatedCounter";
 import TextReveal from "@/components/TextReveal";
 
 const FAQS = [

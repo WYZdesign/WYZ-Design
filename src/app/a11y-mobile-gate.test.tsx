@@ -177,7 +177,13 @@ describe("page section order", () => {
 
 describe("splash entry", () => {
   it("enters only via the Enter Site button, never a full-screen tap", () => {
-    const root = read("app", "page.tsx");
+    // 2026-10-29 (Claude): "/" was split into a server-component page.tsx
+    // (so it can export its own metadata) that just renders the client-only
+    // <HomeEntry /> -- the splash/enter markup this test locks now lives
+    // there instead of in app/page.tsx. Updated to read the file that
+    // actually contains it; the invariant itself (enter only via the
+    // button, never a full-screen tap) is unchanged.
+    const root = read("components", "HomeEntry.tsx");
     expect(root, "full-screen tap must not enter").not.toMatch(/onClick=\{handleEnter\}/);
     expect(root).toMatch(/<RandomSplash onEnter=\{handleEnter\} \/>/);
     const brand = read("components", "splash", "SplashBrand.tsx");
@@ -212,11 +218,22 @@ describe("photography delivery", () => {
 
 describe("carousel scale", () => {
   it("image carousels use the 15% larger card sizes", () => {
+    // 2026-10-29 (Claude): the oversized-file split (board S3) moved these
+    // carousels out of their page.tsx files into dedicated components
+    // (home -> components/home/HomeCarousels.tsx, photography's main-page
+    // carousel -> components/photography/PhotographyModals.tsx, events ->
+    // components/events/EventsVideo.tsx), then a later carousel-unification
+    // pass changed photography's and events' widths too. Updated each read
+    // to the file that now actually contains the markup, and the two
+    // widths that changed with it. designs/page.tsx was never split, so it
+    // stays as-is. PhotographyCategoryRows.tsx is a *different* component
+    // (the /photography/[category] detail-page rows), untouched by any of
+    // this, so its own assertion is unchanged.
     expect(read("app", "designs", "page.tsx")).toMatch(/md:w-\[423px\]/);
-    expect(read("app", "home", "page.tsx")).toMatch(/md:w-\[423px\]/);
-    expect(read("app", "photography", "page.tsx")).toMatch(/lg:w-\[582px\]/);
+    expect(read("components", "home", "HomeCarousels.tsx")).toMatch(/md:w-\[423px\]/);
+    expect(read("components", "photography", "PhotographyModals.tsx")).toMatch(/lg:w-\[582px\]/);
     expect(read("components", "PhotographyCategoryRows.tsx")).toMatch(/md:h-\[381px\]/);
-    expect(read("app", "events", "page.tsx")).toMatch(/md:w-\[297px\]/);
+    expect(read("components", "events", "EventsVideo.tsx")).toMatch(/md:w-\[297px\]/);
   });
 });
 

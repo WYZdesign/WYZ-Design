@@ -5,7 +5,7 @@ import SafeImage from "@/components/SafeImage";
 import Link from "next/link";
 import { useModalA11y } from "@/hooks/useModalA11y";
 import { type Product, fmt, CATEGORIES, SORT_OPTIONS, ARCHIVE_IMAGES } from "@/lib/data/merch";
-import { TypewriterText, ParallaxHero, DynamicContentUnderHero, SquareQuote, BundleSets, ProductGrid } from "@/components/merch/MerchSections";
+import { ParallaxHero, DynamicContentUnderHero, SquareQuote, BundleSets, ProductGrid } from "@/components/merch/MerchSections";
 
 export default function MerchPage() {
   const [activeCategory, setActiveCategory] = useState("All");

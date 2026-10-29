@@ -1,6 +1,13 @@
 // Shared types/data extracted from src/app/merch/page.tsx (oversized-file
-// split, board S3). Pure data + the one tiny formatter helper -- no JSX.
-// Rendered output must stay byte-for-byte identical.
+// split, board S3 + S3 follow-up 2026-10-28). Pure data + the one tiny
+// formatter helper -- no JSX. Rendered output must stay byte-for-byte
+// identical.
+//
+// ARCHIVE_IMAGES[3] was out of sync with the live page (a stale filename
+// from before this file went unused) -- corrected to match page.tsx.
+// DBC_MODEL_MOCKUPS/FAOTM_URL below are dead: they belonged to the
+// MerchCarousel/mockup components removed as dead code on 2026-10-13.
+// Left in place rather than deleted in case that work gets revived.
 
 export interface Product {
   id: number;
@@ -21,7 +28,7 @@ export const ARCHIVE_IMAGES = [
   "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg",
   "/images/merch/dbc-archive/98442d-b3c114b8dab6450887e3d3aee9c71030~mv2.jpg",
   "/images/merch/dbc-archive/98442d-bd1e1406036d4ba99d4f8197e1495337~mv2.jpg",
-  "/images/merch/dbc-archive/98442d-c13840a266e44b959886dc63b5826213~mv2.jpg",
+  "/images/merch/dbc-archive/98442d-84cab96655a54e569290d09abd01eaed~mv2.jpg",
   "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg",
   "/images/merch/dbc-archive/98442d-71e847c4dd9546b0bef2a69d72d2baa6~mv2.jpg",
   "/images/merch/dbc-archive/98442d-7ef7fb49e39942f687d13018406e72a8~mv2.jpg",

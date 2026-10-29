@@ -2,17 +2,19 @@ import { logger } from "@/lib/logger";
 import { getServiceClient } from "@/lib/supabase";
 
 export interface SeoCheckRecord {
-  id: string;
+  id?: string;
   url: string;
   score: number;
-  title_length: number;
-  description_length: number;
-  has_h1: number;
-  has_canonical: number;
-  has_og: number;
-  has_schema: number;
-  issues: string;
-  created_at: string;
+  title?: string;
+  description?: string;
+  title_length?: number;
+  description_length?: number;
+  has_h1?: number;
+  has_canonical?: number;
+  has_og?: number;
+  has_schema?: number;
+  issues?: string;
+  created_at?: string;
 }
 
 const SEO_PAGES = [
@@ -35,10 +37,10 @@ async function runSinglePageCheck(base: string, path: string): Promise<SeoCheckR
     const descMatch = html.match(/<meta\s+name=["']description["'][^>]*content=["']([^"']+)["']/i) || [null, ""];
     const description = descMatch[1] || "";
 
-    const canonical = /<link\s+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i.test(html) ? 1 : 0;
-    const hasOg = /<meta\s+property=["']og:image["']/i.test(html) ? 1 : 0;
-    const hasH1 = /<h1[\s>]/i.test(html) ? 1 : 0;
-    const hasSchema = /application\/ld\+json/i.test(html) ? 1 : 0;
+    const canonical = /<link\s+rel=["']canonical["'][^>]*href=["']([^"']+)["']/i.test(html);
+    const hasOg = /<meta\s+property=["']og:image["']/i.test(html);
+    const hasH1 = /<h1[\s>]/i.test(html);
+    const hasSchema = /application\/ld\+json/i.test(html);
 
     const issues: string[] = [];
     if (!title) issues.push("Missing title tag");
@@ -49,7 +51,7 @@ async function runSinglePageCheck(base: string, path: string): Promise<SeoCheckR
 
     const score = Math.round(
       [canonical, hasOg, hasH1, hasSchema, title ? 1 : 0, description ? 1 : 0]
-        .reduce((a, b) => a + b, 0) * 100 / 7,
+        .reduce<number>((a, b) => a + (b ? 1 : 0), 0) * 100 / 7,
     );
 
     return {
@@ -58,10 +60,10 @@ async function runSinglePageCheck(base: string, path: string): Promise<SeoCheckR
       score,
       title_length: title.length,
       description_length: description.length,
-      has_h1: hasH1,
-      has_canonical: canonical,
-      has_og: hasOg,
-      has_schema: hasSchema,
+      has_h1: hasH1 ? 1 : 0,
+      has_canonical: canonical ? 1 : 0,
+      has_og: hasOg ? 1 : 0,
+      has_schema: hasSchema ? 1 : 0,
       issues: JSON.stringify(issues),
       created_at: new Date().toISOString(),
     };

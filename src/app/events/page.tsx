@@ -2,17 +2,14 @@
 import ServiceForm from "@/components/ServiceForm";
 import HeroDots from "@/components/HeroDots";
 
-import { useRef, useState, useEffect, useCallback, createContext, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FiChevronLeft, FiChevronRight, FiPlay, FiX } from "react-icons/fi";
-import { useModalA11y } from "@/hooks/useModalA11y";
 import { useShuffle } from "@/hooks/useShuffle";
 import ScrollReveal from "@/components/ScrollReveal";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import TextSplit from "@/components/TextSplit";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import { useZeal } from "@/components/ZealProvider";
 import { getSiteUrl } from "@/lib/site-url";
 import { VideoMuteProvider, VideoCarousel, VideoModal } from "@/components/events/EventsVideo";
 

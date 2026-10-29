@@ -6,11 +6,16 @@ const ChatWidget = dynamic(() => import("@/components/ChatWidget"), { ssr: false
 const CookieBanner = dynamic(() => import("@/components/CookieBanner"), { ssr: false });
 const NoiseOverlay = dynamic(() => import("@/components/NoiseOverlay"), { ssr: false });
 const A11yAudit = dynamic(() => import("@/components/A11yAudit"), { ssr: false });
+const WebVitalsTracker = dynamic(
+  () => import("@/lib/web-vitals-tracker").then((m) => m.WebVitalsTracker),
+  { ssr: false },
+);
 
 export default function ClientComponents() {
   return (
     <>
       <A11yAudit />
+      <WebVitalsTracker />
       <ChatWidget />
       <NoiseOverlay />
       <CookieBanner />

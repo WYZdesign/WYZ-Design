@@ -69,7 +69,17 @@ function Carousel({ images, direction = "left" }: { images: string[]; direction?
       if (!paused.current && el) {
         offsetRef.current -= speed * dirRef.current;
         const half = el.scrollWidth / 2;
-        if (Math.abs(offsetRef.current) >= half) offsetRef.current += half;
+        // 2026-10-29 (Claude): offsetRef drifts negative for direction="left"
+        // (dirRef=1) but positive for direction="right" (dirRef=-1) -- the old
+        // single-branch `+= half` only wrapped the negative case back toward
+        // 0; for the positive case it pushed the offset even further away
+        // (+half -> +half+half), so it never wrapped and grew unbounded,
+        // eventually scrolling the whole track out of view (confirmed live:
+        // the Flyers carousel -- the only one using direction="right" --
+        // renders blank once its translateX passes the viewport). Wrap both
+        // directions back toward [-half, half) explicitly.
+        if (offsetRef.current <= -half) offsetRef.current += half;
+        else if (offsetRef.current >= half) offsetRef.current -= half;
         el.style.transform = `translateX(${offsetRef.current}px)`;
       }
       raf = requestAnimationFrame(tick);

@@ -36,6 +36,7 @@ export default function BlogPage() {
  <style>{`
  .blog-card{transition:all .35s ease}
  .blog-card:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(0,0,0,.1)}
+ .dark .blog-card:hover{box-shadow:0 16px 32px rgba(0,0,0,.45)}
  .blog-card:hover .blog-img{transform:scale(1.08)}
  .blog-img{transition:transform .6s ease}
  @keyframes heroGradBlog{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}

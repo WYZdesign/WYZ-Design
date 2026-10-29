@@ -10,9 +10,12 @@ import type { FormEntry, User, Subscriber, ChatsData, ChatSession, NsfwAdminData
 import { Empty } from "@/components/admin/AdminShared";
 
 export function FormsTab({ data }: { data: FormEntry[] }) {
+  // Hook must run before the early return below, or React throws
+  // 'Rendered more hooks than during the previous render' the moment
+  // this tab goes from empty data to populated data while mounted.
+  const [filter, setFilter] = useState<string>("all");
   if (!data.length) return <Empty>No form submissions yet</Empty>;
   const types = [...new Set(data.map(f => f.formType))];
-  const [filter, setFilter] = useState<string>("all");
   const filtered = filter === "all" ? data : data.filter(f => f.formType === filter);
   return (
     <div className="space-y-6">

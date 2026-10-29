@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
-@variant dark (&:where(.dark, .dark *));
+@layer base {
+  :where(html, body) { font-family: var(--font-body); font-size: var(--font-size-body); line-height: var(--line-height-body); }
+}
+
+@import "./design-tokens.css";
 
 @theme inline {
   --color-wyz-bg: #FFFFFF;
@@ -81,7 +85,20 @@ h3 { max-width: 75%; margin-left: auto; margin-right: auto; }
 .dark ::selection { background: rgba(223, 49, 49, 0.3); color: #e0e0e0; }
 
 /* ── NAV ── */
+/* 2026-10-27 (Claude): wrapped in @layer base. This rule has no media
+   query -- it was applying at every viewport, not just mobile -- and being
+   bare/un-layered/non-!important, it was silently out-ranking every nav
+   link and button's own text-[Npx] utility everywhere on the site (e.g.
+   Navbar.tsx's text-[14px] links were computing 15px; the blog pagination
+   "Prev"/"Next" buttons' text-[12px] were computing 15px). Same bug, same
+   fix as the other four spots already wrapped elsewhere in this file --
+   just the one instance that wasn't scoped to a mobile media query, so it
+   was missed in the earlier passes that specifically grepped mobile
+   @media blocks. letter-spacing stays a sensible shared default either
+   way; only font-size needed to stop fighting component classes. */
+@layer base {
 nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
+}
 
 /* ── BUTTONS ── */
 .btn-primary {
@@ -503,6 +520,7 @@ button:not(:disabled), a, [role="button"] {
 button:not(:disabled):active, a:active, [role="button"]:active { transform: scale(.97); }
 .wz-lift { transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease; }
 .wz-lift:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,.14); }
+.dark .wz-lift:hover { box-shadow: 0 14px 34px rgba(0,0,0,.45); }
 .wz-underline { background-image: linear-gradient(#C9A227, #C9A227); background-size: 0% 2px;
   background-position: 0 100%; background-repeat: no-repeat; transition: background-size .3s ease; }
 .wz-underline:hover { background-size: 100% 2px; }
@@ -670,9 +688,40 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: scal
   color: var(--dm-muted) !important;
 }
 
-/* Dark mode card shadows — visible elevation */
-.dark [class*="shadow"] {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.5) !important;
+/* Dark mode card shadows — visible elevation.
+   2026-10-29: this used to be one blanket rule (`.dark [class*="shadow"]`)
+   that force-set every single shadow-using element to the exact same
+   flat `0 2px 12px rgba(0,0,0,.5)`, `!important`. Two real problems with
+   that: (1) it erased the shadow-sm/md/lg/xl/2xl depth hierarchy that
+   light mode has -- every card read at the same flat elevation in dark
+   mode no matter which size utility it actually used; (2) far more
+   visibly, it clobbered every `shadow-lg shadow-[#DF3131]/30`-style
+   colored brand-glow (active tabs, CTA hovers, the red ring on hero
+   images -- dozens of these across the site) with a plain grey shadow,
+   so the one signature "glows red" touch light mode has was simply
+   missing in dark mode. Confirmed live via computed style on the FAQ
+   page's active filter pill: it was rendering flat black instead of its
+   own `shadow-[#DF3131]/20`.
+   Fixed by excluding anything that pairs a shadow utility with a
+   Tailwind shadow-color value (`shadow-[...]` or `shadow-black`, the
+   only two color forms used in this codebase) -- those already compose
+   a correctly-tinted, already-visible shadow on their own and need no
+   dark-mode help -- and by tiering the remaining plain shadow-sm through
+   shadow-2xl overrides instead of flattening them to one value. */
+.dark [class*="shadow-sm"]:not([class*="shadow-["]):not([class*="shadow-black"]) {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.35) !important;
+}
+.dark [class*="shadow-md"]:not([class*="shadow-["]):not([class*="shadow-black"]) {
+  box-shadow: 0 4px 10px -1px rgba(0,0,0,0.45), 0 2px 4px -2px rgba(0,0,0,0.4) !important;
+}
+.dark [class*="shadow-lg"]:not([class*="shadow-["]):not([class*="shadow-black"]) {
+  box-shadow: 0 10px 20px -3px rgba(0,0,0,0.5), 0 4px 6px -4px rgba(0,0,0,0.45) !important;
+}
+.dark [class*="shadow-xl"]:not([class*="shadow-["]):not([class*="shadow-black"]) {
+  box-shadow: 0 20px 30px -5px rgba(0,0,0,0.55), 0 8px 10px -6px rgba(0,0,0,0.5) !important;
+}
+.dark [class*="shadow-2xl"]:not([class*="shadow-["]):not([class*="shadow-black"]) {
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6) !important;
 }
 
 /* All form inputs — prevent iOS auto-zoom with 16px minimum */
@@ -1799,6 +1848,7 @@ h3, h4 { margin-bottom: 0.5rem; }
 .hover-lift { transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; will-change: transform; }
 @media (hover: hover) {
   .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 18px 44px -20px rgba(0,0,0,.5); }
+  .dark .hover-lift:hover { box-shadow: 0 18px 44px -16px rgba(0,0,0,.8); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hover-lift { transition: none; }

@@ -36,7 +36,17 @@ export function SmoothCarousel({ items, className = "", speed = 0.5, direction =
   if (!paused.current && el) {
   offsetRef.current -= speed * dirRef.current;
   const half = el.scrollWidth / 2;
-  if (Math.abs(offsetRef.current) >= half) offsetRef.current += half;
+  // 2026-10-29 (Claude): offsetRef drifts negative for direction="left"
+  // (dirRef=1) but positive for direction="right" (dirRef=-1) -- the old
+  // single-branch `+= half` only wrapped the negative case back toward 0;
+  // for direction="right" it pushed the offset even further positive
+  // instead of wrapping, so it grew unbounded and eventually scrolled the
+  // whole track out of view (same bug confirmed live on the designs page's
+  // Flyers carousel, the only one there using direction="right" -- this
+  // component's hero image-gallery-strip instance uses it too). Wrap both
+  // directions back toward [-half, half) explicitly.
+  if (offsetRef.current <= -half) offsetRef.current += half;
+  else if (offsetRef.current >= half) offsetRef.current -= half;
   el.style.transform = `translateX(${offsetRef.current}px)`;
   }
   raf = requestAnimationFrame(tick);

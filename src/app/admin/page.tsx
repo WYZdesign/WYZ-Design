@@ -6,7 +6,7 @@
 import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import { FiMenu, FiLogOut } from "react-icons/fi";
+import { FiMenu, FiLogOut, FiChevronLeft } from "react-icons/fi";
 import { logger } from "@/lib/logger";
 import { NAV_SECTIONS, type TabId } from "@/lib/types/admin";
 import { Loader, PageLoader, AccountAuth, NotAuthorized } from "@/components/admin/AdminShared";
@@ -24,6 +24,46 @@ const ADMIN_STYLES = `
 .admin-scrollbar::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 4px; }
 .admin-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }
 .admin-scrollbar::-webkit-scrollbar-corner { background: #1a1a1a; }
+
+/* Collapse/expand handle: a tab that sticks out of the sidebar's right
+   edge so it reads as a grabbable control instead of a button hiding
+   inside the header row. Same handle serves both the mobile drawer and
+   the desktop rail. */
+.admin-sidebar-handle {
+  position: absolute;
+  top: 72px;
+  right: -14px;
+  width: 28px;
+  height: 44px;
+  border-radius: 0 10px 10px 0;
+  background: #161616;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-left: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.35);
+}
+.admin-sidebar-handle:hover, .admin-sidebar-handle:focus-visible {
+  background: #1c1c1c;
+  color: #DF3131;
+  box-shadow: 2px 0 16px rgba(223,49,49,0.35);
+  transform: translateX(1px);
+}
+.admin-sidebar-handle:focus-visible { outline: 2px solid rgba(223,49,49,0.6); outline-offset: 1px; }
+.admin-sidebar-handle svg { transition: transform 0.3s ease; }
+.admin-sidebar-handle.is-collapsed svg { transform: rotate(180deg); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .admin-tab-enter { animation: adminTabEnter 0.28s ease both; }
+}
+@keyframes adminTabEnter {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 `;
 
 export default function AdminDashboard() {
@@ -79,11 +119,16 @@ export default function AdminDashboard() {
       <style>{ADMIN_STYLES}</style>
       {sidebarOpen && <div className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={() => setSidebarOpen(false)} />}
       <aside className={`fixed inset-y-0 left-0 z-40 bg-[#111] border-r border-white/10 transition-all duration-300 flex flex-col w-72 -translate-x-full lg:translate-x-0 lg:w-16 ${sidebarOpen ? "translate-x-0 lg:w-72" : ""}`}>
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className={`admin-sidebar-handle${sidebarOpen ? "" : " is-collapsed"}`}
+          aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
+          aria-expanded={sidebarOpen}
+        >
+          <FiChevronLeft className="w-4 h-4" />
+        </button>
         <div className="h-16 flex items-center px-4 border-b border-white/10">
-          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="w-8 h-8 flex items-center justify-center text-white/60 hover:text-white transition-colors" aria-label="Toggle sidebar">
-            {sidebarOpen ? "\u25C1" : "\u25B7"}
-          </button>
-          {sidebarOpen && <span className="ml-3 text-[13px] font-heading font-bold tracking-[0.15em] uppercase">WYZ Admin</span>}
+          {sidebarOpen && <span className="text-[13px] font-heading font-bold tracking-[0.15em] uppercase">WYZ Admin</span>}
         </div>
          <nav className="flex-1 overflow-y-auto admin-scrollbar py-4">
           {NAV_SECTIONS.map(section => (
@@ -121,10 +166,10 @@ export default function AdminDashboard() {
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30 whitespace-nowrap">ADMIN</span>
-            <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors whitespace-nowrap">\u2190 Site</Link>
+            <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors whitespace-nowrap">\u2190 <span className="hidden sm:inline">Site</span></Link>
           </div>
         </header>
-        <div className="p-4 sm:p-8 max-w-full">
+        <div key={tab} className="admin-tab-enter p-4 sm:p-8 max-w-full">
           {tab === "profile" ? <ProfileTab session={session} update={update} signOut={signOut} /> :
            tab === "bugs" ? <BugReportTab session={session} /> :
            loading ? <Loader /> : data?.forbidden ? <NotAuthorized /> : (
