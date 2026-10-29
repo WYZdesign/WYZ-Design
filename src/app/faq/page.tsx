@@ -148,6 +148,7 @@ export default function FAQPage() {
       <style>{`
         .faq-item{transition:all .3s ease}
         .faq-item:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+        .dark .faq-item:hover{box-shadow:0 8px 24px rgba(0,0,0,.3)}
       `}</style>
 
       <style>{`
@@ -157,28 +158,17 @@ export default function FAQPage() {
       <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
         {/* Hero */}
         <ScrollReveal animation="fadeUp" duration={1}>
-          <div className="relative overflow-hidden -mx-6 lg:-mx-12 mb-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] max-h-[800px]">
-              <div className="relative overflow-hidden flex items-center justify-center w-screen ml-[calc(50%-50vw)] wz-grad-inline" style={{background:"linear-gradient(-45deg, rgba(223,49,49,0.8), rgba(26,26,26,0.9), rgba(139,0,0,0.7), rgba(42,42,42,0.85), rgba(223,49,49,0.8))",backgroundSize:"400% 400%",animation:"heroGradFaq 8s ease infinite"}}>
-                <video src="/videos/wyz-nav-bg.mp4" muted loop autoPlay playsInline preload="none" className="hidden lg:block absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/80 to-[#1a1a1a]/90" />
-                <div className="relative z-10 text-center px-8">
-                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto">
-                    <FiHelpCircle className="w-8 h-8 text-[#DF3131]" />
-                  </div>
-                  <TextReveal text="F.A.Q." className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] leading-[1.05] mb-4" tag="h1" />
-                  <p className="text-white/70 text-base sm:text-lg max-w-md mx-auto">Simplifying Creative Success, Find answers to everything</p>
+          <div className="relative overflow-hidden mb-12">
+            <div className="relative overflow-hidden flex items-center justify-center min-h-[60vh] max-h-[600px] bg-gradient-to-br from-[#DF3131]/20 via-transparent to-[#1a1a1a]/20">
+              <video src="/videos/wyz-nav-bg.mp4" muted loop autoPlay playsInline preload="none" className="absolute inset-0 w-full h-full object-cover opacity-30" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/60 to-[#1a1a1a]/80" />
+              <div className="relative z-10 text-center px-8">
+                <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6 shadow-lg mx-auto">
+                  <FiHelpCircle className="w-8 h-8 text-[#DF3131]" />
                 </div>
-              </div>
-              <div className="hidden lg:flex flex-col items-center justify-center h-full px-10 lg:px-16 text-center bg-white dark:bg-[#1C1C1E]">
-                <div className="grid grid-cols-3 gap-6 mb-8">
-                  <AnimatedCounter end={12} suffix="+" className="font-heading font-black text-[2.25rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Questions" />
-                  <AnimatedCounter end={6} className="font-heading font-black text-[2.25rem] text-[#333] dark:text-white" labelClassName="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase" label="Topics" />
-                  <div className="text-center">
-                    <p className="font-heading font-black text-[2.25rem] text-[#333] dark:text-white">24/7</p>
-                    <p className="text-[11px] text-[#666] dark:text-white/50 tracking-[0.1em] uppercase">AI Answers</p>
-                  </div>
-                </div>
+                <TextReveal text="FREQUENTLY ASKED" className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-white tracking-[0.08em] leading-[1.05] mb-2" tag="h1" />
+                <TextReveal text="QUESTIONS" className="text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[3rem] font-heading font-black text-[#DF3131] tracking-[0.08em] leading-[1.05] mb-4" tag="span" />
+                <p className="text-white/70 text-base sm:text-lg max-w-md mx-auto">Simplifying Creative Success — Find Answers to Everything</p>
               </div>
             </div>
           </div>

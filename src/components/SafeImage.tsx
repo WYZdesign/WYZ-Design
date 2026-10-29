@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface SafeImageProps {
   src: string;
@@ -17,6 +17,7 @@ interface SafeImageProps {
   style?: React.CSSProperties;
   quality?: number;
   blurWidth?: number;
+  hideOnError?: boolean;
 }
 
 function getWebPSources(src: string): { webp: string; fallback: string } {
@@ -71,10 +72,21 @@ export default function SafeImage({
   priority,
   style,
   quality = 75,
+  hideOnError,
   ...imgProps
 }: SafeImageProps & React.ImgHTMLAttributes<HTMLImageElement>) {
   const [broken, setBroken] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const img = imgRef.current;
+    if (!img) return;
+    if (img.complete) {
+      if (img.naturalWidth > 0) setLoaded(true);
+      else if (img.src) setBroken(true);
+    }
+  }, [src]);
 
   const resolvedLoading = priority ? "eager" : (loading || "lazy");
 
@@ -85,6 +97,7 @@ export default function SafeImage({
   const bypassed = isLocal && !optimizedBase.startsWith("/_next/image");
 
   if (broken) {
+    if (hideOnError) return null;
     return (
       <div className={`bg-[#f5f5f5] flex items-center justify-center text-[#666] text-[11px] font-bold tracking-[0.1em] uppercase ${className}`} style={{ minHeight: 60 }}>
         {alt || "IMG"}
@@ -99,6 +112,7 @@ export default function SafeImage({
       <picture>
         {!bypassed && <source srcSet={sources.webp} type="image/webp" />}
         <img
+          ref={imgRef}
           src={sources.fallback}
           alt={alt}
           className={`${className} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
@@ -117,6 +131,7 @@ export default function SafeImage({
     <picture>
       {!bypassed && <source srcSet={sources.webp} type="image/webp" />}
       <img
+        ref={imgRef}
         src={sources.fallback}
         alt={alt}
         className={`${className} ${loaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}

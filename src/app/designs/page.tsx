@@ -7,7 +7,6 @@ import Image from "next/image";
 import { FiArrowRight, FiSearch } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import ParallaxVideo from "@/components/ParallaxVideo";
-import SafeImage from "@/components/SafeImage";
 import { LOGOS_IMAGES, COVER_ART_WYZ, FLYERS_IMAGES } from "@/data/designs-data";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 import ScrollParallaxCard from "@/components/ScrollParallaxCard";
@@ -39,7 +38,7 @@ const CASE_STUDIES = [
   { slug: "gft-foods", name: "GFT Foods", tag: "Food & Beverage", blurb: "Complete rebrand, packaging design, and e-commerce for a food brand.", stat: "Full Rebrand", accent: "#6fcf6f" },
 ];
 
-function Carousel({ images, direction = "left", whiteBgInDark }: { images: string[]; direction?: "left" | "right"; whiteBgInDark?: boolean; scrollRef?: React.RefObject<HTMLDivElement | null> }) {
+function Carousel({ images, direction = "left" }: { images: string[]; direction?: "left" | "right"; scrollRef?: React.RefObject<HTMLDivElement | null> }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const paused = useRef(false);
@@ -47,6 +46,9 @@ function Carousel({ images, direction = "left", whiteBgInDark }: { images: strin
   const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartX = useRef<number | null>(null);
   const dirRef = useRef(direction === "right" ? -1 : 1);
+  const imgRefs = useRef<Map<number, HTMLImageElement>>(new Map());
+
+  const CAROUSEL_H = "h-[232px] sm:h-[338px] md:h-[423px]";
 
   useEffect(() => { dirRef.current = direction === "right" ? -1 : 1; }, [direction]);
 
@@ -98,6 +100,12 @@ function Carousel({ images, direction = "left", whiteBgInDark }: { images: strin
     clickTimer.current = setTimeout(() => { paused.current = false; }, 3000);
   };
 
+  const handleImgLoad = (idx: number) => (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const img = e.currentTarget;
+    img.style.opacity = "1";
+    imgRefs.current.set(idx, img);
+  };
+
   // Never show the same piece twice in one carousel.
   const unique = Array.from(new Set(images));
   const doubled = [...unique, ...unique];
@@ -106,8 +114,17 @@ function Carousel({ images, direction = "left", whiteBgInDark }: { images: strin
     <div ref={sectionRef} aria-hidden="true" className="overflow-hidden" onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
         {doubled.map((src, i) => (
-          <div key={i} className={`flex-none w-[42.32vw] sm:w-[305px] md:w-[423px] h-[232px] sm:h-[338px] md:h-[423px] relative overflow-hidden rounded-sm bg-[#F2F2F2] dark:bg-[#1C1C1E] ${whiteBgInDark ? "dark:bg-white" : ""}`}>
-            <SafeImage src={src} alt="WYZ Design portfolio" width={384} loading="eager" className="absolute inset-0 w-full h-full object-contain" />
+          <div key={i} className={`flex-none w-[42.32vw] sm:w-[305px] md:w-[423px] ${CAROUSEL_H} relative overflow-hidden rounded-sm`}>
+            <Image
+              src={src}
+              alt="WYZ Design portfolio"
+              fill
+              sizes="(max-width:640px) 42vw, 423px"
+              loading="eager"
+              decoding="async"
+              onLoad={handleImgLoad(i)}
+              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
+            />
           </div>
         ))}
       </div>
@@ -320,7 +337,7 @@ export default function DesignsPage() {
    <h2 className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] xl:text-[3rem] font-heading font-black text-[#333] dark:text-[#e0e0e0] tracking-[0.06em] mb-2 sm:mb-4">Logos</h2>
    <Link href="/designs/gallery/logos" className="text-[14px] font-bold tracking-[0.08em] text-[#333] dark:text-[#e0e0e0] hover:text-[#DF3131] transition-colors flex items-center gap-1">Browse all <FiArrowRight className="w-3 h-3" /></Link>
   </div>
-  <Carousel images={shuffledLogos} direction="left" whiteBgInDark scrollRef={logosScrollRef} />
+  <Carousel images={shuffledLogos} direction="left" scrollRef={logosScrollRef} />
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12 flex justify-end mt-3">
   </div>
    </section>
