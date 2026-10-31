@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs/config";
 
 const nextConfig: NextConfig = {
   typescript: { ignoreBuildErrors: false },
@@ -180,4 +181,13 @@ const nextConfig: NextConfig = {
   turbopack: {},
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  org: "wyzdesign",
+  project: "wyzdesign",
+  silent: true,
+  widenClientFileUpload: true,
+  reactComponentAnnotation: { enabled: true },
+  hideSourceMaps: true,
+  disableLogger: true,
+  automaticVercelMonitors: true,
+});

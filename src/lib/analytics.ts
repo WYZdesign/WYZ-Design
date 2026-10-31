@@ -201,7 +201,58 @@ export async function getPageviews(filters?: {
 
 // ─── EVENTS ───
 
-export function logEvent(event_type: string, path: string, label = "", value = 0, metadata = "{}", session_id = ""): void {
+/** Standard event types for the enhanced analytics suite. */
+export const ANALYTICS_EVENTS = {
+  // Page/session lifecycle
+  PAGEVIEW: "pageview",
+  SESSION_START: "session_start",
+  SESSION_END: "session_end",
+
+  // Engagement
+  SCROLL_DEPTH: "scroll_depth",          // label: "25" | "50" | "75" | "100", value: percent
+  TIME_ON_PAGE: "time_on_page",          // value: milliseconds
+
+  // Forms & conversion
+  FORM_START: "form_start",              // label: form name (e.g., "booking", "contact")
+  FORM_SUBMIT: "form_submit",            // label: form name, value: 1
+  FORM_ERROR: "form_error",              // label: form name, metadata: { field, error }
+
+  // Booking flow
+  BOOKING_STEP: "booking_step",          // label: step name (e.g., "select_date", "select_service", "confirm"), value: step number
+  BOOKING_COMPLETE: "booking_complete",  // value: order total, metadata: { service, date, total }
+
+  // Commerce
+  CART_ADD: "cart_add",                  // metadata: { product_id, price, qty }
+  CART_REMOVE: "cart_remove",            // metadata: { product_id }
+  CHECKOUT_START: "checkout_start",
+  CHECKOUT_COMPLETE: "checkout_complete", // value: order total
+
+  // Content engagement
+  IMAGE_VIEW: "image_view",              // label: image path/id
+  VIDEO_PLAY: "video_play",              // label: video id
+  VIDEO_COMPLETE: "video_complete",      // label: video id
+  DOWNLOAD: "download",                  // label: file name/path
+
+  // Navigation
+  CTA_CLICK: "cta_click",                // label: CTA text/id, metadata: { destination }
+  NAV_CLICK: "nav_click",                // label: nav item
+  LINK_CLICK: "link_click",              // label: link text, metadata: { href, external: boolean }
+
+  // SEO / external
+  SEO_CHECK: "seo_check",                // metadata: { url, score, issues }
+  OUTBOUND_CLICK: "outbound_click",      // label: domain, metadata: { href }
+
+  // Errors
+  ERROR: "error",                        // label: error type, metadata: { message, stack }
+  JS_ERROR: "js_error",                  // metadata: { message, filename, lineno, colno }
+
+  // Custom
+  CUSTOM: "custom",
+} as const;
+
+export type AnalyticsEventType = typeof ANALYTICS_EVENTS[keyof typeof ANALYTICS_EVENTS];
+
+export function logEvent(event_type: AnalyticsEventType | string, path: string, label = "", value = 0, metadata = "{}", session_id = ""): void {
   const ev: AnalyticsEvent = {
     id: ++evSeq,
     event_type,
