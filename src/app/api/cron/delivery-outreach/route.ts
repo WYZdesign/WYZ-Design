@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
 import { logger } from "@/lib/logger";
+import { markCronRun } from "@/lib/cron-heartbeat";
 import { sendEmail } from "@/lib/email";
 import {
   OUTREACH_STAGES,
@@ -156,6 +157,7 @@ export async function GET(req: NextRequest) {
 
     const summary = `phase ${OUTREACH_PHASE}: sent ${sent.length}, previewed ${previews.length}, opted-out ${optedOut}, cadence-held ${cadenceSkipped}, failed ${failed}${dryRun ? " (dry run)" : ""}`;
     logger.info("cron:delivery-outreach", summary);
+    await markCronRun("delivery-outreach", true, summary);
     return NextResponse.json({
       ok: true,
       phase: OUTREACH_PHASE,
@@ -169,6 +171,7 @@ export async function GET(req: NextRequest) {
     });
   } catch (e) {
     logger.error("cron:delivery-outreach", e instanceof Error ? e.message : String(e));
+    await markCronRun("delivery-outreach", false, e instanceof Error ? e.message : String(e));
     return NextResponse.json({ error: "Outreach runner failed" }, { status: 500 });
   }
 }

@@ -21,6 +21,11 @@ export interface RedisLike {
   setex(key: string, seconds: number, value: string): Promise<"OK" | null>;
   keys(pattern: string): Promise<string[]>;
   ping(): Promise<string>;
+  hincrby(key: string, field: string, n: number): Promise<number>;
+  hgetall(key: string): Promise<Record<string, string> | null>;
+  expire(key: string, seconds: number): Promise<number>;
+  pfadd(key: string, ...members: string[]): Promise<number>;
+  pfcount(key: string): Promise<number>;
 }
 
 /**
@@ -95,6 +100,26 @@ export function getRedis(): RedisLike {
       },
       async ping() {
         return r.ping();
+      },
+      async hincrby(key, field, n) {
+        const res = await r.hincrby(key, field, n);
+        return typeof res === "number" ? res : 0;
+      },
+      async hgetall(key) {
+        const res = await r.hgetall<Record<string, string>>(key);
+        return res && typeof res === "object" ? res : null;
+      },
+      async expire(key, seconds) {
+        const res = await r.expire(key, seconds);
+        return typeof res === "number" ? res : 0;
+      },
+      async pfadd(key, ...members) {
+        const res = await r.pfadd(key, ...members);
+        return typeof res === "number" ? res : 0;
+      },
+      async pfcount(key) {
+        const res = await r.pfcount(key);
+        return typeof res === "number" ? res : 0;
       },
     };
   }

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
 import { logger } from "@/lib/logger";
+import { markCronRun } from "@/lib/cron-heartbeat";
 
 /**
  * Housekeeping cron: cleans up abandoned merch checkouts.
@@ -58,9 +59,11 @@ export async function GET(req: NextRequest) {
     }
 
     logger.info("cron:cleanup-orders", `released ${released} reservations, deleted ${ids.length} pending orders`);
+    await markCronRun("cleanup-orders", true, `released ${released}, deleted ${ids.length} pending orders`);
     return NextResponse.json({ ok: true, cutoff, released, ordersDeleted: ids.length });
   } catch (e) {
     logger.error("cron:cleanup-orders", e instanceof Error ? e.message : String(e));
+    await markCronRun("cleanup-orders", false, e instanceof Error ? e.message : String(e));
     return NextResponse.json({ error: "Cleanup failed" }, { status: 500 });
   }
 }

@@ -34,6 +34,7 @@ export default function CustomCursor() {
   const lastKind = useRef("");
   const applied = useRef({ size: -1, border: -1, color: "", opacity: -1 });
   const rippleRef = useRef<HTMLDivElement>(null);
+  const crownRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -137,6 +138,16 @@ export default function CustomCursor() {
           a.opacity = s.opacity;
         }
         el.style.transform = `translate3d(${c.x - s.size / 2}px, ${c.y - s.size / 2}px, 0) scale(${shrink})`;
+        // Crown glyph, sized to the ring and tinted with the same contrast
+        // colour so it stays readable on light and dark targets.
+        const crown = crownRef.current;
+        if (crown) {
+          const cw = Math.max(9, Math.round(s.size * 0.46));
+          crown.style.width = `${cw}px`;
+          crown.style.height = `${Math.round(cw * 0.78)}px`;
+          crown.style.fill = s.color;
+          crown.style.opacity = s.opacity > 0.6 ? "0.95" : "0.75";
+        }
       }
       if (trailRef.current) {
         trailRef.current.style.transform = `translate3d(${t.x - 4}px, ${t.y - 4}px, 0)`;
@@ -180,7 +191,14 @@ export default function CustomCursor() {
           willChange: "transform",
         }}
       >
-        <span style={{ position: "absolute", left: "50%", top: "50%", width: 4, height: 4, marginLeft: -2, marginTop: -2, borderRadius: "50%", background: "#FFD700", boxShadow: "0 0 0 1px rgba(0,0,0,0.55)" }} />
+        <svg
+          ref={crownRef}
+          viewBox="0 0 18 14"
+          aria-hidden="true"
+          style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%, -50%)", width: 9, height: 7, fill: "#FFD700" }}
+        >
+          <path d="M1 13 L0.6 4.2 L4.9 7 L9 0.8 L13.1 7 L17.4 4.2 L17 13 Z" />
+        </svg>
       </div>
       <div
         ref={trailRef}

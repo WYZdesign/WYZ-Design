@@ -52,6 +52,30 @@ function evKey(date: string): string {
   return `analytics:ev:${date}`;
 }
 
+/**
+ * Durable per-day rollup used by the 30/90-day summary. Written with HINCRBY
+ * (no read-modify-write race) and kept for 40 days so a 30-day range actually
+ * exists. Key layout:
+ *   v            total views
+ *   p:<path>     views per path
+ *   pd:<path>    duration sum per path (ms)
+ *   r:<ref>      referrer counts
+ *   m:<utm>      utm_source counts
+ *   d:/b:/o:     device / browser / os counts
+ *   s:<session>  views per session (bounce + pages-per-session)
+ *   analytics:uniq:<date> = HyperLogLog of visitor ids
+ */
+function dayKey(date: string): string {
+  return `analytics:day:${date}`;
+}
+
+function uniqKey(date: string): string {
+  return `analytics:uniq:${date}`;
+}
+
+/** 40 days. Previously 24h, which made a 30-day summary structurally empty. */
+const ANALYTICS_TTL = 60 * 60 * 24 * 40;
+
 function todayKey(): string {
   return new Date().toISOString().slice(0, 10);
 }
@@ -103,7 +127,30 @@ export function logPageview(input: PageviewInput): void {
   };
   const r = redis();
   if (r) {
-    void r.setex(`${pvKey(todayKey())}:${ts}`, 86400, JSON.stringify(pv)).catch((e: unknown) => logger.warn("analytics:pg", e instanceof Error ? e.message : String(e)));
+    const day = todayKey();
+    const dk = dayKey(day);
+    // Visitor id: ip hash when the salt is configured, else the session id.
+    const uid = pv.ip_hash && pv.ip_hash !== "no-salt-configured" ? pv.ip_hash : pv.session_id || "anon";
+    const job = async () => {
+      await r.setex(`${pvKey(day)}:${ts}`, ANALYTICS_TTL, JSON.stringify(pv));
+      const ops: Promise<unknown>[] = [
+        r.hincrby(dk, "v", 1),
+        r.hincrby(dk, `r:${pv.referrer || "(direct)"}`, 1),
+        r.hincrby(dk, `m:${pv.utm_source || "(none)"}`, 1),
+        r.hincrby(dk, `d:${pv.device || "unknown"}`, 1),
+        r.hincrby(dk, `b:${pv.browser || "other"}`, 1),
+        r.hincrby(dk, `o:${pv.os || "other"}`, 1),
+        r.hincrby(dk, `s:${pv.session_id || "anon"}`, 1),
+        r.pfadd(uniqKey(day), uid),
+      ];
+      if (pv.path) {
+        ops.push(r.hincrby(dk, `p:${pv.path}`, 1));
+        if (pv.duration_ms > 0) ops.push(r.hincrby(dk, `pd:${pv.path}`, pv.duration_ms));
+      }
+      await Promise.all(ops);
+      await Promise.all([r.expire(dk, ANALYTICS_TTL), r.expire(uniqKey(day), ANALYTICS_TTL)]);
+    };
+    void job().catch((e: unknown) => logger.warn("analytics:pg", e instanceof Error ? e.message : String(e)));
     return;
   }
   // in-memory no-op fallback: data won't persist, but the request won't crash.
@@ -167,7 +214,7 @@ export function logEvent(event_type: string, path: string, label = "", value = 0
   };
   const r = redis();
   if (r) {
-    void r.setex(`${evKey(todayKey())}:${ts()}:${event_type}`, 86400, JSON.stringify(ev)).catch((e: unknown) => logger.warn("analytics:ev", e instanceof Error ? e.message : String(e)));
+    void r.setex(`${evKey(todayKey())}:${ts()}:${event_type}`, ANALYTICS_TTL, JSON.stringify(ev)).catch((e: unknown) => logger.warn("analytics:ev", e instanceof Error ? e.message : String(e)));
     return;
   }
 }
@@ -206,32 +253,11 @@ export async function getAnalyticsSummary(days = 30): Promise<AnalyticsSummary> 
   const r = redis();
   if (!r) return EMPTY_SUMMARY(days);
   try {
-    const now = Date.now();
-    const from = new Date(now - days * 86400000).toISOString().slice(0, 10);
-    const to = new Date().toISOString().slice(0, 10);
-
-    // Gather pageviews from Redis keys across the date range
-    const allPvs: Pageview[] = [];
-    const daily: Record<string, Pageview[]> = {};
-    for (let d = new Date(from); d <= new Date(to); d.setUTCDate(d.getUTCDate() + 1)) {
-      const day = d.toISOString().slice(0, 10);
-      const keys = await r.keys(`${pvKey(day)}:*`).catch(() => []);
-      for (const k of keys) {
-        const raw = await r.get(k).catch(() => null);
-        if (raw) {
-          const pv: Pageview = JSON.parse(raw);
-          allPvs.push(pv);
-          (daily[day] ||= []).push(pv);
-        }
-      }
-    }
-
-    if (allPvs.length === 0) return EMPTY_SUMMARY(days);
-
-    const total_pageviews = allPvs.length;
-    const unique_visitors = new Set(allPvs.map((p) => p.ip_hash).filter(Boolean)).size;
-    const unique_pages = new Set(allPvs.map((p) => p.path)).size;
-    const avg_duration_ms = Math.round(allPvs.reduce((s, p) => s + p.duration_ms, 0) / total_pageviews);
+    const today = new Date();
+    const start = new Date(
+      Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() - (days - 1))
+    );
+    const todayStr = today.toISOString().slice(0, 10);
 
     const byPath = new Map<string, { views: number; dur: number }>();
     const byRef = new Map<string, number>();
@@ -239,48 +265,97 @@ export async function getAnalyticsSummary(days = 30): Promise<AnalyticsSummary> 
     const byDevice = new Map<string, number>();
     const byBrowser = new Map<string, number>();
     const byOs = new Map<string, number>();
+    const daily_views: { date: string; views: number; unique: number }[] = [];
 
-    for (const pv of allPvs) {
-      const p = byPath.get(pv.path) || { views: 0, dur: 0 };
-      byPath.set(pv.path, { views: p.views + 1, dur: p.dur + pv.duration_ms });
-      const ref = pv.referrer || "(direct)";
-      byRef.set(ref, (byRef.get(ref) || 0) + 1);
-      const utm = pv.utm_source || "(none)";
-      byUtm.set(utm, (byUtm.get(utm) || 0) + 1);
-      const dev = pv.device || "unknown";
-      byDevice.set(dev, (byDevice.get(dev) || 0) + 1);
-      const br = pv.browser || "other";
-      byBrowser.set(br, (byBrowser.get(br) || 0) + 1);
-      const os = pv.os || "other";
-      byOs.set(os, (byOs.get(os) || 0) + 1);
+    let total_pageviews = 0;
+    let unique_visitors = 0;
+    let totalSessions = 0;
+    let singlePageSessions = 0;
+
+    for (let i = 0; i < days; i++) {
+      const d = new Date(start);
+      d.setUTCDate(d.getUTCDate() + i);
+      const date = d.toISOString().slice(0, 10);
+      if (date > todayStr) break;
+
+      const hash = await r.hgetall(dayKey(date)).catch(() => null);
+      const uniq = await r.pfcount(uniqKey(date)).catch(() => 0);
+      const views = hash ? Number(hash.v || 0) : 0;
+
+      if (hash) {
+        for (const [k, raw] of Object.entries(hash)) {
+          const n = Number(raw) || 0;
+          if (k.startsWith("pd:")) {
+            const path = k.slice(3);
+            const cur = byPath.get(path) || { views: 0, dur: 0 };
+            cur.dur += n;
+            byPath.set(path, cur);
+          } else if (k.startsWith("p:")) {
+            const path = k.slice(2);
+            const cur = byPath.get(path) || { views: 0, dur: 0 };
+            cur.views += n;
+            byPath.set(path, cur);
+          } else if (k.startsWith("r:")) {
+            const ref = k.slice(2);
+            byRef.set(ref, (byRef.get(ref) || 0) + n);
+          } else if (k.startsWith("m:")) {
+            const src = k.slice(2);
+            byUtm.set(src, (byUtm.get(src) || 0) + n);
+          } else if (k.startsWith("d:")) {
+            const dev = k.slice(2);
+            byDevice.set(dev, (byDevice.get(dev) || 0) + n);
+          } else if (k.startsWith("b:")) {
+            const br = k.slice(2);
+            byBrowser.set(br, (byBrowser.get(br) || 0) + n);
+          } else if (k.startsWith("o:")) {
+            const os = k.slice(2);
+            byOs.set(os, (byOs.get(os) || 0) + n);
+          } else if (k.startsWith("s:")) {
+            totalSessions += 1;
+            if (n <= 1) singlePageSessions += 1;
+          }
+        }
+        total_pageviews += views;
+      }
+
+      unique_visitors += uniq;
+      daily_views.push({ date, views, unique: uniq });
     }
 
-    const top_pages = [...byPath.entries()].map(([path, v]) => ({ path, views: v.views, avg_duration: Math.round(v.dur / v.views) })).sort((a, b) => b.views - a.views).slice(0, 10);
+    if (total_pageviews === 0 && unique_visitors === 0) return EMPTY_SUMMARY(days);
+
+    const unique_pages = byPath.size;
+    const durSum = [...byPath.values()].reduce((s, v) => s + v.dur, 0);
+    const avg_duration_ms = total_pageviews > 0 ? Math.round(durSum / total_pageviews) : 0;
+
+    const top_pages = [...byPath.entries()]
+      .map(([path, v]) => ({ path, views: v.views, avg_duration: v.views ? Math.round(v.dur / v.views) : 0 }))
+      .sort((a, b) => b.views - a.views)
+      .slice(0, 10);
     const top_referrers = [...byRef.entries()].map(([referrer, count]) => ({ referrer, count })).sort((a, b) => b.count - a.count).slice(0, 10);
     const top_utm_sources = [...byUtm.entries()].map(([source, count]) => ({ source, count })).sort((a, b) => b.count - a.count).slice(0, 10);
     const device_breakdown = [...byDevice.entries()].map(([device, count]) => ({ device, count })).sort((a, b) => b.count - a.count);
     const browser_breakdown = [...byBrowser.entries()].map(([browser, count]) => ({ browser, count })).sort((a, b) => b.count - a.count).slice(0, 8);
     const os_breakdown = [...byOs.entries()].map(([os, count]) => ({ os, count })).sort((a, b) => b.count - a.count).slice(0, 8);
 
-    // Bounce rate: sessions with only 1 pageview
-    const sessions = new Map<string, number>();
-    for (const pv of allPvs) {
-      if (pv.session_id) sessions.set(pv.session_id, (sessions.get(pv.session_id) || 0) + 1);
-    }
-    const singlePage = [...sessions.values()].filter((v) => v === 1).length;
-    const bounce_rate = sessions.size > 0 ? Math.round((singlePage / sessions.size) * 100) : 0;
-    const pages_per_session = sessions.size > 0 ? Math.round((total_pageviews / sessions.size) * 10) / 10 : 0;
-
-    const daily_views = Object.entries(daily).sort().map(([date, pvs]) => ({
-      date,
-      views: pvs.length,
-      unique: new Set(pvs.map((p) => p.ip_hash).filter(Boolean)).size,
-    }));
+    const bounce_rate = totalSessions > 0 ? Math.round((singlePageSessions / totalSessions) * 100) : 0;
+    const pages_per_session = totalSessions > 0 ? Math.round((total_pageviews / totalSessions) * 10) / 10 : 0;
 
     return {
-      period: `${days}d`, total_pageviews, unique_visitors, unique_pages, avg_duration_ms,
-      top_pages, top_referrers, top_utm_sources, device_breakdown, browser_breakdown, os_breakdown,
-      daily_views, bounce_rate, pages_per_session,
+      period: `${days}d`,
+      total_pageviews,
+      unique_visitors,
+      unique_pages,
+      avg_duration_ms,
+      top_pages,
+      top_referrers,
+      top_utm_sources,
+      device_breakdown,
+      browser_breakdown,
+      os_breakdown,
+      daily_views,
+      bounce_rate,
+      pages_per_session,
     };
   } catch (e) {
     logger.error("analytics:summary", e);

@@ -35,6 +35,7 @@ export default function MerchProductPage({ params }: { params: Promise<{ id: str
   const [color, setColor] = useState<string | null>(null);
   const [size, setSize] = useState<string | null>(null);
   const { addLine } = useCart();
+  const [related, setRelated] = useState<{ id: number; title: string; image: string; price: number }[]>([]);
 
   useEffect(() => {
     if (!productId || isNaN(productId)) {
@@ -55,6 +56,32 @@ export default function MerchProductPage({ params }: { params: Promise<{ id: str
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [productId]);
+
+  // "You might also like": same category first, then the rest of the catalog.
+  useEffect(() => {
+    if (!product) return;
+    let cancelled = false;
+    fetch("/api/printful-catalog")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (cancelled || !d || !Array.isArray(d.products)) return;
+        const all = (d.products as { id: number; title: string; image?: string; price?: number; category?: string }[])
+          .filter((p) => p.id !== product.id);
+        const want = (product.type || "").toLowerCase();
+        const same = all.filter((p) => (p.category || "").toLowerCase() === want);
+        const rest = all.filter((p) => !same.includes(p));
+        setRelated(
+          [...same, ...rest].slice(0, 4).map((p) => ({
+            id: p.id,
+            title: p.title,
+            image: p.image || "",
+            price: p.price || 0,
+          }))
+        );
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [product]);
 
   const sizesForColor = useMemo(() => {
     if (!product) return [];
@@ -231,6 +258,37 @@ export default function MerchProductPage({ params }: { params: Promise<{ id: str
           </ScrollReveal>
         </div>
       </div>
+
+      {related.length > 0 && (
+        <div className="max-w-7xl mx-auto px-6 pb-16 lg:pb-24">
+          <div className="border-t border-[#E2E2E2] dark:border-[#444] pt-10">
+            <h2 className="font-heading font-black text-[#333] dark:text-white text-xl tracking-[0.06em] uppercase mb-6">
+              You might also like
+            </h2>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {related.map((p) => (
+                <Link key={p.id} href={`/merch/${p.id}`} className="group block">
+                  <div className="relative aspect-square bg-[#f5f5f5] dark:bg-[#252528] rounded-lg overflow-hidden mb-3">
+                    {p.image ? (
+                      <SafeImage
+                        src={p.image}
+                        alt={p.title}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : null}
+                  </div>
+                  <p className="text-[12px] font-bold text-[#333] dark:text-white leading-snug line-clamp-2">{p.title}</p>
+                  {p.price > 0 && (
+                    <p className="text-[12px] text-[#DF3131] font-bold mt-1">{formatUSD(Math.round(p.price * 100))}</p>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

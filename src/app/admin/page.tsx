@@ -15,7 +15,7 @@ import { OverviewTab } from "@/components/admin/AdminOverviewTab";
 import { BookkeepingDashboard, IncomeTab, ExpensesTab, ReportsTab } from "@/components/admin/AdminFinanceTabs";
 import { AnalyticsTab, SeoTab, TrafficTab } from "@/components/admin/AdminGrowthTabs";
 import { FormsTab, UsersTab, NewsletterTab, ChatsTab, NsfwContentTab } from "@/components/admin/AdminManageTabs";
-import { HealthTab, ExportTab } from "@/components/admin/AdminSystemTabs";
+import { HealthTab, AutomationsTab, ExportTab } from "@/components/admin/AdminSystemTabs";
 
 const ADMIN_STYLES = `
 .admin-scrollbar { scrollbar-width: thin; scrollbar-color: #3a3a3a #1a1a1a; }
@@ -188,6 +188,7 @@ export default function AdminDashboard() {
               {tab === "chats" && <ChatsTab data={data} />}
               {tab === "nsfw" && <NsfwContentTab data={data} onRefresh={fetchTab} />}
               {tab === "health" && <HealthTab />}
+              {tab === "automations" && <AutomationsTab data={data} />}
               {tab === "export" && <ExportTab />}
             </>
           )}

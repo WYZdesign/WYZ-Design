@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase";
 import { sendBookingWhatsNext } from "@/lib/email";
 import { logger } from "@/lib/logger";
+import { markCronRun } from "@/lib/cron-heartbeat";
 
 /**
  * Day-before "What to Expect" email automation.
@@ -68,10 +69,12 @@ export async function GET(req: NextRequest) {
       }
     }
 
+    await markCronRun("booking-whatsnext", true, `sent ${sent}/${due.length} for ${target}`);
     return NextResponse.json({ ok: true, target, candidates: due.length, sent });
   } catch (e) {
     logger.error("cron:booking-whatsnext", e);
     const detail = e instanceof Error ? `${e.message}${e.cause ? " | cause: " + String(e.cause) : ""}` : String(e);
+    await markCronRun("booking-whatsnext", false, detail);
     return NextResponse.json({ error: "Failed to run booking whats-next", detail }, { status: 500 });
   }
 }

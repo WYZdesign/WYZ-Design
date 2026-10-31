@@ -4,6 +4,7 @@ import { getAllUsers, getDashboardStats, getNewsletterSubscribers } from "@/lib/
 import { getServiceClient } from "@/lib/supabase";
 import type { Session } from "next-auth";
 import { logger } from "@/lib/logger";
+import { getCronStatus, getIntegrationStatus } from "@/lib/cron-heartbeat";
 
 interface FormSubmission {
   id: string;
@@ -117,6 +118,13 @@ export async function GET(req: NextRequest) {
     }
 
     // Forms tab
+    if (tab === "automations") {
+      return NextResponse.json({
+        jobs: await getCronStatus(),
+        integrations: getIntegrationStatus(),
+      });
+    }
+
     if (tab === "forms") {
       return NextResponse.json({ submissions: await getFormSubmissions() });
     }

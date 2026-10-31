@@ -36,6 +36,7 @@ export const NAV_SECTIONS: { label: string; items: { id: string; icon: string; l
   ]},
   { label: "SYSTEM", items: [
     { id: "health", icon: "◎", label: "Health" },
+    { id: "automations", icon: "⟳", label: "Automations" },
     { id: "export", icon: "↓", label: "Export" },
   ]},
   { label: "PROFILE", items: [
@@ -44,7 +45,7 @@ export const NAV_SECTIONS: { label: string; items: { id: string; icon: string; l
   ]},
 ];
 
-export type TabId = "overview" | "bookkeeping" | "income" | "expenses" | "reports" | "analytics" | "seo" | "traffic" | "forms" | "users" | "newsletter" | "chats" | "nsfw" | "health" | "export" | "profile" | "bugs";
+export type TabId = "overview" | "bookkeeping" | "income" | "expenses" | "reports" | "analytics" | "seo" | "traffic" | "forms" | "users" | "newsletter" | "chats" | "nsfw" | "health" | "automations" | "export" | "profile" | "bugs";
 
 export interface NsfwAdminData {
   gatedCategories: string[];

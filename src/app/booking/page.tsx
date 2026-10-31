@@ -5,6 +5,7 @@ import { logger } from "@/lib/logger";
 import Link from "next/link";
 import { FiCheck } from "react-icons/fi";
 import toast from "react-hot-toast";
+import ConfettiBurst from "@/components/ConfettiBurst";
 
 const SERVICES = [
   "Photoshoot",
@@ -81,6 +82,7 @@ const SERVICE_PRICES: Record<string, number> = {
 export default function BookingPage() {
   const calLink = "torree-harris-ddqqep";
   const [submitted, setSubmitted] = useState(false);
+  const [celebrate, setCelebrate] = useState(false);
   const [selectedService, setSelectedService] = useState("");
   const [loading, setLoading] = useState(false);
   const [formMsg, setFormMsg] = useState("");
@@ -121,6 +123,15 @@ export default function BookingPage() {
         throw new Error("Submission failed");
       }
       setSubmitted(true); setFormMsg("Booking request submitted successfully.");
+      // One celebration per session; never on reduced-motion (component no-ops).
+      try {
+        if (!sessionStorage.getItem("wyz-booked-celebrated")) {
+          sessionStorage.setItem("wyz-booked-celebrated", "1");
+          setCelebrate(true);
+        }
+      } catch {
+        setCelebrate(true);
+      }
     } catch (err) {
       logger.error("booking-page", `Booking submission failed: ${err}`);
       notify("Submission failed. Please try again.");
@@ -154,6 +165,7 @@ export default function BookingPage() {
 
   return (
     <main className="pb-12 bg-white dark:bg-[#1C1C1E]">
+      <ConfettiBurst run={celebrate} />
       <div aria-live="polite" className="sr-only">{formMsg}</div>
       <div className="max-w-4xl mx-auto px-6 lg:px-12 pt-32 lg:pt-40">
         <h1 id="booking-heading" className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-[#333333] dark:text-[#e0e0e0] tracking-[0.15em] text-center mb-6 sm:mb-8" style={{ lineHeight: 0.9 }}>Book a Service</h1>
