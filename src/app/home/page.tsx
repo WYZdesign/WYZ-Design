@@ -12,6 +12,7 @@ import GyroTilt from "@/components/GyroTilt";
 import TextMaskReveal from "@/components/TextMaskReveal";
 import MagneticElement from "@/components/MagneticElement";
 import EnhancedMarquee from "@/components/EnhancedMarquee";
+import CountUp from "@/components/CountUp";
 
 import TextSplit from "@/components/TextSplit";
 import ImageReveal from "@/components/ImageReveal";
@@ -159,7 +160,7 @@ export default function HomePage() {
         { stat: "13+", label: "Years Running" },
       ].map((t) => (
         <li key={t.label} className="flex flex-col items-center">
-          <span className="text-[#C9A227] font-heading font-black text-[26px] sm:text-[32px] leading-none">{t.stat}</span>
+          <CountUp value={t.stat} className="text-[#C9A227] font-heading font-black text-[26px] sm:text-[32px] leading-none" />
           <span className="text-white/60 text-[11px] sm:text-[11px] font-heading font-bold tracking-[0.15em] uppercase mt-2">{t.label}</span>
         </li>
       ))}

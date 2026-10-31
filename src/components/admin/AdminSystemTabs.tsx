@@ -25,11 +25,15 @@ export function HealthTab() {
             <p className="text-[11px] text-white/60">API Status</p>
           </div>
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#DF3131]/20 text-[#DF3131]">{"\u2713"}</div>
+            <div className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 ${health?.redis === "ok" ? "bg-[#DF3131]/20 text-[#DF3131]" : "bg-[#C00000]/20 text-[#C00000]"}`}>
+              {health?.redis === "ok" ? "\u2713" : "\u2717"}
+            </div>
             <p className="text-[11px] text-white/60">DB Connected</p>
           </div>
           <div className="text-center">
-            <div className="w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 bg-[#DF3131]/20 text-[#DF3131]">{"\u2713"}</div>
+            <div className={`w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-2 ${health?.redis === "ok" ? "bg-[#DF3131]/20 text-[#DF3131]" : "bg-[#C00000]/20 text-[#C00000]"}`}>
+              {health?.redis === "ok" ? "\u2713" : "\u2717"}
+            </div>
             <p className="text-[11px] text-white/60">Analytics Active</p>
           </div>
           <div className="text-center">

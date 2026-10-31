@@ -10,7 +10,7 @@ export function OverviewTab({ data }: { data: OverviewData }) {
   const s = data?.stats;
   if (!s) return <Empty>No data yet</Empty>;
   const total = s.totalForms + s.totalChats + s.newsletterSubs;
-  const recentForms = s.recentForms || [];
+  const recentForms = data?.recentForms || [];
   return (
     <div className="space-y-8">
       {/* KPI Row */}
@@ -80,10 +80,10 @@ export function OverviewTab({ data }: { data: OverviewData }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {recentForms.slice(0, 15).map((f: { form_type: string; created_at: string; data: Record<string, unknown> }, i: number) => (
+                  {recentForms.slice(0, 15).map((f: { formType: string; submittedAt: string; data: Record<string, unknown> }, i: number) => (
                     <tr key={i} className="border-b border-white/5 last:border-0 hover:bg-white/5">
-                      <td className="px-5 py-3 text-white/60">{f.created_at ? new Date(f.created_at).toLocaleDateString() : "-"}</td>
-                      <td className="px-5 py-3"><span className="px-2 py-0.5 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold uppercase">{f.form_type}</span></td>
+                      <td className="px-5 py-3 text-white/60">{f.submittedAt ? new Date(f.submittedAt).toLocaleDateString() : "-"}</td>
+                      <td className="px-5 py-3"><span className="px-2 py-0.5 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold uppercase">{f.formType}</span></td>
                       <td className="px-5 py-3 text-white/50 text-[12px]">
                         {Object.entries(f.data || {}).slice(0, 2).map(([k,v]) => <span key={k} className="mr-3">{k}: <span className="text-white/80">{String(v).slice(0,30)}</span></span>)}
                       </td>

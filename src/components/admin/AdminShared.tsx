@@ -8,10 +8,10 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { FiAlertCircle } from "react-icons/fi";
 
-export function KpiCard({ label, value, color, icon, format }: { label: string; value: number; color: string; icon: string; format?: string }) {
+export function KpiCard({ label, value, color, icon, format, hint }: { label: string; value: number; color: string; icon: string; format?: string; hint?: string }) {
   const display = format === "currency" ? `$${value.toLocaleString(undefined,{minimumFractionDigits:2})}` : value.toLocaleString();
   return (
-    <div className="bg-white/5 border border-white/10 p-5 hover:border-white/20 transition-colors">
+    <div className="bg-white/5 border border-white/10 p-5 hover:border-white/20 transition-colors" title={hint}>
       <div className="flex items-center gap-2 mb-2">
         <span className="text-[14px]" style={{color}}>{icon}</span>
         <span className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase">{label}</span>
@@ -22,7 +22,7 @@ export function KpiCard({ label, value, color, icon, format }: { label: string; 
 }
 
 export function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-size-12 font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-3 mt-6">{children}</h3>;
+  return <h3 className="text-size-12 font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-3 mt-6 text-left">{children}</h3>;
 }
 
 export function Empty({ children }: { children: React.ReactNode }) {

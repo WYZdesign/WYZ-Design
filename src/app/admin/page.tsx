@@ -135,7 +135,7 @@ export default function AdminDashboard() {
             <div key={section.label} className="mb-4">
               {sidebarOpen && <p className="px-4 text-[9px] text-white/40 font-bold tracking-[0.2em] uppercase mb-2">{section.label}</p>}
               {section.items.map(item => (
-                <button key={item.id} onClick={() => { setTab(item.id as TabId); if (window.matchMedia("(max-width: 1023px)").matches) setSidebarOpen(false); }}
+                <button key={item.id} onClick={() => { setData(null); setLoading(true); setTab(item.id as TabId); if (window.matchMedia("(max-width: 1023px)").matches) setSidebarOpen(false); }}
                   className={`w-full flex items-center gap-3 px-4 py-2.5 text-[13px] transition-all ${tab === item.id ? "text-[#DF3131] bg-[#DF3131]/10 border-r-2 border-[#DF3131]" : "text-white/60 hover:text-white/70 hover:bg-white/5"} ${!sidebarOpen ? "justify-center px-0" : ""}`}>
                   <span className="text-[14px] w-5 text-center">{item.icon}</span>
                   {sidebarOpen && <span className="font-heading font-bold tracking-[0.05em] uppercase text-[11px]">{item.label}</span>}
@@ -160,13 +160,13 @@ export default function AdminDashboard() {
             <button className="lg:hidden w-8 h-8 flex items-center justify-center text-white/70 hover:text-white transition-colors shrink-0" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
               <FiMenu className="w-5 h-5" />
             </button>
-            <h1 className="text-size-15 font-heading font-bold tracking-[0.12em] uppercase text-white/60 truncate">
+            <div role="heading" aria-level={1} className="text-size-15 font-heading font-bold tracking-[0.12em] uppercase text-white/60 truncate">
               {NAV_SECTIONS.flatMap(s => s.items).find(i => i.id === tab)?.label || tab}
-            </h1>
+            </div>
           </div>
           <div className="flex items-center gap-3 shrink-0">
             <span className="px-3 py-1 bg-[#DF3131]/20 text-[#DF3131] text-[10px] font-bold tracking-[0.1em] uppercase border border-[#DF3131]/30 whitespace-nowrap">ADMIN</span>
-            <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors whitespace-nowrap">\u2190 <span className="hidden sm:inline">Site</span></Link>
+            <Link href="/home" className="text-[12px] text-white/50 hover:text-white transition-colors whitespace-nowrap">← <span className="hidden sm:inline">Site</span></Link>
           </div>
         </header>
         <div key={tab} className="admin-tab-enter p-4 sm:p-8 max-w-full">

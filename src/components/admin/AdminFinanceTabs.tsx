@@ -46,8 +46,8 @@ return (
        <div className="flex gap-3 flex-wrap">
         <button onClick={() => setShowForm("income")} className="px-5 py-3 bg-[#DF3131]/20 text-[#DF3131] border border-[#DF3131]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#DF3131]/30 transition-all">+ Log Income</button>
         <button onClick={() => setShowForm("expense")} className="px-5 py-3 bg-[#C00000]/20 text-[#C00000] border border-[#C00000]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#C00000]/30 transition-all">+ Log Expense</button>
-        <a href="/api/bookkeeping?tab=csv&type=business" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV</a>
-        <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Schedule C</a>
+        <a href="/api/bookkeeping?tab=csv&type=business" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">↓ Export CSV</a>
+        <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">↓ Schedule C (tax form)</a>
       </div>
       {showForm && <TransactionForm type={showForm} onClose={() => { setShowForm(null); onRefresh(); }} />}
       <RevenueByCategoryCard year={data.year} />
@@ -164,7 +164,7 @@ export function IncomeTab({ data, onRefresh }: { data: { transactions: Transacti
         </div>
         <div className="flex gap-3">
           <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#DF3131]/20 text-[#DF3131] border border-[#DF3131]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#DF3131]/30 transition-all">+ Log Income</button>
-          <a href="/api/bookkeeping?tab=csv&type=income" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 CSV</a>
+          <a href="/api/bookkeeping?tab=csv&type=income" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">↓ CSV</a>
         </div>
       </div>
       {showForm && <TransactionForm type="income" onClose={() => { setShowForm(false); onRefresh(); }} />}
@@ -187,7 +187,7 @@ export function ExpensesTab({ data, onRefresh }: { data: { transactions: Transac
         </div>
         <div className="flex gap-3">
           <button onClick={() => setShowForm(!showForm)} className="px-5 py-3 bg-[#C00000]/20 text-[#C00000] border border-[#C00000]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#C00000]/30 transition-all">+ Log Expense</button>
-          <a href="/api/bookkeeping?tab=csv&type=expense" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 CSV</a>
+          <a href="/api/bookkeeping?tab=csv&type=expense" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">↓ CSV</a>
         </div>
       </div>
       {showForm && <TransactionForm type="expense" onClose={() => { setShowForm(false); onRefresh(); }} />}
@@ -262,9 +262,9 @@ export function ReportsTab({ data }: { data: FinancialSummary }) {
         </div>
       )}
       <div className="flex gap-3">
-        <a href="/api/bookkeeping?tab=csv&type=business" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV (Business Only)</a>
-        <a href="/api/bookkeeping?tab=csv" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV (All)</a>
-        <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-[#C9A227]/20 text-[#C9A227] border border-[#C9A227]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#C9A227]/30 transition-all inline-block">\u2193 Schedule C Export</a>
+        <a href="/api/bookkeeping?tab=csv&type=business" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">↓ Export CSV (Business Only)</a>
+        <a href="/api/bookkeeping?tab=csv" className="px-5 py-3 bg-white/5 text-white/50 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">↓ Export CSV (All)</a>
+        <a href="/api/bookkeeping?tab=schedule-c" className="px-5 py-3 bg-[#C9A227]/20 text-[#C9A227] border border-[#C9A227]/30 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#C9A227]/30 transition-all inline-block">↓ Schedule C Export (tax form)</a>
       </div>
     </div>
   );
@@ -300,7 +300,7 @@ export function TransactionForm({ type, onClose }: { type: "income" | "expense";
 
   return (
     <form onSubmit={handleSubmit} className="bg-white/5 border border-white/10 p-6 space-y-4">
-      <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60">{type === "income" ? "Log Income" : "Log Expense"}</h3>
+      <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 text-left">{type === "income" ? "Log Income" : "Log Expense"}</h3>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
           <label className="text-[10px] text-white/50 font-heading font-bold tracking-[0.1em] uppercase mb-1 block">Date</label>

@@ -170,8 +170,13 @@ export function LogoCarousel({ items, speed = 0.5 }: { items: { name: string; im
  <div ref={sectionRef} className="overflow-hidden" onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
   <div ref={trackRef} className="flex gap-8 sm:gap-12 lg:gap-16 items-center py-3 will-change-transform cursor-pointer">
   {tripled.map((logo, i) => (
-  <div key={i} className="flex-none flex items-center justify-center opacity-60 hover:opacity-100 transition-all duration-300 hover:scale-110">
-    <Image src={logo.img} alt={logo.name} width={96} height={96} className="h-10 sm:h-12 max-w-[110px] sm:max-w-[150px] w-auto object-contain transition-all duration-300" />
+  <div key={i} className="flex-none flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-110">
+    {/* 2026-10-30 (Claude): grayscale-by-default, full color on hover -- a
+       small, common agency-site touch that makes an otherwise-static logo
+       strip feel alive without adding any new motion for folks with
+       prefers-reduced-motion (the color transition still respects that,
+       since it's just a filter/opacity tween, not movement). */}
+    <Image src={logo.img} alt={logo.name} width={96} height={96} className="h-10 sm:h-12 max-w-[110px] sm:max-w-[150px] w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" />
  </div>
  ))}
  </div>

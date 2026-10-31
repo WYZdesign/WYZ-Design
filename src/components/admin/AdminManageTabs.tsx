@@ -81,7 +81,7 @@ export function NewsletterTab({ data }: { data: Subscriber[] }) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <p className="text-[13px] text-white/50">{data.length} subscriber{data.length !== 1 ? "s" : ""}</p>
-        <a href="/api/admin?tab=newsletter&format=csv" className="px-4 py-2 bg-white/5 text-white/50 border border-white/10 text-[11px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">\u2193 Export CSV</a>
+        <a href="/api/admin?tab=newsletter&format=csv" className="px-4 py-2 bg-white/5 text-white/50 border border-white/10 text-[11px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-white/10 transition-all inline-block">↓ Export CSV</a>
       </div>
       <div className="bg-white/5 border border-white/10 overflow-hidden">
         {data.map((s, i) => (
@@ -165,7 +165,7 @@ export function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRef
 
       {/* Gated Categories */}
       <div className="bg-white/5 border border-white/10 p-6">
-        <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Gated Categories</h3>
+        <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4 text-left">Gated Categories</h3>
         <div className="flex flex-wrap gap-2">
           {gatedCategories.map(cat => (
             <span key={cat} className="px-3 py-1.5 bg-[#DF3131]/10 border border-[#DF3131]/30 text-[#DF3131] text-[11px] font-heading font-bold tracking-[0.05em] uppercase">
@@ -182,7 +182,7 @@ export function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRef
       {/* Scan Results */}
       <div className="bg-white/5 border border-white/10 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60">Scan Results</h3>
+          <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 text-left">Scan Results</h3>
           <button onClick={onRefresh} className="text-[11px] text-white/40 hover:text-white/60 transition-colors font-heading font-bold tracking-[0.05em] uppercase">
             Refresh
           </button>
@@ -229,7 +229,7 @@ export function NsfwContentTab({ data, onRefresh }: { data: NsfwAdminData; onRef
 
       {/* Verified Users */}
       <div className="bg-white/5 border border-white/10 p-6">
-        <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4">Age-Verified Users</h3>
+        <h3 className="text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/60 mb-4 text-left">Age-Verified Users</h3>
         {verifiedUsers.length === 0 ? (
           <p className="text-[12px] text-white/30">No users have verified age yet.</p>
         ) : (

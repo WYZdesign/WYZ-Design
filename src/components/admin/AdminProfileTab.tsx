@@ -92,7 +92,7 @@ export function ProfileTab({ session, update, signOut }: { session: import("next
       </div>
 
       <div className="bg-white/5 border border-white/10 p-6 mb-6">
-        <h3 className="text-size-12 font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-4">Account Actions</h3>
+        <h3 className="text-size-12 font-heading font-bold tracking-[0.15em] uppercase text-white/60 mb-4 text-left">Account Actions</h3>
         <div className="grid grid-cols-2 gap-3">
           <ProfileActionLink href="/services#plans" label="View Plans" icon={<FiFileText className="w-4 h-4" />} />
           <ProfileActionLink href="/booking-calendar/photoshoot" label="Book a Shoot" icon={<FiCamera className="w-4 h-4" />} />
@@ -179,7 +179,7 @@ export function BugReportTab({ session }: { session: import("next-auth").Session
     <div className="max-w-2xl">
       <div className="bg-white/5 border border-white/10 p-6">
         <button onClick={() => setOpen(!open)} className="flex items-center justify-between w-full">
-          <h3 className="flex items-center gap-2 text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/80"><FiAlertCircle className="w-4 h-4 text-[#DF3131]" /> Report a Bug / Issue</h3>
+          <h3 className="flex items-center gap-2 text-size-13 font-heading font-bold tracking-[0.1em] uppercase text-white/80 text-left"><FiAlertCircle className="w-4 h-4 text-[#DF3131]" /> Report a Bug / Issue</h3>
           {open ? <FiChevronUp className="w-5 h-5 text-white/50" /> : <FiChevronDown className="w-5 h-5 text-white/50" />}
         </button>
         {open && (

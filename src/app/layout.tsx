@@ -4,8 +4,6 @@ import ConsentGatedAnalytics from "@/components/ConsentGatedAnalytics";
 import { Toaster } from "react-hot-toast";
 import { RouteBackground } from "@/components/RouteBackground";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { GlobalImagePicker } from "@/components/ImagePicker";
 import AuthProvider from "@/components/AuthProvider";
 import ZealProvider from "@/components/ZealProvider";
@@ -13,16 +11,13 @@ import ScrollProgress from "@/components/ScrollProgress";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
 import AnalyticsTracker from "@/components/AnalyticsTracker";
 import ScrollToTopOnNavigate from "@/components/ScrollToTopOnNavigate";
-import PageTransition from "@/components/PageTransition";
-import ScrollToTop from "@/components/ScrollToTop";
 import ThemeProvider from "@/components/ThemeProvider";
 import ScrollAnimator from "@/components/ScrollAnimator";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
+import AppShell from "@/components/AppShell";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import ClientComponents from "@/components/ClientComponents";
 import CustomCursor from "@/components/CustomCursor";
 import { CartProvider } from "@/lib/cart";
-import CartButton from "@/components/CartButton";
 
 const montserrat = localFont({ src: "./fonts/montserrat-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-heading", display: "swap", preload: true });
 const inter = localFont({ src: "./fonts/inter-latin-var.woff2", weight: "100 900", style: "normal", variable: "--font-body", display: "swap", preload: true });
@@ -340,15 +335,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AnalyticsTracker />
         <ScrollToTopOnNavigate />
           <CartProvider>
-          <Navbar />
-          <ErrorBoundary>
-          <div id="main-content" className="flex-1 pt-16 lg:pt-20 bg-white dark:bg-[#1C1C1E]" tabIndex={-1}>
-            <PageTransition>{children}</PageTransition>
-          </div>
-          <Footer />
-          <ScrollToTop />
-          </ErrorBoundary>
-          <CartButton />
+          <AppShell>{children}</AppShell>
           </CartProvider>
           </SmoothScrollProvider>
           </ZealProvider>

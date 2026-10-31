@@ -15,8 +15,8 @@ export function AnalyticsTab({ data }: { data: AnalyticsSummary }) {
         <KpiCard label="Pageviews" value={data.total_pageviews} color="#DF3131" icon="◎" />
         <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#C9A227" icon="◆" />
         <KpiCard label="Unique Pages" value={data.unique_pages} color="#DF3131" icon="□" />
-        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#C00000" icon="○" />
-        <KpiCard label="Pages/Session" value={Math.round(data.pages_per_session * 10) / 10} color="#C9A227" icon="◇" />
+        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#C00000" icon="○" hint="Share of visitors who left after viewing only one page" />
+        <KpiCard label="Pages/Session" value={Math.round(data.pages_per_session * 10) / 10} color="#C9A227" icon="◇" hint="Average number of pages a visitor looks at before leaving" />
       </div>
 
       {data.daily_views?.length > 0 && (
@@ -157,7 +157,7 @@ export function TrafficTab({ data }: { data: AnalyticsSummary }) {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard label="Total Views" value={data.total_pageviews} color="#DF3131" icon="◎" />
         <KpiCard label="Unique Visitors" value={data.unique_visitors} color="#C9A227" icon="◆" />
-        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#C00000" icon="○" />
+        <KpiCard label="Bounce Rate" value={Math.round(data.bounce_rate)} color="#C00000" icon="○" hint="Share of visitors who left after viewing only one page" />
         <KpiCard label="Avg Duration" value={Math.round(data.avg_duration_ms / 1000)} color="#DF3131" icon="⊙" />
       </div>
 

@@ -10,7 +10,7 @@ export interface AnalyticsSummary { period: string; total_pageviews: number; uni
 export interface Category { id: number; name: string; schedule_c_line: string; type: string }
 export interface Client { id: number; name: string; email: string; notes: string }
 export interface ChatSession { sessionId: string; messages: number; lastMessage: string; preview: {role:string;content:string;timestamp:string}[] }
-export interface OverviewData { stats: { totalForms: number; totalChats: number; totalUsers: number; newsletterSubs: number; adminCount: number; chatSessions: number; formTypes: Record<string, number>; recentForms: { form_type: string; created_at: string; data: Record<string, unknown> }[] } }
+export interface OverviewData { stats: { totalForms: number; totalChats: number; totalUsers: number; newsletterSubs: number; adminCount: number; chatSessions: number; formTypes: Record<string, number> }; recentForms: { formType: string; submittedAt: string; data: Record<string, unknown> }[] }
 export interface SeoData { checks: { name: string; status: "pass" | "warn" | "fail"; message: string; check: string; detail?: string }[]; checkedAt: string }
 export interface ChatsData { sessions: ChatSession[] }
 
