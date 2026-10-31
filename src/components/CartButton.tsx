@@ -16,7 +16,7 @@ export default function CartButton() {
   const { lines, count, subtotalCents, open, setOpen, updateQuantity, removeLine } = useCart();
   const panelRef = useRef<HTMLDivElement>(null);
   // Escape-to-close, focus trap, and focus restore -- same hook already used
-  // by ImagePicker/FDDriveBrowser for this exact role="dialog" pattern. The
+  // by ImagePicker for this exact role="dialog" pattern. The
   // cart drawer shipped without it (found during a live accessibility
   // audit): it had no keyboard way to close other than tabbing to the
   // backdrop button, and focus wasn't moved into the drawer or restored to
