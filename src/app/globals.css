@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/* 2026-10-31 (Claude): Tailwind v4's `dark:` variant compiles to an OS-level
+   `@media (prefers-color-scheme: dark)` query by default unless this is
+   declared -- it does NOT key off a `.dark` class anywhere out of the box.
+   ThemeProvider.tsx has been toggling `document.documentElement.classList`
+   with a `dark` class this whole time (and persisting the choice to
+   localStorage), but with no custom variant declared, every `dark:` utility
+   in this file was actually just mirroring the visitor's OS/browser color
+   scheme and completely ignoring that class -- so the in-app light/dark
+   toggle changed the sun/moon icon and localStorage, but never the
+   rendered page. Root cause of "light and dark look the same no matter
+   what I click." This line makes `dark:` respect `.dark` on <html> (or an
+   ancestor), the way the rest of this codebase already assumed it did. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :where(html, body) { font-family: var(--font-body); font-size: var(--font-size-body); line-height: var(--line-height-body); }
 }
@@ -821,6 +835,13 @@ select:focus-visible {
 /* #DF3131 = 3.36:1 on white (WCAG FAIL 4.5:1 for text < 14px bold / < 18px regular) */
 [class*="text-[#DF3131]"]:not([class*="text-[#DF3131]/"]):where([class*="text-[11px]"], [class*="text-[12px]"], [class*="text-[13px]"]) {
   color: var(--color-wyz-text-red) !important;
+}
+
+/* Explicit opt-out: red small text sitting on an always-dark surface (hero
+   image overlays). The light-mode bump above is tuned for white backgrounds
+   and only reaches ~2.9:1 on #111, so these get the brighter dark-mode red. */
+[class*="text-[#DF3131]"].wz-on-dark {
+  color: #FF5252 !important;
 }
 
 /* Direct #C00000 text is tuned for white (5.5:1) but drops to ~1.9:1 on dark

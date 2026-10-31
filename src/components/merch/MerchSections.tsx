@@ -63,7 +63,7 @@ export function ParallaxHero() {
       <div className="absolute inset-0 bg-black/50 pointer-events-none" />
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center">
-        <p className="text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-2" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
+        <p className="wz-on-dark text-[#DF3131] text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.3em] uppercase mb-2" style={{ opacity: Math.max(0, 1 - scrollY / 400) }}>
           Dying Breed Crew
         </p>
         <h1 className="text-center text-[1.75rem] sm:text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] font-heading font-black text-white leading-[0.9] tracking-[0.05em] mb-4 sm:mb-8" style={{ opacity: Math.max(0, 1 - scrollY / 500), transform: `translateY(${scrollY * 0.15}px)` }}>
@@ -202,7 +202,7 @@ export function BundleSets({ products }: { products: Product[] }) {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {set.items.map((p) => (
-                      <Link key={p.id} href={`/merch/${p.id}`} className="px-3 py-2 border border-[#d9d6d3] text-[11px] font-bold uppercase tracking-[0.06em] text-[#333] hover:border-[#DF3131] hover:text-[#DF3131] transition-colors">
+                      <Link key={p.id} href={`/merch/${p.id}`} className="px-3 py-2 border border-[#d9d6d3] dark:border-[#444] text-[11px] font-bold uppercase tracking-[0.06em] text-[#333] dark:text-white hover:border-[#DF3131] hover:text-[#DF3131] transition-colors">
                         {p.name}
                       </Link>
                     ))}
@@ -227,7 +227,7 @@ export function ProductGrid({ products, onSelect }: { products: Product[]; onSel
           aria-label={`View ${product.name}`}
           onMouseEnter={() => setHoveredId(product.id)} onMouseLeave={() => setHoveredId(null)}
           onClick={() => onSelect(product)}>
-          <div className={`bg-[#f7f7f5] aspect-square overflow-hidden relative mb-3 transition-all duration-300 ${hoveredId === product.id ? "shadow-xl shadow-[#DF3131]/15 -translate-y-1" : "shadow-sm"}`}>
+          <div className={`bg-[#f7f7f5] dark:bg-[#252528] aspect-square overflow-hidden relative mb-3 transition-all duration-300 ${hoveredId === product.id ? "shadow-xl shadow-[#DF3131]/15 -translate-y-1" : "shadow-sm"}`}>
                <SafeImage src={product.image} alt={product.name} fill sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 25vw" className={`w-full h-full object-contain p-3 transition-transform duration-500 ${hoveredId === product.id ? "scale-[1.03]" : "scale-100"}`} decoding="async" />
             <div className={`absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 ${hoveredId === product.id ? "opacity-100" : "opacity-0"}`}>
               <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2 hover:bg-[#DF3131] hover:text-white transition-all mb-2">Quick View</span>
@@ -235,10 +235,10 @@ export function ProductGrid({ products, onSelect }: { products: Product[]; onSel
             {product.badge && <span className="absolute top-2 left-2 bg-[#DF3131] text-white text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 z-10 mb-2">{product.badge}</span>}
           </div>
           <div className="text-center px-1">
-            <p className="text-[11px] text-[#666] font-bold tracking-[0.12em] uppercase mb-2">{product.category}</p>
-            <h3 className="text-size-9 font-heading font-bold tracking-[0.03em] uppercase text-[#333] leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
+            <p className="text-[11px] text-[#666] dark:text-[#aaa] font-bold tracking-[0.12em] uppercase mb-2">{product.category}</p>
+            <h3 className="text-size-9 font-heading font-bold tracking-[0.03em] uppercase text-[#333] dark:text-white leading-tight line-clamp-2 group-hover:text-[#DF3131] transition-colors mb-3">{product.name}</h3>
             <p className="text-[#DF3131] font-black text-[11px] whitespace-nowrap">{fmt(product.price)}</p>
-            <p className="text-[9px] uppercase tracking-[0.12em] text-[#999] mt-1">Printed to order</p>
+            <p className="text-[9px] uppercase tracking-[0.12em] text-[#6B6B6B] dark:text-[#A8A8A8] mt-1">Printed to order</p>
           </div>
         </button>
       ))}
