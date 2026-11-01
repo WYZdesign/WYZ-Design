@@ -296,6 +296,36 @@ export default function BookingPage() {
             </div>
           </div>
         )}
+
+        {/* Manual Payment Methods */}
+        <div className="mt-16">
+          <h2 className="text-center font-heading font-bold text-[18px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] mb-4">Prefer to Pay Directly?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+            {/* Cash App */}
+            <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-lg p-6 text-center">
+              <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] mb-2">Cash App</h3>
+              <p className="text-[14px] text-[#666] dark:text-[#b0b0b0] mb-1">Personal: <span className="font-mono font-bold text-[#DF3131]">$Torye91</span></p>
+              <p className="text-[14px] text-[#666] dark:text-[#b0b0b0]">Business: <span className="font-mono font-bold text-[#DF3131]">WYZdesignLLC</span></p>
+              <p className="text-[11px] text-[#777] dark:text-[#999] mt-3">Include booking reference in note</p>
+            </div>
+            {/* Venmo */}
+            <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-lg p-6 text-center">
+              <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] mb-2">Venmo</h3>
+              <p className="text-[14px] text-[#666] dark:text-[#b0b0b0] mb-1">Personal: <span className="font-mono font-bold text-[#DF3131]">@wild.yet.zealous</span></p>
+              <p className="text-[14px] text-[#666] dark:text-[#b0b0b0]">Business: <span className="font-mono font-bold text-[#DF3131]">@WYZdesign</span></p>
+              <p className="text-[11px] text-[#777] dark:text-[#999] mt-3">Include booking reference in note</p>
+            </div>
+            {/* PayPal */}
+            <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-lg p-6 text-center">
+              <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] mb-2">PayPal</h3>
+              <p className="text-[14px] text-[#666] dark:text-[#b0b0b0] mb-1">Business: <span className="font-mono font-bold text-[#DF3131]">WYZ Design</span></p>
+              <p className="text-[11px] text-[#777] dark:text-[#999] mt-3">Send to <span className="font-mono">paypal.me/WYZDesign</span></p>
+            </div>
+          </div>
+          <p className="text-center text-[12px] text-[#777] dark:text-[#999] mt-4">
+            After sending, email <a href="mailto:info@wyzdesign.com" className="text-[#DF3131] hover:underline">info@wyzdesign.com</a> with payment screenshot + booking reference.
+          </p>
+        </div>
       </div>
     </main>
   );
