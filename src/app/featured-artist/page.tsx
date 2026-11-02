@@ -75,7 +75,7 @@ function ArtistGallery() {
  >
  {!flipping && (
  item.src ? (
-    <Image src={item.src} alt={item.label} fill sizes="(max-width:640px) 50vw, 33vw" className="w-full h-full object-cover" />
+    <Image src={item.src} alt={item.label} fill sizes="(max-width:640px) 50vw, 33vw" className="w-full h-full object-contain" />
  ) : (
  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#DF3131]/5 to-[#C9A227]/5">
  <span className="text-[#DF3131]/30 text-[13px] font-bold tracking-[0.1em] uppercase mb-2">{item.label}</span>

@@ -133,7 +133,7 @@ function Carousel({ images, direction = "left" }: { images: string[]; direction?
               loading="eager"
               decoding="async"
               onLoad={handleImgLoad(i)}
-              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
+              className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300"
             />
           </div>
         ))}

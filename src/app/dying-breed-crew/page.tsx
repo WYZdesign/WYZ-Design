@@ -74,7 +74,7 @@ export default function DyingBreedCrewPage() {
           {merchItems.map((item) => (
             <Link key={item.name} href="/merch" className="group block bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-xl overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all">
               <div className="relative aspect-square bg-[#F5F5F3] dark:bg-[#1C1C1E] overflow-hidden">
-                <Image src={item.img} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 50vw, 33vw" />
+                <Image src={item.img} alt={item.name} fill className="object-contain group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 50vw, 33vw" />
               </div>
               <div className="p-4">
                 <p className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[14px] tracking-[0.02em]">{item.name}</p>

@@ -206,7 +206,7 @@ export function VideoCarousel({ items, onPlay }: { items: { title: string; video
    muted
    preload="none"
    data-video-id={v.title}
-   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
   ref={(el) => { if (el) { el.volume = 0.3; } }}
   onLoadedMetadata={(e) => { e.currentTarget.currentTime = 5; }}
   onMouseEnter={(e) => {

@@ -99,7 +99,7 @@ export function SmoothCarousel({ items, className = "", speed = 0.5, direction =
           loading="eager"
           decoding="async"
           onLoad={handleImgLoad(i)}
-          className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:scale-[1.035]"
+          className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:scale-[1.035]"
         />
       </div>
       ))}

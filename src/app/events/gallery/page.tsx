@@ -30,7 +30,7 @@ export default function EventGalleryIndex() {
               className="group border border-white/10 hover:border-[#DF3131] rounded-xl overflow-hidden bg-white/[0.03] transition-colors"
             >
               <div className="relative aspect-[4/3] bg-black">
-                <Image src={cover} alt={g.label} fill unoptimized className="object-cover" />
+                <Image src={cover} alt={g.label} fill unoptimized className="object-contain" />
               </div>
               <div className="p-5">
                 <h2 className="text-white font-heading font-bold uppercase tracking-[0.08em] group-hover:text-[#DF3131] transition-colors">
