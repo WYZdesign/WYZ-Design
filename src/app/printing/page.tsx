@@ -319,9 +319,9 @@ export default function PrintingPage() {
     backTitle="VINYL STICKER PRICING"
     backContent={
       <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
-        {[{ size: '2" x 2"', price: "$5" }, { size: '3" x 3"', price: "$8" }, { size: '4" x 4"', price: "$12" }, { size: '5" x 5"', price: "$16" }].map((t) => (
+        {[{ size: '2" x 2"', price: "$5", label: "Small" }, { size: '3" x 3"', price: "$8", label: "Medium" }, { size: '4" x 4"', price: "$12", label: "Large" }, { size: '5" x 5"', price: "$16", label: "XL" }].map((t) => (
           <div key={t.size} className="bg-white/10 border border-white/20 p-3 text-center">
-            <p className="text-white/70 text-[11px] mb-1">{t.size}</p>
+            <p className="text-white/70 text-[11px] mb-1">{t.label} <span className="text-white/50">({t.size})</span></p>
             <p className="text-white font-black text-[18px]">{t.price}</p>
             <p className="text-white/50 text-[11px]">per sticker</p>
           </div>
@@ -339,13 +339,13 @@ export default function PrintingPage() {
   <FlipCardInline
     title="PRINTS + POSTERS"
     subtitle="Prices based on size, calculated by average inches."
-    img="/images/printing/paper_1.jpg"
+    img="/images/printing/rave-flyers-wallpapers.webp"
     backTitle="PRINT + POSTER PRICING"
     backContent={
       <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
-        {[{ size: '8.5" x 11"', price: "$15" }, { size: '11" x 17"', price: "$25" }, { size: '18" x 24"', price: "$40" }, { size: '24" x 36"', price: "$55" }].map((t) => (
+        {[{ size: '8.5" x 11"', price: "$15", label: "Letter" }, { size: '11" x 17"', price: "$25", label: "Tabloid" }, { size: '18" x 24"', price: "$40", label: "Medium" }, { size: '24" x 36"', price: "$55", label: "Large" }].map((t) => (
           <div key={t.size} className="bg-white/10 border border-white/20 p-3 text-center">
-            <p className="text-white/70 text-[11px] mb-1">{t.size}</p>
+            <p className="text-white/70 text-[11px] mb-1">{t.label} <span className="text-white/50">({t.size})</span></p>
             <p className="text-white font-black text-[18px]">{t.price}</p>
             <p className="text-white/50 text-[11px]">per print</p>
           </div>

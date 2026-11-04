@@ -50,6 +50,18 @@ function Carousel({ images, direction = "left" }: { images: string[]; direction?
 
   const CAROUSEL_H = "h-[232px] sm:h-[338px] md:h-[423px]";
 
+  // Preload images for instant display
+  useEffect(() => {
+    images.forEach((src) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = src;
+      document.head.appendChild(link);
+      return () => document.head.removeChild(link);
+    });
+  }, [images]);
+
   useEffect(() => { dirRef.current = direction === "right" ? -1 : 1; }, [direction]);
 
   useEffect(() => {
@@ -133,7 +145,7 @@ function Carousel({ images, direction = "left" }: { images: string[]; direction?
               loading="eager"
               decoding="async"
               onLoad={handleImgLoad(i)}
-              className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300"
+              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
             />
           </div>
         ))}

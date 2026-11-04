@@ -33,8 +33,8 @@ export default function EnhancedMarquee({
     <div className={`relative overflow-hidden ${className}`}>
       {gradientFade && (
         <>
-          <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent dark:from-[#1C1C1E]" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent dark:from-[#1C1C1E]" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent dark:from-transparent" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent dark:from-transparent" />
         </>
       )}
       <div

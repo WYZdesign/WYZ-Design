@@ -170,14 +170,25 @@ export default function EventsPage() {
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [modalVideo, setModalVideo] = useState<{ video: string; title: string } | null>(null);
   const [shuffled, setShuffled] = useState(ALL_EVENT_IMAGES);
-  const [heroVideo, setHeroVideo] = useState("/videos/diy-shows/Action Sack Vol. 6.mp4");
- const [heroReady, setHeroReady] = useState(false);
+const [heroVideo, setHeroVideo] = useState("/videos/diy-shows/Action Sack Vol. 6.mp4");
+  const [heroReady, setHeroReady] = useState(false);
 
   useEffect(() => {
     setShuffled([...ALL_EVENT_IMAGES].sort(() => Math.random() - 0.5));
     const vids = DIY_SHOWS_RAW.filter(v => v.title !== "C.O. Reloaded Vol. 1");
     setHeroVideo(vids[Math.floor(Math.random() * vids.length)].video);
   }, []);
+
+  // Preload hero video for instant playback
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "video";
+    link.href = heroVideo;
+    link.type = "video/mp4";
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); };
+  }, [heroVideo]);
  const visibleEvents = shuffled.slice(0, visibleCount);
  const hasMore = visibleCount < shuffled.length;
 
@@ -248,33 +259,33 @@ export default function EventsPage() {
     real difference between them was the saturate/contrast filter, which now
     applies at the md breakpoint via a plain CSS class instead of a second
     element. */}
-    <div className="absolute inset-0 z-0">
-     <video
-      key={heroVideo}
-      src={heroVideo}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      style={{ opacity: heroReady ? 1 : 0, transition: "opacity 0.7s ease-in" }}
-      className="absolute inset-0 w-full h-full object-cover md:[filter:saturate(1.2)_contrast(1.1)]"
-      onCanPlay={(e) => { const v = e.currentTarget; if (v.currentTime < 4.5) v.currentTime = 5; void v.play().catch(() => {}); setHeroReady(true); }}
-      onTimeUpdate={(e) => {
-        // `loop` restarts silently at 0 without firing `ended`, so re-apply the
-        // 5s start point whenever a loop cycle brings it back near the top.
-        const vid = e.currentTarget;
-        if (vid.currentTime < 0.5 && vid.dataset.wzLooped !== "pending") {
-          vid.dataset.wzLooped = "pending";
-          vid.currentTime = 5;
-        } else if (vid.currentTime > 1) {
-          vid.dataset.wzLooped = "";
-        }
-      }}
-     />
-     <div className="absolute inset-0 bg-black z-0" />
-     <div className="absolute inset-0 bg-black/65 z-[1]" />
-    </div>
+<div className="absolute inset-0 z-0">
+      <video
+       key={heroVideo}
+       src={heroVideo}
+       autoPlay
+       muted
+       loop
+       playsInline
+       preload="auto"
+       style={{ opacity: heroReady ? 1 : 0, transition: "opacity 0.7s ease-in" }}
+       className="absolute inset-0 w-full h-full object-cover md:[filter:saturate(1.2)_contrast(1.1)]"
+       onCanPlay={(e) => { const v = e.currentTarget; if (v.currentTime < 6) v.currentTime = 6; void v.play().catch(() => {}); setHeroReady(true); }}
+       onTimeUpdate={(e) => {
+         // `loop` restarts silently at 0 without firing `ended`, so re-apply the
+         // 6s start point whenever a loop cycle brings it back near the top.
+         const vid = e.currentTarget;
+         if (vid.currentTime < 0.5 && vid.dataset.wzLooped !== "pending") {
+           vid.dataset.wzLooped = "pending";
+           vid.currentTime = 6;
+         } else if (vid.currentTime > 1) {
+           vid.dataset.wzLooped = "";
+         }
+       }}
+      />
+      <div className="absolute inset-0 bg-black z-0" />
+      <div className="absolute inset-0 bg-black/65 z-[1]" />
+     </div>
 {/* Text overlay */}
 <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-10 lg:px-16 text-center">
     <div className="relative z-10">

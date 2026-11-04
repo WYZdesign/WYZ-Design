@@ -7,12 +7,14 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
 import { IoChevronDown } from "react-icons/io5";
-import { FiSun, FiMoon, FiSearch, FiZap, FiShare2, FiGift, FiCalendar, FiUser } from "react-icons/fi";
+import { FiSun, FiMoon, FiSearch, FiZap, FiShare2, FiGift, FiCalendar, FiUser, FiSettings } from "react-icons/fi";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useColorTheme } from "@/lib/color-theme-context";
 import MagneticElement from "@/components/MagneticElement";
 import { useZeal } from "@/components/ZealProvider";
 import { useCart } from "@/lib/cart";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 const NAV_LINKS = [
   { href: "/", label: "H O M E" },
@@ -339,6 +341,9 @@ export default function Navbar() {
                               <FiGift className="w-3 h-3 text-[#DF3131]" />
                               Gift Cards
                             </Link>
+                            <div className="pt-2">
+                              <ThemeSwitcher />
+                            </div>
                           </div>
 
                           <Link href="/account/my-account" onClick={() => setProfileOpen(false)}
@@ -388,33 +393,38 @@ export default function Navbar() {
             </button>
             {/* Profile / Account / Login - pinned to top of side menu */}
              <div className="pl-6 pr-16 pt-3 pb-4 border-b border-[#E2E2E2] dark:border-[#333]">
-               {session?.user ? (
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#DF3131] flex items-center justify-center bg-[#DF3131]/10 shrink-0">
-                    {session.user.image ? (
-                      <Image src={session.user.image} alt={session.user.name || "Account"} width={48} height={48} className="w-full h-full object-cover" />
-                    ) : (
-                      <span className="w-full h-full rounded-full bg-[#DF3131] text-white flex items-center justify-center font-heading font-bold text-[18px]">
-                        {session.user.name?.[0]?.toUpperCase() || "U"}
-                      </span>
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[15px] font-semibold text-[#333] dark:text-[#e0e0e0] truncate">{session.user.name || "Account"}</p>
-                    <p className="text-[12px] text-[#666] truncate">{session.user.email}</p>
-                  </div>
+{session?.user ? (
+                 <div className="flex items-center gap-3 mb-3">
+                   <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#DF3131] flex items-center justify-center bg-[#DF3131]/10 shrink-0">
+                     {session.user.image ? (
+                       <Image src={session.user.image} alt={session.user.name || "Account"} width={48} height={48} className="w-full h-full object-cover" />
+                     ) : (
+                       <span className="w-full h-full rounded-full bg-[#DF3131] text-white flex items-center justify-center font-heading font-bold text-[18px]">
+                         {session.user.name?.[0]?.toUpperCase() || "U"}
+                       </span>
+                     )}
+                   </div>
+                   <div className="min-w-0">
+                     <p className="text-[15px] font-semibold text-[#333] dark:text-[#e0e0e0] truncate">{session.user.name || "Account"}</p>
+                     <p className="text-[12px] text-[#666] truncate">{session.user.email}</p>
+                   </div>
+                 </div>
+                ) : (
+                 <div className="flex items-center gap-3 mb-3">
+                   <div className="w-12 h-12 rounded-full border-2 border-dashed border-[#E2E2E2] dark:border-[#333] flex items-center justify-center bg-[#f5f5f5] dark:bg-[#252528] shrink-0">
+                     <FiUser className="w-5 h-5 text-[#999]" />
+                   </div>
+                   <div className="min-w-0">
+                     <p className="text-[15px] font-semibold text-[#333] dark:text-[#e0e0e0]">Guest</p>
+                     <p className="text-[12px] text-[#666]">Sign in to track orders & rewards</p>
+                   </div>
+                 </div>
+                )}
+
+                {/* Theme Switcher */}
+                <div className="mb-3">
+                  <ThemeSwitcher />
                 </div>
-               ) : (
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full border-2 border-dashed border-[#E2E2E2] dark:border-[#333] flex items-center justify-center bg-[#f5f5f5] dark:bg-[#252528] shrink-0">
-                    <FiUser className="w-5 h-5 text-[#999]" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[15px] font-semibold text-[#333] dark:text-[#e0e0e0]">Guest</p>
-                    <p className="text-[12px] text-[#666]">Sign in to track orders & rewards</p>
-                  </div>
-                </div>
-               )}
 
                {/* Account widget: rewards + cart */}
                <div className="grid grid-cols-2 gap-2 mb-3">

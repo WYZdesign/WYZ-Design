@@ -120,27 +120,27 @@ import { ALBUM_COVERS_STATIC, ALBUM_DESC, ALBUMS } from "@/lib/data/photography"
  const carousel1: string[] = [];
  const carousel2: string[] = [];
 
- const [featuredModels, setFeaturedModels] = useState([
+const [featuredModels, setFeaturedModels] = useState([
   { name: "ADRIENNE", cover: "/images/photography/carousel_3/wix_0283.jpg", title: "Signed Model" },
   { name: "CAMILLE", cover: "/images/photography/carousel_3/wix_0285.jpg", title: "Professional" },
   { name: "CRISTINA", cover: "/images/photography/carousel_3/wix_0287.jpg", title: "Experienced" },
   { name: "DANIELLE", cover: "/images/photography/carousel_3/wix_0289.jpg", title: "Rising Star" },
   { name: "STAR", cover: "/images/photography/carousel_3/wix_0291.jpg", title: "Featured" },
-  { name: "SYDNEY", cover: "/images/photography/carousel_3/wix_0296.jpg", title: "New Face" },
+  { name: "GRAYSON", cover: "/images/photography/carousel_3/wix_0296.jpg", title: "New Face" },
   { name: "WOLF", cover: "/images/photography/carousel_3/wix_0298.jpg", title: "Editorial" },
- ]);
+]);
 
- useEffect(() => {
+useEffect(() => {
   setFeaturedModels(shuffleArray([
   { name: "ADRIENNE", cover: "/images/photography/carousel_3/wix_0283.jpg", title: "Signed Model" },
   { name: "CAMILLE", cover: "/images/photography/carousel_3/wix_0285.jpg", title: "Professional" },
   { name: "CRISTINA", cover: "/images/photography/carousel_3/wix_0287.jpg", title: "Experienced" },
   { name: "DANIELLE", cover: "/images/photography/carousel_3/wix_0289.jpg", title: "Rising Star" },
   { name: "STAR", cover: "/images/photography/carousel_3/wix_0291.jpg", title: "Featured" },
-  { name: "SYDNEY", cover: "/images/photography/carousel_3/wix_0296.jpg", title: "New Face" },
+  { name: "GRAYSON", cover: "/images/photography/carousel_3/wix_0296.jpg", title: "New Face" },
   { name: "WOLF", cover: "/images/photography/carousel_3/wix_0298.jpg", title: "Editorial" },
   ]));
- }, []);
+}, []);
  const [modelIdx, setModelIdx] = useState(0);
  const [modelAutoPlay, setModelAutoPlay] = useState(true);
   const [applicationSubmitted, setApplicationSubmitted] = useState(false);
@@ -615,9 +615,9 @@ return (
           isNsfw && !nsfwSession.ageVerified ? "blur-xl scale-110" : ""
         }`} />
       <div className="absolute inset-0 z-10 bg-black/30" />
-      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-4 text-center">
-      <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase drop-shadow-lg transition-all duration-500 group-hover:opacity-0 absolute">{a}</p>
-      <p className="text-white/90 text-[12px] sm:text-[13px] md:text-[14px] leading-snug drop-shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500">{ALBUM_DESC[a]}</p>
+<div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-4 text-center">
+       <p className="text-white text-[17px] sm:text-[21px] md:text-[26px] lg:text-[33px] font-heading font-black tracking-[0.08em] uppercase dark:drop-shadow-none drop-shadow-lg transition-all duration-500 group-hover:opacity-0 absolute">{a}</p>
+       <p className="text-white/90 text-[12px] sm:text-[13px] md:text-[14px] leading-snug drop-shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500">{ALBUM_DESC[a]}</p>
       </div>
 {isNsfw && !nsfwSession.ageVerified && (
           <div className="absolute top-2 right-2 z-30 bg-black/20 pointer-events-none">

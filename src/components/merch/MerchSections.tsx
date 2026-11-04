@@ -132,7 +132,7 @@ export function SquareQuote() {
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="relative h-64 md:h-auto overflow-hidden">
             <div className="absolute inset-0" style={{ transform: `translateY(${scrollOffset}px) scale(1.1)` }}>
-              <SafeImage src="/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg" alt="Featured Artist" width={700} className="w-full h-full object-cover" />
+              <SafeImage src="/images/danny-davis.png" alt="Featured Artist" width={700} className="w-full h-full object-cover" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#111]/80 hidden md:block" />
           </div>

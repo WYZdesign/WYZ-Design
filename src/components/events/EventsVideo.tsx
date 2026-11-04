@@ -108,6 +108,19 @@ export function VideoCarousel({ items, onPlay }: { items: { title: string; video
 
   const CAROUSEL_H = "h-[232px] sm:h-[338px] md:h-[423px]";
 
+  // Preload videos for instant playback
+  useEffect(() => {
+    items.forEach((item) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "video";
+      link.href = item.video;
+      link.type = "video/mp4";
+      document.head.appendChild(link);
+      return () => document.head.removeChild(link);
+    });
+  }, [items]);
+
   useEffect(() => {
    const sec = secRef.current;
    if (!sec) return;
@@ -199,23 +212,23 @@ export function VideoCarousel({ items, onPlay }: { items: { title: string; video
   <div ref={trackRef} className="flex gap-3 will-change-transform">
    {list.map((v, i) => (
    <div key={i} className={`flex-none w-[55.5vw] sm:w-[254px] md:w-[297px] ${CAROUSEL_H} aspect-video group cursor-pointer hover-lift`} onClick={() => onPlay?.(v)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPlay?.(v); } }} role="button" tabIndex={0} aria-label={`Play ${v.title}`}>
-  <div className="relative overflow-hidden w-full h-full">
-  <video
-  src={v.video}
-  poster={videoThumb(v.video)}
-   muted
-   preload="none"
-   data-video-id={v.title}
-   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
-  ref={(el) => { if (el) { el.volume = 0.3; } }}
-  onLoadedMetadata={(e) => { e.currentTarget.currentTime = 5; }}
-  onMouseEnter={(e) => {
-   const vid = e.target as HTMLVideoElement;
-   if (vid.readyState >= 1) vid.currentTime = 5;
-   vid.play().catch(() => {});
-  }}
-  onMouseLeave={(e) => { const vid = e.target as HTMLVideoElement; vid.pause(); }}
-  />
+<div className="relative overflow-hidden w-full h-full">
+   <video
+   src={v.video}
+   poster={videoThumb(v.video)}
+    muted
+    preload="metadata"
+    data-video-id={v.title}
+    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+   ref={(el) => { if (el) { el.volume = 0.3; } }}
+   onLoadedMetadata={(e) => { e.currentTarget.currentTime = 6; }}
+   onMouseEnter={(e) => {
+    const vid = e.target as HTMLVideoElement;
+    if (vid.readyState >= 1) vid.currentTime = 6;
+    vid.play().catch(() => {});
+   }}
+   onMouseLeave={(e) => { const vid = e.target as HTMLVideoElement; vid.pause(); }}
+   />
   <button
   onClick={(e) => { e.stopPropagation(); e.preventDefault(); toggleVideo(v.title); }}
   onMouseEnter={(e) => e.stopPropagation()}
