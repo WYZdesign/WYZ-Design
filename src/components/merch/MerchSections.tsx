@@ -8,6 +8,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import SafeImage from "@/components/SafeImage";
 import { type Product, fmt, ARCHIVE_IMAGES } from "@/lib/data/merch";
+import { useModalA11y } from "@/hooks/useModalA11y";
 
 export function TypewriterText({ text, speed = 40 }: { text: string; speed?: number }) {
   const [displayed, setDisplayed] = useState("");
@@ -160,15 +161,39 @@ export function SquareQuote() {
 }
 
 export function BundleSets({ products }: { products: Product[] }) {
-  const pick = (cat: string) => products.find((p) => p.category === cat);
-  const apparel = pick("Apparel");
-  const headwear = pick("Headwear");
-  const accessory = pick("Accessories");
+  // Pull every product per category (not just the first) so we can build more
+  // than one real combination per category -- the live catalog comes from
+  // Printful and its contents/ordering can change, so sets are assembled by
+  // position within each category rather than by hardcoded product names.
+  const byCategory = (cat: string) => products.filter((p) => p.category === cat);
+  const apparelAll = byCategory("Apparel");
+  const headwearAll = byCategory("Headwear");
+  const accessoryAll = byCategory("Accessories");
+
+  const apparel = apparelAll[0];
+  const apparel2 = apparelAll[1];
+  const headwear = headwearAll[0];
+  const headwear2 = headwearAll[1];
+  const accessory = accessoryAll[0];
+  const accessory2 = accessoryAll[1];
 
   const sets: { name: string; items: Product[] }[] = [];
-  if (apparel && headwear) sets.push({ name: "Top + Cap", items: [apparel, headwear] });
-  if (apparel && accessory) sets.push({ name: "Top + Carry", items: [apparel, accessory] });
-  if (apparel && headwear && accessory) sets.push({ name: "The Full Fit", items: [apparel, headwear, accessory] });
+  const seenCombos = new Set<string>();
+  const addSet = (name: string, items: (Product | undefined)[]) => {
+    const real = items.filter((p): p is Product => !!p);
+    if (real.length !== items.length) return;
+    const key = real.map((p) => p.id).sort((a, b) => a - b).join("-");
+    if (seenCombos.has(key)) return;
+    seenCombos.add(key);
+    sets.push({ name, items: real });
+  };
+
+  addSet("Top + Cap", [apparel, headwear]);
+  addSet("Top + Carry", [apparel, accessory]);
+  addSet("The Full Fit", [apparel, headwear, accessory]);
+  addSet("Cap + Carry", [headwear, accessory]);
+  addSet("Double Top", [apparel, apparel2]);
+  addSet("The Alt Fit", [apparel2 ?? apparel, headwear2 ?? headwear, accessory2 ?? accessory]);
 
   if (sets.length === 0) return null;
 
@@ -242,6 +267,35 @@ export function ProductGrid({ products, onSelect }: { products: Product[]; onSel
           </div>
         </button>
       ))}
+    </div>
+  );
+}
+// Real quick-view modal, extracted from src/app/merch/page.tsx so any page
+// that lists live products (not mock/archive data) can open the same
+// product-detail flyout -- same markup, same "Choose options and add to
+// cart" link through to the real PDP/cart flow at /merch/[id].
+export function QuickViewModal({ product, onClose }: { product: Product | null; onClose: () => void }) {
+  const quickViewRef = useRef<HTMLDivElement>(null);
+  useModalA11y(onClose, { lockScroll: true, active: !!product, containerRef: quickViewRef });
+
+  if (!product) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
+      <div ref={quickViewRef} role="dialog" aria-modal="true" aria-labelledby="quick-view-title" className="bg-white dark:bg-[#252528] max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(event) => event.stopPropagation()}>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="bg-[#f7f7f5] dark:bg-[#1C1C1E] aspect-square flex items-center justify-center overflow-hidden relative"><SafeImage src={product.image} alt={product.name} width={700} className="w-full h-full object-contain p-6" /></div>
+          <div className="p-6 sm:p-8">
+            <button type="button" onClick={onClose} className="min-h-11 text-[#555] dark:text-[#aaa] hover:text-[#111] dark:hover:text-white text-[14px] mb-4 block">Back to shop</button>
+            <p className="text-[12px] text-[#666] dark:text-[#aaa] font-heading font-bold tracking-[0.1em] uppercase mb-2">{product.category}</p>
+            <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.06em] uppercase text-[#333] dark:text-white mb-4">{product.name}</h2>
+            <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(product.price)}</p>
+            <p className="text-[14px] text-[#666] dark:text-[#aaa] mb-3">{product.description}</p>
+            <p className="text-[12px] text-[#666] dark:text-[#aaa] mb-6">Printed to order. Usually ships in 3-6 business days.</p>
+            <Link href={`/merch/${product.id}`} className="block w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-center text-[13px] hover:bg-[#B82020]">Choose options and add to cart</Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

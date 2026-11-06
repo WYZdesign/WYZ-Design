@@ -1,7 +1,7 @@
 "use client";
 import HeroDots from "@/components/HeroDots";
 
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FiArrowRight, FiSearch } from "react-icons/fi";
@@ -14,6 +14,9 @@ import ImageHoverReveal from "@/components/ImageHoverReveal";
 import TextSplit from "@/components/TextSplit";
 import { shuffleArray } from "@/lib/utils";
 import { useModalA11y } from "@/hooks/useModalA11y";
+import { usePrintfulCatalog } from "@/hooks/usePrintfulCatalog";
+import { QuickViewModal } from "@/components/merch/MerchSections";
+import { type Product, fmt } from "@/lib/data/merch";
 
 function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onClose: () => void }) {
  useModalA11y(onClose);
@@ -136,16 +139,16 @@ function Carousel({ images, direction = "left" }: { images: string[]; direction?
     <div ref={sectionRef} aria-hidden="true" className="overflow-hidden" onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer">
         {doubled.map((src, i) => (
-          <div key={i} className={`flex-none w-[42.32vw] sm:w-[305px] md:w-[423px] ${CAROUSEL_H} relative overflow-hidden rounded-sm`}>
+          <div key={i} className={`flex-none ${CAROUSEL_H} flex items-center justify-center overflow-hidden rounded-sm bg-[#f5f5f5] dark:bg-[#252528]`}>
             <Image
               src={src}
               alt="WYZ Design portfolio"
-              fill
-              sizes="(max-width:640px) 42vw, 423px"
+              width={423}
+              height={423}
               loading="eager"
               decoding="async"
               onLoad={handleImgLoad(i)}
-              className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300"
+              className="h-full w-auto max-w-[80vw] object-contain opacity-0 transition-opacity duration-300"
             />
           </div>
         ))}
@@ -205,20 +208,10 @@ export default function DesignsPage() {
   const flyersScrollRef = useRef<HTMLDivElement>(null);
   const logosScrollRef = useRef<HTMLDivElement>(null);
   const merchScrollRef = useRef<HTMLDivElement>(null);
-  const dbcMerch = useMemo(() => [
-  { img: "/images/merch/dbc-archive/98442d-488e206ac0954202bc9563140aa2b55b~mv2.jpg", name: "Dying Breed Crew", price: "$35" },
-  { img: "/images/merch/dbc-archive/98442d-b3c114b8dab6450887e3d3aee9c71030~mv2.jpg", name: "Dying Breed Crew", price: "$65" },
-  { img: "/images/merch/dbc-archive/98442d-bd1e1406036d4ba99d4f8197e1495337~mv2.jpg", name: "Dying Breed Crew", price: "$45" },
-  { img: "/images/merch/dbc-archive/98442d-c13840a266e44b959886dc63b5826213~mv2.jpg", name: "Dying Breed Crew", price: "$55" },
-  { img: "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg", name: "Dying Breed Crew", price: "$25" },
-  { img: "/images/merch/dbc-archive/98442d-71e847c4dd9546b0bef2a69d72d2baa6~mv2.jpg", name: "Dying Breed Crew", price: "$32" },
-  { img: "/images/merch/dbc-archive/98442d-7ef7fb49e39942f687d13018406e72a8~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
-  { img: "/images/merch/dbc-archive/98442d-a35038eae10c4de8a68b7ca3aa5f28f3~mv2.jpg", name: "Dying Breed Crew", price: "$40" },
-  { img: "/images/merch/dbc-archive/98442d-60d7fe9cb1a14d4696d62ca1b5902cdf~mv2.jpg", name: "Dying Breed Crew", price: "$15" },
-  { img: "/images/merch/dbc-archive/98442d-95706f79d3f649dd9dda6bc28ef99f65~mv2.jpg", name: "Dying Breed Crew", price: "$28" },
-  { img: "/images/merch/dbc-archive/nsplsh-ea5cee04903c44399fee2f8de391fa51~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
-  { img: "/images/merch/dbc-archive/98442d-422f5f161e544ce9bf0e06f901881db4~mv2.jpg", name: "Dying Breed Crew", price: "$30" },
-], []);
+  // Real, order-able catalog -- same live Printful feed the /merch page uses --
+  // instead of the old static archive-photo mock strip with fake prices.
+  const { products: merchProducts } = usePrintfulCatalog();
+  const [selectedMerchProduct, setSelectedMerchProduct] = useState<Product | null>(null);
 
  const [shuffledLogos, setShuffledLogos] = useState(LOGOS_IMAGES);
  const [shuffledCovers, setShuffledCovers] = useState(COVER_ART_WYZ);
@@ -446,14 +439,17 @@ export default function DesignsPage() {
  </div>
  <div className="relative">
  <div ref={merchScrollRef} className="flex gap-2 overflow-x-auto pb-2 px-6" style={{ scrollbarWidth: "none" }}>
- {dbcMerch.map((p, i) => (
- <Link key={i} href="/merch" className="flex-none w-[27.8vw] min-w-[252px] sm:w-[17.2vw] sm:min-w-[159px] group cursor-pointer block">
+{merchProducts.map((p) => (
+ <button key={p.id} type="button" onClick={() => setSelectedMerchProduct(p)} className="flex-none w-[27.8vw] min-w-[252px] sm:w-[17.2vw] sm:min-w-[159px] group cursor-pointer block text-left bg-transparent border-0 p-0" aria-label={`Quick view ${p.name}`}>
     <div className="aspect-square relative dark:bg-[#252528] overflow-hidden mb-2 rounded-md">
-      <Image src={p.img} alt={p.name} fill sizes="17vw" loading="eager" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+      <Image src={p.image} alt={p.name} fill sizes="17vw" loading="eager" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+      <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+        <span className="bg-white text-[#333] text-[8px] font-bold tracking-[0.1em] uppercase px-4 py-2">Quick View</span>
+      </div>
    </div>
    <p className="text-[12px] font-bold text-[#333] dark:text-[#e0e0e0] truncate tracking-wide mb-2">{p.name}</p>
-  <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{p.price}</p>
- </Link>
+  <p className="text-[13px] text-[#666] dark:text-[#b0b0b0]">{fmt(p.price)}</p>
+ </button>
  ))}
  </div>
  </div>
@@ -529,6 +525,7 @@ export default function DesignsPage() {
   </section>
 
  {lbSrc && <SimpleLightbox src={lbSrc} onClose={() => setLbSrc(null)} />}
+ <QuickViewModal product={selectedMerchProduct} onClose={() => setSelectedMerchProduct(null)} />
  </main>
  );
 }

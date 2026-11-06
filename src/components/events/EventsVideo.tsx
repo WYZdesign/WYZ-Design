@@ -211,15 +211,15 @@ export function VideoCarousel({ items, onPlay }: { items: { title: string; video
   }}>
   <div ref={trackRef} className="flex gap-3 will-change-transform">
    {list.map((v, i) => (
-   <div key={i} className={`flex-none w-[55.5vw] sm:w-[254px] md:w-[297px] ${CAROUSEL_H} aspect-video group cursor-pointer hover-lift`} onClick={() => onPlay?.(v)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPlay?.(v); } }} role="button" tabIndex={0} aria-label={`Play ${v.title}`}>
-<div className="relative overflow-hidden w-full h-full">
+   <div key={i} className={`flex-none ${CAROUSEL_H} flex items-center justify-center bg-black group cursor-pointer hover-lift`} onClick={() => onPlay?.(v)} onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onPlay?.(v); } }} role="button" tabIndex={0} aria-label={`Play ${v.title}`}>
+<div className="relative overflow-hidden h-full w-auto max-w-[80vw]">
    <video
    src={v.video}
    poster={videoThumb(v.video)}
     muted
     preload="metadata"
     data-video-id={v.title}
-    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+    className="h-full w-auto max-w-[80vw] object-contain group-hover:scale-105 transition-transform duration-500"
    ref={(el) => { if (el) { el.volume = 0.3; } }}
    onLoadedMetadata={(e) => { e.currentTarget.currentTime = 6; }}
    onMouseEnter={(e) => {

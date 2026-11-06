@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import SafeImage from "@/components/SafeImage";
-import Link from "next/link";
-import { useModalA11y } from "@/hooks/useModalA11y";
-import { type Product, fmt, CATEGORIES, SORT_OPTIONS, ARCHIVE_IMAGES } from "@/lib/data/merch";
-import { ParallaxHero, DynamicContentUnderHero, SquareQuote, BundleSets, ProductGrid } from "@/components/merch/MerchSections";
+import { type Product, CATEGORIES, SORT_OPTIONS, ARCHIVE_IMAGES } from "@/lib/data/merch";
+import { ParallaxHero, DynamicContentUnderHero, SquareQuote, BundleSets, ProductGrid, QuickViewModal } from "@/components/merch/MerchSections";
+import { usePrintfulCatalog } from "@/hooks/usePrintfulCatalog";
 
 export default function MerchPage() {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -19,55 +18,7 @@ export default function MerchPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, [sizeGuide]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const quickViewRef = useRef<HTMLDivElement>(null);
-  useModalA11y(() => setSelectedProduct(null), { lockScroll: true, active: !!selectedProduct, containerRef: quickViewRef });
-  const [products, setProducts] = useState<Product[]>([]);
-
-  const [catalogStatus, setCatalogStatus] = useState<"idle" | "loading" | "loaded" | "error">("idle");
-
-  useEffect(() => {
-    setCatalogStatus("loading");
-    let attempts = 0;
-    const maxAttempts = 3;
-    const delay = 1000;
-    const controller = new AbortController();
-
-    const fetchCatalog = () => {
-      fetch("/api/printful-catalog", { signal: controller.signal })
-        .then((r) => {
-          if (!r.ok) throw new Error(`HTTP ${r.status}`);
-          return r.json();
-        })
-        .then((data) => {
-          // An empty (but successful) catalog must land in a real empty state,
-          // not sit on the loading skeleton forever: the early return here used
-          // to skip setCatalogStatus("loaded") entirely.
-          const list: Record<string, unknown>[] = Array.isArray(data.products) ? data.products : [];
-          if (list.length === 0) { setProducts([]); setCatalogStatus("loaded"); return; }
-          const printfulProducts: Product[] = list.map((p) => ({
-            id: p.id as number,
-            name: p.title as string,
-            category: (p.category as string) || "Apparel",
-            price: (p.price as number) || 0,
-            description: `Custom ${p.title}, Dying Breed Crew x WYZ Design`,
-            colors: ["#333333", "#DF3131", "#FFFFFF"],
-            image: (p.image as string) || "/images/merch/dbc-archive/WYZ-Crown-Dad-hat.jpg",
-          }));
-          setProducts(printfulProducts);
-          setCatalogStatus("loaded");
-        })
-        .catch(() => {
-          attempts++;
-          if (attempts < maxAttempts && !controller.signal.aborted) {
-            setTimeout(fetchCatalog, delay * attempts);
-          } else {
-            setCatalogStatus("error");
-          }
-        });
-    };
-    fetchCatalog();
-    return () => controller.abort();
-  }, []);
+  const { products, catalogStatus } = usePrintfulCatalog();
 
   const filteredProducts = useMemo(() => {
     const result = activeCategory === "All" ? [...products] : products.filter((p) => p.category === activeCategory);
@@ -172,24 +123,7 @@ export default function MerchPage() {
         </div>
       )}
 
-      {selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => setSelectedProduct(null)}>
-          <div ref={quickViewRef} role="dialog" aria-modal="true" aria-labelledby="quick-view-title" className="bg-white dark:bg-[#252528] max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(event) => event.stopPropagation()}>
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="bg-[#f7f7f5] dark:bg-[#1C1C1E] aspect-square flex items-center justify-center overflow-hidden relative"><SafeImage src={selectedProduct.image} alt={selectedProduct.name} width={700} className="w-full h-full object-contain p-6" /></div>
-              <div className="p-6 sm:p-8">
-                <button type="button" onClick={() => setSelectedProduct(null)} className="min-h-11 text-[#555] dark:text-[#aaa] hover:text-[#111] dark:hover:text-white text-[14px] mb-4 block">Back to shop</button>
-                <p className="text-[12px] text-[#666] dark:text-[#aaa] font-heading font-bold tracking-[0.1em] uppercase mb-2">{selectedProduct.category}</p>
-                <h2 id="quick-view-title" className="text-[1.5rem] font-heading font-bold tracking-[0.06em] uppercase text-[#333] dark:text-white mb-4">{selectedProduct.name}</h2>
-                <p className="text-[1.5rem] font-bold text-[#DF3131] mb-4">{fmt(selectedProduct.price)}</p>
-                <p className="text-[14px] text-[#666] dark:text-[#aaa] mb-3">{selectedProduct.description}</p>
-              <p className="text-[12px] text-[#666] dark:text-[#aaa] mb-6">Printed to order. Usually ships in 3-6 business days.</p>
-                <Link href={`/merch/${selectedProduct.id}`} className="block w-full py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.12em] uppercase text-center text-[13px] hover:bg-[#B82020]">Choose options and add to cart</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <QuickViewModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   );
 

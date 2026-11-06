@@ -327,8 +327,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-white dark:bg-[#1C1C1E] text-[#333333] dark:text-[#e0e0e0] antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
-          <ColorThemeProvider>
-            <AuthProvider>
+          <AuthProvider>
+            <ColorThemeProvider>
             <ZealProvider>
             <SmoothScrollProvider>
             <ScrollAnimator />
@@ -341,8 +341,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </CartProvider>
             </SmoothScrollProvider>
             </ZealProvider>
+            </ColorThemeProvider>
           </AuthProvider>
-          </ColorThemeProvider>
         </ThemeProvider>
         <GlobalImagePicker />
         <ConsentGatedAnalytics />

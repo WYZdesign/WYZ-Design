@@ -1,191 +1,151 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from "react";
+import { useSession } from "next-auth/react";
+import { useTheme as useLightDarkMode } from "@/components/ThemeProvider";
 
 export type ColorThemeName = "default" | "ocean" | "forest" | "sunset" | "midnight" | "rose";
+
+interface ModeColors {
+  primary: string;
+  primaryHover: string;
+}
 
 export interface ColorTheme {
   name: ColorThemeName;
   label: string;
-  colors: {
-    primary: string;
-    primaryHover: string;
-    secondary: string;
-    accent: string;
-    background: string;
-    surface: string;
-    text: string;
-    textMuted: string;
-    border: string;
-    cardBg: string;
-    heroGradient: string;
-  };
+  swatch: string; // small decorative secondary swatch shown next to primary in the picker
+  // Every theme has its own light-mode AND dark-mode pair. Which pair is
+  // actually applied follows the site's existing light/dark toggle (top
+  // right) -- this picker only ever chooses the color family, never the
+  // light/dark state itself, so the two controls stop fighting over it.
+  light: ModeColors;
+  dark: ModeColors;
 }
 
 export const colorThemes: Record<ColorThemeName, ColorTheme> = {
   default: {
     name: "default",
     label: "Classic",
-    colors: {
-      primary: "#DF3131",
-      primaryHover: "#B82020",
-      secondary: "#C9A227",
-      accent: "#DF3131",
-      background: "#FFFFFF",
-      surface: "#F5F5F3",
-      text: "#111111",
-      textMuted: "#666666",
-      border: "#E2E2E2",
-      cardBg: "#FFFFFF",
-      heroGradient: "linear-gradient(135deg, #DF3131 0%, #C9A227 100%)",
-    },
+    swatch: "#C9A227",
+    light: { primary: "#DF3131", primaryHover: "#B82020" },
+    dark: { primary: "#FF5C5C", primaryHover: "#DF3131" },
   },
   ocean: {
     name: "ocean",
     label: "Ocean",
-    colors: {
-      primary: "#006D77",
-      primaryHover: "#004D53",
-      secondary: "#83C5BE",
-      accent: "#006D77",
-      background: "#F0F8FA",
-      surface: "#E8F4F6",
-      text: "#003D44",
-      textMuted: "#4A8C94",
-      border: "#B5E2E8",
-      cardBg: "#FFFFFF",
-      heroGradient: "linear-gradient(135deg, #006D77 0%, #83C5BE 100%)",
-    },
+    swatch: "#83C5BE",
+    light: { primary: "#006D77", primaryHover: "#004D53" },
+    dark: { primary: "#4DD9E8", primaryHover: "#1DB8C9" },
   },
   forest: {
     name: "forest",
     label: "Forest",
-    colors: {
-      primary: "#2D5016",
-      primaryHover: "#1B3A0E",
-      secondary: "#8FBC8F",
-      accent: "#2D5016",
-      background: "#F4F8F1",
-      surface: "#E8F0E1",
-      text: "#1A3C0D",
-      textMuted: "#5D8A4A",
-      border: "#C5D9BE",
-      cardBg: "#FFFFFF",
-      heroGradient: "linear-gradient(135deg, #2D5016 0%, #8FBC8F 100%)",
-    },
+    swatch: "#8FBC8F",
+    light: { primary: "#2D5016", primaryHover: "#1B3A0E" },
+    dark: { primary: "#6FCF52", primaryHover: "#4F9E39" },
   },
   sunset: {
     name: "sunset",
     label: "Sunset",
-    colors: {
-      primary: "#E85D04",
-      primaryHover: "#B84703",
-      secondary: "#FFB84D",
-      accent: "#E85D04",
-      background: "#FFF5EB",
-      surface: "#FFE8D6",
-      text: "#7A3000",
-      textMuted: "#B8763A",
-      border: "#F0D5B8",
-      cardBg: "#FFFFFF",
-      heroGradient: "linear-gradient(135deg, #E85D04 0%, #FFB84D 100%)",
-    },
+    swatch: "#FFB84D",
+    light: { primary: "#E85D04", primaryHover: "#B84703" },
+    dark: { primary: "#FF8C42", primaryHover: "#E85D04" },
   },
   midnight: {
     name: "midnight",
     label: "Midnight",
-    colors: {
-      primary: "#6C5CE7",
-      primaryHover: "#5548C8",
-      secondary: "#A29BFE",
-      accent: "#6C5CE7",
-      background: "#1A1A2E",
-      surface: "#16213E",
-      text: "#EAEAEA",
-      textMuted: "#A0A0B8",
-      border: "#2D2D4A",
-      cardBg: "#1F2D55",
-      heroGradient: "linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%)",
-    },
+    swatch: "#A29BFE",
+    light: { primary: "#6C5CE7", primaryHover: "#5548C8" },
+    dark: { primary: "#9C8CFF", primaryHover: "#6C5CE7" },
   },
   rose: {
     name: "rose",
     label: "Rose",
-    colors: {
-      primary: "#D63384",
-      primaryHover: "#A8286A",
-      secondary: "#F7A8C9",
-      accent: "#D63384",
-      background: "#FFF0F6",
-      surface: "#FFE4EE",
-      text: "#7A1A4B",
-      textMuted: "#B85A8A",
-      border: "#F0C5D8",
-      cardBg: "#FFFFFF",
-      heroGradient: "linear-gradient(135deg, #D63384 0%, #F7A8C9 100%)",
-    },
+    swatch: "#F7A8C9",
+    light: { primary: "#D63384", primaryHover: "#A8286A" },
+    dark: { primary: "#FF6FAE", primaryHover: "#D63384" },
   },
 };
+
+// Guests only ever preview a theme for the current tab -- it is never
+// written anywhere, so a reload always comes back to the real default.
+// Once someone is signed in, their pick is treated as a real, persisted
+// default and saved under this account-scoped key. (This is still a
+// per-browser localStorage value, not yet synced to the account/profile in
+// the database -- see the handover for that follow-up.)
+const ACCOUNT_STORAGE_KEY = "wyz-color-theme-account";
 
 interface ColorThemeContextType {
   theme: ColorTheme;
   setTheme: (themeName: ColorThemeName) => void;
   availableThemes: ColorTheme[];
+  isPersisted: boolean; // false for a guest preview, true once saved as a real account default
 }
 
 const ColorThemeContext = createContext<ColorThemeContextType | undefined>(undefined);
 
 export function ColorThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ColorTheme>(colorThemes.default);
+  const { status } = useSession();
+  const { theme: mode } = useLightDarkMode(); // "light" | "dark" from the existing toggle
+  const [themeName, setThemeName] = useState<ColorThemeName>("default");
   const [mounted, setMounted] = useState(false);
+  const signedIn = status === "authenticated";
 
-  useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("wyz-color-theme") as ColorThemeName | null;
-    if (saved && colorThemes[saved]) {
-      setThemeState(colorThemes[saved]);
-      applyTheme(colorThemes[saved]);
-    } else {
-      applyTheme(colorThemes.default);
-    }
+  const applyColors = useCallback((name: ColorThemeName, modeNow: "light" | "dark") => {
+    const t = colorThemes[name];
+    const pair = modeNow === "dark" ? t.dark : t.light;
+    const root = document.documentElement;
+    root.style.setProperty("--wyz-primary", pair.primary);
+    root.style.setProperty("--wyz-primary-hover", pair.primaryHover);
+    root.setAttribute("data-color-theme", name);
   }, []);
 
-  const setTheme = (themeName: ColorThemeName) => {
-    const newTheme = colorThemes[themeName];
-    setThemeState(newTheme);
-    localStorage.setItem("wyz-color-theme", themeName);
-    applyTheme(newTheme);
-  };
-
-  const applyTheme = (t: ColorTheme) => {
-    if (!mounted) return;
-    const root = document.documentElement;
-    root.style.setProperty("--wyz-primary", t.colors.primary);
-    root.style.setProperty("--wyz-primary-hover", t.colors.primaryHover);
-    root.style.setProperty("--wyz-secondary", t.colors.secondary);
-    root.style.setProperty("--wyz-accent", t.colors.accent);
-    root.style.setProperty("--wyz-bg", t.colors.background);
-    root.style.setProperty("--wyz-surface", t.colors.surface);
-    root.style.setProperty("--wyz-text", t.colors.text);
-    root.style.setProperty("--wyz-text-muted", t.colors.textMuted);
-    root.style.setProperty("--wyz-border", t.colors.border);
-    root.style.setProperty("--wyz-card-bg", t.colors.cardBg);
-    root.style.setProperty("--wyz-hero-gradient", t.colors.heroGradient);
-    
-    // Apply dark mode variant for midnight theme
-    if (t.name === "midnight") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
+  // Mount: a signed-in visitor's saved pick is their real default and gets
+  // restored. A guest always starts from Classic -- nothing was ever saved
+  // for them, so there is nothing to restore.
+  useEffect(() => {
+    setMounted(true);
+    let initial: ColorThemeName = "default";
+    if (status === "authenticated") {
+      try {
+        const saved = localStorage.getItem(ACCOUNT_STORAGE_KEY) as ColorThemeName | null;
+        if (saved && colorThemes[saved]) initial = saved;
+      } catch {}
     }
-  };
+    setThemeName(initial);
+  }, [status]);
+
+  // Re-apply whenever the color theme OR the light/dark mode changes, so the
+  // two controls stay in sync instead of racing each other.
+  useEffect(() => {
+    if (!mounted) return;
+    applyColors(themeName, mode);
+  }, [mounted, themeName, mode, applyColors]);
+
+  const setTheme = useCallback((name: ColorThemeName) => {
+    setThemeName(name);
+    if (signedIn) {
+      try { localStorage.setItem(ACCOUNT_STORAGE_KEY, name); } catch {}
+    }
+    // A guest's pick is intentionally never written to storage -- it only
+    // lives in this render's state, so a refresh or a new tab always comes
+    // back to the real site default.
+  }, [signedIn]);
 
   if (!mounted) {
     return <>{children}</>;
   }
 
   return (
-    <ColorThemeContext.Provider value={{ theme, setTheme, availableThemes: Object.values(colorThemes) }}>
+    <ColorThemeContext.Provider
+      value={{
+        theme: colorThemes[themeName],
+        setTheme,
+        availableThemes: Object.values(colorThemes),
+        isPersisted: signedIn,
+      }}
+    >
       {children}
     </ColorThemeContext.Provider>
   );

@@ -7,8 +7,9 @@ import { useSession, signOut } from "next-auth/react";
 import toast from "react-hot-toast";
 import {
   FiUser, FiMail, FiEdit2, FiZap, FiGift, FiUsers, FiLogOut,
-  FiCamera, FiMessageCircle, FiCreditCard, FiHeart, FiStar, FiHelpCircle,
+  FiCamera, FiMessageCircle, FiCreditCard, FiHeart, FiStar, FiHelpCircle, FiDroplet,
 } from "react-icons/fi";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 interface ZealSummary {
   points?: number;
@@ -297,6 +298,19 @@ export default function MyAccountPage() {
             </p>
           </Link>
         </div>
+
+        {/* Appearance / theme */}
+        <section className={`${cardClass} mb-6`}>
+          <div className="flex items-center justify-between flex-wrap gap-3">
+            <h2 className="font-heading font-bold text-[15px] tracking-[0.1em] uppercase text-[#333] dark:text-[#e0e0e0] flex items-center gap-2">
+              <FiDroplet className="text-[#DF3131]" /> Appearance
+            </h2>
+            <ThemeSwitcher />
+          </div>
+          <p className="text-[12px] text-[#666] dark:text-white/50 mt-3">
+            Pick the site&apos;s color theme. Since you&apos;re signed in, your pick is saved here as your real default -- guests browsing the site only ever get a preview that resets when they leave.
+          </p>
+        </section>
 
         {/* Referral program */}
         <section className={`${cardClass} mb-6`}>

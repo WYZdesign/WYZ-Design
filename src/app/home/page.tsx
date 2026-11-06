@@ -122,10 +122,10 @@ export default function HomePage() {
      <p className="text-white/70 text-[11px] sm:text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-center mb-6 sm:mb-8 max-w-full">
         <TextSplit stagger={0.04} direction="up">Wild Vision. Zealous Execution.</TextSplit>
       </p>
-        <TextMaskReveal direction="up">
+<TextMaskReveal direction="up">
         <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black text-white tracking-[0.08em] text-center mb-6 sm:mb-10 max-w-lg mx-auto" style={{ lineHeight: 0.9 }}>
-           <span>WE MAKE</span><br />
-           <span className="text-[#DF3131]">WHAT WORKS</span>
+           <span><span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">WE</TextSplit></span> <TextSplit stagger={0.03} direction="up">MAKE</TextSplit></span><br />
+           <span><TextSplit stagger={0.03} direction="up">WHAT</TextSplit> <span className="text-[#DF3131]"><TextSplit stagger={0.03} direction="up">WORKS</TextSplit></span></span>
         </h1>
         </TextMaskReveal>
          <p className="text-white/70 text-[14px] sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-xs sm:max-w-sm mx-auto text-center">

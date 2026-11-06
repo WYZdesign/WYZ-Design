@@ -270,21 +270,21 @@ const [heroVideo, setHeroVideo] = useState("/videos/diy-shows/Action Sack Vol. 6
        preload="auto"
        style={{ opacity: heroReady ? 1 : 0, transition: "opacity 0.7s ease-in" }}
        className="absolute inset-0 w-full h-full object-cover md:[filter:saturate(1.2)_contrast(1.1)]"
-       onCanPlay={(e) => { const v = e.currentTarget; if (v.currentTime < 6) v.currentTime = 6; void v.play().catch(() => {}); setHeroReady(true); }}
+       onCanPlay={(e) => { const v = e.currentTarget; if (v.currentTime < 10) v.currentTime = 10; void v.play().catch(() => {}); setHeroReady(true); }}
        onTimeUpdate={(e) => {
          // `loop` restarts silently at 0 without firing `ended`, so re-apply the
          // 6s start point whenever a loop cycle brings it back near the top.
          const vid = e.currentTarget;
          if (vid.currentTime < 0.5 && vid.dataset.wzLooped !== "pending") {
            vid.dataset.wzLooped = "pending";
-           vid.currentTime = 6;
+           vid.currentTime = 10;
          } else if (vid.currentTime > 1) {
            vid.dataset.wzLooped = "";
          }
        }}
       />
       <div className="absolute inset-0 bg-black z-0" />
-      <div className="absolute inset-0 bg-black/65 z-[1]" />
+      <div className="absolute inset-0 bg-black/75 z-[1]" />
      </div>
 {/* Text overlay */}
 <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 sm:px-10 lg:px-16 text-center">
@@ -364,7 +364,7 @@ const [heroVideo, setHeroVideo] = useState("/videos/diy-shows/Action Sack Vol. 6
 
   {/* ═══ 6. YouTube Section ═══ */}
   <ScrollReveal animation="fadeUp" delay={0.1}>
-  <div className="mb-12">
+  <div className="mt-10 sm:mt-16 mb-12">
   <YouTubeSection />
   </div>
   </ScrollReveal>

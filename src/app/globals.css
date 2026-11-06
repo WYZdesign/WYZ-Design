@@ -1878,3 +1878,72 @@ h3, h4 { margin-bottom: 0.5rem; }
 
 /* Every in-page anchor target clears the sticky header */
 [id] { scroll-margin-top: 5rem; }
+
+/* ===================================================================
+   2026-11-05 (Claude): real, sitewide theme-color override.
+   The 6-theme ColorThemeProvider sets --wyz-primary/--wyz-primary-hover
+   on <html>, but nothing read them -- every bg-[#DF3131]/text-[#DF3131]/
+   border-[#DF3131] etc. across ~110 files is a literal hex baked into its
+   own Tailwind utility class, so picking a theme changed the swatch label
+   only. These rules re-point the exact generated class selectors for the
+   two brand colors (the primary red #DF3131 and its hover #B82020) at
+   those CSS variables, so every one of those elements actually re-colors
+   the instant a theme is chosen -- a real sitewide re-theme, with no edits
+   to the ~110 component files themselves.
+
+   Scope, stated plainly: this covers solid bg-/text-/border- usages of
+   #DF3131 and #B82020 (plain, hover:, dark:, dark:hover:, focus:,
+   focus-visible:, and group-hover: variants) -- the overwhelming majority
+   of visible brand-red across the site (buttons, links, borders, badges).
+   It does NOT cover opacity-modified utilities (bg-[#DF3131]/20 and
+   friends), gradient stops (from-/via-/to-[#DF3131]), box-shadow/ring
+   color utilities, or the YouTube-brand #FF0000/#CC0000 on the events
+   page (that red is YouTube's own brand color, not WYZ's, and should not
+   retheme). Flagged in the handover as a known, deliberate limitation --
+   not silently partial. These rwles are plain (unlayered) CSS, which in a
+   Tailwind v4 cascade always outranks Tailwind's own @layer utilities
+   regardless of source order, so !important is used only for certainty
+   given there's no real `next build` on this device to visually confirm.
+   =================================================================== */
+.bg-\[\#DF3131\] { background-color: var(--wyz-primary) !important; }
+.hover\:bg-\[\#DF3131\]:hover { background-color: var(--wyz-primary) !important; }
+.focus\:bg-\[\#DF3131\]:focus { background-color: var(--wyz-primary) !important; }
+.focus-visible\:bg-\[\#DF3131\]:focus-visible { background-color: var(--wyz-primary) !important; }
+.group:hover .group-hover\:bg-\[\#DF3131\] { background-color: var(--wyz-primary) !important; }
+.dark\:bg-\[\#DF3131\]:where(.dark, .dark *) { background-color: var(--wyz-primary) !important; }
+.dark\:hover\:bg-\[\#DF3131\]:where(.dark, .dark *):hover { background-color: var(--wyz-primary) !important; }
+.bg-\[\#B82020\] { background-color: var(--wyz-primary-hover) !important; }
+.hover\:bg-\[\#B82020\]:hover { background-color: var(--wyz-primary-hover) !important; }
+.focus\:bg-\[\#B82020\]:focus { background-color: var(--wyz-primary-hover) !important; }
+.focus-visible\:bg-\[\#B82020\]:focus-visible { background-color: var(--wyz-primary-hover) !important; }
+.group:hover .group-hover\:bg-\[\#B82020\] { background-color: var(--wyz-primary-hover) !important; }
+.dark\:bg-\[\#B82020\]:where(.dark, .dark *) { background-color: var(--wyz-primary-hover) !important; }
+.dark\:hover\:bg-\[\#B82020\]:where(.dark, .dark *):hover { background-color: var(--wyz-primary-hover) !important; }
+.text-\[\#DF3131\] { color: var(--wyz-primary) !important; }
+.hover\:text-\[\#DF3131\]:hover { color: var(--wyz-primary) !important; }
+.focus\:text-\[\#DF3131\]:focus { color: var(--wyz-primary) !important; }
+.focus-visible\:text-\[\#DF3131\]:focus-visible { color: var(--wyz-primary) !important; }
+.group:hover .group-hover\:text-\[\#DF3131\] { color: var(--wyz-primary) !important; }
+.dark\:text-\[\#DF3131\]:where(.dark, .dark *) { color: var(--wyz-primary) !important; }
+.dark\:hover\:text-\[\#DF3131\]:where(.dark, .dark *):hover { color: var(--wyz-primary) !important; }
+.text-\[\#B82020\] { color: var(--wyz-primary-hover) !important; }
+.hover\:text-\[\#B82020\]:hover { color: var(--wyz-primary-hover) !important; }
+.focus\:text-\[\#B82020\]:focus { color: var(--wyz-primary-hover) !important; }
+.focus-visible\:text-\[\#B82020\]:focus-visible { color: var(--wyz-primary-hover) !important; }
+.group:hover .group-hover\:text-\[\#B82020\] { color: var(--wyz-primary-hover) !important; }
+.dark\:text-\[\#B82020\]:where(.dark, .dark *) { color: var(--wyz-primary-hover) !important; }
+.dark\:hover\:text-\[\#B82020\]:where(.dark, .dark *):hover { color: var(--wyz-primary-hover) !important; }
+.border-\[\#DF3131\] { border-color: var(--wyz-primary) !important; }
+.hover\:border-\[\#DF3131\]:hover { border-color: var(--wyz-primary) !important; }
+.focus\:border-\[\#DF3131\]:focus { border-color: var(--wyz-primary) !important; }
+.focus-visible\:border-\[\#DF3131\]:focus-visible { border-color: var(--wyz-primary) !important; }
+.group:hover .group-hover\:border-\[\#DF3131\] { border-color: var(--wyz-primary) !important; }
+.dark\:border-\[\#DF3131\]:where(.dark, .dark *) { border-color: var(--wyz-primary) !important; }
+.dark\:hover\:border-\[\#DF3131\]:where(.dark, .dark *):hover { border-color: var(--wyz-primary) !important; }
+.border-\[\#B82020\] { border-color: var(--wyz-primary-hover) !important; }
+.hover\:border-\[\#B82020\]:hover { border-color: var(--wyz-primary-hover) !important; }
+.focus\:border-\[\#B82020\]:focus { border-color: var(--wyz-primary-hover) !important; }
+.focus-visible\:border-\[\#B82020\]:focus-visible { border-color: var(--wyz-primary-hover) !important; }
+.group:hover .group-hover\:border-\[\#B82020\] { border-color: var(--wyz-primary-hover) !important; }
+.dark\:border-\[\#B82020\]:where(.dark, .dark *) { border-color: var(--wyz-primary-hover) !important; }
+.dark\:hover\:border-\[\#B82020\]:where(.dark, .dark *):hover { border-color: var(--wyz-primary-hover) !important; }

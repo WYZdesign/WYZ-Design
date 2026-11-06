@@ -7,10 +7,9 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenu, HiX } from "react-icons/hi";
 import { IoChevronDown } from "react-icons/io5";
-import { FiSun, FiMoon, FiSearch, FiZap, FiShare2, FiGift, FiCalendar, FiUser, FiSettings } from "react-icons/fi";
+import { FiSun, FiMoon, FiSearch, FiZap, FiShare2, FiGift, FiCalendar, FiUser } from "react-icons/fi";
 import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
-import { useColorTheme } from "@/lib/color-theme-context";
 import MagneticElement from "@/components/MagneticElement";
 import { useZeal } from "@/components/ZealProvider";
 import { useCart } from "@/lib/cart";
@@ -21,23 +20,28 @@ const NAV_LINKS = [
   { href: "/photography", label: "P H O T O G R A P H Y" },
   { href: "/designs", label: "D E S I G N S" },
   { href: "/events", label: "E V E N T S" },
+  { href: "/printing", label: "P R I N T I N G" },
 ];
 
+// Order within and across these groups is deliberate: About, Services, Merch,
+// F.A.O.T.M., WYZMiND, Rewards, Community, Blog, Contact, FAQ -- flattening
+// MORE_GROUPS in declaration order must reproduce that exact sequence.
 const MORE_GROUPS = [
-  { title: "S T U D I O", links: [
+  { title: "A B O U T", links: [
     { href: "/about", label: "A B O U T" },
-    { href: "/blog", label: "B L O G" },
-    { href: "/community", label: "C O M M U N I T Y" },
-  ] },
-  { title: "S H O P", links: [
     { href: "/services", label: "S E R V I C E S" },
-    { href: "/merch", label: "M E R C H" },
-    { href: "/printing", label: "P R I N T I N G" },
-    { href: "/loyalty", label: "R E W A R D S" },
-    { href: "/featured-artist", label: "F. A. O. T. M." },
   ] },
-  { title: "T O O L S", links: [
+  { title: "S H O P  &  P E R K S", links: [
+    { href: "/merch", label: "M E R C H" },
+    { href: "/featured-artist", label: "F. A. O. T. M." },
     { href: "/wyzmind", label: "W Y Z M i N D" },
+    { href: "/loyalty", label: "R E W A R D S" },
+  ] },
+  { title: "C O M M U N I T Y", links: [
+    { href: "/community", label: "C O M M U N I T Y" },
+    { href: "/blog", label: "B L O G" },
+  ] },
+  { title: "S U P P O R T", links: [
     { href: "/contact", label: "C O N T A C T" },
     { href: "/faq", label: "F. A. Q." },
   ] },
