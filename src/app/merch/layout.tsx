@@ -4,7 +4,6 @@ export const metadata: Metadata = {
   title: "Merch Store",
   description: "Official WYZ Design merchandise, hoodies, tees, accessories. Premium quality streetwear inspired by the creative community.",
   keywords: ["WYZ Design merch", "streetwear", "creative agency merchandise", "designer clothing"],
-  alternates: { canonical: "https://www.wyzdesign.com/merch" },
   openGraph: {
     title: "Merch Store | WYZ Design",
     description: "Official WYZ Design merch, hoodies, tees, accessories.",

@@ -3,14 +3,15 @@ import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { listAllScanResults, listAgeVerifiedUsers, clearScanResult } from "@/lib/nsfw";
 import { NSFW_CATEGORIES } from "@/lib/nsfw";
 import { logger } from "@/lib/logger";
+import { normalizeEmail } from "@/lib/email-normalize";
 import type { Session } from "next-auth";
 
 function getAllowedEmails(): string[] {
-  return (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
+  return (process.env.ADMIN_EMAILS || "").split(",").map(e => normalizeEmail(e)).filter(Boolean);
 }
 
 function checkAdmin(session: Session | null): boolean {
-  const candidate = (session?.user?.email || "").toLowerCase();
+  const candidate = normalizeEmail(session?.user?.email);
   const admins = getAllowedEmails();
   if (admins.length === 0) return false;
   return admins.includes(candidate);

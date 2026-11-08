@@ -46,7 +46,7 @@ const issues = [
   },
 ];
 
-export default function NomadicBreedPage() {
+export default function NomadicBreedPage({ asSection = false }: { asSection?: boolean } = {}) {
   const currentIssue = issues[0];
   const flipbookPages = getFlipbookPages();
 
@@ -102,10 +102,17 @@ export default function NomadicBreedPage() {
                 16 Pages
               </span>
             </div>
-            <h1 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.9] mb-4">
-              <span className="text-[#6E6E6E] dark:text-[#888]">Nomadic Breed</span>
-              <span className="text-[#DF3131]">Issue 001</span>
-            </h1>
+            {asSection ? (
+              <h2 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.9] mb-4">
+                <span className="text-[#6E6E6E] dark:text-[#888]">Nomadic Breed</span>
+                <span className="text-[#DF3131]">Issue 001</span>
+              </h2>
+            ) : (
+              <h1 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.9] mb-4">
+                <span className="text-[#6E6E6E] dark:text-[#888]">Nomadic Breed</span>
+                <span className="text-[#DF3131]">Issue 001</span>
+              </h1>
+            )}
             <p className="text-white/70 text-[16px] sm:text-[18px] leading-relaxed max-w-2xl mb-8">
               The inaugural issue of Nomadic Breed Magazine. Digital-first, print-ready.
             </p>

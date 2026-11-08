@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
 import { useEffect } from "react";
 
 /**
@@ -68,7 +69,11 @@ function useStripDefaultAuthUI() {
   }, []);
 }
 
-export default function AuthProvider({ children }: { children: React.ReactNode }) {
+export default function AuthProvider({ children, session }: { children: React.ReactNode; session?: Session | null }) {
   useStripDefaultAuthUI();
-  return <SessionProvider>{children}</SessionProvider>;
+  return (
+    <SessionProvider session={session} refetchOnWindowFocus={false} refetchInterval={0}>
+      {children}
+    </SessionProvider>
+  );
 }

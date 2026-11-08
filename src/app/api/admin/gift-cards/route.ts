@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import { getServiceClient } from "@/lib/supabase";
 import { logger } from "@/lib/logger";
+import { normalizeEmail } from "@/lib/email-normalize";
 import type { Session } from "next-auth";
 
 function isAllowedEmail(email: string): boolean {
-  const admins = (process.env.ADMIN_EMAILS || "").split(",").map((e) => e.trim().toLowerCase()).filter(Boolean);
+  const admins = (process.env.ADMIN_EMAILS || "").split(",").map((e) => normalizeEmail(e)).filter(Boolean);
   if (admins.length === 0) return false;
-  return admins.includes(String(email).trim().toLowerCase());
+  return admins.includes(normalizeEmail(email));
 }
 function checkAdmin(session: Session | null): boolean {
   return isAllowedEmail(session?.user?.email || "");

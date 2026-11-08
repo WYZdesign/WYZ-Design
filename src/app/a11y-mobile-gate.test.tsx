@@ -117,8 +117,13 @@ describe("mobile regression locks (source-level)", () => {
 
   it("merch empty catalog resolves to a real empty state, not an endless skeleton", () => {
     const src = read("app", "merch", "page.tsx");
-    expect(src).toMatch(/setCatalogStatus\("loaded"\)/);
+    expect(src).toMatch(/usePrintfulCatalog/);
     expect(src).toMatch(/New pieces are coming soon/);
+    // The shared catalog hook owns the loaded state (the inline
+    // setCatalogStatus moved out of the page when the oversized file was
+    // split), so lock the real empty-state transition there too.
+    const hook = read("hooks", "usePrintfulCatalog.ts");
+    expect(hook).toMatch(/setCatalogStatus\("loaded"\)/);
   });
 });
 
@@ -217,23 +222,17 @@ describe("photography delivery", () => {
 });
 
 describe("carousel scale", () => {
-  it("image carousels use the 15% larger card sizes", () => {
-    // 2026-10-29 (Claude): the oversized-file split (board S3) moved these
-    // carousels out of their page.tsx files into dedicated components
-    // (home -> components/home/HomeCarousels.tsx, photography's main-page
-    // carousel -> components/photography/PhotographyModals.tsx, events ->
-    // components/events/EventsVideo.tsx), then a later carousel-unification
-    // pass changed photography's and events' widths too. Updated each read
-    // to the file that now actually contains the markup, and the two
-    // widths that changed with it. designs/page.tsx was never split, so it
-    // stays as-is. PhotographyCategoryRows.tsx is a *different* component
-    // (the /photography/[category] detail-page rows), untouched by any of
-    // this, so its own assertion is unchanged.
-    expect(read("app", "designs", "page.tsx")).toMatch(/md:w-\[423px\]/);
+  it("image carousels use full, uncropped dimensions (fixed height, auto width)", () => {
+    // 2026-11 (opencode batch): carousels moved from fixed-width cards
+    // (which cropped images) to fixed-height / auto-width frames with
+    // object-contain, so each image renders at its true dimensions with no
+    // top/bottom letterbox gaps. designs and events now size by height only;
+    // home, photography and the category rows kept their explicit widths.
+    expect(read("app", "designs", "page.tsx")).toMatch(/max-w-\[80vw\]/);
     expect(read("components", "home", "HomeCarousels.tsx")).toMatch(/md:w-\[423px\]/);
     expect(read("components", "photography", "PhotographyModals.tsx")).toMatch(/lg:w-\[582px\]/);
     expect(read("components", "PhotographyCategoryRows.tsx")).toMatch(/md:h-\[381px\]/);
-    expect(read("components", "events", "EventsVideo.tsx")).toMatch(/md:w-\[297px\]/);
+    expect(read("components", "events", "EventsVideo.tsx")).toMatch(/max-w-\[80vw\]/);
   });
 });
 

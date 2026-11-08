@@ -5,6 +5,7 @@ import { getServiceClient } from "@/lib/supabase";
 import type { Session } from "next-auth";
 import { logger } from "@/lib/logger";
 import { getCronStatus, getIntegrationStatus } from "@/lib/cron-heartbeat";
+import { normalizeEmail } from "@/lib/email-normalize";
 
 interface FormSubmission {
   id: string;
@@ -41,7 +42,7 @@ async function getFormSubmissions(): Promise<FormSubmission[]> {
 }
 
 function getAllowedEmails(): string[] {
-  return (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase()).filter(Boolean);
+  return (process.env.ADMIN_EMAILS || "").split(",").map(e => normalizeEmail(e)).filter(Boolean);
 }
 
 function isAllowedEmail(email: string | null | undefined): boolean {
@@ -49,11 +50,11 @@ function isAllowedEmail(email: string | null | undefined): boolean {
   const admins = getAllowedEmails();
   // Fail closed: no allowlist configured means deny everyone.
   if (admins.length === 0) return false;
-  return admins.includes(String(email).trim().toLowerCase());
+  return admins.includes(normalizeEmail(email));
 }
 
 function checkAdmin(session: Session | null): boolean {
-  const candidate = (session?.user?.email || "").toLowerCase();
+  const candidate = normalizeEmail(session?.user?.email);
   return isAllowedEmail(candidate);
 }
 

@@ -275,7 +275,7 @@ export default function AboutPage() {
 
       <LeadMagnet />
           {/* merged from /nomadic-breed */}
-      <NomadicBreedPage />
+      <NomadicBreedPage asSection />
       {/* merged from /dying-breed-crew */}
       <DyingBreedCrewPage />
 

@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { safeEquals } from "@/lib/api-utils";
 import { rateLimit } from "@/lib/rate-limit";
+import { normalizeEmail } from "@/lib/email-normalize";
 
 interface ExtendedSession extends Session {
   user: Session["user"] & { provider?: string };
@@ -25,7 +26,7 @@ const providers = [
       password: { label: "Admin Key", type: "password" },
     },
     async authorize(credentials) {
-      const email = String(credentials?.email || "").trim().toLowerCase();
+      const email = normalizeEmail(typeof credentials?.email === "string" ? credentials.email : "");
       const pw = String(credentials?.password || "");
       if (!email || !pw) return null;
 
@@ -50,7 +51,7 @@ const providers = [
 
       loginAttempts.delete(email);
 
-      const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(e => e.trim().toLowerCase());
+      const adminEmails = (process.env.ADMIN_EMAILS || "").split(",").map(e => normalizeEmail(e));
       if (!adminEmails.includes(email)) return null;
 
       return { id: email, email, name: email.split("@")[0] };

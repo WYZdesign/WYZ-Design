@@ -6,6 +6,7 @@ import { RouteBackground } from "@/components/RouteBackground";
 import "./globals.css";
 import { GlobalImagePicker } from "@/components/ImagePicker";
 import AuthProvider from "@/components/AuthProvider";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
 import ZealProvider from "@/components/ZealProvider";
 import ScrollProgress from "@/components/ScrollProgress";
 import AnalyticsProvider from "@/components/AnalyticsProvider";
@@ -78,7 +79,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth();
   return (
     <html lang="en" className={`${montserrat.variable} ${inter.variable} h-full`}>
       <head>
@@ -327,7 +329,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-white dark:bg-[#1C1C1E] text-[#333333] dark:text-[#e0e0e0] antialiased">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-[#DF3131] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
         <ThemeProvider>
-          <AuthProvider>
+          <AuthProvider session={session}>
             <ColorThemeProvider>
             <ZealProvider>
             <SmoothScrollProvider>
