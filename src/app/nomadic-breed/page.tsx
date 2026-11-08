@@ -205,16 +205,6 @@ export default function NomadicBreedPage({ asSection = false }: { asSection?: bo
             </div>
           </section>
 
-          {/* What's Inside Section Cards */}
-          <section className="max-w-5xl mx-auto px-6 pb-20">
-            <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.12em] uppercase text-center mb-8">
-              What's Inside Every Issue
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {sectionCards}
-            </div>
-          </section>
-
           {/* CTA */}
           <section className="max-w-4xl mx-auto px-6 pb-16">
             <div className="bg-[#0A0A0A] rounded-2xl p-6 sm:p-8 lg:p-10 text-center">
