@@ -1,18 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FiArrowRight, FiBookOpen, FiImage, FiEdit3, FiStar, FiDownload, FiPlay, FiCompass, FiBookmark } from "react-icons/fi";
-import type { IconType } from "react-icons";
+import { FiArrowRight } from "react-icons/fi";
 import MagazineFlipbook from "@/components/magazine/MagazineFlipbook";
-import { getFlipbookPages, ISSUE_001_META } from "@/lib/magazine/issue-001";
+import { InterviewIcon, PhotoEssayIcon, ProcessIcon, StatusIcon } from "@/components/magazine/NomadicIcons";
 
 const SITE = "https://www.wyzdesign.com";
-
-const SERVICE_ICONS: Record<string, IconType> = {
-  FiBookOpen,
-  FiImage,
-  FiEdit3,
-  FiStar,
-};
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -24,10 +16,10 @@ const jsonLd = {
 };
 
 const sections = [
-  { icon: "FiBookOpen", title: "Long-Form Interviews", desc: "Artists, builders, and organizers on how the work actually gets made. The decisions, the dead ends, and the parts nobody puts in a press release." },
-  { icon: "FiImage", title: "Photo Essays", desc: "Full shoots from the archive, sequenced as stories instead of a grid of highlights. One body of work, told properly." },
-  { icon: "FiEdit3", title: "Process Documentation", desc: "The brief, the references, the revisions and the reasoning. Documentation of the process, not just the final image." },
-  { icon: "FiStar", title: "Nomadic Status", desc: "A recurring editorial spotlight on one person or crew per issue: where they are, what they are building, and what comes next." },
+  { Icon: InterviewIcon, title: "Long-Form Interviews", desc: "Artists, builders, and organizers on how the work actually gets made. The decisions, the dead ends, and the parts nobody puts in a press release." },
+  { Icon: PhotoEssayIcon, title: "Photo Essays", desc: "Full shoots from the archive, sequenced as stories instead of a grid of highlights. One body of work, told properly." },
+  { Icon: ProcessIcon, title: "Process Documentation", desc: "The brief, the references, the revisions and the reasoning. Documentation of the process, not just the final image." },
+  { Icon: StatusIcon, title: "Nomadic Status", desc: "A recurring editorial spotlight on one person or crew per issue: where they are, what they are building, and what comes next." },
 ];
 
 const issues = [
@@ -48,19 +40,18 @@ const issues = [
 
 export default function NomadicBreedPage({ asSection = false }: { asSection?: boolean } = {}) {
   const currentIssue = issues[0];
-  const flipbookPages = getFlipbookPages();
 
   const sectionCards = sections.map((s) => {
-    const Icon = SERVICE_ICONS[s.icon] ?? FiBookOpen;
+    const Icon = s.Icon;
     return (
       <Link
         key={s.title}
         href={`/nomadic-breed/category/${s.title.toLowerCase().replace(/\s+/g, "-")}`}
-        className="group block"
+        className="group block h-full"
       >
-        <div className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] rounded-2xl p-8 hover:-translate-y-1 hover:shadow-lg hover:border-[#DF3131]/30 transition-all">
-          <div className="w-10 h-10 rounded-lg bg-[#6E6E6E]/10 flex items-center justify-center mb-4 group-hover:bg-[#DF3131]/10 transition-colors">
-            <Icon className="w-5 h-5 text-[#6E6E6E] group-hover:text-[#DF3131] transition-colors" />
+        <div className="h-full min-h-[260px] flex flex-col items-center justify-center text-center bg-white dark:bg-[#252528] p-8 hover:bg-[#DF3131]/[0.04] dark:hover:bg-[#DF3131]/10 transition-colors">
+          <div className="w-14 h-14 rounded-full bg-[#6E6E6E]/10 flex items-center justify-center mb-5 group-hover:bg-[#DF3131]/10 transition-colors">
+            <Icon className="w-7 h-7 text-[#6E6E6E] group-hover:text-[#DF3131] transition-colors" />
           </div>
           <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.03em] mb-3">{s.title}</h3>
           <p className="text-[#666] dark:text-[#666] text-[14px] leading-relaxed">{s.desc}</p>
@@ -92,25 +83,25 @@ export default function NomadicBreedPage({ asSection = false }: { asSection?: bo
           </div>
           <div className="relative z-10 max-w-4xl mx-auto px-6 h-full flex flex-col justify-end pb-16">
             <div className="mb-4 flex flex-wrap gap-2">
-              <span className="px-3 py-1 bg-[#DF3131]/10 text-[#DF3131] text-[11px] font-bold tracking-[0.15em] uppercase rounded-full">
-                Issue 001 · Vol. 1
+              <span className="whitespace-nowrap px-2.5 py-1 bg-[#DF3131]/10 text-[#DF3131] text-[11px] font-bold tracking-[0.06em] uppercase rounded-full">
+                Vol. 1 · Issue 001
               </span>
-              <span className="px-3 py-1 bg-white/10 dark:bg-black/10 text-white/60 text-[11px] font-bold tracking-[0.15em] uppercase rounded-full">
+              <span className="whitespace-nowrap px-2.5 py-1 bg-white/10 dark:bg-black/10 text-white/60 text-[11px] font-bold tracking-[0.06em] uppercase rounded-full">
                 Jan 2026
               </span>
-              <span className="px-3 py-1 bg-[#C9A227]/10 text-[#8C6A1D] text-[11px] font-bold tracking-[0.15em] uppercase rounded-full">
+              <span className="whitespace-nowrap px-2.5 py-1 bg-[#C9A227]/10 text-[#8C6A1D] text-[11px] font-bold tracking-[0.06em] uppercase rounded-full">
                 16 Pages
               </span>
             </div>
             {asSection ? (
-              <h2 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.9] mb-4">
-                <span className="text-[#6E6E6E] dark:text-[#888]">Nomadic Breed</span>
-                <span className="text-[#DF3131]">Issue 001</span>
+              <h2 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.95] mb-4">
+                <span className="text-[#6E6E6E] dark:text-[#888] block">Nomadic Breed</span>
+                <span className="text-[#DF3131] block">Issue 001</span>
               </h2>
             ) : (
-              <h1 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.9] mb-4">
-                <span className="text-[#6E6E6E] dark:text-[#888]">Nomadic Breed</span>
-                <span className="text-[#DF3131]">Issue 001</span>
+              <h1 className="font-heading font-black text-white text-[2.5rem] sm:text-[3.5rem] lg:text-[4.5rem] tracking-[0.04em] leading-[0.95] mb-4">
+                <span className="text-[#6E6E6E] dark:text-[#888] block">Nomadic Breed</span>
+                <span className="text-[#DF3131] block">Issue 001</span>
               </h1>
             )}
             <p className="text-white/70 text-[16px] sm:text-[18px] leading-relaxed max-w-2xl mb-8">
@@ -123,26 +114,15 @@ export default function NomadicBreedPage({ asSection = false }: { asSection?: bo
               >
                 Read Issue 001 <FiArrowRight className="w-4 h-4" />
               </Link>
-              <a
-                href="/nomadic-breed/issue-001/download"
-                className="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-heading font-bold text-[14px] tracking-[0.08em] uppercase hover:bg-white hover:text-[#111] transition-all"
-              >
-                Download PDF <FiDownload className="w-4 h-4" />
-              </a>
             </div>
           </div>
         </section>
 
         {/* Digital Magazine Flipbook Preview */}
-        <section className="max-w-5xl mx-auto px-6 pb-12 -mt-12 z-10 relative">
+        <section className="max-w-5xl mx-auto px-6 pb-12 pt-10 z-10 relative">
           <MagazineFlipbook
             pages={[
               { src: "/images/nomadic-breed/issue-001/cover.jpg", alt: "Cover - Hand-painted red NOMADIC BREED title, gritty back-alley aesthetic", pageNumber: 1 },
-              { src: "/images/nomadic-breed/issue-001/inside-cover.jpg", alt: "Inside cover - Masthead and contributors", pageNumber: 2 },
-              { src: "/images/nomadic-breed/issue-001/pg-03.jpg", alt: "Table of Contents", pageNumber: 3 },
-              { src: "/images/nomadic-breed/issue-001/pg-04.jpg", alt: "Nomadic Status Vol. 1", pageNumber: 4 },
-              { src: "/images/nomadic-breed/issue-001/pg-05.jpg", alt: "Breed Files - Echoes of the Concrete Jungle", pageNumber: 5 },
-              { src: "/images/nomadic-breed/issue-001/pg-05.jpg", alt: "In Transit - Postcards from the Borderless", pageNumber: 6 },
             ]}
             initialPage={1}
             showControls={true}
@@ -166,11 +146,11 @@ export default function NomadicBreedPage({ asSection = false }: { asSection?: bo
         </section>
 
 {/* What's Inside - Section Cards */}
-          <section className="max-w-5xl mx-auto px-6 pb-20">
-            <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.12em] uppercase text-center mb-8">
-              What's Inside
+          <section className="pb-20">
+            <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] text-[1.1rem] tracking-[0.12em] uppercase text-center mb-8 px-6">
+              What's Inside Every Issue
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E2E2E2] dark:bg-[#333] border-y border-[#E2E2E2] dark:border-[#333]">
               {sectionCards}
             </div>
           </section>
