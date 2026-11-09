@@ -9,6 +9,11 @@ export type ColorThemeName = "default" | "ocean" | "forest" | "sunset" | "midnig
 interface ModeColors {
   primary: string;
   primaryHover: string;
+  // Secondary (tertiary) accent: the gold/alt accent used for eyebrows,
+  // badges and small highlights. secondaryText is a contrast-safe variant
+  // for text on the page background.
+  secondary: string;
+  secondaryText: string;
 }
 
 export interface ColorTheme {
@@ -28,43 +33,43 @@ export const colorThemes: Record<ColorThemeName, ColorTheme> = {
     name: "default",
     label: "Classic",
     swatch: "#C9A227",
-    light: { primary: "#DF3131", primaryHover: "#B82020" },
-    dark: { primary: "#FF5C5C", primaryHover: "#DF3131" },
+    light: { primary: "#DF3131", primaryHover: "#B82020", secondary: "#C9A227", secondaryText: "#8C6A1D" },
+    dark: { primary: "#FF5C5C", primaryHover: "#DF3131", secondary: "#E7C873", secondaryText: "#E7C873" },
   },
   ocean: {
     name: "ocean",
     label: "Ocean",
     swatch: "#83C5BE",
-    light: { primary: "#006D77", primaryHover: "#004D53" },
-    dark: { primary: "#4DD9E8", primaryHover: "#1DB8C9" },
+    light: { primary: "#006D77", primaryHover: "#004D53", secondary: "#83C5BE", secondaryText: "#3A7C74" },
+    dark: { primary: "#4DD9E8", primaryHover: "#1DB8C9", secondary: "#A9E3DC", secondaryText: "#A9E3DC" },
   },
   forest: {
     name: "forest",
     label: "Forest",
     swatch: "#8FBC8F",
-    light: { primary: "#2D5016", primaryHover: "#1B3A0E" },
-    dark: { primary: "#6FCF52", primaryHover: "#4F9E39" },
+    light: { primary: "#2D5016", primaryHover: "#1B3A0E", secondary: "#8FBC8F", secondaryText: "#4F7A4F" },
+    dark: { primary: "#6FCF52", primaryHover: "#4F9E39", secondary: "#B8DDB8", secondaryText: "#B8DDB8" },
   },
   sunset: {
     name: "sunset",
     label: "Sunset",
     swatch: "#FFB84D",
-    light: { primary: "#E85D04", primaryHover: "#B84703" },
-    dark: { primary: "#FF8C42", primaryHover: "#E85D04" },
+    light: { primary: "#E85D04", primaryHover: "#B84703", secondary: "#FFB84D", secondaryText: "#A85F00" },
+    dark: { primary: "#FF8C42", primaryHover: "#E85D04", secondary: "#FFD08A", secondaryText: "#FFD08A" },
   },
   midnight: {
     name: "midnight",
     label: "Midnight",
     swatch: "#A29BFE",
-    light: { primary: "#6C5CE7", primaryHover: "#5548C8" },
-    dark: { primary: "#9C8CFF", primaryHover: "#6C5CE7" },
+    light: { primary: "#6C5CE7", primaryHover: "#5548C8", secondary: "#A29BFE", secondaryText: "#5B4FC8" },
+    dark: { primary: "#9C8CFF", primaryHover: "#6C5CE7", secondary: "#C4BEFF", secondaryText: "#C4BEFF" },
   },
   rose: {
     name: "rose",
     label: "Rose",
     swatch: "#F7A8C9",
-    light: { primary: "#D63384", primaryHover: "#A8286A" },
-    dark: { primary: "#FF6FAE", primaryHover: "#D63384" },
+    light: { primary: "#D63384", primaryHover: "#A8286A", secondary: "#F7A8C9", secondaryText: "#A83B6A" },
+    dark: { primary: "#FF6FAE", primaryHover: "#D63384", secondary: "#FFC2DA", secondaryText: "#FFC2DA" },
   },
 };
 
@@ -98,6 +103,8 @@ export function ColorThemeProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement;
     root.style.setProperty("--wyz-primary", pair.primary);
     root.style.setProperty("--wyz-primary-hover", pair.primaryHover);
+    root.style.setProperty("--wyz-secondary", pair.secondary);
+    root.style.setProperty("--wyz-secondary-text", pair.secondaryText);
     root.setAttribute("data-color-theme", name);
   }, []);
 

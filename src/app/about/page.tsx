@@ -273,9 +273,9 @@ export default function AboutPage() {
         </section>
       </ScrollReveal>
 
-      <LeadMagnet />
-          {/* merged from /nomadic-breed */}
+      {/* merged from /nomadic-breed */}
       <NomadicBreedPage asSection />
+      <LeadMagnet />
       {/* merged from /dying-breed-crew */}
       <DyingBreedCrewPage />
 

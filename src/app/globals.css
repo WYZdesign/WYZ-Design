@@ -455,6 +455,19 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   background: linear-gradient(135deg, #C90000 0%, #E63C3C 38%, #DF3131 100%);
 }
 
+/* Non-default color themes recolor the brand bar too. Default keeps the exact
+   original red gradient; every other theme derives it from --wyz-primary. */
+[data-color-theme="ocean"] .wyz-red-gradient,
+[data-color-theme="forest"] .wyz-red-gradient,
+[data-color-theme="sunset"] .wyz-red-gradient,
+[data-color-theme="midnight"] .wyz-red-gradient,
+[data-color-theme="rose"] .wyz-red-gradient {
+  background: linear-gradient(135deg,
+    color-mix(in oklab, var(--wyz-primary) 78%, #000) 0%,
+    color-mix(in oklab, var(--wyz-primary) 88%, #fff) 38%,
+    var(--wyz-primary) 100%);
+}
+
 /* ── Custom Cursor (desktop only) ──
    Scoped to a JS-toggled class, not a bare media query: a media query only
    detects device capability (mouse present), not current input mode, so a
@@ -1947,3 +1960,108 @@ h3, h4 { margin-bottom: 0.5rem; }
 .group:hover .group-hover\:border-\[\#B82020\] { border-color: var(--wyz-primary-hover) !important; }
 .dark\:border-\[\#B82020\]:where(.dark, .dark *) { border-color: var(--wyz-primary-hover) !important; }
 .dark\:hover\:border-\[\#B82020\]:where(.dark, .dark *):hover { border-color: var(--wyz-primary-hover) !important; }
+
+/* 2026-11-09: full theme coverage. Extends the 2026-11-05 override to
+   opacity tints, gradients, rings, shadows, accent, border-t/r/b/l,
+   plus the secondary/tertiary accents, so every theme recolors the
+   whole site (not just solid bg/text/border). Primary -> --wyz-primary,
+   hover/dark-text -> --wyz-primary-hover, gold -> --wyz-secondary(-text). */
+:root { --wyz-primary: #DF3131; --wyz-primary-hover: #B82020; --wyz-secondary: #C9A227; --wyz-secondary-text: #8C6A1D; }
+.dark { --wyz-primary: #FF5C5C; --wyz-primary-hover: #DF3131; --wyz-secondary: #E7C873; --wyz-secondary-text: #E7C873; }
+
+.accent-\[\#DF3131\] { accent-color: var(--wyz-primary) !important; }
+.bg-\[\#B82020\]\/20 { background-color: color-mix(in oklab, var(--wyz-primary-hover) 20%, transparent) !important; }
+.bg-\[\#C00000\] { background-color: var(--wyz-primary-hover) !important; }
+.bg-\[\#C00000\]\/10 { background-color: color-mix(in oklab, var(--wyz-primary-hover) 10%, transparent) !important; }
+.bg-\[\#C00000\]\/20 { background-color: color-mix(in oklab, var(--wyz-primary-hover) 20%, transparent) !important; }
+.bg-\[\#C9A227\] { background-color: var(--wyz-secondary) !important; }
+.bg-\[\#C9A227\]\/10 { background-color: color-mix(in oklab, var(--wyz-secondary) 10%, transparent) !important; }
+.bg-\[\#C9A227\]\/15 { background-color: color-mix(in oklab, var(--wyz-secondary) 15%, transparent) !important; }
+.bg-\[\#C9A227\]\/20 { background-color: color-mix(in oklab, var(--wyz-secondary) 20%, transparent) !important; }
+.bg-\[\#DF3131\] { background-color: var(--wyz-primary) !important; }
+.bg-\[\#DF3131\]\/10 { background-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.bg-\[\#DF3131\]\/15 { background-color: color-mix(in oklab, var(--wyz-primary) 15%, transparent) !important; }
+.bg-\[\#DF3131\]\/20 { background-color: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.bg-\[\#DF3131\]\/35 { background-color: color-mix(in oklab, var(--wyz-primary) 35%, transparent) !important; }
+.bg-\[\#DF3131\]\/40 { background-color: color-mix(in oklab, var(--wyz-primary) 40%, transparent) !important; }
+.bg-\[\#DF3131\]\/5 { background-color: color-mix(in oklab, var(--wyz-primary) 5%, transparent) !important; }
+.bg-\[\#DF3131\]\/50 { background-color: color-mix(in oklab, var(--wyz-primary) 50%, transparent) !important; }
+.bg-\[\#DF3131\]\/80 { background-color: color-mix(in oklab, var(--wyz-primary) 80%, transparent) !important; }
+.bg-\[\#DF3131\]\/90 { background-color: color-mix(in oklab, var(--wyz-primary) 90%, transparent) !important; }
+.border-\[\#C00000\]\/30 { border-color: color-mix(in oklab, var(--wyz-primary-hover) 30%, transparent) !important; }
+.border-\[\#C00000\]\/40 { border-color: color-mix(in oklab, var(--wyz-primary-hover) 40%, transparent) !important; }
+.border-\[\#C9A227\]\/30 { border-color: color-mix(in oklab, var(--wyz-secondary) 30%, transparent) !important; }
+.border-\[\#DF3131\] { border-color: var(--wyz-primary) !important; }
+.border-\[\#DF3131\]\/20 { border-color: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.border-\[\#DF3131\]\/30 { border-color: color-mix(in oklab, var(--wyz-primary) 30%, transparent) !important; }
+.border-\[\#DF3131\]\/50 { border-color: color-mix(in oklab, var(--wyz-primary) 50%, transparent) !important; }
+.border-t-\[\#DF3131\] { border-top-color: var(--wyz-primary) !important; }
+.dark\:bg-\[\#DF3131\]:where(.dark, .dark *) { background-color: var(--wyz-primary) !important; }
+.dark\:bg-\[\#DF3131\]\/10:where(.dark, .dark *) { background-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.dark\:hover\:bg-\[\#DF3131\]:where(.dark, .dark *):hover { background-color: var(--wyz-primary) !important; }
+.dark\:hover\:bg-\[\#DF3131\]\/10:where(.dark, .dark *):hover { background-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.dark\:hover\:border-\[\#DF3131\]:where(.dark, .dark *):hover { border-color: var(--wyz-primary) !important; }
+.dark\:text-\[\#C9A227\]:where(.dark, .dark *) { color: var(--wyz-secondary) !important; }
+.dark\:text-\[\#DF3131\]:where(.dark, .dark *) { color: var(--wyz-primary) !important; }
+.fill-\[\#8C6A1D\] { fill: var(--wyz-secondary-text) !important; }
+.focus-visible\:ring-\[\#DF3131\]:focus-visible { --tw-ring-color: var(--wyz-primary) !important; }
+.focus\:bg-\[\#DF3131\]:focus { background-color: var(--wyz-primary) !important; }
+.focus\:border-\[\#DF3131\]:focus { border-color: var(--wyz-primary) !important; }
+.focus\:border-\[\#DF3131\]\/50:focus { border-color: color-mix(in oklab, var(--wyz-primary) 50%, transparent) !important; }
+.focus\:ring-\[\#DF3131\]:focus { --tw-ring-color: var(--wyz-primary) !important; }
+.focus\:ring-\[\#DF3131\]\/20:focus { --tw-ring-color: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.from-\[\#DF3131\] { --tw-gradient-from: var(--wyz-primary) !important; }
+.from-\[\#DF3131\]\/10 { --tw-gradient-from: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.from-\[\#DF3131\]\/20 { --tw-gradient-from: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.from-\[\#DF3131\]\/30 { --tw-gradient-from: color-mix(in oklab, var(--wyz-primary) 30%, transparent) !important; }
+.from-\[\#DF3131\]\/5 { --tw-gradient-from: color-mix(in oklab, var(--wyz-primary) 5%, transparent) !important; }
+.from-\[\#DF3131\]\/60 { --tw-gradient-from: color-mix(in oklab, var(--wyz-primary) 60%, transparent) !important; }
+.group:hover .group-hover\:bg-\[\#C00000\]\/70 { background-color: color-mix(in oklab, var(--wyz-primary-hover) 70%, transparent) !important; }
+.group:hover .group-hover\:bg-\[\#DF3131\] { background-color: var(--wyz-primary) !important; }
+.group:hover .group-hover\:bg-\[\#DF3131\]\/10 { background-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.group:hover .group-hover\:bg-\[\#DF3131\]\/70 { background-color: color-mix(in oklab, var(--wyz-primary) 70%, transparent) !important; }
+.group:hover .group-hover\:border-\[\#DF3131\] { border-color: var(--wyz-primary) !important; }
+.group:hover .group-hover\:shadow-\[\#DF3131\]\/10 { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.group:hover .group-hover\:text-\[\#DF3131\] { color: var(--wyz-primary) !important; }
+.hover\:bg-\[\#B82020\]:hover { background-color: var(--wyz-primary-hover) !important; }
+.hover\:bg-\[\#C00000\]\/30:hover { background-color: color-mix(in oklab, var(--wyz-primary-hover) 30%, transparent) !important; }
+.hover\:bg-\[\#C9A227\]:hover { background-color: var(--wyz-secondary) !important; }
+.hover\:bg-\[\#C9A227\]\/30:hover { background-color: color-mix(in oklab, var(--wyz-secondary) 30%, transparent) !important; }
+.hover\:bg-\[\#DF3131\]:hover { background-color: var(--wyz-primary) !important; }
+.hover\:bg-\[\#DF3131\]\/\[0\.04\]:hover { background-color: color-mix(in oklab, var(--wyz-primary) 4%, transparent) !important; }
+.hover\:bg-\[\#DF3131\]\/10:hover { background-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.hover\:bg-\[\#DF3131\]\/20:hover { background-color: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.hover\:bg-\[\#DF3131\]\/30:hover { background-color: color-mix(in oklab, var(--wyz-primary) 30%, transparent) !important; }
+.hover\:bg-\[\#DF3131\]\/5:hover { background-color: color-mix(in oklab, var(--wyz-primary) 5%, transparent) !important; }
+.hover\:bg-\[\#DF3131\]\/80:hover { background-color: color-mix(in oklab, var(--wyz-primary) 80%, transparent) !important; }
+.hover\:border-\[\#B82020\]:hover { border-color: var(--wyz-primary-hover) !important; }
+.hover\:border-\[\#DF3131\]:hover { border-color: var(--wyz-primary) !important; }
+.hover\:border-\[\#DF3131\]\/30:hover { border-color: color-mix(in oklab, var(--wyz-primary) 30%, transparent) !important; }
+.hover\:border-\[\#DF3131\]\/40:hover { border-color: color-mix(in oklab, var(--wyz-primary) 40%, transparent) !important; }
+.hover\:border-\[\#DF3131\]\/50:hover { border-color: color-mix(in oklab, var(--wyz-primary) 50%, transparent) !important; }
+.hover\:ring-\[\#DF3131\]:hover { --tw-ring-color: var(--wyz-primary) !important; }
+.hover\:shadow-\[\#DF3131\]\/10:hover { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.hover\:shadow-\[\#DF3131\]\/20:hover { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.hover\:shadow-\[\#DF3131\]\/30:hover { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 30%, transparent) !important; }
+.hover\:text-\[\#B82020\]:hover { color: var(--wyz-primary-hover) !important; }
+.hover\:text-\[\#C00000\]:hover { color: var(--wyz-primary-hover) !important; }
+.hover\:text-\[\#C9A227\]:hover { color: var(--wyz-secondary) !important; }
+.hover\:text-\[\#DF3131\]:hover { color: var(--wyz-primary) !important; }
+.ring-\[\#DF3131\] { --tw-ring-color: var(--wyz-primary) !important; }
+.shadow-\[\#DF3131\]\/10 { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.shadow-\[\#DF3131\]\/15 { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 15%, transparent) !important; }
+.shadow-\[\#DF3131\]\/20 { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.shadow-\[\#DF3131\]\/30 { --tw-shadow-color: color-mix(in oklab, var(--wyz-primary) 30%, transparent) !important; }
+.text-\[\#8C6A1D\] { color: var(--wyz-secondary-text) !important; }
+.text-\[\#C00000\] { color: var(--wyz-primary-hover) !important; }
+.text-\[\#C00000\]\/60 { color: color-mix(in oklab, var(--wyz-primary-hover) 60%, transparent) !important; }
+.text-\[\#C9A227\] { color: var(--wyz-secondary) !important; }
+.text-\[\#DF3131\] { color: var(--wyz-primary) !important; }
+.text-\[\#DF3131\]\/30 { color: color-mix(in oklab, var(--wyz-primary) 30%, transparent) !important; }
+.to-\[\#B82020\] { --tw-gradient-to: var(--wyz-primary-hover) !important; }
+.to-\[\#C9A227\]\/5 { --tw-gradient-to: color-mix(in oklab, var(--wyz-secondary) 5%, transparent) !important; }
+.to-\[\#DF3131\] { --tw-gradient-to: var(--wyz-primary) !important; }
+.to-\[\#DF3131\]\/10 { --tw-gradient-to: color-mix(in oklab, var(--wyz-primary) 10%, transparent) !important; }
+.to-\[\#DF3131\]\/20 { --tw-gradient-to: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
+.via-\[\#B82020\]\/20 { --tw-gradient-via: color-mix(in oklab, var(--wyz-primary-hover) 20%, transparent) !important; }
+

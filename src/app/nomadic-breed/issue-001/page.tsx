@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { InterviewIcon, PhotoEssayIcon, TransitIcon, PackIcon, ExitWoundsIcon, StatusIcon, FoldIcon, LookbookIcon } from "@/components/magazine/NomadicIcons";
 
 export const metadata: Metadata = {
@@ -53,24 +54,6 @@ export default function Issue001Page() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Periodical",
-          name: "Nomadic Breed Issue 001",
-          description: "A 2026 independent magazine from WYZ Design, digital-first, documenting the people, places and scenes that move culture.",
-          url: "https://www.wyzdesign.com/nomadic-breed/issue-001",
-          publisher: { "@type": "Organization", name: "WYZ Design", url: "https://www.wyzdesign.com" },
-          datePublished: "2026-01-15",
-          issueNumber: 1,
-          volumeNumber: "1",
-          isPartOf: {
-            "@type": "Periodical",
-            name: "Nomadic Breed",
-          },
-        }) }}
-      />
       <main className="pb-20 bg-white dark:bg-[#1C1C1E]">
         <script
           type="application/ld+json"
@@ -85,33 +68,31 @@ export default function Issue001Page() {
             <p className="text-[#666] dark:text-[#aaa] text-[16px] leading-relaxed max-w-2xl mx-auto mb-6">
               The inaugural issue of Nomadic Breed Magazine. Digital-first, print-ready.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
-              <span className="whitespace-nowrap px-2.5 py-1 bg-[#DF3131]/10 text-[#DF3131] text-[11px] font-bold tracking-[0.06em] uppercase rounded-full">
+            <div className="flex flex-nowrap items-center justify-center gap-1.5 mt-6">
+              <span className="whitespace-nowrap px-2 py-0.5 bg-[#DF3131]/10 text-[#DF3131] text-[9px] sm:text-[10px] font-bold tracking-[0.06em] uppercase rounded-full">
                 Vol. 1 · Issue 001
               </span>
-              <span className="whitespace-nowrap px-2.5 py-1 bg-[#6E6E6E]/10 text-[#6E6E6E] text-[11px] font-bold tracking-[0.06em] uppercase rounded-full">
+              <span className="whitespace-nowrap px-2 py-0.5 bg-[#6E6E6E]/10 text-[#6E6E6E] text-[9px] sm:text-[10px] font-bold tracking-[0.06em] uppercase rounded-full">
                 Jan 2026
               </span>
-              <span className="whitespace-nowrap px-2.5 py-1 bg-[#C9A227]/10 text-[#8C6A1D] text-[11px] font-bold tracking-[0.06em] uppercase rounded-full">
+              <span className="whitespace-nowrap px-2 py-0.5 bg-[#C9A227]/10 text-[#8C6A1D] text-[9px] sm:text-[10px] font-bold tracking-[0.06em] uppercase rounded-full">
                 16 Pages
               </span>
             </div>
           </header>
         </section>
 
-        {/* Magazine Flipbook */}
+        {/* Cover */}
         <section className="max-w-5xl mx-auto px-6 pb-12 pt-6">
-          <div
-            className="relative aspect-[2/3] max-w-[800px] mx-auto rounded-xl overflow-hidden shadow-2xl"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-            <div className="relative z-10 h-full flex flex-col">
-              <div className="h-full flex items-center justify-center bg-[#111]">
-                <span className="text-white/50 text-[14px] font-bold tracking-[0.1em] uppercase">
-                  Magazine Flipbook Preview
-                </span>
-              </div>
-            </div>
+          <div className="mx-auto w-full max-w-[340px] sm:max-w-[420px]">
+            <Image
+              src="/images/nomadic-breed/issue-001/cover.jpg"
+              alt="Nomadic Breed Issue 001 cover"
+              width={1200}
+              height={1800}
+              sizes="(max-width: 640px) 80vw, 420px"
+              className="w-full h-auto object-contain rounded-xl shadow-2xl"
+            />
           </div>
         </section>
 
