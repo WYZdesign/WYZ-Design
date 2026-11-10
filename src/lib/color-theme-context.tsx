@@ -140,10 +140,11 @@ export function ColorThemeProvider({ children }: { children: ReactNode }) {
     // back to the real site default.
   }, [signedIn]);
 
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  // Always provide the context, even before mount. Previously this returned
+  // bare children until mounted, which meant any SSR-rendered consumer of
+  // useColorTheme() threw "must be used within a ColorThemeProvider". The
+  // theme/light-dark values only matter once mounted (the apply effect), so
+  // providing the default context up front is safe and fixes SSR.
   return (
     <ColorThemeContext.Provider
       value={{

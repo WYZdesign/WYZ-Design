@@ -370,8 +370,11 @@ export default function Navbar() {
                   Login
                 </Link>
               )}
-              <ThemeToggle />
-            </div>
+                <div className="ml-2 flex items-center gap-2">
+                  <ThemeSwitcher compact />
+                  <ThemeToggle />
+                </div>
+                </div>
 
             <div className="min-[1440px]:hidden ml-auto flex items-center gap-3">
               <ThemeToggle />

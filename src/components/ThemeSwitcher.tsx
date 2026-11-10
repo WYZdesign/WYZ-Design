@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import { FiDroplet, FiX, FiCheck, FiLock, FiUser } from "react-icons/fi";
 import { useModalA11y } from "@/hooks/useModalA11y";
 
-export function ThemeSwitcher() {
+export function ThemeSwitcher({ compact = false }: { compact?: boolean } = {}) {
   const { theme, setTheme, availableThemes, isPersisted } = useColorTheme();
   const { theme: mode } = useLightDarkMode();
   const [open, setOpen] = useState(false);
@@ -37,7 +37,7 @@ export function ThemeSwitcher() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 pl-1.5 pr-3 py-1.5 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-full text-[12px] font-bold tracking-[0.06em] text-[#333] dark:text-white hover:border-[#DF3131] transition-all"
+        className={`flex items-center bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-full text-[12px] font-bold tracking-[0.06em] text-[#333] dark:text-white hover:border-[#DF3131] transition-all ${compact ? "p-1.5" : "gap-2 pl-1.5 pr-3 py-1.5"}`}
         aria-label="Theme settings"
         aria-expanded={open}
       >
@@ -46,7 +46,7 @@ export function ThemeSwitcher() {
           style={{ background: `linear-gradient(135deg, ${currentPair.primary} 50%, ${theme.swatch} 50%)` }}
           aria-hidden="true"
         />
-        <span className="hidden sm:inline">{theme.label}</span>
+        {!compact && <span className="hidden sm:inline">{theme.label}</span>}
       </button>
 
       {open && (
