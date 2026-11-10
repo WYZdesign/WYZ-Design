@@ -46,8 +46,11 @@ Verified live by setting the same CSS vars the provider sets: primary, tertiary/
 - `npx vitest run` → 122/122 passed
 - `wyz_deploy_check.py e53e18a… --project wyzdesign` → DEPLOY IS LIVE ✅
 
-## Observation (not changed)
-The color-theme switcher is only mounted in the **mobile menu** (`min-[1440px]:hidden`) and the **signed-in profile dropdown**. At exactly ≥1440px a signed-out desktop visitor has no color-theme switcher (only the sun/moon light/dark toggle). If you want a desktop-visible color-theme control, add `<ThemeSwitcher />` next to `<ThemeToggle />` in the desktop nav (`Navbar.tsx` ~line 373). Left as-is to avoid an unrequested nav layout change.
+## Follow-up: desktop theme switcher + SSR fix (commit `2bdc9fa`, live)
+- **Added the color-theme switcher to the desktop nav.** It was only in the mobile menu and the signed-in profile dropdown, so a signed-out desktop visitor at ≥1440px had no way to pick a color theme. `<ThemeSwitcher compact />` is now rendered next to the light/dark toggle in the `hidden min-[1440px]:flex` nav block.
+- **`compact` prop** on `ThemeSwitcher`: icon-only pill (swatch only, no label) so it fits without pushing the light/dark toggle off-screen. Verified at 1440px: switcher 40px wide at x1318-1358, toggle x1366-1413 (fully inside the 1440 viewport), page has no horizontal overflow. Full switcher (with label) still used in the mobile menu and profile dropdown.
+- **Fixed a latent SSR bug** the desktop placement exposed: `ColorThemeProvider` returned bare children until `mounted`, so any SSR-rendered `useColorTheme()` consumer threw `useColorTheme must be used within a ColorThemeProvider` (the mobile menu never hit it because it is only mounted on open). The provider now always supplies the context (default values pre-mount); the color-apply effect still waits for mount. This makes `ThemeSwitcher` safe to render anywhere.
+- Verified end-to-end on the built app at 1440px: open switcher → pick Rose → `data-color-theme=rose`, `--wyz-primary=#D63384`, hero/accent recolor, dark toggle stays visible. Gates: tsc 0, eslint 0 errors, build 0, vitest 122/122, deploy `DEPLOY IS LIVE ✅`.
 
 ## Notes
 - `src/components/magazine/MagazineFlipbook.tsx` is now unused (no imports). Left in place (no deletions without approval); safe to remove later.
