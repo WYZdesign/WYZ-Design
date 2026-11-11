@@ -16,6 +16,7 @@ import {
 import ScrollReveal from "@/components/ScrollReveal";
 import { useZeal } from "@/components/ZealProvider";
 
+import { themeColor, themeText, themeTint } from "@/lib/theme-colors";
 import { CATEGORIES, DISCORD_CHANNELS, DISCORD_INVITE, FLAIRS, NEWS_POSTS, SEED_THREADS, UPCOMING_EVENTS } from "@/lib/data/community";
 const COMMUNITY_HIGHLIGHTS = [
   {
@@ -316,7 +317,7 @@ export default function ForumPage() {
                   <div className="p-5 sm:p-6 flex items-start gap-4">
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors"
-                      style={{ backgroundColor: `${h.color}15`, color: h.color === "#C9A227" ? "#8C6A1D" : h.color }}
+                      style={{ backgroundColor: themeTint(h.color, 8), color: themeText(h.color) }}
                     >
                       {h.icon}
                     </div>
@@ -367,7 +368,7 @@ export default function ForumPage() {
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[14px] font-heading font-bold shrink-0"
-                        style={{ backgroundColor: post.avatar, color: post.avatar === "#C9A227" ? "#1C1408" : undefined }}
+                        style={{ backgroundColor: themeColor(post.avatar), color: post.avatar === "#C9A227" ? "#1C1408" : undefined }}
                       >
                         {post.author.slice(0, 1).toUpperCase()}
                       </div>
@@ -434,7 +435,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: c.avatar, color: c.avatar === "#C9A227" ? "#1C1408" : undefined }}
+                                style={{ backgroundColor: themeColor(c.avatar), color: c.avatar === "#C9A227" ? "#1C1408" : undefined }}
                               >
                                 {c.author.slice(0, 1).toUpperCase()}
                               </div>
@@ -690,7 +691,7 @@ export default function ForumPage() {
                         {flair && (
                           <span
                             className="text-[11px] font-bold tracking-[0.1em] uppercase px-2 py-0.5 rounded mb-2"
-                            style={{ backgroundColor: `${flair.color}18`, color: flair.color === "#C9A227" ? "#8C6A1D" : flair.color === "#DF3131" ? "#C41C1C" : flair.color }}
+                            style={{ backgroundColor: themeTint(flair.color, 10), color: themeText(flair.color) }}
                           >
                             {flair.label}
                           </span>
@@ -733,7 +734,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: r.avatar, color: r.avatar === "#C9A227" ? "#1C1408" : undefined }}
+                                style={{ backgroundColor: themeColor(r.avatar), color: r.avatar === "#C9A227" ? "#1C1408" : undefined }}
                               >
                                 {r.author.slice(0, 1).toUpperCase()}
                               </div>

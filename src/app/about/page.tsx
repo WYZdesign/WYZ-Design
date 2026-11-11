@@ -10,6 +10,7 @@ import TextSplit from "@/components/TextSplit";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import LeadMagnet from "@/components/LeadMagnet";
 import { SUB_BRANDS, taglineColor } from "@/lib/brands";
+import { themeColor, themeText } from "@/lib/theme-colors";
 
 import NomadicBreedPage from "@/app/nomadic-breed/page";
 import DyingBreedCrewPage from "@/app/dying-breed-crew/page";
@@ -221,8 +222,8 @@ export default function AboutPage() {
               {SUB_BRANDS.map((brand, i) => (
                 <div key={i} className="relative group">
                   <div className="p-8 bg-[#F5F5F3] dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] hover:border-transparent transition-all duration-500 h-full text-center">
-                    <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full mx-auto" style={{ background: brand.color }} />
-                    <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: taglineColor(brand.color) }}>{brand.tagline}</span>
+                    <div className="w-12 h-1 mb-6 transition-all duration-500 group-hover:w-full mx-auto" style={{ background: themeColor(brand.color) }} />
+                    <span className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: themeText(brand.color) === brand.color ? taglineColor(brand.color) : themeText(brand.color) }}>{brand.tagline}</span>
                     <h3 className="font-heading font-black text-[#333] dark:text-white text-[18px] sm:text-[20px] tracking-[0.04em] uppercase mb-3">{brand.name}</h3>
                     <p className="text-[14px] text-[#666] dark:text-white/70 leading-relaxed">{brand.longDesc}</p>
                   </div>

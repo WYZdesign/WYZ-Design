@@ -17,6 +17,7 @@ import { useModalA11y } from "@/hooks/useModalA11y";
 import { usePrintfulCatalog } from "@/hooks/usePrintfulCatalog";
 import { QuickViewModal } from "@/components/merch/MerchSections";
 import { type Product, fmt } from "@/lib/data/merch";
+import { themeColor, themeText } from "@/lib/theme-colors";
 
 function SimpleLightbox({ src, alt, onClose }: { src: string; alt?: string; onClose: () => void }) {
  useModalA11y(onClose);
@@ -167,8 +168,8 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
  onClick={onToggle}
  className="w-full flex items-center gap-4 py-5 px-6 lg:px-10 text-left hover:bg-gray-50 transition-colors group"
  >
- <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300" style={{ background: isOpen ? accent : "transparent", border: isOpen ? "none" : `2px solid ${accent}` }}>
- <span className="text-[18px] font-bold transition-all duration-300" style={{ color: isOpen ? "white" : accent, transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>+</span>
+ <div className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300" style={{ background: isOpen ? themeColor(accent) : "transparent", border: isOpen ? "none" : `2px solid ${themeColor(accent)}` }}>
+ <span className="text-[18px] font-bold transition-all duration-300" style={{ color: isOpen ? "white" : themeText(accent), transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}>+</span>
  </div>
  <div className="flex-1">
   <h3 className="font-heading font-black text-[#333] dark:text-[#e0e0e0] text-[20px] sm:text-[24px] tracking-[0.04em] leading-snug mb-3">{title}</h3>
@@ -188,7 +189,7 @@ function AccordionServiceCard({ img, title, desc, accent = "#DF3131", isOpen, on
    </div>
   <div className="w-full sm:w-[55%] px-6 lg:px-10 py-6 flex flex-col justify-center">
   <p className="text-[17px] text-[#666] dark:text-[#b0b0b0] leading-[1.7] mb-5">{desc}</p>
-  <Link href="/booking" className="inline-flex items-center gap-2 px-6 py-3 text-[12px] sm:text-[15px] font-bold tracking-[0.08em] text-white text-center transition-all hover:scale-105" style={{ background: accent }}>
+  <Link href="/booking" className="inline-flex items-center gap-2 px-6 py-3 text-[12px] sm:text-[15px] font-bold tracking-[0.08em] text-white text-center transition-all hover:scale-105" style={{ background: themeColor(accent) }}>
   GET A QUOTE <FiArrowRight className="w-4 h-4" />
   </Link>
  </div>

@@ -8,6 +8,7 @@ import { FiStar, FiGift, FiZap, FiShield, FiTarget, FiAward, FiRefreshCw } from 
 
 import GiftCardPage from "@/app/gift-card/page";
 import ReferralPage from "@/app/referral/page";
+import { themeColor } from "@/lib/theme-colors";
 interface CatalogAction { id: string; zeal: number; category: string; reason: string; repeatable: boolean }
 interface AchievementDef { id: string; zeal: number; title: string; description: string }
 interface QuestDef { id: string; title: string; description: string; steps: string[]; bonusZeal: number }
@@ -130,8 +131,8 @@ export default function LoyaltyPage() {
                 </button>
               </div>
               <p className="text-[13px] font-bold tracking-[0.15em] uppercase text-[#666] dark:text-white/50 mb-2">Your Zeal</p>
-              <p className="text-[3rem] font-heading font-black" style={{ color: data.tierColor }}>{data.points}</p>
-              <p className="text-[14px] uppercase font-bold tracking-[0.1em] mb-2" style={{ color: data.tierColor }}>{data.tier} TIER</p>
+              <p className="text-[3rem] font-heading font-black" style={{ color: themeColor(data.tierColor) }}>{data.points}</p>
+              <p className="text-[14px] uppercase font-bold tracking-[0.1em] mb-2" style={{ color: themeColor(data.tierColor) }}>{data.tier} TIER</p>
               {data.nextTier && (
                 <p className="text-[13px] text-[#666] dark:text-white/50 mt-2">{data.nextTier.min - data.points} more Zeal to reach {data.nextTier.name}</p>
               )}
@@ -141,7 +142,7 @@ export default function LoyaltyPage() {
                   width: data.nextTier
                     ? `${Math.min(100, Math.round((data.points / data.nextTier.min) * 100))}%`
                     : "100%",
-                  background: data.tierColor,
+                  background: themeColor(data.tierColor),
                 }} />
               </div>
             </div>
@@ -286,8 +287,8 @@ export default function LoyaltyPage() {
             { name: "Legend", min: 5000, color: "#00D4FF" },
           ]).map((t, i) => (
             <div key={t.name} className="bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#444] rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: t.color }} />
-              <h3 className="font-heading font-bold text-[18px] tracking-[0.06em] mb-2" style={{ color: t.color }}>{t.name}</h3>
+              <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: themeColor(t.color) }} />
+              <h3 className="font-heading font-bold text-[18px] tracking-[0.06em] mb-2" style={{ color: themeColor(t.color) }}>{t.name}</h3>
               <p className="text-[13px] text-[#666] dark:text-white/50 mb-3">{t.min === 0 ? "Start here" : `${t.min.toLocaleString()}+ Zeal`}</p>
               <p className="text-[13px] text-[#666] dark:text-[#b0b0b0] leading-relaxed">
                 {["Base access to the program", "5% off services, free social graphics, birthday discount", "10% off, priority booking, free retouching, event invites", "15% off, dedicated rep, free monthly shoot, VIP access, custom merch"][i]}

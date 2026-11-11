@@ -10,6 +10,7 @@ import {
   FiCamera, FiMessageCircle, FiCreditCard, FiHeart, FiStar, FiHelpCircle, FiDroplet,
 } from "react-icons/fi";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { themeColor } from "@/lib/theme-colors";
 
 interface ZealSummary {
   points?: number;
@@ -275,8 +276,8 @@ export default function MyAccountPage() {
             <p className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#666] dark:text-white/50 mb-2">Zeal Balance</p>
             {zeal ? (
               <>
-                <p className="text-[2.5rem] font-heading font-black leading-none mb-1" style={{ color: zeal.tierColor || "#DF3131" }}>{zeal.points}</p>
-                <p className="text-[12px] font-bold tracking-[0.1em] uppercase" style={{ color: zeal.tierColor || "#DF3131" }}>{zeal.tier} tier</p>
+                <p className="text-[2.5rem] font-heading font-black leading-none mb-1" style={{ color: themeColor(zeal.tierColor || "#DF3131") }}>{zeal.points}</p>
+                <p className="text-[12px] font-bold tracking-[0.1em] uppercase" style={{ color: themeColor(zeal.tierColor || "#DF3131") }}>{zeal.tier} tier</p>
                 {typeof zeal.visitStreak === "number" && zeal.visitStreak > 0 && (
                   <p className="text-[11px] text-[#666] dark:text-white/40 mt-2 flex items-center gap-1"><FiZap className="w-3 h-3 text-[#DF3131]" /> {zeal.visitStreak} day streak</p>
                 )}

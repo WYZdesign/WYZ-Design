@@ -20,6 +20,7 @@ import AgeGateModal from "@/components/AgeGateModal";
 import { AlbumModal, AutoScrollRow } from "@/components/photography/PhotographyModals";
 
 import { ALBUM_COVERS_STATIC, ALBUM_DESC, ALBUMS } from "@/lib/data/photography";
+import { themeColor } from "@/lib/theme-colors";
 
  function PhotoFlipCard({ s }: { s: { name: string; price: string; dur: string; cat: string; desc: string; bookLink: string; img: string } }) {
   const [flipped, setFlipped] = useState(false);
@@ -654,7 +655,7 @@ return (
  { title: "TOP-QUALITY\nGUARANTEED", desc: "Satisfaction is 100% guaranteed no matter how big or small your project may be.", icon: "\u2605", bg: "#DF3131" },
  ].map((b, i) => (
  <div key={b.title} className={`p-10 text-center group ${i === 1 ? "bg-white dark:bg-[#252528]" : "bg-[#F5F5F3] dark:bg-[#DF3131]"}`}>
- <div className="w-16 h-16 mx-auto flex items-center justify-center text-white text-2xl font-bold mb-4" style={{ backgroundColor: b.bg }}>
+ <div className="w-16 h-16 mx-auto flex items-center justify-center text-white text-2xl font-bold mb-4" style={{ backgroundColor: themeColor(b.bg) }}>
  {b.icon}
  </div>
  <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] whitespace-pre-line leading-tight mb-3">{b.title}</h3>
