@@ -5,12 +5,12 @@
 
 :root {
   /* ── Brand Core ── */
-  --color-wyz-red: #DF3131;
-  --color-wyz-red-dark: #B82020;
-  --color-wyz-text-red: #C00000;
-  --color-wyz-gold: #C9A227;
-  --color-wyz-gold-light: #E7C873;
-  --color-wyz-gold-deep: #8C6A1D;
+  --color-wyz-red: var(--wyz-primary);
+  --color-wyz-red-dark: var(--wyz-primary-hover);
+  --color-wyz-text-red: var(--wyz-primary-hover);
+  --color-wyz-gold: var(--wyz-secondary);
+  --color-wyz-gold-light: var(--wyz-secondary);
+  --color-wyz-gold-deep: var(--wyz-secondary-text);
 
   /* ── Neutrals ── */
   --color-wyz-white: #FFFFFF;

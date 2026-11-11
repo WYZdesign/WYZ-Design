@@ -254,7 +254,7 @@ export default function DesignsPage() {
  "@keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}",
  "@keyframes slideInLeft{from{opacity:0;transform:translateX(-80px)}to{opacity:1;transform:translateX(0)}}",
  "@keyframes slideInRight{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:translateX(0)}}",
- "@keyframes pulse3131{0%,100%{box-shadow:0 0 0 0 rgba(223,49,49,.35)}50%{box-shadow:0 0 0 10px rgba(223,49,49,0)}}",
+ "@keyframes pulse3131{0%,100%{box-shadow:0 0 0 0 rgba(var(--wyz-primary-rgb),.35)}50%{box-shadow:0 0 0 10px rgba(var(--wyz-primary-rgb),0)}}",
  ".animate-fadeInUp{animation:fadeInUp .8s ease-out forwards}",
  ".animate-slideInLeft{animation:slideInLeft .8s ease-out forwards}",
  ".animate-slideInRight{animation:slideInRight .8s ease-out forwards}",

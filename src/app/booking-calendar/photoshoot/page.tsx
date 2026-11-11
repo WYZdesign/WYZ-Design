@@ -219,7 +219,7 @@ export default function PhotoshootCalendar() {
                   <button
                     onClick={handleSubmit}
                     disabled={!selectedDate || !selectedTime || !name || !email || submitting}
-                    className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-[#B82020] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Confirm Booking
                   </button>

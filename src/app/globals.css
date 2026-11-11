@@ -26,12 +26,12 @@
   --color-wyz-text: #333333;
   --color-wyz-text-secondary: #666665;
   --color-wyz-muted: #666666;
-  --color-wyz-red: #DF3131;
-  --color-wyz-red-dark: #B82020;
-  --color-wyz-text-red: #C00000; /* ~5.5:1 on white for small text accessibility */
-  --color-wyz-gold: #C9A227; /* real metallic gold, logo tone */
-  --color-wyz-gold-light: #E7C873; /* highlight / glow */
-  --color-wyz-gold-deep: #8C6A1D; /* gold text on light bg (contrast safe) */
+  --color-wyz-red: var(--wyz-primary);
+  --color-wyz-red-dark: var(--wyz-primary-hover);
+  --color-wyz-text-red: var(--wyz-primary-hover); /* ~5.5:1 on white for small text accessibility */
+  --color-wyz-gold: var(--wyz-secondary); /* real metallic gold, logo tone */
+  --color-wyz-gold-light: var(--wyz-secondary-text); /* highlight / glow */
+  --color-wyz-gold-deep: var(--wyz-secondary-text); /* gold text on light bg (contrast safe) */
   --color-wyz-border: #E2E2E2;
   --color-wyz-card: #FFFFFF;
   --font-heading: 'Montserrat', sans-serif;
@@ -95,8 +95,8 @@ h3 { max-width: 75%; margin-left: auto; margin-right: auto; }
   h3 { max-width: 85%; margin-left: auto; margin-right: auto; }
 }
 
-::selection { background: rgba(223, 49, 49, 0.2); color: #333333; }
-.dark ::selection { background: rgba(223, 49, 49, 0.3); color: #e0e0e0; }
+::selection { background: rgba(var(--wyz-primary-rgb), 0.2); color: #333333; }
+.dark ::selection { background: rgba(var(--wyz-primary-rgb), 0.3); color: #e0e0e0; }
 
 /* ── NAV ── */
 /* 2026-10-27 (Claude): wrapped in @layer base. This rule has no media
@@ -116,11 +116,11 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 
 /* ── BUTTONS ── */
 .btn-primary {
-  background: #DF3131; color: #FFFFFF; border: none;
+  background: var(--wyz-primary); color: #FFFFFF; border: none;
   padding: 0.9rem 2.2rem; font-size: 15px; font-weight: 600;
   letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s;
 }
-.btn-primary:hover { background: #B82020; }
+.btn-primary:hover { background: var(--wyz-primary-hover); }
 
 .btn-outline {
   background: transparent; color: #333333; border: 1px solid #333333;
@@ -130,7 +130,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 .btn-outline:hover { background: #333333; color: #FFFFFF; }
 
 .btn-gold {
-  background: #C9A227; color: #1C1408; border: none;
+  background: var(--wyz-secondary); color: #1C1408; border: none;
   padding: 0.9rem 2.2rem; font-size: 15px; font-weight: 600;
   text-transform: uppercase; transition: background 0.2s;
 }
@@ -167,8 +167,8 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
     input[type="number"], input[type="date"], input[type="search"], input[type="password"],
     textarea:not([readonly])):not(:disabled):focus {
     outline: none;
-    border-color: #DF3131;
-    box-shadow: 0 0 0 1px #DF3131;
+    border-color: var(--wyz-primary);
+    box-shadow: 0 0 0 1px var(--wyz-primary);
   }
 }
 
@@ -357,7 +357,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   .service-card { min-height: min(380px, 55vh) !important; }
 
   /* Photography filter buttons — consistent style */
-  .filter-btn-active { background: #DF3131 !important; color: white !important; border-color: #DF3131 !important; }
+  .filter-btn-active { background: var(--wyz-primary) !important; color: white !important; border-color: var(--wyz-primary) !important; }
 
   /* Gift card — improve visual hierarchy */
   .gift-card-amount { font-size: 2.5rem !important; }
@@ -452,7 +452,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 
 /* ── Nav/Footer Red Gradient (mobile fallback for heavy bg video) ── */
 .wyz-red-gradient {
-  background: linear-gradient(135deg, #C90000 0%, #E63C3C 38%, #DF3131 100%);
+  background: linear-gradient(135deg, var(--wyz-primary-hover) 0%, var(--wyz-primary) 38%, var(--wyz-primary) 100%);
 }
 
 /* Non-default color themes recolor the brand bar too. Default keeps the exact
@@ -502,7 +502,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: #f5f5f5; }
   ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #C9A227; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--wyz-secondary); }
   * { scrollbar-width: thin; scrollbar-color: #ccc #f5f5f5; }
 }
 
@@ -514,9 +514,9 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 .wz-gold-border { border-color: var(--color-wyz-gold); }
 .wz-gold-glow { box-shadow: 0 0 24px rgba(201, 162, 39, 0.35); }
 .wz-gold-line { display: block; height: 3px; width: 56px; border-radius: 2px;
-  background: linear-gradient(90deg, #DF3131 0%, #C9A227 100%); }
+  background: linear-gradient(90deg, var(--wyz-primary) 0%, var(--wyz-secondary) 100%); }
 .wz-gold-text {
-  background: linear-gradient(90deg, #E7C873 0%, #C9A227 50%, #8C6A1D 100%);
+  background: linear-gradient(90deg, var(--wyz-secondary-text) 0%, var(--wyz-secondary) 50%, var(--wyz-secondary-text) 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
@@ -548,7 +548,7 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: scal
 .wz-lift { transition: transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease; }
 .wz-lift:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,.14); }
 .dark .wz-lift:hover { box-shadow: 0 14px 34px rgba(0,0,0,.45); }
-.wz-underline { background-image: linear-gradient(#C9A227, #C9A227); background-size: 0% 2px;
+.wz-underline { background-image: linear-gradient(var(--wyz-secondary), var(--wyz-secondary)); background-size: 0% 2px;
   background-position: 0 100%; background-repeat: no-repeat; transition: background-size .3s ease; }
 .wz-underline:hover { background-size: 100% 2px; }
 @media (prefers-reduced-motion: reduce) {
@@ -584,7 +584,7 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: scal
    FOCUS RING — additive, works alongside outline-none
    ═══════════════════════════════════════════════════════════ */
 :focus-visible {
-  outline: 2px solid #DF3131 !important;
+  outline: 2px solid var(--wyz-primary) !important;
   outline-offset: 2px !important;
   border-radius: 2px;
 }
@@ -722,13 +722,13 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: scal
    that: (1) it erased the shadow-sm/md/lg/xl/2xl depth hierarchy that
    light mode has -- every card read at the same flat elevation in dark
    mode no matter which size utility it actually used; (2) far more
-   visibly, it clobbered every `shadow-lg shadow-[#DF3131]/30`-style
+   visibly, it clobbered every `shadow-lg shadow-[var(--wyz-primary)]/30`-style
    colored brand-glow (active tabs, CTA hovers, the red ring on hero
    images -- dozens of these across the site) with a plain grey shadow,
    so the one signature "glows red" touch light mode has was simply
    missing in dark mode. Confirmed live via computed style on the FAQ
    page's active filter pill: it was rendering flat black instead of its
-   own `shadow-[#DF3131]/20`.
+   own `shadow-[var(--wyz-primary)]/20`.
    Fixed by excluding anything that pairs a shadow utility with a
    Tailwind shadow-color value (`shadow-[...]` or `shadow-black`, the
    only two color forms used in this codebase) -- those already compose
@@ -803,13 +803,13 @@ select {
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid #C9A227 !important;
+  outline: 2px solid var(--wyz-secondary) !important;
   outline-offset: 2px !important;
 }
 
 /* Filter buttons — active state clearly distinct */
 .filter-btn-active {
-  background: #DF3131 !important;
+  background: var(--wyz-primary) !important;
   color: #FFFFFF !important;
   font-weight: 700 !important;
 }
@@ -825,27 +825,27 @@ select:focus-visible {
 }
 .dark [data-kp-light].bg-white {
   background: white !important;
-  color: #DF3131 !important;
+  color: var(--wyz-primary) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
    BRAND RED — WCAG AA boost in dark mode
-   #DF3131 = 3.36:1 on #252528 (FAIL)
-   #FF5252 = 4.79:1 on #252528 (PASS)
+   var(--wyz-primary) = 3.36:1 on #252528 (FAIL)
+   var(--wyz-primary) = 4.79:1 on #252528 (PASS)
    Only boost on dark backgrounds where contrast matters.
    ═══════════════════════════════════════════════════════════ */
 .dark [class*="bg-[#DF3131]"]:not([class*="bg-[#DF3131]/"]) {
-  background-color: #FF5252 !important;
+  background-color: var(--wyz-primary) !important;
 }
 .dark [class*="text-[#DF3131]"]:not([class*="text-[#DF3131]/"]) {
-  color: #FF5252 !important;
+  color: var(--wyz-primary) !important;
 }
 .dark [class*="border-[#DF3131]"]:not([class*="border-[#DF3131]/"]) {
-  border-color: #FF5252 !important;
+  border-color: var(--wyz-primary) !important;
 }
 
 /* Small-text red accessibility fix — light mode */
-/* #DF3131 = 3.36:1 on white (WCAG FAIL 4.5:1 for text < 14px bold / < 18px regular) */
+/* var(--wyz-primary) = 3.36:1 on white (WCAG FAIL 4.5:1 for text < 14px bold / < 18px regular) */
 [class*="text-[#DF3131]"]:not([class*="text-[#DF3131]/"]):where([class*="text-[11px]"], [class*="text-[12px]"], [class*="text-[13px]"]) {
   color: var(--color-wyz-text-red) !important;
 }
@@ -854,28 +854,28 @@ select:focus-visible {
    image overlays). The light-mode bump above is tuned for white backgrounds
    and only reaches ~2.9:1 on #111, so these get the brighter dark-mode red. */
 [class*="text-[#DF3131]"].wz-on-dark {
-  color: #FF5252 !important;
+  color: var(--wyz-primary) !important;
 }
 
-/* Direct #C00000 text is tuned for white (5.5:1) but drops to ~1.9:1 on dark
-   surfaces — boost to the same #FF5252 used for DF3131 in dark mode. */
+/* Direct var(--wyz-primary-hover) text is tuned for white (5.5:1) but drops to ~1.9:1 on dark
+   surfaces — boost to the same var(--wyz-primary) used for DF3131 in dark mode. */
 .dark [class*="text-[#C00000]"] {
-  color: #FF5252 !important;
+  color: var(--wyz-primary) !important;
 }
 
 /* Hover states — Tailwind v4 generates separate rules */
 @media (hover: hover) {
   .dark a:hover[class*="text-[#DF3131]"],
   .dark button:hover[class*="text-[#DF3131]"] {
-    color: #ff7070 !important;
+    color: color-mix(in oklab, var(--wyz-primary) 78%, #fff) !important;
   }
   .dark a:hover[class*="bg-[#DF3131]"],
   .dark button:hover[class*="bg-[#DF3131]"] {
-    background-color: #ff7070 !important;
+    background-color: color-mix(in oklab, var(--wyz-primary) 78%, #fff) !important;
   }
   .dark a:hover[class*="border-[#DF3131]"],
   .dark button:hover[class*="border-[#DF3131]"] {
-    border-color: #ff7070 !important;
+    border-color: color-mix(in oklab, var(--wyz-primary) 78%, #fff) !important;
   }
 }
 
@@ -888,12 +888,12 @@ select:focus-visible {
 
 /* Focus ring — match boosted red */
 .dark :focus-visible {
-  outline-color: #FF5252 !important;
+  outline-color: var(--wyz-primary) !important;
 }
 
 /* Filter button active state — boosted red */
 .dark .filter-btn-active {
-  background: #FF5252 !important;
+  background: var(--wyz-primary) !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1132,42 +1132,42 @@ section:first-of-type {
 
 /* Gradient background utilities for hero text sides - black/white/red/dark-red/gray only */
 .hero-grad-photo {
-  background: linear-gradient(135deg, #1a1a1a, #DF3131, #333333, #B82020, #1a1a1a);
+  background: linear-gradient(135deg, #1a1a1a, var(--wyz-primary), #333333, var(--wyz-primary-hover), #1a1a1a);
   background-size: 400% 400%;
   animation: heroGradShift 12s ease infinite;
 }
 .hero-grad-design {
-  background: linear-gradient(225deg, #FFFFFF, #DF3131, #E2E2E2, #8B0000, #FFFFFF);
+  background: linear-gradient(225deg, #FFFFFF, var(--wyz-primary), #E2E2E2, var(--wyz-primary-hover), #FFFFFF);
   background-size: 400% 400%;
   animation: heroGradShift 10s ease infinite;
 }
 .hero-grad-events {
-  background: linear-gradient(45deg, #1a1a1a, #333333, #DF3131, #991111, #1a1a1a);
+  background: linear-gradient(45deg, #1a1a1a, #333333, var(--wyz-primary), var(--wyz-primary-hover), #1a1a1a);
   background-size: 400% 400%;
   animation: heroGradShift 14s ease infinite;
 }
 .hero-grad-wyzmind {
-  background: linear-gradient(315deg, #FFFFFF, #E2E2E2, #DF3131, #8B0000, #FFFFFF);
+  background: linear-gradient(315deg, #FFFFFF, #E2E2E2, var(--wyz-primary), var(--wyz-primary-hover), #FFFFFF);
   background-size: 400% 400%;
   animation: heroGradShift 11s ease infinite;
 }
 .hero-grad-print {
-  background: linear-gradient(180deg, #000000, #1a1a1a, #DF3131, #B82020, #000000);
+  background: linear-gradient(180deg, #000000, #1a1a1a, var(--wyz-primary), var(--wyz-primary-hover), #000000);
   background-size: 400% 400%;
   animation: heroGradShift 13s ease infinite;
 }
 .hero-grad-web {
-  background: linear-gradient(90deg, #FFFFFF, #E2E2E2, #DF3131, #991111, #FFFFFF);
+  background: linear-gradient(90deg, #FFFFFF, #E2E2E2, var(--wyz-primary), var(--wyz-primary-hover), #FFFFFF);
   background-size: 400% 400%;
   animation: heroGradShift 10s ease infinite;
 }
 .hero-grad-home-print {
-  background: linear-gradient(-45deg, #1a1a1a, #DF3131, #333333, #B82020, #1a1a1a);
+  background: linear-gradient(-45deg, #1a1a1a, var(--wyz-primary), #333333, var(--wyz-primary-hover), #1a1a1a);
   background-size: 400% 400%;
   animation: heroGradShift 12s ease infinite;
 }
 .hero-grad-services {
-  background: linear-gradient(135deg, #000000, #DF3131, #E2E2E2, #8B0000, #000000);
+  background: linear-gradient(135deg, #000000, var(--wyz-primary), #E2E2E2, var(--wyz-primary-hover), #000000);
   background-size: 400% 400%;
   animation: heroGradShift 11s ease infinite;
 }
@@ -1474,7 +1474,7 @@ img.h-full {
   transition: box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .glow-hover:hover {
-  box-shadow: 0 8px 32px rgba(223, 49, 49, 0.15), 0 0 0 1px rgba(223, 49, 49, 0.1);
+  box-shadow: 0 8px 32px rgba(var(--wyz-primary-rgb), 0.15), 0 0 0 1px rgba(var(--wyz-primary-rgb), 0.1);
   transform: translateY(-2px);
 }
 
@@ -1510,7 +1510,7 @@ img.h-full {
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(223, 49, 49, 0.06), transparent 40%);
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--wyz-primary-rgb), 0.06), transparent 40%);
 }
 .pointer-spotlight:hover::after { opacity: 1; }
 
@@ -1578,7 +1578,7 @@ section { content-visibility: visible; contain-intrinsic-size: none; }
 .gradient-border { position: relative; }
 .gradient-border::before {
   content: ""; position: absolute; inset: 0; padding: 2px;
-  background: linear-gradient(135deg, #DF3131, #C9A227, #DF3131);
+  background: linear-gradient(135deg, var(--wyz-primary), var(--wyz-secondary), var(--wyz-primary));
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -1588,9 +1588,9 @@ section { content-visibility: visible; contain-intrinsic-size: none; }
 
 /* Focus ring animation */
 @keyframes focusPulse {
-  0% { box-shadow: 0 0 0 0 rgba(223, 49, 49, 0.4); }
-  70% { box-shadow: 0 0 0 6px rgba(223, 49, 49, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(223, 49, 49, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(var(--wyz-primary-rgb), 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(var(--wyz-primary-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--wyz-primary-rgb), 0); }
 }
 :focus-visible { animation: focusPulse 0.6s ease-in-out 1; }
 @media (prefers-reduced-motion: reduce) { :focus-visible { animation: none; } }
@@ -1599,7 +1599,7 @@ section { content-visibility: visible; contain-intrinsic-size: none; }
 .link-underline { position: relative; text-decoration: none; }
 .link-underline::after {
   content: ""; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
-  background: #DF3131; transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: var(--wyz-primary); transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .link-underline:hover::after { width: 100%; }
 
@@ -1607,7 +1607,7 @@ section { content-visibility: visible; contain-intrinsic-size: none; }
 .hover-underline { position: relative; display: inline-block; }
 .hover-underline::after {
   content: ""; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%;
-  background: #DF3131; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  background: var(--wyz-primary); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform: translateX(-50%);
 }
 .hover-underline:hover::after { width: 100%; }
@@ -1616,14 +1616,14 @@ section { content-visibility: visible; contain-intrinsic-size: none; }
 .ripple { position: relative; overflow: hidden; }
 .ripple::before {
   content: ""; position: absolute; top: 50%; left: 50%; width: 0; height: 0;
-  border-radius: 50%; background: rgba(223, 49, 49, 0.15);
+  border-radius: 50%; background: rgba(var(--wyz-primary-rgb), 0.15);
   transform: translate(-50%, -50%); transition: width 0.5s ease, height 0.5s ease;
 }
 .ripple:active::before { width: 300px; height: 300px; }
 
 /* Text shimmer */
 .text-shimmer {
-  background: linear-gradient(110deg, #333 30%, #DF3131 50%, #333 70%);
+  background: linear-gradient(110deg, #333 30%, var(--wyz-primary) 50%, #333 70%);
   background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text; animation: textShimmer 3s ease-in-out infinite;
 }
@@ -1635,7 +1635,7 @@ section { content-visibility: visible; contain-intrinsic-size: none; }
 
 /* Glow pulse CTA */
 .glow-pulse { animation: glowPulse 2s ease-in-out infinite; }
-@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(223, 49, 49, 0.4); } 50% { box-shadow: 0 0 20px 4px rgba(223, 49, 49, 0.2); } }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(var(--wyz-primary-rgb), 0.4); } 50% { box-shadow: 0 0 20px 4px rgba(var(--wyz-primary-rgb), 0.2); } }
 
 /* Skeleton loading */
 .skeleton {
@@ -1808,7 +1808,7 @@ p:last-child, .p:last-child { margin-bottom: 0; }
   letter-spacing: 0.2em;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #DF3131;
+  color: var(--wyz-primary);
   margin-bottom: 0.5rem;
 }
 
@@ -1870,8 +1870,8 @@ button:not(:disabled):active, a:active, [role="button"]:active { transform: tran
 }
 
 /* Final polish (owner 2026-10-08) */
-::selection { background: #DF3131; color: #fff; }
-:focus-visible { outline: 2px solid #DF3131; outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--wyz-primary); color: #fff; }
+:focus-visible { outline: 2px solid var(--wyz-primary); outline-offset: 3px; border-radius: 2px; }
 img, video { max-width: 100%; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -1966,8 +1966,8 @@ h3, h4 { margin-bottom: 0.5rem; }
    plus the secondary/tertiary accents, so every theme recolors the
    whole site (not just solid bg/text/border). Primary -> --wyz-primary,
    hover/dark-text -> --wyz-primary-hover, gold -> --wyz-secondary(-text). */
-:root { --wyz-primary: #DF3131; --wyz-primary-hover: #B82020; --wyz-secondary: #C9A227; --wyz-secondary-text: #8C6A1D; }
-.dark { --wyz-primary: #FF5C5C; --wyz-primary-hover: #DF3131; --wyz-secondary: #E7C873; --wyz-secondary-text: #E7C873; }
+:root { --wyz-primary: #DF3131; --wyz-primary-hover: #B82020; --wyz-secondary: #C9A227; --wyz-secondary-text: #8C6A1D; --wyz-primary-rgb: 223, 49, 49; }
+.dark { --wyz-primary: #FF5C5C; --wyz-primary-hover: #DF3131; --wyz-secondary: #E7C873; --wyz-secondary-text: #E7C873; --wyz-primary-rgb: 255, 92, 92; }
 
 .accent-\[\#DF3131\] { accent-color: var(--wyz-primary) !important; }
 .bg-\[\#B82020\]\/20 { background-color: color-mix(in oklab, var(--wyz-primary-hover) 20%, transparent) !important; }
@@ -2065,3 +2065,14 @@ h3, h4 { margin-bottom: 0.5rem; }
 .to-\[\#DF3131\]\/20 { --tw-gradient-to: color-mix(in oklab, var(--wyz-primary) 20%, transparent) !important; }
 .via-\[\#B82020\]\/20 { --tw-gradient-via: color-mix(in oklab, var(--wyz-primary-hover) 20%, transparent) !important; }
 
+
+/* 2026-11-10: header/footer background video follows the color theme.
+   The nav + footer red background is a video (wyz-nav-bg-new.mp4), not a
+   color, so CSS vars cannot recolor it; hue-rotate the video to the theme
+   hue instead. The gradient fallback behind it is already themed. Default
+   theme is untouched (stays the exact brand red). */
+[data-color-theme="ocean"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(185deg); }
+[data-color-theme="forest"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(96deg); }
+[data-color-theme="sunset"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(23deg); }
+[data-color-theme="midnight"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(247deg); }
+[data-color-theme="rose"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(330deg); }

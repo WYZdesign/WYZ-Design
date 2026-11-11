@@ -186,7 +186,7 @@ export default function CustomCursor() {
         className="fixed top-0 left-0 pointer-events-none z-[99999] hidden lg:block rounded-full"
         style={{
           width: 20, height: 20, borderWidth: 2, borderStyle: "solid",
-          borderColor: "#FFD700", backgroundColor: "rgba(223,49,49,0.06)",
+          borderColor: "#FFD700", backgroundColor: "rgba(var(--wyz-primary-rgb),0.06)",
           boxShadow: "0 0 0 1.5px rgba(0,0,0,0.55), 0 0 12px rgba(0,0,0,0.35)",
           willChange: "transform",
         }}

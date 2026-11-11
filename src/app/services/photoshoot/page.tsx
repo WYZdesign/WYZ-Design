@@ -102,7 +102,7 @@ export default function Photoshoot() {
           </div>
 
           <div className="text-center">
-            <Link href="/booking-calendar/photoshoot" className="bg-[#DF3131] text-white px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition-colors inline-block">
+            <Link href="/booking-calendar/photoshoot" className="bg-[#DF3131] text-white px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-[#B82020] transition-colors inline-block">
               Book a Photoshoot
             </Link>
           </div>

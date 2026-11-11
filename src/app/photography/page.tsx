@@ -659,7 +659,7 @@ return (
  </div>
  <h3 className="font-heading font-black text-[#333] dark:text-white text-[22px] tracking-[0.06em] whitespace-pre-line leading-tight mb-3">{b.title}</h3>
    <p className="text-[15px] text-[#333] dark:text-[#aaa] leading-relaxed mb-4 text-center">{b.desc}</p>
-   <Link href="/services#plans" className="inline-block text-[#C41C1C] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-[#B82020] transition-colors">READ MORE +</Link>
+   <Link href="/services#plans" className="inline-block text-[#B82020] text-[17px] font-bold tracking-[0.08em] hover:underline border-b-2 border-[#DF3131] pb-0.5 hover:text-[#B82020] transition-colors">READ MORE +</Link>
  </div>
  ))}
  </div>

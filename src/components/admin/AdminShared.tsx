@@ -87,7 +87,7 @@ export function AccountAuth() {
               className="w-full bg-white/5 border border-white/10 text-white text-[14px] px-4 py-3 focus:outline-none focus:border-[#DF3131]/50 transition-colors placeholder:text-white/30" />
           </div>
           {error && <p className="flex items-center gap-2 text-[#DF3131] text-sm justify-center"><FiAlertCircle className="w-4 h-4 shrink-0" />{error}</p>}
-          <button type="submit" disabled={loading} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#c12a2a] transition-colors disabled:opacity-50">
+          <button type="submit" disabled={loading} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#B82020] transition-colors disabled:opacity-50">
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>

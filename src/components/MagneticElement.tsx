@@ -26,7 +26,7 @@ export default function MagneticElement<T extends ElementType = "span">({
     const relY = e.clientY - (rect.top + rect.height / 2);
     el.style.transform = `translate(${relX * strength}px, ${relY * strength}px) scale(1.08)`;
     el.style.transition = "transform 0.15s ease-out, box-shadow 0.3s ease";
-    el.style.boxShadow = "0 0 20px rgba(223, 49, 49, 0.5), 0 0 40px rgba(223, 49, 49, 0.25)";
+    el.style.boxShadow = "0 0 20px rgba(var(--wyz-primary-rgb), 0.5), 0 0 40px rgba(var(--wyz-primary-rgb), 0.25)";
   }, [strength]);
 
   const onLeave = useCallback(() => {

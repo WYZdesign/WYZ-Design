@@ -64,7 +64,7 @@ export default function HeroDots({
             width: d.size,
             height: d.size,
             background: d.red ? "#DF3131" : "rgba(255,255,255,0.55)",
-            boxShadow: d.red ? "0 0 8px rgba(223,49,49,0.6)" : "0 0 6px rgba(255,255,255,0.35)",
+            boxShadow: d.red ? "0 0 8px rgba(var(--wyz-primary-rgb),0.6)" : "0 0 6px rgba(255,255,255,0.35)",
             animation: `wzDotWander ${d.dur}s cubic-bezier(.45,0,.55,1) ${d.delay}s infinite`,
             "--wz-dot-x1": `${d.x1}px`,
             "--wz-dot-y1": `${d.y1}px`,

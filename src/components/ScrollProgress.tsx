@@ -40,7 +40,7 @@ export default function ScrollProgress() {
         className="h-full relative origin-left will-change-transform"
         style={{ transform: "scaleX(0)" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#DF3131] via-[#FFD700] to-[#DF3131] shadow-[0_0_12px_rgba(223,49,49,0.8),0_0_24px_rgba(255,215,0,0.4)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--wyz-primary)] via-[var(--wyz-secondary)] to-[var(--wyz-primary)] shadow-[0_0_12px_var(--wyz-primary),0_0_24px_var(--wyz-secondary)]" />
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
       </div>
     </div>

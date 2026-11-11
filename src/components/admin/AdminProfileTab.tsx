@@ -73,7 +73,7 @@ export function ProfileTab({ session, update, signOut }: { session: import("next
             <ProfileField label="Instagram" value={profile.instagram} onChange={v => setProfile(p => ({ ...p, instagram: v }))} placeholder="@username" inputClass={inputClass} />
             <ProfileField label="Facebook" value={profile.facebook} onChange={v => setProfile(p => ({ ...p, facebook: v }))} placeholder="Profile URL" inputClass={inputClass} />
             <ProfileField label="Avatar URL" value={profile.avatarUrl} onChange={v => setProfile(p => ({ ...p, avatarUrl: v }))} placeholder="https://..." inputClass={inputClass} />
-            <button onClick={saveProfile} disabled={saving} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#c12a2a] transition-colors disabled:opacity-50">
+            <button onClick={saveProfile} disabled={saving} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#B82020] transition-colors disabled:opacity-50">
               {saving ? "Saving..." : "Save Profile"}
             </button>
           </div>
@@ -217,7 +217,7 @@ export function BugReportTab({ session }: { session: import("next-auth").Session
                   <label className="block text-[11px] font-heading font-bold tracking-[0.08em] uppercase text-white/60 mb-2">Describe the issue <span className="text-white/40 font-normal">({bugDesc.length}/1250)</span></label>
                   <textarea value={bugDesc} onChange={e => { if (e.target.value.length <= 1250) setBugDesc(e.target.value); }} rows={5} placeholder="What happened? What did you expect to happen? Which page were you on?" className={`${inputClass} resize-none`} />
                 </div>
-                <button onClick={submit} disabled={!bugDesc.trim()} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#c12a2a] transition-colors disabled:opacity-40">
+                <button onClick={submit} disabled={!bugDesc.trim()} className="w-full bg-[#DF3131] text-white py-3 font-heading font-bold tracking-[0.12em] uppercase text-sm hover:bg-[#B82020] transition-colors disabled:opacity-40">
                   Submit Report
                 </button>
               </>

@@ -50,10 +50,10 @@ const ADMIN_STYLES = `
 .admin-sidebar-handle:hover, .admin-sidebar-handle:focus-visible {
   background: #1c1c1c;
   color: #DF3131;
-  box-shadow: 2px 0 16px rgba(223,49,49,0.35);
+  box-shadow: 2px 0 16px rgba(var(--wyz-primary-rgb),0.35);
   transform: translateX(1px);
 }
-.admin-sidebar-handle:focus-visible { outline: 2px solid rgba(223,49,49,0.6); outline-offset: 1px; }
+.admin-sidebar-handle:focus-visible { outline: 2px solid rgba(var(--wyz-primary-rgb),0.6); outline-offset: 1px; }
 .admin-sidebar-handle svg { transition: transform 0.3s ease; }
 .admin-sidebar-handle.is-collapsed svg { transform: rotate(180deg); }
 

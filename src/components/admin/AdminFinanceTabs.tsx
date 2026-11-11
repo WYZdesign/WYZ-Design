@@ -354,7 +354,7 @@ export function TransactionForm({ type, onClose }: { type: "income" | "expense";
         </div>
       </div>
       <div className="flex gap-3 pt-2">
-        <button type="submit" disabled={saving} className="px-6 py-2.5 bg-[#DF3131] text-white text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#c12a2a] disabled:opacity-40 transition-all">{saving ? "Saving..." : "Save"}</button>
+        <button type="submit" disabled={saving} className="px-6 py-2.5 bg-[#DF3131] text-white text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:bg-[#B82020] disabled:opacity-40 transition-all">{saving ? "Saving..." : "Save"}</button>
         <button type="button" onClick={onClose} className="px-6 py-2.5 bg-white/5 text-white/60 border border-white/10 text-[12px] font-heading font-bold tracking-[0.1em] uppercase hover:text-white/70 transition-all">Cancel</button>
       </div>
     </form>

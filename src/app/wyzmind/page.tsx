@@ -77,6 +77,17 @@ export default function WYZMiNDPage() {
      if (!c) return;
      const cx = c.getContext("2d");
      if (!cx) return;
+     // Read the live theme primary so the canvas network follows the color theme.
+     const readPrimaryRgb = () => {
+       const v = getComputedStyle(document.documentElement).getPropertyValue("--wyz-primary").trim();
+       const h = v.replace("#", "");
+       const f = h.length === 3 ? h.split("").map((ch) => ch + ch).join("") : h;
+       const n = parseInt(f, 16);
+       return Number.isNaN(n) ? "223,49,49" : `${(n >> 16) & 255},${(n >> 8) & 255},${n & 255}`;
+     };
+     let primaryRgb = readPrimaryRgb();
+     const themeObserver = new MutationObserver(() => { primaryRgb = readPrimaryRgb(); });
+     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["style", "data-color-theme"] });
      let animId: number;
      const nodes: { x: number; y: number; vx: number; vy: number; r: number }[] = [];
       function resize() {
@@ -109,7 +120,7 @@ export default function WYZMiNDPage() {
            const dist = Math.sqrt(dx * dx + dy * dy);
            if (dist < 120) {
              cx!.beginPath();
-             cx!.strokeStyle = `rgba(223,49,49,${0.4 * (1 - dist / 120)})`;
+              cx!.strokeStyle = `rgba(${primaryRgb},${0.4 * (1 - dist / 120)})`;
              cx!.lineWidth = 0.5;
              cx!.moveTo(nodes[i].x, nodes[i].y);
              cx!.lineTo(nodes[j].x, nodes[j].y);
@@ -123,14 +134,14 @@ export default function WYZMiNDPage() {
          if (n.x < 0 || n.x > w) n.vx *= -1;
          if (n.y < 0 || n.y > h) n.vy *= -1;
          cx!.beginPath();
-         cx!.fillStyle = "rgba(223,49,49,0.6)";
+          cx!.fillStyle = `rgba(${primaryRgb},0.6)`;
          cx!.arc(n.x, n.y, n.r, 0, Math.PI * 2);
          cx!.fill();
        });
        animId = requestAnimationFrame(draw);
      }
      draw();
-     return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
+     return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); themeObserver.disconnect(); };
    }, []);
 
   const filteredStack = activeStackCat === "All"

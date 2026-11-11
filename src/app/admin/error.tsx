@@ -21,7 +21,7 @@ export default function AdminError({
         </p>
         <button
           onClick={() => reset()}
-          className="px-6 py-3 bg-[#DF3131] text-white rounded-lg hover:bg-red-700 transition-colors"
+          className="px-6 py-3 bg-[#DF3131] text-white rounded-lg hover:bg-[#B82020] transition-colors"
         >
           Try Again
         </button>

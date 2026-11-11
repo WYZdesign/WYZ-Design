@@ -83,7 +83,7 @@ export default function ParallaxVideo({
       <div className="absolute inset-0 bg-gradient-to-br from-[#DF3131]/30 via-[#B82020]/20 to-[#1a1a1a]/40 pointer-events-none z-[1]">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-[#DF3131]/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-[#B82020]/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#FF6B6B]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#DF3131]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
       </div>
       <motion.div className="w-[125%] h-[125%] -ml-[12.5%] -mt-[12.5%]" style={{ y }}>
           <video

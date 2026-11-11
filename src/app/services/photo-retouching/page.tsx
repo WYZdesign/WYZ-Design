@@ -113,7 +113,7 @@ export default function PhotoRetouching() {
           <div className="bg-[#333333] text-white p-12 text-center">
             <h2 className="text-[1.5rem] sm:text-[1.75rem] md:text-[2rem] lg:text-[2.5rem] font-heading font-bold tracking-[0.15em] uppercase mb-4">Upload Your Photos</h2>
             <p className="mb-6">Send us your images and we will provide a free estimate before any work begins.</p>
-            <Link href="/booking" className="bg-[#DF3131] text-white px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition-colors inline-block">
+            <Link href="/booking" className="bg-[#DF3131] text-white px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-[#B82020] transition-colors inline-block">
               Get a Quote
             </Link>
           </div>

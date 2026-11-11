@@ -105,6 +105,12 @@ export function ColorThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty("--wyz-primary-hover", pair.primaryHover);
     root.style.setProperty("--wyz-secondary", pair.secondary);
     root.style.setProperty("--wyz-secondary-text", pair.secondaryText);
+    // RGB triplet of the primary, for rgba(...) tint usages that can't use a hex var.
+    const h = pair.primary.replace("#", "");
+    const full = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
+    const n = parseInt(full, 16);
+    const rgb = Number.isNaN(n) ? "223, 49, 49" : `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
+    root.style.setProperty("--wyz-primary-rgb", rgb);
     root.setAttribute("data-color-theme", name);
   }, []);
 

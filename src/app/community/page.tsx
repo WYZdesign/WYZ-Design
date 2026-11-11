@@ -260,7 +260,7 @@ export default function ForumPage() {
     <main className="pb-20 bg-white dark:bg-[#1C1C1E] min-h-screen">
       <div className="bg-[#DF3131]/10 border-b-2 border-[#DF3131] px-6 py-3 text-center">
         <p className="text-[13px] font-heading font-bold tracking-[0.1em] uppercase text-[#DF3131]">Community Preview</p>
-        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0] mt-0.5">Votes, posts, and threads live on <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="text-[#C41C1C] underline">Discord</a> - this page is a demo with local state only.</p>
+        <p className="text-[12px] text-[#666] dark:text-[#b0b0b0] mt-0.5">Votes, posts, and threads live on <a href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" className="text-[#B82020] underline">Discord</a> - this page is a demo with local state only.</p>
       </div>
       <ScrollReveal animation="fadeUp">
         <div className="max-w-6xl mx-auto px-6 pt-32 lg:pt-40">
@@ -377,7 +377,7 @@ export default function ForumPage() {
                             {post.author}
                           </p>
                           {post.type === "announcement" && (
-                            <span className="text-[11px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#C41C1C] shrink-0 mb-2">
+                            <span className="text-[11px] font-bold tracking-[0.1em] uppercase px-1.5 py-0.5 bg-[#DF3131]/10 text-[#B82020] shrink-0 mb-2">
                               Official
                             </span>
                           )}
@@ -475,7 +475,7 @@ export default function ForumPage() {
                         />
                         <button
                           onClick={() => postFeedComment(post.id)}
-                          className="p-2.5 bg-[#DF3131] text-white rounded-full hover:bg-[#c02a2a] transition-colors"
+                          className="p-2.5 bg-[#DF3131] text-white rounded-full hover:bg-[#B82020] transition-colors"
                         >
                           <FiSend className="w-4 h-4" />
                         </button>
@@ -556,7 +556,7 @@ export default function ForumPage() {
               <div className="hidden sm:flex items-center justify-between gap-4">
                 <div className="flex items-center gap-4 text-[12px] text-[#666] dark:text-[#b0b0b0]">
                   <span>{visibleThreads.length} threads</span>
-                  <span className="px-2 py-1 bg-[#DF3131]/10 text-[#C41C1C] rounded-full font-bold tracking-[0.05em] uppercase">
+                  <span className="px-2 py-1 bg-[#DF3131]/10 text-[#B82020] rounded-full font-bold tracking-[0.05em] uppercase">
                     {activeCat === "all" ? "All" : CATEGORIES.find(c => c.id === activeCat)?.label}
                   </span>
                   <span className="px-2 py-1 bg-[#333]/10 text-[#333] dark:bg-white/10 dark:text-white rounded-full font-bold tracking-[0.05em] uppercase">

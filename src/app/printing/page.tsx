@@ -241,7 +241,7 @@ export default function PrintingPage() {
     <div className="relative z-10 flex flex-col items-center justify-center h-full">
     <h1 className="wz-stack text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[4rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-3 sm:mb-6">DIGITAL PRINTING</h1>
     <p className="text-white/70 text-[16px] sm:text-lg mb-6 max-w-sm text-center">Print your photos, flyers, posters, and stickers in LA. Prices run about 10% under standard industry rates.</p>
-    <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
+    <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GET A QUOTE
     </Link>
     </div>
@@ -256,7 +256,7 @@ export default function PrintingPage() {
     <div className="relative z-10 max-w-lg mx-auto px-6 sm:px-10 py-16 sm:py-20 pt-32 lg:pt-40 flex flex-col items-center justify-center h-full">
     <div className="text-[2rem] sm:text-[2.5rem] font-heading font-black tracking-[0.15em] uppercase text-white text-center mb-4 sm:mb-6">DIGITAL PRINTING</div>
     <p className="text-white/70 text-[16px] sm:text-lg mb-6 max-w-sm text-center">Print your photos, flyers, posters, and stickers in LA. Prices run about 10% under standard industry rates.</p>
-    <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-red-700 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
+    <Link href="/contact" className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-[#DF3131] text-white font-heading font-bold tracking-[0.15em] uppercase text-[12px] sm:text-sm text-center hover:bg-[#B82020] transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#DF3131]/30 mb-4">
     GET A QUOTE
     </Link>
    </div>

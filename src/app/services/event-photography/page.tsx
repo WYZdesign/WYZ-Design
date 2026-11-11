@@ -120,7 +120,7 @@ export default function EventPhotography() {
           </div>
 
           <div className="text-center">
-            <Link href="/booking-calendar/event-photography" className="bg-[#DF3131] text-white px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-red-700 transition-colors inline-block">
+            <Link href="/booking-calendar/event-photography" className="bg-[#DF3131] text-white px-8 py-3 font-heading font-bold tracking-[0.15em] uppercase hover:bg-[#B82020] transition-colors inline-block">
               Book Event Photography
             </Link>
           </div>

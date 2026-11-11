@@ -55,7 +55,7 @@ export default function AboutPage() {
               style={{
                 opacity: isHovering ? 1 : 0,
                 transition: "opacity 180ms ease-out",
-                background: `radial-gradient(circle 300px at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(223,49,49,0.2), transparent 70%)`,
+                background: `radial-gradient(circle 300px at ${mousePos.x * 100}% ${mousePos.y * 100}%, rgba(var(--wyz-primary-rgb),0.2), transparent 70%)`,
               }}
             />
           </div>

@@ -57,7 +57,7 @@ export default function ImageHoverReveal({
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(${spotlightRadius}px circle at ${pos.x}% ${pos.y}%, rgba(223,49,49,0.12) 0%, transparent 60%)`,
+            background: `radial-gradient(${spotlightRadius}px circle at ${pos.x}% ${pos.y}%, rgba(var(--wyz-primary-rgb),0.12) 0%, transparent 60%)`,
           }}
         />
         <div
