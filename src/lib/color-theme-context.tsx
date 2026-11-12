@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, useCallback, ReactNode 
 import { useSession } from "next-auth/react";
 import { useTheme as useLightDarkMode } from "@/components/ThemeProvider";
 
-export type ColorThemeName = "default" | "ocean" | "forest" | "sunset" | "midnight" | "rose" | "sky" | "lime" | "amber";
+export type ColorThemeName = "default" | "ocean" | "forest" | "sunset" | "midnight" | "rose" | "sky" | "indigo" | "amber";
 
 interface ModeColors {
   primary: string;
@@ -78,12 +78,12 @@ export const colorThemes: Record<ColorThemeName, ColorTheme> = {
     light: { primary: "#3B82F6", primaryHover: "#2563EB", secondary: "#60A5FA", secondaryText: "#1D4ED8" },
     dark: { primary: "#60A5FA", primaryHover: "#3B82F6", secondary: "#93C5FD", secondaryText: "#93C5FD" },
   },
-  lime: {
-    name: "lime",
-    label: "Lime",
-    swatch: "#BEF264",
-    light: { primary: "#84CC16", primaryHover: "#65A30D", secondary: "#A3E635", secondaryText: "#4D7C0F" },
-    dark: { primary: "#A3E635", primaryHover: "#84CC16", secondary: "#BEF264", secondaryText: "#BEF264" },
+  indigo: {
+    name: "indigo",
+    label: "Indigo",
+    swatch: "#818CF8",
+    light: { primary: "#6366F1", primaryHover: "#4F46E5", secondary: "#818CF8", secondaryText: "#3730A3" },
+    dark: { primary: "#818CF8", primaryHover: "#6366F1", secondary: "#A5B4FC", secondaryText: "#A5B4FC" },
   },
   amber: {
     name: "amber",

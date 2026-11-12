@@ -2073,5 +2073,5 @@ h3, h4 { margin-bottom: 0.5rem; }
 [data-color-theme="midnight"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(258deg); }
 [data-color-theme="rose"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(330deg); }
 [data-color-theme="sky"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(217deg); }
-[data-color-theme="lime"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(84deg); }
+[data-color-theme="indigo"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(239deg); }
 [data-color-theme="amber"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(38deg); }

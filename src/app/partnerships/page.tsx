@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { FiUsers, FiTarget, FiTrendingUp } from "react-icons/fi";
 import { SUB_BRANDS, taglineColor } from "@/lib/brands";
+import { themeColor, themeText } from "@/lib/theme-colors";
 
 interface LeaderEntry {
   name: string;
@@ -84,8 +85,8 @@ export default function PartnershipsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {SUB_BRANDS.map((p) => (
               <div key={p.name} className="bg-[#F5F5F3] dark:bg-[#252528] rounded-2xl p-8 text-center hover:shadow-xl transition-all duration-300 relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: p.color }} />
-                <p className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: taglineColor(p.color) }}>{p.tagline}</p>
+                <div className="absolute top-0 left-0 right-0 h-1.5" style={{ background: themeColor(p.color) }} />
+                <p className="text-[11px] font-heading font-bold tracking-[0.2em] uppercase mb-2" style={{ color: themeText(p.color) === p.color ? taglineColor(p.color) : themeText(p.color) }}>{p.tagline}</p>
                 <h3 className="font-heading font-bold text-[20px] tracking-[0.06em] text-[#333] dark:text-white uppercase mb-3">{p.name}</h3>
                 <p className="text-[15px] text-[#666] dark:text-white/60 leading-relaxed">{p.longDesc}</p>
               </div>

@@ -840,7 +840,7 @@ export default function ForumPage() {
                 rel="noopener noreferrer"
                 className="block p-6 bg-white dark:bg-[#252528] border border-[#E2E2E2] dark:border-[#333] hover:border-[#DF3131] transition-all group min-h-[44px]"
               >
-                <p className="font-heading font-bold text-[14px] tracking-[0.08em] mb-2" style={{ color: s.color }}>
+                <p className="font-heading font-bold text-[14px] tracking-[0.08em] mb-2" style={{ color: themeText(s.color) }}>
                   {s.name}
                 </p>
                 <p className="text-[16px] text-[#666] dark:text-[#b0b0b0]">{s.desc}</p>
