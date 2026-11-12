@@ -243,8 +243,11 @@ export function VideoCarousel({ items, onPlay }: { items: { title: string; video
   </div>
   </div>
   </div>
-  <div className="px-0.5 py-1.5">
-   <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] carousel-video-title group-hover:text-[#DF3131] transition-colors leading-tight line-clamp-2 mb-3">{v.title}</h3>
+<div className="px-0.5 py-1.5">
+    <h3 className="font-heading font-bold text-[#333] dark:text-[#e0e0e0] carousel-video-title group-hover:text-[#DF3131] transition-colors leading-tight line-clamp-2 mb-3"
+        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', height: '100%', maxWidth: '1.2em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+      {v.title}
+    </h3>
   </div>
   </div>
   ))}

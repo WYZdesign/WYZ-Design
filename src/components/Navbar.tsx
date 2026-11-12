@@ -27,21 +27,21 @@ const NAV_LINKS = [
 // F.A.O.T.M., WYZMiND, Rewards, Community, Blog, Contact, FAQ -- flattening
 // MORE_GROUPS in declaration order must reproduce that exact sequence.
 const MORE_GROUPS = [
-  { title: "A B O U T", links: [
+  { links: [
     { href: "/about", label: "A B O U T" },
     { href: "/services", label: "S E R V I C E S" },
   ] },
-  { title: "S H O P  &  P E R K S", links: [
+  { links: [
     { href: "/merch", label: "M E R C H" },
     { href: "/featured-artist", label: "F. A. O. T. M." },
     { href: "/wyzmind", label: "W Y Z M i N D" },
     { href: "/loyalty", label: "R E W A R D S" },
   ] },
-  { title: "C O M M U N I T Y", links: [
+  { links: [
     { href: "/community", label: "C O M M U N I T Y" },
     { href: "/blog", label: "B L O G" },
   ] },
-  { title: "S U P P O R T", links: [
+  { links: [
     { href: "/contact", label: "C O N T A C T" },
     { href: "/faq", label: "F. A. Q." },
   ] },
@@ -216,8 +216,7 @@ export default function Navbar() {
                       </div>
                       <div className="relative z-10 py-1">
                         {MORE_GROUPS.map((g) => (
-                          <div key={g.title}>
-                            <p className="px-5 pt-3 pb-1 text-center text-[10px] tracking-[0.25em] font-bold text-white/40 uppercase">{g.title}</p>
+                          <div key={g.links[0].href}>
                             {g.links.map((l) => (
                               <Link key={l.href} href={l.href}
                                 aria-current={isActive(l.href) ? "page" : undefined}
@@ -345,7 +344,8 @@ export default function Navbar() {
                               <FiGift className="w-3 h-3 text-[#DF3131]" />
                               Gift Cards
                             </Link>
-                            <div className="pt-2">
+                            {/* Theme Switcher - centered */}
+                            <div className="pt-2 flex justify-center">
                               <ThemeSwitcher />
                             </div>
                           </div>
@@ -493,8 +493,7 @@ export default function Navbar() {
                 </motion.div>
               ))}
               {MORE_GROUPS.map((g) => (
-                <div key={g.title} className="pt-4">
-                  <p className="px-1 pb-2 text-[10px] tracking-[0.25em] font-bold text-[#999] dark:text-white/40 uppercase">{g.title}</p>
+                <div key={g.links[0].href} className="pt-4">
                   {g.links.map((l, i) => (
                     <motion.div key={l.href} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                       <Link href={l.href} onClick={() => setMobileOpen(false)}

@@ -231,10 +231,12 @@ export default function PrintingPage() {
       against a min-height-only ancestor and collapses to content height instead,
       which was leaving a large gap before the marquee below. */}
   <div className="hidden lg:grid lg:grid-cols-2 absolute inset-0">
-   <div className="relative h-full">
-    <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} 
-        poster="/images/hero-printing.jpg" />
-   </div>
+<div className="relative h-full">
+     <ParallaxVideo src="/videos/hero-banners/printing.mp4" speed={0.3} opacity={0.8} overlayOpacity={0} playbackRate={0.7} 
+         poster="/images/hero-printing.jpg" />
+     {/* Wall of posters overlay - subtle poster wall texture */}
+     <div className="absolute inset-0 [background-image:linear-gradient(135deg,rgba(255,255,255,0.03)_0%,transparent_50%),linear-gradient(45deg,rgba(255,255,255,0.02)_0%,transparent_50%),linear-gradient(225deg,rgba(255,255,255,0.04)_0%,transparent_50%)] [background-size:200px_200px] [background-position:0_0,100px_100px,200px_0] [mask-image:linear-gradient(to_bottom,rgba(0,0,0,1)_70%,transparent)]" />
+    </div>
    <div className="relative overflow-hidden flex flex-col items-center justify-center text-center px-4 sm:px-10 lg:px-16 py-12 lg:pt-32 lg:pb-16">
     <div className="absolute inset-0 hero-grad-print z-0" />
     <div className="absolute inset-0 bg-black/30 z-[1]" />
