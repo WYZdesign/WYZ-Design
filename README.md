@@ -220,3 +220,4 @@ WYZMIND services (used in local development and wired for production extension):
 ---
 
 *WYZ DESIGN — signal, signature, silent broadcast.*
+ 
