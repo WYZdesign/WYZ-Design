@@ -457,11 +457,7 @@ nav a, nav button { letter-spacing: 0.18em; font-size: 15px; }
 
 /* Non-default color themes recolor the brand bar too. Default keeps the exact
    original red gradient; every other theme derives it from --wyz-primary. */
-[data-color-theme="ocean"] .wyz-red-gradient,
-[data-color-theme="forest"] .wyz-red-gradient,
-[data-color-theme="sunset"] .wyz-red-gradient,
-[data-color-theme="midnight"] .wyz-red-gradient,
-[data-color-theme="rose"] .wyz-red-gradient {
+[data-color-theme]:not([data-color-theme="default"]) .wyz-red-gradient {
   background: linear-gradient(135deg,
     color-mix(in oklab, var(--wyz-primary) 78%, #000) 0%,
     color-mix(in oklab, var(--wyz-primary) 88%, #fff) 38%,
@@ -2071,8 +2067,11 @@ h3, h4 { margin-bottom: 0.5rem; }
    color, so CSS vars cannot recolor it; hue-rotate the video to the theme
    hue instead. The gradient fallback behind it is already themed. Default
    theme is untouched (stays the exact brand red). */
-[data-color-theme="ocean"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(185deg); }
-[data-color-theme="forest"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(96deg); }
-[data-color-theme="sunset"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(23deg); }
-[data-color-theme="midnight"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(247deg); }
+[data-color-theme="ocean"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(189deg); }
+[data-color-theme="forest"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(142deg); }
+[data-color-theme="sunset"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(25deg); }
+[data-color-theme="midnight"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(258deg); }
 [data-color-theme="rose"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(330deg); }
+[data-color-theme="sky"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(217deg); }
+[data-color-theme="lime"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(84deg); }
+[data-color-theme="amber"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(38deg); }

@@ -42,8 +42,8 @@ export function ThemeSwitcher({ compact = false }: { compact?: boolean } = {}) {
         aria-expanded={open}
       >
         <span
-          className="w-6 h-6 rounded-full flex-shrink-0 border border-black/10 dark:border-white/15 shadow-sm"
-          style={{ background: `linear-gradient(135deg, ${currentPair.primary} 50%, ${theme.swatch} 50%)` }}
+          className="w-8 h-5 rounded-full flex-shrink-0 border border-black/10 dark:border-white/15 shadow-sm"
+          style={{ background: `linear-gradient(90deg, ${currentPair.primary} 50%, ${theme.swatch} 50%)` }}
           aria-hidden="true"
         />
         {!compact && <span className="hidden sm:inline">{theme.label}</span>}
@@ -80,7 +80,7 @@ export function ThemeSwitcher({ compact = false }: { compact?: boolean } = {}) {
                       : "border-transparent hover:border-[#E2E2E2] dark:hover:border-[#444] hover:bg-[#F5F5F3] dark:hover:bg-[#2a2a2a]"
                   }`}
                 >
-                  <span className="relative w-9 h-9 rounded-full border-2 border-white dark:border-[#1C1C1E] shadow-md" style={{ background: `linear-gradient(135deg, ${pair.primary} 50%, ${t.swatch} 50%)` }}>
+                  <span className="relative w-full h-4 rounded-full border border-black/10 dark:border-white/15 shadow-sm" style={{ background: `linear-gradient(90deg, ${pair.primary} 50%, ${t.swatch} 50%)` }}>
                     {active && (
                       <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#DF3131] text-white flex items-center justify-center">
                         <FiCheck className="w-2.5 h-2.5" />

@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, useCallback, ReactNode 
 import { useSession } from "next-auth/react";
 import { useTheme as useLightDarkMode } from "@/components/ThemeProvider";
 
-export type ColorThemeName = "default" | "ocean" | "forest" | "sunset" | "midnight" | "rose";
+export type ColorThemeName = "default" | "ocean" | "forest" | "sunset" | "midnight" | "rose" | "sky" | "lime" | "amber";
 
 interface ModeColors {
   primary: string;
@@ -39,37 +39,58 @@ export const colorThemes: Record<ColorThemeName, ColorTheme> = {
   ocean: {
     name: "ocean",
     label: "Ocean",
-    swatch: "#83C5BE",
-    light: { primary: "#006D77", primaryHover: "#004D53", secondary: "#83C5BE", secondaryText: "#3A7C74" },
-    dark: { primary: "#4DD9E8", primaryHover: "#1DB8C9", secondary: "#A9E3DC", secondaryText: "#A9E3DC" },
+    swatch: "#67E8F9",
+    light: { primary: "#06B6D4", primaryHover: "#0891B2", secondary: "#22D3EE", secondaryText: "#0E7490" },
+    dark: { primary: "#22D3EE", primaryHover: "#06B6D4", secondary: "#67E8F9", secondaryText: "#67E8F9" },
   },
   forest: {
     name: "forest",
     label: "Forest",
-    swatch: "#8FBC8F",
-    light: { primary: "#2D5016", primaryHover: "#1B3A0E", secondary: "#8FBC8F", secondaryText: "#4F7A4F" },
-    dark: { primary: "#6FCF52", primaryHover: "#4F9E39", secondary: "#B8DDB8", secondaryText: "#B8DDB8" },
+    swatch: "#86EFAC",
+    light: { primary: "#22C55E", primaryHover: "#16A34A", secondary: "#4ADE80", secondaryText: "#15803D" },
+    dark: { primary: "#4ADE80", primaryHover: "#22C55E", secondary: "#86EFAC", secondaryText: "#86EFAC" },
   },
   sunset: {
     name: "sunset",
     label: "Sunset",
-    swatch: "#FFB84D",
-    light: { primary: "#E85D04", primaryHover: "#B84703", secondary: "#FFB84D", secondaryText: "#A85F00" },
-    dark: { primary: "#FF8C42", primaryHover: "#E85D04", secondary: "#FFD08A", secondaryText: "#FFD08A" },
+    swatch: "#FDBA74",
+    light: { primary: "#F97316", primaryHover: "#EA580C", secondary: "#FB923C", secondaryText: "#C2410C" },
+    dark: { primary: "#FDBA74", primaryHover: "#F97316", secondary: "#FED7AA", secondaryText: "#FED7AA" },
   },
   midnight: {
     name: "midnight",
     label: "Midnight",
-    swatch: "#A29BFE",
-    light: { primary: "#6C5CE7", primaryHover: "#5548C8", secondary: "#A29BFE", secondaryText: "#5B4FC8" },
-    dark: { primary: "#9C8CFF", primaryHover: "#6C5CE7", secondary: "#C4BEFF", secondaryText: "#C4BEFF" },
+    swatch: "#A78BFA",
+    light: { primary: "#8B5CF6", primaryHover: "#7C3AED", secondary: "#A78BFA", secondaryText: "#6D28D9" },
+    dark: { primary: "#A78BFA", primaryHover: "#8B5CF6", secondary: "#C4B5FD", secondaryText: "#C4B5FD" },
   },
   rose: {
     name: "rose",
     label: "Rose",
-    swatch: "#F7A8C9",
-    light: { primary: "#D63384", primaryHover: "#A8286A", secondary: "#F7A8C9", secondaryText: "#A83B6A" },
-    dark: { primary: "#FF6FAE", primaryHover: "#D63384", secondary: "#FFC2DA", secondaryText: "#FFC2DA" },
+    swatch: "#F9A8D4",
+    light: { primary: "#EC4899", primaryHover: "#DB2777", secondary: "#F472B6", secondaryText: "#BE185D" },
+    dark: { primary: "#F472B6", primaryHover: "#EC4899", secondary: "#FBCFE8", secondaryText: "#FBCFE8" },
+  },
+  sky: {
+    name: "sky",
+    label: "Sky",
+    swatch: "#93C5FD",
+    light: { primary: "#3B82F6", primaryHover: "#2563EB", secondary: "#60A5FA", secondaryText: "#1D4ED8" },
+    dark: { primary: "#60A5FA", primaryHover: "#3B82F6", secondary: "#93C5FD", secondaryText: "#93C5FD" },
+  },
+  lime: {
+    name: "lime",
+    label: "Lime",
+    swatch: "#BEF264",
+    light: { primary: "#84CC16", primaryHover: "#65A30D", secondary: "#A3E635", secondaryText: "#4D7C0F" },
+    dark: { primary: "#A3E635", primaryHover: "#84CC16", secondary: "#BEF264", secondaryText: "#BEF264" },
+  },
+  amber: {
+    name: "amber",
+    label: "Amber",
+    swatch: "#FCD34D",
+    light: { primary: "#F59E0B", primaryHover: "#D97706", secondary: "#FBBF24", secondaryText: "#B45309" },
+    dark: { primary: "#FBBF24", primaryHover: "#F59E0B", secondary: "#FCD34D", secondaryText: "#FCD34D" },
   },
 };
 
