@@ -129,7 +129,7 @@ export function AutoScrollRow({ items, speed = 0.88, className = "" }: { items: 
    <div ref={trackRef} className="flex flex-nowrap gap-4 py-2 will-change-transform">
 {[...Array.from(new Set(items)), ...Array.from(new Set(items))].map((src, i) => (
           <div key={i} className={`flex-none w-[52.9vw] sm:w-[370px] md:w-[503px] lg:w-[582px] ${CAROUSEL_H} relative overflow-hidden cursor-pointer group`}>
-        <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 53vw, 582px" loading="eager" onLoad={handleImgLoad(i)} className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:scale-105 transition-transform duration-300" />
+        <Image src={src} alt="Photography portfolio" fill sizes="(max-width:640px) 53vw, 582px" loading="eager" onLoad={handleImgLoad(i)} className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:scale-105 transition-transform duration-300" />
      </div>
         ))}
    </div>
