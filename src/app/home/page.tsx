@@ -5,6 +5,8 @@ import Link from "next/link";
 import { FiCamera, FiMonitor, FiVideo, FiMessageCircle, FiGlobe, FiSearch, FiAward } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
 import { SmoothCarousel, LogoCarousel, VideoPlaylist } from "@/components/home/HomeCarousels";
+import { MIXED_CAROUSEL_1, MIXED_CAROUSEL_2, MIXED_CAROUSEL_3 } from "@/lib/data/mixed-carousel";
+import { LOGO_INTROS_RAW, HERO_IMAGES_RAW, CLIENT_LOGOS_RAW, DESIGN_SHOWCASE_RAW, MODELS_RAW_RECORDS, FAQ_ITEMS } from "@/lib/data/home";
 
 import Testimonials from "@/components/Testimonials";
 import LeadMagnet from "@/components/LeadMagnet";
@@ -17,7 +19,6 @@ import CountUp from "@/components/CountUp";
 import TextSplit from "@/components/TextSplit";
 import ImageReveal from "@/components/ImageReveal";
 import { shuffleArray } from "@/lib/utils";
-import { LOGO_INTROS_RAW, HERO_IMAGES_RAW, CLIENT_LOGOS_RAW, DESIGN_SHOWCASE_RAW, MODELS_RAW_RECORDS, FAQ_ITEMS } from "@/lib/data/home";
 
 const SERVICES = [
  { icon: <FiCamera />, name: "Artist Launch Kit", desc: "Creative direction, photoshoot, cover art, social graphics, landing page. For musicians, models, performers ready to level up.", href: "/services#plans", tab: "FOR ARTISTS" },
@@ -34,22 +35,16 @@ const SERVICES = [
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("ALL");
- const [spTab, setSpTab] = useState<"services" | "plans">("services");
- const [openFaq, setOpenFaq] = useState<number | null>(null);
- const [faqSearch, setFaqSearch] = useState("");
- const [faqCount, setFaqCount] = useState(4);
- const heroRef = useRef<HTMLDivElement>(null);
- const [heroVis, setHeroVis] = useState(false);
-  const [shuffledHero, setShuffledHero] = useState<string[]>([]);
-  const [shuffledDesign, setShuffledDesign] = useState<string[]>([]);
-  const [shuffledModels, setShuffledModels] = useState<string[]>([]);
+  const [spTab, setSpTab] = useState<"services" | "plans">("services");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [faqSearch, setFaqSearch] = useState("");
+  const [faqCount, setFaqCount] = useState(4);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [heroVis, setHeroVis] = useState(false);
   const [logoIntros, setLogoIntros] = useState(LOGO_INTROS_RAW);
   const [clientLogos, setClientLogos] = useState(CLIENT_LOGOS_RAW);
 
   useEffect(() => {
-  setShuffledHero(shuffleArray(HERO_IMAGES_RAW));
-  setShuffledDesign(shuffleArray(DESIGN_SHOWCASE_RAW));
-  setShuffledModels(shuffleArray(MODELS_RAW_RECORDS));
   setLogoIntros(shuffleArray(LOGO_INTROS_RAW));
   setClientLogos(shuffleArray(CLIENT_LOGOS_RAW));
   }, []);
@@ -186,7 +181,7 @@ export default function HomePage() {
 <ScrollReveal animation="fadeIn" duration={1}>
    <ImageReveal direction="up">
    <section className="py-2 w-full relative overflow-hidden">
-   <SmoothCarousel items={shuffledHero.length > 0 ? shuffledHero : HERO_IMAGES_RAW} speed={0.55} direction="right" />
+   <SmoothCarousel items={MIXED_CAROUSEL_1} speed={0.55} direction="right" />
    </section>
    </ImageReveal>
    </ScrollReveal>
@@ -206,10 +201,10 @@ export default function HomePage() {
      <p className="text-[#666] dark:text-white/70 text-[15px] sm:text-base max-w-xl mx-auto leading-relaxed mt-4">Every service we offer comes from one simple place: we make things that look good and actually work. WYZ Design started in Chicago&apos;s DIY art and music scene, making flyers for friends, shooting shows in basements, and learning every part of the creative process by doing it. Founder Torreé Marcel built this from the ground up: 90+ events produced, 45+ clients served. Now based in Los Angeles, we help artists, brands, studios, and anyone with a creative vision turn scattered ideas into work that looks and feels like them.</p>
     </div>
   </div>
-   {/* Full-width carousel - full bleed stretching to both sides */}
-   <div className="relative z-10 my-16 sm:my-24 w-full overflow-hidden">
-      <SmoothCarousel items={shuffledModels.length > 0 ? shuffledModels : MODELS_RAW_RECORDS} speed={0.55} />
-   </div>
+{/* Full-width carousel - full bleed stretching to both sides */}
+    <div className="relative z-10 my-16 sm:my-24 w-full overflow-hidden">
+       <SmoothCarousel items={MIXED_CAROUSEL_2} speed={0.55} />
+    </div>
   <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
   {/* Animated tab switcher. data-chat-avoid (2026-10-10, Claude): this pair
      of buttons lands in ScrollToTop's fixed bottom-left corner at common
@@ -402,12 +397,12 @@ export default function HomePage() {
  </section>
  </ScrollReveal>
 
- {/* DESIGN SHOWCASE CAROUSEL ═══ */}
- <ScrollReveal animation="fadeIn" duration={1}>
- <section className="py-6">
- <SmoothCarousel items={shuffledDesign.length > 0 ? shuffledDesign : DESIGN_SHOWCASE_RAW} speed={0.55} />
-  </section>
-  </ScrollReveal>
+{/* DESIGN SHOWCASE CAROUSEL ═══ */}
+  <ScrollReveal animation="fadeIn" duration={1}>
+  <section className="py-6">
+  <SmoothCarousel items={MIXED_CAROUSEL_3} speed={0.55} />
+   </section>
+   </ScrollReveal>
 
   <LeadMagnet />
   </main>

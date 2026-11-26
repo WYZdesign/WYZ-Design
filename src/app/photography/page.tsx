@@ -379,7 +379,7 @@ return (
 {/* ═══ BRAND MARQUEE ═══ */}
   <section className="py-3 sm:py-6">
   <EnhancedMarquee speed="semislow" pauseOnHover gradientFade className="bg-white dark:bg-[#1C1C1E]">
-    {(["EVENTS","OUTDOORS","STUDIO","BOUDOIR","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
+    {(["EVENTS","OUTDOORS","STUDIO","INTIMATE","BODYPAINT","URBEX","PRODUCTS","CONCEPTUAL"] as const).map((word, i) => {
       const M = ["text-[#DF3131]", "text-[#111] dark:text-white", "marquee-outline", "text-[#6E6E6E] dark:text-[#666]"];
       return (
         <span key={i} className="inline-flex items-center">
@@ -587,13 +587,13 @@ return (
   <ScrollReveal animation="fadeUp" delay={0.05}>
   <section className="py-6 sm:py-8 lg:section-gap">
   <div className="max-w-[130rem] mx-auto px-6 lg:px-12">
-  {/* 2026-10-10 (Claude, board K8): ALBUMS has exactly 6 categories. The
-      old grid-cols-2 sm:grid-cols-3 md:grid-cols-4 step broke evenness
-      right at md -- 6 items in 4 columns leaves an orphan row of 2. Both 2
-      and 3 columns divide 6 evenly (3 rows / 2 rows), so the 4-column step
-      is dropped and the grid now stays even at every breakpoint from
-      mobile through desktop. */}
-  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+{/* 2026-10-10 (Claude, board K8): ALBUMS has exactly 6 categories. The
+       old grid-cols-2 sm:grid-cols-3 md:grid-cols-4 step broke evenness
+       right at md -- 6 items in 4 columns leaves an orphan row of 2. Both 2
+       and 3 columns divide 6 evenly (3 rows / 2 rows), so the 4-column step
+       is dropped and the grid now stays even at every breakpoint from
+       mobile through desktop. */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
   {ALBUMS.map((a, i) => {
     const isNsfw = NSFW_CATEGORIES.some(c => c.toLowerCase() === a.toLowerCase());
     const handleClick = (e: React.MouseEvent) => {

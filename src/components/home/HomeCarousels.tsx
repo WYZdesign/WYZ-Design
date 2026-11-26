@@ -8,7 +8,19 @@ import Image from "next/image";
 
 const CAROUSEL_H = "h-[232px] sm:h-[338px] md:h-[423px]";
 
-export function SmoothCarousel({ items, className = "", speed = 0.5, direction = "left" }: { items: string[]; className?: string; speed?: number; direction?: "left" | "right" }) {
+// Support both string paths and objects with src/type
+type CarouselItem = string | { src: string; type?: string; alt?: string };
+
+function getSrc(item: CarouselItem): string {
+  return typeof item === "string" ? item : item.src;
+}
+
+function getAlt(item: CarouselItem): string {
+  if (typeof item === "string") return "";
+  return item.alt || "";
+}
+
+export function SmoothCarousel({ items, className = "", speed = 0.5, direction = "left" }: { items: CarouselItem[]; className?: string; speed?: number; direction?: "left" | "right" }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
   const paused = useRef(false);
@@ -83,28 +95,32 @@ export function SmoothCarousel({ items, className = "", speed = 0.5, direction =
     imgRefs.current.set(idx, img);
   };
 
-  const unique = Array.from(new Set(items));
+const unique = Array.from(new Map(items.map((item) => [getSrc(item), item])).values());
   const doubled = [...unique, ...unique];
 
   return (
     <div ref={sectionRef} aria-hidden="true" className={`overflow-hidden ${className}`} onClick={handleClick} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
          <div ref={trackRef} className="flex flex-nowrap items-start gap-4 py-2 will-change-transform cursor-pointer" aria-hidden="true">
-       {doubled.map((src, i) => (
-           <div key={i} className={`group flex-none w-[42.32vw] sm:w-[305px] md:w-[423px] ${CAROUSEL_H} relative overflow-hidden rounded-sm`}>
-        <Image
-          src={src}
-          alt=""
-          fill
-          sizes="(max-width:640px) 42vw, 423px"
-          loading="eager"
-          decoding="async"
-          onLoad={handleImgLoad(i)}
-          className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:scale-[1.035]"
-        />
-      </div>
-      ))}
-   </div>
-   </div>
+      {doubled.map((item, i) => {
+            const src = getSrc(item);
+            const alt = getAlt(item);
+            return (
+            <div key={i} className={`group flex-none w-[42.32vw] sm:w-[305px] md:w-[423px] ${CAROUSEL_H} relative overflow-hidden rounded-sm`}>
+         <Image
+           src={src}
+           alt={alt}
+           fill
+           sizes="(max-width:640px) 42vw, 423px"
+           loading="eager"
+           decoding="async"
+           onLoad={handleImgLoad(i)}
+           className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:scale-[1.035]"
+         />
+       </div>
+            );
+          })}
+    </div>
+    </div>
   );
 }
 

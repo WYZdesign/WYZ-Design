@@ -7,7 +7,7 @@
  */
 
 /** Categories that are gated at the album level (always blurred + age-gated). */
-export const NSFW_CATEGORIES = ["Boudoir", "Bodypaint"];
+export const NSFW_CATEGORIES = ["Intimate", "Bodypaint"];
 
 /** Threshold for classifying an image as NSFW (Porn + Sexy combined confidence). */
 export const NSFW_CONFIDENCE_THRESHOLD = 0.65;
