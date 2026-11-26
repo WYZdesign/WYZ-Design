@@ -76,7 +76,7 @@ export async function sendBookingConfirmation(data: BookingConfirmation): Promis
   const name = escapeHtml(customerName || "there");
   const safeServiceName = escapeHtml(serviceName);
 
-  const subject = `Your WYZ Design ${subjectLine(serviceName)} is confirmed ✦`;
+  const subject = `Your WYZ Design ${subjectLine(serviceName)} is confirmed`;
   const html = `
 <!DOCTYPE html>
 <html>
@@ -130,7 +130,7 @@ export async function sendBookingWhatsNext(data: BookingConfirmationWhatsNext): 
   const name = escapeHtml(customerName || "there");
   const safeServiceName = escapeHtml(serviceName);
 
-  const subject = `Getting ready for your ${subjectLine(serviceName)} at WYZ Design ✦`;
+  const subject = `Getting ready for your ${subjectLine(serviceName)} at WYZ Design`;
   const html = `
 <!DOCTYPE html>
 <html>
@@ -185,7 +185,7 @@ export async function sendBookingDelivered(data: { email: string; customerName?:
   const safeServiceName = escapeHtml(serviceName);
   const safeDeliveryNotes = deliveryNotes ? escapeHtml(deliveryNotes) : "";
 
-  const subject = `Your ${subjectLine(serviceName)} from WYZ Design is ready ✦`;
+  const subject = `Your ${subjectLine(serviceName)} from WYZ Design is ready`;
   const html = `
 <!DOCTYPE html>
 <html>

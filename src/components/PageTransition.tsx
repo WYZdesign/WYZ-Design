@@ -65,12 +65,11 @@ export default function PageTransition({ children }: { children: ReactNode }) {
           animate={{ scaleX: 0 }}
           exit={{ scaleX: 1, transition: { duration: 0.4, ease: CURTAIN_EASE } }}
         />
-        <motion.div
-          className="fixed inset-0 z-[9998] bg-[#111] pointer-events-none origin-right"
-          initial={{ scaleX: 1 }}
-          animate={{ scaleX: 0, transition: { duration: 0.4, ease: CURTAIN_EASE, delay: 0.05 } }}
-          exit={{ scaleX: 0 }}
-        />
+        {/* 2026-11-23 (Claude): the black (#111) reveal curtain was removed. It
+            sat at full width on every page load and swept away over ~0.4s,
+            which read as a stray black bar, and it could get stuck covering
+            the page if the animation stalled (background tab, slow hydration).
+            The themed wipe above still plays on exit; the new page just fades in. */}
         <motion.div
           initial={isRoot ? { opacity: 1 } : { opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 0.4, delay: isRoot ? 0 : 0.3 } }}

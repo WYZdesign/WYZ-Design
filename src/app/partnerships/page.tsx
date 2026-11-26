@@ -5,6 +5,7 @@ import { FiUsers, FiTarget, FiTrendingUp } from "react-icons/fi";
 import { SUB_BRANDS, taglineColor } from "@/lib/brands";
 import { themeColor, themeText } from "@/lib/theme-colors";
 
+import { CheckIcon } from "@/components/icons";
 interface LeaderEntry {
   name: string;
   conversions: number;
@@ -147,7 +148,7 @@ export default function PartnershipsPage() {
                 <ul className="space-y-3">
                   {tier.perks.map((perk) => (
                     <li key={perk} className="flex items-start gap-2 text-[14px] text-[#555] dark:text-white/50">
-                      <span className="text-[#DF3131] mt-0.5 shrink-0">✓</span>
+                      <span className="text-[#DF3131] mt-0.5 shrink-0"><CheckIcon /></span>
                       {perk}
                     </li>
                   ))}

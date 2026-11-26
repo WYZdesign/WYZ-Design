@@ -6,6 +6,7 @@ import { logger } from "@/lib/logger";
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
+import { staticSrc } from "@/lib/static-src";
 import Link from "next/link";
 import { FiUser, FiEdit3, FiCalendar, FiMapPin, FiHeart, FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -112,7 +113,7 @@ function ArtistGallery() {
    <FiChevronRight className="w-10 h-10" />
    </button>
    )}
- <Image src={ARTIST_GALLERY[lbIdx].src} alt={ARTIST_GALLERY[lbIdx].label}
+ <Image src={staticSrc(ARTIST_GALLERY[lbIdx].src)} alt={ARTIST_GALLERY[lbIdx].label}
  width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
  <div className="absolute bottom-4 text-white/50 text-sm">{lbIdx + 1} / {ARTIST_GALLERY.length}</div>

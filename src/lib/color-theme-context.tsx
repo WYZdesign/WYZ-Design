@@ -14,6 +14,14 @@ interface ModeColors {
   // for text on the page background.
   secondary: string;
   secondaryText: string;
+  // Contrast-safe companions (2026-11-26 audit). onPrimary / onPrimaryHover
+  // are the text colors to place ON a primary / primary-hover fill (white
+  // fails WCAG on the bright theme primaries). primaryText is primary-colored
+  // text on the page background; primaryTextSm is the same for small text.
+  onPrimary: string;
+  onPrimaryHover: string;
+  primaryText: string;
+  primaryTextSm: string;
 }
 
 export interface ColorTheme {
@@ -33,64 +41,64 @@ export const colorThemes: Record<ColorThemeName, ColorTheme> = {
     name: "default",
     label: "Classic",
     swatch: "#C9A227",
-    light: { primary: "#DF3131", primaryHover: "#B82020", secondary: "#C9A227", secondaryText: "#8C6A1D" },
-    dark: { primary: "#FF5C5C", primaryHover: "#DF3131", secondary: "#E7C873", secondaryText: "#E7C873" },
+    light: { primary: "#DF3131", primaryHover: "#B82020", secondary: "#C9A227", secondaryText: "#8C6A1D", onPrimary: "#FFFFFF", onPrimaryHover: "#FFFFFF", primaryText: "#DF3131", primaryTextSm: "#B82020" },
+    dark: { primary: "#FF5C5C", primaryHover: "#DF3131", secondary: "#E7C873", secondaryText: "#E7C873", onPrimary: "#111111", onPrimaryHover: "#FFFFFF", primaryText: "#FF5C5C", primaryTextSm: "#DF3131" },
   },
   ocean: {
     name: "ocean",
     label: "Ocean",
     swatch: "#67E8F9",
-    light: { primary: "#06B6D4", primaryHover: "#0891B2", secondary: "#22D3EE", secondaryText: "#0E7490" },
-    dark: { primary: "#22D3EE", primaryHover: "#06B6D4", secondary: "#67E8F9", secondaryText: "#67E8F9" },
+    light: { primary: "#06B6D4", primaryHover: "#0891B2", secondary: "#22D3EE", secondaryText: "#0E7490", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#04768A", primaryTextSm: "#04768A" },
+    dark: { primary: "#22D3EE", primaryHover: "#06B6D4", secondary: "#67E8F9", secondaryText: "#67E8F9", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#22D3EE", primaryTextSm: "#06B6D4" },
   },
   forest: {
     name: "forest",
     label: "Forest",
     swatch: "#86EFAC",
-    light: { primary: "#22C55E", primaryHover: "#16A34A", secondary: "#4ADE80", secondaryText: "#15803D" },
-    dark: { primary: "#4ADE80", primaryHover: "#22C55E", secondary: "#86EFAC", secondaryText: "#86EFAC" },
+    light: { primary: "#22C55E", primaryHover: "#16A34A", secondary: "#4ADE80", secondaryText: "#15803D", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#167E3C", primaryTextSm: "#167E3C" },
+    dark: { primary: "#4ADE80", primaryHover: "#22C55E", secondary: "#86EFAC", secondaryText: "#86EFAC", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#4ADE80", primaryTextSm: "#22C55E" },
   },
   sunset: {
     name: "sunset",
     label: "Sunset",
     swatch: "#FDBA74",
-    light: { primary: "#F97316", primaryHover: "#EA580C", secondary: "#FB923C", secondaryText: "#C2410C" },
-    dark: { primary: "#FDBA74", primaryHover: "#F97316", secondary: "#FED7AA", secondaryText: "#FED7AA" },
+    light: { primary: "#F97316", primaryHover: "#EA580C", secondary: "#FB923C", secondaryText: "#C2410C", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#AE500F", primaryTextSm: "#AE500F" },
+    dark: { primary: "#FDBA74", primaryHover: "#F97316", secondary: "#FED7AA", secondaryText: "#FED7AA", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#FDBA74", primaryTextSm: "#F97316" },
   },
   midnight: {
     name: "midnight",
     label: "Midnight",
     swatch: "#A78BFA",
-    light: { primary: "#8B5CF6", primaryHover: "#7C3AED", secondary: "#A78BFA", secondaryText: "#6D28D9" },
-    dark: { primary: "#A78BFA", primaryHover: "#8B5CF6", secondary: "#C4B5FD", secondaryText: "#C4B5FD" },
+    light: { primary: "#8B5CF6", primaryHover: "#7C3AED", secondary: "#A78BFA", secondaryText: "#6D28D9", onPrimary: "#000000", onPrimaryHover: "#FFFFFF", primaryText: "#7950D6", primaryTextSm: "#7950D6" },
+    dark: { primary: "#A78BFA", primaryHover: "#8B5CF6", secondary: "#C4B5FD", secondaryText: "#C4B5FD", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#A78BFA", primaryTextSm: "#8B5CF6" },
   },
   rose: {
     name: "rose",
     label: "Rose",
     swatch: "#F9A8D4",
-    light: { primary: "#EC4899", primaryHover: "#DB2777", secondary: "#F472B6", secondaryText: "#BE185D" },
-    dark: { primary: "#F472B6", primaryHover: "#EC4899", secondary: "#FBCFE8", secondaryText: "#FBCFE8" },
+    light: { primary: "#EC4899", primaryHover: "#DB2777", secondary: "#F472B6", secondaryText: "#BE185D", onPrimary: "#111111", onPrimaryHover: "#FFFFFF", primaryText: "#B83877", primaryTextSm: "#B83877" },
+    dark: { primary: "#F472B6", primaryHover: "#EC4899", secondary: "#FBCFE8", secondaryText: "#FBCFE8", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#F472B6", primaryTextSm: "#EC4899" },
   },
   sky: {
     name: "sky",
     label: "Sky",
     swatch: "#93C5FD",
-    light: { primary: "#3B82F6", primaryHover: "#2563EB", secondary: "#60A5FA", secondaryText: "#1D4ED8" },
-    dark: { primary: "#60A5FA", primaryHover: "#3B82F6", secondary: "#93C5FD", secondaryText: "#93C5FD" },
+    light: { primary: "#3B82F6", primaryHover: "#2563EB", secondary: "#60A5FA", secondaryText: "#1D4ED8", onPrimary: "#111111", onPrimaryHover: "#FFFFFF", primaryText: "#3069C7", primaryTextSm: "#3069C7" },
+    dark: { primary: "#60A5FA", primaryHover: "#3B82F6", secondary: "#93C5FD", secondaryText: "#93C5FD", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#60A5FA", primaryTextSm: "#3B82F6" },
   },
   indigo: {
     name: "indigo",
     label: "Indigo",
     swatch: "#818CF8",
-    light: { primary: "#6366F1", primaryHover: "#4F46E5", secondary: "#818CF8", secondaryText: "#3730A3" },
-    dark: { primary: "#818CF8", primaryHover: "#6366F1", secondary: "#A5B4FC", secondaryText: "#A5B4FC" },
+    light: { primary: "#6366F1", primaryHover: "#4F46E5", secondary: "#818CF8", secondaryText: "#3730A3", onPrimary: "#000000", onPrimaryHover: "#FFFFFF", primaryText: "#585BD6", primaryTextSm: "#585BD6" },
+    dark: { primary: "#818CF8", primaryHover: "#6366F1", secondary: "#A5B4FC", secondaryText: "#A5B4FC", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#818CF8", primaryTextSm: "#6366F1" },
   },
   amber: {
     name: "amber",
     label: "Amber",
     swatch: "#FCD34D",
-    light: { primary: "#F59E0B", primaryHover: "#D97706", secondary: "#FBBF24", secondaryText: "#B45309" },
-    dark: { primary: "#FBBF24", primaryHover: "#F59E0B", secondary: "#FCD34D", secondaryText: "#FCD34D" },
+    light: { primary: "#F59E0B", primaryHover: "#D97706", secondary: "#FBBF24", secondaryText: "#B45309", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#986207", primaryTextSm: "#986207" },
+    dark: { primary: "#FBBF24", primaryHover: "#F59E0B", secondary: "#FCD34D", secondaryText: "#FCD34D", onPrimary: "#111111", onPrimaryHover: "#111111", primaryText: "#FBBF24", primaryTextSm: "#F59E0B" },
   },
 };
 
@@ -126,6 +134,10 @@ export function ColorThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty("--wyz-primary-hover", pair.primaryHover);
     root.style.setProperty("--wyz-secondary", pair.secondary);
     root.style.setProperty("--wyz-secondary-text", pair.secondaryText);
+    root.style.setProperty("--wyz-on-primary", pair.onPrimary);
+    root.style.setProperty("--wyz-on-primary-hover", pair.onPrimaryHover);
+    root.style.setProperty("--wyz-primary-text", pair.primaryText);
+    root.style.setProperty("--wyz-primary-text-sm", pair.primaryTextSm);
     // RGB triplet of the primary, for rgba(...) tint usages that can't use a hex var.
     const h = pair.primary.replace("#", "");
     const full = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;

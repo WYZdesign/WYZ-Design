@@ -28,7 +28,7 @@
   --color-wyz-muted: #666666;
   --color-wyz-red: var(--wyz-primary);
   --color-wyz-red-dark: var(--wyz-primary-hover);
-  --color-wyz-text-red: var(--wyz-primary-hover); /* ~5.5:1 on white for small text accessibility */
+  --color-wyz-text-red: var(--wyz-primary-text-sm, var(--wyz-primary-hover)); /* ~5.5:1 on white for small text accessibility */
   --color-wyz-gold: var(--wyz-secondary); /* real metallic gold, logo tone */
   --color-wyz-gold-light: var(--wyz-secondary-text); /* highlight / glow */
   --color-wyz-gold-deep: var(--wyz-secondary-text); /* gold text on light bg (contrast safe) */
@@ -1962,8 +1962,8 @@ h3, h4 { margin-bottom: 0.5rem; }
    plus the secondary/tertiary accents, so every theme recolors the
    whole site (not just solid bg/text/border). Primary -> --wyz-primary,
    hover/dark-text -> --wyz-primary-hover, gold -> --wyz-secondary(-text). */
-:root { --wyz-primary: #DF3131; --wyz-primary-hover: #B82020; --wyz-secondary: #C9A227; --wyz-secondary-text: #8C6A1D; --wyz-primary-rgb: 223, 49, 49; }
-.dark { --wyz-primary: #FF5C5C; --wyz-primary-hover: #DF3131; --wyz-secondary: #E7C873; --wyz-secondary-text: #E7C873; --wyz-primary-rgb: 255, 92, 92; }
+:root { --wyz-on-primary: #FFFFFF; --wyz-on-primary-hover: #FFFFFF; --wyz-primary-text: #DF3131; --wyz-primary-text-sm: #B82020; --wyz-primary: #DF3131; --wyz-primary-hover: #B82020; --wyz-secondary: #C9A227; --wyz-secondary-text: #8C6A1D; --wyz-primary-rgb: 223, 49, 49; }
+.dark { --wyz-on-primary: #111111; --wyz-on-primary-hover: #FFFFFF; --wyz-primary-text: #FF5C5C; --wyz-primary-text-sm: #DF3131; --wyz-primary: #FF5C5C; --wyz-primary-hover: #DF3131; --wyz-secondary: #E7C873; --wyz-secondary-text: #E7C873; --wyz-primary-rgb: 255, 92, 92; }
 
 .accent-\[\#DF3131\] { accent-color: var(--wyz-primary) !important; }
 .bg-\[\#B82020\]\/20 { background-color: color-mix(in oklab, var(--wyz-primary-hover) 20%, transparent) !important; }
@@ -2075,3 +2075,29 @@ h3, h4 { margin-bottom: 0.5rem; }
 [data-color-theme="sky"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(217deg); }
 [data-color-theme="indigo"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(239deg); }
 [data-color-theme="amber"] video[src*="wyz-nav-bg-new"] { filter: hue-rotate(38deg); }
+
+/* 2026-11-26 (Claude) contrast pairings for the bright theme primaries.
+   White-on-primary and primary-on-white fail WCAG AA for most non-default
+   themes (e.g. amber ~2.2:1). The provider sets --wyz-on-primary(-hover) and
+   --wyz-primary-text(-sm) per theme and mode; default keeps its exact
+   current colors. Exact class tokens only (no hover:/dark: variants) so
+   unrelated elements are not touched. */
+.bg-\[\#DF3131\].text-white,
+.bg-\[\#DF3131\] .text-white:not([class*="bg-"]),
+.bg-\[\#DF3131\] [class*="text-white/"]:not([class*="bg-"]),
+.from-\[\#DF3131\] .text-white:not([class*="bg-"]) {
+  color: var(--wyz-on-primary) !important;
+}
+.bg-\[\#DF3131\].hover\:bg-\[\#B82020\]:hover.text-white {
+  color: var(--wyz-on-primary-hover) !important;
+}
+:root:not([data-color-theme="default"]):not(.dark) .text-\[\#DF3131\]:not(.wz-on-dark) {
+  color: var(--wyz-primary-text) !important;
+}
+:root:not([data-color-theme="default"]):not(.dark) :is(.text-\[\#B82020\], .text-\[\#C00000\]):not(.wz-on-dark) {
+  color: var(--wyz-primary-text-sm) !important;
+}
+/* Skip-to-content link (focus state) uses focus: variants, not the base classes above. */
+.focus\:bg-\[\#DF3131\].focus\:text-white:focus {
+  color: var(--wyz-on-primary) !important;
+}

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Image from "next/image";
+import { staticSrc } from "@/lib/static-src";
 import Link from "next/link";
 import MODEL_GALLERIES from "@/lib/data/model-galleries.json";
 import { FiSend, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -368,7 +369,7 @@ export default function ModelArchivePage() {
   <FiChevronRight className="w-10 h-10" />
   </button>
   )}
- <Image src={albumImages[lightboxIdx]} alt={`${selectedModel} ${lightboxIdx + 1}`}
+ <Image src={staticSrc(albumImages[lightboxIdx])} alt={`${selectedModel} ${lightboxIdx + 1}`}
  width={900} height={1200} unoptimized
  className="max-h-[90vh] max-w-[90vw] object-contain" onClick={(e) => e.stopPropagation()} />
   <div className="absolute bottom-4 text-white/50 text-sm" aria-live="polite" aria-atomic="true">{lightboxIdx + 1} / {albumImages.length}</div>

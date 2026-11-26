@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { staticSrc } from "@/lib/static-src";
 import Link from "next/link";
 import MODEL_GALLERIES from "@/lib/data/model-galleries.json";
 
@@ -33,7 +34,7 @@ export default function ModelGalleryIndex() {
           >
             <div className="relative aspect-[3/4] bg-black">
               <Image
-                src={images[0] || "/images/wyz-crown.png"}
+                src={staticSrc(images[0] || "/images/wyz-crown.png")}
                 alt={name}
                 fill
                 unoptimized

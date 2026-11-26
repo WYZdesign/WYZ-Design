@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { staticSrc } from "@/lib/static-src";
 import Link from "next/link";
 import { DESIGN_CATEGORIES, DESIGN_CATEGORY_KEYS } from "@/lib/data/design-galleries";
 
@@ -30,13 +31,13 @@ export default function DesignGalleryIndex() {
               className="group border border-white/10 hover:border-[#DF3131] rounded-lg overflow-hidden bg-white/[0.03] transition-colors"
             >
               <div className="relative aspect-[4/3] bg-black">
-                <Image src={cover} alt={d.label} fill unoptimized className="object-contain p-4" />
+                <Image src={staticSrc(cover)} alt={d.label} fill unoptimized className="object-contain p-4" />
               </div>
               <div className="p-4">
                 <h2 className="text-white font-heading font-bold uppercase tracking-[0.1em] group-hover:text-[#DF3131] transition-colors">
                   {d.label}
                 </h2>
-                <p className="text-white/40 text-sm mt-1">{d.items.length} pieces</p>
+                <p className="text-white/55 text-sm mt-1">{d.items.length} pieces</p>
               </div>
             </Link>
           );
@@ -44,7 +45,7 @@ export default function DesignGalleryIndex() {
       </div>
 
       <div className="text-center mt-10">
-        <Link href="/designs" className="text-white/40 hover:text-[#DF3131] text-sm transition-colors">
+        <Link href="/designs" className="text-white/55 hover:text-[#DF3131] text-sm transition-colors">
           Back to Designs
         </Link>
       </div>

@@ -16,7 +16,7 @@ import {
 import ScrollReveal from "@/components/ScrollReveal";
 import { useZeal } from "@/components/ZealProvider";
 
-import { themeColor, themeText, themeTint } from "@/lib/theme-colors";
+import { themeColor, themeOn, themeText, themeTint } from "@/lib/theme-colors";
 import { CATEGORIES, DISCORD_CHANNELS, DISCORD_INVITE, FLAIRS, NEWS_POSTS, SEED_THREADS, UPCOMING_EVENTS } from "@/lib/data/community";
 const COMMUNITY_HIGHLIGHTS = [
   {
@@ -368,7 +368,7 @@ export default function ForumPage() {
                     <div className="flex items-center gap-3 mb-3">
                       <div
                         className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[14px] font-heading font-bold shrink-0"
-                        style={{ backgroundColor: themeColor(post.avatar), color: post.avatar === "#C9A227" ? "#1C1408" : undefined }}
+                        style={{ backgroundColor: themeColor(post.avatar), color: post.avatar === "#C9A227" ? "#1C1408" : themeOn(post.avatar, "") || undefined }}
                       >
                         {post.author.slice(0, 1).toUpperCase()}
                       </div>
@@ -435,7 +435,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: themeColor(c.avatar), color: c.avatar === "#C9A227" ? "#1C1408" : undefined }}
+                                style={{ backgroundColor: themeColor(c.avatar), color: c.avatar === "#C9A227" ? "#1C1408" : themeOn(c.avatar, "") || undefined }}
                               >
                                 {c.author.slice(0, 1).toUpperCase()}
                               </div>
@@ -734,7 +734,7 @@ export default function ForumPage() {
                             <div key={i} className="flex gap-3">
                               <div
                                 className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-white text-[12px] font-bold"
-                                style={{ backgroundColor: themeColor(r.avatar), color: r.avatar === "#C9A227" ? "#1C1408" : undefined }}
+                                style={{ backgroundColor: themeColor(r.avatar), color: r.avatar === "#C9A227" ? "#1C1408" : themeOn(r.avatar, "") || undefined }}
                               >
                                 {r.author.slice(0, 1).toUpperCase()}
                               </div>

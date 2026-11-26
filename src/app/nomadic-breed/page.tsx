@@ -192,15 +192,15 @@ export default function NomadicBreedPage({ asSection = false }: { asSection?: bo
             {[0, 1].map((i) => (
               <div key={`placeholder-${i}`} className="bg-white dark:bg-[#252528] border border-dashed border-[#E2E2E2] dark:border-[#333] rounded-2xl overflow-hidden">
                 <div className="relative aspect-[2/3] flex items-center justify-center bg-[#F5F5F3] dark:bg-[#1C1C1E]">
-                  <span className="px-2 py-1 text-[10px] font-bold tracking-[0.1em] uppercase text-[#999] dark:text-[#666]">
+                  <span className="px-2 py-1 text-[10px] font-bold tracking-[0.1em] uppercase text-[#6B6B6B] dark:text-[#999]">
                     Coming Soon
                   </span>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-heading font-black text-[#999] dark:text-[#666] text-[1.1rem] tracking-[0.03em] mb-2">
+                  <h3 className="font-heading font-black text-[#6B6B6B] dark:text-[#999] text-[1.1rem] tracking-[0.03em] mb-2">
                     Issue {`00${i + 2}`}
                   </h3>
-                  <p className="text-[#999] dark:text-[#666] text-[13px] leading-relaxed">In the works.</p>
+                  <p className="text-[#6B6B6B] dark:text-[#999] text-[13px] leading-relaxed">In the works.</p>
                 </div>
               </div>
             ))}

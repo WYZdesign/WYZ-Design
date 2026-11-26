@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { staticSrc } from "@/lib/static-src";
 import Link from "next/link";
 import { EVENT_GALLERIES, EVENT_KEYS } from "@/lib/data/event-galleries";
 
@@ -30,13 +31,13 @@ export default function EventGalleryIndex() {
               className="group border border-white/10 hover:border-[#DF3131] rounded-xl overflow-hidden bg-white/[0.03] transition-colors"
             >
               <div className="relative aspect-[4/3] bg-black">
-                <Image src={cover} alt={g.label} fill unoptimized className="object-contain" />
+                <Image src={staticSrc(cover)} alt={g.label} fill unoptimized className="object-contain" />
               </div>
               <div className="p-5">
                 <h2 className="text-white font-heading font-bold uppercase tracking-[0.08em] group-hover:text-[#DF3131] transition-colors">
                   {g.label}
                 </h2>
-                <p className="text-white/40 text-sm mt-2">{g.images.length} photos</p>
+                <p className="text-white/55 text-sm mt-2">{g.images.length} photos</p>
               </div>
             </Link>
           );
@@ -44,7 +45,7 @@ export default function EventGalleryIndex() {
       </div>
 
       <div className="text-center mt-14">
-        <Link href="/events" className="text-white/40 hover:text-[#DF3131] text-sm transition-colors">
+        <Link href="/events" className="text-white/55 hover:text-[#DF3131] text-sm transition-colors">
           Back to Events
         </Link>
       </div>

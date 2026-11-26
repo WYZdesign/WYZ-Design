@@ -13,6 +13,7 @@ import EnhancedMarquee from "@/components/EnhancedMarquee";
 import SuccessBurst from "@/components/SuccessBurst";
 import { useZeal } from "@/components/ZealProvider";
 
+import { CheckIcon } from "@/components/icons";
 const PAPER_TYPES = [
  { name: "Premium Gloss", desc: "Thinnest, glossiest paper. Vibrant color and crisp images. Great for brochures and flyers.", details: ["Thinnest gloss available", "Vibrant color reproduction", "Crispest image detail", "Best for brochures & flyers"] },
  { name: "Matte Photo Paper", desc: "A soft, non-reflective finish with rich ink absorption. Looks sharp behind glass.", details: ["Anti-reflective finish", "Professional look behind glass", "Exceptional ink absorption", "Reduced glare"] },
@@ -107,7 +108,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
   <div className="grid grid-cols-2 gap-2">
   {sticker.features.map((f) => (
   <div key={f} className="flex items-center gap-2 text-[13px] text-[#333] dark:text-[#e0e0e0]">
-  <span className="text-[#DF3131] font-bold">✓</span> {f}
+  <span className="text-[#DF3131] font-bold"><CheckIcon /></span> {f}
   </div>
   ))}
   </div>
@@ -127,7 +128,7 @@ function StickerCard({ sticker }: { sticker: typeof STICKER_TYPES[0] }) {
      <div className="space-y-2 text-center w-full">
      {sticker.features.map((f) => (
      <div key={f} className="flex items-center justify-center gap-2 text-[14px] text-white/95 font-medium text-center">
-     <span>✓</span> {f}
+     <span><CheckIcon /></span> {f}
      </div>
      ))}
      </div>

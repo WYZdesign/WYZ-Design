@@ -10,6 +10,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 import EnhancedMarquee from "@/components/EnhancedMarquee";
 
+import { CheckIcon } from "@/components/icons";
 function FlipCard({ plan }: { plan: { name: string; price: string; features: string[]; accent: boolean; img: string } }) {
   const [flipped, setFlipped] = useState(false);
 
@@ -47,7 +48,7 @@ function FlipCard({ plan }: { plan: { name: string; price: string; features: str
             <ul className="space-y-2 text-[13px]">
               {plan.features.map((f) => (
                 <li key={f} className="flex items-center justify-center gap-2">
-                  <span className="text-[#DF3131]">✓</span>
+                  <span className="text-[#DF3131]"><CheckIcon /></span>
                   <span className="text-white/80">{f}</span>
                 </li>
               ))}

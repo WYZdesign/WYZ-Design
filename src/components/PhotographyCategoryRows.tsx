@@ -86,7 +86,7 @@ export function MarqueeTitle({ text }: { text: string }) {
         {[...Array(8)].map((_, repeat) => (
           <span key={repeat} className="text-[2rem] sm:text-[2.5rem] md:text-[3.5rem] font-heading font-black tracking-[0.08em] inline-flex">
             {text.split("").map((character, index) => {
-              const wordColor = repeat % 2 === 0 ? "#DF3131" : "#FFFFFF";
+              const wordColor = repeat % 2 === 0 ? "var(--wyz-primary)" : "#FFFFFF";
               return <span key={index} style={{ color: wordColor }}>{character}</span>;
             })}
             <span className="w-12 inline-block" />

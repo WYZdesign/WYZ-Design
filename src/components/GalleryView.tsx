@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { staticSrc } from "@/lib/static-src";
 import { useEffect, useMemo, useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiX } from "react-icons/fi";
 import { MarqueeTitle } from "@/components/PhotographyCategoryRows";
@@ -80,7 +81,7 @@ export default function GalleryView({
         <div className="px-6 sm:px-10 lg:px-16 max-w-[120rem] mx-auto">
           <Link
             href={backHref}
-            className="inline-flex items-center gap-2 text-white/40 hover:text-[#DF3131] text-[13px] mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-white/55 hover:text-[#DF3131] text-[13px] mb-8 transition-colors"
           >
             <FiChevronLeft /> {backLabel}
           </Link>
@@ -117,7 +118,7 @@ export default function GalleryView({
                 className="group mb-5 sm:mb-6 lg:mb-8 block w-full break-inside-avoid overflow-hidden rounded-xl bg-white/[0.03] border border-white/10 hover:border-[#DF3131] transition-colors text-left"
               >
                 <Image
-                  src={it.src}
+                  src={staticSrc(it.src)}
                   alt={it.title}
                   width={900}
                   height={900}
@@ -168,7 +169,7 @@ export default function GalleryView({
           </button>
           <div className="flex flex-col items-center gap-4 px-12 sm:px-16 max-h-full" onClick={(e) => e.stopPropagation()}>
             <Image
-              src={active.src}
+              src={staticSrc(active.src)}
               alt={active.title}
               width={1400}
               height={1400}
@@ -177,7 +178,7 @@ export default function GalleryView({
             />
             <div className="text-center">
               <p className="text-white text-sm">{active.title}</p>
-              <p className="text-white/40 text-xs mt-1">{idx! + 1} / {items.length}</p>
+              <p className="text-white/55 text-xs mt-1">{idx! + 1} / {items.length}</p>
             </div>
           </div>
           <button

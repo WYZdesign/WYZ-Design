@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { logger } from "@/lib/logger";
 import Link from "next/link";
 
+import { CheckIcon } from "@/components/icons";
 const HOURS = Array.from({ length: 10 }, (_, i) => i + 10); // 10AM-7PM
 
 export default function PhotoshootCalendar() {
@@ -95,7 +96,7 @@ export default function PhotoshootCalendar() {
 <main className="min-h-screen bg-white dark:bg-[#1C1C1E] pb-20">
           <div className="max-w-lg mx-auto px-6 text-center">
             <div className="w-16 h-16 bg-[#DF3131] rounded-full flex items-center justify-center mx-auto mb-6">
-              <span className="text-white text-2xl">✓</span>
+              <span className="text-white text-2xl"><CheckIcon /></span>
             </div>
             <h1 className="text-3xl font-heading font-bold tracking-[0.15em] uppercase text-[#333333] dark:text-white mb-6 sm:mb-8">Booking Confirmed</h1>
             <p className="text-[#666665] dark:text-white/70 mb-2">Your photoshoot is scheduled for:</p>

@@ -56,7 +56,7 @@ export default function ClearCachePage() {
           onClick={runClean}
           className="px-10 py-4 bg-[#DF3131] text-white font-bold tracking-widest uppercase rounded-lg hover:bg-[#b82020] transition-all"
         >
-          {done ? "Done ✓" : "Clear Everything"}
+          {done ? "Done" : "Clear Everything"}
         </button>
         {status && <p className="mt-6 text-sm text-[#ff8a80]">{status}</p>}
         <p className="mt-8 text-xs text-white/40">

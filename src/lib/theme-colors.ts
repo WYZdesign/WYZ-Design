@@ -22,7 +22,7 @@ export function themeColor(c: string): string {
 /** Readable text color on a light/dark surface that follows the active theme. */
 export function themeText(c: string): string {
   const k = key(c);
-  if (k === PRIMARY) return "var(--wyz-primary-hover)";
+  if (k === PRIMARY) return "var(--wyz-primary-text-sm, var(--wyz-primary-hover))";
   if (k === SECONDARY) return "var(--wyz-secondary-text)";
   return c;
 }
@@ -30,4 +30,10 @@ export function themeText(c: string): string {
 /** Translucent tint of the (themed) color, replacing hex-alpha suffixes. */
 export function themeTint(c: string, percent: number): string {
   return `color-mix(in oklab, ${themeColor(c)} ${percent}%, transparent)`;
+}
+
+// Text color to place ON a themed fill: the theme's contrast-safe on-primary
+// color when the fill is the primary accent, otherwise the given fallback.
+export function themeOn(c: string, fallback: string = "#fff"): string {
+  return key(c) === PRIMARY ? "var(--wyz-on-primary)" : fallback;
 }

@@ -11,6 +11,7 @@ import PricingCalculator from "@/components/PricingCalculator";
 import LeadMagnet from "@/components/LeadMagnet";
 import type { FormField } from "@/components/DynamicForm";
 
+import { CheckIcon } from "@/components/icons";
 const FEATURES: Record<string, string[]> = {
   "Starter Pack": [
     "(1) Two-Hour Photoshoot",
@@ -143,7 +144,7 @@ function PlanCard({ p, subscribe, loading }: { p: typeof PLANS[0]; subscribe: (n
             <ul className="space-y-2 text-left max-w-xs mx-auto">
               {FEATURES[p.name].map((f) => (
                 <li key={f} className="text-[17px] text-white flex items-start gap-2">
-                  <span className="text-white mt-0.5">✓</span>
+                  <span className="text-white mt-0.5"><CheckIcon /></span>
                   {f}
                 </li>
               ))}
